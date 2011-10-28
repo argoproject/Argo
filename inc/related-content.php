@@ -1,0 +1,260 @@
+<?php
+
+/**
+ *
+ * Show related tags and subcategories for each main category
+ *
+ 
+ if (isset($tags[$tag->term_id])) {
+                	$tags[ $tag->term_id ]++;
+                } else {
+                	$tags[ $tag->term_id ] = 0;
+                }
+                $tag_objs[ $tag->term_id ] = $tag;
+endif;
+
+ */
+
+function argo_get_related_topics_for_category( $obj ) { 
+    $MAX_RELATED_TOPICS = 5;
+    
+    if (!isset($obj->post_type)) {
+    	$obj->post_type = 0;
+    }
+
+    if ( $obj->post_type ) {
+        if ( $obj->post_type == 'nav_menu_item' ) {
+            $cat_id = $obj->object_id;
+        }
+ 
+    }else {
+    $cat_id = $obj->cat_ID;
+    }
+
+    $out = "<ul>";
+    
+    // spit out the subcategories
+    $cats = _subcategories_for_category( $cat_id );
+
+    foreach ( $cats as $c ) {
+        $out .= sprintf( '<li><a href="%s">%s</a></li>',
+            get_category_link( $c->term_id ), $c->name
+        );
+    }
+
+    if ( count( $cats ) < $MAX_RELATED_TOPICS ) {
+        $tags = _tags_associated_with_category( $cat_id, 
+            $MAX_RELATED_TOPICS - count( $cats ) );
+
+        foreach ( $tags as $t ) {
+            $out .= sprintf( '<li><a href="%s">%s</a></li>',
+                get_tag_link( $t->term_id ), $t->name
+            );
+        }
+    }
+
+    $out .= "</ul>";
+    return $out;
+}
+
+
+function _tags_associated_with_category( $cat_id, $max = 5 ) {
+    $query = new WP_Query( array( 
+        'posts_per_page' => -1,
+        'cat' => $cat_id,
+    ) );
+
+    // Get a list of the tags used in posts in this category.
+    $tags = array();
+    $tag_objs = array();
+    
+    foreach ( $query->posts as $post ) {
+        $ptags = get_the_tags( $post->ID );
+        if ( $ptags ) {
+            foreach ( $ptags as $tag ) {
+                if (isset($tags[$tag->term_id])) {
+                	$tags[ $tag->term_id ]++;
+                } else {
+                	$tags[ $tag->term_id ] = 0;
+                }
+                $tag_objs[ $tag->term_id ] = $tag;
+            }
+        }
+    }
+
+    // Sort the most popular and get the $max results, or all results
+    // if max is -1
+    arsort( $tags, SORT_NUMERIC );
+    if ( $max == -1 ) {
+        $tag_keys = array_keys( $tags );
+    }
+    else {
+        $tag_keys = array_splice( array_keys( $tags ), 0, $max );
+    }
+
+    // Create an array of the selected tag objects
+    $return_tags = array();
+    foreach ( $tag_keys as $tk ) {
+        array_push( $return_tags, $tag_objs[ $tk ] );
+    }
+
+    return $return_tags;
+}
+
+
+function _subcategories_for_category( $cat_id ) {
+    // XXX: could also use get_term_children().  not sure which is better.
+    $cats = get_categories( array( 
+        'child_of' => $cat_id, 
+    ) );
+
+    return $cats;
+}
+
+
+/**
+ * Builds links to the latest posts for a given category.
+ * @param   object  $cat    Term object
+ * @return  string
+ */
+function argo_get_latest_posts_for_category( $cat ) {
+    $query = new WP_Query( array( 
+        'showposts' => 4,
+        'orderby' => 'date',
+        'order' => 'DESC',
+        'cat' => $cat->object_id,
+        'ignore_sticky_posts' => 1,
+    ) );
+
+    $output = '';
+    foreach ( $query->posts as $post ) {
+        $output .= '<h4><a href="' . get_permalink( $post->ID ) . '">' . $post->post_title . '</a></h4>';
+    }
+
+    return $output;
+}
+
+/**
+ * Provides topics (categories and tags) related to the current post in The 
+ * Loop.
+ *
+ * @param int $max The maximum number of topics to return.
+ * @return array of term objects.
+ */
+function argo_get_post_related_topics( $max = 5 ) {
+    $cats = get_the_category();
+    $tags = get_the_tags();
+
+    $topics = array();
+    if ( $cats ) {
+        foreach ( $cats as $cat ) {
+            if ( $cat->name == 'Uncategorized' ) {
+                continue;
+            }
+            $posts = argo_get_recent_posts_for_term( $cat, 3, 2 );
+            if ( $posts ) {
+                $topics[] = $cat;
+            }
+        }
+    }
+
+    if ( $tags ) {
+        foreach ( $tags as $tag ) {
+            $posts = argo_get_recent_posts_for_term( $tag, 3, 2 );
+            if ( $posts ) {
+                $topics[] = $tag;
+            }
+        }
+    }
+
+    return array_slice( $topics, 0, $max );
+}
+
+/**
+ * Provides the recent posts for a term object (category, post_tag, etc).
+ * @uses global $post
+ * @param object    $term   A term object.
+ * @param int       $max    Maximum number of posts to return.
+ * @param int       $min    Minimum number of posts. If not met, returns false.
+ * @return array|false of post objects.
+ */
+function argo_get_recent_posts_for_term( $term, $max = 5, $min = 1 ) {
+    global $post;
+
+    $query_args = array( 
+        'showposts' => $max,
+        'orderby' => 'date',
+        'order' => 'DESC',
+        'ignore_sticky_posts' => 1,
+    );
+
+    // Exclude the current post if we're inside The Loop
+    if ( $post ) {
+        $query_args[ 'post__not_in' ] = array( $post->ID );
+    }
+
+    if ( $term->taxonomy == 'post_tag' ) {
+        // have to use tag__in because tag_id doesn't seem to work.
+        $query_args[ 'tag__in' ] = array( $term->term_id );
+    }
+    elseif ( $term->taxonomy == 'category' ) {
+        $query_args[ 'cat' ] = $term->term_id;
+    }
+    elseif ( $term->taxonomy == 'feature' ) {
+        $query_args[ 'feature' ] = $term->slug;
+    }
+
+    $query = new WP_Query( $query_args );
+
+    if ( count( $query->posts ) < $min ) {
+        return false;
+    }
+
+    return $query->posts;
+}
+
+
+function argo_has_categories_or_tags() {
+    if ( get_the_tags() ) {
+        return true;
+    }
+
+    $cats = get_the_category();
+    if ( $cats ) {
+        foreach ( $cats as $cat ) {
+            if ( $cat->name != 'Uncategorized' ) {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+function argo_the_categories_and_tags() {
+    $cats = get_the_category();
+    $tags = get_the_tags();
+
+    $links = array();
+    if ( $cats ) {
+        foreach ( $cats as $cat ) {
+            if ( $cat->name == 'Uncategorized' ) {
+                continue;
+            }
+            $links[] = sprintf( 
+                '<span class="post-category-link"><a href="%s" title="%s">%s</a></span>',
+                get_category_link( $cat->term_id ), $cat->name, 
+                $cat->name 
+            );
+        }
+    }
+    if ( $tags ) {
+        foreach ( $tags as $tag ) {
+            $links[] = sprintf( 
+                '<span class="post-tag-link"><a href="%s" title="%s">%s</a></span>',
+                get_tag_link( $tag->term_id ), $tag->name, $tag->name 
+            );
+        }
+    }
+    echo implode( ', ', $links );
+}
