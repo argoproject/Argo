@@ -11,7 +11,6 @@
 	<div id="site-footer" class="clearfix">
 		<footer>
 			<div id="supplementary" class="container_12">
-
 			<?php
 				/* A sidebar in the footer? Yep. You can can customize
 				 * your footer with three columns of widgets.
@@ -29,8 +28,6 @@
 		</footer>
 	</div><!-- #site-footer -->
 </div><!-- #page -->
-
 <?php wp_footer(); ?>
-
 </body>
 </html>

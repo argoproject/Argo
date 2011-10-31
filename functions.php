@@ -522,7 +522,12 @@ function argo_init_js() {
 		wp_enqueue_script('text_placeholder', get_bloginfo('template_url') . '/js/jquery.textPlaceholder.js', array('jquery'), '1.0', true);
 		
 		// load jquery hover intent
-		wp_enqueue_script('hover_intent', get_bloginfo('template_url') . '/js/jquery.hoverIntent.minified.js', array('jquery'), '1.0', true);		
+		wp_enqueue_script('hover_intent', get_bloginfo('template_url') . '/js/jquery.hoverIntent.minified.js', array('jquery'), '1.0', true);
+		
+		if ( get_option('show_related_content', 1) ) {
+			// load id tabs
+			wp_enqueue_script('idTabs', get_bloginfo('template_url') . '/js/jquery.idTabs.js', array('jquery'), '1.0', true);
+		}
 	}
 }
 add_action('init', 'argo_init_js');

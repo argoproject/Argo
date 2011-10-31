@@ -359,7 +359,7 @@ form.inline p { margin-bottom:0; }
 /****************** HEADER ******************/
 
 #site-title {
-	line-height: 1;
+	line-height: 1.3;
 	font-size: 42px;
 	margin: 0;
 }

@@ -33,3 +33,40 @@
             </div><!-- /.post-meta -->
 	</div><!-- .entry-content -->
 </article><!-- #post-<?php the_ID(); ?> -->
+
+<!-- Related posts -->
+<?php if ( get_option('show_related_content', 1) ): ?>
+<?php $rel_topics = argo_get_post_related_topics( 6 ); if ( $rel_topics ) { ?>
+<div id="related-posts" class="idTabs clearfix">
+    <ul id="related-post-nav">
+        <li><h4>MORE POSTS ABOUT</h4></li>
+        <?php foreach ( $rel_topics as $count => $topic ): ?>
+        <li><a href="#rp<?php echo $count; ?>"><?php echo $topic->name; ?></a></li>
+        <?php endforeach; ?>
+    </ul>
+    <div class="items">
+        <?php foreach ( $rel_topics as $count => $topic ): ?>
+        <div id="rp<?php echo $count; ?>">  
+            <?php $rel_posts = argo_get_recent_posts_for_term( $topic, 3 ); ?>
+            <ul>
+                <?php $top_post = array_shift( $rel_posts ); ?>
+                <li class="top-related clearfix">
+                    <h3><a href="<?php echo get_permalink( $top_post->ID ); ?>" title="<?php echo esc_attr($topic->name); ?>">
+                    <?php echo $top_post->post_title; ?></a></h3>
+                    
+                    <?php if ( has_post_thumbnail( $top_post->ID ) ) { ?>
+                        <img src="<?php echo argo_get_post_thumbnail_src( $top_post, '60x60' ); ?>" alt="related" width="60" height="60" />
+                    <?php } ?>
+                    <p><?php the_excerpt($top_post); ?> <a href="<?php echo get_permalink( $top_post->ID ); ?>" title="<?php echo esc_attr($topic->name); ?>" title="<?php echo esc_attr($topic->name); ?>"><b>Read More</b></a></p>
+                </li>
+                <?php foreach ( $rel_posts as $rel_post ): ?>
+                    <li><a href="<?php echo get_permalink( $rel_post->ID ); ?>" title="<?php echo esc_attr($topic->name); ?>"><?php echo $rel_post->post_title; ?></a></li>
+                <?php endforeach; ?>
+            </ul>
+                <p><a href="<?php echo get_term_link( $topic, $topic->taxonomy ); ?>" title="<?php echo esc_attr($topic->name); ?>" target="_blank"><strong>view all <?php echo $topic->name; ?> posts</strong></a></p>
+        </div> <!-- /#rpX -->
+        <?php endforeach; ?>
+    </div> <!-- /.items -->
+</div> <!-- /#related-posts -->
+<?php } // if ( $rel_posts ) ?>
+<?php endif; ?>

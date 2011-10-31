@@ -26,6 +26,11 @@ function argo_options_page() {
 }
 
 function argo_settings_init() {
+
+    add_settings_field( 'show_related_content', 'Show related posts on post pages?',
+        'argo_show_related_content_callback', 'argo', 'argo_settings' );
+    register_setting( 'argo', 'show_related_content' );
+    
     add_settings_section( 'argo_settings', 'Argo theme options', 'argo_settings_section_callback', 'argo' );
 
     add_settings_field( 'copyright_msg', 'Copyright and credit', 
@@ -34,7 +39,7 @@ function argo_settings_init() {
     
     add_settings_field( 'site_blurb', 'Short Site Blurb',
         'argo_site_blurb_callback', 'argo', 'argo_settings' );
-    register_setting( 'argo', 'site_blurb' );
+    register_setting( 'argo', 'site_blurb' );    
     
     add_settings_field( 'facebook_link', 'Link to Facebook Profile', 
         'argo_facebook_link_callback', 'argo', 'argo_settings' );
@@ -62,6 +67,12 @@ function argo_settings_init() {
     
 }
 add_action( 'admin_init', 'argo_settings_init' );
+
+function argo_show_related_content_callback() {
+    $option = get_option('show_related_content', 1); ?>
+    <input type="checkbox" value="1" name="show_related_content" <?php checked($option, 1); ?> />
+    <?php
+}
 
 function argo_settings_section_callback() {
     echo '<p>The following fields are <b>optional</b>, but you may use them to add additional information about your site. </p><p><i>Note: To change social media settings for a user, view their edit profile screen.</p>';
