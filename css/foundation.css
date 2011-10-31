@@ -327,197 +327,6 @@ form.inline p { margin-bottom:0; }
 .success a  { color: #264409; }
 
 
-/************* ICONS AND BUTTONS ******************/
-
-.icon-discussions { background-position: 0 -290px; width: 49px; height: 49px; } 
-
-.icon-recommend { background-position: 0 -587px; width: 16px; height: 16px; } 
-
-.icon-rss { background-position: 0 -726px; height: 15px; } 
-
-.logo-npr { background-position: 0 -930px; width: 54px; height: 18px; } 
-
-/************* ARGO PANEL ******************/
-
-#argo-panel-wrapper {
-	background: #3d3c3c url(../img/argo-panel-bg.png) repeat-x;
-	border-bottom: 5px solid #3d3c3c;
-}
-
-#argo-panel {
-	display: none;
-	height: 170px;
-}
-
-#apanel-title {
-	margin: 0;
-	position: absolute;
-	top: -10px;
-	right: 6px;
-	z-index: 1;
-}
-
-.ie6 #apanel-title {
-	display: none;
-}
-
-#wrapper #apanel-trigger {
-	display: block;
-	width: 77px;
-	height: 45px;
-	text-indent: -10000px;
-	position: relative;
-	outline: none;
-	background-image: url(../img/panel-nav.png);
-	background-position: 0 -190px;
-}
-
-#wrapper  #apanel-title .opanel {
-	background-position: 0 0;
-}
-
-#wrapper  #apanel-title .cpanel {
-	background-position: 0 -190px;
-}
-
-#wrapper  #apanel-title .cpanel:hover {
-	background-position:0 -95px;
-}
-
-#wrapper {
-	border-top: none;
-	position: relative;
-	margin-top: 0 !important;
-}
-
-.ie6 #wrapper {
-	position: static;
-}
-
-#apanel-content {
-	display: none;
-	position: absolute;
-	top: 5px;
-	left: 0;
-	width: 100%;
-	color: #999;
-	font-family: helvetica, arial, sans-serif;
-}
-
-#apanel-content a {
-	color: #ddd;
-	font-weight: bold;
-	text-decoration: none;
-	outline: none;
-}
-
-#apanel-content a:hover {
-	color: #fff;
-}
-
-#apanel-content h5 {
-	font-size: 13px;
-	margin: 0 0 5px 0;
-	color: #ddd;
-}
-
-#argo-inner-panel {
-	width: 960px;
-	margin: 0 auto;
-	height: 140px;
-	position: relative;
-}
-
-#panel-about {
-	width: 203px;
-	overflow: hidden;
-	height: 140px;
-	position: absolute;
-	top: 5px;
-	left: -5px;
-}
-
-#panel-about p {
-	font-size: 13px;
-	font-style: italic;
-	line-height: 1.4;
-}
-
-#panel-network, #panel-featured {
-	border-left: 1px solid #666; 
-	padding-left: 8px;
-}
-
-#panel-network {
-	position: absolute;
-	top: 5px;
-	left: 200px;
-	overflow: hidden;
-	height: 140px;
-	width: 450px;
-}
-
-#panel-network ul {
-	float: left;
-	width: 135px;
-	font-size: 11px;
-	margin: 0 0 0 10px;
-	border-left: 1px solid #666;
-}
-
-#panel-network #panel-network-first {
-	margin-left: -9px;
-	border-left: none;
-}
-
-#panel-network li {
-	margin-bottom: 3px;
-}
-
-#panel-network li a {
-	padding-left: 15px;
-}
-
-#panel-network .selected {
-	background: transparent url(../img/argo-panel-selected.png) no-repeat 0 2px;
-}
-
-
-#panel-featured {
-	position: absolute;
-	top: 5px;
-	right: 0px;
-	width: 290px;
-	height: 140px;
-	overflow: hidden;
-}
-
-#panel-featured div{
-	display: none;
-	margin-top: 12px;
-}
-
-#panel-featured img {
-	float: left;
-	margin-right: 10px;
-	border: 1px solid #999;
-}
-
-#panel-featured h3 {
-	font-size: 13px;
-	margin: 0;
-}
-
-#panel-featured p {
-	font-size: 11px;
-	line-height: 1.2;
-	border-top: 1px solid #999;
-	color: #999;
-	margin-top: 10px;
-	padding-top: 5px;
-	margin-left: 70px;
-}
-
 /************* GLOBAL NAVIGATION ******************/
 
 .global-nav-bg {
@@ -545,36 +354,6 @@ form.inline p { margin-bottom:0; }
 .global-nav li {
 	float: left;
 	margin: 10px 10px 0 0;
-}
-
-.global-nav .support a {
-	background-color: #ccc;
-	font-weight: bold;
-	color: #666;
-	padding: 3px 5px;
-}
-
-.global-nav .support a:hover {
-	background-color: #fff;
-	color: #333;
-	text-decoration: none;
-}
-
-.global-nav .network-branding {
-	position: absolute;
-	top: 0;
-	right: 0;
-	margin: 0;
-	background: transparent url(../img/argo-network-logo.png) no-repeat top right;
-	text-indent: -10000px;
-	width: 70px;
-	height: 37px;
-}
-
-.network-branding a {
-	display: block;
-	width: 70px;
-	height: 37px;
 }
 
 /****************** HEADER ******************/
@@ -779,6 +558,10 @@ background-color: #333;
 	overflow: hidden;
 }
 
+.ie6 #follow-us {
+display: none;
+}
+
 #follow-us li {
 	float: left;
 	text-indent: -10000px;
@@ -815,8 +598,6 @@ background-color: #333;
 #follow-us .icon-twitter-header a:hover {
 	background-position: 0 -365px;
 }
-
-
 
 /* mega menu */
 
@@ -920,7 +701,6 @@ background-color: #333;
 	background-position: 5px 12px ;
 }
 
-
 .inner-menu {
 	width: 920px;
 	padding: 10px;
@@ -965,7 +745,6 @@ background-color: #333;
 	text-decoration: underline !important;
 }
 
-
 .mega-feature .read-more {
 	font-weight: bold;
 	font-size: 11px;
@@ -991,7 +770,6 @@ background-color: #333;
 	padding: 0 !important;
 }
 
-
 .category-articles h5 a {
 	font-size: 12px;
 	line-height: 1;
@@ -1012,7 +790,6 @@ background-color: #333;
 	border-bottom: 1px solid #ddd !important;
 }
 
-
 .category-topics {
 	width: 210px;
 	margin-left: 20px;
@@ -1025,17 +802,18 @@ background-color: #333;
 	margin: 0 0 15px 0;
 }
 
+/************** POST ******************/
 
-
-/************** HOME PAGE ****************/
-
-.home .post, .archive .post, .search .post, .home .roundup, .archive .roundup, .search .roundup, .home .slideshow, .archive .slideshow, .search .slideshow {
+.post {
 	padding-bottom: 20px;
 	margin-bottom: 20px;
 	border-bottom: 1px solid #999;
 }
 
-/************** POST ******************/
+.single .post, .page .post {
+padding-bottom: 0;
+border-bottom: none;
+}
 
 .ie6 #content {
 	width: 610px;
@@ -1140,14 +918,6 @@ padding-bottom: 10px;
 border-bottom: 1px solid #ddd;
 }
 
-#term-view {
-font-weight: bold;
-}
-
-#page .bottom-meta .labels {
-margin-bottom: 0;
-}
-
 #content .post-meta h6 {
 	font-size: 12px;
 	font-weight: normal;
@@ -1191,13 +961,7 @@ background: transparent url(../img/comment-icon.gif) no-repeat;
 	float: right;
 }
 
-.meta-gestures .meta-email { 
-	background: transparent url(../img/icon-email.png) no-repeat 0 2px;
-	height: 16px; 
-	padding-left: 20px;
-} 
-
-.ie8 .meta-gestures .meta-email, .ie7 .meta-gestures .meta-email, .ie6 .meta-gestures .meta-email { 
+.ie7 .meta-gestures .meta-comments, .ie6 .meta-gestures .meta-comments { 
 	background: none;
 } 
 
@@ -1207,7 +971,7 @@ background: transparent url(../img/comment-icon.gif) no-repeat;
 }
 
 #content .post-meta .labels li {
-	margin-right: 5px;
+	margin: 0 5px 0 0;
 	float: left;
 }
 
@@ -1228,12 +992,15 @@ background: transparent url(../img/comment-icon.gif) no-repeat;
 	text-decoration: none;
 }
 
+#term-view {
+font-weight: bold;
+}
+
 .subscribe {/* RSS Icon */
 	background: transparent url(../img/rss16.gif) no-repeat top left; 
 	height: 19px;
 	padding-left: 22px;
 }
-
 
 .ie6 .subscribe {
 	background: none;
@@ -1242,23 +1009,6 @@ background: transparent url(../img/comment-icon.gif) no-repeat;
 
 .subscribe a {
 	color: #666;
-}
-
-#content .meta-gestures .activity-alert a {
-	background-color: #000;
-	color: #fff;
-	padding: 3px;
-}
-
-#content .twitter {
-	margin-left: 10px;
-	margin-right: 0;
-	background-image: none;
-}
-
-#content .fb {
-	margin-right: 20px;
-	background-image: none;
 }
 
 /* blog hosts */
@@ -1340,7 +1090,6 @@ margin: 0;
 #related-posts a {
 	font-weight: normal;
 }
-
 
 #related-post-nav { 
 	float:left; 
@@ -1526,7 +1275,7 @@ padding-right: 0;
 	display: block;
 }
 
-#content .credit, #content .wp-media-credit {
+#content .wp-media-credit {
 	font-size: 10px;
 	margin: 0;
 	text-align: right;
@@ -1535,7 +1284,7 @@ padding-right: 0;
 	display: block;
 }
 
-#content .caption, #content .wp-caption-text {
+#content .wp-caption-text {
 	font-size: 12px;
 	margin: 5px 0 0 0;
 	color: #666;
@@ -1544,23 +1293,17 @@ padding-right: 0;
 	display: block;
 }
 
-#content .permalink {
-	display: block;
-}
-
-#content .module .attribution {
-	margin: 0;
-	font-size: 11px;
-	font-style: italic;
-}
-
 #content .half {
 	width: 300px;
 	font-size: 11px;
 }
 
-#content .aligncenter, #content .centered {
+#content .aligncenter {
 	margin: 20px auto;
+	clear: both;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 #content .alignleft, #content .left {
@@ -1592,35 +1335,6 @@ padding-right: 0;
 
 #content .pull-quote p {
 	font-size: 24px;
-}
-
-/* floated images */
-
-.alignleft,
-img.alignleft {
-	display: inline;
-	float: left;
-	margin-right: 24px;
-	margin-top: 4px;
-}
-.alignright,
-img.alignright {
-	display: inline;
-	float: right;
-	margin-left: 24px;
-	margin-top: 4px;
-}
-.aligncenter,
-img.aligncenter {
-	clear: both;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-}
-img.alignleft,
-img.alignright,
-img.aligncenter {
-	margin-bottom: 12px;
 }
 
 /* = Customized comment form styles via the twenty eleven theme
@@ -1923,8 +1637,6 @@ p.comment-form-comment {
 	display: none;
 }
 
-/********** POST TYPES  ***************/
-
 /* sticky posts */
 
 .sticky-solo, .sticky-related {
@@ -1945,7 +1657,6 @@ p.comment-form-comment {
     color: #666;
     font-size: 12px;
 }
-
 
 #content .sticky img {
     float: left;
@@ -2030,74 +1741,6 @@ p.comment-form-comment {
     font-weight: bold;
 }
 
-
-/* link-roundup */
-
-#content .roundup h5 {
-	font-weight: normal;
-	font-size: 16px;
-}
-
-.roundup p {
-	background: transparent url(../img/link-roundup-icon.png) no-repeat 0 2px; /* Silk icon set 1.3 http://www.famfamfam.com/lab/icons/silk/ */
-	padding-left: 30px;
-	margin-right: 60px;
-}
-
-.roundup p em {
-	font-size: 12px;
-	color: #909090;
-}
-
-.roundup .module p {
-	background: none !important;
-	padding-left: 0 !important;
-}
-
-/* Q&A */
-
-#content .question {
-	position: relative;
-	padding-left: 30px;
-	font-weight: bold;
-}
-
-#content .answer {
-	position: relative;
-	padding-left: 30px;
-}
-
-.question .abbr, .answer .abbr {
-	position: absolute;
-	top: 0;
-	left: 0;
-	color: #999;
-	font-size: 20px;
-	line-height: 1;
-	font-weight: normal;
-}
-
-.question abbr, .answer abbr {
-	border-bottom: none;
-}
-
-.ie6 .question .abbr, .ie6 .answer .abbr {
-	position: absolute;
-	top: 0;
-	left: -30px;
-}
-
-#content .contenttype-short-post blockquote, #content .contenttype-quote blockquote {
-	background-color: transparent;
-	padding: 0 20px;
-	border-left: 4px solid #333;
-	margin: 10px 0;
-}
-
-#content .contenttype-short-post blockquote p, #content .contenttype-quote blockquote p {
-	margin: 0 0 10px 0;
-}
-
 /**************** ARCHIVE PAGE ***********************/
 
 #archive-intro {
@@ -2120,58 +1763,6 @@ margin-bottom: 5px;
 
 .archive-dropdown {
 	float: right;
-}
-
-/* archive page navigation */
-
-.list-pagination {
-	border-bottom: 3px solid #ddd;
-	min-height: 22px;
-	padding-bottom: 10px;
-}
-
-.ie6 .list-pagination {
-	height: 30px;
-}
-
-#main .list-pagination a {
-	color:#666;
-}
-
-.ie6 .older-posts, .ie6 .newer-posts {
-	width: 300px;
-}
-
-.older-posts {
-	float: left;
-}
-
- .older-posts a {
-	background: transparent url(../img/btn-previous.png) no-repeat top left;
-	height: 22px;
-	display: block;
-	padding-left: 30px;
-	font-size: 17px;
-	font-weight: bold;
-	color: #333;
-}
-
-.newer-posts {
-	float: right;
-}
-
-.ie6 .newer-posts {
-	text-align: right;
-}
-
-.newer-posts a {
-	background: transparent url(../img/btn-next.png) no-repeat top right;
-	height: 22px;
-	display: block;
-	padding-right: 30px;
-	font-size: 17px;
-	font-weight: bold;
-	color: #333;
 }
 
 #content .recent-posts, .tag #content .recent-posts {
@@ -2279,31 +1870,6 @@ margin-bottom: 5px;
 	margin: 0;
 }
 
-.topic-square {
-	width: 220px;
-	float: right;
-	padding-left: 30px;
-	overflow: hidden;
-}
-
-.topic-square img {
-	border: 1px solid #999;
-	margin: 0;
-}
-
-#content .topic-square .credit {
-	margin:0;
-	padding: 0;
-	vertical-align: top;
-}
-
-.key-fact h3 {
-	font-style: italic;
-	color: #666;
-	font-size: 26px !important;
-	line-height: 1.2;
-}
-
 .tag  #content h3 {
 	font-size: 18px;
 	font-weight: normal;
@@ -2331,7 +1897,6 @@ margin-bottom: 5px;
 .ie8 .page-title, .ie7 .page-title, .ie6 .page-title {
 	margin-top: 20px;
 }
-
 
 
 /**************** SIDEBARS ***********************/
@@ -2450,10 +2015,7 @@ float: left;
 margin-right: 5px
 }
 
-
-
 /*widget_meta*/
-
 
 .widget_meta {
 font-size: 10px;
@@ -2539,10 +2101,6 @@ color: #aaa;
 font-weight: normal;
 }
 
-
-
-/** end new siebar styles **/
-
 /*container ul for wigitized sidebar area */
 .widget-container, .widget {
 	margin-bottom: 10px;
@@ -2564,7 +2122,6 @@ padding: 0;
 	width: 290px;
 	overflow: hidden;
 }
-
 
 /*button styling for anchor tags */
 
@@ -2597,10 +2154,6 @@ padding: 0;
 	text-decoration: none;
 }
 
-
-
-
-
 /*greatest hits */
 
 .widget_nav_menu h2 {
@@ -2630,40 +2183,7 @@ padding: 0;
 	margin-bottom: 0;
 }
 
-/******************** FOOTER ****************************/
-
-#site-footer {
-	margin-top: 20px;
-	color: #ccc;
-	background-color: #666;
-	padding: 10px 0;
-}
-
-#site-footer .widgettitle {
-font-size: 21px;
-margin: 10px 0;
-}
-
-#site-footer a {
-	color: #fff;
-}
-
-.bio p {
-	font-size: 12px;
-	line-height: 1.3;
-}
-
-#site-footer .bio h6 a {
-	background-color: #ccc;
-	padding: 5px;
-	color: #666;
-}
-
-#site-footer .bio h6 a:hover { 
-	background-color: #fff;
-	text-decoration: none;
-}
-
+/* argo follow */
 .argo-follow h4 {
 	font-size: 12px;
 	margin-bottom: 5px;
@@ -2684,34 +2204,14 @@ margin: 10px 0;
 	padding-left: 30px;
 }
 
-/* podcast button */
-
 .argo-follow .podcast {
 	background: transparent url(../img/podcast.png) no-repeat 1px 0;
 	padding-left: 30px;
 	line-height: 27px;
 }
 
-.about-site h6 {
-	float: right;
-	font-size: 11px;
-	margin-top: 7px;
-}
 
-#site-footer .about-site h6 a {
-	background-color: #ccc;
-	padding: 2px 4px;
-	color: #666;
-}
-
-#site-footer .about-site h6 a:hover { 
-	background-color: #fff;
-	text-decoration: none;
-}
-
-#site-footer h3 {
-	margin: 10px 0;
-}
+/* in case you missed it widget */
 
 .post-lead {
 	clear: both;
@@ -2736,22 +2236,26 @@ margin: 10px 0;
 	margin-left: 80px;
 }
 
-#menu-read-more-about {
-	margin-bottom: 2px;
+/******************** FOOTER ****************************/
+
+#site-footer {
+	margin-top: 20px;
+	color: #ccc;
+	background-color: #666;
+	padding: 10px 0;
 }
 
-.must-read-footer {
-	font-size: 12px;
+#site-footer .widgettitle {
+font-size: 21px;
+margin: 10px 0;
 }
 
-.must-read-footer li {
-	border-bottom: 1px solid #999;
-	padding-bottom: 3px;
+#site-footer a {
+	color: #fff;
 }
 
-.must-read-footer p {
-	margin: 0;
-	font-style: italic;
+#site-footer h3 {
+	margin: 10px 0;
 }
 
 #site-footer ol {
@@ -2808,543 +2312,6 @@ margin: 10px 0;
 	margin: 0 5px 0 0;
 	padding: 0 5px 0 0;
 	line-height: 1;
-}
-
-/* email newsletter feedburner */
-
-#email-footer {
-	margin-top: 20px;
-}
-
-#email-footer h4 {
-	text-transform: uppercase;
-	line-height: 1;
-	font-size: 13px;
-	margin-bottom: 5px;
-}
-
-#email-footer input {
-	width: 120px;
-	font-size:11px;
-	padding: 2px
-}
-
-#email-footer .footer-submit {
-	font-weight: bold;
-	padding: 3px;
-	font-size: 11px;
-	width: 75px;
-	color: #fff;
-	text-transform: uppercase;
-	border: 1px solid #000;
-	background-color: #000;
-}
-
-#email-footer .footer-submit:hover {
-	border: 1px solid #333;
-	background-color: #333;
-}
-
-.widget_feedburner-subscribe-widget p {
-	margin-bottom: 0;
-}
-
-.widget_feedburner-subscribe-widget input {
-	width: 190px;
-	font-size:12px;
-	padding: 4px;
-}
-
-.widget_feedburner-subscribe-widget .widget-submit {
-	font-weight: bold;
-	padding: 4px;
-	font-size: 11px;
-	width: 75px;
-	color: #fff;
-	text-transform: uppercase;
-	border: 1px solid #000;
-	background-color: #000;
-}
-
-.widget_feedburner-subscribe-widget .widget-submit:hover {
-	border: 1px solid #333;
-	background-color: #333;
-}
-
-/****************** AUDIO PLAYER ********************/
-
-ul.playlist li {
-	margin-left:0
-}
-
-/* base audio styles */
-
-.spectrum-container {
-	display:none;
-}
-
-ul.use-spectrum li.sm2_playing .spectrum-container {
-	position:absolute;
-	left:0px;
-	top:0px;
-	margin-left:-266px;
-	margin-top:-1px;
-	display:block;
-	background-color:#5588bb;
-	border:1px solid #99ccff;
-	-moz-border-radius:4px;
-	-webkit-border-radius:4px;
-	border-radius:4px;
-}
-
-ul.use-spectrum .spectrum-box {
-	position:relative;
-	width:255px;
-	font-size:14px;
-	padding:2px 0px;
-	height:1.2em;
-	overflow:hidden;
-}
-
-ul.use-spectrum .spectrum-box .spectrum {
-	position:absolute;
-	left:0px;
-	top:-2px;
-	margin-top:20px;
-	display:block;
-	font-size:1px;
-	width:1px;
-	height:1px; /* set to 50px for a thick line, 1px for a thin line, etc. */
-	overflow:hidden;
-	background-color:#fff;
-}
-
-ul.playlist {
-	list-style-type:none;
-	margin:0px;
-	padding:0px;
-}
-
-ul.playlist li {
- /* assume all items will be sounds rather than wait for onload etc. in this example.. may differ for your uses. */
-	position:relative;
-	display:block;
-	width:auto;
-	font-size:2em;
-	border:none;
-	letter-spacing:-1px;
-	background-color: #f9f9f9;
-	border-radius:4px;
-	-webkit-border-radius:4px;
-	-moz-border-radius:4px;
-	min-height: 75px;
- /* ZOMG WEB X.0. ;) */
-}
-
-#content ul.playlist li span.caption {
-	color:#666;
-	letter-spacing: .3px;
-	text-shadow: 1px 1px 1px #fff;
-	display:block;
-	line-height: 1.3;
-	font-size: 11px;
-	font-family: 'Helvetica', Arial, sans-serif;
-	font-weight: normal;
-}
-
-ul.playlist li a.inline {
-	padding:0.45em 0.5em 0.45em 0.5em;
-	-webkit-transition-property: hover;
-	-webkit-transition: background-color 0.5s ease-in-out;
-	color: #666;
-	display:block;
-	text-decoration:none;
-	font-weight:normal;
-	font-size:22px;
-	outline:none;
-	position:relative;
-	z-index:2;
-	background: transparent url(../img/audio-play-default.png) no-repeat 22px 5px;
-	line-height: 1;
-	margin-bottom: 10px;
-	padding-left:90px;
-}
-
-#content ul.playlist li a.exclude {
-	font-family: 'Helvetica', Arial, sans-serif;
-	font-size: 11px;
-	font-weight: normal;
-	padding: 0 0 0 16px;
-	color: #aaa;
-	background: transparent url(../img/audio-download.png) no-repeat 0 1px;
-	position: absolute;
-	left: 10px;
-	top: 50px;
-	display:block;
-	z-index: 3;
-	width: 100px;
-	height: 30px;
-}
-
-ul.playlist li.sm2_playing,
-ul.playlist li.sm2_paused,
-ul.playlist li.sm2_playing a.inline {
-	color:#fff;
-	background-color: #eee;
-}
-
-#content ul.playlist li.sm2_playing a.inline,
-#content ul.playlist li.sm2_playing span.caption {
-	color: #666;
-}
-
-#content ul.playlist li.sm2_playing a.inline,
-#content ul.playlist li.sm2_paused a.inline {
-	max-width: 380px;
-}
-
-
-ul.playlist li a:hover.inline {
-	background: transparent url(../img/audio-play-hover.png) no-repeat 22px 5px;
-}
-
-ul.playlist li:hover {
-	background-color: #ededed;
-}
-
-ul.playlist li:hover a.inline {
-	color:#666;
-}
-
-ul.playlist li.sm2_playing,
-ul.playlist li.sm2_playing:hover {
-	background-color: #eee;
-}
-
-ul.playlist li.sm2_playing .inline,
-ul.playlist li.sm2_playing:hover .inline {
-	background: #eee url(../img/audio-play-pause.png) no-repeat 22px 5px;
-}
-
-ul.playlist li.sm2_paused {
-	background-color: #ededed
-}
-
-ul.playlist li.sm2_paused .inline {
-	background: transparent url(../img/audio-play-default.png) no-repeat 22px 5px;
-}
- 
-ul.playlist li.sm2_playing:hover a.inline,
-ul.playlist li.sm2_paused a.inline {
-	color:#fff;
-}
-
-ul.playlist li .controls {
-	display:none;
-	padding: 5px;
-	background:#eee; 
-	-webkit-border-bottom-right-radius: 4px;
-	-webkit-border-bottom-left-radius: 4px;
-	-moz-border-radius-bottomright: 4px;
-	-moz-border-radius-bottomleft: 4px;
-	border-bottom-right-radius: 4px;
-	border-bottom-left-radius: 4px;
-}
-
-ul.playlist li .peak,
-ul.playlist.use-peak li .peak {
-	display:none;
-	position:absolute;
-	top:0.55em;
-	right:0.5em;
-}
-
-ul.playlist li.sm2_playing .controls,
-ul.playlist li.sm2_paused .controls {
-	position:relative;
-	display:block;
-}
-
-ul.playlist.use-peak li.sm2_playing .peak,
-ul.playlist.use-peak li.sm2_paused .peak {
-	display:inline;
-	display:inline-block;
-}
-
-ul.playlist.use-peak li .peak {
-	display:none; /* IE 7 */
-}
-
-ul.playlist li.sm2_paused .controls {
-	background-color:#ddd;
-}
-
-ul.playlist li:hover .controls .statusbar {
-	position:relative;
-	cursor:ew-resize;
-	cursor:-moz-grab;
-	cursor:grab;
-}
-
-ul.playlist li.sm2_paused .controls .statusbar {
-	background-color:#eee;
-}
-
-ul.playlist li .controls {
-	position:relative;
-	margin-top:0.25em;
-	margin-bottom:0.25em;
-	background-color:#eee;
-}
-
-ul.playlist li .controls .statusbar {
-	position:relative;
-	height:0.5em;
-	background-color:#aaa;
-	overflow:hidden;
-	cursor:-moz-grab;
-	cursor:grab;
-}
-
-ul.playlist li .controls.dragging .statusbar {
-	cursor:-moz-grabbing;
-	cursor:grabbing;
-}
-
-ul.playlist li .controls .statusbar .position,
-ul.playlist li .controls .statusbar .loading,
-ul.playlist li .controls .statusbar .annotation {
-	position:absolute;
-	left:0px;
-	top:0px;
-	height:0.5em;
-}
-
-ul.playlist li .controls .statusbar .position {
-	background-color:#373737;
-	border-right:3px solid #373737;
-	border-radius:3px;
-	-moz-border-radius:3px;
-	-webkit-border-radius:3px;
-}
-
-ul.playlist li.sm2_paused .controls .statusbar .position {
-	background-color:#aaa;
-	border-color:#aaa;
-}
-
-ul.playlist li .controls .statusbar .loading {
-	background-color:#fff;
-}
-
-ul.playlist li .controls .statusbar .position,
-ul.playlist li .controls .statusbar .loading {
-	width:0px;
-}
-
-ul.playlist li.sm2_playing a.sm2_link,
-ul.playlist li.sm2_paused a.sm2_link {
-	margin-right:4.5em; /* room for timing stuff */
-}
-
-ul.playlist li .timing {
-	position:absolute;
-	display:none;
-	text-align:right;
-	right:1em;
-	top:1em;
-	width:auto;
-	height:1em;
-	padding:3px 5px;
-	background-color:#aaa;
-	-moz-border-radius:4px;
-	-khtml-border-radius:4px;
-	border-radius:4px;
-	letter-spacing:0px;
-	font:44% monaco,"VT-100",terminal,"lucida console",courier,system;
-	line-height:1em;
-	vertical-align:middle;
-}
-
-ul.playlist.use-peak li .timing {
-	right:4.25em;
-}
-
-ul.playlist li:hover .timing {
-	z-index:2;
-}
-
-ul.playlist li .timing div.sm2_timing {
-	margin:0px;
-	padding:0px;
-	margin-top:-1em;
-}
-
-ul.playlist li.sm2_playing .timing,
-ul.playlist li.sm2_paused .timing {
-	display:block;
-}
-
-ul.playlist li.sm2_paused .timing .sm2_position {
-	text-decoration:blink; /* hee hee. first actual appropriate use? :D */
-}
-
-ul.playlist li.sm2_paused .timing,
-ul.playlist.use-peak li.sm2_paused .peak {
-	background-color:#aaa;
-}
-
-/* peak data */
-
-/* ul.playlist ... */
-
-ul.playlist.use-peak li .peak {
-	display:none;
-	zoom:1;
-	padding:2px;
-	height:0.55em;
-	-moz-border-radius:4px;
-	-khtml-border-radius:4px;
-	border-radius:4px;
-	background-color:#aaa;
-	width:0.8em;
-	height:0.55em;
-	margin-top:-3px;
-}
-
-ul.playlist.use-peak li .peak-box {
-	position:relative;
-	width:100%;
-	height:0.55em;
-	overflow:hidden;
-}
-
-ul.playlist li .peak .l,
-ul.playlist li .peak .r {
-	position:absolute;
-	left:0px;
-	top:0px;
-	width:7px;
-	height:50px;
-	background:#fff;
-	border:1px solid #fff;
-	-moz-border-radius:1px;
-	-khtml-border-radius:1px;
-	margin-top:1em;
-}
-
-ul.playlist li .peak .l {
-	margin-right:1px;
-}
-
-ul.playlist li .peak .r {
-	left:10px;
-}
-
-#control-template {
-	display:none;
-}
-
-/* flash player audio */
-
-/*
- SoundManager 2 + useFlashBlock
- Flash positioning and flashblock / clicktoflash handling
-*/
-
-#sm2-container {
- /*
-  where the SM2 flash movie goes. by default, relative container.
-  set relative or absolute here, and don't touch it later or bad things will happen (see below comments.)
- */
-	position:relative;
-	width:1px;
-	height:1px;
-	_overflow:hidden; /* screw IE 6, just make it display nice */
-}
-
-#sm2-container object,
-#sm2-container embed {
- /*
-  the actual movie bit.
-  SWF needs to be able to be moved off-screen without display: or position: changes. important.
-  changing display: or position: or overflow: here or on parent can cause SFW reload or other weird issues after unblock,
-  eg. SM2 starts but strange errors, no whileplaying() etc.
- */
-	position:absolute;
-}
-
-#sm2-container object,
-#sm2-container embed,
-#sm2-container.swf_timedout,
-#sm2-container.swf_timedout object,
-#sm2-container.swf_timedout embed {
- /* 
-  when SM2 didn't start normally, time-out case. flash blocked, missing SWF, no flash?
-  48px square flash placeholder is typically used by blockers.
- */
-	left:auto;
-	top:auto;
-	width:48px;
-	height:48px;
-}
-
-#sm2-container.swf_unblocked {
-	/* SWF unblocked, or was never blocked to begin with; try to collapse container as much as possible. */
-	width:1px;
-	height:1px;
-}
-
-#sm2-container.swf_unblocked object,
-#sm2-container.swf_unblocked embed {
-	/* hide flash off-screen (relative to container) when it has loaded OK */
-	left:-9999em;
-	top:-9999em;
-}
-
-#sm2-container.swf_error {
-	/* when there is a fatal error (flash loaded, but SM2 failed) */
-	display:none;
-}
-
-#sm2-container.high_performance {
-	/* "high performance" case: keep on-screen at all times */
-	position:absolute;
-	position:fixed;
-	_top:-9999px; /* IE 6 hax, no position:fixed */
-	_left:-9999px;
-	bottom:0px;
-	left:0px;
- /*
-  special case: show at first with w/h, hide when unblocked.
-  might be bad/annoying.
- */
-	width:48px;
-	height:48px;
-	z-index:99; /* try to stay on top */
-}
-
-#sm2-container.high_performance.swf_unblocked {
-	z-index:auto;
-}
-
-#sm2-container.high_performance.swf_unblocked,
-#sm2-container.high_performance.swf_unblocked object,
-#sm2-container.high_performance.swf_unblocked embed {
- /* 8x8px is required minimum to load in fx/win32 in some cases(?), 6x6+ good for fast performance, even better when on-screen via position:fixed */
-	width:8px;
-	height:8px;
-}
-
-#sm2-container.high_performance.swf_unblocked object,
-#sm2-container.high_performance.swf_unblocked embed {
- /* high-performance case must stay on-screen */
-	left:auto;
-	top:auto;
-}
-
-#sm2-container.high_performance.swf_timedout {
-	z-index:99; /* try to stay on top */
 }
 
 /*no-js styles*/
@@ -3517,5 +2484,3 @@ ul.playlist li .peak .r {
   html { -webkit-text-size-adjust:none; -ms-text-size-adjust:none; } 
  */
  }
-
-
