@@ -3375,20 +3375,7 @@ ul.playlist li .peak .r {
 
 	* { background: transparent !important; color: black !important; text-shadow: none !important; filter:none !important; -ms-filter: none !important;  }
 
-	.global-nav-bg, .featured-posts, #main-nav, .clear, #topics-bar, .post-meta, .post-pagination, #respond, #sidebar, #site-footer, .list-pagination, #disqus_thread, .dsq-brlink, .post-nav { display: none;}
-
-	#header, #branding {height: auto !important;}
-
-	#header #branding h1 {
-		text-indent: 0 !important;
-		margin: 0 0 .5em 0 !important;
-		padding: 0 !important;
-		height: 30px !important;
-		width: auto !important;
-		font-size: 18pt;
-	}
-
-	#branding h2 {display: none;}
+	.global-nav-bg, #branding, .featured-posts, #main-nav, .clear, #topics-bar, .post-pagination, #respond, #sidebar, #site-footer, .list-pagination, .post-nav, .widget-area { display: none;}
 
 	#wrapper {
 		width: auto !important; 
@@ -3431,7 +3418,8 @@ ul.playlist li .peak .r {
 	.grid_13,
 	.grid_14,
 	.grid_15,
-	.grid_16 {
+	.grid_16
+	 {
 		width: auto !important;
 	}
   
@@ -3444,16 +3432,8 @@ ul.playlist li .peak .r {
 	p, h2, h3 { orphans: 3; widows: 3; }
 
 	h2, h3{ page-break-after: avoid; }
-	
-	
-	#respond {
-		display: none;
-	}
-	.widget-area {
-		display: none;
-	}
 
-	/* Comments */
+	/* comments */
 	.commentlist > li.comment {
 		background: none;
 		border: 1px solid #ddd;
