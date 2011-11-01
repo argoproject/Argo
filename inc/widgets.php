@@ -329,8 +329,7 @@ class Argo_hosts_Widget extends WP_Widget {
     	<?php endforeach; ?>
     	
     	<?php else: ?>
-    	<h3>Your blog has no hosts</h3>
-    		<p>Add a host by selecting the blog host checkbox on any user profile screen.</p>
+    		<p><strong>Your blog has no hosts.</strong> Add a host by selecting the blog host checkbox on any user profile screen.</p>
     	
 	<?php endif; // end argo get staff ?>
          

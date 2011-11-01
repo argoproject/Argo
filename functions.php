@@ -90,7 +90,7 @@ function argo_setup() {
 	add_theme_support( 'custom-header');
 
 	// The default header text color
-	define( 'HEADER_TEXTCOLOR', '000' );
+	define( 'HEADER_TEXTCOLOR', '' );
 
 	// Default image
 	define('HEADER_IMAGE', trailingslashit( get_stylesheet_directory_uri() ).'img/headers/default-logo.png');

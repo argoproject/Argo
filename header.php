@@ -77,26 +77,31 @@
 	
 	<div class="container_12 clearfix">
 			<?php
-				// Has the text been hidden?
 				$header_image = get_header_image();
-				
-				if ( 'blank' == get_header_textcolor() || empty( $header_image )) :
+				// Has the text been hidden?
+				if ( 'blank' == get_header_textcolor() || '' == get_header_textcolor()):
+					$style = ' style="display:none;"';
 			?>
-				
+				<div id="branding" class="grid_6">
+			<?php 
+				// Has the header image been hidden?
+				elseif (empty( $header_image )):
+			?>
 				<div id="branding" class="grid_6">
 			<?php
 				else :
+				$style = ' style="color:#' . get_theme_mod( 'header_textcolor', HEADER_TEXTCOLOR ) . ';"';
 			?>
 				<div id="branding" class="grid_6 brand-image">
 			<?php endif; ?>
 			
 			    <?php $heading_tag = ( is_home() || is_front_page() ) ? 'h1' : 'h2'; ?>
-				<<?php echo $heading_tag; ?> id="site-title">
+				<<?php echo $heading_tag; ?> id="site-title" <?php echo $style; ?>>
         		<a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
             	<?php bloginfo('name'); ?>
         		</a>
     		</<?php echo $heading_tag; ?>>
-    		<h2 id="site-description"><?php bloginfo('description'); ?></h2>
+    		<h2 id="site-description" <?php echo $style; ?>><?php bloginfo('description'); ?></h2>
     		
 			<?php
 				// Check to see if the header image has been removed
@@ -139,7 +144,6 @@
 			</div>
 			
             <ul id="follow-us">
-                <li class="icon-rss-header"><?php the_feed_link( 'RSS Feed' ); ?></li>
                 <?php if ( get_option( 'facebook_link' ) ) : ?>
                 <li class="icon-fb-header"><a href="<?php echo get_option( 'facebook_link' ); ?>" title="Facebook">Facebook</a></li>
                 <?php endif; ?>
