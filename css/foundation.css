@@ -1905,6 +1905,11 @@ margin-bottom: 5px;
 font-size: 13px;
 }
 
+#sidebar .widgettitle, #sidebar widget-title {
+font-size: 21px;
+margin: 0 0 10px 0;
+}
+
 #sidebar ul {
 margin-bottom: 0;
 }

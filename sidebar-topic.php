@@ -6,7 +6,7 @@
 <div class="widget-area" role="complementary">
 	<?php if ( ! dynamic_sidebar( 'sidebar-topic' ) ) : ?>
 
-	category and tag sidebar
-
+	<?php the_widget( 'Argo_hosts_Widget','title=Blog Hosts' ); ?>
+	
 	<?php endif; // end sidebar widget area ?>
 </div><!-- #main .widget-area -->
