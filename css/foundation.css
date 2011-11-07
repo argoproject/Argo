@@ -2171,6 +2171,7 @@ padding: 0;
 	list-style-type: decimal;
 	margin-left: 30px;
 	clear: both;
+	border: none;
 }
 
 #menu-greatest-hits a {

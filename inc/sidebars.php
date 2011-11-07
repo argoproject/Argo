@@ -24,16 +24,6 @@ function argo_register_sidebars() {
 		'before_title' => '<h3 class="widget-title">',
 		'after_title' => '</h3>',
 	) );
-
-	register_sidebar( array(
-		'name' => __( 'Showcase Sidebar', 'argo' ),
-		'id' => 'sidebar-showcase',
-		'description' => __( 'The sidebar for the optional Showcase Template', 'argo' ),
-		'before_widget' => '<aside id="%1$s" class="widget %2$s clearfix">',
-		'after_widget' => "</aside>",
-		'before_title' => '<h3 class="widget-title">',
-		'after_title' => '</h3>',
-	) );
 	
 	register_sidebar( array(
 		'name' => __( 'Topic Sidebar', 'argo' ),
