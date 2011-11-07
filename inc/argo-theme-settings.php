@@ -37,7 +37,7 @@ function argo_settings_init() {
         'argo_copyright_msg_callback', 'argo', 'argo_settings' );
     register_setting( 'argo', 'copyright_msg' );
     
-    add_settings_field( 'site_blurb', 'Short Site Blurb',
+    add_settings_field( 'site_blurb', 'About this site',
         'argo_site_blurb_callback', 'argo', 'argo_settings' );
     register_setting( 'argo', 'site_blurb' );    
     

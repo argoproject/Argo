@@ -66,6 +66,7 @@ if ( ! function_exists( 'argo_setup' ) ):
  * @uses add_editor_style() To style the visual editor.
  * @uses add_theme_support() To add support for post thumbnails, automatic feed links, and Post Formats.
  */
+
 function argo_setup() {
 
 	// This theme styles the visual editor with editor-style.css to match the theme style.
