@@ -42,8 +42,8 @@ get_header(); ?>
 			<?php endif; ?>
 			</h3>
 
-		<?php if ( ! get_the_author_meta( 'description' ) && is_author() ): ?>
-			<p><?php the_author_meta( 'description' ); ?> </p>
+		<?php if ( get_the_author_meta( 'description' ) && is_author() ): ?>
+			<p><?php the_author_meta( 'description' ); ?></p>
 		<?php endif; ?>
 		</div>
 

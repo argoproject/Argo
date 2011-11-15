@@ -46,7 +46,6 @@ require_once( THEMEINCPATH . 'images.php' );
 require_once( THEMEINCPATH . 'related-content.php' );
 require_once( THEMEINCPATH . 'featured-content.php' );
 
-
 /**
  * Tell WordPress to run argo_setup() when the 'after_setup_theme' hook is run.
  */
