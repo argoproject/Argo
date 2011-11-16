@@ -15,7 +15,7 @@
 		?>
 			<div class="sticky-related clearfix"> 
 				<dl> 
-					<dt>More in this series:</dt> 
+					<dt>More from <?php echo $feature->name; ?>:</dt> 
 					<?php foreach ( $feature_posts as $feature_post ): ?>
 						<dd><a href="<?php echo get_permalink( $feature_post->ID ); ?>"><?php echo get_the_title( $feature_post->ID ); ?></a></dd> 
 					<?php endforeach; ?>
@@ -25,7 +25,6 @@
 				</dl> 
 		<?php else: // feature_posts ?>
 			<div class="sticky-solo clearfix">
-				<h5><?php echo $feature->name; ?></h5> 
 		<?php endif; // feature_posts
 		else: // argo_post_has_features ?> 
 			<div class="sticky-solo clearfix">
