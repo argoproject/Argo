@@ -500,28 +500,17 @@ function argo_comment( $comment, $args, $depth ) {
 endif; // ends check for argo_comment()
 
  /**
- * Add JS to the footer
+ * Enqueue JS for the footer
  */
+function argo_enqueue_js() {
+	wp_enqueue_script( 'text_placeholder', get_bloginfo('template_url') . '/js/jquery.textPlaceholder.js', array( 'jquery' ), '1.0', true );
 
-add_action( 'init', 'argo_init_js' );
+	wp_enqueue_script( 'hoverIntent' );
 
-function argo_init_js() {
-	if (!is_admin()) {
-		wp_enqueue_script( 'jquery' );
-
-		// load text placeholder
-		wp_enqueue_script('text_placeholder', get_bloginfo('template_url') . '/js/jquery.textPlaceholder.js', array('jquery'), '1.0', true);
-		
-		// load jquery hover intent
-		wp_enqueue_script( 'hoverIntent' );
-
-		if ( get_option('show_related_content', 1) ) {
-			// load id tabs
-			wp_enqueue_script('idTabs', get_bloginfo('template_url') . '/js/jquery.idTabs.js', array('jquery'), '1.0', true);
-		}
-	}
+	if ( get_option( 'show_related_content', true ) )
+		wp_enqueue_script( 'idTabs', get_bloginfo('template_url') . '/js/jquery.idTabs.js', array( 'jquery' ), '1.0', true );
 }
-add_action('init', 'argo_init_js');
+add_action('wp_enqueue_scripts', 'argo_enqueue_js' );
 
 add_action( 'wp_footer', 'argo_footer_js' );
 	function argo_footer_js() { ?>
