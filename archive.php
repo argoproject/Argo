@@ -27,7 +27,9 @@ get_header(); ?>
 		<div id="archive-intro">
 			<?php if ( !is_author() ): ?>
 				<nav class="archive-dropdown">
-					<select name="archive-dropdown" onchange='document.location.href=this.options[this.selectedIndex].value;'> <option value=""><?php echo esc_attr(__('Select Month')); ?></option> <?php wp_get_archives(apply_filters('widget_archives_dropdown_args', array('type' => 'monthly', 'format' => 'option', 'show_post_count' => $c))); ?> </select>
+					<select name="archive-dropdown" onchange='document.location.href=this.options[this.selectedIndex].value;'><option value="">Select Month</option>
+					<?php wp_get_archives( array('type' => 'monthly', 'format' => 'option' ) ); ?>
+					</select>
 				</nav>
 			<?php endif; ?>
 			<h3>
@@ -36,7 +38,7 @@ get_header(); ?>
 			<?php elseif ( is_year() ) : ?>
 			<?php printf( 'Yearly Archives: <span>%s</span>', get_the_date('Y') ); ?>
 			<?php elseif ( is_author() ) : ?>
-			<?php printf( __( 'Author Archives: %s', 'twentyeleven' ), '<span class="vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( "ID" ) ) ) . '" title="' . esc_attr( get_the_author() ) . '" rel="me">' . get_the_author() . '</a></span>' ); ?>
+			<?php printf( 'Author Archives: %s', '<span class="vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '" title="' . esc_attr( get_the_author() ) . '" rel="me">' . get_the_author() . '</a></span>' ); ?>
 			<?php else : ?>
 			Blog Archives
 			<?php endif; ?>
