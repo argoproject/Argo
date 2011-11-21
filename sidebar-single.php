@@ -4,9 +4,8 @@
  */
 ?>
 <div class="widget-area" role="complementary">
-	<?php if ( ! dynamic_sidebar( 'sidebar-single' ) ) : ?>
-
-	<?php the_widget( 'Argo_hosts_Widget','title=Blog Hosts' ); ?>
-
-	<?php endif; // end sidebar widget area ?>
+	<?php
+		if ( ! dynamic_sidebar( 'sidebar-single' ) )
+			the_widget( 'Argo_hosts_Widget', array( 'title' => 'Blog Hosts' ) );
+	?>
 </div><!-- #main .widget-area -->
