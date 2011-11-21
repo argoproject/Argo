@@ -464,8 +464,11 @@ endif; // ends check for argo_comment()
  */
 function argo_enqueue_js() {
 	wp_enqueue_script( 'text_placeholder', get_bloginfo('template_url') . '/js/jquery.textPlaceholder.js', array( 'jquery' ), '1.0', true );
-
-	wp_enqueue_script( 'hoverIntent' );
+	
+	if ( wp_script_is( 'hoverIntent' ) )
+		wp_enqueue_script( 'hoverIntent' );
+	else
+		wp_enqueue_script( 'hoverIntent', includes_url( "/js/hoverIntent.js" ), array('jquery'), '20090102', true );
 
 	if ( get_option( 'show_related_content', true ) )
 		wp_enqueue_script( 'idTabs', get_bloginfo('template_url') . '/js/jquery.idTabs.js', array( 'jquery' ), '1.0', true );
