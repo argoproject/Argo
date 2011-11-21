@@ -82,7 +82,7 @@
 				<div id="branding" class="grid_6">
 			<?php 
 				// Has the header image been hidden?
-				elseif (empty( $header_image )):
+				elseif ( ! $header_image ) :
 			?>
 				<div id="branding" class="grid_6">
 			<?php
@@ -101,15 +101,13 @@
     		<h2 id="site-description" <?php echo $style; ?>><?php bloginfo('description'); ?></h2>
     		
 			<?php
-				// Check to see if the header image has been removed
-				$header_image = get_header_image();
-				if ( ! empty( $header_image ) ) :
+				// Check to see if the header image should be displayed
+				if ( $header_image ) :
 			?>
 				<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
-					<img src="<?php header_image(); ?>" width="<?php echo HEADER_IMAGE_WIDTH; ?>" height="<?php echo HEADER_IMAGE_HEIGHT; ?>" alt="<?php bloginfo('name'); ?>">
+					<img src="<?php header_image(); ?>" width="<?php echo HEADER_IMAGE_WIDTH; ?>" height="<?php echo HEADER_IMAGE_HEIGHT; ?>" alt="<?php esc_attr( get_bloginfo( 'name', 'display' ) ); ?>">
 				</a>
-				
-			<?php endif; // end check for removed header image ?>
+			<?php endif; ?>
 			
 		</div><!-- end .grid_6 -->
 		<div class="grid_6 featured-posts">
