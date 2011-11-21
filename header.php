@@ -121,8 +121,11 @@
                     <h3 class="features-caption unitPng"><a href="<?php the_permalink(); ?>" title="headline"><?php the_title(); ?></a></h3>
                 </div>
 
-            <?php $slot++;
-            endwhile; ?>		
+            <?php
+            	$slot++;
+            	endwhile;
+            	wp_reset_postdata();
+            ?>		
 		</div> <!-- end .grid_6 -->
 		
 	</div> <!--/ .container_12 -->
