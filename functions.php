@@ -79,8 +79,8 @@ function argo_setup() {
 	// The default header text color
 	define( 'HEADER_TEXTCOLOR', '' );
 
-	// Default image
-	define('HEADER_IMAGE', get_template_directory_uri() . '/img/headers/default-logo.png' );
+	// Default image, which child themes should include.
+	define( 'HEADER_IMAGE', get_stylesheet_directory_uri() . '/img/headers/default-logo.png' );
 
 	// The height and width of your custom header.
 	// Add a filter to argo_header_image_width and argo_header_image_height to change these values.
