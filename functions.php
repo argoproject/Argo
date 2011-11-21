@@ -78,14 +78,7 @@ function argo_setup() {
 	remove_action( 'wp_head', 'rsd_link' ); // Display the link to the Really Simple Discovery service endpoint, EditURI link
 	remove_action( 'wp_head', 'wlwmanifest_link' ); // Display the link to the Windows Live Writer manifest file.
 	remove_action( 'wp_head', 'wp_generator' ); // Display the XHTML generator that is generated on the wp_head hook, WP version
-	
-	// remove WordPress version from RSS feed
-	function argo_no_generator() { 
-		return ''; 
-	}
-	
-	add_filter('the_generator', 'argo_no_generator');
-	
+
 	// The next four constants set how argo supports custom headers via the TwentyEleven theme
 	add_theme_support( 'custom-header');
 
