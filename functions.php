@@ -44,6 +44,7 @@ require_once( TEMPLATEPATH . '/inc/editor.php' );
 require_once( TEMPLATEPATH . '/inc/images.php' );
 require_once( TEMPLATEPATH . '/inc/related-content.php' );
 require_once( TEMPLATEPATH . '/inc/featured-content.php' );
+require_once( TEMPLATEPATH . '/inc/special-functionality.php' );
 
 /**
  * Tell WordPress to run argo_setup() when the 'after_setup_theme' hook is run.
@@ -71,11 +72,6 @@ function argo_setup() {
 
 	// Add default posts and comments RSS feed links to <head>.
 	add_theme_support( 'automatic-feed-links' );
-	
-	// Clean up <head>.
-	remove_action( 'wp_head', 'rsd_link' );
-	remove_action( 'wp_head', 'wlwmanifest_link' );
-	remove_action( 'wp_head', 'wp_generator' );
 
 	// The next four constants set how argo supports custom headers via the TwentyEleven theme
 	add_theme_support( 'custom-header');
@@ -101,7 +97,7 @@ function argo_setup() {
 			'url' => '%s/img/headers/default-logo.png',
 			'thumbnail_url' => '%s/img/headers/default-logo-thumbnail.png',
 			/* translators: header image description */
-			'description' => __( 'Wheel', 'argo' )
+			'description' => 'Wheel',
 		),
 	) );
 }	
@@ -230,7 +226,7 @@ function argo_admin_header_image() { ?>
 	<?php
 		// Has the text been hidden?
 		$header_image = get_header_image();
-		if ( 'blank' == get_header_textcolor() || empty( $header_image )) :
+		if ( 'blank' == get_header_textcolor() || ! $header_image ) :
 	?>
 	<div id="branding">
 	<?php
@@ -260,43 +256,18 @@ function argo_admin_header_image() { ?>
 <?php }
 endif; // argo_admin_header_image
 
-// add to robots.txt
-// http://codex.wordpress.org/Search_Engine_Optimization_for_WordPress#Robots.txt_Optimization
-function argo_robots() {
-	echo "Disallow: /cgi-bin\n";
-	echo "Disallow: /wp-admin\n";
-	echo "Disallow: /wp-includes\n";
-	echo "Disallow: /wp-content/plugins\n";
-	echo "Disallow: /plugins\n";
-	echo "Disallow: /wp-content/cache\n";
-	echo "Disallow: /wp-content/themes\n";
-	echo "Disallow: /trackback\n";
-	echo "Disallow: /feed\n";
-	echo "Disallow: /comments\n";
-	echo "Disallow: /category/*/*\n";
-	echo "Disallow: */trackback\n";
-	echo "Disallow: */feed\n";
-	echo "Disallow: */comments\n";
-	echo "Disallow: /*?*\n";
-	echo "Disallow: /*?\n";
-	echo "Allow: /wp-content/uploads\n";
-	echo "Allow: /assets";
-}
-
-add_action('do_robots', 'argo_robots');
-
 // Prints HTML with meta information for the current post-date/time and author.
 
 if ( ! function_exists( 'argo_posted_on' ) ) :
 
 function argo_posted_on() {
-	printf( __( '<a href="%1$s" title="%2$s" rel="bookmark"><time class="entry-date" datetime="%3$s" pubdate>%4$s</time></a><span class="by-author"> <span class="sep"> by </span> <span class="author vcard"><a class="url fn n" href="%5$s" title="%6$s" rel="author">%7$s</a></span></span>', 'argo' ),
+	printf( '<a href="%1$s" title="%2$s" rel="bookmark"><time class="entry-date" datetime="%3$s" pubdate>%4$s</time></a><span class="by-author"> <span class="sep"> by </span> <span class="author vcard"><a class="url fn n" href="%5$s" title="%6$s" rel="author">%7$s</a></span></span>',
 		esc_url( get_permalink() ),
 		esc_attr( get_the_time() ),
 		esc_attr( get_the_date( 'c' ) ),
 		esc_html( get_the_date() ),
 		esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
-		sprintf( esc_attr__( 'View all posts by %s', 'argo' ), get_the_author() ),
+		esc_attr( sprintf( 'View all posts by %s', get_the_author() ) ),
 		esc_html( get_the_author() )
 	);
 }
@@ -313,13 +284,11 @@ function argo_excerpt_length( $length ) {
 }
 add_filter( 'excerpt_length', 'argo_excerpt_length' );
 
-
-
 /**
  * Adds a pretty "Continue Reading" link to custom post excerpts.
  */
 function argo_continue_reading_link() {
-	return ' <a href="'. esc_url( get_permalink() ) . '">' . __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'eleven' ) . '</a>';
+	return ' <a href="'. esc_url( get_permalink() ) . '">' . 'Continue reading <span class="meta-nav">&rarr;</span>' . '</a>';
 }
 
 function argo_auto_excerpt_more( $more ) {
@@ -347,7 +316,7 @@ function argo_content_nav( $nav_id ) {
 <nav  id="<?php echo $nav_id; ?>">
 <ul class="post-nav clearfix">
 <li class="n-post"><?php previous_posts_link( 'Newer posts &rarr;' ); ?></li>
-<li class="p-post"><?php next_posts_link( ' &larr; Older posts' ); ?></li>
+<li class="p-post"><?php next_posts_link( '&larr; Older posts' ); ?></li>
 </ul>
 </nav><!-- .post-nav -->
 	<?php endif;
@@ -361,64 +330,66 @@ function argo_content_nav( $nav_id ) {
 * previous_posts_link(' < '); - returns the Previous page link
 * next_posts_link(' > '); - returns the Next page link
 */
-function argo_pagination($range = 6){
-  // $paged - number of the current page
-  global $paged, $wp_query;
-  // How much pages do we have?
-  $max_page = 0;
-  
-  if ( !$max_page ) {
-    $max_page = $wp_query->max_num_pages;
-  }
-  // We need the pagination only if there are more than 1 page
-  if($max_page > 1){
-    if(!$paged){
+function argo_pagination( $range = 6 ) {
+	// $paged - number of the current page
+	global $paged, $wp_query;
+
+	$max_page = $wp_query->max_num_pages;
+
+	// We need the pagination only if there are more than 1 page
+	if ( $max_page <= 1 )
+		return;
+
+    if ( ! $paged )
       $paged = 1;
-    } ?>
-    
+?>
+
     <nav>
 		<ul class="argo-pag clearfix">
 		<li class="argo-previous"><?php previous_posts_link( '&larr; Newer posts' ); ?></li>
-			
-				<?php if($max_page > $range){
+
+				<?php if ( $max_page > $range ) {
 				// When closer to the beginning
-					if($paged < $range){
-						for($i = 1; $i <= ($range + 1); $i++){
-							echo "<li><a href='" . get_pagenum_link($i) ."'";
-							if($i==$paged) echo "class='current'";
+					if ( $paged < $range ) {
+						for ( $i = 1; $i <= ( $range + 1 ); $i++ ) {
+							echo "<li><a href='" . esc_url( get_pagenum_link( $i ) ) ."'";
+							if( $i == $paged )
+								echo " class='current'";
 							echo ">$i</a></li>";
 						}
 					}
 					// When closer to the end
-					elseif($paged >= ($max_page - ceil(($range/2)))){
-						for($i = $max_page - $range; $i <= $max_page; $i++){
-							echo "<li><a href='" . get_pagenum_link($i) ."'";
-							if($i==$paged) echo "class='current'";
+					elseif ( $paged >= ( $max_page - ceil( ( $range / 2 ) ) ) ) {
+						for ( $i = $max_page - $range; $i <= $max_page; $i++ ) {
+							echo "<li><a href='" . esc_url( get_pagenum_link( $i ) ) ."'";
+							if( $i == $paged )
+								echo " class='current'";
 							echo ">$i</a></li>";
 						}
 					}
-      
 					// Somewhere in the middle
-					elseif($paged >= $range && $paged < ($max_page - ceil(($range/2)))){
-						for($i = ($paged - ceil($range/2)); $i <= ($paged + ceil(($range/2))); $i++){
-							echo "<li><a href='" . get_pagenum_link($i) ."'";
-							if($i==$paged) echo "class='current'";
+					elseif ( $paged >= $range && $paged < ( $max_page - ceil( ( $range / 2 ) ) ) ) {
+						for ( $i = ( $paged - ceil( $range / 2 ) ); $i <= ( $paged + ceil( ( $range / 2 ) ) ); $i++ ) {
+							echo "<li><a href='" . esc_url( get_pagenum_link( $i ) ) ."'";
+							if( $i == $paged )
+								echo " class='current'";
 							echo ">$i</a></li>";
 						}
 					}
 				}
     			// Less pages than the range, no sliding effect needed
-				else{
-					for($i = 1; $i <= $max_page; $i++){
-						echo "<li><a href='" . get_pagenum_link($i) ."'";
-						if($i==$paged) echo "class='current'";
+				else {
+					for( $i = 1; $i <= $max_page; $i++ ){
+						echo "<li><a href='" . esc_url( get_pagenum_link( $i ) ) ."'";
+						if( $i == $paged )
+							echo " class='current'";
 						echo ">$i</a></li>";
 					}
 				} ?>
 			<li class="argo-next"><?php next_posts_link( 'Older posts &rarr;' ); ?></li>
 		</ul>
 	</nav><!-- .post-nav -->
- <?php }
+ <?php
 }
 
 if ( ! function_exists( 'argo_comment' ) ) :
@@ -437,7 +408,7 @@ function argo_comment( $comment, $args, $depth ) {
 		case 'trackback' :
 	?>
 	<li class="post pingback">
-		<p><?php _e( 'Pingback:', 'eleven' ); ?> <?php comment_author_link(); ?><?php edit_comment_link( __( 'Edit', 'eleven' ), '<span class="edit-link">', '</span>' ); ?></p>
+		<p>Pingback: <?php comment_author_link(); ?><?php edit_comment_link( 'Edit', '<span class="edit-link">', '</span>' ); ?></p>
 	<?php
 			break;
 		default :
@@ -454,22 +425,22 @@ function argo_comment( $comment, $args, $depth ) {
 						echo get_avatar( $comment, $avatar_size );
 
 						/* translators: 1: comment author, 2: date and time */
-						printf( __( '%1$s on %2$s <span class="says">said:</span>', 'eleven' ),
+						printf( '%1$s on %2$s <span class="says">said:</span>',
 							sprintf( '<span class="fn">%s</span>', get_comment_author_link() ),
 							sprintf( '<a href="%1$s"><time pubdate datetime="%2$s">%3$s</time></a>',
 								esc_url( get_comment_link( $comment->comment_ID ) ),
 								get_comment_time( 'c' ),
 								/* translators: 1: date, 2: time */
-								sprintf( __( '%1$s at %2$s', 'eleven' ), get_comment_date(), get_comment_time() )
+								sprintf( '%1$s at %2$s', get_comment_date(), get_comment_time() )
 							)
 						);
 					?>
 
-					<?php edit_comment_link( __( 'Edit', 'argo' ), '<span class="edit-link">', '</span>' ); ?>
+					<?php edit_comment_link( 'Edit', '<span class="edit-link">', '</span>' ); ?>
 				</div><!-- .comment-author .vcard -->
 
 				<?php if ( $comment->comment_approved == '0' ) : ?>
-					<em class="comment-awaiting-moderation"><?php _e( 'Your comment is awaiting moderation.', 'argo' ); ?></em>
+					<em class="comment-awaiting-moderation">Your comment is awaiting moderation.</em>
 					<br />
 				<?php endif; ?>
 
@@ -478,7 +449,7 @@ function argo_comment( $comment, $args, $depth ) {
 			<div class="comment-content"><?php comment_text(); ?></div>
 
 			<div class="reply">
-				<?php comment_reply_link( array_merge( $args, array( 'reply_text' => __( 'Reply <span>&darr;</span>', 'argo' ), 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
+				<?php comment_reply_link( array_merge( $args, array( 'reply_text' => 'Reply <span>&darr;</span>', 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
 			</div><!-- .reply -->
 		</article><!-- #comment-## -->
 
