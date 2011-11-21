@@ -3,7 +3,7 @@
 	<head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 		<title>Page Not Found</title>
-		<link rel="stylesheet" href="<?php bloginfo( 'stylesheet_url' ); ?>?v=1" />
+		<link rel="stylesheet" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
 	</head>
 	<body>
 	<div id="wrapper">
@@ -15,12 +15,11 @@
     <div id="header">
     <div class="container_12 clearfix">
         <div class="grid_6 branding">
-    		<?php $heading_tag = ( is_home() || is_front_page() ) ? 'h1' : 'h2'; ?>
-				<<?php echo $heading_tag; ?> id="site-title">
+				<h2 id="site-title">
         		<a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home" class="unitPng">
             	<?php bloginfo('name'); ?>
         		</a>
-    		</<?php echo $heading_tag; ?>>
+    		</h2>
     		<h2><?php bloginfo('description'); ?></h2>
 		</div>
         <!-- end .grid_6 -->
