@@ -31,16 +31,15 @@
 
 	// Add a page number if necessary:
 	if ( $paged >= 2 || $page >= 2 )
-		echo ' | ' . sprintf( __( 'Page %s', 'argo' ), max( $paged, $page ) );
+		echo ' | ' . 'Page ' . max( $paged, $page );
 
 	?></title>
 <link rel="profile" href="http://gmpg.org/xfn/11" />
-<link rel="stylesheet" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-
-<script src="<?php echo get_template_directory_uri(); ?>/js/modernizr.custom.55609.js" type="text/javascript"></script>
-
 <?php
+	wp_enqueue_style( 'argo-stylesheet', get_bloginfo( 'stylesheet_url' ) );
+	wp_enqueue_script( 'argo-modernizr', get_template_directory_uri() . '/js/modernizr.custom.55609.js' );
+
 	/* We add some JavaScript to pages with the comment form
 	 * to support sites with threaded comments (when in use).
 	 */
@@ -67,7 +66,7 @@
         		<span class="visuallyhidden">
         			<a href="#main" title="Skip to content">Skip to content</a>
         		</span>
-        		<?php wp_nav_menu( array( 'theme_location' => 'global-nav', 'container' => false, 'depth' => 1  ) ); ?>
+        		<?php wp_nav_menu( array( 'theme_location' => 'global-nav', 'container' => false, 'depth' => 1 ) ); ?>
         	</nav>
         </div>
        <!-- /.global-nav -->
