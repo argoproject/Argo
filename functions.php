@@ -59,13 +59,12 @@ if ( ! function_exists( 'argo_setup' ) ):
  * before the init hook. The init hook is too late for some features, such as indicating
  * support post thumbnails.
  *
- * To override eleven_setup() in a child theme, add your own eleven_setup to your child theme's
+ * To override argo_setup() in a child theme, add your own argo_setup() to your child theme's
  * functions.php file.
  *
  * @uses add_editor_style() To style the visual editor.
  * @uses add_theme_support() To add support for post thumbnails, automatic feed links, and Post Formats.
  */
-
 function argo_setup() {
 
 	// This theme styles the visual editor with editor-style.css to match the theme style.
@@ -86,7 +85,7 @@ function argo_setup() {
 	define( 'HEADER_TEXTCOLOR', '' );
 
 	// Default image
-	define('HEADER_IMAGE', trailingslashit( get_stylesheet_directory_uri() ).'img/headers/default-logo.png');
+	define('HEADER_IMAGE', get_template_directory_uri() . '/img/headers/default-logo.png' );
 
 	// The height and width of your custom header.
 	// Add a filter to argo_header_image_width and argo_header_image_height to change these values.
