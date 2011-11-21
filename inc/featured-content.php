@@ -89,9 +89,10 @@ function argo_get_the_main_feature() {
 
 if ( ! function_exists( 'argo_custom_taxonomy_terms' ) ) :
 function argo_custom_taxonomy_terms( $post_id ) {
-    global $CUSTOM_TAXONOMIES;
+	$taxonomies = apply_filters( 'argo_custom_taxnomies', array( 'feature' ) );
+
     $post_terms = array();
-    foreach ( $CUSTOM_TAXONOMIES as $tax ) {
+    foreach ( $taxonomies as $tax ) {
         if ( taxonomy_exists( $tax ) ) {
             $terms = get_the_terms( $post_id, $tax );
             if ( $terms ) {

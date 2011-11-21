@@ -1,5 +1,5 @@
 <?php
-$CUSTOM_TAXONOMIES = array( 'feature', );
+
 function argo_custom_taxonomies() {
     // PROMINENCE
     if ( ! taxonomy_exists( 'prominence' ) ) {
