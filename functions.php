@@ -34,17 +34,16 @@
 if ( ! isset( $content_width ) )
 	$content_width = 620;
 
-define( 'THEMEINCPATH', TEMPLATEPATH . '/inc/' );
-require_once( THEMEINCPATH . 'users.php' );
-require_once( THEMEINCPATH . 'sidebars.php' );
-require_once( THEMEINCPATH . 'widgets.php' );
-require_once( THEMEINCPATH . 'nav-menus.php' );
-require_once( THEMEINCPATH . 'taxonomies.php' );
-require_once( THEMEINCPATH . 'argo-theme-settings.php' );
-require_once( THEMEINCPATH . 'editor.php' );
-require_once( THEMEINCPATH . 'images.php' );
-require_once( THEMEINCPATH . 'related-content.php' );
-require_once( THEMEINCPATH . 'featured-content.php' );
+require_once( TEMPLATEPATH . '/inc/users.php' );
+require_once( TEMPLATEPATH . '/inc/sidebars.php' );
+require_once( TEMPLATEPATH . '/inc/widgets.php' );
+require_once( TEMPLATEPATH . '/inc/nav-menus.php' );
+require_once( TEMPLATEPATH . '/inc/taxonomies.php' );
+require_once( TEMPLATEPATH . '/inc/argo-theme-settings.php' );
+require_once( TEMPLATEPATH . '/inc/editor.php' );
+require_once( TEMPLATEPATH . '/inc/images.php' );
+require_once( TEMPLATEPATH . '/inc/related-content.php' );
+require_once( TEMPLATEPATH . '/inc/featured-content.php' );
 
 /**
  * Tell WordPress to run argo_setup() when the 'after_setup_theme' hook is run.
@@ -73,10 +72,10 @@ function argo_setup() {
 	// Add default posts and comments RSS feed links to <head>.
 	add_theme_support( 'automatic-feed-links' );
 	
-	//header cleanup http://wpengineer.com/1438/wordpress-header
-	remove_action( 'wp_head', 'rsd_link' ); // Display the link to the Really Simple Discovery service endpoint, EditURI link
-	remove_action( 'wp_head', 'wlwmanifest_link' ); // Display the link to the Windows Live Writer manifest file.
-	remove_action( 'wp_head', 'wp_generator' ); // Display the XHTML generator that is generated on the wp_head hook, WP version
+	// Clean up <head>.
+	remove_action( 'wp_head', 'rsd_link' );
+	remove_action( 'wp_head', 'wlwmanifest_link' );
+	remove_action( 'wp_head', 'wp_generator' );
 
 	// The next four constants set how argo supports custom headers via the TwentyEleven theme
 	add_theme_support( 'custom-header');
@@ -96,8 +95,6 @@ function argo_setup() {
 	// custom headers. See argo_admin_header_style(), below.
 	add_custom_image_header( 'argo_header_style', 'argo_admin_header_style', 'argo_admin_header_image' );
 
-	// ... and thus ends the changeable header business.
-
 	// Default custom headers packaged with the theme. %s is a placeholder for the theme template directory URI.
 	register_default_headers( array(
 		'wheel' => array(
@@ -105,7 +102,7 @@ function argo_setup() {
 			'thumbnail_url' => '%s/img/headers/default-logo-thumbnail.png',
 			/* translators: header image description */
 			'description' => __( 'Wheel', 'argo' )
-		)
+		),
 	) );
 }	
 endif; // argo_setup
