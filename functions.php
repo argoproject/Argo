@@ -507,10 +507,6 @@ add_action( 'init', 'argo_init_js' );
 
 function argo_init_js() {
 	if (!is_admin()) {
-		// deregister l10n.js (new since WordPress 3.1)
-		// why you might want to keep it: http://wordpress.stackexchange.com/questions/5451/what-does-l10n-js-do-in-wordpress-3-1-and-how-do-i-remove-it/5484#5484
-		
-		
 		wp_deregister_script('jquery');
 
 		// load Google jQuery API
@@ -522,8 +518,8 @@ function argo_init_js() {
 		wp_enqueue_script('text_placeholder', get_bloginfo('template_url') . '/js/jquery.textPlaceholder.js', array('jquery'), '1.0', true);
 		
 		// load jquery hover intent
-		wp_enqueue_script('hover_intent', get_bloginfo('template_url') . '/js/jquery.hoverIntent.minified.js', array('jquery'), '1.0', true);
-		
+		wp_enqueue_script( 'hoverIntent' );
+
 		if ( get_option('show_related_content', 1) ) {
 			// load id tabs
 			wp_enqueue_script('idTabs', get_bloginfo('template_url') . '/js/jquery.idTabs.js', array('jquery'), '1.0', true);
