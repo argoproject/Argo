@@ -507,12 +507,7 @@ add_action( 'init', 'argo_init_js' );
 
 function argo_init_js() {
 	if (!is_admin()) {
-		wp_deregister_script('jquery');
-
-		// load Google jQuery API
-		wp_register_script('jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js', false, '1.6.4', true);
-
-		wp_enqueue_script('jquery');
+		wp_enqueue_script( 'jquery' );
 
 		// load text placeholder
 		wp_enqueue_script('text_placeholder', get_bloginfo('template_url') . '/js/jquery.textPlaceholder.js', array('jquery'), '1.0', true);
