@@ -1,5 +1,4 @@
 <?php
-define( 'HALF_WIDTH', 300 );
 /*
  * TINYMCE CUSTOMIZATIONS
  */
