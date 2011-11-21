@@ -64,7 +64,7 @@ if ( get_option( 'show_related_content', true ) ) :
 					<li><a href="<?php echo esc_url( get_permalink( $rel_post->ID ) ); ?>" title="<?php echo esc_attr($topic->name); ?>"><?php echo $rel_post->post_title; ?></a></li>
 					<?php endforeach; ?>
 				</ul>
-				<p><a href="<?php echo get_term_link( $topic, $topic->taxonomy ); ?>" title="<?php echo esc_attr($topic->name); ?>" target="_blank"><strong>view all <?php echo $topic->name; ?> posts</strong></a></p>
+				<p><a href="<?php echo esc_url( get_term_link( $topic ) ); ?>" title="<?php echo esc_attr($topic->name); ?>" target="_blank"><strong>view all <?php echo $topic->name; ?> posts</strong></a></p>
 			</div> <!-- /#rpX -->
 		<?php endforeach; ?>
 	</div> <!-- /.items -->
