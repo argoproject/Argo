@@ -19,11 +19,12 @@ class Argo_follow_Widget extends WP_Widget {
 	function Argo_follow_Widget() {
 		/* Widget settings. */
 		$widget_ops = array( 
-		'classname' => 'argo-follow', 
-		'description' => __('Display links to social media sites set in Argo theme options', 'argo-follow') );
+			'classname' => 'argo-follow', 
+			'description' => 'Display links to social media sites set in Argo theme options',
+		);
 
 		/* Create the widget. */
-		$this->WP_Widget( 'argo-follow-widget', __('Argo Follow', 'argo-follow'), $widget_ops);
+		$this->WP_Widget( 'argo-follow-widget', 'Argo Follow', $widget_ops );
 	}
 
 	/**
@@ -38,7 +39,7 @@ class Argo_follow_Widget extends WP_Widget {
 
 		/* Display the widget title if one was input */
 		if ( $title )
-			echo $before_title . $title . $after_title;?>
+			echo $before_title . $title . $after_title; ?>
 			
 			<ul>
 				<li class="subscribe"><?php echo the_feed_link( 'RSS' ); ?></li>
@@ -46,41 +47,41 @@ class Argo_follow_Widget extends WP_Widget {
 			<?php if ( get_option( 'facebook_link' ) ) : ?>
 				<li>
 					<img src="<?php bloginfo('template_directory'); ?>/img/fb16.png" alt="facebook-fav" width="16" height="16" />
-					<a href="<?php echo get_option( 'facebook_link' ); ?>" title="Facebook">Facebook</a>
+					<a href="<?php echo esc_url( get_option( 'facebook_link' ) ); ?>" title="Facebook">Facebook</a>
 				</li>
 			<?php endif; ?>
 
 			<?php if ( get_option( 'twitter_link' ) ) : ?>
 				<li>
 					<img src="<?php bloginfo('template_directory'); ?>/img/twitter16.png" alt="twitter-fav" width="16" height="16" />
-					<a href="<?php echo get_option( 'twitter_link' ); ?>" title="twitter">Twitter</a>
+					<a href="<?php echo esc_url( get_option( 'twitter_link' ) ); ?>" title="twitter">Twitter</a>
 				</li>
 			<?php endif; ?>
 
 			<?php if ( get_option( 'youtube_link' ) ) : ?>
 				<li>
 					<img src="<?php bloginfo('template_directory'); ?>/img/youtube16.png" alt="youtube-fav" width="16" height="16" />
-					<a href="<?php echo get_option( 'youtube_link' ); ?>" title="youtube">YouTube</a>
+					<a href="<?php echo esc_url( get_option( 'youtube_link' ) ); ?>" title="youtube">YouTube</a>
 				</li>
 			<?php endif; ?>
 
 			<?php if ( get_option( 'flickr_link' ) ) : ?>
 				<li>
 					<img src="<?php bloginfo('template_directory'); ?>/img/flickr16.png" alt="flickr-fav" width="16" height="16" />
-					<a href="<?php echo get_option( 'flickr_link' ); ?>" title="flickr">Flickr</a>
+					<a href="<?php echo esc_url( get_option( 'flickr_link' ) ); ?>" title="flickr">Flickr</a>
 				</li>
 			<?php endif; ?>
 
 			<?php if ( get_option( 'gplus_link' ) ) : ?>
 				<li>
 					<img src="<?php bloginfo('template_directory'); ?>/img/gplus16.png" alt="gplus-fav" width="16" height="16" />
-					<a href="<?php echo get_option( 'gplus_link' ); ?>?rel=author" title="Google+">Google+</a>
+					<a href="<?php echo esc_url( get_option( 'gplus_link' ) ); ?>?rel=author" title="Google+">Google+</a>
 				</li>
 			<?php endif; ?>
 			
 			<?php if ( get_option( 'podcast_link' ) ) :?>
 				<li class="podcast">
-				<a href="<?php echo get_option( 'podcast_link' ); ?>">Podcast</a>
+				<a href="<?php echo esc_url( get_option( 'podcast_link' ) ); ?>">Podcast</a>
 				</li>
 			<?php endif; ?>
 			
@@ -108,16 +109,12 @@ class Argo_follow_Widget extends WP_Widget {
 	function form( $instance ) {
 
 		/* Set up some default widget settings. */
-		$defaults = array( 'title' => __('Follow Us', 'argo-follow'));
+		$defaults = array( 'title' => 'Follow Us' );
 		$instance = wp_parse_args( (array) $instance, $defaults ); ?>
-
-		<!-- Widget Title: Text Input -->
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e('Title:', 'argo-follow'); ?></label>
-			<input id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" style="width:90%;" />
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>">Title:</label>
+			<input id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $instance['title'] ); ?>" style="width:90%;" />
 		</p>
-
-
 	<?php
 	}
 }
