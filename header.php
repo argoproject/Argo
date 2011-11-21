@@ -53,8 +53,6 @@
 	 */
 	wp_head();
 ?>
-
-<?php get_template_part('customstyle');?>
 </head>
 
 <body <?php body_class(); ?>>
