@@ -140,16 +140,16 @@
 			<div id="header-search">
 				<?php get_search_form(); ?>
 			</div>
-			
+
             <ul id="follow-us">
-                <?php if ( get_option( 'facebook_link' ) ) : ?>
-                <li class="icon-fb-header"><a href="<?php echo get_option( 'facebook_link' ); ?>" title="Facebook">Facebook</a></li>
+                <?php if ( $facebook = get_option( 'facebook_link' ) ) : ?>
+                <li class="icon-fb-header"><a href="<?php echo esc_url( $facebook ); ?>" title="Facebook">Facebook</a></li>
                 <?php endif; ?>
-                <?php if ( get_option( 'twitter_link' ) ) : ?>
-                <li class="icon-twitter-header"><a href="<?php echo get_option( 'twitter_link' ); ?>" title="Twitter">Twitter</a></li>
-                <?php endif; ?>
+                <?php if ( $twitter = get_option( 'twitter_link' ) ) : ?>
+                <li class="icon-twitter-header"><a href="<?php echo esc_url( $twitter ); ?>" title="Twitter">Twitter</a></li>
+                <?php endif; unset( $facebook, $twitter ); ?>
             </ul> <!-- /#follow-us -->
-            
+
         </nav> <!-- /utility-nav -->
     </div> <!-- /main-nav -->
     <div id="secondary-nav" class="container_12 clearfix">
