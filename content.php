@@ -17,10 +17,10 @@
 				<dl> 
 					<dt>More from <?php echo $feature->name; ?>:</dt> 
 					<?php foreach ( $feature_posts as $feature_post ): ?>
-						<dd><a href="<?php echo get_permalink( $feature_post->ID ); ?>"><?php echo get_the_title( $feature_post->ID ); ?></a></dd> 
+						<dd><a href="<?php echo esc_url( get_permalink( $feature_post->ID ) ); ?>"><?php echo get_the_title( $feature_post->ID ); ?></a></dd> 
 					<?php endforeach; ?>
 					<?php if ( count( $feature_posts ) == 3 ): ?>
-						<dd class="sticky-all"><a href="<?php echo get_term_link( $feature, $feature->taxonomy ); ?>">Full coverage <span class="meta-nav">&rarr;</span></a></dd> 
+						<dd class="sticky-all"><a href="<?php echo esc_url( get_term_link( $feature ) ); ?>">Full coverage <span class="meta-nav">&rarr;</span></a></dd> 
 					<?php endif; ?>
 				</dl> 
 		<?php else: // feature_posts ?>
@@ -49,10 +49,10 @@
 
         		<ul class="meta-gestures clearfix">
         			<li><?php argo_posted_on(); ?></li>
-    				<li class="meta-comments"><span class="comments-link"><?php comments_popup_link( 'Comment', '<strong>1</strong> Comment ', ' <strong>%</strong> Comments' ); ?></span></li>
+    				<li class="meta-comments"><span class="comments-link"><?php comments_popup_link( 'Comment', '<strong>1</strong> Comment', '<strong>%</strong> Comments' ); ?></span></li>
     			</ul>
     		</div><!-- /.post-meta -->
- 			<h2 class="entry-title"><a href="<?php the_permalink(); ?>" title="<?php printf( 'Permalink to %s', the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
+ 			<h2 class="entry-title"><a href="<?php the_permalink(); ?>" title="Permalink to <?php the_title_attribute(); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
 		</header><!-- / entry header -->
 		
 
