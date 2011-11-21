@@ -4,31 +4,30 @@
  * SIDEBAR REGISTRATION
  */
 function argo_register_sidebars() {
-
 	register_sidebar( array(
-		'name' => __( 'Main Sidebar', 'argo' ),
+		'name' => 'Main Sidebar',
 		'id' => 'sidebar-main',
-		'description' => __( 'The sidebar for index and archive pages', 'argo' ),
+		'description' => 'The sidebar for index and archive pages',
 		'before_widget' => '<aside id="%1$s" class="widget %2$s clearfix">',
 		'after_widget' => "</aside>",
 		'before_title' => '<h3 class="widget-title">',
 		'after_title' => '</h3>',
 	) );
-	
+
 	register_sidebar( array(
-		'name' => __( 'Single Sidebar', 'argo' ),
+		'name' => 'Single Sidebar',
 		'id' => 'sidebar-single',
-		'description' => __( 'The sidebar for posts and pages', 'argo' ),
+		'description' => 'The sidebar for posts and pages',
 		'before_widget' => '<aside id="%1$s" class="widget %2$s clearfix">',
 		'after_widget' => "</aside>",
 		'before_title' => '<h3 class="widget-title">',
 		'after_title' => '</h3>',
 	) );
-	
+
 	register_sidebar( array(
-		'name' => __( 'Topic Sidebar', 'argo' ),
+		'name' => 'Topic Sidebar',
 		'id' => 'topic-sidebar',
-		'description' => __( 'The sidebar for category and tag pages', 'argo' ),
+		'description' => 'The sidebar for category and tag pages',
 		'before_widget' => '<aside id="%1$s" class="widget %2$s clearfix">',
 		'after_widget' => "</aside>",
 		'before_title' => '<h3 class="widget-title">',
@@ -36,9 +35,9 @@ function argo_register_sidebars() {
 	) );
 
 	register_sidebar( array(
-		'name' => __( 'Footer Area One', 'argo' ),
+		'name' => 'Footer Area One',
 		'id' => 'footer-1',
-		'description' => __( 'a 2 column footer region', 'argo' ),
+		'description' => 'a 2 column footer region',
 		'before_widget' => '<aside id="%1$s" class="widget %2$s clearfix">',
 		'after_widget' => "</aside>",
 		'before_title' => '<h3 class="widget-title">',
@@ -46,9 +45,9 @@ function argo_register_sidebars() {
 	) );
 
 	register_sidebar( array(
-		'name' => __( 'Footer Area Two', 'argo' ),
+		'name' => 'Footer Area Two',
 		'id' => 'footer-2',
-		'description' => __( 'a 6 column footer region', 'argo' ),
+		'description' => 'a 6 column footer region',
 		'before_widget' => '<aside id="%1$s" class="widget %2$s clearfix">',
 		'after_widget' => "</aside>",
 		'before_title' => '<h3 class="widget-title">',
@@ -56,14 +55,13 @@ function argo_register_sidebars() {
 	) );
 
 	register_sidebar( array(
-		'name' => __( 'Footer Area Three', 'argo' ),
+		'name' => 'Footer Area Three',
 		'id' => 'footer-3',
-		'description' => __( 'a 4 column footer region', 'argo' ),
+		'description' => 'a 4 column footer region',
 		'before_widget' => '<aside id="%1$s" class="widget %2$s clearfix">',
 		'after_widget' => "</aside>",
 		'before_title' => '<h3 class="widget-title">',
 		'after_title' => '</h3>',
 	) );
-
 }
-add_action( 'init', 'argo_register_sidebars' );
+add_action( 'widgets_init', 'argo_register_sidebars' );
