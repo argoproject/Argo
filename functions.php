@@ -479,7 +479,7 @@ add_action( 'wp_footer', 'argo_footer_js' );
 	function argo_footer_js() { ?>
 	
 		<script type="text/javascript">
-			jQuery(document).ready(function() {
+			jQuery(document).ready(function($) {
 			//html5 placeholders
 			$("input[placeholder]").textPlaceholder();
 
