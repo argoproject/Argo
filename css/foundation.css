@@ -961,7 +961,7 @@ background: transparent url(../img/comment-icon.gif) no-repeat;
 	float: right;
 }
 
-.ie7 .meta-gestures .meta-comments, .ie6 .meta-gestures .meta-comments { 
+.ie8 .meta-gestures .meta-comments, .ie7 .meta-gestures .meta-comments, .ie6 .meta-gestures .meta-comments { 
 	background: none;
 } 
 
