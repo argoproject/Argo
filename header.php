@@ -36,6 +36,41 @@
 	?></title>
 <link rel="profile" href="http://gmpg.org/xfn/11" />
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
+
+
+<link rel="stylesheet" href="<?php bloginfo( 'template_directory' ); ?>/css/master.css" />
+<noscript>
+<link rel="stylesheet" href="<?php bloginfo( 'template_directory' ); ?>/css/mobile.min.css" />
+</noscript>
+<script>
+// Edit to suit your needs.
+var ADAPT_CONFIG = {
+  // Where is your CSS?
+  path: '<?php bloginfo( 'template_directory' ); ?>/css/',
+
+  // false = Only run once, when page first loads.
+  // true = Change on window resize and page tilt.
+  dynamic: true,
+
+  // First range entry is the minimum.
+  // Last range entry is the maximum.
+  // Separate ranges by "to" keyword.
+  range: [
+    '0px    to 760px  = mobile.min.css',
+    '760px  to 980px  = 720.min.css',
+    '980px  to 1280px = 960.min.css',
+    '1280px to 1600px = 1200.min.css',
+    '1600px to 1940px = 1560.min.css',
+    '1940px to 2540px = 1920.min.css',
+    '2540px           = 2520.min.css'
+  ]
+};
+</script>
+<script src="<?php bloginfo( 'template_directory' ); ?>/js/adapt.min.js"></script>
+
+
+
+
 <?php
 	wp_enqueue_style( 'argo-stylesheet', get_bloginfo( 'stylesheet_url' ) );
 	wp_enqueue_script( 'argo-modernizr', get_template_directory_uri() . '/js/modernizr.custom.55609.js' );
