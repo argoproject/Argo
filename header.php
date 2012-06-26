@@ -171,28 +171,7 @@ var ADAPT_CONFIG = {
 		<nav>
         <?php wp_nav_menu( array( 'theme_location' => 'categories', 'container' => false , 'menu_id' => 'topnav', 'walker' => new Argo_Categories_Walker, 'depth' => 1 ) ); ?>
 		</nav><!-- /#main-nav -->
-		<nav id="utility-nav">
-			<div id="header-search">
-				<?php get_search_form(); ?>
-			</div>
-
-            <ul id="follow-us">
-                <?php if ( $facebook = get_option( 'facebook_link' ) ) : ?>
-                <li class="icon-fb-header"><a href="<?php echo esc_url( $facebook ); ?>" title="Facebook">Facebook</a></li>
-                <?php endif; ?>
-                <?php if ( $twitter = get_option( 'twitter_link' ) ) : ?>
-                <li class="icon-twitter-header"><a href="<?php echo esc_url( $twitter ); ?>" title="Twitter">Twitter</a></li>
-                <?php endif; unset( $facebook, $twitter ); ?>
-            </ul> <!-- /#follow-us -->
-
-        </nav> <!-- /utility-nav -->
+		
     </div> <!-- /main-nav -->
-    <div id="secondary-nav" class="container_12 clearfix">
-    	<nav>
-    		<div id="topics-bar" class="grid_12">
-				<?php wp_nav_menu( array( 'theme_location' => 'dont-miss', 'container' => false, 'depth' => 1 ) ); ?>
-			</div> <!--/.grid_12-->
-		</nav>
-	</div><!--/.container_12-->
- 
-	<div id="main" class="container_12 clearfix">
+    
+<div id="main" class="container_12 clearfix">
