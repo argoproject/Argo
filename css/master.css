@@ -9,7 +9,7 @@ body {
   color: #333;
 }
 
-h1 {
+/*h1 {
   background: #eee url(../images/h1.png) no-repeat right center;
   border-bottom: 1px solid #ccc;
   padding: 10px 90px 10px 15px;
@@ -22,7 +22,7 @@ h4,
 h5,
 h6 {
   line-height: 1;
-}
+}*/
 
 a {
   color: #06c;
