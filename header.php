@@ -94,8 +94,8 @@ var ADAPT_CONFIG = {
 <div id="page" class="hfeed">
    
    <div class="global-nav-bg"> 
-		<div class="global-nav">
-			<nav>
+		<div class="global-nav container_12">
+			<nav class="grid_12">
         		<span class="visuallyhidden">
         			<a href="#main" title="Skip to content">Skip to content</a>
         		</span>
@@ -114,17 +114,17 @@ var ADAPT_CONFIG = {
 				if ( 'blank' == get_header_textcolor() || '' == get_header_textcolor()):
 					$style = ' style="display:none;"';
 			?>
-				<div id="branding" class="grid_6">
+				<div id="branding" class="grid_12">
 			<?php 
 				// Has the header image been hidden?
 				elseif ( ! $header_image ) :
 			?>
-				<div id="branding" class="grid_6">
+				<div id="branding" class="grid_12">
 			<?php
 				else :
 				$style = ' style="color:#' . get_theme_mod( 'header_textcolor', HEADER_TEXTCOLOR ) . ';"';
 			?>
-				<div id="branding" class="grid_6 brand-image">
+				<div id="branding" class="grid_12 brand-image">
 			<?php endif; ?>
 			
 			    <?php $heading_tag = ( is_home() || is_front_page() ) ? 'h1' : 'h2'; ?>
@@ -144,31 +144,14 @@ var ADAPT_CONFIG = {
 				</a>
 			<?php endif; ?>
 			
-		</div><!-- end .grid_6 -->
-		<div class="grid_6 featured-posts">
-            <?php $featured = argo_get_featured_posts(); 
-                  $slot = 1;
-                  while ( $featured->have_posts() ) : $featured->the_post(); ?>
-
-                <div id="feature<?php echo $slot; ?>" class="features">
-                    <a href="<?php the_permalink(); ?>" title="headline">
-                        <?php the_post_thumbnail(); ?></a>
-                    <h3 class="features-caption unitPng"><a href="<?php the_permalink(); ?>" title="headline"><?php the_title(); ?></a></h3>
-                </div>
-
-            <?php
-            	$slot++;
-            	endwhile;
-            	wp_reset_postdata();
-            ?>		
-		</div> <!-- end .grid_6 -->
+		</div><!-- end .grid_12 -->
 		
 	</div> <!--/ .container_12 -->
 
 	</header></div>
 <!-- ============= / #header  ============= -->
-	<div id="main-nav">
-		<nav>
+	<div id="main-nav" class="container_12">
+		<nav class="grid_12">
         <?php wp_nav_menu( array( 'theme_location' => 'categories', 'container' => false , 'menu_id' => 'topnav', 'walker' => new Argo_Categories_Walker, 'depth' => 1 ) ); ?>
 		</nav><!-- /#main-nav -->
 		
