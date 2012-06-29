@@ -108,6 +108,7 @@ var ADAPT_CONFIG = {
 	<div id="header"><header>
 	
 	<div class="container_12 clearfix">
+			
 			<?php
 				$header_image = get_header_image();
 				// Has the text been hidden?
@@ -125,6 +126,7 @@ var ADAPT_CONFIG = {
 				$style = ' style="color:#' . get_theme_mod( 'header_textcolor', HEADER_TEXTCOLOR ) . ';"';
 			?>
 				<div id="branding" class="grid_12 brand-image">
+				
 			<?php endif; ?>
 			
 			    <?php $heading_tag = ( is_home() || is_front_page() ) ? 'h1' : 'h2'; ?>
@@ -140,7 +142,8 @@ var ADAPT_CONFIG = {
 				if ( $header_image ) :
 			?>
 				<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
-					<img src="<?php header_image(); ?>" width="<?php echo HEADER_IMAGE_WIDTH; ?>" height="<?php echo HEADER_IMAGE_HEIGHT; ?>" alt="<?php esc_attr( get_bloginfo( 'name', 'display' ) ); ?>">
+					<img src="http://www.msgr.ca/msgr-10/Tim%20Horton%20pot%20of%20coffee%20animated.gif"  height="140" style="float:left;"/>
+					<img style="float:left;" src="<?php header_image(); ?>" width="<?php echo HEADER_IMAGE_WIDTH; ?>" height="<?php echo HEADER_IMAGE_HEIGHT; ?>" alt="<?php esc_attr( get_bloginfo( 'name', 'display' ) ); ?>">
 				</a>
 			<?php endif; ?>
 			
