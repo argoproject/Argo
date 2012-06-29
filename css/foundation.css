@@ -188,7 +188,6 @@ hr {
 }
 
 h1, h2, h3, h4, h5, h6, h7, h8 {
-	font: 16px Georgia, Times, "Times New Roman", serif;
 	
 }
 
@@ -350,16 +349,16 @@ form.inline p { margin-bottom:0; }
 /************* GLOBAL NAVIGATION ******************/
 
 .global-nav-bg {
-	background-color: #666;
-	padding: 5px 0;
-	margin-bottom: 10px;
+	background-color: #aaa;
+	padding: 4px 0;
+	margin-bottom: 6px;
 }
 
 .global-nav {
 	color: #fff;
-	font-size: 11px;
+	font-size: 0.815em;
 	position: relative;
-	height: 40px;
+	height: 28px;
 }
 
 .global-nav a, .global-nav a:visited, .global-nav a:hover, .global-nav a:active { color:#fff; }
@@ -370,7 +369,7 @@ form.inline p { margin-bottom:0; }
 
 .global-nav li {
 	float: left;
-	margin: 10px 10px 0 0;
+	margin: 4px 10px 0 0;
 }
 
 /****************** HEADER ******************/
@@ -397,7 +396,6 @@ form.inline p { margin-bottom:0; }
 	color: #333;
 }
 
-
 .brand-image img {
 	position: absolute;
 	top: 0;
@@ -406,11 +404,11 @@ form.inline p { margin-bottom:0; }
 }
 
 .brand-image #site-title {
-margin-top: 30px;
+	margin-top: 30px;
 }
 
 .brand-image #site-title, .brand-image #site-description {
-margin-left: 70px;
+	margin-left: 70px;
 }
 
 .featured-posts {
@@ -501,7 +499,6 @@ margin-left: 70px;
 }
 
 #topics-bar ul {
-	/*width: 862px;*/
 	width:100%;
 }
 
@@ -532,7 +529,6 @@ margin-left: 70px;
 }
 
 .search-submit {
-	font-family: helvetica, arial, sans-serif;
 	font-weight: bold;
 	color: #eee;
 	font-size: 12px;
@@ -623,9 +619,10 @@ margin-left: 70px;
 #main-nav {
 	margin-top: 5px;
 	margin-bottom: 10px;
-	min-height: 38px;
+	min-height: 36px;
 	position: relative;
 	z-index: 100;
+	background-color:#ccc;
 }
 
 #topnav {
@@ -634,27 +631,27 @@ margin-left: 70px;
 	float:left;
 	width: 100%;
 	list-style: none;
-	font-size: 1.1em;
+	font-size: 1em;
 }
 
 #topnav li {
 	float: left;
 	margin: 0 0 0 0; 
 	padding: 0;
-	font-size: 15px;
+	font-size: 1em;
 	line-height: 1;
 }
 
 #topnav li a {
 	float: left; 
-	padding: 8px 25px 8px 8px;
-	margin: 0 5px;
+	padding: 10px 28px 2px 8px;
+	margin: 0 10px;
 	color: #000;
-	background: transparent url(../img/arrow-down.png) no-repeat 95% 50%;
+	background: transparent url(../img/arrow-down.png) no-repeat 95% 70%;
 }
 
 #topnav .first a {
-	margin-left: -5px;
+	margin-left: -10px;
 }
 
 #topnav li:hover a, #topnav li a:hover { 
@@ -662,12 +659,12 @@ margin-left: 70px;
 	text-decoration: none; 
 	color: #fff; 
 	border-bottom: 7px solid #999;
-	background: #999 url(../img/arrow-hover.png) no-repeat 95% 50%;
+	background: #999 url(../img/arrow-hover.png) no-repeat 95% 70%;
 }
 
 #topnav li .sub {
 	position: absolute;	
-	top: 31px; 
+	top: 35px; 
 	left: -5px;
 	float: left;
 	display: none;
@@ -793,7 +790,7 @@ margin-left: 70px;
 }
 
 #topnav .category-topics li {
-	font: 1em Georgia, Times, "Times New Roman", serif;
+	font-size: 1em;
 	margin: 0 0 10px 0 !important;
 	line-height:1;
 	padding-bottom: 8px !important;
@@ -870,12 +867,17 @@ margin-left: 70px;
 }
 
 h2.entry-title {
-	font-size: 2.75em;
+	font-size: 1.833em;
 	margin: 10px 0;
+	font-weight:bold;
+}
+h1.entry-title {
+	font-size: 2.25em;
+	margin: 10px 0;
+	font-weight:bold;
 }
 #content h2 a {
 	color: #333;
-	font-weight: normal;
 }
 
 .post blockquote {
@@ -1335,9 +1337,9 @@ h2.entry-title {
 	padding-left: 20px;
 	font-size: 1.5em;
 	font-style: italic;
-	line-height: 1.3;
+	line-height: 1.4;
 	margin: 20px;
-	font: 16px Georgia, Times, "Times New Roman", serif;
+	font: 1.222em Georgia, Times, "Times New Roman", serif;
 }
 
 #content .pull-quote h6 {
@@ -2259,8 +2261,8 @@ p.comment-form-comment {
 
 #site-footer {
 	margin-top: 20px;
-	color: #ccc;
-	background-color: #666;
+	color: #fff;
+	background-color: #999;
 	padding: 10px 0;
 }
 
@@ -2300,8 +2302,9 @@ p.comment-form-comment {
 
 #boilerplate {
 	font-size: 0.815em;
-	border-top: 1px solid #999;
-	padding-top: 20px;
+	border-top: 1px solid #ccc;
+	padding-top: 10px;
+	margin-top:20px;
 }
 
 .back-to-top {
