@@ -142,7 +142,7 @@ var ADAPT_CONFIG = {
 				if ( $header_image ) :
 			?>
 				<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
-					<img src="http://www.msgr.ca/msgr-10/Tim%20Horton%20pot%20of%20coffee%20animated.gif"  height="140" style="float:left;"/>
+					<img src="<?php bloginfo( 'template_directory' ); ?>/img/headers/coffee.gif"  height="140" style="float:left;"/>
 					<img style="float:left;" src="<?php header_image(); ?>" width="<?php echo HEADER_IMAGE_WIDTH; ?>" height="<?php echo HEADER_IMAGE_HEIGHT; ?>" alt="<?php esc_attr( get_bloginfo( 'name', 'display' ) ); ?>">
 				</a>
 			<?php endif; ?>

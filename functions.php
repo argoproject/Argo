@@ -81,7 +81,7 @@ function argo_setup() {
 	define( 'HEADER_TEXTCOLOR', '' );
 
 	// Default image, which child themes should include.
-	define( 'HEADER_IMAGE', get_stylesheet_directory_uri() . '/img/headers/default-logo.png' );
+	define( 'HEADER_IMAGE', get_stylesheet_directory_uri() . '/img/headers/largo-text.png' );
 
 	// The height and width of your custom header.
 	// Add a filter to argo_header_image_width and argo_header_image_height to change these values.
@@ -95,7 +95,7 @@ function argo_setup() {
 	// Default custom headers packaged with the theme. %s is a placeholder for the theme template directory URI.
 	register_default_headers( array(
 		'wheel' => array(
-			'url' => '%s/img/headers/default-logo.png',
+			'url' => '%s/img/headers/largo-text.png',
 			'thumbnail_url' => '%s/img/headers/default-logo-thumbnail.png',
 			/* translators: header image description */
 			'description' => 'Wheel',
