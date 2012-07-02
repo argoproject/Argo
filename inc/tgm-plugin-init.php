@@ -135,20 +135,20 @@ function my_theme_register_required_plugins() {
 		),
 		
 		array(
-			'name' 		=> 'XML Sitemap',
-			'slug' 		=> 'xml-sitemap-feed',
-			'required' 	=> false,
-		),
-		
-		array(
-			'name' 		=> 'WordPress SEO',
-			'slug' 		=> 'wordpress-seo',
+			'name' 		=> 'Better WordPress Google XML Sitemaps',
+			'slug' 		=> 'bwp-google-xml-sitemaps',
 			'required' 	=> false,
 		),
 		
 		array(
 			'name' 		=> 'WP Super Cache',
 			'slug' 		=> 'wp-super-cache',
+			'required' 	=> false,
+		),
+		
+		array(
+			'name' 		=> 'All in One SEO Pack',
+			'slug' 		=> 'all-in-one-seo-pack',
 			'required' 	=> false,
 		),
 
