@@ -372,7 +372,7 @@ form.inline p { margin-bottom:0; }
 	margin: 4px 10px 0 0;
 }
 
-.org-logo {
+.global-nav img.org-logo {
 	float:right;
 	margin-top:-4px;
 }
