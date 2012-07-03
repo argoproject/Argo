@@ -100,11 +100,20 @@ var ADAPT_CONFIG = {
         			<a href="#main" title="Skip to content">Skip to content</a>
         		</span>
         		<?php wp_nav_menu( array( 'theme_location' => 'global-nav', 'container' => false, 'depth' => 1 ) ); ?>
+        		
+        		<div class="org-logo">
+        			<a href="http://investigativenewsnetwork.org/" target="_blank"><img src="<?php bloginfo( 'template_directory' ); ?>/img/INN-120-60.jpg" height="48" alt="INN logo" /></a>
+        		</div>
         	</nav>
+        	
+        	
+        	
         </div>
        <!-- /.global-nav -->
 	</div> <!-- /.global-nav-bg -->
-
+	
+	
+	
 	<div id="header"><header>
 	
 	<div class="container_12 clearfix">
