@@ -129,12 +129,6 @@ function my_theme_register_required_plugins() {
 		),
 		
 		array(
-			'name' 		=> 'Google Analytics for WordPress',
-			'slug' 		=> 'google-analytics-for-wordpress',
-			'required' 	=> false,
-		),
-		
-		array(
 			'name' 		=> 'Better WordPress Google XML Sitemaps',
 			'slug' 		=> 'bwp-google-xml-sitemaps',
 			'required' 	=> false,
