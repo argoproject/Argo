@@ -1,0 +1,147 @@
+// LANDSCAPE PHONE TO SMALL DESKTOP & PORTRAIT TABLET
+// --------------------------------------------------
+
+@media (max-width: 767px) {
+
+  .wrapper {
+    margin:0 auto;
+  }
+  #main {
+	 clear:both;
+	 width:100%;
+	 text-align:center;
+	 position:relative;
+	 top:0;
+	 left:0;
+	 margin-bottom:20px;
+	 border-bottom: 8px solid @grayLight;
+	 background-color: @grayLighter;
+	 padding:10px 0 0;
+ }
+ header {
+   ul {
+   	 margin:0 auto @baseline/2;
+     li {
+	   display:inline;
+	   margin-bottom: @baseline;
+	   line-height: 2.75;
+	   background-color: @blue;
+	   padding:8px 12px;
+	   .border-radius(8px);
+	   vertical-align: baseline;
+	   text-shadow: 0 -1px 0 rgba(0,0,0,.8);
+	   font-family: @sansFontFamily;
+	   font-size: @baseFontSize;
+	   line-height: 2.75;
+	   &:hover {
+	     background-color: darken(@blue, 10%);
+	   }
+	   &.current-menu-item {
+	     background-color: darken(@blue, 5%);
+	     font-weight:bold;
+	   }
+	   a {
+	     color: @white;
+		 &:hover {
+	     text-decoration:none;
+	     color:@white;
+	   }
+	  }
+     }
+   }
+ }
+ #content {
+ 	float:none;
+	clear:both;
+	width:96%;
+	padding:0 2%;
+ }
+ #main input {
+	 width:45%;
+ }
+ h1.entry-title { font-size: @baseFontSize * 2.25; }
+
+  // TYPOGRAPHY
+  // ----------
+  // Reset horizontal dl
+  .dl-horizontal {
+    dt {
+      float: none;
+      clear: none;
+      width: auto;
+      text-align: left;
+    }
+    dd {
+      margin-left: 0;
+    }
+  }
+
+  // FORM FIELDS
+  // -----------
+  // Make span* classes full width
+  .input-large,
+  .input-xlarge,
+  .input-xxlarge,
+  input[class*="span"],
+  select[class*="span"],
+  textarea[class*="span"],
+  .uneditable-input {
+    .input-block-level();
+  }
+  // But don't let it screw up prepend/append inputs
+  .input-prepend input,
+  .input-append input,
+  .input-prepend input[class*="span"],
+  .input-append input[class*="span"] {
+    display: inline-block; // redeclare so they don't wrap to new lines
+    width: auto;
+  }
+
+}
+
+// UP TO LANDSCAPE PHONE
+// ---------------------
+
+
+@media (max-width: 480px) {
+
+  #content {
+ 	float:none;
+	clear:both;
+  }
+  .entry-content h3 {
+  	font-size: @baseFontSize * 1.5;
+  }
+  #main input {
+	 width:65%;
+  }
+
+  // Update checkboxes for iOS
+  input[type="checkbox"],
+  input[type="radio"] {
+    border: 1px solid #ccc;
+  }
+
+  // Remove the horizontal form styles
+  .form-horizontal .control-group > label {
+    float: none;
+    width: auto;
+    padding-top: 0;
+    text-align: left;
+  }
+  // Move over all input controls and content
+  .form-horizontal .controls {
+    margin-left: 0;
+  }
+  // Move the options list down to align with labels
+  .form-horizontal .control-list {
+    padding-top: 0; // has to be padding because margin collaspes
+  }
+  // Move over buttons in .form-actions to align with .controls
+  .form-horizontal .form-actions {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+}
+

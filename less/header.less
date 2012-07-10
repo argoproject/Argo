@@ -1,0 +1,42 @@
+#branding {
+	a {
+		color: @textColor;
+		&:hover {
+			text-decoration:none;
+		}
+	}
+}
+#branding h1 {
+	font-size: @baseFontSize * 2.75;
+	line-height: 1.2;
+	margin-bottom:@baseline / 4;
+}
+header {
+	ul {
+		list-style:none;
+		padding:0;
+		margin:0 0 @baseline;
+		font-size: @baseFontSize * 1.222;
+		line-height: 1.5;
+
+		li {
+			margin-bottom: @baseline * 0.15;
+			white-space: nowrap;
+		}
+
+		&.social-icons {
+			min-height:33px;
+			height:auto;
+			overflow:auto;
+			li {
+				display:inline;
+				float:left;
+				margin:0 4px 4px 0;
+				a:hover i {
+					opacity:0.8;
+				}
+			}
+		}
+
+	}
+}
