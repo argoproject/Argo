@@ -31,13 +31,11 @@
 <link rel="profile" href="http://gmpg.org/xfn/11" />
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 
-    <?php $url = (!empty($_SERVER['HTTPS'])) ? "https://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'] : "http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']; ?>
+<?php $url = (!empty($_SERVER['HTTPS'])) ? "https://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'] : "http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']; ?>
 
-    <!--
-    open graph and twittercard tags
+<!-- open graph and twittercard tags
     to-do: make this dynamic
-    -->
-
+-->
 	<?php if ( is_single() ) {
 			$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'thumbnail' );
 			if ($image != '') {
@@ -93,9 +91,18 @@
 	 */
 	wp_head();
 ?>
+
 </head>
 
 <body <?php body_class(); ?>>
+
+
+
+<div id="left-nav">
+	<ul>
+		<li><a href="">Something</a></li>
+	</ul>
+</div>
 
 <div class="global-nav-bg">
 	<div class="global-nav">
@@ -122,6 +129,8 @@
         </nav>
     </div> <!-- /.global-nav -->
 </div> <!-- /.global-nav-bg -->
+
+
 
 
 <div id="page" class="hfeed">

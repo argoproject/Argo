@@ -9,6 +9,7 @@
 	font-size:@baseFontSize - 2;
 	position: relative;
 	height: 32px;
+	overflow-y:visible;
 }
 
 .global-nav a, .global-nav a:visited, .global-nav a:hover, .global-nav a:active { color:#fff; }
@@ -41,6 +42,7 @@
 	a {
 	  padding:4px 6px;
 	  color: @white;
+	  text-shadow: 0 -1px 0 rgba(0,0,0,.8);
 	  &:hover {
 	    text-decoration:none;
 	  }
@@ -71,8 +73,21 @@
 .global-nav .org-logo {
  	float:left;
  	height:40px;
+ 	.box-shadow(0 3px 4px -2px @black);
 }
 
+
+/****************** LEFT NAV ******************/
+#left-nav {
+	float:left;
+	width: 4%;
+	position:fixed;
+	height:100%;
+	background-color:@grayLighter;
+	overflow:hidden;
+	display:none;
+	z-index:1;
+}
 /****************** HEADER ******************/
 
 #site-title {

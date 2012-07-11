@@ -503,6 +503,7 @@ hr {
   font-size: 14px;
   position: relative;
   height: 32px;
+  overflow-y: visible;
 }
 .global-nav a,
 .global-nav a:visited,
@@ -541,6 +542,7 @@ hr {
 .global-nav .donate-btn a {
   padding: 4px 6px;
   color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.8);
 }
 .global-nav .donate-btn a:hover {
   text-decoration: none;
@@ -570,6 +572,20 @@ hr {
 .global-nav .org-logo {
   float: left;
   height: 40px;
+  -webkit-box-shadow: 0 3px 4px -2px #000000;
+  -moz-box-shadow: 0 3px 4px -2px #000000;
+  box-shadow: 0 3px 4px -2px #000000;
+}
+/****************** LEFT NAV ******************/
+#left-nav {
+  float: left;
+  width: 4%;
+  position: fixed;
+  height: 100%;
+  background-color: #eeeeee;
+  overflow: hidden;
+  display: none;
+  z-index: 1;
 }
 /****************** HEADER ******************/
 #site-title {
