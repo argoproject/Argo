@@ -143,9 +143,8 @@ textarea {
 }
 .global-nav,
 #page {
-  margin: 0 auto;
   max-width: 1170px;
-  padding: 0 3%;
+  padding: 0 7%;
   *zoom: 1;
 }
 .global-nav:before,
@@ -571,7 +570,7 @@ hr {
 }
 .global-nav .org-logo {
   float: left;
-  height: 40px;
+  height: 60px;
   -webkit-box-shadow: 0 3px 4px -2px #000000;
   -moz-box-shadow: 0 3px 4px -2px #000000;
   box-shadow: 0 3px 4px -2px #000000;
@@ -580,12 +579,16 @@ hr {
 #left-nav {
   float: left;
   width: 4%;
+  min-width: 40px;
   position: fixed;
   height: 100%;
   background-color: #eeeeee;
   overflow: hidden;
   display: none;
   z-index: 1;
+  -webkit-box-shadow: 0 4px 5px 3px #555555;
+  -moz-box-shadow: 0 4px 5px 3px #555555;
+  box-shadow: 0 4px 5px 3px #555555;
 }
 /****************** HEADER ******************/
 #site-title {
@@ -1147,7 +1150,7 @@ article.story {
 }
 #related-posts .items div img {
   float: left;
-  margin-right: 15px;
+  margin-right: 10px;
   margin-bottom: 10px;
   margin-top: 0;
 }
@@ -1161,23 +1164,23 @@ article.story {
   font-size: 13.04px;
   line-height: 1.5;
 }
-#related-posts .items p {
-  font-size: 13.04px;
-  margin-bottom: 6px;
-}
-#related-posts .top-related {
-  list-style-type: none;
+#related-posts .items ul li.top-related {
+  list-style: none;
   margin-left: 0;
   border-bottom: 1px solid #eeeeee;
   margin-bottom: 5px;
   font-size: 8px;
 }
-#related-posts .top-related h3 {
+#related-posts .items ul li.top-related h3 {
   font-size: 19.552px;
   font-weight: bold;
+  margin-bottom: 0;
+}
+#related-posts .items ul li.top-related p {
+  font-size: 13.04px;
   margin-bottom: 6px;
 }
-#related-posts .top-related p {
+#related-posts .items p {
   font-size: 13.04px;
 }
 #disqus_thread {
@@ -3109,4 +3112,35 @@ img.aligncenter {
   .visible-desktop {
     display: none !important ;
   }
+}
+@media (min-width: 1200px) {
+  .global-nav,
+  #page {
+    margin: 0 auto;
+    padding: 0 3%;
+  }
+}
+@media screen and (min-width: 1600px) {
+  .global-nav,
+  #page {
+    padding: 0;
+  }
+}
+@media (min-width: 768px) and (max-width: 979px) {
+  .global-nav,
+  #page {
+    padding: 0 10px;
+  }
+}
+@media (max-width: 767px) {
+  #sidebar {
+    clear: both;
+    width: 100%;
+  }
+  #content {
+    width: 100%;
+  }
+}
+@media (max-width: 480px) {
+  
 }

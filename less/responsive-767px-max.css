@@ -1,0 +1,12 @@
+@media (max-width: 767px) {
+  #sidebar {
+    clear: both;
+    width: 100%;
+  }
+  #content {
+    width: 100%;
+  }
+}
+@media (max-width: 480px) {
+  
+}
