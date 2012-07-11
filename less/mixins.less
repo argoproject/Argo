@@ -21,6 +21,14 @@
   }
 }
 
+.visuallyhidden {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px; width: 1px;
+  margin: -1px; padding: 0; border: 0;
+}
+
 // Webkit-style focus
 // ------------------
 .tab-focus() {
@@ -526,7 +534,7 @@
 // Table columns
 .tableColumns(@columnSpan: 1) {
   float: none; // undo default grid column styles
-  width: ((@gridColumnWidth) * @columnSpan) + (@gridGutterWidth * (@columnSpan - 1)) - 16; // 16 is total padding on left and right of table cells
+  width: ((@fluidGridColumnWidth) * @columnSpan) + (@fluidGridGutterWidth * (@columnSpan - 1)) - 16; // 16 is total padding on left and right of table cells
   margin-left: 0; // undo default grid column styles
 }
 

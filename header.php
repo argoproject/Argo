@@ -1,10 +1,4 @@
-<?php
-/**
- * The Header for our theme.
- *
- * Displays all of the <head> section and everything up till <div id="main">
- */
-?><!DOCTYPE html>
+<!DOCTYPE html>
 <!--[if lt IE 7]> <html <?php language_attributes(); ?> class="no-js ie6"> <![endif]-->
 <!--[if IE 7]>    <html <?php language_attributes(); ?> class="no-js ie7"> <![endif]-->
 <!--[if IE 8]>    <html <?php language_attributes(); ?> class="no-js ie8"> <![endif]-->
@@ -37,6 +31,51 @@
 <link rel="profile" href="http://gmpg.org/xfn/11" />
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 
+    <?php $url = (!empty($_SERVER['HTTPS'])) ? "https://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'] : "http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']; ?>
+
+    <!--
+    open graph and twittercard tags
+    to-do: make this dynamic
+    -->
+
+	<?php if ( is_single() ) {
+			$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'thumbnail' );
+			if ($image != '') {
+				$thumbnailURL = $image[0];
+			} else {
+			    $thumbnailURL = get_bloginfo( 'template_directory' ) . '/assets/img/headshot_500.png';
+		    }; ?>
+	    <meta name="twitter:card" content="summary">
+	    <meta name="twitter:site" content="@mediatoybox">
+	    <meta name="twitter:creator" content="@aschweig">
+	    <meta property="og:title" content="<?php the_title(); ?>" />
+	    <meta property="og:type" content="article" />
+	    <meta property="og:url" content="<?php the_permalink(); ?>"/>
+	    <meta property="og:site_name" content="<?php bloginfo('name'); ?>" />
+	    <meta property="og:description" content="<?php echo strip_tags(get_the_excerpt()); ?>" />
+	    <meta property="og:image" content="<?php echo $thumbnailURL; ?>">
+	<?php } elseif ( is_home() ) { ?>
+		<meta name="twitter:card" content="summary">
+	    <meta name="twitter:site" content="@mediatoybox">
+	    <meta name="twitter:creator" content="@aschweig">
+		<meta property="og:title" content="<?php bloginfo('name'); echo ' - '; bloginfo('description'); ?>" />
+	    <meta property="og:type" content="website" />
+	    <meta property="og:url" content="<?php bloginfo('url'); ?>"/>
+	    <meta property="og:image" content="<?php bloginfo( 'template_directory' ); ?>/assets/img/headshot_500.png" />
+	    <meta property="og:site_name" content="<?php bloginfo('name'); ?>" />
+	    <meta property="og:description" content="<?php bloginfo('description'); ?>" />
+	<?php } else { ?>
+		<meta name="twitter:card" content="summary">
+	    <meta name="twitter:site" content="@mediatoybox">
+	    <meta name="twitter:creator" content="@aschweig">
+		<meta property="og:title" content="<?php bloginfo('name'); wp_title(); ?>" />
+	    <meta property="og:type" content="article" />
+	    <meta property="og:url" content="<?php echo $url; ?>"/>
+	    <meta property="og:image" content="<?php bloginfo( 'template_directory' ); ?>/assets/img/headshot_500.png" />
+	    <meta property="og:site_name" content="<?php bloginfo('name'); ?>" />
+	    <meta property="og:description" content="<?php bloginfo('description'); ?>" />
+	<?php } ?>
+
 <?php
 	wp_enqueue_style( 'argo-stylesheet', get_bloginfo( 'stylesheet_url' ) );
 	wp_enqueue_script( 'argo-modernizr', get_template_directory_uri() . '/js/modernizr.custom.55609.js' );
@@ -57,32 +96,39 @@
 </head>
 
 <body <?php body_class(); ?>>
-<div id="page" class="hfeed">
 
-   <div class="global-nav-bg">
-		<div class="global-nav container_12">
-			<nav class="grid_12">
-        		<span class="visuallyhidden">
-        			<a href="#main" title="Skip to content">Skip to content</a>
-        		</span>
-        		<?php wp_nav_menu( array( 'theme_location' => 'global-nav', 'container' => false, 'depth' => 1 ) ); ?>
-        		<div class="nav-right">
-        			<a class="donate-btn" href="">Donate Now</a>
-        			<a href="http://investigativenewsnetwork.org/" target="_blank"><img class="org-logo" src="<?php bloginfo( 'template_directory' ); ?>/img/INN-logo-120-100.png" height="48" alt="INN logo" /></a>
+<div class="global-nav-bg">
+	<div class="global-nav">
+		<nav class="span12">
+        	<span class="visuallyhidden">
+        		<a href="#main" title="Skip to content">Skip to content</a>
+        	</span>
+        	<?php wp_nav_menu( array( 'theme_location' => 'global-nav', 'container' => false, 'depth' => 1 ) ); ?>
+        	<div class="nav-right">
+        		<div class="donate-btn">
+        			<a href=""><i class="icon-heart icon-white"></i>Donate Now</a>
         		</div>
-        	</nav>
+
+				<div id="header-search">
+					<form class="form-search" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+						<div class="input-append">
+							<input type="text" placeholder="SEARCH" class="input-medium appendedInputButton search-query" value="" name="s" /><button type="submit" class="search-submit btn">Go!</button>
+						</div>
+					</form>
+				</div>
+
+        		<a href="http://investigativenewsnetwork.org/" target="_blank"><img class="org-logo" src="<?php bloginfo( 'template_directory' ); ?>/img/INN-logo-120-100.png" height="48" alt="INN logo" /></a>
+        	</div>
+        </nav>
+    </div> <!-- /.global-nav -->
+</div> <!-- /.global-nav-bg -->
 
 
-
-        </div>
-       <!-- /.global-nav -->
-	</div> <!-- /.global-nav-bg -->
-
-
+<div id="page" class="hfeed">
 
 	<div id="header"><header>
 
-	<div class="container_12 clearfix">
+	<div class="row-fluid clearfix">
 
 			<?php
 				$header_image = get_header_image();
@@ -90,17 +136,17 @@
 				if ( 'blank' == get_header_textcolor() || '' == get_header_textcolor()):
 					$style = ' style="display:none;"';
 			?>
-				<div id="branding" class="grid_12">
+				<div id="branding" class="span12">
 			<?php
 				// Has the header image been hidden?
 				elseif ( ! $header_image ) :
 			?>
-				<div id="branding" class="grid_12">
+				<div id="branding" class="span12">
 			<?php
 				else :
 				$style = ' style="color:#' . get_theme_mod( 'header_textcolor', HEADER_TEXTCOLOR ) . ';"';
 			?>
-				<div id="branding" class="grid_12 brand-image">
+				<div id="branding" class="span12 brand-image">
 
 			<?php endif; ?>
 
@@ -128,11 +174,11 @@
 
 	</header></div>
 <!-- ============= / #header  ============= -->
-	<div id="main-nav" class="container_12">
-		<nav class="grid_12">
+	<div id="main-nav" class="row-fluid">
+		<nav class="span12">
         <?php wp_nav_menu( array( 'theme_location' => 'categories', 'container' => false , 'menu_id' => 'topnav', 'walker' => new Argo_Categories_Walker, 'depth' => 1 ) ); ?>
 		</nav><!-- /#main-nav -->
 
     </div> <!-- /main-nav -->
 
-<div id="main" class="container_12 clearfix">
+<div id="main" class="row-fluid clearfix">

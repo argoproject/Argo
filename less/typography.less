@@ -127,11 +127,40 @@ ol.unstyled {
   margin-left: 0;
   list-style: none;
 }
-strong {
+dl dt {
   font-weight: bold;
 }
-em {
+dd {
+  margin-left: 5px;
+}
+
+strong, dfn {
+  font-weight: bold;
+}
+em, dfn {
   font-style: italic;
+}
+
+sup, sub {
+  line-height: 0;
+}
+sub {
+  font-size: smaller;
+  vertical-align: sub;
+}
+sup {
+  font-size: smaller;
+  vertical-align: super;
+}
+acronym {
+  border-bottom: 1px dotted @grayLight;
+}
+address {
+  margin: 0 0 @baseline;
+  font-style: italic;
+}
+del {
+  color: @grayLight;
 }
 
 // --------------------------------------------

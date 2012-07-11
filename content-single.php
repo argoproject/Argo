@@ -17,21 +17,26 @@
 
 	<div class="entry-content">
 		<?php the_content(); ?>
-		<div class="post-meta bottom-meta">
-            
+	</div><!-- .entry-content -->
+	<footer class="post-meta bottom-meta">
+
             <?php if ( argo_has_custom_taxonomy( get_the_ID() ) ): ?>
 				<ul class="labels clearfix">
-					<li id="term-view">View more:</li>
+					<li id="term-view">View More:</li>
             		<?php argo_the_post_labels( get_the_ID() ); ?>
         		</ul>
         	<?php endif; ?>
 
-        <?php if ( argo_has_categories_or_tags() ): ?>
-    		<h5>Filed under: <?php echo argo_the_categories_and_tags(); ?></h5>
-    	<?php endif; ?>
-          
-            </div><!-- /.post-meta -->
-	</div><!-- .entry-content -->
+        	<?php if ( argo_has_categories_or_tags() ): ?>
+    			<div class="tags">
+    				<h5>Filed Under:</h5>
+    				<ul>
+    					<?php echo argo_the_categories_and_tags(); ?>
+    				</ul>
+    			</div>
+    		<?php endif; ?>
+
+    </footer><!-- /.post-meta -->
 </article><!-- #post-<?php the_ID(); ?> -->
 
 <!-- Related posts -->
@@ -39,16 +44,16 @@
 if ( get_option( 'show_related_content', true ) ) :
 	if ( $rel_topics = argo_get_post_related_topics( 6 ) ) :
 ?>
-	<div id="related-posts" class="idTabs clearfix">
-		<ul id="related-post-nav" class="grid2">
-			<li><h4>MORE POSTS ABOUT</h4></li>
+	<div id="related-posts" class="idTabs row-fluid">
+		<ul id="related-post-nav" class="span3">
+			<li><h4>More Posts About</h4></li>
 			<?php foreach ( $rel_topics as $count => $topic ) : ?>
 			<li><a href="#rp<?php echo $count; ?>"><?php echo $topic->name; ?></a></li>
 			<?php endforeach; ?>
 		</ul>
-	<div class="items grid6">
+	<div class="items span9">
 		<?php foreach ( $rel_topics as $count => $topic ): ?>
-			<div id="rp<?php echo $count; ?>">  
+			<div id="rp<?php echo $count; ?>">
 				<?php $rel_posts = argo_get_recent_posts_for_term( $topic, 3 ); ?>
 				<ul>
 					<?php $top_post = array_shift( $rel_posts ); ?>
@@ -58,13 +63,13 @@ if ( get_option( 'show_related_content', true ) ) :
 						<?php if ( has_post_thumbnail( $top_post->ID ) ) { ?>
 							<img src="<?php echo argo_get_post_thumbnail_src( $top_post, '60x60' ); ?>" alt="related" width="60" height="60" />
 						<?php } ?>
-						<p><?php echo argo_get_excerpt( $top_post ); ?> <a href="<?php echo esc_url( get_permalink( $top_post->ID ) ); ?>" title="<?php echo esc_attr($topic->name); ?>"><b>Read More</b></a></p>
+						<p><?php echo argo_get_excerpt( $top_post ); ?> <a href="<?php echo esc_url( get_permalink( $top_post->ID ) ); ?>" title="<?php echo esc_attr($topic->name); ?>"></a></p>
 					</li>
 					<?php foreach ( $rel_posts as $rel_post ): ?>
 					<li><a href="<?php echo esc_url( get_permalink( $rel_post->ID ) ); ?>" title="<?php echo esc_attr($topic->name); ?>"><?php echo $rel_post->post_title; ?></a></li>
 					<?php endforeach; ?>
 				</ul>
-				<p><a href="<?php echo esc_url( get_term_link( $topic ) ); ?>" title="<?php echo esc_attr($topic->name); ?>" target="_blank"><strong>view all <?php echo $topic->name; ?> posts</strong></a></p>
+				<p><a href="<?php echo esc_url( get_term_link( $topic ) ); ?>" title="<?php echo esc_attr($topic->name); ?>" target="_blank"><strong>View all <?php echo $topic->name; ?> posts &rarr;</strong></a></p>
 			</div> <!-- /#rpX -->
 		<?php endforeach; ?>
 	</div> <!-- /.items -->
@@ -72,3 +77,10 @@ if ( get_option( 'show_related_content', true ) ) :
 <?php
 	endif; // if ( $rel_topics )
 endif; ?>
+
+<nav id="nav-below" class="pager post-nav">
+	<div class="previous"><?php previous_post_link( '<h5>Newer Post</h5> %link', '<span class="meta-nav">' . _x( '&larr;', 'Previous post link', 'largo' ) . '</span> %title' ); ?></div>
+	<div class="next"><?php next_post_link( '<h5>Older Post</h5> %link', '%title <span class="meta-nav">' . _x( '&rarr;', 'Next post link', 'largo' ) . '</span>' ); ?></div>
+</nav><!-- #nav-below -->
+
+

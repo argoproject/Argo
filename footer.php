@@ -10,29 +10,29 @@
 
 	<div id="site-footer" class="clearfix">
 		<footer>
-			<div id="supplementary" class="container_12">
+			<div id="supplementary" class="row-fluid">
 			<?php
 				/* A sidebar in the footer? Yep. You can can customize
 				 * your footer with three columns of widgets.
 				 */
 				get_sidebar( 'footer' );
 			?>
-				
-				<div id="boilerplate" class="grid_12">
+
+				<div id="boilerplate" class="row-fluid">
 				    <p><?php argo_copyright_message(); ?></p>
 				    <?php wp_nav_menu( array( 'theme_location' => 'footer', 'container' => false, 'depth' => 1  ) ); ?>
 					<p class="back-to-top"><a href="#page">Back to top &uarr;</a></p>
 				</div><!-- /#boilerplate -->
-				
+
 			</div><!-- /.container_12 -->
 		</footer>
 	</div><!-- #site-footer -->
 </div><!-- #page -->
 <?php wp_footer(); ?>
 
-	
+
 	<!-- google analytics, you have to add your ID in theme settings for this to work -->
-	
+
 	<?php if ( get_option( 'ga_id', true ) // make sure the ga_id setting is defined
 		&& ( !is_user_logged_in() ) ) : // don't track logged in users
 	?>
@@ -50,8 +50,8 @@
 
 	</script>
 	<?php endif; ?>
-	
+
 	<!-- end:google analytics -->
-	
+
 </body>
 </html>

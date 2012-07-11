@@ -27,7 +27,7 @@
  * For more information on hooks, actions, and filters, see http://codex.wordpress.org/Plugin_API.
  *
  */
- 
+
  /**
  * Set the content width based on the theme's design and stylesheet.
  */
@@ -101,7 +101,7 @@ function argo_setup() {
 			'description' => 'Wheel',
 		),
 	) );
-}	
+}
 endif; // argo_setup
 
 if ( ! function_exists( 'argo_header_style' ) ) :
@@ -157,48 +157,48 @@ function argo_admin_header_style() {
 	.appearance_page_custom-header #branding {
 		border: none;
 	}
-	
+
 	#branding {
 		width: 460px;
 		height: 140px;
 		position: relative;
 	}
-	
+
 	#branding h1,
 	#desc {
 		font-family: "Helvetica Neue", Arial, Helvetica, "Nimbus Sans L", sans-serif;
 	}
-	
+
 	#branding h1 {
 		margin: 0;
 	}
-	
+
 	#branding h1 a {
 		font-size: 42px;
 		line-height: 1;
 		text-decoration: none;
 	}
-	
+
 	#ch-desc{
 		font-size: 24px;
 		line-height: 1;
 	}
-	
+
 	.brand-image #ch-name {
 		padding-top: 30px;
 	}
-	
+
 	.brand-image #ch-name, .brand-image #ch-desc {
 		margin-left: 70px;
 	}
-	
+
 	.brand-image img {
 		position: absolute;
 		top: 0;
 		left: 0;
 		z-index: -1;
 	}
-	
+
 	<?php
 		// If the user has set a custom color for the text use that
 		if ( get_header_textcolor() != HEADER_TEXTCOLOR ) :
@@ -208,7 +208,7 @@ function argo_admin_header_style() {
 			color: #<?php echo get_header_textcolor(); ?>;
 		}
 	<?php endif; ?>
-	
+
 </style>
 <?php
 }
@@ -235,8 +235,8 @@ function argo_admin_header_image() { ?>
 	?>
 		<div id="branding" class="brand-image">
 	<?php endif; ?>
-	
-	
+
+
 		<?php
 		if ( 'blank' == get_theme_mod( 'header_textcolor', HEADER_TEXTCOLOR ) || '' == get_theme_mod( 'header_textcolor', HEADER_TEXTCOLOR ) )
 			$style = ' style="display:none;"';
@@ -245,7 +245,7 @@ function argo_admin_header_image() { ?>
 		?>
 		<h1 id="ch-name"><a <?php echo $style; ?> onclick="return false;" href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php bloginfo( 'name' ); ?></a></h1>
 		<div id="ch-desc"<?php echo $style; ?>><?php bloginfo( 'description' ); ?></div>
-		
+
 		<?php
 			// Check to see if the header image has been removed
 			$header_image = get_header_image();
@@ -313,13 +313,13 @@ function argo_content_nav( $nav_id ) {
 	global $wp_query;
 
 	if ( $wp_query->max_num_pages > 1 ) : ?>
-		
-<nav  id="<?php echo $nav_id; ?>">
-<ul class="post-nav clearfix">
-<li class="n-post"><?php previous_posts_link( 'Newer posts &rarr;' ); ?></li>
-<li class="p-post"><?php next_posts_link( '&larr; Older posts' ); ?></li>
-</ul>
+
+<nav id="<?php echo $nav_id; ?>" class="pager post-nav">
+	<div class="next"><?php previous_posts_link( 'Newer posts &rarr;' ); ?></div>
+	<div class="previous"><?php next_posts_link( '&larr; Older posts' ); ?></div>
 </nav><!-- .post-nav -->
+
+
 	<?php endif;
 }
 
@@ -465,7 +465,7 @@ endif; // ends check for argo_comment()
  */
 function argo_enqueue_js() {
 	wp_enqueue_script( 'text_placeholder', get_bloginfo('template_url') . '/js/jquery.textPlaceholder.js', array( 'jquery' ), '1.0', true );
-	
+
 	if ( wp_script_is( 'hoverIntent' ) )
 		wp_enqueue_script( 'hoverIntent' );
 	else
@@ -478,33 +478,36 @@ add_action('wp_enqueue_scripts', 'argo_enqueue_js' );
 
 add_action( 'wp_footer', 'argo_footer_js' );
 	function argo_footer_js() { ?>
-	
+
 		<script type="text/javascript">
 			jQuery(document).ready(function($) {
 			//html5 placeholders
 			$("input[placeholder]").textPlaceholder();
 
-			//main navigation	
+			//main navigation
 			function megaHoverOver(){
 				$(this).find(".sub").stop().fadeTo('fast', 1).show();
 			}
-		
-			function megaHoverOut(){ 
+
+			function megaHoverOut(){
 				$(this).find(".sub").stop().fadeTo('fast', 0, function() {
-				$(this).hide(); 
+				$(this).hide();
 				});
 			}
-			var config = {    
-				sensitivity: 2, // number = sensitivity threshold (must be 1 or higher)    
-				interval: 100, // number = milliseconds for onMouseOver polling interval    
-				over: megaHoverOver, // function = onMouseOver callback (REQUIRED)    
-				timeout: 500, // number = milliseconds delay before onMouseOut    
-				out: megaHoverOut // function = onMouseOut callback (REQUIRED)    
+			var config = {
+				sensitivity: 2, // number = sensitivity threshold (must be 1 or higher)
+				interval: 100, // number = milliseconds for onMouseOver polling interval
+				over: megaHoverOver, // function = onMouseOver callback (REQUIRED)
+				timeout: 500, // number = milliseconds delay before onMouseOut
+				out: megaHoverOut // function = onMouseOut callback (REQUIRED)
 			};
 
 			$("#topnav li .sub").css({'opacity':'0'});
 			$("#topnav li").hoverIntent(config);
 			});
 		</script>
-	
+
 	<?php }
+
+//hide the admin bar
+	add_filter( 'show_admin_bar', '__return_false' );
