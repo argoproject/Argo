@@ -78,15 +78,15 @@ function argo_setup() {
 	add_theme_support( 'custom-header');
 
 	// The default header text color
-	define( 'HEADER_TEXTCOLOR', '' );
+	define( 'HEADER_TEXTCOLOR', '333' );
 
 	// Default image, which child themes should include.
 	define( 'HEADER_IMAGE', get_stylesheet_directory_uri() . '/img/headers/largo-text.png' );
 
 	// The height and width of your custom header.
 	// Add a filter to argo_header_image_width and argo_header_image_height to change these values.
-	define( 'HEADER_IMAGE_WIDTH', apply_filters( 'argo_header_image_width', 460 ) );
-	define( 'HEADER_IMAGE_HEIGHT', apply_filters( 'argo_header_image_height', 140 ) );
+	define( 'HEADER_IMAGE_WIDTH', apply_filters( 'argo_header_image_width', 1170 ) );
+	define( 'HEADER_IMAGE_HEIGHT', apply_filters( 'argo_header_image_height', 120 ) );
 
 	// Add a way for the custom header to be styled in the admin panel that controls
 	// custom headers. See argo_admin_header_style(), below.
@@ -515,9 +515,11 @@ add_action( 'wp_footer', 'argo_footer_js' );
 				});
 
 				$('#left-nav').hover(function() {
-			       		$(this).animate({width: '15%',overflow: 'visible'}, { duration: 200, queue: false });
+			       		$(this).animate({width: '20%',overflow: 'visible'}, { duration: 200, queue: false });
+			       		$('#page').animate({opacity: '0.7'}, 100);
 			        }, function() {
 			        	$(this).animate({width: '4%',overflow: 'hidden'}, { duration: 200, queue: false });
+			        	$('#page').animate({opacity: '1'}, 100);
 			    });
 
 			    // dim sidebar

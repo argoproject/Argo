@@ -100,7 +100,6 @@
 
 <div id="left-nav">
 	<ul>
-		<li><a href="">Something</a></li>
 	</ul>
 </div>
 
@@ -119,7 +118,7 @@
 				<div id="header-search">
 					<form class="form-search" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 						<div class="input-append">
-							<input type="text" placeholder="SEARCH" class="input-medium appendedInputButton search-query" value="" name="s" /><button type="submit" class="search-submit btn">Go!</button>
+							<input type="text" placeholder="SEARCH" class="input-medium appendedInputButton search-query" value="" name="s" /><button type="submit" class="search-submit btn">GO</button>
 						</div>
 					</form>
 				</div>
@@ -135,54 +134,45 @@
 
 <div id="page" class="hfeed">
 
-	<div id="header"><header>
+	<header id="site-header">
 
-	<div class="row-fluid clearfix">
+				<?php
+					$header_image = get_header_image();
+					// Has the text been hidden?
+					if ( 'blank' == get_header_textcolor() || '' == get_header_textcolor()):
+						$style = ' style="display:none;"';
+				?>
+					<div id="branding">
+				<?php
+					// Has the header image been hidden?
+					elseif ( ! $header_image ) :
+				?>
+					<div id="branding">
+				<?php
+					else :
+					$style = ' style="color:#' . get_theme_mod( 'header_textcolor', HEADER_TEXTCOLOR ) . ';"';
+				?>
+					<div id="branding" class="brand-image">
 
-			<?php
-				$header_image = get_header_image();
-				// Has the text been hidden?
-				if ( 'blank' == get_header_textcolor() || '' == get_header_textcolor()):
-					$style = ' style="display:none;"';
-			?>
-				<div id="branding" class="span12">
-			<?php
-				// Has the header image been hidden?
-				elseif ( ! $header_image ) :
-			?>
-				<div id="branding" class="span12">
-			<?php
-				else :
-				$style = ' style="color:#' . get_theme_mod( 'header_textcolor', HEADER_TEXTCOLOR ) . ';"';
-			?>
-				<div id="branding" class="span12 brand-image">
+				<?php endif; ?>
 
-			<?php endif; ?>
+				<?php $heading_tag = ( is_home() || is_front_page() ) ? 'h1' : 'h2'; ?>
 
-			    <?php $heading_tag = ( is_home() || is_front_page() ) ? 'h1' : 'h2'; ?>
-				<<?php echo $heading_tag; ?> id="site-title" <?php echo $style; ?>>
-        		<a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
-            	<?php bloginfo('name'); ?>
-        		</a>
-    		</<?php echo $heading_tag; ?>>
-    		<h2 id="site-description" <?php echo $style; ?>><?php bloginfo('description'); ?></h2>
+			    <<?php echo $heading_tag; ?> id="site-title" <?php echo $style; ?>>
+	        	<a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo('name'); ?></a></<?php echo $heading_tag; ?>>
+	    		<h2 id="site-description" <?php echo $style; ?>><?php bloginfo('description'); ?></h2>
 
-			<?php
-				// Check to see if the header image should be displayed
-				if ( $header_image ) :
-			?>
-				<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
-					<img src="<?php bloginfo( 'template_directory' ); ?>/img/headers/coffee.gif"  height="140" style="float:left;"/>
-					<img style="float:left;" src="<?php header_image(); ?>" width="<?php echo HEADER_IMAGE_WIDTH; ?>" height="<?php echo HEADER_IMAGE_HEIGHT; ?>" alt="<?php esc_attr( get_bloginfo( 'name', 'display' ) ); ?>">
-				</a>
-			<?php endif; ?>
+				<?php
+					// Check to see if the header image should be displayed
+					if ( $header_image ) :
+				?>
+					<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
+						<img src="<?php header_image(); ?>" alt="<?php esc_attr( get_bloginfo( 'name', 'display' ) ); ?>">
+					</a>
+				<?php endif; ?>
 
-		</div><!-- end .grid_12 -->
+	</header>
 
-	</div> <!--/ .container_12 -->
-
-	</header></div>
-<!-- ============= / #header  ============= -->
 	<div id="main-nav" class="row-fluid">
 		<nav class="span12">
         <?php wp_nav_menu( array( 'theme_location' => 'categories', 'container' => false , 'menu_id' => 'topnav', 'walker' => new Argo_Categories_Walker, 'depth' => 1 ) ); ?>

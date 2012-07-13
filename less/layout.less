@@ -1,10 +1,22 @@
 .global-nav,
 #page {
-	//margin: 0 5%;
-	margin:0 auto;
 	max-width: @containerMaxWidth;
-	padding: 0 3%;
+	padding: 0 7%;
 	.clearfix();
+}
+
+/****************** LEFT NAV ******************/
+#left-nav {
+	float:left;
+	width: 4%;
+	min-width:40px;
+	position:fixed;
+	height:100%;
+	background-color:@grayLighter;
+	overflow:hidden;
+	display:none;
+	z-index:1;
+	.box-shadow(0 4px 5px 3px @gray);
 }
 
 // Fluid (940px)
