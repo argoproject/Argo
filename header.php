@@ -142,7 +142,7 @@
 					if ( 'blank' == get_header_textcolor() || '' == get_header_textcolor()):
 						$style = ' style="display:none;"';
 				?>
-					<div id="branding">
+					<div id="branding" class="brand-image image-only">
 				<?php
 					// Has the header image been hidden?
 					elseif ( ! $header_image ) :
@@ -167,7 +167,7 @@
 					if ( $header_image ) :
 				?>
 					<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
-						<img src="<?php header_image(); ?>" alt="<?php esc_attr( get_bloginfo( 'name', 'display' ) ); ?>">
+						<img src="<?php header_image(); ?>" height="<?php echo HEADER_IMAGE_HEIGHT; ?>" alt="<?php esc_attr( get_bloginfo( 'name', 'display' ) ); ?>">
 					</a>
 				<?php endif; ?>
 

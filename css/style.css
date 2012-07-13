@@ -610,7 +610,7 @@ hr {
   overflow: hidden;
 }
 #branding.brand-image {
-  height: 115px;
+  height: 120px;
 }
 #site-title {
   float: left;
@@ -636,12 +636,19 @@ hr {
   color: #333;
   padding-left: 10px;
 }
-.brand-image img {
+.brand-image {
   height: 120px;
-  width: 1170px;
+}
+.brand-image img {
   z-index: -1;
   position: relative;
   top: -100px;
+  height: 120px;
+  min-width: 400px;
+  overflow: hidden;
+}
+.brand-image.image-only img {
+  top: 0;
 }
 .brand-image #site-title {
   padding-top: 20px;

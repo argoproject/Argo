@@ -88,7 +88,7 @@
 	height:65px;
 	overflow:hidden;
 	&.brand-image {
-		height:115px;
+		height:120px;
 	}
 }
 #site-title {
@@ -117,13 +117,18 @@
 }
 
 .brand-image {
+  height:120px;
   img {
-	height:120px;
-	width:1170px;
 	z-index: -1;
 	position:relative;
 	top:-100px;
+	height:120px;
+	min-width:400px;
+	overflow:hidden;
   }
+  &.image-only img {
+		top:0;
+	}
   #site-title {
     padding-top: 20px;
   }
