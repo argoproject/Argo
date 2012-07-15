@@ -1,15 +1,19 @@
 .global-nav,
-#page {
+#page,
+#page-single {
 	max-width: @containerMaxWidth;
-	padding: 0 7%;
+	padding: 0 5%;
 	.clearfix();
+}
+#page-single {
+	padding-left:80px;
 }
 
 /****************** LEFT NAV ******************/
 #left-nav {
 	float:left;
-	width: 4%;
-	min-width:40px;
+	margin-top:-32px;
+	min-width:50px;
 	position:fixed;
 	height:100%;
 	background-color:@grayLighter;

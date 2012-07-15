@@ -142,27 +142,34 @@ textarea {
   box-sizing: border-box;
 }
 .global-nav,
-#page {
+#page,
+#page-single {
   max-width: 1170px;
-  padding: 0 7%;
+  padding: 0 5%;
   *zoom: 1;
 }
 .global-nav:before,
 #page:before,
+#page-single:before,
 .global-nav:after,
-#page:after {
+#page:after,
+#page-single:after {
   display: table;
   content: "";
 }
 .global-nav:after,
-#page:after {
+#page:after,
+#page-single:after {
   clear: both;
+}
+#page-single {
+  padding-left: 80px;
 }
 /****************** LEFT NAV ******************/
 #left-nav {
   float: left;
-  width: 4%;
-  min-width: 40px;
+  margin-top: -32px;
+  min-width: 50px;
   position: fixed;
   height: 100%;
   background-color: #eeeeee;
@@ -3006,6 +3013,12 @@ img.aligncenter {
   }
   #content {
     width: 100%;
+  }
+  #page-single {
+    padding: 5%;
+  }
+  #left-nav {
+    display: none !important;
   }
 }
 @media (max-width: 480px) {

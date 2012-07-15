@@ -524,16 +524,16 @@ add_action( 'wp_footer', 'argo_footer_js' );
 
 			    // dim sidebar
 			    $(window).scroll(function(){
-					if (($(window).scrollTop() > 100)) {
+					if (($(window).scrollTop() > 300)) {
 						$('#sidebar').animate({opacity: '0.5'}, 100);
-					} else if (($(window).scrollTop() < 100)) {
+					} else if (($(window).scrollTop() < 300)) {
 						$('#sidebar').animate({opacity: '1'}, 100);
 					}
 				});
 				$('#sidebar').hover(function() {
 			       		$(this).animate({opacity: '1'}, 100);
 			        }, function() {
-			        	if (($(window).scrollTop() < 100)) {
+			        	if (($(window).scrollTop() < 300)) {
 			        		$(this).animate({opacity: '1'}, 100);
 			        	} else {
 			        		$(this).animate({opacity: '0.5'}, 100);

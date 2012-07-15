@@ -96,13 +96,6 @@
 
 <body <?php body_class(); ?>>
 
-
-
-<div id="left-nav">
-	<ul>
-	</ul>
-</div>
-
 <div class="global-nav-bg">
 	<div class="global-nav">
 		<nav class="span12">
@@ -129,10 +122,15 @@
     </div> <!-- /.global-nav -->
 </div> <!-- /.global-nav-bg -->
 
+<?php if(is_single()) { ?>
+<div id="left-nav">
+	<ul></ul>
+</div>
 
-
-
+<div id="page-single" class="hfeed">
+<?php } else { ?>
 <div id="page" class="hfeed">
+<?php } ?>
 
 	<header id="site-header">
 
