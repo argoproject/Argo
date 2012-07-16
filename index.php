@@ -11,7 +11,7 @@
 
 get_header(); ?>
 
-			<div id="content" class="span8" role="main">
+			<div id="content" class="stories span8" role="main">
 
 			<?php
 			if ( have_posts() ) :
