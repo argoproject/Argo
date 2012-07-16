@@ -6,7 +6,7 @@
 
 <?php get_header(); ?>
 
-		<div id="content" class="span8" role="main">
+		<div id="content" class="stories span8" role="main">
 
 			<?php if ( have_posts() ) : ?>
 
@@ -20,8 +20,8 @@
 						echo '<div class="category-description">' . $category_description . '</div>';
 				?>
 
-				<div class="related-topics clearfix">
-					<h4>Key topics in this category:</h4>
+				<div class="related-topics">
+					<h5>Key topics in this category:</h5>
 					<?php echo argo_get_related_topics_for_category( get_queried_object() ); ?>
 				</div> <!-- /.related-topics -->
 			</div> <!-- /.category-background -->
