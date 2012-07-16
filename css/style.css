@@ -429,7 +429,7 @@ del {
 }
 blockquote {
   *zoom: 1;
-  padding: 12px 15px 12px 15px;
+  padding: 0 15px;
   margin: 0 0 24px;
   background-color: #eeeeee;
   border-left: 5px solid #999999;
@@ -513,7 +513,7 @@ pre code {
   overflow-y: scroll;
 }
 hr {
-  margin: 18px 0;
+  margin: 24px 0;
   border: 0;
   border-top: 1px solid #eeeeee;
   border-bottom: 1px solid #ffffff;

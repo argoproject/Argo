@@ -177,13 +177,13 @@ del {
 
 blockquote {
   .clearfix();
-  padding: 12px 15px 12px 15px;
+  padding: 0 15px;
   margin: 0 0 @baseline;
   background-color: @grayLighter;
   border-left: 5px solid @grayLight;
   p {
     font-size: @baseFontSize;
-    margin: (@baseline / 2) 0;
+    margin: @baseline/2 0;
     line-height:1.5;
   }
   small {
@@ -194,7 +194,6 @@ blockquote {
       content: '\2014 \00A0';
     }
   }
-
   // Float right with text-align: right
   &.pull-right {
     float: right;
@@ -263,7 +262,7 @@ pre {
 }
 
 hr {
-  margin: 18px 0;
+  margin: @baseline 0;
   border: 0;
   border-top: 1px solid @grayLighter;
   border-bottom: 1px solid @white;
