@@ -126,11 +126,10 @@
 <div id="left-nav">
 	<ul></ul>
 </div>
-
-<div id="page-single" class="hfeed">
-<?php } else { ?>
-<div id="page" class="hfeed">
 <?php } ?>
+
+<div id="page" class="hfeed">
+
 
 	<header id="site-header">
 
