@@ -13,6 +13,10 @@
   #left-nav {
     display: none !important;
   }
+  #content .half {
+    width: 90%;
+    margin: 0 5%;
+  }
 }
 @media (max-width: 480px) {
   
