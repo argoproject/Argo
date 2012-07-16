@@ -6,13 +6,10 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header>
-		<div class="post-meta top-meta">
-				<ul class="meta-gestures clearfix">
-        			<li><?php argo_posted_on(); ?></li>
-    				<li class="meta-comments"><span class="comments-link"><?php comments_popup_link( 'Comment', '<strong>1</strong> Comment ', ' <strong>%</strong> Comments' ); ?></span></li>
-    			</ul>
-    		</div><!-- /.post-meta -->
  		<h1 class="entry-title"><?php the_title(); ?></h1>
+ 		<div class="post-meta">
+ 			<h5 class="byline"><?php largo_byline(); ?> | <span class="comments-link"><?php comments_popup_link( 'Comment', '<strong>1</strong> Comment ', ' <strong>%</strong> Comments' ); ?></span></h5>
+ 		</div>
 	</header><!-- / entry header -->
 
 	<div class="entry-content">

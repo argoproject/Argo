@@ -294,7 +294,8 @@ h1 {
 }
 h1.entry-title {
   font-size: 44px;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
+  line-height: 1;
 }
 h2 {
   font-size: 44px;
@@ -898,6 +899,7 @@ article.story {
 .tags h5 {
   font-size: 16px;
   margin-bottom: 6px;
+  font-weight: bold;
 }
 .tags ul {
   padding: 0;
@@ -1057,17 +1059,142 @@ article.story {
 #related-posts .items p {
   font-size: 13.04px;
 }
+#content .module {
+  margin-bottom: 12px;
+  color: #000000;
+}
+#content .module h3 {
+  font-size: 16px;
+  margin-bottom: 12px;
+  font-weight: bold;
+}
+#content .module dl {
+  margin: 0;
+}
+#content .module dt {
+  font-size: 1em;
+  margin-bottom: 10px;
+}
+#content .module dd {
+  margin: 0 0 10px 0;
+}
+#content .aside p {
+  font-size: 0.815em;
+}
+.image p {
+  display: inline;
+  font-size: 10px;
+}
+.image img {
+  display: block;
+}
+#content .wp-media-credit {
+  font-size: 10.672px;
+  margin: 0;
+  text-align: right;
+  color: #555555;
+  display: block;
+}
+#content .wp-caption-text {
+  font-size: 13.04px;
+  margin: 5px 0 0 0;
+  color: #555555;
+  font-style: italic;
+  line-height: 1.5;
+  display: block;
+}
+#content .navis-slideshow .pagination li {
+  list-style-type: none !important;
+}
+#content .half {
+  width: 50%;
+  font-size: 13.04px;
+}
+#content .aligncenter,
+#content .center {
+  margin: 20px auto;
+  clear: both;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+#content .alignleft,
+#content .left {
+  float: left;
+  margin: 5px 20px 10px 0;
+}
+#content .alignright,
+#content .right {
+  float: right;
+  margin: 0 0 10px 20px;
+}
+#content .pull-quote {
+  width: 50%;
+  border-left: 4px solid #333;
+  padding-left: 20px;
+  font: Georgia, "Times New Roman", Times, serif;
+  font-size: 24px;
+  font-style: italic;
+  line-height: 1.3;
+}
+#content .pull-quote h6 {
+  font-size: 16px;
+  font-style: italic;
+  margin: 0;
+}
+#content .pull-quote p {
+  font-size: 1.5em;
+  margin-bottom: 6px;
+}
 #disqus_thread {
   background-color: #eeeeee;
   padding: 20px 10px;
   border-top: 8px solid #999999;
 }
-.stories h3 {
-  margin-bottom: 4px;
+.stories article {
+  border-bottom: 1px dotted #999999;
+  margin-bottom: 12px;
+}
+.byline {
+  font-weight: normal;
+  font-size: 13.04px;
+  margin-bottom: 24px;
+}
+.byline .author {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.byline a {
+  color: #333333;
+}
+.time-ago {
+  text-transform: uppercase;
+  color: #9d261d;
+}
+.stories h2.entry-title {
+  font-size: 36px;
+  margin-bottom: 6px;
+}
+.stories .byline {
+  margin-bottom: 12px;
 }
 .stories p {
   font-size: 18px;
   margin-bottom: 12px;
+}
+.stories .bottom-meta h5 {
+  font-size: 13.04px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  line-height: 1.5;
+  margin-bottom: 0;
+}
+.category-background .related-topics ul {
+  list-style: none;
+  margin: 0;
+}
+.category-background .related-topics ul li {
+  display: inline;
 }
 .CleanContact {
   width: 100% !important;

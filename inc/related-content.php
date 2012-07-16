@@ -262,6 +262,34 @@ function argo_the_categories_and_tags() {
     echo implode( '', $links );
 }
 
+function argo_homepage_categories_and_tags() {
+    $cats = get_the_category();
+    $tags = get_the_tags();
+
+    $links = array();
+    if ( $cats ) {
+        foreach ( $cats as $cat ) {
+            if ( $cat->name == 'Uncategorized' ) {
+                continue;
+            }
+            $links[] = sprintf(
+                '<span class="post-category-link"><a href="%s" title="%s">%s</a></span>',
+                get_category_link( $cat->term_id ), $cat->name,
+                $cat->name
+            );
+        }
+    }
+    if ( $tags ) {
+        foreach ( $tags as $tag ) {
+            $links[] = sprintf(
+                '<span class="post-tag-link"><a href="%s" title="%s">%s</a></span>',
+                get_tag_link( $tag->term_id ), $tag->name, $tag->name
+            );
+        }
+    }
+    echo implode( ', ', $links );
+}
+
 /**
  * RELATED POSTS
 */
