@@ -1134,8 +1134,8 @@ article.story {
   font-size: 13.04px;
 }
 #content .full {
-  width: 90%;
-  margin: 0 5% 12px;
+  width: 100%;
+  margin: 0 0 12px;
 }
 #content .aligncenter,
 #content .center {
