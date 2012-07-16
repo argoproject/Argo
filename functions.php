@@ -259,20 +259,31 @@ endif; // argo_admin_header_image
 
 // Prints HTML with meta information for the current post-date/time and author.
 
-if ( ! function_exists( 'argo_posted_on' ) ) :
+function largo_time() {
+	// Change to the date after a certain time
+	$time_difference = current_time('timestamp') - get_the_time('U');
+	if($time_difference < 86400) {
+		return '<span class="time-ago">' .human_time_diff(get_the_time('U'), current_time('timestamp')) . ' ago</span>';
+	} else {
+		return get_the_date();
+	};
+}
 
-function argo_posted_on() {
-	printf( '<a href="%1$s" title="%2$s" rel="bookmark"><time class="entry-date" datetime="%3$s" pubdate>%4$s</time></a><span class="by-author"> <span class="sep"> by </span> <span class="author vcard"><a class="url fn n" href="%5$s" title="%6$s" rel="author">%7$s</a></span></span>',
-		esc_url( get_permalink() ),
-		esc_attr( get_the_time() ),
-		esc_attr( get_the_date( 'c' ) ),
-		esc_html( get_the_date() ),
+if ( ! function_exists( 'largo_byline' ) ) :
+
+function largo_byline() {
+	printf( '<span class="by-author"><span class="sep">By:</span> <span class="author vcard"><a class="url fn n" href="%1$s" title="%2$s" rel="author">%3$s</a></span></span> | <time class="entry-date" datetime="%4$s" pubdate>%5$s</time>',
 		esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
 		esc_attr( sprintf( 'View all posts by %s', get_the_author() ) ),
-		esc_html( get_the_author() )
+		esc_html( get_the_author() ),
+		esc_attr( get_the_date( 'c' ) ),
+		largo_time()
 	);
 }
 endif;
+
+
+
 
 /**
  * Sets the post excerpt length to 35 words.
