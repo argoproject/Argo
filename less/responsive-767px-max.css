@@ -6,8 +6,9 @@
   #content {
     width: 100%;
   }
-  #page-single {
-    padding: 5%;
+  .single #page,
+  .single .global-nav {
+    padding: 0 5%;
   }
   #left-nav {
     display: none !important;
