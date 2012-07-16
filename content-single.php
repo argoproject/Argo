@@ -8,7 +8,7 @@
 	<header>
  		<h1 class="entry-title"><?php the_title(); ?></h1>
  		<div class="post-meta">
- 			<h5 class="byline"><?php largo_byline(); ?> | <span class="comments-link"><?php comments_popup_link( 'Comment', '<strong>1</strong> Comment ', ' <strong>%</strong> Comments' ); ?></span></h5>
+ 			<h5 class="byline"><?php largo_byline(); ?> | <span class="comments-link"><?php comments_popup_link( 'Leave a Comment', '<strong>1</strong> Comment ', ' <strong>%</strong> Comments' ); ?></span></h5>
  		</div>
 	</header><!-- / entry header -->
 
