@@ -59,7 +59,8 @@
 .navbar .nav.pull-right {
   float: right; // redeclare due to specificity
 }
-.navbar .nav > li {
+.navbar .nav > li,
+.cat-item {
   display: block;
   float: left;
   margin-bottom:0;
@@ -76,7 +77,8 @@ li.home-link {
 }
 
 // Links
-.navbar .nav > li > a {
+.navbar .nav > li > a,
+.cat-item a {
   float: none;
   // Vertically center the text given @navbarHeight
   padding: 7px 10px 9px;
@@ -85,7 +87,11 @@ li.home-link {
   text-decoration: none;
   text-shadow: 0 -1px 0 rgba(0,0,0,.8);
 }
+.navbar .nav > li.dropdown > a {
+	padding-right:0;
+}
 .navbar .nav > li > a:hover,
+.cat-item a:hover,
 .navbar .nav > li.open > a {
   #gradient > .vertical(@navbarBackground, @navbarBackgroundHighlight);
   color:@grayLighter;
@@ -107,10 +113,10 @@ li.home-link {
 .navbar .divider-vertical {
   height: @navbarHeight;
   width: 1px;
-  margin: 0 2px;
+  margin: 0 0 0 2px;
   overflow: hidden;
   background-color: @navbarBackground;
-  border-right: 1px solid @navbarBackgroundHighlight;
+  border-left: 1px solid @navbarBackgroundHighlight;
 }
 
 // Secondary (floated right) nav in topbar
@@ -222,7 +228,8 @@ li.home-link {
   }
 
   // Links within the dropdown menu
-  a {
+  a,
+  .cat-item a {
     display: block;
     padding: 3px 15px;
     clear: both;
@@ -230,6 +237,7 @@ li.home-link {
     line-height: @baseLineHeight;
     color: @dropdownLinkColor;
     white-space: nowrap;
+    text-shadow: none;
   }
 }
 

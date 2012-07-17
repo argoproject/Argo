@@ -184,15 +184,16 @@
 	      <ul class="nav">
 	        	<li class="home-link"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><i class="icon-home icon-white"></i></a></li>
 	        	<li class="divider-vertical"></li>
-	        	<li class="dropdown" id="category-list">
+	        	<span class="hidden-phone">
+	        	  <?php wp_list_categories( array( 'depth' => 1, 'title_li' => '', 'exclude' => '1' ) ); ?>
+	        	</span>
+	        	<li class="dropdown visible-phone" id="category-list">
 				    <a class="dropdown-toggle" data-toggle="dropdown" href="#category-list">
 				      Categories
 				      <b class="caret"></b>
 				    </a>
 				    <ul class="dropdown-menu">
-				      <li><a href="#">Category 1</a></li>
-				      <li><a href="#">Category 2</a></li>
-				      <li><a href="#">Category 3</a></li>
+				      <?php wp_list_categories( array( 'depth' => 1, 'title_li' => '', 'exclude' => '1' ) ); ?>
 				    </ul>
 				</li>
 				<!--<li class="dropdown">

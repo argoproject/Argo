@@ -729,7 +729,8 @@ hr {
 .navbar .nav.pull-right {
   float: right;
 }
-.navbar .nav > li {
+.navbar .nav > li,
+.cat-item {
   display: block;
   float: left;
   margin-bottom: 0;
@@ -745,7 +746,8 @@ li.home-link:hover i {
   opacity: 0.85;
   filter: alpha(opacity=85);
 }
-.navbar .nav > li > a {
+.navbar .nav > li > a,
+.cat-item a {
   float: none;
   padding: 7px 10px 9px;
   line-height: 24px;
@@ -753,7 +755,11 @@ li.home-link:hover i {
   text-decoration: none;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.8);
 }
+.navbar .nav > li.dropdown > a {
+  padding-right: 0;
+}
 .navbar .nav > li > a:hover,
+.cat-item a:hover,
 .navbar .nav > li.open > a {
   background-color: #1d65a1;
   background-image: -moz-linear-gradient(top, #1a5a90, #2275bb);
@@ -778,10 +784,10 @@ li.home-link:hover i {
 .navbar .divider-vertical {
   height: 28px;
   width: 1px;
-  margin: 0 2px;
+  margin: 0 0 0 2px;
   overflow: hidden;
   background-color: #1a5a90;
-  border-right: 1px solid #2275bb;
+  border-left: 1px solid #2275bb;
 }
 .navbar .nav.pull-right {
   margin-left: 10px;
@@ -912,7 +918,8 @@ li.home-link:hover i {
   background-color: #e5e5e5;
   border-bottom: 1px solid #ffffff;
 }
-.dropdown-menu a {
+.dropdown-menu a,
+.dropdown-menu .cat-item a {
   display: block;
   padding: 3px 15px;
   clear: both;
@@ -920,6 +927,7 @@ li.home-link:hover i {
   line-height: 24px;
   color: #333333;
   white-space: nowrap;
+  text-shadow: none;
 }
 .dropdown-menu li > a:hover,
 .dropdown-menu .active > a,

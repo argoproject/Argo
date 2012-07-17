@@ -26,7 +26,7 @@ function argo_register_custom_menus() {
             $locations = get_theme_mod( 'nav_menu_locations' );
             $locations[ $location ] = $nav_menu->term_id;
             set_theme_mod( 'nav_menu_locations', $locations );
-        } 
+        }
     }
 }
 
@@ -49,7 +49,7 @@ class Argo_Categories_Walker extends Walker {
     function start_el( &$output, $item, $depth, $args ) {
         global $wp_query;
         $li_class = ( $output ) ? '' : ' class="first"';
-        $output .= '<li' . $li_class . '><a href="' . $item->url . '">' . 
+        $output .= '<li' . $li_class . '><a href="' . $item->url . '">' .
              $item->title  . '</a>';
         $output .= '<div class="sub container_12"><ul><li><div class="inner-menu">';
 
@@ -75,4 +75,6 @@ class Argo_Categories_Walker extends Walker {
         $output .= "</li>\n";
     }
 }
+
+
 ?>
