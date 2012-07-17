@@ -1,79 +1,81 @@
 .global-nav-bg {
-	background-color: @gray;
-	.gradientBar (@grayDark, @grayDarker);
-	.box-shadow(0 1px 3px 1px @grayLight);
+  background-color: @gray;
+  .gradientBar (@grayDark, @grayDarker);
+  .box-shadow(0 1px 3px 1px @grayLight);
 }
 .global-nav {
-	color: #fff;
-	font-family: @sansFontFamily;
-	font-size:@baseFontSize - 2;
-	position: relative;
-	height: 32px;
-	overflow-y:visible;
-}
-
-.global-nav a, .global-nav a:visited, .global-nav a:hover, .global-nav a:active { color:#fff; }
-
-.global-nav ul {
-	margin: 0;
-	list-style:none;
-	font-size: @baseFontSize - 2;
+  color: #fff;
+  font-family: @sansFontFamily;
+  font-size:@baseFontSize - 2;
+  position: relative;
+  height: 32px;
+  overflow-y:visible;
+  ul {
+    margin: 0;
+    list-style:none;
+    font-size: @baseFontSize - 2;
 	li {
 	  float: left;
 	  margin: 4px 18px 0 0;
     }
-    a:hover {
+    a {
+	  color: @white;
+      &:hover {
 	    text-decoration:none;
 	    color: darken(@white, 15%);
+      }
     }
+  }
+  .nav-right {
+    float:right;
+    .donate-btn {
+	  float:left;
+	  margin: 4px 10px 0;
+	}
+	.org-logo {
+ 	  float:left;
+ 	  height:50px;
+ 	  .box-shadow(0 3px 4px -2px @black);
+    }
+  }
 }
-.global-nav .nav-right {
-	float:right;
-}
-.global-nav .donate-btn {
-	float:left;
-	margin: 4px 10px 0;
-	font-size: @baseFontSize - 2;
-	background-color: @red;
-    .border-radius(4px);
+.donate-btn {
+  font-size: @baseFontSize - 2;
+  background-color: @red;
+  .border-radius(4px);
+  &:hover {
+    background-color: lighten(@red, 5%);
+  }
+  a {
+    padding:4px 6px;
+    color: @white;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.8);
     &:hover {
-	  background-color: lighten(@red, 5%);
-	}
-	a {
-	  padding:4px 6px;
-	  color: @white;
-	  text-shadow: 0 -1px 0 rgba(0,0,0,.8);
-	  &:hover {
-	    text-decoration:none;
-	  }
-	}
-	i {
-	  margin-right:3px;
-	  margin-top:1px;
-	}
+      text-decoration:none;
+    }
+  }
+  i {
+    margin-right:3px;
+    margin-top:1px;
+  }
 }
-.global-nav #header-search {
-	float:left;
-	margin-right:10px;
-	margin-top:2px;
-}
-#header-search input {
-	font-size: @baseFontSize - 3;
+#header-search {
+  float:left;
+  margin-right:10px;
+  margin-top:2px;
+  input {
+    font-size: @baseFontSize - 3;
 	line-height:1.8;
 	font-family: @sansFontFamily;
 	height:14px;
-}
-#header-search button{
+  }
+  button {
 	height:24px;
 	font-size: @baseFontSize - 3;
 	line-height:1;
 	font-family: @sansFontFamily;
 	text-transform:uppercase;
-}
-.global-nav .org-logo {
- 	float:left;
- 	height:50px;
- 	.box-shadow(0 3px 4px -2px @black);
+  }
 }
 
 /****************** HEADER ******************/
@@ -85,8 +87,9 @@
 }
 #branding {
 	margin:0;
-	height:65px;
+	height:75px;
 	overflow:hidden;
+	width:100%;
 	&.brand-image {
 		height:120px;
 	}
@@ -98,11 +101,10 @@
   padding-top:10px;
   line-height:1;
   a {
-	color: #000;
+	color: @black;
 	outline: none;
     &:hover {
 	  text-decoration: none;
-	  color: #3366cc;
 	}
   }
 }
@@ -112,10 +114,9 @@
 	font-size: @baseFontSize * 1.25;
 	line-height:@baseLineHeight;
 	padding-top: @baseline + 5;
-	color: #333;
+	color: @gray;
 	padding-left:10px;
 }
-
 .brand-image {
   height:120px;
   img {
@@ -137,196 +138,4 @@
 	color:@black;
 	padding-left: 20px;
   }
-}
-
-/* mega menu */
-
-#main-nav {
-	margin-bottom: 20px;
-	min-height: 36px;
-	position: relative;
-	z-index: 100;
-	background-color:#ccc;
-}
-
-#topnav {
-	margin: 0;
-	padding: 0;
-	float:left;
-	width: 100%;
-	list-style: none;
-	font-size: 1em;
-}
-
-#topnav li {
-	float: left;
-	margin: 0 0 0 0;
-	padding: 0;
-	font-size: 1em;
-	line-height: 1;
-}
-
-#topnav li a {
-	float: left;
-	padding: 10px 28px 2px 8px;
-	margin: 0 10px;
-	color: #000;
-	background: transparent url(../img/arrow-down.png) no-repeat 95% 70%;
-}
-
-#topnav .first a {
-	margin-left: -10px;
-}
-
-#topnav li:hover a, #topnav li a:hover {
-	background-color: #999;
-	text-decoration: none;
-	color: #fff;
-	border-bottom: 7px solid #999;
-	background: #999 url(../img/arrow-hover.png) no-repeat 95% 70%;
-}
-
-#topnav li .sub {
-	position: absolute;
-	top: 35px;
-	left: -5px;
-	float: left;
-	display: none;
-	border: 4px solid #999;
-}
-
-#topnav li .row {
-	clear: both;
-	float: left;
-	width: 100%;
-	margin-bottom: 10px;
-}
-
-#topnav li .sub ul{
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	float: left;
-	background-color: #fff;
-}
-
-#topnav .sub ul li {
-	width: 100%;
-	color: #333;
-	border: none;
-	background-color: #fff !important;
-}
-
-#topnav .sub ul li a {
-	float: none;
-	text-indent: 0; /*--Reset text indent--*/
-	height: auto;
-	background: none;
-	text-decoration: none;
-	color: #333;
-	padding-left: 0;
-}
-
-.ie6 #topnav .sub ul li a {
-	background-image: none !important;
-}
-
-#topnav .sub ul li a:hover {
-	color: #ddd;
-	background-position: 5px 12px ;
-}
-
-.inner-menu {
-	padding: 10px 0;
-}
-
-#topnav .sub .inner-menu a {
-	margin: 10px 0;
-	border: none;
-}
-
-#topnav .sub .inner-menu a:hover {
-	text-decoration: underline;
-	color: #333;
-}
-
-
-.mega-feature {
-	float: left;
-}
-
-.mega-feature h2 {
-	font-size: 1.5em;
-	line-height: 1.222;
-	color: #666;
-	padding-bottom: 15px;
-}
-
-.mega-feature img {
-	float: left;
-	margin-right: 20px;
-}
-
-.mega-feature h3 {
-	font-size: 1.222em;
-	line-height: 1;
-	margin: 0 0 5px 0;
-}
-
-.mega-feature h3 a:hover {
-	color: #333 !important;
-	text-decoration: underline !important;
-}
-
-.mega-feature .read-more {
-	font-weight: bold;
-	font-size: 0.815em;
-}
-
-.category-articles {
-	float: left;
-}
-
-.category-articles h4 {
-	font-size: 1em;
-	line-height: 1;
-	margin: 0 0 10px 0;
-	padding-bottom: 8px !important;
-	border-bottom: 1px solid #ddd;
-}
-
-.category-articles h4 a {
-	font-weight: normal;
-	margin: 0 !important;
-	padding: 0 !important;
-}
-
-.category-articles h5 a {
-	font-size: 0.815em;
-	line-height: 1;
-	margin: 0 0 5px 0;
-	display: block;
-	font-weight: bold;
-}
-
-#topnav .category-topics ul {
-	padding: 0;
-}
-
-#topnav .category-topics li {
-	font-size: 1em;
-	margin: 0 0 10px 0 !important;
-	line-height:1;
-	padding-bottom: 8px !important;
-	border-bottom: 1px solid #ddd !important;
-}
-
-.category-topics {
-	float: left;
-}
-
-.inner-menu h3 {
-	font-size: 18px;
-	color: #666;
-	margin: 0 0 15px 0;
 }

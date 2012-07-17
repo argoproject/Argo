@@ -477,6 +477,8 @@ endif; // ends check for argo_comment()
 function argo_enqueue_js() {
 	wp_enqueue_script( 'text_placeholder', get_bloginfo('template_url') . '/js/jquery.textPlaceholder.js', array( 'jquery' ), '1.0', true );
 
+	wp_enqueue_script( 'bootstrap_collapse', get_bloginfo('template_url') . '/js/bootstrap-collapse.js', array( 'jquery' ), '1.0', true );
+
 	if ( wp_script_is( 'hoverIntent' ) )
 		wp_enqueue_script( 'hoverIntent' );
 	else

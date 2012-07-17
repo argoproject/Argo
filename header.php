@@ -170,11 +170,34 @@
 
 	</header>
 
-	<div id="main-nav" class="row-fluid">
-		<nav class="span12">
-        <?php wp_nav_menu( array( 'theme_location' => 'categories', 'container' => false , 'menu_id' => 'topnav', 'walker' => new Argo_Categories_Walker, 'depth' => 1 ) ); ?>
-		</nav><!-- /#main-nav -->
+	<nav id="main-nav" class="navbar">
+	  <div class="navbar-inner">
+	    <div class="container">
 
-    </div> <!-- /main-nav -->
+	      <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+	      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </a>
+
+	      <ul class="nav">
+	        	<li><a href="">Something</a></li>
+	        	<li><a href="">Something</a></li>
+	        	<li><a href="">Something</a></li>
+	      </ul>
+
+	      <!-- Everything you want hidden at 940px or less, place within here -->
+	      <div class="nav-collapse">
+	        <ul class="nav">
+	        	<li><a href="">Something</a></li>
+	        	<li><a href="">Something</a></li>
+	        	<li><a href="">Something</a></li>
+	        </ul>
+	      </div>
+
+	    </div>
+	  </div>
+	</nav>
 
 <div id="main" class="row-fluid clearfix">
