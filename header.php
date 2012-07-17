@@ -116,7 +116,7 @@
 					</form>
 				</div>
 
-        		<a href="http://investigativenewsnetwork.org/" target="_blank"><img class="org-logo" src="<?php bloginfo( 'template_directory' ); ?>/img/INN-logo-120-100.png" height="48" alt="INN logo" /></a>
+        		<a href="http://investigativenewsnetwork.org/" target="_blank"><img class="org-logo" src="<?php bloginfo( 'template_directory' ); ?>/img/inn-logo-80-50.jpg" height="50" alt="INN logo" /></a>
         	</div>
         </nav>
     </div> <!-- /.global-nav -->
@@ -182,10 +182,10 @@
 	      </a>
 
 	      <ul class="nav">
-	        	<li class="home-link"><a href=""><i class="icon-home icon-white"></i></a></li>
+	        	<li class="home-link"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><i class="icon-home icon-white"></i></a></li>
 	        	<li class="divider-vertical"></li>
-	        	<li class="dropdown" id="menu1">
-				    <a class="dropdown-toggle" data-toggle="dropdown" href="#menu1">
+	        	<li class="dropdown" id="category-list">
+				    <a class="dropdown-toggle" data-toggle="dropdown" href="#category-list">
 				      Categories
 				      <b class="caret"></b>
 				    </a>

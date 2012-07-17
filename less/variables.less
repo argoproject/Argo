@@ -15,7 +15,7 @@
 
 // Accent colors
 // -------------------------
-@blue:                  #049cdb;
+@blue:                  #2275bb;
 @blueDark:              #0064cd;
 @green:                 #46a546;
 @red:                   #9d261d;
@@ -26,7 +26,7 @@
 
 // Links
 // -------------------------
-@linkColor:             #08c;
+@linkColor:             @blue;
 @linkColorHover:        lighten(@linkColor, 10%);
 
 
@@ -152,8 +152,8 @@
 // Navbar
 // -------------------------
 @navbarHeight:                    28px;
-@navbarBackground:                darken(@blue, 20%);
-@navbarBackgroundHighlight:       darken(@blue, 10%);
+@navbarBackground:                darken(@blue, 10%);
+@navbarBackgroundHighlight:       @blue;
 
 @navbarText:                      @white;
 @navbarLinkColor:                 @white;

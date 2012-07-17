@@ -689,15 +689,15 @@ hr {
 }
 .navbar-inner {
   min-height: 36px;
-  background-color: #036a95;
-  background-image: -moz-linear-gradient(top, #0378a9, #025577);
-  background-image: -ms-linear-gradient(top, #0378a9, #025577);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0378a9), to(#025577));
-  background-image: -webkit-linear-gradient(top, #0378a9, #025577);
-  background-image: -o-linear-gradient(top, #0378a9, #025577);
-  background-image: linear-gradient(top, #0378a9, #025577);
+  background-color: #1f6aaa;
+  background-image: -moz-linear-gradient(top, #2275bb, #1a5a90);
+  background-image: -ms-linear-gradient(top, #2275bb, #1a5a90);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#2275bb), to(#1a5a90));
+  background-image: -webkit-linear-gradient(top, #2275bb, #1a5a90);
+  background-image: -o-linear-gradient(top, #2275bb, #1a5a90);
+  background-image: linear-gradient(top, #2275bb, #1a5a90);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0378a9', endColorstr='#025577', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2275bb', endColorstr='#1a5a90', GradientType=0);
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
@@ -751,19 +751,19 @@ li.home-link:hover i {
   line-height: 24px;
   color: #ffffff;
   text-decoration: none;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.8);
 }
 .navbar .nav > li > a:hover,
 .navbar .nav > li.open > a {
-  background-color: #03638b;
-  background-image: -moz-linear-gradient(top, #025577, #0378a9);
-  background-image: -ms-linear-gradient(top, #025577, #0378a9);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#025577), to(#0378a9));
-  background-image: -webkit-linear-gradient(top, #025577, #0378a9);
-  background-image: -o-linear-gradient(top, #025577, #0378a9);
-  background-image: linear-gradient(top, #025577, #0378a9);
+  background-color: #1d65a1;
+  background-image: -moz-linear-gradient(top, #1a5a90, #2275bb);
+  background-image: -ms-linear-gradient(top, #1a5a90, #2275bb);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#1a5a90), to(#2275bb));
+  background-image: -webkit-linear-gradient(top, #1a5a90, #2275bb);
+  background-image: -o-linear-gradient(top, #1a5a90, #2275bb);
+  background-image: linear-gradient(top, #1a5a90, #2275bb);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#025577', endColorstr='#0378a9', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1a5a90', endColorstr='#2275bb', GradientType=0);
   color: #eeeeee;
 }
 .navbar .nav > li.home-link > a:hover {
@@ -773,15 +773,15 @@ li.home-link:hover i {
 .navbar .nav .active > a:hover {
   color: #eeeeee;
   text-decoration: none;
-  background-color: #025577;
+  background-color: #1a5a90;
 }
 .navbar .divider-vertical {
   height: 28px;
   width: 1px;
   margin: 0 2px;
   overflow: hidden;
-  background-color: #025577;
-  border-right: 1px solid #0378a9;
+  background-color: #1a5a90;
+  border-right: 1px solid #2275bb;
 }
 .navbar .nav.pull-right {
   margin-left: 10px;
@@ -794,18 +794,18 @@ li.home-link:hover i {
   margin-left: 5px;
   margin-right: 5px;
   margin-top: 4px;
-  background-color: #036a95;
-  background-image: -moz-linear-gradient(top, #0378a9, #025577);
-  background-image: -ms-linear-gradient(top, #0378a9, #025577);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0378a9), to(#025577));
-  background-image: -webkit-linear-gradient(top, #0378a9, #025577);
-  background-image: -o-linear-gradient(top, #0378a9, #025577);
-  background-image: linear-gradient(top, #0378a9, #025577);
+  background-color: #1f6aaa;
+  background-image: -moz-linear-gradient(top, #2275bb, #1a5a90);
+  background-image: -ms-linear-gradient(top, #2275bb, #1a5a90);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#2275bb), to(#1a5a90));
+  background-image: -webkit-linear-gradient(top, #2275bb, #1a5a90);
+  background-image: -o-linear-gradient(top, #2275bb, #1a5a90);
+  background-image: linear-gradient(top, #2275bb, #1a5a90);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0378a9', endColorstr='#025577', GradientType=0);
-  border-color: #025577 #025577 #011f2c;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2275bb', endColorstr='#1a5a90', GradientType=0);
+  border-color: #1a5a90 #1a5a90 #0e314f;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  *background-color: #025577;
+  *background-color: #1a5a90;
   /* Darken IE7 buttons by default so they stand out more given they won't have borders */
 
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
@@ -818,12 +818,12 @@ li.home-link:hover i {
 .navbar .btn-navbar.active,
 .navbar .btn-navbar.disabled,
 .navbar .btn-navbar[disabled] {
-  background-color: #025577;
-  *background-color: #02435e;
+  background-color: #1a5a90;
+  *background-color: #164c7a;
 }
 .navbar .btn-navbar:active,
 .navbar .btn-navbar.active {
-  background-color: #013145 \9;
+  background-color: #123f65 \9;
 }
 .navbar .btn-navbar .icon-bar {
   display: block;
@@ -1144,14 +1144,14 @@ article.story {
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.8);
   margin-bottom: 8px;
   float: left;
-  background-color: #049cdb;
+  background-color: #2275bb;
   padding: 5px 12px 5px 8px;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   border-radius: 8px;
 }
 .tags ul li:hover {
-  background-color: #0378a9;
+  background-color: #1a5a90;
 }
 .tags ul li i {
   position: relative;
@@ -1190,14 +1190,14 @@ article.story {
 .pager a {
   display: inline-block;
   padding: 5px 14px;
-  border: 1px solid #94defd;
+  border: 1px solid #a1cbee;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   border-radius: 8px;
 }
 .pager a:hover {
   text-decoration: none;
-  background-color: #049cdb;
+  background-color: #2275bb;
   color: #ffffff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.8);
 }
@@ -1251,7 +1251,7 @@ article.story {
 }
 #related-post-nav a.selected {
   color: #ffffff;
-  background: #049cdb;
+  background: #2275bb;
   border: none;
   font-weight: bold;
 }
@@ -1475,8 +1475,8 @@ article.story {
     width: 94%;
     margin: 5px 3%;
     overflow: hidden;
-    background-color: #025577;
-    border-bottom: 1px solid #0378a9;
+    background-color: #1a5a90;
+    border-bottom: 1px solid #2275bb;
   }
   .nav-collapse .btn {
     padding: 4px 10px 4px;
@@ -1490,7 +1490,7 @@ article.story {
   }
   .nav-collapse .nav > li > a:hover,
   .nav-collapse .dropdown-menu a:hover {
-    background-color: #025577;
+    background-color: #1a5a90;
   }
   .nav-collapse.in .btn-group {
     margin-top: 5px;
@@ -1526,8 +1526,8 @@ article.story {
     float: none;
     padding: 12px 15px;
     margin: 12px 0;
-    border-top: 1px solid #025577;
-    border-bottom: 1px solid #025577;
+    border-top: 1px solid #1a5a90;
+    border-bottom: 1px solid #1a5a90;
     -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 1px 0 rgba(255,255,255,.1);
     -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 1px 0 rgba(255,255,255,.1);
     box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 1px 0 rgba(255,255,255,.1);
