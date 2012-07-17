@@ -182,9 +182,38 @@
 	      </a>
 
 	      <ul class="nav">
-	        	<li><a href="">Something</a></li>
-	        	<li><a href="">Something</a></li>
-	        	<li><a href="">Something</a></li>
+	        	<li class="dropdown" id="menu1">
+				    <a class="dropdown-toggle" data-toggle="dropdown" href="#menu1">
+				      Dropdown
+				      <b class="caret"></b>
+				    </a>
+				    <ul class="dropdown-menu">
+				      <li><a href="#">Action</a></li>
+				      <li><a href="#">Another action</a></li>
+				      <li><a href="#">Something else here</a></li>
+				      <li class="divider"></li>
+				      <li><a href="#">Separated link</a></li>
+				    </ul>
+				  </li>
+				  <li class="dropdown">
+		              <a data-toggle="dropdown" class="dropdown-toggle" href="#">Dropdown with Submenu <b class="caret"></b></a>
+		              <ul class="dropdown-menu">
+		                <li><a href="#">Action</a></li>
+		                <li><a href="#">Another action</a></li>
+		                <li>
+		                    <a href="#">Submenu! <i class="icon-arrow-right"></i></a>
+		                    <ul class="dropdown-menu sub-menu">
+		                        <li><a href="#">Action</a></li>
+		                        <li><a href="#">Another action</a></li>
+		                        <li><a href="#">Something else here</a></li>
+		                    </ul>
+		                </li>
+		                <li class="divider"></li>
+		                <li><a href="#">Separated link</a></li>
+		              </ul>
+			      	</li>
+				  <li><a href="">Something</a></li>
+				  <li><a href="">Something</a></li>
 	      </ul>
 
 	      <!-- Everything you want hidden at 940px or less, place within here -->
