@@ -735,6 +735,16 @@ hr {
   margin-bottom: 0;
   padding-top: 5px;
 }
+li.home-link {
+  margin-left: 4px;
+}
+li.home-link i {
+  margin-top: 4px;
+}
+li.home-link:hover i {
+  opacity: 0.85;
+  filter: alpha(opacity=85);
+}
 .navbar .nav > li > a {
   float: none;
   padding: 7px 10px 9px;
@@ -743,7 +753,8 @@ hr {
   text-decoration: none;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
-.navbar .nav > li > a:hover {
+.navbar .nav > li > a:hover,
+.navbar .nav > li.open > a {
   background-color: #03638b;
   background-image: -moz-linear-gradient(top, #025577, #0378a9);
   background-image: -ms-linear-gradient(top, #025577, #0378a9);
@@ -755,6 +766,9 @@ hr {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#025577', endColorstr='#0378a9', GradientType=0);
   color: #eeeeee;
 }
+.navbar .nav > li.home-link > a:hover {
+  background: none;
+}
 .navbar .nav .active > a,
 .navbar .nav .active > a:hover {
   color: #eeeeee;
@@ -764,7 +778,7 @@ hr {
 .navbar .divider-vertical {
   height: 28px;
   width: 1px;
-  margin: 0 9px;
+  margin: 0 2px;
   overflow: hidden;
   background-color: #025577;
   border-right: 1px solid #0378a9;
@@ -852,7 +866,7 @@ hr {
 .dropdown .caret {
   margin-top: 10px;
   margin-left: 1px;
-  margin-right: 5px;
+  margin-right: 8px;
 }
 .dropdown:hover .caret,
 .open .caret {
@@ -1447,6 +1461,7 @@ article.story {
     text-shadow: none;
   }
   .nav-collapse .nav > li > a,
+  .nav-collapse .nav > span > li > a,
   .nav-collapse .dropdown-menu a {
     padding: 6px 15px;
     font-weight: bold;
@@ -1454,6 +1469,14 @@ article.story {
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
+  }
+  .nav-collapse .divider {
+    height: 1px;
+    width: 94%;
+    margin: 5px 3%;
+    overflow: hidden;
+    background-color: #025577;
+    border-bottom: 1px solid #0378a9;
   }
   .nav-collapse .btn {
     padding: 4px 10px 4px;
@@ -3504,6 +3527,15 @@ img.aligncenter {
   #related-posts .related-items {
     float: none;
     width: 100%;
+  }
+  .global-nav-bg {
+    display: none;
+  }
+  h1.entry-title,
+  .stories h2.entry-title {
+    font-size: 32px;
+    font-weight: bold;
+    line-height: 1.3;
   }
 }
 @media (max-width: 480px) {

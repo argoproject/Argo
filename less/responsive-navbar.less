@@ -33,11 +33,20 @@
   }
   // Nav and dropdown links in navbar
   .nav-collapse .nav > li > a,
+  .nav-collapse .nav > span > li > a,
   .nav-collapse .dropdown-menu a {
     padding: 6px 15px;
     font-weight: bold;
     color: @navbarLinkColor;
     .border-radius(3px);
+  }
+  .nav-collapse .divider {
+    height: 1px;
+    width: 94%;
+    margin: 5px 3%;
+    overflow: hidden;
+    background-color: @navbarBackground;
+    border-bottom: 1px solid @navbarBackgroundHighlight;
   }
   // Buttons
   .nav-collapse .btn {

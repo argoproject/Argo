@@ -98,7 +98,7 @@
 
 <div class="global-nav-bg">
 	<div class="global-nav">
-		<nav class="span12">
+		<nav id="top-nav" class="span12">
         	<span class="visuallyhidden">
         		<a href="#main" title="Skip to content">Skip to content</a>
         	</span>
@@ -182,47 +182,51 @@
 	      </a>
 
 	      <ul class="nav">
+	        	<li class="home-link"><a href=""><i class="icon-home icon-white"></i></a></li>
+	        	<li class="divider-vertical"></li>
 	        	<li class="dropdown" id="menu1">
 				    <a class="dropdown-toggle" data-toggle="dropdown" href="#menu1">
-				      Dropdown
+				      Categories
 				      <b class="caret"></b>
 				    </a>
 				    <ul class="dropdown-menu">
-				      <li><a href="#">Action</a></li>
-				      <li><a href="#">Another action</a></li>
-				      <li><a href="#">Something else here</a></li>
-				      <li class="divider"></li>
-				      <li><a href="#">Separated link</a></li>
+				      <li><a href="#">Category 1</a></li>
+				      <li><a href="#">Category 2</a></li>
+				      <li><a href="#">Category 3</a></li>
 				    </ul>
-				  </li>
-				  <li class="dropdown">
-		              <a data-toggle="dropdown" class="dropdown-toggle" href="#">Dropdown with Submenu <b class="caret"></b></a>
-		              <ul class="dropdown-menu">
-		                <li><a href="#">Action</a></li>
-		                <li><a href="#">Another action</a></li>
-		                <li>
-		                    <a href="#">Submenu! <i class="icon-arrow-right"></i></a>
-		                    <ul class="dropdown-menu sub-menu">
-		                        <li><a href="#">Action</a></li>
-		                        <li><a href="#">Another action</a></li>
-		                        <li><a href="#">Something else here</a></li>
-		                    </ul>
-		                </li>
-		                <li class="divider"></li>
-		                <li><a href="#">Separated link</a></li>
-		              </ul>
-			      	</li>
-				  <li><a href="">Something</a></li>
-				  <li><a href="">Something</a></li>
+				</li>
+				<!--<li class="dropdown">
+		            <a data-toggle="dropdown" class="dropdown-toggle" href="#">Dropdown with Submenu <b class="caret"></b></a>
+		            <ul class="dropdown-menu">
+		              <li><a href="#">Action</a></li>
+		              <li><a href="#">Another action</a></li>
+		              <li>
+		              	<a href="#">Submenu! <i class="icon-arrow-right"></i></a>
+		                <ul class="dropdown-menu sub-menu">
+		                    <li><a href="#">Action</a></li>
+		                    <li><a href="#">Another action</a></li>
+		                    <li><a href="#">Something else here</a></li>
+		                </ul>
+		              </li>
+		              <li class="divider"></li>
+		              <li><a href="#">Separated link</a></li>
+		            </ul>
+			    </li>
+				<li><a href="">Something</a></li>
+				<li><a href="">Something</a></li>-->
 	      </ul>
 
 	      <!-- Everything you want hidden at 940px or less, place within here -->
 	      <div class="nav-collapse">
 	        <ul class="nav">
-	        	<li><a href="">Something</a></li>
-	        	<li><a href="">Something</a></li>
-	        	<li><a href="">Something</a></li>
-	        </ul>
+	        	<li><a href="">Link</a></li>
+	        	<li><a href="">Link</a></li>
+	        	<li><a href="">Link</a></li>
+	        <span class="visible-phone">
+	        	<li class="divider"></li>
+	        	<?php wp_nav_menu( array( 'theme_location' => 'global-nav', 'container' => false, 'depth' => 1, 'items_wrap' => '%3$s' ) ); ?>
+	        </span>
+	         </ul>
 	      </div>
 
 	    </div>
