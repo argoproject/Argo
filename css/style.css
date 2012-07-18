@@ -301,6 +301,10 @@ h1.entry-title {
 h2 {
   font-size: 44px;
 }
+h2.widgettitle {
+  font-size: 24px;
+  margin-bottom: 6px;
+}
 h3 {
   font-size: 36px;
 }
@@ -364,6 +368,9 @@ p.intro {
   color: #555555;
   font-style: italic;
   font-weight: bold;
+}
+.widget p {
+  font-size: 16px;
 }
 ul,
 ol {
