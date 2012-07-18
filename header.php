@@ -258,7 +258,7 @@
 	  </div>
 	</nav>
 	<nav id="secondary-nav">
-    	<div id="topics-bar" class="span12">
+    	<div id="topics-bar" class="span12 hidden-phone">
 			<?php wp_nav_menu( array( 'theme_location' => 'dont-miss', 'container' => false, 'depth' => 1 ) ); ?>
 		</div>
 	</nav>

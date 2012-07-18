@@ -1088,8 +1088,6 @@ li.home-link:hover i {
 }
 #secondary-nav {
   *zoom: 1;
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 3px;
   margin-bottom: 24px;
 }
 #secondary-nav:before,
@@ -1100,6 +1098,10 @@ li.home-link:hover i {
 #secondary-nav:after {
   clear: both;
 }
+#secondary-nav #topics-bar {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 3px;
+}
 #secondary-nav ul {
   margin: 0;
   padding: 0;
@@ -1109,6 +1111,7 @@ li.home-link:hover i {
   font-size: 16px;
   display: inline;
   margin-right: 10px;
+  white-space: nowrap;
 }
 #secondary-nav ul li h4 {
   font-size: 16px;
