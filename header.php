@@ -185,7 +185,18 @@
 	        	<li class="home-link"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><i class="icon-home icon-white"></i></a></li>
 	        	<li class="divider-vertical"></li>
 	        	<span class="hidden-phone">
-	        	  <?php wp_list_categories( array( 'depth' => 1, 'title_li' => '', 'exclude' => '1' ) ); ?>
+	        		<?php
+						$args = array(
+							'theme_location' => 'navbar-categories',
+							'depth'		 => 0,
+							'container'	 => false,
+							'items_wrap' => '%3$s',
+							'menu_class'	 => 'nav',
+							'walker'	 => new Bootstrap_Walker_Nav_Menu()
+						);
+
+						wp_nav_menu($args);
+					?>
 	        	</span>
 	        	<li class="dropdown visible-phone" id="category-list">
 				    <a class="dropdown-toggle" data-toggle="dropdown" href="#category-list">
@@ -193,7 +204,7 @@
 				      <b class="caret"></b>
 				    </a>
 				    <ul class="dropdown-menu">
-				      <?php wp_list_categories( array( 'depth' => 1, 'title_li' => '', 'exclude' => '1' ) ); ?>
+				      <?php wp_nav_menu( array( 'theme_location' => 'navbar-categories', 'container' => false, 'items_wrap' => '%3$s', 'depth' => 1 ) ); ?>
 				    </ul>
 				</li>
 				<!--<li class="dropdown">
@@ -220,9 +231,10 @@
 	      <!-- Everything you want hidden at 940px or less, place within here -->
 	      <div class="nav-collapse">
 	        <ul class="nav">
+	        	<?php wp_nav_menu( array( 'theme_location' => 'navbar-supplemental', 'container' => false, 'items_wrap' => '%3$s', 'depth' => 1 ) ); ?>
+	        	<!--<li><a href="">Link</a></li>
 	        	<li><a href="">Link</a></li>
-	        	<li><a href="">Link</a></li>
-	        	<li><a href="">Link</a></li>
+	        	<li><a href="">Link</a></li>-->
 	        <span class="visible-phone">
 	        	<li class="divider"></li>
 	        	<?php wp_nav_menu( array( 'theme_location' => 'global-nav', 'container' => false, 'depth' => 1, 'items_wrap' => '%3$s' ) ); ?>

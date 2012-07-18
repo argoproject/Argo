@@ -59,9 +59,12 @@
 .navbar .nav.pull-right {
   float: right; // redeclare due to specificity
 }
-.navbar .nav > li,
-.cat-item {
-  display: block;
+//.navbar .nav > li,
+//.navbar .cat-item,
+//.navbar .menu-item {
+
+.navbar li {
+ display: block;
   float: left;
   margin-bottom:0;
   padding-top:5px;
@@ -77,8 +80,10 @@ li.home-link {
 }
 
 // Links
-.navbar .nav > li > a,
-.cat-item a {
+//.navbar .nav > li > a,
+//.navbar .menu-item a,
+//.navbar .cat-item a {
+.navbar li > a {
   float: none;
   // Vertically center the text given @navbarHeight
   padding: 7px 10px 9px;
@@ -86,24 +91,25 @@ li.home-link {
   color: @navbarLinkColor;
   text-decoration: none;
   text-shadow: 0 -1px 0 rgba(0,0,0,.8);
+  &:hover {
+    #gradient > .vertical(@navbarBackground, @navbarBackgroundHighlight);
+    color:@grayLighter;
+  }
 }
 .navbar .nav > li.dropdown > a {
-	padding-right:0;
+  padding-right:0;
 }
-.navbar .nav > li > a:hover,
-.cat-item a:hover,
-.navbar .nav > li.open > a {
+.navbar .open > a {
   #gradient > .vertical(@navbarBackground, @navbarBackgroundHighlight);
   color:@grayLighter;
 }
-.navbar .nav > li.home-link > a:hover {
+.navbar li.home-link > a:hover {
   background:none;
 }
 
-
 // Active nav items
-.navbar .nav .active > a,
-.navbar .nav .active > a:hover {
+.navbar .active > a,
+.navbar .active > a:hover {
   color: @navbarLinkColorActive;
   text-decoration: none;
   background-color: @navbarLinkBackgroundActive;
@@ -202,8 +208,8 @@ li.home-link {
   display: none; // none by default, but block on "open" of the menu
   float: left;
   min-width: 160px;
-  padding: 4px 0;
-  margin: 10px 0 0; // override default ul
+  padding: 3px 0;
+  margin: 9px 0 0; // override default ul
   list-style: none;
   background-color: @dropdownBackground;
   border: 1px solid #ccc;
@@ -226,11 +232,14 @@ li.home-link {
   .divider {
     .nav-divider(@dropdownDividerTop, @dropdownDividerBottom);
   }
-
+  li {
+    padding-top:0;
+    width:100%;
+  }
   // Links within the dropdown menu
-  a,
-  .cat-item a {
+  li > a {
     display: block;
+    width:auto;
     padding: 3px 15px;
     clear: both;
     font-weight: normal;
@@ -243,9 +252,13 @@ li.home-link {
 
 // Hover state
 // -----------
-.dropdown-menu li > a:hover,
-.dropdown-menu .active > a,
-.dropdown-menu .active > a:hover {
+
+.dropdown-menu li a:hover {
+	background:none;
+}
+.dropdown-menu li a:hover,
+.dropdown-menu .active a,
+.dropdown-menu .active a:hover {
   color: @dropdownLinkColorHover;
   text-decoration: none;
   background-color: @dropdownLinkBackgroundHover;
@@ -381,37 +394,41 @@ li.home-link {
 	margin-bottom: 0;
 }
 /* add support for second level dropdown menus */
-.dropdown-menu .sub-menu {
-    left: 99%;
+.dropdown-menu .sub-menu,
+.dropdown-menu .sub-sub-menu {
     position: absolute;
-    top: 0;
+    top: -20%;
+    left: 99%;
     visibility: hidden;
-    margin-top: 15px;
+    margin-top:0;
 }
 .dropdown-menu .icon-arrow-right {
 	position:relative;
 	top:2px;
-	left:5px;
+	left:3px;
 }
-.dropdown-menu li:hover .sub-menu {
+.dropdown-menu li:hover .sub-menu,
+.dropdown-menu .sub-menu li:hover .sub-sub-menu {
     visibility: visible;
     display: block;
 }
 
-.navbar .sub-menu:before {
+.navbar .sub-menu:before,
+.navbar .sub-sub-menu:before {
     border-bottom: 9px solid transparent;
     border-left: none;
     border-right: 9px solid rgba(0, 0, 0, 0.2);
     border-top: 9px solid transparent;
     left: -9px;
-    top: 50%;
+    top: 30%;
 }
-.navbar .sub-menu:after {
+.navbar .sub-menu:after,
+.navbar .sub-sub-menu:after {
     border-top: 8px solid transparent;
     border-left: none;
     border-right: 8px solid #fff;
     border-bottom: 8px solid transparent;
     left: 10px;
-    top: 51%;
+    top: 31%;
     left: -8px;
 }
