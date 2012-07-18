@@ -685,7 +685,7 @@ hr {
   *position: relative;
   *z-index: 2;
   overflow: visible;
-  margin-bottom: 24px;
+  margin-bottom: 4.8px;
 }
 .navbar-inner {
   min-height: 36px;
@@ -1085,6 +1085,35 @@ li.home-link:hover i {
   left: 10px;
   top: 31%;
   left: -8px;
+}
+#secondary-nav {
+  *zoom: 1;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 3px;
+  margin-bottom: 24px;
+}
+#secondary-nav:before,
+#secondary-nav:after {
+  display: table;
+  content: "";
+}
+#secondary-nav:after {
+  clear: both;
+}
+#secondary-nav ul {
+  margin: 0;
+  padding: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+#secondary-nav ul li {
+  font-size: 16px;
+  display: inline;
+  margin-right: 10px;
+}
+#secondary-nav ul li h4 {
+  font-size: 16px;
+  margin-bottom: 0;
+  display: inline;
 }
 .post-header,
 .page-header,

@@ -257,5 +257,10 @@
 	    </div>
 	  </div>
 	</nav>
+	<nav id="secondary-nav">
+    	<div id="topics-bar" class="span12">
+			<?php wp_nav_menu( array( 'theme_location' => 'dont-miss', 'container' => false, 'depth' => 1 ) ); ?>
+		</div>
+	</nav>
 
 <div id="main" class="row-fluid clearfix">
