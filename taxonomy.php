@@ -9,7 +9,7 @@ get_header(); ?>
 
 			<?php if ( have_posts() ) : ?>
 
-			<div class="category-background">
+			<header class="category-background">
 
 				<h1 class="page-title"><?php single_term_title(); ?></h1>
 
@@ -18,7 +18,7 @@ get_header(); ?>
 					if ( $term_description )
 						echo '<div class="taxonomy-description">' . $term_description . '</div>';
 				?>
-			</div> <!-- /.category-background -->
+			</header> <!-- /.category-background -->
 
 			<h3 class="recent-posts">Recent posts<a class="rss-link" href="<?php echo esc_url( get_term_feed_link( get_queried_object() ) ); ?>"></a></h3>
 

@@ -10,7 +10,7 @@
 
 			<?php if ( have_posts() ) : ?>
 
-			<div class="category-background">
+			<header class="category-background">
 				<h1 class="page-title"><?php single_cat_title(); ?></h1>
 				<?php
 					$category_description = category_description();
@@ -22,7 +22,7 @@
 					<?php echo argo_get_related_topics_for_category( get_queried_object() ); ?>
 				</div> <!-- /.related-topics -->
 
-			</div> <!-- /.category-background -->
+			</header> <!-- /.category-background -->
 
 			<h3 class="recent-posts">Recent posts<a class="rss-link" href="<?php echo esc_url( get_category_feed_link( get_queried_object_id() ) ); ?>"></a></h3>
 
