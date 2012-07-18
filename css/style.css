@@ -1536,8 +1536,8 @@ h3.recent-posts {
   *zoom: 1;
   padding: 2px 0;
   margin-bottom: 19.56px;
-  border-top: 1px solid #555555;
-  border-bottom: 3px solid #555555;
+  border-top: 1px solid #999999;
+  border-bottom: 3px solid #999999;
 }
 h3.recent-posts:before,
 h3.recent-posts:after {
