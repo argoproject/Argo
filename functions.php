@@ -552,7 +552,7 @@ add_action( 'wp_footer', 'argo_footer_js' );
 
 add_action( 'wp_footer', 'largo_google_analytics' );
 
-// add the google analytics code to the footer, you need to add your ID to the theme settings for this to work
+// add Google Analytics code to the footer, you need to add your GA ID to the theme settings for this to work
 
 function largo_google_analytics() {
 
@@ -560,7 +560,6 @@ function largo_google_analytics() {
 		&& ( !is_user_logged_in() ) ) : // don't track logged in users
 	?>
 	<script>
-
 	    var _gaq = _gaq || [];
 	    _gaq.push(['_setAccount', '<?php echo get_option( "ga_id" ) ?>']);
 	    _gaq.push(['_trackPageview']);
@@ -570,7 +569,6 @@ function largo_google_analytics() {
 		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
 		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 		})();
-
 	</script>
 	<?php endif;
 }
