@@ -1,12 +1,12 @@
 <?php
 
-function argo_load_widgets() {
+function largo_load_widgets() {
     register_widget( 'Argo_follow_Widget' );
     register_widget( 'Argo_more_featured_Widget' );
     register_widget( 'Argo_about_Widget' );
     register_widget( 'Argo_hosts_Widget' );
 }
-add_action( 'widgets_init', 'argo_load_widgets' );
+add_action( 'widgets_init', 'largo_load_widgets' );
 
 /*
  * Argo Follow Widget
