@@ -257,9 +257,8 @@ function argo_admin_header_image() { ?>
 <?php }
 endif; // argo_admin_header_image
 
-// Prints HTML with meta information for the current post-date/time and author.
+// For posts in the last 24 hours, show time since posted instead of the regular date and time
 
-if ( ! function_exists( 'largo_time' ) ) :
 function largo_time() {
 	// Change to the date after a certain time
 	$time_difference = current_time('timestamp') - get_the_time('U');
@@ -269,9 +268,9 @@ function largo_time() {
 		return get_the_date();
 	};
 }
-endif;
 
-if ( ! function_exists( 'largo_byline' ) ) :
+// Print the byline
+
 function largo_byline() {
 	printf( '<span class="by-author"><span class="sep">By:</span> <span class="author vcard"><a class="url fn n" href="%1$s" title="%2$s" rel="author">%3$s</a></span></span> | <time class="entry-date" datetime="%4$s" pubdate>%5$s</time>',
 		esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
@@ -281,7 +280,15 @@ function largo_byline() {
 		largo_time()
 	);
 }
-endif;
+
+// print the copyright message in the footer
+
+function largo_copyright_message() {
+    $msg = get_option( 'copyright_msg' );
+    if ( ! $msg )
+    	$msg = 'Copyright %s';
+    printf( $msg, date( 'Y' ) );
+}
 
 /**
  * Sets the post excerpt length to 35 words.
@@ -477,11 +484,6 @@ function argo_enqueue_js() {
 	wp_enqueue_script( 'text_placeholder', get_bloginfo('template_url') . '/js/jquery.textPlaceholder.js', array( 'jquery' ), '1.0', true );
 	wp_enqueue_script( 'bootstrap_dropdown', get_bloginfo('template_url') . '/js/bootstrap-dropdown.js', array( 'jquery' ), '1.0', true );
 	wp_enqueue_script( 'bootstrap_collapse', get_bloginfo('template_url') . '/js/bootstrap-collapse.js', array( 'jquery' ), '1.0', true );
-
-	//if ( wp_script_is( 'hoverIntent' ) )
-	//	wp_enqueue_script( 'hoverIntent' );
-	//else
-	//	wp_enqueue_script( 'hoverIntent', includes_url( "/js/hoverIntent.js" ), array('jquery'), '20090102', true );
 
 	if ( get_option( 'show_related_content', true ) )
 		wp_enqueue_script( 'idTabs', get_bloginfo('template_url') . '/js/jquery.idTabs.js', array( 'jquery' ), '1.0', true );

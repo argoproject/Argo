@@ -111,11 +111,4 @@ function largo_settings_field_link_callback( $args ) {
 	echo '<input type="text" value="' . esc_url( get_option( $field ) ) . '" name="' . esc_attr( $field ) . '" class="regular-text" />';
 }
 
-function largo_copyright_message() {
-    $msg = get_option( 'copyright_msg' );
-    if ( ! $msg )
-    	$msg = 'Copyright %s';
-    printf( $msg, date( 'Y' ) );
-}
-
 ?>
