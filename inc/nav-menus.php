@@ -46,7 +46,6 @@ function largo_donate_button () {
 }
 
 function argo_add_dont_miss_label( $items, $args ) {
-
     $msg = get_option( 'dont_miss_label' );
     if ( ! $msg )
     	$msg = 'Don\'t Miss';
