@@ -9,16 +9,11 @@
 </div> <!-- /.grid_2 -->
 
 <div class="span6 widget-area" role="complementary">
-
-	<?php
-	if ( ! dynamic_sidebar( 'footer-2' ) )
-		the_widget( 'largo_featured_Widget', array( 'title' => "In Case You Missed It" ) );
-	?>
-
+	<?php the_widget( 'largo_featured_Widget', array( 'title' => "In Case You Missed It" ) ); ?>
 </div> <!-- /.grid_6 -->
 
 <div class="span3 widget-area" role="complementary">
-	<?php if ( ! dynamic_sidebar( 'footer-3' ) ) : ?>
+	<?php if ( ! dynamic_sidebar( 'footer-widget-area' ) ) : ?>
 
 	<div id="searchform-footer">
 		<h3 class="widget-title">Search This Site</h3>
