@@ -5,15 +5,15 @@
 ?>
 
 <div class="span2 widget-area" role="complementary">
+	<?php wp_nav_menu( array( 'theme_location' => 'footer', 'container' => false, 'depth' => 1  ) ); ?>
+</div> <!-- /.grid_2 -->
+
+<div class="span6 widget-area" role="complementary">
 
 	<?php
 	if ( ! dynamic_sidebar( 'footer-1' ) )
 		the_widget( 'Argo_follow_Widget', array( 'title' => 'Follow us' ) );
 	?>
-
-</div> <!-- /.grid_2 -->
-
-<div class="span6 widget-area" role="complementary">
 
 	<?php
 	if ( ! dynamic_sidebar( 'footer-2' ) )

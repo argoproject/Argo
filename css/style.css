@@ -3813,23 +3813,32 @@ p.comment-form-comment {
 #site-footer {
   color: #ffffff;
 }
+#supplementary {
+  padding-bottom: 24px;
+  border-bottom: 1px solid #666;
+}
 #boilerplate {
-  *zoom: 1;
+  border-top: 1px solid #999;
+  padding-top: 12px;
   width: 100%;
 }
-#boilerplate:before,
-#boilerplate:after {
-  display: table;
-  content: "";
-}
-#boilerplate:after {
-  clear: both;
-}
 #boilerplate p {
+  font-size: 13.04px;
+  margin-bottom: 0;
   float: left;
 }
 #boilerplate p.back-to-top {
   float: right;
+}
+#boilerplate .menu {
+  clear: both;
+  margin: 0;
+  font-size: 10.672px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+#boilerplate .menu li {
+  display: inline;
+  padding-right: 14px;
 }
 .sticky,
 .bypostauthor,
