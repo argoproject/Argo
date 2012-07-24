@@ -2342,13 +2342,13 @@ table .span24 {
 }
 .donate-btn {
   font-size: 14px;
-  background-color: #9d261d;
+  background-color: #bd261d;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
 }
 .donate-btn:hover {
-  background-color: #b32b21;
+  background-color: #d32a20;
 }
 .donate-btn a {
   padding: 4px 6px;
@@ -3286,7 +3286,7 @@ article.story {
 }
 .time-ago {
   text-transform: uppercase;
-  color: #9d261d;
+  color: #bd261d;
 }
 .stories h2.entry-title {
   font-size: 36px;
@@ -3813,17 +3813,57 @@ p.comment-form-comment {
 #site-footer {
   color: #ffffff;
 }
+#menu-footer-navigation {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  list-style: none;
+  margin: 0;
+}
+#menu-footer-navigation li {
+  margin-bottom: 4px;
+}
+#menu-footer-navigation :first-child {
+  margin-bottom: 4px;
+}
+.widget-title,
+.widgettitle,
+#menu-footer-navigation h4 {
+  font-size: 16px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  padding-bottom: 3px;
+  border-bottom: 1px solid #666;
+}
+#site-footer .largo-featured .post-lead {
+  min-height: 60px;
+  margin-bottom: 8px;
+}
+#site-footer .largo-featured img {
+  float: left;
+  margin: 0 10px 10px 0;
+  padding-top: 4px;
+}
+#site-footer .largo-featured h5 {
+  font-size: 16px;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+#site-footer .largo-featured p {
+  font-size: 10.672px;
+  margin-bottom: 0;
+}
 #supplementary {
-  padding-bottom: 24px;
+  padding-bottom: 12px;
   border-bottom: 1px solid #666;
 }
 #boilerplate {
   border-top: 1px solid #999;
   padding-top: 12px;
   width: 100%;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 #boilerplate p {
   font-size: 13.04px;
+  color: #999999;
   margin-bottom: 0;
   float: left;
 }
@@ -3834,11 +3874,10 @@ p.comment-form-comment {
   clear: both;
   margin: 0;
   font-size: 10.672px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 #boilerplate .menu li {
   display: inline;
-  padding-right: 14px;
+  padding-right: 10px;
 }
 .sticky,
 .bypostauthor,

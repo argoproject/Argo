@@ -47,7 +47,7 @@ function argo_register_sidebars() {
 	register_sidebar( array(
 		'name' => 'Footer Area Two',
 		'id' => 'footer-2',
-		'description' => 'center footer regio',
+		'description' => 'center footer region',
 		'before_widget' => '<aside id="%1$s" class="widget %2$s clearfix">',
 		'after_widget' => "</aside>",
 		'before_title' => '<h3 class="widget-title">',
