@@ -4,7 +4,7 @@
  */
 ?>
 
-<div class="span2 widget-area" role="complementary">
+<div class="span3 widget-area" role="complementary">
 	<?php wp_nav_menu( array( 'theme_location' => 'footer', 'container' => false, 'depth' => 1  ) ); ?>
 </div> <!-- /.grid_2 -->
 
@@ -17,7 +17,7 @@
 
 </div> <!-- /.grid_6 -->
 
-<div class="span4 widget-area" role="complementary">
+<div class="span3 widget-area" role="complementary">
 	<?php if ( ! dynamic_sidebar( 'footer-3' ) ) : ?>
 
 	<div id="searchform-footer">
@@ -26,7 +26,7 @@
 	</div>
 
 	<div id="ft-archive">
-    	<h3 class="widget-title">Browse Archives By Date</h3>
+    	<h3 class="widget-title">Browse Archives</h3>
 		<select name="archive-dropdown" onChange='document.location.href=this.options[this.selectedIndex].value;'>
 			<option value="">Select Month</option>
 			<?php wp_get_archives( array( 'type' => 'monthly', 'format' => 'option', 'show_post_count' => 1 ) ); ?>

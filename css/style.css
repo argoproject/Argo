@@ -3876,6 +3876,10 @@ p.comment-form-comment {
   font-size: 10.672px;
   margin-bottom: 0;
 }
+#site-footer input,
+#site-footer select {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
 #supplementary {
   padding-bottom: 12px;
   border-bottom: 1px solid #666;
