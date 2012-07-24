@@ -3362,6 +3362,10 @@ h3.recent-posts a.rss-link:hover {
   opacity: 0.85;
   filter: alpha(opacity=85);
 }
+span.search-term {
+  background-color: #cde3f6;
+  padding: 1px 5px;
+}
 .archive-dropdown {
   margin-bottom: 12px;
 }

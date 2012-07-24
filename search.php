@@ -18,7 +18,7 @@ get_header(); ?>
 					</form>
 				</header>
 
-				<h3 class="recent-posts clearfix">Your search for <?php the_search_query(); ?> returned <?php printf( _n( '%s result', '%s results', $wp_query->found_posts ), number_format_i18n( $wp_query->found_posts ) ); ?></h3>
+				<h3 class="recent-posts clearfix">Your search for <span class="search-term"><?php the_search_query(); ?></span> returned <?php printf( _n( '%s result', '%s results', $wp_query->found_posts ), number_format_i18n( $wp_query->found_posts ) ); ?></h3>
 
 				<?php
 				/* Start the Loop */
