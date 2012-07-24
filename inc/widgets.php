@@ -41,7 +41,6 @@ class largo_follow_Widget extends WP_Widget {
 		if ( $title )
 			echo $before_title . $title . $after_title; ?>
 
-
 			<?php
 				$feed = get_feed_link();
 				if ( of_get_option( 'rss_link' ) )
