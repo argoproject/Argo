@@ -10,6 +10,8 @@ Used to style the TinyMCE editor.
 /*global editor styles */
 
 html .mceContentBody {
-	max-width:620px;
+	width:95%;
+	max-width:771px;
+	margin: 0 2.5%;
 }
 
