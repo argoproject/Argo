@@ -46,17 +46,15 @@
  			</div>
 		</header><!-- / entry header -->
 
-
-
-		<?php if ( is_search() ) : // Only display Excerpts for Search ?>
+		<?php if ( is_search() || is_archive() ) : // Only display Excerpts for Search ?>
 		<div class="entry-summary">
 			<?php the_excerpt(); ?>
 		</div><!-- .entry-summary -->
 		<?php else : ?>
 		<div class="entry-content">
-            <?php the_content( 'Continue reading <span class="meta-nav">&rarr;</span>' ); ?>
+        	<?php the_content( 'Continue reading <span class="meta-nav">&rarr;</span>' ); ?>
 
-           <?php if ( argo_has_categories_or_tags() ): ?>
+        	<?php if ( argo_has_categories_or_tags() ): ?>
             	<div class="post-meta bottom-meta">
     				 <h5><strong>Filed under:</strong> <?php echo argo_homepage_categories_and_tags(); ?></h5>
             	</div><!-- /.post-meta -->
