@@ -3842,7 +3842,7 @@ p.comment-form-comment {
 #menu-footer-navigation {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   list-style: none;
-  margin: 0;
+  margin: 0 0 12px 0;
 }
 #menu-footer-navigation li {
   margin-bottom: 0;
