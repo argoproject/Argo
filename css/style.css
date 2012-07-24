@@ -3688,7 +3688,8 @@ p.comment-form-comment {
   font-size: 24px;
   margin-bottom: 6px;
 }
-#sidebar .widget-title {
+#sidebar .widget-title,
+#sidebar .widgettitle {
   margin-bottom: 8px;
   padding: 3px 8px;
   border: 1px solid #ddd;
@@ -3830,32 +3831,44 @@ p.comment-form-comment {
 #site-footer a:hover {
   color: #61a7e2;
 }
-.widget-title,
-.widgettitle,
-#menu-footer-navigation h4 {
+#site-footer p,
+#site-footer li {
+  font-size: 13.04px;
+}
+#site-footer ul {
+  margin: 0;
+}
+#site-footer ul li {
+  line-height: 1.2;
+  margin-bottom: 12px;
+  list-style: none;
+}
+#site-footer .widget-title,
+#site-footer .widgettitle,
+#site-footer #menu-footer-navigation h4 {
   font-size: 16px;
   text-transform: uppercase;
   margin-bottom: 12px;
   padding-bottom: 3px;
   border-bottom: 1px solid #666;
 }
-#menu-footer-navigation {
+#site-footer ul#menu-footer-navigation {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   list-style: none;
   margin: 0 0 12px 0;
 }
-#menu-footer-navigation li {
+#site-footer ul#menu-footer-navigation li {
   margin-bottom: 0;
-  padding: 3px 0;
+  padding: 5px 0;
   border-bottom: 1px solid #454545;
-  font-size: 14px;
+  font-size: 16px;
 }
-#menu-footer-navigation li:first-child {
+#site-footer ul#menu-footer-navigation li:first-child {
   margin: 0;
   padding: 0;
   border-bottom: none;
 }
-#menu-footer-navigation li h4 {
+#site-footer ul#menu-footer-navigation li h4 {
   margin-bottom: 0;
 }
 #site-footer .largo-featured .post-lead {
@@ -3882,6 +3895,7 @@ p.comment-form-comment {
 }
 #site-footer select {
   width: 90%;
+  margin: 0 0 24px;
 }
 #site-footer input.search-query {
   width: 67%;
@@ -3903,7 +3917,6 @@ p.comment-form-comment {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 #boilerplate p {
-  font-size: 13.04px;
   color: #999999;
   margin-bottom: 0;
   float: left;
