@@ -6,6 +6,7 @@ function argo_register_custom_menus() {
         'navbar-supplemental'       => "Navbar Supplemental Links",
         'dont-miss'       => "Don't Miss",
         'footer'          => 'Footer Navigation',
+        'footer-bottom'          => 'Footer Bottom',
     );
     register_nav_menus( $menus );
 

@@ -9,13 +9,30 @@
 #site-footer {
 	color:@white;
 }
+#supplementary {
+	padding-bottom: @baseline;
+	border-bottom:1px solid #666;
+}
 #boilerplate {
-	.clearfix;
+	border-top: 1px solid #999;
+	padding-top:@baseline/2;
 	width:100%;
 	p {
+	  font-size:@baseFontSize*0.815;
+	  margin-bottom:0;
 	  float:left;
 	  &.back-to-top {
 	    float:right;
 	  }
 	}
+	.menu {
+	  clear:both;
+	  margin:0;
+	  font-size: @baseFontSize*0.667;
+	  font-family: @sansFontFamily;
+	  li {
+		display:inline;
+		padding-right:14px;
+	  }
+    }
 }
