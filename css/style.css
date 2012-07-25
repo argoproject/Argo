@@ -3211,15 +3211,15 @@ article.story {
 .image img {
   display: block;
 }
-.wp-media-credit {
-  font-size: 10.672px;
+p.wp-media-credit {
+  font-size: 10.672px !important;
   margin: 0;
   text-align: right;
   color: #555555;
   display: block;
 }
-.wp-caption-text {
-  font-size: 13.04px;
+p.wp-caption-text {
+  font-size: 13.04px !important;
   margin: 5px 0 0 0;
   color: #555555;
   font-style: italic;
