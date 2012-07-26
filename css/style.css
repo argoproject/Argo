@@ -3338,6 +3338,7 @@ p.wp-caption-text {
 }
 .stories article.sticky {
   border-bottom: none;
+  margin-bottom: 24px;
 }
 .sticky-related ul {
   float: right;
