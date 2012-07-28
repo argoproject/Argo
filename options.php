@@ -134,15 +134,13 @@ function optionsframework_options() {
 		'type' => 'info');
 
 	$options[] = array(
-		'name' => __('Show Author Box', 'largo'),
-		'desc' => __('<strong>Show/Hide</strong> the author bio at the bottom of single posts.', 'largo'),
+		'desc' => __('<strong>Show/Hide the author bio</strong> at the bottom of single posts.', 'largo'),
 		'id' => 'show_author_box',
 		'std' => '1',
 		'type' => 'checkbox');
 
 	$options[] = array(
-		'name' => __('Show Related Content', 'largo'),
-		'desc' => __('<strong>Show/Hide</strong> related posts at the bottom of single posts.', 'largo'),
+		'desc' => __('<strong>Show/Hide related posts</strong> at the bottom of single posts.', 'largo'),
 		'id' => 'show_related_content',
 		'std' => '1',
 		'type' => 'checkbox');
