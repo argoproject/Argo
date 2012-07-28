@@ -3184,6 +3184,82 @@ article.story {
 #related-posts .related-items p {
   font-size: 13.04px;
 }
+.author-box {
+  clear: both;
+  margin-bottom: 24px;
+}
+.author-box h1,
+.author-box h3 {
+  font-size: 36px;
+  margin-bottom: 4.8px;
+}
+.author-box img.avatar {
+  float: left;
+  margin: 0 20px 0 0;
+  padding: 4px;
+  border: 1px solid #ccc;
+}
+.author-box p {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+.author-box ul {
+  list-style: none;
+  margin: 0;
+}
+.author-box ul li {
+  display: inline;
+  float: left;
+  margin-right: 12px;
+}
+.author-box ul li.email {
+  background-color: #2275bb;
+  padding: 1px 8px 3px 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 15px;
+}
+.author-box ul li.email a {
+  color: #ffffff;
+}
+.author-box ul li.email a:hover {
+  text-decoration: none;
+  opacity: 0.9;
+  filter: alpha(opacity=90);
+}
+.author-box ul li.email i {
+  position: relative;
+  top: 2px;
+}
+.author-box ul li.facebook {
+  position: relative;
+  top: -2px;
+}
+.author-box ul li.gplus {
+  position: relative;
+  top: -5px;
+}
+.author-box iframe {
+  margin: 0;
+}
+.single-post .author-box {
+  padding: 10px 20px;
+  background-color: #efefef;
+  border: 1px solid #eeeeee;
+  border-top: 3px solid #999999;
+}
+.single-post .author-box h3 {
+  font-size: 24px;
+}
+.single-post .author-box h3 span {
+  float: right;
+  text-align: right;
+  font-size: 10.672px;
+  padding-top: 13px;
+}
 .module {
   margin-bottom: 12px;
   color: #000000;
@@ -3295,7 +3371,7 @@ p.wp-caption-text {
 .stories .byline {
   margin-bottom: 12px;
 }
-.stories p {
+.stories .entry-content p {
   font-size: 18px;
   margin-bottom: 12px;
 }
