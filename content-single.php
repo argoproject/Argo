@@ -39,7 +39,7 @@
 <!-- Author bio and social links -->
 <?php if ( of_get_option( 'show_author_box' ) ) : ?>
 <div class="author-box clearfix">
-	<h3>About <?php echo esc_attr( get_the_author() ); ?><span><a href="<?php echo get_author_posts_url(get_the_author_meta( 'ID' )); ?>" rel="author" title="See all posts by <?php the_author_meta('display_name'); ?>">More by <?php the_author_meta('display_name'); ?></a></span></h3>
+	<h3>About <?php echo esc_attr( get_the_author() ); ?><span><a href="<?php echo get_author_posts_url(get_the_author_meta( 'ID' )); ?>" rel="author" title="See all posts by <?php the_author_meta('display_name'); ?>">More by this author</a></span></h3>
 
 	<?php if (has_gravatar( get_the_author_meta('user_email') ) ) :
 			echo get_avatar( get_the_author_meta('ID'), 96 );
