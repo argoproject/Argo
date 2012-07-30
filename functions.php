@@ -42,6 +42,7 @@ require_once( TEMPLATEPATH . '/inc/users.php' );
 require_once( TEMPLATEPATH . '/inc/sidebars.php' );
 require_once( TEMPLATEPATH . '/inc/widgets.php' );
 require_once( TEMPLATEPATH . '/inc/nav-menus.php' );
+require_once( TEMPLATEPATH . '/inc/open-graph.php' );
 require_once( TEMPLATEPATH . '/inc/taxonomies.php' );
 require_once( TEMPLATEPATH . '/inc/editor.php' );
 require_once( TEMPLATEPATH . '/inc/images.php' );
