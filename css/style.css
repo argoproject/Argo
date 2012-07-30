@@ -4132,27 +4132,26 @@ p.comment-form-comment {
   margin: 12px;
 }
 .aligncenter,
-div.aligncenter {
+div.aligncenter,
+.center {
   display: block;
   margin: 12px auto;
 }
-.alignright {
+.alignright,
+.right {
   float: right;
   margin-top: 12px;
   margin-right: 0;
   margin-bottom: 12px;
   margin-left: 12px;
 }
-.alignleft {
+.alignleft,
+.left {
   float: left;
   margin-top: 12px;
   margin-right: 12px;
   margin-bottom: 12px;
   margin-left: 0;
-}
-.aligncenter {
-  display: block;
-  margin: 12px auto;
 }
 img,
 img[class*="align"],
@@ -4160,22 +4159,6 @@ img[class*="wp-image-"] {
   max-width: 100%;
   height: auto;
   clear: both;
-}
-img.alignright {
-  margin-top: 12px;
-  margin-right: 0;
-  margin-bottom: 12px;
-  margin-left: 12px;
-}
-img.alignleft {
-  margin-top: 12px;
-  margin-right: 12px;
-  margin-bottom: 12px;
-  margin-left: 0;
-}
-img.aligncenter {
-  display: block;
-  margin: 12px auto;
 }
 .embed-container {
   position: relative;
