@@ -10,6 +10,9 @@
  		<div class="post-meta">
  			<h5 class="byline"><?php largo_byline(); ?> | <span class="comments-link"><?php comments_popup_link( 'Leave a Comment', '<strong>1</strong> Comment ', ' <strong>%</strong> Comments' ); ?></span></h5>
  		</div>
+ 		<div class="post-social">
+ 			<a href="#" onclick="window.print()" title="print this article" rel="nofollow">Print</a>
+ 		</div>
 	</header><!-- / entry header -->
 
 	<div class="entry-content">
