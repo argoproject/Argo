@@ -9,8 +9,8 @@
 
 	function largo_opengraph() {
 
-		//get the current page url
-		$url = (!empty($_SERVER['HTTPS'])) ? "https://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'] : "http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
+		//get the current url
+		$current_url = (!empty($_SERVER['HTTPS'])) ? "https://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'] : "http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
 
 		//set a default thumbnail, if a post has a featured image use that instead
 		$thumbnailURL = get_bloginfo( 'template_directory' ) . '/assets/img/headshot_500.png';
@@ -59,7 +59,7 @@
 
 			<meta property="og:title" content="<?php bloginfo('name'); wp_title(); ?>" />
 			<meta property="og:type" content="article" />
-			<meta property="og:url" content="<?php echo $url; ?>"/>
+			<meta property="og:url" content="<?php echo $current_url; ?>"/>
 			<?php
 				//let's try to get a better description when available
 				$description = get_bloginfo('description');
