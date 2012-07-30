@@ -2494,7 +2494,7 @@ li.home-link:hover i {
   text-decoration: none;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.8);
 }
-.navbar .nav > li.dropdown > a {
+.navbar li.dropdown > a {
   padding-right: 0;
 }
 .navbar .open > a,

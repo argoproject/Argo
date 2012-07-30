@@ -33,7 +33,6 @@
   height: auto;
 }
 
-
 // Brand, links, text, and buttons
 .navbar {
   color: @navbarText;
@@ -59,9 +58,6 @@
 .navbar .nav.pull-right {
   float: right; // redeclare due to specificity
 }
-//.navbar .nav > li,
-//.navbar .cat-item,
-//.navbar .menu-item {
 
 .navbar li {
  display: block;
@@ -79,10 +75,6 @@ li.home-link {
   }
 }
 
-// Links
-//.navbar .nav > li > a,
-//.navbar .menu-item a,
-//.navbar .cat-item a {
 .navbar li > a {
   float: none;
   // Vertically center the text given @navbarHeight
@@ -92,7 +84,7 @@ li.home-link {
   text-decoration: none;
   text-shadow: 0 -1px 0 rgba(0,0,0,.8);
 }
-.navbar .nav > li.dropdown > a {
+.navbar li.dropdown > a {
   padding-right:0;
 }
 .navbar .open > a,
