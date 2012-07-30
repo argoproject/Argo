@@ -502,22 +502,6 @@ add_action( 'wp_footer', 'argo_footer_js' );
 				//html5 placeholders
 				$("input[placeholder]").textPlaceholder();
 
-				$(window).scroll(function(){
-					if (($(window).scrollTop() > 50)) {
-						$('#left-nav').fadeIn(500);
-					} else if (($(window).scrollTop() < 50)) {
-						$('#left-nav').fadeOut(500);
-					}
-				});
-
-				$('#left-nav').hover(function() {
-			       		$(this).animate({width: '20%',overflow: 'visible'}, { duration: 200, queue: false });
-			       		$('#page').animate({opacity: '0.7'}, 100);
-			        }, function() {
-			        	$(this).animate({width: '4%',overflow: 'hidden'}, { duration: 200, queue: false });
-			        	$('#page').animate({opacity: '1'}, 100);
-			    });
-
 			    // dim sidebar
 			    $(window).scroll(function(){
 					if (($(window).scrollTop() > 300)) {

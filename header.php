@@ -91,14 +91,7 @@
     </div> <!-- /.global-nav -->
 </div> <!-- /.global-nav-bg -->
 
-<?php if(is_single()) { ?>
-<div id="left-nav">
-	<ul></ul>
-</div>
-<?php } ?>
-
 <div id="page" class="hfeed clearfix">
-
 
 	<header id="site-header" class="clearfix">
 

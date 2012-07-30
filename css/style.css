@@ -2179,37 +2179,17 @@ table .span24 {
 }
 .global-nav,
 #page,
-#page-single,
 #site-footer {
   max-width: 1170px;
   padding: 0 5%;
 }
-.single #page,
-.single .global-nav {
-  padding-left: 80px;
-}
-#page,
-#page-single {
+#page {
   padding-bottom: 24px;
 }
 #main {
   margin-top: 24px;
 }
 /****************** LEFT NAV ******************/
-#left-nav {
-  float: left;
-  margin-top: -32px;
-  min-width: 50px;
-  position: fixed;
-  height: 100%;
-  background-color: #eeeeee;
-  overflow: hidden;
-  display: none;
-  z-index: 1;
-  -webkit-box-shadow: 0 4px 5px 3px #555555;
-  -moz-box-shadow: 0 4px 5px 3px #555555;
-  box-shadow: 0 4px 5px 3px #555555;
-}
 .row-fluid {
   width: 100%;
   *zoom: 1;
@@ -4306,14 +4286,6 @@ img.aligncenter {
   }
   #content {
     width: 100%;
-  }
-  .single #page,
-  .single .global-nav {
-    padding-left: 5%;
-    padding-right: 5%;
-  }
-  #left-nav {
-    display: none !important;
   }
   #content .half,
   #content .full {
