@@ -1,4 +1,8 @@
-<?php get_header(); ?>
+<?php
+/**
+ * The template for displaying 404 pages.
+**/
+get_header(); ?>
 
 <div id="content" class="span8" role="main">
 	<h1 class="entry-title">Not Found</h1>
