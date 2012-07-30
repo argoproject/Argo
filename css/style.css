@@ -4248,7 +4248,6 @@ img.aligncenter {
 @media screen and (min-width: 1600px) {
   .global-nav,
   #page,
-  #page-single,
   #site-footer {
     padding-left: 0;
     padding-right: 0;
