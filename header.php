@@ -35,6 +35,8 @@
 <link rel="profile" href="http://gmpg.org/xfn/11" />
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 
+<?php $current_url = (!empty($_SERVER['HTTPS'])) ? "https://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'] : "http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']; ?>
+
 <?php
 	wp_enqueue_style( 'argo-stylesheet', get_bloginfo( 'stylesheet_url' ) );
 	wp_enqueue_script( 'argo-modernizr', get_template_directory_uri() . '/js/modernizr.custom.55609.js' );
@@ -130,6 +132,10 @@
 					</a>
 				<?php endif; ?>
 
+	</header>
+
+	<header class="print-header">
+		<p><strong><?php echo esc_attr( get_bloginfo( 'name' ) ); ?></strong> (<?php echo $current_url ?>)</p>
 	</header>
 
 	<nav id="main-nav" class="navbar clearfix">
