@@ -2500,6 +2500,12 @@ li.home-link:hover i {
 .navbar li.dropdown > a {
   padding-right: 0;
 }
+.navbar li.dropdown .dropdown-menu li a {
+  padding-right: 10px;
+}
+.dropdown-menu i.icon-arrow-right {
+  padding-right: 4px;
+}
 .navbar .open > a,
 .navbar li > a:hover {
   background-color: #1d65a1;
