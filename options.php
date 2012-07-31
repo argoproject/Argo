@@ -145,6 +145,16 @@ function optionsframework_options() {
 		'std' => '1',
 		'type' => 'checkbox');
 
+	$options[] = array(
+		'name' => __('Advanced Settings', 'largo'),
+		'type' => 'heading');
+
+	$options[] = array(
+		'name' => __('Upload a Thumbnail Image (200x200px)', 'largo'),
+		'desc' => __('This is a default image used for Facebook posts when you do not set a featured image for your posts.', 'largo'),
+		'id' => 'logo_thumbnail_sq',
+		'type' => 'upload');
+
 	return $options;
 }
 

@@ -13,7 +13,7 @@
 		$current_url = (!empty($_SERVER['HTTPS'])) ? "https://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'] : "http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
 
 		//set a default thumbnail, if a post has a featured image use that instead
-		$thumbnailURL = get_bloginfo( 'template_directory' ) . '/assets/img/headshot_500.png';
+		$thumbnailURL = of_get_option( 'logo_thumbnail_sq' );
 
 		if ( is_single() ) :
 			$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'thumbnail' );
