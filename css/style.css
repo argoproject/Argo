@@ -142,11 +142,11 @@ body {
   background-color: #ffffff;
 }
 a {
-  color: #0088cc;
+  color: #2275bb;
   text-decoration: none;
 }
 a:hover {
-  color: #005580;
+  color: #368fda;
   text-decoration: underline;
 }
 a.more-link {
@@ -1207,18 +1207,18 @@ legend + .control-group {
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
 .btn-primary {
-  background-color: #0074cc;
-  background-image: -moz-linear-gradient(top, #0088cc, #0055cc);
-  background-image: -ms-linear-gradient(top, #0088cc, #0055cc);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0055cc));
-  background-image: -webkit-linear-gradient(top, #0088cc, #0055cc);
-  background-image: -o-linear-gradient(top, #0088cc, #0055cc);
-  background-image: linear-gradient(top, #0088cc, #0055cc);
+  background-color: #2266bb;
+  background-image: -moz-linear-gradient(top, #2275bb, #224fbb);
+  background-image: -ms-linear-gradient(top, #2275bb, #224fbb);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#2275bb), to(#224fbb));
+  background-image: -webkit-linear-gradient(top, #2275bb, #224fbb);
+  background-image: -o-linear-gradient(top, #2275bb, #224fbb);
+  background-image: linear-gradient(top, #2275bb, #224fbb);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0088cc', endColorstr='#0055cc', GradientType=0);
-  border-color: #0055cc #0055cc #003580;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2275bb', endColorstr='#224fbb', GradientType=0);
+  border-color: #224fbb #224fbb #16337a;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  *background-color: #0055cc;
+  *background-color: #224fbb;
   /* Darken IE7 buttons by default so they stand out more given they won't have borders */
 
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
@@ -1228,12 +1228,12 @@ legend + .control-group {
 .btn-primary.active,
 .btn-primary.disabled,
 .btn-primary[disabled] {
-  background-color: #0055cc;
-  *background-color: #004ab3;
+  background-color: #224fbb;
+  *background-color: #1e46a5;
 }
 .btn-primary:active,
 .btn-primary.active {
-  background-color: #004099 \9;
+  background-color: #1a3d90 \9;
 }
 .btn-warning {
   background-color: #faa732;
@@ -2688,7 +2688,7 @@ li.home-link:hover i {
 .dropdown-menu .active a:hover {
   color: #ffffff;
   text-decoration: none;
-  background-color: #0088cc;
+  background-color: #2275bb;
 }
 .open {
   *z-index: 1000;
