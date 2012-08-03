@@ -518,10 +518,6 @@ add_action( 'wp_footer', 'argo_footer_js' );
 			        		$(this).animate({opacity: '0.5'}, 100);
 			        	};
 			    });
-			    // nav collapse button
-			    $('div.navbar-collapse-btn-text').click(function () {
-				    $(this).toggleClass('active');
-				});
 			});
 
 		</script>

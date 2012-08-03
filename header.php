@@ -144,7 +144,7 @@
 
 	      <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
 	      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-	        <div class="label navbar-collapse-btn-text"></div>
+	        <div class="label">More</div>
 	        <div class="bars">
 		        <span class="icon-bar"></span>
 		        <span class="icon-bar"></span>
