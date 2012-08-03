@@ -2578,6 +2578,18 @@ li.home-link:hover i {
 .navbar .btn-navbar.active {
   background-color: #285d28 \9;
 }
+.navbar .btn-navbar .label {
+  float: right;
+  color: white;
+  line-height: 1;
+  margin: -1px 0 0 5px;
+  padding: 0;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.8);
+  font-size: 14px;
+}
+.navbar .btn-navbar .bars {
+  float: left;
+}
 .navbar .btn-navbar .icon-bar {
   display: block;
   width: 18px;
@@ -2837,8 +2849,10 @@ li.home-link:hover i {
     float: none;
     margin: 0 0 12px;
   }
-  .nav-collapse .nav > li {
+  .nav-collapse .nav > li,
+  .nav-collapse .nav > span > li {
     float: none;
+    display: list-item;
   }
   .nav-collapse .nav > li > a {
     margin-bottom: 2px;
@@ -2853,20 +2867,26 @@ li.home-link:hover i {
   .nav-collapse .nav > li > a,
   .nav-collapse .nav > span > li > a,
   .nav-collapse .dropdown-menu a {
-    padding: 6px 15px;
-    font-weight: bold;
     color: #ffffff;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
+  }
+  .nav-collapse .nav > li > a:hover,
+  .nav-collapse .nav > span > li > a:hover,
+  .nav-collapse .dropdown-menu a:hover {
+    background: none !important;
+    color: #eeeeee;
+  }
+  .nav-collapse .nav > li:hover > a,
+  .nav-collapse .nav > span > li:hover > a {
+    background: none;
   }
   .nav-collapse .divider {
     height: 1px;
     width: 94%;
-    margin: 5px 3%;
+    margin: 10px 10px 5px;
+    padding: 0;
     overflow: hidden;
-    background-color: #378137;
-    border-bottom: 1px solid #46a546;
+    background-color: #ffffff;
+    border-bottom: 1px solid #378137;
   }
   .nav-collapse .btn {
     padding: 4px 10px 4px;

@@ -138,6 +138,18 @@ li.home-link {
   .buttonBackground(@navbarBackgroundHighlight, @navbarBackground);
   .box-shadow(~"inset 0 1px 0 rgba(255,255,255,.1), 0 1px 0 rgba(255,255,255,.075)");
 }
+.navbar .btn-navbar .label {
+	float:right;
+	color:white;
+	line-height:1;
+	margin:-1px 0 0 5px;
+	padding:0;
+	text-shadow: 0 -1px 0 rgba(0,0,0,.8);
+	font-size:14px;
+}
+.navbar .btn-navbar .bars {
+	float:left;
+}
 .navbar .btn-navbar .icon-bar {
   display: block;
   width: 18px;
@@ -448,8 +460,10 @@ li.home-link {
     float: none;
     margin: 0 0 (@baseLineHeight / 2);
   }
-  .nav-collapse .nav > li {
+  .nav-collapse .nav > li,
+  .nav-collapse .nav > span > li {
     float: none;
+    display:list-item;
   }
   .nav-collapse .nav > li > a {
     margin-bottom: 2px;
@@ -465,18 +479,24 @@ li.home-link {
   .nav-collapse .nav > li > a,
   .nav-collapse .nav > span > li > a,
   .nav-collapse .dropdown-menu a {
-    padding: 6px 15px;
-    font-weight: bold;
     color: @navbarLinkColor;
-    .border-radius(3px);
+    &:hover {
+	  background:none !important;
+	  color: @grayLighter;
+    }
+  }
+  .nav-collapse .nav > li:hover > a,
+  .nav-collapse .nav > span > li:hover > a {
+    background:none;
   }
   .nav-collapse .divider {
     height: 1px;
     width: 94%;
-    margin: 5px 3%;
+    margin: 10px 10px 5px;
+    padding:0;
     overflow: hidden;
-    background-color: @navbarBackground;
-    border-bottom: 1px solid @navbarBackgroundHighlight;
+    background-color: @white;
+    border-bottom: 1px solid @navbarBackground;
   }
   // Buttons
   .nav-collapse .btn {
