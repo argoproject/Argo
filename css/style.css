@@ -2491,7 +2491,7 @@ li.home-link:hover i {
 }
 .navbar li > a {
   float: none;
-  padding: 7px 10px 9px;
+  padding: 7px 10px 8px;
   line-height: 24px;
   color: #ffffff;
   text-decoration: none;
