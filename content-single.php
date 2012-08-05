@@ -40,7 +40,10 @@
 </article><!-- #post-<?php the_ID(); ?> -->
 
 <!-- Author bio and social links -->
-<?php if ( of_get_option( 'show_author_box' ) && get_the_author_meta( 'description' ) ) : ?>
+<?php
+	$values = get_post_custom( $post->ID );
+	if ( of_get_option( 'show_author_box' ) && get_the_author_meta( 'description' ) && !isset( $values['largo_byline_text'] ) ) :
+?>
 <div class="author-box clearfix">
 	<h3>About <?php echo esc_attr( get_the_author() ); ?><span><a href="<?php echo get_author_posts_url(get_the_author_meta( 'ID' )); ?>" rel="author" title="See all posts by <?php the_author_meta('display_name'); ?>">More by this author</a></span></h3>
 

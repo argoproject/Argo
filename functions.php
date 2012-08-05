@@ -45,6 +45,7 @@ require_once( TEMPLATEPATH . '/inc/nav-menus.php' );
 require_once( TEMPLATEPATH . '/inc/open-graph.php' );
 require_once( TEMPLATEPATH . '/inc/taxonomies.php' );
 require_once( TEMPLATEPATH . '/inc/editor.php' );
+require_once( TEMPLATEPATH . '/inc/post-meta.php' );
 require_once( TEMPLATEPATH . '/inc/images.php' );
 require_once( TEMPLATEPATH . '/inc/related-content.php' );
 require_once( TEMPLATEPATH . '/inc/featured-content.php' );
@@ -276,10 +277,20 @@ function largo_time() {
 // Print the byline
 
 function largo_byline() {
+	$values = get_post_custom( $post->ID );
+	$byline_text = isset( $values['largo_byline_text'] ) ? esc_attr( $values['largo_byline_text'][0] ) : '';
+	$byline_link = isset( $values['largo_byline_link'] ) ? esc_url( $values['largo_byline_link'][0] ) : '';
+	if ( $byline_text == '' ) :
+		$byline_text = esc_html( get_the_author() );
+	endif;
+	if ( $byline_link == '' ) :
+		$byline_link = esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) );
+	endif;
+
 	printf( '<span class="by-author"><span class="sep">By:</span> <span class="author vcard"><a class="url fn n" href="%1$s" title="%2$s" rel="author">%3$s</a></span></span> | <time class="entry-date" datetime="%4$s" pubdate>%5$s</time>',
-		esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
+		$byline_link,
 		esc_attr( sprintf( 'View all posts by %s', get_the_author() ) ),
-		esc_html( get_the_author() ),
+		$byline_text,
 		esc_attr( get_the_date( 'c' ) ),
 		largo_time()
 	);
