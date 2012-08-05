@@ -277,7 +277,7 @@ function largo_time() {
 // Print the byline
 
 function largo_byline() {
-
+	// get post custom fields and use the custom byline if set, if not use default author valuess
 	$values = get_post_custom( $post->ID );
 	$byline_text = isset( $values['largo_byline_text'] ) ? esc_attr( $values['largo_byline_text'][0] ) : '';
 	$byline_link = isset( $values['largo_byline_link'] ) ? esc_url( $values['largo_byline_link'][0] ) : '';
@@ -291,6 +291,7 @@ function largo_byline() {
 		$byline_title_attr = esc_attr( sprintf( 'View all posts by %s', get_the_author() ) );
 	endif;
 
+	// print the byline
 	printf( '<span class="by-author"><span class="sep">By:</span> <span class="author vcard"><a class="url fn n" href="%1$s" title="%2$s" rel="author">%3$s</a></span></span> | <time class="entry-date" datetime="%4$s" pubdate>%5$s</time>',
 		$byline_link,
 		$byline_title_attr,
