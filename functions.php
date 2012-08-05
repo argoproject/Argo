@@ -277,19 +277,23 @@ function largo_time() {
 // Print the byline
 
 function largo_byline() {
+
 	$values = get_post_custom( $post->ID );
 	$byline_text = isset( $values['largo_byline_text'] ) ? esc_attr( $values['largo_byline_text'][0] ) : '';
 	$byline_link = isset( $values['largo_byline_link'] ) ? esc_url( $values['largo_byline_link'][0] ) : '';
+	$byline_title_attr = esc_attr( sprintf( 'More from %s', $byline_text ) );
+
 	if ( $byline_text == '' ) :
 		$byline_text = esc_html( get_the_author() );
 	endif;
 	if ( $byline_link == '' ) :
 		$byline_link = esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) );
+		$byline_title_attr = esc_attr( sprintf( 'View all posts by %s', get_the_author() ) );
 	endif;
 
 	printf( '<span class="by-author"><span class="sep">By:</span> <span class="author vcard"><a class="url fn n" href="%1$s" title="%2$s" rel="author">%3$s</a></span></span> | <time class="entry-date" datetime="%4$s" pubdate>%5$s</time>',
 		$byline_link,
-		esc_attr( sprintf( 'View all posts by %s', get_the_author() ) ),
+		$byline_title_attr,
 		$byline_text,
 		esc_attr( get_the_date( 'c' ) ),
 		largo_time()
