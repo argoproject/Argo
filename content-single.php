@@ -20,18 +20,18 @@
 	</div><!-- .entry-content -->
 	<footer class="post-meta bottom-meta">
 
-            <?php if ( argo_has_custom_taxonomy( get_the_ID() ) ): ?>
+            <?php if ( largo_has_custom_taxonomy( get_the_ID() ) ): ?>
 				<ul class="labels clearfix">
 					<li id="term-view">View More:</li>
-            		<?php argo_the_post_labels( get_the_ID() ); ?>
+            		<?php largo_the_post_labels( get_the_ID() ); ?>
         		</ul>
         	<?php endif; ?>
 
-        	<?php if ( argo_has_categories_or_tags() ): ?>
+        	<?php if ( largo_has_categories_or_tags() ): ?>
     			<div class="tags clearfix">
     				<h5>Filed Under:</h5>
     				<ul>
-    					<?php echo argo_the_categories_and_tags(); ?>
+    					<?php echo largo_the_categories_and_tags(); ?>
     				</ul>
     			</div>
     		<?php endif; ?>
@@ -87,7 +87,7 @@
 <!-- Related posts -->
 <?php
 if ( of_get_option( 'show_related_content' ) ) :
-	if ( $rel_topics = argo_get_post_related_topics( 6 ) ) :
+	if ( $rel_topics = largo_get_post_related_topics( 6 ) ) :
 ?>
 	<div id="related-posts" class="idTabs row-fluid clearfix">
 		<ul id="related-post-nav">
@@ -99,16 +99,16 @@ if ( of_get_option( 'show_related_content' ) ) :
 		<div class="related-items">
 			<?php foreach ( $rel_topics as $count => $topic ): ?>
 				<div id="rp<?php echo $count; ?>">
-					<?php $rel_posts = argo_get_recent_posts_for_term( $topic, 3 ); ?>
+					<?php $rel_posts = largo_get_recent_posts_for_term( $topic, 3 ); ?>
 					<ul>
 						<?php $top_post = array_shift( $rel_posts ); ?>
 						<li class="top-related clearfix">
 							<h3><a href="<?php echo get_permalink( $top_post->ID ); ?>" title="<?php echo esc_attr($topic->name); ?>"><?php echo $top_post->post_title; ?></a></h3>
 
 							<?php if ( has_post_thumbnail( $top_post->ID ) ) { ?>
-								<img src="<?php echo argo_get_post_thumbnail_src( $top_post, '60x60' ); ?>" alt="related" width="60" height="60" />
+								<img src="<?php echo largo_get_post_thumbnail_src( $top_post, '60x60' ); ?>" alt="related" width="60" height="60" />
 							<?php } ?>
-							<p><?php echo argo_get_excerpt( $top_post ); ?> <a href="<?php echo esc_url( get_permalink( $top_post->ID ) ); ?>" title="<?php echo esc_attr($topic->name); ?>"></a></p>
+							<p><?php echo largo_get_excerpt( $top_post ); ?> <a href="<?php echo esc_url( get_permalink( $top_post->ID ) ); ?>" title="<?php echo esc_attr($topic->name); ?>"></a></p>
 						</li>
 						<?php foreach ( $rel_posts as $rel_post ): ?>
 						<li><a href="<?php echo esc_url( get_permalink( $rel_post->ID ) ); ?>" title="<?php echo esc_attr($topic->name); ?>"><?php echo $rel_post->post_title; ?></a></li>

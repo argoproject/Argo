@@ -18,7 +18,7 @@ get_header(); ?>
 				while ( have_posts() ) : the_post();
 					get_template_part( 'content', 'index' );
 				endwhile;
-				argo_content_nav( 'nav-below' );
+				largo_content_nav( 'nav-below' );
 			else :
 			?>
 

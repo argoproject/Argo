@@ -1,6 +1,6 @@
 <?php
 /**
- * Argo functions and definitions
+ * Largo functions and definitions
  *
  * When using a child theme (see http://codex.wordpress.org/Theme_Development and
  * http://codex.wordpress.org/Child_Themes), you can override certain functions
@@ -50,7 +50,7 @@ require_once( TEMPLATEPATH . '/inc/images.php' );
 require_once( TEMPLATEPATH . '/inc/related-content.php' );
 require_once( TEMPLATEPATH . '/inc/featured-content.php' );
 require_once( TEMPLATEPATH . '/inc/special-functionality.php' );
-require_once( TEMPLATEPATH . '/inc/tgm-plugin-init.php' );
+require_once( TEMPLATEPATH . '/inc/largo-plugin-init.php' );
 
 /**
  * Tell WordPress to run argo_setup() when the 'after_setup_theme' hook is run.
@@ -316,36 +316,36 @@ function largo_copyright_message() {
  * To override this length in a child theme, remove the filter and add your own
  * function tied to the excerpt_length filter hook.
  */
-function argo_excerpt_length( $length ) {
+function largo_excerpt_length( $length ) {
 	return 35;
 }
-add_filter( 'excerpt_length', 'argo_excerpt_length' );
+add_filter( 'excerpt_length', 'largo_excerpt_length' );
 
 /**
  * Adds a pretty "Continue Reading" link to custom post excerpts.
  */
-function argo_continue_reading_link() {
+function largo_continue_reading_link() {
 	return ' <a href="'. esc_url( get_permalink() ) . '">' . 'Continue reading <span class="meta-nav">&rarr;</span>' . '</a>';
 }
 
-function argo_auto_excerpt_more( $more ) {
-	return ' &hellip;' . argo_continue_reading_link();
+function largo_auto_excerpt_more( $more ) {
+	return ' &hellip;' . largo_continue_reading_link();
 }
-add_filter( 'excerpt_more', 'argo_auto_excerpt_more' );
+add_filter( 'excerpt_more', 'largo_auto_excerpt_more' );
 
 
-function argo_custom_excerpt_more( $output ) {
+function largo_custom_excerpt_more( $output ) {
 	if ( has_excerpt() && ! is_attachment() ) {
-		$output .= argo_continue_reading_link();
+		$output .= largo_continue_reading_link();
 	}
 	return $output;
 }
-add_filter( 'get_the_excerpt', 'argo_custom_excerpt_more' );
+add_filter( 'get_the_excerpt', 'largo_custom_excerpt_more' );
 
 /**
  * Display navigation to next/previous pages when applicable
  */
-function argo_content_nav( $nav_id ) {
+function largo_content_nav( $nav_id ) {
 	global $wp_query;
 
 	if ( $wp_query->max_num_pages > 1 ) : ?>
@@ -367,7 +367,7 @@ function argo_content_nav( $nav_id ) {
 * previous_posts_link(' < '); - returns the Previous page link
 * next_posts_link(' > '); - returns the Next page link
 */
-function argo_pagination( $range = 6 ) {
+function largo_pagination( $range = 6 ) {
 	// $paged - number of the current page
 	global $paged, $wp_query;
 
@@ -382,8 +382,8 @@ function argo_pagination( $range = 6 ) {
 ?>
 
     <nav>
-		<ul class="argo-pag clearfix">
-		<li class="argo-previous"><?php previous_posts_link( '&larr; Newer posts' ); ?></li>
+		<ul class="largo-pag clearfix">
+		<li class="largo-previous"><?php previous_posts_link( '&larr; Newer posts' ); ?></li>
 
 				<?php if ( $max_page > $range ) {
 				// When closer to the beginning
@@ -423,13 +423,13 @@ function argo_pagination( $range = 6 ) {
 						echo ">$i</a></li>";
 					}
 				} ?>
-			<li class="argo-next"><?php next_posts_link( 'Older posts &rarr;' ); ?></li>
+			<li class="largo-next"><?php next_posts_link( 'Older posts &rarr;' ); ?></li>
 		</ul>
 	</nav><!-- .post-nav -->
  <?php
 }
 
-if ( ! function_exists( 'argo_comment' ) ) :
+if ( ! function_exists( 'largo_comment' ) ) :
 /**
  * Template for comments and pingbacks.
  *
@@ -438,7 +438,7 @@ if ( ! function_exists( 'argo_comment' ) ) :
  *
  * Used as a callback by wp_list_comments() for displaying the comments.
  */
-function argo_comment( $comment, $args, $depth ) {
+function largo_comment( $comment, $args, $depth ) {
 	$GLOBALS['comment'] = $comment;
 	switch ( $comment->comment_type ) :
 		case 'pingback' :
@@ -499,7 +499,7 @@ endif; // ends check for argo_comment()
  /**
  * Enqueue JS for the footer
  */
-function argo_enqueue_js() {
+function largo_enqueue_js() {
 
 	wp_enqueue_script( 'text_placeholder', get_bloginfo('template_url') . '/js/jquery.textPlaceholder.js', array( 'jquery' ), '1.0', true );
 	wp_enqueue_script( 'bootstrap', get_bloginfo('template_url') . '/js/bootstrap.min.js', array( 'jquery' ), '1.0', true );
@@ -507,10 +507,10 @@ function argo_enqueue_js() {
 	if ( get_option( 'show_related_content', true ) )
 		wp_enqueue_script( 'idTabs', get_bloginfo('template_url') . '/js/jquery.idTabs.js', array( 'jquery' ), '1.0', true );
 }
-add_action('wp_enqueue_scripts', 'argo_enqueue_js' );
+add_action('wp_enqueue_scripts', 'largo_enqueue_js' );
 
-add_action( 'wp_footer', 'argo_footer_js' );
-	function argo_footer_js() { ?>
+add_action( 'wp_footer', 'largo_footer_js' );
+	function largo_footer_js() { ?>
 
 		<script type="text/javascript">
 			jQuery(document).ready(function($) {

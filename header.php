@@ -38,8 +38,8 @@
 <?php $current_url = (!empty($_SERVER['HTTPS'])) ? "https://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'] : "http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']; ?>
 
 <?php
-	wp_enqueue_style( 'argo-stylesheet', get_bloginfo( 'stylesheet_url' ) );
-	wp_enqueue_script( 'argo-modernizr', get_template_directory_uri() . '/js/modernizr.custom.55609.js' );
+	wp_enqueue_style( 'largo-stylesheet', get_bloginfo( 'stylesheet_url' ) );
+	wp_enqueue_script( 'largo-modernizr', get_template_directory_uri() . '/js/modernizr.custom.55609.js' );
 
 	/* We add some JavaScript to pages with the comment form
 	 * to support sites with threaded comments (when in use).
