@@ -3011,6 +3011,7 @@ article.story {
 article.story {
   padding-bottom: 12px;
 }
+.labels,
 .tags,
 .pager,
 #related-posts {
@@ -3024,6 +3025,42 @@ article.story {
   list-style: none;
   font-size: 16px;
   line-height: 1.6;
+}
+.labels {
+  background-color: #fafafa;
+  border: 1px solid #eeeeee;
+  border-top: 3px solid #999999;
+}
+.labels h4 {
+  font-size: 16px;
+  line-height: 1;
+  background-color: #dedede;
+  margin-bottom: 0;
+  padding: 8px;
+}
+.labels .series-label {
+  margin: 5px;
+  padding: 8px;
+  background-color: #efefef;
+}
+.labels .series-label h5 {
+  font-size: 19.552px;
+  margin-bottom: 2px;
+}
+.labels .series-label h5 a.rss-link {
+  background: url("../img/rss24.png") no-repeat;
+  width: 24px;
+  height: 24px;
+  float: right;
+  margin-top: 4px;
+}
+.labels .series-label h5 a.rss-link:hover {
+  opacity: 0.85;
+  filter: alpha(opacity=85);
+}
+.labels .series-label p {
+  font-size: 13.04px;
+  margin-bottom: 0;
 }
 .tags {
   height: 100%;
@@ -3257,21 +3294,38 @@ article.story {
 }
 .single-post .author-box,
 .single-argolinkroundups .author-box {
-  padding: 10px 20px;
-  background-color: #efefef;
+  background-color: #fafafa;
   border: 1px solid #eeeeee;
   border-top: 3px solid #999999;
 }
 .single-post .author-box h3,
 .single-argolinkroundups .author-box h3 {
-  font-size: 24px;
+  font-size: 16px;
+  line-height: 1;
+  background-color: #dedede;
+  margin-bottom: 0;
+  padding: 8px;
 }
 .single-post .author-box h3 span,
 .single-argolinkroundups .author-box h3 span {
   float: right;
   text-align: right;
   font-size: 10.672px;
-  padding-top: 13px;
+  padding-top: 4px;
+}
+.single-post .author-box img,
+.single-argolinkroundups .author-box img {
+  margin: 10px 20px 10px 10px;
+}
+.single-post .author-box p,
+.single-argolinkroundups .author-box p,
+.single-post .author-box ul,
+.single-argolinkroundups .author-box ul {
+  margin: 10px;
+}
+.single-post .author-box .gplus img,
+.single-argolinkroundups .author-box .gplus img {
+  margin: 0;
 }
 .module {
   margin-bottom: 12px;
