@@ -34,6 +34,15 @@ class largo_follow_widget extends WP_Widget {
 		extract( $args );
 		$title = apply_filters('widget_title', $instance['title'] );
 
+		$widget_class = !empty($instance['widget_class']) ? $instance['widget_class'] : '';
+		/* Add the widget class to $before widget, used as a style hook */
+		if( strpos($before_widget, 'class') === false ) {
+			$before_widget = str_replace('>', 'class="'. $widget_class . '"', $before_widget);
+		}
+		else {
+			$before_widget = str_replace('class="', 'class="'. $widget_class . ' ', $before_widget);
+		}
+
 		/* Before widget*/
 		echo $before_widget;
 
@@ -71,8 +80,8 @@ class largo_follow_widget extends WP_Widget {
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
 
-		/* Strip tags for title */
 		$instance['title'] = strip_tags( $new_instance['title'] );
+		$instance['widget_class'] = $new_instance['widget_class'];
 
 		return $instance;
 	}
@@ -83,12 +92,22 @@ class largo_follow_widget extends WP_Widget {
 	function form( $instance ) {
 
 		/* Set up some default widget settings. */
-		$defaults = array( 'title' => 'Follow ' . get_bloginfo('name') );
+		$defaults = array(
+			'title' => 'Follow ' . get_bloginfo('name'),
+			'widget_class' => 'default'
+		);
 		$instance = wp_parse_args( (array) $instance, $defaults ); ?>
 		<p>
 			<label for="<?php echo $this->get_field_id( 'title' ); ?>">Title:</label>
 			<input id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $instance['title'] ); ?>" style="width:90%;" />
 		</p>
+
+		<label for="<?php echo $this->get_field_id( 'widget_class' ); ?>"><?php _e('Widget Background', 'largo-about'); ?></label>
+		<select id="<?php echo $this->get_field_id('widget_class'); ?>" name="<?php echo $this->get_field_name('widget_class'); ?>" class="widefat" style="width:90%;">
+		    <option <?php selected( $instance['widget_class'], 'default'); ?> value="default">Default</option>
+		    <option <?php selected( $instance['widget_class'], 'rev'); ?> value="rev">Reverse</option>
+		    <option <?php selected( $instance['widget_class'], 'no-bg'); ?> value="no-bg">No Background</option>
+		</select>
 	<?php
 	}
 }
@@ -139,7 +158,6 @@ class largo_featured_widget extends WP_Widget {
 	}
 
 	function form( $instance ) {
-
 		$defaults = array( 'title' => __('In Case You Missed It', 'largo-featured'));
 		$instance = wp_parse_args( (array) $instance, $defaults ); ?>
 
@@ -147,7 +165,6 @@ class largo_featured_widget extends WP_Widget {
 			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e('Title:', 'largo-featured'); ?></label>
 			<input id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" style="width:90%;" />
 		</p>
-
 
 	<?php
 	}
@@ -171,6 +188,15 @@ class largo_about_widget extends WP_Widget {
 
 		$title = apply_filters('widget_title', $instance['title'] );
 
+		$widget_class = !empty($instance['widget_class']) ? $instance['widget_class'] : '';
+		/* Add the widget class to $before widget, used as a style hook */
+		if( strpos($before_widget, 'class') === false ) {
+			$before_widget = str_replace('>', 'class="'. $widget_class . '"', $before_widget);
+		}
+		else {
+			$before_widget = str_replace('class="', 'class="'. $widget_class . ' ', $before_widget);
+		}
+
 		echo $before_widget;
 		if ( $title )
 			echo $before_title . $title . $after_title; ?>
@@ -188,17 +214,29 @@ class largo_about_widget extends WP_Widget {
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
 		$instance['title'] = strip_tags( $new_instance['title'] );
+		$instance['widget_class'] = $new_instance['widget_class'];
 		return $instance;
 	}
 
 	function form( $instance ) {
-		$defaults = array( 'title' => __('About ' . get_bloginfo('name'), 'largo-about'));
+		$defaults = array(
+			'title' => 'About ' . get_bloginfo('name'),
+			'widget_class' => 'default'
+		);
 		$instance = wp_parse_args( (array) $instance, $defaults ); ?>
 
 		<p>
 			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e('Title:', 'largo-about'); ?></label>
 			<input id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" style="width:90%;" />
 		</p>
+
+		<label for="<?php echo $this->get_field_id( 'widget_class' ); ?>"><?php _e('Widget Background', 'largo-about'); ?></label>
+		<select id="<?php echo $this->get_field_id('widget_class'); ?>" name="<?php echo $this->get_field_name('widget_class'); ?>" class="widefat" style="width:90%;">
+		    <option <?php selected( $instance['widget_class'], 'default'); ?> value="default">Default</option>
+		    <option <?php selected( $instance['widget_class'], 'rev'); ?> value="rev">Reverse</option>
+		    <option <?php selected( $instance['widget_class'], 'no-bg'); ?> value="no-bg">No Background</option>
+		</select>
+
 	<?php
 	}
 }
@@ -216,6 +254,15 @@ class largo_donate_widget extends WP_Widget {
 		extract( $args );
 
 		$title = apply_filters('widget_title', $instance['title'] );
+
+		$widget_class = !empty($instance['widget_class']) ? $instance['widget_class'] : '';
+		/* Add the widget class to $before widget, used as a style hook */
+		if( strpos($before_widget, 'class') === false ) {
+			$before_widget = str_replace('>', 'class="'. $widget_class . '"', $before_widget);
+		}
+		else {
+			$before_widget = str_replace('class="', 'class="'. $widget_class . ' ', $before_widget);
+		}
 
 		echo $before_widget;
 		if ( $title )
@@ -235,6 +282,7 @@ class largo_donate_widget extends WP_Widget {
 		$instance['cta_text'] = strip_tags( $new_instance['cta_text'] );
 		$instance['button_text'] = strip_tags( $new_instance['button_text'] );
 		$instance['button_url'] = strip_tags( $new_instance['button_url'] );
+		$instance['widget_class'] = $new_instance['widget_class'];
 
 		return $instance;
 	}
@@ -249,7 +297,8 @@ class largo_donate_widget extends WP_Widget {
 			'title' => 'Support ' . get_bloginfo('name'),
 			'cta_text' => 'We depend on your support. A generous gift in any amount helps us continue to bring you this service.',
 			'button_text' => $donate_btn_text,
-			'button_url' => $donate_link
+			'button_url' => $donate_link,
+			'widget_class' => 'default'
 		);
 		$instance = wp_parse_args( (array) $instance, $defaults ); ?>
 
@@ -269,6 +318,13 @@ class largo_donate_widget extends WP_Widget {
 			<label for="<?php echo $this->get_field_id( 'button_url' ); ?>">Button URL (for custom campaigns):</label>
 			<input id="<?php echo $this->get_field_id( 'button_url' ); ?>" name="<?php echo $this->get_field_name( 'button_url' ); ?>" value="<?php echo $instance['button_url']; ?>" style="width:90%;" />
 		</p>
+
+		<label for="<?php echo $this->get_field_id( 'widget_class' ); ?>"><?php _e('Widget Background', 'largo-about'); ?></label>
+		<select id="<?php echo $this->get_field_id('widget_class'); ?>" name="<?php echo $this->get_field_name('widget_class'); ?>" class="widefat" style="width:90%;">
+		    <option <?php selected( $instance['widget_class'], 'default'); ?> value="default">Default</option>
+		    <option <?php selected( $instance['widget_class'], 'rev'); ?> value="rev">Reverse</option>
+		    <option <?php selected( $instance['widget_class'], 'no-bg'); ?> value="no-bg">No Background</option>
+		</select>
 
 		<?php
 	}
