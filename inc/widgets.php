@@ -2,7 +2,7 @@
 
 function largo_load_widgets() {
     register_widget( 'largo_follow_widget' );
-    register_widget( 'largo_featured_widget' );
+    register_widget( 'largo_footer_featured_widget' );
     register_widget( 'largo_about_widget' );
     register_widget( 'largo_donate_widget' );
 }
@@ -113,16 +113,16 @@ class largo_follow_widget extends WP_Widget {
 }
 
 /*
- * Largo Featured Posts
+ * Largo Footer Featured Posts
  */
-class largo_featured_widget extends WP_Widget {
+class largo_footer_featured_widget extends WP_Widget {
 
-	function largo_featured_widget() {
+	function largo_footer_featured_widget() {
 		$widget_ops = array(
-		'classname' => 'largo-featured',
-		'description' => __('Show two recent featured posts with thumbnails and excerpts', 'largo-featured') );
+		'classname' => 'largo-footer-featured',
+		'description' => __('Show two recent featured posts with thumbnails and excerpts', 'largo-footer-featured') );
 
-		$this->WP_Widget( 'largo-featured-widget', __('Largo Featured Posts', 'largo-featured'), $widget_ops);
+		$this->WP_Widget( 'largo-footer-featured-widget', __('Largo Footer Featured Posts', 'largo-footer-featured'), $widget_ops);
 	}
 
 	function widget( $args, $instance ) {
@@ -133,7 +133,7 @@ class largo_featured_widget extends WP_Widget {
 		if ( $title )
 			echo $before_title . $title . $after_title;?>
 
-			<?php $missedit = largo_get_featured_posts( array( 'meta_key' => 'footer_featured_widget', 'showposts' => 2 ) );
+			<?php $missedit = largo_get_featured_posts( array( 'meta_key' => 'footer_featured_widget', 'showposts' => $instance['num_posts'] ) );
           	if ( $missedit->have_posts() ) : ?>
              	 <?php while ( $missedit->have_posts() ) : $missedit->the_post(); ?>
                   	<div class="post-lead clearfix">
@@ -143,7 +143,7 @@ class largo_featured_widget extends WP_Widget {
                   	</div> <!-- /.post-lead -->
             <?php endwhile; ?>
             <?php else: ?>
-    		<p class="error">You're currently featuring 3 or fewer posts. Mark more posts as featured on the add/edit post screen to populate this region.</p>
+    		<p class="error">You're currently featuring 2 or fewer posts. Mark more posts as featured on the add/edit post screen to populate this region.</p>
 
          <?php endif; // end more featured posts ?>
 
@@ -154,16 +154,25 @@ class largo_featured_widget extends WP_Widget {
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
 		$instance['title'] = strip_tags( $new_instance['title'] );
+		$instance['num_posts'] = strip_tags( $new_instance['num_posts'] );
 		return $instance;
 	}
 
 	function form( $instance ) {
-		$defaults = array( 'title' => __('In Case You Missed It', 'largo-featured'));
+		$defaults = array( 'title' => __('In Case You Missed It', 'largo-footer-featured'));
+		$defaults = array(
+			'title' => 'In Case You Missed It',
+			'num_posts' => 2
+		);
 		$instance = wp_parse_args( (array) $instance, $defaults ); ?>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e('Title:', 'largo-featured'); ?></label>
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e('Title:', 'largo-footer-featured'); ?></label>
 			<input id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" style="width:90%;" />
+		</p>
+		<p>
+			<label for="<?php echo $this->get_field_id( 'num_posts' ); ?>"><?php _e('Number of posts to show:', 'largo-footer-featured'); ?></label>
+			<input id="<?php echo $this->get_field_id( 'num_posts' ); ?>" name="<?php echo $this->get_field_name( 'num_posts' ); ?>" value="<?php echo $instance['num_posts']; ?>" style="width:90%;" />
 		</p>
 
 	<?php
