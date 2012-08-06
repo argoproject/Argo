@@ -8,7 +8,7 @@
 	<header>
  		<h1 class="entry-title"><?php the_title(); ?></h1>
  		<div class="post-meta">
- 			<h5 class="byline"><?php largo_byline(); ?> | <span class="comments-link"><?php comments_popup_link( 'Leave a Comment', '<strong>1</strong> Comment ', ' <strong>%</strong> Comments' ); ?></span><?php edit_post_link('edit', ' | ', ''); ?></h5>
+ 			<h5 class="byline"><?php largo_byline(); ?> | <span class="comments-link"><?php comments_popup_link( 'Leave a Comment', '<strong>1</strong> Comment ', ' <strong>%</strong> Comments' ); ?></span><?php edit_post_link('Edit This Post', ' | <span class="edit-link">', '</span>'); ?></h5>
  		</div>
  		<div class="post-social">
  			<a href="#" onclick="window.print()" title="print this article" rel="nofollow">Print</a>
@@ -22,7 +22,7 @@
 
             <?php if ( largo_has_custom_taxonomy( get_the_ID() ) ): ?>
 				<div class="labels clearfix">
-            		<h4>More in this series:</h4>
+            		<h4>More In This Series:</h4>
             		<?php largo_the_post_labels( get_the_ID() ); ?>
         		</div>
         	<?php endif; ?>

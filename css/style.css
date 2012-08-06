@@ -3431,6 +3431,9 @@ p.wp-caption-text {
   text-transform: uppercase;
   color: #bd261d;
 }
+.edit-link a {
+  color: #bd261d;
+}
 .stories h2.entry-title {
   font-size: 32px;
   margin-bottom: 8px;
