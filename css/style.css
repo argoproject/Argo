@@ -3910,7 +3910,7 @@ p.comment-form-comment {
 #sidebar .widget-title,
 #sidebar .widgettitle {
   margin-bottom: 8px;
-  padding: 3px 8px;
+  padding: 5px 8px;
   border: 1px solid #ddd;
   font-size: 13.04px;
   text-transform: uppercase;
@@ -4093,6 +4093,9 @@ p.comment-form-comment {
 #site-footer ul#menu-footer-navigation li h4 {
   margin-bottom: 0;
 }
+#site-footer .largo-footer-featured {
+  margin-bottom: 12px;
+}
 #site-footer .largo-footer-featured .post-lead {
   min-height: 60px;
   margin-bottom: 8px;
@@ -4110,6 +4113,9 @@ p.comment-form-comment {
 #site-footer .largo-footer-featured p {
   font-size: 10.672px;
   margin-bottom: 0;
+}
+#site-footer .largo-about p {
+  margin-bottom: 24px;
 }
 #site-footer input,
 #site-footer select {
