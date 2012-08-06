@@ -1,21 +1,21 @@
 <?php
 
 function largo_load_widgets() {
-    register_widget( 'largo_follow_Widget' );
-    register_widget( 'largo_featured_Widget' );
-    register_widget( 'largo_about_Widget' );
+    register_widget( 'largo_follow_widget' );
+    register_widget( 'largo_featured_widget' );
+    register_widget( 'largo_about_widget' );
 }
 add_action( 'widgets_init', 'largo_load_widgets' );
 
 /*
  * Largo Follow Widget
  */
-class largo_follow_Widget extends WP_Widget {
+class largo_follow_widget extends WP_Widget {
 
 	/**
 	 * Widget setup.
 	 */
-	function largo_follow_Widget() {
+	function largo_follow_widget() {
 		/* Widget settings. */
 		$widget_ops = array(
 			'classname' => 'largo-follow',
@@ -38,25 +38,23 @@ class largo_follow_Widget extends WP_Widget {
 
 		/* Display the widget title if one was input */
 		if ( $title )
-			echo $before_title . $title . $after_title; ?>
+			echo $before_title . $title . $after_title;
 
-			<?php
-				$feed = get_feed_link();
-				if ( of_get_option( 'rss_link' ) )
-					$feed = esc_url (of_get_option( 'rss_link' ) );
-				printf('
-					<div class="subscribe">
-						<a href="%1$s"><i class="social-icons small rss"></i>Subscribe via RSS</a>
-					</div>',
-					$feed
-				);
-			?>
+			$feed = get_feed_link();
+			if ( of_get_option( 'rss_link' ) )
+				$feed = esc_url (of_get_option( 'rss_link' ) );
+			printf('
+				<div class="subscribe">
+					<a href="%1$s"><i class="social-icons small rss"></i>Subscribe via RSS</a>
+				</div>',
+				$feed
+			);
 
-			<?php if ( of_get_option( 'twitter_link' ) ) : ?>
+			if ( of_get_option( 'twitter_link' ) ) : ?>
 				<a href="<?php echo esc_url( of_get_option( 'twitter_link' ) ); ?>" class="twitter-follow-button" data-width="100%" data-align="left" data-size="large">Follow @INN</a>
-			<?php endif; ?>
+			<?php endif;
 
-			<?php if ( of_get_option( 'facebook_link' ) ) : ?>
+			if ( of_get_option( 'facebook_link' ) ) : ?>
 				<div class="fb-like" data-href="<?php echo esc_url( of_get_option( 'facebook_link' ) ); ?>" data-send="false" data-show-faces="false"></div>
 			<?php endif; ?>
 
@@ -97,12 +95,12 @@ class largo_follow_Widget extends WP_Widget {
 /*
  * Largo Featured Posts
  */
-class largo_featured_Widget extends WP_Widget {
+class largo_featured_widget extends WP_Widget {
 
 	/**
 	 * Widget setup.
 	 */
-	function largo_featured_Widget() {
+	function largo_featured_widget() {
 		/* Widget settings. */
 		$widget_ops = array(
 		'classname' => 'largo-featured',
@@ -178,12 +176,12 @@ class largo_featured_Widget extends WP_Widget {
 /*
  * About this site
  */
-class largo_about_Widget extends WP_Widget {
+class largo_about_widget extends WP_Widget {
 
 	/**
 	 * Widget setup.
 	 */
-	function largo_about_Widget() {
+	function largo_about_widget() {
 		/* Widget settings. */
 		$widget_ops = array(
 		'classname' => 'largo-about',
@@ -209,10 +207,10 @@ class largo_about_Widget extends WP_Widget {
 		if ( $title )
 			echo $before_title . $title . $after_title;?>
 
-			<?php if ( get_option( 'site_blurb' ) ) : ?>
-                <p><?php echo get_option( 'site_blurb' ); ?></p>
+			<?php if ( of_get_option( 'site_blurb' ) ) : ?>
+                <p><?php echo of_get_option( 'site_blurb' ); ?></p>
 			<?php else: ?>
-    			<p class="error"><strong>You have not set a description for your site.</strong> Add a site description by visiting the Largo Theme Options page, or add a different widget to this region.</p>
+    			<p class="error"><strong>You have not set a description for your site.</strong> Add a site description by visiting the Largo Theme Options page.</p>
         	<?php endif; // end about site ?>
 
 		<?php
