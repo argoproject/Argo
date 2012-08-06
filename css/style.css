@@ -1207,18 +1207,18 @@ legend + .control-group {
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
 .btn-primary {
-  background-color: #2266bb;
-  background-image: -moz-linear-gradient(top, #2275bb, #224fbb);
-  background-image: -ms-linear-gradient(top, #2275bb, #224fbb);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#2275bb), to(#224fbb));
-  background-image: -webkit-linear-gradient(top, #2275bb, #224fbb);
-  background-image: -o-linear-gradient(top, #2275bb, #224fbb);
-  background-image: linear-gradient(top, #2275bb, #224fbb);
+  background-color: #46a550;
+  background-image: -moz-linear-gradient(top, #46a546, #46a55e);
+  background-image: -ms-linear-gradient(top, #46a546, #46a55e);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#46a546), to(#46a55e));
+  background-image: -webkit-linear-gradient(top, #46a546, #46a55e);
+  background-image: -o-linear-gradient(top, #46a546, #46a55e);
+  background-image: linear-gradient(top, #46a546, #46a55e);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2275bb', endColorstr='#224fbb', GradientType=0);
-  border-color: #224fbb #224fbb #16337a;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#46a546', endColorstr='#46a55e', GradientType=0);
+  border-color: #46a55e #46a55e #2f6f3f;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  *background-color: #224fbb;
+  *background-color: #46a55e;
   /* Darken IE7 buttons by default so they stand out more given they won't have borders */
 
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
@@ -1228,12 +1228,12 @@ legend + .control-group {
 .btn-primary.active,
 .btn-primary.disabled,
 .btn-primary[disabled] {
-  background-color: #224fbb;
-  *background-color: #1e46a5;
+  background-color: #46a55e;
+  *background-color: #3e9354;
 }
 .btn-primary:active,
 .btn-primary.active {
-  background-color: #1a3d90 \9;
+  background-color: #378149 \9;
 }
 .btn-warning {
   background-color: #faa732;
@@ -4016,6 +4016,9 @@ p.comment-form-comment {
 }
 .largo-about p {
   margin-bottom: 0;
+}
+.largo-donate p {
+  margin-bottom: 8px;
 }
 .argo-more-featured h5 {
   font-size: 16px;
