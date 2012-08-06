@@ -3378,14 +3378,15 @@ p.wp-caption-text {
   color: #bd261d;
 }
 .stories h2.entry-title {
-  font-size: 36px;
+  font-size: 32px;
   margin-bottom: 8px;
+  line-height: 1.1;
 }
 .stories .byline {
   margin-bottom: 12px;
 }
 .stories .entry-content p {
-  font-size: 18px;
+  font-size: 16px;
   margin-bottom: 12px;
 }
 .stories .bottom-meta h5 {
@@ -3500,7 +3501,8 @@ p.wp-caption-text {
 }
 .sticky-main-feature h2 {
   font-size: 29.328px;
-  margin-bottom: 0;
+  margin-bottom: 4px;
+  line-height: 1;
 }
 .sticky-main-feature h2 a {
   color: #ffffff;
