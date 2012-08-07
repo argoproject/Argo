@@ -146,7 +146,7 @@
 							'depth'		 => 0,
 							'container'	 => false,
 							'items_wrap' => '%3$s',
-							'menu_class'	 => 'nav',
+							'menu_class' => 'nav',
 							'walker'	 => new Bootstrap_Walker_Nav_Menu()
 						);
 
