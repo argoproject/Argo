@@ -81,7 +81,6 @@
 	text-transform:uppercase;
   }
 }
-
 #site-header {
 	margin:0;
 	width:auto;
@@ -89,6 +88,26 @@
       clear:none;
       margin-top:-13px;
       margin-bottom:5px;
+	}
+
+}
+#site-header h1.branding,
+#site-header h2.branding {
+	clear:both;
+	margin:0 0 20px;
+	font-size: @baseFontSize * 3.375;
+	line-height:1;
+	a {
+	  color: @textColor;
+	  &:hover {
+	    text-decoration:none;
+	  }
+	}
+	span {
+	  font-size: @baseFontSize * 1.5;
+	  font-weight:normal;
+	  color: @gray;
+	  padding-left:10px;
 	}
 }
 .print-header {

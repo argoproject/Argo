@@ -8,13 +8,14 @@
 	  padding-left:20px;
 	  padding-right:20px;
 	}
-	#site-header img {
-		position:relative;
-		top:-13px;
+	#site-header h1.branding,
+	#site-header h2.branding {
+		font-size: @baseFontSize * 2.75;
+		span {
+		  font-size: @baseFontSize * 1.222;
+		}
 	}
-	#main-nav {
-		margin-top:-13px;
-	}
+	#site-header
 	.sticky-related ul,
 	.sticky-main-feature {
 		clear:both;

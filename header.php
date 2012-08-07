@@ -96,15 +96,26 @@
 <div id="page" class="hfeed clearfix">
 
 	<header id="site-header" class="clearfix">
-		<?php if(is_home()) { ?>
-    		<h1 class="visuallyhidden"><?php bloginfo('name'); ?> - <?php bloginfo('description'); ?></h1>
-    	<?php } else { ?>
-    		<h2 class="visuallyhidden"><?php bloginfo('name'); ?></h2>
-    	<?php } ?>
-
-		<img class="visible-desktop" src="<?php echo of_get_option( 'banner_image_lg' ); ?>" alt="branding" />
-		<img class="visible-tablet" src="<?php echo of_get_option( 'banner_image_med' ); ?>" alt="branding" />
-		<img class="visible-phone" src="<?php echo of_get_option( 'banner_image_sm' ); ?>" alt="branding" />
+		<?php
+			$header_tag = is_home() ? 'h1' : 'h2';
+			$header_class = of_get_option( 'no_header_image' ) ? 'branding' : 'visuallyhidden';
+			$divider = $header_class == 'branding' ? '' : ' - ';
+    		printf('<%1$s class="%2$s"><a href="%3$s">%4$s%5$s<span class="tagline">%6$s</span></a></%1$s>',
+	    		$header_tag,
+	    		$header_class,
+	    		esc_url( home_url( '/' ) ),
+	    		esc_attr( get_bloginfo('name') ),
+	    		$divider,
+	    		esc_attr( get_bloginfo('description') )
+	    	);
+	    	if ($header_class != 'branding') :
+    	?>
+			<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
+				<img class="visible-desktop" src="<?php echo of_get_option( 'banner_image_lg' ); ?>" alt="" />
+				<img class="visible-tablet" src="<?php echo of_get_option( 'banner_image_med' ); ?>" alt="" />
+				<img class="visible-phone" src="<?php echo of_get_option( 'banner_image_sm' ); ?>" alt="" />
+			</a>
+		<?php endif; ?>
 	</header>
 
 	<header class="print-header">

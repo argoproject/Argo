@@ -2373,6 +2373,28 @@ table .span24 {
   margin-top: -13px;
   margin-bottom: 5px;
 }
+#site-header h1.branding,
+#site-header h2.branding {
+  clear: both;
+  margin: 0 0 20px;
+  font-size: 54px;
+  line-height: 1;
+}
+#site-header h1.branding a,
+#site-header h2.branding a {
+  color: #333333;
+}
+#site-header h1.branding a:hover,
+#site-header h2.branding a:hover {
+  text-decoration: none;
+}
+#site-header h1.branding span,
+#site-header h2.branding span {
+  font-size: 24px;
+  font-weight: normal;
+  color: #555555;
+  padding-left: 10px;
+}
 .print-header {
   display: none;
 }
@@ -4294,14 +4316,15 @@ img[class*="wp-image-"] {
     padding-left: 20px;
     padding-right: 20px;
   }
-  #site-header img {
-    position: relative;
-    top: -13px;
+  #site-header h1.branding,
+  #site-header h2.branding {
+    font-size: 44px;
   }
-  #main-nav {
-    margin-top: -13px;
+  #site-header h1.branding span,
+  #site-header h2.branding span {
+    font-size: 19.552px;
   }
-  .sticky-related ul,
+  #site-header.sticky-related ul,
   .sticky-main-feature {
     clear: both;
     width: 96%;
@@ -4351,6 +4374,18 @@ img[class*="wp-image-"] {
   }
   .global-nav .nav-right .org-logo {
     float: right;
+  }
+  #site-header h1.branding,
+  #site-header h2.branding {
+    font-size: 54px;
+  }
+  #site-header h1.branding span,
+  #site-header h2.branding span {
+    display: block;
+    clear: both;
+    margin: 6px 0 4px;
+    padding: 0;
+    font-size: 19.552px;
   }
   h1.entry-title {
     font-size: 32px;
@@ -4426,6 +4461,16 @@ img[class*="wp-image-"] {
   }
   #site-header img {
     margin-top: 5px;
+  }
+  #site-header h1.branding,
+  #site-header h2.branding {
+    margin-top: 10px;
+    font-size: 48px;
+    text-align: center;
+  }
+  #site-header h1.branding span,
+  #site-header h2.branding span {
+    font-size: 16px;
   }
 }
 @media print {
