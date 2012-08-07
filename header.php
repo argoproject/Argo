@@ -35,8 +35,6 @@
 <link rel="profile" href="http://gmpg.org/xfn/11" />
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 
-<?php $current_url = (!empty($_SERVER['HTTPS'])) ? "https://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'] : "http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']; ?>
-
 <?php
 	wp_enqueue_style( 'largo-stylesheet', get_bloginfo( 'stylesheet_url' ) );
 	wp_enqueue_script( 'largo-modernizr', get_template_directory_uri() . '/js/modernizr.custom.55609.js' );
