@@ -345,6 +345,12 @@ add_action( 'wp_footer', 'largo_footer_js' );
 		  })();
 		</script>
 
+		<?php if (is_single()) : ?>
+		<!--Share This-->
+		<script type="text/javascript">var switchTo5x=false;</script>
+		<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+		<script type="text/javascript">stLight.options({publisher: "ur-d146f7d5-e64d-ca0d-8676-596162de75fa"}); </script>
+		<?php endif; ?>
 
 	<?php }
 
