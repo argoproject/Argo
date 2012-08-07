@@ -100,6 +100,7 @@
 			$header_tag = is_home() ? 'h1' : 'h2';
 			$header_class = of_get_option( 'no_header_image' ) ? 'branding' : 'visuallyhidden';
 			$divider = $header_class == 'branding' ? '' : ' - ';
+    		//print the text-only version of the site title
     		printf('<%1$s class="%2$s"><a href="%3$s">%4$s%5$s<span class="tagline">%6$s</span></a></%1$s>',
 	    		$header_tag,
 	    		$header_class,
@@ -109,6 +110,7 @@
 	    		esc_attr( get_bloginfo('description') )
 	    	);
 	    	if ($header_class != 'branding') :
+	    	//show the banner images, TO DO: Make this less ugly, conditionally load images
     	?>
 			<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
 				<img class="visible-desktop" src="<?php echo of_get_option( 'banner_image_lg' ); ?>" alt="" />
