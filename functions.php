@@ -82,15 +82,6 @@ function largo_setup() {
 }
 endif; // largo_setup
 
-// print the copyright message in the footer
-
-function largo_copyright_message() {
-    $msg = of_get_option( 'copyright_msg' );
-    if ( ! $msg )
-    	$msg = 'Copyright %s';
-    printf( $msg, date( 'Y' ) );
-}
-
 /**
  * Sets the post excerpt length to 35 words.
  *
@@ -276,6 +267,15 @@ function largo_comment( $comment, $args, $depth ) {
 	endswitch;
 }
 endif; // ends check for largo_comment()
+
+// print the copyright message in the footer
+
+function largo_copyright_message() {
+    $msg = of_get_option( 'copyright_msg' );
+    if ( ! $msg )
+    	$msg = 'Copyright %s';
+    printf( $msg, date( 'Y' ) );
+}
 
  /**
  * Enqueue JS for the footer
