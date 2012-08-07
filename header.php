@@ -96,42 +96,15 @@
 <div id="page" class="hfeed clearfix">
 
 	<header id="site-header" class="clearfix">
+		<?php if(is_home()) { ?>
+    		<h1 class="visuallyhidden"><?php bloginfo('name'); ?> - <?php bloginfo('description'); ?></h1>
+    	<?php } else { ?>
+    		<h2 class="visuallyhidden"><?php bloginfo('name'); ?></h2>
+    	<?php } ?>
 
-				<?php
-					$header_image = get_header_image();
-					// Has the text been hidden?
-					if ( 'blank' == get_header_textcolor() || '' == get_header_textcolor()):
-						$style = ' style="display:none;"';
-				?>
-					<div id="branding" class="brand-image image-only">
-				<?php
-					// Has the header image been hidden?
-					elseif ( ! $header_image ) :
-				?>
-					<div id="branding">
-				<?php
-					else :
-					$style = ' style="color:#' . get_theme_mod( 'header_textcolor', HEADER_TEXTCOLOR ) . ';"';
-				?>
-					<div id="branding" class="brand-image">
-
-				<?php endif; ?>
-
-				<?php $heading_tag = ( is_home() || is_front_page() ) ? 'h1' : 'h2'; ?>
-
-			    <<?php echo $heading_tag; ?> id="site-title" <?php echo $style; ?>>
-	        	<a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo('name'); ?></a></<?php echo $heading_tag; ?>>
-	    		<h2 id="site-description" <?php echo $style; ?>><?php bloginfo('description'); ?></h2>
-
-				<?php
-					// Check to see if the header image should be displayed
-					if ( $header_image ) :
-				?>
-					<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
-						<img src="<?php header_image(); ?>" height="<?php echo HEADER_IMAGE_HEIGHT; ?>" alt="<?php esc_attr( get_bloginfo( 'name', 'display' ) ); ?>">
-					</a>
-				<?php endif; ?>
-
+		<img class="visible-desktop" src="<?php echo of_get_option( 'banner_image_lg' ); ?>" alt="branding" />
+		<img class="visible-tablet" src="<?php echo of_get_option( 'banner_image_med' ); ?>" alt="branding" />
+		<img class="visible-phone" src="<?php echo of_get_option( 'banner_image_sm' ); ?>" alt="branding" />
 	</header>
 
 	<header class="print-header">
