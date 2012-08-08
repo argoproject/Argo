@@ -284,44 +284,15 @@ function largo_enqueue_js() {
 
 	wp_enqueue_script( 'text_placeholder', get_bloginfo('template_url') . '/js/jquery.textPlaceholder.js', array( 'jquery' ), '1.0', true );
 	wp_enqueue_script( 'bootstrap', get_bloginfo('template_url') . '/js/bootstrap.min.js', array( 'jquery' ), '1.0', true );
+	wp_enqueue_script( 'largoCore', get_bloginfo('template_url') . '/js/largoCore.js', array( 'jquery' ), '1.0', true );
 
 	if ( get_option( 'show_related_content', true ) )
 		wp_enqueue_script( 'idTabs', get_bloginfo('template_url') . '/js/jquery.idTabs.js', array( 'jquery' ), '1.0', true );
 }
-add_action('wp_enqueue_scripts', 'largo_enqueue_js' );
+add_action( 'wp_enqueue_scripts', 'largo_enqueue_js' );
 
 add_action( 'wp_footer', 'largo_footer_js' );
 	function largo_footer_js() { ?>
-
-		<script type="text/javascript">
-			jQuery(document).ready(function($) {
-				//html5 placeholders
-				$("input[placeholder]").textPlaceholder();
-
-			    // dim sidebar
-			    $(window).scroll(function(){
-					if (($(window).scrollTop() > 300)) {
-						$('.showey-hidey').animate({opacity: '0.5'}, 100);
-					} else if (($(window).scrollTop() < 300)) {
-						$('.showey-hidey').animate({opacity: '1'}, 100);
-					}
-				});
-				$('.showey-hidey').hover(function() {
-			       		$(this).animate({opacity: '1'}, 100);
-			        }, function() {
-			        	if (($(window).scrollTop() < 300)) {
-			        		$(this).animate({opacity: '1'}, 100);
-			        	} else {
-			        		$(this).animate({opacity: '0.5'}, 100);
-			        	};
-			    });
-			});
-
-		</script>
-
-		<!--
-		Social Media API Calls
-		-->
 
 		<!--Facebook-->
 		<div id="fb-root"></div>
@@ -346,10 +317,10 @@ add_action( 'wp_footer', 'largo_footer_js' );
 		</script>
 
 		<?php if (is_single()) : ?>
-		<!--Share This-->
-		<script type="text/javascript">var switchTo5x=false;</script>
-		<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
-		<script type="text/javascript">stLight.options({publisher: "ur-d146f7d5-e64d-ca0d-8676-596162de75fa"}); </script>
+			<!--Share This-->
+			<script type="text/javascript">var switchTo5x=false;</script>
+			<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+			<script type="text/javascript">stLight.options({publisher: "ur-d146f7d5-e64d-ca0d-8676-596162de75fa"}); </script>
 		<?php endif; ?>
 
 	<?php }
