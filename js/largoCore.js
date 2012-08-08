@@ -22,4 +22,5 @@ jQuery(document).ready(function($) {
 			    $(this).animate({opacity: '0.5'}, 100);
 			};
 	});
+
 });
