@@ -23,4 +23,10 @@ jQuery(document).ready(function($) {
 			};
 	});
 
+	$('.header_img').attr('src', banner_img_src);
+
+	$(window).resize(function() {
+		$('.header_img').attr('src', whichHeader());
+	});
+
 });

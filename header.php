@@ -52,9 +52,25 @@
 	 */
 	wp_head();
 ?>
+<script>
+	function whichHeader() {
+		var screenWidth = document.documentElement.clientWidth,
+		header_img;
+		if (screenWidth <= 767) {
+			header_img = '<?php echo of_get_option( 'banner_image_sm' ); ?>';
+		} else if (screenWidth > 767 && screenWidth <= 979) {
+			header_img = '<?php echo of_get_option( 'banner_image_med' ); ?>';
+		} else {
+			header_img = '<?php echo of_get_option( 'banner_image_lg' ); ?>';
+		};
+		return header_img;
+	};
+	var banner_img_src = whichHeader();
+</script>
 </head>
 
 <body <?php body_class(); ?>>
+<?php echo $header_img; ?>
 <div id="top"></div>
 <div class="global-nav-bg">
 	<div class="global-nav">
@@ -110,9 +126,7 @@
 	    	//show the banner images, TO DO: Make this less ugly, conditionally load images
     	?>
 			<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
-				<img class="visible-desktop" src="<?php echo of_get_option( 'banner_image_lg' ); ?>" alt="" />
-				<img class="visible-tablet" src="<?php echo of_get_option( 'banner_image_med' ); ?>" alt="" />
-				<img class="visible-phone" src="<?php echo of_get_option( 'banner_image_sm' ); ?>" alt="" />
+				<img class="header_img" src="" alt="" />
 			</a>
 		<?php endif; ?>
 	</header>
