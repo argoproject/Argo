@@ -52,21 +52,6 @@
 	 */
 	wp_head();
 ?>
-<script>
-	function whichHeader() {
-		var screenWidth = document.documentElement.clientWidth,
-		header_img;
-		if (screenWidth <= 767) {
-			header_img = '<?php echo of_get_option( 'banner_image_sm' ); ?>';
-		} else if (screenWidth > 767 && screenWidth <= 979) {
-			header_img = '<?php echo of_get_option( 'banner_image_med' ); ?>';
-		} else {
-			header_img = '<?php echo of_get_option( 'banner_image_lg' ); ?>';
-		};
-		return header_img;
-	};
-	var banner_img_src = whichHeader();
-</script>
 </head>
 
 <body <?php body_class(); ?>>

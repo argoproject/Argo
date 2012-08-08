@@ -291,44 +291,60 @@ function largo_enqueue_js() {
 }
 add_action( 'wp_enqueue_scripts', 'largo_enqueue_js' );
 
+function largo_header_js() {
+	//decides which size of the banner image to load based on the window width ?>
+	<script>
+		function whichHeader() {
+			var screenWidth = document.documentElement.clientWidth,
+			header_img;
+			if (screenWidth <= 767) {
+				header_img = '<?php echo of_get_option( 'banner_image_sm' ); ?>';
+			} else if (screenWidth > 767 && screenWidth <= 979) {
+				header_img = '<?php echo of_get_option( 'banner_image_med' ); ?>';
+			} else {
+				header_img = '<?php echo of_get_option( 'banner_image_lg' ); ?>';
+			};
+			return header_img;
+		};
+		var banner_img_src = whichHeader();
+	</script>
+<?php
+}
+add_action( 'wp_head', 'largo_header_js' );
+
+function largo_footer_js() { ?>
+	<!--Facebook-->
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
+
+	<!--Twitter-->
+	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="http://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+	<!--Google Plus-->
+	<script type="text/javascript">
+	  (function() {
+	    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+		po.src = 'https://apis.google.com/js/plusone.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+	  })();
+	  </script>
+
+	<?php if (is_single()) : ?>
+		<!--Share This-->
+		<script type="text/javascript">var switchTo5x=false;</script>
+		<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+		<script type="text/javascript">stLight.options({publisher: "ur-d146f7d5-e64d-ca0d-8676-596162de75fa"}); </script>
+	<?php endif;
+}
 add_action( 'wp_footer', 'largo_footer_js' );
-	function largo_footer_js() { ?>
-
-		<!--Facebook-->
-		<div id="fb-root"></div>
-		<script>(function(d, s, id) {
-		  var js, fjs = d.getElementsByTagName(s)[0];
-		  if (d.getElementById(id)) return;
-		  js = d.createElement(s); js.id = id;
-		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-		  fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));</script>
-
-		<!--Twitter-->
-		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="http://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-
-		<!--Google Plus-->
-		<script type="text/javascript">
-		  (function() {
-		    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-		    po.src = 'https://apis.google.com/js/plusone.js';
-		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-		  })();
-		</script>
-
-		<?php if (is_single()) : ?>
-			<!--Share This-->
-			<script type="text/javascript">var switchTo5x=false;</script>
-			<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
-			<script type="text/javascript">stLight.options({publisher: "ur-d146f7d5-e64d-ca0d-8676-596162de75fa"}); </script>
-		<?php endif; ?>
-
-	<?php }
-
-add_action( 'wp_footer', 'largo_google_analytics' );
 
 // add Google Analytics code to the footer, you need to add your GA ID to the theme settings for this to work
-
 function largo_google_analytics() {
 
 	if ( get_option( 'ga_id', true ) // make sure the ga_id setting is defined
@@ -347,3 +363,4 @@ function largo_google_analytics() {
 	</script>
 	<?php endif;
 }
+add_action( 'wp_footer', 'largo_google_analytics' );
