@@ -14,76 +14,79 @@ get_header(); ?>
 			<div id="content" class="stories span8" role="main">
 
 			<?php global $ids; ?>
-			<div id="homepage-featured" class="row-fluid clearfix">
 
-				<div class="top-story span8">
-					<?php $topstory = largo_get_featured_posts( array(
-						'tax_query' => array(
-							array(
-								'taxonomy' => 'prominence',
-								'field' => 'slug',
-								'terms' => 'top-story'
-							)
-						),
-						'showposts' => 1
-						) );
-		          	if ( $topstory->have_posts() ) : ?>
-		             	 <?php while ( $topstory->have_posts() ) : $topstory->the_post(); $ids[] = get_the_ID(); ?>
-		                 	<?php the_post_thumbnail( 'medium' ); ?>
-		                    <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-		                    <h5 class="byline"><?php largo_byline(); ?><?php edit_post_link('Edit This Post', ' | <span class="edit-link">', '</span>'); ?></h5>
-		                    <?php the_excerpt(); ?>
+			<?php if (of_get_option('homepage_layout') == 'newsy') { ?>
+				<div id="homepage-featured" class="row-fluid clearfix">
 
-		                    <?php if ( largo_post_in_series() ):
-								$feature = largo_get_the_main_feature();
-								$feature_posts = largo_get_recent_posts_for_term( $feature, 1, 1 );
-								if ( $feature_posts ):
-							?>
-								<?php foreach ( $feature_posts as $feature_post ): ?>
-										<h4 class="related-story">RELATED: <a href="<?php echo esc_url( get_permalink( $feature_post->ID ) ); ?>"><?php echo get_the_title( $feature_post->ID ); ?></a></h4>
-								<?php endforeach;
+					<div class="top-story span8">
+						<?php $topstory = largo_get_featured_posts( array(
+							'tax_query' => array(
+								array(
+									'taxonomy' => 'prominence',
+									'field' => 'slug',
+									'terms' => 'top-story'
+								)
+							),
+							'showposts' => 1
+							) );
+			          	if ( $topstory->have_posts() ) : ?>
+			             	 <?php while ( $topstory->have_posts() ) : $topstory->the_post(); $ids[] = get_the_ID(); ?>
+			                 	<?php the_post_thumbnail( 'medium' ); ?>
+			                    <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+			                    <h5 class="byline"><?php largo_byline(); ?><?php edit_post_link('Edit This Post', ' | <span class="edit-link">', '</span>'); ?></h5>
+			                    <?php the_excerpt(); ?>
+
+			                    <?php if ( largo_post_in_series() ):
+									$feature = largo_get_the_main_feature();
+									$feature_posts = largo_get_recent_posts_for_term( $feature, 1, 1 );
+									if ( $feature_posts ):
+								?>
+									<?php foreach ( $feature_posts as $feature_post ): ?>
+											<h4 class="related-story">RELATED: <a href="<?php echo esc_url( get_permalink( $feature_post->ID ) ); ?>"><?php echo get_the_title( $feature_post->ID ); ?></a></h4>
+									<?php endforeach;
+									endif;
 								endif;
-							endif;
-		                endwhile;
-		            endif; // end more featured posts ?>
+			                endwhile;
+			            endif; // end more featured posts ?>
+					</div>
+					<div class="sub-stories span4">
+						<?php $substories = largo_get_featured_posts( array(
+							'tax_query' => array(
+								array(
+									'taxonomy' => 'prominence',
+									'field' => 'slug',
+									'terms' => 'homepage-featured'
+								)
+							),
+							'showposts'		=> 6,
+							'post__not_in' 	=> $ids
+							) );
+			          	if ( $substories->have_posts() ) : ?>
+			             	 <?php $count = 1; ?>
+			             	 <?php while ( $substories->have_posts() ) : $substories->the_post(); $ids[] = get_the_ID(); ?>
+
+			                      	<?php if ($count <= 3) : ?>
+			                      		<div class="story">
+			                      			<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+			                      			<?php the_excerpt(); ?>
+			                      		</div>
+			                      	<?php elseif ($count == 4) : ?>
+			                      		<h4 class="subhead">More Headlines</h4>
+			                      		<h5><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
+			                      	<?php else : ?>
+			                      		<h5><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
+			                      	<?php endif; ?>
+
+			                  	<?php $count++; ?>
+				            <?php endwhile; ?>
+				    	<?php endif; // end more featured posts ?>
+					</div>
 				</div>
-				<div class="sub-stories span4">
-					<?php $substories = largo_get_featured_posts( array(
-						'tax_query' => array(
-							array(
-								'taxonomy' => 'prominence',
-								'field' => 'slug',
-								'terms' => 'homepage-featured'
-							)
-						),
-						'showposts'		=> 6,
-						'post__not_in' 	=> $ids
-						) );
-		          	if ( $substories->have_posts() ) : ?>
-		             	 <?php $count = 1; ?>
-		             	 <?php while ( $substories->have_posts() ) : $substories->the_post(); $ids[] = get_the_ID(); ?>
-
-		                      	<?php if ($count <= 3) : ?>
-		                      		<div class="story">
-		                      			<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-		                      			<?php the_excerpt(); ?>
-		                      		</div>
-		                      	<?php elseif ($count == 4) : ?>
-		                      		<h4 class="subhead">More Headlines</h4>
-		                      		<h5><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
-		                      	<?php else : ?>
-		                      		<h5><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
-		                      	<?php endif; ?>
-
-		                  	<?php $count++; ?>
-			            <?php endwhile; ?>
-			    	<?php endif; // end more featured posts ?>
+			<?php } else if (of_get_option('homepage_layout') == 'slider') { ?>
+				<div id="homepage-slider" class="clearfix">
+					SLIDER!
 				</div>
-			</div>
-
-			<div id="homepage-slider" class="clearfix">
-
-			</div>
+			<?php } ?>
 
 			<?php if ( have_posts() ) {
 				while ( have_posts() ) : the_post();
