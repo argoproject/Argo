@@ -2187,7 +2187,7 @@ table .span24 {
   padding-bottom: 24px;
 }
 #main {
-  margin-top: 24px;
+  margin-top: 12px;
 }
 /****************** LEFT NAV ******************/
 .row-fluid {
@@ -4447,9 +4447,6 @@ img[class*="wp-image-"] {
   .stories h2.entry-title,
   .sticky-main-feature h2 {
     font-size: 24px;
-  }
-  #main {
-    margin-top: 10px;
   }
   #homepage-featured .top-story,
   #homepage-featured .sub-stories {
