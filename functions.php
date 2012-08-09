@@ -281,13 +281,13 @@ function largo_copyright_message() {
  * Enqueue JS for the footer
  */
 function largo_enqueue_js() {
-
 	wp_enqueue_script( 'text_placeholder', get_bloginfo('template_url') . '/js/jquery.textPlaceholder.js', array( 'jquery' ), '1.0', true );
-	wp_enqueue_script( 'bootstrap', get_bloginfo('template_url') . '/js/bootstrap.min.js', array( 'jquery' ), '1.0', true );
-	wp_enqueue_script( 'largoCore', get_bloginfo('template_url') . '/js/largoCore.js', array( 'jquery' ), '1.0', true );
-
 	if ( get_option( 'show_related_content', true ) )
 		wp_enqueue_script( 'idTabs', get_bloginfo('template_url') . '/js/jquery.idTabs.js', array( 'jquery' ), '1.0', true );
+	wp_enqueue_script( 'bootstrap', get_bloginfo('template_url') . '/js/bootstrap.min.js', array( 'jquery' ), '1.0', true );
+	wp_enqueue_script( 'largoCore', get_bloginfo('template_url') . '/js/largoCore.js', array( 'jquery' ), '1.0', true );
+	if ( is_single() )
+		wp_enqueue_script( 'sharethis', get_bloginfo('template_url') . '/js/st_buttons.js', array( 'jquery' ), '1.0', true );
 }
 add_action( 'wp_enqueue_scripts', 'largo_enqueue_js' );
 
@@ -333,16 +333,10 @@ function largo_footer_js() { ?>
 		po.src = 'https://apis.google.com/js/plusone.js';
 		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
 	  })();
-	  </script>
-
-	<?php if (is_single()) : ?>
-		<!--Share This-->
-		<script type="text/javascript">var switchTo5x=false;</script>
-		<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
-		<script type="text/javascript">stLight.options({publisher: "ur-d146f7d5-e64d-ca0d-8676-596162de75fa"}); </script>
-	<?php endif;
+	</script>
+<?php
 }
-add_action( 'wp_footer', 'largo_footer_js' );
+add_action( 'wp_enqueue_scripts', 'largo_footer_js' );
 
 // add Google Analytics code to the footer, you need to add your GA ID to the theme settings for this to work
 function largo_google_analytics() {
