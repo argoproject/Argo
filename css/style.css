@@ -3498,7 +3498,7 @@ p.wp-caption-text {
 .sticky-main-feature .image-wrap {
   float: left;
   margin: 15px 15px 0 15px;
-  height: 145px;
+  min-height: 150px;
 }
 .sticky-main-feature .image-wrap h4 {
   background-color: #000000;
