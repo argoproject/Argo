@@ -140,6 +140,11 @@ function my_theme_register_required_plugins() {
 			'required' 	=> false,
 		),
 
+		array(
+			'name' 		=> 'WP Google Ad Manager Plugin',
+			'slug' 		=> 'wp-google-ad-manager-plugin',
+			'required' 	=> false,
+		)
 	);
 
 	// Change this to your theme text domain, used for internationalising strings
