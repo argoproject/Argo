@@ -3459,10 +3459,11 @@ p.wp-caption-text {
   padding: 10px 0 20px 10px;
 }
 #homepage-featured .top-story img {
-  margin-bottom: 6px;
+  margin-bottom: 12px;
 }
 #homepage-featured .top-story h2 {
-  margin-bottom: 3px;
+  font-size: 32px;
+  margin-bottom: 12px;
   line-height: 1.1;
 }
 #homepage-featured .top-story p {
@@ -3484,9 +3485,9 @@ p.wp-caption-text {
   margin-bottom: 12px;
 }
 #homepage-featured .sub-stories h3 {
-  font-size: 19.552px;
-  margin-bottom: 3px;
-  line-height: 1.1;
+  font-size: 16px;
+  margin-bottom: 6px;
+  line-height: 1.2;
 }
 #homepage-featured .sub-stories p {
   font-size: 10.672px;
