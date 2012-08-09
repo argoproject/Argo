@@ -2984,6 +2984,62 @@ article.story {
 article.story {
   padding-bottom: 12px;
 }
+.byline {
+  font-weight: normal;
+  font-size: 13.04px;
+  margin-bottom: 12px;
+}
+.byline .author {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.byline a {
+  color: #333333;
+}
+.byline .time-ago,
+.byline .edit-link a {
+  text-transform: uppercase;
+  color: #bd261d;
+}
+.post-social {
+  border-top: 1px solid #eeeeee;
+  border-bottom: 1px solid #eeeeee;
+  min-height: 28px;
+  height: auto;
+  padding: 2px 0;
+  margin-bottom: 24px;
+}
+.post-social .right,
+.post-social .left {
+  margin: 0;
+  height: auto;
+}
+.post-social span.twitter {
+  position: relative;
+  top: 4px;
+  margin-right: 4px;
+}
+.post-social span.st_sharethis,
+.post-social span.st_email {
+  position: relative;
+  top: 1px;
+}
+.post-social span.print {
+  font-family: Verdana, Helvetica, sans-serif;
+  font-size: 11px;
+  position: relative;
+  top: 2px;
+}
+.post-social span.print:hover {
+  opacity: 0.85;
+  filter: alpha(opacity=85);
+}
+.post-social span.print a {
+  color: black;
+}
+.post-social span.print a:hover {
+  text-decoration: none;
+}
 .labels,
 .tags,
 .pager,
@@ -3388,64 +3444,6 @@ p.wp-caption-text {
   border-bottom: 1px dotted #999999;
   margin-bottom: 12px;
 }
-.byline {
-  font-weight: normal;
-  font-size: 13.04px;
-  margin-bottom: 12px;
-}
-.byline .author {
-  text-transform: uppercase;
-  font-weight: bold;
-}
-.byline a {
-  color: #333333;
-}
-.time-ago {
-  text-transform: uppercase;
-  color: #bd261d;
-}
-.edit-link a {
-  color: #bd261d;
-}
-.post-social {
-  border-top: 1px solid #eeeeee;
-  border-bottom: 1px solid #eeeeee;
-  min-height: 28px;
-  height: auto;
-  padding: 2px 0;
-  margin-bottom: 24px;
-}
-.post-social .right,
-.post-social .left {
-  margin: 0;
-  height: auto;
-}
-.post-social span.twitter {
-  position: relative;
-  top: 4px;
-  margin-right: 4px;
-}
-.post-social span.st_sharethis,
-.post-social span.st_email {
-  position: relative;
-  top: 1px;
-}
-.post-social span.print {
-  font-family: Verdana, Helvetica, sans-serif;
-  font-size: 11px;
-  position: relative;
-  top: 2px;
-}
-.post-social span.print:hover {
-  opacity: 0.85;
-  filter: alpha(opacity=85);
-}
-.post-social span.print a {
-  color: black;
-}
-.post-social span.print a:hover {
-  text-decoration: none;
-}
 .stories h2.entry-title {
   font-size: 32px;
   margin-bottom: 8px;
@@ -3461,6 +3459,10 @@ p.wp-caption-text {
   font-weight: normal;
   line-height: 1.5;
   margin-bottom: 0;
+}
+.stories article.sticky {
+  border-bottom: none;
+  margin-bottom: 24px;
 }
 .sticky-related,
 .sticky-solo {
@@ -3490,10 +3492,6 @@ p.wp-caption-text {
   opacity: 0.9;
   filter: alpha(opacity=90);
   text-decoration: none;
-}
-.stories article.sticky {
-  border-bottom: none;
-  margin-bottom: 24px;
 }
 .sticky-main-feature .image-wrap {
   float: left;
