@@ -5,22 +5,24 @@
  * @package WordPress
  */
 ?>
-
 	<?php if ( is_sticky() && ! is_paged() ):  ?>
-		<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix sticky'); ?>>
+		<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix sticky '); ?>>
 		<?php if ( largo_post_in_series() ):
 			$feature = largo_get_the_main_feature();
 			$feature_posts = largo_get_recent_posts_for_term( $feature, 3, 1 );
 			if ( $feature_posts ):
 		?>
-			<div class="sticky-related clearfix">
+			<div class="sticky-related row-fluid clearfix">
+				<div class="sticky-main-feature span8">
 		<?php else: // feature_posts ?>
-			<div class="sticky-solo clearfix">
+			<div class="sticky-solo row-fluid clearfix">
+				<div class="sticky-main-feature span12">
 		<?php endif; // feature_posts
 		else: // largo_post_has_features ?>
-			<div class="sticky-solo clearfix">
+			<div class="sticky-solo row-fluid clearfix">
+				<div class="sticky-main-feature span12">
 		<?php endif; // largo_post_has_features(); ?>
-				<div class="sticky-main-feature">
+
 
 					<?php if ( has_post_thumbnail() ): ?>
 						<div class="image-wrap">
@@ -34,15 +36,17 @@
 						<?php the_excerpt(); ?>
 				</div>
 				<?php if ( $feature_posts ): ?>
-				<ul>
-					<li><h4>More from<br /><span class="series-name"><?php echo $feature->name; ?></span></h4></li>
-					<?php foreach ( $feature_posts as $feature_post ): ?>
-						<li><a href="<?php echo esc_url( get_permalink( $feature_post->ID ) ); ?>"><?php echo get_the_title( $feature_post->ID ); ?></a></li>
-					<?php endforeach; ?>
-					<?php if ( count( $feature_posts ) == 3 ): ?>
-						<li class="sticky-all"><a href="<?php echo esc_url( get_term_link( $feature ) ); ?>">Full coverage <span class="meta-nav">&rarr;</span></a></li>
-					<?php endif; ?>
-				</ul>
+				<div class="sticky-features-list span4">
+					<ul>
+						<li><h4>More from<br /><span class="series-name"><?php echo $feature->name; ?></span></h4></li>
+						<?php foreach ( $feature_posts as $feature_post ): ?>
+							<li><a href="<?php echo esc_url( get_permalink( $feature_post->ID ) ); ?>"><?php echo get_the_title( $feature_post->ID ); ?></a></li>
+						<?php endforeach; ?>
+						<?php if ( count( $feature_posts ) == 3 ): ?>
+							<li class="sticky-all"><a href="<?php echo esc_url( get_term_link( $feature ) ); ?>">Full coverage <span class="meta-nav">&rarr;</span></a></li>
+						<?php endif; ?>
+					</ul>
+				</div>
 				<?php endif; ?>
 			</div>
 

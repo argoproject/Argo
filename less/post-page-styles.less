@@ -487,7 +487,7 @@ p.wp-caption-text {
 	}
 }
 .stories h2.entry-title {
-	font-size: @baseFontSize *2;
+	font-size: @baseFontSize * 2;
 	margin-bottom: @baseline/3;
 	line-height:1.1;
 }
@@ -504,7 +504,6 @@ p.wp-caption-text {
 }
 .sticky-related,
 .sticky-solo {
-  padding:10px;
   .border-radius(8px);
   border:1px solid darken(@baseColor, 5%);
   .box-shadow(~"0 2px 3px rgba(0,0,0,.15), inset 0 -1px 0 rgba(0,0,0,.05)");
@@ -521,14 +520,62 @@ p.wp-caption-text {
   border-bottom:none;
   margin-bottom: @baseline;
 }
-.sticky-related ul {
-	float:right;
-	width:25%;
+.sticky-main-feature {
+	.image-wrap {
+	  float:left;
+	  margin:15px 15px 0 15px;
+	  height:145px;
+	  h4 {
+	    background-color:@black;
+	    color: @white;
+	    padding:2px 5px;
+	    width: 130px;
+	    .opacity (80);
+	    display:block;
+	    position:relative;
+	    z-index:10;
+	  }
+	  img {
+	    float:left;
+	    display:block;
+	    position:relative;
+	    top:-20px;
+	    z-index:1;
+	  }
+	}
+	h4 {
+	  font-size:@baseFontSize * 0.815;
+	  margin-bottom:0;
+	  color: #ddd;
+	}
+	h2 {
+	  font-size: @baseFontSize * 1.5;
+	  margin:10px 15px 4px;
+	  line-height:1;
+	  a {
+	    color: @white;
+	  }
+	}
+	p {
+	  color:#fff;
+	  font-size: @baseFontSize - 4;
+	  margin:0 15px 10px;
+	  a {
+	    color: @white;
+	    font-weight:bold;
+	    white-space:nowrap;
+	  }
+	}
+}
+.sticky-features-list {
+	padding:10px;
+}
+.sticky-features-list ul {
 	list-style:none;
-	margin:5px 0;
+	padding:10px;
+	margin:0;
 	#gradient > .vertical(lighten(@baseColor, 35%), lighten(@baseColor, 25%));
 	border-radius:8px;
-	padding:10px;
 	li {
 	  h4 {
 	    color: #333;
@@ -548,61 +595,6 @@ p.wp-caption-text {
 	  }
 	}
 }
-.sticky-main-feature {
-	float:left;
-	width:68%;
-	padding:5px;
-	.image-wrap {
-	  float:left;
-	  padding-top:5px;
-	  height:145px;
-	  h4 {
-	    background-color:@black;
-	    color: @white;
-	    padding:2px 5px;
-	    width: 130px;
-	    .opacity (80);
-	    display:block;
-	    position:relative;
-	    z-index:10;
-	  }
-	  img {
-	    float:left;
-	    margin:0 15px 0 0;
-	    display:block;
-	    position:relative;
-	    top:-20px;
-	    z-index:1;
-	  }
-	}
-	h4 {
-	  font-size:@baseFontSize * 0.815;
-	  margin-bottom:0;
-	  color: #ddd;
-	}
-	h2 {
-	  font-size: @baseFontSize * 1.833;
-	  margin-bottom:4px;
-	  line-height:1;
-	  a {
-	    color: @white;
-	  }
-	}
-	p {
-	  color:#eee;
-	  font-size: @baseFontSize - 3;
-	  margin-bottom:0;
-	  a {
-	    color: @white;
-	    font-weight:bold;
-	    white-space:nowrap;
-	  }
-	}
-}
-.sticky-solo .sticky-main-feature {
-  width:100%;
-}
-
 
 // --------------------------------------------
 // Archive Pages

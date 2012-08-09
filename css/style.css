@@ -3464,7 +3464,6 @@ p.wp-caption-text {
 }
 .sticky-related,
 .sticky-solo {
-  padding: 10px;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   border-radius: 8px;
@@ -3496,49 +3495,9 @@ p.wp-caption-text {
   border-bottom: none;
   margin-bottom: 24px;
 }
-.sticky-related ul {
-  float: right;
-  width: 25%;
-  list-style: none;
-  margin: 5px 0;
-  background-color: #addcad;
-  background-image: -moz-linear-gradient(top, #bbe2bb, #97d397);
-  background-image: -ms-linear-gradient(top, #bbe2bb, #97d397);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#bbe2bb), to(#97d397));
-  background-image: -webkit-linear-gradient(top, #bbe2bb, #97d397);
-  background-image: -o-linear-gradient(top, #bbe2bb, #97d397);
-  background-image: linear-gradient(top, #bbe2bb, #97d397);
-  background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#bbe2bb', endColorstr='#97d397', GradientType=0);
-  border-radius: 8px;
-  padding: 10px;
-}
-.sticky-related ul li {
-  font-size: 14px;
-  margin-bottom: 7px;
-  line-height: 1.2;
-}
-.sticky-related ul li h4 {
-  color: #333;
-  font-size: 9px;
-  text-transform: uppercase;
-  margin-bottom: 5px;
-}
-.sticky-related ul li h4 span {
-  font-size: 12px;
-}
-.sticky-related ul li.sticky-all {
-  font-weight: bold;
-  font-size: 10.672px;
-}
-.sticky-main-feature {
-  float: left;
-  width: 68%;
-  padding: 5px;
-}
 .sticky-main-feature .image-wrap {
   float: left;
-  padding-top: 5px;
+  margin: 15px 15px 0 15px;
   height: 145px;
 }
 .sticky-main-feature .image-wrap h4 {
@@ -3554,7 +3513,6 @@ p.wp-caption-text {
 }
 .sticky-main-feature .image-wrap img {
   float: left;
-  margin: 0 15px 0 0;
   display: block;
   position: relative;
   top: -20px;
@@ -3566,25 +3524,58 @@ p.wp-caption-text {
   color: #ddd;
 }
 .sticky-main-feature h2 {
-  font-size: 29.328px;
-  margin-bottom: 4px;
+  font-size: 24px;
+  margin: 10px 15px 4px;
   line-height: 1;
 }
 .sticky-main-feature h2 a {
   color: #ffffff;
 }
 .sticky-main-feature p {
-  color: #eee;
-  font-size: 13px;
-  margin-bottom: 0;
+  color: #fff;
+  font-size: 12px;
+  margin: 0 15px 10px;
 }
 .sticky-main-feature p a {
   color: #ffffff;
   font-weight: bold;
   white-space: nowrap;
 }
-.sticky-solo .sticky-main-feature {
-  width: 100%;
+.sticky-features-list {
+  padding: 10px;
+}
+.sticky-features-list ul {
+  list-style: none;
+  padding: 10px;
+  margin: 0;
+  background-color: #addcad;
+  background-image: -moz-linear-gradient(top, #bbe2bb, #97d397);
+  background-image: -ms-linear-gradient(top, #bbe2bb, #97d397);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#bbe2bb), to(#97d397));
+  background-image: -webkit-linear-gradient(top, #bbe2bb, #97d397);
+  background-image: -o-linear-gradient(top, #bbe2bb, #97d397);
+  background-image: linear-gradient(top, #bbe2bb, #97d397);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#bbe2bb', endColorstr='#97d397', GradientType=0);
+  border-radius: 8px;
+}
+.sticky-features-list ul li {
+  font-size: 14px;
+  margin-bottom: 7px;
+  line-height: 1.2;
+}
+.sticky-features-list ul li h4 {
+  color: #333;
+  font-size: 9px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+.sticky-features-list ul li h4 span {
+  font-size: 12px;
+}
+.sticky-features-list ul li.sticky-all {
+  font-weight: bold;
+  font-size: 10.672px;
 }
 .category-background {
   margin-bottom: 19.56px;
@@ -4360,16 +4351,10 @@ img[class*="wp-image-"] {
   #site-header h2.branding span {
     font-size: 19.552px;
   }
-  #site-header.sticky-related ul,
-  .sticky-main-feature {
+  #site-header {
     clear: both;
     width: 96%;
     margin: 0;
-  }
-  .sticky-related ul {
-    margin-top: 6px;
-    padding: 2.5%;
-    width: 95%;
   }
 }
 @media (max-width: 767px) {
@@ -4433,16 +4418,11 @@ img[class*="wp-image-"] {
   #main {
     margin-top: 10px;
   }
-  .sticky-related ul,
-  .sticky-main-feature {
+  .sticky-main-feature,
+  .sticky-features-list {
     clear: both;
-    width: 96%;
-    margin: 0;
-  }
-  .sticky-related ul {
-    margin-top: 6px;
-    padding: 3%;
-    width: 94%;
+    width: 100% !important;
+    margin: 0 !important;
   }
   #menu-footer-navigation li {
     font-size: 18px;
@@ -4450,17 +4430,6 @@ img[class*="wp-image-"] {
   }
 }
 @media (max-width: 480px) {
-  .sticky-related ul,
-  .sticky-main-feature {
-    clear: both;
-    width: 96%;
-    margin: 0;
-  }
-  .sticky-related ul {
-    margin-top: 6px;
-    padding: 4%;
-    width: 92%;
-  }
   .global-nav {
     height: 38px;
     padding-top: 2px;
