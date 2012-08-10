@@ -31,7 +31,7 @@ get_header(); ?>
 							) );
 			          	if ( $topstory->have_posts() ) : ?>
 			             	 <?php while ( $topstory->have_posts() ) : $topstory->the_post(); $ids[] = get_the_ID(); ?>
-			                 	<?php the_post_thumbnail( 'medium' ); ?>
+			                 	<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'medium' ); ?></a>
 			                    <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
 			                    <h5 class="byline"><?php largo_byline(); ?><?php edit_post_link('Edit This Post', ' | <span class="edit-link">', '</span>'); ?></h5>
 			                    <?php the_excerpt(); ?>
@@ -83,8 +83,58 @@ get_header(); ?>
 					</div>
 				</div>
 			<?php } else if (of_get_option('homepage_layout') == 'slider') { ?>
-				<div id="homepage-slider" class="clearfix">
-					SLIDER!
+				<div id="homepage-slider" class="carousel slide clearfix">
+				 	<!-- Carousel items -->
+				 	<div class="carousel-inner">
+					 	<div class="top-story item active">
+							<?php $topstory = largo_get_featured_posts( array(
+								'tax_query' => array(
+									array(
+										'taxonomy' => 'prominence',
+										'field' => 'slug',
+										'terms' => 'top-story'
+									)
+								),
+								'showposts' => 1
+								) );
+				          	if ( $topstory->have_posts() ) : ?>
+				             	 <?php while ( $topstory->have_posts() ) : $topstory->the_post(); $ids[] = get_the_ID(); ?>
+				                 	<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'medium' ); ?></a>
+				                    <div class="carousel-caption">
+				                    	<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+				                    	<h5 class="byline"><?php largo_byline(); ?><?php edit_post_link('Edit This Post', ' | <span class="edit-link">', '</span>'); ?></h5>
+				                    	<?php the_excerpt(); ?>
+				                    </div>
+				                <?php endwhile;
+				            endif; // end more featured posts ?>
+						</div>
+						<?php $substories = largo_get_featured_posts( array(
+							'tax_query' => array(
+								array(
+									'taxonomy' => 'prominence',
+									'field' => 'slug',
+									'terms' => 'homepage-featured'
+								)
+							),
+							'showposts'		=> 4,
+							'post__not_in' 	=> $ids
+							) );
+			          	if ( $substories->have_posts() ) :
+			          		while ( $substories->have_posts() ) : $substories->the_post(); $ids[] = get_the_ID(); ?>
+					          	<div class="item">
+					          		<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'medium' ); ?></a>
+						            <div class="carousel-caption">
+						            	<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+						                <h5 class="byline"><?php largo_byline(); ?><?php edit_post_link('Edit This Post', ' | <span class="edit-link">', '</span>'); ?></h5>
+						                <?php the_excerpt(); ?>
+						            </div>
+							 	</div>
+							 <?php endwhile; ?>
+				    	<?php endif; ?>
+				 	</div>
+				 	<!-- Carousel nav -->
+				 	<a class="carousel-control left" href="#homepage-slider" data-slide="prev">&lsaquo;</a>
+				 	<a class="carousel-control right" href="#homepage-slider" data-slide="next">&rsaquo;</a>
 				</div>
 			<?php } ?>
 
