@@ -35,6 +35,7 @@ require_once( TEMPLATEPATH . '/inc/widgets/largo-footer-featured.php' );
 require_once( TEMPLATEPATH . '/inc/widgets/largo-sidebar-featured.php' );
 require_once( TEMPLATEPATH . '/inc/widgets/largo-about.php' );
 require_once( TEMPLATEPATH . '/inc/widgets/largo-donate.php' );
+require_once( TEMPLATEPATH . '/inc/widgets/largo-twitter.php' );
 
 // ...and then register them
 
@@ -44,5 +45,6 @@ function largo_load_widgets() {
     register_widget( 'largo_sidebar_featured_widget' );
     register_widget( 'largo_about_widget' );
     register_widget( 'largo_donate_widget' );
+    register_widget( 'largo_twitter_widget' );
 }
 add_action( 'widgets_init', 'largo_load_widgets' );
