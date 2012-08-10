@@ -15,6 +15,15 @@ class largo_twitter_widget extends WP_Widget {
 	function widget( $args, $instance ) {
 		extract( $args );
 
+		$widget_class = !empty($instance['widget_class']) ? $instance['widget_class'] : '';
+		/* Add the widget class to $before widget, used as a style hook */
+		if( strpos($before_widget, 'class') === false ) {
+			$before_widget = str_replace('>', 'class="'. $widget_class . '"', $before_widget);
+		}
+		else {
+			$before_widget = str_replace('class="', 'class="'. $widget_class . ' ', $before_widget);
+		}
+
 		echo $before_widget; ?>
 
 			<script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script>
@@ -72,6 +81,7 @@ class largo_twitter_widget extends WP_Widget {
 		$instance['twitter_search'] = strip_tags( $new_instance['twitter_search'] );
 		$instance['widget_type'] = $new_instance['widget_type'];
 		$instance['bg_color'] = $new_instance['bg_color'];
+		$instance['widget_class'] = $new_instance['widget_class'];
 		return $instance;
 	}
 
@@ -83,7 +93,8 @@ class largo_twitter_widget extends WP_Widget {
 			'twitter_list_slug' => 'inn-staff-and-associates',
 			'twitter_search' => 'your search',
 			'widget_type' => 'profile',
-			'bg_color' => '333333'
+			'bg_color' => '333333',
+			'widget_class' => 'default'
 		);
 		$instance = wp_parse_args( (array) $instance, $defaults ); ?>
 
@@ -123,6 +134,13 @@ class largo_twitter_widget extends WP_Widget {
 			<label for="<?php echo $this->get_field_id( 'twitter_search' ); ?>"><?php _e('Twitter Search Query (for search widget):', 'largo-twitter'); ?></label>
 			<input id="<?php echo $this->get_field_id( 'twitter_search' ); ?>" name="<?php echo $this->get_field_name( 'twitter_search' ); ?>" value="<?php echo $instance['twitter_search']; ?>" style="width:90%;" />
 		</p>
+
+		<label for="<?php echo $this->get_field_id( 'widget_class' ); ?>"><?php _e('Widget Background', 'largo-twitter'); ?></label>
+		<select id="<?php echo $this->get_field_id('widget_class'); ?>" name="<?php echo $this->get_field_name('widget_class'); ?>" class="widefat" style="width:90%;">
+		    <option <?php selected( $instance['widget_class'], 'default'); ?> value="default">Default</option>
+		    <option <?php selected( $instance['widget_class'], 'rev'); ?> value="rev">Reverse</option>
+		    <option <?php selected( $instance['widget_class'], 'no-bg'); ?> value="no-bg">No Background</option>
+		</select>
 
 	<?php
 	}
