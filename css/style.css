@@ -4567,7 +4567,8 @@ img[class*="wp-image-"] {
     font-size: 32px;
   }
   .stories h2.entry-title,
-  .sticky-main-feature h2 {
+  .sticky-main-feature h2,
+  .carousel-caption h2 {
     font-size: 24px;
   }
   #homepage-featured .top-story,
