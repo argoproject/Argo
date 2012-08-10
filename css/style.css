@@ -4087,6 +4087,11 @@ p.comment-form-comment {
   font-size: 10.672px;
   margin-bottom: 12px;
 }
+#sidebar .widget_archive select,
+#sidebar .widget_categories select,
+#sidebar .widget_search form {
+  margin: 4.8px 0;
+}
 .footer-bg {
   background-color: #555555;
   background-color: #2c2c2c;
