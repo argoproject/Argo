@@ -17,6 +17,12 @@
 					'widget_class' => 'default'
 					)
 				);
+			the_widget( 'largo_recent_posts_widget', array(
+					'title' => 'Recent Posts',
+					'num_posts' => 5,
+					'widget_class' => 'default'
+				)
+			);
 		endif;
 	?>
 </div><!-- #main .widget-area -->
