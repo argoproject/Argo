@@ -50,7 +50,7 @@ function largo_meta_box_save( $post_id ) {
 		)
 	);
 
-	// Probably a good idea to make sure your data is set
+	// make sure data is set, if author has removed the field or not populated it, delete it
 	if( isset( $_POST['largo_byline_text'] ) && $_POST['largo_byline_text'] != '' ) {
 		update_post_meta( $post_id, 'largo_byline_text', wp_kses( $_POST['largo_byline_text'], $allowed ) );
 	} else if ( isset( $_POST['largo_byline_text'] ) && $_POST['largo_byline_text'] == '' ) {
