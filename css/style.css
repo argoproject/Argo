@@ -2995,6 +2995,17 @@ article.story {
 .post-social span.print a:hover {
   text-decoration: none;
 }
+.post-pagination a,
+.post-pagination span {
+  padding: 5px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  font-size: 13.04px;
+}
+.post-pagination a:first-child,
+.post-pagination span:first-child {
+  padding-left: 0;
+}
 .labels,
 .tags,
 .pager,

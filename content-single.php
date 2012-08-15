@@ -12,7 +12,7 @@
 	</header><!-- / entry header -->
 
 	<div class="entry-content clearfix">
-		<?php the_content(); ?>
+		<?php largo_entry_content( $post ); ?>
 	</div><!-- .entry-content -->
 
 	<footer class="post-meta bottom-meta">
