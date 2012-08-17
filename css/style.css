@@ -2259,8 +2259,7 @@ table .span24 {
   text-decoration: none;
 }
 .donate-btn i {
-  margin-right: 3px;
-  margin-top: 1px;
+  margin: 1px 3px 0 0;
 }
 #header-search {
   float: left;
@@ -2269,18 +2268,18 @@ table .span24 {
 #header-search form {
   margin: 0;
 }
-#header-search input {
+#header-search input,
+#header-search button {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 13px;
   line-height: 1;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+#header-search input {
   height: 14px;
   padding: 6px 4px 2px 4px;
 }
 #header-search button {
   height: 24px;
-  font-size: 13px;
-  line-height: 1;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-transform: uppercase;
 }
 #site-header {
@@ -2289,8 +2288,7 @@ table .span24 {
 }
 #site-header img {
   clear: none;
-  margin-top: -13px;
-  margin-bottom: 5px;
+  margin: -13px 0 5px;
 }
 #site-header h1.branding,
 #site-header h2.branding {
@@ -2441,9 +2439,7 @@ li.home-link:hover i {
   display: none;
   float: right;
   padding: 7px 10px;
-  margin-left: 5px;
-  margin-right: 5px;
-  margin-top: 4px;
+  margin: 4px 5px 0;
   background-color: #1f6aaa;
   background-image: -moz-linear-gradient(top, #2275bb, #1a5a90);
   background-image: -ms-linear-gradient(top, #2275bb, #1a5a90);
@@ -2526,9 +2522,7 @@ li.home-link:hover i {
   filter: alpha(opacity=80);
 }
 .dropdown .caret {
-  margin-top: 10px;
-  margin-left: 1px;
-  margin-right: 8px;
+  margin: 10px 8px 0 1px;
 }
 .dropdown:hover .caret,
 .open .caret {
@@ -2883,7 +2877,6 @@ li.home-link:hover i {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 #secondary-nav ul li {
-  font-size: 16px;
   display: inline;
   margin-right: 10px;
   white-space: nowrap;
@@ -3841,7 +3834,7 @@ a.comment-reply-link > span {
   color: #eee;
   cursor: pointer;
   font-size: 15px;
-  margin: 14px 0 20px 0;
+  margin: 14px 0 20px;
   padding: 5px 22px;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
 }
@@ -4113,7 +4106,7 @@ p.comment-form-comment {
 #site-footer ul#menu-footer-navigation {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   list-style: none;
-  margin: 0 0 12px 0;
+  margin: 0 0 12px;
 }
 #site-footer ul#menu-footer-navigation li {
   margin-bottom: 0;
@@ -4312,8 +4305,7 @@ img[class*="wp-image-"] {
   .global-nav,
   #page,
   #site-footer {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 0 20px;
   }
   #site-header h1.branding,
   #site-header h2.branding {
