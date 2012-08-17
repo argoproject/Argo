@@ -3260,8 +3260,8 @@ h3.recent-posts a.rss-link:hover,
 .author-box iframe {
   margin: 0;
 }
-.single-post .author-box h4 span,
-.single-argolinkroundups .author-box h4 span {
+.single-post .author-box h4 span.author-posts-link,
+.single-argolinkroundups .author-box h4 span.author-posts-link {
   float: right;
   text-align: right;
   font-size: 10.672px;
