@@ -347,22 +347,6 @@ li.home-link {
 .navbar .nav li.dropdown.active > .dropdown-toggle:hover {
   color: @white;
 }
-
-// Right aligned menus need alt position
-// TODO: rejigger this at some point to simplify the selectors
-.navbar .pull-right .dropdown-menu,
-.navbar .dropdown-menu.pull-right {
-  left: auto;
-  right: 0;
-  &:before {
-    left: auto;
-    right: 12px;
-  }
-  &:after {
-    left: auto;
-    right: 13px;
-  }
-}
 .dropdown-menu li {
 	margin-bottom: 0;
 }

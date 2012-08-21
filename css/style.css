@@ -2578,21 +2578,6 @@ li.home-link:hover i {
 .navbar .nav li.dropdown.active > .dropdown-toggle:hover {
   color: #ffffff;
 }
-.navbar .pull-right .dropdown-menu,
-.navbar .dropdown-menu.pull-right {
-  left: auto;
-  right: 0;
-}
-.navbar .pull-right .dropdown-menu:before,
-.navbar .dropdown-menu.pull-right:before {
-  left: auto;
-  right: 12px;
-}
-.navbar .pull-right .dropdown-menu:after,
-.navbar .dropdown-menu.pull-right:after {
-  left: auto;
-  right: 13px;
-}
 .dropdown-menu li {
   margin-bottom: 0;
 }
