@@ -331,7 +331,6 @@ blockquote small:before {
 }
 blockquote.pull-right {
   float: right;
-  padding-right: 15px;
   padding-left: 0;
   border-right: 5px solid #eeeeee;
   border-left: 0;
@@ -1867,118 +1866,46 @@ table .span24 {
 }
 .social-icons {
   display: block;
-}
-.social-icons.small {
-  background: url("../img/social-icons-sm.png") no-repeat;
+  background: url("../img/social-icons.png") no-repeat;
   width: 32px;
   height: 33px;
 }
-.social-icons.small.linkedin {
-  background-position: 0px 0px;
-}
-.social-icons.small.skype {
-  background-position: -32px 0px;
-}
-.social-icons.small.slideshare {
-  background-position: -64px 0px;
-}
-.social-icons.small.github {
-  background-position: -96px 0px;
-}
-.social-icons.small.gplus {
-  background-position: 0px -33px;
-}
-.social-icons.small.vimeo {
-  background-position: -32px -33px;
-}
-.social-icons.small.pinterest {
-  background-position: -64px -33px;
-}
-.social-icons.small.facebook {
-  background-position: -96px -33px;
-}
-.social-icons.small.delicious {
+.social-icons.gplus {
   background-position: 0px -66px;
 }
-.social-icons.small.foursquare {
-  background-position: -32px -66px;
+.social-icons.vimeo {
+  background-position: 0px -33px;
 }
-.social-icons.small.rss {
-  background-position: -64px -66px;
+.social-icons.pinterest {
+  background-position: 0px -264px;
 }
-.social-icons.small.twitter {
-  background-position: -96px -66px;
-}
-.social-icons.small.wordpress {
-  background-position: 0px -99px;
-}
-.social-icons.small.flickr {
-  background-position: -32px -99px;
-}
-.social-icons.small.tumblr {
-  background-position: -64px -99px;
-}
-.social-icons.small.youtube {
-  background-position: -96px -99px;
-}
-.social-icons.small.myspace {
-  background-position: 0px -132px;
-}
-.social-icons.large {
-  background: url("../img/social-icons-lg.png") no-repeat;
-  width: 77px;
-  height: 79px;
-}
-.social-icons.large.skype {
+.social-icons.facebook {
   background-position: 0px 0px;
 }
-.social-icons.large.slideshare {
-  background-position: 0px -79px;
+.social-icons.rss {
+  background-position: 0px -165px;
 }
-.social-icons.large.facebook {
-  background-position: 0px -158px;
+.social-icons.twitter {
+  background-position: 0px -99px;
 }
-.social-icons.large.github {
-  background-position: 0px -237px;
+.social-icons.flickr {
+  background-position: 0px -198px;
 }
-.social-icons.large.gplus {
-  background-position: 0px -316px;
+.social-icons.tumblr {
+  background-position: -64px -99px;
 }
-.social-icons.large.vimeo {
-  background-position: 0px -395px;
+.social-icons.youtube {
+  background-position: 0px -231px;
 }
-.social-icons.large.pinterest {
-  background-position: 0px -474px;
+.social-icons.rss24 {
+  background-position: 0px -297px;
+  width: 24px;
+  height: 24px;
 }
-.social-icons.large.delicious {
-  background-position: 0px -553px;
-}
-.social-icons.large.tumblr {
-  background-position: 0px -632px;
-}
-.social-icons.large.foursquare {
-  background-position: 0px -711px;
-}
-.social-icons.large.twitter {
-  background-position: 0px -790px;
-}
-.social-icons.large.wordpress {
-  background-position: 0px -869px;
-}
-.social-icons.large.flickr {
-  background-position: 0px -948px;
-}
-.social-icons.large.linkedin {
-  background-position: 0px -1027px;
-}
-.social-icons.large.youtube {
-  background-position: 0px -1106px;
-}
-.social-icons.large.myspace {
-  background-position: 0px -1185px;
-}
-.social-icons.large.rss {
-  background-position: 0px -1264px;
+.social-icons.gplus-19 {
+  background-position: 0px -321px;
+  width: 19px;
+  height: 19px;
 }
 .carousel {
   position: relative;
@@ -2555,10 +2482,6 @@ li.home-link:hover i {
   -moz-background-clip: padding;
   background-clip: padding-box;
 }
-.dropdown-menu.pull-right {
-  right: 0;
-  left: auto;
-}
 .dropdown-menu .divider {
   *width: 100%;
   height: 1px;
@@ -2599,10 +2522,6 @@ li.home-link:hover i {
 .open  > .dropdown-menu {
   display: block;
 }
-.pull-right > .dropdown-menu {
-  right: 0;
-  left: auto;
-}
 .dropup .caret,
 .navbar-fixed-bottom .dropdown .caret {
   border-top: 0;
@@ -2641,19 +2560,6 @@ li.home-link:hover i {
   position: absolute;
   top: -9px;
   left: 10px;
-}
-.navbar-fixed-bottom .dropdown-menu:before {
-  border-top: 7px solid #ccc;
-  border-top-color: rgba(0, 0, 0, 0.2);
-  border-bottom: 0;
-  bottom: -7px;
-  top: auto;
-}
-.navbar-fixed-bottom .dropdown-menu:after {
-  border-top: 6px solid #ffffff;
-  border-bottom: 0;
-  bottom: -6px;
-  top: auto;
 }
 .navbar .nav li.dropdown .dropdown-toggle .caret,
 .navbar .nav li.dropdown.open .caret {
@@ -2793,10 +2699,6 @@ li.home-link:hover i {
   .nav-collapse .dropdown-menu a:hover {
     background-color: #1a5a90;
   }
-  .nav-collapse.in .btn-group {
-    margin-top: 5px;
-    padding: 0;
-  }
   .nav-collapse .dropdown-menu {
     position: static;
     top: auto;
@@ -2822,21 +2724,6 @@ li.home-link:hover i {
   .nav-collapse .dropdown-menu .divider {
     display: none;
   }
-  .nav-collapse .navbar-form,
-  .nav-collapse .navbar-search {
-    float: none;
-    padding: 12px 15px;
-    margin: 12px 0;
-    border-top: 1px solid #1a5a90;
-    border-bottom: 1px solid #1a5a90;
-    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 1px 0 rgba(255,255,255,.1);
-    -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 1px 0 rgba(255,255,255,.1);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 1px 0 rgba(255,255,255,.1);
-  }
-  .navbar .nav-collapse .nav.pull-right {
-    float: none;
-    margin-left: 0;
-  }
   .nav-collapse,
   .nav-collapse.collapse {
     overflow: hidden;
@@ -2845,10 +2732,6 @@ li.home-link:hover i {
   .navbar .btn-navbar {
     display: block;
   }
-  .navbar-static .navbar-inner {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
 }
 @media (min-width: 980px) {
   .nav-collapse.collapse {
@@ -2856,24 +2739,12 @@ li.home-link:hover i {
     overflow: visible !important;
   }
 }
-#secondary-nav {
-  *zoom: 1;
-}
-#secondary-nav:before,
-#secondary-nav:after {
-  display: table;
-  content: "";
-}
-#secondary-nav:after {
-  clear: both;
-}
 #secondary-nav #topics-bar {
   border-bottom: 1px solid #ccc;
   padding-bottom: 3px;
 }
 #secondary-nav ul {
   margin: 0;
-  padding: 0;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 #secondary-nav ul li {
@@ -2882,7 +2753,7 @@ li.home-link:hover i {
   white-space: nowrap;
 }
 #secondary-nav ul li h4 {
-  font-size: 16px;
+  font-size: 17px;
   margin-bottom: 0;
   display: inline;
 }
@@ -3008,9 +2879,6 @@ article.story {
 }
 h3.recent-posts a.rss-link,
 .labels .series-label h5 a.rss-link {
-  background: url("../img/rss24.png") no-repeat;
-  width: 24px;
-  height: 24px;
   float: right;
   margin-top: 4px;
 }
@@ -3245,10 +3113,6 @@ h3.recent-posts a.rss-link:hover,
 .author-box ul li.facebook {
   position: relative;
   top: -2px;
-}
-.author-box ul li.gplus {
-  position: relative;
-  top: -5px;
 }
 .author-box iframe {
   margin: 0;
@@ -4289,16 +4153,14 @@ img[class*="wp-image-"] {
   #page,
   #site-footer {
     margin: 0 auto;
-    padding-left: 3%;
-    padding-right: 3%;
+    padding: 0 3%;
   }
 }
 @media screen and (min-width: 1600px) {
   .global-nav,
   #page,
   #site-footer {
-    padding-left: 0;
-    padding-right: 0;
+    padding: 0;
   }
 }
 @media (min-width: 769px) and (max-width: 979px) {
