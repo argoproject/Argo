@@ -38,19 +38,19 @@ if ( !function_exists( 'optionsframework_init' ) ) {
 	define( 'OPTIONS_FRAMEWORK_DIRECTORY', get_template_directory_uri() . '/inc/options-framework/' );
 	require_once dirname( __FILE__ ) . '/inc/options-framework/options-framework.php';
 }
-require_once( TEMPLATEPATH . '/inc/users.php' );
-require_once( TEMPLATEPATH . '/inc/sidebars.php' );
-require_once( TEMPLATEPATH . '/inc/widgets.php' );
-require_once( TEMPLATEPATH . '/inc/nav-menus.php' );
-require_once( TEMPLATEPATH . '/inc/open-graph.php' );
-require_once( TEMPLATEPATH . '/inc/taxonomies.php' );
-require_once( TEMPLATEPATH . '/inc/editor.php' );
-require_once( TEMPLATEPATH . '/inc/post-meta.php' );
-require_once( TEMPLATEPATH . '/inc/images.php' );
-require_once( TEMPLATEPATH . '/inc/related-content.php' );
-require_once( TEMPLATEPATH . '/inc/featured-content.php' );
-require_once( TEMPLATEPATH . '/inc/special-functionality.php' );
-require_once( TEMPLATEPATH . '/inc/largo-plugin-init.php' );
+require_once( get_template_directory() . '/inc/users.php' );
+require_once( get_template_directory() . '/inc/sidebars.php' );
+require_once( get_template_directory() . '/inc/widgets.php' );
+require_once( get_template_directory() . '/inc/nav-menus.php' );
+require_once( get_template_directory() . '/inc/open-graph.php' );
+require_once( get_template_directory() . '/inc/taxonomies.php' );
+require_once( get_template_directory() . '/inc/editor.php' );
+require_once( get_template_directory() . '/inc/post-meta.php' );
+require_once( get_template_directory() . '/inc/images.php' );
+require_once( get_template_directory() . '/inc/related-content.php' );
+require_once( get_template_directory() . '/inc/featured-content.php' );
+require_once( get_template_directory() . '/inc/special-functionality.php' );
+require_once( get_template_directory() . '/inc/largo-plugin-init.php' );
 
 /**
  * Tell WordPress to run largo_setup() when the 'after_setup_theme' hook is run.
