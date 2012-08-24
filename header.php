@@ -109,7 +109,7 @@
 	    	if ($header_class != 'branding') :
     	?>
 			<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
-				<img class="header_img" src="<?php echo of_get_option( 'banner_image_sm' ); ?>" alt="" />
+				<img class="header_img" src="" alt="" />
 			</a>
 		<?php endif; ?>
 	</header>
