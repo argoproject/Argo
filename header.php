@@ -37,7 +37,7 @@
 
 <?php
 	wp_enqueue_style( 'largo-stylesheet', get_bloginfo( 'stylesheet_url' ) );
-	wp_enqueue_script( 'largo-modernizr', get_template_directory_uri() . '/js/modernizr-2.5.3.min.js' );
+	wp_enqueue_script( 'largo-modernizr', get_template_directory_uri() . '/js/modernizr.custom.js' );
 
 	/* We add some JavaScript to pages with the comment form
 	 * to support sites with threaded comments (when in use).
@@ -107,10 +107,9 @@
 	    		esc_attr( get_bloginfo('description') )
 	    	);
 	    	if ($header_class != 'branding') :
-	    	//show the banner images, TO DO: Make this less ugly, conditionally load images
     	?>
 			<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
-				<img class="header_img" src="" alt="" />
+				<img class="header_img" src="<?php echo of_get_option( 'banner_image_sm' ); ?>" alt="" />
 			</a>
 		<?php endif; ?>
 	</header>
