@@ -3272,6 +3272,10 @@ p.comment-form-comment {
   -moz-border-radius: 4px;
   border-radius: 4px;
 }
+#sidebar .widget-title a,
+#sidebar .widgettitle a {
+  color: #fff;
+}
 #sidebar .widget p,
 #sidebar .widget ul {
   padding: 0 3px;
@@ -3361,20 +3365,36 @@ p.comment-form-comment {
   margin-bottom: 8px;
 }
 #sidebar .largo-sidebar-featured img,
-#sidebar .largo-recent-posts img {
+#sidebar .largo-recent-posts img,
+#sidebar .widget_rss img {
   float: left;
   margin: 5px 10px 0 5px;
 }
 #sidebar .largo-sidebar-featured h5,
-#sidebar .largo-recent-posts h5 {
+#sidebar .largo-recent-posts h5,
+#sidebar .widget_rss h5 {
   margin-bottom: 2px;
   padding: 0 3px;
   font-size: 16px;
 }
 #sidebar .largo-sidebar-featured p,
-#sidebar .largo-recent-posts p {
+#sidebar .largo-recent-posts p,
+#sidebar .widget_rss p {
   font-size: 10.672px;
   margin-bottom: 12px;
+}
+#sidebar .widget_rss ul {
+  margin: 12px 0;
+  padding: 0;
+}
+#sidebar .widget_rss li {
+  list-style: none;
+  margin-bottom: 12px;
+}
+#sidebar .widget_rss li h5,
+#sidebar .widget_rss li h6,
+#sidebar .widget_rss li p {
+  margin-bottom: 4.8px;
 }
 #sidebar .widget_archive select,
 #sidebar .widget_categories select,
