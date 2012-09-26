@@ -1769,11 +1769,14 @@ table .span24 {
 .navbar .nav.pull-right {
   float: right;
 }
+.navbar ul {
+  font-size: 15px;
+}
 .navbar li {
   display: block;
   float: left;
   margin-bottom: 0;
-  padding-top: 5px;
+  padding-top: 6px;
 }
 li.home-link {
   margin-left: 4px;
@@ -1787,7 +1790,7 @@ li.home-link:hover i {
 }
 .navbar li > a {
   float: none;
-  padding: 7px 10px 8px;
+  padding: 8px 9px 9px;
   line-height: 24px;
   color: #ffffff;
   text-decoration: none;
