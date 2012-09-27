@@ -207,7 +207,7 @@ li.home-link {
   float: left;
   min-width: 160px;
   padding: 3px 0;
-  margin: 6px 0 0; // override default ul
+  margin: 5px 0 0; // override default ul
   list-style: none;
   background-color: @dropdownBackground;
   border: 1px solid #ccc;
@@ -240,18 +240,26 @@ li.home-link {
     text-shadow: none;
   }
 }
-ul.nav li.dropdown:hover ul.dropdown-menu{
+ul.nav li.dropdown:hover ul.dropdown-menu {
     display: block;
 }
+
+.navbar .dropdown-menu .active > a,
+.navbar .dropdown-menu .active > a:hover {
+  color: @linkColor;
+  font-weight:bold;
+  background-color: @dropdownBackground;
+}
+
+
+
 // Hover state
 // -----------
 
 .dropdown-menu li a:hover {
 	background:none;
 }
-.dropdown-menu li a:hover,
-.dropdown-menu .active a,
-.dropdown-menu .active a:hover {
+.dropdown-menu li a:hover {
   color: @dropdownLinkColorHover;
   text-decoration: none;
   background-color: @dropdownLinkBackgroundHover;
