@@ -121,12 +121,6 @@ li.home-link {
   border-left: 1px solid @navbarBackgroundHighlight;
 }
 
-// Secondary (floated right) nav in topbar
-.navbar .nav.pull-right {
-  margin-left: 10px;
-  margin-right: 0;
-}
-
 // Navbar button for toggling navbar items in responsive layouts
 // These definitions need to come after '.navbar .btn'
 .navbar .btn-navbar {
@@ -209,11 +203,11 @@ li.home-link {
   top: 100%;
   left: 0;
   z-index: @zindexDropdown;
-  display: none; // none by default, but block on "open" of the menu
+  display: none;
   float: left;
   min-width: 160px;
   padding: 3px 0;
-  margin: 9px 0 0; // override default ul
+  margin: 6px 0 0; // override default ul
   list-style: none;
   background-color: @dropdownBackground;
   border: 1px solid #ccc;
@@ -246,7 +240,9 @@ li.home-link {
     text-shadow: none;
   }
 }
-
+ul.nav li.dropdown:hover ul.dropdown-menu{
+    display: block;
+}
 // Hover state
 // -----------
 
