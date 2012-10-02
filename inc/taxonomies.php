@@ -13,6 +13,7 @@ function largo_custom_taxonomies() {
         wp_insert_term( 'Sidebar Featured Widget', 'prominence', array( 'description' => 'If you are using the Sidebar Featured Posts widget, add this label to posts to determine which to display in the widget', 'slug' => 'sidebar-featured' ) );
         wp_insert_term( 'Footer Featured Widget', 'prominence', array( 'description' => 'If you are using the Footer Featured Posts widget, add this label to posts to determine which to display in the widget', 'slug' => 'footer-featured' ) );
 
+        //check to make sure top story doesn't exist yet (for some reason it sometimes creates a duplicate term without this check) and then insert it
         $term = term_exists('Top Story', 'prominence');
         if ( $term == 0 || $term == null ) {
 		    $parent_term = term_exists( 'Homepage Featured', 'prominence' );
