@@ -45,7 +45,7 @@
 										<h4 class="no-image">FEATURED</h4>
 									<?php endif; ?>
 										<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-										<?php the_excerpt(); ?>
+										<?php largo_excerpt( $post, 4, '' ); ?>
 										<?php $ids[] = get_the_ID(); ?>
 								</div>
 								<?php if ( $feature_posts ): ?>
@@ -77,13 +77,7 @@
 						</header><!-- / entry header -->
 
 						<div class="entry-content">
-							<?php
-								if ( is_home() && strpos($post->post_content, '<!--more-->') ) : // if we're on the homepage and the post has a more tag, use that
-									the_content( 'Continue reading <span class="meta-nav">&rarr;</span>' );
-								else : // otherwise use the excerpt
-									the_excerpt();
-								endif;
-							?>
+							<?php largo_excerpt( $post, 5 ); ?>
 				        	<?php if ( largo_has_categories_or_tags() ): ?>
 				            	<div class="post-meta bottom-meta">
 				    				 <h5><strong>Filed under:</strong> <?php echo largo_homepage_categories_and_tags(); ?></h5>

@@ -16,8 +16,7 @@
 				<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'large' ); ?></a>
 				<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
 			    <h5 class="byline"><?php largo_byline(); ?><?php edit_post_link('Edit This Post', ' | <span class="edit-link">', '</span>'); ?></h5>
-			    <?php the_excerpt(); ?>
-
+			    <?php largo_excerpt( $post, 4, '', 0 ); ?>
 			    <?php if ( largo_post_in_series() ):
 					$feature = largo_get_the_main_feature();
 					$feature_posts = largo_get_recent_posts_for_term( $feature, 1, 1 );
@@ -50,7 +49,7 @@
 				if ($count <= 3) : ?>
 					<div class="story">
 			        	<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-			            <?php the_excerpt(); ?>
+			            <?php largo_excerpt( $post, 3, '', 0 ); ?>
 			        </div>
 			    <?php elseif ($count == 4) : ?>
 			        <h4 class="subhead">More Headlines</h4>
