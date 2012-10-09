@@ -89,7 +89,7 @@ endif; // largo_setup
  * function tied to the excerpt_length filter hook.
  */
 function largo_excerpt_length( $length ) {
-	return 35;
+	return 65;
 }
 add_filter( 'excerpt_length', 'largo_excerpt_length' );
 
