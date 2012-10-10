@@ -118,8 +118,8 @@ if ( ! function_exists( 'largo_content_nav' ) ) {
 		if ( $wp_query->max_num_pages > 1 ) : ?>
 
 	<nav id="<?php echo $nav_id; ?>" class="pager post-nav">
-		<div class="next"><?php previous_posts_link( 'Newer posts &rarr;' ); ?></div>
-		<div class="previous"><?php next_posts_link( '&larr; Older posts' ); ?></div>
+		<div class="next"><?php previous_posts_link( 'Newer Stories &rarr;' ); ?></div>
+		<div class="previous"><?php next_posts_link( '&larr; Older Stories' ); ?></div>
 	</nav><!-- .post-nav -->
 
 		<?php endif;
