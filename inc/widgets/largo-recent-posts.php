@@ -60,7 +60,7 @@ class largo_recent_posts_widget extends WP_Widget {
 
 	function form( $instance ) {
 		$defaults = array(
-			'title' => 'Recent Posts',
+			'title' => 'Recent Stories',
 			'num_posts' => 5,
 			'widget_class' => 'default'
 		);
