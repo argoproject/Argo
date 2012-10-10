@@ -90,7 +90,11 @@ if ( ! function_exists( 'largo_excerpt' ) ) {
 		if ( is_home() && strpos($post->post_content, '<!--more-->') && ($use_more != 0) ) : // if we're on the homepage and the post has a more tag, use that
 			the_content( 'Continue reading <span class="meta-nav">&rarr;</span>' );
 		elseif ( $post->post_excerpt ) : // if it has the optional excerpt set, use THAT
-			the_excerpt();
+			if ($use_more == 0) :
+				the_excerpt();
+			else :
+				echo '<p>' . strip_tags(get_the_excerpt()) . ' <a href="' . get_permalink() . '">' . $more_link . '</a></p>';
+			endif;
 		else : // otherwise we'll just do our best and make the prettiest excerpt we can muster
 			$strings = preg_split('/(\.|!|\?)\s/', strip_tags(strip_shortcodes($post->post_content)));
 			if ($strings[$i] != '') :
@@ -106,7 +110,6 @@ if ( ! function_exists( 'largo_excerpt' ) ) {
 		endif;
 	}
 } // ends check for largo_excerpt()
-
 
 if ( ! function_exists( 'largo_content_nav' ) ) {
 /**
