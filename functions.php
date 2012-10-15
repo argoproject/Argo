@@ -97,13 +97,9 @@ if ( ! function_exists( 'largo_excerpt' ) ) {
 			endif;
 		else : // otherwise we'll just do our best and make the prettiest excerpt we can muster
 			$strings = preg_split('/(\.|!|\?)\s/', strip_tags(strip_shortcodes($post->post_content)));
-			if ($strings[$i] != '') :
-				$output = $strings[0] . '. ';
-			endif;
 			for ($i = 1; $i < $sentence_count+1; $i++) {
-				if ($strings[$i] != '') :
+				if ($strings[$i] != '')
 					$output .= $strings[$i] . '. ';
-				endif;
 			}
 			$output .= '<a href="' . get_permalink() . '">' . $more_link . '</a>';
 			echo apply_filters('the_content', $output);
