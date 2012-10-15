@@ -3,7 +3,6 @@
  * Largo Sidebar Featured Posts
  */
 class largo_sidebar_featured_widget extends WP_Widget {
-
 	function largo_sidebar_featured_widget() {
 		$widget_ops = array(
 			'classname' => 'largo-sidebar-featured',
