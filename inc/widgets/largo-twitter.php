@@ -80,7 +80,9 @@ class largo_twitter_widget extends WP_Widget {
 			'twitter_search' => 'your search',
 			'widget_type' => 'timeline',
 			'widget_theme' => 'light',
-			'widget_class' => 'default'
+			'widget_class' => 'default',
+			'hidden_tablet' => '',
+			'hidden_phone'	=> ''
 		);
 		$instance = wp_parse_args( (array) $instance, $defaults );
 		$tablet = $instance['hidden_tablet'] ? 'checked="checked"' : '';

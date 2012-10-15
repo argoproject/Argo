@@ -77,7 +77,9 @@ class largo_sidebar_featured_widget extends WP_Widget {
 		$defaults = array(
 			'title' => 'We Recommend',
 			'num_posts' => 5,
-			'widget_class' => 'default'
+			'widget_class' => 'default',
+			'hidden_tablet' => '',
+			'hidden_phone'	=> ''
 		);
 		$instance = wp_parse_args( (array) $instance, $defaults );
 		$tablet = $instance['hidden_tablet'] ? 'checked="checked"' : '';
