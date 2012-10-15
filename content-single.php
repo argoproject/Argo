@@ -46,7 +46,7 @@
 ?>
 	<div id="related-posts" class="idTabs row-fluid clearfix">
 		<ul id="related-post-nav" class="span4">
-			<li><h4>More Posts About</h4></li>
+			<li><h4>More About</h4></li>
 			<?php foreach ( $rel_topics as $count => $topic ) : ?>
 			<li><a href="#rp<?php echo $count; ?>"><?php echo $topic->name; ?></a></li>
 			<?php endforeach; ?>
