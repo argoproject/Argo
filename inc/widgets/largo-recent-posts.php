@@ -57,7 +57,7 @@ class largo_recent_posts_widget extends WP_Widget {
     		<?php endif; // end more featured posts
 
     		if($instance['linkurl'] !='') {?>
-				<a href="<?php echo $instance['linkurl']; ?>" class="morelink"><?php echo $instance['linktext']; ?></a>
+				<p class="morelink"><a href="<?php echo $instance['linkurl']; ?>"><?php echo $instance['linktext']; ?></a></p>
 			<?php }
 		echo $after_widget;
 	}
