@@ -25,7 +25,7 @@ class largo_footer_featured_widget extends WP_Widget {
 					array(
 						'taxonomy' => 'prominence',
 						'field' => 'slug',
-						'terms' => 'footer-featured-widget'
+						'terms' => 'footer-featured'
 					)
 				),
 				'showposts' => $instance['num_posts']
