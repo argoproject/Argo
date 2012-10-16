@@ -106,13 +106,14 @@ if ( ! function_exists( 'largo_excerpt' ) ) {
 if ( ! function_exists ('largo_trim_sentences') ) {
 	function largo_trim_sentences($input, $sentences) {
 		$strings = preg_split('/(\.|!|\?)\s/', strip_tags(strip_shortcodes($input)));
-		for ($i = 1; $i < $sentences+1; $i++) {
+		for ($i = 0; $i < $sentences; $i++) {
 			if ($strings[$i] != '')
 				$output .= $strings[$i] . '. ';
 		}
 		return $output;
 	}
 }
+
 if ( ! function_exists( 'largo_content_nav' ) ) {
 /**
  * Display navigation to next/previous pages when applicable
