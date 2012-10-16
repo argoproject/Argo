@@ -36,7 +36,13 @@ class largo_recent_posts_widget extends WP_Widget {
 			echo $before_title . $title . $after_title;?>
 
 			<?php
-			$my_query = new WP_Query( array( 'post__not_in' => get_option( 'sticky_posts' ), 'showposts' => 5 ) );
+			$my_query = new WP_Query( array(
+				'cat' 			=> $instance['cat'],
+				'tag' 			=> $instance['tag'],
+				'author' 		=> $instance['author'],
+				'post__not_in' 	=> get_option( 'sticky_posts' ),
+				'showposts' 	=> $instance['num_posts']
+			) );
           		if ( $my_query->have_posts() ) :
           			while ( $my_query->have_posts() ) : $my_query->the_post(); ?>
 	                  	<div class="post-lead clearfix">
@@ -48,9 +54,11 @@ class largo_recent_posts_widget extends WP_Widget {
 	            else: ?>
 	    		<p class="error"><strong>You don't have any recent posts.</strong></p>
 
-    		<?php endif; // end more featured posts ?>
+    		<?php endif; // end more featured posts
 
-		<?php
+    		if($instance['linkurl'] !='') {?>
+				<a href="<?php echo $instance['linkurl']; ?>" class="morelink"><?php echo $instance['linktext']; ?></a>
+			<?php }
 		echo $after_widget;
 	}
 
@@ -58,6 +66,11 @@ class largo_recent_posts_widget extends WP_Widget {
 		$instance = $old_instance;
 		$instance['title'] = strip_tags( $new_instance['title'] );
 		$instance['num_posts'] = strip_tags( $new_instance['num_posts'] );
+		$instance['cat'] = $new_instance['cat'];
+		$instance['tag'] = $new_instance['tag'];
+		$instance['author'] = $new_instance['author'];
+		$instance['linktext'] = $new_instance['linktext'];
+		$instance['linkurl'] = $new_instance['linkurl'];
 		$instance['widget_class'] = $new_instance['widget_class'];
 		$instance['hidden_tablet'] = $new_instance['hidden_tablet'] ? 1 : 0;
 		$instance['hidden_phone'] = $new_instance['hidden_phone'] ? 1 : 0;
@@ -66,9 +79,14 @@ class largo_recent_posts_widget extends WP_Widget {
 
 	function form( $instance ) {
 		$defaults = array(
-			'title' => 'Recent Stories',
-			'num_posts' => 5,
-			'widget_class' => 'default',
+			'title' 		=> 'Recent Stories',
+			'num_posts' 	=> 5,
+			'cat' 			=> 0,
+			'tag'			=> '',
+			'author' 		=> '',
+			'linktext' 		=> '',
+			'linkurl' 		=> '',
+			'widget_class' 	=> 'default',
 			'hidden_tablet' => '',
 			'hidden_phone'	=> ''
 		);
@@ -85,6 +103,33 @@ class largo_recent_posts_widget extends WP_Widget {
 		<p>
 			<label for="<?php echo $this->get_field_id( 'num_posts' ); ?>"><?php _e('Number of posts to show:', 'largo-recent-posts'); ?></label>
 			<input id="<?php echo $this->get_field_id( 'num_posts' ); ?>" name="<?php echo $this->get_field_name( 'num_posts' ); ?>" value="<?php echo $instance['num_posts']; ?>" style="width:90%;" />
+		</p>
+
+		<p>
+			<label for="<?php echo $this->get_field_id('cat'); ?>"><?php _e('Limit to category: '); ?>
+			<?php wp_dropdown_categories(array('name' => $this->get_field_name('cat'), 'show_option_all' => __('None (all categories)'), 'hide_empty'=>0, 'hierarchical'=>1, 'selected'=>$instance['cat'])); ?></label>
+		</p>
+
+		<p>
+			<label for="<?php echo $this->get_field_id('tag'); ?>"><?php _e('Limit to tags:'); ?></label>
+			<input class="widefat" id="<?php echo $this->get_field_id('tag'); ?>" name="<?php echo $this->get_field_name('tag'); ?>" type="text" value="<?php echo $instance['tag']; ?>" />
+			<br /><small><?php _e('Enter post tags separated by commas (\'cat,dog\')'); ?></small>
+		</p>
+
+		<p>
+			<label for="<?php echo $this->get_field_id('author'); ?>"><?php _e('Limit to author: '); ?>
+			<?php wp_dropdown_users(array('name' => $this->get_field_name('author'), 'show_option_all' => __('None (all authors)'), 'selected'=>$instance['author'])); ?></label>
+
+		</p>
+
+		<p>
+			<label for="<?php echo $this->get_field_id('linktext'); ?>"><?php _e('Link text:'); ?></label>
+			<input class="widefat" id="<?php echo $this->get_field_id('linktext'); ?>" name="<?php echo $this->get_field_name('linktext'); ?>" type="text" value="<?php echo $instance['linktext']; ?>" />
+		</p>
+
+		<p>
+			<label for="<?php echo $this->get_field_id('linkurl'); ?>"><?php _e('URL:'); ?></label>
+			<input class="widefat" id="<?php echo $this->get_field_id('linkurl'); ?>" name="<?php echo $this->get_field_name('linkurl'); ?>" type="text" value="<?php echo $instance['linkurl']; ?>" />
 		</p>
 
 		<label for="<?php echo $this->get_field_id( 'widget_class' ); ?>"><?php _e('Widget Background', 'largo-recent-posts'); ?></label>
