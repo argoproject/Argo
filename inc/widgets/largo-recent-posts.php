@@ -48,7 +48,7 @@ class largo_recent_posts_widget extends WP_Widget {
 	                  	<div class="post-lead clearfix">
 	                      	<h5><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
 	                      	<?php the_post_thumbnail( '60x60' ); ?>
-	                     	<?php the_excerpt(); ?>
+	                     	<?php echo '<p>' . largo_trim_sentences(get_the_content(), $instance['num_sentences']) . '</p>'; ?>
 	                  	</div> <!-- /.post-lead -->
 	            <?php endwhile;
 	            else: ?>
@@ -66,6 +66,7 @@ class largo_recent_posts_widget extends WP_Widget {
 		$instance = $old_instance;
 		$instance['title'] = strip_tags( $new_instance['title'] );
 		$instance['num_posts'] = strip_tags( $new_instance['num_posts'] );
+		$instance['num_sentences'] = strip_tags( $new_instance['num_sentences'] );
 		$instance['cat'] = $new_instance['cat'];
 		$instance['tag'] = $new_instance['tag'];
 		$instance['author'] = $new_instance['author'];
@@ -81,6 +82,7 @@ class largo_recent_posts_widget extends WP_Widget {
 		$defaults = array(
 			'title' 		=> 'Recent Stories',
 			'num_posts' 	=> 5,
+			'num_sentences' => 2,
 			'cat' 			=> 0,
 			'tag'			=> '',
 			'author' 		=> '',
@@ -103,6 +105,11 @@ class largo_recent_posts_widget extends WP_Widget {
 		<p>
 			<label for="<?php echo $this->get_field_id( 'num_posts' ); ?>"><?php _e('Number of posts to show:', 'largo-recent-posts'); ?></label>
 			<input id="<?php echo $this->get_field_id( 'num_posts' ); ?>" name="<?php echo $this->get_field_name( 'num_posts' ); ?>" value="<?php echo $instance['num_posts']; ?>" style="width:90%;" />
+		</p>
+
+		<p>
+			<label for="<?php echo $this->get_field_id( 'num_sentences' ); ?>"><?php _e('Excerpt Length (# of Sentences):', 'largo-footer-featured'); ?></label>
+			<input id="<?php echo $this->get_field_id( 'num_sentences' ); ?>" name="<?php echo $this->get_field_name( 'num_sentences' ); ?>" value="<?php echo $instance['num_sentences']; ?>" style="width:90%;" />
 		</p>
 
 		<p>
