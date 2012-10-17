@@ -40,7 +40,7 @@ class largo_sidebar_featured_widget extends WP_Widget {
 					array(
 						'taxonomy' => 'prominence',
 						'field' => 'slug',
-						'terms' => 'sidebar-featured-widget'
+						'terms' => 'sidebar-featured'
 					)
 				),
 				'showposts' => $instance['num_posts']
