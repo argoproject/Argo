@@ -1600,7 +1600,6 @@ table .span24 {
 .global-nav {
   color: #fff;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 14px;
   position: relative;
   height: 32px;
   overflow: visible;
@@ -1609,11 +1608,11 @@ table .span24 {
 .global-nav ul {
   margin: 0;
   list-style: none;
-  font-size: 14px;
+  font-size: 12px;
 }
 .global-nav ul li {
   float: left;
-  margin: 4px 18px 0 0;
+  margin: 5px 18px 0 0;
 }
 .global-nav ul a {
   color: #ffffff;
