@@ -114,37 +114,7 @@ function largo_widget_rss_output( $rss, $args = array() ) {
 		$desc = str_replace(array("read more", "Read More", "È"), "", $desc);
 		$desc = preg_replace('/[^a-zA-Z0-9;_ %\[\]\.\(\)%&-]/s', '', $desc);
 		$desc = trim(str_replace('&039;', '\'', $desc));
-
-		//$strings = preg_split('/(\.|!|\?)\s/', $desc);
-
-		$re = '/# Split sentences on whitespace between them.
-		    (?<=                # Begin positive lookbehind.
-		      [.!?]             # Either an end of sentence punct,
-		    | [.!?][\'"]        # or end of sentence punct and quote.
-		    )                   # End positive lookbehind.
-		    (?<!                # Begin negative lookbehind.
-		      Mr\.              # Skip either "Mr."
-		    | Mrs\.             # or "Mrs.",
-		    | Ms\.              # or "Ms.",
-		    | Jr\.              # or "Jr.",
-		    | Dr\.              # or "Dr.",
-		    | Prof\.            # or "Prof.",
-		    | Sr\.              # or "Sr.",
-		    | Rep\.             # or "Rep.",
-		    | Sen\.             # or "Sen.",
-		    | Gov\.             # or "Gov.",
-		    | Pres\.            # or "Pres.",
-		    | \s[A-Z]\.         # or initials ex: "George W. Bush",
-		    )                   # End negative lookbehind.
-		    \s+                 # Split on whitespace between sentences.
-		    /ix';
-		$strings = preg_split($re, $desc, -1, PREG_SPLIT_NO_EMPTY);
-		$output = '';
-		for ($i = 0; $i < 1; $i++) {
-			if (!empty($strings[$i]))
-				$output .= $strings[$i];
-		}
-		$desc = $output;
+		$desc = largo_trim_sentences($desc, 2);
 
 		$summary = "<p class='rssSummary'>$desc</p>";
 
