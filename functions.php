@@ -105,10 +105,30 @@ if ( ! function_exists( 'largo_excerpt' ) ) {
 
 if ( ! function_exists ('largo_trim_sentences') ) {
 	function largo_trim_sentences($input, $sentences) {
-		$strings = preg_split('/(\.|!|\?)\s/', strip_tags(strip_shortcodes($input)));
+		$re = '/# Split sentences on whitespace between them.
+		    (?<=                # Begin positive lookbehind.
+		      [.!?]             # Either an end of sentence punct,
+		    | [.!?][\'"]        # or end of sentence punct and quote.
+		    )                   # End positive lookbehind.
+		    (?<!                # Begin negative lookbehind.
+		      Mr\.              # Skip either "Mr."
+		    | Mrs\.             # or "Mrs.",
+		    | Ms\.              # or "Ms.",
+		    | Jr\.              # or "Jr.",
+		    | Dr\.              # or "Dr.",
+		    | Prof\.            # or "Prof.",
+		    | Sr\.              # or "Sr.",
+		    | Rep\.             # or "Rep.",
+		    )                   # End negative lookbehind.
+		    \s+                 # Split on whitespace between sentences.
+		    /ix';
+		$strings = preg_split($re, strip_tags(strip_shortcodes($input)), -1, PREG_SPLIT_NO_EMPTY);
+
+
+		//$strings = preg_split('/(\.|!|\?)\s/', strip_tags(strip_shortcodes($input)));
 		for ($i = 0; $i < $sentences; $i++) {
 			if ($strings[$i] != '')
-				$output .= $strings[$i] . '. ';
+				$output .= $strings[$i] . ' ';
 		}
 		return $output;
 	}

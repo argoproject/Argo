@@ -111,17 +111,39 @@ function largo_widget_rss_output( $rss, $args = array() ) {
 
 		$desc = str_replace( array("\n", "\r"), ' ', esc_attr( strip_tags( @html_entity_decode( $item->get_description(), ENT_QUOTES, get_option('blog_charset') ) ) ) );
 
-		$strings = preg_split('/(\.|!|\?)\s/', $desc);
-		$output = '';
-		for ($i = 0; $i < 1; $i++) {
-			if ($strings[$i] != '')
-				$output .= $strings[$i] . '. ';
-		}
-
-		//various cleanup unique to our particular feed
-		$desc = str_replace(array("read more", "Read More", "È"), "", $output);
+		$desc = str_replace(array("read more", "Read More", "È"), "", $desc);
 		$desc = preg_replace('/[^a-zA-Z0-9;_ %\[\]\.\(\)%&-]/s', '', $desc);
 		$desc = trim(str_replace('&039;', '\'', $desc));
+
+		//$strings = preg_split('/(\.|!|\?)\s/', $desc);
+
+		$re = '/# Split sentences on whitespace between them.
+		    (?<=                # Begin positive lookbehind.
+		      [.!?]             # Either an end of sentence punct,
+		    | [.!?][\'"]        # or end of sentence punct and quote.
+		    )                   # End positive lookbehind.
+		    (?<!                # Begin negative lookbehind.
+		      Mr\.              # Skip either "Mr."
+		    | Mrs\.             # or "Mrs.",
+		    | Ms\.              # or "Ms.",
+		    | Jr\.              # or "Jr.",
+		    | Dr\.              # or "Dr.",
+		    | Prof\.            # or "Prof.",
+		    | Sr\.              # or "Sr.",
+		    | Rep\.             # or "Rep.",
+		                        # or... (you get the idea).
+		    )                   # End negative lookbehind.
+		    \s+                 # Split on whitespace between sentences.
+		    /ix';
+		$strings = preg_split($re, $desc, -1, PREG_SPLIT_NO_EMPTY);
+		$output = '';
+		for ($i = 0; $i < 1; $i++) {
+			if (!empty($strings[$i]))
+				$output .= $strings[$i];
+		}
+		$desc = $output;
+		//various cleanup unique to our particular feed
+
 
 		$summary = "<p class='rssSummary'>$desc</p>";
 
