@@ -6,8 +6,8 @@ class largo_about_widget extends WP_Widget {
 
 	function largo_about_widget() {
 		$widget_ops = array(
-			'classname' => 'largo-about',
-			'description' => 'Show the site description from your theme options page'
+			'classname' 	=> 'largo-about',
+			'description'	=> 'Show the site description from your theme options page'
 		);
 		$this->WP_Widget( 'largo-about-widget', __('Largo About Site', 'largo-about'), $widget_ops);
 	}
@@ -18,6 +18,8 @@ class largo_about_widget extends WP_Widget {
 		$title = apply_filters('widget_title', $instance['title'] );
 
 		$widget_class = !empty($instance['widget_class']) ? $instance['widget_class'] : '';
+		if ($instance['hidden_desktop'] === 1)
+			$widget_class .= ' hidden-desktop';
 		if ($instance['hidden_tablet'] === 1)
 			$widget_class .= ' hidden-tablet';
 		if ($instance['hidden_phone'] === 1)
@@ -48,6 +50,7 @@ class largo_about_widget extends WP_Widget {
 		$instance = $old_instance;
 		$instance['title'] = strip_tags( $new_instance['title'] );
 		$instance['widget_class'] = $new_instance['widget_class'];
+		$instance['hidden_desktop'] = $new_instance['hidden_desktop'] ? 1 : 0;
 		$instance['hidden_tablet'] = $new_instance['hidden_tablet'] ? 1 : 0;
 		$instance['hidden_phone'] = $new_instance['hidden_phone'] ? 1 : 0;
 		return $instance;
@@ -55,12 +58,14 @@ class largo_about_widget extends WP_Widget {
 
 	function form( $instance ) {
 		$defaults = array(
-			'title' 		=> 'About ' . get_bloginfo('name'),
-			'widget_class' 	=> 'default',
-			'hidden_tablet' => '',
-			'hidden_phone'	=> ''
+			'title' 			=> 'About ' . get_bloginfo('name'),
+			'widget_class' 		=> 'default',
+			'hidden_desktop' 	=> '',
+			'hidden_tablet'		=> '',
+			'hidden_phone'		=> ''
 		);
 		$instance = wp_parse_args( (array) $instance, $defaults );
+		$desktop = $instance['hidden_desktop'] ? 'checked="checked"' : '';
 		$tablet = $instance['hidden_tablet'] ? 'checked="checked"' : '';
 		$phone = $instance['hidden_phone'] ? 'checked="checked"' : '';
 		?>
@@ -78,9 +83,11 @@ class largo_about_widget extends WP_Widget {
 		</select>
 
 		<p style="margin:15px 0 10px 5px">
-			<input class="checkbox" type="checkbox" <?php echo $tablet; ?> id="<?php echo $this->get_field_id('hidden_tablet'); ?>" name="<?php echo $this->get_field_name('hidden_tablet'); ?>" /> <label for="<?php echo $this->get_field_id('hidden_tablet'); ?>"><?php _e('Hide on Tablets?'); ?></label>
+			<input class="checkbox" type="checkbox" <?php echo $desktop; ?> id="<?php echo $this->get_field_id('hidden_desktop'); ?>" name="<?php echo $this->get_field_name('hidden_desktop'); ?>" /> <label for="<?php echo $this->get_field_id('hidden_desktop'); ?>"><?php _e('Hidden on Desktops?'); ?></label>
 			<br />
-			<input class="checkbox" type="checkbox" <?php echo $phone; ?> id="<?php echo $this->get_field_id('hidden_phone'); ?>" name="<?php echo $this->get_field_name('hidden_phone'); ?>" /> <label for="<?php echo $this->get_field_id('hidden_phone'); ?>"><?php _e('Hide on Phones?'); ?></label>
+			<input class="checkbox" type="checkbox" <?php echo $tablet; ?> id="<?php echo $this->get_field_id('hidden_tablet'); ?>" name="<?php echo $this->get_field_name('hidden_tablet'); ?>" /> <label for="<?php echo $this->get_field_id('hidden_tablet'); ?>"><?php _e('Hidden on Tablets?'); ?></label>
+			<br />
+			<input class="checkbox" type="checkbox" <?php echo $phone; ?> id="<?php echo $this->get_field_id('hidden_phone'); ?>" name="<?php echo $this->get_field_name('hidden_phone'); ?>" /> <label for="<?php echo $this->get_field_id('hidden_phone'); ?>"><?php _e('Hidden on Phones?'); ?></label>
 		</p>
 	<?php
 	}
