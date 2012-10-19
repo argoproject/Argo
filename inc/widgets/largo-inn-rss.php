@@ -131,7 +131,10 @@ function largo_widget_rss_output( $rss, $args = array() ) {
 		    | Prof\.            # or "Prof.",
 		    | Sr\.              # or "Sr.",
 		    | Rep\.             # or "Rep.",
-		                        # or... (you get the idea).
+		    | Sen\.             # or "Sen.",
+		    | Gov\.             # or "Gov.",
+		    | Pres\.            # or "Pres.",
+		    | \s[A-Z]\.         # or initials ex: "George W. Bush",
 		    )                   # End negative lookbehind.
 		    \s+                 # Split on whitespace between sentences.
 		    /ix';
@@ -142,8 +145,6 @@ function largo_widget_rss_output( $rss, $args = array() ) {
 				$output .= $strings[$i];
 		}
 		$desc = $output;
-		//various cleanup unique to our particular feed
-
 
 		$summary = "<p class='rssSummary'>$desc</p>";
 

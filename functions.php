@@ -119,6 +119,10 @@ if ( ! function_exists ('largo_trim_sentences') ) {
 		    | Prof\.            # or "Prof.",
 		    | Sr\.              # or "Sr.",
 		    | Rep\.             # or "Rep.",
+		    | Sen\.             # or "Sen.",
+		    | Gov\.             # or "Gov.",
+		    | Pres\.            # or "Pres.",
+		    | \s[A-Z]\.         # or initials ex: "George W. Bush",
 		    )                   # End negative lookbehind.
 		    \s+                 # Split on whitespace between sentences.
 		    /ix';
