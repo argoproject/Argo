@@ -17,6 +17,8 @@ class largo_recent_posts_widget extends WP_Widget {
 		$title = apply_filters('widget_title', $instance['title'] );
 
 		$widget_class = !empty($instance['widget_class']) ? $instance['widget_class'] : '';
+		if ($instance['hidden_desktop'] === 1)
+			$widget_class .= ' hidden-desktop';
 		if ($instance['hidden_tablet'] === 1)
 			$widget_class .= ' hidden-tablet';
 		if ($instance['hidden_phone'] === 1)
@@ -36,13 +38,26 @@ class largo_recent_posts_widget extends WP_Widget {
 			echo $before_title . $title . $after_title;?>
 
 			<?php
-			$my_query = new WP_Query( array(
-				'cat' 			=> $instance['cat'],
-				'tag' 			=> $instance['tag'],
-				'author' 		=> $instance['author'],
+			$query_args = array (
 				'post__not_in' 	=> get_option( 'sticky_posts' ),
 				'showposts' 	=> $instance['num_posts']
-			) );
+			);
+			if ($instance['cat'] != '')
+				$query_args['cat'] = $instance['cat'];
+			if ($instance['tag'] != '')
+				$query_args['tag'] = $instance['tag'];
+			if ($instance['author'] != '')
+				$query_args['author'] = $instance['author'];
+			if ($instance['taxonomy'] != '')
+				$query_args['tax_query'] = array(
+					array(
+						'taxonomy' => $instance['taxonomy'],
+						'field' => 'slug',
+						'terms' => $instance['term']
+					)
+				);
+
+			$my_query = new WP_Query( $query_args );
           		if ( $my_query->have_posts() ) :
           			while ( $my_query->have_posts() ) : $my_query->the_post(); ?>
 	                  	<div class="post-lead clearfix">
@@ -69,10 +84,13 @@ class largo_recent_posts_widget extends WP_Widget {
 		$instance['num_sentences'] = strip_tags( $new_instance['num_sentences'] );
 		$instance['cat'] = $new_instance['cat'];
 		$instance['tag'] = $new_instance['tag'];
+		$instance['taxonomy'] = $new_instance['taxonomy'];
+		$instance['term'] = $new_instance['term'];
 		$instance['author'] = $new_instance['author'];
 		$instance['linktext'] = $new_instance['linktext'];
 		$instance['linkurl'] = $new_instance['linkurl'];
 		$instance['widget_class'] = $new_instance['widget_class'];
+		$instance['hidden_desktop'] = $new_instance['hidden_desktop'] ? 1 : 0;
 		$instance['hidden_tablet'] = $new_instance['hidden_tablet'] ? 1 : 0;
 		$instance['hidden_phone'] = $new_instance['hidden_phone'] ? 1 : 0;
 		return $instance;
@@ -80,19 +98,23 @@ class largo_recent_posts_widget extends WP_Widget {
 
 	function form( $instance ) {
 		$defaults = array(
-			'title' 		=> 'Recent Stories',
-			'num_posts' 	=> 5,
-			'num_sentences' => 2,
-			'cat' 			=> 0,
-			'tag'			=> '',
-			'author' 		=> '',
-			'linktext' 		=> '',
-			'linkurl' 		=> '',
-			'widget_class' 	=> 'default',
-			'hidden_tablet' => '',
-			'hidden_phone'	=> ''
+			'title' 			=> 'Recent Stories',
+			'num_posts' 		=> 5,
+			'num_sentences' 	=> 2,
+			'cat' 				=> 0,
+			'tag'				=> '',
+			'taxonomy'			=> '',
+			'term'				=> '',
+			'author' 			=> '',
+			'linktext' 			=> '',
+			'linkurl' 			=> '',
+			'widget_class' 		=> 'default',
+			'hidden_desktop' 	=> '',
+			'hidden_tablet' 	=> '',
+			'hidden_phone'		=> ''
 		);
 		$instance = wp_parse_args( (array) $instance, $defaults );
+		$desktop = $instance['hidden_desktop'] ? 'checked="checked"' : '';
 		$tablet = $instance['hidden_tablet'] ? 'checked="checked"' : '';
 		$phone = $instance['hidden_phone'] ? 'checked="checked"' : '';
 		?>
@@ -112,23 +134,32 @@ class largo_recent_posts_widget extends WP_Widget {
 			<input id="<?php echo $this->get_field_id( 'num_sentences' ); ?>" name="<?php echo $this->get_field_name( 'num_sentences' ); ?>" value="<?php echo $instance['num_sentences']; ?>" style="width:90%;" />
 		</p>
 
+		<p><strong>Limit by Author, Categories or Tags</strong><br /><small><?php _e('Select an author or category from the dropdown menus or enter post tags separated by commas (\'cat,dog\')'); ?></small></p>
+		<p>
+			<label for="<?php echo $this->get_field_id('author'); ?>"><?php _e('Limit to author: '); ?><br />
+			<?php wp_dropdown_users(array('name' => $this->get_field_name('author'), 'show_option_all' => __('None (all authors)'), 'selected'=>$instance['author'])); ?></label>
+
+		</p>
 		<p>
 			<label for="<?php echo $this->get_field_id('cat'); ?>"><?php _e('Limit to category: '); ?>
 			<?php wp_dropdown_categories(array('name' => $this->get_field_name('cat'), 'show_option_all' => __('None (all categories)'), 'hide_empty'=>0, 'hierarchical'=>1, 'selected'=>$instance['cat'])); ?></label>
 		</p>
-
 		<p>
 			<label for="<?php echo $this->get_field_id('tag'); ?>"><?php _e('Limit to tags:'); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id('tag'); ?>" name="<?php echo $this->get_field_name('tag'); ?>" type="text" value="<?php echo $instance['tag']; ?>" />
-			<br /><small><?php _e('Enter post tags separated by commas (\'cat,dog\')'); ?></small>
 		</p>
 
+		<p><strong>Limit by Custom Taxonomy</strong><br /><small><?php _e('Enter the slug for the custom taxonomy you want to query and the term within that taxonomy to display'); ?></small></p>
 		<p>
-			<label for="<?php echo $this->get_field_id('author'); ?>"><?php _e('Limit to author: '); ?>
-			<?php wp_dropdown_users(array('name' => $this->get_field_name('author'), 'show_option_all' => __('None (all authors)'), 'selected'=>$instance['author'])); ?></label>
-
+			<label for="<?php echo $this->get_field_id('taxonomy'); ?>"><?php _e('Taxonomy:'); ?></label>
+			<input class="widefat" id="<?php echo $this->get_field_id('taxonomy'); ?>" name="<?php echo $this->get_field_name('taxonomy'); ?>" type="text" value="<?php echo $instance['taxonomy']; ?>" />
+		</p>
+		<p>
+			<label for="<?php echo $this->get_field_id('term'); ?>"><?php _e('Term:'); ?></label>
+			<input class="widefat" id="<?php echo $this->get_field_id('term'); ?>" name="<?php echo $this->get_field_name('term'); ?>" type="text" value="<?php echo $instance['term']; ?>" />
 		</p>
 
+		<p><strong>More Link</strong><br /><small><?php _e('If you would like to add a more link at the bottom of the widget, add the link text and url here.'); ?></small></p>
 		<p>
 			<label for="<?php echo $this->get_field_id('linktext'); ?>"><?php _e('Link text:'); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id('linktext'); ?>" name="<?php echo $this->get_field_name('linktext'); ?>" type="text" value="<?php echo $instance['linktext']; ?>" />
@@ -147,9 +178,11 @@ class largo_recent_posts_widget extends WP_Widget {
 		</select>
 
 		<p style="margin:15px 0 10px 5px">
-			<input class="checkbox" type="checkbox" <?php echo $tablet; ?> id="<?php echo $this->get_field_id('hidden_tablet'); ?>" name="<?php echo $this->get_field_name('hidden_tablet'); ?>" /> <label for="<?php echo $this->get_field_id('hidden_tablet'); ?>"><?php _e('Hide on Tablets?'); ?></label>
+			<input class="checkbox" type="checkbox" <?php echo $desktop; ?> id="<?php echo $this->get_field_id('hidden_desktop'); ?>" name="<?php echo $this->get_field_name('hidden_desktop'); ?>" /> <label for="<?php echo $this->get_field_id('hidden_desktop'); ?>"><?php _e('Hidden on Desktops?'); ?></label>
 			<br />
-			<input class="checkbox" type="checkbox" <?php echo $phone; ?> id="<?php echo $this->get_field_id('hidden_phone'); ?>" name="<?php echo $this->get_field_name('hidden_phone'); ?>" /> <label for="<?php echo $this->get_field_id('hidden_phone'); ?>"><?php _e('Hide on Phones?'); ?></label>
+			<input class="checkbox" type="checkbox" <?php echo $tablet; ?> id="<?php echo $this->get_field_id('hidden_tablet'); ?>" name="<?php echo $this->get_field_name('hidden_tablet'); ?>" /> <label for="<?php echo $this->get_field_id('hidden_tablet'); ?>"><?php _e('Hidden on Tablets?'); ?></label>
+			<br />
+			<input class="checkbox" type="checkbox" <?php echo $phone; ?> id="<?php echo $this->get_field_id('hidden_phone'); ?>" name="<?php echo $this->get_field_name('hidden_phone'); ?>" /> <label for="<?php echo $this->get_field_id('hidden_phone'); ?>"><?php _e('Hidden on Phones?'); ?></label>
 		</p>
 
 	<?php
