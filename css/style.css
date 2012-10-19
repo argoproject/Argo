@@ -3409,6 +3409,7 @@ p.comment-form-comment {
 }
 #sidebar .widget_archive select,
 #sidebar .widget_categories select,
+#sidebar .largo-taxonomy-list select,
 #sidebar .widget_search form {
   margin: 4.8px 0;
 }
