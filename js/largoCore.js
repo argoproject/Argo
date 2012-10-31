@@ -1,8 +1,3 @@
-Modernizr.load({
-	test: Modernizr.mq('only all'),
-	nope: 'respond.min.js'
-});
-
 jQuery(document).ready(function($) {
 
 	//html5 placeholders

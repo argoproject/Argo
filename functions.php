@@ -360,17 +360,16 @@ if ( ! function_exists( 'largo_enqueue_js' ) ) {
  * Enqueue JS for the footer
  */
 	function largo_enqueue_js() {
-		wp_enqueue_script( 'text_placeholder', get_template_directory_uri() . '/js/jquery.textPlaceholder.js', array( 'jquery' ), '1.0', true );
-		if ( is_single() && of_get_option( 'show_related_content' ) )
-			wp_enqueue_script( 'idTabs', get_template_directory_uri() . '/js/jquery.idTabs.js', array( 'jquery' ), '1.0', true );
-		wp_enqueue_script( 'bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js', array( 'jquery' ), '1.0', true );
+		wp_enqueue_script( 'largoPlugins', get_template_directory_uri() . '/js/largoPlugins.js', array( 'jquery' ), '1.0', true );
+		wp_enqueue_script( 'largoCore', get_template_directory_uri() . '/js/largoCore.js', array( 'jquery' ), '1.0', true );
 		if ( is_home() && of_get_option('homepage_layout') == 'slider' )
 			wp_enqueue_script( 'bootstrap-carousel', get_template_directory_uri() . '/js/bootstrap-carousel.min.js', array( 'jquery' ), '1.0', true );
 			wp_enqueue_style( 'carousel-styles', get_template_directory_uri() . '/css/carousel.css', false, false, 'screen' );
-		wp_enqueue_script( 'largoCore', get_template_directory_uri() . '/js/largoCore.js', array( 'jquery' ), '1.0', true );
-		if ( is_single() )
+		if ( is_single() ) {
 			wp_enqueue_script( 'sharethis', get_template_directory_uri() . '/js/st_buttons.js', array( 'jquery' ), '1.0', true );
-
+			if ( of_get_option( 'show_related_content' ) )
+				wp_enqueue_script( 'idTabs', get_template_directory_uri() . '/js/jquery.idTabs.js', array( 'jquery' ), '1.0', true );
+		}
 	}
 	add_action( 'wp_enqueue_scripts', 'largo_enqueue_js' );
 } // ends check for largo_enqueue_js()
