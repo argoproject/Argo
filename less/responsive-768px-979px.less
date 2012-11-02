@@ -2,22 +2,35 @@
 // ----------------------------------
 
 @media (min-width: 769px) and (max-width: 979px) {
-	.global-nav,
-	#page,
-	#site-footer {
-	  padding: 0 20px;
-	}
-	#site-header h1.branding,
-	#site-header h2.branding {
-		font-size: @baseFontSize * 2.75;
-		span {
-		  font-size: @baseFontSize * 1.222;
-		}
-	}
-	#homepage-featured .sub-stories {
-	  h4, h5 {display:none;}
-	}
-	.carousel-caption {
-      position: static;
+  .global-nav,
+  #page,
+  #site-footer,
+  #footer-logos {
+    padding: 0 18px;
+  }
+  #main {
+    margin: 12px 0 0;
+  }
+  #site-header h1.branding,
+  #site-header h2.branding {
+    font-size: @baseFontSize * 2.75;
+    span {
+      font-size: @baseFontSize * 1.222;
     }
+  }
+  #homepage-featured .sub-stories {
+    h4, h5 {display:none;}
+  }
+  .carousel-caption {
+    position: static;
+  }
+  #footer-logos {
+    clear:both;
+  }
+  #footer-logos .logo4 {
+    clear:both;
+  }
+  #footer-logos a {
+    width: 33.3333333333%;
+  }
 }

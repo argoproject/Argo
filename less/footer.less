@@ -1,10 +1,41 @@
 .footer-bg {
   background-color: @gray;
   .gradientBar (@grayDark, @grayDarker);
-  .box-shadow(0 -1px 10px 0 #000);
-  padding:18px 0;
-  border-top: 1px solid @grayDark;
+  .box-shadow(0 -3px 10px 0 #999);
+  padding:0 0 18px;
   margin-bottom:0;
+}
+#footer-logos-bg {
+  background-color:@white;
+  .box-shadow(0 5px 10px 0 #000);
+  padding:10px 0;
+}
+#footer-logos {
+  overflow:hidden;
+  a {
+    display:block;
+  	float:left;
+    width:16.666666667%;
+    img {
+	  display:block;
+	  width:100%;
+	  max-width:180px;
+	  margin:0 auto;
+    }
+  }
+  h6 {
+    margin-bottom:4px;
+    padding-bottom:3px;
+    border-bottom:1px solid #ccc;
+    font-size:12px;
+    color:@gray;
+    text-transform:uppercase;
+    font-weight:normal;
+    a {
+	  float:right;
+	  text-align:right;
+    }
+  }
 }
 #site-footer {
   color:@white;
@@ -105,7 +136,7 @@ ul#ft-social li {
 }
 
 #supplementary {
-  padding-bottom: @baseline/2;
+  padding: @baseline 0 @baseline/2;
   border-bottom:1px solid #666;
 }
 #boilerplate {

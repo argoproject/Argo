@@ -1493,17 +1493,17 @@ table .span24 {
 }
 .global-nav,
 #page,
-#site-footer {
+#site-footer,
+#footer-logos {
   max-width: 1170px;
   padding: 0 5%;
 }
 #page {
-  padding-bottom: 24px;
+  padding-bottom: 18px;
 }
 #main {
-  margin: 24px 0;
+  margin: 18px 0;
 }
-/****************** LEFT NAV ******************/
 .row-fluid {
   width: 100%;
   *zoom: 1;
@@ -3429,12 +3429,45 @@ p.comment-form-comment {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#333333', endColorstr='#222222', GradientType=0);
   border-color: #222222 #222222 #000000;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  -webkit-box-shadow: 0 -1px 10px 0 #000000;
-  -moz-box-shadow: 0 -1px 10px 0 #000000;
-  box-shadow: 0 -1px 10px 0 #000000;
-  padding: 18px 0;
-  border-top: 1px solid #333333;
+  -webkit-box-shadow: 0 -3px 10px 0 #999999;
+  -moz-box-shadow: 0 -3px 10px 0 #999999;
+  box-shadow: 0 -3px 10px 0 #999999;
+  padding: 0 0 18px;
   margin-bottom: 0;
+}
+#footer-logos-bg {
+  background-color: #ffffff;
+  -webkit-box-shadow: 0 5px 10px 0 #000000;
+  -moz-box-shadow: 0 5px 10px 0 #000000;
+  box-shadow: 0 5px 10px 0 #000000;
+  padding: 10px 0;
+}
+#footer-logos {
+  overflow: hidden;
+}
+#footer-logos a {
+  display: block;
+  float: left;
+  width: 16.666666667%;
+}
+#footer-logos a img {
+  display: block;
+  width: 100%;
+  max-width: 180px;
+  margin: 0 auto;
+}
+#footer-logos h6 {
+  margin-bottom: 4px;
+  padding-bottom: 3px;
+  border-bottom: 1px solid #ccc;
+  font-size: 12px;
+  color: #555555;
+  text-transform: uppercase;
+  font-weight: normal;
+}
+#footer-logos h6 a {
+  float: right;
+  text-align: right;
 }
 #site-footer {
   color: #ffffff;
@@ -3535,7 +3568,7 @@ ul#ft-social li:hover {
   filter: alpha(opacity=75);
 }
 #supplementary {
-  padding-bottom: 12px;
+  padding: 24px 0 12px;
   border-bottom: 1px solid #666;
 }
 #boilerplate {
@@ -3662,7 +3695,8 @@ img[class*="wp-image-"] {
 @media (min-width: 1200px) {
   .global-nav,
   #page,
-  #site-footer {
+  #site-footer,
+  #footer-logos {
     margin: 0 auto;
     padding: 0 3%;
   }
@@ -3670,15 +3704,20 @@ img[class*="wp-image-"] {
 @media screen and (min-width: 1600px) {
   .global-nav,
   #page,
-  #site-footer {
+  #site-footer,
+  #footer-logos {
     padding: 0;
   }
 }
 @media (min-width: 769px) and (max-width: 979px) {
   .global-nav,
   #page,
-  #site-footer {
-    padding: 0 20px;
+  #site-footer,
+  #footer-logos {
+    padding: 0 18px;
+  }
+  #main {
+    margin: 12px 0 0;
   }
   #site-header h1.branding,
   #site-header h2.branding {
@@ -3695,6 +3734,15 @@ img[class*="wp-image-"] {
   .carousel-caption {
     position: static;
   }
+  #footer-logos {
+    clear: both;
+  }
+  #footer-logos .logo4 {
+    clear: both;
+  }
+  #footer-logos a {
+    width: 33.3333333333%;
+  }
 }
 @media (max-width: 768px) {
   #sidebar,
@@ -3705,7 +3753,13 @@ img[class*="wp-image-"] {
     margin-right: 0;
   }
   #site-footer .widget-area {
-    margin-bottom: 24px;
+    margin-bottom: 6px;
+  }
+  #page {
+    padding-bottom: 12px;
+  }
+  #main {
+    margin: 8px 0 0;
   }
   #content {
     width: 100%;
@@ -3776,6 +3830,18 @@ img[class*="wp-image-"] {
     font-size: 18px;
     padding: 8px 0;
   }
+  #footer-logos .logo4 {
+    clear: both;
+  }
+  #footer-logos a {
+    width: 33.3333333333%;
+  }
+  #footer-logos h6 a {
+    display: inline;
+    clear: both;
+    float: none;
+    text-align: left;
+  }
 }
 @media (max-width: 480px) {
   .global-nav-bg {
@@ -3800,17 +3866,19 @@ img[class*="wp-image-"] {
   }
   #header-search {
     float: right;
-    margin: 3px 0 0 0;
+    margin: 3px 0 0;
   }
   #header-search input {
-    font-size: 16px;
-    padding: 2px 4px 2px;
-    line-height: 1;
     height: 23px;
+    padding: 2px 4px;
     overflow: visible;
+    font-size: 16px;
+    line-height: 1;
   }
   #header-search button {
     height: 29px;
+    position: relative;
+    top: 1px;
   }
   #header-search .input-medium {
     width: 110px;
@@ -3830,6 +3898,12 @@ img[class*="wp-image-"] {
   }
   .post-social .print {
     display: none;
+  }
+  #footer-logos h6 a {
+    display: inline;
+    clear: both;
+    float: none;
+    text-align: left;
   }
 }
 @media print {
