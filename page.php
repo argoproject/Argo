@@ -16,7 +16,7 @@ get_header(); ?>
 
 </div><!-- /.grid_8 #content -->
 <aside id="sidebar" class="span4">
-<?php get_sidebar('single'); ?>
+<?php get_sidebar(); ?>
 </aside>
 <!-- /.grid_4 -->
 <?php get_footer(); ?>
