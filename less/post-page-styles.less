@@ -94,7 +94,6 @@ article.story {
 }
 
 // POST META
-
 .labels,
 .tags,
 .pager,
@@ -144,7 +143,6 @@ h3.recent-posts,
 }
 
 // LABELS
-
 .labels .series-label {
   margin:5px;
   padding:8px;
@@ -160,7 +158,6 @@ h3.recent-posts,
 }
 
 // TAGS
-
 .tags {
   height:100%;
   overflow:auto;
@@ -249,7 +246,6 @@ h3.recent-posts,
 }
 
 // RELATED POSTS
-
 #related-posts {
   border: 1px solid @grayLighter;
   border-top: 3px solid @grayLight;
@@ -327,7 +323,6 @@ h3.recent-posts,
 }
 
 // AUTHOR BOX
-
 .author-box {
   clear:both;
   margin-bottom: @baseline;
@@ -481,7 +476,9 @@ p.wp-caption-text {
   border-bottom: 1px dotted @grayLight;
   margin-bottom: @baseline/2;
 }
-
+.stories article[class*="span"] {
+  margin-left:0;
+}
 .stories h2.entry-title {
   font-size: @baseFontSize * 2;
   margin-bottom: @baseline/3;
@@ -566,7 +563,6 @@ p.wp-caption-text {
   border-bottom:none;
   margin-bottom: @baseline;
 }
-
 .sticky-related,
 .sticky-solo {
   .border-radius(8px);
@@ -667,7 +663,6 @@ p.wp-caption-text {
 // --------------------------------------------
 
 // Category, Tag and Taxonomy Pages
-
 .category-background {
   margin-bottom: @baseline*0.815;
   h1 {
@@ -713,16 +708,19 @@ h3.recent-posts {
   border-bottom: 1px solid @grayLight;
   border-top: 3px solid @grayLight;
 }
+article img.attachment-post-thumbnail {
+  float: right;
+  max-width: 30%;
+  margin: 0 0 10px 20px;
+}
 
 // Search Results
-
 span.search-term {
   background-color: lighten(@baseColor, 45%);
   padding:1px 5px;
 }
 
 // Date Archive
-
 .archive-dropdown {
   margin-bottom: @baseline/2;
 }

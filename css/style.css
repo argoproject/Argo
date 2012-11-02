@@ -2680,6 +2680,9 @@ p.wp-caption-text {
   border-bottom: 1px dotted #999999;
   margin-bottom: 12px;
 }
+.stories article[class*="span"] {
+  margin-left: 0;
+}
 .stories h2.entry-title {
   font-size: 32px;
   margin-bottom: 8px;
@@ -2922,6 +2925,11 @@ h3.recent-posts {
   margin-bottom: 19.56px;
   border-bottom: 1px solid #999999;
   border-top: 3px solid #999999;
+}
+article img.attachment-post-thumbnail {
+  float: right;
+  max-width: 30%;
+  margin: 0 0 10px 20px;
 }
 span.search-term {
   background-color: #cde3f6;

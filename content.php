@@ -16,6 +16,7 @@
 	</header><!-- / entry header -->
 
 	<div class="entry-content">
+		<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
 		<?php largo_excerpt( $post, 5 ); ?>
         <?php if ( largo_has_categories_or_tags() ): ?>
             <div class="post-meta bottom-meta">
