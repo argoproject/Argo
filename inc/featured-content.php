@@ -109,7 +109,7 @@ function largo_term_to_label( $term ) {
     	get_term_link( $term, $term->taxonomy ),
     	esc_attr( $term->name ),
     	get_term_feed_link( $term->term_id, $term->taxonomy ),
-    	esc_attr( $term->description ) );
+    	esc_attr( strip_tags ( $term->description ) ) );
 }
 
 if ( ! function_exists( 'largo_the_post_labels' ) ) {
