@@ -1,11 +1,11 @@
 body {
-	margin: 0;
-	font-family: @baseFontFamily;
-	font-size: @baseFontSize;
-	font-weight: @baseFontWeight;
-	line-height: @baseLineHeight;
-	color: @textColor;
-	background-color: @bodyBackground;
+  margin: 0;
+  font-family: @baseFontFamily;
+  font-size: @baseFontSize;
+  font-weight: @baseFontWeight;
+  line-height: @baseLineHeight;
+  color: @textColor;
+  background-color: @bodyBackground;
 }
 
 // --------------------------------------------
@@ -29,71 +29,77 @@ a {
 // --------------------------------------------
 
 p,
- dl,
- hr,
- h1,
- h2,
- h3,
- h4,
- h5,
- h6,
- ol,
- ul,
- pre,
- table,
- address,
- fieldset {
-	margin: 0 0 @baseline;
+dl,
+hr,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ol,
+ul,
+pre,
+table,
+address,
+fieldset {
+  margin: 0 0 @baseline;
 }
-
 h1 {
-	font-size: @baseFontSize * 3.375;
-	&.entry-title {
-		font-size: @baseFontSize * 2.75;
-		margin-bottom: @baseline/2;
-		line-height:1;
-	}
+  font-size: @baseFontSize * 3.375;
+  &.entry-title {
+    font-size: @baseFontSize * 2.75;
+    margin-bottom: @baseline/2;
+    line-height:1;
+  }
 }
 
 h2 {
-	font-size: @baseFontSize * 2.75;
+  font-size: @baseFontSize * 2.75;
 }
 
 h3 {
-	font-size: @baseFontSize * 2.25;
+  font-size: @baseFontSize * 2.25;
 }
 h4,
 .entry-content h1,
 .entry-content h2,
 .entry-content h3 {
-	font-size: @baseFontSize * 1.833;
+  font-size: @baseFontSize * 1.833;
 }
 h5,
 .stories h3,
 .entry-content h4 {
-	font-size: @baseFontSize * 1.5;
+  font-size: @baseFontSize * 1.5;
 }
 h6,
 .entry-content h5 {
-	font-size: @baseFontSize * 1.222;
+  font-size: @baseFontSize * 1.222;
 }
 h7,
 .entry-content h6 {
-	font-size: @baseFontSize;
+  font-size: @baseFontSize;
 }
 h8,
 .entry-content h7 {
-	font-size: @baseFontSize * 0.815;
+  font-size: @baseFontSize * 0.815;
 }
 h1, h2, h3, h4, h5, h6, h7, h8 {
-	font-family: @headingsFontFamily;
-	font-weight: @headingsFontWeight;
-	color: @headingsColor;
-	line-height:1.3;
-	text-rendering: optimizelegibility;
-    small {
-    	font-size: 0.815em;
-    }
+  font-family: @headingsFontFamily;
+  font-weight: @headingsFontWeight;
+  color: @headingsColor;
+  line-height:1.3;
+  text-rendering: optimizelegibility;
+  small {
+    font-size: 0.815em;
+  }
+}
+.entry-content h2,
+.entry-content h3,
+.entry-content h4,
+.entry-content h5,
+.entry-content h6 {
+  margin-bottom: @baseline*0.815;
 }
 p {
   font-size: @baseFontSize + 3;
@@ -268,5 +274,3 @@ hr {
   border-top: 1px solid @grayLighter;
   border-bottom: 1px solid @white;
 }
-
-

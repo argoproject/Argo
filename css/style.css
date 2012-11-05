@@ -230,6 +230,13 @@ h7 small,
 h8 small {
   font-size: 0.815em;
 }
+.entry-content h2,
+.entry-content h3,
+.entry-content h4,
+.entry-content h5,
+.entry-content h6 {
+  margin-bottom: 19.56px;
+}
 p {
   font-size: 19px;
   line-height: 1.5;
