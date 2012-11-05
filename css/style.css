@@ -3386,6 +3386,10 @@ p.comment-form-comment {
 .fb-like-box span iframe[style] {
   width: 100% !important;
 }
+.fb-like-box {
+  background: white !important;
+  background-color: white !important;
+}
 .largo-about p {
   margin-bottom: 0;
 }
