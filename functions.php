@@ -98,6 +98,7 @@ if ( ! function_exists( 'largo_excerpt' ) ) {
 		else : // otherwise we'll just do our best and make the prettiest excerpt we can muster
 			$output = largo_trim_sentences(get_the_content(), $sentence_count);
 			$output .= '<a href="' . get_permalink() . '">' . $more_link . '</a>';
+			$output = strip_tags(str_replace('(more...)', '', $output));
 			echo apply_filters('the_content', $output);
 		endif;
 	}
@@ -122,6 +123,7 @@ if ( ! function_exists ('largo_trim_sentences') ) {
 		    | Sen\.             # or "Sen.",
 		    | Gov\.             # or "Gov.",
 		    | Pres\.            # or "Pres.",
+		    | U\.S\.            # or "U.S.",
 		    | \s[A-Z]\.         # or initials ex: "George W. Bush",
 		    )                   # End negative lookbehind.
 		    \s+                 # Split on whitespace between sentences.
