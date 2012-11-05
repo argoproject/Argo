@@ -2888,6 +2888,12 @@ p.wp-caption-text {
   font-weight: bold;
   font-size: 10.672px;
 }
+.home .stories article img.attachment-medium,
+.sub-stories img.attachment-post-thumbnail {
+  max-width: 30%;
+  float: right;
+  margin: 0 0 10px 20px;
+}
 .category-background {
   margin-bottom: 19.56px;
 }
