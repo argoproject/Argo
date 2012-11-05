@@ -32,8 +32,6 @@ class largo_facebook_widget extends WP_Widget {
 
 		echo $before_widget;
 
-			// <div class="fb-like-box" data-href="http://www.facebook.com/platform" data-height="400" data-show-faces="true" data-stream="true" data-header="true"></div>
-
 			 $output = '<div class="fb-like-box" data-href="' . $instance['fb_page_url'] . '" data-height="' . $instance['widget-height'] . '"';
 			 $output .= $instance['show_faces'] === 1 ? ' data-show-faces="true"' : ' data-show-faces="false"';
 			 $output .= $instance['show_stream'] === 1 ? ' data-stream="true"' : ' data-stream="false"';
