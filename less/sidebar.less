@@ -139,9 +139,30 @@
   }
 }
 #sidebar .widget.largo-INN-RSS.rev .widget-title a {
-	color:#333;
+  color:#333;
 }
+#sidebar .widget.largo-recent-comments {
+  ul {
+    margin-left:0;
+    list-style:none;
+  }
+  p {
+    margin-bottom:3px;
+    &.comment-excerpt {
+      &:before {
+	    content: open-quote;
+	  }
+	  &:after {
+	    content: close-quote;
+	  }
+    }
+    &.comment-meta {
+      font-style: italic;
+      color:inherit;
+    }
+  }
 
+}
 //adjustments for default WP widgets
 #sidebar .widget_archive select,
 #sidebar .widget_categories select,

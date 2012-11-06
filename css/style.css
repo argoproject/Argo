@@ -3439,6 +3439,23 @@ p.comment-form-comment {
 #sidebar .widget.largo-INN-RSS.rev .widget-title a {
   color: #333;
 }
+#sidebar .widget.largo-recent-comments ul {
+  margin-left: 0;
+  list-style: none;
+}
+#sidebar .widget.largo-recent-comments p {
+  margin-bottom: 3px;
+}
+#sidebar .widget.largo-recent-comments p.comment-excerpt:before {
+  content: open-quote;
+}
+#sidebar .widget.largo-recent-comments p.comment-excerpt:after {
+  content: close-quote;
+}
+#sidebar .widget.largo-recent-comments p.comment-meta {
+  font-style: italic;
+  color: inherit;
+}
 #sidebar .widget_archive select,
 #sidebar .widget_categories select,
 #sidebar .largo-taxonomy-list select,
