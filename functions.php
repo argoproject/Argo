@@ -437,14 +437,18 @@ if ( ! function_exists( 'largo_google_analytics' ) ) {
  * add Google Analytics code to the footer, you need to add your GA ID to the theme settings for this to work
  */
 	function largo_google_analytics() {
-
-		if ( get_option( 'ga_id', true ) // make sure the ga_id setting is defined
-			&& ( !is_user_logged_in() ) ) : // don't track logged in users
-		?>
+		if ( !is_user_logged_in() ) : // don't track logged in users ?>
 			<script>
 			    var _gaq = _gaq || [];
-			    _gaq.push(['_setAccount', '<?php echo of_get_option( "ga_id" ) ?>']);
-			    _gaq.push(['_trackPageview']);
+			<?php if ( of_get_option( 'ga_id', true ) ) : // make sure the ga_id setting is defined ?>
+				_gaq.push(['_setAccount', '<?php echo of_get_option( "ga_id" ) ?>']);
+				_gaq.push(['_trackPageview']);
+			<?php endif; ?>
+			    _gaq.push(
+					["largo._setAccount", "UA-17578670-4"],
+					["largo._setCustomVar", 1, "SiteName", "<?php bloginfo('name') ?>"],
+					["largo._trackPageview"]
+				);
 
 			    (function() {
 				    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
@@ -452,8 +456,7 @@ if ( ! function_exists( 'largo_google_analytics' ) ) {
 				    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 				})();
 			</script>
-		<?php
-		endif;
+	<?php endif;
 	}
 	add_action( 'wp_footer', 'largo_google_analytics' );
 } // ends check for largo_google_analytics()
