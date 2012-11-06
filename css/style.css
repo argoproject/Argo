@@ -3617,10 +3617,6 @@ ul#ft-social li:hover {
 #boilerplate p.back-to-top {
   float: right;
 }
-#boilerplate p.footer-credit,
-#boilerplate p.footer-credit a {
-  color: #555555;
-}
 #boilerplate .menu {
   clear: both;
   margin: 0;
