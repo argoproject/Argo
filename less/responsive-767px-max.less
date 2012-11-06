@@ -34,6 +34,9 @@
     width:100%;
     margin:0;
   }
+  #related-post-nav a {
+    padding: 8px 5px;
+  }
   .global-nav ul {
     display:none;
   }
@@ -58,8 +61,13 @@
       font-size: @baseFontSize * 1.222;
     }
   }
-  h1.entry-title {
+  h1.entry-title,
+  h1.page-title {
     font-size: @baseFontSize * 2;
+    line-height: 1.2;
+  }
+  .category-background .related-topics ul {
+	line-height:1.5;
   }
   .stories h2.entry-title,
   .sticky-main-feature h2,

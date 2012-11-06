@@ -14,9 +14,10 @@ class largo_text_widget extends WP_Widget {
 			'classname' 	=> 'largo-text',
 			'description' 	=> 'Arbitrary text or HTML',
 		);
+		$control_ops = array('width' => 400, 'height' => 350);
 
 		/* Create the widget. */
-		$this->WP_Widget( 'largo-text-widget', 'Largo Text or HTML', $widget_ops );
+		$this->WP_Widget( 'largo-text-widget', 'Largo Text or HTML', $widget_ops, $control_ops );
 	}
 
 	/**

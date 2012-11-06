@@ -3809,6 +3809,9 @@ img[class*="wp-image-"] {
     width: 100%;
     margin: 0;
   }
+  #related-post-nav a {
+    padding: 8px 5px;
+  }
   .global-nav ul {
     display: none;
   }
@@ -3834,8 +3837,13 @@ img[class*="wp-image-"] {
     padding: 0;
     font-size: 19.552px;
   }
-  h1.entry-title {
+  h1.entry-title,
+  h1.page-title {
     font-size: 32px;
+    line-height: 1.2;
+  }
+  .category-background .related-topics ul {
+    line-height: 1.5;
   }
   .stories h2.entry-title,
   .sticky-main-feature h2,
