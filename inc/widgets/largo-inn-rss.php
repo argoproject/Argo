@@ -19,7 +19,7 @@ class largo_INN_RSS_widget extends WP_Widget {
 		extract($args);
 
 		$rss = fetch_feed('http://www.investigativenewsnetwork.org/member-feed-items.rss');
-		$title = 'Recent stories from INN members';
+		$title = 'Stories From Other INN Members';
 		$desc = '';
 		$link = 'http://www.investigativenewsnetwork.org/';
 		$url = esc_url(strip_tags($url));
