@@ -104,7 +104,7 @@ class largo_text_widget extends WP_Widget {
 
 		<textarea class="widefat" rows="16" cols="20" id="<?php echo $this->get_field_id('text'); ?>" name="<?php echo $this->get_field_name('text'); ?>"><?php echo $text; ?></textarea>
 
-		<label for="<?php echo $this->get_field_id( 'widget_class' ); ?>"><?php _e('Widget Background', 'largo-follow'); ?></label>
+		<label for="<?php echo $this->get_field_id( 'widget_class' ); ?>"><?php _e('Widget Background', 'largo-text'); ?></label>
 		<select id="<?php echo $this->get_field_id('widget_class'); ?>" name="<?php echo $this->get_field_name('widget_class'); ?>" class="widefat" style="width:90%;">
 		    <option <?php selected( $instance['widget_class'], 'default'); ?> value="default">Default</option>
 		    <option <?php selected( $instance['widget_class'], 'rev'); ?> value="rev">Reverse</option>
