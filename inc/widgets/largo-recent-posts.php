@@ -120,7 +120,7 @@ class largo_recent_posts_widget extends WP_Widget {
 		?>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e('Title:', 'largo-recent-posts'); ?></label>
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e('Title:', 'largo-recent-posts', 'largo-recent-posts'); ?></label>
 			<input id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" style="width:90%;" />
 		</p>
 
@@ -130,43 +130,43 @@ class largo_recent_posts_widget extends WP_Widget {
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'num_sentences' ); ?>"><?php _e('Excerpt Length (# of Sentences):', 'largo-footer-featured'); ?></label>
+			<label for="<?php echo $this->get_field_id( 'num_sentences' ); ?>"><?php _e('Excerpt Length (# of Sentences):', 'largo-recent-posts'); ?></label>
 			<input id="<?php echo $this->get_field_id( 'num_sentences' ); ?>" name="<?php echo $this->get_field_name( 'num_sentences' ); ?>" value="<?php echo $instance['num_sentences']; ?>" style="width:90%;" />
 		</p>
 
 		<p><strong>Limit by Author, Categories or Tags</strong><br /><small><?php _e('Select an author or category from the dropdown menus or enter post tags separated by commas (\'cat,dog\')'); ?></small></p>
 		<p>
-			<label for="<?php echo $this->get_field_id('author'); ?>"><?php _e('Limit to author: '); ?><br />
-			<?php wp_dropdown_users(array('name' => $this->get_field_name('author'), 'show_option_all' => __('None (all authors)'), 'selected'=>$instance['author'])); ?></label>
+			<label for="<?php echo $this->get_field_id('author'); ?>"><?php _e('Limit to author: ', 'largo-recent-posts'); ?><br />
+			<?php wp_dropdown_users(array('name' => $this->get_field_name('author'), 'show_option_all' => __('None (all authors)', 'largo-recent-posts'), 'selected'=>$instance['author'])); ?></label>
 
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id('cat'); ?>"><?php _e('Limit to category: '); ?>
-			<?php wp_dropdown_categories(array('name' => $this->get_field_name('cat'), 'show_option_all' => __('None (all categories)'), 'hide_empty'=>0, 'hierarchical'=>1, 'selected'=>$instance['cat'])); ?></label>
+			<label for="<?php echo $this->get_field_id('cat'); ?>"><?php _e('Limit to category: ', 'largo-recent-posts'); ?>
+			<?php wp_dropdown_categories(array('name' => $this->get_field_name('cat'), 'show_option_all' => __('None (all categories)', 'largo-recent-posts'), 'hide_empty'=>0, 'hierarchical'=>1, 'selected'=>$instance['cat'])); ?></label>
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id('tag'); ?>"><?php _e('Limit to tags:'); ?></label>
+			<label for="<?php echo $this->get_field_id('tag'); ?>"><?php _e('Limit to tags:', 'largo-recent-posts'); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id('tag'); ?>" name="<?php echo $this->get_field_name('tag'); ?>" type="text" value="<?php echo $instance['tag']; ?>" />
 		</p>
 
-		<p><strong>Limit by Custom Taxonomy</strong><br /><small><?php _e('Enter the slug for the custom taxonomy you want to query and the term within that taxonomy to display'); ?></small></p>
+		<p><strong>Limit by Custom Taxonomy</strong><br /><small><?php _e('Enter the slug for the custom taxonomy you want to query and the term within that taxonomy to display', 'largo-recent-posts'); ?></small></p>
 		<p>
-			<label for="<?php echo $this->get_field_id('taxonomy'); ?>"><?php _e('Taxonomy:'); ?></label>
+			<label for="<?php echo $this->get_field_id('taxonomy'); ?>"><?php _e('Taxonomy:', 'largo-recent-posts'); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id('taxonomy'); ?>" name="<?php echo $this->get_field_name('taxonomy'); ?>" type="text" value="<?php echo $instance['taxonomy']; ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id('term'); ?>"><?php _e('Term:'); ?></label>
+			<label for="<?php echo $this->get_field_id('term'); ?>"><?php _e('Term:', 'largo-recent-posts'); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id('term'); ?>" name="<?php echo $this->get_field_name('term'); ?>" type="text" value="<?php echo $instance['term']; ?>" />
 		</p>
 
-		<p><strong>More Link</strong><br /><small><?php _e('If you would like to add a more link at the bottom of the widget, add the link text and url here.'); ?></small></p>
+		<p><strong>More Link</strong><br /><small><?php _e('If you would like to add a more link at the bottom of the widget, add the link text and url here.', 'largo-recent-posts'); ?></small></p>
 		<p>
-			<label for="<?php echo $this->get_field_id('linktext'); ?>"><?php _e('Link text:'); ?></label>
+			<label for="<?php echo $this->get_field_id('linktext'); ?>"><?php _e('Link text:', 'largo-recent-posts'); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id('linktext'); ?>" name="<?php echo $this->get_field_name('linktext'); ?>" type="text" value="<?php echo $instance['linktext']; ?>" />
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id('linkurl'); ?>"><?php _e('URL:'); ?></label>
+			<label for="<?php echo $this->get_field_id('linkurl'); ?>"><?php _e('URL:', 'largo-recent-posts'); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id('linkurl'); ?>" name="<?php echo $this->get_field_name('linkurl'); ?>" type="text" value="<?php echo $instance['linkurl']; ?>" />
 		</p>
 
@@ -178,11 +178,11 @@ class largo_recent_posts_widget extends WP_Widget {
 		</select>
 
 		<p style="margin:15px 0 10px 5px">
-			<input class="checkbox" type="checkbox" <?php echo $desktop; ?> id="<?php echo $this->get_field_id('hidden_desktop'); ?>" name="<?php echo $this->get_field_name('hidden_desktop'); ?>" /> <label for="<?php echo $this->get_field_id('hidden_desktop'); ?>"><?php _e('Hidden on Desktops?'); ?></label>
+			<input class="checkbox" type="checkbox" <?php echo $desktop; ?> id="<?php echo $this->get_field_id('hidden_desktop'); ?>" name="<?php echo $this->get_field_name('hidden_desktop'); ?>" /> <label for="<?php echo $this->get_field_id('hidden_desktop'); ?>"><?php _e('Hidden on Desktops?', 'largo-recent-posts'); ?></label>
 			<br />
-			<input class="checkbox" type="checkbox" <?php echo $tablet; ?> id="<?php echo $this->get_field_id('hidden_tablet'); ?>" name="<?php echo $this->get_field_name('hidden_tablet'); ?>" /> <label for="<?php echo $this->get_field_id('hidden_tablet'); ?>"><?php _e('Hidden on Tablets?'); ?></label>
+			<input class="checkbox" type="checkbox" <?php echo $tablet; ?> id="<?php echo $this->get_field_id('hidden_tablet'); ?>" name="<?php echo $this->get_field_name('hidden_tablet'); ?>" /> <label for="<?php echo $this->get_field_id('hidden_tablet'); ?>"><?php _e('Hidden on Tablets?', 'largo-recent-posts'); ?></label>
 			<br />
-			<input class="checkbox" type="checkbox" <?php echo $phone; ?> id="<?php echo $this->get_field_id('hidden_phone'); ?>" name="<?php echo $this->get_field_name('hidden_phone'); ?>" /> <label for="<?php echo $this->get_field_id('hidden_phone'); ?>"><?php _e('Hidden on Phones?'); ?></label>
+			<input class="checkbox" type="checkbox" <?php echo $phone; ?> id="<?php echo $this->get_field_id('hidden_phone'); ?>" name="<?php echo $this->get_field_name('hidden_phone'); ?>" /> <label for="<?php echo $this->get_field_id('hidden_phone'); ?>"><?php _e('Hidden on Phones?', 'largo-recent-posts'); ?></label>
 		</p>
 
 	<?php
