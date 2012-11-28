@@ -1,9 +1,14 @@
 @import "variables.less";
 @import "mixins.less";
 
+
+#homepage-slider {
+  margin-bottom: @baseline;
+  min-height:100px;
+}
+
 // CAROUSEL
 // --------
-
 .carousel {
   position: relative;
   margin-bottom: @baseLineHeight;
@@ -142,6 +147,6 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 979px) {
   .carousel-caption { position: static; }
 }

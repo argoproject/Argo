@@ -1,3 +1,7 @@
+#homepage-slider {
+  margin-bottom: 24px;
+  min-height: 100px;
+}
 .carousel {
   position: relative;
   margin-bottom: 24px;
@@ -113,7 +117,7 @@
 .carousel-caption p a {
   display: none;
 }
-@media (max-width: 768px) {
+@media (max-width: 979px) {
   .carousel-caption {
     position: static;
   }

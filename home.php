@@ -35,7 +35,6 @@
 								<div class="sticky-main-feature span12">
 						<?php endif; // largo_post_has_features(); ?>
 
-
 									<?php if ( has_post_thumbnail() ): ?>
 										<div class="image-wrap">
 											<h4>FEATURED</h4>
