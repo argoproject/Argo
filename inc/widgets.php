@@ -1,8 +1,6 @@
 <?php
 
-/**
- * remove the unsupported default WP widgets
- */
+// remove default WP widgets
 function largo_unregister_widgets() {
 	unregister_widget( 'WP_Widget_Pages' );
 	unregister_widget( 'WP_Widget_Calendar' );
@@ -31,7 +29,7 @@ require_once( get_template_directory() . '/inc/widgets/largo-facebook.php' );
 require_once( get_template_directory() . '/inc/widgets/largo-text.php' );
 require_once( get_template_directory() . '/inc/widgets/largo-recent-comments.php' );
 
-// ...and then register them
+// and then register them
 function largo_load_widgets() {
     register_widget( 'largo_follow_widget' );
     register_widget( 'largo_footer_featured_widget' );
@@ -47,5 +45,41 @@ function largo_load_widgets() {
     register_widget( 'largo_recent_comments_widget' );
 }
 add_action( 'widgets_init', 'largo_load_widgets' );
+
+// add odd/even and incremental counter classes to widgets
+function add_odd_even_widget_classes($params) {
+	global $widget_num;
+
+	// Widget class
+	$class = array();
+	$class[] = 'widget';
+
+	// Iterated class
+	$widget_num++;
+	$class[] = 'widget-' . $widget_num;
+
+	// Alt class
+	if ($widget_num % 2) :
+		$class[] = 'odd';
+	else :
+		$class[] = 'even';
+	endif;
+
+	// Join the classes in the array
+	$class = join(' ', $class);
+
+	// Interpolate the 'my_widget_class' placeholder
+	$params[0]['before_widget'] = str_replace('odd_even', $class, $params[0]['before_widget']);
+	return $params;
+}
+add_filter('dynamic_sidebar_params', 'add_odd_even_widget_classes');
+
+// reset counter for each sidebar
+add_filter('get_sidebar','widget_counter_reset', 99);
+function widget_counter_reset($text) {
+   global $widget_num;
+   $widget_num = 0;
+   return $text;
+}
 
 ?>
