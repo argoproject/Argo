@@ -56,7 +56,4 @@ function remove_default_post_screen_metaboxes() {
 }
 add_action('admin_menu','remove_default_post_screen_metaboxes');
 
-
-
-
 ?>
