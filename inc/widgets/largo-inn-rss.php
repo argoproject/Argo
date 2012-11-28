@@ -17,8 +17,7 @@ class largo_INN_RSS_widget extends WP_Widget {
 	function widget($args, $instance) {
 
 		extract($args);
-
-		$rss = fetch_feed('http://www.investigativenewsnetwork.org/member-feed-items.rss');
+		$rss = fetch_feed('http://investigativenewsnetwork.org/all-member-news.rss');
 		$title = 'Stories From Other INN Members';
 		$desc = '';
 		$link = 'http://www.investigativenewsnetwork.org/';
@@ -110,10 +109,6 @@ function largo_widget_rss_output( $rss, $args = array() ) {
 		$title = esc_attr(strip_tags($item->get_title()));
 
 		$desc = str_replace( array("\n", "\r"), ' ', esc_attr( strip_tags( @html_entity_decode( $item->get_description(), ENT_QUOTES, get_option('blog_charset') ) ) ) );
-
-		$desc = str_replace(array("read more", "Read More", "È"), "", $desc);
-		$desc = preg_replace('/[^a-zA-Z0-9;_ %\[\]\.\(\)%&-]/s', '', $desc);
-		$desc = trim(str_replace('&039;', '\'', $desc));
 		$desc = largo_trim_sentences($desc, 2);
 
 		$summary = "<p class='rssSummary'>$desc</p>";
