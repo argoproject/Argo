@@ -62,7 +62,7 @@ class largo_recent_posts_widget extends WP_Widget {
 
 			$my_query = new WP_Query( $query_args );
           		if ( $my_query->have_posts() ) :
-          			while ( $my_query->have_posts() ) : $my_query->the_post(); ?>
+          			while ( $my_query->have_posts() ) : $my_query->the_post(); $ids[] = get_the_ID(); ?>
 	                  	<div class="post-lead clearfix">
 	                      	<h5><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
 	                      	<?php
