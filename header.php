@@ -35,15 +35,11 @@
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 
 <link rel="canonical" href="<?php echo $current_url; ?>" />
-<?php
-	if (get_option( 'blog_public') ) {
-		if (is_date() || ( is_archive() &&  of_get_option( 'noindex_archives' ) ) ) { ?>
-			<meta name="robots" content="noindex,follow" />
-<?php 	} else { ?>
-			<meta name="robots" content="index,follow" />
-<?php   }
-	}
-?>
+<?php if (get_option( 'blog_public') ) {
+	if (is_date() || ( is_archive() &&  of_get_option( 'noindex_archives' ) ) ) { ?>
+		<meta name="robots" content="noindex,follow" />
+<?php } ?>
+
 <?php
 	wp_enqueue_style( 'largo-stylesheet', get_bloginfo( 'stylesheet_url' ) );
 	wp_enqueue_script( 'largo-modernizr', get_template_directory_uri() . '/js/modernizr.custom.js' );
