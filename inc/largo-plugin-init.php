@@ -146,22 +146,11 @@ function my_theme_register_required_plugins() {
 		),
 
 		array(
-			'name' 		=> 'All in One SEO Pack',
-			'slug' 		=> 'all-in-one-seo-pack',
-			'required' 	=> false,
-		),
-
-		array(
 			'name' 		=> 'Edit Flow',
 			'slug' 		=> 'edit-flow',
 			'required' 	=> false,
 		),
 
-		array(
-			'name' 		=> 'WP Google Ad Manager Plugin',
-			'slug' 		=> 'wp-google-ad-manager-plugin',
-			'required' 	=> false,
-		)
 	);
 
 	// Change this to your theme text domain, used for internationalising strings
