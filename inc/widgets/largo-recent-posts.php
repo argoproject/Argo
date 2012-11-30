@@ -13,6 +13,7 @@ class largo_recent_posts_widget extends WP_Widget {
 	}
 
 	function widget( $args, $instance ) {
+		global $ids; // an array of post IDs already on a page so we can avoid duplicating posts
 		extract( $args );
 		$title = apply_filters('widget_title', $instance['title'] );
 
@@ -42,6 +43,8 @@ class largo_recent_posts_widget extends WP_Widget {
 				'post__not_in' 	=> get_option( 'sticky_posts' ),
 				'showposts' 	=> $instance['num_posts']
 			);
+			if ($instance['avoid_duplicates'] === 1)
+				$query_args['post__not_in'] = $ids;
 			if ($instance['cat'] != '')
 				$query_args['cat'] = $instance['cat'];
 			if ($instance['tag'] != '')
@@ -62,8 +65,18 @@ class largo_recent_posts_widget extends WP_Widget {
           			while ( $my_query->have_posts() ) : $my_query->the_post(); ?>
 	                  	<div class="post-lead clearfix">
 	                      	<h5><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
-	                      	<?php the_post_thumbnail( '60x60' ); ?>
-	                     	<?php echo '<p>' . largo_trim_sentences(get_the_content(), $instance['num_sentences']) . '</p>'; ?>
+	                      	<?php
+	                      		$thumb = $instance['thumbnail_display'];
+	                      		$excerpt = $instance['excerpt_display'];
+	                      		if ($thumb == 'small')
+	                      			the_post_thumbnail( '60x60' );
+	                      		elseif ($thumb == 'medium')
+	                      			the_post_thumbnail();
+	                      		if 	($excerpt == 'num_sentences')
+	                      			echo '<p>' . largo_trim_sentences(get_the_content(), $instance['num_sentences']) . '</p>';
+	                      		else
+	                      			the_excerpt();
+	                      	?>
 	                  	</div> <!-- /.post-lead -->
 	            <?php endwhile;
 	            else: ?>
@@ -81,6 +94,9 @@ class largo_recent_posts_widget extends WP_Widget {
 		$instance = $old_instance;
 		$instance['title'] = strip_tags( $new_instance['title'] );
 		$instance['num_posts'] = strip_tags( $new_instance['num_posts'] );
+		$instance['avoid_duplicates'] = $new_instance['avoid_duplicates'] ? 1 : 0;
+		$instance['thumbnail_display'] = $new_instance['thumbnail_display'];
+		$instance['excerpt_display'] = $new_instance['excerpt_display'];
 		$instance['num_sentences'] = strip_tags( $new_instance['num_sentences'] );
 		$instance['cat'] = $new_instance['cat'];
 		$instance['tag'] = $new_instance['tag'];
@@ -100,6 +116,9 @@ class largo_recent_posts_widget extends WP_Widget {
 		$defaults = array(
 			'title' 			=> 'Recent Stories',
 			'num_posts' 		=> 5,
+			'avoid_duplicates'	=> '',
+			'thumbnail_display' => 'small',
+			'excerpt_display' 	=> 'num_sentences',
 			'num_sentences' 	=> 2,
 			'cat' 				=> 0,
 			'tag'				=> '',
@@ -114,6 +133,7 @@ class largo_recent_posts_widget extends WP_Widget {
 			'hidden_phone'		=> ''
 		);
 		$instance = wp_parse_args( (array) $instance, $defaults );
+		$duplicates = $instance['avoid_duplicates'] ? 'checked="checked"' : '';
 		$desktop = $instance['hidden_desktop'] ? 'checked="checked"' : '';
 		$tablet = $instance['hidden_tablet'] ? 'checked="checked"' : '';
 		$phone = $instance['hidden_phone'] ? 'checked="checked"' : '';
@@ -127,6 +147,27 @@ class largo_recent_posts_widget extends WP_Widget {
 		<p>
 			<label for="<?php echo $this->get_field_id( 'num_posts' ); ?>"><?php _e('Number of posts to show:', 'largo-recent-posts'); ?></label>
 			<input id="<?php echo $this->get_field_id( 'num_posts' ); ?>" name="<?php echo $this->get_field_name( 'num_posts' ); ?>" value="<?php echo $instance['num_posts']; ?>" style="width:90%;" />
+		</p>
+
+		<p>
+			<input class="checkbox" type="checkbox" <?php echo $duplicates; ?> id="<?php echo $this->get_field_id('avoid_duplicates'); ?>" name="<?php echo $this->get_field_name('avoid_duplicates'); ?>" /> <label for="<?php echo $this->get_field_id('avoid_duplicates'); ?>"><?php _e('Avoid Duplicate Posts?', 'largo-recent-posts'); ?></label>
+		</p>
+
+		<p>
+			<label for="<?php echo $this->get_field_id( 'thumbnail_display' ); ?>"><?php _e('Thumbnail Image', 'largo-recent-posts'); ?></label>
+			<select id="<?php echo $this->get_field_id('thumbnail_display'); ?>" name="<?php echo $this->get_field_name('thumbnail_display'); ?>" class="widefat" style="width:90%;">
+			    <option <?php selected( $instance['thumbnail_display'], 'small'); ?> value="small">Small (60x60)</option>
+			    <option <?php selected( $instance['thumbnail_display'], 'medium'); ?> value="medium">Medium (150x150)</option>
+			    <option <?php selected( $instance['thumbnail_display'], 'none'); ?> value="none">None</option>
+			</select>
+		</p>
+
+		<p>
+			<label for="<?php echo $this->get_field_id( 'excerpt_display' ); ?>"><?php _e('Excerpt Display', 'largo-recent-posts'); ?></label>
+			<select id="<?php echo $this->get_field_id('excerpt_display'); ?>" name="<?php echo $this->get_field_name('excerpt_display'); ?>" class="widefat" style="width:90%;">
+			    <option <?php selected( $instance['excerpt_display'], 'num_sentences'); ?> value="num_sentences">Use # of Sentences</option>
+			    <option <?php selected( $instance['excerpt_display'], 'custom_excerpt'); ?> value="custom_excerpt">Use Custom Post Excerpt</option>
+			</select>
 		</p>
 
 		<p>
