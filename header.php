@@ -38,7 +38,9 @@
 <?php if (get_option( 'blog_public') ) {
 	if (is_date() || ( is_archive() &&  of_get_option( 'noindex_archives' ) ) ) { ?>
 		<meta name="robots" content="noindex,follow" />
-<?php } ?>
+<?php }
+	}
+?>
 
 <?php
 	wp_enqueue_style( 'largo-stylesheet', get_bloginfo( 'stylesheet_url' ) );
