@@ -155,6 +155,16 @@ function optionsframework_options() {
 		'type' => 'checkbox');
 
 	$options[] = array(
+		'name' => __('SEO Options', 'largo'),
+		'type' => 'info');
+
+	$options[] = array(
+		'desc' => __('Use noindex for all archive pages (default is to use noindex for just date archives).', 'largo'),
+		'id' => 'noindex_archives',
+		'std' => '0',
+		'type' => 'checkbox');
+
+	$options[] = array(
 		'name' => __('Theme Images', 'largo'),
 		'type' => 'heading');
 

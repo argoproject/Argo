@@ -13,8 +13,7 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
  */
 	function largo_opengraph() {
 
-		//get the current url
-		$current_url = (!empty($_SERVER['HTTPS'])) ? "https://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'] : "http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
+		global $current_url;
 
 		//set a default thumbnail, if a post has a featured image use that instead
 		$thumbnailURL = of_get_option( 'logo_thumbnail_sq' );
