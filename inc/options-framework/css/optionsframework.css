@@ -1,6 +1,4 @@
-/*-------------------------------------------------------------------------------------------*/
 /* Options Framework Admin Styles */
-/*-------------------------------------------------------------------------------------------*/
 
 .updated {
 	max-width:764px;
@@ -32,7 +30,7 @@
 	border-bottom: 1px solid #dfdfdf;
 }
 #optionsframework .section .controls {
-	float: right;
+	float: left;
 	min-width:350px;
 	width: 54%;
 	padding-right:2%;
@@ -43,20 +41,14 @@
 	font-size: 12px;
 	line-height:16px;
 	color: #777;
-	margin-left:32px;
 }
 #optionsframework .section-checkbox .controls {
 	width: 98%;
 }
 #optionsframework .section-checkbox .explain {
 	max-width:94%;
-	margin-left:0;
 }
-#optionsframework .section-color .controls {
-	min-width:125px;
-	width:125px
-}
-#optionsframework .controls input, #optionsframework .controls select, #optionsframework .controls textarea {
+#optionsframework .controls select, #optionsframework .controls textarea {
 	margin-bottom:10px;
 	width:100%;
 }
@@ -72,15 +64,16 @@
 	float:left;
 	clear:both;
 }
-#optionsframework .controls .of-color {
-	float:left;
-	width: 80px;
-	margin-left:5px;
-	margin-right:5px;
+#optionsframework .section-typography .controls {
+	float:none;
+	width:auto;
+}
+#optionsframework .section-typography .explain {
+	float:none;
+	width:auto;
 }
 #optionsframework .controls .of-typography-size {
 	width:80px;
-	margin-left:5px;
 	float:left
 }
 #optionsframework .controls .of-typography-unit {
@@ -101,7 +94,7 @@
 }
 #optionsframework .of-background-properties {
 	clear:both;
-	margin-top: 18px;
+	margin-top: 18px;	
 }
 #optionsframework .controls .of-background-repeat {
 	width:125px;
@@ -118,8 +111,8 @@
 	margin-right:5px;
 	float:left
 }
-#optionsframework div.section-background .controls input.upload {
-	width:47%;
+#optionsframework .section-background .wp-picker-container {
+	margin-bottom:10px;
 }
 #optionsframework .controls .of-radio-img-img {
 	border:3px solid #f9f9f9;
@@ -175,10 +168,8 @@
 }
 #optionsframework .controls input.upload_button {
 	float:right;
-	width:45px;
 	border-color:#BBBBBB;
 	cursor:pointer;
-	height:16px;
 }
 #optionsframework .controls input.upload_button:hover {
 	border-color:#666666;
@@ -236,26 +227,10 @@
 #optionsframework .button-primary {
 	float:right;
 }
-
-/* Bottom Section */
-
-#optionsframework .section:before, #optionsframework .section:after {
+#optionsframework .section:after {
 	content: "";
 	display: table;
 }
 #optionsframework .section:after {
 	clear: both;
-}
-
-@media (max-width: 767px) {
-	#optionsframework .section .controls,
-	#optionsframework .section .explain {
-		clear:both;
-		width:94%;
-		margin: 0 3%;
-	}
-	#optionsframework #optionsframework-submit .button-primary {
-		float:left;
-		margin-right:10px;
-	}
 }
