@@ -1,4 +1,5 @@
-#sidebar .widget {
+#sidebar .widget,
+#homepage-bottom .widget {
   margin-bottom: @baseline;
   padding:12px;
   #gradient > .vertical(#efefef, #fafafa);
@@ -43,7 +44,8 @@
   margin: -@baseline/4 0 0;
 }
 //A Few Alternate Styles
-#sidebar .widget.rev {
+#sidebar .widget.rev,
+#homepage-bottom .widget.rev {
   color: @white;
   #gradient > .vertical(@baseColor, darken(@baseColor, 10%));
   .widget-title {
@@ -56,7 +58,8 @@
     font-weight:bold;
   }
 }
-#sidebar .widget.no-bg {
+#sidebar .widget.no-bg,
+#homepage-bottom .widget.no-bg {
   background:none;
   border:none;
   padding:0;

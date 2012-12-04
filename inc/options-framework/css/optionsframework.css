@@ -94,7 +94,7 @@
 }
 #optionsframework .of-background-properties {
 	clear:both;
-	margin-top: 18px;	
+	margin-top: 18px;
 }
 #optionsframework .controls .of-background-repeat {
 	width:125px;
@@ -233,4 +233,13 @@
 }
 #optionsframework .section:after {
 	clear: both;
+}
+
+/* largo custom styles */
+#optionsframework #section-homepage_top .controls,
+#optionsframework #section-homepage_top .explain,
+#optionsframework #section-homepage_bottom .controls,
+#optionsframework #section-homepage_bottom .explain {
+	max-width: 100%;
+	width: 100%;
 }

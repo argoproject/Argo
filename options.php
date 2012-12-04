@@ -207,15 +207,36 @@ function optionsframework_options() {
 		'type' => 'heading');
 
 	$options[] = array(
-		'name' => "Homepage Layout",
-		'desc' => "Select the layout to use for the top of the homepage",
-		'id' => "homepage_layout",
+		'name' => "Homepage Top",
+		'desc' => "<strong>Select the layout to use for the top of the homepage.</strong> Largo currently supports three homepage options: a blog-like list of posts with the ability to stick a post to the op of the homepage, a newspaper-like layout highlighting featured stories and an animated carousel of featured stories with large images.",
+		'id' => "homepage_top",
 		'std' => "blog",
 		'type' => "images",
 		'options' => array(
 			'blog' => $imagepath . 'blog.png',
 			'topstories' => $imagepath . 'newsy.png',
 			'slider' => $imagepath . 'slider.png')
+	);
+
+	$options[] = array(
+		'name' => __('Sticky Posts', 'largo'),
+		'type' => 'info');
+
+	$options[] = array(
+		'desc' => __('Show sticky posts box on homepage? If checked, you will need to set at least one post as sticky for this box to appear.', 'largo'),
+		'id' => 'show_sticky_posts',
+		'std' => '1',
+		'type' => 'checkbox');
+
+	$options[] = array(
+		'name' => "Homepage Bottom",
+		'desc' => "<strong>Select the layout to use for the bottom of the homepage.</strong> Largo currently supports two options: a single column list of recent posts with photos and excerpts or a two column widget area",
+		'id' => "homepage_bottom",
+		'std' => "list",
+		'type' => "images",
+		'options' => array(
+			'list' => $imagepath . 'list.png',
+			'widgets' => $imagepath . 'widgets.png')
 	);
 
 	return $options;

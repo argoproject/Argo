@@ -364,11 +364,11 @@ if ( ! function_exists( 'largo_enqueue_js' ) ) {
 	function largo_enqueue_js() {
 		wp_enqueue_script( 'largoPlugins', get_template_directory_uri() . '/js/largoPlugins.js', array( 'jquery' ), '1.0', true );
 		wp_enqueue_script( 'largoCore', get_template_directory_uri() . '/js/largoCore.js', array( 'jquery' ), '1.0', true );
-		if ( is_home() && of_get_option('homepage_layout') == 'slider' ) {
+		if ( is_home() && of_get_option('homepage_top') == 'slider' ) {
 			wp_enqueue_script( 'bootstrap-carousel', get_template_directory_uri() . '/js/bootstrap-carousel.min.js', array( 'jquery' ), '1.0', true );
 			wp_enqueue_style( 'carousel-styles', get_template_directory_uri() . '/css/carousel.css', false, false, 'screen' );
 		}
-		if ( is_home() && of_get_option('homepage_layout') == 'topstories' )
+		if ( is_home() && of_get_option('homepage_top') == 'topstories' )
 			wp_enqueue_style( 'topstory-styles', get_template_directory_uri() . '/css/top-stories.css', false, false, 'screen' );
 		if ( is_single() ) {
 			wp_enqueue_script( 'sharethis', get_template_directory_uri() . '/js/st_buttons.js', array( 'jquery' ), '1.0', true );

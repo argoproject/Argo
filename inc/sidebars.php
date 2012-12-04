@@ -54,6 +54,17 @@ function largo_register_sidebars() {
 		'after_title' => '</h3>',
 	) );
 
+	if ( of_get_option('homepage_bottom') == 'widgets' ) :
+		register_sidebar( array(
+			'name' => 'Homepage Bottom',
+			'id' => 'homepage-bottom',
+			'description' => 'An optional widget area at the bottom of the homepage',
+			'before_widget' => '<div id="%1$s" class="%2$s odd_even span6">',
+			'after_widget' => '</div>',
+			'before_title' => '<h3>',
+			'after_title' => '</h3>',
+		) );
+	endif;
 }
 add_action( 'widgets_init', 'largo_register_sidebars' );
 
