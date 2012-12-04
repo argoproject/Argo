@@ -69,4 +69,16 @@ function largo_get_image_tag( $html, $id, $alt, $title, $align, $size ) {
 }
 add_filter( 'get_image_tag', 'largo_get_image_tag', 10, 6 );
 
+function attachment_image_link_remove_filter( $content ) {
+    $content =
+        preg_replace(
+            array('{<a(.*?)(wp-att|wp-content\/uploads)[^>]*><img}',
+                '{ wp-image-[0-9]*" /></a>}'),
+            array('<img','" />'),
+            $content
+        );
+    return $content;
+}
+add_filter( 'the_content', 'attachment_image_link_remove_filter' );
+
 ?>
