@@ -1,11 +1,19 @@
 <?php
 global $ids;
 $sticky = get_option( 'sticky_posts' );
-$query = new WP_Query( 'p=' . $sticky[0] );
+//$query = new WP_Query( 'p=' . $sticky[0] );
+
+$sticky = get_option( 'sticky_posts' );
+$args = array(
+	'posts_per_page' => 1,
+	'post__in'  => $sticky,
+	'ignore_sticky_posts' => 1
+);
+$query = new WP_Query( $args );
 
 if ( $query->have_posts() ) {
 	while ( $query->have_posts() ) : $query->the_post();
-		if ( ! is_paged() ) {
+		if ( $sticky[0] && ! is_paged() ) {
 ?>
 
 			<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix sticky '); ?>>
