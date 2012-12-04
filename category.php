@@ -2,13 +2,12 @@
 /**
  * The template for displaying Category Archive pages.
  */
-?>
 
-<?php get_header(); ?>
+get_header(); ?>
 
 		<div id="content" class="stories span8" role="main">
 
-			<?php if ( have_posts() ) : ?>
+			<?php if ( have_posts() ) { ?>
 
 			<header class="category-background clearfix">
 				<h1 class="page-title"><?php single_cat_title(); ?></h1>
@@ -28,31 +27,16 @@
 
 			<h3 class="recent-posts clearfix">Recent posts<a class="rss-link" href="<?php echo esc_url( get_category_feed_link( get_queried_object_id() ) ); ?>"><i class="social-icons rss24"></i></a></h3>
 
-				<?php /* Start the Loop */ ?>
-				<?php while ( have_posts() ) : the_post(); ?>
 				<?php
-				/* Run the loop for the category page to output the posts.
-				* If you want to overload this in a child theme then include a file
-				* called content-category.php and that will be used instead.
-				*/
-				get_template_part( 'content', 'category' ); ?>
+					while ( have_posts() ) : the_post();
+						get_template_part( 'content', 'category' );
+					endwhile;
+					largo_content_nav( 'nav-below' );
 
-				<?php endwhile; ?>
-				<?php largo_content_nav( 'nav-below' ); ?>
-			<?php else : ?>
-
-				<article id="post-0" class="post no-results not-found">
-					<header class="entry-header">
-						<h1 class="entry-title">Nothing Found</h1>
-					</header><!-- .entry-header -->
-
-					<div class="entry-content">
-						<p>Apologies, but no results were found for the requested archive. Perhaps searching will help find a related post.</p>
-						<?php get_search_form(); ?>
-					</div><!-- .entry-content -->
-				</article><!-- #post-0 -->
-
-			<?php endif; ?>
+				} else {
+					get_template_part( 'content', 'not-found' );
+				}
+				?>
 
 		</div>
 		<!-- /.grid_8 #content -->
