@@ -4,7 +4,7 @@
 	</header><!-- .entry-header -->
 
 	<div class="entry-content">
-		<p>Apologies, but no results were found for the requested archive. Perhaps searching will help.</p>
+		<p>Apologies, but no results were found. Perhaps searching will help.</p>
 		<?php get_search_form(); ?>
 	</div><!-- .entry-content -->
 </article><!-- #post-0 -->
