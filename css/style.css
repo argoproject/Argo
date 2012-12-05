@@ -2320,20 +2320,20 @@ article.story {
   clear: both;
   margin: 0 0 12px;
   width: 100%;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.labels h5,
+.tags h5,
+.pager h5,
+#related-posts h5 {
+  font-size: 16px;
+  margin-bottom: 6px;
 }
 .tags,
 .pager {
   list-style: none;
   font-size: 16px;
   line-height: 1.6;
-}
-.labels h4 {
-  font-size: 16px;
-  line-height: 1;
-  background-color: #dedede;
-  margin-bottom: 0;
-  padding: 8px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .single-post .author-box,
 .single-argolinkroundups .author-box,
@@ -2342,9 +2342,9 @@ article.story {
   border: 1px solid #eeeeee;
   border-top: 3px solid #999999;
 }
-.single-post .author-box h4,
-.single-argolinkroundups .author-box h4,
-.labels h4 {
+.single-post .author-box h5,
+.single-argolinkroundups .author-box h5,
+.labels h5 {
   font-size: 16px;
   line-height: 1;
   background-color: #dedede;
@@ -2367,7 +2367,8 @@ h3.recent-posts a.rss-link:hover,
   background-color: #efefef;
 }
 .labels .series-label h5 {
-  font-size: 19.552px;
+  background: none;
+  padding: 0;
   margin-bottom: 2px;
 }
 .labels .series-label p {
@@ -2378,37 +2379,32 @@ h3.recent-posts a.rss-link:hover,
   height: 100%;
   overflow: auto;
 }
-.tags h5 {
-  font-size: 16px;
-  margin-bottom: 6px;
-  font-weight: bold;
-}
 .tags ul {
   padding: 0;
   margin: 0;
-  font-size: 16px;
+  font-size: 13px;
 }
 .tags ul li {
   display: inline;
-  margin-right: 10px;
+  font-weight: normal;
+  letter-spacing: 1px;
+  margin-right: 8px;
   vertical-align: baseline;
+  font-weight: 300;
   white-space: nowrap;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.8);
   margin-bottom: 8px;
   float: left;
   background-color: #2275bb;
-  padding: 5px 12px 5px 8px;
-  -webkit-border-radius: 8px;
-  -moz-border-radius: 8px;
-  border-radius: 8px;
+  padding: 3px 8px 2px 5px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
 }
 .tags ul li:hover {
   background-color: #1a5a90;
 }
 .tags ul li i {
-  position: relative;
-  top: 2px;
-  margin-right: 3px;
+  margin: 1px 3px 0 0;
 }
 .tags ul li a {
   color: #ffffff;
@@ -2416,20 +2412,10 @@ h3.recent-posts a.rss-link:hover,
 .tags ul li a:hover {
   text-decoration: none;
 }
-.tags p {
-  text-transform: uppercase;
-  margin-bottom: 4px;
-  font-size: 16px;
-  color: #555555;
-}
 .pager {
   list-style: none;
   text-align: center;
   margin-bottom: 24px;
-}
-.pager h5 {
-  margin-bottom: 6px;
-  font-size: 16px;
 }
 .pager a {
   display: inline-block;
@@ -2467,6 +2453,7 @@ h3.recent-posts a.rss-link:hover,
 }
 #related-post-nav {
   padding: 8px 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 #related-post-nav li {
   list-style-type: none;
@@ -2476,8 +2463,7 @@ h3.recent-posts a.rss-link:hover,
 #related-post-nav li:last-child a {
   border-bottom: 1px solid #999999;
 }
-#related-post-nav h4 {
-  font-size: 16px;
+#related-post-nav h5 {
   margin: 0 0 5px 5px;
 }
 #related-post-nav a {
@@ -2495,7 +2481,7 @@ h3.recent-posts a.rss-link:hover,
   color: #ffffff;
   background: #2275bb;
   border: none;
-  font-weight: bold;
+  letter-spacing: 1px;
 }
 #related-posts .related-items div {
   display: none;
@@ -2525,13 +2511,15 @@ h3.recent-posts a.rss-link:hover,
 #related-posts .related-items ul li.top-related h3 {
   font-size: 19.552px;
   font-weight: bold;
-  margin-bottom: 0;
+  margin-bottom: 4.8px;
 }
 #related-posts .related-items ul li.top-related p {
-  font-size: 13.04px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 10.672px;
   margin-bottom: 6px;
 }
 #related-posts .related-items p {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 13.04px;
 }
 .author-box {
@@ -2591,8 +2579,8 @@ h3.recent-posts a.rss-link:hover,
 .author-box iframe {
   margin: 0;
 }
-.single-post .author-box h4 span.author-posts-link,
-.single-argolinkroundups .author-box h4 span.author-posts-link {
+.single-post .author-box h5 span.author-posts-link,
+.single-argolinkroundups .author-box h5 span.author-posts-link {
   float: right;
   text-align: right;
   font-size: 10.672px;

@@ -2,7 +2,7 @@
 	<?php if ( is_author() ) { ?>
 		<h1 class="fn n"><?php echo esc_attr( get_the_author() ); ?></h1>
 	<?php } else { ?>
-		<h4>About <span class="fn n"><?php echo esc_attr( get_the_author() ); ?></span><span class="author-posts-link"><a class="url" href="<?php echo get_author_posts_url(get_the_author_meta( 'ID' )); ?>" rel="author" title="See all posts by <?php the_author_meta('display_name'); ?>">More by this author</a></span></h4>
+		<h5>About <span class="fn n"><?php echo esc_attr( get_the_author() ); ?></span><span class="author-posts-link"><a class="url" href="<?php echo get_author_posts_url(get_the_author_meta( 'ID' )); ?>" rel="author" title="See all posts by <?php the_author_meta('display_name'); ?>">More by this author</a></span></h5>
 	<?php } ?>
 
 	<?php if (has_gravatar( get_the_author_meta('user_email') ) ) : ?>

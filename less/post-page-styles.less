@@ -23,8 +23,8 @@ article.story {
 // --------------------------------------------
 
 .byline {
-  font-weight:normal;
-  font-size: @baseFontSize *0.815;
+  font-weight: normal;
+  font-size: @baseFontSize * 0.815;
   margin-bottom: @baseline/2;
   a {
     color: @textColor;
@@ -32,10 +32,10 @@ article.story {
   .author,
   .time-ago,
   .edit-link a {
-    text-transform:uppercase;
+    text-transform: uppercase;
   }
   .author {
-    font-weight:bold;
+    font-weight: bold;
   }
   .time-ago,
   .edit-link a {
@@ -45,30 +45,30 @@ article.story {
 .post-social {
   border-top: 1px solid @grayLighter;
   border-bottom: 1px solid @grayLighter;
-  min-height:28px;
-  height:auto;
-  padding:2px 0;
+  min-height: 28px;
+  height: auto;
+  padding: 2px 0;
   margin-bottom: @baseline;
   .right,
   .left {
-    margin:0;
-    height:auto;
+    margin: 0;
+    height: auto;
   }
   span {
     position:relative;
   }
   span.twitter {
-    top:4px;
-    margin-right:4px;
+    top: 4px;
+    margin-right: 4px;
   }
   span.st_sharethis,
   span.st_email {
-    top:1px;
+    top: 1px;
   }
   span.print {
     font-family: Verdana, Helvetica, sans-serif;
     font-size: 11px;
-    top:2px;
+    top: 2px;
     &:hover {
       .opacity(85);
     }
@@ -83,12 +83,12 @@ article.story {
 // POST PAGINATION
 .post-pagination {
   a, span {
-    padding:5px;
+    padding: 5px;
     font-family: @sansFontFamily;
-    text-transform:uppercase;
-    font-size: @baseFontSize *0.815;
+    text-transform: uppercase;
+    font-size: @baseFontSize * 0.815;
     &:first-child {
-	  padding-left:0;
+	  padding-left: 0;
     }
   }
 }
@@ -100,21 +100,18 @@ article.story {
 #related-posts {
   clear:both;
   margin: 0 0 @baseline / 2;
-  width:100%;
-  font-family: @sansFontFamily;
+  width: 100%;
+  h5 {
+    font-size: @baseFontSize;
+    margin-bottom: @baseline / 4;
+  }
 }
 .tags,
 .pager {
   list-style: none;
   font-size: @baseFontSize;
   line-height: 1.6;
-}
-.labels h4 {
-  font-size:@baseFontSize;
-  line-height:1;
-  background-color: #dedede;
-  margin-bottom:0;
-  padding:8px;
+  font-family: @sansFontFamily;
 }
 .single-post .author-box,
 .single-argolinkroundups .author-box,
@@ -122,19 +119,19 @@ article.story {
   background-color: #fafafa;
   border: 1px solid @grayLighter;
   border-top: 3px solid @grayLight;
-  h4 {
-    font-size:@baseFontSize;
-    line-height:1;
+  h5 {
+    font-size: @baseFontSize;
+    line-height: 1;
     background-color: #dedede;
-    margin-bottom:0;
-	padding:8px;
+    margin-bottom: 0;
+	padding: 8px;
   }
 }
 h3.recent-posts,
 .labels .series-label h5 {
   a.rss-link {
     float:right;
-    margin-top:4px;
+    margin-top: 4px;
     &:hover {
       .opacity(85);
     }
@@ -143,77 +140,62 @@ h3.recent-posts,
 
 // LABELS
 .labels .series-label {
-  margin:5px;
-  padding:8px;
+  margin: 5px;
+  padding: 8px;
   background-color: #efefef;
   h5 {
-    font-size:@baseFontSize*1.222;
-    margin-bottom:2px;
+    background: none;
+    padding: 0;
+    margin-bottom: 2px;
   }
   p {
-    font-size:@baseFontSize*0.815;
-    margin-bottom:0;
+    font-size: @baseFontSize * 0.815;
+    margin-bottom: 0;
   }
 }
 
 // TAGS
 .tags {
-  height:100%;
-  overflow:auto;
-  h5 {
-    font-size: @baseFontSize;
-    margin-bottom: @baseline / 4;
-    font-weight:bold;
-  }
+  height: 100%;
+  overflow: auto;
   ul {
-    padding:0;
-    margin:0;
-    font-size: @baseFontSize;
+    padding: 0;
+    margin: 0;
+    font-size: @baseFontSize - 3;
 	li {
-	  display:inline;
-	  margin-right:10px;
+	  display: inline;
+	  font-weight: normal;
+	  letter-spacing: 1px;
+	  margin-right: 8px;
 	  vertical-align: baseline;
+	  font-weight: 300;
 	  white-space: nowrap;
-	  text-shadow: 0 -1px 0 rgba(0,0,0,.8);
-	  margin-bottom:8px;
-	  float:left;
+	  margin-bottom: 8px;
+	  float: left;
 	  background-color: @baseColor;
-	  padding:5px 12px 5px 8px;
-	  .border-radius(8px);
+	  padding: 3px 8px 2px 5px;
+	  .border-radius(4px);
 	  &:hover {
 	    background-color: darken(@baseColor, 10%);
 	  }
 	  i {
-		position:relative;
-		top:2px;
-		margin-right:3px;
+		margin: 1px 3px 0 0;
 	  }
 	  a {
 		color: @white;
 		&:hover {
-		  text-decoration:none;
+		  text-decoration: none;
 		}
 	  }
 	}
   }
-  p {
-    text-transform: uppercase;
-	margin-bottom:4px;
-	font-size: @baseFontSize;
-	color: @gray;
-  }
 }
 
 // NEXT - PREV NAVIGATION
-
 .pager {
   list-style: none;
   text-align: center;
   margin-bottom: @baseline;
-  h5 {
-	  margin-bottom: @baseline / 4;
-	  font-size: @baseFontSize;
-  }
   a {
     display: inline-block;
     padding: 5px 14px;
@@ -251,6 +233,7 @@ h3.recent-posts,
 }
 #related-post-nav {
   padding: 8px 0;
+  font-family: @sansFontFamily;
   li {
     list-style-type:none;
     margin-bottom:0;
@@ -259,8 +242,7 @@ h3.recent-posts,
       border-bottom: 1px solid @grayLight;
     }
   }
-  h4 {
-    font-size: @baseFontSize;
+  h5 {
     margin: 0 0 5px 5px;
   }
   a {
@@ -276,8 +258,8 @@ h3.recent-posts,
     &.selected {
       color: @white;
       background: @baseColor;
-      border:none;
-      font-weight:bold;
+      border: none;
+      letter-spacing: 1px;
 	}
   }
 }
@@ -307,17 +289,19 @@ h3.recent-posts,
         h3 {
           font-size: @baseFontSize * 1.222;
           font-weight: bold;
-          margin-bottom:0;
+          margin-bottom: @baseline / 5;
         }
         p {
-          font-size: @baseFontSize *0.815;
-          margin-bottom:@baseline /4;
+          font-family: @baseFontFamily;
+          font-size: @baseFontSize * 0.667;
+          margin-bottom: @baseline / 4;
         }
       }
     }
   }
   p {
-    font-size: @baseFontSize *0.815;
+    font-family: @sansFontFamily;
+    font-size: @baseFontSize * 0.815;
   }
 }
 
@@ -375,7 +359,7 @@ h3.recent-posts,
 }
 .single-post .author-box,
 .single-argolinkroundups .author-box {
-  h4 span.author-posts-link {
+  h5 span.author-posts-link {
     float:right;
     text-align:right;
     font-size: @baseFontSize * 0.667;
