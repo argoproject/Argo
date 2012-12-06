@@ -115,20 +115,18 @@
 // -----------------------------
 
 .carousel-caption {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  position: static;
   height:auto;
-  padding: 10px 15px 5px;
-  background: @grayDark;
-  background: rgba(0,0,0,.75);
+  padding: 10px 10px 5px;
+  border-right: 1px solid @grayLighter;
+  border-bottom: 1px solid @grayLighter;
+  border-left: 1px solid @grayLighter;
 }
 .carousel-caption h2 a,
 .carousel-caption h5,
 .carousel-caption h5 a,
 .carousel-caption p {
-  color: @white;
+  color: @black;
 }
 .carousel-caption h2 {
   font-size: @baseFontSize *1.75;
@@ -140,13 +138,15 @@
   margin-bottom: @baseline/5;
 }
 .carousel-caption p {
-  font-size: @baseFontSize *0.667;
+  font-size: @baseFontSize *0.815;
   margin-bottom: @baseline/3;
   a {
     display:none;
   }
 }
-
-@media (max-width: 979px) {
-  .carousel-caption { position: static; }
+@media (max-width: 768px) {
+  .carousel-control {
+    top: 32%;
+  }
 }
+

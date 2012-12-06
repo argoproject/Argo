@@ -86,20 +86,18 @@
   filter: alpha(opacity=90);
 }
 .carousel-caption {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  position: static;
   height: auto;
-  padding: 10px 15px 5px;
-  background: #333333;
-  background: rgba(0, 0, 0, 0.75);
+  padding: 10px 10px 5px;
+  border-right: 1px solid #eeeeee;
+  border-bottom: 1px solid #eeeeee;
+  border-left: 1px solid #eeeeee;
 }
 .carousel-caption h2 a,
 .carousel-caption h5,
 .carousel-caption h5 a,
 .carousel-caption p {
-  color: #ffffff;
+  color: #000000;
 }
 .carousel-caption h2 {
   font-size: 28px;
@@ -111,14 +109,14 @@
   margin-bottom: 4.8px;
 }
 .carousel-caption p {
-  font-size: 10.672px;
+  font-size: 13.04px;
   margin-bottom: 8px;
 }
 .carousel-caption p a {
   display: none;
 }
-@media (max-width: 979px) {
-  .carousel-caption {
-    position: static;
+@media (max-width: 768px) {
+  .carousel-control {
+    top: 32%;
   }
 }
