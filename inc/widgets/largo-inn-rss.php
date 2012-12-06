@@ -19,7 +19,7 @@ class largo_INN_RSS_widget extends WP_Widget {
 		extract($args);
 		$rss = fetch_feed('http://investigativenewsnetwork.org/all-member-news.rss');
 		$title = 'Stories From Other INN Members';
-		$desc = '';
+		$desc = 'View more recent stories from members of the Investigative News Network';
 		$link = 'http://www.investigativenewsnetwork.org/';
 		$url = esc_url(strip_tags($url));
 
@@ -32,13 +32,12 @@ class largo_INN_RSS_widget extends WP_Widget {
 			$widget_class .= ' hidden-tablet';
 		if ($instance['hidden_phone'] === 1)
 			$widget_class .= ' hidden-phone';
+
 		/* Add the widget class to $before widget, used as a style hook */
-		if( strpos($before_widget, 'class') === false ) {
+		if( strpos($before_widget, 'class') === false )
 			$before_widget = str_replace('>', 'class="'. $widget_class . '"', $before_widget);
-		}
-		else {
+		else
 			$before_widget = str_replace('class="', 'class="'. $widget_class . ' ', $before_widget);
-		}
 
 		echo $before_widget;
 		if ( $title )
