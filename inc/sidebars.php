@@ -10,7 +10,7 @@ function largo_register_sidebars() {
 		'description' => 'The sidebar for index and archive pages',
 		'before_widget' => '<aside id="%1$s" class="%2$s odd_even clearfix">',
 		'after_widget' => "</aside>",
-		'before_title' => '<h3 class="widget-title">',
+		'before_title' => '<h3 class="widgettitle">',
 		'after_title' => '</h3>',
 	) );
 
@@ -20,7 +20,7 @@ function largo_register_sidebars() {
 		'description' => 'The sidebar for posts and pages',
 		'before_widget' => '<aside id="%1$s" class="%2$s odd_even clearfix">',
 		'after_widget' => "</aside>",
-		'before_title' => '<h3 class="widget-title">',
+		'before_title' => '<h3 class="widgettitle">',
 		'after_title' => '</h3>',
 	) );
 
@@ -30,7 +30,7 @@ function largo_register_sidebars() {
 		'description' => 'The sidebar for category and tag pages',
 		'before_widget' => '<aside id="%1$s" class="%2$s odd_even clearfix">',
 		'after_widget' => "</aside>",
-		'before_title' => '<h3 class="widget-title">',
+		'before_title' => '<h3 class="widgettitle">',
 		'after_title' => '</h3>',
 	) );
 
@@ -40,7 +40,7 @@ function largo_register_sidebars() {
 		'description' => 'Center footer column.',
 		'before_widget' => '<aside id="%1$s" class="%2$s odd_even clearfix">',
 		'after_widget' => "</aside>",
-		'before_title' => '<h3 class="widget-title">',
+		'before_title' => '<h3 class="widgettitle">',
 		'after_title' => '</h3>',
 	) );
 
@@ -50,7 +50,7 @@ function largo_register_sidebars() {
 		'description' => 'A configurable widget area in the far right column of the site footer.',
 		'before_widget' => '<aside id="%1$s" class="%2$s odd_even clearfix">',
 		'after_widget' => "</aside>",
-		'before_title' => '<h3 class="widget-title">',
+		'before_title' => '<h3 class="widgettitle">',
 		'after_title' => '</h3>',
 	) );
 
@@ -61,7 +61,7 @@ function largo_register_sidebars() {
 			'description' => 'An optional widget area at the bottom of the homepage',
 			'before_widget' => '<div id="%1$s" class="%2$s odd_even span6">',
 			'after_widget' => '</div>',
-			'before_title' => '<h3>',
+			'before_title' => '<h3 class="widgettitle">',
 			'after_title' => '</h3>',
 		) );
 	endif;

@@ -3235,11 +3235,10 @@ p.comment-form-comment {
   -moz-box-shadow: 0 1px 3px rgba(0,0,0,.15), inset 0 -1px 0 rgba(0,0,0,.05);
   box-shadow: 0 1px 3px rgba(0,0,0,.15), inset 0 -1px 0 rgba(0,0,0,.05);
 }
-.widget-title {
-  font-size: 24px;
+.widgettitle {
   margin-bottom: 6px;
+  font-size: 24px;
 }
-#sidebar .widget-title,
 #sidebar .widgettitle {
   margin-bottom: 8px;
   padding: 5px 8px;
@@ -3262,7 +3261,6 @@ p.comment-form-comment {
   -moz-border-radius: 4px;
   border-radius: 4px;
 }
-#sidebar .widget-title a,
 #sidebar .widgettitle a {
   color: #fff;
 }
@@ -3294,8 +3292,8 @@ p.comment-form-comment {
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2275bb', endColorstr='#1a5a90', GradientType=0);
 }
-#sidebar .widget.rev .widget-title,
-#homepage-bottom .widget.rev .widget-title {
+#sidebar .widget.rev .widgettitle,
+#homepage-bottom .widget.rev .widgettitle {
   color: #333;
   text-shadow: 0 -1px 0 rgba(255, 255, 255, 0.3);
   background-color: #eeeeee;
@@ -3315,9 +3313,9 @@ p.comment-form-comment {
 }
 #sidebar .widget.no-bg,
 #homepage-bottom .widget.no-bg {
+  padding: 0;
   background: none;
   border: none;
-  padding: 0;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
@@ -3332,13 +3330,13 @@ p.comment-form-comment {
   background: none;
   border: none;
 }
-#sidebar .widget.no-bg .widget-title,
-#homepage-bottom .widget.no-bg .widget-title {
+#sidebar .widget.no-bg .widgettitle,
+#homepage-bottom .widget.no-bg .widgettitle {
   color: #ffffff;
 }
 .subscribe {
   height: 24px;
-  line-height: 24px;
+  line-height: 1.5;
   font-size: 16px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
@@ -3397,8 +3395,8 @@ p.comment-form-comment {
   padding: 0;
 }
 #sidebar .largo-INN-RSS li {
-  list-style: none;
   margin-bottom: 12px;
+  list-style: none;
 }
 #sidebar .largo-INN-RSS li h5,
 #sidebar .largo-INN-RSS li h6,

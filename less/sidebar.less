@@ -1,41 +1,39 @@
 #sidebar .widget,
 #homepage-bottom .widget {
   margin-bottom: @baseline;
-  padding:12px;
+  padding: 12px;
   #gradient > .vertical(#efefef, #fafafa);
-  border:1px solid #ddd;
+  border: 1px solid #ddd;
   .border-radius(8px);
   .box-shadow(~"0 1px 3px rgba(0,0,0,.15), inset 0 -1px 0 rgba(0,0,0,.05)");
 }
-.widget-title {
-  font-size: @baseFontSize * 1.5;
+.widgettitle {
   margin-bottom: @baseline/4;
+  font-size: @baseFontSize * 1.5;
 }
-#sidebar .widget-title,
 #sidebar .widgettitle {
   margin-bottom: @baseline/3;
-  padding:5px 8px;
-  border:1px solid #ddd;
+  padding: 5px 8px;
+  border: 1px solid #ddd;
   font-size: @baseFontSize * 0.815;
-  text-transform:uppercase;
-  color:#fff;
-  font-weight:bold;
+  text-transform: uppercase;
+  color: #fff;
+  font-weight: bold;
   text-shadow: 0 -1px 0 rgba(0,0,0,.8);
   #gradient > .vertical(#999, #666);
   .border-radius(4px);
 }
-#sidebar .widget-title a,
 #sidebar .widgettitle a {
-  color:#fff;
+  color: #fff;
 }
 #sidebar .widget p,
 #sidebar .widget ul {
-  padding:0 3px;
-  font-size:@baseFontSize *0.815;
+  padding: 0 3px;
+  font-size: @baseFontSize *0.815;
 }
 #sidebar .widget ul {
   margin: @baseline/5 0 0 16px;
-  line-height:1.2;
+  line-height: 1.2;
   ul {
     margin-bottom:@baseline/5;
   }
@@ -48,8 +46,8 @@
 #homepage-bottom .widget.rev {
   color: @white;
   #gradient > .vertical(@baseColor, darken(@baseColor, 10%));
-  .widget-title {
-	  color:#333;
+  .widgettitle {
+	  color: #333;
 	  text-shadow: 0 -1px 0 rgba(255,255,255,.3);
 	  #gradient > .vertical(#e6e6e6, #f9f9f9);
   }
@@ -60,37 +58,37 @@
 }
 #sidebar .widget.no-bg,
 #homepage-bottom .widget.no-bg {
-  background:none;
-  border:none;
-  padding:0;
+  padding: 0;
+  background: none;
+  border: none;
   .box-shadow(none);
   .border-radius(0);
   p, ul {
-    background:none;
-    border:none;
+    background: none;
+    border: none;
   }
-  .widget-title {
-	  color:@white;
+  .widgettitle {
+	  color: @white;
   }
 }
 
 //Follow Widget
 .subscribe {
-  height:24px;
-  line-height:24px;
+  height: 24px;
+  line-height: 1.5;
   font-size: @baseFontSize;
-  font-family:@sansFontFamily;
+  font-family: @sansFontFamily;
   a {
-    color:@gray;
+    color: @gray;
   }
   i {
-    float:left;
-    margin-right:8px;
+    float: left;
+    margin-right: 8px;
   }
 }
 .twitter-follow-button {
-  display:block;
-  margin:8px 0 10px;
+  display: block;
+  margin: 8px 0 10px;
 }
 .fb-like, .fb-like span, .fb-like.fb_iframe_widget span iframe {
   width: 100% !important;
@@ -99,27 +97,27 @@
 	width: 100% !important;
 }
 .fb-like-box {
-	background:white !important;
-	background-color:white !important;
+	background: white !important;
+	background-color: white !important;
 }
 //About Widget
 .largo-about p {
-  margin-bottom:0;
+  margin-bottom: 0;
 }
 //Donate Widget
 .largo-donate p {
-  margin-bottom:@baseline/3;
+  margin-bottom: @baseline/3;
 }
 //Featured and Recent Posts Widget
 #sidebar .largo-sidebar-featured,
 #sidebar .largo-recent-posts,
 #sidebar .largo-INN-RSS {
   img {
-    float:left;
+    float: left;
     margin: 5px 10px 0 5px;
   }
   h5 {
-    margin-bottom:2px;
+    margin-bottom: 2px;
     padding: 0 3px;
     font-size: @baseFontSize;
   }
@@ -130,27 +128,29 @@
 }
 #sidebar .largo-INN-RSS {
   ul {
-    margin:@baseline/2 0;
-    padding:0;
+    margin: @baseline/2 0;
+    padding: 0;
   }
   li {
-    list-style:none;
     margin-bottom: @baseline/2;
-    h5, h6, p {
-	  margin-bottom:@baseline/5;
+    list-style: none;
+    h5,
+    h6,
+    p {
+	  margin-bottom: @baseline/5;
     }
   }
 }
 #sidebar .widget.largo-INN-RSS.rev .widget-title a {
-  color:#333;
+  color: #333;
 }
 #sidebar .widget.largo-recent-comments {
   ul {
-    margin-left:0;
-    list-style:none;
+    margin-left: 0;
+    list-style: none;
   }
   p {
-    margin-bottom:3px;
+    margin-bottom: 3px;
     &.comment-excerpt {
       &:before {
 	    content: open-quote;
@@ -161,7 +161,7 @@
     }
     &.comment-meta {
       font-style: italic;
-      color:inherit;
+      color: inherit;
     }
   }
 }
