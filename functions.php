@@ -79,6 +79,9 @@ function largo_setup() {
 	// Add default posts and comments RSS feed links to <head>.
 	add_theme_support( 'automatic-feed-links' );
 
+	// Add support for localization (this is a work in progress)
+	load_theme_textdomain('largo', get_template_directory() . '/languages');
+
 }
 endif; // largo_setup
 
