@@ -105,11 +105,11 @@ function _subcategories_for_category( $cat_id ) {
  */
 function largo_get_latest_posts_for_category( $cat ) {
     $query = new WP_Query( array(
-        'showposts' => 4,
-        'orderby' => 'date',
-        'order' => 'DESC',
-        'cat' => $cat->object_id,
-        'ignore_sticky_posts' => 1,
+        'showposts' 			=> 4,
+        'orderby' 				=> 'date',
+        'order' 				=> 'DESC',
+        'cat' 					=> $cat->object_id,
+        'ignore_sticky_posts' 	=> 1,
     ) );
 
     $output = '';
@@ -168,10 +168,10 @@ function largo_get_recent_posts_for_term( $term, $max = 5, $min = 1 ) {
     global $post;
 
     $query_args = array(
-        'showposts' => $max,
-        'orderby' => 'date',
-        'order' => 'DESC',
-        'ignore_sticky_posts' => 1,
+        'showposts' 			=> $max,
+        'orderby' 				=> 'date',
+        'order' 				=> 'DESC',
+        'ignore_sticky_posts' 	=> 1,
     );
 
     // Exclude the current post if we're inside The Loop

@@ -15,16 +15,14 @@ add_action( 'publish_post', 'largo_tag_featured_posts', 10, 2 );
 function largo_get_featured_posts( $args = array() ) {
     $defaults = array(
         'showposts' => 3,
-        'offset' => 0,
-        'orderby' => 'date',
-        'order' => 'DESC',
-        //'meta_key' => 'featured',
-        //'meta_value' => 'yes',
+        'offset' 	=> 0,
+        'orderby' 	=> 'date',
+        'order' 	=> 'DESC',
         'tax_query' => array(
 			array(
-				'taxonomy' => 'prominence',
-				'field' => 'slug',
-				'terms' => 'footer-featured-widget'
+				'taxonomy' 	=> 'prominence',
+				'field' 	=> 'slug',
+				'terms' 	=> 'footer-featured-widget'
 			)
 		),
         'ignore_sticky_posts' => 1,
