@@ -2,12 +2,12 @@
 
 function largo_register_custom_menus() {
     $menus = array(
-        'global-nav'         	=> 'Global Navigation',
-        'navbar-categories'     => 'Navbar Categories List',
-        'navbar-supplemental'	=> "Navbar Supplemental Links",
-        'dont-miss'       		=> "Don't Miss",
-        'footer'          		=> 'Footer Navigation',
-        'footer-bottom'			=> 'Footer Bottom',
+        'global-nav'         	=> __( 'Global Navigation', 'largo' ),
+        'navbar-categories'     => __( 'Navbar Categories List', 'largo' ),
+        'navbar-supplemental'	=> __( 'Navbar Supplemental Links', 'largo' ),
+        'dont-miss'       		=> __( 'Don\'t Miss', 'largo' ),
+        'footer'          		=> __( 'Footer Navigation', 'largo' ),
+        'footer-bottom'			=> __( 'Footer Bottom', 'largo' )
     );
     register_nav_menus( $menus );
 

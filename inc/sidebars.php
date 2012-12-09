@@ -5,9 +5,9 @@
  */
 function largo_register_sidebars() {
 	register_sidebar( array(
-		'name' 			=> 'Main Sidebar',
+		'name' 			=> __( 'Main Sidebar', 'largo' ),
+		'description' 	=> __( 'The sidebar for index and archive pages', 'largo' ),
 		'id' 			=> 'sidebar-main',
-		'description' 	=> 'The sidebar for index and archive pages',
 		'before_widget' => '<aside id="%1$s" class="%2$s odd_even clearfix">',
 		'after_widget' 	=> "</aside>",
 		'before_title' 	=> '<h3 class="widgettitle">',
@@ -15,9 +15,9 @@ function largo_register_sidebars() {
 	) );
 
 	register_sidebar( array(
-		'name' 			=> 'Single Sidebar',
+		'name' 			=> __( 'Single Sidebar', 'largo' ),
+		'description' 	=> __( 'The sidebar for posts and pages', 'largo' ),
 		'id' 			=> 'sidebar-single',
-		'description' 	=> 'The sidebar for posts and pages',
 		'before_widget' => '<aside id="%1$s" class="%2$s odd_even clearfix">',
 		'after_widget' 	=> "</aside>",
 		'before_title' 	=> '<h3 class="widgettitle">',
@@ -25,9 +25,9 @@ function largo_register_sidebars() {
 	) );
 
 	register_sidebar( array(
-		'name' 			=> 'Topic Sidebar',
+		'name' 			=> __( 'Topic Sidebar', 'largo' ),
+		'description' 	=> __( 'The sidebar for category and tag pages', 'largo' ),
 		'id' 			=> 'topic-sidebar',
-		'description' 	=> 'The sidebar for category and tag pages',
 		'before_widget' => '<aside id="%1$s" class="%2$s odd_even clearfix">',
 		'after_widget' 	=> "</aside>",
 		'before_title' 	=> '<h3 class="widgettitle">',
@@ -35,9 +35,9 @@ function largo_register_sidebars() {
 	) );
 
 	register_sidebar( array(
-		'name' 			=> 'Footer Featured Posts',
+		'name' 			=> __( 'Footer Featured Posts', 'largo' ),
+		'description' 	=> __( 'Center footer column.', 'largo' ),
 		'id' 			=> 'footer-featured-posts',
-		'description' 	=> 'Center footer column.',
 		'before_widget' => '<aside id="%1$s" class="%2$s odd_even clearfix">',
 		'after_widget' 	=> "</aside>",
 		'before_title' 	=> '<h3 class="widgettitle">',
@@ -45,9 +45,9 @@ function largo_register_sidebars() {
 	) );
 
 	register_sidebar( array(
-		'name' 			=> 'Footer Widget Area',
+		'name' 			=> __( 'Footer Widget Area', 'largo' ),
+		'description' 	=> __( 'A configurable widget area in the far right column of the site footer.', 'largo' ),
 		'id' 			=> 'footer-widget-area',
-		'description' 	=> 'A configurable widget area in the far right column of the site footer.',
 		'before_widget' => '<aside id="%1$s" class="%2$s odd_even clearfix">',
 		'after_widget' 	=> "</aside>",
 		'before_title' 	=> '<h3 class="widgettitle">',
@@ -56,9 +56,9 @@ function largo_register_sidebars() {
 
 	if ( of_get_option('homepage_bottom') == 'widgets' ) :
 		register_sidebar( array(
-			'name' 			=> 'Homepage Bottom',
+			'name' 			=> __( 'Homepage Bottom', 'largo' ),
+			'description' 	=> __( 'An optional widget area at the bottom of the homepage', 'largo' ),
 			'id' 			=> 'homepage-bottom',
-			'description' 	=> 'An optional widget area at the bottom of the homepage',
 			'before_widget' => '<div id="%1$s" class="%2$s odd_even span6">',
 			'after_widget' 	=> '</div>',
 			'before_title' 	=> '<h3 class="widgettitle">',
