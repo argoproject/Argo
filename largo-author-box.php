@@ -1,9 +1,13 @@
 <div class="author-box author vcard clearfix">
 	<?php if ( is_author() ) { ?>
 		<h1 class="fn n"><?php echo esc_attr( get_the_author() ); ?></h1>
-	<?php } else { ?>
-		<h5>About <span class="fn n"><?php echo esc_attr( get_the_author() ); ?></span><span class="author-posts-link"><a class="url" href="<?php echo get_author_posts_url(get_the_author_meta( 'ID' )); ?>" rel="author" title="See all posts by <?php the_author_meta('display_name'); ?>">More by this author</a></span></h5>
-	<?php } ?>
+	<?php } else {
+		printf( __('<h5>About <span class="fn n">%1$s</span><span class="author-posts-link"><a class="url" href="%2$s" rel="author" title="See all posts by %3$s">More by this author</a></span></h5>', 'largo'),
+			esc_attr( get_the_author() ),
+			esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
+			esc_attr( get_the_author_meta( 'display_name' ) )
+			);
+	} ?>
 
 	<?php if (has_gravatar( get_the_author_meta('user_email') ) ) : ?>
 			<div class="photo">
@@ -13,13 +17,13 @@
 	?>
 
 	<?php if ( get_the_author_meta( 'description' ) ) : ?>
-		<p><?php the_author_meta( 'description' ); ?></p>
+		<p><?php echo esc_attr( get_the_author_meta( 'description' ) ); ?></p>
 	<?php endif; ?>
 
 	<ul class="social-links">
 		<?php if ( get_the_author_meta( 'user_email' ) ) : ?>
 		<li class="email">
-			<a href="mailto:<?php echo esc_attr( get_the_author_meta( 'user_email' ) ); ?>" title="e-mail <?php echo esc_attr( get_the_author() ); ?>"><i class="icon-envelope icon-white"></i> email</a>
+			<a href="mailto:<?php echo esc_attr( get_the_author_meta( 'user_email' ) ); ?>" title="e-mail <?php echo esc_attr( get_the_author() ); ?>"><i class="icon-envelope icon-white"></i> <?php _e('email', 'largo'); ?></a>
 		</li>
 		<?php endif; ?>
 

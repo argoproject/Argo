@@ -5,7 +5,7 @@
  */
 
 function largo_meta_box_add() {
-	add_meta_box( 'largo_byline_meta', 'Custom Byline Options', 'largo_meta_box_display', 'post', 'side', 'core' );
+	add_meta_box( 'largo_byline_meta', __('Custom Byline Options', 'largo'), 'largo_meta_box_display', 'post', 'side', 'core' );
 }
 add_action( 'add_meta_boxes', 'largo_meta_box_add' );
 
@@ -47,12 +47,12 @@ function largo_meta_box_display( $post ) {
 	wp_nonce_field( 'my_meta_box_nonce', 'meta_box_nonce' );
 	?>
 	<p>
-		<label for="largo_byline_text">Byline Text</label>
+		<label for="largo_byline_text"><?php _e('Byline Text', 'largo'); ?></label>
 		<input type="text" name="largo_byline_text" id="largo_byline_text" value="<?php echo $byline_text; ?>" />
 	</p>
 
 	<p>
-		<label for="largo_byline_link">Byline Link</label>
+		<label for="largo_byline_link"><?php _e('Byline Link', 'largo'); ?></label>
 		<input type="text" name="largo_byline_link" id="largo_byline_link" value="<?php echo $byline_link; ?>" />
 	</p>
 	<?php
@@ -65,7 +65,7 @@ if ( ! function_exists( 'largo_time' ) ) {
 	function largo_time() {
 		$time_difference = current_time('timestamp') - get_the_time('U');
 		if($time_difference < 86400) {
-			return '<span class="time-ago">' .human_time_diff(get_the_time('U'), current_time('timestamp')) . ' ago</span>';
+			return '<span class="time-ago">' . human_time_diff(get_the_time('U'), current_time('timestamp')) . _e(' ago', 'largo') . '</span>';
 		} else {
 			return get_the_date();
 		}
@@ -95,13 +95,13 @@ if ( ! function_exists( 'largo_author_link' ) ) {
 		$values = get_post_custom( $post->ID );
 		$byline_text = isset( $values['largo_byline_text'] ) ? esc_attr( $values['largo_byline_text'][0] ) : '';
 		$byline_link = isset( $values['largo_byline_link'] ) ? esc_url( $values['largo_byline_link'][0] ) : '';
-		$byline_title_attr = esc_attr( sprintf( 'More from %s', $byline_text ) );
+		$byline_title_attr = esc_attr( sprintf( __( 'More from %s','largo' ), $byline_text ) );
 
 		if ( $byline_text == '' )
 			$byline_text = esc_html( get_the_author() );
 		if ( $byline_link == '' ) :
 			$byline_link = esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) );
-			$byline_title_attr = esc_attr( sprintf( 'View all posts by %s', get_the_author() ) );
+			$byline_title_attr = esc_attr( sprintf( __( 'View all posts by %s','largo' ), get_the_author() ) );
 		endif;
 
 		return '<a class="url fn n" href="' . $byline_link . '" title="' . $byline_title_attr . '" rel="author">' . $byline_text . '</a>';
@@ -179,14 +179,14 @@ if ( ! function_exists( 'largo_custom_wp_link_pages' ) ) {
  */
 	function largo_custom_wp_link_pages( $args ) {
 		$defaults = array(
-			'before' => '<div class="post-pagination">',
-			'after' => '</div>',
-			'text_before' => '',
-			'text_after' => '',
-			'nextpagelink' => 'Next Page',
-			'previouspagelink' => 'Previous Page',
-			'pagelink' => '%',
-			'echo' => 1
+			'before' 			=> '<div class="post-pagination">',
+			'after' 			=> '</div>',
+			'text_before' 		=> '',
+			'text_after' 		=> '',
+			'nextpagelink' 		=> __( 'Next Page', 'largo' ),
+			'previouspagelink' 	=> __( 'Previous Page', 'largo' ),
+			'pagelink' 			=> '%',
+			'echo' 				=> 1
 		);
 
 		$r = wp_parse_args( $args, $defaults );
