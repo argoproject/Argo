@@ -7,7 +7,7 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'hnews item' ); ?>>
 	<header>
  		<h1 class="entry-title"><?php the_title(); ?></h1>
- 		<h5 class="byline"><?php largo_byline(); ?> | <span class="comments-link"><?php comments_popup_link( 'Leave a Comment', '<strong>1</strong> Comment ', ' <strong>%</strong> Comments' ); ?></span><?php edit_post_link('Edit This Post', ' | <span class="edit-link">', '</span>'); ?></h5>
+ 		<h5 class="byline"><?php largo_byline(); ?> | <span class="comments-link"><?php comments_popup_link( __('Leave a Comment', 'largo'), __('<strong>1</strong> Comment ', 'largo'), __(' <strong>%</strong> Comments', 'largo') ); ?></span><?php edit_post_link( __('Edit This Post', 'largo'), ' | <span class="edit-link">', '</span>'); ?></h5>
  		<?php get_template_part( 'largo-social' ); ?>
 	</header><!-- / entry header -->
 
@@ -21,7 +21,7 @@
  		<!-- Other posts in this series -->
  		<?php if ( largo_has_custom_taxonomy( get_the_ID() ) ): ?>
 			<div class="labels clearfix">
-            	<h5>More In This Series</h5>
+            	<h5><?php _e('More In This Series', 'largo'); ?></h5>
             	<?php largo_the_post_labels( get_the_ID() ); ?>
         	</div>
         <?php endif; ?>
@@ -29,7 +29,7 @@
         <!-- Post tags -->
         <?php if ( largo_has_categories_or_tags() ): ?>
     		<div class="tags clearfix">
-    			<h5>Filed Under:</h5>
+    			<h5><?php _e('Filed Under:', 'largo'); ?></h5>
     			<ul>
     				<?php echo largo_the_categories_and_tags(); ?>
     			</ul>
@@ -46,7 +46,7 @@
 		?>
 			<div id="related-posts" class="idTabs row-fluid clearfix">
 				<ul id="related-post-nav" class="span4">
-					<li><h5>More About</h5></li>
+					<li><h5><?php _e('More About', 'largo'); ?></h5></li>
 					<?php foreach ( $rel_topics as $count => $topic ) : ?>
 					<li><a href="#rp<?php echo $count; ?>"><?php echo $topic->name; ?></a></li>
 					<?php endforeach; ?>
@@ -69,7 +69,7 @@
 								<li><a href="<?php echo esc_url( get_permalink( $rel_post->ID ) ); ?>" title="<?php echo esc_attr($topic->name); ?>"><?php echo $rel_post->post_title; ?></a></li>
 								<?php endforeach; ?>
 							</ul>
-							<p><a href="<?php echo esc_url( get_term_link( $topic ) ); ?>" title="<?php echo esc_attr($topic->name); ?>" target="_blank"><strong>View all <?php echo $topic->name; ?> posts &rarr;</strong></a></p>
+							<p><a href="<?php echo esc_url( get_term_link( $topic ) ); ?>" title="<?php echo esc_attr($topic->name); ?>" target="_blank"><strong><?php printf( __('View all %s posts &rarr;', 'largo'), $topic->name ); ?></strong></a></p>
 						</div> <!-- /#rpX -->
 					<?php endforeach; ?>
 				</div> <!-- /.items -->
@@ -82,8 +82,8 @@
 </article><!-- #post-<?php the_ID(); ?> -->
 
 <nav id="nav-below" class="pager post-nav clearfix">
-	<div class="previous"><?php previous_post_link( '<h5>Previous Story</h5> %link', '<span class="meta-nav">' . _x( '&larr;', 'Previous post link', 'largo' ) . '</span> %title' ); ?></div>
-	<div class="next"><?php next_post_link( '<h5>Next Story</h5> %link', '%title <span class="meta-nav">' . _x( '&rarr;', 'Next post link', 'largo' ) . '</span>' ); ?></div>
+	<div class="previous"><?php previous_post_link( __('<h5>Previous Story</h5> %link', 'largo'), '<span class="meta-nav">' . _x( '&larr;', 'Previous post link', 'largo' ) . '</span> %title' ); ?></div>
+	<div class="next"><?php next_post_link( __('<h5>Next Story</h5> %link', 'largo'), '%title <span class="meta-nav">' . _x( '&rarr;', 'Next post link', 'largo' ) . '</span>' ); ?></div>
 </nav><!-- #nav-below -->
 
 

@@ -11,7 +11,12 @@ get_header(); ?>
 
 				<?php get_search_form(); ?>
 
-				<h3 class="recent-posts clearfix">Your search for <span class="search-term"><?php the_search_query(); ?></span> returned <?php printf( _n( '%s result', '%s results', $wp_query->found_posts ), number_format_i18n( $wp_query->found_posts ) ); ?></h3>
+				<h3 class="recent-posts clearfix">
+					<?php
+						printf( __('Your search for <span class="search-term">%s</span> returned ', 'largo'), get_search_query() );
+						printf( _n( '%s result', '%s results', $wp_query->found_posts ), number_format_i18n( $wp_query->found_posts ) );
+					?>
+				</h3>
 
 				<?php
 				/* Start the Loop */
@@ -20,7 +25,7 @@ get_header(); ?>
 				endwhile;
     			largo_content_nav( 'nav-below' );
     		} else {
-					get_template_part( 'content', 'not-found' );
+				get_template_part( 'content', 'not-found' );
 			}
     		?>
 

@@ -26,7 +26,7 @@ get_header(); ?>
 
 				<header class="clearfix">
 					<nav class="archive-dropdown">
-						<select name="archive-dropdown" onchange='document.location.href=this.options[this.selectedIndex].value;'><option value="">Select Month</option>
+						<select name="archive-dropdown" onchange='document.location.href=this.options[this.selectedIndex].value;'><option value=""><?php _e('Select Month', 'largo'); ?></option>
 						<?php wp_get_archives( array('type' => 'monthly', 'format' => 'option' ) ); ?>
 						</select>
 					</nav>
@@ -35,11 +35,11 @@ get_header(); ?>
 				<h3 class="recent-posts clearfix">
 					<?php
 						if ( is_month() ) {
-							printf( 'Monthly Archives: <span>%s</span>', get_the_date('F Y') );
+							printf(__('Monthly Archives: <span>%s</span>', 'largo'), get_the_date('F Y') );
 						} elseif ( is_year() ) {
-							printf( 'Yearly Archives: <span>%s</span>', get_the_date('Y') );
+							printf(__('Yearly Archives: <span>%s</span>', 'largo'), get_the_date('Y') );
 						} else {
-							echo 'Blog Archives';
+							_e('Blog Archives', 'largo');
 						}
 					?>
 				</h3>

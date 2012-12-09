@@ -59,7 +59,7 @@
 	<div class="global-nav">
 		<nav id="top-nav" class="span12">
         	<span class="visuallyhidden">
-        		<a href="#main" title="Skip to content">Skip to content</a>
+        		<a href="#main" title="Skip to content"><?php _e('Skip to content', 'largo'); ?></a>
         	</span>
         	<?php
 				$args = array(
@@ -77,7 +77,8 @@
 				<div id="header-search">
 					<form class="form-search" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 						<div class="input-append">
-							<input type="text" placeholder="SEARCH" class="input-medium appendedInputButton search-query" value="" name="s" /><button type="submit" class="search-submit btn">GO</button>
+							<input type="text" placeholder="<?php _e('Search', 'largo'); ?>" class="input-medium appendedInputButton search-query" value="" name="s" />
+							<button type="submit" class="search-submit btn"><?php _e('GO', 'largo'); ?></button>
 						</div>
 					</form>
 				</div>
@@ -105,7 +106,7 @@
 
 	      <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
 	      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-	        <div class="label">More</div>
+	        <div class="label"><?php _e('More', 'largo'); ?></div>
 	        <div class="bars">
 		        <span class="icon-bar"></span>
 		        <span class="icon-bar"></span>

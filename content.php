@@ -11,7 +11,7 @@
 	<header>
  		<h2 class="entry-title"><a href="<?php the_permalink(); ?>" title="Permalink to <?php the_title_attribute(); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
  		<div class="post-meta">
- 			<h5 class="byline"><?php largo_byline(); ?><?php edit_post_link('Edit This Post', ' | <span class="edit-link">', '</span>'); ?></h5>
+ 			<h5 class="byline"><?php largo_byline(); ?><?php edit_post_link( __('Edit This Post', 'largo'), ' | <span class="edit-link">', '</span>'); ?></h5>
  		</div>
 	</header><!-- / entry header -->
 
@@ -20,7 +20,7 @@
 		<?php largo_excerpt( $post, 5, '', 1); ?>
         <?php if ( largo_has_categories_or_tags() ): ?>
             <div class="post-meta bottom-meta">
-    			<h5><strong>Filed under:</strong> <?php echo largo_homepage_categories_and_tags(); ?></h5>
+    			<h5><strong><?php _e('Filed under:', 'largo'); ?></strong> <?php echo largo_homepage_categories_and_tags(); ?></h5>
             </div><!-- /.post-meta -->
         <?php endif; ?>
 	</div><!-- .entry-content -->

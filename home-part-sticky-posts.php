@@ -44,13 +44,13 @@ if ( $query->have_posts() ) {
 			if ( has_post_thumbnail() ) {
 ?>
 						<div class="image-wrap">
-							<h4>FEATURED</h4>
+							<h4><?php _e('FEATURED', 'largo'); ?></h4>
 							<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
 						</div>
 <?php
 			} else {
 ?>
-						<h4 class="no-image">FEATURED</h4>
+						<h4 class="no-image"><?php _e('FEATURED', 'largo'); ?></h4>
 <?php
 			} // end thumbnail
 ?>
@@ -67,7 +67,7 @@ if ( $query->have_posts() ) {
 ?>
 					<div class="sticky-features-list span4">
 						<ul>
-							<li><h4>More from<br /><span class="series-name"><?php echo $feature->name; ?></span></h4></li>
+							<li><h4><?php _e('More from', 'largo'); ?><br /><span class="series-name"><?php echo $feature->name; ?></span></h4></li>
 							<?php
 								foreach ( $feature_posts as $feature_post ):
 									printf( '<li><a href="%1$s">%2$s</a></li>',
@@ -76,7 +76,7 @@ if ( $query->have_posts() ) {
 									);
 								endforeach;
 								if ( count( $feature_posts ) == 3 )
-									printf( '<li class="sticky-all"><a href="%1$s">Full&nbsp;Coverage&nbsp;&rarr;</a></li>',
+									printf( __('<li class="sticky-all"><a href="%1$s">Full&nbsp;Coverage&nbsp;&rarr;</a></li>', 'largo'),
 										esc_url( get_term_link( $feature ) )
 									);
 							?>

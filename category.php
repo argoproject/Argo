@@ -18,14 +18,14 @@ get_header(); ?>
 				?>
 				<?php if (largo_get_related_topics_for_category( get_queried_object() ) != '<ul></ul>' ) : ?>
 					<div class="related-topics">
-						<h5>Related Topics: </h5>
+						<h5><?php _e('Related Topics:', 'largo'); ?> </h5>
 						<?php echo largo_get_related_topics_for_category( get_queried_object() ); ?>
 					</div> <!-- /.related-topics -->
 				<?php endif; ?>
 
 			</header> <!-- /.category-background -->
 
-			<h3 class="recent-posts clearfix">Recent posts<a class="rss-link" href="<?php echo esc_url( get_category_feed_link( get_queried_object_id() ) ); ?>"><i class="social-icons rss24"></i></a></h3>
+			<h3 class="recent-posts clearfix"><?php _e('Recent posts', 'largo'); ?><a class="rss-link" href="<?php echo esc_url( get_category_feed_link( get_queried_object_id() ) ); ?>"><i class="social-icons rss24"></i></a></h3>
 
 				<?php
 					while ( have_posts() ) : the_post();

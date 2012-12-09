@@ -10,7 +10,7 @@
 ?>
 	<div id="comments" class="clearfix">
 	<?php if ( post_password_required() ) : ?>
-		<p class="nopassword">This post is password protected. Enter the password to view any comments.</p>
+		<p class="nopassword"><?php _e('This post is password protected. Enter the password to view any comments.', 'largo'); ?></p>
 	</div><!-- #comments -->
 	<?php
 			/* Stop the rest of comments.php from being processed,
@@ -33,8 +33,8 @@
 
 		<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : // are there comments to navigate through ?>
 		<nav id="comment-nav-above">
-			<div class="nav-previous"><?php previous_comments_link( '&larr; Older Comments' ); ?></div>
-			<div class="nav-next"><?php next_comments_link( 'Newer Comments &rarr;' ); ?></div>
+			<div class="nav-previous"><?php previous_comments_link( __('&larr; Older Comments', 'largo') ); ?></div>
+			<div class="nav-next"><?php next_comments_link( __('Newer Comments &rarr;', 'largo') ); ?></div>
 		</nav>
 		<?php endif; // check for comment navigation ?>
 
@@ -63,7 +63,7 @@
 		 */
 		elseif ( ! comments_open() && ! is_page() && post_type_supports( get_post_type(), 'comments' ) ) :
 	?>
-		<p class="nocomments notice">Comments are closed.</p>
+		<p class="nocomments notice"><?php _e('Comments are closed.', 'largo'); ?></p>
 	<?php endif; ?>
 
 	<?php comment_form(); ?>
