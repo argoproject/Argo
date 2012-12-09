@@ -89,26 +89,26 @@ if ( ! function_exists( 'largo_excerpt' ) ) {
 /**
 * Make a nicer-looking excerpt regardless of how an author has been using excerpts in the past
 */
-	function largo_excerpt( $post, $sentence_count = 5, $more_link = 'Continue reading <span class="meta-nav">&rarr;</span>', $use_more = 1 ) {
-		if ( is_home() && strpos($post->post_content, '<!--more-->') && ($use_more != 0) ) : // if we're on the homepage and the post has a more tag, use that
-			the_content( 'Continue reading <span class="meta-nav">&rarr;</span>' );
+	function largo_excerpt( $post, $sentence_count = 5, $more_link = 'Continue&nbsp;reading&nbsp;&rarr;', $use_more = 1 ) {
+		if ( is_home() && strpos( $post->post_content, '<!--more-->' ) && ( $use_more != 0 ) ) : // if we're on the homepage and the post has a more tag, use that
+			the_content( __( $more_link, 'largo' ) );
 		elseif ( $post->post_excerpt ) : // if it has the optional excerpt set, use THAT
-			if ($use_more == 0) :
+			if ( $use_more == 0 ) :
 				the_excerpt();
 			else :
-				echo '<p>' . strip_tags(get_the_excerpt()) . ' <a href="' . get_permalink() . '">' . $more_link . '</a></p>';
+				echo '<p>' . strip_tags( get_the_excerpt() ) . ' <a href="' . get_permalink() . '">' . __( $more_link, 'largo' ) . '</a></p>';
 			endif;
 		else : // otherwise we'll just do our best and make the prettiest excerpt we can muster
-			$output = largo_trim_sentences(get_the_content(), $sentence_count);
-			$output .= '<a href="' . get_permalink() . '">' . $more_link . '</a>';
-			$output = strip_tags(str_replace('(more...)', '', $output));
-			echo apply_filters('the_content', $output);
+			$output = largo_trim_sentences( get_the_content(), $sentence_count );
+			$output .= '<a href="' . get_permalink() . '">' . __( $more_link, 'largo' ) . '</a>';
+			$output = str_replace( '(more...)', '', $output );
+			echo apply_filters( 'the_content', $output );
 		endif;
 	}
 } // ends check for largo_excerpt()
 
-if ( ! function_exists ('largo_trim_sentences') ) {
-	function largo_trim_sentences($input, $sentences) {
+if ( ! function_exists ( 'largo_trim_sentences' ) ) {
+	function largo_trim_sentences( $input, $sentences ) {
 		$re = '/# Split sentences on whitespace between them.
 		    (?<=                # Begin positive lookbehind.
 		      [.!?]             # Either an end of sentence punct,
@@ -131,12 +131,10 @@ if ( ! function_exists ('largo_trim_sentences') ) {
 		    )                   # End negative lookbehind.
 		    \s+                 # Split on whitespace between sentences.
 		    /ix';
-		$strings = preg_split($re, strip_tags(strip_shortcodes($input)), -1, PREG_SPLIT_NO_EMPTY);
+		$strings = preg_split( $re, strip_tags( strip_shortcodes( $input ) ), -1, PREG_SPLIT_NO_EMPTY);
 
-
-		//$strings = preg_split('/(\.|!|\?)\s/', strip_tags(strip_shortcodes($input)));
-		for ($i = 0; $i < $sentences; $i++) {
-			if ($strings[$i] != '')
+		for ( $i = 0; $i < $sentences; $i++ ) {
+			if ( $strings[$i] != '' )
 				$output .= $strings[$i] . ' ';
 		}
 		return $output;
@@ -153,8 +151,8 @@ if ( ! function_exists( 'largo_content_nav' ) ) {
 		if ( $wp_query->max_num_pages > 1 ) : ?>
 
 	<nav id="<?php echo $nav_id; ?>" class="pager post-nav">
-		<div class="next"><?php previous_posts_link( 'Newer Stories &rarr;' ); ?></div>
-		<div class="previous"><?php next_posts_link( '&larr; Older Stories' ); ?></div>
+		<div class="next"><?php previous_posts_link( __( 'Newer Stories &rarr;', 'largo' ) ); ?></div>
+		<div class="previous"><?php next_posts_link( __( '&larr; Older Stories', 'largo' ) ); ?></div>
 	</nav><!-- .post-nav -->
 
 		<?php endif;
@@ -186,7 +184,7 @@ if ( !function_exists( 'largo_pagination' ) ) {
 
 	    <nav>
 			<ul class="largo-pag clearfix">
-			<li class="largo-previous"><?php previous_posts_link( '&larr; Newer posts' ); ?></li>
+			<li class="largo-previous"><?php previous_posts_link( __( '&larr; Newer posts', 'largo' ) ); ?></li>
 
 					<?php if ( $max_page > $range ) {
 					// When closer to the beginning
@@ -249,7 +247,7 @@ if ( ! function_exists( 'largo_comment' ) ) {
 			case 'trackback' :
 		?>
 		<li class="post pingback">
-			<p>Pingback: <?php comment_author_link(); ?><?php edit_comment_link( 'Edit', '<span class="edit-link">', '</span>' ); ?></p>
+			<p><?php _e( 'Pingback:', 'largo' ) ?> <?php comment_author_link(); ?><?php edit_comment_link( __( 'Edit', 'largo' ) , '<span class="edit-link">', '</span>' ); ?></p>
 		<?php
 				break;
 			default :
@@ -277,7 +275,7 @@ if ( ! function_exists( 'largo_comment' ) ) {
 							);
 						?>
 
-						<?php edit_comment_link( 'Edit', '<span class="edit-link">', '</span>' ); ?>
+						<?php edit_comment_link( __( 'Edit', 'largo' ), '<span class="edit-link">', '</span>' ); ?>
 					</div><!-- .comment-author .vcard -->
 
 					<?php if ( $comment->comment_approved == '0' ) : ?>
@@ -290,7 +288,7 @@ if ( ! function_exists( 'largo_comment' ) ) {
 				<div class="comment-content"><?php comment_text(); ?></div>
 
 				<div class="reply">
-					<?php comment_reply_link( array_merge( $args, array( 'reply_text' => 'Reply <span>&darr;</span>', 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
+					<?php comment_reply_link( array_merge( $args, array( 'reply_text' => __( 'Reply <span>&darr;</span>', 'largo' ), 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
 				</div><!-- .reply -->
 			</article><!-- #comment-## -->
 
@@ -329,7 +327,7 @@ if ( ! function_exists( 'largo_copyright_message' ) ) {
 	function largo_copyright_message() {
 	    $msg = of_get_option( 'copyright_msg' );
 	    if ( ! $msg )
-	    	$msg = 'Copyright %s';
+	    	$msg = __( 'Copyright %s', 'largo' );
 	    printf( $msg, date( 'Y' ) );
 	}
 } // ends check for largo_copyright_message()
@@ -341,12 +339,12 @@ if ( ! function_exists( 'largo_social_links' ) ) {
 	function largo_social_links () {
 
 		$fields = array(
-			'rss' => 'Link to RSS Feed',
-			'facebook' => 'Link to Facebook Profile',
-			'twitter' => 'Link to Twitter Page',
-			'youtube' => 'Link to YouTube Page',
-			'flickr' => 'Link to Flickr Page',
-			'gplus' => 'Link to Google Plus Page'
+			'rss' 		=> __( 'Link to RSS Feed', 'largo' ),
+			'facebook' 	=> __( 'Link to Facebook Profile', 'largo' ),
+			'twitter' 	=> __( 'Link to Twitter Page', 'largo' ),
+			'youtube' 	=> __( 'Link to YouTube Page', 'largo' ),
+			'flickr' 	=> __( 'Link to Flickr Page', 'largo' ),
+			'gplus' 	=> __( 'Link to Google Plus Page', 'largo' )
 		);
 
 		foreach ( $fields as $field => $title ) {
