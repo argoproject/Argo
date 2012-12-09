@@ -7,9 +7,9 @@ class largo_facebook_widget extends WP_Widget {
 	function largo_facebook_widget() {
 		$widget_ops = array(
 			'classname' 	=> 'largo-facebook',
-			'description' 	=> 'Show a Facebook Like Box for your page'
+			'description' 	=> __('Show a Facebook Like Box for your page', 'largo')
 		);
-		$this->WP_Widget( 'largo-facebook-widget', __('Largo Facebook Widget', 'largo-facebook'), $widget_ops);
+		$this->WP_Widget( 'largo-facebook-widget', __('Largo Facebook Widget', 'largo'), $widget_ops);
 	}
 
 	function widget( $args, $instance ) {
@@ -79,38 +79,38 @@ class largo_facebook_widget extends WP_Widget {
 		?>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'fb_page_url' ); ?>"><?php _e('Facebook Page URL:', 'largo-facebook'); ?></label>
+			<label for="<?php echo $this->get_field_id( 'fb_page_url' ); ?>"><?php _e('Facebook Page URL:', 'largo'); ?></label>
 			<input id="<?php echo $this->get_field_id( 'fb_page_url' ); ?>" name="<?php echo $this->get_field_name( 'fb_page_url' ); ?>" value="<?php echo $instance['fb_page_url']; ?>" style="width:90%;" />
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'widget_height' ); ?>"><?php _e('Widget Height:', 'largo-facebook'); ?></label>
+			<label for="<?php echo $this->get_field_id( 'widget_height' ); ?>"><?php _e('Widget Height:', 'largo'); ?></label>
 			<input id="<?php echo $this->get_field_id( 'widget_height' ); ?>" name="<?php echo $this->get_field_name( 'widget_height' ); ?>" value="<?php echo $instance['widget_height']; ?>" style="width:90%;" />
 		</p>
 
 		<p style="margin:15px 0 10px 5px">
-			<input class="checkbox" type="checkbox" <?php echo $show_faces; ?> id="<?php echo $this->get_field_id('show_faces'); ?>" name="<?php echo $this->get_field_name('show_faces'); ?>" /> <label for="<?php echo $this->get_field_id('show_faces'); ?>"><?php _e('Show Faces?', 'largo-facebook'); ?></label>
+			<input class="checkbox" type="checkbox" <?php echo $show_faces; ?> id="<?php echo $this->get_field_id('show_faces'); ?>" name="<?php echo $this->get_field_name('show_faces'); ?>" /> <label for="<?php echo $this->get_field_id('show_faces'); ?>"><?php _e('Show Faces?', 'largo'); ?></label>
 			<br />
-			<input class="checkbox" type="checkbox" <?php echo $show_stream; ?> id="<?php echo $this->get_field_id('show_stream'); ?>" name="<?php echo $this->get_field_name('show_stream'); ?>" /> <label for="<?php echo $this->get_field_id('show_stream'); ?>"><?php _e('Show Stream?', 'largo-facebook'); ?></label>
+			<input class="checkbox" type="checkbox" <?php echo $show_stream; ?> id="<?php echo $this->get_field_id('show_stream'); ?>" name="<?php echo $this->get_field_name('show_stream'); ?>" /> <label for="<?php echo $this->get_field_id('show_stream'); ?>"><?php _e('Show Stream?', 'largo'); ?></label>
 			<br />
-			<input class="checkbox" type="checkbox" <?php echo $show_header; ?> id="<?php echo $this->get_field_id('show_header'); ?>" name="<?php echo $this->get_field_name('show_header'); ?>" /> <label for="<?php echo $this->get_field_id('show_header'); ?>"><?php _e('Show Header?', 'largo-facebook'); ?></label>
+			<input class="checkbox" type="checkbox" <?php echo $show_header; ?> id="<?php echo $this->get_field_id('show_header'); ?>" name="<?php echo $this->get_field_name('show_header'); ?>" /> <label for="<?php echo $this->get_field_id('show_header'); ?>"><?php _e('Show Header?', 'largo'); ?></label>
 		</p>
 
-
-		<label for="<?php echo $this->get_field_id( 'widget_class' ); ?>"><?php _e('Widget Background', 'largo-facebook'); ?></label>
+		<label for="<?php echo $this->get_field_id( 'widget_class' ); ?>"><?php _e('Widget Background', 'largo'); ?></label>
 		<select id="<?php echo $this->get_field_id('widget_class'); ?>" name="<?php echo $this->get_field_name('widget_class'); ?>" class="widefat" style="width:90%;">
-		    <option <?php selected( $instance['widget_class'], 'default'); ?> value="default">Default</option>
-		    <option <?php selected( $instance['widget_class'], 'rev'); ?> value="rev">Reverse</option>
-		    <option <?php selected( $instance['widget_class'], 'no-bg'); ?> value="no-bg">No Background</option>
+		    <option <?php selected( $instance['widget_class'], 'default'); ?> value="default"><?php _e('Default', 'largo'); ?></option>
+		    <option <?php selected( $instance['widget_class'], 'rev'); ?> value="rev"><?php _e('Reverse', 'largo'); ?></option>
+		    <option <?php selected( $instance['widget_class'], 'no-bg'); ?> value="no-bg"><?php _e('No Background', 'largo'); ?></option>
 		</select>
 
 		<p style="margin:15px 0 10px 5px">
-			<input class="checkbox" type="checkbox" <?php echo $desktop; ?> id="<?php echo $this->get_field_id('hidden_desktop'); ?>" name="<?php echo $this->get_field_name('hidden_desktop'); ?>" /> <label for="<?php echo $this->get_field_id('hidden_desktop'); ?>"><?php _e('Hidden on Desktops?', 'largo-facebook'); ?></label>
+			<input class="checkbox" type="checkbox" <?php echo $desktop; ?> id="<?php echo $this->get_field_id('hidden_desktop'); ?>" name="<?php echo $this->get_field_name('hidden_desktop'); ?>" /> <label for="<?php echo $this->get_field_id('hidden_desktop'); ?>"><?php _e('Hidden on Desktops?', 'largo'); ?></label>
 			<br />
-			<input class="checkbox" type="checkbox" <?php echo $tablet; ?> id="<?php echo $this->get_field_id('hidden_tablet'); ?>" name="<?php echo $this->get_field_name('hidden_tablet'); ?>" /> <label for="<?php echo $this->get_field_id('hidden_tablet'); ?>"><?php _e('Hidden on Tablets?', 'largo-facebook'); ?></label>
+			<input class="checkbox" type="checkbox" <?php echo $tablet; ?> id="<?php echo $this->get_field_id('hidden_tablet'); ?>" name="<?php echo $this->get_field_name('hidden_tablet'); ?>" /> <label for="<?php echo $this->get_field_id('hidden_tablet'); ?>"><?php _e('Hidden on Tablets?', 'largo'); ?></label>
 			<br />
-			<input class="checkbox" type="checkbox" <?php echo $phone; ?> id="<?php echo $this->get_field_id('hidden_phone'); ?>" name="<?php echo $this->get_field_name('hidden_phone'); ?>" /> <label for="<?php echo $this->get_field_id('hidden_phone'); ?>"><?php _e('Hidden on Phones?', 'largo-facebook'); ?></label>
+			<input class="checkbox" type="checkbox" <?php echo $phone; ?> id="<?php echo $this->get_field_id('hidden_phone'); ?>" name="<?php echo $this->get_field_name('hidden_phone'); ?>" /> <label for="<?php echo $this->get_field_id('hidden_phone'); ?>"><?php _e('Hidden on Phones?', 'largo'); ?></label>
 		</p>
+
 	<?php
 	}
 }

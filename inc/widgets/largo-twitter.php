@@ -7,9 +7,9 @@ class largo_twitter_widget extends WP_Widget {
 	function largo_twitter_widget() {
 		$widget_ops = array(
 			'classname' 	=> 'largo-twitter',
-			'description' 	=> 'Show a Twitter profile, list or search widget'
+			'description' 	=> __('Show a Twitter profile, list or search widget', 'largo')
 		);
-		$this->WP_Widget( 'largo-twitter-widget', __('Largo Twitter Widget', 'largo-twitter'), $widget_ops);
+		$this->WP_Widget( 'largo-twitter-widget', __('Largo Twitter Widget', 'largo'), $widget_ops);
 	}
 
 	function widget( $args, $instance ) {
@@ -80,7 +80,7 @@ class largo_twitter_widget extends WP_Widget {
 			'widget_ID' 		=> '',
 			'twitter_username' 	=> twitter_url_to_username( of_get_option( 'twitter_link' ) ),
 			'twitter_list_slug' => 'inn-staff-and-associates',
-			'twitter_search' 	=> 'your search',
+			'twitter_search' 	=> __('your search', 'largo'),
 			'widget_type' 		=> 'timeline',
 			'widget_theme' 		=> 'light',
 			'widget_class' 		=> 'default',
@@ -95,57 +95,58 @@ class largo_twitter_widget extends WP_Widget {
 		?>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'widget_type' ); ?>"><?php _e('Widget Type', 'largo-twitter'); ?></label>
+			<label for="<?php echo $this->get_field_id( 'widget_type' ); ?>"><?php _e('Widget Type', 'largo'); ?></label>
 			<select id="<?php echo $this->get_field_id('widget_type'); ?>" name="<?php echo $this->get_field_name('widget_type'); ?>" class="widefat" style="width:90%;">
-			    <option <?php selected( $instance['widget_type'], 'timeline'); ?> value="timeline">Timeline</option>
-			    <option <?php selected( $instance['widget_type'], 'favorites'); ?> value="favorites">Favorites</option>
-			    <option <?php selected( $instance['widget_type'], 'list'); ?> value="list">List</option>
-			    <option <?php selected( $instance['widget_type'], 'search'); ?> value="search">Search</option>
+			    <option <?php selected( $instance['widget_type'], 'timeline'); ?> value="timeline"><?php _e('Timeline', 'largo'); ?></option>
+			    <option <?php selected( $instance['widget_type'], 'favorites'); ?> value="favorites"><?php _e('Favorites', 'largo'); ?></option>
+			    <option <?php selected( $instance['widget_type'], 'list'); ?> value="list"><?php _e('List', 'largo'); ?></option>
+			    <option <?php selected( $instance['widget_type'], 'search'); ?> value="search"><?php _e('Search', 'largo'); ?></option>
 			</select>
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'widget_theme' ); ?>"><?php _e('Widget Theme', 'largo-twitter'); ?></label>
+			<label for="<?php echo $this->get_field_id( 'widget_theme' ); ?>"><?php _e('Widget Theme', 'largo'); ?></label>
 			<select id="<?php echo $this->get_field_id('widget_theme'); ?>" name="<?php echo $this->get_field_name('widget_theme'); ?>" class="widefat" style="width:90%;">
-			    <option <?php selected( $instance['widget_theme'], 'light'); ?> value="light">Light</option>
-			    <option <?php selected( $instance['widget_theme'], 'dark'); ?> value="dark">Dark</option>
+			    <option <?php selected( $instance['widget_theme'], 'light'); ?> value="light"><?php _e('Light', 'largo'); ?></option>
+			    <option <?php selected( $instance['widget_theme'], 'dark'); ?> value="dark"><?php _e('Dark', 'largo'); ?></option>
 			</select>
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'widget_ID' ); ?>"><?php _e('Twitter Widget ID (from https://twitter.com/settings/widgets):', 'largo-twitter'); ?></label>
+			<label for="<?php echo $this->get_field_id( 'widget_ID' ); ?>"><?php _e('Twitter Widget ID (from https://twitter.com/settings/widgets):', 'largo'); ?></label>
 			<input id="<?php echo $this->get_field_id( 'widget_ID' ); ?>" name="<?php echo $this->get_field_name( 'widget_ID' ); ?>" value="<?php echo $instance['widget_ID']; ?>" style="width:90%;" />
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'twitter_username' ); ?>"><?php _e('Twitter Username (for timeline, favorites and list widgets):', 'largo-twitter'); ?></label>
+			<label for="<?php echo $this->get_field_id( 'twitter_username' ); ?>"><?php _e('Twitter Username (for timeline, favorites and list widgets):', 'largo'); ?></label>
 			<input id="<?php echo $this->get_field_id( 'twitter_username' ); ?>" name="<?php echo $this->get_field_name( 'twitter_username' ); ?>" value="<?php echo $instance['twitter_username']; ?>" style="width:90%;" />
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'twitter_list_slug' ); ?>"><?php _e('Twitter List Slug (for list widget):', 'largo-twitter'); ?></label>
+			<label for="<?php echo $this->get_field_id( 'twitter_list_slug' ); ?>"><?php _e('Twitter List Slug (for list widget):', 'largo'); ?></label>
 			<input id="<?php echo $this->get_field_id( 'twitter_list_slug' ); ?>" name="<?php echo $this->get_field_name( 'twitter_list_slug' ); ?>" value="<?php echo $instance['twitter_list_slug']; ?>" style="width:90%;" />
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'twitter_search' ); ?>"><?php _e('Twitter Search Query (for search widget):', 'largo-twitter'); ?></label>
+			<label for="<?php echo $this->get_field_id( 'twitter_search' ); ?>"><?php _e('Twitter Search Query (for search widget):', 'largo'); ?></label>
 			<input id="<?php echo $this->get_field_id( 'twitter_search' ); ?>" name="<?php echo $this->get_field_name( 'twitter_search' ); ?>" value="<?php echo $instance['twitter_search']; ?>" style="width:90%;" />
 		</p>
 
-		<label for="<?php echo $this->get_field_id( 'widget_class' ); ?>"><?php _e('Widget Background', 'largo-twitter'); ?></label>
+		<label for="<?php echo $this->get_field_id( 'widget_class' ); ?>"><?php _e('Widget Background', 'largo'); ?></label>
 		<select id="<?php echo $this->get_field_id('widget_class'); ?>" name="<?php echo $this->get_field_name('widget_class'); ?>" class="widefat" style="width:90%;">
-		    <option <?php selected( $instance['widget_class'], 'default'); ?> value="default">Default</option>
-		    <option <?php selected( $instance['widget_class'], 'rev'); ?> value="rev">Reverse</option>
-		    <option <?php selected( $instance['widget_class'], 'no-bg'); ?> value="no-bg">No Background</option>
+		    <option <?php selected( $instance['widget_class'], 'default'); ?> value="default"><?php _e('Default', 'largo'); ?></option>
+		    <option <?php selected( $instance['widget_class'], 'rev'); ?> value="rev"><?php _e('Reverse', 'largo'); ?></option>
+		    <option <?php selected( $instance['widget_class'], 'no-bg'); ?> value="no-bg"><?php _e('No Background', 'largo'); ?></option>
 		</select>
 
 		<p style="margin:15px 0 10px 5px">
-			<input class="checkbox" type="checkbox" <?php echo $desktop; ?> id="<?php echo $this->get_field_id('hidden_desktop'); ?>" name="<?php echo $this->get_field_name('hidden_desktop'); ?>" /> <label for="<?php echo $this->get_field_id('hidden_desktop'); ?>"><?php _e('Hidden on Desktops?', 'largo-twitter'); ?></label>
+			<input class="checkbox" type="checkbox" <?php echo $desktop; ?> id="<?php echo $this->get_field_id('hidden_desktop'); ?>" name="<?php echo $this->get_field_name('hidden_desktop'); ?>" /> <label for="<?php echo $this->get_field_id('hidden_desktop'); ?>"><?php _e('Hidden on Desktops?', 'largo'); ?></label>
 			<br />
-			<input class="checkbox" type="checkbox" <?php echo $tablet; ?> id="<?php echo $this->get_field_id('hidden_tablet'); ?>" name="<?php echo $this->get_field_name('hidden_tablet'); ?>" /> <label for="<?php echo $this->get_field_id('hidden_tablet'); ?>"><?php _e('Hidden on Tablets?', 'largo-twitter'); ?></label>
+			<input class="checkbox" type="checkbox" <?php echo $tablet; ?> id="<?php echo $this->get_field_id('hidden_tablet'); ?>" name="<?php echo $this->get_field_name('hidden_tablet'); ?>" /> <label for="<?php echo $this->get_field_id('hidden_tablet'); ?>"><?php _e('Hidden on Tablets?', 'largo'); ?></label>
 			<br />
-			<input class="checkbox" type="checkbox" <?php echo $phone; ?> id="<?php echo $this->get_field_id('hidden_phone'); ?>" name="<?php echo $this->get_field_name('hidden_phone'); ?>" /> <label for="<?php echo $this->get_field_id('hidden_phone'); ?>"><?php _e('Hidden on Phones?', 'largo-twitter'); ?></label>
+			<input class="checkbox" type="checkbox" <?php echo $phone; ?> id="<?php echo $this->get_field_id('hidden_phone'); ?>" name="<?php echo $this->get_field_name('hidden_phone'); ?>" /> <label for="<?php echo $this->get_field_id('hidden_phone'); ?>"><?php _e('Hidden on Phones?', 'largo'); ?></label>
 		</p>
+
 	<?php
 	}
 }

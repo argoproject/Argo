@@ -9,17 +9,17 @@ class largo_INN_RSS_widget extends WP_Widget {
 	function __construct() {
 		$widget_ops = array(
 			'classname' 	=> 'largo-INN-RSS',
-			'description' 	=> 'An RSS feed of recent stories from INN members',
+			'description' 	=> __('An RSS feed of recent stories from INN members', 'largo'),
 		);
-		parent::__construct( 'largo_INN_RSS', __('INN Member Stories', 'largo-INN-RSS'), $widget_ops );
+		parent::__construct( 'largo_INN_RSS', __('INN Member Stories', 'largo'), $widget_ops );
 	}
 
 	function widget($args, $instance) {
 
 		extract($args);
 		$rss = fetch_feed('http://investigativenewsnetwork.org/all-member-news.rss');
-		$title = 'Stories From Other INN Members';
-		$desc = 'View more recent stories from members of the Investigative News Network';
+		$title = __('Stories From Other INN Members', 'largo');
+		$desc = __('View more recent stories from members of the Investigative News Network', 'largo');
 		$link = 'http://www.investigativenewsnetwork.org/';
 		$url = esc_url(strip_tags($url));
 
@@ -78,20 +78,21 @@ class largo_INN_RSS_widget extends WP_Widget {
 		$phone = $instance['hidden_phone'] ? 'checked="checked"' : '';
 		?>
 
-		<label for="<?php echo $this->get_field_id( 'widget_class' ); ?>"><?php _e('Widget Background', 'largo-INN-RSS'); ?></label>
+		<label for="<?php echo $this->get_field_id( 'widget_class' ); ?>"><?php _e('Widget Background', 'largo'); ?></label>
 		<select id="<?php echo $this->get_field_id('widget_class'); ?>" name="<?php echo $this->get_field_name('widget_class'); ?>" class="widefat" style="width:90%;">
-		    <option <?php selected( $instance['widget_class'], 'default'); ?> value="default">Default</option>
-		    <option <?php selected( $instance['widget_class'], 'rev'); ?> value="rev">Reverse</option>
-		    <option <?php selected( $instance['widget_class'], 'no-bg'); ?> value="no-bg">No Background</option>
+		    <option <?php selected( $instance['widget_class'], 'default'); ?> value="default"><?php _e('Default', 'largo'); ?></option>
+		    <option <?php selected( $instance['widget_class'], 'rev'); ?> value="rev"><?php _e('Reverse', 'largo'); ?></option>
+		    <option <?php selected( $instance['widget_class'], 'no-bg'); ?> value="no-bg"><?php _e('No Background', 'largo'); ?></option>
 		</select>
 
 		<p style="margin:15px 0 10px 5px">
-			<input class="checkbox" type="checkbox" <?php echo $desktop; ?> id="<?php echo $this->get_field_id('hidden_desktop'); ?>" name="<?php echo $this->get_field_name('hidden_desktop'); ?>" /> <label for="<?php echo $this->get_field_id('hidden_desktop'); ?>"><?php _e('Hidden on Desktops?', 'largo-INN-RSS'); ?></label>
+			<input class="checkbox" type="checkbox" <?php echo $desktop; ?> id="<?php echo $this->get_field_id('hidden_desktop'); ?>" name="<?php echo $this->get_field_name('hidden_desktop'); ?>" /> <label for="<?php echo $this->get_field_id('hidden_desktop'); ?>"><?php _e('Hidden on Desktops?', 'largo'); ?></label>
 			<br />
-			<input class="checkbox" type="checkbox" <?php echo $tablet; ?> id="<?php echo $this->get_field_id('hidden_tablet'); ?>" name="<?php echo $this->get_field_name('hidden_tablet'); ?>" /> <label for="<?php echo $this->get_field_id('hidden_tablet'); ?>"><?php _e('Hidden on Tablets?', 'largo-INN-RSS'); ?></label>
+			<input class="checkbox" type="checkbox" <?php echo $tablet; ?> id="<?php echo $this->get_field_id('hidden_tablet'); ?>" name="<?php echo $this->get_field_name('hidden_tablet'); ?>" /> <label for="<?php echo $this->get_field_id('hidden_tablet'); ?>"><?php _e('Hidden on Tablets?', 'largo'); ?></label>
 			<br />
-			<input class="checkbox" type="checkbox" <?php echo $phone; ?> id="<?php echo $this->get_field_id('hidden_phone'); ?>" name="<?php echo $this->get_field_name('hidden_phone'); ?>" /> <label for="<?php echo $this->get_field_id('hidden_phone'); ?>"><?php _e('Hidden on Phones?', 'largo-INN-RSS'); ?></label>
+			<input class="checkbox" type="checkbox" <?php echo $phone; ?> id="<?php echo $this->get_field_id('hidden_phone'); ?>" name="<?php echo $this->get_field_name('hidden_phone'); ?>" /> <label for="<?php echo $this->get_field_id('hidden_phone'); ?>"><?php _e('Hidden on Phones?', 'largo'); ?></label>
 		</p>
+
 	<?php
 	}
 

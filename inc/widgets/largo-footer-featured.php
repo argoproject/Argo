@@ -6,10 +6,10 @@ class largo_footer_featured_widget extends WP_Widget {
 
 	function largo_footer_featured_widget() {
 		$widget_ops = array(
-			'classname' => 'largo-footer-featured',
-			'description' => 'Show recent featured posts with thumbnails and excerpts', 'largo-footer-featured'
+			'classname' 	=> 'largo-footer-featured',
+			'description' 	=> 'Show recent featured posts with thumbnails and excerpts', 'largo-footer-featured'
 		);
-		$this->WP_Widget( 'largo-footer-featured-widget', __('Largo Footer Featured Posts', 'largo-footer-featured'), $widget_ops);
+		$this->WP_Widget( 'largo-footer-featured-widget', __('Largo Footer Featured Posts', 'largo'), $widget_ops);
 	}
 
 	function widget( $args, $instance ) {
@@ -23,9 +23,9 @@ class largo_footer_featured_widget extends WP_Widget {
 			<?php $missedit = largo_get_featured_posts( array(
 				'tax_query' => array(
 					array(
-						'taxonomy' => 'prominence',
-						'field' => 'slug',
-						'terms' => 'footer-featured'
+						'taxonomy' 	=> 'prominence',
+						'field' 	=> 'slug',
+						'terms' 	=> 'footer-featured'
 					)
 				),
 				'showposts' => $instance['num_posts']
@@ -40,7 +40,7 @@ class largo_footer_featured_widget extends WP_Widget {
                   	</div> <!-- /.post-lead -->
 	            <?php endwhile; ?>
 	            <?php else: ?>
-	    		<p class="error"><strong>You don't presently have any posts in the footer featured category.</strong> Mark more posts as featured on the add/edit post screen to populate this region.</p>
+	    		<p class="error"><strong><?php _e('You don\'t presently have any posts in the footer featured category.</strong> Mark more posts as featured on the add/edit post screen to populate this region.', 'largo') ?></p>
 
     		<?php endif; // end more featured posts ?>
 
@@ -58,24 +58,24 @@ class largo_footer_featured_widget extends WP_Widget {
 
 	function form( $instance ) {
 		$defaults = array(
-			'title' => 'In Case You Missed It',
-			'num_posts' => 2,
+			'title' 		=> __('In Case You Missed It', 'largo'),
+			'num_posts' 	=> 2,
 			'num_sentences' => 2
 		);
 		$instance = wp_parse_args( (array) $instance, $defaults ); ?>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e('Title:', 'largo-footer-featured'); ?></label>
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e('Title:', 'largo'); ?></label>
 			<input id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" style="width:90%;" />
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'num_posts' ); ?>"><?php _e('Number of posts to show:', 'largo-footer-featured'); ?></label>
+			<label for="<?php echo $this->get_field_id( 'num_posts' ); ?>"><?php _e('Number of posts to show:', 'largo'); ?></label>
 			<input id="<?php echo $this->get_field_id( 'num_posts' ); ?>" name="<?php echo $this->get_field_name( 'num_posts' ); ?>" value="<?php echo $instance['num_posts']; ?>" style="width:90%;" />
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'num_sentences' ); ?>"><?php _e('Excerpt Length (# of Sentences):', 'largo-footer-featured'); ?></label>
+			<label for="<?php echo $this->get_field_id( 'num_sentences' ); ?>"><?php _e('Excerpt Length (# of Sentences):', 'largo'); ?></label>
 			<input id="<?php echo $this->get_field_id( 'num_sentences' ); ?>" name="<?php echo $this->get_field_name( 'num_sentences' ); ?>" value="<?php echo $instance['num_sentences']; ?>" style="width:90%;" />
 		</p>
 
