@@ -1,0 +1,1375 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Project Largo\n"
+"POT-Creation-Date: 2012-12-09 16:25-0500\n"
+"PO-Revision-Date: 2012-12-09 16:35-0500\n"
+"Last-Translator: Investigative News Network <largo@investigativenewsnetwork."
+"org>\n"
+"Language-Team: Investigative News Network <largo@investigativenewsnetwork."
+"org>\n"
+"Language: English\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../archive.php:29 ../sidebar-footer.php:28
+msgid "Select Month"
+msgstr ""
+
+#: ../archive.php:38
+#, php-format
+msgid "Monthly Archives: <span>%s</span>"
+msgstr ""
+
+#: ../archive.php:40
+#, php-format
+msgid "Yearly Archives: <span>%s</span>"
+msgstr ""
+
+#: ../archive.php:42
+msgid "Blog Archives"
+msgstr ""
+
+#: ../author.php:24 ../category.php:28 ../tag.php:23 ../taxonomy.php:22
+msgid "Recent posts"
+msgstr ""
+
+#: ../category.php:21
+msgid "Related Topics:"
+msgstr ""
+
+#: ../comments.php:13
+msgid ""
+"This post is password protected. Enter the password to view any comments."
+msgstr ""
+
+#: ../comments.php:36
+msgid "&larr; Older Comments"
+msgstr ""
+
+#: ../comments.php:37
+msgid "Newer Comments &rarr;"
+msgstr ""
+
+#: ../comments.php:66
+msgid "Comments are closed."
+msgstr ""
+
+#: ../content-not-found.php:3
+msgid "Nothing Found"
+msgstr ""
+
+#: ../content-not-found.php:7
+msgid "Apologies, but no results were found. Perhaps searching will help."
+msgstr ""
+
+#: ../content-page.php:10
+msgid "Edit This Page"
+msgstr ""
+
+#: ../content-single.php:10
+msgid "Leave a Comment"
+msgstr ""
+
+#: ../content-single.php:10
+msgid "<strong>1</strong> Comment "
+msgstr ""
+
+#: ../content-single.php:10
+msgid " <strong>%</strong> Comments"
+msgstr ""
+
+#: ../content-single.php:10 ../content.php:14 ../home-part-slider.php:21
+#: ../home-part-slider.php:44 ../home-part-topstories.php:19
+msgid "Edit This Post"
+msgstr ""
+
+#: ../content-single.php:24
+msgid "More In This Series"
+msgstr ""
+
+#: ../content-single.php:32
+msgid "Filed Under:"
+msgstr ""
+
+#: ../content-single.php:49
+msgid "More About"
+msgstr ""
+
+#: ../content-single.php:72
+#, php-format
+msgid "View all %s posts &rarr;"
+msgstr ""
+
+#: ../content-single.php:85
+msgid "<h5>Previous Story</h5> %link"
+msgstr ""
+
+#: ../content-single.php:86
+msgid "<h5>Next Story</h5> %link"
+msgstr ""
+
+#: ../content.php:20
+msgid "Continue&nbsp;Reading&nbsp;&rarr;"
+msgstr ""
+
+#: ../content.php:23
+msgid "Filed under:"
+msgstr ""
+
+#: ../footer.php:20
+msgid "Back to top &uarr;"
+msgstr ""
+
+#: ../footer.php:22
+msgid ""
+"This site built with <a href=\"http://largoproject.org\">Project Largo</a> "
+"from the <a href=\"http://investigativenewsnetwork.org\">Investigative News "
+"Network</a> and proudly powered by <a href=\"http://wordpress.org\" rel="
+"\"nofollow\">WordPress</a>."
+msgstr ""
+
+#: ../functions.php:154
+msgid "Newer Stories &rarr;"
+msgstr ""
+
+#: ../functions.php:155
+msgid "&larr; Older Stories"
+msgstr ""
+
+#: ../functions.php:187
+msgid "&larr; Newer posts"
+msgstr ""
+
+#: ../functions.php:250
+msgid "Pingback:"
+msgstr ""
+
+#: ../functions.php:250 ../functions.php:278
+msgid "Edit"
+msgstr ""
+
+#: ../functions.php:291
+msgid "Reply <span>&darr;</span>"
+msgstr ""
+
+#: ../functions.php:330
+#, php-format
+msgid "Copyright %s"
+msgstr ""
+
+#: ../functions.php:342
+msgid "Link to RSS Feed"
+msgstr ""
+
+#: ../functions.php:343
+msgid "Link to Facebook Profile"
+msgstr ""
+
+#: ../functions.php:344
+msgid "Link to Twitter Page"
+msgstr ""
+
+#: ../functions.php:345
+msgid "Link to YouTube Page"
+msgstr ""
+
+#: ../functions.php:346
+msgid "Link to Flickr Page"
+msgstr ""
+
+#: ../functions.php:347
+msgid "Link to Google Plus Page"
+msgstr ""
+
+#: ../header.php:62
+msgid "Skip to content"
+msgstr ""
+
+#: ../header.php:80 ../searchform.php:8 ../inc/widgets/largo-twitter.php:103
+msgid "Search"
+msgstr ""
+
+#: ../header.php:81 ../searchform.php:9
+msgid "GO"
+msgstr ""
+
+#: ../header.php:109
+msgid "More"
+msgstr ""
+
+#: ../home-part-sticky-posts.php:47 ../home-part-sticky-posts.php:53
+msgid "FEATURED"
+msgstr ""
+
+#: ../home-part-sticky-posts.php:70
+msgid "More from"
+msgstr ""
+
+#: ../home-part-sticky-posts.php:79
+#, php-format
+msgid ""
+"<li class=\"sticky-all\"><a href=\"%1$s\">Full&nbsp;Coverage&nbsp;&rarr;</"
+"a></li>"
+msgstr ""
+
+#: ../home-part-topstories.php:27
+msgid "RELATED:"
+msgstr ""
+
+#: ../home-part-topstories.php:57
+msgid "More Headlines"
+msgstr ""
+
+#: ../largo-author-box.php:5
+#, php-format
+msgid ""
+"<h5>About <span class=\"fn n\">%1$s</span><span class=\"author-posts-link"
+"\"><a class=\"url\" href=\"%2$s\" rel=\"author\" title=\"See all posts by "
+"%3$s\">More by this author</a></span></h5>"
+msgstr ""
+
+#: ../largo-author-box.php:26
+msgid "email"
+msgstr ""
+
+#: ../largo-author-box.php:38 ../inc/widgets/largo-follow.php:62
+#, php-format
+msgid "Follow @%1$s"
+msgstr ""
+
+#: ../options.php:35 ../inc/options-framework/options_ref.php:106
+msgid "Basic Settings"
+msgstr ""
+
+#: ../options.php:39
+msgid "Site Description"
+msgstr ""
+
+#: ../options.php:40
+msgid ""
+"Enter a <strong>short blurb about your site</strong>. This is used in a "
+"sidebar widget"
+msgstr ""
+
+#: ../options.php:46
+msgid "Feed URL"
+msgstr ""
+
+#: ../options.php:47
+msgid ""
+"Enter the <strong>URL for your primary RSS feed.</strong> You can override "
+"the default if you use Feedburner or some other service to generate or track "
+"your RSS feed"
+msgstr ""
+
+#: ../options.php:53
+msgid "Donate Button"
+msgstr ""
+
+#: ../options.php:54
+msgid ""
+"<strong>Show/Hide</strong> a button in the top header to link to your "
+"donation page or form."
+msgstr ""
+
+#: ../options.php:59
+msgid ""
+"Enter the <strong>link to your donation page</strong> or form (include "
+"http://)."
+msgstr ""
+
+#: ../options.php:66
+msgid ""
+"Enter the <strong>text for the donate button</strong> (e.g. - Support Us)."
+msgstr ""
+
+#: ../options.php:68 ../sidebar-single.php:15 ../sidebar-topic.php:15
+#: ../sidebar.php:15 ../inc/widgets/largo-donate.php:61
+msgid "Donate Now"
+msgstr ""
+
+#: ../options.php:73
+msgid "Don't Miss Menu"
+msgstr ""
+
+#: ../options.php:74
+msgid ""
+"<strong>Show/Hide</strong> the \"Don't Miss\" menu under the main site "
+"navigation. Add links to this menu under <strong>Appearance > Menus</strong>."
+msgstr ""
+
+#: ../options.php:79
+msgid ""
+"Enter the <strong>label that appears in front of the menu links</strong>. "
+"You can delete this default and no label will appear."
+msgstr ""
+
+#: ../options.php:81 ../inc/nav-menus.php:8
+msgid "Don't Miss"
+msgstr ""
+
+#: ../options.php:86
+msgid "Footer Nav Menu"
+msgstr ""
+
+#: ../options.php:87
+msgid ""
+"Enter the <strong>label that appears before the menu links</strong>. You can "
+"delete this default and no label will appear."
+msgstr ""
+
+#: ../options.php:93
+msgid "Copyright Message"
+msgstr ""
+
+#: ../options.php:94
+#, php-format
+msgid ""
+"Enter the <strong>copyright and credit information</strong> to display in "
+"the footer. You can use <code>%d</code> to output the current year."
+msgstr ""
+
+#: ../options.php:96
+#, php-format
+msgid "&copy; Copyright %d, "
+msgstr ""
+
+#: ../options.php:100
+msgid "Google Analytics"
+msgstr ""
+
+#: ../options.php:101
+msgid ""
+"Enter your <strong>Google Analytics ID (UA-XXXXXXXX-X)</strong> and the code "
+"will be included in the footer."
+msgstr ""
+
+#: ../options.php:107
+msgid "Social Media Links"
+msgstr ""
+
+#: ../options.php:108
+msgid ""
+"Enter the links for your organization's primary social media accounts. To "
+"change social media settings for a user, view their <strong>edit profile</"
+"strong> screen."
+msgstr ""
+
+#: ../options.php:112
+msgid ""
+"<strong>Link to Facebook Page</strong> (https://www.facebook.com/username)"
+msgstr ""
+
+#: ../options.php:118
+msgid "<strong>Link to Twitter Profile</strong> (https://twitter.com/username)"
+msgstr ""
+
+#: ../options.php:124
+msgid "<strong>Link to Google+ Page</strong> (https://plus.google.com/userID/)"
+msgstr ""
+
+#: ../options.php:130
+msgid ""
+"<strong>Link to YouTube Channel</strong> (http://www.youtube.com/user/"
+"username)"
+msgstr ""
+
+#: ../options.php:136
+msgid ""
+"<strong>Link to Flickr Photostream</strong> (http://www.flickr.com/photos/"
+"username/)"
+msgstr ""
+
+#: ../options.php:142
+msgid "Single Post Options"
+msgstr ""
+
+#: ../options.php:146
+msgid ""
+"<strong>Show/Hide the author bio</strong> at the bottom of single posts."
+msgstr ""
+
+#: ../options.php:152
+msgid "<strong>Show/Hide related posts</strong> at the bottom of single posts."
+msgstr ""
+
+#: ../options.php:158
+msgid "SEO Options"
+msgstr ""
+
+#: ../options.php:162
+msgid ""
+"Use noindex for all archive pages (default is to use noindex for just date "
+"archives)."
+msgstr ""
+
+#: ../options.php:168
+msgid "Theme Images"
+msgstr ""
+
+#: ../options.php:172
+msgid "Upload a Thumbnail Image (200x200px)"
+msgstr ""
+
+#: ../options.php:173
+msgid ""
+"This is a default image used for Facebook posts when you do not set a "
+"featured image for your posts."
+msgstr ""
+
+#: ../options.php:178
+msgid "Header Image"
+msgstr ""
+
+#: ../options.php:182
+msgid ""
+"<strong>Use only text</strong> in the place of a banner image (uses site "
+"title and description)."
+msgstr ""
+
+#: ../options.php:188
+msgid "Small Banner Image (768x200px)"
+msgstr ""
+
+#: ../options.php:189
+msgid "Used for viewports below 768px wide (mostly phones and some tablets)"
+msgstr ""
+
+#: ../options.php:194
+msgid "Medium Banner Image (980x150px)"
+msgstr ""
+
+#: ../options.php:195
+msgid "Used for viewports between 768px and 980 px (mostly tablets)"
+msgstr ""
+
+#: ../options.php:200
+msgid "Large Banner Image (1170x120px)"
+msgstr ""
+
+#: ../options.php:201
+msgid "Used for viewports above 980 px (landscape tablets and desktops)"
+msgstr ""
+
+#: ../options.php:206
+msgid "Homepage Options"
+msgstr ""
+
+#: ../options.php:210
+msgid "Homepage Top"
+msgstr ""
+
+#: ../options.php:211
+msgid ""
+"<strong>Select the layout to use for the top of the homepage.</strong> Largo "
+"currently supports three homepage options: a blog-like list of posts with "
+"the ability to stick a post to the op of the homepage, a newspaper-like "
+"layout highlighting featured stories and an animated carousel of featured "
+"stories with large images."
+msgstr ""
+
+#: ../options.php:222
+msgid "Sticky Posts"
+msgstr ""
+
+#: ../options.php:226
+msgid ""
+"Show sticky posts box on homepage? If checked, you will need to set at least "
+"one post as sticky for this box to appear."
+msgstr ""
+
+#: ../options.php:232 ../inc/sidebars.php:59
+msgid "Homepage Bottom"
+msgstr ""
+
+#: ../options.php:233
+msgid ""
+"<strong>Select the layout to use for the bottom of the homepage.</strong> "
+"Largo currently supports two options: a single column list of recent posts "
+"with photos and excerpts or a two column widget area"
+msgstr ""
+
+#: ../search.php:16
+#, php-format
+msgid "Your search for <span class=\"search-term\">%s</span> returned "
+msgstr ""
+
+#: ../sidebar-footer.php:13 ../inc/widgets/largo-footer-featured.php:61
+msgid "In Case You Missed It"
+msgstr ""
+
+#: ../sidebar-footer.php:21
+msgid "Search This Site"
+msgstr ""
+
+#: ../sidebar-footer.php:26
+msgid "Browse Archives"
+msgstr ""
+
+#: ../sidebar-homepage-bottom.php:3
+msgid ""
+"Please add widgets to this content area in the WordPress admin area under "
+"appearance > widgets."
+msgstr ""
+
+#: ../sidebar-single.php:9 ../sidebar-topic.php:9 ../sidebar.php:9
+msgid "Follow Us"
+msgstr ""
+
+#: ../sidebar-single.php:10 ../sidebar-topic.php:10 ../sidebar.php:10
+msgid "About This Site"
+msgstr ""
+
+#: ../sidebar-single.php:13 ../sidebar-topic.php:13 ../sidebar.php:13
+#: ../inc/widgets/largo-donate.php:65
+msgid "Support "
+msgstr ""
+
+#: ../sidebar-single.php:14 ../sidebar-topic.php:14 ../sidebar.php:14
+#: ../inc/widgets/largo-donate.php:66
+msgid ""
+"We depend on your support. A generous gift in any amount helps us continue "
+"to bring you this service."
+msgstr ""
+
+#: ../sidebar-single.php:21 ../inc/widgets/largo-recent-posts.php:117
+msgid "Recent Stories"
+msgstr ""
+
+#: ../sidebar-topic.php:21 ../sidebar.php:21
+#: ../inc/widgets/largo-sidebar-featured.php:82
+msgid "We Recommend"
+msgstr ""
+
+#: ../sidebar.php:28 ../inc/widgets/largo-inn-rss.php:21
+msgid "Stories From Other INN Members"
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:164 ../inc/largo-plugin-init.php:176
+msgid "Install Required Plugins"
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:165 ../inc/largo-plugin-init.php:177
+msgid "Install Plugins"
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:166 ../inc/largo-plugin-init.php:178
+#, php-format
+msgid "Installing Plugin: %s"
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:167
+msgid "Something went wrong."
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:178
+#: ../inc/class-tgm-plugin-activation.php:490 ../inc/largo-plugin-init.php:190
+msgid "Return to Required Plugins Installer"
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:179
+#: ../inc/class-tgm-plugin-activation.php:1846
+#: ../inc/largo-plugin-init.php:191
+msgid "Plugin activated successfully."
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:180
+#, php-format
+msgid "All plugins installed and activated successfully. %1$s"
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:517
+#: ../inc/class-tgm-plugin-activation.php:2058
+msgid "Return to the Dashboard"
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:545
+#, php-format
+msgid "The following plugin was activated successfully: %s."
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:704
+msgid "Dismiss this notice"
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:1091
+msgid "External Link"
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:1096
+msgid "Private Repository"
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:1099
+msgid "Pre-Packaged"
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:1103
+msgid "WordPress Repository"
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:1106
+msgid "Required"
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:1106
+msgid "Recommended"
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:1109
+msgid "Not Installed"
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:1111
+msgid "Installed But Not Activated"
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:1281
+#, php-format
+msgid ""
+"No plugins to install or activate. <a href=\"%1$s\" title=\"Return to the "
+"Dashboard\">Return to the Dashboard</a>"
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:1297
+msgid "Plugin"
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:1298
+msgid "Source"
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:1299
+msgid "Type"
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:1300
+msgid "Status"
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:1318
+msgid "Install"
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:1319
+msgid "Activate"
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:1829
+msgid "Install package not available."
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:1830
+#, php-format
+msgid "Downloading install package from <span class=\"code\">%s</span>&#8230;"
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:1831
+msgid "Unpacking the package&#8230;"
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:1832
+msgid "Installing the plugin&#8230;"
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:1833
+msgid "Plugin install failed."
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:1834
+msgid "Plugin installed successfully."
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:1845
+msgid "Plugin activation failed."
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:1955
+msgid ""
+"The installation and activation process is starting. This process may take a "
+"while on some hosts, so please be patient."
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:1956
+#, php-format
+msgid "%1$s installed and activated successfully."
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:1956
+#: ../inc/class-tgm-plugin-activation.php:1965
+msgid "Show Details"
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:1956
+#: ../inc/class-tgm-plugin-activation.php:1965
+msgid "Hide Details"
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:1957
+msgid "All installations and activations have been completed."
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:1958
+#, php-format
+msgid "Installing and Activating Plugin %1$s (%2$d/%3$d)"
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:1962
+msgid ""
+"The installation process is starting. This process may take a while on some "
+"hosts, so please be patient."
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:1963
+#, php-format
+msgid "An error occurred while installing %1$s: <strong>%2$s</strong>."
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:1964
+#, php-format
+msgid "The installation of %1$s failed."
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:1965
+#, php-format
+msgid "%1$s installed successfully."
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:1966
+msgid "All installations have been completed."
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:1967
+#, php-format
+msgid "Installing Plugin %1$s (%2$d/%3$d)"
+msgstr ""
+
+#: ../inc/largo-plugin-init.php:179
+msgid "Something went wrong with the plugin API."
+msgstr ""
+
+#: ../inc/largo-plugin-init.php:192
+#, php-format
+msgid "All plugins installed and activated successfully. %s"
+msgstr ""
+
+#: ../inc/nav-menus.php:5
+msgid "Global Navigation"
+msgstr ""
+
+#: ../inc/nav-menus.php:6
+msgid "Navbar Categories List"
+msgstr ""
+
+#: ../inc/nav-menus.php:7
+msgid "Navbar Supplemental Links"
+msgstr ""
+
+#: ../inc/nav-menus.php:9
+msgid "Footer Navigation"
+msgstr ""
+
+#: ../inc/nav-menus.php:10
+msgid "Footer Bottom"
+msgstr ""
+
+#: ../inc/post-meta.php:8
+msgid "Custom Byline Options"
+msgstr ""
+
+#: ../inc/post-meta.php:50
+msgid "Byline Text"
+msgstr ""
+
+#: ../inc/post-meta.php:55
+msgid "Byline Link"
+msgstr ""
+
+#: ../inc/post-meta.php:68
+msgid " ago"
+msgstr ""
+
+#: ../inc/post-meta.php:98
+#, php-format
+msgid "More from %s"
+msgstr ""
+
+#: ../inc/post-meta.php:104
+#, php-format
+msgid "View all posts by %s"
+msgstr ""
+
+#: ../inc/post-meta.php:186
+msgid "Next Page"
+msgstr ""
+
+#: ../inc/post-meta.php:187
+msgid "Previous Page"
+msgstr ""
+
+#: ../inc/sidebars.php:8
+msgid "Main Sidebar"
+msgstr ""
+
+#: ../inc/sidebars.php:9
+msgid "The sidebar for index and archive pages"
+msgstr ""
+
+#: ../inc/sidebars.php:18
+msgid "Single Sidebar"
+msgstr ""
+
+#: ../inc/sidebars.php:19
+msgid "The sidebar for posts and pages"
+msgstr ""
+
+#: ../inc/sidebars.php:28
+msgid "Topic Sidebar"
+msgstr ""
+
+#: ../inc/sidebars.php:29
+msgid "The sidebar for category and tag pages"
+msgstr ""
+
+#: ../inc/sidebars.php:38
+msgid "Footer Featured Posts"
+msgstr ""
+
+#: ../inc/sidebars.php:39
+msgid "Center footer column."
+msgstr ""
+
+#: ../inc/sidebars.php:48
+msgid "Footer Widget Area"
+msgstr ""
+
+#: ../inc/sidebars.php:49
+msgid "A configurable widget area in the far right column of the site footer."
+msgstr ""
+
+#: ../inc/sidebars.php:60
+msgid "An optional widget area at the bottom of the homepage"
+msgstr ""
+
+#: ../inc/taxonomies.php:8
+msgid "Post Prominence"
+msgstr ""
+
+#: ../inc/taxonomies.php:14
+msgid "Homepage Featured"
+msgstr ""
+
+#: ../inc/taxonomies.php:16
+msgid ""
+"If you are using the Newspaper or Carousel optional homepage layout, add "
+"this label to posts to display them in the featured area on the homepage"
+msgstr ""
+
+#: ../inc/taxonomies.php:22
+msgid "Sidebar Featured Widget"
+msgstr ""
+
+#: ../inc/taxonomies.php:24
+msgid ""
+"If you are using the Sidebar Featured Posts widget, add this label to posts "
+"to determine which to display in the widget"
+msgstr ""
+
+#: ../inc/taxonomies.php:30
+msgid "Footer Featured Widget"
+msgstr ""
+
+#: ../inc/taxonomies.php:32
+msgid ""
+"If you are using the Footer Featured Posts widget, add this label to posts "
+"to determine which to display in the widget"
+msgstr ""
+
+#: ../inc/taxonomies.php:43
+msgid "Top Story"
+msgstr ""
+
+#: ../inc/taxonomies.php:46
+msgid ""
+"If you are using the Newspaper or Carousel optional homepage layout, add "
+"this label to a post to make it the top story on the homepage"
+msgstr ""
+
+#: ../inc/taxonomies.php:55
+msgid "Series"
+msgstr ""
+
+#: ../inc/options-framework/options-framework.php:163
+#: ../inc/options-framework/options-framework.php:380
+msgid "Theme Options"
+msgstr ""
+
+#: ../inc/options-framework/options-framework.php:196
+msgid "Clear"
+msgstr ""
+
+#: ../inc/options-framework/options-framework.php:197
+#: ../inc/widgets/largo-about.php:80 ../inc/widgets/largo-donate.php:99
+#: ../inc/widgets/largo-facebook.php:101 ../inc/widgets/largo-follow.php:114
+#: ../inc/widgets/largo-inn-rss.php:83
+#: ../inc/widgets/largo-recent-comments.php:149
+#: ../inc/widgets/largo-recent-posts.php:216
+#: ../inc/widgets/largo-sidebar-featured.php:113
+#: ../inc/widgets/largo-taxonomy-list.php:115
+#: ../inc/widgets/largo-text.php:109 ../inc/widgets/largo-twitter.php:137
+msgid "Default"
+msgstr ""
+
+#: ../inc/options-framework/options-framework.php:198
+msgid "Select Color"
+msgstr ""
+
+#: ../inc/options-framework/options-framework.php:244
+msgid "Click OK to reset. Any theme settings will be lost!"
+msgstr ""
+
+#: ../inc/options-framework/options-framework.php:276
+msgid "Default options restored."
+msgstr ""
+
+#: ../inc/options-framework/options-framework.php:330
+msgid "Options saved."
+msgstr ""
+
+#: ../inc/options-framework/options-medialibrary-uploader.php:26
+msgid "Theme Options Media"
+msgstr ""
+
+#: ../inc/options-framework/options-medialibrary-uploader.php:126
+msgid "Upload"
+msgstr ""
+
+#: ../inc/options-framework/options-medialibrary-uploader.php:149
+msgid "View File"
+msgstr ""
+
+#: ../inc/options-framework/options-medialibrary-uploader.php:282
+msgid "Gallery"
+msgstr ""
+
+#: ../inc/options-framework/options-medialibrary-uploader.php:282
+msgid "Previously Uploaded"
+msgstr ""
+
+#: ../inc/widgets/largo-about.php:10
+msgid "Show the site description from your theme options page"
+msgstr ""
+
+#: ../inc/widgets/largo-about.php:12
+msgid "Largo About Site"
+msgstr ""
+
+#: ../inc/widgets/largo-about.php:42
+msgid ""
+"You have not set a description for your site.</strong> Add a site "
+"description by visiting the Largo Theme Options page."
+msgstr ""
+
+#: ../inc/widgets/largo-about.php:61
+msgid "About "
+msgstr ""
+
+#: ../inc/widgets/largo-about.php:74 ../inc/widgets/largo-donate.php:81
+#: ../inc/widgets/largo-follow.php:108
+#: ../inc/widgets/largo-footer-featured.php:68
+#: ../inc/widgets/largo-recent-comments.php:138
+#: ../inc/widgets/largo-recent-posts.php:143
+#: ../inc/widgets/largo-sidebar-featured.php:97
+#: ../inc/widgets/largo-taxonomy-list.php:102
+#: ../inc/widgets/largo-text.php:101
+msgid "Title:"
+msgstr ""
+
+#: ../inc/widgets/largo-about.php:78 ../inc/widgets/largo-donate.php:97
+#: ../inc/widgets/largo-facebook.php:99 ../inc/widgets/largo-follow.php:112
+#: ../inc/widgets/largo-inn-rss.php:81
+#: ../inc/widgets/largo-recent-comments.php:147
+#: ../inc/widgets/largo-recent-posts.php:214
+#: ../inc/widgets/largo-sidebar-featured.php:111
+#: ../inc/widgets/largo-taxonomy-list.php:113
+#: ../inc/widgets/largo-text.php:107 ../inc/widgets/largo-twitter.php:135
+msgid "Widget Background"
+msgstr ""
+
+#: ../inc/widgets/largo-about.php:81 ../inc/widgets/largo-donate.php:100
+#: ../inc/widgets/largo-facebook.php:102 ../inc/widgets/largo-follow.php:115
+#: ../inc/widgets/largo-inn-rss.php:84
+#: ../inc/widgets/largo-recent-comments.php:150
+#: ../inc/widgets/largo-recent-posts.php:217
+#: ../inc/widgets/largo-sidebar-featured.php:114
+#: ../inc/widgets/largo-taxonomy-list.php:116
+#: ../inc/widgets/largo-text.php:110 ../inc/widgets/largo-twitter.php:138
+msgid "Reverse"
+msgstr ""
+
+#: ../inc/widgets/largo-about.php:82 ../inc/widgets/largo-donate.php:101
+#: ../inc/widgets/largo-facebook.php:103 ../inc/widgets/largo-follow.php:116
+#: ../inc/widgets/largo-inn-rss.php:85
+#: ../inc/widgets/largo-recent-comments.php:151
+#: ../inc/widgets/largo-recent-posts.php:218
+#: ../inc/widgets/largo-sidebar-featured.php:115
+#: ../inc/widgets/largo-taxonomy-list.php:117
+#: ../inc/widgets/largo-text.php:111 ../inc/widgets/largo-twitter.php:139
+msgid "No Background"
+msgstr ""
+
+#: ../inc/widgets/largo-about.php:86 ../inc/widgets/largo-donate.php:105
+#: ../inc/widgets/largo-facebook.php:107 ../inc/widgets/largo-follow.php:120
+#: ../inc/widgets/largo-inn-rss.php:89
+#: ../inc/widgets/largo-recent-comments.php:155
+#: ../inc/widgets/largo-recent-posts.php:222
+#: ../inc/widgets/largo-sidebar-featured.php:119
+#: ../inc/widgets/largo-taxonomy-list.php:121
+#: ../inc/widgets/largo-text.php:115 ../inc/widgets/largo-twitter.php:143
+msgid "Hidden on Desktops?"
+msgstr ""
+
+#: ../inc/widgets/largo-about.php:88 ../inc/widgets/largo-donate.php:107
+#: ../inc/widgets/largo-facebook.php:109 ../inc/widgets/largo-follow.php:122
+#: ../inc/widgets/largo-inn-rss.php:91
+#: ../inc/widgets/largo-recent-comments.php:157
+#: ../inc/widgets/largo-recent-posts.php:224
+#: ../inc/widgets/largo-sidebar-featured.php:121
+#: ../inc/widgets/largo-taxonomy-list.php:123
+#: ../inc/widgets/largo-text.php:117 ../inc/widgets/largo-twitter.php:145
+msgid "Hidden on Tablets?"
+msgstr ""
+
+#: ../inc/widgets/largo-about.php:90 ../inc/widgets/largo-donate.php:109
+#: ../inc/widgets/largo-facebook.php:111 ../inc/widgets/largo-follow.php:124
+#: ../inc/widgets/largo-inn-rss.php:93
+#: ../inc/widgets/largo-recent-comments.php:159
+#: ../inc/widgets/largo-recent-posts.php:226
+#: ../inc/widgets/largo-sidebar-featured.php:123
+#: ../inc/widgets/largo-taxonomy-list.php:125
+#: ../inc/widgets/largo-text.php:119 ../inc/widgets/largo-twitter.php:147
+msgid "Hidden on Phones?"
+msgstr ""
+
+#: ../inc/widgets/largo-donate.php:10
+msgid "Call-to-action for donations"
+msgstr ""
+
+#: ../inc/widgets/largo-donate.php:12
+msgid "Largo Donate Widget"
+msgstr ""
+
+#: ../inc/widgets/largo-donate.php:85
+msgid "Call-to-Action Text:"
+msgstr ""
+
+#: ../inc/widgets/largo-donate.php:89
+msgid "Button Text:"
+msgstr ""
+
+#: ../inc/widgets/largo-donate.php:93
+msgid "Button URL (for custom campaigns):"
+msgstr ""
+
+#: ../inc/widgets/largo-facebook.php:10
+msgid "Show a Facebook Like Box for your page"
+msgstr ""
+
+#: ../inc/widgets/largo-facebook.php:12
+msgid "Largo Facebook Widget"
+msgstr ""
+
+#: ../inc/widgets/largo-facebook.php:82
+msgid "Facebook Page URL:"
+msgstr ""
+
+#: ../inc/widgets/largo-facebook.php:87
+msgid "Widget Height:"
+msgstr ""
+
+#: ../inc/widgets/largo-facebook.php:92
+msgid "Show Faces?"
+msgstr ""
+
+#: ../inc/widgets/largo-facebook.php:94
+msgid "Show Stream?"
+msgstr ""
+
+#: ../inc/widgets/largo-facebook.php:96
+msgid "Show Header?"
+msgstr ""
+
+#: ../inc/widgets/largo-follow.php:15
+msgid "Display links to social media sites set in Largo theme options"
+msgstr ""
+
+#: ../inc/widgets/largo-follow.php:19
+msgid "Largo Follow"
+msgstr ""
+
+#: ../inc/widgets/largo-follow.php:54
+#, php-format
+msgid ""
+"\n"
+"\t\t\t\t<div class=\"subscribe\">\n"
+"\t\t\t\t\t<a href=\"%1$s\"><i class=\"social-icons small rss24\"></"
+"i>Subscribe via RSS</a>\n"
+"\t\t\t\t</div>"
+msgstr ""
+
+#: ../inc/widgets/largo-follow.php:95
+msgid "Follow "
+msgstr ""
+
+#: ../inc/widgets/largo-footer-featured.php:12
+msgid "Largo Footer Featured Posts"
+msgstr ""
+
+#: ../inc/widgets/largo-footer-featured.php:43
+msgid ""
+"You don't presently have any posts in the footer featured category.</strong> "
+"Mark more posts as featured on the add/edit post screen to populate this "
+"region."
+msgstr ""
+
+#: ../inc/widgets/largo-footer-featured.php:73
+#: ../inc/widgets/largo-recent-posts.php:148
+#: ../inc/widgets/largo-sidebar-featured.php:102
+msgid "Number of posts to show:"
+msgstr ""
+
+#: ../inc/widgets/largo-footer-featured.php:78
+#: ../inc/widgets/largo-recent-posts.php:174
+#: ../inc/widgets/largo-sidebar-featured.php:107
+msgid "Excerpt Length (# of Sentences):"
+msgstr ""
+
+#: ../inc/widgets/largo-inn-rss.php:12
+msgid "An RSS feed of recent stories from INN members"
+msgstr ""
+
+#: ../inc/widgets/largo-inn-rss.php:14
+msgid "INN Member Stories"
+msgstr ""
+
+#: ../inc/widgets/largo-inn-rss.php:22
+msgid "View more recent stories from members of the Investigative News Network"
+msgstr ""
+
+#: ../inc/widgets/largo-recent-comments.php:15
+msgid "Show recent comments"
+msgstr ""
+
+#: ../inc/widgets/largo-recent-comments.php:19
+msgid "Largo Recent Comments"
+msgstr ""
+
+#: ../inc/widgets/largo-recent-comments.php:143
+msgid "Number of comments to show:"
+msgstr ""
+
+#: ../inc/widgets/largo-recent-posts.php:10
+msgid "Show your most recent posts with thumbnails and excerpts"
+msgstr ""
+
+#: ../inc/widgets/largo-recent-posts.php:12
+msgid "Largo Recent Posts"
+msgstr ""
+
+#: ../inc/widgets/largo-recent-posts.php:153
+msgid "Avoid Duplicate Posts?"
+msgstr ""
+
+#: ../inc/widgets/largo-recent-posts.php:157
+msgid "Thumbnail Image"
+msgstr ""
+
+#: ../inc/widgets/largo-recent-posts.php:159
+msgid "Small (60x60)"
+msgstr ""
+
+#: ../inc/widgets/largo-recent-posts.php:160
+msgid "Medium (150x150)"
+msgstr ""
+
+#: ../inc/widgets/largo-recent-posts.php:161
+msgid "None"
+msgstr ""
+
+#: ../inc/widgets/largo-recent-posts.php:166
+msgid "Excerpt Display"
+msgstr ""
+
+#: ../inc/widgets/largo-recent-posts.php:168
+msgid "Use # of Sentences"
+msgstr ""
+
+#: ../inc/widgets/largo-recent-posts.php:169
+msgid "Use Custom Post Excerpt"
+msgstr ""
+
+#: ../inc/widgets/largo-recent-posts.php:178
+msgid "Limit by Author, Categories or Tags"
+msgstr ""
+
+#: ../inc/widgets/largo-recent-posts.php:178
+msgid ""
+"Select an author or category from the dropdown menus or enter post tags "
+"separated by commas ('cat,dog')"
+msgstr ""
+
+#: ../inc/widgets/largo-recent-posts.php:180
+msgid "Limit to author: "
+msgstr ""
+
+#: ../inc/widgets/largo-recent-posts.php:181
+msgid "None (all authors)"
+msgstr ""
+
+#: ../inc/widgets/largo-recent-posts.php:185
+msgid "Limit to category: "
+msgstr ""
+
+#: ../inc/widgets/largo-recent-posts.php:186
+msgid "None (all categories)"
+msgstr ""
+
+#: ../inc/widgets/largo-recent-posts.php:189
+msgid "Limit to tags:"
+msgstr ""
+
+#: ../inc/widgets/largo-recent-posts.php:193
+msgid "Limit by Custom Taxonomy"
+msgstr ""
+
+#: ../inc/widgets/largo-recent-posts.php:193
+msgid ""
+"Enter the slug for the custom taxonomy you want to query and the term within "
+"that taxonomy to display"
+msgstr ""
+
+#: ../inc/widgets/largo-recent-posts.php:195
+#: ../inc/widgets/largo-taxonomy-list.php:106
+msgid "Taxonomy:"
+msgstr ""
+
+#: ../inc/widgets/largo-recent-posts.php:199
+msgid "Term:"
+msgstr ""
+
+#: ../inc/widgets/largo-recent-posts.php:203
+msgid "More Link"
+msgstr ""
+
+#: ../inc/widgets/largo-recent-posts.php:203
+msgid ""
+"If you would like to add a more link at the bottom of the widget, add the "
+"link text and url here."
+msgstr ""
+
+#: ../inc/widgets/largo-recent-posts.php:205
+msgid "Link text:"
+msgstr ""
+
+#: ../inc/widgets/largo-recent-posts.php:210
+msgid "URL:"
+msgstr ""
+
+#: ../inc/widgets/largo-sidebar-featured.php:10
+msgid "Show recent featured posts with thumbnails and excerpts"
+msgstr ""
+
+#: ../inc/widgets/largo-sidebar-featured.php:12
+msgid "Largo Sidebar Featured Posts"
+msgstr ""
+
+#: ../inc/widgets/largo-taxonomy-list.php:10
+msgid "List all of the terms in a custom taxonomy with links"
+msgstr ""
+
+#: ../inc/widgets/largo-taxonomy-list.php:12
+msgid "Largo Taxonomy List"
+msgstr ""
+
+#: ../inc/widgets/largo-taxonomy-list.php:18
+msgid "Categories"
+msgstr ""
+
+#: ../inc/widgets/largo-taxonomy-list.php:51
+#, php-format
+msgid "Select %s"
+msgstr ""
+
+#: ../inc/widgets/largo-taxonomy-list.php:111
+msgid "Display as dropdown"
+msgstr ""
+
+#: ../inc/widgets/largo-text.php:15
+msgid "Arbitrary text or HTML"
+msgstr ""
+
+#: ../inc/widgets/largo-text.php:20
+msgid "Largo Text or HTML"
+msgstr ""
+
+#: ../inc/widgets/largo-twitter.php:10
+msgid "Show a Twitter profile, list or search widget"
+msgstr ""
+
+#: ../inc/widgets/largo-twitter.php:12
+msgid "Largo Twitter Widget"
+msgstr ""
+
+#: ../inc/widgets/largo-twitter.php:83
+msgid "your search"
+msgstr ""
+
+#: ../inc/widgets/largo-twitter.php:98
+msgid "Widget Type"
+msgstr ""
+
+#: ../inc/widgets/largo-twitter.php:100
+msgid "Timeline"
+msgstr ""
+
+#: ../inc/widgets/largo-twitter.php:101
+msgid "Favorites"
+msgstr ""
+
+#: ../inc/widgets/largo-twitter.php:102
+msgid "List"
+msgstr ""
+
+#: ../inc/widgets/largo-twitter.php:108
+msgid "Widget Theme"
+msgstr ""
+
+#: ../inc/widgets/largo-twitter.php:110
+msgid "Light"
+msgstr ""
+
+#: ../inc/widgets/largo-twitter.php:111
+msgid "Dark"
+msgstr ""
+
+#: ../inc/widgets/largo-twitter.php:116
+msgid "Twitter Widget ID (from https://twitter.com/settings/widgets):"
+msgstr ""
+
+#: ../inc/widgets/largo-twitter.php:121
+msgid "Twitter Username (for timeline, favorites and list widgets):"
+msgstr ""
+
+#: ../inc/widgets/largo-twitter.php:126
+msgid "Twitter List Slug (for list widget):"
+msgstr ""
+
+#: ../inc/widgets/largo-twitter.php:131
+msgid "Twitter Search Query (for search widget):"
+msgstr ""
