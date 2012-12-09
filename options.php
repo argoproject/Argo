@@ -32,211 +32,211 @@ function optionsframework_options() {
 	$options = array();
 
 	$options[] = array(
-		'name' => __('Basic Settings', 'largo'),
-		'type' => 'heading');
+		'name' 	=> __('Basic Settings', 'largo'),
+		'type' 	=> 'heading');
 
 	$options[] = array(
-		'name' => __('Site Description', 'largo'),
-		'desc' => __('Enter a <strong>short blurb about your site</strong>. This is used in a sidebar widget', 'largo'),
-		'id' => 'site_blurb',
-		'std' => '',
-		'type' => 'textarea');
+		'name' 	=> __('Site Description', 'largo'),
+		'desc' 	=> __('Enter a <strong>short blurb about your site</strong>. This is used in a sidebar widget', 'largo'),
+		'id' 	=> 'site_blurb',
+		'std' 	=> '',
+		'type' 	=> 'textarea');
 
 	$options[] = array(
-		'name' => __('Feed URL', 'largo'),
-		'desc' => __('Enter the <strong>URL for your primary RSS feed.</strong> You can override the default if you use Feedburner or some other service to generate or track your RSS feed', 'largo'),
-		'id' => 'rss_link',
-		'std' => get_feed_link(),
-		'type' => 'text');
+		'name' 	=> __('Feed URL', 'largo'),
+		'desc' 	=> __('Enter the <strong>URL for your primary RSS feed.</strong> You can override the default if you use Feedburner or some other service to generate or track your RSS feed', 'largo'),
+		'id' 	=> 'rss_link',
+		'std' 	=> get_feed_link(),
+		'type' 	=> 'text');
 
 	$options[] = array(
-		'name' => __('Donate Button', 'largo'),
-		'desc' => __('<strong>Show/Hide</strong> a button in the top header to link to your donation page or form.', 'largo'),
-		'id' => 'show_donate_button',
-		'type' => 'checkbox');
+		'name' 	=> __('Donate Button', 'largo'),
+		'desc' 	=> __('<strong>Show/Hide</strong> a button in the top header to link to your donation page or form.', 'largo'),
+		'id' 	=> 'show_donate_button',
+		'type' 	=> 'checkbox');
 
 	$options[] = array(
-		'desc' => __('Enter the <strong>link to your donation page</strong> or form (include http://).', 'largo'),
-		'id' => 'donate_link',
-		'std' => '',
+		'desc' 	=> __('Enter the <strong>link to your donation page</strong> or form (include http://).', 'largo'),
+		'id' 	=> 'donate_link',
+		'std' 	=> '',
 		'class' => 'hidden',
-		'type' => 'text');
+		'type' 	=> 'text');
 
 	$options[] = array(
-		'desc' => __('Enter the <strong>text for the donate button</strong> (e.g. - Support Us).', 'largo'),
-		'id' => 'donate_button_text',
-		'std' => 'Donate Now',
+		'desc' 	=> __('Enter the <strong>text for the donate button</strong> (e.g. - Support Us).', 'largo'),
+		'id' 	=> 'donate_button_text',
+		'std' 	=> __('Donate Now', 'largo'),
 		'class' => 'hidden',
-		'type' => 'text');
+		'type' 	=> 'text');
 
 	$options[] = array(
-		'name' => __('Don\'t Miss Menu', 'largo'),
-		'desc' => __('<strong>Show/Hide</strong> the "Don\'t Miss" menu under the main site navigation. Add links to this menu under <strong>Appearance > Menus</strong>.', 'largo'),
-		'id' => 'show_dont_miss_menu',
-		'type' => 'checkbox');
+		'name' 	=> __('Don\'t Miss Menu', 'largo'),
+		'desc' 	=> __('<strong>Show/Hide</strong> the "Don\'t Miss" menu under the main site navigation. Add links to this menu under <strong>Appearance > Menus</strong>.', 'largo'),
+		'id' 	=> 'show_dont_miss_menu',
+		'type' 	=> 'checkbox');
 
 	$options[] = array(
-		'desc' => __('Enter the <strong>label that appears in front of the menu links</strong>. You can delete this default and no label will appear.', 'largo'),
-		'id' => 'dont_miss_label',
-		'std' => 'Don\'t Miss',
+		'desc' 	=> __('Enter the <strong>label that appears in front of the menu links</strong>. You can delete this default and no label will appear.', 'largo'),
+		'id' 	=> 'dont_miss_label',
+		'std' 	=> __('Don\'t Miss', 'largo'),
 		'class' => 'hidden',
-		'type' => 'text');
+		'type' 	=> 'text');
 
 	$options[] = array(
-		'name' => __('Footer Nav Menu', 'largo'),
-		'desc' => __('Enter the <strong>label that appears before the menu links</strong>. You can delete this default and no label will appear.', 'largo'),
-		'id' => 'footer_menu_label',
-		'std' => get_bloginfo('name'),
-		'type' => 'text');
+		'name' 	=> __('Footer Nav Menu', 'largo'),
+		'desc' 	=> __('Enter the <strong>label that appears before the menu links</strong>. You can delete this default and no label will appear.', 'largo'),
+		'id' 	=> 'footer_menu_label',
+		'std' 	=> get_bloginfo('name'),
+		'type' 	=> 'text');
 
 	$options[] = array(
-		'name' => __('Copyright Message', 'largo'),
-		'desc' => __('Enter the <strong>copyright and credit information</strong> to display in the footer. You can use <code>%d</code> to output the current year.', 'largo'),
-		'id' => 'copyright_msg',
-		'std' => '&copy; Copyright %d, '. get_bloginfo('name'),
-		'type' => 'textarea');
+		'name' 	=> __('Copyright Message', 'largo'),
+		'desc' 	=> __('Enter the <strong>copyright and credit information</strong> to display in the footer. You can use <code>%d</code> to output the current year.', 'largo'),
+		'id' 	=> 'copyright_msg',
+		'std' 	=> __('&copy; Copyright %d, '. get_bloginfo('name'), 'largo'),
+		'type' 	=> 'textarea');
 
 	$options[] = array(
-		'name' => __('Google Analytics', 'largo'),
-		'desc' => __('Enter your <strong>Google Analytics ID (UA-XXXXXXXX-X)</strong> and the code will be included in the footer.', 'largo'),
-		'id' => 'ga_id',
-		'std' => '',
-		'type' => 'text');
+		'name' 	=> __('Google Analytics', 'largo'),
+		'desc' 	=> __('Enter your <strong>Google Analytics ID (UA-XXXXXXXX-X)</strong> and the code will be included in the footer.', 'largo'),
+		'id' 	=> 'ga_id',
+		'std' 	=> '',
+		'type' 	=> 'text');
 
 	$options[] = array(
-		'name' => __('Social Media Links', 'largo'),
-		'desc' => __('Enter the links for your organization\'s primary social media accounts. To change social media settings for a user, view their <strong>edit profile</strong> screen.', 'largo'),
-		'type' => 'info');
+		'name' 	=> __('Social Media Links', 'largo'),
+		'desc' 	=> __('Enter the links for your organization\'s primary social media accounts. To change social media settings for a user, view their <strong>edit profile</strong> screen.', 'largo'),
+		'type' 	=> 'info');
 
 	$options[] = array(
-		'desc' => __('<strong>Link to Facebook Page</strong> (https://www.facebook.com/username)', 'largo'),
-		'id' => 'facebook_link',
-		'std' => '',
-		'type' => 'text');
+		'desc' 	=> __('<strong>Link to Facebook Page</strong> (https://www.facebook.com/username)', 'largo'),
+		'id' 	=> 'facebook_link',
+		'std' 	=> '',
+		'type' 	=> 'text');
 
 	$options[] = array(
-		'desc' => __('<strong>Link to Twitter Profile</strong> (https://twitter.com/username)', 'largo'),
-		'id' => 'twitter_link',
-		'std' => '',
-		'type' => 'text');
+		'desc' 	=> __('<strong>Link to Twitter Profile</strong> (https://twitter.com/username)', 'largo'),
+		'id' 	=> 'twitter_link',
+		'std' 	=> '',
+		'type' 	=> 'text');
 
 	$options[] = array(
-		'desc' => __('<strong>Link to Google+ Page</strong> (https://plus.google.com/userID/)', 'largo'),
-		'id' => 'gplus_link',
-		'std' => '',
-		'type' => 'text');
+		'desc' 	=> __('<strong>Link to Google+ Page</strong> (https://plus.google.com/userID/)', 'largo'),
+		'id' 	=> 'gplus_link',
+		'std' 	=> '',
+		'type' 	=> 'text');
 
 	$options[] = array(
-		'desc' => __('<strong>Link to YouTube Channel</strong> (http://www.youtube.com/user/username)', 'largo'),
-		'id' => 'youtube_link',
-		'std' => '',
-		'type' => 'text');
+		'desc' 	=> __('<strong>Link to YouTube Channel</strong> (http://www.youtube.com/user/username)', 'largo'),
+		'id' 	=> 'youtube_link',
+		'std' 	=> '',
+		'type' 	=> 'text');
 
 	$options[] = array(
-		'desc' => __('<strong>Link to Flickr Photostream</strong> (http://www.flickr.com/photos/username/)', 'largo'),
-		'id' => 'flickr_link',
-		'std' => '',
-		'type' => 'text');
+		'desc' 	=> __('<strong>Link to Flickr Photostream</strong> (http://www.flickr.com/photos/username/)', 'largo'),
+		'id' 	=> 'flickr_link',
+		'std' 	=> '',
+		'type' 	=> 'text');
 
 	$options[] = array(
-		'name' => __('Single Post Options', 'largo'),
-		'type' => 'info');
+		'name' 	=> __('Single Post Options', 'largo'),
+		'type' 	=> 'info');
 
 	$options[] = array(
-		'desc' => __('<strong>Show/Hide the author bio</strong> at the bottom of single posts.', 'largo'),
-		'id' => 'show_author_box',
-		'std' => '1',
-		'type' => 'checkbox');
+		'desc' 	=> __('<strong>Show/Hide the author bio</strong> at the bottom of single posts.', 'largo'),
+		'id' 	=> 'show_author_box',
+		'std' 	=> '1',
+		'type' 	=> 'checkbox');
 
 	$options[] = array(
-		'desc' => __('<strong>Show/Hide related posts</strong> at the bottom of single posts.', 'largo'),
-		'id' => 'show_related_content',
-		'std' => '1',
-		'type' => 'checkbox');
+		'desc' 	=> __('<strong>Show/Hide related posts</strong> at the bottom of single posts.', 'largo'),
+		'id' 	=> 'show_related_content',
+		'std' 	=> '1',
+		'type' 	=> 'checkbox');
 
 	$options[] = array(
-		'name' => __('SEO Options', 'largo'),
-		'type' => 'info');
+		'name' 	=> __('SEO Options', 'largo'),
+		'type'	=> 'info');
 
 	$options[] = array(
-		'desc' => __('Use noindex for all archive pages (default is to use noindex for just date archives).', 'largo'),
-		'id' => 'noindex_archives',
-		'std' => '0',
-		'type' => 'checkbox');
+		'desc' 	=> __('Use noindex for all archive pages (default is to use noindex for just date archives).', 'largo'),
+		'id' 	=> 'noindex_archives',
+		'std' 	=> '0',
+		'type' 	=> 'checkbox');
 
 	$options[] = array(
-		'name' => __('Theme Images', 'largo'),
-		'type' => 'heading');
+		'name' 	=> __('Theme Images', 'largo'),
+		'type' 	=> 'heading');
 
 	$options[] = array(
-		'name' => __('Upload a Thumbnail Image (200x200px)', 'largo'),
-		'desc' => __('This is a default image used for Facebook posts when you do not set a featured image for your posts.', 'largo'),
-		'id' => 'logo_thumbnail_sq',
-		'type' => 'upload');
+		'name' 	=> __('Upload a Thumbnail Image (200x200px)', 'largo'),
+		'desc' 	=> __('This is a default image used for Facebook posts when you do not set a featured image for your posts.', 'largo'),
+		'id' 	=> 'logo_thumbnail_sq',
+		'type' 	=> 'upload');
 
 	$options[] = array(
-		'name' => __('Header Image', 'largo'),
-		'type' => 'info');
+		'name' 	=> __('Header Image', 'largo'),
+		'type' 	=> 'info');
 
 	$options[] = array(
-		'desc' => __('<strong>Use only text</strong> in the place of a banner image (uses site title and description).', 'largo'),
-		'id' => 'no_header_image',
-		'std' => '0',
-		'type' => 'checkbox');
+		'desc' 	=> __('<strong>Use only text</strong> in the place of a banner image (uses site title and description).', 'largo'),
+		'id' 	=> 'no_header_image',
+		'std' 	=> '0',
+		'type' 	=> 'checkbox');
 
 	$options[] = array(
-		'name' => __('Small Banner Image (768x200px)', 'largo'),
-		'desc' => __('Used for viewports below 768px wide (mostly phones and some tablets)', 'largo'),
-		'id' => 'banner_image_sm',
-		'type' => 'upload');
+		'name' 	=> __('Small Banner Image (768x200px)', 'largo'),
+		'desc' 	=> __('Used for viewports below 768px wide (mostly phones and some tablets)', 'largo'),
+		'id' 	=> 'banner_image_sm',
+		'type' 	=> 'upload');
 
 	$options[] = array(
-		'name' => __('Medium Banner Image (980x150px)', 'largo'),
-		'desc' => __('Used for viewports between 768px and 980 px (mostly tablets)', 'largo'),
-		'id' => 'banner_image_med',
-		'type' => 'upload');
+		'name' 	=> __('Medium Banner Image (980x150px)', 'largo'),
+		'desc' 	=> __('Used for viewports between 768px and 980 px (mostly tablets)', 'largo'),
+		'id' 	=> 'banner_image_med',
+		'type' 	=> 'upload');
 
 	$options[] = array(
-		'name' => __('Large Banner Image (1170x120px)', 'largo'),
-		'desc' => __('Used for viewports above 980 px (landscape tablets and desktops)', 'largo'),
-		'id' => 'banner_image_lg',
-		'type' => 'upload');
+		'name' 	=> __('Large Banner Image (1170x120px)', 'largo'),
+		'desc' 	=> __('Used for viewports above 980 px (landscape tablets and desktops)', 'largo'),
+		'id' 	=> 'banner_image_lg',
+		'type' 	=> 'upload');
 
 	$options[] = array(
-		'name' => __('Homepage Options', 'largo'),
-		'type' => 'heading');
+		'name' 	=> __('Homepage Options', 'largo'),
+		'type' 	=> 'heading');
 
 	$options[] = array(
-		'name' => "Homepage Top",
-		'desc' => "<strong>Select the layout to use for the top of the homepage.</strong> Largo currently supports three homepage options: a blog-like list of posts with the ability to stick a post to the op of the homepage, a newspaper-like layout highlighting featured stories and an animated carousel of featured stories with large images.",
-		'id' => "homepage_top",
-		'std' => "blog",
-		'type' => "images",
-		'options' => array(
-			'blog' => $imagepath . 'blog.png',
-			'topstories' => $imagepath . 'newsy.png',
-			'slider' => $imagepath . 'slider.png')
+		'name' 	=> __('Homepage Top', 'largo'),
+		'desc' 	=> __('<strong>Select the layout to use for the top of the homepage.</strong> Largo currently supports three homepage options: a blog-like list of posts with the ability to stick a post to the op of the homepage, a newspaper-like layout highlighting featured stories and an animated carousel of featured stories with large images.', 'largo'),
+		'id' 	=> 'homepage_top',
+		'std' 	=> 'blog',
+		'type' 	=> 'images',
+		'options' 	=> array(
+			'blog' 			=> $imagepath . 'blog.png',
+			'topstories' 	=> $imagepath . 'newsy.png',
+			'slider' 		=> $imagepath . 'slider.png')
 	);
 
 	$options[] = array(
-		'name' => __('Sticky Posts', 'largo'),
-		'type' => 'info');
+		'name' 	=> __('Sticky Posts', 'largo'),
+		'type' 	=> 'info');
 
 	$options[] = array(
-		'desc' => __('Show sticky posts box on homepage? If checked, you will need to set at least one post as sticky for this box to appear.', 'largo'),
-		'id' => 'show_sticky_posts',
-		'std' => '1',
-		'type' => 'checkbox');
+		'desc' 	=> __('Show sticky posts box on homepage? If checked, you will need to set at least one post as sticky for this box to appear.', 'largo'),
+		'id' 	=> 'show_sticky_posts',
+		'std' 	=> '1',
+		'type' 	=> 'checkbox');
 
 	$options[] = array(
-		'name' => "Homepage Bottom",
-		'desc' => "<strong>Select the layout to use for the bottom of the homepage.</strong> Largo currently supports two options: a single column list of recent posts with photos and excerpts or a two column widget area",
-		'id' => "homepage_bottom",
-		'std' => "list",
-		'type' => "images",
-		'options' => array(
-			'list' => $imagepath . 'list.png',
-			'widgets' => $imagepath . 'widgets.png')
+		'name' 	=> __('Homepage Bottom', 'largo'),
+		'desc' 	=> __('<strong>Select the layout to use for the bottom of the homepage.</strong> Largo currently supports two options: a single column list of recent posts with photos and excerpts or a two column widget area', 'largo'),
+		'id' 	=> 'homepage_bottom',
+		'std' 	=> 'list',
+		'type' 	=> 'images',
+		'options' 	=> array(
+			'list' 		=> $imagepath . 'list.png',
+			'widgets' 	=> $imagepath . 'widgets.png')
 	);
 
 	return $options;
