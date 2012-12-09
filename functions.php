@@ -89,18 +89,18 @@ if ( ! function_exists( 'largo_excerpt' ) ) {
 /**
 * Make a nicer-looking excerpt regardless of how an author has been using excerpts in the past
 */
-	function largo_excerpt( $post, $sentence_count = 5, $more_link = 'Continue&nbsp;reading&nbsp;&rarr;', $use_more = 1 ) {
+	function largo_excerpt( $post, $sentence_count = 5, $more_link = '', $use_more = 1 ) {
 		if ( is_home() && strpos( $post->post_content, '<!--more-->' ) && ( $use_more != 0 ) ) : // if we're on the homepage and the post has a more tag, use that
-			the_content( __( $more_link, 'largo' ) );
+			the_content( $more_link );
 		elseif ( $post->post_excerpt ) : // if it has the optional excerpt set, use THAT
 			if ( $use_more == 0 ) :
 				the_excerpt();
 			else :
-				echo '<p>' . strip_tags( get_the_excerpt() ) . ' <a href="' . get_permalink() . '">' . __( $more_link, 'largo' ) . '</a></p>';
+				echo '<p>' . strip_tags( get_the_excerpt() ) . ' <a href="' . get_permalink() . '">' . $more_link . '</a></p>';
 			endif;
 		else : // otherwise we'll just do our best and make the prettiest excerpt we can muster
 			$output = largo_trim_sentences( get_the_content(), $sentence_count );
-			$output .= '<a href="' . get_permalink() . '">' . __( $more_link, 'largo' ) . '</a>';
+			$output .= '<a href="' . get_permalink() . '">' . $more_link . '</a>';
 			$output = str_replace( '(more...)', '', $output );
 			echo apply_filters( 'the_content', $output );
 		endif;
