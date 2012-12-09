@@ -5,64 +5,64 @@
  */
 function largo_register_sidebars() {
 	register_sidebar( array(
-		'name' => 'Main Sidebar',
-		'id' => 'sidebar-main',
-		'description' => 'The sidebar for index and archive pages',
+		'name' 			=> 'Main Sidebar',
+		'id' 			=> 'sidebar-main',
+		'description' 	=> 'The sidebar for index and archive pages',
 		'before_widget' => '<aside id="%1$s" class="%2$s odd_even clearfix">',
-		'after_widget' => "</aside>",
-		'before_title' => '<h3 class="widgettitle">',
-		'after_title' => '</h3>',
+		'after_widget' 	=> "</aside>",
+		'before_title' 	=> '<h3 class="widgettitle">',
+		'after_title' 	=> '</h3>',
 	) );
 
 	register_sidebar( array(
-		'name' => 'Single Sidebar',
-		'id' => 'sidebar-single',
-		'description' => 'The sidebar for posts and pages',
+		'name' 			=> 'Single Sidebar',
+		'id' 			=> 'sidebar-single',
+		'description' 	=> 'The sidebar for posts and pages',
 		'before_widget' => '<aside id="%1$s" class="%2$s odd_even clearfix">',
-		'after_widget' => "</aside>",
-		'before_title' => '<h3 class="widgettitle">',
-		'after_title' => '</h3>',
+		'after_widget' 	=> "</aside>",
+		'before_title' 	=> '<h3 class="widgettitle">',
+		'after_title' 	=> '</h3>',
 	) );
 
 	register_sidebar( array(
-		'name' => 'Topic Sidebar',
-		'id' => 'topic-sidebar',
-		'description' => 'The sidebar for category and tag pages',
+		'name' 			=> 'Topic Sidebar',
+		'id' 			=> 'topic-sidebar',
+		'description' 	=> 'The sidebar for category and tag pages',
 		'before_widget' => '<aside id="%1$s" class="%2$s odd_even clearfix">',
-		'after_widget' => "</aside>",
-		'before_title' => '<h3 class="widgettitle">',
-		'after_title' => '</h3>',
+		'after_widget' 	=> "</aside>",
+		'before_title' 	=> '<h3 class="widgettitle">',
+		'after_title' 	=> '</h3>',
 	) );
 
 	register_sidebar( array(
-		'name' => 'Footer Featured Posts',
-		'id' => 'footer-featured-posts',
-		'description' => 'Center footer column.',
+		'name' 			=> 'Footer Featured Posts',
+		'id' 			=> 'footer-featured-posts',
+		'description' 	=> 'Center footer column.',
 		'before_widget' => '<aside id="%1$s" class="%2$s odd_even clearfix">',
-		'after_widget' => "</aside>",
-		'before_title' => '<h3 class="widgettitle">',
-		'after_title' => '</h3>',
+		'after_widget' 	=> "</aside>",
+		'before_title' 	=> '<h3 class="widgettitle">',
+		'after_title' 	=> '</h3>',
 	) );
 
 	register_sidebar( array(
-		'name' => 'Footer Widget Area',
-		'id' => 'footer-widget-area',
-		'description' => 'A configurable widget area in the far right column of the site footer.',
+		'name' 			=> 'Footer Widget Area',
+		'id' 			=> 'footer-widget-area',
+		'description' 	=> 'A configurable widget area in the far right column of the site footer.',
 		'before_widget' => '<aside id="%1$s" class="%2$s odd_even clearfix">',
-		'after_widget' => "</aside>",
-		'before_title' => '<h3 class="widgettitle">',
-		'after_title' => '</h3>',
+		'after_widget' 	=> "</aside>",
+		'before_title' 	=> '<h3 class="widgettitle">',
+		'after_title' 	=> '</h3>',
 	) );
 
 	if ( of_get_option('homepage_bottom') == 'widgets' ) :
 		register_sidebar( array(
-			'name' => 'Homepage Bottom',
-			'id' => 'homepage-bottom',
-			'description' => 'An optional widget area at the bottom of the homepage',
+			'name' 			=> 'Homepage Bottom',
+			'id' 			=> 'homepage-bottom',
+			'description' 	=> 'An optional widget area at the bottom of the homepage',
 			'before_widget' => '<div id="%1$s" class="%2$s odd_even span6">',
-			'after_widget' => '</div>',
-			'before_title' => '<h3 class="widgettitle">',
-			'after_title' => '</h3>',
+			'after_widget' 	=> '</div>',
+			'before_title' 	=> '<h3 class="widgettitle">',
+			'after_title' 	=> '</h3>',
 		) );
 	endif;
 }

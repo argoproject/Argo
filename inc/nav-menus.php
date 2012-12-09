@@ -2,12 +2,12 @@
 
 function largo_register_custom_menus() {
     $menus = array(
-        'global-nav'         => 'Global Navigation',
-        'navbar-categories'      => 'Navbar Categories List',
-        'navbar-supplemental'       => "Navbar Supplemental Links",
-        'dont-miss'       => "Don't Miss",
-        'footer'          => 'Footer Navigation',
-        'footer-bottom'          => 'Footer Bottom',
+        'global-nav'         	=> 'Global Navigation',
+        'navbar-categories'     => 'Navbar Categories List',
+        'navbar-supplemental'	=> "Navbar Supplemental Links",
+        'dont-miss'       		=> "Don't Miss",
+        'footer'          		=> 'Footer Navigation',
+        'footer-bottom'			=> 'Footer Bottom',
     );
     register_nav_menus( $menus );
 
@@ -38,12 +38,9 @@ if ( ! function_exists( 'largo_donate_button' ) ) {
 	function largo_donate_button () {
 		$donate_link = esc_url( of_get_option( 'donate_link' ) );
 		if ( $donate_link )
-			printf('
-		        <div class="donate-btn">
-		        	<a href="%1$s"><i class="icon-heart icon-white"></i>%2$s</a>
-		        </div> ',
-		    $donate_link,
-		    of_get_option( 'donate_button_text' )
+			printf('<div class="donate-btn"><a href="%1$s"><i class="icon-heart icon-white"></i>%2$s</a></div> ',
+		    	$donate_link,
+		    	of_get_option( 'donate_button_text' )
 		    );
 	}
 }
