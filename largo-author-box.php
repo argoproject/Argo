@@ -35,7 +35,7 @@
 
 		<?php if ( get_the_author_meta( 'twitter' ) ) : ?>
 		<li class="twitter">
-			<a href="<?php echo esc_url( get_the_author_meta( 'twitter' ) ); ?>" class="twitter-follow-button" data-show-count="false" data-lang="en">Follow @<?php echo twitter_url_to_username ( get_the_author_meta( 'twitter' ) ); ?></a>
+			<a href="<?php echo esc_url( get_the_author_meta( 'twitter' ) ); ?>" class="twitter-follow-button" data-show-count="false" data-lang="en"><?php printf( __('Follow @%1$s', 'largo'), twitter_url_to_username ( get_the_author_meta( 'twitter' ) ) ); ?></a>
 		</li>
 		<?php endif; ?>
 
