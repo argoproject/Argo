@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Project Largo\n"
-"POT-Creation-Date: 2012-12-09 16:25-0500\n"
-"PO-Revision-Date: 2012-12-09 16:35-0500\n"
+"POT-Creation-Date: 2012-12-10 10:22-0500\n"
+"PO-Revision-Date: 2012-12-10 10:22-0500\n"
 "Last-Translator: Investigative News Network <largo@investigativenewsnetwork."
 "org>\n"
 "Language-Team: Investigative News Network <largo@investigativenewsnetwork."
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.5.4\n"
-"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-KeywordsList: __;_e;_n\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: ..\n"
@@ -46,6 +46,11 @@ msgstr ""
 #: ../comments.php:13
 msgid ""
 "This post is password protected. Enter the password to view any comments."
+msgstr ""
+
+#: ../comments.php:29
+#, php-format
+msgid "One thought on &ldquo;%2$s&rdquo;"
 msgstr ""
 
 #: ../comments.php:36
@@ -500,6 +505,11 @@ msgstr ""
 msgid "Your search for <span class=\"search-term\">%s</span> returned "
 msgstr ""
 
+#: ../search.php:17
+#, php-format
+msgid "%s result"
+msgstr ""
+
 #: ../sidebar-footer.php:13 ../inc/widgets/largo-footer-featured.php:61
 msgid "In Case You Missed It"
 msgstr ""
@@ -659,6 +669,10 @@ msgstr ""
 
 #: ../inc/class-tgm-plugin-activation.php:1319
 msgid "Activate"
+msgstr ""
+
+#: ../inc/class-tgm-plugin-activation.php:1544
+msgid "The following plugin was activated successfully:"
 msgstr ""
 
 #: ../inc/class-tgm-plugin-activation.php:1829
