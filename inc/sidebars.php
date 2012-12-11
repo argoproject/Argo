@@ -67,5 +67,3 @@ function largo_register_sidebars() {
 	endif;
 }
 add_action( 'widgets_init', 'largo_register_sidebars' );
-
-?>

@@ -80,5 +80,3 @@ function attachment_image_link_remove_filter( $content ) {
     return $content;
 }
 add_filter( 'the_content', 'attachment_image_link_remove_filter' );
-
-?>

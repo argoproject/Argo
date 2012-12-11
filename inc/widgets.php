@@ -81,5 +81,3 @@ function widget_counter_reset($text) {
    $widget_num = 0;
    return $text;
 }
-
-?>

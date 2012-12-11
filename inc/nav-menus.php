@@ -156,5 +156,3 @@ class Bootstrap_Walker_Nav_Menu extends Walker_Nav_Menu {
 			}
 
 }
-
-?>

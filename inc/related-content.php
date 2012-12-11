@@ -334,5 +334,3 @@ function largo_get_excerpt( $post, $word_count = 40 ) {
 
     return $text;
 }
-
-?>

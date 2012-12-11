@@ -133,5 +133,3 @@ if ( ! function_exists( 'largo_has_custom_taxonomy' ) ) {
 		return false;
 	}
 }
-
-?>

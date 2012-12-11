@@ -55,5 +55,3 @@ function remove_default_post_screen_metaboxes() {
 	remove_meta_box( 'commentsdiv','post','normal' ); // comments
 }
 add_action('admin_menu','remove_default_post_screen_metaboxes');
-
-?>

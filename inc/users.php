@@ -30,5 +30,3 @@ function largo_contactmethods( $contactmethods ) {
 	return $contactmethods;
 }
 add_filter( 'user_contactmethods', 'largo_contactmethods', 10, 1 );
-
-?>
