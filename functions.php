@@ -395,9 +395,9 @@ if ( ! function_exists( 'largo_header_js' ) ) {
 					header_img = '<?php echo of_get_option( 'banner_image_med' ); ?>';
 				} else {
 					header_img = '<?php echo of_get_option( 'banner_image_lg' ); ?>';
-				};
+				}
 				return header_img;
-			};
+			}
 			var banner_img_src = whichHeader();
 		</script>
 	<?php
