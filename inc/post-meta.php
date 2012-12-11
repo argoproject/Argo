@@ -65,7 +65,7 @@ if ( ! function_exists( 'largo_time' ) ) {
 	function largo_time() {
 		$time_difference = current_time('timestamp') - get_the_time('U');
 		if($time_difference < 86400) {
-			return '<span class="time-ago">' . human_time_diff(get_the_time('U'), current_time('timestamp')) . _e(' ago', 'largo') . '</span>';
+			return '<span class="time-ago">' . human_time_diff(get_the_time('U'), current_time('timestamp')) . __(' ago', 'largo') . '</span>';
 		} else {
 			return get_the_date();
 		}
