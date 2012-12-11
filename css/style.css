@@ -198,22 +198,12 @@ h6,
 .entry-content h5 {
   font-size: 19.552px;
 }
-h7,
-.entry-content h6 {
-  font-size: 16px;
-}
-h8,
-.entry-content h7 {
-  font-size: 13.04px;
-}
 h1,
 h2,
 h3,
 h4,
 h5,
-h6,
-h7,
-h8 {
+h6 {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: bold;
   color: inherit;
@@ -225,9 +215,7 @@ h2 small,
 h3 small,
 h4 small,
 h5 small,
-h6 small,
-h7 small,
-h8 small {
+h6 small {
   font-size: 0.815em;
 }
 .entry-content h2,
@@ -1440,9 +1428,7 @@ table .span24 {
   *margin-right: .3em;
   line-height: 14px;
   vertical-align: text-top;
-  background-image: url("../img/glyphicons-halflings.png");
-  background-position: 14px 14px;
-  background-repeat: no-repeat;
+  background: url('../img/glyphicons-halflings.png') no-repeat 14px 14px;
 }
 [class^="icon-"]:last-child,
 [class*=" icon-"]:last-child {
@@ -1468,33 +1454,33 @@ table .span24 {
 }
 .social-icons {
   display: block;
-  background: url("../img/social-icons.png") no-repeat;
+  background: url('../img/social-icons.png') no-repeat;
   width: 24px;
   height: 24px;
 }
 .social-icons.facebook {
-  background-position: 0px 0px;
+  background-position: 0 0;
 }
 .social-icons.gplus {
-  background-position: 0px -24px;
+  background-position: 0 -24px;
 }
 .social-icons.rss24 {
-  background-position: 0px -48px;
+  background-position: 0 -48px;
 }
 .social-icons.youtube {
-  background-position: 0px -72px;
+  background-position: 0 -72px;
 }
 .social-icons.rss {
-  background-position: 0px -96px;
+  background-position: 0 -96px;
 }
 .social-icons.flickr {
-  background-position: 0px -120px;
+  background-position: 0 -120px;
 }
 .social-icons.twitter {
-  background-position: 0px -144px;
+  background-position: 0 -144px;
 }
 .social-icons.gplus-19 {
-  background-position: 0px -168px;
+  background-position: 0 -168px;
   width: 19px;
   height: 19px;
 }
@@ -1587,7 +1573,6 @@ table .span24 {
   *width: 5.882978723%;
 }
 .global-nav-bg {
-  background-color: #555555;
   background-color: #2c2c2c;
   background-image: -moz-linear-gradient(top, #333333, #222222);
   background-image: -ms-linear-gradient(top, #333333, #222222);
@@ -2101,7 +2086,6 @@ ul.nav li.dropdown:hover ul.dropdown-menu {
   border-left: none;
   border-right: 8px solid #fff;
   border-bottom: 8px solid transparent;
-  left: 10px;
   top: 31%;
   left: -8px;
 }
@@ -2386,7 +2370,6 @@ h3.recent-posts a.rss-link:hover,
 }
 .tags ul li {
   display: inline;
-  font-weight: normal;
   letter-spacing: 1px;
   margin-right: 8px;
   vertical-align: baseline;
@@ -3143,9 +3126,9 @@ a.comment-reply-link > span {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
-  -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3);
-  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   color: #eee;
   cursor: pointer;
   font-size: 15px;
@@ -3433,7 +3416,6 @@ p.comment-form-comment {
   max-width: 100%;
 }
 .footer-bg {
-  background-color: #555555;
   background-color: #2c2c2c;
   background-image: -moz-linear-gradient(top, #333333, #222222);
   background-image: -ms-linear-gradient(top, #333333, #222222);

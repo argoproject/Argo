@@ -12,10 +12,7 @@
   .ie7-restore-right-whitespace();
   line-height: 14px;
   vertical-align: text-top;
-  background-image: url("@{iconSpritePath}");
-  background-position: 14px 14px;
-  background-repeat: no-repeat;
-
+  background: url('@{iconSpritePath}') no-repeat 14px 14px;
 }
 .icon-white {
   background-image: url("@{iconWhiteSpritePath}");
@@ -38,15 +35,15 @@
 
 .social-icons {
 	display: block;
-	background: url("@{socialIconsSpritePath}") no-repeat;
+	background: url('@{socialIconsSpritePath}') no-repeat;
 	width:24px;
 	height:24px;
-	&.facebook 		{ background-position: -0px -0px; }
-	&.gplus 		{ background-position: -0px -24px; }
-	&.rss24 		{ background-position: -0px -48px; }
-	&.youtube 		{ background-position: -0px -72px; }
-	&.rss 			{ background-position: -0px -96px; }
-	&.flickr 		{ background-position: -0px -120px; }
-	&.twitter 		{ background-position: -0px -144px; }
-	&.gplus-19 		{ background-position: -0px -168px; width: 19px; height: 19px; }
+	&.facebook 		{ background-position: 0 0; }
+	&.gplus 		{ background-position: 0 -24px; }
+	&.rss24 		{ background-position: 0 -48px; }
+	&.youtube 		{ background-position: 0 -72px; }
+	&.rss 			{ background-position: 0 -96px; }
+	&.flickr 		{ background-position: 0 -120px; }
+	&.twitter 		{ background-position: 0 -144px; }
+	&.gplus-19 		{ background-position: 0 -168px; width: 19px; height: 19px; }
 }
