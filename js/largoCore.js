@@ -5,9 +5,9 @@ jQuery(document).ready(function($) {
 
 	// dim sidebar
 	$(window).scroll(function(){
-		if (($(window).scrollTop() > 300) && (document.documentElement.clientWidth >= 767)) {
+		if (($(this).scrollTop() > 300) && (document.documentElement.clientWidth >= 767)) {
 			$('.showey-hidey').animate({opacity: '0.5'}, 100);
-		} else if (($(window).scrollTop() < 300)) {
+		} else if (($(this).scrollTop() < 300)) {
 			$('.showey-hidey').animate({opacity: '1'}, 100);
 		}
 	});
@@ -23,7 +23,7 @@ jQuery(document).ready(function($) {
 				    $(this).animate({opacity: '0.5'}, 100);
 				}
 		});
-	};
+	}
 
 	//get the correct sized image for the header, replace it with a new one if the window is resized
 	$('.header_img').attr('src', banner_img_src);
@@ -36,6 +36,6 @@ jQuery(document).ready(function($) {
 		$('.carousel').carousel({
 			interval: 6000
 		});
-	};
+	}
 
 });
