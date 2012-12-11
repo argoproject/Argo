@@ -21,7 +21,6 @@ class largo_INN_RSS_widget extends WP_Widget {
 		$title = __('Stories From Other INN Members', 'largo');
 		$desc = __('View more recent stories from members of the Investigative News Network', 'largo');
 		$link = 'http://www.investigativenewsnetwork.org/';
-		$url = esc_url(strip_tags($url));
 
 		$title = "<a class='rsswidget' href='$link' title='$desc'>$title</a>";
 
