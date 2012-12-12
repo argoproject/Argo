@@ -3,7 +3,7 @@
 /**
  * For posts published less than 24 hours ago, show "time ago" instead of date, otherwise just use get_the_date
  *
- * @param $echo bool echo the string or return it
+ * @param $echo bool echo the string or return itv (default: echo)
  * @return string date and time as formatted html
  * @since 1.0
  */
@@ -25,7 +25,7 @@ if ( ! function_exists( 'largo_time' ) ) {
 /**
  * Get the author name when custom byline options are set
  *
- * @param $echo bool echo the string or return it
+ * @param $echo bool echo the string or return it (default: echo)
  * @return string author name as formatted html
  * @since 1.0
  */
@@ -46,7 +46,7 @@ if ( ! function_exists( 'largo_author' ) ) {
 /**
  * Get the author link when custom byline options are set
  *
- * @param $echo bool echo the string or return it
+ * @param $echo bool echo the string or return it (default: echo)
  * @return string author link as formatted html
  * @since 1.0
  */
@@ -75,7 +75,7 @@ if ( ! function_exists( 'largo_author_link' ) ) {
 /**
  * Outputs custom byline and link (if set), otherwise outputs author link and post date
  *
- * @param $echo bool echo the string or return it
+ * @param $echo bool echo the string or return it (default: echo)
  * @return string byline as formatted html
  * @since 1.0
  */
@@ -238,8 +238,9 @@ if ( ! function_exists( 'largo_custom_wp_link_pages' ) ) {
  *
  * @param $post object the post
  * @param $sentence_count int the number of sentences to show
+ * @param $use_more bool append read more link to end of output
  * @param $more_link string the text of the read more link
- * @param $use_more int 1 = append read more link to end of output
+ * @param $echo bool echo the output or return it (default: echo)
  * @uses largo_trim_sentences
  * @since 1.0
  * @todo change $use_more to bool, add echo/return
@@ -273,7 +274,8 @@ if ( ! function_exists( 'largo_excerpt' ) ) {
  *
  * @param $input string
  * @param $sentences number of sentences to trim to
- * @return $output string
+ * @param $echo echo the string or return it (default: return)
+ * @return $output trimmed string
  *
  * @since 1.0
  */
