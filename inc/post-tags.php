@@ -3,34 +3,42 @@
 /**
  * For posts published less than 24 hours ago, show "time ago" instead of date, otherwise just use get_the_date
  *
+ * @param $echo bool echo the string or return it
  * @return string date and time as formatted html
  * @since 1.0
  */
 if ( ! function_exists( 'largo_time' ) ) {
-	function largo_time() {
+	function largo_time( $echo = true ) {
 		$time_difference = current_time('timestamp') - get_the_time('U');
-		if($time_difference < 86400) {
-			return '<span class="time-ago">' . human_time_diff(get_the_time('U'), current_time('timestamp')) . __(' ago', 'largo') . '</span>';
-		} else {
-			return get_the_date();
-		}
+
+		if($time_difference < 86400)
+			$output = '<span class="time-ago">' . human_time_diff(get_the_time('U'), current_time('timestamp')) . __(' ago', 'largo') . '</span>';
+		else
+			$output = get_the_date();
+
+		if ( $echo )
+			echo $output;
+		return $output;
 	}
 }
 
 /**
  * Get the author name when custom byline options are set
  *
- * @return string byline as formatted html
+ * @param $echo bool echo the string or return it
+ * @return string author name as formatted html
  * @since 1.0
  */
 if ( ! function_exists( 'largo_author' ) ) {
-	function largo_author() {
+	function largo_author( $echo = true ) {
 		$values = get_post_custom( $post->ID );
 		$byline_text = isset( $values['largo_byline_text'] ) ? esc_attr( $values['largo_byline_text'][0] ) : '';
 
 		if ( $byline_text == '' )
 			$byline_text = esc_html( get_the_author() );
 
+		if ( $echo )
+			echo $byline_text;
 		return $byline_text;
 	}
 }
@@ -38,11 +46,12 @@ if ( ! function_exists( 'largo_author' ) ) {
 /**
  * Get the author link when custom byline options are set
  *
- * @return string byline as formatted html
+ * @param $echo bool echo the string or return it
+ * @return string author link as formatted html
  * @since 1.0
  */
 if ( ! function_exists( 'largo_author_link' ) ) {
-	function largo_author_link() {
+	function largo_author_link( $echo = true ) {
 		$values = get_post_custom( $post->ID );
 		$byline_text = isset( $values['largo_byline_text'] ) ? esc_attr( $values['largo_byline_text'][0] ) : '';
 		$byline_link = isset( $values['largo_byline_link'] ) ? esc_url( $values['largo_byline_link'][0] ) : '';
@@ -55,22 +64,31 @@ if ( ! function_exists( 'largo_author_link' ) ) {
 			$byline_title_attr = esc_attr( sprintf( __( 'View all posts by %s','largo' ), get_the_author() ) );
 		endif;
 
-		return '<a class="url fn n" href="' . $byline_link . '" title="' . $byline_title_attr . '" rel="author">' . $byline_text . '</a>';
+		$output = '<a class="url fn n" href="' . $byline_link . '" title="' . $byline_title_attr . '" rel="author">' . $byline_text . '</a>';
+
+		if ( $echo )
+			echo $output;
+		return $output;
 	}
 }
 
 /**
  * Outputs custom byline and link (if set), otherwise outputs author link and post date
  *
+ * @param $echo bool echo the string or return it
+ * @return string byline as formatted html
  * @since 1.0
  */
 if ( ! function_exists( 'largo_byline' ) ) {
-	function largo_byline() {
-		printf( '<span class="by-author"><span class="sep">By:</span> <span class="author vcard">%1$s</span></span> | <time class="entry-date updated dtstamp pubdate" datetime="%2$s">%3$s</time>',
-			largo_author_link(),
+	function largo_byline( $echo = true ) {
+		$output = sprintf( '<span class="by-author"><span class="sep">By:</span> <span class="author vcard">%1$s</span></span> | <time class="entry-date updated dtstamp pubdate" datetime="%2$s">%3$s</time>',
+			largo_author_link( false ),
 			esc_attr( get_the_date( 'c' ) ),
-			largo_time()
+			largo_time( false )
 		);
+		if ( $echo )
+			echo $output;
+		return $output;
 	}
 }
 
@@ -86,8 +104,7 @@ function largo_show_author_box() {
 	$byline_text = get_post_meta( $post->ID, 'largo_byline_text' ) ? esc_attr( get_post_meta( $post->ID, 'largo_byline_text', true ) ) : '';
 	if ( of_get_option( 'show_author_box' ) && get_the_author_meta( 'description' ) && $byline_text == '' )
 		return true;
-	else
-		return false;
+	return false;
 }
 
 /**
@@ -98,16 +115,14 @@ function largo_show_author_box() {
  * @return bool true if a gravatar is available for this user
  * @since 1.0
  */
-function has_gravatar($email) {
+function has_gravatar( $email ) {
 	// Craft a potential url and test its headers
 	$hash = md5(strtolower(trim($email)));
 	$uri = 'http://www.gravatar.com/avatar/' . $hash . '?d=404';
 	$headers = @get_headers($uri);
-	if (!preg_match("|200|", $headers[0]))
-		$has_valid_avatar = FALSE;
-	else
-		$has_valid_avatar = TRUE;
-	return $has_valid_avatar;
+	if (preg_match("|200|", $headers[0]))
+		return true;
+	return false;
 }
 
 /**
@@ -230,21 +245,26 @@ if ( ! function_exists( 'largo_custom_wp_link_pages' ) ) {
  * @todo change $use_more to bool, add echo/return
  */
 if ( ! function_exists( 'largo_excerpt' ) ) {
-	function largo_excerpt( $post, $sentence_count = 5, $more_link = '', $use_more = 1 ) {
-		if ( is_home() && strpos( $post->post_content, '<!--more-->' ) && ( $use_more != 0 ) ) : // if we're on the homepage and the post has a more tag, use that
-			the_content( $more_link );
+	function largo_excerpt( $post, $sentence_count = 5, $use_more = true, $more_link = '', $echo = true ) {
+		if ( is_home() && strpos( $post->post_content, '<!--more-->' ) && ( !$use_more ) ) : // if we're on the homepage and the post has a more tag, use that
+			$output = '<p>' . strip_tags( get_the_content( $more_link ) ) . '</p>';
 		elseif ( $post->post_excerpt ) : // if it has the optional excerpt set, use THAT
-			if ( $use_more == 0 ) :
-				the_excerpt();
+			if ( !$use_more ) :
+				$output = '<p>' . get_the_excerpt() . '</p>';
 			else :
-				echo '<p>' . strip_tags( get_the_excerpt() ) . ' <a href="' . get_permalink() . '">' . $more_link . '</a></p>';
+				$output = '<p>' . strip_tags( get_the_excerpt() ) . ' <a href="' . get_permalink() . '">' . $more_link . '</a></p>';
 			endif;
 		else : // otherwise we'll just do our best and make the prettiest excerpt we can muster
 			$output = largo_trim_sentences( get_the_content(), $sentence_count );
 			$output .= '<a href="' . get_permalink() . '">' . $more_link . '</a>';
 			$output = str_replace( '(more...)', '', $output );
-			echo apply_filters( 'the_content', $output );
+			$output = apply_filters( 'the_content', $output );
 		endif;
+
+		if ( $echo )
+			echo $output;
+
+		return $output;
 	}
 }
 
