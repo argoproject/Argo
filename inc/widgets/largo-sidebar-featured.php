@@ -53,7 +53,7 @@ class largo_sidebar_featured_widget extends WP_Widget {
                   	<div class="post-lead clearfix">
                       	<h5><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
                       	<?php the_post_thumbnail( '60x60' ); ?>
-                     	<?php echo '<p>' . largo_trim_sentences(get_the_content(), $instance['num_sentences']) . '</p>'; ?>
+                     	<?php echo '<p>' . largo_trim_sentences( get_the_content(), $instance['num_sentences'] ) . '</p>'; ?>
                   	</div> <!-- /.post-lead -->
 	            <?php endwhile; ?>
 	            <?php else: ?>

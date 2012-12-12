@@ -74,7 +74,7 @@ class largo_recent_posts_widget extends WP_Widget {
 	                      		elseif ($thumb == 'medium')
 	                      			the_post_thumbnail();
 	                      		if 	($excerpt == 'num_sentences')
-	                      			echo '<p>' . largo_trim_sentences(get_the_content(), $instance['num_sentences']) . '</p>';
+	                      			echo '<p>' . largo_trim_sentences( get_the_content(), $instance['num_sentences'] ) . '</p>';
 	                      		else
 	                      			the_excerpt();
 	                      	?>
