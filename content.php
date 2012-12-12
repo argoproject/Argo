@@ -17,7 +17,7 @@
 
 	<div class="entry-content">
 		<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
-		<?php largo_excerpt( $post, 5, __('Continue&nbsp;Reading&nbsp;&rarr;', 'largo'), 1); ?>
+		<?php largo_excerpt( $post, 5, true, __('Continue&nbsp;Reading&nbsp;&rarr;', 'largo') ); ?>
         <?php if ( largo_has_categories_or_tags() ): ?>
             <div class="post-meta bottom-meta">
     			<h5><strong><?php _e('Filed under:', 'largo'); ?></strong> <?php echo largo_homepage_categories_and_tags(); ?></h5>
