@@ -1615,6 +1615,7 @@ table .span24 {
 }
 .global-nav .nav-right {
   float: right;
+  margin-right: 5px;
 }
 .global-nav .nav-right .donate-btn {
   float: left;
