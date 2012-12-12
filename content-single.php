@@ -19,10 +19,10 @@
  		<?php get_template_part( 'largo-social' ); ?>
 
  		<!-- Other posts in this series -->
- 		<?php if ( largo_has_custom_taxonomy( get_the_ID() ) ): ?>
+ 		<?php if ( largo_post_in_series() ): ?>
 			<div class="labels clearfix">
             	<h5><?php _e('More In This Series', 'largo'); ?></h5>
-            	<?php largo_the_post_labels( get_the_ID() ); ?>
+            	<?php largo_the_series_list(); ?>
         	</div>
         <?php endif; ?>
 
@@ -37,7 +37,7 @@
     	<?php endif; ?>
 
 		<!-- Author bio and social links -->
-		<?php if ( largo_show_author_box( $post->ID ) )
+		<?php if ( largo_show_author_box() )
 			get_template_part( 'largo-author-box' ); ?>
 
 		<!-- Related posts -->
