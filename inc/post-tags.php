@@ -277,7 +277,7 @@ if ( ! function_exists( 'largo_excerpt' ) ) {
  *
  * @since 1.0
  */
-function largo_trim_sentences( $input, $sentences ) {
+function largo_trim_sentences( $input, $sentences, $echo = false ) {
 	$re = '/# Split sentences on whitespace between them.
 		(?<=                # Begin positive lookbehind.
 			[.!?]           	# Either an end of sentence punct,
@@ -307,6 +307,10 @@ function largo_trim_sentences( $input, $sentences ) {
 		if ( $strings[$i] != '' )
 			$output .= $strings[$i] . ' ';
 	}
+
+	if ( $echo )
+		echo $output;
+
 	return $output;
 }
 
