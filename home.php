@@ -27,6 +27,7 @@ if ( of_get_option('homepage_bottom') == 'widgets' ) {
 } else {
 	$args = array(
 		'paged'			=> $paged,
+		'post_status'	=> 'publish',
 		'posts_per_page'=> 10,
 		'post__not_in' 	=> $ids
 		);
