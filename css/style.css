@@ -3377,7 +3377,7 @@ p.comment-form-comment {
 #sidebar .largo-recent-posts p,
 #sidebar .largo-INN-RSS p {
   font-size: 10.672px;
-  margin-bottom: 12px;
+  margin-bottom: 0;
 }
 #sidebar .largo-INN-RSS ul {
   margin: 12px 0;
