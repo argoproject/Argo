@@ -41,7 +41,8 @@ class largo_recent_posts_widget extends WP_Widget {
 			<?php
 			$query_args = array (
 				'post__not_in' 	=> get_option( 'sticky_posts' ),
-				'showposts' 	=> $instance['num_posts']
+				'showposts' 	=> $instance['num_posts'],
+				'post_status'	=> 'publish'
 			);
 			if ($instance['avoid_duplicates'] === 1)
 				$query_args['post__not_in'] = $ids;
