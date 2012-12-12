@@ -215,6 +215,7 @@ function largo_has_categories_or_tags() {
 
     return false;
 }
+
 if ( ! function_exists( 'largo_the_categories_and_tags' ) ) {
 	function largo_the_categories_and_tags() {
 	    $cats = get_the_category();

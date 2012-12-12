@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Register the prominence and series custom taxonomies
+ * Insert the default terms
+ *
+ * @since 1.0
+ */
 function largo_custom_taxonomies() {
     // PROMINENCE
     if ( ! taxonomy_exists( 'prominence' ) ) {
@@ -59,3 +65,71 @@ function largo_custom_taxonomies() {
     }
 }
 add_action( 'init', 'largo_custom_taxonomies' );
+
+/**
+ * Determines whether a post is in a series
+ * Expects to be called from within The Loop.
+ *
+ * @uses global $post
+ * @return bool
+ * @since 1.0
+ */
+function largo_post_in_series() {
+    global $post;
+    $features = get_the_terms( $post->ID, 'series' );
+    return ( $features ) ? true : false;
+}
+
+/**
+ * Outputs a list of series a post is in
+ * Called in content-single.php
+ *
+ * @since 1.0
+ */
+if ( ! function_exists( 'largo_the_series_list' ) ) {
+	function largo_the_series_list() {
+		global $post;
+		$post_terms = largo_custom_taxonomy_terms( $post->ID );
+		foreach ( $post_terms as $term ) {
+			if ( strtolower( $term->name ) == 'series' )
+				continue;
+			echo largo_term_to_label( $term );
+		}
+	}
+}
+
+/**
+ * Outputs custom taxonomy terms attached to a post
+ *
+ * @return array of terms
+ * @since 1.0
+ */
+function largo_custom_taxonomy_terms( $post_id ) {
+	$taxonomies = apply_filters( 'largo_custom_taxonomies', array( 'series' ) );
+	$post_terms = array();
+	foreach ( $taxonomies as $tax ) {
+		if ( taxonomy_exists( $tax ) ) {
+			$terms = get_the_terms( $post_id, $tax );
+			if ( $terms )
+				$post_terms = array_merge( $post_terms, $terms );
+		}
+	}
+	return $post_terms;
+}
+
+/**
+ * Output format for the series custom taxonomy at the bottom of single posts
+ *
+ * @param $term array the term we want to output
+ * @since 1.0
+ */
+if ( ! function_exists( 'largo_term_to_label' ) ) {
+	function largo_term_to_label( $term ) {
+	    return sprintf( '<div class="series-label"><h5><a href="%1$s">%2$s</a><a class="rss-link" href="%3$s"></a></h5><p>%4$s</p></div>',
+	    	get_term_link( $term, $term->taxonomy ),
+	    	esc_attr( $term->name ),
+	    	get_term_feed_link( $term->term_id, $term->taxonomy ),
+	    	esc_attr( strip_tags ( $term->description )
+	    ));
+	}
+}

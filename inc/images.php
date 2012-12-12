@@ -1,13 +1,22 @@
 <?php
 
+/**
+ * Define medium and large image sizes
+ *
+ * @since 1.0
+ */
 if ( !defined( 'LARGE_WIDTH') ) {
 	define( 'LARGE_WIDTH', 771 );
 }
-
 if ( !defined( 'MEDIUM_WIDTH') ) {
 	define( 'MEDIUM_WIDTH', 336 );
 }
 
+/**
+ * Create custom image sizes used by the largo parent theme
+ *
+ * @since 1.0
+ */
 function largo_create_image_sizes() {
     add_theme_support( 'post-thumbnails' );
     set_post_thumbnail_size( 140, 140, true ); // skybox thumbnail
@@ -19,7 +28,9 @@ function largo_create_image_sizes() {
 add_action( 'after_setup_theme', 'largo_create_image_sizes' );
 
 /**
- * Replace all the defaults in settings > media with our preferred settins
+ * Replace all the defaults in settings > media with our preferred settings
+ *
+ * @since 1.0
  */
 function largo_set_media_options() {
 	update_option('thumbnail_size_w', 140);
@@ -35,40 +46,13 @@ function largo_set_media_options() {
 }
 add_action( 'after_setup_theme', 'largo_set_media_options' );
 
-
 /**
- * largo_get_image_tag(): Renders an <img /> tag for attachments, scaling it
- * to $size and guaranteeing that it's not wider than the content well.
+ * Remove links to attachments
  *
- * This is largely taken from get_image_tag() in wp-includes/media.php.
+ * @param object the post content
+ * @return object post content with image links stripped out
+ * @since 1.0
  */
-function largo_get_image_tag( $html, $id, $alt, $title, $align, $size ) {
-    // Never allow an image wider than the LARGE_WIDTH
-    if ( $size == 'full' ) {
-        list( $img_src, $width, $height ) = wp_get_attachment_image_src( $id, $size );
-        if ( $width > LARGE_WIDTH ) {
-            $size = 'large';
-        }
-    }
-
-    list( $img_src, $width, $height ) = image_downsize( $id, $size );
-    $hwstring = image_hwstring( $width, $height );
-
-    // XXX: may not need all these classes
-    $class = 'align' . esc_attr( $align ) .' size-' .  esc_attr( $size ) .
-             ' wp-image-' . $id;
-    $class = apply_filters( 'get_image_tag_class', $class, $id, $align,
-                            $size );
-
-    $html = '<img src="' . esc_attr( $img_src ) .
-        '" alt="' . esc_attr( $alt ) .
-        '" title="' . esc_attr( $title ) . '" ' .
-        $hwstring . 'class="' . $class . '" />';
-
-    return $html;
-}
-add_filter( 'get_image_tag', 'largo_get_image_tag', 10, 6 );
-
 function attachment_image_link_remove_filter( $content ) {
     $content =
         preg_replace(

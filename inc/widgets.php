@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Setup the Largo custom widgets
+ *
+ * @since 1.0
+ */
+
 // remove default WP widgets
 function largo_unregister_widgets() {
 	unregister_widget( 'WP_Widget_Pages' );
@@ -46,8 +52,12 @@ function largo_load_widgets() {
 }
 add_action( 'widgets_init', 'largo_load_widgets' );
 
-// add odd/even and incremental counter classes to widgets
-function add_odd_even_widget_classes($params) {
+/**
+ * Adds odd/even and numbered classes to sidebar widgets
+ *
+ * @since 1.0
+ */
+function add_odd_even_widget_classes( $params ) {
 	global $widget_num;
 
 	// Widget class
@@ -74,10 +84,14 @@ function add_odd_even_widget_classes($params) {
 }
 add_filter('dynamic_sidebar_params', 'add_odd_even_widget_classes');
 
-// reset counter for each sidebar
-add_filter('get_sidebar','widget_counter_reset', 99);
-function widget_counter_reset($text) {
+/**
+ * Resets the counter for each subsequent sidebar
+ *
+ * @since 1.0
+ */
+function widget_counter_reset( $text ) {
    global $widget_num;
    $widget_num = 0;
    return $text;
 }
+add_filter('get_sidebar','widget_counter_reset', 99);

@@ -1,17 +1,13 @@
 <?php
 
-function largo_tag_featured_posts( $post_id, $post ) {
-    $terms = wp_get_post_terms( $post_id, 'prominence', array("fields" => "names") );
-    if (in_array('Footer Featured Widget', $terms)) {
-        add_post_meta( $post_id, 'footer_featured_widget', 'yes', true ) or
-            update_post_meta( $post_id, 'footer_featured_widget', 'yes' );
-    }
-    else {
-        delete_post_meta( $post_id, 'footer_featured_widget' );
-    }
-}
-add_action( 'publish_post', 'largo_tag_featured_posts', 10, 2 );
-
+/**
+ * Shorthand for querying posts from a custom taxonomy
+ * Used in homepage templates and sidebar widgets
+ *
+ * @param array $args query args
+ * @return array of featured post objects
+ * @since 1.0
+ */
 function largo_get_featured_posts( $args = array() ) {
     $defaults = array(
         'showposts' => 3,
@@ -22,7 +18,7 @@ function largo_get_featured_posts( $args = array() ) {
 			array(
 				'taxonomy' 	=> 'prominence',
 				'field' 	=> 'slug',
-				'terms' 	=> 'footer-featured-widget'
+				'terms' 	=> 'footer-featured'
 			)
 		),
         'ignore_sticky_posts' => 1,
@@ -30,6 +26,22 @@ function largo_get_featured_posts( $args = array() ) {
     $args = wp_parse_args( $args, $defaults );
     $featured_query = new WP_Query( $args );
     return $featured_query;
+}
+
+/**
+ * Provides the "main" feature associated with a post.
+ * Expects to be called from within The Loop.
+ *
+ * @uses global $post
+ * @return term object|false
+ * @since 1.0
+ */
+function largo_get_the_main_feature() {
+    global $post;
+    $features = get_the_terms( $post->ID, 'series' );
+    if ( ! $features )
+        return false;
+    return array_shift( $features );
 }
 
 /**
@@ -41,6 +53,7 @@ function largo_get_featured_posts( $args = array() ) {
  * @param array $after new list of sticky posts
  * @param array $before original list of sticky posts
  * @return array
+ * @since 1.0
  */
 function largo_scrub_sticky_posts( $after, $before ) {
     $newest_post_id = array_pop( $after );
@@ -49,87 +62,3 @@ function largo_scrub_sticky_posts( $after, $before ) {
 }
 add_filter( 'pre_update_option_sticky_posts', 'largo_scrub_sticky_posts', 10, 2 );
 
-
-/**
- * Determines whether a post has a "main" item from the feature custom
- * taxonomy. Expects to be called from within The Loop.
- *
- * @uses global $post
- * @return bool
- */
-function largo_post_in_series() {
-    global $post;
-
-    $features = get_the_terms( $post->ID, 'series' );
-
-    return ( $features ) ? true : false;
-}
-
-/**
- * Provides the "main" feature associated with a post.
- *
- * @uses global $post
- * @return term object|false
- */
-function largo_get_the_main_feature() {
-    global $post;
-
-    $features = get_the_terms( $post->ID, 'series' );
-
-    if ( ! $features )
-        return false;
-
-    return array_shift( $features );
-}
-
-// add a link to an archive page for terms within the "featured" taxonomy to post meta.
-
-if ( ! function_exists( 'largo_custom_taxonomy_terms' ) ) {
-	function largo_custom_taxonomy_terms( $post_id ) {
-		$taxonomies = apply_filters( 'largo_custom_taxnomies', array( 'series' ) );
-
-	    $post_terms = array();
-	    foreach ( $taxonomies as $tax ) {
-	        if ( taxonomy_exists( $tax ) ) {
-	            $terms = get_the_terms( $post_id, $tax );
-	            if ( $terms ) {
-	                $post_terms = array_merge( $post_terms, $terms );
-	            }
-	        }
-	    }
-
-	    return $post_terms;
-	}
-}
-
-function largo_term_to_label( $term ) {
-    return sprintf( '<div class="series-label"><h5><a href="%1$s">%2$s</a><a class="rss-link" href="%3$s"></a></h5><p>%4$s</p></div>',
-    	get_term_link( $term, $term->taxonomy ),
-    	esc_attr( $term->name ),
-    	get_term_feed_link( $term->term_id, $term->taxonomy ),
-    	esc_attr( strip_tags ( $term->description ) ) );
-}
-
-if ( ! function_exists( 'largo_the_post_labels' ) ) {
-	function largo_the_post_labels( $post_id ) {
-	    $post_terms = largo_custom_taxonomy_terms( $post_id );
-	    $all_labels = $post_terms;
-	    foreach ( $all_labels as $term ) {
-	        if ( strtolower( $term->name ) == 'featured' ) {
-	            continue;
-	        }
-	        echo largo_term_to_label( $term );
-	    }
-	}
-}
-
-//new to argo parent
-if ( ! function_exists( 'largo_has_custom_taxonomy' ) ) {
-	function largo_has_custom_taxonomy($post_id) {
-		$largo_has_terms = largo_custom_taxonomy_terms( $post_id );
-		if ($largo_has_terms) {
-        	return true;
-		}
-		return false;
-	}
-}

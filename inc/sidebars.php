@@ -1,7 +1,9 @@
 <?php
 
-/*
- * SIDEBAR REGISTRATION
+/**
+ * Register our sidebars and other widget areas
+ *
+ * @since 1.0
  */
 function largo_register_sidebars() {
 	register_sidebar( array(

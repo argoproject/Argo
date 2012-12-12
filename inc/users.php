@@ -1,7 +1,10 @@
 <?php
 
 /**
- * Modify the user profile screen to allow us to save more up to date contact methods and social media links
+ * Modify the user profile screen
+ * Remove old links and add some new ones
+ *
+ * @since 1.0
  */
 function largo_contactmethods( $contactmethods ) {
 	// Remove Yahoo IM

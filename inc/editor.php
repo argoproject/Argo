@@ -1,8 +1,10 @@
 <?php
-/*
- * TINYMCE CUSTOMIZATIONS
- */
 
+/**
+ * Add the tinymce plugin to insert modules into posts
+ *
+ * @since 1.0
+ */
 function add_largo_mce_plugin( $plugin_array ) {
     $plugin_array['modulize'] = get_template_directory_uri() . '/js/tinymce/plugins/largo/editor_plugin.js';
     return $plugin_array;
@@ -21,10 +23,12 @@ function largo_add_mce_buttons() {
 }
 add_action( 'init', 'largo_add_mce_buttons' );
 
-/*
- * EDITOR MARKUP CUSTOMIZATIONS
- */
 
+/**
+ * Add the module shortcode (used for pullquotes and asides within posts)
+ *
+ * @since 1.0
+ */
 function module_shortcode( $atts, $content, $code ) {
     extract( shortcode_atts( array(
         'align' => 'left',
@@ -36,7 +40,11 @@ function module_shortcode( $atts, $content, $code ) {
 }
 add_shortcode( 'module', 'module_shortcode' );
 
-// MOVE THE AUTHOR METABOX INTO THE PUBLISH METABOX
+/**
+ * Move the author dropdown to the publish metabox so it's easier to find
+ *
+ * @since 1.0
+ */
 function move_author_to_publish_metabox() {
     global $post_ID;
     $post = get_post( $post_ID );
@@ -46,7 +54,11 @@ function move_author_to_publish_metabox() {
 }
 add_action( 'post_submitbox_misc_actions', 'move_author_to_publish_metabox' );
 
-// REMOVE META BOXES FROM DEFAULT POSTS SCREEN
+/**
+ * Hide some of the less commonly used metaboxes to cleanup the post and page edit screens
+ *
+ * @since 1.0
+ */
 function remove_default_post_screen_metaboxes() {
 	remove_meta_box( 'trackbacksdiv','post','normal' ); // trackbacks
 	remove_meta_box( 'slugdiv','post','normal' ); // slug
