@@ -52,7 +52,6 @@
       list-style:none;
     }
   }
-  .widget-title,
   .widgettitle,
   #menu-footer-navigation h4 {
     font-size:@baseFontSize;
@@ -141,23 +140,25 @@ ul#ft-social li {
 #boilerplate {
   border-top: 1px solid #999;
   padding-top:@baseline/2;
-  width:100%;
+  width: 100%;
   font-family: @sansFontFamily;
   p {
-    color:@grayLight;
     margin-bottom:0;
-    float:left;
+    color: @grayLight;
+    &.footer-credit {
+      float: left;
+    }
     &.back-to-top {
-      float:right;
+      float: right;
     }
   }
   .menu {
-    clear:both;
-    margin:0;
+    clear: both;
+    margin: 0;
     font-size: @baseFontSize*0.667;
     li {
-      display:inline;
-      padding-right:10px;
+      display: inline;
+      padding-right: 10px;
     }
   }
 }

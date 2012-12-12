@@ -18,12 +18,12 @@
 	<?php if ( ! dynamic_sidebar( 'footer-widget-area' ) ) : ?>
 
 	<div id="searchform-footer">
-		<h3 class="widget-title"><?php _e('Search This Site', 'largo'); ?></h3>
+		<h3 class="widgettitle"><?php _e('Search This Site', 'largo'); ?></h3>
 		<?php get_search_form(); ?>
 	</div>
 
 	<div id="ft-archive">
-    	<h3 class="widget-title"><?php _e('Browse Archives', 'largo'); ?></h3>
+    	<h3 class="widgettitle"><?php _e('Browse Archives', 'largo'); ?></h3>
 		<select name="archive-dropdown" onChange='document.location.href=this.options[this.selectedIndex].value;'>
 			<option value=""><?php _e('Select Month', 'largo'); ?></option>
 			<?php wp_get_archives( array( 'type' => 'monthly', 'format' => 'option', 'show_post_count' => 1 ) ); ?>

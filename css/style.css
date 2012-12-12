@@ -3485,7 +3485,6 @@ p.comment-form-comment {
   margin-bottom: 12px;
   list-style: none;
 }
-#site-footer .widget-title,
 #site-footer .widgettitle,
 #site-footer #menu-footer-navigation h4 {
   font-size: 16px;
@@ -3576,8 +3575,10 @@ ul#ft-social li:hover {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 #boilerplate p {
-  color: #999999;
   margin-bottom: 0;
+  color: #999999;
+}
+#boilerplate p.footer-credit {
   float: left;
 }
 #boilerplate p.back-to-top {
@@ -3832,6 +3833,10 @@ img[class*="wp-image-"] {
     clear: both;
     float: none;
     text-align: left;
+  }
+  #boilerplate p.back-to-top {
+    padding-top: 12px;
+    font-size: 16px;
   }
 }
 @media (max-width: 480px) {
