@@ -2,6 +2,9 @@
 
 /**
  * Show related tags and subcategories for each main category
+ * Used on category.php to display a list of related terms
+ *
+ * @since 1.0
  */
 
 function largo_get_related_topics_for_category( $obj ) {
@@ -104,6 +107,7 @@ function _subcategories_for_category( $cat_id ) {
  *
  * @param int $max The maximum number of topics to return.
  * @return array of term objects.
+ * @since 1.0
  */
 function largo_get_post_related_topics( $max = 5 ) {
     $cats = get_the_category();
@@ -141,6 +145,7 @@ function largo_get_post_related_topics( $max = 5 ) {
  * @param int       $max    Maximum number of posts to return.
  * @param int       $min    Minimum number of posts. If not met, returns false.
  * @return array|false of post objects.
+ * @since 1.0
  */
 function largo_get_recent_posts_for_term( $term, $max = 5, $min = 1 ) {
     global $post;
@@ -177,6 +182,12 @@ function largo_get_recent_posts_for_term( $term, $max = 5, $min = 1 ) {
     return $query->posts;
 }
 
+/**
+ * Determine if a post has either categories or tags
+ *
+ * @return bool true is a post has categories or tags
+ * @since 1.0
+ */
 function largo_has_categories_or_tags() {
     if ( get_the_tags() ) {
         return true;
@@ -194,62 +205,75 @@ function largo_has_categories_or_tags() {
     return false;
 }
 
-if ( ! function_exists( 'largo_the_categories_and_tags' ) ) {
-	function largo_the_categories_and_tags() {
+/**
+ * Return (or echo) a list of categories and tags
+ *
+ * @param $max int number of categories and tags to return
+ * @param $echo bool echo the output or return it (default: echo)
+ * @param $link bool return the tags and category links or just the terms themselves
+ * @param $use_icon bool include the tag icon or not (used on single.php)
+ * @param $separator string to use as a separator between list items
+ * @param $item_wrapper string html tag to use as a wrapper for elements in the output
+ * @param $exclude array of term ids to exclude
+ * @return array of category and tag links
+ * @since 1.0
+ * @todo consider prioritizing tags by popularity?
+ */
+if ( ! function_exists( 'largo_categories_and_tags' ) ) {
+	function largo_categories_and_tags( $max = 5, $echo = true, $link = true, $use_icon = false, $separator = ', ', $item_wrapper = 'span', $exclude ) {
 	    $cats = get_the_category();
 	    $tags = get_the_tags();
+	    $icon = '';
+	    $output = array();
 
-	    $links = array();
+	    // if $use_icon is true, include the markup for the tag icon
+	    if ( $use_icon )
+	    	$icon = '<i class="icon-white icon-tag"></i>';
+
 	    if ( $cats ) {
 	        foreach ( $cats as $cat ) {
-	            if ( $cat->name == 'Uncategorized' ) {
+
+	            // skip uncategorized and any others in the array of terms to exclude
+	            if ( $cat->name == 'Uncategorized' || in_array( $cat->term_id, $exclude ) )
 	                continue;
-	            }
-	            $links[] = sprintf(
-	                '<li class="post-category-link"><i class="icon-white icon-tag"></i><a href="%s" title="%s">%s</a></li>',
-	                get_category_link( $cat->term_id ), $cat->name,
-	                $cat->name
-	            );
+
+	            if ( $link ) {
+		            $output[] = sprintf(
+		                __('<%1$s class="post-category-link"><a href="%2$s" title="Read posts in the %3$s category">%4$s%3$s</a></%1$s>', 'largo'),
+			                $item_wrapper,
+			                get_category_link( $cat->term_id ),
+			                $cat->name,
+			                $icon
+		            );
+		       } else {
+			       $output[] = $cat->name;
+		       }
 	        }
 	    }
+
 	    if ( $tags ) {
 	        foreach ( $tags as $tag ) {
-	            $links[] = sprintf(
-	                '<li class="post-tag-link"><i class="icon-white icon-tag"></i><a href="%s" rel="tag" title="%s">%s</a></li>',
-	                get_tag_link( $tag->term_id ), $tag->name, $tag->name
-	            );
-	        }
-	    }
-	    echo implode( '', $links );
-	}
-}
 
-if ( ! function_exists( 'largo_homepage_categories_and_tags' ) ) {
-	function largo_homepage_categories_and_tags( $max = 5 ) {
-	    $cats = get_the_category();
-	    $tags = get_the_tags();
-
-	    $links = array();
-	    if ( $cats ) {
-	        foreach ( $cats as $cat ) {
-	            if ( $cat->name == 'Uncategorized' ) {
+	        	if ( in_array( $tag->term_id, $exclude ) )
 	                continue;
-	            }
-	            $links[] = sprintf(
-	                '<span class="post-category-link"><a href="%s" title="%s">%s</a></span>',
-	                get_category_link( $cat->term_id ), $cat->name,
-	                $cat->name
-	            );
+
+	        	if ( $link ) {
+		            $output[] = sprintf(
+		                __('<%1$s class="post-tag-link"><a href="%2$s" title="Read posts tagged with: %3$s">%4$s%3$s</a></%1$s>', 'largo'),
+		                	$item_wrapper,
+		                	get_tag_link( $tag->term_id ),
+		                	$tag->name,
+		                	$icon
+		            );
+		         } else {
+		         	 $output[] = $tag->name;
+		       }
 	        }
 	    }
-	    if ( $tags ) {
-	        foreach ( $tags as $tag ) {
-	            $links[] = sprintf(
-	                '<span class="post-tag-link"><a href="%s" title="%s">%s</a></span>',
-	                get_tag_link( $tag->term_id ), $tag->name, $tag->name
-	            );
-	        }
-	    }
-	    echo implode( ', ', array_slice( $links, 0, $max ) );
+
+	    if ( $echo )
+			echo implode( $separator, array_slice( $output, 0, $max ) );
+
+		return $output;
 	}
 }
