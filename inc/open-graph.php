@@ -17,6 +17,8 @@ function twitter_url_to_username ($url) {
  * Adds appropriate open graph, twittercards, and google publisher tags
  * to the header based on the page type displayed
  *
+ * @uses twitter_url_to_username()
+ * @uses global $current_url
  * @since 1.0
  */
 if ( ! function_exists( 'largo_opengraph' ) ) {
@@ -24,14 +26,14 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
 
 		global $current_url;
 
-		//set a default thumbnail, if a post has a featured image use that instead
+		// set a default thumbnail, if a post has a featured image use that instead
 		$thumbnailURL = of_get_option( 'logo_thumbnail_sq' );
 
 		if ( is_single() ) {
 			$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'thumbnail' );
 			if ($image != '')
 				$thumbnailURL = $image[0];
-		} // is_single
+		}
 
 		// start the output, some attributes will be the same for all page types ?>
 
@@ -41,7 +43,7 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
 			<meta name="twitter:site" content="@<?php echo twitter_url_to_username( of_get_option( 'twitter_link' ) ); ?>">
 		<?php endif; ?>
 
-		<?php //output appropriate OG tags by page type
+		<?php // output appropriate OG tags by page type
 			if ( is_single() ) {
 
 				if ( have_posts() ) : the_post(); // we need to queue up the post to get the post specific info
@@ -72,8 +74,6 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
 				<meta property="og:url" content="<?php echo $current_url; ?>"/>
 				<?php
 					//let's try to get a better description when available
-					$description = get_bloginfo( 'description' );
-
 					if ( is_category() && category_description() ) {
 						$description = category_description();
 					} elseif ( is_author() ) {
@@ -82,6 +82,8 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
 								$description = get_the_author_meta( 'description' );
 						endif;
 						rewind_posts();
+					} else {
+						$description = get_bloginfo( 'description' );
 					}
 				?>
 				<meta property="og:description" content="<?php echo strip_tags( $description ); ?>" />
