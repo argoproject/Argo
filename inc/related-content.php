@@ -253,14 +253,3 @@ if ( ! function_exists( 'largo_homepage_categories_and_tags' ) ) {
 	    echo implode( ', ', array_slice( $links, 0, $max ) );
 	}
 }
-
- /*
- * XXX: this may not be necessary the_post_thumbnail takes sizes. -- ML
- */
-function largo_get_post_thumbnail_src( $post, $size = '60x60' ) {
-    if ( has_post_thumbnail( $post->ID ) ) {
-        $thumb = get_post_thumbnail_id( $post->ID );
-        $image = wp_get_attachment_image_src( $thumb, $size );
-        return $image[ 0 ]; // src
-    }
-}
