@@ -31,7 +31,7 @@
     		<div class="tags clearfix">
     			<h5><?php _e('Filed Under:', 'largo'); ?></h5>
     			<ul>
-    				<?php echo largo_the_categories_and_tags(); ?>
+    				<?php largo_categories_and_tags( 20, true, true, true, '', 'li' ); ?>
     			</ul>
     		</div>
     	<?php endif; ?>
