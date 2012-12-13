@@ -16,7 +16,7 @@ get_header(); ?>
 					if ( $category_description )
 						echo '<div class="category-description">' . $category_description . '</div>';
 				?>
-				<?php if (largo_get_related_topics_for_category( get_queried_object() ) != '<ul></ul>' ) : ?>
+				<?php if ( largo_get_related_topics_for_category( get_queried_object() ) != '<ul></ul>' ) : ?>
 					<div class="related-topics">
 						<h5><?php _e('Related Topics:', 'largo'); ?> </h5>
 						<?php echo largo_get_related_topics_for_category( get_queried_object() ); ?>
