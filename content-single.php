@@ -38,45 +38,14 @@
 
 		<!-- Author bio and social links -->
 		<?php if ( largo_show_author_box() )
-			get_template_part( 'largo-author-box' ); ?>
+			get_template_part( 'largo-author-box' );
+		?>
 
 		<!-- Related posts -->
-		<?php if ( of_get_option( 'show_related_content' ) ) :
-			if ( $rel_topics = largo_get_post_related_topics( 6 ) ) :
+		<?php if ( of_get_option( 'show_related_content' ) )
+			get_template_part( 'largo-related-posts' );
 		?>
-			<div id="related-posts" class="idTabs row-fluid clearfix">
-				<ul id="related-post-nav" class="span4">
-					<li><h5><?php _e('More About', 'largo'); ?></h5></li>
-					<?php foreach ( $rel_topics as $count => $topic ) : ?>
-					<li><a href="#rp<?php echo $count; ?>"><?php echo $topic->name; ?></a></li>
-					<?php endforeach; ?>
-				</ul>
-				<div class="related-items span8">
-					<?php foreach ( $rel_topics as $count => $topic ): ?>
-						<div id="rp<?php echo $count; ?>">
-							<?php $rel_posts = largo_get_recent_posts_for_term( $topic, 3 ); ?>
-							<ul>
-								<?php $top_post = array_shift( $rel_posts ); ?>
-								<li class="top-related clearfix">
-									<h3><a href="<?php echo get_permalink( $top_post->ID ); ?>" title="<?php echo esc_attr($topic->name); ?>"><?php echo $top_post->post_title; ?></a></h3>
 
-									<?php if ( has_post_thumbnail( $top_post->ID ) ) { ?>
-										<img src="<?php echo largo_get_post_thumbnail_src( $top_post, '60x60' ); ?>" alt="related" width="60" height="60" />
-									<?php } ?>
-									<p><?php echo largo_get_excerpt( $top_post ); ?> <a href="<?php echo esc_url( get_permalink( $top_post->ID ) ); ?>" title="<?php echo esc_attr($topic->name); ?>"></a></p>
-								</li>
-								<?php foreach ( $rel_posts as $rel_post ): ?>
-								<li><a href="<?php echo esc_url( get_permalink( $rel_post->ID ) ); ?>" title="<?php echo esc_attr($topic->name); ?>"><?php echo $rel_post->post_title; ?></a></li>
-								<?php endforeach; ?>
-							</ul>
-							<p><a href="<?php echo esc_url( get_term_link( $topic ) ); ?>" title="<?php echo esc_attr($topic->name); ?>" target="_blank"><strong><?php printf( __('View all %s posts &rarr;', 'largo'), $topic->name ); ?></strong></a></p>
-						</div> <!-- /#rpX -->
-					<?php endforeach; ?>
-				</div> <!-- /.items -->
-			</div> <!-- /#related-posts -->
-		<?php
-			endif; // if ( $rel_topics )
-		endif; ?>
 
 	</footer><!-- /.post-meta -->
 </article><!-- #post-<?php the_ID(); ?> -->

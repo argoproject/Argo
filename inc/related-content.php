@@ -99,28 +99,6 @@ function _subcategories_for_category( $cat_id ) {
 }
 
 /**
- * Builds links to the latest posts for a given category.
- * @param   object  $cat    Term object
- * @return  string
- */
-function largo_get_latest_posts_for_category( $cat ) {
-    $query = new WP_Query( array(
-        'showposts' 			=> 4,
-        'orderby' 				=> 'date',
-        'order' 				=> 'DESC',
-        'cat' 					=> $cat->object_id,
-        'ignore_sticky_posts' 	=> 1,
-    ) );
-
-    $output = '';
-    foreach ( $query->posts as $post ) {
-        $output .= '<h4><a href="' . get_permalink( $post->ID ) . '">' . $post->post_title . '</a></h4>';
-    }
-
-    return $output;
-}
-
-/**
  * Provides topics (categories and tags) related to the current post in The
  * Loop.
  *
@@ -276,10 +254,6 @@ if ( ! function_exists( 'largo_homepage_categories_and_tags' ) ) {
 	}
 }
 
-/**
- * RELATED POSTS
-*/
-
  /*
  * XXX: this may not be necessary the_post_thumbnail takes sizes. -- ML
  */
@@ -289,49 +263,4 @@ function largo_get_post_thumbnail_src( $post, $size = '60x60' ) {
         $image = wp_get_attachment_image_src( $thumb, $size );
         return $image[ 0 ]; // src
     }
-}
-
-/* Retrieves the excerpt of any post.
- *
- * @param   object  $post       Post object
- * @param   int     $word_count Number of words (default 40)
- * @return  String
- */
-function largo_split_words( $text, $split_limit = -1 ) {
-    // XXX: deal with the way largo_get_excerpt uses this limit to
-    // determine whether to cut off remaining text.
-    if ( $split_limit > -1 )
-        $split_limit += 1;
-
-    $words = preg_split( "/[\n\r\t ]+/", $text, $split_limit,
-                         PREG_SPLIT_NO_EMPTY );
-    return $words;
-}
-
-function largo_get_excerpt( $post, $word_count = 40 ) {
-    $text = $post->post_content;
-
-    // HACK: This is ripped from wp_trim_excerpt() in
-    // wp-includes/formatting.php because there's seemingly no way to
-    // use it outside of The Loop
-    // A solution to this was filed as ticket #16372 in WP Trac, and
-    // should land in WP 3.2.
-    $text = strip_shortcodes( $text );
-
-    $text = apply_filters( 'the_content', $text );
-    $text = str_replace( ']]>', ']]&gt;', $text );
-    $text = strip_tags( $text );
-    $excerpt_length = apply_filters( 'excerpt_length', $word_count );
-    $excerpt_more = apply_filters( 'excerpt_more', ' ' . '[...]' );
-    $words = largo_split_words( $text, $excerpt_length );
-
-    if ( count( $words ) > $excerpt_length ) {
-        array_pop( $words );
-        $text = implode( ' ', $words );
-        $text = $text . $excerpt_more;
-    } else {
-        $text = implode( ' ', $words );
-    }
-
-    return $text;
 }
