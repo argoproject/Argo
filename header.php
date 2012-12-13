@@ -35,8 +35,8 @@
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 
 <link rel="canonical" href="<?php echo $current_url; ?>" />
-<?php if (get_option( 'blog_public') ) {
-	if (is_date() || ( is_archive() &&  of_get_option( 'noindex_archives' ) ) ) { ?>
+<?php if ( get_option( 'blog_public') ) {
+	if ( is_date() || ( is_archive() &&  of_get_option( 'noindex_archives' ) ) ) { ?>
 		<meta name="robots" content="noindex,follow" />
 <?php }
 	}

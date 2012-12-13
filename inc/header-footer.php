@@ -5,10 +5,13 @@ if ( ! function_exists( 'largo_header' ) ) {
  * output the site header
  */
 	function largo_header() {
-			$header_tag = is_home() ? 'h1' : 'h2';
+			$header_tag = is_home() ? 'h1' : 'h2'; // use h1 for the homepage, h2 for internal pages
+
+			// if we're using the text only header, display the output, otherwise this is just replacement text for the banner image
 			$header_class = of_get_option( 'no_header_image' ) ? 'branding' : 'visuallyhidden';
 			$divider = $header_class == 'branding' ? '' : ' - ';
-    		//print the text-only version of the site title
+
+    		// print the text-only version of the site title
     		printf('<%1$s class="%2$s"><a href="%3$s">%4$s%5$s<span class="tagline">%6$s</span></a></%1$s>',
 	    		$header_tag,
 	    		$header_class,
@@ -17,10 +20,12 @@ if ( ! function_exists( 'largo_header' ) ) {
 	    		$divider,
 	    		esc_attr( get_bloginfo('description') )
 	    	);
+
+	    	// add an image placeholder, the src is added by largo_header_js() in inc/enqueue.php
 	    	if ($header_class != 'branding')
 	    		echo '<a href="' . esc_url( home_url( '/' ) ) . '"><img class="header_img" src="" alt="" /></a>';
 		}
-} // ends check for largo_header()
+}
 
 if ( ! function_exists( 'largo_copyright_message' ) ) {
 /**
@@ -32,13 +37,13 @@ if ( ! function_exists( 'largo_copyright_message' ) ) {
 	    	$msg = __( 'Copyright %s', 'largo' );
 	    printf( $msg, date( 'Y' ) );
 	}
-} // ends check for largo_copyright_message()
+}
 
 if ( ! function_exists( 'largo_social_links' ) ) {
 /**
- * outputs all of the social media links from the theme options
+ * Outputs a list of social media links (with icons) from theme options
  */
-	function largo_social_links () {
+	function largo_social_links() {
 
 		$fields = array(
 			'rss' 		=> __( 'Link to RSS Feed', 'largo' ),
@@ -57,4 +62,18 @@ if ( ! function_exists( 'largo_social_links' ) ) {
 			}
 		}
 	}
-} // ends check for largo_social_links()
+}
+
+if ( ! function_exists( 'largo_shortcut_icons' ) ) {
+/**
+ * Adds shortcut icons to the header
+ */
+	function largo_shortcut_icons() {
+		if ( of_get_option( 'logo_thumbnail_sq' ) ) ?>
+			<link rel="apple-touch-icon" href="<?php echo of_get_option( 'logo_thumbnail_sq' ); ?>"/>
+		<?php if ( of_get_option( 'favicon' ) ) ?>
+			<link rel="shortcut icon" href="<?php echo of_get_option( 'favicon' ); ?>" />
+	<?php
+	}
+}
+add_action( 'wp_head', 'largo_shortcut_icons' );

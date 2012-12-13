@@ -169,9 +169,15 @@ function optionsframework_options() {
 		'type' 	=> 'heading');
 
 	$options[] = array(
-		'name' 	=> __('Upload a Thumbnail Image (200x200px)', 'largo'),
-		'desc' 	=> __('This is a default image used for Facebook posts when you do not set a featured image for your posts.', 'largo'),
+		'name' 	=> __('Upload a Square Thumbnail Image (200x200px minimum)', 'largo'),
+		'desc' 	=> __('This is a default image used for Facebook posts when you do not set a featured image for your posts. We also use it as a bookmark icon for Apple devices.', 'largo'),
 		'id' 	=> 'logo_thumbnail_sq',
+		'type' 	=> 'upload');
+
+	$options[] = array(
+		'name' 	=> __('Upload a Favicon', 'largo'),
+		'desc' 	=> __('This is the small icon that appears in browser tabs and in some feed readers and other applications. Favicons must be an .ico file and are typically 16x16px square.', 'largo'),
+		'id' 	=> 'favicon',
 		'type' 	=> 'upload');
 
 	$options[] = array(
@@ -185,20 +191,20 @@ function optionsframework_options() {
 		'type' 	=> 'checkbox');
 
 	$options[] = array(
-		'name' 	=> __('Small Banner Image (768x200px)', 'largo'),
-		'desc' 	=> __('Used for viewports below 768px wide (mostly phones and some tablets)', 'largo'),
+		'name' 	=> __('Small Banner Image (768px wide)', 'largo'),
+		'desc' 	=> __('Used for viewports below 768px wide (mostly phones and some tablets). Recommended height: 240px.', 'largo'),
 		'id' 	=> 'banner_image_sm',
 		'type' 	=> 'upload');
 
 	$options[] = array(
-		'name' 	=> __('Medium Banner Image (980x150px)', 'largo'),
-		'desc' 	=> __('Used for viewports between 768px and 980 px (mostly tablets)', 'largo'),
+		'name' 	=> __('Medium Banner Image (980px wide)', 'largo'),
+		'desc' 	=> __('Used for viewports between 768px and 980 px (mostly tablets). Recommended height: 180px.', 'largo'),
 		'id' 	=> 'banner_image_med',
 		'type' 	=> 'upload');
 
 	$options[] = array(
-		'name' 	=> __('Large Banner Image (1170x120px)', 'largo'),
-		'desc' 	=> __('Used for viewports above 980 px (landscape tablets and desktops)', 'largo'),
+		'name' 	=> __('Large Banner Image (1170px wide)', 'largo'),
+		'desc' 	=> __('Used for viewports above 980 px (landscape tablets and desktops). Recommended height: 150px.', 'largo'),
 		'id' 	=> 'banner_image_lg',
 		'type' 	=> 'upload');
 
