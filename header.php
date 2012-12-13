@@ -11,7 +11,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <?php
-	// get the current url (used for rel canonical and open graph tags)
+	// get the current page url (used for rel canonical and open graph tags)
 	global $current_url;
 	$current_url = (!empty($_SERVER['HTTPS'])) ? "https://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'] : "http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
 ?>
@@ -33,14 +33,6 @@
 </title>
 <link rel="profile" href="http://gmpg.org/xfn/11" />
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-
-<link rel="canonical" href="<?php echo $current_url; ?>" />
-<?php if ( get_option( 'blog_public') ) {
-	if ( is_date() || ( is_archive() &&  of_get_option( 'noindex_archives' ) ) ) { ?>
-		<meta name="robots" content="noindex,follow" />
-<?php }
-	}
-?>
 
 <?php
 	wp_enqueue_style( 'largo-stylesheet', get_bloginfo( 'stylesheet_url' ) );
