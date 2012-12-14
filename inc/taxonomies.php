@@ -50,7 +50,7 @@ function largo_custom_taxonomies() {
 		    	array(
 		    		'parent'		=> $parent_term_id,
 		    		'description' 	=> __('If you are using the Newspaper or Carousel optional homepage layout, add this label to a post to make it the top story on the homepage', 'largo'),
-		    		'slug' 			=> 'homepage-featured-top-story' ) );
+		    		'slug' 			=> 'top-story' ) );
 		}
     }
 
