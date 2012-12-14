@@ -109,21 +109,9 @@ if ( ! function_exists ( 'largo_seo' ) ) {
 		// news_keywords meta tag
 		if ( is_single() ) {
 			if ( have_posts() ) : the_post();
-				$tags = get_the_tags();
-				$num_tags = count ($tags);
-				$output = '<meta name="news_keywords" content="';
-				$count = 0;
-				foreach ( $tags as $tag ) {
-					$count++;
-					if ( $count > 10 ) // google only allows 10 tags
-						continue;
-					else if ( $count == 10 || $count == $num_tags ) // if this is the last tag, don't add a comma
-						$output .= $tag->name;
-					else
-						$output .= $tag->name . ', ';
-				}
-				$output .= '">';
-				echo $output;
+				echo '<meta name="news_keywords" content="';
+				largo_categories_and_tags( 10, true, false, false, ', ' );
+				echo '">';
 			endif;
 		}
 		rewind_posts();
