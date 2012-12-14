@@ -220,7 +220,7 @@ function largo_has_categories_or_tags() {
  * @todo consider prioritizing tags by popularity?
  */
 if ( ! function_exists( 'largo_categories_and_tags' ) ) {
-	function largo_categories_and_tags( $max = 5, $echo = true, $link = true, $use_icon = false, $separator = ', ', $item_wrapper = 'span', $exclude ) {
+	function largo_categories_and_tags( $max = 5, $echo = true, $link = true, $use_icon = false, $separator = ', ', $item_wrapper = 'span', $exclude = array() ) {
 	    $cats = get_the_category();
 	    $tags = get_the_tags();
 	    $icon = '';
