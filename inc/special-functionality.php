@@ -113,3 +113,15 @@ function largo_custom_login_logo() {
 	';
 }
 add_action('login_head', 'largo_custom_login_logo');
+
+// add a credit line to the admin footer
+function largo_admin_footer_text( $default_text ) {
+     return '<span id="footer-thankyou">This website powered by <a href="http://largoproject.org">Project Largo</a> from the <a href="http://investigativenewsnetwork.org">Investigative News Network</a> and <a href="http://wordpress.org">WordPress</a>.</span>';
+}
+add_filter( 'admin_footer_text', 'largo_admin_footer_text' );
+
+// remove the links menu item
+function largo_admin_menu() {
+     remove_menu_page('link-manager.php');
+}
+add_action( 'admin_menu', 'largo_admin_menu' );
