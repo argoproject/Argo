@@ -93,7 +93,7 @@ class largo_recent_posts_widget extends WP_Widget {
 	                    if ($excerpt == 'num_sentences')
 	                    	$output .= '<p>' . largo_trim_sentences( get_the_content(), $instance['num_sentences'] ) . '</p>';
 	                    elseif ($excerpt == 'custom_excerpt')
-	                    	$output .= get_the_excerpt();
+	                    	$output .= '<p>' . get_the_excerpt() . '</p>';
 
 	                    // close the item
 	                  	$output .= ( $excerpt == 'none' || $thumb == 'none' ) ? '</li>' : '</div>';
