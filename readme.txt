@@ -12,7 +12,7 @@ Feedback, comments and questions to: largo@investigativenewsnetwork.org
 
 == ABOUT PROJECT LARGO ==
 
-Project Largo is a responsively designed WordPress parent theme designed and optimized to support long form journalism.
+Project Largo is a responsive WordPress starter/parent theme designed with the needs of news publisers in mind.
 
 The project extends work done by NPR's Project Argo (http://argoproject.org/).
 
