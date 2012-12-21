@@ -18,7 +18,7 @@ The project extends work done by NPR's Project Argo (http://argoproject.org/).
 
 Documentation and more information at: http://largoproject.org
 
-VERSION: 0.1
+VERSION: 0.2
 
 == SETUP ==
 
