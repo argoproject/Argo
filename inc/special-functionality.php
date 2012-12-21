@@ -37,6 +37,12 @@ function largo_robots() {
 }
 add_action( 'do_robots', 'largo_robots' );
 
+/**
+ * Various customizations for the admin dashboard
+ *
+ * @since 1.0
+ */
+
 // cleanup the wordpress dashboard and add a few of our own widgets
 function largo_dashboard_widgets() {
      global $wp_meta_boxes;
