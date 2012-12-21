@@ -1,3 +1,15 @@
+***************************************************
+IMPORTANT! THIS PROJECT IS UNDER ACTIVE DEVELOPMENT
+***************************************************
+
+We are making regular updates that may or may not always play nice with previous versions.
+
+Feel free to tinker with the current version but know that we won't be offering a stable v. 1.0 release of the Largo framework until the end of Q1 2013.
+
+Feedback, comments and questions to: largo@investigativenewsnetwork.org
+
+***************************************************
+
 == ABOUT PROJECT LARGO ==
 
 Project Largo is a responsively designed WordPress parent theme designed and optimized to support long form journalism.
