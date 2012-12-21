@@ -27,18 +27,22 @@
   color: #fff;
 }
 #sidebar .widget p,
-#sidebar .widget ul {
+#sidebar .widget ul,
+#homepage-bottom .widget p,
+#homepage-bottom .widget ul {
   padding: 0 3px;
   font-size: @baseFontSize *0.815;
 }
-#sidebar .widget ul {
+#sidebar .widget ul,
+#homepage-bottom .widget ul {
   margin: @baseline/5 0 0 16px;
   line-height: 1.2;
   ul {
     margin-bottom:@baseline/5;
   }
 }
-#sidebar .widget p.morelink {
+#sidebar .widget p.morelink,
+#homepage-bottom .widget p.morelink {
   margin: -@baseline/4 0 0;
 }
 //A Few Alternate Styles
@@ -110,8 +114,11 @@
 }
 //Featured and Recent Posts Widget
 #sidebar .largo-sidebar-featured,
+#homepage-bottom .largo-sidebar-featured,
 #sidebar .largo-recent-posts,
-#sidebar .largo-INN-RSS {
+#homepage-bottom .largo-recent-posts,
+#sidebar .largo-INN-RSS,
+#homepage-bottom, .largo-INN-RSS {
   .post-lead {
     overflow: hidden;
     margin-bottom: 10px;

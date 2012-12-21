@@ -3249,18 +3249,23 @@ p.comment-form-comment {
   color: #fff;
 }
 #sidebar .widget p,
-#sidebar .widget ul {
+#sidebar .widget ul,
+#homepage-bottom .widget p,
+#homepage-bottom .widget ul {
   padding: 0 3px;
   font-size: 13.04px;
 }
-#sidebar .widget ul {
+#sidebar .widget ul,
+#homepage-bottom .widget ul {
   margin: 4.8px 0 0 16px;
   line-height: 1.2;
 }
-#sidebar .widget ul ul {
+#sidebar .widget ul ul,
+#homepage-bottom .widget ul ul {
   margin-bottom: 4.8px;
 }
-#sidebar .widget p.morelink {
+#sidebar .widget p.morelink,
+#homepage-bottom .widget p.morelink {
   margin: -6px 0 0;
 }
 #sidebar .widget.rev,
@@ -3356,32 +3361,52 @@ p.comment-form-comment {
   margin-bottom: 8px;
 }
 #sidebar .largo-sidebar-featured .post-lead,
+#homepage-bottom .largo-sidebar-featured .post-lead,
 #sidebar .largo-recent-posts .post-lead,
-#sidebar .largo-INN-RSS .post-lead {
+#homepage-bottom .largo-recent-posts .post-lead,
+#sidebar .largo-INN-RSS .post-lead,
+#homepage-bottom .post-lead,
+.largo-INN-RSS .post-lead {
   overflow: hidden;
   margin-bottom: 10px;
 }
 #sidebar .largo-sidebar-featured img,
+#homepage-bottom .largo-sidebar-featured img,
 #sidebar .largo-recent-posts img,
-#sidebar .largo-INN-RSS img {
+#homepage-bottom .largo-recent-posts img,
+#sidebar .largo-INN-RSS img,
+#homepage-bottom img,
+.largo-INN-RSS img {
   float: left;
   margin: 5px 10px 0 5px;
 }
 #sidebar .largo-sidebar-featured img.attachment-large,
+#homepage-bottom .largo-sidebar-featured img.attachment-large,
 #sidebar .largo-recent-posts img.attachment-large,
-#sidebar .largo-INN-RSS img.attachment-large {
+#homepage-bottom .largo-recent-posts img.attachment-large,
+#sidebar .largo-INN-RSS img.attachment-large,
+#homepage-bottom img.attachment-large,
+.largo-INN-RSS img.attachment-large {
   margin: 5px 0 10px;
 }
 #sidebar .largo-sidebar-featured h5,
+#homepage-bottom .largo-sidebar-featured h5,
 #sidebar .largo-recent-posts h5,
-#sidebar .largo-INN-RSS h5 {
+#homepage-bottom .largo-recent-posts h5,
+#sidebar .largo-INN-RSS h5,
+#homepage-bottom h5,
+.largo-INN-RSS h5 {
   margin-bottom: 2px;
   padding: 0 3px;
   font-size: 16px;
 }
 #sidebar .largo-sidebar-featured p,
+#homepage-bottom .largo-sidebar-featured p,
 #sidebar .largo-recent-posts p,
-#sidebar .largo-INN-RSS p {
+#homepage-bottom .largo-recent-posts p,
+#sidebar .largo-INN-RSS p,
+#homepage-bottom p,
+.largo-INN-RSS p {
   font-size: 10.672px;
   margin-bottom: 0;
 }
