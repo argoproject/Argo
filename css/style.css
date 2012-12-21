@@ -3367,6 +3367,11 @@ p.comment-form-comment {
   float: left;
   margin: 5px 10px 0 5px;
 }
+#sidebar .largo-sidebar-featured img.attachment-large,
+#sidebar .largo-recent-posts img.attachment-large,
+#sidebar .largo-INN-RSS img.attachment-large {
+  margin: 5px 0 10px;
+}
 #sidebar .largo-sidebar-featured h5,
 #sidebar .largo-recent-posts h5,
 #sidebar .largo-INN-RSS h5 {

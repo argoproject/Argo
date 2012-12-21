@@ -39,6 +39,9 @@ class largo_recent_posts_widget extends WP_Widget {
 			echo $before_title . $title . $after_title;?>
 
 			<?php
+			$thumb = $instance['thumbnail_display'];
+	        $excerpt = $instance['excerpt_display'];
+
 			$query_args = array (
 				'post__not_in' 	=> get_option( 'sticky_posts' ),
 				'showposts' 	=> $instance['num_posts'],
@@ -61,29 +64,51 @@ class largo_recent_posts_widget extends WP_Widget {
 					)
 				);
 
+			// if we're just showing a list of headlines, wrap the elements in a ul
+			if ($excerpt == 'none')
+	        	echo '<ul>';
+
 			$my_query = new WP_Query( $query_args );
           		if ( $my_query->have_posts() ) :
-          			while ( $my_query->have_posts() ) : $my_query->the_post(); $ids[] = get_the_ID(); ?>
-	                  	<div class="post-lead clearfix">
-	                      	<h5><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
-	                      	<?php
-	                      		$thumb = $instance['thumbnail_display'];
-	                      		$excerpt = $instance['excerpt_display'];
-	                      		if ($thumb == 'small')
-	                      			the_post_thumbnail( '60x60' );
-	                      		elseif ($thumb == 'medium')
-	                      			the_post_thumbnail();
-	                      		if 	($excerpt == 'num_sentences')
-	                      			echo '<p>' . largo_trim_sentences( get_the_content(), $instance['num_sentences'] ) . '</p>';
-	                      		else
-	                      			the_excerpt();
-	                      	?>
-	                  	</div> <!-- /.post-lead -->
-	            <?php endwhile;
-	            else: ?>
-	    		<p class="error"><strong>You don't have any recent posts.</strong></p>
 
-    		<?php endif; // end more featured posts
+          			$output = '';
+
+          			while ( $my_query->have_posts() ) : $my_query->the_post(); $ids[] = get_the_ID();
+
+          				// wrap the items in li if we're just showing a list of headlines, otherwise use a div
+          				$output .= ( $excerpt == 'none' || $thumb == 'none' ) ? '<li>' : '<div class="post-lead clearfix"><h5>';
+
+          				// the headline
+          				$output .= '<a href="' . get_permalink() . '">' . get_the_title() . '</a></h5>';
+
+          				// the thumbnail image (if we're using one)
+	                    if ($thumb == 'small')
+	                    	$output .= get_the_post_thumbnail( '60x60' );
+	                    elseif ($thumb == 'medium')
+	                    	$output .= get_the_post_thumbnail();
+	                    elseif ($thumb == 'large')
+	                    	$output .= get_the_post_thumbnail('large');
+
+	                    // the excerpt
+	                    if ($excerpt == 'num_sentences')
+	                    	$output .= '<p>' . largo_trim_sentences( get_the_content(), $instance['num_sentences'] ) . '</p>';
+	                    elseif ($excerpt == 'custom_excerpt')
+	                    	$output .= get_the_excerpt();
+
+	                    // close the item
+	                  	$output .= ( $excerpt == 'none' || $thumb == 'none' ) ? '</li>' : '</div>';
+
+	                  endwhile;
+
+	                  // print all of the items
+	                  echo $output;
+	            else:
+	    			_e('<p class="error"><strong>You don\'t have any recent posts.</strong></p>', 'largo');
+	    		endif; // end more featured posts
+
+	    	// close the ul if we're just showing a list of headlines
+	    	if ($excerpt == 'none')
+	        	echo '</ul>';
 
     		if($instance['linkurl'] !='') {?>
 				<p class="morelink"><a href="<?php echo $instance['linkurl']; ?>"><?php echo $instance['linktext']; ?></a></p>
@@ -159,6 +184,7 @@ class largo_recent_posts_widget extends WP_Widget {
 			<select id="<?php echo $this->get_field_id('thumbnail_display'); ?>" name="<?php echo $this->get_field_name('thumbnail_display'); ?>" class="widefat" style="width:90%;">
 			    <option <?php selected( $instance['thumbnail_display'], 'small'); ?> value="small"><?php _e('Small (60x60)', 'largo'); ?></option>
 			    <option <?php selected( $instance['thumbnail_display'], 'medium'); ?> value="medium"><?php _e('Medium (150x150)', 'largo'); ?></option>
+			    <option <?php selected( $instance['thumbnail_display'], 'large'); ?> value="large"><?php _e('Large (Full width of the widget)', 'largo'); ?></option>
 			    <option <?php selected( $instance['thumbnail_display'], 'none'); ?> value="none"><?php _e('None', 'largo'); ?></option>
 			</select>
 		</p>
@@ -168,6 +194,7 @@ class largo_recent_posts_widget extends WP_Widget {
 			<select id="<?php echo $this->get_field_id('excerpt_display'); ?>" name="<?php echo $this->get_field_name('excerpt_display'); ?>" class="widefat" style="width:90%;">
 			    <option <?php selected( $instance['excerpt_display'], 'num_sentences'); ?> value="num_sentences"><?php _e('Use # of Sentences', 'largo'); ?></option>
 			    <option <?php selected( $instance['excerpt_display'], 'custom_excerpt'); ?> value="custom_excerpt"><?php _e('Use Custom Post Excerpt', 'largo'); ?></option>
+			    <option <?php selected( $instance['excerpt_display'], 'none'); ?> value="none"><?php _e('None', 'largo'); ?></option>
 			</select>
 		</p>
 
