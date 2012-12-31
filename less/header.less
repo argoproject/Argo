@@ -1,7 +1,7 @@
 .global-nav-bg {
   .gradientBar (@grayDark, @grayDarker);
   .box-shadow(0 1px 3px 1px @grayLight);
-  height:32px;
+  height: 32px;
 }
 .global-nav {
   color: #fff;
@@ -27,16 +27,17 @@
     }
   }
   .nav-right {
-    float:right;
-    margin-right: 5px;
+    float: right;
     .donate-btn {
-	  float:left;
+	  float: left;
 	  margin: 4px 10px 0;
 	}
 	.org-logo {
- 	  float:left;
- 	  height:55px;
+ 	  float: left;
  	  .box-shadow(0 3px 4px -2px @black);
+	  height: 32px;
+	  overflow: visible;
+	  margin: 0 5px 0 10px;
     }
   }
 }
@@ -61,61 +62,51 @@
 }
 #header-search {
   float:left;
-  margin:2px 10px 0 0;
+  margin-top: 2px;
   form {
-    margin:0;
+    margin: 0;
   }
   input, button {
 	font-family: @sansFontFamily;
 	font-size: @baseFontSize - 3;
-	line-height:1;
+	line-height: 1;
   }
   input {
-	height:14px;
-	padding: 6px 4px 2px 4px
+	height: 14px;
+	padding: 6px 4px 2px;
   }
   button {
-	height:24px;
-	text-transform:uppercase;
+	height: 24px;
+	text-transform: uppercase;
   }
 }
 #site-header {
-	margin:0;
-	width:auto;
+	margin: 0;
+	width: auto;
 	img {
-      clear:none;
-      margin:-18px 0 5px;
+      clear: none;
+      margin: 5px 0;
 	}
-}
-.ie7 #site-header img,
-.ie8 #site-header img,
-.ie9 #site-header img {
-	margin-top:9px;
 }
 #site-header h1.branding,
 #site-header h2.branding {
 	clear:both;
-	margin:0 0 20px;
+	margin: 20px 0;
 	font-size: @baseFontSize * 3.375;
-	line-height:1;
+	line-height: 1;
 	a {
 	  color: @textColor;
 	  &:hover {
-	    text-decoration:none;
+	    text-decoration: none;
 	  }
 	}
 	span {
 	  font-size: @baseFontSize * 1.5;
-	  font-weight:normal;
+	  font-weight: normal;
 	  color: @gray;
-	  padding-left:10px;
+	  padding-left: 10px;
 	}
 }
-.ie7 #site-header h1.branding,
-.ie8 #site-header h1.branding,
-.ie9 #site-header h1.branding {
-	margin-top:17px;
-}
 .print-header {
-	display:none;
+	display: none;
 }
