@@ -28,12 +28,15 @@
  *
  */
 
+if ( ! defined( 'INN_MEMBER' ) )
+	define( 'INN_MEMBER', TRUE );
+
 // Set the content width based on the theme's design and stylesheet.
 if ( ! isset( $content_width ) )
 	$content_width = 771;
 
 // load the options framework (used for our theme options pages)
-if ( !function_exists( 'optionsframework_init' ) ) {
+if ( ! function_exists( 'optionsframework_init' ) ) {
 	define( 'OPTIONS_FRAMEWORK_DIRECTORY', get_template_directory_uri() . '/inc/options-framework/' );
 	require_once dirname( __FILE__ ) . '/inc/options-framework/options-framework.php';
 }
