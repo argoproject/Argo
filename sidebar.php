@@ -25,6 +25,8 @@
 				)
 			);
 		endif;
-		the_widget( 'largo_INN_RSS_widget', array( 'title' => __('Stories From Other INN Members', 'largo') ), array( 'before_title' => '<h3 class="widgettitle">', 'after_title' => '</h3>' ) );
+
+		if ( INN_MEMBER === TRUE )
+			the_widget( 'largo_INN_RSS_widget', array( 'title' => __('Stories From Other INN Members', 'largo') ), array( 'before_title' => '<h3 class="widgettitle">', 'after_title' => '</h3>' ) );
 	?>
 </div><!-- #main .widget-area -->

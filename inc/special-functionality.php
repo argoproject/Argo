@@ -44,7 +44,7 @@ add_action( 'do_robots', 'largo_robots' );
  */
 
 // cleanup the wordpress dashboard and add a few of our own widgets
-function largo_dashboard_widgets() {
+function largo_dashboard_widgets_member() {
      global $wp_meta_boxes;
 
      unset(
@@ -69,8 +69,28 @@ function largo_dashboard_widgets() {
      unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_network_news']);
      $wp_meta_boxes['dashboard']['side']['core']['dashboard_network_news'] = $my_widget;
 }
-add_action('wp_dashboard_setup', 'largo_dashboard_widgets');
 
+// we'll still clean things up a bit for non INN members
+function largo_dashboard_widgets_nonmember() {
+     global $wp_meta_boxes;
+
+     unset(
+          $wp_meta_boxes['dashboard']['normal']['core']['dashboard_plugins'],
+          $wp_meta_boxes['dashboard']['side']['core']['dashboard_secondary'],
+          $wp_meta_boxes['dashboard']['side']['core']['dashboard_primary'],
+          $wp_meta_boxes['dashboard']['normal']['core']['dashboard_incoming_links'],
+          $wp_meta_boxes['dashboard']['normal']['core']['dashboard_recent_comments']
+     );
+
+     wp_add_dashboard_widget( 'dashboard_quick_links', 'Project Largo Help', 'dashboard_quick_links' );
+
+     wp_add_dashboard_widget( 'dashboard_network_news', 'INN Network News', 'dashboard_network_news' );
+     $my_widget = $wp_meta_boxes['dashboard']['normal']['core']['dashboard_network_news'];
+     unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_network_news']);
+     $wp_meta_boxes['dashboard']['side']['core']['dashboard_network_news'] = $my_widget;
+}
+
+// custom dashboard widgets for INN members
 function dashboard_network_news() {
      echo '<div class="rss-widget">';
      wp_widget_rss_output(array(
@@ -118,7 +138,14 @@ function largo_custom_login_logo() {
 		</style>
 	';
 }
-add_action('login_head', 'largo_custom_login_logo');
+
+// only load the dashboard customizations if this is an INN member site
+if ( INN_MEMBER === TRUE ) {
+	add_action('login_head', 'largo_custom_login_logo');
+	add_action('wp_dashboard_setup', 'largo_dashboard_widgets_member');
+} else {
+	add_action('wp_dashboard_setup', 'largo_dashboard_widgets_nonmember');
+}
 
 // add a credit line to the admin footer
 function largo_admin_footer_text( $default_text ) {

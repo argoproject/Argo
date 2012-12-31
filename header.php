@@ -62,9 +62,9 @@
 				wp_nav_menu($args);
 			?>
         	<div class="nav-right">
-        		<?php if ( of_get_option( 'show_donate_button') ) :
+        		<?php if ( of_get_option( 'show_donate_button') )
         			largo_donate_button();
-        		endif; ?>
+        		?>
 
 				<div id="header-search">
 					<form class="form-search" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
@@ -73,9 +73,12 @@
 						</div>
 					</form>
 				</div>
+				<?php if ( INN_MEMBER === TRUE ) { ?>
 				<div class="org-logo">
         			<a href="http://investigativenewsnetwork.org/" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/img/inn-logo-80-55.jpg" height="55" alt="INN logo" /></a>
 				</div>
+				<?php } ?>
+
         	</div>
         </nav>
     </div> <!-- /.global-nav -->
