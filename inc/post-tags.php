@@ -298,7 +298,10 @@ function largo_trim_sentences( $input, $sentences, $echo = false ) {
 		    | Gov\.             # or "Gov.",
 		    | Pres\.            # or "Pres.",
 		    | U\.S\.            # or "U.S.",
+		    | Rev\.            	# or "Rev.",
+		    | Inc\.            	# or "Inc.",
 		    | \s[A-Z]\.         # or initials ex: "George W. Bush",
+		    | [A-Z]\.[A-Z]\.    # or random state abbreviations ex: "O.H.",
 		)                   # End negative lookbehind.
 		\s+                 # Split on whitespace between sentences.
 		/ix';
