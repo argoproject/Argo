@@ -11,7 +11,7 @@ if ( ! function_exists( 'largo_time' ) ) {
 	function largo_time( $echo = true ) {
 		$time_difference = current_time('timestamp') - get_the_time('U');
 
-		if($time_difference < 86400)
+		if ( $time_difference < 86400 )
 			$output = '<span class="time-ago">' . human_time_diff(get_the_time('U'), current_time('timestamp')) . __(' ago', 'largo') . '</span>';
 		else
 			$output = get_the_date();
@@ -86,6 +86,59 @@ if ( ! function_exists( 'largo_byline' ) ) {
 			esc_attr( get_the_date( 'c' ) ),
 			largo_time( false )
 		);
+		if ( $echo )
+			echo $output;
+		return $output;
+	}
+}
+
+/**
+ * Outputs facebook, twitter, email, share and print utility links on article pages
+ *
+ * @param $echo bool echo the string or return it (default: echo)
+ * @return string social icon area markup as formatted html
+ * @since 1.0
+ * @todo maybe let people re-arrange the order of the links or have more control over how they appear
+ */
+if ( ! function_exists( 'largo_social_links' ) ) {
+	function largo_social_links( $echo = true ) {
+		$utilities = of_get_option( 'article_utilities' );
+
+		$output = '<div class="post-social clearfix"><div class="left">';
+
+		if ( $utilities['twitter'] === '1' ) {
+			$twitter_link = of_get_option( 'twitter_link' ) ? 'data-via="' . twitter_url_to_username( of_get_option( 'twitter_link' ) ) . '"' : '';
+			$twitter_related = get_the_author_meta( 'twitter' ) ? get_the_author_meta( 'twitter' ) . ':Follow the author of this article' : '';
+			$twitter_count = (of_get_option( 'show_twitter_count' ) == 0) ? 'data-count="none"' : '';
+
+			$output .= sprintf( '<span class="twitter"><a href="http://twitter.com/share" class="twitter-share-button" data-url="%1$s" data-text="%2$s" %3$s %4$s %5$s>Tweet</a></span>',
+				get_permalink(),
+				get_the_title(),
+				$twitter_link,
+				$twitter_related,
+				$twitter_count
+			);
+		}
+
+		if ( $utilities['facebook'] === '1' )
+			$output .= sprintf( '<span class="facebook"><fb:like href="%1$s" send="false" layout="button_count" show_faces="false" action="%2$s"></fb:like></span>',
+				get_permalink(),
+				of_get_option( 'fb_verb' )
+			);
+
+		$output .= '</div><div class="right">';
+
+		if ( $utilities['sharethis'] === '1' )
+			$output .= '<span class="st_sharethis" displayText="Share"></span>';
+
+		if ( $utilities['email'] === '1' )
+			$output .= '<span class="st_email" displayText="Email"></span>';
+
+		if ( $utilities['print'] === '1' )
+			$output .= '<span class="print"><a href="#" onclick="window.print()" title="print this article" rel="nofollow"><i class="icon-print"></i> Print</a></span>';
+
+		$output .= '</div></div>';
+
 		if ( $echo )
 			echo $output;
 		return $output;
@@ -328,14 +381,21 @@ if ( ! function_exists( 'largo_content_nav' ) ) {
 	function largo_content_nav( $nav_id ) {
 		global $wp_query;
 
-		if ( $wp_query->max_num_pages > 1 ) : ?>
+		if ( $nav_id === 'single-post-nav-below' ) { ?>
 
-	<nav id="<?php echo $nav_id; ?>" class="pager post-nav">
-		<div class="next"><?php previous_posts_link( __( 'Newer Stories &rarr;', 'largo' ) ); ?></div>
-		<div class="previous"><?php next_posts_link( __( '&larr; Older Stories', 'largo' ) ); ?></div>
-	</nav><!-- .post-nav -->
+			<nav id="nav-below" class="pager post-nav clearfix">
+				<div class="previous"><?php previous_post_link( __('<h5>Previous Story</h5> %link', 'largo'), '<span class="meta-nav">' . _x( '&larr;', 'Previous post link', 'largo' ) . '</span> %title' ); ?></div>
+				<div class="next"><?php next_post_link( __('<h5>Next Story</h5> %link', 'largo'), '%title <span class="meta-nav">' . _x( '&rarr;', 'Next post link', 'largo' ) . '</span>' ); ?></div>
+			</nav><!-- #nav-below -->
 
-		<?php endif;
+		<?php } elseif ( $wp_query->max_num_pages > 1 ) { ?>
+
+			<nav id="<?php echo $nav_id; ?>" class="pager post-nav">
+				<div class="next"><?php previous_posts_link( __( 'Newer Stories &rarr;', 'largo' ) ); ?></div>
+				<div class="previous"><?php next_posts_link( __( '&larr; Older Stories', 'largo' ) ); ?></div>
+			</nav><!-- .post-nav -->
+
+		<?php }
 	}
 }
 

@@ -8,7 +8,10 @@
 	<header>
  		<h1 class="entry-title"><?php the_title(); ?></h1>
  		<h5 class="byline"><?php largo_byline(); ?> | <span class="comments-link"><?php comments_popup_link( __('Leave a Comment', 'largo'), __('<strong>1</strong> Comment ', 'largo'), __(' <strong>%</strong> Comments', 'largo') ); ?></span><?php edit_post_link( __('Edit This Post', 'largo'), ' | <span class="edit-link">', '</span>'); ?></h5>
- 		<?php get_template_part( 'largo-social' ); ?>
+ 		<?php
+ 			if ( of_get_option( 'social_icons_display' ) === 'top' || of_get_option( 'social_icons_display' ) === 'both' )
+ 				largo_social_links();
+ 		?>
 	</header><!-- / entry header -->
 
 	<div class="entry-content clearfix">
@@ -16,7 +19,10 @@
 	</div><!-- .entry-content -->
 
 	<footer class="post-meta bottom-meta">
- 		<?php get_template_part( 'largo-social' ); ?>
+ 		<?php
+ 			if ( of_get_option( 'social_icons_display' ) === 'btm' || of_get_option( 'social_icons_display' ) === 'both' )
+ 				largo_social_links();
+ 		?>
 
  		<!-- Other posts in this series -->
  		<?php if ( largo_post_in_series() ): ?>
@@ -27,22 +33,22 @@
         <?php endif; ?>
 
         <!-- Post tags -->
-        <?php if ( largo_has_categories_or_tags() ): ?>
+        <?php if ( largo_has_categories_or_tags() && of_get_option( 'show_tags' ) ): ?>
     		<div class="tags clearfix">
     			<h5><?php _e('Filed Under:', 'largo'); ?></h5>
     			<ul>
-    				<?php largo_categories_and_tags( 20, true, true, true, '', 'li' ); ?>
+    				<?php largo_categories_and_tags( of_get_option( 'tag_limit' ), true, true, true, '', 'li' ); ?>
     			</ul>
     		</div>
     	<?php endif; ?>
 
-		<!-- Author bio and social links -->
-		<?php if ( largo_show_author_box() )
+		<?php
+		// Author bio and social links
+		if ( largo_show_author_box() )
 			get_template_part( 'largo-author-box' );
-		?>
 
-		<!-- Related posts -->
-		<?php if ( of_get_option( 'show_related_content' ) )
+		// Related posts
+		if ( of_get_option( 'show_related_content' ) )
 			get_template_part( 'largo-related-posts' );
 		?>
 
@@ -50,9 +56,7 @@
 	</footer><!-- /.post-meta -->
 </article><!-- #post-<?php the_ID(); ?> -->
 
-<nav id="nav-below" class="pager post-nav clearfix">
-	<div class="previous"><?php previous_post_link( __('<h5>Previous Story</h5> %link', 'largo'), '<span class="meta-nav">' . _x( '&larr;', 'Previous post link', 'largo' ) . '</span> %title' ); ?></div>
-	<div class="next"><?php next_post_link( __('<h5>Next Story</h5> %link', 'largo'), '%title <span class="meta-nav">' . _x( '&rarr;', 'Next post link', 'largo' ) . '</span>' ); ?></div>
-</nav><!-- #nav-below -->
-
+<?php if ( of_get_option( 'show_next_prev_nav_single' ) )
+	largo_content_nav( 'single-post-nav-below' );
+?>
 

@@ -29,6 +29,34 @@ function optionsframework_options() {
 
 	$imagepath =  get_template_directory_uri() . '/inc/options-framework/images/';
 
+	$display_options = array(
+		'top' 	=> __('Top', 'largo'),
+		'btm' 	=> __('Bottom', 'largo'),
+		'both' 	=> __('Both', 'largo'),
+		'none' 	=> __('None', 'largo')
+	);
+
+	$article_utility_buttons = array(
+		'facebook' 	=> __('Facebook', 'largo'),
+		'twitter' 	=> __('Twitter', 'largo'),
+		'sharethis' => __('ShareThis', 'largo'),
+		'email' 	=> __('Email', 'largo'),
+		'print' 	=> __('Print', 'largo')
+	);
+
+	$article_utility_buttons_defaults = array(
+		'facebook' 	=> '1',
+		'twitter' 	=> '1',
+		'sharethis' => '1',
+		'email' 	=> '1',
+		'print' 	=> '1'
+	);
+
+	$fb_verbs = array(
+		'like' 		=> __('Like', 'largo'),
+		'recommend' => __('Recommend', 'largo')
+	);
+
 	$options = array();
 
 	$options[] = array(
@@ -143,6 +171,19 @@ function optionsframework_options() {
 		'type' 	=> 'info');
 
 	$options[] = array(
+		'desc' 	=> __('<strong>Show/Hide list of tags</strong> at the bottom of single posts.', 'largo'),
+		'id' 	=> 'show_tags',
+		'std' 	=> '1',
+		'type' 	=> 'checkbox');
+
+	$options[] = array(
+		'desc' 	=> __('Enter the <strong>maximum number of tags to show</strong>.', 'largo'),
+		'id' 	=> 'tag_limit',
+		'std' 	=> 20,
+		'class' => 'hidden',
+		'type' 	=> 'text');
+
+	$options[] = array(
 		'desc' 	=> __('<strong>Show/Hide the author bio</strong> at the bottom of single posts.', 'largo'),
 		'id' 	=> 'show_author_box',
 		'std' 	=> '1',
@@ -151,6 +192,41 @@ function optionsframework_options() {
 	$options[] = array(
 		'desc' 	=> __('<strong>Show/Hide related posts</strong> at the bottom of single posts.', 'largo'),
 		'id' 	=> 'show_related_content',
+		'std' 	=> '1',
+		'type' 	=> 'checkbox');
+
+	$options[] = array(
+		'desc' 	=> __('<strong>Show/Hide next/prev post navigation</strong> at the bottom of single posts.', 'largo'),
+		'id' 	=> 'show_next_prev_nav_single',
+		'std' 	=> '1',
+		'type' 	=> 'checkbox');
+
+	$options[] = array(
+		'desc' 		=> __('<strong>Where would you like to display share icons on single posts?</strong> By default social icons appear at both the top and the bottom of single posts but you can choose to show them in only one or the other or to not show them at all.', 'largo'),
+		'id' 		=> 'social_icons_display',
+		'std' 		=> 'both',
+		'type' 		=> 'select',
+		'class'		=> 'mini',
+		'options' 	=> $display_options);
+
+	$options[] = array(
+		'desc' 		=> __('Select the <strong>share icons</strong> to display on single posts.', 'largo'),
+		'id' 		=> 'article_utilities',
+		'std' 		=> $article_utility_buttons_defaults,
+		'type' 		=> 'multicheck',
+		'options' 	=> $article_utility_buttons);
+
+	$options[] = array(
+		'desc' 		=> __('<strong>Use "like" or "recommend"</strong> for Facebook buttons?', 'largo'),
+		'id' 		=> 'fb_verb',
+		'std' 		=> 'like',
+		'type'		=> 'select',
+		'class'		=> 'mini',
+		'options' 	=> $fb_verbs);
+
+	$options[] = array(
+		'desc' 	=> __('<strong>Show/Hide share count</strong> with Twitter buttons.', 'largo'),
+		'id' 	=> 'show_twitter_count',
 		'std' 	=> '1',
 		'type' 	=> 'checkbox');
 
@@ -276,6 +352,14 @@ jQuery(document).ready(function($) {
 	if ($('#show_donate_button:checked').val() !== undefined) {
 		$('#section-donate_link').show();
 		$('#section-donate_button_text').show();
+	}
+
+	$('#show_tags').click(function() {
+  		$('#section-tag_limit').fadeToggle(400);
+	});
+
+	if ($('#show_tags:checked').val() !== undefined) {
+		$('#section-tag_limit').show();
 	}
 
 });
