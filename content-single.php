@@ -10,7 +10,7 @@
  		<h5 class="byline"><?php largo_byline(); ?> | <span class="comments-link"><?php comments_popup_link( __('Leave a Comment', 'largo'), __('<strong>1</strong> Comment ', 'largo'), __(' <strong>%</strong> Comments', 'largo') ); ?></span><?php edit_post_link( __('Edit This Post', 'largo'), ' | <span class="edit-link">', '</span>'); ?></h5>
  		<?php
  			if ( of_get_option( 'social_icons_display' ) === 'top' || of_get_option( 'social_icons_display' ) === 'both' )
- 				largo_social_links();
+ 				largo_post_social_links();
  		?>
 	</header><!-- / entry header -->
 
@@ -21,7 +21,7 @@
 	<footer class="post-meta bottom-meta">
  		<?php
  			if ( of_get_option( 'social_icons_display' ) === 'btm' || of_get_option( 'social_icons_display' ) === 'both' )
- 				largo_social_links();
+ 				largo_post_social_links();
  		?>
 
  		<!-- Other posts in this series -->

@@ -100,8 +100,8 @@ if ( ! function_exists( 'largo_byline' ) ) {
  * @since 1.0
  * @todo maybe let people re-arrange the order of the links or have more control over how they appear
  */
-if ( ! function_exists( 'largo_social_links' ) ) {
-	function largo_social_links( $echo = true ) {
+if ( ! function_exists( 'largo_post_social_links' ) ) {
+	function largo_post_social_links( $echo = true ) {
 		$utilities = of_get_option( 'article_utilities' );
 
 		$output = '<div class="post-social clearfix"><div class="left">';
