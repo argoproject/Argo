@@ -17,22 +17,6 @@ class largo_recent_posts_widget extends WP_Widget {
 		extract( $args );
 		$title = apply_filters('widget_title', $instance['title'] );
 
-		$widget_class = !empty($instance['widget_class']) ? $instance['widget_class'] : '';
-		if ($instance['hidden_desktop'] === 1)
-			$widget_class .= ' hidden-desktop';
-		if ($instance['hidden_tablet'] === 1)
-			$widget_class .= ' hidden-tablet';
-		if ($instance['hidden_phone'] === 1)
-			$widget_class .= ' hidden-phone';
-		/* Add the widget class to $before widget, used as a style hook */
-		if( strpos($before_widget, 'class') === false ) {
-			$before_widget = str_replace('>', 'class="'. $widget_class . '"', $before_widget);
-		}
-		else {
-			$before_widget = str_replace('class="', 'class="'. $widget_class . ' ', $before_widget);
-		}
-
-		/* Before widget*/
 		echo $before_widget;
 
 		if ( $title )
@@ -83,11 +67,11 @@ class largo_recent_posts_widget extends WP_Widget {
 
           				// the thumbnail image (if we're using one)
 	                    if ($thumb == 'small')
-	                    	$output .= '<a href="' . get_permalink() . '">' . get_the_post_thumbnail( $post->ID, '60x60' ) . '</a>';
+	                    	$output .= get_the_post_thumbnail($post->ID, '60x60');
 	                    elseif ($thumb == 'medium')
-	                    	$output .= '<a href="' . get_permalink() . '">' . get_the_post_thumbnail() . '</a>';
+	                    	$output .= get_the_post_thumbnail();
 	                    elseif ($thumb == 'large')
-	                    	$output .= '<a href="' . get_permalink() . '">' . get_the_post_thumbnail( $post->ID, 'large') . '</a>';
+	                    	$output .= get_the_post_thumbnail($post->ID, 'large');
 
 	                    // the excerpt
 	                    if ($excerpt == 'num_sentences')
@@ -131,10 +115,6 @@ class largo_recent_posts_widget extends WP_Widget {
 		$instance['author'] = $new_instance['author'];
 		$instance['linktext'] = $new_instance['linktext'];
 		$instance['linkurl'] = $new_instance['linkurl'];
-		$instance['widget_class'] = $new_instance['widget_class'];
-		$instance['hidden_desktop'] = $new_instance['hidden_desktop'] ? 1 : 0;
-		$instance['hidden_tablet'] = $new_instance['hidden_tablet'] ? 1 : 0;
-		$instance['hidden_phone'] = $new_instance['hidden_phone'] ? 1 : 0;
 		return $instance;
 	}
 
@@ -152,17 +132,10 @@ class largo_recent_posts_widget extends WP_Widget {
 			'term'				=> '',
 			'author' 			=> '',
 			'linktext' 			=> '',
-			'linkurl' 			=> '',
-			'widget_class' 		=> 'default',
-			'hidden_desktop' 	=> '',
-			'hidden_tablet' 	=> '',
-			'hidden_phone'		=> ''
+			'linkurl' 			=> ''
 		);
 		$instance = wp_parse_args( (array) $instance, $defaults );
 		$duplicates = $instance['avoid_duplicates'] ? 'checked="checked"' : '';
-		$desktop = $instance['hidden_desktop'] ? 'checked="checked"' : '';
-		$tablet = $instance['hidden_tablet'] ? 'checked="checked"' : '';
-		$phone = $instance['hidden_phone'] ? 'checked="checked"' : '';
 		?>
 
 		<p>
@@ -237,21 +210,6 @@ class largo_recent_posts_widget extends WP_Widget {
 		<p>
 			<label for="<?php echo $this->get_field_id('linkurl'); ?>"><?php _e('URL:', 'largo'); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id('linkurl'); ?>" name="<?php echo $this->get_field_name('linkurl'); ?>" type="text" value="<?php echo $instance['linkurl']; ?>" />
-		</p>
-
-		<label for="<?php echo $this->get_field_id( 'widget_class' ); ?>"><?php _e('Widget Background', 'largo'); ?></label>
-		<select id="<?php echo $this->get_field_id('widget_class'); ?>" name="<?php echo $this->get_field_name('widget_class'); ?>" class="widefat" style="width:90%;">
-		    <option <?php selected( $instance['widget_class'], 'default'); ?> value="default"><?php _e('Default', 'largo'); ?></option>
-		    <option <?php selected( $instance['widget_class'], 'rev'); ?> value="rev"><?php _e('Reverse', 'largo'); ?></option>
-		    <option <?php selected( $instance['widget_class'], 'no-bg'); ?> value="no-bg"><?php _e('No Background', 'largo'); ?></option>
-		</select>
-
-		<p style="margin:15px 0 10px 5px">
-			<input class="checkbox" type="checkbox" <?php echo $desktop; ?> id="<?php echo $this->get_field_id('hidden_desktop'); ?>" name="<?php echo $this->get_field_name('hidden_desktop'); ?>" /> <label for="<?php echo $this->get_field_id('hidden_desktop'); ?>"><?php _e('Hidden on Desktops?', 'largo'); ?></label>
-			<br />
-			<input class="checkbox" type="checkbox" <?php echo $tablet; ?> id="<?php echo $this->get_field_id('hidden_tablet'); ?>" name="<?php echo $this->get_field_name('hidden_tablet'); ?>" /> <label for="<?php echo $this->get_field_id('hidden_tablet'); ?>"><?php _e('Hidden on Tablets?', 'largo'); ?></label>
-			<br />
-			<input class="checkbox" type="checkbox" <?php echo $phone; ?> id="<?php echo $this->get_field_id('hidden_phone'); ?>" name="<?php echo $this->get_field_name('hidden_phone'); ?>" /> <label for="<?php echo $this->get_field_id('hidden_phone'); ?>"><?php _e('Hidden on Phones?', 'largo'); ?></label>
 		</p>
 
 	<?php
