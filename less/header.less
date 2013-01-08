@@ -1,13 +1,11 @@
 .global-nav-bg {
-  .gradientBar (@grayDark, @grayDarker);
-  .box-shadow(0 1px 3px 1px @grayLight);
-  height: 32px;
+  height: 38px;
+  background-color: @grayDarker;
 }
 .global-nav {
-  color: #fff;
   font-family: @sansFontFamily;
   position: relative;
-  height: 32px;
+  height: 38px;
   overflow:visible;
   z-index: 1030;
   ul {
@@ -16,7 +14,7 @@
     font-size: @baseFontSize - 4;
 	li {
 	  float: left;
-	  margin: 5px 18px 0 0;
+	  margin: 7px 18px 0 0;
     }
     a {
 	  color: @white;
@@ -30,7 +28,7 @@
     float: right;
     .donate-btn {
 	  float: left;
-	  margin: 4px 10px 0;
+	  margin: 6px 10px 0;
 	}
 	.org-logo {
  	  float: left;
@@ -43,15 +41,15 @@
 }
 .donate-btn {
   font-size: @baseFontSize - 2;
+  line-height: 1.8;
   background-color: @red;
   .border-radius(4px);
   &:hover {
     background-color: lighten(@red, 5%);
   }
   a {
-    padding:4px 6px;
+    padding:7px;
     color: @white;
-    text-shadow: 0 -1px 0 rgba(0,0,0,.8);
     &:hover {
       text-decoration:none;
     }
@@ -62,7 +60,7 @@
 }
 #header-search {
   float:left;
-  margin-top: 2px;
+  margin-top: 4px;
   form {
     margin: 0;
   }
@@ -72,11 +70,11 @@
 	line-height: 1;
   }
   input {
-	height: 14px;
+	height: 18px;
 	padding: 6px 4px 2px;
   }
   button {
-	height: 24px;
+	height: 28px;
 	text-transform: uppercase;
   }
 }
