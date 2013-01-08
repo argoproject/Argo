@@ -83,11 +83,11 @@ class largo_recent_posts_widget extends WP_Widget {
 
           				// the thumbnail image (if we're using one)
 	                    if ($thumb == 'small')
-	                    	$output .= get_the_post_thumbnail( '60x60' );
+	                    	$output .= get_the_post_thumbnail( $post->ID, '60x60' );
 	                    elseif ($thumb == 'medium')
 	                    	$output .= get_the_post_thumbnail();
 	                    elseif ($thumb == 'large')
-	                    	$output .= get_the_post_thumbnail('large');
+	                    	$output .= get_the_post_thumbnail( $post->ID, 'large');
 
 	                    // the excerpt
 	                    if ($excerpt == 'num_sentences')
