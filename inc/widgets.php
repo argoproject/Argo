@@ -31,7 +31,6 @@ require_once( get_template_directory() . '/inc/widgets/largo-recent-posts.php' )
 require_once( get_template_directory() . '/inc/widgets/largo-inn-rss.php' );
 require_once( get_template_directory() . '/inc/widgets/largo-taxonomy-list.php' );
 require_once( get_template_directory() . '/inc/widgets/largo-facebook.php' );
-require_once( get_template_directory() . '/inc/widgets/largo-text.php' );
 require_once( get_template_directory() . '/inc/widgets/largo-recent-comments.php' );
 
 // and then register them
