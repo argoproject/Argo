@@ -29,7 +29,7 @@
  */
 
 if ( ! defined( 'INN_MEMBER' ) )
-	define( 'INN_MEMBER', TRUE );
+	define( 'INN_MEMBER', FALSE );
 
 // Set the content width based on the theme's design and stylesheet.
 if ( ! isset( $content_width ) )
