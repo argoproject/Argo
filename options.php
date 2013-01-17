@@ -289,6 +289,17 @@ function optionsframework_options() {
 		'type' 	=> 'heading');
 
 	$options[] = array(
+		'name' 	=> __('Homepage Layout', 'largo'),
+		'desc' 	=> __('<strong>Select the overall layout you would like to use for your site\'s homepage.</strong> By default, Largo has a two column layout with a main content area on the left and a configurable sidebar on the right, but you can add a skinny side rail (configurable under the appearance > widgets tab) to left of the main content area by selecting the three-column option.', 'largo'),
+		'id' 	=> 'homepage_layout',
+		'std' 	=> '2col',
+		'type' 	=> 'images',
+		'options' 	=> array(
+			'2col' => $imagepath . '2col.png',
+			'3col' => $imagepath . '3col.png')
+	);
+
+	$options[] = array(
 		'name' 	=> __('Homepage Top', 'largo'),
 		'desc' 	=> __('<strong>Select the layout to use for the top of the homepage.</strong> Largo currently supports three homepage options: a blog-like list of posts with the ability to stick a post to the op of the homepage, a newspaper-like layout highlighting featured stories and an animated carousel of featured stories with large images.', 'largo'),
 		'id' 	=> 'homepage_top',

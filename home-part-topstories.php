@@ -1,6 +1,10 @@
+<?php global $layout; ?>
 <div id="homepage-featured" class="row-fluid clearfix">
+	<?php if ( $layout === '3col' ) { ?>
+	<div class="top-story span12">
+	<?php } else { ?>
 	<div class="top-story span8">
-		<?php
+	<?php }
 		global $ids;
 		$topstory = largo_get_featured_posts( array(
 			'tax_query' => array(
@@ -32,6 +36,7 @@
 		endif; // end top story ?>
 	</div>
 
+	<?php if ( $layout === '2col' ) { ?>
 	<div class="sub-stories span4">
 		<?php $substories = largo_get_featured_posts( array(
 			'tax_query' => array(
@@ -63,4 +68,5 @@
 			endwhile;
 		endif; // end more featured posts ?>
 	</div>
+	<?php } ?>
 </div>

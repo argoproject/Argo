@@ -1,14 +1,20 @@
 <?php
 get_header();
 
-//collect post IDs in each loop so we can avoid duplicating posts
-global $ids;
+/*
+ * Collect post IDs in each loop so we can avoid duplicating posts
+ * and get the theme option to determine if this is a two column or three column layout
+ */
+global $ids, $layout;
 $ids = array();
+$layout = of_get_option('homepage_layout');
 ?>
 
 <div id="content" class="stories span8" role="main">
 
-<?php
+<?php if ( $layout === '3col' ) { ?>
+<div id="content-main" class="span8">
+<?php }
 // get the optional homepage top section (if set)
 if ( of_get_option('homepage_top') == 'topstories' ) {
 	get_template_part( 'home-part-topstories' );
@@ -48,9 +54,18 @@ if ( of_get_option('homepage_bottom') == 'widgets' ) {
 		get_template_part( 'content', 'not-found' );
 	}
 }
-?>
+if ( $layout === '3col' ) { ?>
+</div>
+<div id="left-rail" class="span4">
+<?php if ( ! dynamic_sidebar( 'homepage-left-rail' ) ) : ?>
+	<p><?php _e('Please add widgets to this content area in the WordPress admin area under appearance > widgets.', 'largo'); ?></p>
+<?php endif; ?>
+</div>
+<?php } ?>
 
-</div><!--/.grid_8 #content-->
+</div><!-- #content-->
+
+
 
 <div id="sidebar" class="span4">
 	<?php get_sidebar(); ?>
