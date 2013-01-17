@@ -3,52 +3,49 @@
 
 @media (max-width: 768px) {
   #sidebar,
-  #site-footer .widget-area {
-    clear:both;
-    width:100%;
-    margin-left:0;
-    margin-right:0;
+  #site-footer .widget-area,
+  #content .half,
+  #content .full,
+  #left-rail,
+  #content-main,
+  #related-post-nav,
+  #related-posts .related-items {
+    clear: both;
+    float: none;
+    width: 100%;
+    margin: 0 0 @baseline;
   }
-  #site-footer .widget-area {
-    margin-bottom:@baseline/4;
+  #content .half,
+  #content .full,
+  #content-main,
+  #related-post-nav,
+  #related-posts .related-items {
+    margin: 0;
   }
   #page {
-    padding-bottom:12px;
+    padding-bottom: 12px;
   }
   #main {
     margin: 8px 0 0;
   }
   #content {
-    width:100%;
-  }
-  #content .half,
-  #content .full {
-    clear:both;
-    float:none;
-    width:100%;
-    margin: 0 0 @baseline;
-  }
-  #related-post-nav,
-  #related-posts .related-items {
-    float:none;
-    width:100%;
-    margin:0;
+    width: 100%;
   }
   #related-post-nav a {
     padding: 8px 5px;
   }
   .global-nav ul {
-    display:none;
+    display: none;
   }
   .global-nav .nav-right {
-    width:100%;
+    width: 100%;
   }
   .global-nav .nav-right .donate-btn {
-    float:left;
-    margin-left:0;
+    float: left;
+    margin-left: 0;
   }
   .global-nav .nav-right .org-logo {
-    float:right;
+    float: right;
   }
   #site-header h1.branding,
   #site-header h2.branding {
@@ -57,7 +54,7 @@
       display:block;
       clear:both;
       margin: 6px 0 4px;
-      padding:0;
+      padding: 0;
       font-size: @baseFontSize * 1.222;
     }
   }
@@ -67,7 +64,7 @@
     line-height: 1.2;
   }
   .category-background .related-topics ul {
-	line-height:1.5;
+	line-height: 1.5;
   }
   .stories h2.entry-title,
   .sticky-main-feature h2,
@@ -76,31 +73,25 @@
   }
   .sticky-main-feature,
   .sticky-features-list {
-    clear:both;
-    width:100% !important;
-    margin:0 !important;
+    clear: both;
+    width: 100% !important;
+    margin: 0 !important;
   }
-  #homepage-bottom .widget.odd,
-  #homepage-bottom .widget.even {
-    width: 100%;
-	margin: 0 0 20px;
-	float: none;
-  }
-  #menu-footer-navigation li {
-    font-size:@baseFontSize + 2;
-    padding:8px 0;
+  #menu-footer-navigation li a {
+    font-size: @baseFontSize + 3;
+    padding: 10px 0;
   }
   #footer-logos .logo4 {
-    clear:both;
+    clear: both;
   }
   #footer-logos a {
     width: 33.3333333333%;
   }
   #footer-logos h6 a {
-  	display:inline;
-  	clear:both;
-  	float:none;
-  	text-align:left;
+  	display: inline;
+  	clear: both;
+  	float: none;
+  	text-align: left;
   }
   #boilerplate p.back-to-top {
     padding-top: @baseline / 2;
@@ -111,48 +102,43 @@
 // UP TO LANDSCAPE PHONE
 // ---------------------
 @media (max-width: 480px) {
-  .global-nav .org-logo {
+  .global-nav .org-logo,
+  .post-social .print {
     display:none;
   }
   #header-search {
     float:right;
-    margin: 3px 0 0;
   }
   #header-search input {
-    height:23px;
-    padding:2px 4px;
-    overflow:visible;
-    font-size:@baseFontSize;
+    height: 23px;
+    padding: 2px 4px;
+    overflow: visible;
+    font-size: @baseFontSize;
     line-height: 1;
   }
   #header-search button {
-    height:29px;
-    position:relative;
-    top:1px;
+    height: 29px;
   }
   #header-search .input-medium {
-    width:110px;
+    width: 110px;
   }
   #site-header img {
-    margin-top:5px;
+    margin-top: 5px;
   }
   #site-header h1.branding,
   #site-header h2.branding {
-    margin-top:10px;
+    margin-top: 10px;
     font-size: @baseFontSize*3;
-    text-align:center;
+    text-align: center;
     span {
-    font-size:@baseFontSize;
+      font-size: @baseFontSize;
 	}
   }
-  .post-social .print {
-    display:none;
-  }
   #footer-logos h6 a {
-  	display:inline;
-  	clear:both;
-  	float:none;
-  	text-align:left;
+  	display: inline;
+  	clear: both;
+  	float: none;
+  	text-align: left;
   }
 }
 
