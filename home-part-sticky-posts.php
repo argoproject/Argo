@@ -1,6 +1,5 @@
 <?php
 global $ids;
-//$query = new WP_Query( 'p=' . $sticky[0] );
 
 $sticky = get_option( 'sticky_posts' );
 $args = array(
