@@ -3,6 +3,7 @@
 		<div class="top-story item active">
 			<?php
 			global $ids;
+			$items = 0;
 			$topstory = largo_get_featured_posts( array(
 				'tax_query' => array(
 					array(
@@ -21,7 +22,9 @@
 				        <h5 class="byline"><?php largo_byline(); ?><?php edit_post_link( __('Edit This Post', 'largo'), ' | <span class="edit-link">', '</span>'); ?></h5>
 				        <?php largo_excerpt( $post, 4, false ); ?>
 				    </div>
-				<?php endwhile;
+				<?php
+					$items++;
+				endwhile;
 			endif; // end more featured posts ?>
 		</div>
 		<?php $substories = largo_get_featured_posts( array(
@@ -45,10 +48,13 @@
 						<?php largo_excerpt( $post, 4, false ); ?>
 					</div>
 				</div>
-			<?php endwhile;
+			<?php $items++;
+			endwhile;
 		endif; ?>
 	</div>
+	<?php if ( $items > 1 ) { ?>
 	<!-- Carousel nav -->
 	<a class="carousel-control left" href="#homepage-slider" data-slide="prev">&lsaquo;</a>
 	<a class="carousel-control right" href="#homepage-slider" data-slide="next">&rsaquo;</a>
+	<?php } ?>
 </div>
