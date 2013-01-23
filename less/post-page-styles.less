@@ -466,7 +466,7 @@ p.wp-caption-text {
   font-size: @baseFontSize;
   margin-bottom: @baseline / 2;
 }
-.stories .bottom-meta h5 {
+.stories h5.tag-list {
   font-size:@baseFontSize *0.815;
   font-family: @sansFontFamily;
   font-weight:normal;
@@ -587,6 +587,14 @@ p.wp-caption-text {
   max-width: 30%;
   float: right;
   margin: 0 0 10px 20px;
+}
+h5.top-tag {
+  font-size: @baseFontSize;
+  margin-bottom: @baseline/5;
+  text-transform: uppercase;
+  a {
+    color: @grayLight;
+  }
 }
 #homepage-bottom {
   margin-top: 24px;

@@ -5,9 +5,9 @@ get_header();
  * Collect post IDs in each loop so we can avoid duplicating posts
  * and get the theme option to determine if this is a two column or three column layout
  */
-global $ids, $layout;
 $ids = array();
 $layout = of_get_option('homepage_layout');
+$tags = of_get_option ('tag_display');
 ?>
 
 <div id="content" class="stories span8" role="main">
@@ -16,19 +16,19 @@ $layout = of_get_option('homepage_layout');
 <div id="content-main" class="span8">
 <?php }
 // get the optional homepage top section (if set)
-if ( of_get_option('homepage_top') == 'topstories' ) {
+if ( of_get_option('homepage_top') === 'topstories' ) {
 	get_template_part( 'home-part-topstories' );
-} else if ( of_get_option('homepage_top' ) == 'slider') {
-	get_template_part( 'home-part-slider' );
+} else if ( of_get_option('homepage_top' ) === 'slider') {
+	get_template_part( 'home-part', 'slider' );
 }
 
 // sticky posts box if this site uses it
 if ( of_get_option( 'show_sticky_posts' ) ) {
-	get_template_part( 'home-part-sticky-posts' );
+	get_template_part( 'home-part', 'sticky-posts' );
 }
 
-// homepage bottom
-if ( of_get_option('homepage_bottom') == 'widgets' ) {
+// bottom section, we'll either use a two-column widget area or a single column list of recent posts
+if ( of_get_option('homepage_bottom') === 'widgets' ) {
 	get_sidebar('homepage-bottom');
 } else {
 	$args = array(
@@ -54,6 +54,7 @@ if ( of_get_option('homepage_bottom') == 'widgets' ) {
 		get_template_part( 'content', 'not-found' );
 	}
 }
+
 if ( $layout === '3col' ) { ?>
 </div>
 <div id="left-rail" class="span4">
@@ -65,9 +66,7 @@ if ( $layout === '3col' ) { ?>
 
 </div><!-- #content-->
 
-
-
-<div id="sidebar" class="span4">
+<aside id="sidebar" class="span4">
 	<?php get_sidebar(); ?>
-</div><!-- /.grid_4 -->
+</aside><!-- /.grid_4 -->
 <?php get_footer(); ?>

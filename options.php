@@ -36,6 +36,12 @@ function optionsframework_options() {
 		'none' 	=> __('None', 'largo')
 	);
 
+	$tag_display_options = array(
+		'top' 	=> __('Single Tag Above', 'largo'),
+		'btm' 	=> __('List Below', 'largo'),
+		'none' 	=> __('None', 'largo')
+	);
+
 	$article_utility_buttons = array(
 		'facebook' 	=> __('Facebook', 'largo'),
 		'twitter' 	=> __('Twitter', 'largo'),
@@ -331,6 +337,18 @@ function optionsframework_options() {
 			'list' 		=> $imagepath . 'list.png',
 			'widgets' 	=> $imagepath . 'widgets.png')
 	);
+
+	$options[] = array(
+		'name' 	=> __('Other Homepage Display Options', 'largo'),
+		'type' 	=> 'info');
+
+	$options[] = array(
+		'desc' 		=> __('<strong>How would you like to display categories and tags for posts on the homepage?</strong> Largo can display a single category or tag above the headline for each story, a list of tags below the story\'s excerpt or nothing at all.', 'largo'),
+		'id' 		=> 'tag_display',
+		'std' 		=> 'top',
+		'type' 		=> 'select',
+		'class'		=> 'mini',
+		'options' 	=> $tag_display_options);
 
 	return $options;
 }

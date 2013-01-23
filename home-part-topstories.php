@@ -1,4 +1,4 @@
-<?php global $layout; ?>
+<?php global $layout, $tags; ?>
 <div id="homepage-featured" class="row-fluid clearfix">
 	<?php if ( $layout === '3col' ) { ?>
 	<div class="top-story span12">
@@ -54,6 +54,9 @@
 			while ( $substories->have_posts() ) : $substories->the_post(); $ids[] = get_the_ID();
 				if ($count <= 3) : ?>
 					<div class="story">
+			        	<?php if ( largo_has_categories_or_tags() && $tags === 'top' ) : ?>
+			        		<h5 class="top-tag"><?php largo_categories_and_tags(1); ?></h5>
+			        	<?php endif; ?>
 			        	<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 			        	<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
 			            <?php largo_excerpt( $post, 3, false ); ?>
