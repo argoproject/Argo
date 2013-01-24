@@ -30,6 +30,10 @@ function largo_contactmethods( $contactmethods ) {
 	if ( !isset( $contactmethods['fb'] ) )
 		$contactmethods['fb'] = 'Facebook<br><em>https://www.facebook.com/username<em>';
 
+	// Add LinkedIn
+	if ( !isset( $contactmethods['linkedin'] ) )
+		$contactmethods['linkedin'] = 'LinkedIn<br><em>http://www.linkedin.com/in/username<em>';
+
 	return $contactmethods;
 }
 add_filter( 'user_contactmethods', 'largo_contactmethods', 10, 1 );

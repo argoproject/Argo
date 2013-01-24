@@ -173,6 +173,12 @@ function optionsframework_options() {
 		'type' 	=> 'text');
 
 	$options[] = array(
+		'desc' 	=> __('<strong>Link to LinkedIn Group or Profile</strong> (http://www.linkedin.com/in/username/)', 'largo'),
+		'id' 	=> 'linkedin_link',
+		'std' 	=> '',
+		'type' 	=> 'text');
+
+	$options[] = array(
 		'name' 	=> __('Single Post Options', 'largo'),
 		'type' 	=> 'info');
 

@@ -57,14 +57,15 @@ if ( ! function_exists( 'largo_social_links' ) ) {
 			'twitter' 	=> __( 'Link to Twitter Page', 'largo' ),
 			'youtube' 	=> __( 'Link to YouTube Page', 'largo' ),
 			'flickr' 	=> __( 'Link to Flickr Page', 'largo' ),
-			'gplus' 	=> __( 'Link to Google Plus Page', 'largo' )
+			'gplus' 	=> __( 'Link to Google Plus Page', 'largo' ),
+			'linkedin' 	=> __( 'Link to LinkedIn Page', 'largo' )
 		);
 
 		foreach ( $fields as $field => $title ) {
 			$field_link =  $field . '_link';
 
 			if ( of_get_option( $field_link ) ) {
-				echo '<li><a href="' . esc_url( of_get_option( $field_link ) ) . '" title="' . $title . '"><i class="social-icons ' . $field . '"></i></a></li>';
+				echo '<li><a href="' . esc_url( of_get_option( $field_link ) ) . '" title="' . $title . '"><i class="icon-' . $field . '"></i></a></li>';
 			}
 		}
 	}
