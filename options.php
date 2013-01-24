@@ -179,6 +179,11 @@ function optionsframework_options() {
 		'type' 	=> 'text');
 
 	$options[] = array(
+		'desc' 	=> __('By default, a row of social media icons is shown in the site footer. <strong>Check this box is you want to show them in the header as well</strong>. Note that they will only display on desktops and larger tablets.', 'largo'),
+		'id' 	=> 'show_header_social',
+		'type' 	=> 'checkbox');
+
+	$options[] = array(
 		'name' 	=> __('Single Post Options', 'largo'),
 		'type' 	=> 'info');
 

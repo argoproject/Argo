@@ -32,7 +32,7 @@
 
 	<?php endif; // end sidebar widget area ?>
 
-	<ul id="ft-social">
+	<ul id="ft-social" class="social-icons">
 		<?php largo_social_links(); ?>
 	</ul>
 

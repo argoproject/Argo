@@ -62,6 +62,13 @@
 				wp_nav_menu($args);
 			?>
         	<div class="nav-right">
+
+        		<?php if ( of_get_option( 'show_header_social') ) { ?>
+	        		<ul id="header-social" class="social-icons visible-desktop">
+						<?php largo_social_links(); ?>
+					</ul>
+				<?php } ?>
+
         		<?php if ( of_get_option( 'show_donate_button') )
         			largo_donate_button();
         		?>
@@ -73,6 +80,8 @@
 						</div>
 					</form>
 				</div>
+
+
 				<?php if ( INN_MEMBER === TRUE ) { ?>
 				<div class="org-logo">
         			<a href="http://investigativenewsnetwork.org/" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/img/inn-logo-80-55.jpg" height="55" alt="INN logo" /></a>
