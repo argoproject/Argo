@@ -18,7 +18,7 @@
 		<?php largo_excerpt( $post, 5, true, __('Continue&nbsp;Reading&nbsp;&rarr;', 'largo') ); ?>
         <?php if ( largo_has_categories_or_tags() ): ?>
             <div class="post-meta bottom-meta">
-    			<h5><strong><?php _e('Filed under:', 'largo'); ?></strong> <?php largo_categories_and_tags(); ?></h5>
+    			<h5 class="tag-list"><strong><?php _e('Filed under:', 'largo'); ?></strong> <?php largo_categories_and_tags(); ?></h5>
             </div><!-- /.post-meta -->
         <?php endif; ?>
 	</div><!-- .entry-content -->
