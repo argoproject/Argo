@@ -65,15 +65,6 @@
   margin-bottom:0;
   padding-top:6px;
 }
-li.home-link {
-  margin-left:4px;
-  i {
-    margin-top:4px;
-  }
-  &:hover i {
-    .opacity(85);
-  }
-}
 .navbar li > a {
   float: none;
   // Vertically center the text given @navbarHeight
@@ -88,16 +79,20 @@ li.home-link {
 .navbar li.dropdown .dropdown-menu li a {
   padding-right:10px;
 }
-.dropdown-menu i.icon-arrow-right {
-  padding-right:4px;
-}
 .navbar .open > a,
 .navbar li > a:hover {
   background-color: @navbarLinkBackgroundActive;
   color: @grayLighter;
 }
-.navbar li.home-link > a:hover {
-  background:none;
+li.home-link:hover i {
+  .opacity(85);
+}
+.navbar li.home-link > a {
+  font-size: @baseFontSize + 3;
+  padding: 5px 5px 5px 10px;
+  &:hover {
+    background:none;
+  }
 }
 
 // Active nav items

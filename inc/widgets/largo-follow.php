@@ -37,7 +37,7 @@ class largo_follow_widget extends WP_Widget {
 				$feed = esc_url (of_get_option( 'rss_link' ) );
 			printf(__('
 				<div class="subscribe">
-					<a href="%1$s"><i class="social-icons small rss24"></i>Subscribe via RSS</a>
+					<a href="%1$s"><i class="icon-rss"></i>Subscribe via RSS</a>
 				</div>', 'largo'),
 				$feed
 			);

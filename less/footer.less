@@ -122,9 +122,13 @@ ul#ft-social li {
   float:left;
   display:inline;
   margin-right:8px;
-  .opacity(60);
-  &:hover {
+  i {
+    font-size: @baseFontSize + 2;
+    color: @white;
     .opacity(75);
+    &:hover {
+      .opacity(100);
+    }
   }
 }
 #supplementary {

@@ -75,14 +75,25 @@
 .subscribe {
   height: 24px;
   line-height: 1.5;
-  font-size: @baseFontSize;
+  font-size: @baseFontSize - 2;
   font-family: @sansFontFamily;
   a {
     color: @gray;
+    &:hover {
+	  text-decoration: none;
+	  color: @grayDarker;
+    }
   }
   i {
-    float: left;
-    margin-right: 8px;
+    background-color: darken(@orange, 5%);
+    color: @white;
+    padding: 3px 2px 3px 3px;
+    .border-radius(4px);
+    font-size: @baseFontSize - 3;
+    margin-right: 5px;
+    &:hover {
+	  background-color: @orange;
+    }
   }
 }
 .twitter-follow-button {

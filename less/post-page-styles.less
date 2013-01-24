@@ -69,6 +69,12 @@ article.story {
     font-family: Verdana, Helvetica, sans-serif;
     font-size: 11px;
     top: 2px;
+    i.icon-print {
+	  font-size: @baseFontSize + 2;
+	  margin: 0 -3px 0 2px;
+	  position: relative;
+	  top: 2px;
+    }
     &:hover {
       .opacity(85);
     }
@@ -326,27 +332,47 @@ h3.recent-posts,
 	  display:inline;
 	  float:left;
 	  margin-right:12px;
-	  &.email {
-		background-color: @baseColor;
-	  	padding:1px 8px 3px 4px;
-	  	font-family: @sansFontFamily;
-	  	font-size: @baseFontSize - 2;
-	  	line-height:15px;
-        a {
-          color: @white;
-	       &:hover {
-		     text-decoration:none;
-		     .opacity(90);
-	       }
-        }
-        i {
-	      position:relative;
-	      top:2px;
-        }
-	  }
 	  &.facebook {
 	    position:relative;
 	    top:-2px;
+	  }
+	  &.gplus,
+	  &.linkedin,
+	  &.email {
+	    position: relative;
+		top: -5px;
+		width: 24px;
+	    i {
+          color: @white;
+	      padding: 4px;
+	      font-size: 10px;
+	      background-color: @red;
+	      .border-radius(3px);
+	      &:hover {
+		    background-color: darken(@red, 10%);
+	      }
+	    }
+	    i.icon-mail {
+	      font-size:22px;
+	      padding: 0;
+	      background-color: @white;
+	      color: @black;
+	      position:relative;
+	      top: 3px;
+	      &:hover {
+		    .opacity(80);
+	      }
+	    }
+	    i.icon-gplus {
+		  margin-left: -5px;
+	    }
+	    i.icon-linkedin {
+		  background-color: @blue;
+		  margin-left: -13px;
+		  &:hover {
+		    background-color: darken(@blue, 10%);
+	      }
+	    }
 	  }
     }
   }

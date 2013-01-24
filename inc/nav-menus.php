@@ -48,7 +48,7 @@ if ( ! function_exists( 'largo_donate_button' ) ) {
 	function largo_donate_button () {
 		$donate_link = esc_url( of_get_option( 'donate_link' ) );
 		if ( $donate_link )
-			printf('<div class="donate-btn"><a href="%1$s"><i class="icon-heart icon-white"></i>%2$s</a></div> ',
+			printf('<div class="donate-btn"><a href="%1$s"><i class="icon-heart"></i>%2$s</a></div> ',
 		    	$donate_link,
 		    	of_get_option( 'donate_button_text' )
 		    );
