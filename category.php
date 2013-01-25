@@ -25,7 +25,7 @@ get_header(); ?>
 
 			</header> <!-- /.category-background -->
 
-			<h3 class="recent-posts clearfix"><?php _e('Recent posts', 'largo'); ?><a class="rss-link" href="<?php echo esc_url( get_category_feed_link( get_queried_object_id() ) ); ?>"><i class="social-icons rss24"></i></a></h3>
+			<h3 class="recent-posts clearfix"><?php _e('Recent posts', 'largo'); ?><a class="rss-link" href="<?php echo esc_url( get_category_feed_link( get_queried_object_id() ) ); ?>"><i class="icon-rss"></i></a></h3>
 
 				<?php
 					while ( have_posts() ) : the_post();

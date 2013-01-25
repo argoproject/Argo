@@ -13,7 +13,7 @@ get_header(); ?>
 			get_template_part( 'largo-author-box' );
 		?>
 
-		<h3 class="recent-posts clearfix"><?php _e('Recent posts', 'largo'); ?><a class="rss-link" href="<?php echo esc_url( get_author_feed_link( get_the_author_meta('ID') ) ); ?>"><i class="social-icons rss24"></i></a></h3>
+		<h3 class="recent-posts clearfix"><?php _e('Recent posts', 'largo'); ?><a class="rss-link" href="<?php echo esc_url( get_author_feed_link( get_the_author_meta('ID') ) ); ?>"><i class="icon-rss"></i></a></h3>
 
 		<?php
 			rewind_posts();
