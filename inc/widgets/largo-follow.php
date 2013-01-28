@@ -35,12 +35,8 @@ class largo_follow_widget extends WP_Widget {
 			$feed = get_feed_link();
 			if ( of_get_option( 'rss_link' ) )
 				$feed = esc_url (of_get_option( 'rss_link' ) );
-			printf(__('
-				<div class="subscribe">
-					<a href="%1$s"><i class="icon-rss"></i>Subscribe via RSS</a>
-				</div>', 'largo'),
-				$feed
-			);
+
+			printf(__('<a class="subscribe" href="%1$s"><i class="icon-rss"></i>Subscribe via RSS</a>', 'largo'), $feed );
 
 			if ( of_get_option( 'twitter_link' ) ) : ?>
 				<a href="<?php echo esc_url( of_get_option( 'twitter_link' ) ); ?>" class="twitter-follow-button" data-width="100%" data-align="left" data-size="large"><?php printf( __('Follow @%1$s', 'largo'), twitter_url_to_username ( of_get_option( 'twitter_link' ) ) ); ?></a>
@@ -48,9 +44,11 @@ class largo_follow_widget extends WP_Widget {
 
 			if ( of_get_option( 'facebook_link' ) ) : ?>
 				<div class="fb-like" data-href="<?php echo esc_url( of_get_option( 'facebook_link' ) ); ?>" data-send="false" data-show-faces="false"></div>
-			<?php endif; ?>
+			<?php endif;
 
-		<?php
+			if ( of_get_option( 'linkedin_link' ) ) : ?>
+				<a class="subscribe" href="<?php echo esc_url( of_get_option( 'linkedin_link' ) ); ?>"><i class="icon-linkedin"></i>Find Us on LinkedIn</a>
+			<?php endif;
 
 		echo $after_widget;
 	}
