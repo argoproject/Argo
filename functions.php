@@ -28,6 +28,11 @@
  *
  */
 
+/**
+ * By default we'll assume the site is not for an INN member
+ * set INN_MEMBER to TRUE to show an INN logo in the header
+ * and a widget of INN member stories in the homepage sidebar
+ */
 if ( ! defined( 'INN_MEMBER' ) )
 	define( 'INN_MEMBER', FALSE );
 
@@ -42,7 +47,7 @@ if ( ! function_exists( 'optionsframework_init' ) ) {
 }
 
 /**
- * Load up all of the other goodies in the /inc directory
+ * Load up all of the other goodies from the /inc directory
  */
 
 // a list of recommended plugins
