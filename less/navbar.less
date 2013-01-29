@@ -144,7 +144,6 @@ li.home-link:hover i {
   margin-top: 3px;
 }
 
-
 // DROPDOWN MENUS
 // --------------
 
@@ -239,8 +238,6 @@ ul.nav li.dropdown:hover ul.dropdown-menu {
   font-weight:bold;
   background-color: @dropdownBackground;
 }
-
-
 
 // Hover state
 // -----------
@@ -342,45 +339,44 @@ ul.nav li.dropdown:hover ul.dropdown-menu {
   color: @white;
 }
 .dropdown-menu li {
-	margin-bottom: 0;
+  margin-bottom: 0;
 }
 /* add support for second level dropdown menus */
 .dropdown-menu .sub-menu,
 .dropdown-menu .sub-sub-menu {
-    position: absolute;
-    top: -20%;
-    left: 99%;
-    visibility: hidden;
-    margin-top:0;
+  position: absolute;
+  top: -20%;
+  left: 99%;
+  visibility: hidden;
+  margin-top: 0;
 }
 .dropdown-menu .icon-arrow-right {
-	position:relative;
-	top:2px;
-	left:3px;
+  position: relative;
+  top: 2px;
+  left: 3px;
 }
 .dropdown-menu li:hover .sub-menu,
 .dropdown-menu .sub-menu li:hover .sub-sub-menu {
-    visibility: visible;
-    display: block;
+  visibility: visible;
+  display: block;
 }
-
 .navbar .sub-menu:before,
 .navbar .sub-sub-menu:before {
-    border-bottom: 9px solid transparent;
-    border-left: none;
-    border-right: 9px solid rgba(0, 0, 0, 0.2);
-    border-top: 9px solid transparent;
-    left: -9px;
-    top: 30%;
+  border-bottom: 9px solid transparent;
+  border-left: none;
+  border-right: 9px solid rgba(0, 0, 0, 0.2);
+  border-top: 9px solid transparent;
+  left: -9px;
+  top: 30%;
 }
 .navbar .sub-menu:after,
 .navbar .sub-sub-menu:after {
-    border-top: 8px solid transparent;
-    border-left: none;
-    border-right: 8px solid #fff;
-    border-bottom: 8px solid transparent;
-    top: 31%;
-    left: -8px;
+  border-top: 8px solid transparent;
+  border-left: none;
+  border-right: 8px solid #fff;
+  border-bottom: 8px solid transparent;
+  top: 31%;
+  left: -8px;
 }
 
 // TABLETS AND BELOW
@@ -503,23 +499,21 @@ ul.nav li.dropdown:hover ul.dropdown-menu {
 // The "Don't Miss" Secondary Nav
 // ---------------
 
-#secondary-nav {
-	#topics-bar {
-	  border-bottom:1px solid #ccc;
-	  padding-bottom:3px;
-	}
-	ul {
-	  margin:0;
-	  font-family: @sansFontFamily;
-      li {
-        display:inline;
-        margin-right:10px;
-        white-space: nowrap;
-        h4 {
-	      font-size: @baseFontSize + 1;
-	      margin-bottom:0;
-	      display:inline;
-        }
+#topics-bar {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 3px;
+  ul {
+    margin: 0;
+    font-family: @sansFontFamily;
+    li {
+      display: inline;
+      margin-right: 10px;
+      white-space: nowrap;
+      font-size: @baseFontSize - 2;
+      &.menu-label {
+      	font-size: @baseFontSize;
+        font-weight: bold;
       }
     }
+  }
 }

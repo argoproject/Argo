@@ -63,14 +63,14 @@ if ( ! function_exists( 'largo_donate_button' ) ) {
  */
 if ( ! function_exists( 'largo_add_dont_miss_label' ) ) {
 	function largo_add_dont_miss_label( $items, $args ) {
-	    return "<li><h4>" . of_get_option( 'dont_miss_label') . "</h4></li>" . $items;
+	    return '<li class="menu-label">' . of_get_option( 'dont_miss_label') . '</li>' . $items;
 	}
 }
 add_filter( 'wp_nav_menu_dont-miss_items', 'largo_add_dont_miss_label', 10, 2 );
 
 if ( ! function_exists( 'largo_add_footer_menu_label' ) ) {
 	function largo_add_footer_menu_label( $items, $args ) {
-	    return "<li><h4>" . of_get_option( 'footer_menu_label') . "</h4></li>" . $items;
+	    return '<li class="menu-label">' . of_get_option( 'footer_menu_label') . '</li>' . $items;
 	}
 }
 add_filter( 'wp_nav_menu_footer-navigation_items', 'largo_add_footer_menu_label', 10, 2 );
