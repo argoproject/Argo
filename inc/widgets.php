@@ -14,7 +14,6 @@ function largo_unregister_widgets() {
 	unregister_widget( 'WP_Widget_Tag_Cloud' );
 	unregister_widget( 'WP_Widget_Meta' );
 	unregister_widget( 'WP_Widget_Recent_Comments' );
-	unregister_widget( 'WP_Nav_Menu_Widget' );
 	unregister_widget( 'WP_Widget_RSS' );
 	unregister_widget( 'WP_Widget_Recent_Posts' );
 }
