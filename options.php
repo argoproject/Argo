@@ -302,11 +302,11 @@ function optionsframework_options() {
 		'type' 	=> 'upload');
 
 	$options[] = array(
-		'name' 	=> __('Homepage Options', 'largo'),
+		'name' 	=> __('Layout Options', 'largo'),
 		'type' 	=> 'heading');
 
 	$options[] = array(
-		'name' 	=> __('Homepage Layout', 'largo'),
+		'name' 	=> __('Overall Homepage Layout', 'largo'),
 		'desc' 	=> __('<strong>Select the overall layout you would like to use for your site\'s homepage.</strong> By default, Largo has a two column layout with a main content area on the left and a configurable sidebar on the right, but you can add a skinny side rail (configurable under the appearance > widgets tab) to left of the main content area by selecting the three-column option.', 'largo'),
 		'id' 	=> 'homepage_layout',
 		'std' 	=> '2col',
@@ -360,6 +360,19 @@ function optionsframework_options() {
 		'type' 		=> 'select',
 		'class'		=> 'mini',
 		'options' 	=> $tag_display_options);
+
+	$options[] = array(
+		'name' 	=> __('Footer Layout', 'largo'),
+		'desc' 	=> __('<strong>Select the layout to use for the footer.</strong> The default is a 3 column footer with a wide center column. Alternatively you can choose to have 3 or 4 equal columns. Each column is a widget area that can be configured under the Appearance > Widgets menu.', 'largo'),
+		'id' 	=> 'footer_layout',
+		'std' 	=> '3col-default',
+		'type' 	=> 'images',
+		'options' 	=> array(
+			'3col-default'	=> $imagepath . 'footer-3col-lg-center.png',
+			'3col-equal' 	=> $imagepath . 'footer-3col-equal.png',
+			'4col' 			=> $imagepath . 'footer-4col.png')
+	);
+
 
 	return $options;
 }

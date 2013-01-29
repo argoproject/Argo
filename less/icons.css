@@ -1,0 +1,181 @@
+@font-face {
+  font-family: 'fontello';
+  src: url("../fonts/fontello/font/fontello.eot");
+  src: url("../fonts/fontello/font/fontello.eot?#iefix") format('embedded-opentype'), url("../fonts/fontello/font/fontello.woff") format('woff'), url("../fonts/fontello/font/fontello.ttf") format('truetype'), url("../fonts/fontello/font/fontello.svg#fontello") format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  font-family: 'fontello';
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: 0.2em;
+  text-align: center;
+  opacity: 1;
+}
+.icon-gplus:before {
+  content: '\62';
+}
+/* 'b' */
+.icon-pinterest:before {
+  content: '\63';
+}
+/* 'c' */
+.icon-cc:before {
+  content: '\64';
+}
+/* 'd' */
+.icon-flickr:before {
+  content: '\65';
+}
+/* 'e' */
+.icon-linkedin:before {
+  content: '\66';
+}
+/* 'f' */
+.icon-rss:before {
+  content: '\67';
+}
+/* 'g' */
+.icon-twitter:before {
+  content: '\68';
+}
+/* 'h' */
+.icon-youtube:before {
+  content: '\69';
+}
+/* 'i' */
+.icon-facebook:before {
+  content: '\70';
+}
+/* 'p' */
+.icon-github:before {
+  content: '\71';
+}
+/* 'q' */
+.icon-itunes:before {
+  content: '\72';
+}
+/* 'r' */
+.icon-tumblr:before {
+  content: '\73';
+}
+/* 's' */
+.icon-home:before {
+  content: '\50';
+}
+/* 'P' */
+.icon-star:before {
+  content: '\43';
+}
+/* 'C' */
+.icon-star-empty:before {
+  content: '\44';
+}
+/* 'D' */
+.icon-heart-empty:before {
+  content: '\42';
+}
+/* 'B' */
+.icon-heart:before {
+  content: '\41';
+}
+/* 'A' */
+.icon-ok:before {
+  content: '\45';
+}
+/* 'E' */
+.icon-cancel:before {
+  content: '\46';
+}
+/* 'F' */
+.icon-plus:before {
+  content: '\47';
+}
+/* 'G' */
+.icon-minus:before {
+  content: '\48';
+}
+/* 'H' */
+.icon-help:before {
+  content: '\49';
+}
+/* 'I' */
+.icon-tag:before {
+  content: '\52';
+}
+/* 'R' */
+.icon-tags:before {
+  content: '\53';
+}
+/* 'S' */
+.icon-print:before {
+  content: '\55';
+}
+/* 'U' */
+.icon-comment:before {
+  content: '\56';
+}
+/* 'V' */
+.icon-chat:before {
+  content: '\57';
+}
+/* 'W' */
+.icon-play:before {
+  content: '\60';
+}
+/* '`' */
+.icon-spinner:before {
+  content: '\61';
+}
+/* 'a' */
+.icon-instagram:before {
+  content: '\74';
+}
+/* 't' */
+.icon-headphones:before {
+  content: '\59';
+}
+/* 'Y' */
+.icon-phone:before {
+  content: '\58';
+}
+/* 'X' */
+.icon-download:before {
+  content: '\54';
+}
+/* 'T' */
+.icon-link:before {
+  content: '\51';
+}
+/* 'Q' */
+.icon-mail:before {
+  content: '\75';
+}
+/* 'u' */
+.social-icons i.icon-rss:hover {
+  color: #f89406 !important;
+}
+.social-icons i.icon-facebook:hover {
+  color: #4454a0 !important;
+}
+.social-icons i.icon-twitter:hover {
+  color: #0094c5 !important;
+}
+.social-icons i.icon-youtube:hover {
+  color: #c42f23 !important;
+}
+.social-icons i.icon-gplus:hover {
+  color: #ed202b !important;
+}
+.social-icons i.icon-flickr:hover {
+  color: #005fdf !important;
+}
+.social-icons i.icon-linkedin:hover {
+  color: #238cc3 !important;
+}

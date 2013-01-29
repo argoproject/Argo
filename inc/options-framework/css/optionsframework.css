@@ -241,9 +241,15 @@
 #optionsframework #section-homepage_top .controls,
 #optionsframework #section-homepage_top .explain,
 #optionsframework #section-homepage_bottom .controls,
-#optionsframework #section-homepage_bottom .explain {
+#optionsframework #section-homepage_bottom .explain,
+#optionsframework #section-footer_layout .controls,
+#optionsframework #section-footer_layout .explain  {
 	max-width: 100%;
 	width: 100%;
+}
+#optionsframework #section-footer_layout img {
+	max-width: 210px;
+	margin-left: 20px;
 }
 #optionsframework #section-tag_limit {
 	width:auto;
