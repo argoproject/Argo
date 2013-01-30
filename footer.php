@@ -6,14 +6,14 @@
  */
 ?>
 
-	</div> <!-- #main .container_12 -->
+	</div> <!-- #main -->
 
 </div><!-- #page -->
 
 <div class="footer-bg clearfix">
 	<footer id="site-footer">
 		<div id="supplementary" class="row-fluid">
-			<?php get_sidebar( 'footer' ); ?>
+			<?php get_template_part( 'footer-part', 'widget-area' ); ?>
 		</div>
 		<div id="boilerplate" class="row-fluid clearfix">
 			<p><?php largo_copyright_message(); ?></p>
@@ -25,6 +25,7 @@
 		</div><!-- /#boilerplate -->
 	</footer>
 </div>
+
 <?php wp_footer(); ?>
 
 </body>

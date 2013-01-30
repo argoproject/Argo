@@ -28,8 +28,8 @@ if ( of_get_option( 'show_sticky_posts' ) ) {
 }
 
 // bottom section, we'll either use a two-column widget area or a single column list of recent posts
-if ( of_get_option('homepage_bottom') === 'widgets' ) {
-	get_sidebar('homepage-bottom');
+if ( of_get_option( 'homepage_bottom') === 'widgets' ) {
+	get_template_part( 'home-part', 'bottom-widget-area' );
 } else {
 	$args = array(
 		'paged'			=> $paged,
