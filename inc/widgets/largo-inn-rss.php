@@ -39,30 +39,49 @@ class largo_INN_RSS_widget extends WP_Widget {
 
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
+		$instance['num_posts'] = strip_tags( $new_instance['num_posts'] );
+		$instance['show_excerpt'] = $new_instance['show_excerpt'] ? 1 : 0;
 		return $instance;
 	}
 
 	function form( $instance ) {
-		$defaults = array();
+		$defaults = array(
+			'num_posts'		=> 3,
+			'show_excerpt' 	=> ''
+		);
 		$instance = wp_parse_args( (array) $instance, $defaults );
-	}
+		$show_excerpt = $instance['show_excerpt'] ? 'checked="checked"' : '';
+		?>
+			<p>
+				<input class="checkbox" type="checkbox" <?php echo $show_excerpt; ?> id="<?php echo $this->get_field_id('show_excerpt'); ?>" name="<?php echo $this->get_field_name('show_excerpt'); ?>" /> <label for="<?php echo $this->get_field_id('show_excerpt'); ?>"><?php _e('Show excerpts?', 'largo'); ?></label>
+			</p>
 
+			<p>
+				<label for="<?php echo $this->get_field_id( 'num_posts' ); ?>"><?php _e('Number of stories to show:', 'largo'); ?></label>
+				<input id="<?php echo $this->get_field_id( 'num_posts' ); ?>" name="<?php echo $this->get_field_name( 'num_posts' ); ?>" value="<?php echo $instance['num_posts']; ?>" style="width:90%;" />
+			</p>
+		<?php
+	}
 }
+
 
 function largo_widget_rss_output( $rss, $args = array() ) {
 
 	echo '<ul>';
-	foreach ( $rss->get_items(0, 3) as $item ) {
+	foreach ( $rss->get_items(0, $args['num_posts']) as $item ) {
 		$link = $item->get_link();
 		while ( stristr($link, 'http') != $link )
 			$link = substr($link, 1);
 		$link = esc_url(strip_tags($link));
 		$title = esc_attr(strip_tags($item->get_title()));
 
-		$desc = str_replace( array("\n", "\r"), ' ', esc_attr( strip_tags( @html_entity_decode( $item->get_description(), ENT_QUOTES, get_option('blog_charset') ) ) ) );
-		$desc = largo_trim_sentences($desc, 2);
-
-		$summary = "<p class='rssSummary'>$desc</p>";
+		if ( $args['show_excerpt'] === 1 ) {
+			$desc = str_replace( array("\n", "\r"), ' ', esc_attr( strip_tags( @html_entity_decode( $item->get_description(), ENT_QUOTES, get_option('blog_charset') ) ) ) );
+			$desc = largo_trim_sentences($desc, 2);
+			$summary = "<p class='rssSummary'>$desc</p>";
+		} else {
+			$summary = '';
+		}
 
 		$date = '';
 		$date = $item->get_date( 'U' );
