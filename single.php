@@ -17,6 +17,6 @@ get_header(); ?>
 		</div><!--/.grid_8 #content-->
 
 		<div id="sidebar" class="span4">
-			<?php get_sidebar('single'); ?>
+			<?php get_sidebar(); ?>
 		</div><!-- /.grid_4 -->
 <?php get_footer(); ?>

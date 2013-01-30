@@ -8,7 +8,7 @@
 function largo_register_sidebars() {
 	register_sidebar( array(
 		'name' 			=> __( 'Main Sidebar', 'largo' ),
-		'description' 	=> __( 'The sidebar for index and archive pages', 'largo' ),
+		'description' 	=> __( 'The sidebar for the homepage. If you do not add widgets to any of the other sidebars, this will also be used on all of the other pages of your site.', 'largo' ),
 		'id' 			=> 'sidebar-main',
 		'before_widget' => '<aside id="%1$s" class="%2$s clearfix">',
 		'after_widget' 	=> "</aside>",
@@ -26,15 +26,17 @@ function largo_register_sidebars() {
 		'after_title' 	=> '</h3>',
 	) );
 
-	register_sidebar( array(
-		'name' 			=> __( 'Topic Sidebar', 'largo' ),
-		'description' 	=> __( 'The sidebar for category and tag pages', 'largo' ),
-		'id' 			=> 'topic-sidebar',
-		'before_widget' => '<aside id="%1$s" class="%2$s clearfix">',
-		'after_widget' 	=> "</aside>",
-		'before_title' 	=> '<h3 class="widgettitle">',
-		'after_title' 	=> '</h3>',
-	) );
+	if ( of_get_option( 'use_topic_sidebar' ) ) {
+		register_sidebar( array(
+			'name' 			=> __( 'Archive/Topic Sidebar', 'largo' ),
+			'description' 	=> __( 'The sidebar for category, tag and other archive pages', 'largo' ),
+			'id' 			=> 'topic-sidebar',
+			'before_widget' => '<aside id="%1$s" class="%2$s clearfix">',
+			'after_widget' 	=> "</aside>",
+			'before_title' 	=> '<h3 class="widgettitle">',
+			'after_title' 	=> '</h3>',
+		) );
+	}
 
 	register_sidebar( array(
 		'name' 			=> __( 'Footer 1', 'largo' ),
