@@ -7,9 +7,9 @@
 	<?php
 		if ( is_singular() && is_active_sidebar( 'sidebar-single' ) ) {
 			dynamic_sidebar( 'sidebar-single' );
-		} elseif ( ( is_archive() || is_tax() ) && is_active_sidebar( 'topic-sidebar' ) ) {
+		} elseif ( ( is_archive() || is_tax() ) && of_get_option( 'use_topic_sidebar' ) && is_active_sidebar( 'topic-sidebar' ) ) {
 			dynamic_sidebar( 'topic-sidebar' );
-		} else if ( ! dynamic_sidebar( 'sidebar-main' ) ) {
+		} elseif ( ! dynamic_sidebar( 'sidebar-main' ) ) {
 				the_widget( 'largo_about_widget', array( 'title' => __('About This Site', 'largo') ) );
 				the_widget( 'largo_follow_widget', array( 'title' => __('Follow Us', 'largo') ) );
 				if ( of_get_option( 'donate_link' ) )
