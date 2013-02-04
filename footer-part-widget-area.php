@@ -28,11 +28,12 @@
 	<?php if ( ! dynamic_sidebar( 'footer-3' ) ) {
 		the_widget( 'WP_Widget_Search', array( 'title' => __('Search This Site', 'largo') ) );
 		the_widget( 'WP_Widget_Archives', array( 'title' => __('Browse Archives', 'largo' ), 'dropdown' => 1 ) );
-	} ?>
-
-	<ul id="ft-social" class="social-icons">
-		<?php largo_social_links(); ?>
-	</ul>
+	}
+	if ( ! $layout === '4col') { ?>
+		<ul id="ft-social" class="social-icons">
+			<?php largo_social_links(); ?>
+		</ul>
+	<?php } ?>
 </div>
 
 <?php if ($layout === '4col') { ?>
@@ -40,5 +41,8 @@
 	<?php if ( ! dynamic_sidebar( 'footer-4' ) ) { ?>
 		<p><?php _e('Please add widgets to this content area in the WordPress admin area under appearance > widgets.', 'largo'); ?></p>
 	<?php } ?>
+	<ul id="ft-social" class="social-icons">
+		<?php largo_social_links(); ?>
+	</ul>
 </div>
 <?php } ?>
