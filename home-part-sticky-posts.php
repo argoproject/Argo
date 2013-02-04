@@ -54,7 +54,7 @@ if ( $query->have_posts() ) {
 ?>
 						<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
 						<?php
-							largo_excerpt( $post, 4, false );
+							largo_excerpt( $post, 2, false );
 							$ids[] = get_the_ID();
 						?>
 					</div> <!-- end sticky-main-feature -->
