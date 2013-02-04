@@ -27,7 +27,11 @@ if ( $rel_topics = largo_get_post_related_topics( 6 ) ) : ?>
 							echo '<h3><a href="' . $permalink . '" title="Read: ' . $post_title . '">' . $post_title . '</a></h3>';
 							if ( get_the_post_thumbnail( $top_post->ID ) )
 								echo '<a href="' . $permalink . '"/>' . get_the_post_thumbnail( $top_post->ID, '60x60' ) . '</a>';
-							largo_excerpt( $top_post, 2, false );
+							if ($top_post->post_excerpt) {
+								echo '<p>' . $top_post->post_excerpt . '</p>';
+							} else {
+								echo '<p>' . largo_trim_sentences($top_post->post_content, 2) . '</p>';
+							}
 						?>
 						</li>
 						<?php
