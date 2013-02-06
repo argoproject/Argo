@@ -17,13 +17,15 @@ if ( !defined( 'MEDIUM_WIDTH') ) {
  *
  * @since 1.0
  */
-function largo_create_image_sizes() {
-    add_theme_support( 'post-thumbnails' );
-    set_post_thumbnail_size( 140, 140, true ); // skybox thumbnail
-    add_image_size( '60x60', 60, 60, true ); // in case you missed it thumbnail
-    add_image_size( 'medium', MEDIUM_WIDTH, 9999 ); // medium width scaling
-    add_image_size( 'large', LARGE_WIDTH, 9999 ); // large width scaling
-    add_image_size( 'full', 1170, 9999 ); // large width scaling
+if ( ! function_exists( 'largo_create_image_sizes' ) ) {
+	function largo_create_image_sizes() {
+	    add_theme_support( 'post-thumbnails' );
+	    set_post_thumbnail_size( 140, 140, true ); // skybox thumbnail
+	    add_image_size( '60x60', 60, 60, true ); // in case you missed it thumbnail
+	    add_image_size( 'medium', MEDIUM_WIDTH, 9999 ); // medium width scaling
+	    add_image_size( 'large', LARGE_WIDTH, 9999 ); // large width scaling
+	    add_image_size( 'full', 1170, 9999 ); // large width scaling
+	}
 }
 add_action( 'after_setup_theme', 'largo_create_image_sizes' );
 
@@ -32,17 +34,19 @@ add_action( 'after_setup_theme', 'largo_create_image_sizes' );
  *
  * @since 1.0
  */
-function largo_set_media_options() {
-	update_option('thumbnail_size_w', 140);
-    update_option('thumbnail_size_h', 140);
-    update_option('thumbnail_crop', 1);
-    update_option('medium_size_w', 336);
-    update_option('medium_size_h', 9999);
-    update_option('large_size_w', 771);
-    update_option('large_size_h', 9999);
-	update_option('embed_autourls', 1);
-	update_option('embed_size_w', 771);
-	update_option('embed_size_h', 9999);
+if ( ! function_exists( 'largo_set_media_options' ) ) {
+	function largo_set_media_options() {
+		update_option('thumbnail_size_w', 140);
+	    update_option('thumbnail_size_h', 140);
+	    update_option('thumbnail_crop', 1);
+	    update_option('medium_size_w', 336);
+	    update_option('medium_size_h', 9999);
+	    update_option('large_size_w', 771);
+	    update_option('large_size_h', 9999);
+		update_option('embed_autourls', 1);
+		update_option('embed_size_w', 771);
+		update_option('embed_size_h', 9999);
+	}
 }
 add_action( 'after_setup_theme', 'largo_set_media_options' );
 
