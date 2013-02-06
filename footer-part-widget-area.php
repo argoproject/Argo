@@ -29,7 +29,7 @@
 		the_widget( 'WP_Widget_Search', array( 'title' => __('Search This Site', 'largo') ) );
 		the_widget( 'WP_Widget_Archives', array( 'title' => __('Browse Archives', 'largo' ), 'dropdown' => 1 ) );
 	}
-	if ( ! $layout === '4col') { ?>
+	if ( $layout != '4col') { ?>
 		<ul id="ft-social" class="social-icons">
 			<?php largo_social_links(); ?>
 		</ul>
