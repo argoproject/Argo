@@ -362,6 +362,18 @@ function optionsframework_options() {
 		'options' 	=> $tag_display_options);
 
 	$options[] = array(
+		'desc' 	=> __('<strong>Number of posts</strong> to display in the main loop on the homepage', 'largo'),
+		'id' 	=> 'num_posts_home',
+		'std' 	=> 10,
+		'type' 	=> 'text');
+
+	$options[] = array(
+		'desc' 	=> __('<strong>Categories to include or exclude</strong> in the main loop on the homepage (comma-separated list of values, see: http://bit.ly/XmDGgd for correct format).', 'largo'),
+		'id' 	=> 'cats_home',
+		'std' 	=> '',
+		'type' 	=> 'text');
+
+	$options[] = array(
 		'name' 	=> __('Sidebar Options', 'largo'),
 		'type' 	=> 'info');
 

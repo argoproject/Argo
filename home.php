@@ -37,6 +37,10 @@ if ( of_get_option( 'homepage_bottom') === 'widgets' ) {
 		'posts_per_page'=> 10,
 		'post__not_in' 	=> $ids
 		);
+	if ( of_get_option('num_posts_home') )
+		$args['posts_per_page'] = of_get_option('num_posts_home');
+	if ( of_get_option('cats_home') )
+		$args['cat'] = of_get_option('cats_home');
 	$query = new WP_Query( $args );
 
 	if ( $query->have_posts() ) {
