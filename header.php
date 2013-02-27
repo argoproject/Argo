@@ -192,4 +192,6 @@
 	</nav>
 	<?php endif; ?>
 
+<?php if (function_exists('dynamic_sidebar')) { dynamic_sidebar("Header"); } ?>
+
 <div id="main" class="row-fluid clearfix">
