@@ -36,9 +36,7 @@
 					);
 		}
 
-		//Show the Job-Board widget if appropriate
-		global $post;
-		if ( is_singular() && is_active_sidebar( 'jobboard-widgets' ) && $post->post_name == 'jobs') {
+		if ( largo_is_job_page() && is_active_sidebar( 'jobboard-widgets' )) {
 			dynamic_sidebar( 'jobboard-widgets' );
 		}
 
