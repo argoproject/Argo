@@ -46,6 +46,8 @@ if ( ! function_exists( 'optionsframework_init' ) ) {
 	require_once dirname( __FILE__ ) . '/inc/options-framework/options-framework.php';
 }
 
+require_once('functions/ad-codes.php');
+
 /**
  * Load up all of the other goodies from the /inc directory
  */
