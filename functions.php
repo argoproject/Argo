@@ -66,7 +66,8 @@ $includes = array(
 	'/inc/header-footer.php',		// some additional template tags used in the header and footer
 	'/inc/related-content.php',		// functions dealing with related content
 	'/inc/featured-content.php',		// functions dealing with featured content
-	'/inc/enqueue.php'			// enqueue our js and css files
+	'/inc/enqueue.php',			// enqueue our js and css files
+	'/inc/business-directory.php'
 );
 
 foreach ( $includes as $include ) {
