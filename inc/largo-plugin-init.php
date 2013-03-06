@@ -131,9 +131,13 @@ function my_theme_register_required_plugins() {
 			'external_url' 			=> 'http://wpjobboard.net/', // If set, overrides default API URL and points to an external URL
 		),
 
-
-
 		// This is an example of how to include a plugin from the WordPress Plugin Repository
+		array(
+			'name' 		=> 'Ad Code Manager',
+			'slug' 		=> 'ad-code-manager',
+			'required' 	=> false,
+		),
+
 		array(
 			'name' 		=> 'Winer Links',
 			'slug' 		=> 'winerlinks',
