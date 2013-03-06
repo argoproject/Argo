@@ -69,7 +69,7 @@ $includes = array(
 // Load our plugin customizations (only if the plugins are installed and active)
 $optional_includes = array(
 	'business-directory-plugin/wpbusdirman.php' => '/inc/business-directory.php',	//Business Directory plugin
-	'wpjobboard/index.php' => '/inc/job-board.php' 									//WP Job Board plugin
+	'wpjobboard/index.php' => '/inc/job-board.php', 								//WP Job Board plugin
 	'ad-code-manager/ad-code-manager.php' => '/inc/ad-codes.php' 					//WP Ad Code Manager plugin
 );
 
