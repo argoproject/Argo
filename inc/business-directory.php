@@ -35,7 +35,7 @@ function largo_bd_output_sidebar() {
 		dynamic_sidebar( 'bd-widgets' );
    }
 }
-add_action('largo_sidebar', 'largo_bd_output_sidebar' );
+add_action('largo_after_sidebar_widgets', 'largo_bd_output_sidebar' );
 
 
 /**
