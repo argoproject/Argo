@@ -53,24 +53,37 @@ require_once('functions/ad-codes.php');
  */
 
 $includes = array(
-	'/inc/largo-plugin-init.php',		// a list of recommended plugins
+	'/inc/largo-plugin-init.php',			// a list of recommended plugins
 	'/inc/special-functionality.php',	// header cleanup and robots.txt
-	'/inc/users.php',			// add custom fields for user profiles
-	'/inc/sidebars.php',			// register sidebars
-	'/inc/widgets.php',			// register widgets
-	'/inc/nav-menus.php',			// register nav menus
-	'/inc/taxonomies.php',			// add our custom taxonomies
-	'/inc/images.php',			// setup custom image sizes
-	'/inc/editor.php',			// add tinymce customizations and shortcodes
-	'/inc/post-meta.php',			// add post meta boxes
-	'/inc/open-graph.php',			// add open graph, twittercard and google publisher markup to the header
-	'/inc/post-tags.php',			// add some custom template tags (mostly used in single posts)
-	'/inc/header-footer.php',		// some additional template tags used in the header and footer
-	'/inc/related-content.php',		// functions dealing with related content
-	'/inc/featured-content.php',		// functions dealing with featured content
-	'/inc/enqueue.php'			// enqueue our js and css files
+	'/inc/users.php',									// add custom fields for user profiles
+	'/inc/sidebars.php',							// register sidebars
+	'/inc/widgets.php',								// register widgets
+	'/inc/nav-menus.php',							// register nav menus
+	'/inc/taxonomies.php',						// add our custom taxonomies
+	'/inc/images.php',								// setup custom image sizes
+	'/inc/editor.php',								// add tinymce customizations and shortcodes
+	'/inc/post-meta.php',							// add post meta boxes
+	'/inc/open-graph.php',						// add opengraph, twittercard and google publisher markup to the header
+	'/inc/post-tags.php',							// add some custom template tags (mostly used in single posts)
+	'/inc/header-footer.php',					// some additional template tags used in the header and footer
+	'/inc/related-content.php',				// functions dealing with related content
+	'/inc/featured-content.php',			// functions dealing with featured content
+	'/inc/enqueue.php'								// enqueue our js and css files
 );
 
+$optional_includes = array(
+	'business-directory-plugin/wpbusdirman.php' => '/inc/business-directory.php',	//Business Directory plugin
+	'wpjobboard/index.php' => '/inc/job-board.php' //WP Job Board plugin
+);
+
+//loop thru optional includes and add if active
+include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+foreach ( $optional_includes as $plugin => $include_file ) {
+	if ( is_plugin_active($plugin) )
+		array_push($includes, $include_file);
+}
+
+//Perform load
 foreach ( $includes as $include ) {
 	require_once( get_template_directory() . $include );
 }
@@ -101,25 +114,3 @@ if ( ! function_exists( 'largo_setup' ) ) {
 	}
 }
 add_action( 'after_setup_theme', 'largo_setup' );
-
-/**
- * Tests is the current page is a part of the WPJobBoard plugin
- */
-function largo_is_job_page() {
-
-		$jobboardOptions = get_option('wpjb_config', NULL);
-		if (is_array($jobboardOptions)) {
-			$wpjb_page_ids = array( $jobboardOptions['link_jobs'], $jobboardOptions['link_resumes'] );
-		} else {
-			//Options weren't present, meaning plugin isn't installed, meaning we can't be on a job page.
-			return false;
-		}
-
-		if (is_singular()) :
-			global $post;
-			if (in_array($post->ID, $wpjb_page_ids)) return true;
-		endif;
-
-		//failure
-		return false;
-}
