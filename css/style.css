@@ -3636,7 +3636,7 @@ body.clean-read .byline + .post-social {
 body.clean-read .entry-content {
   font-size: 110%;
 }
-body.clean-read #clean-read-close {
+body.clean-read > .clean-read-close {
   position: fixed;
   top: 10px;
   right: 20px;
