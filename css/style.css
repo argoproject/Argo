@@ -3601,6 +3601,7 @@ body.clean-read {
 }
 body.clean-read .global-nav-bg,
 body.clean-read #main-nav,
+body.clean-read #secondary-nav,
 body.clean-read #sidebar,
 body.clean-read .footer-bg {
   display: none;
