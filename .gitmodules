@@ -1,0 +1,3 @@
+[submodule "plugins/wp-taxonomy-landing"]
+	path = plugins/wp-taxonomy-landing
+	url = git@github.com:crowdfavorite/wp-taxonomy-landing.git
