@@ -67,20 +67,6 @@ $includes = array(
 	'/inc/post-templates.php'	//single post templates
 );
 
-// Load our plugin customizations (only if the plugins are installed and active)
-$optional_includes = array(
-	'business-directory-plugin/wpbusdirman.php' => '/inc/business-directory.php',	//Business Directory plugin
-	'wpjobboard/index.php' => '/inc/job-board.php', 								//WP Job Board plugin
-	'ad-code-manager/ad-code-manager.php' => '/inc/ad-codes.php' 					//WP Ad Code Manager plugin
-);
-
-// Loop thru optional includes and add if active
-include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-foreach ( $optional_includes as $plugin => $include_file ) {
-	if ( is_plugin_active($plugin) )
-		array_push($includes, $include_file);
-}
-
 // Perform load
 foreach ( $includes as $include ) {
 	require_once( get_template_directory() . $include );
