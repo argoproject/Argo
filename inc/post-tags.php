@@ -353,6 +353,10 @@ function largo_trim_sentences( $input, $sentences, $echo = false ) {
 		    | Pres\.            # or "Pres.",
 		    | U\.S\.            # or "U.S.",
 		    | Rev\.            	# or "Rev.",
+		    | Gen\.        		# or "Gen.",
+		    | Capt\.            # or "Capt.",
+		    | Lt\.            	# or "Lt.",
+		    | Cpl\.            	# or "Cpl.",
 		    | Inc\.            	# or "Inc.",
 		    | \s[A-Z]\.         # or initials ex: "George W. Bush",
 		    | [A-Z]\.[A-Z]\.    # or random state abbreviations ex: "O.H.",
@@ -371,7 +375,7 @@ function largo_trim_sentences( $input, $sentences, $echo = false ) {
 
 	if ( $echo )
 		echo $output;
-	
+
 	return $output;
 }
 
