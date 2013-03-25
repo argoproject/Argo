@@ -199,35 +199,31 @@ h3.recent-posts,
 
 // NEXT - PREV NAVIGATION
 .pager {
-  list-style: none;
-  text-align: center;
-  margin-bottom: @baseline;
+  line-height: 1.2;
+  h5 {
+    margin-bottom: 0;
+  }
   a {
     display: inline-block;
-    padding: 5px 14px;
-    border: 1px solid lighten(@baseColor, 35%);
+    padding: 10px 15px;
+    color: @textColor;
+    background-color: #eee;
     &:hover {
-  	  text-decoration: none;
-  	  background-color: @baseColor;
+  	  background-color: #666;
   	  color: @white;
+  	  text-decoration: none;
     }
   }
 }
-.pager .next {
+.next {
+  width: 50%;
   float: right;
-  text-align:right;
-  margin-bottom: @baseline / 2 ;
+  text-align: right;
 }
-.pager .previous {
+.previous {
+  width: 50%;
   float: left;
-  text-align:left;
-  margin-bottom: @baseline / 2 ;
-}
-.pager .disabled a,
-.pager .disabled a:hover {
-  color: @grayLight;
-  background-color: @white;
-  cursor: default;
+  text-align: left;
 }
 
 // RELATED POSTS
