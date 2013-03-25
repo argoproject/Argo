@@ -1,13 +1,17 @@
-<?php get_header(); ?>
+<?php
+/**
+ * Template for various archive pages (category, tag, term, date, etc.
+ */
+get_header();
+?>
 
-		<div id="content" class="stories span8" role="main">
+<div id="content" class="stories span8" role="main">
 
 		<?php if ( have_posts() ) { ?>
 
 		<?php
 
-			// cue up the first post so we know what type of archive page we're dealing with
-
+			// queue up the first post so we know what type of archive page we're dealing with
 			the_post();
 
 			/*
@@ -107,10 +111,7 @@
 		}
 	?>
 
-		</div><!--/ #content .grid_8-->
+</div><!--#content-->
 
-<aside id="sidebar" class="span4">
 <?php get_sidebar(); ?>
-</aside>
-<!-- /.grid_4 -->
 <?php get_footer(); ?>
