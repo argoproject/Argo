@@ -391,8 +391,20 @@ if ( ! function_exists( 'largo_content_nav' ) ) {
 		if ( $nav_id === 'single-post-nav-below' ) { ?>
 
 			<nav id="nav-below" class="pager post-nav clearfix">
-				<div class="previous"><?php previous_post_link( __('<h5>Previous Story</h5> %link', 'largo'), '<span class="meta-nav">' . _x( '&larr;', 'Previous post link', 'largo' ) . '</span> %title' ); ?></div>
-				<div class="next"><?php next_post_link( __('<h5>Next Story</h5> %link', 'largo'), '%title <span class="meta-nav">' . _x( '&rarr;', 'Next post link', 'largo' ) . '</span>' ); ?></div>
+				<?php
+					if ( $prev = get_previous_post() ) {
+						printf( '<div class="previous"><a href="%1$s"><h5>Previous Story</h5><span class="meta-nav">%2$s</span></a></div>',
+							get_permalink( $prev->ID ),
+							$prev->post_title
+						);
+					}
+					if ( $next = get_next_post() ) {
+						printf( '<div class="next"><a href="%1$s"><h5>Next Story</h5><span class="meta-nav">%2$s</span></a></div>',
+							get_permalink( $next->ID ),
+							$next->post_title
+						);
+					}
+				?>
 			</nav><!-- #nav-below -->
 
 		<?php } elseif ( $wp_query->max_num_pages > 1 ) { ?>
