@@ -87,6 +87,13 @@ if ( ! function_exists( 'largo_byline' ) ) {
 			esc_attr( get_the_date( 'c' ) ),
 			largo_time( false )
 		);
+
+		if ( current_user_can( 'edit_post', $post->ID ) )
+			$output .=  sprintf( ' | <span class="edit-link"><a href="%1$s">Edit This Post</a></span>', get_edit_post_link() );
+
+ 		if ( is_single() && of_get_option( 'clean_read' ) === 'byline' )
+ 			$output .=	__('<a href="#" class="clean-read">View as "Clean Read"</a>', 'largo');
+
 		if ( $echo )
 			echo $output;
 		return $output;
@@ -169,7 +176,7 @@ function largo_show_author_box() {
  * @return bool true if a gravatar is available for this user
  * @since 1.0
  */
-function has_gravatar( $email ) {
+function largo_has_gravatar( $email ) {
 	// Craft a potential url and test its headers
 	$hash = md5(strtolower(trim($email)));
 	$uri = 'http://www.gravatar.com/avatar/' . $hash . '?d=404';
