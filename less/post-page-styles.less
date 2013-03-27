@@ -724,11 +724,26 @@ article img.attachment-post-thumbnail {
 }
 
 // Search Results
-span.search-term {
-  background-color: lighten(@baseColor, 45%);
+.search-term {
+  background-color: @grayLighter;
   padding: 1px 5px;
 }
-
+.search-results .stories article {
+  padding-bottom: 12px;
+}
+.search-results .stories h2.entry-title {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+.search-results .stories .entry-content,
+.search-results .stories .entry-content p {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+.search-results h5.byline {
+  font-size: 12px;
+  margin-bottom: 0;
+}
 // Date Archive
 .archive-dropdown {
   margin-bottom: @baseline/2;
