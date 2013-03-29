@@ -79,13 +79,13 @@ get_header();
 					 */
 
 					if ( is_author() ) {
-						printf(__('Recent posts<a class="rss-link" href="%s"><i class="icon-rss"></i></a>', 'largo'), get_author_feed_link( get_the_author_meta('ID') ) );
+						printf(__('Recent stories<a class="rss-link" href="%s"><i class="icon-rss"></i></a>', 'largo'), get_author_feed_link( get_the_author_meta('ID') ) );
 					} elseif ( is_category() ) {
-						printf(__('Recent posts<a class="rss-link" href="%s"><i class="icon-rss"></i></a>', 'largo'), get_category_feed_link( get_queried_object_id() ) );
+						printf(__('Recent stories<a class="rss-link" href="%s"><i class="icon-rss"></i></a>', 'largo'), get_category_feed_link( get_queried_object_id() ) );
 					} elseif ( is_tag() ) {
-						printf(__('Recent posts<a class="rss-link" href="%s"><i class="icon-rss"></i></a>', 'largo'), get_tag_feed_link( get_queried_object_id() ) );
+						printf(__('Recent stories<a class="rss-link" href="%s"><i class="icon-rss"></i></a>', 'largo'), get_tag_feed_link( get_queried_object_id() ) );
 					} elseif ( is_tax() ) {
-						printf(__('Recent posts<a class="rss-link" href="%s"><i class="icon-rss"></i></a>', 'largo'), get_term_feed_link( get_queried_object() ) );
+						printf(__('Recent stories<a class="rss-link" href="%s"><i class="icon-rss"></i></a>', 'largo'), get_term_feed_link( get_queried_object() ) );
 					} elseif ( is_month() ) {
 						printf(__('Monthly Archives: <span>%s</span>', 'largo'), get_the_date('F Y') );
 					} elseif ( is_year() ) {
