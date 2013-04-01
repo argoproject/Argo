@@ -30,7 +30,8 @@
 				});
 
 				// Add a node change handler, selects the button in the UI when an aside is selected
-				// kinda-sorta-really doesn't work as we want it to switch from the IMG preview to the ASIDE, then re-fire onNodeChange
+				// TO DO: only do this stuff if the aside's class is "module"
+				// TO DO: pass the markup to the form in way that options are pre-set
 				ed.onNodeChange.add(function(ed, cm, n) {
 					if (n.parentNode.nodeName == 'ASIDE') {
 						//select the aside instead

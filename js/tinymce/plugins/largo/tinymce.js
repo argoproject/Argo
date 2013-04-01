@@ -1,8 +1,5 @@
-function init() {
+function init() {	//this doesn't seem to actually be getting called, despite what's in window.php?
 	tinyMCEPopup.resizeToInnerSize();
-	the_content = tinyMCE.getInstanceById('content').selection.getContent();
-	console.log( the_content );
-	console.log('here');
 }
 
 function insertModuleCode(){
