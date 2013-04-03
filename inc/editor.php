@@ -67,3 +67,14 @@ function remove_default_post_screen_metaboxes() {
 	remove_meta_box( 'commentsdiv','post','normal' ); // comments
 }
 add_action('admin_menu','remove_default_post_screen_metaboxes');
+
+/**
+ * Remove weird span tags inserted by TinyMCE
+ *
+ * @since 1.0
+ */
+function largo_tinymce_config( $init ) {
+	$init['extended_valid_elements'] .= "span[!class]";
+	return $init;
+}
+add_filter('tiny_mce_before_init', 'largo_tinymce_config');
