@@ -19,7 +19,7 @@ function insertModuleCode(){
 		}
 	}
 
-	var start_tag = '<aside class="module align-' + mod_align + ' ' + mod_width + ' type-' + mod_type + '" ' + embed_style + '>';
+	var start_tag = '<aside class="module align-' + mod_align + ' ' + mod_width + ' ' + mod_type + '" ' + embed_style + '>';
 
 	window.tinyMCE.execInstanceCommand('content', 'mceInsertContent', false, start_tag+html+'</aside>');
 	tinyMCEPopup.editor.execCommand('mceRepaint');
