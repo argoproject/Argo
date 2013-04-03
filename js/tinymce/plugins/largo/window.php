@@ -42,7 +42,7 @@
 	<ul>
 		<li><input type="radio" name="mod_width" value="half" checked id="half"> Half</li>
 		<li><input type="radio" name="mod_width" value="full"> Full</li>
-		<li><input type="radio" name="mod_width" value="extract" id="extract"> Extract from Embed</li>
+		<li><input type="radio" name="mod_width" value="extract" id="extract"> Extract from Embed (non-responsive)</li>
 	</ul>
 	<br>
 	<div class="mceActionPanel">

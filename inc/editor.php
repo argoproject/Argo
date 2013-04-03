@@ -23,23 +23,6 @@ function largo_add_mce_buttons() {
 }
 add_action( 'init', 'largo_add_mce_buttons' );
 
-
-/**
- * Add the module shortcode (used for pullquotes and asides within posts)
- *
- * @since 1.0
- */
-function module_shortcode( $atts, $content, $code ) {
-	extract( shortcode_atts( array(
-		'align' => 'left',
-		'width' => 'half',
-		'type' => 'aside',
-	), $atts ) );
-
-	return sprintf( '<aside class="module %s %s %s">%s</aside>', $type, $align, $width, $content );
-}
-add_shortcode( 'module', 'module_shortcode' );
-
 /**
  * Move the author dropdown to the publish metabox so it's easier to find
  *

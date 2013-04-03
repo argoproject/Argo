@@ -10,9 +10,13 @@ function insertModuleCode(){
 		mod_type  = $("input[name='mod_type']:checked").val(),
 		embed_style = "";
 
-	if (mod_type == 'embed' && mod_width == 'extract') {
-		var dims = getEmbedDimensions( html );
-		if (dims) embed_style = 'style="' + dims + '"';
+	if (mod_type == 'embed') {
+		if  (mod_width == 'extract') {
+			var dims = getEmbedDimensions( html );
+			if (dims) embed_style = 'style="' + dims + '"';
+		} else {
+			mod_type  += " embed-container";
+		}
 	}
 
 	var start_tag = '<aside class="module align-' + mod_align + ' width-' + mod_width + ' type-' + mod_type + '" ' + embed_style + '>';
