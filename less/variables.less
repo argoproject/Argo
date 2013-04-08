@@ -28,6 +28,11 @@
 
 // Links
 // -------------------------
+/**
+ * @label Color of links
+ * @type color
+ * @default_value #2275bb
+ */
 @linkColor:             @blue;
 @linkColorHover:        lighten(@linkColor, 10%);
 
@@ -104,7 +109,15 @@
 // Form states and alerts
 // -------------------------
 @warningText:             #c09853;
+/**
+ * @label Warning Background Color
+ * @type color
+ */
 @warningBackground:       #fcf8e3;
+
+/**
+ * @type color
+ */
 @warningBorder:           darken(spin(@warningBackground, -10), 3%);
 
 @errorText:               #b94a48;
