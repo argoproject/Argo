@@ -24,6 +24,23 @@ function largo_add_mce_buttons() {
 add_action( 'init', 'largo_add_mce_buttons' );
 
 /**
+ * Add the module shortcode (used for pullquotes and asides within posts)
+ * This is no longer used but is included here for backwards compatibility
+ *
+ * @since 1.0
+ */
+function module_shortcode( $atts, $content, $code ) {
+    extract( shortcode_atts( array(
+        'align' => 'left',
+        'width' => 'half',
+        'type' => 'aside',
+    ), $atts ) );
+
+    return sprintf( '<aside class="module %s %s %s">%s</aside>', $type, $align, $width, $content );
+}
+add_shortcode( 'module', 'module_shortcode' );
+
+/**
  * Move the author dropdown to the publish metabox so it's easier to find
  *
  * @since 1.0
@@ -50,3 +67,18 @@ function remove_default_post_screen_metaboxes() {
 	remove_meta_box( 'commentsdiv','post','normal' ); // comments
 }
 add_action('admin_menu','remove_default_post_screen_metaboxes');
+
+/**
+ * Remove weird span tags inserted by TinyMCE
+ *
+ * @since 1.0
+ */
+function largo_tinymce_config( $init ) {
+	if ( isset( $init['extended_valid_elements'] ) ) {
+		$init['extended_valid_elements'] .= "span[!class]";
+	} else {
+		$init['extended_valid_elements'] = "span[!class]";
+	}
+	return $init;
+}
+add_filter('tiny_mce_before_init', 'largo_tinymce_config');
