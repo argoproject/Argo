@@ -405,7 +405,7 @@ class Largo_Custom_Less_Variables {
 										if ( isset( $field_type_callbacks[$field['type']] ) ) {
 											call_user_func_array( $field_type_callbacks[$field['type']], array( $field, $value, $form_name, $form_id ) );
 										} else {
-											echo '<input type="text" name="', $form_name, '" id="', $form_id, '" />';
+											echo '<input type="text" name="', $form_name, '" id="', $form_id, '" value="', esc_attr($value),'" />';
 										}
 
 										echo '</div>';
