@@ -376,7 +376,7 @@ class Largo_Custom_Less_Variables {
 					</div>
 					<div id="post-body">
 						<div id="post-body-content">
-							<div class="postarea">
+							<div class="custom-less-variables">
 								<?php
 								$field_groups = self::get_editable_variables();
 
@@ -396,11 +396,11 @@ class Largo_Custom_Less_Variables {
 									}
 
 									foreach ( $field_groups[$group_name] as $field_name => $field ) {
-										echo '<div class="field" id="field-',$field_name,'-row">';
+										echo '<div class="field field-', esc_attr($field['type']), '" id="field-',$field_name,'-row">';
 										$form_name = 'field['.$field_name.']';
 										$form_id = 'field-'.$field_name;
 										$value = empty( $values['variables'][$field_name] ) ? trim( $field['default_value'] ) : $values['variables'][$field_name];
-										echo '<label id="',$form_id,'">', $field['label'], '</label>';
+										echo '<label id="',$form_id,'">', $field['label'], '</label> ';
 
 										if ( isset( $field_type_callbacks[$field['type']] ) ) {
 											call_user_func_array( $field_type_callbacks[$field['type']], array( $field, $value, $form_name, $form_id ) );
@@ -431,6 +431,9 @@ class Largo_Custom_Less_Variables {
 		wp_enqueue_script( 'iris' ); // Colorpicker
 
 		wp_enqueue_script( 'largo_custom_less_variable', get_template_directory_uri().'/js/custom-less-variables.js', array( 'jquery', 'iris' ), '20130405', true );
+
+		wp_enqueue_style( 'largo_custom_less_variable', get_template_directory_uri().'/css/custom-less-variables.css', '20130405' );
+
 
 		do_action( 'largo_custom_less_variable_head' );
 	}
