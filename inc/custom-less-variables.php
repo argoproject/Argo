@@ -164,6 +164,38 @@ class Largo_Custom_Less_Variables {
 	}
 
 
+
+	/**
+	 * Get the compiled CSS for a LESS file.
+	 *
+	 * It will retrieved it from saved generated CSS or go
+	 * ahead and compile it.
+	 *
+	 * @param string $less_file - the LESS file to compile
+	 *
+	 * @return string the generated CSS
+	 */
+	static function get_css( $less_file ) {
+		$variables = self::get_custom_values();
+
+		// Use the cached version saved to the DB
+		if ( !empty( $variables['meta']->ID ) ) {
+			$css = get_post_meta( $variables['meta']->ID, $less_file );
+
+			if ( !empty( $css ) ) {
+				$css = $css[0];
+			} else {
+				$css = self::compile_less( $less_file );
+				add_post_meta( $variables['meta']->ID, $less_file, $css );
+			}
+
+			return $css;
+		}
+
+		return self::compile_less( $less_file );
+	}
+
+
 	/**
 	 * Compile a LESS file with our custom variables
 	 *
@@ -270,6 +302,8 @@ class Largo_Custom_Less_Variables {
 		$css_file = filter_input( INPUT_GET, 'css_file', FILTER_SANITIZE_STRING );
 
 		header( 'Content-Type: text/css', true, 200 );
+		header( 'Expires: ' . gmdate( 'D, d M Y H:i:s', time() + 31536000) . ' GMT' ); // 1 year
+
 
 		// Echo nothing if the file is missing
 		if ( empty( $css_file ) ) {
@@ -288,7 +322,7 @@ class Largo_Custom_Less_Variables {
 
 		$variables = self::get_custom_values();
 		echo "/* Custom LESS Variables {$variables['meta']->post_modified_gmt} */\n";
-		echo self::compile_less( self::$less_files[$key] );
+		echo self::get_css( self::$less_files[$key] );
 
 		exit;
 	}
@@ -546,10 +580,16 @@ class Largo_Custom_Less_Variables {
 		);
 
 		if ( empty( $post_id ) ) {
-			wp_insert_post( $post_data );
+			$post_id = wp_insert_post( $post_data );
 		} else {
 			$post_data['ID'] = $post_id;
 			wp_update_post( $post_data );
+
+			// Clear out meta data
+			$meta_keys = get_post_custom_keys( $post_id );
+			foreach ( $meta_keys as $meta_key ) {
+				delete_post_meta( $post_id, $meta_key );
+			}
 		}
 		
 		// clear cache
