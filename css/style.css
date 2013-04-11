@@ -2668,6 +2668,9 @@ p.wp-caption-text {
   font-size: 24px;
   margin-bottom: 6px;
 }
+.DV-container {
+  margin-bottom: 8px;
+}
 .stories article {
   border-bottom: 1px dotted #999999;
   margin-bottom: 12px;
