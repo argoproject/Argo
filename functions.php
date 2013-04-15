@@ -64,7 +64,8 @@ $includes = array(
 	'/inc/related-content.php',			// functions dealing with related content
 	'/inc/featured-content.php',		// functions dealing with featured content
 	'/inc/enqueue.php',					// enqueue our js and css files
-	'/inc/post-templates.php'	//single post templates
+	'/inc/post-templates.php',	//single post templates
+	'/inc/custom-less-variables.php'	// add UI to alter variables.less
 );
 
 // Perform load
