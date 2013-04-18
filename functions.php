@@ -57,14 +57,14 @@ $includes = array(
 	'/inc/taxonomies.php',				// add our custom taxonomies
 	'/inc/images.php',					// setup custom image sizes
 	'/inc/editor.php',					// add tinymce customizations and shortcodes
-	'/inc/post-meta.php',				// add post meta boxes
 	'/inc/open-graph.php',				// add opengraph, twittercard and google publisher markup to the header
 	'/inc/post-tags.php',				// add some custom template tags (mostly used in single posts)
 	'/inc/header-footer.php',			// some additional template tags used in the header and footer
 	'/inc/related-content.php',			// functions dealing with related content
 	'/inc/featured-content.php',		// functions dealing with featured content
 	'/inc/enqueue.php',					// enqueue our js and css files
-	'/inc/post-templates.php'	//single post templates
+	'/inc/post-templates.php',			//single post templates
+	'/inc/post-meta.php'				// add post meta boxes
 );
 
 // Perform load
