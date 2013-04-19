@@ -16,4 +16,6 @@ require_once __DIR__ .'/feedinput_feedset.class.php';
 require_once __DIR__ .'/feedinput_manager.class.php';
 require_once __DIR__ .'/api.php';
 
+require_once __DIR__ . '/feedinput_adminpage.class.php';
+
 //require_once __DIR__ .'/test.php';
