@@ -36,6 +36,7 @@ class FeedInput_AdminPage {
 			<h2><?php _e('Syndicated Sources', 'feedinput'); ?></h2>
 
 			<form method="POST" action="options-general.php?page=syndicated_sources">
+				<?php wp_nonce_field( 'update_feed_urls', 'feedinput_nonce' ); ?>
 				<input type="hidden" name="feedinput" value="1" />
 				<label for="feed_urls"><?php _e('Feed URLs', 'feedinput'); ?></label>
 				<p><?php _e('Enter each feed URL on a separate line.', 'feedinput'); ?></p>
@@ -68,6 +69,11 @@ class FeedInput_AdminPage {
 		$current_screen = get_current_screen();
 
 		if ( $current_screen->id == 'settings_page_syndicated_sources' && filter_input(INPUT_POST, 'feedinput', FILTER_VALIDATE_BOOLEAN) ) {
+			if ( empty($_POST['feedinput_nonce']) || !wp_verify_nonce($_POST['feedinput_nonce'],'update_feed_urls') ) {
+				// The nonce did not match
+				return;
+			}
+
 			$old_feed_urls = $this->get_feed_urls();
 
 			// Get input
