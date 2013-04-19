@@ -38,6 +38,15 @@ class FeedInput_Manager {
 			$feed_set->update();
 		}
 	}
+
+	/**
+	 *
+	 */
+	static function force_update_feedset( $feed_set_name ) {
+		if ( isset(self::$feed_sets[$feed_set_name]) ) {
+			self::$feed_sets[$feed_set_name]->update();
+		}
+	}
 }
 
 

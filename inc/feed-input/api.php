@@ -24,5 +24,5 @@ function feedinput_register_feed( $feed_name, $feed_urls, $options=array() ) {
  * @param string $feed_name - the identify name for the feed set
  */
 function feedinput_force_update_feed( $feed_name ) {
-
+  return FeedInput_Manager::force_update_feedset( $feed_name );
 }
