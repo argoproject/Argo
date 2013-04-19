@@ -98,3 +98,124 @@ if ( ! function_exists( 'largo_setup' ) ) {
 	}
 }
 add_action( 'after_setup_theme', 'largo_setup' );
+
+
+
+
+
+/**
+ *  bypass WordPress's native file delivery
+ */
+function largo_send_image_to_editor($html, $post_id, $caption, $title, $align, $url, $size, $alt) {
+
+//	$shortcode = " 
+//HTML: |$html|
+//POST_ID: $post_id 
+//URL: $url 
+//		";
+
+//return $shortcode;
+
+//	$image_source = wp_get_attachment_image_src($post_id, $size);
+//	$path_info = pathinfo($image_source[0]);
+
+	$shortcode = '';//$html;
+
+//return $shortcode;
+
+
+	//$shortcode = str_replace($html, '', $shortcode);
+
+	$shortcode .= '[picturefill id="' . $post_id . '"';
+	if ($title){
+		$shortcode .= ' title="' . esc_attr($title) . '"';
+	}
+	if ($alt){
+		$shortcode .= ' alttext="' . esc_html($alt) . '"';
+	}
+	if ($align) {
+		$shortcode .= ' align="' . esc_html($align) . '"';
+	}
+	$shortcode .= ' ]';
+
+	return $shortcode;
+}
+add_filter('image_send_to_editor', 'largo_send_image_to_editor', 1, 8);
+
+
+
+function largo_picturefill_shortcode($attributes, $content = null) {
+
+	$output = '';
+
+	extract(shortcode_atts(array(
+		'id' => null,
+		'alttext' => null,
+		'title' => null,
+		'align' => null,
+	), $attributes ) );
+
+    // Get ID
+
+    // Get URLs for sizes in ID
+
+    // ??????
+
+    // Output!!
+	
+
+	if ($attributes['id']) {
+	
+		$output .= '<div data-picture';
+
+		if ($attributes['alttext'] != null) {
+			$output .= 'data-alt="' . esc_attr($attributes['alttext']) . '"';
+		}
+		$output .= '>' . PHP_EOL;
+
+
+		$large = wp_get_attachment_image_src( $attributes['id'], 'large');
+
+//var_dump($large);
+
+//	if ($attributes['title'] != null) {
+//		$output .= ' title="' . esc_attr($attributes['title']) . '"';
+//	}
+//	if ($attributes['align'] != null) {
+//		$output .= ' class="align' . esc_attr($attributes['align']) . '"';
+//	}
+
+		$output .= '<div data-src="' . $large[0] . '"></div>' . PHP_EOL;
+		$output .= '<div data-src="' . $large[0] . '" data-media="(min-width: 400px)"></div>' . PHP_EOL;
+		$output .= '<div data-src="' . $large[0] . '" data-media="(min-width: 800px)"></div>' . PHP_EOL;
+		$output .= '<div data-src="' . $large[0] . '" data-media="(min-width: 1000px)"></div>' . PHP_EOL;
+
+
+		/*  /// SAMPLE MARKUP --
+
+	    <div data-picture data-alt="A giant stone face at The Bayon temple in Angkor Thom, Cambodia">
+	        <div data-src="small.jpg"></div>
+	        <div data-src="medium.jpg"     data-media="(min-width: 400px)"></div>
+	        <div data-src="large.jpg"      data-media="(min-width: 800px)"></div>
+	        <div data-src="extralarge.jpg" data-media="(min-width: 1000px)"></div>
+
+	        <!-- Fallback content for non-JS browsers. Same img src as the initial, unqualified source element. -->
+	        <noscript>
+	            <img src="external/imgs/small.jpg" alt="A giant stone face at The Bayon temple in Angkor Thom, Cambodia">
+	        </noscript>
+	    </div>
+
+		*/
+	    $output .= '<noscript>
+	            <img src="external/imgs/small.jpg" alt="A giant stone face at The Bayon temple in Angkor Thom, Cambodia">
+	        </noscript>
+	    </div>' . PHP_EOL;
+
+
+	}
+
+	return $output;
+
+}
+add_shortcode( 'picturefill', 'largo_picturefill_shortcode' );
+
