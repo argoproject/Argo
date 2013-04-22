@@ -143,7 +143,6 @@ function largo_send_image_to_editor($html, $post_id, $caption, $title, $align, $
 add_filter('image_send_to_editor', 'largo_send_image_to_editor', 1, 8);
 
 
-
 function largo_picturefill_shortcode($attributes, $content = null) {
 
 	$output = '';
@@ -155,67 +154,46 @@ function largo_picturefill_shortcode($attributes, $content = null) {
 		'align' => null,
 	), $attributes ) );
 
-    // Get ID
-
-    // Get URLs for sizes in ID
-
-    // ??????
-
-    // Output!!
-	
-
 	if ($attributes['id']) {
 	
-		$output .= '<div data-picture';
+		$image_large = wp_get_attachment_image_src( $attributes['id'], 'large');
+		$image_medlarge = wp_get_attachment_image_src( $attributes['id'], 'medlarge');
+		$image_mediasmall = wp_get_attachment_image_src( $attributes['id'], 'mediasmall');
+		$image_medium = wp_get_attachment_image_src( $attributes['id'], 'medium');
 
+		// Open tag & output for modern browsers
+		$output .= '<div data-picture';
 		if ($attributes['alttext'] != null) {
-			$output .= 'data-alt="' . esc_attr($attributes['alttext']) . '"';
+			$output .= ' data-alt="' . esc_attr($attributes['alttext']) . '"';
 		}
 		$output .= '>' . PHP_EOL;
 
+		// Various image sizes
+		if (isset($image_medium[0])) {
+			$output .= '<div data-src="' . $image_medium[0] . '"></div>' . PHP_EOL;
+		}
+		if (isset($image_mediasmall[0])) {
+			$output .= '<div data-src="' . $image_mediasmall[0] . '" data-media="(min-width: 360px)"></div>' . PHP_EOL;
+		}
+		if (isset($image_medlarge[0])) {
+			$output .= '<div data-src="' . $image_medlarge[0] . '" data-media="(min-width: 480px)"></div>' . PHP_EOL;
+		}
+		if (isset($image_large[0])) {
+			$output .= '<div data-src="' . $image_large[0] . '" data-media="(min-width: 980px)"></div>' . PHP_EOL;
+		}
 
-		$large = wp_get_attachment_image_src( $attributes['id'], 'large');
+		// Set output for older IE and browsers with no JS
+		$output .= '<!--[if (lt IE 9) & (!IEMobile)]><div data-src="' . $image_large[0] . '"></div><![endif]-->';
+		$output .= '<noscript><img src="' . $image_large[0] . '"';
+		if ($attributes['alttext'] != null) {
+			$output .= ' alt="' . esc_attr($attributes['alttext']) . '"';
+		}
+		$output .= '></noscript>' . PHP_EOL;
 
-//var_dump($large);
-
-//	if ($attributes['title'] != null) {
-//		$output .= ' title="' . esc_attr($attributes['title']) . '"';
-//	}
-//	if ($attributes['align'] != null) {
-//		$output .= ' class="align' . esc_attr($attributes['align']) . '"';
-//	}
-
-		$output .= '<div data-src="' . $large[0] . '"></div>' . PHP_EOL;
-		$output .= '<div data-src="' . $large[0] . '" data-media="(min-width: 400px)"></div>' . PHP_EOL;
-		$output .= '<div data-src="' . $large[0] . '" data-media="(min-width: 800px)"></div>' . PHP_EOL;
-		$output .= '<div data-src="' . $large[0] . '" data-media="(min-width: 1000px)"></div>' . PHP_EOL;
-
-
-		/*  /// SAMPLE MARKUP --
-
-	    <div data-picture data-alt="A giant stone face at The Bayon temple in Angkor Thom, Cambodia">
-	        <div data-src="small.jpg"></div>
-	        <div data-src="medium.jpg"     data-media="(min-width: 400px)"></div>
-	        <div data-src="large.jpg"      data-media="(min-width: 800px)"></div>
-	        <div data-src="extralarge.jpg" data-media="(min-width: 1000px)"></div>
-
-	        <!-- Fallback content for non-JS browsers. Same img src as the initial, unqualified source element. -->
-	        <noscript>
-	            <img src="external/imgs/small.jpg" alt="A giant stone face at The Bayon temple in Angkor Thom, Cambodia">
-	        </noscript>
-	    </div>
-
-		*/
-	    $output .= '<noscript>
-	            <img src="external/imgs/small.jpg" alt="A giant stone face at The Bayon temple in Angkor Thom, Cambodia">
-	        </noscript>
-	    </div>' . PHP_EOL;
-
-
+		// Close tag
+		$output .= '</div>' . PHP_EOL;
 	}
-
 	return $output;
-
 }
 add_shortcode( 'picturefill', 'largo_picturefill_shortcode' );
 
