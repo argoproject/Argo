@@ -101,30 +101,15 @@ add_action( 'after_setup_theme', 'largo_setup' );
 
 
 
-
-
 /**
- *  bypass WordPress's native file delivery
+ * Bypass WordPress's native editor image insert
  */
 function largo_send_image_to_editor($html, $post_id, $caption, $title, $align, $url, $size, $alt) {
 
-//	$shortcode = " 
-//HTML: |$html|
-//POST_ID: $post_id 
-//URL: $url 
-//		";
+	// NOTE: This functionality also bypasses the Navis-Media-Credit plugin's [caption][/caption]
+	// wrapper.
 
-//return $shortcode;
-
-//	$image_source = wp_get_attachment_image_src($post_id, $size);
-//	$path_info = pathinfo($image_source[0]);
-
-	$shortcode = '';//$html;
-
-//return $shortcode;
-
-
-	//$shortcode = str_replace($html, '', $shortcode);
+	$shortcode = ''
 
 	$shortcode .= '[picturefill id="' . $post_id . '"';
 	if ($title){
@@ -132,9 +117,6 @@ function largo_send_image_to_editor($html, $post_id, $caption, $title, $align, $
 	}
 	if ($alt){
 		$shortcode .= ' alttext="' . esc_html($alt) . '"';
-	}
-	if ($align) {
-		$shortcode .= ' align="' . esc_html($align) . '"';
 	}
 	$shortcode .= ' ]';
 
