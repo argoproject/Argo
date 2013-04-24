@@ -63,8 +63,13 @@ $includes = array(
 	'/inc/related-content.php',			// functions dealing with related content
 	'/inc/featured-content.php',		// functions dealing with featured content
 	'/inc/enqueue.php',					// enqueue our js and css files
+<<<<<<< HEAD
 	'/inc/post-templates.php',			//single post templates
 	'/inc/post-meta.php'				// add post meta boxes
+=======
+	'/inc/post-templates.php',	//single post templates
+	'/inc/custom-less-variables.php'	// add UI to alter variables.less
+>>>>>>> 9eff43f44fdba825b2f6edb2754bdd4d6346aa02
 );
 
 // Perform load
