@@ -1,6 +1,6 @@
 <?php
 /**
- * Functionality for converting the variable.less into 
+ * Functionality for converting the variable.less into
  * theme options page that will recompile into new CSS.
  *
  * To debug the generated CSS, add the following to your wp-config.php:
@@ -18,9 +18,7 @@
 add_action( 'largo_custom_less_variables_init', 'largo_custom_less_variables_init', 1 );
 function largo_custom_less_variables_init() {
 	largo_clv_register_files( array( 'bootstrapify.less', 'carousel.less', 'editor-style.less', 'style.less', 'top-stories.less' ) );
-
 	largo_clv_register_directory_paths( get_template_directory() . '/less/', get_template_directory_uri() . '/css/' );
-
 	largo_clv_register_variables_less_file( 'variables.less' );
 }
 
@@ -45,14 +43,14 @@ function largo_clv_register_files( $files ) {
 
 
 /**
- * Set the file path for the directory with the LESS files and 
+ * Set the file path for the directory with the LESS files and
  * URI for the directory with the outputted CSS.
  *
  * @param string $less_dir
  * @param string $css_dir_uri
  */
 function largo_clv_register_directory_paths( $less_dir, $css_dir_uri ) {
-	Largo_Custom_Less_Variables::register_directory_paths( $less_dir, $css_dir_uri );	
+	Largo_Custom_Less_Variables::register_directory_paths( $less_dir, $css_dir_uri );
 }
 
 
@@ -89,23 +87,20 @@ class Largo_Custom_Less_Variables {
 		// Alters the URL for the CSS files that are recompiled with the custom variables
 		add_filter( 'style_loader_src', array( __CLASS__, 'style_loader_src' ), 10, 2 );
 
-		// Used to output the rendered CSS for the customized LESS 
+		// Used to output the rendered CSS for the customized LESS
 		add_action( 'template_redirect', array( __CLASS__, 'template_redirect') );
 
 		// Add our admin page
 		add_action( 'admin_menu', array( __CLASS__, 'admin_menu') );
 
-
 		// Register post type for saving the data to
 		register_post_type( 'largo_custom_less_variables', array( 'public' => false, 'supports' => array( 'revisions' => true ) ));
-
 
 		self::$less_dir    = get_template_directory() . '/less/';
 		self::$css_dir_uri = get_template_directory_uri() . '/css/';
 
 		// Allow others to alter the settings
 		do_action( 'largo_custom_less_variables_init' );
-
 
 		// Check if this page load is result of a save
 		if ( is_admin() && isset( $_POST['customlessvariables'] ) && false != strstr( $_SERVER[ 'REQUEST_URI' ], 'themes.php' ) ) {
@@ -121,7 +116,6 @@ class Largo_Custom_Less_Variables {
 		}
 
 	}
-
 
 	/**
 	 * Register the Less files to compile into CSS files
@@ -139,9 +133,8 @@ class Largo_Custom_Less_Variables {
 		self::$css_files = $css_files;
 	}
 
-
 	/**
-	 * Set the file path for the directory with the LESS files and 
+	 * Set the file path for the directory with the LESS files and
 	 * URI for the directory with the outputted CSS.
 	 *
 	 * @param string $less_dir
@@ -152,8 +145,6 @@ class Largo_Custom_Less_Variables {
 		self::$css_dir_uri  = $css_dir_uri;
 	}
 
-
-
 	/**
 	 * Set the variables.less file
 	 *
@@ -162,8 +153,6 @@ class Largo_Custom_Less_Variables {
 	static function register_variables_less_file( $variables_less_file ) {
 		self::$variables_less_file = $variables_less_file;
 	}
-
-
 
 	/**
 	 * Get the compiled CSS for a LESS file.
@@ -229,14 +218,12 @@ class Largo_Custom_Less_Variables {
 
 	}
 
-
 	/**
 	 * Get the variable.less file path
 	 */
 	static function variable_file_path() {
 		return self::$less_dir . '/' . self::$variables_less_file;
 	}
-
 
 	/**
 	 * Replace the include for the variable file with a modified version
@@ -268,7 +255,6 @@ class Largo_Custom_Less_Variables {
 		return $less;
 	}
 
-
 	/**
 	 * Change the URL for the stylesheets that are the output of the LESS files.
 	 */
@@ -280,7 +266,8 @@ class Largo_Custom_Less_Variables {
 		foreach ( self::$css_files as $key => $filename ) {
 			if ( preg_match( '!^'.$base_url_escape. preg_quote( $filename ) .'(?<extra>[#\?].*)?$!', $src, $matches ) ) {
 				$variables = self::get_custom_values();
-				return add_query_arg( 
+				if (is_null($variables['meta'])) $variables['meta'] = (object) array('post_modified_gmt' => 0);	//check if none defined
+				return add_query_arg(
 					array( 'largo_custom_less_variable' => 1, 'css_file' => $filename, 'timestamp' => $variables['meta']->post_modified_gmt ),
 					home_url( $matches['extra'] )
 				);
@@ -288,7 +275,6 @@ class Largo_Custom_Less_Variables {
 		}
 		return $src;
 	}
-
 
 	/**
 	 * Intercept the loading of the page to determine if we output the rendered CSS
@@ -303,7 +289,6 @@ class Largo_Custom_Less_Variables {
 
 		header( 'Content-Type: text/css', true, 200 );
 		header( 'Expires: ' . gmdate( 'D, d M Y H:i:s', time() + 31536000) . ' GMT' ); // 1 year
-
 
 		// Echo nothing if the file is missing
 		if ( empty( $css_file ) ) {
@@ -327,14 +312,12 @@ class Largo_Custom_Less_Variables {
 		exit;
 	}
 
-
 	/**
 	 * Display a success message
 	 */
 	static function success_admin_notices() {
 		echo '<div id="message" class="updated fade"><p><strong>' . __( 'CSS custom variables saved.', 'largo' ) . '</strong></p></div>';
 	}
-
 
 	/**
 	 * Register the admin page
@@ -349,14 +332,12 @@ class Largo_Custom_Less_Variables {
 		//add_action( "load-$hook", array( 'Largo_Custom_Less_Variables', 'update_title' ) );
 	}
 
-
 	/**
 	 * Render the admin page content
 	 */
 	static function admin() {
 
 		add_meta_box( 'submitdiv', __( 'Publish', 'largo' ), array( __CLASS__, 'publish_box' ), 'customlessvariables', 'side' );
-
 
 		//if ( ! empty( $safecss_post ) && 0 < $safecss_post['ID'] && wp_get_post_revisions( $safecss_post['ID'] ) )
 		//	add_meta_box( 'revisionsdiv', __( 'CSS Variables Revisions', 'largo' ), array( __CLASS__, 'revisions_meta_box' ), 'customlessvariables', 'side' );
@@ -385,6 +366,7 @@ class Largo_Custom_Less_Variables {
 								// Setup the field callbacks
 								$field_type_callbacks = array(
 									'color' => array( __CLASS__, 'color_type_field' ),
+									'pixels' => array( __CLASS__, 'pixels_field' ),
 								);
 								$field_type_callbacks = apply_filters( 'largo_custom_less_variables_types_callbacks', $field_type_callbacks );
 
@@ -405,7 +387,7 @@ class Largo_Custom_Less_Variables {
 										if ( isset( $field_type_callbacks[$field['type']] ) ) {
 											call_user_func_array( $field_type_callbacks[$field['type']], array( $field, $value, $form_name, $form_id ) );
 										} else {
-											echo '<input type="text" name="', $form_name, '" id="', $form_id, '" value="', esc_attr($value),'" />';
+											echo '<input type="text" name="', $form_name, '" id="', $form_id, '" size="40" value="', esc_attr($value),'" />';
 										}
 
 										echo '</div>';
@@ -429,23 +411,16 @@ class Largo_Custom_Less_Variables {
 	 */
 	static function admin_head() {
 		wp_enqueue_script( 'iris' ); // Colorpicker
-
 		wp_enqueue_script( 'largo_custom_less_variable', get_template_directory_uri().'/js/custom-less-variables.js', array( 'jquery', 'iris' ), '20130405', true );
-
 		wp_enqueue_style( 'largo_custom_less_variable', get_template_directory_uri().'/css/custom-less-variables.css', '20130405' );
-
-
 		do_action( 'largo_custom_less_variable_head' );
 	}
-
 
 	/**
 	 * Revision meta box
 	 */
 	static function revisions_meta_box() {
-
 	}
-
 
 	/**
 	 * Render the publish meta box
@@ -455,11 +430,7 @@ class Largo_Custom_Less_Variables {
 		<div id="minor-publishing">
 			<?php /*
 			<div id="misc-publishing-actions">
-				
-
 				// $safecss_post = Jetpack_Custom_CSS::get_current_revision();
-
-				
 				<?php do_action( 'largo_custom_less_variables_submitbox_misc_actions' ); ?>
 			</div>
 			*/ ?>
@@ -474,7 +445,6 @@ class Largo_Custom_Less_Variables {
 		</div>
 		<?php
 	}
-
 
 	/**
 	 * Get the custom values
@@ -530,7 +500,6 @@ class Largo_Custom_Less_Variables {
 			$post_version = $post_version[0];
 		}
 
-
 		// Get the values
 		$values = json_decode( $post_version->post_content, true );
 
@@ -543,14 +512,13 @@ class Largo_Custom_Less_Variables {
 		return $data;
 	}
 
-
 	/**
 	 * Save or update custom values
 	 *
 	 * @param array $values - an associative array of values
 	 * @param string $theme optional - the theme name, defaults to the active the theme
 	 */
-	static function update_custom_values( $values, $theme=null ) {
+	static function update_custom_values( $values, $theme = null ) {
 		if ( empty( $theme ) ) {
 			$theme_data = wp_get_theme();
 			$theme = $theme_data->get_stylesheet();
@@ -572,8 +540,15 @@ class Largo_Custom_Less_Variables {
 
 		if ( !is_array( $values ) ) {
 			$values = array();
+		} else {
+			foreach ($values as $field => $value) {
+				//fix the pixels ones
+				if (strpos($field, "-pixels")) {
+					$values[ str_replace("-pixels", "", $field) ] = $value . "px";
+					unset($values[$field]);
+				}
+			}
 		}
-
 
 		$post_data = array(
 			'post_content' => json_encode( $values ),
@@ -590,16 +565,17 @@ class Largo_Custom_Less_Variables {
 
 			// Clear out meta data
 			$meta_keys = get_post_custom_keys( $post_id );
-			foreach ( $meta_keys as $meta_key ) {
-				delete_post_meta( $post_id, $meta_key );
+			if (count($meta_keys)) {
+				foreach ( $meta_keys as $meta_key ) {
+					delete_post_meta( $post_id, $meta_key );
+				}
 			}
 		}
-		
+
 		// clear cache
 		$cache_key = 'customlessvars_'.$theme;
 		delete_transient( $cache_key );
 	}
-
 
 	/**
 	 * Parse the variable.less to retrieve the editable values
@@ -610,7 +586,6 @@ class Largo_Custom_Less_Variables {
 		);
 
 		$less = file_get_contents( self::variable_file_path() );
-
 
 		// Parse
 		$pattern = '#/\*\*\s+(?<comment>.*)\s+\*/\s*@(?P<name>[\w-_]+):\s*(?P<value>[^;]*);#Us';
@@ -625,7 +600,7 @@ class Largo_Custom_Less_Variables {
 
 			// Parse out the properties in the comment block
 			preg_match_all( $comment_pattern, $comment, $comment_matches );
-			
+
 			foreach ( $comment_matches['prop'] as $pkey => $prop ) {
 				$props[$prop] = trim( $comment_matches['value'][$pkey] );
 			}
@@ -654,11 +629,9 @@ class Largo_Custom_Less_Variables {
 				);
 			}
 		}
-		
+
 		return $variable_groups;
 	}
-
-
 
 
 	/**
@@ -667,6 +640,16 @@ class Largo_Custom_Less_Variables {
 	static function color_type_field( $field, $value, $name, $id ) {
 		echo '<input name="', $name, '" id="', $id, '" data-widget="colorpicker" value="', esc_attr($value), '" />';
 	}
+
+
+	/**
+	 * Render a pixels field in the admin
+	 */
+	static function pixels_field( $field, $value, $name, $id ) {
+		$display_value = esc_attr(rtrim($value, 'px'));	//strip out "px", will be added back in before save
+		echo '<input name="', str_replace("]","-pixels]", $name), '" id="', $id, '" type="number" step="1" value="', $display_value, '" /> pixels';
+	}
+
 }
 
 Largo_Custom_Less_Variables::init();
