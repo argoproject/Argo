@@ -470,6 +470,7 @@ class FeedInput_FeedItem {
 		$converted_posts[$feedset->name] = $post_id;
 		update_post_meta( $this->post->ID, 'converted_posts', $converted_posts );
 
+
 		// Allow others to do additional work
 		do_action( 'feedinput_convert_to_post', get_post( $post_id ), $this->data, $feedset );
 		do_action( "feedinput_convert_to_post-{$feedset->name}", get_post( $post_id ), $this->data, $feedset );
@@ -487,7 +488,15 @@ class FeedInput_FeedItem {
 		foreach ( $map as $field_name => $where ) {
 			switch( $where['type'] ) {
 				case 'field':
-					$data[$field_name] = $this->data[$where['value']];
+					if ( is_array($where['value']) ) {
+						$v = $this->data;
+						for ( $i=0; isset($v) && $i < count($where['value']); ++$i ) {
+							$v = $v[ $where['value'][$i] ];
+						}
+						$data[$field_name] = empty($v) ? '' : $v;
+					} else {
+						$data[$field_name] = $this->data[$where['value']];
+					}
 					break;
 
 				case 'literal':

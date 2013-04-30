@@ -108,7 +108,17 @@ class FeedInput_AdminPage {
 		$feed_urls = $this->get_feed_urls();
 
 		if ( count( $feed_urls ) > 0 ) {
-			feedinput_register_feed( 'feedinput_admin', $feed_urls );
+			$options = array(
+				'convert_to_post' => true,// false,
+				'convert' => array(
+					'post' => array(),
+					'meta' => array(
+						'largo_byline_text' => array( 'type' => 'field', 'value' => array('authors', 0, 'name') ),
+						'largo_byline_link' => array( 'type' => 'field', 'value' => array('authors', 0, 'link') ),
+					),
+				)
+			);
+			feedinput_register_feed( 'feedinput_admin', $feed_urls, $options );
 		}
 	}
 
