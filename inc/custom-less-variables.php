@@ -211,7 +211,9 @@ class Largo_Custom_Less_Variables {
 			$less = file_get_contents( self::$less_dir . $less_file );
 			$less = self::replace_with_custom_variables( $less );
 
-			return $compiler->compile( $less );
+			$css = $compiler->compile( $less );
+			$css = self::fix_urls( $css );
+			return $css;
 		} catch ( Exception $e ) {
 			return $less;
 		}
@@ -253,6 +255,31 @@ class Largo_Custom_Less_Variables {
 		$less = preg_replace( '#^@import ["\']'.$filename.'["\'];#m', $variables_less, $less );
 
 		return $less;
+	}
+
+
+	/**
+	 *
+	 */
+	static function fix_urls( $css ) {
+		preg_match_all('#url\(([^)]+)\)#', $css, $matches );
+
+		$find = array();
+		$replace = array();
+
+		foreach ( $matches[1] as $raw_url ) {
+			$url = trim( $raw_url, " \t\n\r\0\x0B'\"" );
+
+			// Don't replace for URLs with domain name, starting at the root, or just a fragment
+			if ( 0 == preg_match( '@^(\w://|//|/|#)@', $url ) ) {
+				$find[] = 'url('.$raw_url.')';
+				$replace[] = 'url(' . self::$css_dir_uri . $url . ')';
+			}
+		}
+
+		$css = str_replace( $find, $replace, $css );
+		
+		return $css;	
 	}
 
 	/**
