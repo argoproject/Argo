@@ -33,6 +33,7 @@ class FeedInput_FeedItem {
 		) );
 	}
 
+
 	/**
 	 * Parse an array of SimplePie_Items into items
 	 *
@@ -53,7 +54,7 @@ class FeedInput_FeedItem {
 		$posts = get_posts( array(
 			'post_type' => 'feedinput_item',
 			'posts_per_page' => count( $uids ),
-			'post_status' => 'any',
+			'post_status' => array('any', 'trash'),
 			'meta_query' => array(
 				array(
 					'key' => 'uid',
@@ -92,10 +93,74 @@ class FeedInput_FeedItem {
 
 
 	/**
+	 *
+	 */
+	static function get_items( $feedset, $number_of_items=10, $page=1 ) {
+		$posts = get_posts( array(
+			'post_type' => 'feedinput_item',
+			'posts_per_page' => $number_of_items,
+			'paged' => $page,
+			'post_status' => array('any'),
+			'tax_query' => array(
+				array(
+					'taxonomy' => 'feedinput_feed',
+					'field' => 'slug',
+					'terms' => $feedset->name,
+				)
+			)
+		));
+
+		$items = array();
+
+		foreach ( $posts as $post ) {
+			$data = self::get_data_from_post( $post );
+			$items[] = new FeedInput_FeedItem( $data, $post );
+		}
+
+		return $items;
+	}
+
+
+	/**
+	 * @param FeedInput_FeedSet $feedset
+	 * @param string $uid
+	 *
+	 * @return FeedInput_FeedItem
+	 */
+	static function get_item( $feedset, $uid ) {
+		$posts = get_posts( array(
+			'post_type' => 'feedinput_item',
+			'posts_per_page' => 1,
+			'post_status' => array('any'),
+			'tax_query' => array(
+				array(
+					'taxonomy' => 'feedinput_feed',
+					'field' => 'slug',
+					'terms' => $feedset->name,
+				)
+			),
+			'meta_query' => array(
+				array(
+					'key' => 'uid',
+					'value' => $uid,
+				)
+			)
+		));
+		
+		if ( count( $posts ) > 0 ) {
+			$data = self::get_data_from_post( $posts[0] );
+			return new FeedInput_FeedItem( $data, $posts[0] );
+		}
+		return null;
+	}
+
+
+	/**
 	 * Retrieve the data object for an item from a post object
 	 */
 	protected function get_data_from_post( $post ) {
-		return json_decode( $post->post_content, true );
+		$data = get_post_meta( $post->ID, 'data', true );
+		return json_decode( $data, true );
 	}
 
 
@@ -379,12 +444,10 @@ class FeedInput_FeedItem {
 	 * @param boolean $force - force saving of the item
 	 */
 	function save( $feedset=null, $force=false ) {
-
 		if ( empty( $this->post ) ) {
 			$id = wp_insert_post( array(
 				'post_type' => 'feedinput_item',
 				'post_title' => $this->data['uid'],
-				'post_content' => addslashes( json_encode( $this->data ) ),
 			) );
 
 			if ( $id != 0 ) {
@@ -392,22 +455,36 @@ class FeedInput_FeedItem {
 			}
 
 			add_post_meta( $this->post->ID, 'uid', $this->data['uid'], true );
+			add_post_meta( $this->post->ID, 'data', addslashes( json_encode( $this->data ) ) );
 
 		} elseif ( $force ) {
 			wp_update_post( array(
 				'ID' => $this->post->ID,
 				'post_type' => 'feedinput_item',
 				'post_title' => $this->data['uid'],
-				'post_content' => addslashes( json_encode( $this->data ) ),
 			) );
 
 			update_post_meta( $this->post->ID, 'uid', $this->data['uid'] );
+			update_post_meta( $this->post->ID, 'data', addslashes( json_encode( $this->data ) ) );
 		}
+
 
 		// Add category for the Feedset it is from
 		if ( !empty( $feedset ) ) {
 			wp_set_post_terms( $this->post->ID, $feedset->name, 'feedinput_feed', true );
 		}
+	}
+
+
+	/**
+	 *
+	 */
+	function remove_item() {
+		if ( !empty( $this->post ) ) {
+			return wp_update_post( array( 'ID' => $this->post->ID, 'post_status' => 'trash' ) );
+		}
+
+		return null;
 	}
 
 
@@ -424,14 +501,19 @@ class FeedInput_FeedItem {
 			$this->save( $feedset );
 		}
 
+		// echo $this->post->ID;
+		// echo "\n";
+		// echo $this->post->post_content_filtered;
+		// exit();
+
 		// Abort if we already converted to a post
 		$converted_posts = get_post_meta( $this->post->ID, 'converted_posts', true );
 		if ( empty( $converted_posts ) ) {
 			$converted_posts = array();
 		}
-
+		
 		if ( isset( $converted_posts[$feedset->name] ) ) {
-			return;
+			return get_post( $converted_posts[$feedset->name] );
 		}
 
 		$default_post = array(
@@ -489,7 +571,7 @@ class FeedInput_FeedItem {
 		do_action( 'feedinput_convert_to_post', get_post( $post_id ), $this->data, $feedset );
 		do_action( "feedinput_convert_to_post-{$feedset->name}", get_post( $post_id ), $this->data, $feedset );
 
-		return $this->post;
+		return get_post( $post_id );
 	}
 
 

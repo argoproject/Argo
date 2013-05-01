@@ -30,6 +30,7 @@ class FeedInput_Manager {
 		self::$feed_sets[ $feed_name ] = new FeedInput_FeedSet( $feed_name, $feed_urls, $options );
 	}
 
+
 	/**
 	 * Update the value of the feeds
 	 */
@@ -39,13 +40,29 @@ class FeedInput_Manager {
 		}
 	}
 
+
 	/**
-	 *
+	 * Force an update of a feed
 	 */
 	static function force_update_feedset( $feed_set_name ) {
 		if ( isset(self::$feed_sets[$feed_set_name]) ) {
 			self::$feed_sets[$feed_set_name]->update();
 		}
+	}
+
+
+	/**
+	 * Get a registered feedset
+	 *
+	 * @param string $feed_name
+	 *
+	 * @return FeedInput_FeedSet
+	 */
+	static function get_feedset( $feed_name ) {
+		if ( isset( self::$feed_sets[ $feed_name ] ) ) {
+			return self::$feed_sets[ $feed_name ];
+		}
+		return null;
 	}
 }
 

@@ -26,3 +26,15 @@ function feedinput_register_feed( $feed_name, $feed_urls, $options=array() ) {
 function feedinput_force_update_feed( $feed_name ) {
   return FeedInput_Manager::force_update_feedset( $feed_name );
 }
+
+
+/**
+ * Retrieve a registered feed set
+ *
+ * @param string $feed_name
+ *
+ * @return FeedInput_FeedSet
+ */
+function feedinput_get_feed( $feed_name ) {
+  return FeedInput_Manager::get_feedset( $feed_name );
+}

@@ -9,10 +9,20 @@
       var itemId = button.data('id');
       var item = button.closest( 'li' );
 
-      $.post( ajaxurl, { action: 'feedinput_dashboard_convert_item', id: itemId})
+      $.post( ajaxurl, { action: 'feedinput_dashboard_convert_item', id: itemId })
+        .done( function( data ) {
+          button.replaceWith( data );
+          item.addClass('converted');
+        });
     })
     .on( 'click', 'a[data-action="trash-item"]', function( event ) {
+      var button = $(this);
+      var itemId = button.data('id');
+      var item = button.closest( 'li' );
 
+      $.post( ajaxurl, { action: 'feedinput_dashboard_remove_item', id: itemId });
+
+      item.addClass('removed');
     });
 
 })( jQuery );

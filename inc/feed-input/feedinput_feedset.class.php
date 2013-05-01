@@ -74,5 +74,38 @@ class FeedInput_FeedSet {
 			}
 		}
 	}
+
+
+	/**
+	 * Retrieve saved items
+	 *
+	 * @param int $number_of_items - the number of items to return
+	 * @param int $page - the page of results to retrieve
+	 */
+	function get_items( $number_of_items=10, $page=1 ) {
+		return FeedInput_FeedItem::get_items( $this, $number_of_items, $page );
+	}
 	
+
+	/**
+	 * Convert an item in the feed into a post
+	 */
+	function convert_item_to_post( $uid ) {
+		$item = FeedInput_FeedItem::get_item( $this, $uid );
+		if ( !empty( $item ) ) {
+			return $item->convert_to_post( $this->options['convert'], $this );
+		}
+
+		return null;
+	}
+
+
+	function remove_item( $uid ) {
+		$item = FeedInput_FeedItem::get_item( $this, $uid );
+		if ( !empty( $item ) ) {
+			return $item->remove_item();
+		}
+
+		return null;
+	}
 }
