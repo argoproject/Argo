@@ -11,8 +11,8 @@ class FeedInput_AdminPage {
 		add_action( 'admin_menu', array(&$this, 'admin_menu') );
 		add_action( 'admin_enqueue_scripts', array(&$this, 'admin_enqueue_scripts') );
 		add_action( 'init', array(&$this, 'register_feedset') );
-		
-
+		add_action( 'feedinput_convert_to_post-feedinput_admin', array(&$this, 'convert_post_action'), 3, 10 );
+		add_action( 'init', array(&$this, 'register_taxonomy') );
 	}
 
 
@@ -30,7 +30,7 @@ class FeedInput_AdminPage {
 	 */
 	function page_content() {
 		$feed_urls = $this->get_feed_urls();
-
+		$map = $this->get_taxonomy_map();
 		?>
 		<div class="wrap">
 			<h2><?php _e('Syndicated Sources', 'feedinput'); ?></h2>
@@ -39,8 +39,18 @@ class FeedInput_AdminPage {
 				<?php wp_nonce_field( 'update_feed_urls', 'feedinput_nonce' ); ?>
 				<input type="hidden" name="feedinput" value="1" />
 				<label for="feed_urls"><?php _e('Feed URLs', 'feedinput'); ?></label>
-				<p><?php _e('Enter each feed URL on a separate line.', 'feedinput'); ?></p>
-				<textarea id="feed_urls" name="feed_urls" style="width: 100%" rows="10"><?php echo implode( "\n", $feed_urls ); ?></textarea>
+				<p><?php _e('Enter each feed URL on a separate line. You can prefix a URL with the media source term to assign the converted posts. Example: Arnold Times | http://arnoldtimesonline.com/feed', 'feedinput'); ?></p>
+				<textarea id="feed_urls" name="feed_urls" style="width: 100%" rows="10"><?php 
+					$lines = array();
+					foreach ( $feed_urls as $url ) {
+						if ( !empty( $map[$url] ) ) {
+							$lines[] = $map[$url] . ' | ' . $url;
+						} else {
+							$lines[] = $url;
+						}
+					}
+					echo implode( "\n", $lines ); 
+				?></textarea>
 
 				<div>
 					<button type="submit" class="button-primary"><?php _e('Save'); ?></button>
@@ -78,7 +88,20 @@ class FeedInput_AdminPage {
 
 			// Get input
 			$feed_urls_raw = filter_input( INPUT_POST, 'feed_urls', FILTER_SANITIZE_STRING );
-			$urls = explode( "\n", $feed_urls_raw );
+			$lines = explode( "\n", $feed_urls_raw );
+			$urls  = array();
+			$taxonomy_map = array();
+
+			foreach ( $lines as $line ) {
+				preg_match( '#[\s|]+([^\s|]+)\s*$#', $line, $matches );
+				if ( isset( $matches[1] ) ) {
+					$urls[] = $matches[1];
+					$taxonomy_map[$matches[1]] = str_replace( $matches[0], '', $line );
+				} else {
+					$urls[] = trim($line);
+				}
+			}
+
 			$feed_urls = array();
 			foreach ( $urls as $url ) {
 				$url = filter_var( $url, FILTER_SANITIZE_URL );
@@ -90,6 +113,7 @@ class FeedInput_AdminPage {
 
 			// Save the feeds
 			$this->set_feed_urls( $feed_urls );
+			$this->set_taxonomy_map( $taxonomy_map );
 			$this->register_feedset();
 
 			// Check if there are new feeds added, if not then force an initial update
@@ -134,6 +158,45 @@ class FeedInput_AdminPage {
 	function set_feed_urls( $feed_urls ) {
 		$this->feed_urls = $feed_urls;
 		update_option( 'feedinput_feeds', $feed_urls );
+	}
+
+	function get_taxonomy_map() {
+		if ( !is_array( $this->taxonomy_map ) ) {
+			$this->taxonomy_map = get_option( 'feedinput_taxonomy_map', array() );
+		}
+		return $this->taxonomy_map;
+	}
+
+	function set_taxonomy_map( $taxonomy_map ) {
+		$this->taxonomy_map = $taxonomy_map;
+		update_option( 'feedinput_taxonomy_map', $taxonomy_map );
+	}
+
+	/**
+	 * Action for converting a post to add custom Largo taxonomy
+	 */
+	function convert_post_action( $post, $data, $feedset ) {
+		$map = $this->get_taxonomy_map();
+		$feed_url = $data['feed_url'];
+
+		if ( !empty( $map[$feed_url] ) ) {
+			wp_set_post_terms( $post->ID, $map[$feed_url], 'media-sources', true );
+		}
+	}
+
+	/**
+	 * Register a custom taxonomy for the named media source
+	 */
+	function register_taxonomy() {
+		register_taxonomy('media-sources',
+			array( 'post'),
+		 	array(
+		 		'labels' => array(
+		 			'singular_name' => __('Media Source', 'feedinput'),
+		 			'name' => __( 'Media Sources', 'feedinput' ),
+		 		),
+		 		'public' => true,
+		 	) );
 	}
 }
 

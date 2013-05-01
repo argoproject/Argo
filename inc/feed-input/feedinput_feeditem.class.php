@@ -116,6 +116,20 @@ class FeedInput_FeedItem {
 		$data['latitude'] = $item->get_latitude();
 		$data['longitude'] = $item->get_longitude();
 
+		$feed = $item->get_feed();
+		$data['feed_title'] = $feed->get_title();
+
+		$data['feed_url'] = $feed->feed_url;
+
+		// Feed Authors
+		$author_objs = $feed->get_authors();
+		$data['feed_authors'] = array();
+		if ( is_array($author_objs) ) {
+			foreach ( $author_objs as $author ) {
+				$data['feed_authors'][] = self::parse_author( $author, $feedset );
+			}
+		}
+
 		// Dates
 		$data['date'] = $item->get_gmdate('Y-m-d H:i:s');
 		$data['updated'] = $item->get_updated_gmdate('Y-m-d H:i:s');
