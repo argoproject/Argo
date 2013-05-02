@@ -278,8 +278,8 @@ class Largo_Custom_Less_Variables {
 		}
 
 		$css = str_replace( $find, $replace, $css );
-		
-		return $css;	
+
+		return $css;
 	}
 
 	/**
@@ -394,6 +394,7 @@ class Largo_Custom_Less_Variables {
 								$field_type_callbacks = array(
 									'color' => array( __CLASS__, 'color_type_field' ),
 									'pixels' => array( __CLASS__, 'pixels_field' ),
+									'dropdown' => array( __CLASS__, 'dropdown_field' ),
 								);
 								$field_type_callbacks = apply_filters( 'largo_custom_less_variables_types_callbacks', $field_type_callbacks );
 
@@ -668,13 +669,24 @@ class Largo_Custom_Less_Variables {
 		echo '<input name="', $name, '" id="', $id, '" data-widget="colorpicker" value="', esc_attr($value), '" />';
 	}
 
-
 	/**
 	 * Render a pixels field in the admin
 	 */
 	static function pixels_field( $field, $value, $name, $id ) {
 		$display_value = esc_attr(rtrim($value, 'px'));	//strip out "px", will be added back in before save
 		echo '<input name="', str_replace("]","-pixels]", $name), '" id="', $id, '" type="number" step="1" value="', $display_value, '" /> pixels';
+	}
+
+	/**
+	 * Render a dropdown in the admin
+	 */
+	static function dropdown_field( $field, $value, $name, $id ) {
+		$options = explode('|', $field['properties']['options']);
+		echo '<select name="', $name, '" id="', $id, '">';
+		foreach ($options as $opt) {
+			echo '<option value="', esc_attr($opt), '"', selected($opt, $value, 0), '>', $opt, "</option>\n";
+		}
+		echo '</select>';
 	}
 
 }
