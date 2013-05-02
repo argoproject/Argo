@@ -17,7 +17,7 @@ class FeedInput_AdminPage {
 		add_action( 'wp_dashboard_setup', array( &$this, 'register_dashboard_widget' ) );
 		add_action( 'wp_ajax_feedinput_dashboard_convert_item', array(&$this, 'dashboard_widget_ajax_convert_item') );
 		add_action( 'wp_ajax_feedinput_dashboard_remove_item', array(&$this, 'dashboard_widget_ajax_remove_item') );
-
+		add_action( 'wp_ajax_feedinput_dashboard_page', array(&$this, 'dashboard_widget_ajax_page') );
 
 
 	}
@@ -125,7 +125,7 @@ class FeedInput_AdminPage {
 
 			// Check if there are new feeds added, if not then force an initial update
 			$new_feed_urls = array_diff( $feed_urls, $old_feed_urls );
-			if ( true || count( $new_feed_urls ) > 0 ) {
+			if ( count( $new_feed_urls ) > 0 ) {
 				feedinput_force_update_feed( 'feedinput_admin' );
 			}
 		}
@@ -225,39 +225,39 @@ class FeedInput_AdminPage {
 	 * Output the dashboard content
 	 */
 	function dashboard_widget() {
-		$query = new WP_Query(array(
-			'post_type' => 'feedinput_item',
-			'post_status' => 'any',
-			'posts_per_page' => 20,
-			'tax_query' => array(
-				array(
-					'taxonomy' => 'feedinput_feed',
-					'field' => 'slug',
-					'terms' => 'feedinput_admin',
-				)
-			)
-		));
-
-		$feed_set = feedinput_get_feed( 'feedinput_admin' );
-		$items = $feed_set->get_items();
-
-
 
 		echo '<ul class="item-list">';
+		$this->dashboard_widget_items( 1 );		
+		echo '<li class="feedinput-paging-status-indicator">';
+		echo '</li>';
+		echo '</ul>';
+	}
+
+
+	function dashboard_widget_items( $page ) {
+		$feed_set = feedinput_get_feed( 'feedinput_admin' );
+		$items = $feed_set->get_items( 20, $page );
+
 		foreach ( $items as $item ) {
 			$converted = get_post_meta( $item->post->ID, 'converted_posts', true );
-			echo '<li>';
-			echo $item->data['title'];
+			echo '<li data-id="', esc_attr($item->data['uid']),'">';
+			echo '<div class="feedinput-item-title">', $item->data['title'], '</div>';
+			echo '<div class="feedinput-item-meta">';
+			$shorten_url = $item->data['permalink'];
+			$shorten_url = strlen($shorten_url) > 50 ? esc_url(substr($shorten_url, 0, 50)).'&hellip;' : esc_url($shorten_url); 
+			echo $item->data['feed_title'], ' | ', '<a href="', esc_url($item->data['permalink']), '" title="', esc_url($item->data['permalink']), '">', $shorten_url,'</a>';
+			echo '</div>';
+			echo '<div class="feedinput-item-actions">';
 			if ( empty($converted['feedinput_admin'] ) ) {
 				echo '<a data-action="convert-item" data-id="', esc_attr($item->data['uid']),'">', __( 'Convert To Post', 'feedinput'), '</a>';
 			} else {
 				edit_post_link( __('Edit Post'), '', '', $item->post->ID );
 			}
 
-			echo '<a data-action="trash-item" data-id="', esc_attr($item->data['uid']), '">', __( 'Remove Item'), '</a>';
+			echo ' | <a data-action="trash-item" data-id="', esc_attr($item->data['uid']), '">', __( 'Remove Item'), '</a>';
+			echo '</div>';
 			echo '</li>';
 		}
-		echo '</ul>';
 	}
 
 	/**
@@ -268,7 +268,8 @@ class FeedInput_AdminPage {
 
 		if( $screen->base == 'dashboard' ) {
 			$url = get_template_directory_uri();
-			wp_enqueue_script( 'feedinput-dashboard', $url.'/inc/feed-input/dashboard.js', array('jquery'), '0.0.1', true );
+			wp_enqueue_script( 'spinjs', $url.'/inc/feed-input/spin.js', array('jquery'), '1.3.0', true );
+			wp_enqueue_script( 'feedinput-dashboard', $url.'/inc/feed-input/dashboard.js', array('jquery', 'spinjs'), '0.0.1', true );
 			wp_enqueue_style( 'feedinput-dashboard', $url.'/inc/feed-input/dashboard.css' );
 		}
 	}
@@ -317,6 +318,26 @@ class FeedInput_AdminPage {
 		echo 'removed';
 		exit;
 	}
+
+	function dashboard_widget_ajax_page() {
+		if ( !current_user_can( 'edit_pages' ) ) {
+			return;
+		}
+
+		$page = filter_input( INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_INT );
+
+		if ( $page < 1 ) {
+			return;
+		}
+
+		echo '<ul>';
+		$this->dashboard_widget_items( $page );	
+		echo '</ul>';
+
+		exit;
+	}
+
+
 }
 
 // Kickoff
