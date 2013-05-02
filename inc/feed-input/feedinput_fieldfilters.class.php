@@ -44,7 +44,7 @@ class FeedInput_FieldFilters {
 	 * Convert the categories into tags
 	 */
 	static function tax_input( $data, $taxonomy='post_tag' ) {
-		if ( empty($taxonomy) ) {
+		if ( empty($taxonomy) || empty($data) ) {
 			return array();
 		}
 
