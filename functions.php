@@ -42,8 +42,8 @@ if ( ! isset( $content_width ) )
 
 // load the options framework (used for our theme options pages)
 if ( ! function_exists( 'optionsframework_init' ) ) {
-	define( 'OPTIONS_FRAMEWORK_DIRECTORY', get_template_directory_uri() . '/inc/options-framework/' );
-	require_once dirname( __FILE__ ) . '/inc/options-framework/options-framework.php';
+	define( 'OPTIONS_FRAMEWORK_DIRECTORY', get_template_directory_uri() . '/lib/options-framework/' );
+	require_once dirname( __FILE__ ) . '/lib/options-framework/options-framework.php';
 }
 
 /**
