@@ -14,7 +14,8 @@ class largo_footer_featured_widget extends WP_Widget {
 
 	function widget( $args, $instance ) {
 		extract( $args );
-		$title = apply_filters('widget_title', $instance['title'] );
+
+		$title = apply_filters('widget_title', empty( $instance['title'] ) ? __('In Case You Missed It', 'largo') : $instance['title'], $instance, $this->id_base);
 
 		echo $before_widget;
 

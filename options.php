@@ -27,7 +27,7 @@ function optionsframework_option_name() {
 
 function optionsframework_options() {
 
-	$imagepath =  get_template_directory_uri() . '/inc/options-framework/images/';
+	$imagepath =  get_template_directory_uri() . '/lib/options-framework/images/';
 
 	$display_options = array(
 		'top' 	=> __('Top', 'largo'),

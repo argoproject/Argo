@@ -15,7 +15,8 @@ class largo_recent_posts_widget extends WP_Widget {
 	function widget( $args, $instance ) {
 		global $ids; // an array of post IDs already on a page so we can avoid duplicating posts
 		extract( $args );
-		$title = apply_filters('widget_title', $instance['title'] );
+
+		$title = apply_filters('widget_title', empty( $instance['title'] ) ? __('Recent Stories', 'largo') : $instance['title'], $instance, $this->id_base);
 
 		echo $before_widget;
 
