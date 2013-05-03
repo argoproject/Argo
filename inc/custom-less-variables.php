@@ -200,7 +200,7 @@ class Largo_Custom_Less_Variables {
 
 		// Load LESS compiler if loaded
 		if ( !class_exists('lessc') ) {
-			require( dirname( __FILE__ ) . '/lib/lessc.inc.php' );
+			require( dirname( __FILE__ ) . '/../lib/lessc.inc.php' );
 		}
 
 		$compiler = new lessc();
