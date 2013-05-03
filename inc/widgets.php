@@ -31,6 +31,7 @@ require_once( get_template_directory() . '/inc/widgets/largo-inn-rss.php' );
 require_once( get_template_directory() . '/inc/widgets/largo-taxonomy-list.php' );
 require_once( get_template_directory() . '/inc/widgets/largo-facebook.php' );
 require_once( get_template_directory() . '/inc/widgets/largo-recent-comments.php' );
+require_once( get_template_directory() . '/inc/widgets/largo-image-widget.php' );
 
 // and then register them
 function largo_load_widgets() {
@@ -45,6 +46,7 @@ function largo_load_widgets() {
     register_widget( 'largo_taxonomy_list_widget' );
     register_widget( 'largo_facebook_widget' );
     register_widget( 'largo_recent_comments_widget' );
+    register_widget( 'largo_image_widget' );
 }
 add_action( 'widgets_init', 'largo_load_widgets' );
 
