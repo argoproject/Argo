@@ -106,15 +106,19 @@ class Largo_Custom_Less_Variables {
 		if ( is_admin() && isset( $_POST['customlessvariables'] ) && false != strstr( $_SERVER[ 'REQUEST_URI' ], 'themes.php' ) ) {
 			check_admin_referer( 'customlessvariables', 'customlessvariables' );
 
-			if ( isset( $_POST['field'] ) && is_array( $_POST['field'] ) ) {
+			// Reset all values
+			if ( isset( $_POST['reset'] )) {
+				self::reset_all();
+				add_action( 'admin_notices', array( __CLASS__, 'reset_admin_notices' ) );
+			// Update fields
+			} else if ( isset( $_POST['field'] ) && is_array( $_POST['field'] ) ) {
 				self::update_custom_values( $_POST['field'] );
+				add_action( 'admin_notices', array( __CLASS__, 'success_admin_notices' ) );
 			} else {
 				self::update_custom_values( array() );
+				add_action( 'admin_notices', array( __CLASS__, 'success_admin_notices' ) );	//we updated even without getting anything
 			}
-
-			add_action( 'admin_notices', array( __CLASS__, 'success_admin_notices' ) );
 		}
-
 	}
 
 	/**
@@ -347,6 +351,13 @@ class Largo_Custom_Less_Variables {
 	}
 
 	/**
+	 * Display a success message
+	 */
+	static function reset_admin_notices() {
+		echo '<div id="message" class="error fade"><p><strong>' . __( 'Values reset to defaults.', 'largo' ) . '</strong></p></div>';
+	}
+
+	/**
 	 * Register the admin page
 	 */
 	static function admin_menu() {
@@ -467,7 +478,8 @@ class Largo_Custom_Less_Variables {
 			<?php // <input type="button" class="button" id="preview" name="preview" value="<?php esc_attr_e( 'Preview', 'jetpack' ) " />
 			?>
 			<div id="publishing-action">
-				<input type="submit" class="button-primary" id="save" name="save" value="<?php esc_attr_e( 'Save CSS Variables', 'largo' ); ?>" />
+				<input type="submit" class="button-secondary" id="reset" name="reset" value="<?php esc_attr_e( 'Restore Defaults', 'largo' ); ?>" />
+				<input type="submit" class="button-primary" id="save" name="save" value="<?php esc_attr_e( 'Save Variables', 'largo' ); ?>" />
 			</div>
 			<div class="clear"></div>
 		</div>
@@ -541,6 +553,25 @@ class Largo_Custom_Less_Variables {
 	}
 
 	/**
+	 * Delete all custom variables saved
+	 */
+	static function reset_all() {
+
+		//delete from posts
+		$clv_posts = get_posts('numberposts=-1&post_type=largo_less_variables&post_status=any');
+		foreach ($clv_posts as $clv_post) {
+			wp_delete_post( $clv_post->ID, true );
+		}
+
+		//delete anything transient just in case
+		$theme_data = wp_get_theme();
+		$theme = $theme_data->get_stylesheet();
+		$cache_key = 'customlessvars_'.$theme;
+		print_r($cache_key);
+		print delete_transient( $cache_key );
+	}
+
+	/**
 	 * Save or update custom values
 	 *
 	 * @param array $values - an associative array of values
@@ -553,7 +584,7 @@ class Largo_Custom_Less_Variables {
 		}
 
 		// Need the current version of the settings
-		$post = get_posts( array(
+		$_ = get_posts( array(
 			'post_type'      => 'largo_less_variables',
 			'post_name'      => $theme,
 			'posts_per_page' => 1,
