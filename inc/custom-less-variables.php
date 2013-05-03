@@ -375,7 +375,7 @@ class Largo_Custom_Less_Variables {
 	 */
 	static function admin() {
 
-		add_meta_box( 'submitdiv', __( 'Publish', 'largo' ), array( __CLASS__, 'publish_box' ), 'customlessvariables', 'side' );
+		add_meta_box( 'submitdiv', __( 'Publishing Options', 'largo' ), array( __CLASS__, 'publish_box' ), 'customlessvariables', 'side' );
 
 		//if ( ! empty( $safecss_post ) && 0 < $safecss_post['ID'] && wp_get_post_revisions( $safecss_post['ID'] ) )
 		//	add_meta_box( 'revisionsdiv', __( 'CSS Variables Revisions', 'largo' ), array( __CLASS__, 'revisions_meta_box' ), 'customlessvariables', 'side' );
@@ -389,7 +389,7 @@ class Largo_Custom_Less_Variables {
 				<?php wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce', false ); ?>
 				<input type="hidden" name="action" value="save" />
 				<div id="poststuff" class="metabox-holder has-right-sidebar">
-					<p class="css-support"><?php echo apply_filters( 'largo_custom_less_variables_intro', __( 'Customize the variables within the LESS variables.', 'largo' ) ); ?></p>
+					<p class="css-support"><?php echo apply_filters( 'largo_custom_less_variables_intro', __( 'Customize the appearance of this theme by changing key LESS used for generating CSS.', 'largo' ) ); ?></p>
 					<div id="postbox-container-1" class="inner-sidebar">
 						<?php do_meta_boxes( 'customlessvariables', 'side', array() ); ?>
 					</div>
