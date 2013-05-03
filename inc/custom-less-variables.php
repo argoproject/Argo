@@ -568,7 +568,6 @@ class Largo_Custom_Less_Variables {
 		$theme_data = wp_get_theme();
 		$theme = $theme_data->get_stylesheet();
 		$cache_key = 'customlessvars_'.$theme;
-		print_r($cache_key);
 		print delete_transient( $cache_key );
 	}
 
