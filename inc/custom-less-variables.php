@@ -106,7 +106,7 @@ class Largo_Custom_Less_Variables {
 		if ( is_admin() && isset( $_POST['customlessvariables'] ) && false != strstr( $_SERVER[ 'REQUEST_URI' ], 'themes.php' ) ) {
 			check_admin_referer( 'customlessvariables', 'customlessvariables' );
 
-			if ( isset( $_POST['field'] ) && is_array( $_POST['field'] ) ) {
+			if ( isset( $_POST['field'] ) && is_array( $_POST['field'] ) && !( isset( $_POST['submit-action'] ) && $_POST['submit-action'] == __( 'Hard reset', 'largo' ) ) ) {
 				self::update_custom_values( $_POST['field'] );
 			} else {
 				self::update_custom_values( array() );
@@ -459,7 +459,8 @@ class Largo_Custom_Less_Variables {
 			<div id="misc-publishing-actions">
 				<?php /* // $safecss_post = Jetpack_Custom_CSS::get_current_revision();
 				<?php do_action( 'largo_custom_less_variables_submitbox_misc_actions' ); ?> */ ?>
-				<p><a data-action="reset" class="button">Reset to defaults</a></p>
+				<p><a data-action="reset" class="button">Reset to defaults</a> <br/>
+					Clear out the database settings: <input type="submit" name="submit-action" value="<?php esc_attr_e( 'Hard reset', 'largo' ); ?>" class="button" /></p>
 			</div>
 		</div>
 		<div id="major-publishing-actions">
