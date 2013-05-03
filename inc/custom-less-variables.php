@@ -106,16 +106,12 @@ class Largo_Custom_Less_Variables {
 		if ( is_admin() && isset( $_POST['customlessvariables'] ) && false != strstr( $_SERVER[ 'REQUEST_URI' ], 'themes.php' ) ) {
 			check_admin_referer( 'customlessvariables', 'customlessvariables' );
 
-<<<<<<< HEAD
-			if ( isset( $_POST['field'] ) && is_array( $_POST['field'] ) && !( isset( $_POST['submit-action'] ) && $_POST['submit-action'] == __( 'Hard reset', 'largo' ) ) ) {
-=======
+			if ( isset( $_POST['field'] ) && is_array( $_POST['field'] ) && isset( $_POST['submit-action'] ) && $_POST['submit-action'] == __( 'Reset All', 'largo' )) {
 			// Reset all values
-			if ( isset( $_POST['reset'] )) {
 				self::reset_all();
 				add_action( 'admin_notices', array( __CLASS__, 'reset_admin_notices' ) );
 			// Update fields
 			} else if ( isset( $_POST['field'] ) && is_array( $_POST['field'] ) ) {
->>>>>>> d1a8f77c32021c433024a8cf146c8466c2a1e88d
 				self::update_custom_values( $_POST['field'] );
 				add_action( 'admin_notices', array( __CLASS__, 'success_admin_notices' ) );
 			} else {
@@ -471,18 +467,17 @@ class Largo_Custom_Less_Variables {
 	static function publish_box() {
 		?>
 		<div id="minor-publishing">
-			<div id="misc-publishing-actions">
+			<!-- div id="misc-publishing-actions">
 				<?php /* // $safecss_post = Jetpack_Custom_CSS::get_current_revision();
 				<?php do_action( 'largo_custom_less_variables_submitbox_misc_actions' ); ?> */ ?>
-				<p><a data-action="reset" class="button">Reset to defaults</a> <br/>
-					Clear out the database settings: <input type="submit" name="submit-action" value="<?php esc_attr_e( 'Hard reset', 'largo' ); ?>" class="button" /></p>
-			</div>
+				<p><a data-action="reset" class="button">Reset to defaults</a> <br/></p>
+			</div -->
 		</div>
 		<div id="major-publishing-actions">
 			<?php // <input type="button" class="button" id="preview" name="preview" value="<?php esc_attr_e( 'Preview', 'jetpack' ) " />
 			?>
 			<div id="publishing-action">
-				<input type="submit" class="button-secondary" id="reset" name="reset" value="<?php esc_attr_e( 'Restore Defaults', 'largo' ); ?>" />
+				<input type="submit" name="submit-action" value="<?php esc_attr_e( 'Reset All', 'largo' ); ?>" class="button" />
 				<input type="submit" class="button-primary" id="save" name="save" value="<?php esc_attr_e( 'Save Variables', 'largo' ); ?>" />
 			</div>
 			<div class="clear"></div>
