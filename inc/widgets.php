@@ -146,6 +146,11 @@ function largo_widget_custom_fields_form( $widget, $args, $instance ) {
 	<br />
 	<input class="checkbox" type="checkbox" <?php echo $phone; ?> id="<?php echo $widget->get_field_id('hidden_phone'); ?>" name="<?php echo $widget->get_field_name('hidden_phone'); ?>" /> <label for="<?php echo $widget->get_field_id('hidden_phone'); ?>"><?php _e('Hidden on Phones?', 'largo'); ?></label>
   </p>
+
+  <p>
+  	<label for="<?php echo $widget->get_field_id('title_link'); ?>"><?php _e('Widget Title Link <small class="description">(Example: http://google.com)</small>', 'largo'); ?></label>
+    <input type="text" name="<?php echo $widget->get_field_name('title_link'); ?>" id="<?php echo $widget->get_field_id('title_link'); ?>"" class="widefat" value="<?php echo $instance['title_link']; ?>"" />
+  </p>
 <?php
 }
 add_action('in_widget_form', 'largo_widget_custom_fields_form', 1, 3);
@@ -165,6 +170,8 @@ function largo_register_widget_custom_fields ( $instance, $widget ) {
     $instance['hidden_tablet'] = null;
   if ( !isset($instance['hidden_phone']) )
     $instance['hidden_phone'] = null;
+  if ( !isset($instance['title_link']) )
+    $instance['title_link'] = null;
   return $instance;
 }
 add_filter('widget_form_callback', 'largo_register_widget_custom_fields', 10, 2);
@@ -180,6 +187,21 @@ function largo_widget_update_extend ( $instance, $new_instance ) {
   $instance['hidden_desktop'] = $new_instance['hidden_desktop'] ? 1 : 0;
   $instance['hidden_tablet'] = $new_instance['hidden_tablet'] ? 1 : 0;
   $instance['hidden_phone'] = $new_instance['hidden_phone'] ? 1 : 0;
+  $instance['title_link'] = esc_url( $new_instance['title_link'] );
   return $instance;
 }
 add_filter( 'widget_update_callback', 'largo_widget_update_extend', 10, 2 );
+
+/**
+ * Make it possible for widget titles to be links
+ *
+ * @since 1.0
+ * @uses add_filter() 'widget_title'
+ */
+function largo_add_link_to_widget_title( $title, $instance = null ) {
+  if (!empty($title) && !empty($instance['title_link'])) {
+    $title = '<a href="' . $instance['title_link'] . '">' . $title . '</a>';
+  }
+  return $title;
+}
+add_filter( 'widget_title', 'largo_add_link_to_widget_title', 99, 2 );
