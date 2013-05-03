@@ -413,7 +413,7 @@ class Largo_Custom_Less_Variables {
 										echo '<label id="',$form_id,'">', $field['label'], '</label> ';
 
 										if ( isset( $field_type_callbacks[$field['type']] ) ) {
-											call_user_func_array( $field_type_callbacks[$field['type']], array( $field, $value, $form_name, $form_id ) );
+											call_user_func_array( $field_type_callbacks[$field['type']], array( $field, $value, $field['default_value'], $form_name, $form_id ) );
 										} else {
 											echo '<input type="text" name="', $form_name, '" id="', $form_id, '" size="40" value="', esc_attr($value),'" />';
 										}
@@ -456,21 +456,24 @@ class Largo_Custom_Less_Variables {
 	static function publish_box() {
 		?>
 		<div id="minor-publishing">
-			<?php /*
 			<div id="misc-publishing-actions">
-				// $safecss_post = Jetpack_Custom_CSS::get_current_revision();
-				<?php do_action( 'largo_custom_less_variables_submitbox_misc_actions' ); ?>
+				<?php /* // $safecss_post = Jetpack_Custom_CSS::get_current_revision();
+				<?php do_action( 'largo_custom_less_variables_submitbox_misc_actions' ); ?> */ ?>
+				<p><a data-action="reset" class="button">Reset to defaults</a></p>
 			</div>
-			*/ ?>
 		</div>
 		<div id="major-publishing-actions">
 			<?php // <input type="button" class="button" id="preview" name="preview" value="<?php esc_attr_e( 'Preview', 'jetpack' ) " />
 			?>
-			<div id="publishing-action">
+
+			
+			<div id="publishing-action" class="clear">
 				<input type="submit" class="button-primary" id="save" name="save" value="<?php esc_attr_e( 'Save CSS Variables', 'largo' ); ?>" />
 			</div>
 			<div class="clear"></div>
 		</div>
+
+
 		<?php
 	}
 
@@ -665,24 +668,24 @@ class Largo_Custom_Less_Variables {
 	/**
 	 * Render the color field in the admin
 	 */
-	static function color_type_field( $field, $value, $name, $id ) {
-		echo '<input name="', $name, '" id="', $id, '" data-widget="colorpicker" value="', esc_attr($value), '" />';
+	static function color_type_field( $field, $value, $default_value, $name, $id ) {
+		echo '<input name="', $name, '" id="', $id, '" data-widget="colorpicker" value="', esc_attr($value), '" data-default-value="', $default_value,'" />';
 	}
 
 	/**
 	 * Render a pixels field in the admin
 	 */
-	static function pixels_field( $field, $value, $name, $id ) {
+	static function pixels_field( $field, $value, $default_value, $name, $id ) {
 		$display_value = esc_attr(rtrim($value, 'px'));	//strip out "px", will be added back in before save
-		echo '<input name="', str_replace("]","-pixels]", $name), '" id="', $id, '" type="number" step="1" value="', $display_value, '" /> pixels';
+		echo '<input name="', str_replace("]","-pixels]", $name), '" id="', $id, '" type="number" step="1" value="', $display_value, '" data-default-value="', $default_value,'" /> pixels';
 	}
 
 	/**
 	 * Render a dropdown in the admin
 	 */
-	static function dropdown_field( $field, $value, $name, $id ) {
+	static function dropdown_field( $field, $value, $default_value, $name, $id ) {
 		$options = explode('|', $field['properties']['options']);
-		echo '<select name="', $name, '" id="', $id, '">';
+		echo '<select name="', $name, '" id="', $id, '" data-default-value="', $default_value,'">';
 		foreach ($options as $opt) {
 			echo '<option value="', esc_attr($opt), '"', selected($opt, $value, 0), '>', $opt, "</option>\n";
 		}
