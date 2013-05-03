@@ -1,8 +1,38 @@
 <?php
 
 /**
- * Adds meta boxes to the post edit screen for custom byline and link
- * see: http://wp.tutsplus.com/tutorials/plugins/how-to-create-custom-wordpress-writemeta-boxes/
+ * Move the author dropdown to the publish metabox so it's easier to find
+ *
+ * @since 1.0
+ */
+function move_author_to_publish_metabox() {
+	global $post_ID;
+	$post = get_post( $post_ID );
+	echo '<div id="author" class="misc-pub-section" style="padding: 8px 10px;">Author: ';
+	post_author_meta_box( $post );
+	echo '</div>';
+}
+add_action( 'post_submitbox_misc_actions', 'move_author_to_publish_metabox' );
+
+/**
+ * Hide some of the less commonly used metaboxes to cleanup the post and page edit screens
+ *
+ * @since 1.0
+ */
+function remove_default_post_screen_metaboxes() {
+	remove_meta_box( 'trackbacksdiv','post','normal' ); // trackbacks
+	remove_meta_box( 'slugdiv','post','normal' ); // slug
+	remove_meta_box( 'revisionsdiv','post','normal' ); // revisions
+	remove_meta_box( 'authordiv', 'post', 'normal' ); // author
+	remove_meta_box( 'commentsdiv','post','normal' ); // comments
+}
+add_action('admin_menu','remove_default_post_screen_metaboxes');
+
+/**
+ * Adds custom meta boxes to the post edit screen for
+ *  - custom byline and link
+ *  - featured video link
+ *  - custom post layout options
  *
  * @since 1.0
  */
@@ -28,6 +58,14 @@ function largo_meta_box_add() {
 			'core'
 		);
 	}
+    add_meta_box(
+    	'largo_featured_video',
+    	__('Featured Video'),
+    	'largo_featured_video_meta_box_display',
+    	'post',
+    	'side',
+    	'low'
+    );
 }
 add_action( 'add_meta_boxes', 'largo_meta_box_add' );
 
@@ -54,7 +92,8 @@ function largo_meta_box_save( $post_id ) {
 		'_wp_post_template' => $_POST['_wp_post_template'],
 		'custom_sidebar' 	=> $_POST['custom_sidebar'],
 		'largo_byline_text' => $_POST['largo_byline_text'],
-		'largo_byline_link' => $_POST['largo_byline_link']
+		'largo_byline_link' => $_POST['largo_byline_link'],
+		'youtube_url' 		=> $_POST['youtube_url']
 	);
 
 	foreach ( $mydata as $key => $value ) {
@@ -110,4 +149,16 @@ function largo_layout_meta_box_display () {
 	echo '<select name="custom_sidebar" id="custom_sidebar" class="dropdown">';
 	custom_sidebars_dropdown(); //get the options
 	echo '</select>';
+}
+
+function largo_featured_video_meta_box_display() {
+    global $post;
+    $values = get_post_custom( $post->ID );
+    $youtube_url = isset( $values['youtube_url'] ) ? esc_attr( $values['youtube_url'][0] ) : '';
+    wp_nonce_field( 'largo_meta_box_nonce', 'meta_box_nonce' );
+
+    echo __('<p>In some cases you might want to use a video in the place of the featured image. If you would prefer to use a video, enter the URL for the video (YouTube only) here:</p>', 'largo');
+    echo '<input type="text" name="youtube_url" id="youtube_url" value="' . $youtube_url . '" />';
+    echo __('<p class="small">Note that at the moment this is only used for the top story on the homepage but future versions of Largo might enable this functionality elsewhere in the theme.</p>', 'largo');
+
 }
