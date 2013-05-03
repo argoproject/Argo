@@ -27,7 +27,7 @@ function optionsframework_option_name() {
 
 function optionsframework_options() {
 
-	$imagepath =  get_template_directory_uri() . '/inc/options-framework/images/';
+	$imagepath =  get_template_directory_uri() . '/lib/options-framework/images/';
 
 	$display_options = array(
 		'top' 	=> __('Top', 'largo'),
@@ -65,6 +65,9 @@ function optionsframework_options() {
 
 	$options = array();
 
+	/**
+	 * Basic Options
+	 */
 	$options[] = array(
 		'name' 	=> __('Basic Settings', 'largo'),
 		'type' 	=> 'heading');
@@ -275,6 +278,9 @@ function optionsframework_options() {
 		'std' 	=> '0',
 		'type' 	=> 'checkbox');
 
+	/**
+	 * Images Options
+	 */
 	$options[] = array(
 		'name' 	=> __('Theme Images', 'largo'),
 		'type' 	=> 'heading');
@@ -319,6 +325,9 @@ function optionsframework_options() {
 		'id' 	=> 'banner_image_lg',
 		'type' 	=> 'upload');
 
+	/**
+	 * Layout Options
+	 */
 	$options[] = array(
 		'name' 	=> __('Layout Options', 'largo'),
 		'type' 	=> 'heading');
@@ -424,7 +433,6 @@ function optionsframework_options() {
 			'3col-equal' 	=> $imagepath . 'footer-3col-equal.png',
 			'4col' 			=> $imagepath . 'footer-4col.png')
 	);
-
 
 	return $options;
 }

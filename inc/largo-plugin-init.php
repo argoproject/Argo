@@ -19,9 +19,9 @@
 /**
  * Include the TGM_Plugin_Activation class.
  */
-require_once dirname( __FILE__ ) . '/class-tgm-plugin-activation.php';
+require_once( str_replace('//','/',dirname(__FILE__).'/') .'../lib/class-tgm-plugin-activation.php');
 
-add_action( 'tgmpa_register', 'my_theme_register_required_plugins' );
+add_action( 'tgmpa_register', 'largo_register_required_plugins' );
 /**
  * Register the required plugins for this theme.
  *
@@ -34,7 +34,7 @@ add_action( 'tgmpa_register', 'my_theme_register_required_plugins' );
  * This function is hooked into tgmpa_init, which is fired within the
  * TGM_Plugin_Activation class constructor.
  */
-function my_theme_register_required_plugins() {
+function largo_register_required_plugins() {
 
 	/**
 	 * Array of plugin arrays. Required keys are name and slug.
@@ -144,7 +144,7 @@ function my_theme_register_required_plugins() {
 	);
 
 	// Change this to your theme text domain, used for internationalising strings
-	$theme_text_domain = 'tgmpa';
+	$theme_text_domain = 'largo';
 
 	/**
 	 * Array of configuration settings. Amend each line as needed.
