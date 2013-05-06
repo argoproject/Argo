@@ -9,6 +9,9 @@ Author URI: http://seamusleahy.com
 License: MIT
 */
 
+if ( !defined(__DIR__) ) {
+	define( __DIR__, dirname(__FILE__));
+}
 
 require_once __DIR__ .'/feedinput_fieldfilters.class.php';
 require_once __DIR__ .'/feedinput_feeditem.class.php';
