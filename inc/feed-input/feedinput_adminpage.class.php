@@ -286,13 +286,13 @@ class FeedInput_AdminPage {
 	 */
 	function dashboard_widget_ajax_convert_item() {
 		if ( !current_user_can( 'edit_pages' ) ) {
-			return;
+			return json_encode("Insufficient permissions");
 		}
 
 		$id = filter_input( INPUT_POST, 'id', FILTER_SANITIZE_STRING );
 
 		if ( empty( $id ) ) {
-			return;
+			return json_encode("Provided ID was empty");
 		}
 
 		$feed_set = feedinput_get_feed( 'feedinput_admin' );

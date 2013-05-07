@@ -13,6 +13,9 @@
         .done( function( data ) {
           button.replaceWith( data );
           item.addClass('converted');
+        })
+        .fail( function() {
+	        alert('Something in the AJAX failed - check Network pane?');
         });
     })
     .on( 'click', 'a[data-action="trash-item"]', function( event ) {
@@ -47,7 +50,7 @@
     radius: 7
   }).spin();
   spinner.stop();
-  
+
   var loadNextPage = function() {
     if ( loading || atEnd ) {
       return false;
