@@ -582,9 +582,25 @@ function cftl_get_meta_values( $key = '', $value = '', $type = 'cftl-tax-landing
   ", $key, $value, $status, $type ) );
   return $r;
 }
+
+/**
+ *
+ */
+function cftl_admin_scripts() {
+	$screen = get_current_screen();
+
+	if( $screen->base == 'post' && $screen->post_type == 'cftl-tax-landing') {
+		$url = get_template_directory_uri();
+		wp_enqueue_script( 'series', $url.'/inc/wp-taxonomy-landing/series.js', array('jquery'), '0.0.1', true );
+		wp_enqueue_style( 'series', $url.'/inc/wp-taxonomy-landing/series.css' );
+	}
+}
+add_action( 'admin_enqueue_scripts', 'cftl_admin_scripts');
+
+
+
 /**
  * TO DO:
- * - implement smart widgets for each landing page (yikes)
  * - implement JS, UX etc for controlling it
  * - build template file for display of it
  */
