@@ -42,6 +42,8 @@ function cftl_register_taxonomy_landing() {
 			'title',
 			'thumbnail',
 			'revisions',
+			//'excerpt',
+			//'editor'
 		),
 		'public' => false,
 		'exclude_from_search' => true,
@@ -229,7 +231,7 @@ function cftl_tax_landing_add_extras_box() {
 		'cftl_tax_landing_footer',
 		'cftl-tax-landing',
 		'normal',
-		'h'
+		'default'
 	);
 
 	//remove various Largo meta boxes we don't need
@@ -268,7 +270,6 @@ function cftl_tax_landing_extras_box($post) {
 </div>
 <?php
 }
-
 
 function cftl_tax_landing_save_extras($post_id) {
 	if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
@@ -312,22 +313,22 @@ add_filter('post_type_link', 'cftl_post_type_link', 10, 2);
 
 function cftl_tax_landing_header($post) {
 	wp_nonce_field(plugin_basename(__FILE__), 'cftl_tax_landing_header');
-	$fields = get_post_custom( $post );
+	$fields = ($post->post_title) ? get_post_custom( $post->ID ) : cftl_field_defaults();
 	?>
-<div class="form-field">
-	<label for="cftl_header_enable">
+<div class="form-field-enable">
+	<label for="cftl_header_enabled">
 		Enabled?
-		<input type="checkbox" id="cftl_header_enable" name="cftl_header_enable" <?php checked( $fields['header_enabled'][0], 1) ?> />
+		<input type="checkbox" id="cftl_header_enabled" name="header_enabled" <?php checked( $fields['header_enabled'][0], 1) ?> value="1" />
 	</label>
 </div>
-<div class="form-field">
+<div class="form-field-radios-stacked">
 	<h4>Layout Style</h4>
 	<div>
-		<input type="radio" name="cftl_header_style" id="header_style_standard" value="standard" <?php checked( $fields['header_style'][0], 'standard') ?>
+		<input type="radio" name="header_style" id="header_style_standard" value="standard" <?php checked( $fields['header_style'][0], 'standard') ?>
 		<label for="header_style_standard">Standard</label>
 		<div class="description">Uses title, description and featured image</div>
 
-		<input type="radio" name="cftl_header_style" id="header_style_alternate" value="alternate" <?php checked( $fields['header_style'][0], 'alternate') ?>
+		<input type="radio" name="header_style" id="header_style_alternate" value="alternate" <?php checked( $fields['header_style'][0], 'alternate') ?>
 		<label for="header_style_standard">Alternate</label>
 		<div class="description">Uses title, description and custom HTML</div>
 	</div>
@@ -335,13 +336,13 @@ function cftl_tax_landing_header($post) {
 <div class="form-field">
 	<h4>Description</h4>
 	<div>
-		<textarea name="header_excerpt"><?php echo $post->post_excerpt; ?></textarea>
+		<textarea name="excerpt" id="excerpt"><?php echo $post->post_excerpt; ?></textarea>
 	</div>
 </div>
 <div class="form-field-wysiwyg" id="header-html">
 	<h4>Custom HTML</h4>
 	<div>
-		<?php wp_editor( $field['header_html'][0], 'headerhtml', array(
+		<?php wp_editor( $post->post_content, 'content', array(
 			'wpautop' => false,
 			'textarea_rows' => 5,
 			'teeny' => true,
@@ -353,7 +354,7 @@ function cftl_tax_landing_header($post) {
 
 function cftl_tax_landing_main($post) {
 	wp_nonce_field(plugin_basename(__FILE__), 'cftl_tax_landing_main');
-	$fields = get_post_custom( $post );
+	$fields = ($post->post_title) ? get_post_custom( $post->ID ) : cftl_field_defaults();
 	?>
 <div class="form-field-radios">
 	<h4>Layout</h4>
@@ -370,7 +371,11 @@ function cftl_tax_landing_main($post) {
 			<input type="radio" name="cftl_layout" id="layout_one_column" value="one-column" <?php checked( $fields['cftl_layout'][0], 'one-column') ?>
 			<label for="layout_one_column">One Column</label>
 		</div>
-		<div class="explainer">One widget region, called " right"</div>
+		<div class="explainer">
+			<span class="one-column">No regions: posts take up full width </span>
+			<span class="two-column">One widget region, called "Series <?php echo cftl_title($post); ?>: Right"</span>
+			<span class="three-column">Two widget regions, called "Series <?php echo cftl_title($post); ?>: Left" and "Series <?php echo cftl_title($post); ?>: Right"</span>
+		</div>
 	</div>
 </div>
 <div class="form-field">
@@ -397,7 +402,7 @@ function cftl_tax_landing_main($post) {
 					"Top Stories, then newest first" => 'top, DESC',
 					"Top Stories, then oldest first" => 'top, ASC',
 				);
-				foreach ($options as $opt => $label) {
+				foreach ($options as $label => $opt) {
 					echo '<option value="', $opt, '"', selected( $fields['post_order'][0], $opt), '>', $label, "</option>\n";
 				}
 			?>
@@ -408,16 +413,16 @@ function cftl_tax_landing_main($post) {
 	<h4>Show</h4>
 	<div>
 		<label for="show-image">
-			<input type="checkbox" id="show-image" name="show_image" value="1" <?php checked ($fields['show-image'][0], 1 ) ?> /> Featured Image
+			<input type="checkbox" id="show-image" name="show_image" value="1" <?php checked ($fields['show_image'][0], 1 ) ?> /> Featured Image
 		</label>
 		<label for="show-date">
-			<input type="checkbox" id="show-date" name="show_date" value="1" <?php checked ($fields['show-date'][0], 1 ) ?> /> Publication Date
+			<input type="checkbox" id="show-date" name="show_date" value="1" <?php checked ($fields['show_date'][0], 1 ) ?> /> Publication Date
 		</label>
 		<label for="show-author">
-			<input type="checkbox" id="show-author" name="show_author" value="1" <?php checked ($fields['show-author'][0], 1 ) ?> /> Author
+			<input type="checkbox" id="show-author" name="show_author" value="1" <?php checked ($fields['show_author'][0], 1 ) ?> /> Author
 		</label>
 		<label for="show-excerpt">
-			<input type="checkbox" id="show-excerpt" name="show_excerpt" value="1" <?php checked ($fields['show-excerpt'][0], 1 ) ?> /> Excerpt
+			<input type="checkbox" id="show-excerpt" name="show_excerpt" value="1" <?php checked ($fields['show_excerpt'][0], 1 ) ?> /> Excerpt
 		</label>
 	</div>
 </div>
@@ -426,31 +431,160 @@ function cftl_tax_landing_main($post) {
 
 function cftl_tax_landing_footer($post) {
 	wp_nonce_field(plugin_basename(__FILE__), 'cftl_tax_landing_footer');
-	$fields = get_post_custom( $post );
+	$fields = ($post->post_title) ? get_post_custom( $post->ID ) : cftl_field_defaults();
 	?>
-<div class="form-field">
+<div class="form-field-enable">
 	<label for="cftl_header_enable">
 		Enabled?
-		<input type="checkbox" id="cftl_footer_enable" name="cftl_footer_enable" <?php checked( $fields['footer_enabled'][0], 1) ?> />
+		<input type="checkbox" id="cftl_footer_enable" name="footer_enabled" value="1" <?php checked( $fields['footer_enabled'][0], 1) ?> />
 	</label>
 </div>
 <div class="form-field-wysiwyg" id="footer-html">
 	<h4>Custom HTML</h4>
 	<div>
-		<?php wp_editor( $field['header_html'][0], 'headerhtml', array(
+		<?php wp_editor( $fields['footerhtml'][0], 'footerhtml', array(
 			'wpautop' => false,
 			'textarea_rows' => 5,
 			'teeny' => true,
 		)); ?>
 	</div>
-	<div class="description">In addition to this introduction, there is a "[pagetitle] bottom" widget region</div>
+	<div class="description">In addition to this introduction, there is a "Series <?php echo cftl_title($post); ?>: Bottom" widget region</div>
 </div>
 <?php
 }
 
+function cftl_field_defaults( ) {
+	return array(
+		'header_enabled' => array(1),
+		'header_style' => array('standard'),
+		'cftl_layout' => array('two-column'),
+		'per_page' => array('10'),
+		'post_order' => array('DESC'),
+		'show_image' => array(1),
+		'show_date' => array(1),
+		'show_author' => array(0),
+		'show_excerpt' => array(1),
+		'footer_enabled' => array(1),
+	);
+}
+
+function cftl_title( $post ) {
+	if (!empty ($post->post_title)) return $post->post_title;
+	return '[post title]';
+}
+
+
+function cftl_tax_landing_save_layout($post_id) {
+	if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+	if (!isset($_POST['post_type']) || $_POST['post_type'] != 'cftl-tax-landing') return;
+	if (!current_user_can('edit_post', $post_id)) return;
+
+	if (!isset($_POST['cftl_tax_landing_header']) || !wp_verify_nonce($_POST['cftl_tax_landing_header'], plugin_basename(__FILE__))) {
+		return;	//TO DO: verify main and footer nonces too?
+	}
+
+	//update all the post meta stuff
+	$layout_fields = array(
+		'header_enabled',
+		'header_style',
+		'cftl_layout', //needs to instantiate widget regions
+		'per_page',
+		'post_order',
+		'show_image',
+		'show_date',
+		'show_author',
+		'show_excerpt',	//maybe serialize these four?
+		'footer_enabled',
+		'footerhtml'	//instantiate another widget region
+	);
+
+	foreach ($layout_fields as $field_name) {
+		update_post_meta($post_id, $field_name, $_POST[$field_name]);	//do I need to sanitize this?
+	}
+}
+add_action('save_post', 'cftl_tax_landing_save_layout');
+
+
+/**
+ * Instantiate all our necessary widget regions
+ */
+function cftl_custom_sidebars() {
+	//get all the left ones and the titles they connect to
+	$left_widgets = cftl_get_meta_values( 'cftl_layout', 'three-column' );
+	foreach ($left_widgets as $widget ) {
+		$sidebar_slug = largo_make_slug( $widget->post_title );
+		if ( $sidebar_slug ) {
+			register_sidebar( array(
+				'name' 			=> __( 'Series ' . $widget->post_title . ": Left", 'largo' ),
+				'id' 			=> $sidebar_slug . "_left",
+				'before_widget' => '<aside id="%1$s" class="%2$s clearfix">',
+				'after_widget' 	=> '</aside>',
+				'before_title' 	=> '<h3 class="widgettitle">',
+				'after_title' 	=> '</h3>'
+			) );
+			register_sidebar( array(
+				'name' 			=> __( 'Series ' . $widget->post_title . ": Right", 'largo' ),
+				'id' 			=> $sidebar_slug . "_right",
+				'before_widget' => '<aside id="%1$s" class="%2$s clearfix">',
+				'after_widget' 	=> '</aside>',
+				'before_title' 	=> '<h3 class="widgettitle">',
+				'after_title' 	=> '</h3>'
+			) );
+		}
+	}
+
+	//get all the right ones and the titles they connect to
+	$right_widgets = cftl_get_meta_values( 'cftl_layout', 'two-column' );
+	foreach ($right_widgets as $widget ) {
+		$sidebar_slug = largo_make_slug( $widget->post_title );
+		if ( $sidebar_slug ) {
+			register_sidebar( array(
+				'name' 			=> __( 'Series ' . $widget->post_title . ": Right", 'largo' ),
+				'id' 			=> $sidebar_slug . "_right",
+				'before_widget' => '<aside id="%1$s" class="%2$s clearfix">',
+				'after_widget' 	=> '</aside>',
+				'before_title' 	=> '<h3 class="widgettitle">',
+				'after_title' 	=> '</h3>'
+			) );
+		}
+	}
+
+	//get all the right ones and the titles they connect to
+	$footer_widgets = cftl_get_meta_values( 'footer_enabled', '1' );
+	foreach ($footer_widgets as $widget ) {
+		$sidebar_slug = largo_make_slug( $widget->post_title );
+		if ( $sidebar_slug ) {
+			register_sidebar( array(
+				'name' 			=> __( 'Series ' . $widget->post_title . ": Footer", 'largo' ),
+				'id' 			=> $sidebar_slug . "_footer",
+				'before_widget' => '<aside id="%1$s" class="%2$s clearfix">',
+				'after_widget' 	=> '</aside>',
+				'before_title' 	=> '<h3 class="widgettitle">',
+				'after_title' 	=> '</h3>'
+			) );
+		}
+	}
+}
+add_action( 'widgets_init', 'cftl_custom_sidebars' );
+
+function cftl_get_meta_values( $key = '', $value = '', $type = 'cftl-tax-landing', $status = 'publish' ) {
+  global $wpdb;
+  if( empty( $key ) )
+      return;
+  $r = $wpdb->get_results( $wpdb->prepare( "
+      SELECT DISTINCT pm.meta_value, p.post_title
+      FROM {$wpdb->postmeta} pm
+      LEFT JOIN {$wpdb->posts} p ON p.ID = pm.post_id
+      WHERE pm.meta_key = '%s'
+      AND pm.meta_value = '%s'
+      AND p.post_status = '%s'
+      AND p.post_type = '%s'
+  ", $key, $value, $status, $type ) );
+  return $r;
+}
 /**
  * TO DO:
- * - add new meta boxes for controlling stuff
+ * - implement smart widgets for each landing page (yikes)
  * - implement JS, UX etc for controlling it
  * - build template file for display of it
  */
