@@ -40,8 +40,6 @@ function cftl_register_taxonomy_landing() {
 		),
 		'supports' => array(
 			'title',
-			'editor',
-			'page-attributes',
 			'thumbnail',
 			'revisions',
 		),
@@ -191,28 +189,56 @@ function cftl_tax_landing_help($contextual_help, $screen_id, $screen) {
 add_action('contextual_help', 'cftl_tax_landing_help', 10, 3);
 
 function cftl_tax_landing_add_extras_box() {
+
+	//add the 'Extras' box
 	if (0 != count(get_page_templates())) {
 		add_meta_box(
 			'cftl_tax_landing_extras',
-			__('Landing Page Details', 'cf-tax-landing'),
+			__('Extras', 'largo'),
 			'cftl_tax_landing_extras_box',
 			'cftl-tax-landing',
 			'side',
-			'high'
+			'default'
 		);
 	}
 
-	//remove various Largo meta boxes we don't need
-	remove_meta_box('authordiv', 'cftl-tax-landing', 'normal|advanced|side');
-	remove_meta_box('authordiv', 'cftl-tax-landing', 'normal|advanced|side');
-	remove_meta_box('authordiv', 'cftl-tax-landing', 'normal|advanced|side');
-	remove_meta_box('authordiv', 'cftl-tax-landing', 'normal|advanced|side');
-	remove_meta_box('authordiv', 'cftl-tax-landing', 'normal|advanced|side');
-	remove_meta_box('authordiv', 'cftl-tax-landing', 'normal|advanced|side');
-	remove_meta_box('authordiv', 'cftl-tax-landing', 'normal|advanced|side');
+	//add the 'Header' box
+	add_meta_box(
+		'cftl_tax_landing_header',
+		__('Header', 'largo'),
+		'cftl_tax_landing_header',
+		'cftl-tax-landing',
+		'normal',
+		'high'
+	);
 
+	//add the 'Main' box
+	add_meta_box(
+		'cftl_tax_landing_main',
+		__('Main', 'largo'),
+		'cftl_tax_landing_main',
+		'cftl-tax-landing',
+		'normal',
+		'high'
+	);
+
+	//add the 'Footer' box
+	add_meta_box(
+		'cftl_tax_landing_footer',
+		__('Footer', 'largo'),
+		'cftl_tax_landing_footer',
+		'cftl-tax-landing',
+		'normal',
+		'high'
+	);
+
+	//remove various Largo meta boxes we don't need
+	$boxen = array('tagsdiv-post_tag', 'wpbdm-categorydiv', 'tagsdiv-wpbdm-tags', 'prominencediv', 'seriesdiv', 'pageparentdiv');
+	foreach ($boxen as $box_name) {
+		remove_meta_box($box_name, 'cftl-tax-landing', 'side');
+	}
 }
-add_action('add_meta_boxes', 'cftl_tax_landing_add_extras_box', 20);	//do this later so we can remove other meta boxes
+add_action('add_meta_boxes', 'cftl_tax_landing_add_extras_box', 99);	//do this later so we can remove other meta boxes
 
 
 function cftl_tax_landing_extras_box($post) {
@@ -245,34 +271,22 @@ function cftl_tax_landing_extras_box($post) {
 
 
 function cftl_tax_landing_save_extras($post_id) {
-	if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
-		return;
-	}
-
-	if (!isset($_POST['post_type']) || $_POST['post_type'] != 'cftl-tax-landing') {
-		return;
-	}
+	if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+	if (!isset($_POST['post_type']) || $_POST['post_type'] != 'cftl-tax-landing') return;
+	if (!current_user_can('edit_post', $post_id)) return;
 
 	if (!isset($_POST['cftl_tax_landing_extras_nonce']) || !wp_verify_nonce($_POST['cftl_tax_landing_extras_nonce'], plugin_basename(__FILE__))) {
 		return;
 	}
 
-
-	if (!current_user_can('edit_post', $post_id)) {
-		return;
-	}
 	$page_template = isset($_POST['cftl_page_template']) ? $_POST['cftl_page_template'] : null;
 	$page_templates = get_page_templates();
 	if (empty($page_template) || ('default' != $page_template && !in_array($page_template, $page_templates))) {
-
 		delete_post_meta($post_id, '_wp_page_template');
-	}
-	else {
+	} else {
 		update_post_meta($post_id, '_wp_page_template', $page_template);
 	}
 }
-
-
 add_action('save_post', 'cftl_tax_landing_save_extras');
 
 function cftl_post_type_link($post_link, $post) {
@@ -291,17 +305,56 @@ function cftl_post_type_link($post_link, $post) {
 	if (!empty($term)) {
 		return get_term_link($term);
 	}
-
 	return $post_link;
+}
+add_filter('post_type_link', 'cftl_post_type_link', 10, 2);
 
+
+function cftl_tax_landing_header($post) {
+	wp_nonce_field(plugin_basename(__FILE__), 'cftl_tax_landing_header');
+	$fields = get_post_custom( $post );
+	?>
+<div class="form-field">
+	<label for="cftl_header_enable">
+		Enabled?
+		<input type="checkbox" id="cftl_header_enable" name="cftl_header_enable" <?php checked( $fields['header_enabled'][0], 1) ?> />
+	</label>
+</div>
+<div class="form-field">
+	<h4>Layout Style</h4>
+	<div>
+		<input type="radio" name="cftl_header_style" id="header_style_standard" value="standard" <?php checked( $fields['header_style'][0], 'standard') ?>
+		<label for="header_style_standard">Standard</label>
+		<div class="description">Uses title, description and featured image</div>
+
+		<input type="radio" name="cftl_header_style" id="header_style_alternate" value="alternate" <?php checked( $fields['header_style'][0], 'alternate') ?>
+		<label for="header_style_standard">Alternate</label>
+		<div class="description">Uses title, description and custom HTML</div>
+	</div>
+</div>
+<div class="form-field">
+	<h4>Description</h4>
+	<div>
+		<textarea name="header_excerpt"><?php echo $post->post_excerpt; ?></textarea>
+	</div>
+</div>
+<div class="form-field-wysiwyg" id="header-html">
+	<h4>Custom HTML</h4>
+	<div>
+		<?php wp_editor( $field['header_html'][0], 'headerhtml', array(
+			'wpautop' => false,
+			'textarea_rows' => 5,
+			'teeny' => true,
+		)); ?>
+	</div>
+</div>
+<?php
 }
 
-add_filter('post_type_link', 'cftl_post_type_link', 10, 2);
 
 
 /**
  * TO DO:
- * - remove unnecessary meta boxes
  * - add new meta boxes for controlling stuff
  * - implement JS, UX etc for controlling it
  * - build template file for display of it
