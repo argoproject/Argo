@@ -229,11 +229,11 @@ function cftl_tax_landing_add_extras_box() {
 		'cftl_tax_landing_footer',
 		'cftl-tax-landing',
 		'normal',
-		'high'
+		'h'
 	);
 
 	//remove various Largo meta boxes we don't need
-	$boxen = array('tagsdiv-post_tag', 'wpbdm-categorydiv', 'tagsdiv-wpbdm-tags', 'prominencediv', 'seriesdiv', 'pageparentdiv');
+	$boxen = array('tagsdiv-post_tag', 'wpbdm-categorydiv', 'tagsdiv-wpbdm-tags', 'prominencediv', 'categorydiv', 'pageparentdiv');
 	foreach ($boxen as $box_name) {
 		remove_meta_box($box_name, 'cftl-tax-landing', 'side');
 	}
@@ -351,7 +351,102 @@ function cftl_tax_landing_header($post) {
 <?php
 }
 
+function cftl_tax_landing_main($post) {
+	wp_nonce_field(plugin_basename(__FILE__), 'cftl_tax_landing_main');
+	$fields = get_post_custom( $post );
+	?>
+<div class="form-field-radios">
+	<h4>Layout</h4>
+	<div class="options">
+		<div>
+			<input type="radio" name="cftl_layout" id="layout_two_column" value="two-column" <?php checked( $fields['cftl_layout'][0], 'two-column') ?>
+			<label for="layout_two_column">Two Column</label>
+		</div>
+		<div>
+			<input type="radio" name="cftl_layout" id="layout_three_column" value="three-column" <?php checked( $fields['cftl_layout'][0], 'three-column') ?>
+			<label for="layout_three_column">Three Column</label>
+		</div>
+		<div>
+			<input type="radio" name="cftl_layout" id="layout_one_column" value="one-column" <?php checked( $fields['cftl_layout'][0], 'one-column') ?>
+			<label for="layout_one_column">One Column</label>
+		</div>
+		<div class="explainer">One widget region, called " right"</div>
+	</div>
+</div>
+<div class="form-field">
+	<h4>Posts Per Page</h4>
+	<div>
+		<select name="per_page">
+			<?php
+				$options = array("5", "10", "15", "20", "30", "all");
+				foreach ($options as $opt) {
+					echo '<option value="', $opt, '"', selected( $fields['per_page'][0], $opt), '>', $opt, "</option>\n";
+				}
+			?>
+		</select>
+	</div>
+</div>
+<div class="form-field">
+	<h4>Post Order</h4>
+	<div>
+		<select name="post_order">
+			<?php
+				$options = array(
+					"Newest first" => 'DESC',
+					"Oldest first" => 'ASC',
+					"Top Stories, then newest first" => 'top, DESC',
+					"Top Stories, then oldest first" => 'top, ASC',
+				);
+				foreach ($options as $opt => $label) {
+					echo '<option value="', $opt, '"', selected( $fields['post_order'][0], $opt), '>', $label, "</option>\n";
+				}
+			?>
+		</select>
+	</div>
+</div>
+<div class="form-field-checkboxes">
+	<h4>Show</h4>
+	<div>
+		<label for="show-image">
+			<input type="checkbox" id="show-image" name="show_image" value="1" <?php checked ($fields['show-image'][0], 1 ) ?> /> Featured Image
+		</label>
+		<label for="show-date">
+			<input type="checkbox" id="show-date" name="show_date" value="1" <?php checked ($fields['show-date'][0], 1 ) ?> /> Publication Date
+		</label>
+		<label for="show-author">
+			<input type="checkbox" id="show-author" name="show_author" value="1" <?php checked ($fields['show-author'][0], 1 ) ?> /> Author
+		</label>
+		<label for="show-excerpt">
+			<input type="checkbox" id="show-excerpt" name="show_excerpt" value="1" <?php checked ($fields['show-excerpt'][0], 1 ) ?> /> Excerpt
+		</label>
+	</div>
+</div>
+<?php
+}
 
+function cftl_tax_landing_footer($post) {
+	wp_nonce_field(plugin_basename(__FILE__), 'cftl_tax_landing_footer');
+	$fields = get_post_custom( $post );
+	?>
+<div class="form-field">
+	<label for="cftl_header_enable">
+		Enabled?
+		<input type="checkbox" id="cftl_footer_enable" name="cftl_footer_enable" <?php checked( $fields['footer_enabled'][0], 1) ?> />
+	</label>
+</div>
+<div class="form-field-wysiwyg" id="footer-html">
+	<h4>Custom HTML</h4>
+	<div>
+		<?php wp_editor( $field['header_html'][0], 'headerhtml', array(
+			'wpautop' => false,
+			'textarea_rows' => 5,
+			'teeny' => true,
+		)); ?>
+	</div>
+	<div class="description">In addition to this introduction, there is a "[pagetitle] bottom" widget region</div>
+</div>
+<?php
+}
 
 /**
  * TO DO:
