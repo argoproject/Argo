@@ -69,6 +69,7 @@ $includes = array(
 	'/inc/post-templates.php',			// single post templates
 	'/inc/post-meta.php',						// add post meta boxes
 	'/inc/ad-codes.php',						// register ad codes
+	'/inc/wp-taxonomy-landing/taxonomy-landing.php'	// adds taxonomy landing plugin
 );
 
 // Perform load
@@ -101,4 +102,5 @@ if ( ! function_exists( 'largo_setup' ) ) {
 
 	}
 }
+
 add_action( 'after_setup_theme', 'largo_setup' );
