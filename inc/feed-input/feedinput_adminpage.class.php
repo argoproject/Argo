@@ -174,7 +174,7 @@ class FeedInput_AdminPage {
 	}
 
 	function get_taxonomy_map() {
-		if ( !is_array( $this->taxonomy_map ) ) {
+		if ( !isset( $this->taxonomy_map ) || !is_array( $this->taxonomy_map ) ) {
 			$this->taxonomy_map = get_option( 'feedinput_taxonomy_map', array() );
 		}
 		return $this->taxonomy_map;
@@ -246,7 +246,7 @@ class FeedInput_AdminPage {
 
 		foreach ( $items as $item ) {
 			$converted = get_post_meta( $item->post->ID, 'converted_posts', true );
-			echo '<li data-id="', esc_attr($item->data['uid']),'">';
+			echo '<li data-id="', htmlentities($item->data['uid']),'">';
 			echo '<div class="feedinput-item-title">', $item->data['title'], '</div>';
 			echo '<div class="feedinput-item-meta">';
 			$shorten_url = $item->data['permalink'];
@@ -255,12 +255,12 @@ class FeedInput_AdminPage {
 			echo '</div>';
 			echo '<div class="feedinput-item-actions">';
 			if ( empty($converted['feedinput_admin'] ) ) {
-				echo '<a data-action="convert-item" data-id="', esc_attr($item->data['uid']),'">', __( 'Convert To Post', 'feedinput'), '</a>';
+				echo '<a data-action="convert-item" data-id="', htmlentities($item->data['uid']),'">', __( 'Convert To Post', 'feedinput'), '</a>';
 			} else {
 				edit_post_link( __('Edit Post'), '', '', $item->post->ID );
 			}
 
-			echo ' | <a data-action="trash-item" data-id="', esc_attr($item->data['uid']), '">', __( 'Remove Item'), '</a>';
+			echo ' | <a data-action="trash-item" data-id="', htmlentities($item->data['uid']), '">', __( 'Remove Item'), '</a>';
 			echo '</div>';
 			echo '</li>';
 		}

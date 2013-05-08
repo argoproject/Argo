@@ -286,7 +286,7 @@ class FeedInput_FeedItem {
 	/**
 	 * Parse enclosure object
 	 */
-	protected function parse_enclosure( $simplepie_enclosure ) {
+	protected function parse_enclosure( $simplepie_enclosure, $feedset ) {
 		$data = array();
 
 		$enclosure_fields = split( ' ', 'bitrate channels description duration expression extension framerate handler hashes height language keywords length link player sampling_rate size thumbnails title type width real_type' );
@@ -299,7 +299,7 @@ class FeedInput_FeedItem {
 		// Captions
 		$caption_objs = $simplepie_enclosure->get_captions();
 		$data['captions'] = array();
-		if ( is_array( $get_captions ) ) {
+		if ( is_array( $caption_objs ) ) {
 			foreach( $get_captions as $caption_obj ) {
 				$data['captions'][] = self::parse_caption( $caption_obj, $feedset );
 			}
@@ -515,6 +515,7 @@ class FeedInput_FeedItem {
 		if ( isset( $converted_posts[$feedset->name] ) ) {
 			return get_post( $converted_posts[$feedset->name] );
 		}
+
 
 		$default_post = array(
 			'post_title' =>        array( 'type' => 'field', 'value' => 'title' ),
