@@ -18,6 +18,8 @@
 
 if (__FILE__ == $_SERVER['SCRIPT_FILENAME']) { die(); }
 
+define(CFTL_SELF_DIR, get_template_directory_uri() . '/inc/wp-taxonomy-landing/');
+
 /**
  * Registers the taxonomy-landing custom post type
  */
@@ -316,20 +318,23 @@ function cftl_tax_landing_header($post) {
 	$fields = ($post->post_title) ? get_post_custom( $post->ID ) : cftl_field_defaults();
 	?>
 <div class="form-field-enable">
+	<h4>Enabled?</h4>
+	<div>
 	<label for="cftl_header_enabled">
-		Enabled?
 		<input type="checkbox" id="cftl_header_enabled" name="header_enabled" <?php checked( $fields['header_enabled'][0], 1) ?> value="1" />
+		Yes, display header
 	</label>
+	</div>
 </div>
 <div class="form-field-radios-stacked">
 	<h4>Layout Style</h4>
 	<div>
-		<input type="radio" name="header_style" id="header_style_standard" value="standard" <?php checked( $fields['header_style'][0], 'standard') ?>
+		<input type="radio" name="header_style" id="header_style_standard" value="standard" <?php checked( $fields['header_style'][0], 'standard') ?> />
 		<label for="header_style_standard">Standard</label>
 		<div class="description">Uses title, description and featured image</div>
 
-		<input type="radio" name="header_style" id="header_style_alternate" value="alternate" <?php checked( $fields['header_style'][0], 'alternate') ?>
-		<label for="header_style_standard">Alternate</label>
+		<input type="radio" name="header_style" id="header_style_alternate" value="alternate" <?php checked( $fields['header_style'][0], 'alternate') ?> />
+		<label for="header_style_alternate">Alternate</label>
 		<div class="description">Uses title, description and custom HTML</div>
 	</div>
 </div>
@@ -339,7 +344,7 @@ function cftl_tax_landing_header($post) {
 		<textarea name="excerpt" id="excerpt"><?php echo $post->post_excerpt; ?></textarea>
 	</div>
 </div>
-<div class="form-field-wysiwyg" id="header-html">
+<div class="form-field-wysiwyg" id="header-html" <?php if ($fields['header_style'][0] != 'alternate') echo 'style="display:none;"'; ?>>
 	<h4>Custom HTML</h4>
 	<div>
 		<?php wp_editor( $post->post_content, 'content', array(
@@ -360,25 +365,25 @@ function cftl_tax_landing_main($post) {
 	<h4>Layout</h4>
 	<div class="options">
 		<div>
-			<input type="radio" name="cftl_layout" id="layout_two_column" value="two-column" <?php checked( $fields['cftl_layout'][0], 'two-column') ?>
-			<label for="layout_two_column">Two Column</label>
+			<input type="radio" name="cftl_layout" id="layout_two_column" value="two-column" <?php checked( $fields['cftl_layout'][0], 'two-column') ?> />
+			<label for="layout_two_column" class="cols" id="two-col">Two Column</label>
 		</div>
 		<div>
-			<input type="radio" name="cftl_layout" id="layout_three_column" value="three-column" <?php checked( $fields['cftl_layout'][0], 'three-column') ?>
-			<label for="layout_three_column">Three Column</label>
+			<input type="radio" name="cftl_layout" id="layout_three_column" value="three-column" <?php checked( $fields['cftl_layout'][0], 'three-column') ?> />
+			<label for="layout_three_column" class="cols" id="three-col">Three Column</label>
 		</div>
 		<div>
-			<input type="radio" name="cftl_layout" id="layout_one_column" value="one-column" <?php checked( $fields['cftl_layout'][0], 'one-column') ?>
-			<label for="layout_one_column">One Column</label>
+			<input type="radio" name="cftl_layout" id="layout_one_column" value="one-column" <?php checked( $fields['cftl_layout'][0], 'one-column') ?> />
+			<label for="layout_one_column" class="cols" id="one-col">One Column</label>
 		</div>
-		<div class="explainer">
+		<div id="explainer" class="<?php echo $fields['cftl_layout'][0]; ?>">
 			<span class="one-column">No regions: posts take up full width </span>
 			<span class="two-column">One widget region, called "Series <?php echo cftl_title($post); ?>: Right"</span>
 			<span class="three-column">Two widget regions, called "Series <?php echo cftl_title($post); ?>: Left" and "Series <?php echo cftl_title($post); ?>: Right"</span>
 		</div>
 	</div>
 </div>
-<div class="form-field">
+<div class="form-field-select">
 	<h4>Posts Per Page</h4>
 	<div>
 		<select name="per_page">
@@ -391,7 +396,7 @@ function cftl_tax_landing_main($post) {
 		</select>
 	</div>
 </div>
-<div class="form-field">
+<div class="form-field-select">
 	<h4>Post Order</h4>
 	<div>
 		<select name="post_order">
@@ -434,10 +439,13 @@ function cftl_tax_landing_footer($post) {
 	$fields = ($post->post_title) ? get_post_custom( $post->ID ) : cftl_field_defaults();
 	?>
 <div class="form-field-enable">
-	<label for="cftl_header_enable">
-		Enabled?
-		<input type="checkbox" id="cftl_footer_enable" name="footer_enabled" value="1" <?php checked( $fields['footer_enabled'][0], 1) ?> />
-	</label>
+	<h4>Enabled?</h4>
+	<div>
+		<label for="cftl_header_enable">
+			<input type="checkbox" id="cftl_footer_enable" name="footer_enabled" value="1" <?php checked( $fields['footer_enabled'][0], 1) ?> /> Yes
+		</label>
+		<div class="description">Implements a "Series <?php echo cftl_title($post); ?>: Bottom" widget region and the custom HTML provided below.</div>
+	</div>
 </div>
 <div class="form-field-wysiwyg" id="footer-html">
 	<h4>Custom HTML</h4>
@@ -448,7 +456,7 @@ function cftl_tax_landing_footer($post) {
 			'teeny' => true,
 		)); ?>
 	</div>
-	<div class="description">In addition to this introduction, there is a "Series <?php echo cftl_title($post); ?>: Bottom" widget region</div>
+
 </div>
 <?php
 }
