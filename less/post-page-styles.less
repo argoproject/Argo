@@ -23,7 +23,7 @@ article.story {
 // --------------------------------------------
 
 .byline {
-  margin-bottom: @baseline/2;
+  margin-bottom: @baseline / 2;
   font-weight: normal;
   font-size: @baseFontSize * 0.815;
   a {
@@ -46,7 +46,6 @@ article.story {
   min-height: 28px;
   height: auto;
   margin-bottom: @baseline;
-  padding: 2px 0;
   border-top: 1px solid @grayLighter;
   border-bottom: 1px solid @grayLighter;
   .right,
@@ -54,15 +53,17 @@ article.story {
     margin: 0;
     height: auto;
   }
+  .left {
+    padding: 8px 0 0;
+  }
+  .right {
+    padding: 2px 0 0;
+  }
   span {
-    position:relative;
+    position: relative;
   }
   span.twitter {
-    top: 4px;
     margin-right: 8px;
-  }
-  span.facebook {
-    top: 4px;
   }
   span.print {
     font-family: Verdana, Helvetica, sans-serif;
@@ -80,7 +81,7 @@ article.story {
     a {
       color: black;
       &:hover {
-        text-decoration:none;
+        text-decoration: none;
 	  }
     }
   }
@@ -103,8 +104,8 @@ article.story {
 .tags,
 .pager,
 #related-posts {
-  clear:both;
-  margin: 0 0 @baseline / 2;
+  clear: both;
+  margin: 0 0 @baseline;
   width: 100%;
   h5 {
     font-size: @baseFontSize;
@@ -115,7 +116,6 @@ article.story {
 .pager {
   list-style: none;
   font-size: @baseFontSize;
-  line-height: 1.6;
   font-family: @sansFontFamily;
 }
 .single-post .author-box,
@@ -124,6 +124,7 @@ article.story {
   background-color: #fafafa;
   border: 1px solid @grayLighter;
   border-top: 3px solid @grayLight;
+  .border-radius(5px);
   h5 {
     font-size: @baseFontSize;
     line-height: 1;
@@ -165,6 +166,7 @@ h3.recent-posts,
 .tags {
   height: 100%;
   overflow: auto;
+  margin-bottom: @baseline / 2;
   ul {
     padding: 0;
     margin: 0;
@@ -172,14 +174,14 @@ h3.recent-posts,
 	li {
 	  display: inline;
 	  letter-spacing: 1px;
-	  margin-right: 8px;
+	  margin: 0 8px 8px 0;
 	  vertical-align: baseline;
 	  font-weight: 300;
 	  white-space: nowrap;
-	  margin-bottom: 8px;
 	  float: left;
 	  background-color: @baseColor;
-	  padding: 2px 8px 2px 5px;
+	  padding: 4px 8px 4px 5px;
+	  .border-radius(3px);
 	  &:hover {
 	    background-color: darken(@baseColor, 10%);
 	  }
@@ -206,9 +208,10 @@ h3.recent-posts,
     display: inline-block;
     padding: 10px 15px;
     color: @textColor;
-    background-color: #eee;
+    background-color: @grayLighter;
+    .border-radius(5px);
     &:hover {
-  	  background-color: #666;
+  	  background-color: @gray;
   	  color: @white;
   	  text-decoration: none;
     }
@@ -229,6 +232,7 @@ h3.recent-posts,
 #related-posts {
   border: 1px solid @grayLighter;
   border-top: 3px solid @grayLight;
+  .border-radius(5px);
 }
 #related-post-nav {
   padding: 8px 0;
@@ -246,7 +250,7 @@ h3.recent-posts,
   }
   a {
     display: block;
-    padding: 4px 5px;
+    padding: 6px;
     font-weight: normal;
     text-decoration: none;
     border-top: 1px solid @grayLight;
@@ -278,22 +282,21 @@ h3.recent-posts,
       margin-left: 15px;
       margin-bottom: 0;
       font-size: @baseFontSize * 0.815;
-      line-height: 1.5;
       &.top-related {
         list-style: none;
         margin-left: 0;
         border-bottom: 1px solid @grayLighter;
-        margin-bottom: 5px;
+        margin-bottom: @baseline / 2;
         font-size: @baseFontSize * 0.5;
         h3 {
           font-size: @baseFontSize * 1.222;
           font-weight: bold;
-          margin-bottom: @baseline / 5;
+          margin-bottom: @baseline / 4;
         }
         p {
           font-family: @baseFontFamily;
           font-size: @baseFontSize * 0.667;
-          margin-bottom: @baseline / 4;
+          margin-bottom: @baseline / 2;
         }
       }
     }
@@ -301,12 +304,13 @@ h3.recent-posts,
   p {
     font-family: @sansFontFamily;
     font-size: @baseFontSize * 0.815;
+    margin-bottom: @baseline / 4;
   }
 }
 
 // AUTHOR BOX
 .author-box {
-  clear:both;
+  clear: both;
   margin-bottom: @baseline;
   h1, h3 {
     font-size: @baseFontSize * 2;
@@ -314,9 +318,9 @@ h3.recent-posts,
   }
   img.avatar {
     float:left;
-    margin:0 20px 0 0;
+    margin: 0 20px 0 0;
     padding:4px;
-    border: 1px solid #ccc;
+    border: 1px solid @grayLighter;
   }
   p {
     font-size: @baseFontSize * 0.815;
@@ -324,14 +328,14 @@ h3.recent-posts,
   }
   ul {
     list-style:none;
-    margin:0;
+    margin: 0;
     li {
-	  display:inline;
-	  float:left;
-	  margin-right:12px;
+	  display: inline;
+	  float: left;
+	  margin-right: 8px;
 	  &.facebook {
-	    position:relative;
-	    top:-2px;
+	    position: relative;
+	    top: -4px;
 	  }
 	  &.gplus,
 	  &.linkedin,
@@ -350,12 +354,12 @@ h3.recent-posts,
 	      }
 	    }
 	    i.icon-mail {
-	      font-size:22px;
+	      font-size: 22px;
 	      padding: 0;
 	      background-color: @white;
 	      color: @black;
-	      position:relative;
-	      top: 3px;
+	      position: relative;
+	      top: -2px;
 	      &:hover {
 		    .opacity(80);
 	      }
@@ -373,7 +377,7 @@ h3.recent-posts,
 	  }
     }
   }
-  iframe {margin:0;}
+  iframe { margin: 0; }
 }
 .single-post .author-box,
 .single-argolinkroundups .author-box {
@@ -411,7 +415,7 @@ h3.recent-posts,
   }
   dt, dd {
     font-size: @baseFontSize * 0.815;
-    margin: 0 0 @baseline/2 0;
+    margin: 0 0 @baseline/2;
   }
 }
 .type-aside p {
@@ -441,7 +445,7 @@ p.wp-caption-text {
   display: block;
 }
 .navis-slideshow .pagination li {
-  list-style-type:none !important;
+  list-style-type: none !important;
 }
 .half,
 .full,
@@ -449,7 +453,7 @@ p.wp-caption-text {
   margin: 0 0 @baseline;
 }
 .half {
-  width: 50%;
+  width: 40%;
 }
 .full {
   width: 100%;
@@ -460,7 +464,7 @@ p.wp-caption-text {
   font: @serifFontFamily;
   font-style: italic;
   font-size: @baseFontSize * 1.5;
-  line-height:1.3;
+  line-height: 1.3;
   h6 {
     font-size: @baseFontSize;
     margin: 0;
@@ -483,23 +487,23 @@ p.wp-caption-text {
   margin-bottom: @baseline/2;
 }
 .stories article[class*="span"] {
-  margin-left:0;
+  margin-left: 0;
 }
 .stories h2.entry-title {
   font-size: @baseFontSize * 2;
   margin-bottom: @baseline/3;
-  line-height:1.1;
+  line-height: 1.1;
 }
 .stories .entry-content p {
   font-size: @baseFontSize;
   margin-bottom: @baseline / 2;
 }
 .stories h5.tag-list {
-  font-size:@baseFontSize *0.815;
+  font-size: @baseFontSize * 0.815;
   font-family: @sansFontFamily;
   font-weight:normal;
-  line-height:1.5;
-  margin-bottom:0;
+  line-height: 1.5;
+  margin-bottom: 0;
 }
 
 // --------------------------------------------
@@ -525,7 +529,7 @@ p.wp-caption-text {
      color: darken(@baseColor, 15%);
      &:hover {
 	   .opacity(90);
-	   text-decoration:none;
+	   text-decoration: none;
      }
    }
 }
@@ -633,7 +637,7 @@ h5.top-tag {
     background: none;
     color: @grayDark;
     border: none;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid @grayLighter;
   }
   h5 {
     font-size: @baseFontSize + 2;
