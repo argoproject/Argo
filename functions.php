@@ -51,7 +51,6 @@ if ( ! function_exists( 'optionsframework_init' ) ) {
  */
 $includes = array(
 	'/inc/largo-plugin-init.php',		// a list of recommended plugins
-	'/inc/special-functionality.php',	// header cleanup and robots.txt
 	'/inc/dashboard.php',				// custom dashboard widgets
 	'/inc/robots.php',					// default robots.txt config
 	'/inc/custom-feeds.php',			// create custom RSS feeds
