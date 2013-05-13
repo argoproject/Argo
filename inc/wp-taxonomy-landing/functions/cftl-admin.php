@@ -10,7 +10,7 @@
 
 if (__FILE__ == $_SERVER['SCRIPT_FILENAME']) { die(); }
 
-define(CFTL_SELF_DIR, get_template_directory_uri() . '/inc/wp-taxonomy-landing/');
+define('CFTL_SELF_DIR', get_template_directory_uri() . '/inc/wp-taxonomy-landing/');
 
 /**
  * Registers the taxonomy-landing custom post type
@@ -226,7 +226,7 @@ function cftl_tax_landing_add_extras_box() {
 	);
 
 	//remove various Largo meta boxes we don't need
-	$boxen = array('tagsdiv-post_tag', 'wpbdm-categorydiv', 'tagsdiv-wpbdm-tags', 'prominencediv', 'categorydiv', 'pageparentdiv');
+	$boxen = array('tagsdiv-post_tag', 'wpbdm-categorydiv', 'tagsdiv-wpbdm-tags', 'prominencediv', 'categorydiv', 'pageparentdiv', 'tagsdiv-media-sources');
 	foreach ($boxen as $box_name) {
 		remove_meta_box($box_name, 'cftl-tax-landing', 'side');
 	}
@@ -483,10 +483,7 @@ function cftl_field_defaults( ) {
 		'cftl_layout' => array('two-column'),
 		'per_page' => array('10'),
 		'post_order' => array('DESC'),
-		'show_image' => array(1),
-		'show_date' => array(1),
-		'show_author' => array(0),
-		'show_excerpt' => array(1),
+		'show' => array('image' => 1, 'excerpt' => 1, 'byline' => 1, 'tags' => 0),
 		'footer_enabled' => array(1),
 	);
 }

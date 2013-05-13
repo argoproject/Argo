@@ -62,6 +62,7 @@ if( !function_exists( 'get_post_template' ) ) {
 	function get_post_template( $template ) {
 		global $post;
 		$custom_field = get_post_meta( $post->ID, '_wp_post_template', true );
+		//TO DO: This needs to be smarter about parent/child theme stuff with get_template_directory() and get_stylesheet_directory()
 		if( !empty( $custom_field ) && file_exists(TEMPLATEPATH . "/{$custom_field}")) {
 			$template = TEMPLATEPATH . "/{$custom_field}"; }
 		return $template;
