@@ -28,7 +28,19 @@
 
 // Links
 // -------------------------
+/**
+ * @group Links
+ * @label Color of links
+ * @type color
+ * @default_value #2275bb
+ */
 @linkColor:             @blue;
+/**
+ * @group Links
+ * @label Hover color of links
+ * @type color
+ * @default_value #2275bb
+ */
 @linkColorHover:        lighten(@linkColor, 10%);
 
 
@@ -37,8 +49,36 @@
 // --------------------------------------------
 
 @containerMaxWidth:		1170px;
+
+/**
+ * @group Basics
+ * @label Body Background Color
+ * @type color
+ * @default_value #fff
+ */
 @bodyBackground:        @white;
+
+/**
+ * @group Basics
+ * @label Page Background Color
+ * @type color
+ * @default_value #fff
+ */
+@pageBackground:        @white;
+
+/**
+ * @group Basics
+ * @label Text Color
+ * @type color
+ * @default_value #333
+ */
 @textColor:             @grayDark;
+/**
+ * @group Basics
+ * @label Default Vertical Spacing
+ * @type pixels
+ * @default_value 24px
+ */
 @baseline:				24px;
 
 // Grid
@@ -53,13 +93,36 @@
 // TYPOGRAPHY
 // --------------------------------------------
 
+/**
+ * @group Typography
+ * @label Sans Font Family
+ * @type dropdown
+ * @options "Helvetica Neue", Helvetica, Arial, sans-serif|Arial, Arial Black, sans-serif|"Open Sans", Helvetica, sans-serif
+ * @default_value "Helvetica Neue", Helvetica, Arial, sans-serif
+ */
 @sansFontFamily:        "Helvetica Neue", Helvetica, Arial, sans-serif;
+/**
+ * @group Typography
+ * @label Serif Font Family
+ * @type text
+ */
 @serifFontFamily:       Georgia, "Times New Roman", Times, serif;
 @monoFontFamily:        Menlo, Monaco, Consolas, "Courier New", monospace;
 
+/**
+ * @group Typography
+ * @label Base Font Size
+ * @type pixels
+ */
 @baseFontSize:          16px;
 @baseFontFamily:        @serifFontFamily;
-@baseLineHeight:        24px;
+/**
+ * @group Typography
+ * @label Base Line Height
+ * @type text
+ * @default_value 1.5
+ */
+@baseLineHeight:        1.5;
 @altFontFamily:         @sansFontFamily;
 @baseFontWeight:		normal;
 
@@ -121,8 +184,6 @@
 
 // Z-index master list
 // -------------------------
-// Used for a bird's eye view of components dependent on the z-axis
-// Try to avoid customizing these :)
 @zindexDropdown:          1000;
 @zindexPopover:           1010;
 @zindexTooltip:           1020;
@@ -132,7 +193,8 @@
 
 // Navbar
 // -------------------------
-@navbarHeight:                    28px;
+@navbarHeight:                    40px;
+@navbarFontSize:				  15px;
 @navbarBackground:                darken(@baseColor, 10%);
 @navbarBackgroundHighlight:       @baseColor;
 
@@ -143,12 +205,6 @@
 @navbarLinkBackgroundHover:       transparent;
 @navbarLinkBackgroundActive:      @navbarBackground;
 
-@navbarSearchBackground:          lighten(@navbarBackground, 25%);
-@navbarSearchBackgroundFocus:     @white;
-@navbarSearchBorder:              darken(@navbarSearchBackground, 30%);
-@navbarSearchPlaceholderColor:    #ccc;
-@navbarBrandColor:                @navbarLinkColor;
-
 // Dropdowns
 // -------------------------
 @dropdownBackground:            @white;
@@ -158,11 +214,3 @@
 @dropdownLinkBackgroundHover:   @baseColor;
 @dropdownDividerTop:            #e5e5e5;
 @dropdownDividerBottom:         @white;
-
-// --------------------------------------------
-// IMAGE PATHS
-// --------------------------------------------
-
-@socialIconsSpritePath:			"../img/social-icons.png";
-@iconSpritePath:          		"../img/glyphicons-halflings.png";
-@iconWhiteSpritePath:     		"../img/glyphicons-halflings-white.png";

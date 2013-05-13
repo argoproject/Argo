@@ -51,7 +51,7 @@ if ( ! function_exists( 'optionsframework_init' ) ) {
  */
 $includes = array(
 	'/inc/largo-plugin-init.php',		// a list of recommended plugins
-	'/inc/special-functionality.php',	// header cleanup and robots.txt
+	'/inc/dashboard.php',						// header cleanup and robots.txt
 	'/inc/users.php',								// add custom fields for user profiles
 	'/inc/sidebars.php',						// register sidebars
 	'/inc/widgets.php',							// register widgets
@@ -69,6 +69,8 @@ $includes = array(
 	'/inc/post-templates.php',			// single post templates
 	'/inc/post-meta.php',						// add post meta boxes
 	'/inc/ad-codes.php',						// register ad codes
+	'/inc/feed-input/feed-input.php', 	// Pull in posts via RSS or Atom feeds
+	'/inc/custom-less-variables.php'	// Compile custom LESS to CSS from the WP dashboard
 	'/inc/wp-taxonomy-landing/taxonomy-landing.php'	// adds taxonomy landing plugin
 );
 

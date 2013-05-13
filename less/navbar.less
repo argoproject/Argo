@@ -11,12 +11,12 @@
   *z-index: 2;
 
   overflow: visible;
-  margin-bottom: @baseLineHeight / 5;
+  margin-bottom: @baseline / 5;
 }
 
 // Gradient is applied to it's own element because overflow visible is not honored by IE when filter is present
 .navbar-inner {
-  min-height: 36px;
+  min-height: @navbarHeight;
   background-color: @baseColor;
 }
 
@@ -57,27 +57,25 @@
   float: right; // redeclare due to specificity
 }
 .navbar ul {
-  font-size: 15px;
+  font-size: @navbarFontSize;
 }
 .navbar li {
   display: block;
   float: left;
-  margin-bottom:0;
-  padding-top:6px;
+  margin-bottom: 0;
+  line-height: @navbarHeight;
 }
 .navbar li > a {
   float: none;
-  // Vertically center the text given @navbarHeight
-  padding: 9px;
-  line-height: @baseLineHeight;
+  padding: @navbarHeight/4;
   color: @navbarLinkColor;
   text-decoration: none;
 }
 .navbar li.dropdown > a {
-  padding-right:0;
+  padding-right: 0;
 }
 .navbar li.dropdown .dropdown-menu li a {
-  padding-right:10px;
+  padding-right: 10px;
 }
 .navbar .open > a,
 .navbar li > a:hover {
@@ -88,8 +86,8 @@ li.home-link:hover i {
   .opacity(85);
 }
 .navbar li.home-link > a {
-  font-size: @baseFontSize + 3;
-  padding: 5px 5px 5px 10px;
+  font-size: @navbarFontSize + 5;
+  padding: @navbarHeight/4 5px @navbarHeight/4 10px;
   &:hover {
     background:none;
   }
@@ -118,18 +116,22 @@ li.home-link:hover i {
 .navbar .btn-navbar {
   display: none;
   float: right;
-  padding: 7px 10px;
-  margin: 4px 5px 0;
+  margin: @navbarHeight/4 - @navbarFontSize/5 0 0;
+  margin-right: 10px;
+  padding: @navbarHeight/5 10px;
   background-color: @navbarBackgroundHighlight;
   border: none;
 }
+.navbar .btn-navbar:hover {
+  background-color: darken(@navbarBackgroundHighlight, 10%);
+}
 .navbar .btn-navbar .label {
-  float:right;
-  color:white;
-  line-height:1;
-  margin:-1px 0 0 5px;
-  padding:0;
-  font-size:14px;
+  float: right;
+  color: white;
+  line-height: 1;
+  margin: -2px 0 0 5px;
+  padding: 0;
+  font-size: @navbarFontSize;
 }
 .navbar .btn-navbar .bars {
   float:left;
@@ -138,7 +140,7 @@ li.home-link:hover i {
   display: block;
   width: 18px;
   height: 2px;
-  background-color: #f5f5f5;
+  background-color: @navbarText;
 }
 .btn-navbar .icon-bar + .icon-bar {
   margin-top: 3px;
@@ -172,12 +174,12 @@ li.home-link:hover i {
   border-right: 5px solid transparent;
   border-left:  5px solid transparent;
   content: "";
-  .opacity(80);
+  .opacity(90);
 }
 
 // Place the caret
 .dropdown .caret {
-  margin: 10px 8px 0 1px;
+  margin: @navbarHeight/2 - 3 8px 0 3px;
 }
 .dropdown:hover .caret,
 .open .caret {
@@ -195,10 +197,10 @@ li.home-link:hover i {
   float: left;
   min-width: 160px;
   padding: 3px 0;
-  margin: 5px 0 0; // override default ul
+  margin: 0; // override default ul
   list-style: none;
   background-color: @dropdownBackground;
-  border: 1px solid #ccc;
+  border: 1px solid @grayLighter;
   border: 1px solid rgba(0,0,0,.2);
   *border-right-width: 2px;
   *border-bottom-width: 2px;
@@ -212,17 +214,17 @@ li.home-link:hover i {
     .nav-divider(@dropdownDividerTop, @dropdownDividerBottom);
   }
   li {
-    padding-top:0;
-    width:100%;
+    padding-top: 0;
+    width: 100%;
   }
   // Links within the dropdown menu
   li > a {
     display: block;
-    width:auto;
+    width: auto;
     padding: 3px 15px;
     clear: both;
     font-weight: normal;
-    line-height: @baseLineHeight;
+    line-height: @baseline;
     color: @dropdownLinkColor;
     white-space: nowrap;
     text-shadow: none;
@@ -235,7 +237,7 @@ ul.nav li.dropdown:hover ul.dropdown-menu {
 .navbar .dropdown-menu .active > a,
 .navbar .dropdown-menu .active > a:hover {
   color: @linkColor;
-  font-weight:bold;
+  font-weight: bold;
   background-color: @dropdownBackground;
 }
 
@@ -243,7 +245,7 @@ ul.nav li.dropdown:hover ul.dropdown-menu {
 // -----------
 
 .dropdown-menu li a:hover {
-	background:none;
+	background: none;
 }
 .dropdown-menu li a:hover {
   color: @dropdownLinkColorHover;
@@ -298,9 +300,9 @@ ul.nav li.dropdown:hover ul.dropdown-menu {
   &:before {
     content: '';
     display: inline-block;
-    border-left:   10px solid transparent;
-    border-right:  10px solid transparent;
-    border-bottom: 10px solid #ccc;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid @grayLighter;
     border-bottom-color: @dropdownBorder;
     position: absolute;
     top: -10px;
@@ -309,8 +311,8 @@ ul.nav li.dropdown:hover ul.dropdown-menu {
   &:after {
     content: '';
     display: inline-block;
-    border-left:   9px solid transparent;
-    border-right:  9px solid transparent;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
     border-bottom: 9px solid @dropdownBackground;
     position: absolute;
     top: -9px;
@@ -373,7 +375,7 @@ ul.nav li.dropdown:hover ul.dropdown-menu {
 .navbar .sub-sub-menu:after {
   border-top: 8px solid transparent;
   border-left: none;
-  border-right: 8px solid #fff;
+  border-right: 8px solid @white;
   border-bottom: 8px solid transparent;
   top: 31%;
   left: -8px;
@@ -397,15 +399,13 @@ ul.nav li.dropdown:hover ul.dropdown-menu {
   // Block-level the nav
   .nav-collapse .nav {
     float: none;
-    margin: 0 0 (@baseLineHeight / 2);
+    margin: 0 0 (@baseline / 2);
   }
   .nav-collapse .nav > li,
   .nav-collapse .nav > span > li {
     float: none;
-    display:list-item;
-  }
-  .nav-collapse .nav > li > a {
-    margin-bottom: 2px;
+    display: list-item;
+    line-height: 2;
   }
   .nav-collapse .nav > .divider-vertical {
     display: none;
@@ -500,7 +500,7 @@ ul.nav li.dropdown:hover ul.dropdown-menu {
 // ---------------
 
 #topics-bar {
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid @grayDark;
   padding-bottom: 3px;
   ul {
     margin: 0;
@@ -509,9 +509,9 @@ ul.nav li.dropdown:hover ul.dropdown-menu {
       display: inline;
       margin-right: 10px;
       white-space: nowrap;
-      font-size: @baseFontSize - 2;
+      font-size: 14px;
       &.menu-label {
-      	font-size: @baseFontSize;
+      	font-size: 16px;
         font-weight: bold;
       }
     }

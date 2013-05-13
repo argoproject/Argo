@@ -7,6 +7,10 @@ body {
   color: @textColor;
   background-color: @bodyBackground;
 }
+#page {
+  background-color: @pageBackground;
+  padding: 0 20px;
+}
 
 // --------------------------------------------
 // Links
@@ -49,15 +53,13 @@ h1 {
   font-size: @baseFontSize * 3.375;
   &.entry-title {
     font-size: @baseFontSize * 2.75;
-    margin-bottom: @baseline/2;
-    line-height:1;
+    margin-bottom: @baseline / 2;
+    line-height: 1;
   }
 }
-
 h2 {
   font-size: @baseFontSize * 2.75;
 }
-
 h3 {
   font-size: @baseFontSize * 2.25;
 }
@@ -76,11 +78,15 @@ h6,
 .entry-content h5 {
   font-size: @baseFontSize * 1.222;
 }
+.entry-content h6 {
+  font-size: @baseFontSize;
+  text-transform: uppercase;
+}
 h1, h2, h3, h4, h5, h6 {
   font-family: @headingsFontFamily;
   font-weight: @headingsFontWeight;
   color: @headingsColor;
-  line-height:1.3;
+  line-height: 1.3;
   text-rendering: optimizelegibility;
   small {
     font-size: 0.815em;
@@ -91,12 +97,12 @@ h1, h2, h3, h4, h5, h6 {
 .entry-content h4,
 .entry-content h5,
 .entry-content h6 {
-  margin-bottom: @baseline*0.815;
+  margin-bottom: @baseline;
 }
 p {
-  font-size: @baseFontSize + 3;
+  font-size: @baseFontSize * 1.222;
   line-height: 1.5;
-  margin: 0 0 @baseline*0.815;
+  margin: 0 0 @baseline;
   small,
   &.small {
     font-size: @baseFontSize * 0.815;
@@ -107,9 +113,9 @@ p {
 	color: @grayLight;
   }
   &.intro {
-    font-size: @baseFontSize + 6;
+    font-size: @baseFontSize * 1.5;
     color: @gray;
-    font-style:italic;
+    font-style: italic;
   }
 }
 .widget p {
@@ -118,14 +124,14 @@ p {
 
 ul, ol {
   padding: 0;
-  margin: 0 0 @baseLineHeight 25px;
+  margin: 0 0 @baseline 25px;
   font-size: @baseFontSize + 1;
 }
 ul ul,
 ul ol,
 ol ol,
 ol ul {
-  margin-top: @baseline * 0.35;
+  margin-top: @baseline / 3;
   margin-bottom: 0;
 }
 ul {
@@ -176,7 +182,7 @@ del {
 // --------------------------------------------
 
 blockquote {
-  clear:both;
+  clear: both;
   padding: 5px 15px;
   margin: 0 0 @baseline;
   background-color: @grayLighter;
@@ -184,11 +190,11 @@ blockquote {
   p {
     font-size: @baseFontSize;
     margin: @baseline/2 0;
-    line-height:1.5;
+    line-height: 1.5;
   }
   small {
     display: block;
-    line-height: @baseLineHeight;
+    line-height: @baseline;
     color: @grayLight;
     &:before {
       content: '\2014 \00A0';
@@ -227,10 +233,10 @@ code {
 // Blocks of code
 pre {
   display: block;
-  padding: (@baseLineHeight - 1) / 2;
-  margin: 0 0 @baseLineHeight;
+  padding: @baseline / 2;
+  margin: 0 0 @baseline;
   font-size: @baseFontSize * .925; // 13px to 12px
-  line-height: @baseLineHeight;
+  line-height: @baseline;
   word-break: break-all;
   word-wrap: break-word;
   white-space: pre;
@@ -242,7 +248,7 @@ pre {
 
   // Make prettyprint styles more spaced out for readability
   &.prettyprint {
-    margin-bottom: @baseLineHeight;
+    margin-bottom: @baseline;
   }
 
   // Account for some code outputs that place code tags in pre tags

@@ -132,14 +132,77 @@ textarea {
   -ms-box-sizing: border-box;
   box-sizing: border-box;
 }
+/**
+ * @group Links
+ * @label Color of links
+ * @type color
+ * @default_value #2275bb
+ */
+/**
+ * @group Links
+ * @label Hover color of links
+ * @type color
+ * @default_value #2275bb
+ */
+/**
+ * @group Basics
+ * @label Body Background Color
+ * @type color
+ * @default_value #fff
+ */
+/**
+ * @group Basics
+ * @label Page Background Color
+ * @type color
+ * @default_value #fff
+ */
+/**
+ * @group Basics
+ * @label Text Color
+ * @type color
+ * @default_value #333
+ */
+/**
+ * @group Basics
+ * @label Default Vertical Spacing
+ * @type pixels
+ * @default_value 24px
+ */
+/**
+ * @group Typography
+ * @label Sans Font Family
+ * @type dropdown
+ * @options "Helvetica Neue", Helvetica, Arial, sans-serif|Arial, Arial Black, sans-serif|"Open Sans", Helvetica, sans-serif
+ * @default_value "Helvetica Neue", Helvetica, Arial, sans-serif
+ */
+/**
+ * @group Typography
+ * @label Serif Font Family
+ * @type text
+ */
+/**
+ * @group Typography
+ * @label Base Font Size
+ * @type pixels
+ */
+/**
+ * @group Typography
+ * @label Base Line Height
+ * @type text
+ * @default_value 1.5
+ */
 body {
   margin: 0;
   font-family: Georgia, "Times New Roman", Times, serif;
   font-size: 16px;
   font-weight: normal;
-  line-height: 24px;
+  line-height: 1.5;
   color: #333333;
   background-color: #ffffff;
+}
+#page {
+  background-color: #ffffff;
+  padding: 0 20px;
 }
 a {
   color: #2275bb;
@@ -198,6 +261,10 @@ h6,
 .entry-content h5 {
   font-size: 19.552px;
 }
+.entry-content h6 {
+  font-size: 16px;
+  text-transform: uppercase;
+}
 h1,
 h2,
 h3,
@@ -223,12 +290,12 @@ h6 small {
 .entry-content h4,
 .entry-content h5,
 .entry-content h6 {
-  margin-bottom: 19.56px;
+  margin-bottom: 24px;
 }
 p {
-  font-size: 19px;
+  font-size: 19.552px;
   line-height: 1.5;
-  margin: 0 0 19.56px;
+  margin: 0 0 24px;
 }
 p small,
 p.small {
@@ -240,7 +307,7 @@ p.xsmall {
   color: #999999;
 }
 p.intro {
-  font-size: 22px;
+  font-size: 24px;
   color: #555555;
   font-style: italic;
 }
@@ -257,7 +324,7 @@ ul ul,
 ul ol,
 ol ol,
 ol ul {
-  margin-top: 8.399999999999999px;
+  margin-top: 8px;
   margin-bottom: 0;
 }
 ul {
@@ -352,7 +419,7 @@ code {
 }
 pre {
   display: block;
-  padding: 11.5px;
+  padding: 12px;
   margin: 0 0 24px;
   font-size: 14.8px;
   line-height: 24px;
@@ -387,7 +454,7 @@ hr {
   border-bottom: 1px solid #ffffff;
 }
 form {
-  margin: 0 0 24px;
+  margin: 0 0 1.5;
 }
 fieldset {
   padding: 0;
@@ -398,15 +465,15 @@ legend {
   display: block;
   width: 100%;
   padding: 0;
-  margin-bottom: 36px;
+  margin-bottom: 2.25;
   font-size: 24px;
-  line-height: 48px;
+  line-height: 3;
   color: #333333;
   border: 0;
   border-bottom: 1px solid #e5e5e5;
 }
 legend small {
-  font-size: 18px;
+  font-size: 1.125;
   color: #999999;
 }
 label,
@@ -416,7 +483,7 @@ select,
 textarea {
   font-size: 16px;
   font-weight: normal;
-  line-height: 24px;
+  line-height: 1.5;
 }
 input,
 button,
@@ -446,11 +513,11 @@ input[type="tel"],
 input[type="color"],
 .uneditable-input {
   display: inline-block;
-  height: 24px;
+  height: 1.5;
   padding: 4px;
   margin-bottom: 9px;
   font-size: 16px;
-  line-height: 24px;
+  line-height: 1.5;
   color: #555555;
 }
 input,
@@ -782,9 +849,9 @@ select:focus:required:invalid:focus {
   box-shadow: 0 0 6px #f8b9b7;
 }
 .form-actions {
-  padding: 23px 20px 24px;
-  margin-top: 24px;
-  margin-bottom: 24px;
+  padding: 0.5 20px 1.5;
+  margin-top: 1.5;
+  margin-bottom: 1.5;
   background-color: #f5f5f5;
   border-top: 1px solid #e5e5e5;
   *zoom: 1;
@@ -822,7 +889,7 @@ select:focus:required:invalid:focus {
 }
 .help-block {
   display: block;
-  margin-bottom: 12px;
+  margin-bottom: 0.75;
 }
 .help-inline {
   display: inline-block;
@@ -867,11 +934,11 @@ select:focus:required:invalid:focus {
 .input-append .add-on {
   display: inline-block;
   width: auto;
-  height: 24px;
+  height: 1.5;
   min-width: 16px;
   padding: 4px 5px;
   font-weight: normal;
-  line-height: 24px;
+  line-height: 1.5;
   text-align: center;
   text-shadow: 0 1px 0 #ffffff;
   vertical-align: middle;
@@ -1012,14 +1079,14 @@ select:focus:required:invalid:focus {
   margin-left: 0;
 }
 .control-group {
-  margin-bottom: 12px;
+  margin-bottom: 0.75;
 }
 legend + .control-group {
-  margin-top: 24px;
+  margin-top: 1.5;
   -webkit-margin-top-collapse: separate;
 }
 .form-horizontal .control-group {
-  margin-bottom: 24px;
+  margin-bottom: 1.5;
   *zoom: 1;
 }
 .form-horizontal .control-group:before,
@@ -1046,7 +1113,7 @@ legend + .control-group {
   *padding-left: 160px;
 }
 .form-horizontal .help-block {
-  margin-top: 12px;
+  margin-top: 0.75;
   margin-bottom: 0;
 }
 .form-horizontal .form-actions {
@@ -1061,7 +1128,7 @@ legend + .control-group {
   padding: 4px 10px 4px;
   margin-bottom: 0;
   font-size: 16px;
-  line-height: 24px;
+  line-height: 1.5;
   *line-height: 20px;
   color: #333333;
   text-align: center;
@@ -1096,7 +1163,7 @@ legend + .control-group {
 .btn-small {
   padding: 5px 9px;
   font-size: 14px;
-  line-height: 22px;
+  line-height: -0.5px;
 }
 .btn-small [class^="icon-"] {
   margin-top: -1px;
@@ -1104,7 +1171,7 @@ legend + .control-group {
 .btn-mini {
   padding: 2px 6px;
   font-size: 14px;
-  line-height: 20px;
+  line-height: -2.5px;
 }
 .btn-primary,
 .btn-primary:hover {
@@ -1151,12 +1218,12 @@ table {
   border-spacing: 0;
   border: 1px solid #dddddd;
   border-left: 0;
-  margin-bottom: 24px;
+  margin-bottom: 1.5;
 }
 table th,
 table td {
   padding: 8px;
-  line-height: 24px;
+  line-height: 1.5;
   text-align: left;
   vertical-align: top;
   border-top: 1px solid #dddddd;
@@ -1647,11 +1714,12 @@ table .span24 {
 .global-nav ul {
   margin: 0;
   list-style: none;
-  font-size: 12px;
+  font-size: 11px;
+  line-height: 24px;
 }
 .global-nav ul li {
   float: left;
-  margin: 7px 18px 0 0;
+  margin: 9px 18px 0 0;
 }
 .global-nav ul a {
   color: #ffffff;
@@ -1711,7 +1779,7 @@ table .span24 {
 }
 #header-search {
   float: left;
-  margin-top: 5px;
+  margin-top: 4px;
 }
 #header-search form {
   margin: 0;
@@ -1770,7 +1838,7 @@ h2.branding span {
   margin-bottom: 4.8px;
 }
 .navbar-inner {
-  min-height: 36px;
+  min-height: 40px;
   background-color: #2275bb;
 }
 .navbar .container {
@@ -1785,7 +1853,7 @@ h2.branding span {
 }
 .navbar .navbar-text {
   margin-bottom: 0;
-  line-height: 28px;
+  line-height: 40px;
 }
 .navbar .nav {
   position: relative;
@@ -1804,12 +1872,11 @@ h2.branding span {
   display: block;
   float: left;
   margin-bottom: 0;
-  padding-top: 6px;
+  line-height: 40px;
 }
 .navbar li > a {
   float: none;
-  padding: 9px;
-  line-height: 24px;
+  padding: 10px;
   color: #ffffff;
   text-decoration: none;
 }
@@ -1829,8 +1896,8 @@ li.home-link:hover i {
   filter: alpha(opacity=85);
 }
 .navbar li.home-link > a {
-  font-size: 19px;
-  padding: 5px 5px 5px 10px;
+  font-size: 20px;
+  padding: 10px 5px 10px 10px;
 }
 .navbar li.home-link > a:hover {
   background: none;
@@ -1842,7 +1909,7 @@ li.home-link:hover i {
   background-color: #1a5a90;
 }
 .navbar .divider-vertical {
-  height: 28px;
+  height: 40px;
   width: 1px;
   margin: 0 0 0 2px;
   overflow: hidden;
@@ -1852,18 +1919,22 @@ li.home-link:hover i {
 .navbar .btn-navbar {
   display: none;
   float: right;
-  padding: 7px 10px;
-  margin: 4px 5px 0;
+  margin: 7px 0 0;
+  margin-right: 10px;
+  padding: 8px 10px;
   background-color: #2275bb;
   border: none;
+}
+.navbar .btn-navbar:hover {
+  background-color: #1a5a90;
 }
 .navbar .btn-navbar .label {
   float: right;
   color: white;
   line-height: 1;
-  margin: -1px 0 0 5px;
+  margin: -2px 0 0 5px;
   padding: 0;
-  font-size: 14px;
+  font-size: 15px;
 }
 .navbar .btn-navbar .bars {
   float: left;
@@ -1872,7 +1943,7 @@ li.home-link:hover i {
   display: block;
   width: 18px;
   height: 2px;
-  background-color: #f5f5f5;
+  background-color: #ffffff;
 }
 .btn-navbar .icon-bar + .icon-bar {
   margin-top: 3px;
@@ -1897,11 +1968,11 @@ li.home-link:hover i {
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
   content: "";
-  opacity: 0.8;
-  filter: alpha(opacity=80);
+  opacity: 0.9;
+  filter: alpha(opacity=90);
 }
 .dropdown .caret {
-  margin: 10px 8px 0 1px;
+  margin: 17px 8px 0 3px;
 }
 .dropdown:hover .caret,
 .open .caret {
@@ -1917,10 +1988,10 @@ li.home-link:hover i {
   float: left;
   min-width: 160px;
   padding: 3px 0;
-  margin: 5px 0 0;
+  margin: 0;
   list-style: none;
   background-color: #ffffff;
-  border: 1px solid #ccc;
+  border: 1px solid #dddddd;
   border: 1px solid rgba(0, 0, 0, 0.2);
   *border-right-width: 2px;
   *border-bottom-width: 2px;
@@ -1937,7 +2008,7 @@ li.home-link:hover i {
 .dropdown-menu .divider {
   *width: 100%;
   height: 1px;
-  margin: 11px 1px;
+  margin: -0.25 1px;
   *margin: -5px 0 5px;
   overflow: hidden;
   background-color: #e5e5e5;
@@ -2004,7 +2075,7 @@ ul.nav li.dropdown:hover ul.dropdown-menu {
   display: inline-block;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-bottom: 10px solid #ccc;
+  border-bottom: 10px solid #dddddd;
   border-bottom-color: rgba(0, 0, 0, 0.2);
   position: absolute;
   top: -10px;
@@ -2072,7 +2143,7 @@ ul.nav li.dropdown:hover ul.dropdown-menu {
 .navbar .sub-sub-menu:after {
   border-top: 8px solid transparent;
   border-left: none;
-  border-right: 8px solid #fff;
+  border-right: 8px solid #ffffff;
   border-bottom: 8px solid transparent;
   top: 31%;
   left: -8px;
@@ -2093,9 +2164,7 @@ ul.nav li.dropdown:hover ul.dropdown-menu {
   .nav-collapse .nav > span > li {
     float: none;
     display: list-item;
-  }
-  .nav-collapse .nav > li > a {
-    margin-bottom: 2px;
+    line-height: 2;
   }
   .nav-collapse .nav > .divider-vertical {
     display: none;
@@ -2183,7 +2252,7 @@ ul.nav li.dropdown:hover ul.dropdown-menu {
   }
 }
 #topics-bar {
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #333333;
   padding-bottom: 3px;
 }
 #topics-bar ul {
@@ -2239,7 +2308,6 @@ article.story {
   min-height: 28px;
   height: auto;
   margin-bottom: 24px;
-  padding: 2px 0;
   border-top: 1px solid #dddddd;
   border-bottom: 1px solid #dddddd;
 }
@@ -2248,15 +2316,17 @@ article.story {
   margin: 0;
   height: auto;
 }
+.post-social .left {
+  padding: 8px 0 0;
+}
+.post-social .right {
+  padding: 2px 0 0;
+}
 .post-social span {
   position: relative;
 }
 .post-social span.twitter {
-  top: 4px;
   margin-right: 8px;
-}
-.post-social span.facebook {
-  top: 4px;
 }
 .post-social span.print {
   font-family: Verdana, Helvetica, sans-serif;
@@ -2295,7 +2365,7 @@ article.story {
 .pager,
 #related-posts {
   clear: both;
-  margin: 0 0 12px;
+  margin: 0 0 24px;
   width: 100%;
 }
 .labels h5,
@@ -2309,7 +2379,6 @@ article.story {
 .pager {
   list-style: none;
   font-size: 16px;
-  line-height: 1.6;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .single-post .author-box,
@@ -2318,6 +2387,9 @@ article.story {
   background-color: #fafafa;
   border: 1px solid #dddddd;
   border-top: 3px solid #999999;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
 }
 .single-post .author-box h5,
 .single-argolinkroundups .author-box h5,
@@ -2344,6 +2416,9 @@ h3.recent-posts a.rss-link:hover,
   margin: 5px;
   padding: 8px;
   background-color: #efefef;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
 }
 .labels .series-label h5 {
   background: none;
@@ -2357,6 +2432,7 @@ h3.recent-posts a.rss-link:hover,
 .tags {
   height: 100%;
   overflow: auto;
+  margin-bottom: 12px;
 }
 .tags ul {
   padding: 0;
@@ -2366,14 +2442,16 @@ h3.recent-posts a.rss-link:hover,
 .tags ul li {
   display: inline;
   letter-spacing: 1px;
-  margin-right: 8px;
+  margin: 0 8px 8px 0;
   vertical-align: baseline;
   font-weight: 300;
   white-space: nowrap;
-  margin-bottom: 8px;
   float: left;
   background-color: #2275bb;
-  padding: 2px 8px 2px 5px;
+  padding: 4px 8px 4px 5px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
 }
 .tags ul li:hover {
   background-color: #1a5a90;
@@ -2397,10 +2475,13 @@ h3.recent-posts a.rss-link:hover,
   display: inline-block;
   padding: 10px 15px;
   color: #333333;
-  background-color: #eee;
+  background-color: #dddddd;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
 }
 .pager a:hover {
-  background-color: #666;
+  background-color: #555555;
   color: #ffffff;
   text-decoration: none;
 }
@@ -2417,6 +2498,9 @@ h3.recent-posts a.rss-link:hover,
 #related-posts {
   border: 1px solid #dddddd;
   border-top: 3px solid #999999;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
 }
 #related-post-nav {
   padding: 8px 0;
@@ -2435,7 +2519,7 @@ h3.recent-posts a.rss-link:hover,
 }
 #related-post-nav a {
   display: block;
-  padding: 4px 5px;
+  padding: 6px;
   font-weight: normal;
   text-decoration: none;
   border-top: 1px solid #999999;
@@ -2466,28 +2550,28 @@ h3.recent-posts a.rss-link:hover,
   margin-left: 15px;
   margin-bottom: 0;
   font-size: 13.04px;
-  line-height: 1.5;
 }
 #related-posts .related-items ul li.top-related {
   list-style: none;
   margin-left: 0;
   border-bottom: 1px solid #dddddd;
-  margin-bottom: 5px;
+  margin-bottom: 12px;
   font-size: 8px;
 }
 #related-posts .related-items ul li.top-related h3 {
   font-size: 19.552px;
   font-weight: bold;
-  margin-bottom: 4.8px;
+  margin-bottom: 6px;
 }
 #related-posts .related-items ul li.top-related p {
   font-family: Georgia, "Times New Roman", Times, serif;
   font-size: 10.672px;
-  margin-bottom: 6px;
+  margin-bottom: 12px;
 }
 #related-posts .related-items p {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 13.04px;
+  margin-bottom: 6px;
 }
 .author-box {
   clear: both;
@@ -2502,7 +2586,7 @@ h3.recent-posts a.rss-link:hover,
   float: left;
   margin: 0 20px 0 0;
   padding: 4px;
-  border: 1px solid #ccc;
+  border: 1px solid #dddddd;
 }
 .author-box p {
   font-size: 13.04px;
@@ -2515,11 +2599,11 @@ h3.recent-posts a.rss-link:hover,
 .author-box ul li {
   display: inline;
   float: left;
-  margin-right: 12px;
+  margin-right: 8px;
 }
 .author-box ul li.facebook {
   position: relative;
-  top: -2px;
+  top: -4px;
 }
 .author-box ul li.gplus,
 .author-box ul li.linkedin,
@@ -2552,7 +2636,7 @@ h3.recent-posts a.rss-link:hover,
   background-color: #ffffff;
   color: #000000;
   position: relative;
-  top: 3px;
+  top: -2px;
 }
 .author-box ul li.gplus i.icon-mail:hover,
 .author-box ul li.linkedin i.icon-mail:hover,
@@ -2615,7 +2699,7 @@ h3.recent-posts a.rss-link:hover,
 .module dt,
 .module dd {
   font-size: 13.04px;
-  margin: 0 0 12px 0;
+  margin: 0 0 12px;
 }
 .type-aside p {
   font-size: 0.815em;
@@ -2652,7 +2736,7 @@ p.wp-caption-text {
   margin: 0 0 24px;
 }
 .half {
-  width: 50%;
+  width: 40%;
 }
 .full {
   width: 100%;
@@ -2829,7 +2913,7 @@ h5.top-tag a {
   background: none;
   color: #333333;
   border: none;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #dddddd;
 }
 #homepage-bottom h5 {
   font-size: 18px;
@@ -3811,10 +3895,12 @@ img[class*="wp-image-"] {
 }
 @media screen and (min-width: 1600px) {
   .global-nav,
-  #page,
   #site-footer,
   #footer-logos {
     padding: 0;
+  }
+  #page {
+    padding: 0 20px;
   }
 }
 @media (min-width: 769px) and (max-width: 979px) {
