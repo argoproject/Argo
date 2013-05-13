@@ -40,5 +40,7 @@ if (!defined('CF_TEMPLATE_LANDING_VERSION')) {
 
 	include('functions/cftl-post-type.php');
 	include('functions/cftl-intercept-queries.php');
+	include('functions/cftl-series-order.php');
+
 } // End CF_TEMPLATE_LANDING_VERSION check
 

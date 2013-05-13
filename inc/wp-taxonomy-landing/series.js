@@ -34,6 +34,38 @@
 		}
 	});
 
+	//Custom order manager link
+	$('select[name="post_order"]').on('change', function() {
+		if ( $(this).val() == 'custom' ) {
+			$('a.thickbox.custom:hidden').fadeIn('fast');
+		} else {
+			$('a.thickbox.custom:visible').fadeOut('fast');
+		}
+	});
+	$('select[name="post_order"]').change();
+
+	//Custom order manager sortable
+	if ($('#custom-order').length) {
+		var $sort = $("#postsort"), original_order = $sort.html();
+		$sort.sortable().disableSelection();
+
+		//ajax order submit
+		$('#save-order').on('click', function() {
+			tb_remove();
+			var orderdata = 'action=series_sort&series_id=' + $sort.data('series-id') + '&' + $sort.sortable('serialize');
+			$.post( ajaxurl, orderdata, function(resp) {
+				console.log(resp);
+			});
+		});
+
+		//cancel button
+		$('input[name="cancel"]').on('click', function() {
+			$sort.html(original_order);
+			tb_remove();
+		});
+
+	}
+
 	//fade on page load by toggling
 	$('#cftl_header_enabled, #cftl_footer_enable').change().change();
 

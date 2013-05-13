@@ -43,7 +43,7 @@ function cftl_register_taxonomy_landing() {
 		'supports' => array(
 			'title',
 			'thumbnail',
-			'revisions',
+			//'revisions',
 			//'excerpt',
 			//'editor'
 		),
@@ -360,6 +360,7 @@ function cftl_tax_landing_header($post) {
 function cftl_tax_landing_main($post) {
 	wp_nonce_field(plugin_basename(__FILE__), 'cftl_tax_landing_main');
 	$fields = ($post->post_title) ? get_post_custom( $post->ID ) : cftl_field_defaults();
+	$fields['show'] = maybe_unserialize($fields['show'][0]);
 	?>
 <div class="form-field-radios">
 	<h4>Layout</h4>
@@ -399,6 +400,11 @@ function cftl_tax_landing_main($post) {
 <div class="form-field-select">
 	<h4>Post Order</h4>
 	<div>
+		<?php
+			//allow 'custom' if we have a single term
+			$terms = get_the_terms( $post->ID, 'series');
+			if (count($terms) == 1) $series_id = $terms[0]->term_id;
+		?>
 		<select name="post_order">
 			<?php
 				$options = array(
@@ -407,27 +413,47 @@ function cftl_tax_landing_main($post) {
 					"Top Stories, then newest first" => 'top, DESC',
 					"Top Stories, then oldest first" => 'top, ASC',
 				);
+				if ($series_id) $options["Custom"] = "custom";
 				foreach ($options as $label => $opt) {
 					echo '<option value="', $opt, '"', selected( $fields['post_order'][0], $opt), '>', $label, "</option>\n";
 				}
 			?>
 		</select>
+		<?php if ($series_id) :
+			add_thickbox();
+		?>
+		<a class="thickbox custom" href="#TB_inline?width=600&height=550&inlineId=custom-order">Manage</a>
+		<div id="custom-order">
+			<div>
+				<div id="post-list">
+					<p><?php _e('Drag and drop to reorder posts. Newly-added posts will appear at the bottom', 'largo'); ?></p>
+					<ul id="postsort" data-series-id="<?php echo $series_id; ?>">
+						<?php cftl_load_posts( $series_id ); ?>
+					</ul>
+					<div class="publishing">
+						<input type="submit" name="cancel" value="<?php esc_attr_e( 'Cancel', 'largo' ); ?>" class="button" />
+						<input type="submit" class="button-primary" id="save-order" value="<?php esc_attr_e( 'Save & Close', 'largo' ); ?>" />
+					</div>
+				</div>
+			</div>
+		</div>
+		<?php endif; ?>
 	</div>
 </div>
 <div class="form-field-checkboxes">
 	<h4>Show</h4>
 	<div>
 		<label for="show-image">
-			<input type="checkbox" id="show-image" name="show_image" value="1" <?php checked ($fields['show_image'][0], 1 ) ?> /> Featured Image
+			<input type="checkbox" id="show-image" name="show[image]" value="1" <?php checked ($fields['show']['image'], 1 ) ?> /> Featured Image
 		</label>
 		<label for="show-date">
-			<input type="checkbox" id="show-date" name="show_date" value="1" <?php checked ($fields['show_date'][0], 1 ) ?> /> Publication Date
+			<input type="checkbox" id="show-date" name="show[date]" value="1" <?php checked ($fields['show']['date'], 1 ) ?> /> Publication Date
 		</label>
 		<label for="show-author">
-			<input type="checkbox" id="show-author" name="show_author" value="1" <?php checked ($fields['show_author'][0], 1 ) ?> /> Author
+			<input type="checkbox" id="show-author" name="show[author]" value="1" <?php checked ($fields['show']['author'], 1 ) ?> /> Author
 		</label>
 		<label for="show-excerpt">
-			<input type="checkbox" id="show-excerpt" name="show_excerpt" value="1" <?php checked ($fields['show_excerpt'][0], 1 ) ?> /> Excerpt
+			<input type="checkbox" id="show-excerpt" name="show[excerpt]" value="1" <?php checked ($fields['show']['excerpt'], 1 ) ?> /> Excerpt
 		</label>
 	</div>
 </div>
@@ -498,10 +524,7 @@ function cftl_tax_landing_save_layout($post_id) {
 		'cftl_layout', //needs to instantiate widget regions
 		'per_page',
 		'post_order',
-		'show_image',
-		'show_date',
-		'show_author',
-		'show_excerpt',	//maybe serialize these four?
+		'show',	//maybe serialize these four?
 		'footer_enabled',
 		'footerhtml'	//instantiate another widget region
 	);
@@ -592,19 +615,52 @@ function cftl_get_meta_values( $key = '', $value = '', $type = 'cftl-tax-landing
 }
 
 /**
- *
+ * Load CSS and JS we need
  */
 function cftl_admin_scripts() {
 	$screen = get_current_screen();
 
 	if( $screen->base == 'post' && $screen->post_type == 'cftl-tax-landing') {
 		$url = get_template_directory_uri();
-		wp_enqueue_script( 'series', $url.'/inc/wp-taxonomy-landing/series.js', array('jquery'), '0.0.1', true );
+		wp_enqueue_script( 'series', $url.'/inc/wp-taxonomy-landing/series.js', array('jquery', 'jquery-ui-sortable'), '0.0.1', true );
 		wp_enqueue_style( 'series', $url.'/inc/wp-taxonomy-landing/series.css' );
 	}
 }
 add_action( 'admin_enqueue_scripts', 'cftl_admin_scripts');
 
+
+/**
+ * Helper function for loading in posts for custom post manager
+ */
+function cftl_load_posts( $series_id ) {
+	global $wpdb;
+	$post_list = $wpdb->get_results("
+SELECT p.ID, p.post_title FROM $wpdb->posts AS p
+INNER JOIN $wpdb->term_relationships AS tr ON (p.ID = tr.object_id)
+LEFT JOIN wpdb_postmeta AS mt2 ON (p.ID = mt2.post_id AND mt2.meta_key = 'series_{$series_id}_order')
+WHERE ( tr.term_taxonomy_id IN ({$series_id}) )
+AND p.post_type = 'post'
+AND (p.post_status = 'publish' OR p.post_status = 'private')
+GROUP BY p.ID
+ORDER BY ISNULL(mt2.meta_value+0) ASC, mt2.meta_value+0 ASC, p.post_date DESC");
+
+	foreach($post_list as $p) {
+		echo '<li id="pid_', $p->ID, '">', $p->post_title, "</li>";
+	}
+}
+
+
+/**
+ * Handle AJAX request for post order
+ */
+add_action('wp_ajax_series_sort', 'cftl_order_save');
+function cftl_order_save() {
+	$meta_key = "series_" . $_POST['series_id'] . "_order";
+	for ($i = 1; $i <= count($_POST['pid']); $i++ ) {
+		update_post_meta( $_POST['pid'][$i-1], $meta_key, $i);
+	}
+	echo "updated";
+}
 
 
 /**
