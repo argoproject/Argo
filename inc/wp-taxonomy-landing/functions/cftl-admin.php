@@ -623,7 +623,7 @@ function cftl_load_posts( $series_id ) {
 	$post_list = $wpdb->get_results("
 SELECT p.ID, p.post_title FROM $wpdb->posts AS p
 INNER JOIN $wpdb->term_relationships AS tr ON (p.ID = tr.object_id)
-LEFT JOIN wpdb_postmeta AS mt2 ON (p.ID = mt2.post_id AND mt2.meta_key = 'series_{$series_id}_order')
+LEFT JOIN $wpdb->postmeta AS mt2 ON (p.ID = mt2.post_id AND mt2.meta_key = 'series_{$series_id}_order')
 WHERE ( tr.term_taxonomy_id IN ({$series_id}) )
 AND p.post_type = 'post'
 AND (p.post_status = 'publish' OR p.post_status = 'private')

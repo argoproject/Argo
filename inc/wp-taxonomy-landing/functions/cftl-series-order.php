@@ -54,14 +54,14 @@ function largo_series_custom_order ( $sql ) {
 
 			//retool the query
 			$sql['join'] = "
-				INNER JOIN $wpdb->term_relationships ON (wpdb_posts.ID = wpdb_term_relationships.object_id)
-				LEFT JOIN $wpdb->term_relationships t2 ON (wpdb_posts.ID = t2.object_id)
+				INNER JOIN $wpdb->term_relationships ON (wpdb_posts.ID = $wpdb->term_relationships.object_id)
+				LEFT JOIN $wpdb->term_relationships t2 ON ($wpdb->posts.ID = t2.object_id)
 				AND (t2.term_taxonomy_id = " . $top_term->term_id . ")";
 			$sql['where'] = "
-				 AND ( wpdb_term_relationships.term_taxonomy_id IN (".$term->term_id.") )
-				 AND wpdb_posts.post_type = 'post'
-				 AND (wpdb_posts.post_status = 'publish' OR wpdb_posts.post_status = 'private') ";
-			$sql['orderby'] = "ISNULL(t2.term_taxonomy_id) ASC, wpdb_posts.post_date $sort";
+				 AND ( $wpdb->term_relationships.term_taxonomy_id IN (".$term->term_id.") )
+				 AND $wpdb->posts.post_type = 'post'
+				 AND ($wpdb->posts.post_status = 'publish' OR $wpdb->posts.post_status = 'private') ";
+			$sql['orderby'] = "ISNULL(t2.term_taxonomy_id) ASC, $wpdb->posts.post_date $sort";
 
 		}
 	endif;
