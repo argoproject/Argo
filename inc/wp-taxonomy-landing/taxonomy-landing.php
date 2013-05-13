@@ -29,16 +29,12 @@ Author URI: http://crowdfavorite.com
 
 // ini_set('display_errors', '1'); ini_set('error_reporting', E_ALL);
 
-if (!defined('CF_TEMPLATE_LANDING_VERSION')) {
-	define('CF_TEMPLATE_LANDING_VERSION', '1.1.2');
+if (!defined('LARGO_TEMPLATE_LANDING_VERSION')) {
+	define('LARGO_TEMPLATE_LANDING_VERSION', '1.1.2');
 
-	if (!defined('PLUGINDIR')) {
-		define('PLUGINDIR', 'wp-content/plugins');
-	}
+	load_plugin_textdomain( 'cf-tax-landing' );
 
-	load_plugin_textdomain('cf-tax-landing');
-
-	include('functions/cftl-post-type.php');
+	include('functions/cftl-admin.php');
 	include('functions/cftl-intercept-queries.php');
 	include('functions/cftl-series-order.php');
 

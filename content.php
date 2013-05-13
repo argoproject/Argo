@@ -13,7 +13,6 @@ global $tags;
 	 	<?php } ?>
 
  		<h2 class="entry-title">
- 			<?php echo get_post_meta( $post->ID, 'series_37_order', TRUE); ?>
  			<a href="<?php the_permalink(); ?>" title="Permalink to <?php the_title_attribute(); ?>" rel="bookmark"><?php the_title(); ?></a>
  		</h2>
 

@@ -7,15 +7,15 @@ get_header();
 
 // Load up our meta data and whatnot
 the_post();
-//make sure it's a landing page. If so, grab meta stuff
-//if we're not a landing page, bail.
 
-if ($post->post_type == 'cftl-tax-landing') {
+//make sure it's a landing page.
+if ( 'cftl-tax-landing' == $post->post_type ) {
 	$opt = get_post_custom( $post->ID );
 	foreach( $opt as $key => $val ) {
 		$opt[ $key ] = $val[0];
 	}
 	$opt['show'] = maybe_unserialize($opt['show']);	//make this friendlier
+	if ( 'all' == $opt['per_page'] ) $opt['per_page'] = -1;
 	/**
 	 * $opt will look like this:
 	 *
@@ -27,31 +27,54 @@ if ($post->post_type == 'cftl-tax-landing') {
 	 *		[post_order] => ASC|DESC|top, DESC|top, ASC
 	 *		[footer_enabled] => boolean
 	 *		[footerhtml] => {html}
-	 *		[show] => array with boolean values for keys date|excerpt|author|image
+	 *		[show] => array with boolean values for keys byline|excerpt|image|tags
 	 *	)
 	 *
 	 * The post description is stored in 'excerpt' and the custom HTML header is the post content
 	 */
 }
 
-// #content span width
-$content_span = array('one-column' => 12, 'two-column' => 8, 'three-column' => 5);
-
+// #content span width helper
+$content_span = array( 'one-column' => 12, 'two-column' => 8, 'three-column' => 5 );
 ?>
 
+<?php if ( $opt['header_enabled'] ) : ?>
+	<section id="series-header" class="span12">
+		<?php
+		if ( 'standard' == $opt['header_style'] ) {
+			//need to set a size, make this responsive, etc
+			?>
+			<div class="full series-banner"><?php the_post_thumbnail( 'full' ); ?></div>
+		<?php
+		} else {
+			the_content();
+		}
+		?>
+		<h1 class="entry-title"><?php the_title(); ?></h1>
+		<?php edit_post_link(__('Edit This Series Landing', 'largo'), '<h5 class="byline"><span class="edit-link">', '</span></h5>'); ?>
+
+		<div class="description">
+			<?php echo apply_filters( 'the_content', $post->post_excerpt ); ?>
+		</div>
+	</section>
+	</div><!-- end main div -->
+	<div id="series-main" class="row-fluid clearfix">
+<?php endif; ?>
+
+
 <?php // display left rail
-if ($opt['cftl_layout'] == 'three-column') get_sidebar('series-left');
+if ( 'three-column' == $opt['cftl_layout'] ) get_sidebar( 'series-left' );
 ?>
 
 <div id="content" class="span<?php echo $content_span[ $opt['cftl_layout'] ]; ?>" role="main">
-	<?php get_template_part( 'content', 'page' ); ?>
-
 <?php
 
 global $wp_query;
 
 // Make sure we're actually a series page, and pull posts accordingly
-if (isset($wp_query->query_vars['term']) && isset($wp_query->query_vars['taxonomy']) && $wp_query->query_vars['taxonomy'] == 'series') {
+if ( isset( $wp_query->query_vars['term'] )
+			&& isset( $wp_query->query_vars['taxonomy'] )
+			&& 'series' == $wp_query->query_vars['taxonomy'] ) {
 
 	$series = $wp_query->query_vars['term'];
 	$old_query = $wp_query;
@@ -62,10 +85,11 @@ if (isset($wp_query->query_vars['term']) && isset($wp_query->query_vars['taxonom
     'taxonomy' => 'series',
     'term' => $series,
     'order' => 'DESC',
+    'posts_per_page' => $opt['per_page']
   );
 
   //change args as needed
-  if ($opt['post_order'] == 'ASC') $args['order'] = 'ASC';
+  if ('ASC' == $opt['post_order'] ) $args['order'] = 'ASC';
 
   //other changes handled by filters from cftl-series-order.php
 
@@ -80,6 +104,7 @@ if (isset($wp_query->query_vars['term']) && isset($wp_query->query_vars['taxonom
 	largo_content_nav( 'nav-below' );
 
 	$wp_query = $old_query;
+	wp_reset_postdata();
 } ?>
 
 </div><!-- /.grid_8 #content -->
@@ -87,6 +112,23 @@ if (isset($wp_query->query_vars['term']) && isset($wp_query->query_vars['taxonom
 <?php // display left rail
 if ($opt['cftl_layout'] != 'one-column') : ?>
 	<?php get_sidebar('series-right'); ?>
+<?php endif; ?>
+
+
+<?php //display series footer
+if ( $opt['footer_enabled'] ) : ?>
+	<section id="series-footer">
+		<?php
+			//custom footer html
+			echo apply_filters( 'the_content', $opt['footerhtml'] );
+			//footer widget region
+			if ( is_active_sidebar( $post->post_name . "_footer" ) ) : ?>
+			<aside id="sidebar-bottom">
+			<?php dynamic_sidebar( $post->post_name . "_footer" ); ?>
+			</aside>
+			<?php endif;
+		?>
+	</section>
 <?php endif; ?>
 
 <!-- /.grid_4 -->

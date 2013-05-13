@@ -3,17 +3,9 @@
 /**
  * @package taxonomy-landing
  *
- * This file is part of Taxonomy Landing for WordPress
+ * This file was originally part of Taxonomy Landing for WordPress
  * https://github.com/crowdfavorite/wp-taxonomy-landing
  *
- * Copyright (c) 2009-2012 Crowd Favorite, Ltd. All rights reserved.
- * http://crowdfavorite.com
- *
- * **********************************************************************
- * This program is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * **********************************************************************
  */
 
 if (__FILE__ == $_SERVER['SCRIPT_FILENAME']) { die(); }
@@ -43,9 +35,6 @@ function cftl_register_taxonomy_landing() {
 		'supports' => array(
 			'title',
 			'thumbnail',
-			//'revisions',
-			//'excerpt',
-			//'editor'
 		),
 		'public' => false,
 		'exclude_from_search' => true,
@@ -61,7 +50,7 @@ add_action('init', 'cftl_register_taxonomy_landing');
 /**
  * Remove Permalink display / edit controls
  */
-function cfct_get_sample_permalink_html($return, $id, $new_title, $new_slug) {
+function cftl_get_sample_permalink_html($return, $id, $new_title, $new_slug) {
 	$post = get_post($id);
 	if (!empty($post) && $post->post_type == 'cftl-tax-landing') {
 		return '';
@@ -69,7 +58,7 @@ function cfct_get_sample_permalink_html($return, $id, $new_title, $new_slug) {
 	return $return;
 }
 
-add_filter('get_sample_permalink_html', 'cfct_get_sample_permalink_html', 10, 4);
+add_filter('get_sample_permalink_html', 'cftl_get_sample_permalink_html', 10, 4);
 
 /**
  * Remove Categories and Tags submenu items
@@ -242,7 +231,7 @@ function cftl_tax_landing_add_extras_box() {
 		remove_meta_box($box_name, 'cftl-tax-landing', 'side');
 	}
 }
-add_action('add_meta_boxes', 'cftl_tax_landing_add_extras_box', 99);	//do this later so we can remove other meta boxes
+add_action('add_meta_boxes', 'cftl_tax_landing_add_extras_box', 99);	//do this late so we can remove other meta boxes
 
 
 function cftl_tax_landing_extras_box($post) {
@@ -447,21 +436,21 @@ function cftl_tax_landing_main($post) {
 			<input type="checkbox" id="show-image" name="show[image]" value="1" <?php checked ($fields['show']['image'], 1 ) ?> /> Featured Image
 		</label>
 		<label for="show-date">
-			<input type="checkbox" id="show-date" name="show[date]" value="1" <?php checked ($fields['show']['date'], 1 ) ?> /> Publication Date
-		</label>
-		<label for="show-author">
-			<input type="checkbox" id="show-author" name="show[author]" value="1" <?php checked ($fields['show']['author'], 1 ) ?> /> Author
-		</label>
-		<label for="show-excerpt">
 			<input type="checkbox" id="show-excerpt" name="show[excerpt]" value="1" <?php checked ($fields['show']['excerpt'], 1 ) ?> /> Excerpt
+		</label>
+		<label for="show-byline">
+			<input type="checkbox" id="show-byline" name="show[byline]" value="1" <?php checked ($fields['show']['byline'], 1 ) ?> /> Byline
+		</label>
+		<label for="show-tags">
+			<input type="checkbox" id="show-tags" name="show[tags]" value="1" <?php checked ($fields['show']['tags'], 1 ) ?> /> Categories/Tags
 		</label>
 	</div>
 </div>
 <?php
 }
 
-function cftl_tax_landing_footer($post) {
-	wp_nonce_field(plugin_basename(__FILE__), 'cftl_tax_landing_footer');
+function cftl_tax_landing_footer ( $post ) {
+	wp_nonce_field( plugin_basename(__FILE__), 'cftl_tax_landing_footer' );
 	$fields = ($post->post_title) ? get_post_custom( $post->ID ) : cftl_field_defaults();
 	?>
 <div class="form-field-enable">
@@ -661,10 +650,3 @@ function cftl_order_save() {
 	}
 	echo "updated";
 }
-
-
-/**
- * TO DO:
- * - implement JS, UX etc for controlling it
- * - build template file for display of it
- */
