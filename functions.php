@@ -109,7 +109,7 @@ function largo_send_image_to_editor($html, $post_id, $caption, $title, $align, $
 	// NOTE: This functionality also bypasses the Navis-Media-Credit plugin's [caption][/caption]
 	// wrapper.
 
-	$shortcode = ''
+	$shortcode = '';
 
 	$shortcode .= '[picturefill id="' . $post_id . '"';
 	if ($title){
