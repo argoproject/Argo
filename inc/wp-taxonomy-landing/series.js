@@ -10,6 +10,16 @@
 		}
 	});
 
+	// show/hide custom HTML element
+	$('input[name="footer_style"]').on('click', function() {
+		var $val = $(this).val();
+		if ( $val != 'custom' ) {
+			$('#footer-html:visible').hide('fast');
+		} else {
+			$('#footer-html:hidden').show('fast');
+		}
+	});
+
 	//toggle help text display
 	$('input[name="cftl_layout"]').on('click', function() {
 		var $val = $(this).val();
@@ -22,15 +32,6 @@
 			$('.form-field-radios-stacked, .form-field, .form-field-wysiwyg > *' , '#cftl_tax_landing_header').fadeTo(100, 0.5);
 		} else {
 			$('.form-field-radios-stacked, .form-field, .form-field-wysiwyg > *' , '#cftl_tax_landing_header').fadeTo(100, 1);
-		}
-	});
-
-	//enabled footer fade stuff
-	$('#cftl_footer_enable').on('change', function() {
-		if ( !this.checked ) {
-			$('#footer-html').fadeTo(100, 0.5);
-		} else {
-			$('#footer-html').fadeTo(100, 1);
 		}
 	});
 

@@ -399,8 +399,8 @@ function cftl_tax_landing_main($post) {
 				$options = array(
 					"Newest first" => 'DESC',
 					"Oldest first" => 'ASC',
-					"Top Stories, then newest first" => 'top, DESC',
-					"Top Stories, then oldest first" => 'top, ASC',
+					"Featured, then newest first" => 'featured, DESC',
+					"Featured, then oldest first" => 'featured, ASC',
 				);
 				if ($series_id) $options["Custom"] = "custom";
 				foreach ($options as $label => $opt) {
@@ -453,16 +453,24 @@ function cftl_tax_landing_footer ( $post ) {
 	wp_nonce_field( plugin_basename(__FILE__), 'cftl_tax_landing_footer' );
 	$fields = ($post->post_title) ? get_post_custom( $post->ID ) : cftl_field_defaults();
 	?>
-<div class="form-field-enable">
-	<h4>Enabled?</h4>
+<div class="form-field-radios-stacked">
+	<h4>Layout Style</h4>
 	<div>
-		<label for="cftl_header_enable">
-			<input type="checkbox" id="cftl_footer_enable" name="footer_enabled" value="1" <?php checked( $fields['footer_enabled'][0], 1) ?> /> Yes
-		</label>
-		<div class="description">Implements a "Series <?php echo cftl_title($post); ?>: Bottom" widget region and the custom HTML provided below.</div>
+		<input type="radio" name="footer_style" id="footer_style_none" value="none" <?php checked( $fields['footer_style'][0], 'none') ?> />
+		<label for="footer_style_none">None</label>
+		<div class="description">Do not display a footer</div>
+
+		<input type="radio" name="footer_style" id="footer_style_widget" value="widget" <?php checked( $fields['footer_style'][0], 'widget') ?> />
+		<label for="footer_style_widget">Use Widget</label>
+		<div class="description">Implements a "Series <?php echo cftl_title($post); ?>: Bottom" widget</div>
+
+		<input type="radio" name="footer_style" id="footer_style_custom" value="custom" <?php checked( $fields['footer_style'][0], 'custom') ?> />
+		<label for="footer_style_custom">Custom HTML</label>
+		<div class="description">Implements custom HTML entered below</div>
+
 	</div>
 </div>
-<div class="form-field-wysiwyg" id="footer-html">
+<div class="form-field-wysiwyg" id="footer-html" <?php if ($fields['footer_style'][0] != 'custom') echo 'style="display:none;"'; ?>>
 	<h4>Custom HTML</h4>
 	<div>
 		<?php wp_editor( $fields['footerhtml'][0], 'footerhtml', array(
@@ -484,7 +492,7 @@ function cftl_field_defaults( ) {
 		'per_page' => array('10'),
 		'post_order' => array('DESC'),
 		'show' => array('image' => 1, 'excerpt' => 1, 'byline' => 1, 'tags' => 0),
-		'footer_enabled' => array(1),
+		'footer_style' => array('none'),
 	);
 }
 
@@ -511,7 +519,7 @@ function cftl_tax_landing_save_layout($post_id) {
 		'per_page',
 		'post_order',
 		'show',	//maybe serialize these four?
-		'footer_enabled',
+		'footer_style',
 		'footerhtml'	//instantiate another widget region
 	);
 
@@ -566,13 +574,13 @@ function cftl_custom_sidebars() {
 		}
 	}
 
-	//get all the right ones and the titles they connect to
-	$footer_widgets = cftl_get_meta_values( 'footer_enabled', '1' );
+	//get all the footer ones and the titles they connect to
+	$footer_widgets = cftl_get_meta_values( 'footer_style', 'widget' );
 	foreach ($footer_widgets as $widget ) {
 		$sidebar_slug = largo_make_slug( $widget->post_title );
 		if ( $sidebar_slug ) {
 			register_sidebar( array(
-				'name' 			=> __( 'Series ' . $widget->post_title . ": Footer", 'largo' ),
+				'name' 			=> __( 'Series ' . $widget->post_title . ": Bottom", 'largo' ),
 				'id' 			=> $sidebar_slug . "_footer",
 				'before_widget' => '<aside id="%1$s" class="%2$s clearfix">',
 				'after_widget' 	=> '</aside>',

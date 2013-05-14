@@ -116,17 +116,17 @@ if ($opt['cftl_layout'] != 'one-column') : ?>
 
 
 <?php //display series footer
-if ( $opt['footer_enabled'] ) : ?>
+if ( 'none' != $opt['footer_style'] ) : ?>
 	<section id="series-footer">
 		<?php
 			//custom footer html
-			echo apply_filters( 'the_content', $opt['footerhtml'] );
-			//footer widget region
-			if ( is_active_sidebar( $post->post_name . "_footer" ) ) : ?>
-			<aside id="sidebar-bottom">
-			<?php dynamic_sidebar( $post->post_name . "_footer" ); ?>
-			</aside>
-			<?php endif;
+			if ( 'custom' == $opt['footer_style']) {
+				echo apply_filters( 'the_content', $opt['footerhtml'] );
+			} else if ( 'widget' == $opt['footer_style'] && is_active_sidebar( $post->post_name . "_footer" ) ) { ?>
+				<aside id="sidebar-bottom">
+				<?php dynamic_sidebar( $post->post_name . "_footer" ); ?>
+				</aside>
+			<?php }
 		?>
 	</section>
 <?php endif; ?>

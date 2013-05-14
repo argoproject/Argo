@@ -46,15 +46,15 @@ function largo_series_custom_order ( $sql ) {
 				 AND ($wpdb->posts.post_status = 'publish' OR $wpdb->posts.post_status = 'private') ";
 			$sql['orderby'] = "ISNULL(meta.meta_value+0) ASC, meta.meta_value+0 ASC, $wpdb->posts.post_date DESC";
 
-		//top stories first
-		}	elseif ( strpos( $opt['post_order'], 'top,' ) === 0 ) {
+		//featured stories first
+		}	elseif ( strpos( $opt['post_order'], 'featured,' ) === 0 ) {
 
 			list( $top, $sort ) = explode( " ", $opt['post_order'] );
-			$top_term = get_term_by( 'slug', 'top-story', 'prominence' );
+			$top_term = get_term_by( 'slug', 'series-featured', 'prominence' );
 
 			//retool the query
 			$sql['join'] = "
-				INNER JOIN $wpdb->term_relationships ON (wpdb_posts.ID = $wpdb->term_relationships.object_id)
+				INNER JOIN $wpdb->term_relationships ON ($wpdb->posts.ID = $wpdb->term_relationships.object_id)
 				LEFT JOIN $wpdb->term_relationships t2 ON ($wpdb->posts.ID = t2.object_id)
 				AND (t2.term_taxonomy_id = " . $top_term->term_id . ")";
 			$sql['where'] = "
