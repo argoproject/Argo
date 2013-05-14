@@ -23,10 +23,7 @@
   *border: 0; // Remove the border to prevent IE7's black border on input:focus
   border-bottom-color: darken(@btnBorder, 10%);
   .ie7-restore-left-whitespace(); // Give IE7 some love
-  .buttonBackground(@btnBackground, @btnBackgroundHighlight);
   .border-radius(4px);
-  .box-shadow(~"inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05)");
-  border-color: rgba(0,0,0,.1) rgba(0,0,0,.1) rgba(0,0,0,.25);
 }
 // Hover state
 .btn:hover {
@@ -116,8 +113,15 @@
   text-shadow: 0 -1px 0 rgba(0,0,0,.25);
   background-color: @baseColor;
 }
-.btn-primary {
-  .buttonBackground(@btnPrimaryBackground, @btnPrimaryBackgroundHighlight);
+
+.btn-primary:hover {
+  background-color: darken(@baseColor, 10%);
+  *background-color: darken(@baseColor, 15%); /* Buttons in IE7 don't get borders, so darken on hover */
+  background-position: 0 -15px;
+
+  // transition is only when going to hover, otherwise the background
+  // behind the gradient (there for IE<=9 fallback) gets mismatched
+  .transition(background-position .1s linear);
 }
 
 // Cross-browser Jank
