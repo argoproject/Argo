@@ -525,7 +525,8 @@ p.wp-caption-text {
 .sticky-related,
 .sticky-solo {
   background-color: @baseColor;
-  border:1px solid darken(@baseColor, 5%);
+  border: 1px solid darken(@baseColor, 5%);
+  .border-radius(8px);
    a {
      color: darken(@baseColor, 15%);
      &:hover {
@@ -595,6 +596,7 @@ p.wp-caption-text {
     padding: 10px;
     list-style: none;
     background-color: lighten(@baseColor, 25%);
+    .border-radius(4px);
     li {
       h4 {
         color: @grayDark;
