@@ -9,7 +9,7 @@ if ( ! function_exists( 'largo_enqueue_js' ) ) {
 	function largo_enqueue_js() {
 
 		//Modernizr and our primary stylesheet
-		wp_enqueue_style( 'largo-stylesheet', get_bloginfo( 'stylesheet_url' ) );
+		wp_enqueue_style( 'largo-stylesheet', get_template_directory_uri().'/css/style.css' );
 		wp_enqueue_script( 'largo-modernizr', get_template_directory_uri() . '/js/modernizr.custom.js' );
 
 		//the jquery plugins and our main js file
@@ -121,7 +121,9 @@ if ( ! function_exists( 'largo_google_analytics' ) ) {
 			    _gaq.push(
 					["largo._setAccount", "UA-17578670-4"],
 					["largo._setCustomVar", 1, "SiteName", "<?php bloginfo('name') ?>"],
-					["largo._trackPageview"]
+					["largo._trackPageview"],
+					["largo._setDomainName", "<?php echo str_replace( 'http://' , '' , home_url()) ?>"],
+					["largo._setAllowLinker", true]
 				);
 
 			    (function() {
