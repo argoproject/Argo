@@ -32,10 +32,7 @@ if ( ! function_exists( 'largo_time' ) ) {
 if ( ! function_exists( 'largo_author' ) ) {
 	function largo_author( $echo = true ) {
 		$values = get_post_custom( $post->ID );
-		$byline_text = isset( $values['largo_byline_text'] ) ? esc_attr( $values['largo_byline_text'][0] ) : '';
-
-		if ( $byline_text == '' )
-			$byline_text = esc_html( get_the_author() );
+		$byline_text = isset( $values['largo_byline_text'] ) ? esc_attr( $values['largo_byline_text'][0] ) : esc_html( get_the_author() );
 
 		if ( $echo )
 			echo $byline_text;
@@ -54,24 +51,22 @@ if ( ! function_exists( 'largo_author_link' ) ) {
 	function largo_author_link( $echo = true ) {
 		global $post;
 		$values = get_post_custom( $post->ID );
-		$byline_text = isset( $values['largo_byline_text'] ) ? esc_attr( $values['largo_byline_text'][0] ) : '';
+		$byline_text = isset( $values['largo_byline_text'] ) ? esc_attr( $values['largo_byline_text'][0] ) : esc_html( get_the_author() );
 		$byline_link = isset( $values['largo_byline_link'] ) ? esc_url( $values['largo_byline_link'][0] ) : '';
-		$byline_title_attr = esc_attr( sprintf( __( 'More from %s','largo' ), $byline_text ) );
 
-		if ( $byline_text == '' )
-			$byline_text = esc_html( get_the_author() );
-		if ( $byline_link == '' ) :
-			$byline_link = esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) );
-			$byline_title_attr = esc_attr( sprintf( __( 'View all posts by %s','largo' ), get_the_author() ) );
-		endif;
-
-		$output = '<a class="url fn n" href="' . $byline_link . '" title="' . $byline_title_attr . '" rel="author">' . $byline_text . '</a>';
+		if ( $byline_link == '' ) {
+			$output = $byline_text;
+		} else {
+			$byline_title_attr = esc_attr( sprintf( __( 'More from %s','largo' ), $byline_text ) );
+			$output = '<a class="url fn n" href="' . $byline_link . '" title="' . $byline_title_attr . '" rel="author">' . $byline_text . '</a>';
+		}
 
 		if ( $echo )
 			echo $output;
 		return $output;
 	}
 }
+
 
 /**
  * Outputs custom byline and link (if set), otherwise outputs author link and post date
@@ -83,9 +78,11 @@ if ( ! function_exists( 'largo_author_link' ) ) {
 if ( ! function_exists( 'largo_byline' ) ) {
 	function largo_byline( $echo = true ) {
 		global $post;
+		$values = get_post_custom( $post->ID );
+		$authors = ( function_exists( 'coauthors_posts_links' ) && !isset( $values['largo_byline_text'] ) ) ? coauthors_posts_links( null, null, null, null, false ) : largo_author_link( false );
 
 		$output = sprintf( '<span class="by-author"><span class="sep">By:</span> <span class="author vcard">%1$s</span></span> | <time class="entry-date updated dtstamp pubdate" datetime="%2$s">%3$s</time>',
-			largo_author_link( false ),
+			$authors,
 			esc_attr( get_the_date( 'c' ) ),
 			largo_time( false )
 		);
@@ -93,8 +90,8 @@ if ( ! function_exists( 'largo_byline' ) ) {
 		if ( current_user_can( 'edit_post', $post->ID ) )
 			$output .=  sprintf( ' | <span class="edit-link"><a href="%1$s">Edit This Post</a></span>', get_edit_post_link() );
 
- 		if ( is_single() && of_get_option( 'clean_read' ) === 'byline' )
- 			$output .=	__('<a href="#" class="clean-read">View as "Clean Read"</a>', 'largo');
+	 	if ( is_single() && of_get_option( 'clean_read' ) === 'byline' )
+	 		$output .=	__('<a href="#" class="clean-read">View as "Clean Read"</a>', 'largo');
 
 		if ( $echo )
 			echo $output;
