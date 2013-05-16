@@ -141,6 +141,12 @@ function largo_register_required_plugins() {
 			'required' 	=> false,
 		),
 
+		array(
+			'name' 		=> 'Co-Authors Plus',
+			'slug' 		=> 'co-authors-plus',
+			'required' 	=> false,
+		),
+
 	);
 
 	// Change this to your theme text domain, used for internationalising strings
