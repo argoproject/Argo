@@ -5,14 +5,18 @@
  *
  * @since 1.0
  */
-function move_author_to_publish_metabox() {
-	global $post_ID;
-	$post = get_post( $post_ID );
-	echo '<div id="author" class="misc-pub-section" style="padding: 8px 10px;">Author: ';
-	post_author_meta_box( $post );
-	echo '</div>';
+//
+include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+if ( !is_plugin_active('co-authors-plus/co-authors-plus.php') ) {
+	function move_author_to_publish_metabox() {
+		global $post_ID;
+		$post = get_post( $post_ID );
+		echo '<div id="author" class="misc-pub-section" style="padding: 8px 10px;">Author: ';
+		post_author_meta_box( $post );
+		echo '</div>';
+	}
+	add_action( 'post_submitbox_misc_actions', 'move_author_to_publish_metabox' );
 }
-add_action( 'post_submitbox_misc_actions', 'move_author_to_publish_metabox' );
 
 /**
  * Hide some of the less commonly used metaboxes to cleanup the post and page edit screens
