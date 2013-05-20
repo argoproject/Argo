@@ -41,34 +41,6 @@ function module_shortcode( $atts, $content, $code ) {
 add_shortcode( 'module', 'module_shortcode' );
 
 /**
- * Move the author dropdown to the publish metabox so it's easier to find
- *
- * @since 1.0
- */
-function move_author_to_publish_metabox() {
-	global $post_ID;
-	$post = get_post( $post_ID );
-	echo '<div id="author" class="misc-pub-section" style="padding: 8px 10px;">Author: ';
-	post_author_meta_box( $post );
-	echo '</div>';
-}
-add_action( 'post_submitbox_misc_actions', 'move_author_to_publish_metabox' );
-
-/**
- * Hide some of the less commonly used metaboxes to cleanup the post and page edit screens
- *
- * @since 1.0
- */
-function remove_default_post_screen_metaboxes() {
-	remove_meta_box( 'trackbacksdiv','post','normal' ); // trackbacks
-	remove_meta_box( 'slugdiv','post','normal' ); // slug
-	remove_meta_box( 'revisionsdiv','post','normal' ); // revisions
-	remove_meta_box( 'authordiv', 'post', 'normal' ); // author
-	remove_meta_box( 'commentsdiv','post','normal' ); // comments
-}
-add_action('admin_menu','remove_default_post_screen_metaboxes');
-
-/**
  * Remove weird span tags inserted by TinyMCE
  *
  * @since 1.0

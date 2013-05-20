@@ -42,30 +42,38 @@ if ( ! isset( $content_width ) )
 
 // load the options framework (used for our theme options pages)
 if ( ! function_exists( 'optionsframework_init' ) ) {
-	define( 'OPTIONS_FRAMEWORK_DIRECTORY', get_template_directory_uri() . '/inc/options-framework/' );
-	require_once dirname( __FILE__ ) . '/inc/options-framework/options-framework.php';
+	define( 'OPTIONS_FRAMEWORK_DIRECTORY', get_template_directory_uri() . '/lib/options-framework/' );
+	require_once dirname( __FILE__ ) . '/lib/options-framework/options-framework.php';
 }
 
-// Load up all of the other goodies from the /inc directory
+/**
+ * Load up all of the other goodies from the /inc directory
+ */
 $includes = array(
-	'/inc/largo-plugin-init.php',		// a list of recommended plugins
-	'/inc/special-functionality.php',	// header cleanup and robots.txt
-	'/inc/users.php',					// add custom fields for user profiles
-	'/inc/sidebars.php',				// register sidebars
-	'/inc/widgets.php',					// register widgets
-	'/inc/nav-menus.php',				// register nav menus
-	'/inc/taxonomies.php',				// add our custom taxonomies
-	'/inc/images.php',					// setup custom image sizes
-	'/inc/editor.php',					// add tinymce customizations and shortcodes
-	'/inc/open-graph.php',				// add opengraph, twittercard and google publisher markup to the header
-	'/inc/post-tags.php',				// add some custom template tags (mostly used in single posts)
-	'/inc/header-footer.php',			// some additional template tags used in the header and footer
-	'/inc/related-content.php',			// functions dealing with related content
-	'/inc/featured-content.php',		// functions dealing with featured content
-	'/inc/enqueue.php',					// enqueue our js and css files
-	'/inc/post-templates.php',			//single post templates
-	'/inc/post-meta.php',				// add post meta boxes
-	'/inc/custom-less-variables.php',	// add UI to alter variables.less
+	'/inc/largo-plugin-init.php',					// a list of recommended plugins
+	'/inc/dashboard.php',							// custom dashboard widgets
+	'/inc/robots.php',								// default robots.txt config
+	'/inc/custom-feeds.php',						// create custom RSS feeds
+	'/inc/users.php',								// add custom fields for user profiles
+	'/inc/sidebars.php',							// register sidebars
+	'/inc/widgets.php',								// register widgets
+	'/inc/nav-menus.php',							// register nav menus
+	'/inc/taxonomies.php',							// add our custom taxonomies
+	'/inc/images.php',								// setup custom image sizes
+	'/inc/editor.php',								// add tinymce customizations and shortcodes
+	'/inc/post-meta.php',							// add post meta boxes
+	'/inc/open-graph.php',							// add open graph, twittercard and google publisher markup to the header
+	'/inc/post-tags.php',							// add some custom template tags (mostly used in single posts)
+	'/inc/header-footer.php',						// some additional template tags used in the header and footer
+	'/inc/related-content.php',						// functions dealing with related content
+	'/inc/featured-content.php',					// functions dealing with featured content
+	'/inc/enqueue.php',								// enqueue our js and css files
+	'/inc/post-templates.php',						// single post templates
+	'/inc/post-meta.php',							// add post meta boxes
+	'/inc/ad-codes.php',							// register ad codes
+	'/inc/feed-input/feed-input.php', 				// Pull in posts via RSS or Atom feeds
+	'/inc/custom-less-variables.php',				// Compile custom LESS to CSS from the WP dashboard
+	'/inc/wp-taxonomy-landing/taxonomy-landing.php'	// adds taxonomy landing plugin
 );
 
 // Perform load
@@ -138,7 +146,7 @@ function largo_picturefill_shortcode($attributes, $content = null) {
 	), $attributes ) );
 
 	if ($attributes['id']) {
-	
+
 		$image_large = wp_get_attachment_image_src( $attributes['id'], 'large');
 		$image_medlarge = wp_get_attachment_image_src( $attributes['id'], 'medlarge');
 		$image_mediasmall = wp_get_attachment_image_src( $attributes['id'], 'mediasmall');

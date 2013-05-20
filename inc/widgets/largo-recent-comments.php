@@ -45,7 +45,8 @@ class largo_recent_comments_widget extends WP_Widget {
 
 		extract( $args );
 		$output = '';
-		$title = apply_filters('widget_title', $instance['title'] );
+
+		$title = apply_filters('widget_title', empty( $instance['title'] ) ? __('Recent Comments', 'largo') : $instance['title'], $instance, $this->id_base);
 
 		if ( empty( $instance['number'] ) || ! $number = absint( $instance['number'] ) )
  			$number = 5;

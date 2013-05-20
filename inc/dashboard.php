@@ -1,45 +1,8 @@
 <?php
-
-/**
- * Clean up <head>
- *
- * @since 1.0
- */
-remove_action( 'wp_head', 'rsd_link' );
-remove_action( 'wp_head', 'wlwmanifest_link' );
-remove_action( 'wp_head', 'wp_generator' );
-
-/**
- * Setup some defaults for robots.txt
- * See: http://codex.wordpress.org/Search_Engine_Optimization_for_WordPress#Robots.txt_Optimization
- *
- * @since 1.0
- */
-function largo_robots() {
-	echo "Disallow: /cgi-bin\n";
-	echo "Disallow: /wp-admin\n";
-	echo "Disallow: /wp-includes\n";
-	echo "Disallow: /wp-content/plugins\n";
-	echo "Disallow: /plugins\n";
-	echo "Disallow: /wp-content/cache\n";
-	echo "Disallow: /wp-content/themes\n";
-	echo "Disallow: /trackback\n";
-	echo "Disallow: /feed\n";
-	echo "Disallow: /comments\n";
-	echo "Disallow: /category/*/*\n";
-	echo "Disallow: */trackback\n";
-	echo "Disallow: */feed\n";
-	echo "Disallow: */comments\n";
-	echo "Disallow: /*?*\n";
-	echo "Disallow: /*?\n";
-	echo "Allow: /wp-content/uploads\n";
-	echo "Allow: /assets";
-}
-add_action( 'do_robots', 'largo_robots' );
-
 /**
  * Various customizations for the admin dashboard
  *
+ * @package Largo
  * @since 1.0
  */
 
@@ -158,16 +121,3 @@ function largo_admin_menu() {
      remove_menu_page('link-manager.php');
 }
 add_action( 'admin_menu', 'largo_admin_menu' );
-
-/**
- * Create a full text RSS feed even if site is using excerpts in the main feed
- * URL for full text feed is: http://mysite.org/?feed=fulltext
- *
- * @since 1.0
- */
-
-function largo_full_text_feed() {
-    add_filter('pre_option_rss_use_excerpt', '__return_zero');
-    load_template( ABSPATH . WPINC . '/feed-rss2.php' );
-}
-add_feed('fulltext', 'largo_full_text_feed');
