@@ -69,6 +69,10 @@ $includes = array(
 	'/inc/post-templates.php',			// single post templates
 	'/inc/post-meta.php',						// add post meta boxes
 	'/inc/ad-codes.php',						// register ad codes
+	'/inc/enqueue.php',							// enqueue our js and css files
+	'/inc/post-templates.php',			// single post templates
+	'/inc/post-meta.php',						// add post meta boxes
+	'/inc/custom-less-variables.php'// add UI to alter variables.less
 );
 
 // Perform load
