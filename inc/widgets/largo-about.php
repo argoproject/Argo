@@ -15,7 +15,7 @@ class largo_about_widget extends WP_Widget {
 	function widget( $args, $instance ) {
 		extract( $args );
 
-		$title = apply_filters('widget_title', $instance['title'] );
+		$title = apply_filters('widget_title', empty( $instance['title'] ) ? __('About ' . get_bloginfo('name'), 'largo') : $instance['title'], $instance, $this->id_base);
 
 		echo $before_widget;
 		if ( $title )

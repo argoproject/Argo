@@ -54,15 +54,15 @@ class largo_image_widget extends WP_Widget {
 		$instance = wp_parse_args( (array) $instance, self::get_defaults() );
 		if ( !empty( $instance['imageurl'] ) || !empty( $instance['attachment_id'] ) ) {
 
-			$instance['title'] = 				apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'] );
-			$instance['description'] = 	apply_filters( 'widget_text', $instance['description'], $args, $instance );
-			$instance['link'] = 				apply_filters( 'image_widget_image_link', esc_url( $instance['link'] ), $args, $instance );
-			$instance['linktarget'] = 	apply_filters( 'image_widget_image_link_target', esc_attr( $instance['linktarget'] ), $args, $instance );
-			$instance['width'] = 				apply_filters( 'image_widget_image_width', abs( $instance['width'] ), $args, $instance );
-			$instance['height'] = 			apply_filters( 'image_widget_image_height', abs( $instance['height'] ), $args, $instance );
-			$instance['align'] = 				apply_filters( 'image_widget_image_align', esc_attr( $instance['align'] ), $args, $instance );
-			$instance['alt'] = 					apply_filters( 'image_widget_image_alt', esc_attr( $instance['alt'] ), $args, $instance );
-			$instance['track'] = 				($instance['track'] == "true") ? true : false;
+			$instance['title'] = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'] );
+			$instance['description'] = apply_filters( 'widget_text', $instance['description'], $args, $instance );
+			$instance['link'] = apply_filters( 'image_widget_image_link', esc_url( $instance['link'] ), $args, $instance );
+			$instance['linktarget'] = apply_filters( 'image_widget_image_link_target', esc_attr( $instance['linktarget'] ), $args, $instance );
+			$instance['width'] = apply_filters( 'image_widget_image_width', abs( $instance['width'] ), $args, $instance );
+			$instance['height'] = apply_filters( 'image_widget_image_height', abs( $instance['height'] ), $args, $instance );
+			$instance['align'] = apply_filters( 'image_widget_image_align', esc_attr( $instance['align'] ), $args, $instance );
+			$instance['alt'] = apply_filters( 'image_widget_image_alt', esc_attr( $instance['alt'] ), $args, $instance );
+			$instance['track'] = ($instance['track'] == "true") ? true : false;
 
 			if ( !defined( 'IMAGE_WIDGET_COMPATIBILITY_TEST' ) ) {
 				$instance['attachment_id'] = ( $instance['attachment_id'] > 0 ) ? $instance['attachment_id'] : $instance['image'];
@@ -73,6 +73,8 @@ class largo_image_widget extends WP_Widget {
 
 			// Using extracted vars now
 			extract( $instance );
+
+			$title = apply_filters('widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base);
 
 			//output the widget
 			echo $before_widget;

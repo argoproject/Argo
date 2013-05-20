@@ -78,16 +78,18 @@
     }
   }
 }
-#supplementary .menu-dont-miss-container h4 { display: none; }
+#supplementary .menu-dont-miss-container h4,
+#site-footer aside li.menu-label {
+  display: none;
+}
 #menu-footer-navigation li:first-child {
-  padding:0 0 3px;
   border-top: none !important;
 }
 #site-footer .widget_nav_menu .widgettitle {
   margin-bottom: 0;
 }
-#site-footer aside li.menu-label {
-  display:none;
+#site-footer li.menu-label {
+  padding-top: 0 !important;
 }
 #site-footer .largo-footer-featured {
   margin-bottom: @baseline/2;

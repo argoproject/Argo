@@ -19,7 +19,7 @@
 /**
  * Include the TGM_Plugin_Activation class.
  */
-require_once dirname( __FILE__ ) . '/class-tgm-plugin-activation.php';
+require_once( str_replace('//','/',dirname(__FILE__).'/') .'../lib/class-tgm-plugin-activation.php');
 
 add_action( 'tgmpa_register', 'largo_register_required_plugins' );
 /**
@@ -142,10 +142,9 @@ function largo_register_required_plugins() {
 		),
 
 		array(
-			'name' 		=> 'Ad Code Manager',
-			'slug' 		=> 'ad-code-manager',
+			'name' 		=> 'Co-Authors Plus',
+			'slug' 		=> 'co-authors-plus',
 			'required' 	=> false,
-			'force_activation' 		=> false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
 		),
 
 	);

@@ -93,6 +93,8 @@
 
 <div id="page" class="hfeed clearfix">
 
+	<?php // if (function_exists('dynamic_sidebar')) { dynamic_sidebar("Header"); } ?>
+
 	<header id="site-header" class="clearfix">
 		<?php largo_header(); ?>
 	</header>
@@ -189,7 +191,5 @@
 		</div>
 	</nav>
 	<?php endif; ?>
-
-<?php if (function_exists('dynamic_sidebar')) { dynamic_sidebar("Header"); } ?>
 
 <div id="main" class="row-fluid clearfix">

@@ -49,8 +49,36 @@
 // --------------------------------------------
 
 @containerMaxWidth:		1170px;
+
+/**
+ * @group Basics
+ * @label Body Background Color
+ * @type color
+ * @default_value #fff
+ */
 @bodyBackground:        @white;
+
+/**
+ * @group Basics
+ * @label Page Background Color
+ * @type color
+ * @default_value #fff
+ */
+@pageBackground:        @white;
+
+/**
+ * @group Basics
+ * @label Text Color
+ * @type color
+ * @default_value #333
+ */
 @textColor:             @grayDark;
+/**
+ * @group Basics
+ * @label Default Vertical Spacing
+ * @type pixels
+ * @default_value 24px
+ */
 @baseline:				24px;
 
 // Grid
@@ -91,9 +119,11 @@
 /**
  * @group Typography
  * @label Base Line Height
- * @type pixels
+ * @type text
+ * @default_value 1.5
  */
-@baseLineHeight:        24px;
+@baseLineHeight:        1.5;
+
 @altFontFamily:         @sansFontFamily;
 @baseFontWeight:		normal;
 
@@ -138,32 +168,10 @@
 // Form states and alerts
 // -------------------------
 @warningText:             #c09853;
-/**
- * @group Form
- * @label Warning Background Color
- * @type color
- */
 @warningBackground:       #fcf8e3;
-
-/**
- * @group Form
- * @label Warning Border Color
- * @type color
- */
 @warningBorder:           darken(spin(@warningBackground, -10), 3%);
 
-/**
- * @group Form
- * @label Error Text Color
- * @type color
- */
 @errorText:               #b94a48;
-
-/**
- * @group Form
- * @label Error Background Color
- * @type color
- */
 @errorBackground:         #f2dede;
 @errorBorder:             darken(spin(@errorBackground, -10), 3%);
 
@@ -177,8 +185,6 @@
 
 // Z-index master list
 // -------------------------
-// Used for a bird's eye view of components dependent on the z-axis
-// Try to avoid customizing these :)
 @zindexDropdown:          1000;
 @zindexPopover:           1010;
 @zindexTooltip:           1020;
@@ -188,8 +194,9 @@
 
 // Navbar
 // -------------------------
-@navbarHeight:                    28px;
-@navbarBackground:                darken(@baseColor, 10%);
+@navbarHeight:                    40px;
+@navbarFontSize:				  15px;
+@navbarBackground:                darken(@baseColor, 5%);
 @navbarBackgroundHighlight:       @baseColor;
 
 @navbarText:                      @white;
@@ -198,12 +205,6 @@
 @navbarLinkColorActive:           @navbarLinkColorHover;
 @navbarLinkBackgroundHover:       transparent;
 @navbarLinkBackgroundActive:      @navbarBackground;
-
-@navbarSearchBackground:          lighten(@navbarBackground, 25%);
-@navbarSearchBackgroundFocus:     @white;
-@navbarSearchBorder:              darken(@navbarSearchBackground, 30%);
-@navbarSearchPlaceholderColor:    #ccc;
-@navbarBrandColor:                @navbarLinkColor;
 
 // Dropdowns
 // -------------------------
@@ -214,11 +215,3 @@
 @dropdownLinkBackgroundHover:   @baseColor;
 @dropdownDividerTop:            #e5e5e5;
 @dropdownDividerBottom:         @white;
-
-// --------------------------------------------
-// IMAGE PATHS
-// --------------------------------------------
-
-@socialIconsSpritePath:			"../img/social-icons.png";
-@iconSpritePath:          		"../img/glyphicons-halflings.png";
-@iconWhiteSpritePath:     		"../img/glyphicons-halflings-white.png";

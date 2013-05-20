@@ -9,12 +9,16 @@ if ( ! function_exists( 'largo_enqueue_js' ) ) {
 	function largo_enqueue_js() {
 
 		//Modernizr and our primary stylesheet
-		wp_enqueue_style( 'largo-stylesheet', get_template_directory_uri().'/css/style.css' );
+		wp_enqueue_style( 'largo-stylesheet', get_template_directory_uri().'/css/style.css' );	//often overridden by custom-less-variables version
 		wp_enqueue_script( 'largo-modernizr', get_template_directory_uri() . '/js/modernizr.custom.js' );
 
 		//the jquery plugins and our main js file
 		wp_enqueue_script( 'largoPlugins', get_template_directory_uri() . '/js/largoPlugins.js', array( 'jquery' ), '1.0', true );
 		wp_enqueue_script( 'largoCore', get_template_directory_uri() . '/js/largoCore.js', array( 'jquery' ), '1.0', true );
+
+		//Add picturefill and matchmedia -- https://github.com/scottjehl/picturefill
+		wp_enqueue_script( 'matchmedia', get_template_directory_uri() . '/js/matchmedia.js', array( ), '1.0', true );
+		wp_enqueue_script( 'picturefill', get_template_directory_uri() . '/js/picturefill.js', array( ), '1.0', true );
 
 		//only load the carousel and top stories js and css if those homepage options are selected
 		if ( is_home() && of_get_option( 'homepage_top') == 'slider' ) {
@@ -34,6 +38,12 @@ if ( ! function_exists( 'largo_enqueue_js' ) ) {
 				wp_enqueue_script( 'sharethis', get_template_directory_uri() . '/js/st_buttons.js', array( 'jquery' ), '1.0', true );
 			if ( of_get_option( 'show_related_content' ) )
 				wp_enqueue_script( 'idTabs', get_template_directory_uri() . '/js/jquery.idTabs.js', array( 'jquery' ), '1.0', true );
+		}
+
+		//Load the child theme's style.css if we're actually running a child theme of Largo
+		$theme = wp_get_theme();
+		if ( isset($theme->parent()->Template) && $theme->parent()->Template == 'largo') {
+			wp_enqueue_style( 'largo-child-styles', get_stylesheet_directory_uri() . '/style.css', array('largo-stylesheet'));
 		}
 	}
 }
