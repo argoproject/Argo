@@ -226,7 +226,7 @@ function cftl_tax_landing_add_extras_box() {
 	);
 
 	//remove various Largo meta boxes we don't need
-	$boxen = array('tagsdiv-post_tag', 'wpbdm-categorydiv', 'tagsdiv-wpbdm-tags', 'prominencediv', 'categorydiv', 'pageparentdiv', 'tagsdiv-media-sources');
+	$boxen = array('tagsdiv-post_tag', 'wpbdm-categorydiv', 'tagsdiv-wpbdm-tags', 'prominencediv', 'categorydiv', 'pageparentdiv', 'tagsdiv-media-sources', 'tagsdiv-argo-link-tags');
 	foreach ($boxen as $box_name) {
 		remove_meta_box($box_name, 'cftl-tax-landing', 'side');
 	}
