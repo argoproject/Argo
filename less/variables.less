@@ -26,11 +26,19 @@
 
 /**
  * @group Color
- * @label Base Color
+ * @label Base Color (used for navbar, widget titles, etc.)
  * @type color
  * @default_value #2275bb
  */
 @baseColor:				@blue;
+
+/**
+ * @group Color
+ * @label Header/Footer Color
+ * @type color
+ * @default_value #222
+ */
+@headerFooterColor:		@grayDarker;
 
 /**
  * @group Color
@@ -39,6 +47,7 @@
  * @default_value #2275bb
  */
 @linkColor:             @blue;
+
 /**
  * @group Color
  * @label Hover color of links
@@ -46,6 +55,14 @@
  * @default_value #2275bb
  */
 @linkColorHover:        lighten(@linkColor, 10%);
+
+/**
+ * @group Color
+ * @label Background color of post meta boxes (author bio, related posts, etc.)
+ * @type color
+ * @default_value #fff
+ */
+@postBoxBackgroundColor:	#fff;
 
 
 // --------------------------------------------
