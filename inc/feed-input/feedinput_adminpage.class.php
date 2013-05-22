@@ -342,6 +342,7 @@ class FeedInput_AdminPage {
 		exit;
 	}
 
+
 	/**
 	 * Display admin notices
 	 */
@@ -357,6 +358,7 @@ class FeedInput_AdminPage {
     </div>
     <?php
 	}
+
 
 }
 

@@ -20,6 +20,7 @@ class FeedInput_FeedItem {
 		add_action( 'add_meta_boxes_feedinput_item', array( 'FeedInput_FeedItem', 'add_meta_boxes' ) );
 		add_action( 'feedinput_clean_up_old_items', array( 'FeedInput_FeedItem', 'cron_trash_old_items' ) );
 		self::register_cron_job();
+
 	}
 
 
