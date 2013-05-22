@@ -434,6 +434,34 @@ function optionsframework_options() {
 			'4col' 			=> $imagepath . 'footer-4col.png')
 	);
 
+	$options[] = array(
+		'name' 	=> __('Advanced', 'largo'),
+		'type' 	=> 'heading');
+
+	$options[] = array(
+		'desc' 	=> __('Enable Feed Importer.', 'largo'),
+		'id' 	=> 'feed_importer_enabled',
+		'std' 	=> '0',
+		'type' 	=> 'checkbox');
+
+	$options[] = array(
+		'desc' 	=> __('Enable Custom LESS to CSS For Theme Customization.', 'largo'),
+		'id' 	=> 'LESS_enabled',
+		'std' 	=> '0',
+		'type' 	=> 'checkbox');
+
+	$options[] = array(
+		'desc' 	=> __('Enable Google DFP Ad Management.', 'largo'),
+		'id' 	=> 'ads_enabled',
+		'std' 	=> '0',
+		'type' 	=> 'checkbox');
+
+	$options[] = array(
+		'desc' 	=> __('Enable Custom Landing Pages for Series/Project Pages.', 'largo'),
+		'id' 	=> 'custom_landing_enabled',
+		'std' 	=> '0',
+		'type' 	=> 'checkbox');
+
 	return $options;
 }
 

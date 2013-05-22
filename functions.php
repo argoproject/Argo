@@ -69,12 +69,18 @@ $includes = array(
 	'/inc/featured-content.php',			// functions dealing with featured content
 	'/inc/enqueue.php',								// enqueue our js and css files
 	'/inc/post-templates.php',				// single post templates
-	'/inc/post-meta.php',							// add post meta boxes
-	'/inc/ad-codes.php',							// register ad codes
-	'/inc/custom-less-variables.php',	// add UI to alter variables.less
-	'/inc/feed-input/feed-input.php', 				// Pull in posts via RSS or Atom feeds
-	'/inc/wp-taxonomy-landing/taxonomy-landing.php'	// adds taxonomy landing plugin
+	'/inc/post-meta.php'							// add post meta boxes
 );
+
+// This functionality is probably not for everyone so we'll make it easy to turn it on or off
+if ( of_get_option( 'ads_enabled' ) )
+	$includes[] = '/inc/ad-codes.php'; // register ad codes
+if ( of_get_option( 'LESS_enabled' ) )
+	$includes[] = '/inc/custom-less-variables.php';	// add UI to alter variables.less
+if ( of_get_option( 'feed_importer_enabled' ) )
+	$includes[] = '/inc/feed-input/feed-input.php'; // Pull in posts via RSS or Atom feeds
+if ( of_get_option( 'custom_landing_enabled' ) )
+	$includes[] = '/inc/wp-taxonomy-landing/taxonomy-landing.php'; // adds taxonomy landing plugin
 
 // Perform load
 foreach ( $includes as $include ) {
