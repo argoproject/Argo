@@ -18,8 +18,7 @@ class FeedInput_AdminPage {
 		add_action( 'wp_ajax_feedinput_dashboard_convert_item', array(&$this, 'dashboard_widget_ajax_convert_item') );
 		add_action( 'wp_ajax_feedinput_dashboard_remove_item', array(&$this, 'dashboard_widget_ajax_remove_item') );
 		add_action( 'wp_ajax_feedinput_dashboard_page', array(&$this, 'dashboard_widget_ajax_page') );
-
-
+		add_action( 'admin_notices', array(&$this, 'display_link_on_feed_items_page' ) );
 	}
 
 
@@ -343,6 +342,21 @@ class FeedInput_AdminPage {
 		exit;
 	}
 
+	/**
+	 * Display admin notices
+	 */
+	function display_link_on_feed_items_page() {
+		$screen = get_current_screen();
+
+		if ( $screen->id != 'edit-feedinput_item' ) {
+			return;
+		}
+		?>
+		<div class="updated">
+        <p><a href="options-general.php?page=syndicated_sources"><?php _e( 'Change the settings for the feeds to pull items from', 'feedinput' ); ?></a></p>
+    </div>
+    <?php
+	}
 
 }
 
