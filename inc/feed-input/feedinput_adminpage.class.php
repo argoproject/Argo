@@ -147,7 +147,9 @@ class FeedInput_AdminPage {
 			$options = array(
 				'convert_to_post' => false,
 				'convert' => array(
-					'post' => array(),
+					'post' => array(
+						'post_content' => array( 'type' => 'callback', 'value' => array( $this, 'append_source') )
+					),
 					'meta' => array(
 						'largo_byline_text' => array( 'type' => 'field', 'value' => array('authors', 0, 'name') ),
 						'largo_byline_link' => array( 'type' => 'field', 'value' => array('authors', 0, 'link') ),
@@ -158,6 +160,13 @@ class FeedInput_AdminPage {
 		}
 	}
 
+	function append_source( $data ) {
+		$content = $data['content'];
+
+		$content .= "\n\n Via <a href=\"{$data['permalink']}\">{$data['feed_title']}</a>";
+
+		return $content;
+	}
 
 	function get_feed_urls() {
 		if ( !is_array( $this->feed_urls ) ) {
