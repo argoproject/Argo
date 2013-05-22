@@ -6,7 +6,6 @@
  * @since 1.0
  */
 //
-include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 if ( !is_plugin_active('co-authors-plus/co-authors-plus.php') ) {
 	function move_author_to_publish_metabox() {
 		global $post_ID;

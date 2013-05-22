@@ -46,6 +46,9 @@ if ( ! function_exists( 'optionsframework_init' ) ) {
 	require_once dirname( __FILE__ ) . '/lib/options-framework/options-framework.php';
 }
 
+// need to include this explicitly to allow us to check if certain plugins are active.
+include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+
 /**
  * Load up all of the other goodies from the /inc directory
  */
@@ -73,9 +76,9 @@ $includes = array(
 );
 
 // This functionality is probably not for everyone so we'll make it easy to turn it on or off
-if ( of_get_option( 'ads_enabled' ) )
+if ( is_plugin_active('ad-code-manager/ad-code-manager.php') )
 	$includes[] = '/inc/ad-codes.php'; // register ad codes
-if ( of_get_option( 'LESS_enabled' ) )
+if ( of_get_option( 'less_enabled' ) )
 	$includes[] = '/inc/custom-less-variables.php';	// add UI to alter variables.less
 if ( of_get_option( 'feed_importer_enabled' ) )
 	$includes[] = '/inc/feed-input/feed-input.php'; // Pull in posts via RSS or Atom feeds

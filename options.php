@@ -446,13 +446,7 @@ function optionsframework_options() {
 
 	$options[] = array(
 		'desc' 	=> __('Enable Custom LESS to CSS For Theme Customization.', 'largo'),
-		'id' 	=> 'LESS_enabled',
-		'std' 	=> '0',
-		'type' 	=> 'checkbox');
-
-	$options[] = array(
-		'desc' 	=> __('Enable Google DFP Ad Management.', 'largo'),
-		'id' 	=> 'ads_enabled',
+		'id' 	=> 'less_enabled',
 		'std' 	=> '0',
 		'type' 	=> 'checkbox');
 
