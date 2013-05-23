@@ -82,7 +82,7 @@ if ( ! function_exists( 'largo_byline' ) ) {
 		$values = get_post_custom( $post->ID );
 		$authors = ( function_exists( 'coauthors_posts_links' ) && !isset( $values['largo_byline_text'] ) ) ? coauthors_posts_links( null, null, null, null, false ) : largo_author_link( false );
 
-		$output = sprintf( '<span class="by-author"><span class="sep">By:</span> <span class="author vcard">%1$s</span></span> | <time class="entry-date updated dtstamp pubdate" datetime="%2$s">%3$s</time>',
+		$output = sprintf( '<span class="by-author"><span class="by">By:</span> <span class="author vcard">%1$s</span></span><span class="sep"> | </span><time class="entry-date updated dtstamp pubdate" datetime="%2$s">%3$s</time>',
 			$authors,
 			esc_attr( get_the_date( 'c' ) ),
 			largo_time( false )

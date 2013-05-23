@@ -47,6 +47,8 @@ function cftl_register_taxonomy_landing() {
 
 add_action('init', 'cftl_register_taxonomy_landing');
 
+add_post_type_support( 'cftl-tax-landing', 'author' );
+
 /**
  * Remove Permalink display / edit controls
  */
@@ -315,6 +317,24 @@ function cftl_tax_landing_header($post) {
 	</label>
 	</div>
 </div>
+<div class="form-field-enable">
+	<h4>Show Series Byline?</h4>
+	<div>
+	<label for="cftl_show_series_byline">
+		<input type="checkbox" id="cftl_show_series_byline" name="show_series_byline" <?php checked( $fields['show_series_byline'][0], 1) ?> value="1" />
+		Yes, display byline
+	</label>
+	</div>
+</div>
+<div class="form-field-enable">
+	<h4>Show Social Media Sharing Links?</h4>
+	<div>
+	<label for="cftl_show_sharebar">
+		<input type="checkbox" id="cftl_show_sharebar" name="show_sharebar" <?php checked( $fields['show_sharebar'][0], 1) ?> value="1" />
+		Yes, show links
+	</label>
+	</div>
+</div>
 <div class="form-field-radios-stacked">
 	<h4>Layout Style</h4>
 	<div>
@@ -486,6 +506,8 @@ function cftl_tax_landing_footer ( $post ) {
 function cftl_field_defaults( ) {
 	return array(
 		'header_enabled' => array(1),
+		'show_series_byline' => array(1),
+		'show_sharebar' => array(1),
 		'header_style' => array('standard'),
 		'cftl_layout' => array('two-column'),
 		'per_page' => array('10'),
@@ -513,6 +535,8 @@ function cftl_tax_landing_save_layout($post_id) {
 	//update all the post meta stuff
 	$layout_fields = array(
 		'header_enabled',
+		'show_series_byline',
+		'show_sharebar',
 		'header_style',
 		'cftl_layout', //needs to instantiate widget regions
 		'per_page',
