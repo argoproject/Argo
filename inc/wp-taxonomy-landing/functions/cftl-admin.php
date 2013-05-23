@@ -317,21 +317,19 @@ function cftl_tax_landing_header($post) {
 	</label>
 	</div>
 </div>
-<div class="form-field-enable">
+<div class="form-field">
 	<h4>Show Series Byline?</h4>
 	<div>
 	<label for="cftl_show_series_byline">
 		<input type="checkbox" id="cftl_show_series_byline" name="show_series_byline" <?php checked( $fields['show_series_byline'][0], 1) ?> value="1" />
-		Yes, display byline
 	</label>
 	</div>
 </div>
-<div class="form-field-enable">
+<div class="form-field">
 	<h4>Show Social Media Sharing Links?</h4>
 	<div>
 	<label for="cftl_show_sharebar">
 		<input type="checkbox" id="cftl_show_sharebar" name="show_sharebar" <?php checked( $fields['show_sharebar'][0], 1) ?> value="1" />
-		Yes, show links
 	</label>
 	</div>
 </div>
