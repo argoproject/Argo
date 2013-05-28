@@ -122,9 +122,9 @@ if ( ! function_exists( 'largo_google_analytics' ) ) {
 			    _gaq.push(
 					["largo._setAccount", "UA-17578670-4"],
 					["largo._setCustomVar", 1, "SiteName", "<?php bloginfo('name') ?>"],
-					["largo._trackPageview"],
 					["largo._setDomainName", "<?php echo str_replace( 'http://' , '' , home_url()) ?>"],
-					["largo._setAllowLinker", true]
+					["largo._setAllowLinker", true],
+					["largo._trackPageview"]
 				);
 
 			    (function() {
@@ -136,5 +136,5 @@ if ( ! function_exists( 'largo_google_analytics' ) ) {
 	<?php endif;
 	}
 }
-add_action( 'wp_footer', 'largo_google_analytics' );
+add_action( 'wp_enqueue_scripts', 'largo_google_analytics' );
 
