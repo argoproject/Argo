@@ -84,7 +84,7 @@ function largo_send_image_to_editor($html, $post_id, $caption, $title, $align, $
 
 	return $shortcode;
 }
-add_filter('image_send_to_editor', 'largo_send_image_to_editor', 1, 8);
+//add_filter('image_send_to_editor', 'largo_send_image_to_editor', 1, 8);
 
 
 function largo_picturefill_shortcode($attributes, $content = null) {
