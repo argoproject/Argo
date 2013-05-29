@@ -439,12 +439,6 @@ function optionsframework_options() {
 		'type' 	=> 'heading');
 
 	$options[] = array(
-		'desc' 	=> __('Enable Feed Importer.', 'largo'),
-		'id' 	=> 'feed_importer_enabled',
-		'std' 	=> '0',
-		'type' 	=> 'checkbox');
-
-	$options[] = array(
 		'desc' 	=> __('Enable Custom LESS to CSS For Theme Customization.', 'largo'),
 		'id' 	=> 'less_enabled',
 		'std' 	=> '0',

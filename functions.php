@@ -80,8 +80,6 @@ if ( is_plugin_active('ad-code-manager/ad-code-manager.php') )
 	$includes[] = '/inc/ad-codes.php'; // register ad codes
 if ( of_get_option( 'less_enabled' ) )
 	$includes[] = '/inc/custom-less-variables.php';	// add UI to alter variables.less
-if ( of_get_option( 'feed_importer_enabled' ) )
-	$includes[] = '/inc/feed-input/feed-input.php'; // Pull in posts via RSS or Atom feeds
 if ( of_get_option( 'custom_landing_enabled' ) )
 	$includes[] = '/inc/wp-taxonomy-landing/taxonomy-landing.php'; // adds taxonomy landing plugin
 
