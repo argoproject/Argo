@@ -6,7 +6,6 @@
  * @since 1.0
  */
 //
-include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 if ( !is_plugin_active('co-authors-plus/co-authors-plus.php') ) {
 	function move_author_to_publish_metabox() {
 		global $post_ID;
@@ -43,14 +42,18 @@ add_action('admin_menu','remove_default_post_screen_metaboxes');
 
 // Register our custom meta boxes
 function largo_meta_box_add() {
-	add_meta_box(
-		'largo_byline_meta',
-		__('Custom Byline Options', 'largo'),
-		'largo_byline_meta_box_display',
-		'post',
-		'side',
-		'core'
-	);
+	$screens = array( 'post' );
+	if ( of_get_option( 'custom_landing_enabled' ) ) $screens[] = 'cftl-tax-landing';
+    foreach ( $screens as $screen ) {
+		add_meta_box(
+			'largo_byline_meta',
+			__('Custom Byline Options', 'largo'),
+			'largo_byline_meta_box_display',
+			$screen,
+			'side',
+			'core'
+		);
+	}
 	$screens = array( 'post', 'page' );
     foreach ( $screens as $screen ) {
 		add_meta_box(

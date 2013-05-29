@@ -1,6 +1,6 @@
 .global-nav-bg {
   height: 38px;
-  background-color: @grayDarker;
+  background-color: @headerFooterColor;
 }
 .global-nav {
   font-family: @sansFontFamily;
@@ -18,7 +18,7 @@
 	  margin: 9px 18px 0 0;
     }
     a {
-	  color: @white;
+	  .darkLight(@headerFooterColor);
       &:hover {
 	    text-decoration:none;
 	    color: darken(@white, 15%);
@@ -35,6 +35,7 @@
 	  li {
 	    margin: 8px 0 0;
 	    a {
+		  color: @white;
 		  padding: 5px;
 	    }
 	  }

@@ -4,7 +4,7 @@
  * Represents an item from a feed set
  */
 class FeedInput_FeedItem {
-	
+
 	// Static methods
 
 	/**
@@ -112,7 +112,7 @@ class FeedInput_FeedItem {
 				// New item
 				$data = self::parse_item( $item, $feedset );
 				$feedinput_items[] = new FeedInput_FeedItem( $data );
-			}			 
+			}
 		}
 
 		return $feedinput_items;
@@ -173,7 +173,7 @@ class FeedInput_FeedItem {
 				)
 			)
 		));
-		
+
 		if ( count( $posts ) > 0 ) {
 			$data = self::get_data_from_post( $posts[0] );
 			return new FeedInput_FeedItem( $data, $posts[0] );
@@ -191,7 +191,7 @@ class FeedInput_FeedItem {
 	}
 
 
-	/** 
+	/**
 	 * Parse a feed item into data object
 	 */
 	protected function parse_item( $item, $feedset ) {
@@ -256,7 +256,7 @@ class FeedInput_FeedItem {
 			}
 		}
 
-		
+
 		// Enclosure
 		$enclosure_objs = $item->get_enclosures();
 		$enclosure = array();
@@ -264,7 +264,7 @@ class FeedInput_FeedItem {
 		foreach ( $enclosure_objs as $enclosure_obj ) {
 			$enclosures[] = self::parse_enclosure( $enclosure_obj, $feedset );
 		}
-		
+
 		// All the raw data
 		$data['data'] = $item->data['child'];
 
@@ -322,7 +322,7 @@ class FeedInput_FeedItem {
 		foreach ( $enclosure_fields as $field ) {
 			$data[$field] = $simplepie_enclosure->{"get_$field"}();
 		}
-		
+
 		// Captions
 		$caption_objs = $simplepie_enclosure->get_captions();
 		$data['captions'] = array();
@@ -434,7 +434,7 @@ class FeedInput_FeedItem {
 
 		return $data;
 	}
-	
+
 	/**
 	 * Parse author object
 	 */
@@ -538,7 +538,7 @@ class FeedInput_FeedItem {
 		if ( empty( $converted_posts ) ) {
 			$converted_posts = array();
 		}
-		
+
 		if ( isset( $converted_posts[$feedset->name] ) ) {
 			return get_post( $converted_posts[$feedset->name] );
 		}
@@ -564,7 +564,7 @@ class FeedInput_FeedItem {
 		$post = apply_filters( 'feedinput_convert_post_data', $post, $this->data );
 
 		$post_id = wp_insert_post( $post );
-		
+
 		// Abort if unable to save
 		if ( empty( $post_id ) ) {
 			return;
@@ -653,7 +653,7 @@ class FeedInput_FeedItem {
 			$feed_set = feedinput_get_feed( 'feedinput_admin' );
 			$post = $feed_set->convert_item_to_post( $data['uid'] );
 		}
-		
+
 
 		echo '<h2>', esc_html( $data['title'] ), '</h2>';
 
@@ -661,8 +661,8 @@ class FeedInput_FeedItem {
 		<p><label>Feed:</label> <a href="<?php echo esc_url( $data['feed_url'] ); ?>"><?php echo $data['feed_title']; ?></a></p>
 
 		<p><label>Original URL:</label> <a href="<?php echo esc_url( $data['permalink'] ); ?>"><?php echo esc_url( self::shorten_url( $data['permalink'] ) ); ?></a></p>
-		
-		<p><label>Date:</label> <?php echo esc_html( $data['date'] ); ?> <?php 
+
+		<p><label>Date:</label> <?php echo esc_html( $data['date'] ); ?> <?php
 
 		if ( !empty( $data['update'] ) ) {
 			echo ', <label>Update:</label> ', esc_html( $data['update'] );
@@ -682,7 +682,7 @@ class FeedInput_FeedItem {
 			foreach ( $data['authors'] as $author ) {
 				$text = !empty( $author['name'] ) ? $author['name'] : ( !empty($author['email']) ? $author['email'] : $author['link'] );
 				$url = !empty( $author['link'] ) ? $author['link'] : ( !empty( $author['email'] ) ? 'mailto:'.$author['email'] : '' );
-				
+
 				$display = '';
 				if ( !empty( $text ) ) {
 					if ( !empty( $url ) ) {
@@ -751,7 +751,7 @@ class FeedInput_FeedItem {
 	static function action_meta_box( $post ) {
 		echo '<div id="major-publishing-actions">';
 		echo "<a class='delete submitdelete deletion' href='" . get_delete_post_link( $post->ID ) . "'>" . __( 'Trash' ) . "</a>";
-		
+
 		if ( $post->post_type == 'feedinput_item' ) {
 			$converted = get_post_meta( $post->ID, 'converted_posts', true );
 			if ( empty( $converted ) ) {

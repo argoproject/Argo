@@ -1,5 +1,5 @@
 .footer-bg {
-  background-color: @grayDarker;
+  background-color: @headerFooterColor;
   padding: 0 0 18px;
   margin-bottom: 0;
 }
@@ -35,7 +35,7 @@
   }
 }
 #site-footer {
-  color: @white;
+  .darkLight(@headerFooterColor);
   a:hover {
     color: lighten(@linkColor, 20%);
   }
@@ -52,6 +52,7 @@
   }
   .widgettitle,
   li.menu-label {
+    .darkLight(@headerFooterColor);
     font-size: @baseFontSize;
     text-transform: uppercase;
     font-weight: bold;
@@ -141,7 +142,7 @@
   margin-right: 8px;
   i {
     font-size: @baseFontSize + 2;
-    color: @white;
+    .darkLight(@headerFooterColor);
     .opacity(75);
     &:hover {
       .opacity(100);

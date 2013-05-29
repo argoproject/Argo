@@ -46,6 +46,9 @@ if ( ! function_exists( 'optionsframework_init' ) ) {
 	require_once dirname( __FILE__ ) . '/lib/options-framework/options-framework.php';
 }
 
+// need to include this explicitly to allow us to check if certain plugins are active.
+include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+
 /**
  * Load up all of the other goodies from the /inc directory
  */
@@ -69,12 +72,18 @@ $includes = array(
 	'/inc/featured-content.php',			// functions dealing with featured content
 	'/inc/enqueue.php',								// enqueue our js and css files
 	'/inc/post-templates.php',				// single post templates
-	'/inc/post-meta.php',							// add post meta boxes
-	'/inc/ad-codes.php',							// register ad codes
-	'/inc/custom-less-variables.php',	// add UI to alter variables.less
-	'/inc/feed-input/feed-input.php', 				// Pull in posts via RSS or Atom feeds
-	'/inc/wp-taxonomy-landing/taxonomy-landing.php'	// adds taxonomy landing plugin
+	'/inc/post-meta.php'							// add post meta boxes
 );
+
+// This functionality is probably not for everyone so we'll make it easy to turn it on or off
+if ( is_plugin_active('ad-code-manager/ad-code-manager.php') )
+	$includes[] = '/inc/ad-codes.php'; // register ad codes
+if ( of_get_option( 'less_enabled' ) )
+	$includes[] = '/inc/custom-less-variables.php';	// add UI to alter variables.less
+if ( of_get_option( 'feed_importer_enabled' ) )
+	$includes[] = '/inc/feed-input/feed-input.php'; // Pull in posts via RSS or Atom feeds
+if ( of_get_option( 'custom_landing_enabled' ) )
+	$includes[] = '/inc/wp-taxonomy-landing/taxonomy-landing.php'; // adds taxonomy landing plugin
 
 // Perform load
 foreach ( $includes as $include ) {

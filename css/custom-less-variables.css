@@ -9,6 +9,10 @@
   float: left;
   width: 200px;
 }
+#poststuff .custom-less-variables input {
+  clear: both;
+  float: none;
+}
 #poststuff .custom-less-variables .field + h3 {
   padding-top: 20px;
   margin-top: 20px;
@@ -19,7 +23,7 @@
   clear: left;
 }
 #poststuff .custom-less-variables .field + .field {
-  border-top: solid 1px #eee;
+  /*border-top: solid 1px #eee; */
 }
 #poststuff .custom-less-variables .iris-picker {
   margin-left: 200px;
