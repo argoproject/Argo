@@ -44,40 +44,42 @@ function largo_acm_output_tokens( $output_tokens, $tag_id, $code_to_display ) {
 
 
 // Add actual ad tags
-function largo_ad_tags_ids( $ad_tag_ids ) {
-	return array(
-			array(
-					'tag'       => 'leaderboard',
-					'url_vars'  => array(
-							'tag'       => '728x90',
-							'sz'        => '728x90',
-							'height'    => '90',
-							'width'     => '728',
-						),
-					'enable_ui_mapping' => true,
-				),
-			array(
-					'tag'       => 'sidebar 300x250',
-					'url_vars'  => array(
-							'tag'       => '300x250',
-							'sz'        => '300x250',
-							'height'    => '300',
-							'width'     => '250',
-						),
-					'enable_ui_mapping' => true,
-				),
-			array(
-					'tag'       => 'mobile banner',
-					'url_vars'  => array(
-							'tag'       => '300x50',
-							'sz'        => '300x50',
-							'height'    => '50',
-							'width'     => '300',
-						),
-					'enable_ui_mapping' => true,
-				),
+if ( ! function_exists( 'largo_ad_tags_ids' ) ) {
+	function largo_ad_tags_ids( $ad_tag_ids ) {
+		return array(
+				array(
+						'tag'       => 'leaderboard',
+						'url_vars'  => array(
+								'tag'       => '728x90',
+								'sz'        => '728x90',
+								'height'    => '90',
+								'width'     => '728',
+							),
+						'enable_ui_mapping' => true,
+					),
+				array(
+						'tag'       => 'sidebar 300x250',
+						'url_vars'  => array(
+								'tag'       => '300x250',
+								'sz'        => '300x250',
+								'height'    => '300',
+								'width'     => '250',
+							),
+						'enable_ui_mapping' => true,
+					),
+				array(
+						'tag'       => 'mobile banner',
+						'url_vars'  => array(
+								'tag'       => '300x50',
+								'sz'        => '300x50',
+								'height'    => '50',
+								'width'     => '300',
+							),
+						'enable_ui_mapping' => true,
+					),
 
-	);
+		);
+	}
 }
 add_filter( 'acm_ad_tag_ids', 'largo_ad_tags_ids' );
 

@@ -3,6 +3,7 @@
  * Template Name: Series Landing Page Default
  * Description: The default template for a series landing page. Many display options are set via admin.
  */
+
 get_header();
 
 // Load up our meta data and whatnot
@@ -21,6 +22,8 @@ if ( 'cftl-tax-landing' == $post->post_type ) {
 	 *
 	 *	Array (
 	 *		[header_enabled] => boolean
+	 *		[show_series_byline] => boolean
+	 *		[show_sharebar] => boolean
 	 *		[header_style] => standard|alternate
 	 *		[cftl_layout] => one-column|two-column|three-column
 	 *		[per_page] => integer|all
@@ -40,6 +43,16 @@ $content_span = array( 'one-column' => 12, 'two-column' => 8, 'three-column' => 
 
 <?php if ( $opt['header_enabled'] ) : ?>
 	<section id="series-header" class="span12">
+		<h1 class="entry-title"><?php the_title(); ?></h1>
+		<?php
+		if ( $opt['show_series_byline'] )
+			echo '<h5 class="byline">' . largo_byline( false ) . '</h5>';
+		if ( $opt['show_sharebar'] )
+			largo_post_social_links();
+		?>
+		<div class="description">
+			<?php echo apply_filters( 'the_content', $post->post_excerpt ); ?>
+		</div>
 		<?php
 		if ( 'standard' == $opt['header_style'] ) {
 			//need to set a size, make this responsive, etc
@@ -50,12 +63,6 @@ $content_span = array( 'one-column' => 12, 'two-column' => 8, 'three-column' => 
 			the_content();
 		}
 		?>
-		<h1 class="entry-title"><?php the_title(); ?></h1>
-		<?php edit_post_link(__('Edit This Series Landing', 'largo'), '<h5 class="byline"><span class="edit-link">', '</span></h5>'); ?>
-
-		<div class="description">
-			<?php echo apply_filters( 'the_content', $post->post_excerpt ); ?>
-		</div>
 	</section>
 	</div><!-- end main div -->
 	<div id="series-main" class="row-fluid clearfix">
@@ -66,7 +73,7 @@ $content_span = array( 'one-column' => 12, 'two-column' => 8, 'three-column' => 
 if ( 'three-column' == $opt['cftl_layout'] ) get_sidebar( 'series-left' );
 ?>
 
-<div id="content" class="span<?php echo $content_span[ $opt['cftl_layout'] ]; ?>" role="main">
+<div id="content" class="span<?php echo $content_span[ $opt['cftl_layout'] ]; ?> stories" role="main">
 <?php
 
 global $wp_query;
@@ -81,6 +88,7 @@ if ( isset( $wp_query->query_vars['term'] )
 
 	//default query args: by date, descending
 	$args = array(
+		'p' => '',
     'post_type' => 'post',
     'taxonomy' => 'series',
     'term' => $series,
@@ -88,13 +96,24 @@ if ( isset( $wp_query->query_vars['term'] )
     'posts_per_page' => $opt['per_page']
   );
 
+	//stores original 'paged' value in 'pageholder'
+  global $cftl_previous;
+	if ( isset($cftl_previous['pageholder']) && $cftl_previous['pageholder'] > 1 ) {
+		$args['paged'] = $cftl_previous['pageholder'];
+		global $paged;
+		$paged = $args['paged'];
+	}
+
   //change args as needed
   if ('ASC' == $opt['post_order'] ) $args['order'] = 'ASC';
 
   //other changes handled by filters from cftl-series-order.php
 
-	//build the query
-	$wp_query = new WP_Query($args);
+	//build the query, using the original as a guide for pagination and whatnot
+	$all_args = array_merge( $old_query->query_vars, $args );
+
+	$wp_query = new WP_Query($all_args);
+
 
 	// and finally wind the posts back so we can go through the loop as usual
 	while ( have_posts() ) : the_post();

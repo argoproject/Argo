@@ -24,24 +24,45 @@
 @pink:                  #c3325f;
 @purple:                #7a43b6;
 
+/**
+ * @group Color
+ * @label Base Color (used for navbar, widget titles, etc.)
+ * @type color
+ * @default_value #2275bb
+ */
 @baseColor:				@blue;
 
-// Links
-// -------------------------
 /**
- * @group Links
+ * @group Color
+ * @label Header/Footer Color
+ * @type color
+ * @default_value #222
+ */
+@headerFooterColor:		@grayDarker;
+
+/**
+ * @group Color
  * @label Color of links
  * @type color
  * @default_value #2275bb
  */
 @linkColor:             @blue;
+
 /**
- * @group Links
+ * @group Color
  * @label Hover color of links
  * @type color
  * @default_value #2275bb
  */
 @linkColorHover:        lighten(@linkColor, 10%);
+
+/**
+ * @group Color
+ * @label Background color of post meta boxes (author bio, related posts, etc.)
+ * @type color
+ * @default_value #fff
+ */
+@postBoxBackgroundColor:	#fff;
 
 
 // --------------------------------------------
@@ -123,6 +144,7 @@
  * @default_value 1.5
  */
 @baseLineHeight:        1.5;
+
 @altFontFamily:         @sansFontFamily;
 @baseFontWeight:		normal;
 
@@ -195,7 +217,7 @@
 // -------------------------
 @navbarHeight:                    40px;
 @navbarFontSize:				  15px;
-@navbarBackground:                darken(@baseColor, 10%);
+@navbarBackground:                darken(@baseColor, 5%);
 @navbarBackgroundHighlight:       @baseColor;
 
 @navbarText:                      @white;

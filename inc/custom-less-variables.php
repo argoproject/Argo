@@ -17,7 +17,7 @@
  */
 add_action( 'largo_custom_less_variables_init', 'largo_custom_less_variables_init', 1 );
 function largo_custom_less_variables_init() {
-	largo_clv_register_files( array( 'bootstrapify.less', 'carousel.less', 'editor-style.less', 'style.less', 'top-stories.less' ) );
+	largo_clv_register_files( array( 'carousel.less', 'editor-style.less', 'style.less', 'top-stories.less' ) );
 	largo_clv_register_directory_paths( get_template_directory() . '/less/', get_template_directory_uri() . '/css/' );
 	largo_clv_register_variables_less_file( 'variables.less' );
 }

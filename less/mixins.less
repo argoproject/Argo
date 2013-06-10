@@ -605,3 +605,10 @@
   }
 
 }
+
+.darkLight (@a) when (lightness(@a) >= 50%) {
+  color: @grayDarker;
+}
+.darkLight (@a) when (lightness(@a) < 50%) {
+  color: @white;
+}

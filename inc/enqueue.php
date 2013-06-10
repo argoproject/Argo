@@ -9,7 +9,7 @@ if ( ! function_exists( 'largo_enqueue_js' ) ) {
 	function largo_enqueue_js() {
 
 		//Modernizr and our primary stylesheet
-		wp_enqueue_style( 'largo-stylesheet', get_template_directory_uri().'/css/style.css' );  //often overridden by custom-less-variables version
+		wp_enqueue_style( 'largo-stylesheet', get_template_directory_uri().'/css/style.css' );	//often overridden by custom-less-variables version
 		wp_enqueue_script( 'largo-modernizr', get_template_directory_uri() . '/js/modernizr.custom.js' );
 
 		//the jquery plugins and our main js file
@@ -24,8 +24,8 @@ if ( ! function_exists( 'largo_enqueue_js' ) ) {
 		if ( is_home() && of_get_option( 'homepage_top') == 'topstories' )
 			wp_enqueue_style( 'topstory-styles', get_template_directory_uri() . '/css/top-stories.css', false, false, 'screen' );
 
-		// Ads styles
-		wp_enqueue_style( 'ads-styles', get_template_directory_uri() . '/css/ads.css', false, false, 'screen' );
+		if ( is_plugin_active('ad-code-manager/ad-code-manager.php') )
+			wp_enqueue_style( 'ads-styles', get_template_directory_uri() . '/css/ads.css', false, false, 'screen' );
 
 		//only load sharethis on single pages and load jquery tabs for the related content box if it's active
 		if ( is_single() ) {
@@ -38,7 +38,7 @@ if ( ! function_exists( 'largo_enqueue_js' ) ) {
 
 		//Load the child theme's style.css if we're actually running a child theme of Largo
 		$theme = wp_get_theme();
-		if ( isset($theme->parent()->Template) && $theme->parent()->Template == 'largo') {
+		if ( is_object($theme->parent()) && $theme->parent()->Template == 'largo' ) {
 			wp_enqueue_style( 'largo-child-styles', get_stylesheet_directory_uri() . '/style.css', array('largo-stylesheet'));
 		}
 	}
@@ -122,9 +122,9 @@ if ( ! function_exists( 'largo_google_analytics' ) ) {
 			    _gaq.push(
 					["largo._setAccount", "UA-17578670-4"],
 					["largo._setCustomVar", 1, "SiteName", "<?php bloginfo('name') ?>"],
-					["largo._trackPageview"],
 					["largo._setDomainName", "<?php echo str_replace( 'http://' , '' , home_url()) ?>"],
-					["largo._setAllowLinker", true]
+					["largo._setAllowLinker", true],
+					["largo._trackPageview"]
 				);
 
 			    (function() {
@@ -136,5 +136,5 @@ if ( ! function_exists( 'largo_google_analytics' ) ) {
 	<?php endif;
 	}
 }
-add_action( 'wp_footer', 'largo_google_analytics' );
+add_action( 'wp_enqueue_scripts', 'largo_google_analytics' );
 

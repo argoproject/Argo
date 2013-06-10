@@ -43,8 +43,8 @@ function largo_custom_taxonomies() {
         wp_insert_term(
         	__('Featured in Series', 'largo'), 'prominence',
         	array(
-        		'description' 	=> __('Select this option to allow this post to float to the top of any/all series landing pages sorting by Featured first', 'largo'),
-        		'slug' 			=> 'series-featured'
+        		'description'   => __('Select this option to allow this post to float to the top of any/all series landing pages sorting by Featured first', 'largo'),
+        		'slug'			=> 'series-featured'
         	)
         );
 

@@ -54,10 +54,10 @@ article.story {
     height: auto;
   }
   .left {
-    padding: 8px 0 0;
+    padding: 6px 0 0;
   }
   .right {
-    padding: 2px 0 0;
+    padding: 1px 0 0;
   }
   span {
     position: relative;
@@ -121,14 +121,14 @@ article.story {
 .single-post .author-box,
 .single-argolinkroundups .author-box,
 .labels {
-  background-color: #fafafa;
+  background-color: @postBoxBackgroundColor;
   border: 1px solid @grayLighter;
   border-top: 3px solid @grayLight;
   .border-radius(5px);
   h5 {
     font-size: @baseFontSize;
     line-height: 1;
-    background-color: #dedede;
+    background-color: darken(@postBoxBackgroundColor, 10%);
     margin-bottom: 0;
 	padding: 8px;
   }
@@ -150,7 +150,7 @@ h3.recent-posts,
 .labels .series-label {
   margin: 5px;
   padding: 8px;
-  background-color: #efefef;
+  background-color: darken(@postBoxBackgroundColor, 10%);
   .border-radius(5px);
   h5 {
     background: none;
@@ -209,28 +209,29 @@ h3.recent-posts,
     display: inline-block;
     padding: 10px 15px;
     color: @textColor;
-    background-color: @grayLighter;
+    background-color: darken(@postBoxBackgroundColor, 10%);
     .border-radius(5px);
     &:hover {
-  	  background-color: @gray;
+  	  background-color: darken(@postBoxBackgroundColor, 35%);
   	  color: @white;
   	  text-decoration: none;
     }
   }
 }
 .next {
-  width: 50%;
+  width: 48%;
   float: right;
   text-align: right;
 }
 .previous {
-  width: 50%;
+  width: 48%;
   float: left;
   text-align: left;
 }
 
 // RELATED POSTS
 #related-posts {
+  background-color: @postBoxBackgroundColor;
   border: 1px solid @grayLighter;
   border-top: 3px solid @grayLight;
   .border-radius(5px);
@@ -445,9 +446,6 @@ p.wp-caption-text {
   line-height: 1.5;
   display: block;
 }
-.navis-slideshow .pagination li {
-  list-style-type: none !important;
-}
 .half,
 .full,
 .extract {
@@ -525,7 +523,8 @@ p.wp-caption-text {
 .sticky-related,
 .sticky-solo {
   background-color: @baseColor;
-  border:1px solid darken(@baseColor, 5%);
+  border: 1px solid darken(@baseColor, 5%);
+  .border-radius(8px);
    a {
      color: darken(@baseColor, 15%);
      &:hover {
@@ -595,6 +594,7 @@ p.wp-caption-text {
     padding: 10px;
     list-style: none;
     background-color: lighten(@baseColor, 25%);
+    .border-radius(4px);
     li {
       h4 {
         color: @grayDark;
@@ -757,8 +757,12 @@ article img.attachment-post-thumbnail {
 .archive-dropdown {
   margin-bottom: @baseline/2;
 }
-
 // Series Landings
 #series-footer {
-	clear: both;
+  clear: both;
+}
+#series-header .byline time,
+#series-header .byline .clean-read,
+#series-header .byline .sep {
+  display: none;
 }

@@ -5,14 +5,17 @@
  *
  * @since 1.0
  */
-function move_author_to_publish_metabox() {
-	global $post_ID;
-	$post = get_post( $post_ID );
-	echo '<div id="author" class="misc-pub-section" style="padding: 8px 10px;">Author: ';
-	post_author_meta_box( $post );
-	echo '</div>';
+//
+if ( !is_plugin_active('co-authors-plus/co-authors-plus.php') ) {
+	function move_author_to_publish_metabox() {
+		global $post_ID;
+		$post = get_post( $post_ID );
+		echo '<div id="author" class="misc-pub-section" style="padding: 8px 10px;">Author: ';
+		post_author_meta_box( $post );
+		echo '</div>';
+	}
+	add_action( 'post_submitbox_misc_actions', 'move_author_to_publish_metabox' );
 }
-add_action( 'post_submitbox_misc_actions', 'move_author_to_publish_metabox' );
 
 /**
  * Hide some of the less commonly used metaboxes to cleanup the post and page edit screens
@@ -39,14 +42,18 @@ add_action('admin_menu','remove_default_post_screen_metaboxes');
 
 // Register our custom meta boxes
 function largo_meta_box_add() {
-	add_meta_box(
-		'largo_byline_meta',
-		__('Custom Byline Options', 'largo'),
-		'largo_byline_meta_box_display',
-		'post',
-		'side',
-		'core'
-	);
+	$screens = array( 'post' );
+	if ( of_get_option( 'custom_landing_enabled' ) ) $screens[] = 'cftl-tax-landing';
+    foreach ( $screens as $screen ) {
+		add_meta_box(
+			'largo_byline_meta',
+			__('Custom Byline Options', 'largo'),
+			'largo_byline_meta_box_display',
+			$screen,
+			'side',
+			'core'
+		);
+	}
 	$screens = array( 'post', 'page' );
     foreach ( $screens as $screen ) {
 		add_meta_box(

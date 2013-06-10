@@ -2,9 +2,10 @@
   margin-bottom: @baseline;
   padding: 12px;
   border: 1px solid @grayLighter;
+  .border-radius(8px);
   p, ul {
     padding: 0 3px;
-    font-size: @baseFontSize *0.815;
+    font-size: @baseFontSize * 0.815;
   }
   ul {
     margin: @baseline/5 0 0 16px;
@@ -17,12 +18,12 @@
     margin: -@baseline/4 0 0;
   }
 }
-
 .widgettitle,
 .stories h3.widgettitle {
   margin-bottom: @baseline/3;
   padding: 5px 8px;
   border: 1px solid @grayLighter;
+  .border-radius(4px);
   background-color: @baseColor;
   font-size: @baseFontSize * 0.815;
   text-transform: uppercase;
@@ -33,6 +34,12 @@
   }
 }
 
+#site-footer .widget,
+#site-footer .widgettitle,
+#homepage-bottom .widgettitle,
+.widget.no-bg {
+  .border-radius(0);
+}
 // Footer widgets
 #site-footer .widget,
 #site-footer .widgettitle {
@@ -44,7 +51,6 @@
 #site-footer .widget {
   margin-bottom: @baseline/2;
 }
-
 //A Few Alternate Styles
 .widget.rev {
   color: @white;
@@ -55,7 +61,7 @@
   }
   a {
     color: @white;
-    font-weight:bold;
+    font-weight: bold;
   }
 }
 .widget.no-bg {
@@ -70,7 +76,6 @@
     color: @white;
   }
 }
-
 //Follow Widget
 .subscribe {
   display: block;

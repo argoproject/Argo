@@ -4,15 +4,16 @@
  */
 global $post;
 $sidebar_slug = $post->post_name . "_left";
-
-if ( is_active_sidebar( $sidebar_slug ) ) :
 ?>
 	<aside id="sidebar-left" class="span3">
-		<div class="widget-area<?php if ( of_get_option( 'showey-hidey' ) ) echo ' showey-hidey'; ?>" role="complementary">
+		<div class="widget-area" role="complementary">
 			<?php
-				dynamic_sidebar( $sidebar_slug );
+				if ( is_active_sidebar( $sidebar_slug ) ) {
+					dynamic_sidebar( $sidebar_slug );
+				} else {
+					_e( '<p>Please add widgets to this content area in the WordPress admin area under appearance > widgets.</p>', 'largo' );
+				}
 			?>
 		</div><!-- .widget-area -->
 	</aside>
 <?php
-endif;
