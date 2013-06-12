@@ -71,11 +71,13 @@ function largo_register_sidebars() {
 	// @todo - probably add an option to enable this because not everyone is going to have ads here
 	// @todo - add additional widget area in the footer for a leaderboard ad unit there too
 	register_sidebar( array(
-		'name' => 'Header',
+		'name' 			=> __( 'Header Ad Zone'),
+		'description' 	=> __( 'An optional leaderboard ad zone above the main site header' ),
+		'id' 			=> 'header-ads',
 		'before_widget' => '<div id="%1$s" class="%2$s">',
-		'after_widget' => '</div>',
-		'before_title' => '<h2 class="widgettitle">',
-		'after_title' => '</h2>'
+		'after_widget'	=> '</div>',
+		'before_title' 	=> '<h3 class="widgettitle">',
+		'after_title' 	=> '</h3>'
 	) );
 
 	if ( of_get_option('footer_layout') == '4col' ) :
