@@ -14,7 +14,6 @@
 }
 
 .aligncenter,
-div.aligncenter,
 .align-center,
 .center {
    clear: both;
@@ -48,7 +47,8 @@ img[class*="wp-image-"] {
 // SUPPORT FOR IFRAME/OBJECT/EMBED
 // --------------------------------------------
 
-.embed-container {
+.embed-container,
+.type-embed {
     position: relative;
     padding-bottom: 56.25%; /* 16/9 ratio */
     padding-top: 30px; /* IE6 workaround*/
@@ -58,7 +58,10 @@ img[class*="wp-image-"] {
 }
 .embed-container iframe,
 .embed-container object,
-.embed-container embed {
+.embed-container embed,
+.type-embed iframe,
+.type-embed object,
+.type-embed embed {
     position: absolute;
     top: 0;
     left: 0;
