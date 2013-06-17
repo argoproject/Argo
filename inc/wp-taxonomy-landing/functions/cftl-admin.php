@@ -410,7 +410,7 @@ function cftl_tax_landing_main($post) {
 		<?php
 			//allow 'custom' if we have a single term
 			$terms = get_the_terms( $post->ID, 'series');
-			if (count($terms) == 1) $series_id = $terms[0]->term_id;
+			if (count($terms) == 1) $series_id = $terms[0]->term_taxonomy_id;
 		?>
 		<select name="post_order">
 			<?php
@@ -662,6 +662,7 @@ ORDER BY ISNULL(mt2.meta_value+0) ASC, mt2.meta_value+0 ASC, p.post_date DESC");
 	foreach($post_list as $p) {
 		echo '<li id="pid_', $p->ID, '">', $p->post_title, "</li>";
 	}
+
 }
 
 

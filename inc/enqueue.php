@@ -49,6 +49,7 @@ add_action( 'wp_enqueue_scripts', 'largo_enqueue_js' );
  * Determine which size of the banner image to load based on the window width
  *
  * @since 1.0
+ * @todo: should probably use picturefill for this instead
  */
 if ( ! function_exists( 'largo_header_js' ) ) {
 	function largo_header_js() { ?>
@@ -90,7 +91,7 @@ if ( ! function_exists( 'largo_footer_js' ) ) {
 		}(document, 'script', 'facebook-jssdk'));</script>
 
 		<!--Twitter-->
-		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="http://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
 		<!--Google Plus-->
 		<script type="text/javascript">
