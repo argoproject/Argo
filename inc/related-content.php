@@ -239,9 +239,10 @@ if ( ! function_exists( 'largo_categories_and_tags' ) ) {
 
 	            if ( $link ) {
 		            $output[] = sprintf(
-		                __('<%1$s class="post-category-link"><a href="%2$s" title="Read posts in the %3$s category">%4$s%3$s</a></%1$s>', 'largo'),
+		                __('<%1$s class="post-category-link"><a href="%2$s" title="Read %3$s in the %4$s category">%5$s%4$s</a></%1$s>', 'largo'),
 			                $item_wrapper,
 			                get_category_link( $cat->term_id ),
+			                of_get_option( 'posts_term_plural' ),
 			                $cat->name,
 			                $icon
 		            );
@@ -259,9 +260,10 @@ if ( ! function_exists( 'largo_categories_and_tags' ) ) {
 
 	        	if ( $link ) {
 		            $output[] = sprintf(
-		                __('<%1$s class="post-tag-link"><a href="%2$s" title="Read posts tagged with: %3$s">%4$s%3$s</a></%1$s>', 'largo'),
+		                __('<%1$s class="post-tag-link"><a href="%2$s" title="Read %3$s tagged with: %4$s">%5$s%4$s</a></%1$s>', 'largo'),
 		                	$item_wrapper,
 		                	get_tag_link( $tag->term_id ),
+		                	of_get_option( 'posts_term_plural' ),
 		                	$tag->name,
 		                	$icon
 		            );

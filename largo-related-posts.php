@@ -42,7 +42,7 @@ if ( $rel_topics = largo_get_post_related_topics( 6 ) ) : ?>
 						?>
 					</ul>
 
-					<p><a href="<?php echo esc_url( get_term_link( $topic ) ); ?>" title="<?php echo esc_attr($topic->name); ?>" target="_blank"><strong><?php printf( __('View all %s posts &rarr;', 'largo'), $topic->name ); ?></strong></a></p>
+					<p><a href="<?php echo esc_url( get_term_link( $topic ) ); ?>" title="<?php echo esc_attr($topic->name); ?>" target="_blank"><strong><?php printf( __('View all %1$s %2$s &rarr;', 'largo'), $topic->name, of_get_option( 'posts_term_plural' ) ); ?></strong></a></p>
 				</div> <!-- /#rpX -->
 			<?php endforeach; ?>
 		</div> <!-- /.items -->

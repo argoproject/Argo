@@ -77,18 +77,19 @@ get_header();
 					 * Show a label for the list of recent posts
 					 * again, tailored to the type of page we're looking at
 					 */
+					$posts_term = of_get_option( 'posts_term_plural' );
 
 					if ( is_author() ) {
-						printf(__('Recent stories<a class="rss-link" href="%s"><i class="icon-rss"></i></a>', 'largo'), get_author_feed_link( get_the_author_meta('ID') ) );
+						printf(__('Recent %1$s<a class="rss-link" href="%2$s"><i class="icon-rss"></i></a>', 'largo'), $posts_term, get_author_feed_link( get_the_author_meta('ID') ) );
 					} elseif ( is_category() ) {
-						printf(__('Recent stories<a class="rss-link" href="%s"><i class="icon-rss"></i></a>', 'largo'), get_category_feed_link( get_queried_object_id() ) );
+						printf(__('Recent %1$s<a class="rss-link" href="%2$s"><i class="icon-rss"></i></a>', 'largo'), $posts_term, get_category_feed_link( get_queried_object_id() ) );
 					} elseif ( is_tag() ) {
-						printf(__('Recent stories<a class="rss-link" href="%s"><i class="icon-rss"></i></a>', 'largo'), get_tag_feed_link( get_queried_object_id() ) );
+						printf(__('Recent %1$s<a class="rss-link" href="%2$s"><i class="icon-rss"></i></a>', 'largo'), $posts_term, get_tag_feed_link( get_queried_object_id() ) );
 					} elseif ( is_tax() ) {
 						$queried_object = get_queried_object();
 						$term_id = intval( $queried_object->term_id );
 						$tax = $queried_object->taxonomy;
-						printf(__('Recent stories<a class="rss-link" href="%s"><i class="icon-rss"></i></a>', 'largo'), get_term_feed_link( $term_id, $tax ) );
+						printf(__('Recent %1$s<a class="rss-link" href="%2$s"><i class="icon-rss"></i></a>', 'largo'), $posts_term, get_term_feed_link( $term_id, $tax ) );
 					} elseif ( is_month() ) {
 						printf(__('Monthly Archives: <span>%s</span>', 'largo'), get_the_date('F Y') );
 					} elseif ( is_year() ) {

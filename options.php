@@ -141,6 +141,23 @@ function optionsframework_options() {
 		'type' 	=> 'text');
 
 	$options[] = array(
+		'name' 	=> __('Word to use for "Posts"', 'largo'),
+		'desc' 	=> __('WordPress calls single article pages "posts" but might prefer to use another name. <strong>Enter the singular and plural forms</strong> of the word you want to use here.', 'largo'),
+		'type' 	=> 'info');
+
+	$options[] = array(
+		'desc' 	=> __('<strong>Singular Form</strong> (e.g. - post, story, article)', 'largo'),
+		'id' 	=> 'posts_term_singular',
+		'std' 	=> 'Post',
+		'type' 	=> 'text');
+
+	$options[] = array(
+		'desc' 	=> __('<strong>Plural form</strong> (e.g. - posts, stories, articles)', 'largo'),
+		'id' 	=> 'posts_term_plural',
+		'std' 	=> 'Posts',
+		'type' 	=> 'text');
+
+	$options[] = array(
 		'name' 	=> __('Social Media Links', 'largo'),
 		'desc' 	=> __('Enter the links for your organization\'s primary social media accounts. To change social media settings for a user, view their <strong>edit profile</strong> screen.', 'largo'),
 		'type' 	=> 'info');

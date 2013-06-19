@@ -14,9 +14,10 @@ class largo_recent_posts_widget extends WP_Widget {
 
 	function widget( $args, $instance ) {
 		global $ids; // an array of post IDs already on a page so we can avoid duplicating posts
+		$posts_term = of_get_option( 'posts_term_plural' );
 		extract( $args );
 
-		$title = apply_filters('widget_title', empty( $instance['title'] ) ? __('Recent Stories', 'largo') : $instance['title'], $instance, $this->id_base);
+		$title = apply_filters('widget_title', empty( $instance['title'] ) ? __('Recent ' . $posts_term, 'largo') : $instance['title'], $instance, $this->id_base);
 
 		echo $before_widget;
 
@@ -89,7 +90,7 @@ class largo_recent_posts_widget extends WP_Widget {
 	                  // print all of the items
 	                  echo $output;
 	            else:
-	    			_e('<p class="error"><strong>You don\'t have any recent posts.</strong></p>', 'largo');
+	    			printf(__('<p class="error"><strong>You don\'t have any recent %s.</strong></p>', 'largo'), strtolower( $posts_term ) );
 	    		endif; // end more featured posts
 
 	    	// close the ul if we're just showing a list of headlines
@@ -123,7 +124,7 @@ class largo_recent_posts_widget extends WP_Widget {
 
 	function form( $instance ) {
 		$defaults = array(
-			'title' 			=> __('Recent Stories', 'largo'),
+			'title' 			=> __('Recent ' . of_get_option( 'posts_term_plural' ), 'largo'),
 			'num_posts' 		=> 5,
 			'avoid_duplicates'	=> '',
 			'thumbnail_display' => 'small',

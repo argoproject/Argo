@@ -68,7 +68,6 @@ if ( ! function_exists( 'largo_author_link' ) ) {
 	}
 }
 
-
 /**
  * Outputs custom byline and link (if set), otherwise outputs author link and post date
  *
@@ -192,7 +191,6 @@ function largo_has_gravatar( $email ) {
  * @since 1.0
  */
 if ( ! function_exists( 'largo_entry_content' ) ) {
-
 	function my_queryvars( $qvars ) {
     	$qvars[] = 'all';
     	return $qvars;
@@ -400,25 +398,29 @@ if ( ! function_exists( 'largo_content_nav' ) ) {
 			<nav id="nav-below" class="pager post-nav clearfix">
 				<?php
 					if ( $prev = get_previous_post() ) {
-						printf( '<div class="previous"><a href="%1$s"><h5>Previous Story</h5><span class="meta-nav">%2$s</span></a></div>',
+						printf( '<div class="previous"><a href="%1$s"><h5>Previous %2$s</h5><span class="meta-nav">%3$s</span></a></div>',
 							get_permalink( $prev->ID ),
+							of_get_option( 'posts_term_singular' ),
 							$prev->post_title
 						);
 					}
 					if ( $next = get_next_post() ) {
-						printf( '<div class="next"><a href="%1$s"><h5>Next Story</h5><span class="meta-nav">%2$s</span></a></div>',
+						printf( '<div class="next"><a href="%1$s"><h5>Next %2$s</h5><span class="meta-nav">%3$s</span></a></div>',
 							get_permalink( $next->ID ),
+							of_get_option( 'posts_term_singular' ),
 							$next->post_title
 						);
 					}
 				?>
 			</nav><!-- #nav-below -->
 
-		<?php } elseif ( $wp_query->max_num_pages > 1 ) { ?>
+		<?php } elseif ( $wp_query->max_num_pages > 1 ) {
+			$posts_term = of_get_option( 'posts_term_plural' );
+		?>
 
 			<nav id="<?php echo $nav_id; ?>" class="pager post-nav">
-				<div class="next"><?php previous_posts_link( __( 'Newer Stories &rarr;', 'largo' ) ); ?></div>
-				<div class="previous"><?php next_posts_link( __( '&larr; Older Stories', 'largo' ) ); ?></div>
+				<div class="next"><?php previous_posts_link( __( 'Newer ' . $posts_term . ' &rarr;', 'largo' ) ); ?></div>
+				<div class="previous"><?php next_posts_link( __( '&larr; Older ' . $posts_term, 'largo' ) ); ?></div>
 			</nav><!-- .post-nav -->
 
 		<?php }
@@ -487,4 +489,4 @@ if ( ! function_exists( 'largo_comment' ) ) {
 				break;
 		endswitch;
 	}
-} // ends check for largo_comment()
+}
