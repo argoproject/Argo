@@ -88,26 +88,26 @@ if ( isset( $wp_query->query_vars['term'] )
 
 	//default query args: by date, descending
 	$args = array(
-		'p' => '',
-    'post_type' => 'post',
-    'taxonomy' => 'series',
-    'term' => $series,
-    'order' => 'DESC',
-    'posts_per_page' => $opt['per_page']
-  );
+		'p' 				=> '',
+		'post_type' 		=> 'post',
+		'taxonomy' 			=> 'series',
+		'term' 				=> $series,
+		'order' 			=> 'DESC',
+		'posts_per_page' 	=> $opt['per_page']
+	);
 
 	//stores original 'paged' value in 'pageholder'
-  global $cftl_previous;
+	global $cftl_previous;
 	if ( isset($cftl_previous['pageholder']) && $cftl_previous['pageholder'] > 1 ) {
 		$args['paged'] = $cftl_previous['pageholder'];
 		global $paged;
 		$paged = $args['paged'];
 	}
 
-  //change args as needed
-  if ('ASC' == $opt['post_order'] ) $args['order'] = 'ASC';
+	//change args as needed
+	if ('ASC' == $opt['post_order'] ) $args['order'] = 'ASC';
 
-  //other changes handled by filters from cftl-series-order.php
+	//other changes handled by filters from cftl-series-order.php
 
 	//build the query, using the original as a guide for pagination and whatnot
 	$all_args = array_merge( $old_query->query_vars, $args );
