@@ -3,145 +3,107 @@
 /**
  * Register our sidebars and other widget areas
  *
+ * @todo move the taxonomy landing page sidebar registration here
+ *  (currently in inc/wp-taxonomy-landing/functions/cftl-admin.php)
  * @since 1.0
  */
 function largo_register_sidebars() {
-	register_sidebar( array(
-		'name' 			=> __( 'Main Sidebar', 'largo' ),
-		'description' 	=> __( 'The sidebar for the homepage. If you do not add widgets to any of the other sidebars, this will also be used on all of the other pages of your site.', 'largo' ),
-		'id' 			=> 'sidebar-main',
-		'before_widget' => '<aside id="%1$s" class="%2$s clearfix">',
-		'after_widget' 	=> "</aside>",
-		'before_title' 	=> '<h3 class="widgettitle">',
-		'after_title' 	=> '</h3>',
-	) );
+	$sidebars = array (
+		// the default widget areas
+		array (
+			'name'	=> __( 'Main Sidebar', 'largo' ),
+			'desc' 	=> __( 'The sidebar for the homepage. If you do not add widgets to any of the other sidebars, this will also be used on all of the other pages of your site.', 'largo' ),
+			'id' 	=> 'sidebar-main'
+		),
+		array (
+			'name' 	=> __( 'Single Sidebar', 'largo' ),
+			'desc' 	=> __( 'The sidebar for posts and pages', 'largo' ),
+			'id' 	=> 'sidebar-single'
+		),
+		array (
+			'name' 	=> __( 'Footer 1', 'largo' ),
+			'desc' 	=> __( 'The first footer widget area.', 'largo' ),
+			'id' 	=> 'footer-1'
+		),
+		array (
+			'name' 	=> __( 'Footer 2', 'largo' ),
+			'desc' 	=> __( 'The second footer widget area.', 'largo' ),
+			'id' 	=> 'footer-2'
+		),
+		array(
+			'name' 	=> __( 'Footer 3', 'largo' ),
+			'desc' 	=> __( 'The third footer widget area.', 'largo' ),
+			'id' 	=> 'footer-3'
+		)
+	);
 
-	register_sidebar( array(
-		'name' 			=> __( 'Single Sidebar', 'largo' ),
-		'description' 	=> __( 'The sidebar for posts and pages', 'largo' ),
-		'id' 			=> 'sidebar-single',
-		'before_widget' => '<aside id="%1$s" class="%2$s clearfix">',
-		'after_widget' 	=> "</aside>",
-		'before_title' 	=> '<h3 class="widgettitle">',
-		'after_title' 	=> '</h3>',
-	) );
-
+	// optional widget areas
 	if ( of_get_option( 'use_topic_sidebar' ) ) {
-		register_sidebar( array(
-			'name' 			=> __( 'Archive/Topic Sidebar', 'largo' ),
-			'description' 	=> __( 'The sidebar for category, tag and other archive pages', 'largo' ),
-			'id' 			=> 'topic-sidebar',
-			'before_widget' => '<aside id="%1$s" class="%2$s clearfix">',
-			'after_widget' 	=> "</aside>",
-			'before_title' 	=> '<h3 class="widgettitle">',
-			'after_title' 	=> '</h3>',
-		) );
+		$sidebars[] = array(
+			'name' 	=> __( 'Archive/Topic Sidebar', 'largo' ),
+			'desc' 	=> __( 'The sidebar for category, tag and other archive pages', 'largo' ),
+			'id' 	=> 'topic-sidebar'
+		);
 	}
-
-	register_sidebar( array(
-		'name' 			=> __( 'Footer 1', 'largo' ),
-		'description' 	=> __( 'The first footer widget area.', 'largo' ),
-		'id' 			=> 'footer-1',
-		'before_widget' => '<aside id="%1$s" class="%2$s clearfix">',
-		'after_widget' 	=> "</aside>",
-		'before_title' 	=> '<h3 class="widgettitle">',
-		'after_title' 	=> '</h3>',
-	) );
-
-	register_sidebar( array(
-		'name' 			=> __( 'Footer 2', 'largo' ),
-		'description' 	=> __( 'The second footer widget area.', 'largo' ),
-		'id' 			=> 'footer-2',
-		'before_widget' => '<aside id="%1$s" class="%2$s clearfix">',
-		'after_widget' 	=> "</aside>",
-		'before_title' 	=> '<h3 class="widgettitle">',
-		'after_title' 	=> '</h3>',
-	) );
-
-	register_sidebar( array(
-		'name' 			=> __( 'Footer 3', 'largo' ),
-		'description' 	=> __( 'The third footer widget area.', 'largo' ),
-		'id' 			=> 'footer-3',
-		'before_widget' => '<aside id="%1$s" class="%2$s clearfix">',
-		'after_widget' 	=> "</aside>",
-		'before_title' 	=> '<h3 class="widgettitle">',
-		'after_title' 	=> '</h3>',
-	) );
+	if ( of_get_option('footer_layout') == '4col' ) {
+		$sidebars[] = array(
+			'name' 	=> __( 'Footer 4', 'largo' ),
+			'desc' 	=> __( 'The fourth footer widget area.', 'largo' ),
+			'id' 	=> 'footer-4'
+		);
+	}
+	if ( of_get_option('homepage_layout') == '3col' ) {
+		$sidebars[] = array(
+			'name' 	=> __( 'Homepage Left Rail', 'largo' ),
+			'desc' 	=> __( 'An optional widget area that, when enabled, appears to the left of the main content area on the homepage.', 'largo' ),
+			'id' 	=> 'homepage-left-rail'
+		);
+	}
+	if ( of_get_option('homepage_bottom') == 'widgets' ) {
+		$sidebars[] = array(
+			'name' 	=> __( 'Homepage Bottom', 'largo' ),
+			'desc' 	=> __( 'An optional widget area at the bottom of the homepage', 'largo' ),
+			'id' 	=> 'homepage-bottom'
+		);
+	}
 
 	// @todo - probably add an option to enable this because not everyone is going to have ads here
 	// @todo - add additional widget area in the footer for a leaderboard ad unit there too
-	register_sidebar( array(
-		'name' 			=> __( 'Header Ad Zone'),
-		'description' 	=> __( 'An optional leaderboard ad zone above the main site header' ),
-		'id' 			=> 'header-ads',
-		'before_widget' => '<div id="%1$s" class="%2$s">',
-		'after_widget'	=> '</div>',
-		'before_title' 	=> '<h3 class="widgettitle">',
-		'after_title' 	=> '</h3>'
-	) );
+	$sidebars[] = array(
+		'name' 	=> __( 'Header Ad Zone'),
+		'desc' 	=> __( 'An optional leaderboard ad zone above the main site header' ),
+		'id' 	=> 'header-ads'
+	);
 
-	if ( of_get_option('footer_layout') == '4col' ) :
-		register_sidebar( array(
-			'name' 			=> __( 'Footer 4', 'largo' ),
-			'description' 	=> __( 'The fourth footer widget area.', 'largo' ),
-			'id' 			=> 'footer-4',
-			'before_widget' => '<aside id="%1$s" class="%2$s clearfix">',
-			'after_widget' 	=> "</aside>",
-			'before_title' 	=> '<h3 class="widgettitle">',
-			'after_title' 	=> '</h3>',
-		) );
-	endif;
-
-	if ( of_get_option('homepage_layout') == '3col' ) :
-		register_sidebar( array(
-			'name' 			=> __( 'Homepage Left Rail', 'largo' ),
-			'description' 	=> __( 'An optional widget area that, when enabled, appears to the left of the main content area on the homepage.', 'largo' ),
-			'id' 			=> 'homepage-left-rail',
-			'before_widget' => '<div id="%1$s" class="%2$s">',
-			'after_widget' 	=> '</div>',
-			'before_title' 	=> '<h3 class="widgettitle">',
-			'after_title' 	=> '</h3>',
-		) );
-	endif;
-
-	if ( of_get_option('homepage_bottom') == 'widgets' ) :
-		register_sidebar( array(
-			'name' 			=> __( 'Homepage Bottom', 'largo' ),
-			'description' 	=> __( 'An optional widget area at the bottom of the homepage', 'largo' ),
-			'id' 			=> 'homepage-bottom',
-			'before_widget' => '<div id="%1$s" class="%2$s span6">',
-			'after_widget' 	=> '</div>',
-			'before_title' 	=> '<h3 class="widgettitle">',
-			'after_title' 	=> '</h3>',
-		) );
-	endif;
-}
-add_action( 'widgets_init', 'largo_register_sidebars' );
-
-/**
- * Also, register any custom-created sidebars from Theme Options
- *
- * @since 1.0
- */
-function largo_custom_sidebars() {
+	// user-defined custom widget areas
 	$custom_sidebars = preg_split( '/$\R?^/m', of_get_option( 'custom_sidebars' ) );
 	if ( is_array( $custom_sidebars ) ) {
 		foreach( $custom_sidebars as $sidebar ) {
 			$sidebar_slug = largo_make_slug( $sidebar );
 			if ( $sidebar_slug ) {
-				register_sidebar( array(
-					'name' 			=> __( $sidebar, 'largo' ),
-					'id' 			=> $sidebar_slug,
-					'before_widget' => '<aside id="%1$s" class="%2$s clearfix">',
-					'after_widget' 	=> '</aside>',
-					'before_title' 	=> '<h3 class="widgettitle">',
-					'after_title' 	=> '</h3>'
-				) );
+				$sidebars[] = array(
+					'name' 	=> __( $sidebar, 'largo' ),
+					'desc' 	=> '',
+					'id' 	=> $sidebar_slug
+				);
 			}
 		}
 	}
+
+	// register the active widget areas
+	foreach ( $sidebars as $sidebar ) {
+		register_sidebar( array(
+			'name' 			=> $sidebar['name'],
+			'description' 	=> $sidebar['desc'],
+			'id' 			=> $sidebar['id'],
+			'before_widget' => '<aside id="%1$s" class="%2$s clearfix">',
+			'after_widget' 	=> "</aside>",
+			'before_title' 	=> '<h3 class="widgettitle">',
+			'after_title' 	=> '</h3>',
+		) );
+	}
 }
-add_action( 'widgets_init', 'largo_custom_sidebars' );
+add_action( 'widgets_init', 'largo_register_sidebars' );
 
 /**
  * Helper function to transform user-entered text into WP-compatible slugs
