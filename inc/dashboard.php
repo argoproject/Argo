@@ -57,7 +57,7 @@ function largo_dashboard_widgets_nonmember() {
 function dashboard_network_news() {
      echo '<div class="rss-widget">';
      wp_widget_rss_output(array(
-          'url' => 'http://investigativenewsnetwork.org/all-articles.rss',
+          'url' => 'http://feeds.feedburner.com/INNArticles',
           'title' => 'INN Network News',
           'items' => 1,
           'show_summary' => 1,
@@ -69,7 +69,7 @@ function dashboard_network_news() {
 function dashboard_member_news() {
      echo '<div class="rss-widget">';
      wp_widget_rss_output(array(
-          'url' => 'http://investigativenewsnetwork.org/all-member-news.rss',
+          'url' => 'http://feeds.feedburner.com/INNMemberInvestigations',
           'title' => 'Recent Stories from INN Members',
           'items' => 3,
           'show_summary' => 1,
