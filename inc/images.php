@@ -75,4 +75,4 @@ add_filter( 'the_content', 'attachment_image_link_remove_filter' );
 /**
  * Load the picturefill.wp plugin
  */
-require_once(get_template_directory() . '/inc/picturefill/picturefill-wp.php');
+//require_once(get_template_directory() . '/inc/picturefill/picturefill-wp.php');
