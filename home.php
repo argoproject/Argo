@@ -13,7 +13,7 @@ $layout = of_get_option('homepage_layout');
 $tags = of_get_option ('tag_display');
 ?>
 
-<div id="content" class="stories span8" role="main">
+<div id="content" class="stories span8 <?php echo $layout; ?>" role="main">
 
 	<?php if ( $layout === '3col' ) { ?>
 	<div id="content-main" class="span8">

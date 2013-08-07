@@ -25,11 +25,14 @@
   #footer-logos a {
     width: 33.3333333333%;
   }
-  #homepage-bottom .widget {
+  #homepage-bottom .widget.odd,
+  #homepage-bottom .widget.even {
     clear: both;
     float: none;
-    width: 100%;
+    width: 95%;
     margin: 0 0 @baseline;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
   }
   #series-main #sidebar-left {
     display: none;
@@ -40,5 +43,11 @@
   }
   #series-main #sidebar {
     float: right;
+  }
+  .sticky-main-feature,
+  .sticky-features-list {
+    clear: both;
+    width: 100% !important;
+    margin: 0 !important;
   }
 }

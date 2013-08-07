@@ -9,12 +9,19 @@
   #left-rail,
   #content-main,
   #related-post-nav,
-  #related-posts .related-items,
-  #homepage-bottom .widget {
+  #related-posts .related-items {
     clear: both;
     float: none;
     width: 100%;
     margin: 0 0 @baseline;
+  }
+  #homepage-bottom .widget.odd,
+  #homepage-bottom .widget.even {
+    width: 95%;
+    clear: both;
+    float: none;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
   }
   .half,
   .full,
