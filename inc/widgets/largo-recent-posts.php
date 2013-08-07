@@ -14,7 +14,7 @@ class largo_recent_posts_widget extends WP_Widget {
 
 	function widget( $args, $instance ) {
 		global $ids; // an array of post IDs already on a page so we can avoid duplicating posts
-		$posts_term = of_get_option( 'posts_term_plural' );
+		$posts_term = of_get_option( 'posts_term_plural', 'Posts' );
 		extract( $args );
 
 		$title = apply_filters('widget_title', empty( $instance['title'] ) ? __('Recent ' . $posts_term, 'largo') : $instance['title'], $instance, $this->id_base);
@@ -124,7 +124,7 @@ class largo_recent_posts_widget extends WP_Widget {
 
 	function form( $instance ) {
 		$defaults = array(
-			'title' 			=> __('Recent ' . of_get_option( 'posts_term_plural' ), 'largo'),
+			'title' 			=> __('Recent ' . of_get_option( 'posts_term_plural', 'Posts' ), 'largo'),
 			'num_posts' 		=> 5,
 			'avoid_duplicates'	=> '',
 			'thumbnail_display' => 'small',
