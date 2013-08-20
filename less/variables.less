@@ -117,8 +117,7 @@
 /**
  * @group Typography
  * @label Sans Font Family
- * @type dropdown
- * @options "Helvetica Neue", Helvetica, Arial, sans-serif|Arial, Arial Black, sans-serif|"Open Sans", Helvetica, sans-serif
+ * @type text
  * @default_value "Helvetica Neue", Helvetica, Arial, sans-serif
  */
 @sansFontFamily:        "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -136,6 +135,14 @@
  * @type pixels
  */
 @baseFontSize:          16px;
+
+/**
+ * @group Typography
+ * @label Sans Font Family
+ * @type dropdown
+ * @options @serifFontFamily|@sansFontFamily
+ * @default_value @serifFontFamily
+ */
 @baseFontFamily:        @serifFontFamily;
 /**
  * @group Typography
