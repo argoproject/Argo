@@ -24,9 +24,6 @@ if ( ! function_exists( 'largo_enqueue_js' ) ) {
 		if ( is_home() && of_get_option( 'homepage_top') == 'topstories' )
 			wp_enqueue_style( 'topstory-styles', get_template_directory_uri() . '/css/top-stories.css', false, false, 'screen' );
 
-		if ( is_plugin_active('ad-code-manager/ad-code-manager.php') )
-			wp_enqueue_style( 'ads-styles', get_template_directory_uri() . '/css/ads.css', false, false, 'screen' );
-
 		//only load sharethis on single pages and load jquery tabs for the related content box if it's active
 		if ( is_single() ) {
 			$utilities = of_get_option( 'article_utilities' );
