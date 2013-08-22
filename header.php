@@ -95,7 +95,7 @@
 
 	<?php // if (function_exists('dynamic_sidebar')) { dynamic_sidebar("Header"); } ?>
 
-	<header id="site-header" class="clearfix">
+	<header id="site-header" class="clearfix" itemscope itemtype="http://schema.org/Organization">
 		<?php largo_header(); ?>
 	</header>
 
