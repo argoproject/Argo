@@ -24,7 +24,7 @@ global $opt, $tags;	//get display options for the loop
 		<?php endif; ?>
 
  		<?php if ( $opt['show']['excerpt'] ) :
-			largo_excerpt( $post, 5, true, __('Continue&nbsp;Reading&nbsp;&rarr;', 'largo') );
+			largo_excerpt( $post, 5, true, __('Continue&nbsp;Reading&nbsp;&rarr;', 'largo'), true, false );
 		endif; ?>
 
     <?php if ( $opt['show']['tags'] && largo_has_categories_or_tags() ) { ?>
