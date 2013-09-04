@@ -3,52 +3,44 @@
 /**
  * Setup the Largo custom widgets
  *
+ * @package Largo
  * @since 1.0
  */
-
-// remove default WP widgets
-function largo_unregister_widgets() {
-	unregister_widget( 'WP_Widget_Pages' );
-	unregister_widget( 'WP_Widget_Calendar' );
-	unregister_widget( 'WP_Widget_Links' );
-	unregister_widget( 'WP_Widget_Tag_Cloud' );
-	unregister_widget( 'WP_Widget_Meta' );
-	unregister_widget( 'WP_Widget_Recent_Comments' );
-	unregister_widget( 'WP_Widget_RSS' );
-	unregister_widget( 'WP_Widget_Recent_Posts' );
+function largo_widgets() {
+	$unregister = array(
+		'WP_Widget_Pages',
+		'WP_Widget_Calendar',
+		'WP_Widget_Links',
+		'WP_Widget_Tag_Cloud',
+		'WP_Widget_Meta',
+		'WP_Widget_Recent_Comments',
+		'WP_Widget_RSS',
+		'WP_Widget_Recent_Posts'
+	);
+	foreach ( $unregister as $widget ) {
+		unregister_widget( $widget );
+	}
+	$register = array(
+		'largo_about_widget'			=> '/inc/widgets/largo-about.php',
+		'largo_donate_widget'			=> '/inc/widgets/largo-donate.php',
+		'largo_facebook_widget'			=> '/inc/widgets/largo-facebook.php',
+		'largo_follow_widget' 			=> '/inc/widgets/largo-follow.php',
+		'largo_footer_featured_widget'	=> '/inc/widgets/largo-footer-featured.php',
+		'largo_image_widget'			=> '/inc/widgets/largo-image-widget.php',
+		'largo_INN_RSS_widget'			=> '/inc/widgets/largo-inn-rss.php',
+		'largo_recent_comments_widget'	=> '/inc/widgets/largo-recent-comments.php',
+		'largo_recent_posts_widget'		=> '/inc/widgets/largo-recent-posts.php',
+		'largo_sidebar_featured_widget'	=> '/inc/widgets/largo-sidebar-featured.php',
+		'largo_taxonomy_list_widget'	=> '/inc/widgets/largo-taxonomy-list.php',
+		'largo_twitter_widget'			=> '/inc/widgets/largo-twitter.php'
+	);
+	foreach ( $register as $key => $val ) {
+		require_once( get_template_directory() . $val );
+		register_widget( $key );
+	}
 }
-add_action( 'widgets_init', 'largo_unregister_widgets' );
+add_action( 'widgets_init', 'largo_widgets' );
 
-// load our new widgets
-require_once( get_template_directory() . '/inc/widgets/largo-follow.php' );
-require_once( get_template_directory() . '/inc/widgets/largo-footer-featured.php' );
-require_once( get_template_directory() . '/inc/widgets/largo-sidebar-featured.php' );
-require_once( get_template_directory() . '/inc/widgets/largo-about.php' );
-require_once( get_template_directory() . '/inc/widgets/largo-donate.php' );
-require_once( get_template_directory() . '/inc/widgets/largo-twitter.php' );
-require_once( get_template_directory() . '/inc/widgets/largo-recent-posts.php' );
-require_once( get_template_directory() . '/inc/widgets/largo-inn-rss.php' );
-require_once( get_template_directory() . '/inc/widgets/largo-taxonomy-list.php' );
-require_once( get_template_directory() . '/inc/widgets/largo-facebook.php' );
-require_once( get_template_directory() . '/inc/widgets/largo-recent-comments.php' );
-require_once( get_template_directory() . '/inc/widgets/largo-image-widget.php' );
-
-// and then register them
-function largo_load_widgets() {
-    register_widget( 'largo_follow_widget' );
-    register_widget( 'largo_footer_featured_widget' );
-    register_widget( 'largo_sidebar_featured_widget' );
-    register_widget( 'largo_about_widget' );
-    register_widget( 'largo_donate_widget' );
-    register_widget( 'largo_twitter_widget' );
-    register_widget( 'largo_recent_posts_widget' );
-    register_widget( 'largo_INN_RSS_widget' );
-    register_widget( 'largo_taxonomy_list_widget' );
-    register_widget( 'largo_facebook_widget' );
-    register_widget( 'largo_recent_comments_widget' );
-    register_widget( 'largo_image_widget' );
-}
-add_action( 'widgets_init', 'largo_load_widgets' );
 
 /**
  * Add custom CSS classes to sidebar widgets
@@ -63,6 +55,7 @@ add_action( 'widgets_init', 'largo_load_widgets' );
  * Partially adapted from Illimar Tambek's Widget Title Links plugin
  * https://github.com/ragulka/widget-title-links
  *
+ * @package Largo
  * @since 1.0
  */
 function largo_add_widget_classes( $params ) {
