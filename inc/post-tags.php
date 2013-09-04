@@ -306,7 +306,7 @@ if ( ! function_exists( 'largo_custom_wp_link_pages' ) ) {
  * @since 1.0
  */
 if ( ! function_exists( 'largo_excerpt' ) ) {
-	function largo_excerpt( $post, $sentence_count = 5, $use_more = true, $more_link, $echo = true, $strip_tags = true, $strip_shortcodes = true ) {
+	function largo_excerpt( $post, $sentence_count = 5, $use_more = true, $more_link = '', $echo = true, $strip_tags = true, $strip_shortcodes = true ) {
 
 		// handle annoying WP default '(more...' added to the end of excerpts
 		if ( !$use_more || !$more_link )
