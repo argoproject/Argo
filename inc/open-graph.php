@@ -28,7 +28,7 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
 
 		// set a default thumbnail, if a post has a featured image use that instead
 		if ( is_single() && has_post_thumbnail( $post->ID ) ) {
-			$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'thumbnail' );
+			$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'full' );
 			$thumbnailURL = $image[0];
 		} else if ( of_get_option( 'logo_thumbnail_sq' ) ) {
 			$thumbnailURL = of_get_option( 'logo_thumbnail_sq' );
