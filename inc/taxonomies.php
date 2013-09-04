@@ -16,41 +16,46 @@ function largo_custom_taxonomies() {
             'rewrite' 		=> true,
         ) );
 
-        wp_insert_term(
-        	__('Homepage Featured', 'largo'), 'prominence',
-        	array(
-        		'description' 	=> __('If you are using the Newspaper or Carousel optional homepage layout, add this label to posts to display them in the featured area on the homepage', 'largo'),
-        		'slug' 			=> 'homepage-featured'
-        	)
-        );
+		$prominence_terms = array(
+			array(
+				'name' 			=> __('Homepage Featured', 'largo'),
+				'description' 	=> __('If you are using the Newspaper or Carousel optional homepage layout, add this label to posts to display them in the featured area on the homepage.', 'largo'),
+				'slug' 			=> 'homepage-featured'
+			),
+			array(
+				'name' 			=> __('Sidebar Featured Widget', 'largo'),
+				'description' 	=> __('If you are using the Sidebar Featured Posts widget, add this label to posts to determine which to display in the widget.', 'largo'),
+				'slug' 			=> 'sidebar-featured'
+			),
+			array(
+				'name' 			=> __('Footer Featured Widget', 'largo'),
+				'description' 	=> __('If you are using the Footer Featured Posts widget, add this label to posts to determine which to display in the widget.', 'largo'),
+				'slug' 			=> 'footer-featured'
+			),
+			array(
+				'name' 			=> __('Featured in Series', 'largo'),
+				'description' 	=> __('Select this option to allow this post to float to the top of any/all series landing pages sorting by Featured first.', 'largo'),
+				'slug' 			=> 'series-featured'
+			),
+			array(
+				'name' 			=> __('Featured in Category', 'largo'),
+				'description' 	=> __('Not yet implemented, in the future this will allow you to designate a story (or stories) to appear more prominently on category archive pages.', 'largo'),
+				'slug' 			=> 'category-featured'
+			)
+		);
+		foreach ( $prominence_terms as $term ) {
+			if ( ! term_exists( $term['name'], 'prominence' ) ) {
+				wp_insert_term(
+					$term['name'], 'prominence',
+					array(
+						'description' 	=> $term['description'],
+						'slug' 			=> $term['slug']
+					)
+				);
+			}
+		}
 
-        wp_insert_term(
-        	__('Sidebar Featured Widget', 'largo'),	'prominence',
-        	array(
-        		'description' 	=> __('If you are using the Sidebar Featured Posts widget, add this label to posts to determine which to display in the widget', 'largo'),
-        		'slug' 			=> 'sidebar-featured'
-        	)
-        );
-
-        wp_insert_term(
-        	__('Footer Featured Widget', 'largo'), 'prominence',
-        	array(
-        		'description' 	=> __('If you are using the Footer Featured Posts widget, add this label to posts to determine which to display in the widget', 'largo'),
-        		'slug' 			=> 'footer-featured'
-        	)
-        );
-
-        wp_insert_term(
-        	__('Featured in Series', 'largo'), 'prominence',
-        	array(
-        		'description'   => __('Select this option to allow this post to float to the top of any/all series landing pages sorting by Featured first', 'largo'),
-        		'slug'			=> 'series-featured'
-        	)
-        );
-
-        //check to make sure top story doesn't exist yet (for some reason it sometimes creates a duplicate term without this check) and then insert it
-        $term = term_exists('Top Story', 'prominence');
-        if ( $term == 0 || $term == null ) {
+        if ( ! term_exists('Top Story', 'prominence') ) {
 		    $parent_term = term_exists( 'Homepage Featured', 'prominence' );
 		    $parent_term_id = $parent_term['term_id'];
 		    wp_insert_term(
@@ -58,10 +63,11 @@ function largo_custom_taxonomies() {
 		    	array(
 		    		'parent'		=> $parent_term_id,
 		    		'description' 	=> __('If you are using the Newspaper or Carousel optional homepage layout, add this label to a post to make it the top story on the homepage', 'largo'),
-		    		'slug' 			=> 'top-story' ) );
+		    		'slug' 			=> 'top-story' )
+		    	);
 		}
-		//fixes a WP bug where the child terms won't display in the admin even though they exist
-		delete_option("prominence_children");
+
+		delete_option( 'prominence_children' );
     }
 
     // SERIES
