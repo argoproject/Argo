@@ -83,7 +83,7 @@ add_filter( 'wp_nav_menu_footer-navigation_items', 'largo_add_footer_menu_label'
  */
 class Bootstrap_Walker_Nav_Menu extends Walker_Nav_Menu {
 
-	function start_lvl( &$output, $depth ) {
+	function start_lvl( &$output, $depth = 0, $args = array() ) {
 
 		$indent = str_repeat( "\t", $depth );
 		if ($depth == 1) {
