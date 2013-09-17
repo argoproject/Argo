@@ -67,7 +67,7 @@ function largo_meta_box_add() {
 	}
     add_meta_box(
     	'largo_featured_video',
-    	__('Featured Video'),
+    	__('Featured Video', 'largo'),
     	'largo_featured_video_meta_box_display',
     	'post',
     	'side',
