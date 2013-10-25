@@ -9,6 +9,14 @@ get_header();
 	<?php
 		while ( have_posts() ) : the_post();
 			get_template_part( 'content', 'single' );
+
+			if ( is_active_sidebar( 'article-bottom' ) && is_single() ){
+				echo '<div class="clearfix"></div>';
+				do_action('largo_before_sidebar_widgets');
+				dynamic_sidebar( 'article-bottom' );
+				do_action('largo_after_sidebar_widgets');
+			}
+			
 			comments_template( '', true );
 		endwhile;
 	?>
