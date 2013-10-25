@@ -135,6 +135,8 @@ function largo_get_post_related_topics( $max = 5 ) {
         }
     }
 
+    $topics = apply_filters( 'largo_get_post_related_topics', $topics, $max );
+
     return array_slice( $topics, 0, $max );
 }
 
@@ -172,6 +174,8 @@ function largo_get_recent_posts_for_term( $term, $max = 5, $min = 1 ) {
     elseif ( $term->taxonomy == 'series' ) {
         $query_args[ 'series' ] = $term->slug;
     }
+
+    $query_args = apply_filters( 'largo_get_recent_posts_for_term_query_args', $query_args, $term, $max, $min, $post );
 
     $query = new WP_Query( $query_args );
 
@@ -279,3 +283,46 @@ if ( ! function_exists( 'largo_categories_and_tags' ) ) {
 		return $output;
 	}
 }
+
+/**
+ *
+ */
+function largo_filter_get_post_related_topics( $topics, $max ) {
+    $post = get_post();
+
+    if ( $post ) {
+        $posts = preg_split( '#\s*,\s*#', get_post_meta( $post->ID, '_largo_custom_related_posts', true ) );
+
+        if ( !empty( $posts ) ) {
+            // Add a fake term with the ID of -90
+            $top_posts = new stdClass();
+            $top_posts->term_id = -90;
+            $top_posts->name = __( 'Top Posts', 'largo' );
+            array_unshift( $topics, $top_posts );
+        }
+    }
+
+    return $topics;
+}
+add_filter( 'largo_get_post_related_topics', 'largo_filter_get_post_related_topics', 10, 2 );
+
+
+/**
+ *
+ */
+function largo_filter_get_recent_posts_for_term_query_args( $query_args, $term, $max, $min, $post ) {
+
+    if ( $term->term_id == -90 ) {
+        $posts = preg_split( '#\s*,\s*#', get_post_meta( $post->ID, '_largo_custom_related_posts', true ) );
+        $query_args = array(
+            'showposts'             => $max,
+            'orderby'               => 'post__in',
+            'order'                 => 'ASC',
+            'ignore_sticky_posts'   => 1,
+            'post__in'              => $posts,
+        );
+    }
+
+    return $query_args;
+}
+add_filter( 'largo_get_recent_posts_for_term_query_args', 'largo_filter_get_recent_posts_for_term_query_args', 10, 5 );
