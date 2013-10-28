@@ -44,11 +44,22 @@ add_action('admin_menu','remove_default_post_screen_metaboxes');
 function largo_meta_box_add() {
 	$screens = array( 'post' );
 	if ( of_get_option( 'custom_landing_enabled' ) ) $screens[] = 'cftl-tax-landing';
-    foreach ( $screens as $screen ) {
+  foreach ( $screens as $screen ) {
 		add_meta_box(
 			'largo_byline_meta',
 			__('Custom Byline Options', 'largo'),
 			'largo_byline_meta_box_display',
+			$screen,
+			'side',
+			'core'
+		);
+	}
+	$screens = array( 'post' );
+  foreach ( $screens as $screen ) {
+		add_meta_box(
+			'largo_custom_related',
+			__('Top Custom Related Posts', 'largo'),
+			'largo_custom_related_meta_box_display',
 			$screen,
 			'side',
 			'core'
@@ -100,7 +111,8 @@ function largo_meta_box_save( $post_id ) {
 		'custom_sidebar' 	=> $_POST['custom_sidebar'],
 		'largo_byline_text' => $_POST['largo_byline_text'],
 		'largo_byline_link' => $_POST['largo_byline_link'],
-		'youtube_url' 		=> $_POST['youtube_url']
+		'youtube_url' 		=> $_POST['youtube_url'],
+		'_largo_custom_related_posts' => $_POST['largo_custom_related_posts']
 	);
 
 	foreach ( $mydata as $key => $value ) {
@@ -168,4 +180,13 @@ function largo_featured_video_meta_box_display() {
     echo '<input type="text" name="youtube_url" id="youtube_url" value="' . $youtube_url . '" />';
     echo __('<p class="small">Note that at the moment this is only used for the top story on the homepage but future versions of Largo might enable this functionality elsewhere in the theme.</p>', 'largo');
 
+}
+
+
+function largo_custom_related_meta_box_display() {
+	global $post;
+
+	$value = get_post_meta( $post->ID, '_largo_custom_related_posts', true );
+	echo '<p>', __('Enter the post IDs separated by commas.'), '</p>';
+	echo '<input type="text" name="largo_custom_related_posts" value="', esc_attr($value),'" />';
 }
