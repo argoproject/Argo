@@ -58,6 +58,7 @@ $includes = array(
 	'/inc/robots.php',				// default robots.txt config
 	'/inc/custom-feeds.php',			// create custom RSS feeds
 	'/inc/users.php',				// add custom fields for user profiles
+	'/inc/metabox-api.php',				// library-esque convenience functions for hooking into Largo meta boxen
 	'/inc/sidebars.php',				// register sidebars
 	'/inc/widgets.php',				// register widgets
 	'/inc/nav-menus.php',			// register nav menus

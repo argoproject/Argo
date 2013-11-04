@@ -291,7 +291,7 @@ function largo_filter_get_post_related_topics( $topics, $max ) {
     $post = get_post();
 
     if ( $post ) {
-        $posts = preg_split( '#\s*,\s*#', get_post_meta( $post->ID, '_largo_custom_related_posts', true ) );
+        $posts = preg_split( '#\s*,\s*#', get_post_meta( $post->ID, 'largo_custom_related_posts', true ) );
 
         if ( !empty( $posts ) ) {
             // Add a fake term with the ID of -90
@@ -313,7 +313,7 @@ add_filter( 'largo_get_post_related_topics', 'largo_filter_get_post_related_topi
 function largo_filter_get_recent_posts_for_term_query_args( $query_args, $term, $max, $min, $post ) {
 
     if ( $term->term_id == -90 ) {
-        $posts = preg_split( '#\s*,\s*#', get_post_meta( $post->ID, '_largo_custom_related_posts', true ) );
+        $posts = preg_split( '#\s*,\s*#', get_post_meta( $post->ID, 'largo_custom_related_posts', true ) );
         $query_args = array(
             'showposts'             => $max,
             'orderby'               => 'post__in',
