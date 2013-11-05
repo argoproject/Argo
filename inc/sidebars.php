@@ -34,6 +34,11 @@ function largo_register_sidebars() {
 			'name' 	=> __( 'Footer 3', 'largo' ),
 			'desc' 	=> __( 'The third footer widget area.', 'largo' ),
 			'id' 	=> 'footer-3'
+		),
+		array(
+			'name' 	=> __( 'Article Bottom', 'largo' ),
+			'desc' 	=> __( 'Footer widget area for posts', 'largo' ),
+			'id' 	=> 'article-bottom'
 		)
 	);
 
