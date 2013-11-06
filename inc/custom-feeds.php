@@ -23,6 +23,6 @@ add_feed('fulltext', 'largo_full_text_feed');
  */
 function mailchimp_rss() {
 	add_filter('pre_option_rss_use_excerpt', '__return_zero');
-	load_template( get_stylesheet_directory() . '/feed-mailchimp.php' );
+	load_template( get_template_directory() . '/feed-mailchimp.php' );
 }
 add_feed('mailchimp', 'mailchimp_rss');
