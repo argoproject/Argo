@@ -52,7 +52,7 @@ function largo_add_meta_content( $callback, $box_id ) {
 
 	// Create this metabox if one hasn't been defined... assumes just 'post'
 	if ( !array_key_exists( $box_id, $largo['meta']['boxes'] ) ){
-		largo_add_meta_box( $box_id );
+		largo_add_meta_box( $box_id, 'Meta Information' );
 	}
 
 	// Add this field to the array
@@ -70,11 +70,15 @@ function largo_add_meta_content( $callback, $box_id ) {
  */
 function largo_register_meta_input( $input_names ) {
 	global $largo;
+	$largo_metas = get_option('largo_meta_inputs');
 	if ( is_string( $input_names ) ) $input_names = array($input_names);
 
 	foreach( $input_names as $name ) {
-		$largo['meta']['inputs'][] = $name;
+		if (! in_array($name, $largo_metas))
+		$largo_metas[] = $name;
 	}
+
+	update_option('largo_meta_inputs', $largo_metas);
 }
 
 /**
@@ -134,7 +138,8 @@ function _largo_meta_box_save( $post_id ) {
 
 	// set up our array of data
 	$mydata = array();
-	foreach ( $largo['meta']['inputs'] as $input_name ) {
+	$registered_inputs = get_option('largo_meta_inputs', array());
+	foreach ( $registered_inputs as $input_name ) {
 		$mydata[ $input_name ] = $_POST[ $input_name ];
 	}
 
