@@ -369,6 +369,14 @@ function cftl_tax_landing_main($post) {
 	$fields = ($post->post_title) ? get_post_custom( $post->ID ) : cftl_field_defaults();
 	$fields['show'] = maybe_unserialize($fields['show'][0]);
 	?>
+<div class="form-field-checkboxes">
+	<h4>Widget Region(s)</h4>
+	<div>
+		<label for="create-widget-region">
+			<input type="checkbox" id="create-widget-region" name="create-widget-region" value="1" <?php checked ($fields['create-widget-region'][0], 1 ) ?> /> Create Widget Region(s)
+		</label>
+	</div>
+</div>	
 <div class="form-field-radios">
 	<h4>Layout</h4>
 	<div class="options">
@@ -508,6 +516,7 @@ function cftl_field_defaults( ) {
 		'show_sharebar' => array(1),
 		'header_style' => array('standard'),
 		'cftl_layout' => array('two-column'),
+		'create-widget-region' => array(1),
 		'per_page' => array('10'),
 		'post_order' => array('DESC'),
 		'show' => array('image' => 1, 'excerpt' => 1, 'byline' => 1, 'tags' => 0),
@@ -537,6 +546,7 @@ function cftl_tax_landing_save_layout($post_id) {
 		'show_sharebar',
 		'header_style',
 		'cftl_layout', //needs to instantiate widget regions
+		'create-widget-region',
 		'per_page',
 		'post_order',
 		'show',	//maybe serialize these four?
@@ -555,59 +565,62 @@ add_action('save_post', 'cftl_tax_landing_save_layout');
  * Instantiate all our necessary widget regions
  */
 function cftl_custom_sidebars() {
-	//get all the left ones and the titles they connect to
-	$left_widgets = cftl_get_meta_values( 'cftl_layout', 'three-column' );
-	foreach ($left_widgets as $widget ) {
-		$sidebar_slug = largo_make_slug( $widget->post_title );
-		if ( $sidebar_slug ) {
-			register_sidebar( array(
-				'name' 			=> __( 'Series ' . $widget->post_title . ": Left", 'largo' ),
-				'id' 			=> $sidebar_slug . "_left",
-				'before_widget' => '<aside id="%1$s" class="%2$s clearfix">',
-				'after_widget' 	=> '</aside>',
-				'before_title' 	=> '<h3 class="widgettitle">',
-				'after_title' 	=> '</h3>'
-			) );
-			register_sidebar( array(
-				'name' 			=> __( 'Series ' . $widget->post_title . ": Right", 'largo' ),
-				'id' 			=> $sidebar_slug . "_right",
-				'before_widget' => '<aside id="%1$s" class="%2$s clearfix">',
-				'after_widget' 	=> '</aside>',
-				'before_title' 	=> '<h3 class="widgettitle">',
-				'after_title' 	=> '</h3>'
-			) );
+	//check to see if the create widget option is checked first
+	if(!cftl_get_meta_values('create-widget-region')){
+		//get all the left ones and the titles they connect to
+		$left_widgets = cftl_get_meta_values( 'cftl_layout', 'three-column' );
+		foreach ($left_widgets as $widget ) {
+			$sidebar_slug = largo_make_slug( $widget->post_title );
+			if ( $sidebar_slug ) {
+				register_sidebar( array(
+					'name' 			=> __( 'Series ' . $widget->post_title . ": Left", 'largo' ),
+					'id' 			=> $sidebar_slug . "_left",
+					'before_widget' => '<aside id="%1$s" class="%2$s clearfix">',
+					'after_widget' 	=> '</aside>',
+					'before_title' 	=> '<h3 class="widgettitle">',
+					'after_title' 	=> '</h3>'
+				) );
+				register_sidebar( array(
+					'name' 			=> __( 'Series ' . $widget->post_title . ": Right", 'largo' ),
+					'id' 			=> $sidebar_slug . "_right",
+					'before_widget' => '<aside id="%1$s" class="%2$s clearfix">',
+					'after_widget' 	=> '</aside>',
+					'before_title' 	=> '<h3 class="widgettitle">',
+					'after_title' 	=> '</h3>'
+				) );
+			}
 		}
-	}
 
-	//get all the right ones and the titles they connect to
-	$right_widgets = cftl_get_meta_values( 'cftl_layout', 'two-column' );
-	foreach ($right_widgets as $widget ) {
-		$sidebar_slug = largo_make_slug( $widget->post_title );
-		if ( $sidebar_slug ) {
-			register_sidebar( array(
-				'name' 			=> __( 'Series ' . $widget->post_title . ": Right", 'largo' ),
-				'id' 			=> $sidebar_slug . "_right",
-				'before_widget' => '<aside id="%1$s" class="%2$s clearfix">',
-				'after_widget' 	=> '</aside>',
-				'before_title' 	=> '<h3 class="widgettitle">',
-				'after_title' 	=> '</h3>'
-			) );
+		//get all the right ones and the titles they connect to
+		$right_widgets = cftl_get_meta_values( 'cftl_layout', 'two-column' );
+		foreach ($right_widgets as $widget ) {
+			$sidebar_slug = largo_make_slug( $widget->post_title );
+			if ( $sidebar_slug ) {
+				register_sidebar( array(
+					'name' 			=> __( 'Series ' . $widget->post_title . ": Right", 'largo' ),
+					'id' 			=> $sidebar_slug . "_right",
+					'before_widget' => '<aside id="%1$s" class="%2$s clearfix">',
+					'after_widget' 	=> '</aside>',
+					'before_title' 	=> '<h3 class="widgettitle">',
+					'after_title' 	=> '</h3>'
+				) );
+			}
 		}
-	}
 
-	//get all the footer ones and the titles they connect to
-	$footer_widgets = cftl_get_meta_values( 'footer_style', 'widget' );
-	foreach ($footer_widgets as $widget ) {
-		$sidebar_slug = largo_make_slug( $widget->post_title );
-		if ( $sidebar_slug ) {
-			register_sidebar( array(
-				'name'       	=> __( 'Series ' . $widget->post_title . ": Footer", 'largo' ),
-				'id' 			=> $sidebar_slug . "_footer",
-				'before_widget' => '<aside id="%1$s" class="%2$s clearfix">',
-				'after_widget' 	=> '</aside>',
-				'before_title' 	=> '<h3 class="widgettitle">',
-				'after_title' 	=> '</h3>'
-			) );
+		//get all the footer ones and the titles they connect to
+		$footer_widgets = cftl_get_meta_values( 'footer_style', 'widget' );
+		foreach ($footer_widgets as $widget ) {
+			$sidebar_slug = largo_make_slug( $widget->post_title );
+			if ( $sidebar_slug ) {
+				register_sidebar( array(
+					'name'       	=> __( 'Series ' . $widget->post_title . ": Footer", 'largo' ),
+					'id' 			=> $sidebar_slug . "_footer",
+					'before_widget' => '<aside id="%1$s" class="%2$s clearfix">',
+					'after_widget' 	=> '</aside>',
+					'before_title' 	=> '<h3 class="widgettitle">',
+					'after_title' 	=> '</h3>'
+				) );
+			}
 		}
 	}
 }
