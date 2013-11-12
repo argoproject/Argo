@@ -1,9 +1,17 @@
 <?php
-
 /**
  * Contains function definitions for hooking fields and boxes into Largo
  * Relies on the global variable $largo, which feels hack-ish but creates the most convenience
  */
+
+/**
+ * First things first: check if $largo['meta'] exists
+ * If it does, then this file has already been included (likely by a child theme) and should stop.
+ * Otherwise we get function redeclarations.
+ * Since we're using include_once() this is unlikely, but possible and worth checking.
+ */
+if ( is_array($largo['meta']) ) return;
+
 $largo['meta'] = array(
 	'boxes' => array(),		// the metaboxes to generate, including callbacks for the content
 	'inputs' => array(),	// input names to process with largo_meta_box_save()
