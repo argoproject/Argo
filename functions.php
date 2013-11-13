@@ -53,12 +53,12 @@ include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
  * Load up all of the other goodies from the /inc directory
  */
 $includes = array(
+	'/largo-apis.php',	// a list of recommended plugins
 	'/inc/largo-plugin-init.php',	// a list of recommended plugins
 	'/inc/dashboard.php',			// custom dashboard widgets
 	'/inc/robots.php',				// default robots.txt config
 	'/inc/custom-feeds.php',			// create custom RSS feeds
 	'/inc/users.php',				// add custom fields for user profiles
-	'/inc/metabox-api.php',				// library-esque convenience functions for hooking into Largo meta boxen
 	'/inc/sidebars.php',				// register sidebars
 	'/inc/widgets.php',				// register widgets
 	'/inc/nav-menus.php',			// register nav menus
