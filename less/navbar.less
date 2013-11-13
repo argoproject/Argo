@@ -79,7 +79,7 @@
   padding-right: 10px;
 }
 .navbar .open > a,
-.navbar li > a:hover {
+html.no-touch .navbar li > a:hover {
   background-color: @navbarLinkBackgroundActive;
   color: #eee;
 }
@@ -231,7 +231,8 @@ li.home-link:hover i {
     text-shadow: none;
   }
 }
-ul.nav li.dropdown:hover ul.dropdown-menu {
+html.no-touch ul.nav li.dropdown:hover ul.dropdown-menu,
+html.touch ul.nav li.dropdown.open ul.dropdown-menu {
     display: block;
 }
 
