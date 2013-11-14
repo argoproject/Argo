@@ -79,6 +79,7 @@ class Largo_Custom_Less_Variables {
 	static $variables_less_file = 'variables.less';
 
 	const CACHE_DURATION = WEEK_IN_SECONDS;
+	const POST_TYPE = 'largo_less_variables';
 
 	/**
 	 * Initialize the plugin
@@ -94,7 +95,7 @@ class Largo_Custom_Less_Variables {
 		add_action( 'admin_menu', array( __CLASS__, 'admin_menu') );
 
 		// Register post type for saving the data to
-		register_post_type( 'largo_custom_less_variables', array( 'public' => false, 'supports' => array( 'revisions' => true ) ));
+		register_post_type( self::POST_TYPE, array( 'public' => false, 'supports' => array( 'revisions' ) ));
 
 		self::$less_dir    = get_template_directory() . '/less/';
 		self::$css_dir_uri = get_template_directory_uri() . '/css/';
@@ -374,16 +375,20 @@ class Largo_Custom_Less_Variables {
 	 * Render the admin page content
 	 */
 	static function admin() {
+		$revision = filter_input( INPUT_GET, 'revision', FILTER_SANITIZE_NUMBER_INT );
 
 		add_meta_box( 'submitdiv', __( 'Publishing Options', 'largo' ), array( __CLASS__, 'publish_box' ), 'customlessvariables', 'side' );
 
-		//if ( ! empty( $safecss_post ) && 0 < $safecss_post['ID'] && wp_get_post_revisions( $safecss_post['ID'] ) )
-		//	add_meta_box( 'revisionsdiv', __( 'CSS Variables Revisions', 'largo' ), array( __CLASS__, 'revisions_meta_box' ), 'customlessvariables', 'side' );
+		//wp_delete_post_revision
+		$post = self::get_post();
+		if ( !empty( $post ) && wp_get_post_revisions( $post->ID ) ) {
+			add_meta_box( 'revisionsdiv', __( 'CSS Variables Revisions', 'largo' ), array( __CLASS__, 'revisions_meta_box' ), 'customlessvariables', 'side' );
+		}
 
 		?>
 		<div class="wrap columns-2">
 			<h2><?php _e( 'CSS Variables', 'largo' ); ?></h2>
-			<form id="custom-css-variables" action="" method="post">
+			<form id="custom-css-variables" action="themes.php?page=largo_custom_less_variables" method="post">
 				<?php wp_nonce_field( 'customlessvariables', 'customlessvariables' ) ?>
 				<?php wp_nonce_field( 'meta-box-order', 'meta-box-order-nonce', false ); ?>
 				<?php wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce', false ); ?>
@@ -409,7 +414,7 @@ class Largo_Custom_Less_Variables {
 								);
 								$field_type_callbacks = apply_filters( 'largo_custom_less_variables_types_callbacks', $field_type_callbacks );
 
-								$values = self::get_custom_values();
+								$values = self::get_custom_values( null, $revision );
 
 								foreach ( $group_names as $group_name ) {
 									if ( $group_name != '_default' ) {
@@ -459,6 +464,32 @@ class Largo_Custom_Less_Variables {
 	 * Revision meta box
 	 */
 	static function revisions_meta_box() {
+		$post = self::get_post();
+		$revisions = wp_get_post_revisions( $post->ID );
+		$current_revision = filter_input( INPUT_GET, 'revision', FILTER_SANITIZE_NUMBER_INT );
+
+		?>
+		<ol>
+			<li>
+				<?php if ( empty($current_revision) ): ?>
+					<strong><?php echo mysql2date( 'j F, Y @ H:m:s', $post->post_date ); ?></strong>
+				<?php else: ?>
+					<a href="themes.php?page=largo_custom_less_variables"><?php echo mysql2date( 'j F, Y @ H:m:s', $post->post_date ); ?></a>
+				<?php endif; ?>
+				<?php _e( '[Active]', 'largo' ); ?>
+			</li>
+
+			<?php foreach ( $revisions as $revision ): ?>
+			<li>
+				<?php if ( $current_revision == $revision->ID ): ?>
+					<strong><?php echo mysql2date( 'j F, Y @ H:m:s', $revision->post_date ); ?></strong>
+				<?php else: ?>
+					<a href="themes.php?page=largo_custom_less_variables&amp;revision=<?php echo esc_attr($revision->ID); ?>"><?php echo mysql2date( 'j F, Y @ H:m:s', $revision->post_date ); ?></a>
+				<?php endif; ?>
+			</li>
+			<?php endforeach; ?>
+		</ol>
+		<?php
 	}
 
 	/**
@@ -502,43 +533,37 @@ class Largo_Custom_Less_Variables {
 		}
 
 		// Try to retrieve cached values
-		$cache_key = 'customlessvars_'.$theme;
+		$cache_key = 'customlessvars_'.$theme.'_'.(empty($revision) ? 'current' : $revision);
 		$cached = get_transient( $cache_key );
 		if ( $cached !== false ) {
-			return $cached;
+			//return $cached;
 		}
 
 		// Need the current version of the settings
-		$post = get_posts( array(
-			'post_type'      => 'largo_less_variables',
-			'post_name'      => sanitize_title( $theme ),
-			'posts_per_page' => 1,
-		));
+		$post = self::get_post();
 
-		if ( count( $post ) == 0 ) {
+		if ( empty( $post ) ) {
 			$data = array( 'meta' => null, 'variables' => array() );
 			set_transient( $cache_key, $data, self::CACHE_DURATION );
 			return $data;
 		}
-		$post = $post[0];
+
 		$post_version = $post;
+
 
 		// If a current revision is defined
 		if ( !empty($revision) && $post->ID != $revision ) {
-			$post_version = get_posts( array(
-				'post_parent'    => $post->ID,
-				'post_type'      => 'revision',
-				'post_status'    => 'inherit',
-				'posts_per_page' => 1
-			));
+			$post_version = get_post( $revision );
 
-			if ( count( $post_version) == 0 ) {
+			if ( empty($post_version) || $post_version->post_parent != $post->ID || $post_version->post_type != 'revision' ) {
+				$post_version = null;
+			}
+
+			if ( empty( $post_version ) ) {
 				$data = array( 'meta' => null, 'variables' => array() );
 				set_transient( $cache_key, $data, self::CACHE_DURATION );
 				return $data;
 			}
-
-			$post_version = $post_version[0];
 		}
 
 		// Get the values
@@ -554,21 +579,41 @@ class Largo_Custom_Less_Variables {
 	}
 
 	/**
+	 * Get the post the data is saved to
+	 */
+	static function get_post() {
+		$post = get_posts( array(
+			'post_type'      => self::POST_TYPE,
+			'post_name'      => sanitize_title( $theme ),
+			'posts_per_page' => 1,
+		));
+
+		if ( count( $post ) == 0 ) {
+			return null;
+		}
+		return $post[0];
+	}
+
+	/**
 	 * Delete all custom variables saved
 	 */
 	static function reset_all() {
 
 		//delete from posts
-		$clv_posts = get_posts('numberposts=-1&post_type=largo_less_variables&post_status=any');
+		$clv_posts = get_posts('numberposts=-1&post_type='.self::POST_TYPE.'&post_status=any');
 		foreach ($clv_posts as $clv_post) {
+			$revisions = wp_get_post_revisions( $clv_post->ID );
 			wp_delete_post( $clv_post->ID, true );
-		}
 
-		//delete anything transient just in case
-		$theme_data = wp_get_theme();
-		$theme = $theme_data->get_stylesheet();
-		$cache_key = 'customlessvars_'.$theme;
-		print delete_transient( $cache_key );
+			// Delete the transient
+			$cache_key = 'customlessvars_'.$theme.'_current';
+			delete_transient( $cache_key );
+
+			foreach ( $revisions as $revision ) {
+				$cache_key = 'customlessvars_'.$theme.'_'.$revision->ID;
+				delete_transient( $cache_key );
+			}
+		}
 	}
 
 	/**
@@ -585,8 +630,8 @@ class Largo_Custom_Less_Variables {
 		}
 
 		// Need the current version of the settings
-		$_ = get_posts( array(
-			'post_type'      => 'largo_less_variables',
+		$post = get_posts( array(
+			'post_type'      => self::POST_TYPE,
 			'post_name'      => $theme,
 			'posts_per_page' => 1,
 			'post_status'    => 'any'
@@ -613,7 +658,7 @@ class Largo_Custom_Less_Variables {
 		$post_data = array(
 			'post_content' => json_encode( $values ),
 			'post_name'   => $theme,
-			'post_type'   => 'largo_less_variables',
+			'post_type'   => self::POST_TYPE,
 			'post_status' => 'publish'
 		);
 
@@ -630,10 +675,18 @@ class Largo_Custom_Less_Variables {
 					delete_post_meta( $post_id, $meta_key );
 				}
 			}
+
+			// Delete revisions past the five most recent
+			$revisions = wp_get_post_revisions( $post_id );
+			$revisions = array_slice( $revisions, 5 );
+			foreach ( $revisions as $revision ) {
+				wp_delete_post_revision( $revision->ID );
+			}
+
 		}
 
 		// clear cache
-		$cache_key = 'customlessvars_'.$theme;
+		$cache_key = 'customlessvars_'.$theme.'_current';
 		delete_transient( $cache_key );
 	}
 
