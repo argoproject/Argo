@@ -150,3 +150,46 @@ if( !function_exists( 'custom_sidebars_dropdown' ) ) {
 		echo $output;
 	}
 }
+
+/**
+ * Render the widget setting fields on the widget page
+ */
+function largo_widget_settings() {
+	?>
+	<div class="wrap">
+		<div class="advance-widget-settings">
+			<div id="optionsframework-metabox" class="metabox-holder">
+			    <div id="optionsframework" class="postbox">
+					<form action="options.php" method="post">
+						<div> <?php // Extra open <div> because optinosframework_fields() adds an extra closing </div> ?>
+					<?php settings_fields('optionsframework'); ?>
+					<?php optionsframework_fields(); /* Settings */ ?>
+					<div id="optionsframework-submit">
+						<input type="submit" class="button-primary" name="update" value="<?php esc_attr_e( 'Save Options', 'options_framework_theme' ); ?>" />
+						<input type="submit" class="reset-button button-secondary" name="reset" value="<?php esc_attr_e( 'Restore Defaults', 'options_framework_theme' ); ?>" onclick="return confirm( '<?php print esc_js( __( 'Click OK to reset. Any theme settings will be lost!', 'options_framework_theme' ) ); ?>' );" />
+						<br class="clear" />
+					</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<br class="clear" />
+	</div>
+	<br class="clear" />
+	<?php
+}
+add_action( 'sidebar_admin_page', 'largo_widget_settings' );
+
+/**
+ * Load up the scripts for options framework on the widgets
+ */
+function largo_load_of_script_for_widget( $hook ) {
+	
+	if ( $hook == 'widgets.php' ) {
+		optionsframework_load_scripts( 'appearance_page_options-framework' );
+		optionsframework_load_styles();
+		wp_enqueue_style( 'largo-widgets-php', get_template_directory_uri() . '/css/widgets-php.css');
+	}
+}
+add_action('admin_enqueue_scripts', 'largo_load_of_script_for_widget');
+
