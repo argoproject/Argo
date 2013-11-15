@@ -472,11 +472,11 @@ class Largo_Custom_Less_Variables {
 		<ol>
 			<li>
 				<?php if ( empty($current_revision) ): ?>
-					<strong><?php echo mysql2date( 'j F, Y @ H:m:s', $post->post_date ); ?></strong>
+					<strong><?php echo mysql2date( 'j F, Y @ H:m:s', $post->post_modified ); ?></strong>
 				<?php else: ?>
 					<a href="themes.php?page=largo_custom_less_variables"><?php echo mysql2date( 'j F, Y @ H:m:s', $post->post_date ); ?></a>
 				<?php endif; ?>
-				<?php _e( '[Active]', 'largo' ); ?>
+				<?php _e( '[Live]', 'largo' ); ?>
 			</li>
 
 			<?php foreach ( $revisions as $revision ): ?>
