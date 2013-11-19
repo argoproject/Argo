@@ -326,3 +326,166 @@ function largo_filter_get_recent_posts_for_term_query_args( $query_args, $term, 
     return $query_args;
 }
 add_filter( 'largo_get_recent_posts_for_term_query_args', 'largo_filter_get_recent_posts_for_term_query_args', 10, 5 );
+
+
+/**
+ * Get N post IDs related to the current post
+ * Orders by: manual > next in series > next in category > next in tag > next recent post from any category
+ */
+function largo_get_related_posts_for_post( $post_id, $number = 1 ) {
+
+	//see if this post has manually set related posts
+	$post_ids = get_post_meta( $post_id, '_largo_custom_related_posts', true );
+	if ( ! empty( $post_ids ) ) {
+		$post_ids = explode( ",", $post_ids );
+		if ( count( $post_ids ) >= $number ) {
+			return array_slice( $post_ids, 0, $number );
+		}
+	} else {
+		$post_ids = array();
+	}
+
+	//try to get posts by series, if this post is in a series
+	$series = get_the_terms( $post_id, 'series' );
+	if ( count($series) ) {
+
+		//loop thru all the series this post belongs to
+		foreach ( $series as $term ) {
+
+			//start to build our query of posts in this series
+			// get the posts in this series, ordered by rank or (if missing?) date
+			$args = array(
+				'post_type' => 'post',
+				'posts_per_page' => 20,	//should usually be enough
+				'taxonomy' 			=> 'series',
+				'term' => $term->slug,
+				'orderby' => 'date',
+				'order' => 'DESC',
+			);
+
+			// see if there's a post that has the sort order info for this series
+			$pq = new WP_Query( array(
+				'post_type' => 'cftl-tax-landing',
+				'series' => $term->slug,
+				'posts_per_page' => 1
+			));
+
+			if ( $pq->have_posts() ) {
+				$pq->next_post();
+				$has_order = get_post_meta( $pq->post->ID, 'post_order', TRUE );
+				if ( !empty($has_order) ) {
+					switch ( $has_order ) {
+						case 'ASC':
+							$args['order'] = 'ASC';
+							break;
+						case 'custom':
+							$args['orderby'] = 'series_custom';
+							break;
+						case 'featured, DESC':
+						case 'featured, ASC':
+							$args['orderby'] = $opt['post_order'];
+							break;
+					}
+				}
+			}
+
+			// build the query with the sort defined
+			$series_query = new WP_Query( $args );
+			if ( $series_query->have_posts() ) {
+
+				//flip our results
+				//$series_query->posts = array_reverse($series_query->posts);
+				//$series_query->rewind_posts();
+				_largo_related_add_from_query( $series_query, $post_id, $post_ids, $number);
+
+				//are we done yet?
+				if ( count($post_ids) == $number ) return $post_ids;
+			}
+		}
+	}
+
+	error_log("on " . __LINE__);
+
+	//we've gone back and forth through all the post's series, now let's try traditional taxonomies
+	$taxonomies = get_the_terms( $post_id, array('category', 'post_tag') );
+
+	//loop thru taxonomies, much like series, and get posts
+	if ( count($taxonomies) ) {
+		//sort by popularity
+		usort( $taxonomies, 'largo_sort_terms_by_popularity' );
+
+		foreach ( $taxonomies as $term ) {
+			$args = array(
+				'post_type' => 'post',
+				'posts_per_page' => 20,	//should usually be enough
+				'taxonomy' 			=> $term->taxonomy,
+				'term' => $term->slug,
+				'orderby' => 'date',
+				'order' => 'DESC',
+			);
+		}
+		// run the query
+		$term_query = new WP_Query( $args );
+
+		if ( $term_query->have_posts() ) {
+			_largo_related_add_from_query( $term_query, $post_id, $post_ids, $number);
+
+			//are we done yet?
+			if ( count($post_ids) == $number ) return $post_ids;
+		}
+	}
+
+	error_log("on " . __LINE__);
+
+	// Good heavens, we haven't found anything yet? Criminy!
+	// Fine, let's just grab recent posts
+	$args = array(
+		'post_type' => 'post',
+		'posts_per_page' => $number,
+		'post__not_in' => array( $post_id ),
+	);
+
+	$posts_query = new WP_Query( $args );
+
+	error_log("on " . __LINE__);
+
+	if ( $posts_query->have_posts() ) {
+		while ( $posts_query->next_post() ) {
+			if ( !in_array($posts_query->post->ID, $post_ids) ) $post_ids[] = $posts_query->post->ID;
+		}
+	}
+
+	return $post_ids;
+
+}
+
+function _largo_related_add_from_query( $q, $pid, &$post_ids, $max_length, $reversed = FALSE ) {
+	// don't pick up anything until we're past our own post
+	$found_ours = FALSE;
+
+	while ( $q->have_posts() ) {
+		$q->next_post();
+		//don't show our post, but record that we've found it
+		if ( $q->post->ID == $pid ) {
+			$found_ours = TRUE;
+			continue;
+		} else if ( ! $found_ours ) {
+			continue;	// don't add any posts until we're adding posts newer than the one being displayed
+		} else if ( ! in_array($q->post->ID, $post_ids ) ) {	// only add it if it wasn't already there
+			$post_ids[] = $q->post->ID;
+			if ( count($post_ids) == $max_length ) return;
+		}
+	}
+
+	//still here? reverse and try again
+	if ( ! $reversed ) {
+		$q->posts = array_reverse($q->posts);
+		$q->rewind_posts();
+		_largo_related_add_from_query( $q, $pid, $post_ids, $max_length, TRUE );
+	}
+}
+
+function largo_sort_terms_by_popularity( $a, $b ) {
+	if ( $a->count == $b->count ) return 0;
+	return ( $a->count < $b->count ) ? -1 : 1;
+}
