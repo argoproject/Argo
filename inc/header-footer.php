@@ -133,7 +133,7 @@ if ( ! function_exists ( 'largo_seo' ) ) {
 
 				// add the standout metatag if this post is flagged with any of the terms in the prominence taxonomy
 				// see: https://support.google.com/news/publisher/answer/191283
-				if ( has_term( get_terms( 'prominence', 'fields=name' ), 'prominence' ) ) {
+				if ( has_term( get_terms( 'prominence', array( 'fields' => 'names' ) ), 'prominence' ) ) {
 					echo '<meta name="standout" content="' . $permalink . '"/>';
 				}
 
