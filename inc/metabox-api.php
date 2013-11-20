@@ -10,7 +10,7 @@
  * Otherwise we get function redeclarations.
  * Since we're using include_once() this is unlikely, but possible and worth checking.
  */
-if ( is_array($largo['meta']) ) return;
+if ( isset($largo) && is_array($largo['meta']) ) return;
 
 $largo['meta'] = array(
 	'boxes' => array(),		// the metaboxes to generate, including callbacks for the content
