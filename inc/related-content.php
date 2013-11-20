@@ -370,3 +370,257 @@ function largo_filter_get_recent_posts_for_term_query_args( $query_args, $term, 
     return $query_args;
 }
 add_filter( 'largo_get_recent_posts_for_term_query_args', 'largo_filter_get_recent_posts_for_term_query_args', 10, 5 );
+
+
+/**
+ * The Largo Related class.
+ * Used to dig through posts to find IDs related to the current post
+ */
+class Largo_Related {
+
+	var $number;
+	var $post_id;
+	var $post_ids = array();
+
+	/**
+	 * Constructor.
+	 * Sets up essential parameters for retrieving related posts
+	 *
+	 * @access public
+	 *
+	 * @param integer $number optional The number of post IDs to fetch. Defaults to 1
+	 * @param integer $post_id optional The ID of the post to get related posts about. If not provided, defaults to global $post
+	 * @return null
+	 */
+	function __construct( $number = 1, $post_id = '' ) {
+
+		if ( ! empty( $number ) ) {
+			$this->number = $number;
+		}
+
+		if ( ! empty( $post_id ) ) {
+			$this->post_id = $post_id;
+		} else {
+			$this->post_id = get_the_ID();
+		}
+	}
+
+	/**
+	 * Array sorter for organizing terms by # of posts they have
+	 *
+	 * @param object $a First WP term object
+	 * @param object $b Second WP term object
+	 * @return integer
+	 */
+	function popularity_sort( $a, $b ) {
+		if ( $a->count == $b->count ) return 0;
+		return ( $a->count < $b->count ) ? -1 : 1;
+	}
+
+	/**
+	 * Performs cleanup of IDs list prior to returning it. Also applies a filter.
+	 *
+	 * @access protected
+	 *
+	 * @return array The final array of related post IDs
+	 */
+	protected function cleanup_ids() {
+		//make things unique just to be safe
+		$ids = array_unique( $this->post_ids );
+
+		//truncate to desired length
+		$ids = array_slice( $ids, 0, $this->number );
+
+		//run filters
+		return apply_filters( 'largo_related_posts', $ids );
+	}
+
+	/**
+	 * Fetches posts contained within the series(es) this post resides in. Feeds them into $this->post_ids array
+	 *
+	 * @access protected
+	 */
+	protected function get_series_posts() {
+		//try to get posts by series, if this post is in a series
+		$series = get_the_terms( $this->post_id, 'series' );
+		if ( count($series) ) {
+
+			//loop thru all the series this post belongs to
+			foreach ( $series as $term ) {
+
+				//start to build our query of posts in this series
+				// get the posts in this series, ordered by rank or (if missing?) date
+				$args = array(
+					'post_type' => 'post',
+					'posts_per_page' => 20,	//should usually be enough
+					'taxonomy' 			=> 'series',
+					'term' => $term->slug,
+					'orderby' => 'date',
+					'order' => 'DESC',
+				);
+
+				// see if there's a post that has the sort order info for this series
+				$pq = new WP_Query( array(
+					'post_type' => 'cftl-tax-landing',
+					'series' => $term->slug,
+					'posts_per_page' => 1
+				));
+
+				if ( $pq->have_posts() ) {
+					$pq->next_post();
+					$has_order = get_post_meta( $pq->post->ID, 'post_order', TRUE );
+					if ( !empty($has_order) ) {
+						switch ( $has_order ) {
+							case 'ASC':
+								$args['order'] = 'ASC';
+								break;
+							case 'custom':
+								$args['orderby'] = 'series_custom';
+								break;
+							case 'featured, DESC':
+							case 'featured, ASC':
+								$args['orderby'] = $opt['post_order'];
+								break;
+						}
+					}
+				}
+
+				// build the query with the sort defined
+				$series_query = new WP_Query( $args );
+				if ( $series_query->have_posts() ) {
+
+					//flip our results
+					//$series_query->posts = array_reverse($series_query->posts);
+					//$series_query->rewind_posts();
+					$this->add_from_query( $series_query );
+
+				}
+			}
+		}
+	}
+
+	/**
+	 * Fetches posts contained within the categories and tags this post has. Feeds them into $this->post_ids array
+	 *
+	 * @access protected
+	 */
+	protected function get_term_posts() {
+
+		//we've gone back and forth through all the post's series, now let's try traditional taxonomies
+		$taxonomies = get_the_terms( $this->post_id, array('category', 'post_tag') );
+
+		//loop thru taxonomies, much like series, and get posts
+		if ( count($taxonomies) ) {
+			//sort by popularity
+			usort( $taxonomies, array(__CLASS__, 'popularity_sort' ) );
+
+			foreach ( $taxonomies as $term ) {
+				$args = array(
+					'post_type' => 'post',
+					'posts_per_page' => 20,	//should usually be enough
+					'taxonomy' 			=> $term->taxonomy,
+					'term' => $term->slug,
+					'orderby' => 'date',
+					'order' => 'DESC',
+				);
+			}
+			// run the query
+			$term_query = new WP_Query( $args );
+
+			if ( $term_query->have_posts() ) {
+				$this->add_from_query( $term_query );
+			}
+		}
+	}
+
+	/**
+	 * Fetches recent posts. Used as a fallback when other methods have failed to fill post_ids to requested length
+	 *
+	 * @access protected
+	 */
+	protected function get_recent_posts() {
+
+		$args = array(
+			'post_type' => 'post',
+			'posts_per_page' => $this->number,
+			'post__not_in' => array( $this->post_id ),
+		);
+
+		$posts_query = new WP_Query( $args );
+
+		if ( $posts_query->have_posts() ) {
+			while ( $posts_query->next_post() ) {
+				if ( !in_array($posts_query->post->ID, $this->post_ids) ) $this->post_ids[] = $posts_query->post->ID;
+			}
+		}
+	}
+
+	/**
+	 * Loops through series, terms and recent to fill array of related post IDs. Primary means of using this class.
+	 *
+	 * @access public
+	 *
+	 * @return array An array of post ids related to the given post
+	 */
+	public function ids() {
+
+		//see if this post has manually set related posts
+		$post_ids = get_post_meta( $this->post_id, '_largo_custom_related_posts', true );
+		if ( ! empty( $post_ids ) ) {
+			$this->post_ids = explode( ",", $post_ids );
+			if ( count( $this->post_ids ) >= $number ) {
+				return $this->cleanup_ids();
+			}
+		}
+
+		$this->get_series_posts();
+
+		//are we done yet?
+		if ( count($this->post_ids) == $this->number ) return $this->cleanup_ids();
+
+		$this->get_term_posts();
+
+		//are we done yet?
+		if ( count($this->post_ids) == $this->number ) return $this->cleanup_ids();
+
+		$this->get_recent_posts();
+		return $this->cleanup_ids();
+	}
+
+	/**
+	 * Takes a WP_Query result and adds the IDs to $this->post_ids
+	 *
+	 * @access protected
+	 *
+	 * @param object a WP_Query object
+	 * @param boolean optional whether the query post order has been reversed yet. If not, this will loop through in both directions.
+	 */
+	protected function add_from_query( $q, $reversed = FALSE ) {
+		// don't pick up anything until we're past our own post
+		$found_ours = FALSE;
+
+		while ( $q->have_posts() ) {
+			$q->next_post();
+			//don't show our post, but record that we've found it
+			if ( $q->post->ID == $this->post_id ) {
+				$found_ours = TRUE;
+				continue;
+			// don't add any posts until we're adding posts newer than the one being displayed
+			} else if ( ! $found_ours ) {
+				continue;
+			// add this post if it's new
+			} else if ( ! in_array( $q->post->ID, $this->post_ids ) ) {	// only add it if it wasn't already there
+				$this->post_ids[] = $q->post->ID;
+				// stop if we have enough
+				if ( count( $this->post_ids ) == $this->number ) return;
+			}
+		}
+
+		//still here? reverse and try again
+		if ( ! $reversed ) {
+			$q->posts = array_reverse($q->posts);
+			$q->rewind_posts();
+			$this->add_from_query( $q, TRUE );
+		}
+	}
+}
