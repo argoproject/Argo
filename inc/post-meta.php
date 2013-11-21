@@ -152,7 +152,9 @@ function largo_custom_related_meta_box_display() {
 	global $post;
 
 	$value = get_post_meta( $post->ID, '_largo_custom_related_posts', true );
-	echo '<p>', __('Enter the post IDs separated by commas.'), '</p>';
+
+	echo '<p><strong>' . __('Related Posts', 'largo') . '</strong><br />';
+	echo __('To override the default related posts functionality enter specific related post IDs separated by commas.') . '</p>';
 	echo '<input type="text" name="largo_custom_related_posts" value="', esc_attr($value),'" />';
 	largo_register_meta_input('largo_custom_related_posts');
 }
@@ -168,7 +170,7 @@ function largo_top_tag_display() {
 	$terms = get_the_terms( $post->ID, array( 'series', 'category', 'post_tag' ) );
 
 	echo '<p><strong>' . __('Top Term', 'largo') . '</strong><br />';
-	echo __("Identify which of this posts's terms is primary.") . '</p>';
+	echo __('Identify which of this posts\'s terms is primary.') . '</p>';
 	echo '<select name="top_term" id="top_term" class="dropdown">';
 
 	foreach( $terms as $term ) {
