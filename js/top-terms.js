@@ -9,9 +9,6 @@
 		var $dropdown = $('#top_term'),
 			$checklists = $('.categorychecklist').not( "[id^='prominence'], [id^='post-type']" );
 
-		console.log($dropdown);
-		console.log($checklists);
-
 		$("input[type='checkbox']", $checklists).on( 'click', function() {
 			var value = $(this).val();
 			if (this.checked) {

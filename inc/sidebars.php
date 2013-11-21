@@ -71,6 +71,18 @@ function largo_register_sidebars() {
 			'id' 	=> 'homepage-bottom'
 		);
 	}
+	// regions defined by homepage templates
+	if ( of_get_option('home_template') ) {
+		// get the template file and read in the widgets
+		$home_sidebars = largo_home_template_sidebars();
+		foreach ( $home_sidebars as $sb_name ) {
+			$sidebars[] = array(
+				'name' => __( $sb_name, 'largo' ),
+				'desc' => __( 'A sidebar from the homepage template.', 'largo' ),
+				'id' => esc_attr( sanitize_html_class( strtolower($sb_name) ) )	// esc_attr and sanitize redundant? Doesn't look that way
+			);
+		}
+	}
 
 	// @todo - probably add an option to enable this because not everyone is going to have ads here
 	// @todo - add additional widget area in the footer for a leaderboard ad unit there too

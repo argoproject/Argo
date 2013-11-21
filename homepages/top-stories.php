@@ -1,11 +1,17 @@
-<?php global $layout, $tags; ?>
+<?php
+/**
+ * Home Template: Top Stories
+ * Description: A newspaper-like layout highlighting featured stories
+ */
+
+global $shown_ids, $layout, $tags;
+?>
 <div id="homepage-featured" class="row-fluid clearfix">
 	<?php if ( $layout === '3col' ) { ?>
 	<div class="top-story span12">
 	<?php } else { ?>
 	<div class="top-story span8">
 	<?php }
-		global $ids;
 		$topstory = largo_get_featured_posts( array(
 			'tax_query' => array(
 				array(
@@ -17,7 +23,7 @@
 			'showposts' => 1
 		) );
 		if ( $topstory->have_posts() ) :
-			while ( $topstory->have_posts() ) : $topstory->the_post(); $ids[] = get_the_ID();
+			while ( $topstory->have_posts() ) : $topstory->the_post(); $shown_ids[] = get_the_ID();
 
 				if( $has_video = get_post_meta( $post->ID, 'youtube_url', true ) ) { ?>
 					<div class="embed-container">
@@ -59,7 +65,7 @@
 		) );
 		if ( $substories->have_posts() ) :
 			$count = 1;
-			while ( $substories->have_posts() ) : $substories->the_post(); $ids[] = get_the_ID();
+			while ( $substories->have_posts() ) : $substories->the_post(); $shown_ids[] = get_the_ID();
 				if ($count <= 3) : ?>
 					<div class="story">
 			        	<?php if ( largo_has_categories_or_tags() && $tags === 'top' ) : ?>

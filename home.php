@@ -8,7 +8,7 @@ get_header();
  * Collect post IDs in each loop so we can avoid duplicating posts
  * and get the theme option to determine if this is a two column or three column layout
  */
-$ids = array();
+$shown_ids = array();
 $layout = of_get_option('homepage_layout');
 $tags = of_get_option ('tag_display');
 ?>
@@ -18,12 +18,10 @@ $tags = of_get_option ('tag_display');
 	<?php if ( $layout === '3col' ) { ?>
 	<div id="content-main" class="span8">
 	<?php }
-	// get the optional homepage top section (if set)
-	if ( of_get_option('homepage_top') === 'topstories' ) {
-		get_template_part( 'home-part-topstories' );
-	} else if ( of_get_option('homepage_top' ) === 'slider') {
-		get_template_part( 'home-part', 'slider' );
-	}
+
+		$home_template = str_replace('.php', '', of_get_option( 'home_template', 'blog.php' ) );
+		get_template_part( $home_template );
+
 
 	// sticky posts box if this site uses it
 	if ( of_get_option( 'show_sticky_posts' ) ) {
@@ -38,7 +36,7 @@ $tags = of_get_option ('tag_display');
 			'paged'			=> $paged,
 			'post_status'	=> 'publish',
 			'posts_per_page'=> 10,
-			'post__not_in' 	=> $ids
+			'post__not_in' 	=> $shown_ids
 			);
 		if ( of_get_option('num_posts_home') )
 			$args['posts_per_page'] = of_get_option('num_posts_home');
@@ -48,8 +46,8 @@ $tags = of_get_option ('tag_display');
 
 		if ( $query->have_posts() ) {
 			while ( $query->have_posts() ) : $query->the_post();
-				//if the post is in the array of post IDs already on this page, skip it
-				if ( in_array( get_the_ID(), $ids ) ) {
+				//if the post is in the array of post IDs already on this page, skip it. Just a double-check
+				if ( in_array( get_the_ID(), $shown_ids ) ) {
 					continue;
 				} else {
 					$ids[] = get_the_ID();

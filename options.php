@@ -28,6 +28,13 @@ function optionsframework_option_name() {
 function optionsframework_options() {
 
 	$imagepath =  get_template_directory_uri() . '/lib/options-framework/images/';
+	$home_templates = array();
+	$home_templates_data = largo_get_home_templates();
+	if ( count($home_templates_data) ) {
+		foreach ($home_templates_data as $name => $data) {
+			$home_templates[ $data['path'] ] = '<img src="'.$data['thumb'].'" style="float: left; margin-right: 10px;"><strong>'.$name.'</strong> '.$data['desc'];
+		}
+	}
 
 	$display_options = array(
 		'top' 	=> __('Top', 'largo'),
@@ -360,6 +367,7 @@ function optionsframework_options() {
 			'3col' => $imagepath . '3col.png')
 	);
 
+	/*
 	$options[] = array(
 		'name' 	=> __('Homepage Top', 'largo'),
 		'desc' 	=> __('<strong>Select the layout to use for the top of the homepage.</strong> Largo currently supports three homepage options: a blog-like list of posts with the ability to stick a post to the op of the homepage, a newspaper-like layout highlighting featured stories and an animated carousel of featured stories with large images.', 'largo'),
@@ -371,6 +379,18 @@ function optionsframework_options() {
 			'topstories' 	=> $imagepath . 'newsy.png',
 			'slider' 		=> $imagepath . 'slider.png')
 	);
+	*/
+
+	if ( count($home_templates) ) {
+		$options[] = array(
+			'name' 	=> __('Home Template', 'largo'),
+			'desc' 	=> __('<strong>Select the layout to use for the top of the homepage.</strong> These are Home Templates, defined much like post/page templates.', 'largo'),
+			'id' 	=> 'home_template',
+			'std' 	=> 'homepages/blog.php',
+			'type' 	=> 'radio',
+			'options' 	=> $home_templates
+		);
+	}
 
 	$options[] = array(
 		'name' 	=> __('Sticky Posts', 'largo'),
