@@ -32,6 +32,8 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
 			$thumbnailURL = $image[0];
 		} else if ( of_get_option( 'logo_thumbnail_sq' ) ) {
 			$thumbnailURL = of_get_option( 'logo_thumbnail_sq' );
+		} else {
+			$thumbnailURL = false;
 		}
 
 		// start the output, some attributes will be the same for all page types ?>
