@@ -322,7 +322,8 @@ function largo_top_term( $options = array() ) {
 			$icon
 		);
 	} else {
-		$output = implode( largo_categories_and_tags( 1, false, $args['link'], $args['use_icon'], '', $args['wrapper'], $args['exclude']) );
+		$output = largo_categories_and_tags( 1, false, $args['link'], $args['use_icon'], '', $args['wrapper'], $args['exclude']);
+		$output = $output[0];
 	}
 	if ( $args['echo'] ) echo $output;
 	return $output;
