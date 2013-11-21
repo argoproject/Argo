@@ -63,7 +63,7 @@
 				if ($count <= 3) : ?>
 					<div class="story">
 			        	<?php if ( largo_has_categories_or_tags() && $tags === 'top' ) : ?>
-			        		<h5 class="top-tag"><?php largo_top_term(1); ?></h5>
+			        		<h5 class="top-tag"><?php largo_top_term(); ?></h5>
 			        	<?php endif; ?>
 			        	<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 			        	<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
