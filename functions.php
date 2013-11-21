@@ -73,6 +73,7 @@ $includes = array(
 	'/inc/featured-content.php',		// functions dealing with featured content
 	'/inc/enqueue.php',				// enqueue our js and css files
 	'/inc/post-templates.php',		// single post templates
+	'/inc/homepage-api.php',		// single post templates
 );
 
 // This functionality is probably not for everyone so we'll make it easy to turn it on or off
