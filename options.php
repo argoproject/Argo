@@ -77,6 +77,7 @@ function optionsframework_options() {
 	}
 
 	$options = array();
+	$widget_options = array();
 
 	/**
 	 * Basic Options
@@ -430,29 +431,29 @@ function optionsframework_options() {
 		'std' 	=> '',
 		'type' 	=> 'text');
 
-	$options[] = array(
+	$widget_options[] = $options[] = array(
 		'name' 	=> __('Sidebar Options', 'largo'),
 		'type' 	=> 'info');
 
-	$options[] = array(
+	$widget_options[] = $options[] = array(
 		'desc' 	=> __('By default Largo has two sidebars. One is used for single pages and posts and the other is used for everything else (including the homepage). Check this box if you would like to have a third sidebar to be used in place of the main sidebar on archive pages (category, tag, author and series pages).', 'largo'),
 		'id' 	=> 'use_topic_sidebar',
 		'std' 	=> '0',
 		'type' 	=> 'checkbox');
 
-	$options[] = array(
+	$widget_options[] = $options[] = array(
 		'desc' 	=> __('Check this box if you want to fade the sidebar out on single story pages as a reader scrolls.', 'largo'),
 		'id' 	=> 'showey_hidey',
 		'std' 	=> '0',
 		'type' 	=> 'checkbox');
 
-	$options[] = array(
+	$widget_options[] = $options[] = array(
 		'desc' 	=> __('Enter names of <strong>additional sidebar regions</strong> (one per line) you\'d like post authors to be able to choose to display on their posts.', 'largo'),
 		'id' 	=> 'custom_sidebars',
 		'std' 	=> '',
 		'type' 	=> 'textarea');
 
-	$options[] = array(
+	$widget_options[] = $options[] = array(
 		'name' 	=> __('Footer Layout', 'largo'),
 		'desc' 	=> __('<strong>Select the layout to use for the footer.</strong> The default is a 3 column footer with a wide center column. Alternatively you can choose to have 3 or 4 equal columns. Each column is a widget area that can be configured under the Appearance > Widgets menu.', 'largo'),
 		'id' 	=> 'footer_layout',
@@ -494,6 +495,10 @@ function optionsframework_options() {
 		'type' 	=> 'select',
 		'options' => $region_options);
 
+	$screen = get_current_screen();
+	if ( $screen->base == 'widgets' ) {
+		return $widget_options;
+	}
 
 	return $options;
 }

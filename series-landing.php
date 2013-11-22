@@ -112,18 +112,26 @@ if ( isset( $wp_query->query_vars['term'] )
 	}
 
 	//change args as needed
-	if ('ASC' == $opt['post_order'] ) $args['order'] = 'ASC';
-
-	//other changes handled by filters from cftl-series-order.php
+	//these unusual WP_Query args are handled by filters defined in cftl-series-order.php
+	switch ( $opt['post_order'] ) {
+		case 'ASC':
+			$args['order'] = 'ASC';
+			break;
+		case 'custom':
+			$args['orderby'] = 'series_custom';
+			break;
+		case 'featured, DESC':
+		case 'featured, ASC':
+			$args['orderby'] = $opt['post_order'];
+			break;
+	}
 
 	//build the query, using the original as a guide for pagination and whatnot
 	$all_args = array_merge( $old_query->query_vars, $args );
-
 	$wp_query = new WP_Query($all_args);
 
-
 	// and finally wind the posts back so we can go through the loop as usual
-	while ( have_posts() ) : the_post();
+	while ( $wp_query->have_posts() ) : $wp_query->the_post();
 		get_template_part( 'content', 'series' );
 	endwhile;
 
