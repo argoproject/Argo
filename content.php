@@ -9,7 +9,7 @@ global $tags;
 
 	<header>
  		<?php if ( is_home() && largo_has_categories_or_tags() && $tags === 'top' ) { ?>
-	 		<h5 class="top-tag"><?php largo_categories_and_tags( 1 ); ?></h5>
+	 		<h5 class="top-tag"><?php largo_top_term(); ?></h5>
 	 	<?php } ?>
 
  		<h2 class="entry-title">

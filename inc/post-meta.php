@@ -32,102 +32,54 @@ function remove_default_post_screen_metaboxes() {
 add_action('admin_menu','remove_default_post_screen_metaboxes');
 
 /**
- * Adds custom meta boxes to the post edit screen for
- *  - custom byline and link
- *  - featured video link
- *  - custom post layout options
- *
- * @since 1.0
+ * Creates custom meta boxes to the post edit screens using the Largo Metabox API
+ * Which lives in inc/metabox-api.php
  */
 
-// Register our custom meta boxes
-function largo_meta_box_add() {
-	$screens = array( 'post' );
-	if ( of_get_option( 'custom_landing_enabled' ) ) $screens[] = 'cftl-tax-landing';
-  foreach ( $screens as $screen ) {
-		add_meta_box(
-			'largo_byline_meta',
-			__('Custom Byline Options', 'largo'),
-			'largo_byline_meta_box_display',
-			$screen,
-			'side',
-			'core'
-		);
-	}
-	$screens = array( 'post' );
-  foreach ( $screens as $screen ) {
-		add_meta_box(
-			'largo_custom_related',
-			__('Top Custom Related Posts', 'largo'),
-			'largo_custom_related_meta_box_display',
-			$screen,
-			'side',
-			'core'
-		);
-	}
-	$screens = array( 'post', 'page' );
-    foreach ( $screens as $screen ) {
-		add_meta_box(
-			'largo_layout_meta',
-			__('Layout Options', 'largo'),
-			'largo_layout_meta_box_display',
-			$screen,
-			'side',
-			'core'
-		);
-	}
-    add_meta_box(
-    	'largo_featured_video',
-    	__('Featured Video', 'largo'),
-    	'largo_featured_video_meta_box_display',
-    	'post',
-    	'side',
-    	'low'
-    );
-}
-add_action( 'add_meta_boxes', 'largo_meta_box_add' );
+// Related posts controls
+largo_add_meta_box(
+	'largo_additional_options',
+	'Additional Options',
+	'largo_custom_related_meta_box_display', //could also be added with largo_add_meta_content('largo_custom_related_meta_box_display', 'largo_additional_options')
+	'post',
+	'side',
+	'core'
+);
 
-// Save our custom meta box values as custom fields
-function largo_meta_box_save( $post_id ) {
-	global $post;
-	// Bail if we're doing an auto save
-	if( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
+// Related posts controls
+largo_add_meta_box(
+	'largo_byline_meta',
+	'Custom Byline Options',
+	'largo_byline_meta_box_display',
+	( of_get_option( 'custom_landing_enabled' ) ) ? array('post', 'cftl-tax-landing') : 'post',
+	'side',
+	'core'
+);
 
-	// if our nonce isn't there, or we can't verify it, bail
-	if( !isset( $_POST['meta_box_nonce'] ) || !wp_verify_nonce( $_POST['meta_box_nonce'], 'largo_meta_box_nonce' ) ) return;
+// Layout options for post templates, custom sidebars
+largo_add_meta_box(
+	'largo_layout_meta',
+	'Layout Options',
+	'largo_layout_meta_box_display',
+	array('post', 'page'),
+	'side',
+	'core'
+);
 
-	// if our current user can't edit this post, bail
-	if( !current_user_can( 'edit_post' ) ) return;
+// Featured video instead of featured image
+largo_add_meta_box(
+	'largo_featured_video',
+	'Featured Video',
+	'largo_featured_video_meta_box_display',
+	'post',
+	'side',
+	'low'
+);
 
-	// now we can actually save the data
-	$allowed = array(
-		'a' => array( // on allow a tags
-			'href' => array() // and those anchors can only have href attribute
-		)
-	);
 
-	$mydata = array(
-		'_wp_post_template' => $_POST['_wp_post_template'],
-		'custom_sidebar' 	=> $_POST['custom_sidebar'],
-		'largo_byline_text' => $_POST['largo_byline_text'],
-		'largo_byline_link' => $_POST['largo_byline_link'],
-		'youtube_url' 		=> $_POST['youtube_url'],
-		'_largo_custom_related_posts' => $_POST['largo_custom_related_posts']
-	);
-
-	foreach ( $mydata as $key => $value ) {
-		if ( get_post_meta( $post->ID, $key, FALSE ) ) {
-			update_post_meta( $post->ID, $key, $value ); //if the custom field already has a value, update it
-		} else {
-			add_post_meta( $post->ID, $key, $value );//if the custom field doesn't have a value, add the data
-		}
-		if ( !$value ) delete_post_meta( $post->ID, $key ); //and delete if blank
-	}
-
-}
-add_action( 'save_post', 'largo_meta_box_save' );
-
-// Templates for displaying the custom meta boxes
+/**
+ * Contents for the 'byline' metabox
+ */
 function largo_byline_meta_box_display() {
 	global $post;
 	$values = get_post_custom( $post->ID );
@@ -145,8 +97,12 @@ function largo_byline_meta_box_display() {
 		<input type="text" name="largo_byline_link" id="largo_byline_link" value="<?php echo $byline_link; ?>" />
 	</p>
 	<?php
+	largo_register_meta_input( array('largo_byline_text', 'largo_byline_link') );
 }
 
+/**
+ * Contents for the Layout Options metabox
+ */
 function largo_layout_meta_box_display () {
 	global $post;
 
@@ -160,6 +116,7 @@ function largo_layout_meta_box_display () {
 		echo '<option value="">Default</option>';
 		post_templates_dropdown(); //get the options
 		echo '</select>';
+		largo_register_meta_input('_wp_post_template');
 	}
 
 	echo '<p><strong>' . __('Custom Sidebar', 'largo' ) . '</strong><br />';
@@ -168,25 +125,73 @@ function largo_layout_meta_box_display () {
 	echo '<select name="custom_sidebar" id="custom_sidebar" class="dropdown">';
 	custom_sidebars_dropdown(); //get the options
 	echo '</select>';
+	largo_register_meta_input('custom_sidebar');
 }
 
+/**
+ * Content for the Featured Videometabox
+ */
 function largo_featured_video_meta_box_display() {
-    global $post;
-    $values = get_post_custom( $post->ID );
-    $youtube_url = isset( $values['youtube_url'] ) ? esc_attr( $values['youtube_url'][0] ) : '';
-    wp_nonce_field( 'largo_meta_box_nonce', 'meta_box_nonce' );
+  global $post;
+  $values = get_post_custom( $post->ID );
+  $youtube_url = isset( $values['youtube_url'] ) ? esc_attr( $values['youtube_url'][0] ) : '';
+  wp_nonce_field( 'largo_meta_box_nonce', 'meta_box_nonce' );
 
-    echo __('<p>In some cases you might want to use a video in the place of the featured image. If you would prefer to use a video, enter the URL for the video (YouTube only) here:</p>', 'largo');
-    echo '<input type="text" name="youtube_url" id="youtube_url" value="' . $youtube_url . '" />';
-    echo __('<p class="small">Note that at the moment this is only used for the top story on the homepage but future versions of Largo might enable this functionality elsewhere in the theme.</p>', 'largo');
+  echo __('<p>In some cases you might want to use a video in the place of the featured image. If you would prefer to use a video, enter the URL for the video (YouTube only) here:</p>', 'largo');
+  echo '<input type="text" name="youtube_url" id="youtube_url" value="' . $youtube_url . '" />';
+  echo __('<p class="small">Note that at the moment this is only used for the top story on the homepage but future versions of Largo might enable this functionality elsewhere in the theme.</p>', 'largo');
+
+	largo_register_meta_input('youtube_url');
 
 }
 
-
+/**
+ * Content for the Additional Options metabox
+ */
 function largo_custom_related_meta_box_display() {
 	global $post;
 
 	$value = get_post_meta( $post->ID, '_largo_custom_related_posts', true );
-	echo '<p>', __('Enter the post IDs separated by commas.'), '</p>';
+
+	echo '<p><strong>' . __('Related Posts', 'largo') . '</strong><br />';
+	echo __('To override the default related posts functionality enter specific related post IDs separated by commas.') . '</p>';
 	echo '<input type="text" name="largo_custom_related_posts" value="', esc_attr($value),'" />';
+	largo_register_meta_input('largo_custom_related_posts');
 }
+
+
+/**
+ * Additional content for the Additional Options metabox
+ */
+function largo_top_tag_display() {
+	global $post;
+
+	$top_term = get_post_meta( $post->ID, 'top_term', TRUE );
+	$terms = get_the_terms( $post->ID, array( 'series', 'category', 'post_tag' ) );
+
+	if ( ! $terms ) return; //no post terms yet? Disregard this then
+
+	echo '<p><strong>' . __('Top Term', 'largo') . '</strong><br />';
+	echo __('Identify which of this posts\'s terms is primary.') . '</p>';
+	echo '<select name="top_term" id="top_term" class="dropdown">';
+
+	foreach( $terms as $term ) {
+		echo '<option value="' . $term->term_id . '"' . selected( $term->term_id, $top_term, FALSE ) . ">" . $term->name . '</option>';
+	}
+
+	echo '</select>';
+
+	largo_register_meta_input('top_term');
+}
+largo_add_meta_content('largo_top_tag_display', 'largo_additional_options');
+
+/**
+ * Load JS for our top-terms select
+ */
+function largo_top_terms_js() {
+	global $typenow;
+  if( $typenow == 'post' ) {
+  	wp_enqueue_script( 'top-terms', get_template_directory_uri() . '/js/top-terms.js', array( 'jquery' ) );
+  }
+}
+add_action( 'admin_enqueue_scripts', 'largo_top_terms_js' );

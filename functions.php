@@ -53,6 +53,7 @@ include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
  * Load up all of the other goodies from the /inc directory
  */
 $includes = array(
+	'/largo-apis.php',	// APIs for inclusion in child themes
 	'/inc/largo-plugin-init.php',	// a list of recommended plugins
 	'/inc/dashboard.php',			// custom dashboard widgets
 	'/inc/robots.php',				// default robots.txt config
@@ -72,7 +73,6 @@ $includes = array(
 	'/inc/featured-content.php',		// functions dealing with featured content
 	'/inc/enqueue.php',				// enqueue our js and css files
 	'/inc/post-templates.php',		// single post templates
-	'/inc/post-meta.php'				// add post meta boxes
 );
 
 // This functionality is probably not for everyone so we'll make it easy to turn it on or off
