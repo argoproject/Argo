@@ -111,4 +111,32 @@ jQuery(document).ready(function($) {
 		}
 	})();
 
+	// Sticky header and footer
+	(function(){
+		var stickyNavEl = $( '.sticky-nav-holder' );
+		var mainEl = $('#main');
+		mainEl.waypoint( function( direction ) {
+			if ( direction == 'down' ) {
+				// Switch on the sticky nav
+				stickyNavEl.addClass('show');
+
+			} else {
+				// Switch off the sticky nav
+				stickyNavEl.removeClass('show');
+			}
+		}, {
+			offset: $('#wpadminbar').height() + parseInt( mainEl.css('marginTop') )
+		});
+
+		// Show the sticky footer here
+
+		$('#site-footer').waypoint( function( direction ) {
+			if ( direction == 'down' ) {
+				// Switch off the sticky footer
+			} else {
+				// Switch on the sticky footer
+			}
+		}, { offset: '100%' } );
+	})();
+
 });
