@@ -58,7 +58,7 @@
 						<a href="<?php echo esc_url( $twitter ); ?>" class="icon-twitter"></a>
 					<?php endif; ?>
 
-					<?php echo esc_html( $author->display_name ); ?>
+					<a href="<?php echo get_author_posts_url( $author->ID ); ?>"><?php echo esc_html( $author->display_name ); ?></a>
 				</div>
 				<?php endif; ?>
 		</div>
