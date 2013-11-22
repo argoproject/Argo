@@ -63,6 +63,19 @@ function optionsframework_options() {
 		'recommend' => __('Recommend', 'largo')
 	);
 
+	$region_options = array();
+	global $wp_registered_sidebars;
+	$excluded = array(
+		'Footer 1', 'Footer 2', 'Footer 3', 'Article Bottom', 'Header Ad Zone'
+	);
+	// Let others change the list
+	$excluded = apply_filters( 'largo_excluded_sidebars', $excluded );
+	foreach( $wp_registered_sidebars as $sidebar_id => $sidebar ) {
+		//check if excluded
+		if ( in_array( $sidebar_id, $excluded ) || in_array( $sidebar['name'], $excluded ) ) continue;
+		$region_options[$sidebar_id] = $sidebar['name'];
+	}
+
 	$options = array();
 	$widget_options = array();
 
@@ -468,11 +481,25 @@ function optionsframework_options() {
 		'std' 	=> '0',
 		'type' 	=> 'checkbox');
 
+	$options[] = array(
+		'desc' 	=> __('Default region in lefthand column of Landing Pages', 'largo'),
+		'id' 	=> 'landing_left_region_default',
+		'std' 	=> 'sidebar-main',
+		'type' 	=> 'select',
+		'options' => $region_options);
+
+	$options[] = array(
+		'desc' 	=> __('Default region in righthand column of Landing Pages', 'largo'),
+		'id' 	=> 'landing_right_region_default',
+		'std' 	=> 'sidebar-main',
+		'type' 	=> 'select',
+		'options' => $region_options);
+
 	$screen = get_current_screen();
 	if ( $screen->base == 'widgets' ) {
 		return $widget_options;
 	}
-	
+
 	return $options;
 }
 

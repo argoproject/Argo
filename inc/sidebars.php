@@ -124,34 +124,35 @@ function largo_make_slug($string, $maxLength = 63) {
 
 /**
  * Builds a dropdown menu of the custom sidebars
- * Used in the meta box on post/page edit screen
+ * Used in the meta box on post/page edit screen and landing page edit screen
  *
  * @since 1.0
  */
 if( !function_exists( 'custom_sidebars_dropdown' ) ) {
-	function custom_sidebars_dropdown() {
+	function custom_sidebars_dropdown( $selected = '', $skip_default = false ) {
 		global $wp_registered_sidebars, $post;
-		$custom = get_post_meta( $post->ID, 'custom_sidebar', true );
+		$custom = ( $selected ) ? $selected : get_post_meta( $post->ID, 'custom_sidebar', true );
 		$val = ( $custom ) ? $custom : 'none';
 
 		// Add a default option
-		$output .= '<option';
-		if( $val == 'default' ) $output .= ' selected="selected"';
-		$output .= ' value="default">' . __( 'Default', 'largo' ) . '</option>';
-
-		// Build an array of sidebars, making sure they're real
-	  	$custom_sidebars = preg_split( '/$\R?^/m', of_get_option( 'custom_sidebars' ) );
-		$sidebar_slugs = array_map( 'largo_make_slug', $custom_sidebars );
-
-		// Fill the select element with all registered sidebars that are custom
-		foreach( $wp_registered_sidebars as $sidebar_id => $sidebar ) {
-			if ( !in_array( $sidebar_id, $sidebar_slugs ) ) continue;
-			$output .= '<option';
-			if ( $sidebar_id == $val ) $output .= ' selected="selected"';
-			$output .= ' value="' . $sidebar_id . '">' . $sidebar['name'] . '</option>';
+		if ( ! $skip_default ) {
+			$output .= '<option value="default" '.selected('default',$val).'>' . __( 'Default', 'largo' ) . '</option>';
 		}
 
-		$output .= '</select>';
+		// Filter list of sidebars to exclude those we don't want users to choose
+		$excluded = array(
+			'Footer 1', 'Footer 2', 'Footer 3', 'Article Bottom', 'Header Ad Zone'
+		);
+	  // Let others change the list
+	  $excluded = apply_filters( 'largo_excluded_sidebars', $excluded );
+		// Fill the select element with all registered sidebars that are custom
+		foreach( $wp_registered_sidebars as $sidebar_id => $sidebar ) {
+			//check if excluded
+			if ( in_array( $sidebar_id, $excluded ) || in_array( $sidebar['name'], $excluded ) ) continue;
+
+			$output .= '<option value="' . $sidebar_id . '" ' . selected($sidebar_id, $val) . '>' . $sidebar['name'] . '</option>';
+		}
+
 		echo $output;
 	}
 }
