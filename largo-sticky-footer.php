@@ -19,20 +19,7 @@
 		<?php // The category RSS and author follow links ?>
 		<?php
 		// Get the category object
-		$post_categories = wp_get_post_categories( $wp_query->post->ID );
-		if ( !empty( $post_categories ) ) {
-			$first_category = get_category( array_shift($post_categories));
-
-			// Skip the default 'Uncategorized' category
-			if ( $first_category->name == 'Uncategorized' ) {
-				$first_category = get_category( array_shift($post_categories) );
-			}
-
-			// Make sure we have an actual category
-			if ( is_wp_error($first_category) ) {
-				$first_category = null;
-			}
-		}
+		$cat_feed_link = largo_top_term( array( 'use_icon' => 'rss', 'rss' => true, 'echo' => false ) );
 
 		// Get the author object
 		$author = get_userdata( get_the_author_meta( 'ID' ) );
@@ -42,13 +29,13 @@
 			$author = null;
 		}
 		
-		if ( !empty($author) || !empty($first_category) ): ?>
+		if ( !empty($author) || !empty($cat_feed_link) ): ?>
 		<div class="follow">
 			<h4>Follow</h4>
 
 			<?php
-				if ( $first_category ) {
-					echo '<a class="icon-rss" href="', get_category_feed_link( $first_category->cat_ID ), '">',esc_html($first_category->name),'</a>';
+				if ( $cat_feed_link ) {
+					echo $cat_feed_link;
 			} ?>
 
 				<?php if ( $author ): ?>
