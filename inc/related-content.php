@@ -220,15 +220,17 @@ function largo_has_categories_or_tags() {
  * @todo consider prioritizing tags by popularity?
  */
 if ( ! function_exists( 'largo_categories_and_tags' ) ) {
-	function largo_categories_and_tags( $max = 5, $echo = true, $link = true, $use_icon = false, $separator = ', ', $item_wrapper = 'span', $exclude = array() ) {
+	function largo_categories_and_tags( $max = 5, $echo = true, $link = true, $use_icon = false, $separator = ', ', $item_wrapper = 'span', $exclude = array(), $rss = false ) {
 	    $cats = get_the_category();
 	    $tags = get_the_tags();
 	    $icon = '';
 	    $output = array();
 
 	    // if $use_icon is true, include the markup for the tag icon
-	    if ( $use_icon )
+	    if ( $use_icon === true )
 	    	$icon = '<i class="icon-white icon-tag"></i>';
+        elseif ( $use_icon )
+            $icon = '<i class="icon-white icon-'.esc_attr($use_icon).'"></i>';
 
 	    if ( $cats ) {
 	        foreach ( $cats as $cat ) {
@@ -241,7 +243,7 @@ if ( ! function_exists( 'largo_categories_and_tags' ) ) {
 		            $output[] = sprintf(
 		                __('<%1$s class="post-category-link"><a href="%2$s" title="Read %3$s in the %4$s category">%5$s%4$s</a></%1$s>', 'largo'),
 			                $item_wrapper,
-			                get_category_link( $cat->term_id ),
+			                ( $rss ? get_category_feed_link( $cat->term_id ) : get_category_link( $cat->term_id ) ),
 			                of_get_option( 'posts_term_plural' ),
 			                $cat->name,
 			                $icon
@@ -262,7 +264,7 @@ if ( ! function_exists( 'largo_categories_and_tags' ) ) {
 		            $output[] = sprintf(
 		                __('<%1$s class="post-tag-link"><a href="%2$s" title="Read %3$s tagged with: %4$s">%5$s%4$s</a></%1$s>', 'largo'),
 		                	$item_wrapper,
-		                	get_tag_link( $tag->term_id ),
+		                	( $rss ?  get_tag_feed_link( $tag->term_id ) : get_tag_link( $tag->term_id ) ),
 		                	of_get_option( 'posts_term_plural' ),
 		                	$tag->name,
 		                	$icon
@@ -278,4 +280,50 @@ if ( ! function_exists( 'largo_categories_and_tags' ) ) {
 
 		return $output;
 	}
+}
+
+/**
+ * Returns (and optionally echoes) the 'top term' for a post, falling back to a category if one wasn't specified
+ *
+ * @param array|string $options Settings for post id, echo, link, use icon, wrapper and exclude
+ */
+function largo_top_term( $options = array() ) {
+
+    global $wpdb;
+    //print_r( $wpdb );
+
+    $defaults = array(
+        'post' => get_the_ID(),
+        'echo' => TRUE,
+        'link' => TRUE,
+        'use_icon' => FALSE,
+        'wrapper' => 'span',
+        'exclude' => array(),   //only for compatibility with largo_categories_and_tags
+        'rss' => FALSE,
+    );
+
+    $args = wp_parse_args( $options, $defaults );
+
+    $term_id = get_post_meta( $args['post'], 'top_term', TRUE );
+    $icon = ( $args['use_icon'] === true ) ?  '<i class="icon-white icon-tag"></i>' : ($args['use_icon']) ? '<i class="icon-white icon-'.esc_attr($args['use_icon']).'"></i>' : '' ;   //this will probably change to a callback largo_term_icon() someday
+    $link = ( $args['link'] ) ? array('<a href="%2$s" title="Read %3$s in the %4$s category">','</a>') : array('', '') ;
+
+    if ( $term_id ) {
+        //get the taxonomy slug
+        $taxonomy = $wpdb->get_var( $wpdb->prepare( "SELECT taxonomy FROM $wpdb->term_taxonomy WHERE term_id = %d LIMIT 1", $term_id) );
+        // get the term object
+        $term = get_term( $term_id, $taxonomy );
+        $output = sprintf(
+            '<%1$s class="post-category-link">'.$link[0].'%5$s%4$s'.$link[1].'</%1$s>',
+            $args['wrapper'],
+            ($args['rss'] ? get_category_feed_link( $term->ID ) : get_term_link( $term ) ),
+            of_get_option( 'posts_term_plural' ),
+            $term->name,
+            $icon
+        );
+    } else {
+        $output = implode( largo_categories_and_tags( 1, false, $args['link'], $args['use_icon'], '', $args['wrapper'], $args['exclude'], $args['rss']) );
+    }
+    if ( $args['echo'] ) echo $output;
+    return $output;
 }
