@@ -19,7 +19,7 @@
 		<?php // The category RSS and author follow links ?>
 		<?php
 		// Get the category object
-		$cat_feed_link = largo_top_term( array( 'use_icon' => 'rss', 'rss' => true, 'output' => false ) );
+		$cat_feed_link = largo_top_term( array( 'use_icon' => 'rss', 'rss' => true, 'echo' => false ) );
 
 		// Get the author object
 		$author = get_userdata( get_the_author_meta( 'ID' ) );
