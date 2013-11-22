@@ -1,17 +1,15 @@
 <?php
-	$SITEURL = ( $_SERVER[ 'HTTPS' ] ) ? 'https://' : 'http://';
-	$SITEURL .= $_SERVER[ 'HTTP_HOST' ] or $_SERVER[ 'SERVER_NAME' ];
-	$SITEURL .= $_GET[ 'wpbase' ];
-?>
-<!DOCTYPE html>
+
+	require( '../../../../../../../wp-load.php' );	// we're a long way from home, Toto
+
+?><!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<title>Wrap content in module</title>
-	<script language="javascript" type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-	<script language="javascript" type="text/javascript" src="<?php echo $SITEURL; ?>/wp-includes/js/tinymce/tiny_mce_popup.js"></script>
-	<script language="javascript" type="text/javascript" src="<?php echo $SITEURL; ?>/wp-includes/js/tinymce/utils/form_utils.js"></script>
-	<script language="javascript" type="text/javascript" src="<?php echo $SITEURL; ?>/wp-content/themes/largo/js/tinymce/plugins/largo/tinymce.js"></script>
-	<style type="text/css">
+	<script language="javascript" type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script language="javascript" type="text/javascript" src="<?php echo site_url('/wp-includes/js/tinymce/tiny_mce_popup.js'); ?>"></script>
+	<script language="javascript" type="text/javascript" src="<?php echo site_url('/wp-includes/js/tinymce/utils/form_utils.js'); ?>"></script>
+	<script language="javascript" type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/tinymce/plugins/largo/tinymce.js"></script>	<style type="text/css">
 	li {
 		list-style: none;
 	}

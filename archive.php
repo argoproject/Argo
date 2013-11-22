@@ -20,12 +20,10 @@ get_header();
 			 */
 
 			// if it's an author page, show the author box with their bio, social links, etc.
-
 			if ( is_author() ) {
 				get_template_part( 'largo-author-box' );
 
 			// for categories, tags, and custom taxonomies we show the term name and description
-
 			} elseif ( is_category() || is_tag() || is_tax() ) {
 				if ( is_category() ) {
 					$title = single_cat_title( '', false );
@@ -40,18 +38,15 @@ get_header();
 		?>
 			<header class="archive-background clearfix">
 				<?php
-					if ( $title)
-						echo '<h1 class="page-title">' . $title . '</h1>';
-					if ( $description )
-						echo '<div class="archive-description">' . $description . '</div>';
+					if ( $title) echo '<h1 class="page-title">' . $title . '</h1>';
+					if ( $description ) echo '<div class="archive-description">' . $description . '</div>';
 
 					// category pages show a list of related terms
-
 					if ( is_category() && largo_get_related_topics_for_category( get_queried_object() ) != '<ul></ul>' ) { ?>
 						<div class="related-topics">
 							<h5><?php _e('Related Topics:', 'largo'); ?> </h5>
 							<?php echo largo_get_related_topics_for_category( get_queried_object() ); ?>
-						</div> <!-- /.related-topics -->
+						</div>
 				<?php
 					}
 				?>
@@ -59,7 +54,6 @@ get_header();
 		<?php
 
 			// if it's a date archive we'll show the date dropdown in lieu of a description
-
 			} elseif ( is_date() ) {
 		?>
 					<nav class="archive-dropdown">
@@ -67,7 +61,9 @@ get_header();
 						<?php wp_get_archives( array('type' => 'monthly', 'format' => 'option' ) ); ?>
 						</select>
 					</nav>
-		<?php } ?>
+		<?php
+			} // endif
+		?>
 			</header>
 
 			<h3 class="recent-posts clearfix">
@@ -108,7 +104,6 @@ get_header();
 			while ( have_posts() ) : the_post();
 				get_template_part( 'content', 'archive' );
 			endwhile;
-
 			largo_content_nav( 'nav-below' );
 		} else {
 			get_template_part( 'content', 'not-found' );
