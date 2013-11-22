@@ -1723,7 +1723,8 @@ table .span24 {
 #page,
 #site-footer,
 #footer-logos,
-.sticky-nav-container {
+.sticky-nav-container,
+.sticky-footer-container {
   max-width: 1170px;
   padding: 0 2.5%;
 }
@@ -3890,6 +3891,65 @@ p.comment-form-comment {
   display: inline;
   padding-right: 10px;
 }
+.sticky-footer-holder {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 99998;
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: opacity 0.3s;
+  -moz-transition: opacity 0.3s;
+  -ms-transition: opacity 0.3s;
+  -o-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+  background-color: #222222;
+  color: #ffffff;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding: 5px 0;
+}
+.sticky-footer-holder.show {
+  visibility: visible;
+  opacity: 1;
+}
+.sticky-footer-holder .sticky-footer-container {
+  margin: 0 auto;
+}
+.sticky-footer-holder .share {
+  float: left;
+  margin-right: 40px;
+}
+.sticky-footer-holder .share-button {
+  display: inline-block;
+  width: 1.5em;
+  height: 1.5em;
+  cursor: pointer;
+  text-align: center;
+}
+.sticky-footer-holder a {
+  color: #ffffff;
+}
+.sticky-footer-holder a:hover {
+  text-decoration: none;
+}
+.sticky-footer-holder .comments {
+  float: left;
+  margin-right: 40px;
+}
+.sticky-footer-holder .follow {
+  float: right;
+}
+.sticky-footer-holder .follow-author {
+  display: inline-block;
+}
+.sticky-footer-holder h4 {
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 1em;
+  font-weight: normal;
+  margin: 0;
+}
 .byline .clean-read {
   float: right;
 }
@@ -4130,6 +4190,9 @@ img[class*="wp-image-"] {
     width: 100% !important;
     margin: 0 !important;
   }
+  .sticky-footer-holder .follow-author {
+    display: none;
+  }
 }
 @media (max-width: 768px) {
   #sidebar,
@@ -4283,6 +4346,9 @@ img[class*="wp-image-"] {
   #series-main #content {
     margin-left: 0;
   }
+  .sticky-footer-holder .follow-author {
+    display: none;
+  }
 }
 @media (max-width: 480px) {
   .global-nav .org-logo,
@@ -4323,6 +4389,16 @@ img[class*="wp-image-"] {
     clear: both;
     float: none;
     text-align: left;
+  }
+  .sticky-footer-holder .share {
+    margin-right: 0;
+  }
+  .sticky-footer-holder .comments {
+    margin-right: 0;
+    float: right;
+  }
+  .sticky-footer-holder .follow {
+    display: none;
   }
 }
 @media print {

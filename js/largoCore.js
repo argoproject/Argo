@@ -115,28 +115,21 @@ jQuery(document).ready(function($) {
 	(function(){
 		var stickyNavEl = $( '.sticky-nav-holder' );
 		var mainEl = $('#main');
+		
 		mainEl.waypoint( function( direction ) {
-			if ( direction == 'down' ) {
-				// Switch on the sticky nav
-				stickyNavEl.addClass('show');
+			stickyNavEl.toggleClass( 'show', direction == 'down' );
+		}, { offset: $('#wpadminbar').height() + parseInt( mainEl.css('marginTop') ) 	});
 
-			} else {
-				// Switch off the sticky nav
-				stickyNavEl.removeClass('show');
-			}
-		}, {
-			offset: $('#wpadminbar').height() + parseInt( mainEl.css('marginTop') )
-		});
+		// Check if their is a sticky footer
+		var stickyFooterEl = $( '.sticky-footer-holder' );
+		if ( stickyFooterEl.length ) {
+			// Show the sticky footer by default
+			stickyFooterEl.addClass( 'show' );
 
-		// Show the sticky footer here
-
-		$('#site-footer').waypoint( function( direction ) {
-			if ( direction == 'down' ) {
-				// Switch off the sticky footer
-			} else {
-				// Switch on the sticky footer
-			}
-		}, { offset: '100%' } );
+			$('#site-footer').waypoint( function( direction ) {
+				stickyFooterEl.toggleClass( 'show', direction == 'up' );
+			}, { offset: '100%' } );
+		}
 	})();
 
 });
