@@ -70,7 +70,14 @@ $content_span = array( 'one-column' => 12, 'two-column' => 8, 'three-column' => 
 
 
 <?php // display left rail
-if ( 'three-column' == $opt['cftl_layout'] ) get_sidebar( 'series-left' );
+if ( 'three-column' == $opt['cftl_layout'] ) : ?>
+	<aside id="sidebar-left" class="span3">
+		<div class="widget-area" role="complementary">
+			<?php dynamic_sidebar( $opt['left_region'] ); ?>
+		</div>
+	</aside>
+<?php
+endif;
 ?>
 
 <div id="content" class="span<?php echo $content_span[ $opt['cftl_layout'] ]; ?> stories" role="main">
@@ -124,18 +131,28 @@ if ( isset( $wp_query->query_vars['term'] )
 
 	$wp_query = $old_query;
 	wp_reset_postdata();
-	unset( $opt );
 } ?>
 
 </div><!-- /.grid_8 #content -->
 
 <?php // display left rail
 if ($opt['cftl_layout'] != 'one-column') : ?>
-	<?php get_sidebar('series-right'); ?>
-<?php endif; ?>
+<aside id="sidebar" class="span4">
+	<?php do_action('largo_before_sidebar_content'); ?>
+	<div class="widget-area" role="complementary">
+		<?php
+			do_action('largo_before_sidebar_widgets');
+			dynamic_sidebar( $opt['right_region'] );
+			do_action('largo_after_sidebar_widgets');
+		?>
+	</div><!-- .widget-area -->
+	<?php do_action('largo_after_sidebar_content'); ?>
+</aside>
 
+<?php
+endif;
 
-<?php //display series footer
+//display series footer
 if ( 'none' != $opt['footer_style'] ) : ?>
 	<section id="series-footer">
 		<?php
