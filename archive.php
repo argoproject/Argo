@@ -5,7 +5,7 @@
 get_header();
 ?>
 
-<div id="content" class="stories span8" role="main">
+<div class="clearfix">
 
 		<?php if ( have_posts() ) { ?>
 
@@ -40,6 +40,30 @@ get_header();
 		?>
 			<header class="archive-background clearfix">
 				<?php
+
+					/*
+					 * Show a label for the list of recent posts
+					 * again, tailored to the type of page we're looking at
+					 */
+					$posts_term = of_get_option( 'posts_term_plural', 'Stories' );
+
+					if ( is_author() ) {
+						$rss_link =  get_author_feed_link( get_the_author_meta('ID') );
+					} elseif ( is_category() ) {
+						$rss_link =  get_category_feed_link( get_queried_object_id() );
+					} elseif ( is_tag() ) {
+						$rss_link =  get_tag_feed_link( get_queried_object_id() );
+					} elseif ( is_tax() ) {
+						$queried_object = get_queried_object();
+						$term_id = intval( $queried_object->term_id );
+						$tax = $queried_object->taxonomy;
+						$rss_link = get_term_feed_link( $term_id, $tax );
+					}
+
+					if ( $rss_link ) {
+						printf(__('<a class="rss-link rss-subscribe-link" href="%1$s">Subscribe <i class="icon-rss"></i></a>', 'largo'), $rss_link );
+					}
+
 					if ( $title)
 						echo '<h1 class="page-title">' . $title . '</h1>';
 					if ( $description )
@@ -70,52 +94,35 @@ get_header();
 		<?php } ?>
 			</header>
 
-			<h3 class="recent-posts clearfix">
-				<?php
 
-					/*
-					 * Show a label for the list of recent posts
-					 * again, tailored to the type of page we're looking at
-					 */
-					$posts_term = of_get_option( 'posts_term_plural', 'Stories' );
+		<?php 
+			if ( $paged < 2 && ( is_category() || is_tag() || is_tax() ) ) {
+				get_template_part( 'index-primary-featured-posts' );
+				get_template_part( 'index-secondary-featured-posts' );
+			}
+		?>
+	<div class="row-fluid clearfix">
+		<div class="stories span8" role="main" id="content">
+		<?php
+				// and finally wind the posts back so we can go through the loop as usual
 
-					if ( is_author() ) {
-						printf(__('Recent %1$s<a class="rss-link" href="%2$s"><i class="icon-rss"></i></a>', 'largo'), $posts_term, get_author_feed_link( get_the_author_meta('ID') ) );
-					} elseif ( is_category() ) {
-						printf(__('Recent %1$s<a class="rss-link" href="%2$s"><i class="icon-rss"></i></a>', 'largo'), $posts_term, get_category_feed_link( get_queried_object_id() ) );
-					} elseif ( is_tag() ) {
-						printf(__('Recent %1$s<a class="rss-link" href="%2$s"><i class="icon-rss"></i></a>', 'largo'), $posts_term, get_tag_feed_link( get_queried_object_id() ) );
-					} elseif ( is_tax() ) {
-						$queried_object = get_queried_object();
-						$term_id = intval( $queried_object->term_id );
-						$tax = $queried_object->taxonomy;
-						printf(__('Recent %1$s<a class="rss-link" href="%2$s"><i class="icon-rss"></i></a>', 'largo'), $posts_term, get_term_feed_link( $term_id, $tax ) );
-					} elseif ( is_month() ) {
-						printf(__('Monthly Archives: <span>%s</span>', 'largo'), get_the_date('F Y') );
-					} elseif ( is_year() ) {
-						printf(__('Yearly Archives: <span>%s</span>', 'largo'), get_the_date('Y') );
-					} else {
-						_e('Archives', 'largo');
-					}
-					?>
-			</h3>
+				rewind_posts();
 
-	<?php
-			// and finally wind the posts back so we can go through the loop as usual
+				while ( have_posts() ) : the_post();
+					get_template_part( 'content', 'archive' );
+				endwhile;
 
-			rewind_posts();
+				largo_content_nav( 'nav-below' );
+			} else {
+				get_template_part( 'content', 'not-found' );
+			}
+		?>
+		</div><!--#content-->
 
-			while ( have_posts() ) : the_post();
-				get_template_part( 'content', 'archive' );
-			endwhile;
+		<?php get_sidebar(); ?>
+	</div>
 
-			largo_content_nav( 'nav-below' );
-		} else {
-			get_template_part( 'content', 'not-found' );
-		}
-	?>
+</div>
 
-</div><!--#content-->
 
-<?php get_sidebar(); ?>
 <?php get_footer(); ?>
