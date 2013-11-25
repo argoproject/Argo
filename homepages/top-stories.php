@@ -2,6 +2,7 @@
 /**
  * Home Template: Top Stories
  * Description: A newspaper-like layout highlighting featured stories
+ * Sidebars: One Sidebar, sans description | Second SB (with a description) | Third (double (parens))
  */
 
 global $shown_ids, $layout, $tags;
