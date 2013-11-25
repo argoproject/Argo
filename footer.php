@@ -26,6 +26,8 @@
 	</footer>
 </div>
 
+<?php get_template_part( 'largo-sticky-footer' ); ?>
+
 <?php wp_footer(); ?>
 
 </body>
