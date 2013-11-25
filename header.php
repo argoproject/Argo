@@ -184,6 +184,90 @@
 	    </div>
 	  </div>
 	</nav>
+
+	<div class="sticky-nav-holder"><div class="sticky-nav-container">
+		<nav id="sticky-nav" class="sticky-navbar navbar clearfix">
+		  <div class="navbar-inner">
+		    <div class="container">
+
+		      <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+		      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+		        <div class="label"><?php _e('More', 'largo'); ?></div>
+		        <div class="bars">
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+		        </div>
+		      </a>
+
+		      <ul class="nav">
+		        <li class="home-link"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><i class="icon-home icon-white"></i></a></li>
+		        <li class="divider-vertical"></li>
+		      </ul>
+		      <ul class="nav hidden-phone">
+		        <?php
+					$args = array(
+						'theme_location' => 'sticky-nav',
+						'depth'		 => 0,
+						'container'	 => false,
+						'items_wrap' => '%3$s',
+						'menu_class' => 'nav',
+						'walker'	 => new Bootstrap_Walker_Nav_Menu()
+					);
+					wp_nav_menu($args);
+				?>
+		      </ul>
+		      <ul class="nav">
+		        <li class="dropdown visible-phone" id="category-list">
+				  <a class="dropdown-toggle" data-toggle="dropdown" href="#category-list">
+				    Categories
+					<b class="caret"></b>
+				  </a>
+				  <ul class="dropdown-menu">
+				    <?php
+						$args = array(
+							'theme_location' => 'navbar-categories',
+							'depth'		 => 1,
+							'container'	 => false,
+							'items_wrap' => '%3$s'
+						);
+						wp_nav_menu($args);
+					?>
+				  </ul>
+				</li>
+		      </ul>
+
+		      <!-- Everything you want hidden at 940px or less, place within here -->
+		      <div class="nav-collapse">
+		        <ul class="nav">
+		        	<?php
+						$args = array(
+							'theme_location' => 'navbar-supplemental',
+							'depth'		 => 1,
+							'container'	 => false,
+							'items_wrap' => '%3$s'
+						);
+
+						wp_nav_menu($args);
+					?>
+		        </ul>
+		        <ul class="nav visible-phone">
+			        <li class="divider"></li>
+			        <?php
+						$args = array(
+							'theme_location' => 'global-nav',
+							'depth'		 => 1,
+							'container'	 => false,
+							'items_wrap' => '%3$s'
+						);
+						wp_nav_menu($args);
+					?>
+		         </ul>
+		      </div>
+		    </div>
+		  </div>
+		</nav>
+	</div></div>
 	<?php if ( of_get_option( 'show_dont_miss_menu') ) : ?>
 	<nav id="secondary-nav" class="clearfix">
     	<div id="topics-bar" class="span12 hidden-phone">
