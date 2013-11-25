@@ -368,24 +368,7 @@ function cftl_tax_landing_main($post) {
 	wp_nonce_field(plugin_basename(__FILE__), 'cftl_tax_landing_main');
 	$fields = ($post->post_title) ? get_post_custom( $post->ID ) : cftl_field_defaults();
 	$fields['show'] = maybe_unserialize($fields['show'][0]);
-
-	// get custom widget title if there is one, otherwise assign the title of the post
-	$widget_title = (trim($fields['custom-widget-title'][0] != '')) ? $fields['custom-widget-title'][0] : cftl_title($post);
 	?>
-<div class="form-field-checkboxes">
-	<h4>Widget Region(s)</h4>
-	<div>
-		<label for="create-widget-region">
-			<input type="checkbox" id="create-widget-region" name="create-widget-region" value="1" <?php checked ($fields['create-widget-region'][0], 1 ) ?> /> Create Widget Region(s)
-		</label>
-	</div>
-</div>
-<div class="form-field">
-	<h4>Widget Title</h4>
-	<div>
-		<input type="text" name="custom-widget-title" id="custom-widget-title" maxlength="35" value="<?php echo $widget_title ?>">
-	</div>
-</div>	
 <div class="form-field-radios">
 	<h4>Layout</h4>
 	<div class="options">
@@ -403,8 +386,24 @@ function cftl_tax_landing_main($post) {
 		</div>
 		<div id="explainer" class="<?php echo $fields['cftl_layout'][0]; ?>">
 			<span class="one-column">No regions: posts take up full width </span>
-			<span class="two-column">One widget region, called "Series <?php echo $widget_title; ?>: Right"</span>
-			<span class="three-column">Two widget regions, called "Series <?php echo $widget_title; ?>: Left" and "Series <?php echo $widget_title; ?>: Right"</span>
+			<span class="two-column">One widget region on right</span>
+			<span class="three-column">Two widget regions, skinny on left and normal on right</span>
+		</div>
+		<div id="left-region" class="regioner">
+			<strong>Lefthand Column Widget Region</strong><br/>
+			<select name="left_region">
+			<?php
+				custom_sidebars_dropdown( $fields['left_region'][0], TRUE );
+			?>
+			</select>
+		</div>
+		<div id="right-region" class="regioner">
+			<strong>Righthand Column Widget Region</strong><br/>
+			<select name="right_region">
+			<?php
+				custom_sidebars_dropdown( $fields['right_region'][0], TRUE );
+			?>
+			</select>
 		</div>
 	</div>
 </div>
@@ -531,6 +530,8 @@ function cftl_field_defaults( ) {
 		'post_order' => array('DESC'),
 		'show' => array('image' => 1, 'excerpt' => 1, 'byline' => 1, 'tags' => 0),
 		'footer_enabled' => array(1),
+		'left_region' => of_get_option('landing_left_region_default', 'sidebar-single'),
+		'right_region' => of_get_option('landing_right_region_default', 'sidebar-main'),
 	);
 }
 
@@ -555,14 +556,14 @@ function cftl_tax_landing_save_layout($post_id) {
 		'show_series_byline',
 		'show_sharebar',
 		'header_style',
-		'cftl_layout', //needs to instantiate widget regions
-		'create-widget-region',
-		'custom-widget-title',
+		'cftl_layout',
+		'left_region',
+		'right_region',
 		'per_page',
 		'post_order',
 		'show',	//maybe serialize these four?
 		'footer_style',
-		'footerhtml'	//instantiate another widget region
+		'footerhtml',	//instantiate another widget region
 	);
 
 	foreach ($layout_fields as $field_name) {
@@ -576,67 +577,20 @@ add_action('save_post', 'cftl_tax_landing_save_layout');
  * Instantiate all our necessary widget regions
  */
 function cftl_custom_sidebars() {
-	//check to see if the create widget option is checked first
-	if(!cftl_get_meta_values('create-widget-region')){
 
-		//get all the left ones and the titles they connect to
-		$left_widgets = cftl_get_meta_values( 'cftl_layout', 'three-column' );
-		foreach ($left_widgets as $widget ) {
-			// Grab the widget tile if there is a custom title, otherwise use the post title
-			$widget_title = (trim(ctfl_get_meta_value_single('custom-widget-title'))) ? ctfl_get_meta_value_single('custom-widget-title') : $widget->post_title ;
-			$sidebar_slug = largo_make_slug( $widget_title);
-			if ( $sidebar_slug ) {
-				register_sidebar( array(
-					'name' 			=> __( 'Series ' . $widget_title . ": Left", 'largo' ),
-					'id' 			=> $sidebar_slug . "_left",
-					'before_widget' => '<aside id="%1$s" class="%2$s clearfix">',
-					'after_widget' 	=> '</aside>',
-					'before_title' 	=> '<h3 class="widgettitle">',
-					'after_title' 	=> '</h3>'
-				) );
-				register_sidebar( array(
-					'name' 			=> __( 'Series ' . $widget_title . ": Right", 'largo' ),
-					'id' 			=> $sidebar_slug . "_right",
-					'before_widget' => '<aside id="%1$s" class="%2$s clearfix">',
-					'after_widget' 	=> '</aside>',
-					'before_title' 	=> '<h3 class="widgettitle">',
-					'after_title' 	=> '</h3>'
-				) );
-			}
-		}
-
-		//get all the right ones and the titles they connect to
-		$right_widgets = cftl_get_meta_values( 'cftl_layout', 'two-column' );
-		foreach ($right_widgets as $widget ) {
-			// Grab the widget tile if there is a custom title, otherwise use the post title
-			$widget_title = (trim(ctfl_get_meta_value_single('custom-widget-title'))) ? ctfl_get_meta_value_single('custom-widget-title') : $widget->post_title ;
-			$sidebar_slug = largo_make_slug( $widget_title );
-			if ( $sidebar_slug ) {
-				register_sidebar( array(
-					'name' 			=> __( 'Series ' . $widget_title . ": Right", 'largo' ),
-					'id' 			=> $sidebar_slug . "_right",
-					'before_widget' => '<aside id="%1$s" class="%2$s clearfix">',
-					'after_widget' 	=> '</aside>',
-					'before_title' 	=> '<h3 class="widgettitle">',
-					'after_title' 	=> '</h3>'
-				) );
-			}
-		}
-
-		//get all the footer ones and the titles they connect to
-		$footer_widgets = cftl_get_meta_values( 'footer_style', 'widget' );
-		foreach ($footer_widgets as $widget ) {
-			$sidebar_slug = largo_make_slug( $widget_title  );
-			if ( $sidebar_slug ) {
-				register_sidebar( array(
-					'name'       	=> __( 'Series ' . $widget_title  . ": Footer", 'largo' ),
-					'id' 			=> $sidebar_slug . "_footer",
-					'before_widget' => '<aside id="%1$s" class="%2$s clearfix">',
-					'after_widget' 	=> '</aside>',
-					'before_title' 	=> '<h3 class="widgettitle">',
-					'after_title' 	=> '</h3>'
-				) );
-			}
+	//get all the footer ones and the titles they connect to
+	$footer_widgets = cftl_get_meta_values( 'footer_style', 'widget' );
+	foreach ($footer_widgets as $widget ) {
+		$sidebar_slug = largo_make_slug( $widget_title  );
+		if ( $sidebar_slug ) {
+			register_sidebar( array(
+				'name'       	=> __( 'Series ' . $widget_title  . ": Footer", 'largo' ),
+				'id' 			=> $sidebar_slug . "_footer",
+				'before_widget' => '<aside id="%1$s" class="%2$s clearfix">',
+				'after_widget' 	=> '</aside>',
+				'before_title' 	=> '<h3 class="widgettitle">',
+				'after_title' 	=> '</h3>'
+			) );
 		}
 	}
 }

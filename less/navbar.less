@@ -11,7 +11,7 @@
   *z-index: 2;
 
   overflow: visible;
-  margin-bottom: @baseline / 5;
+  margin-bottom: @baseline/5;
 }
 
 // Gradient is applied to it's own element because overflow visible is not honored by IE when filter is present
@@ -79,7 +79,7 @@
   padding-right: 10px;
 }
 .navbar .open > a,
-.navbar li > a:hover {
+html.no-touch .navbar li > a:hover {
   background-color: @navbarLinkBackgroundActive;
   color: #eee;
 }
@@ -231,7 +231,8 @@ li.home-link:hover i {
     text-shadow: none;
   }
 }
-ul.nav li.dropdown:hover ul.dropdown-menu {
+html.no-touch ul.nav li.dropdown:hover ul.dropdown-menu,
+html.touch ul.nav li.dropdown.open ul.dropdown-menu {
     display: block;
 }
 

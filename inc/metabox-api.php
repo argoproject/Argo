@@ -64,7 +64,7 @@ function largo_add_meta_content( $callback, $box_id ) {
 	}
 
 	// Add this field to the array
-	$largo['meta']['boxes'][$box_id]['callbacks'] = $callback;
+	$largo['meta']['boxes'][$box_id]['callbacks'][] = $callback;
 }
 
 /**

@@ -38,9 +38,9 @@ add_action('admin_menu','remove_default_post_screen_metaboxes');
 
 // Related posts controls
 largo_add_meta_box(
-	'largo_custom_related',
-	'Top Custom Related Posts',
-	'largo_custom_related_meta_box_display', //could also be added with largo_add_meta_content('largo_custom_related_meta_box_display', 'largo_custom_related')
+	'largo_additional_options',
+	'Additional Options',
+	'largo_custom_related_meta_box_display', //could also be added with largo_add_meta_content('largo_custom_related_meta_box_display', 'largo_additional_options')
 	'post',
 	'side',
 	'core'
@@ -77,7 +77,9 @@ largo_add_meta_box(
 );
 
 
-// Templates for displaying the custom meta boxes
+/**
+ * Contents for the 'byline' metabox
+ */
 function largo_byline_meta_box_display() {
 	global $post;
 	$values = get_post_custom( $post->ID );
@@ -98,6 +100,9 @@ function largo_byline_meta_box_display() {
 	largo_register_meta_input( array('largo_byline_text', 'largo_byline_link') );
 }
 
+/**
+ * Contents for the Layout Options metabox
+ */
 function largo_layout_meta_box_display () {
 	global $post;
 
@@ -123,6 +128,9 @@ function largo_layout_meta_box_display () {
 	largo_register_meta_input('custom_sidebar');
 }
 
+/**
+ * Content for the Featured Videometabox
+ */
 function largo_featured_video_meta_box_display() {
   global $post;
   $values = get_post_custom( $post->ID );
@@ -137,12 +145,53 @@ function largo_featured_video_meta_box_display() {
 
 }
 
-
+/**
+ * Content for the Additional Options metabox
+ */
 function largo_custom_related_meta_box_display() {
 	global $post;
 
 	$value = get_post_meta( $post->ID, '_largo_custom_related_posts', true );
-	echo '<p>', __('Enter the post IDs separated by commas.'), '</p>';
+
+	echo '<p><strong>' . __('Related Posts', 'largo') . '</strong><br />';
+	echo __('To override the default related posts functionality enter specific related post IDs separated by commas.') . '</p>';
 	echo '<input type="text" name="largo_custom_related_posts" value="', esc_attr($value),'" />';
 	largo_register_meta_input('largo_custom_related_posts');
 }
+
+
+/**
+ * Additional content for the Additional Options metabox
+ */
+function largo_top_tag_display() {
+	global $post;
+
+	$top_term = get_post_meta( $post->ID, 'top_term', TRUE );
+	$terms = get_the_terms( $post->ID, array( 'series', 'category', 'post_tag' ) );
+
+	if ( ! $terms ) return; //no post terms yet? Disregard this then
+
+	echo '<p><strong>' . __('Top Term', 'largo') . '</strong><br />';
+	echo __('Identify which of this posts\'s terms is primary.') . '</p>';
+	echo '<select name="top_term" id="top_term" class="dropdown">';
+
+	foreach( $terms as $term ) {
+		echo '<option value="' . $term->term_id . '"' . selected( $term->term_id, $top_term, FALSE ) . ">" . $term->name . '</option>';
+	}
+
+	echo '</select>';
+
+	largo_register_meta_input('top_term');
+}
+largo_add_meta_content('largo_top_tag_display', 'largo_additional_options');
+
+/**
+ * Load JS for our top-terms select
+ */
+function largo_top_terms_js() {
+	global $typenow;
+  if( $typenow == 'post' ) {
+  	wp_enqueue_script( 'top-terms', get_template_directory_uri() . '/js/top-terms.js', array( 'jquery' ) );
+  }
+}
+add_action( 'admin_enqueue_scripts', 'largo_top_terms_js' );

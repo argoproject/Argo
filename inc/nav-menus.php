@@ -9,6 +9,7 @@
 function largo_register_custom_menus() {
     $menus = array(
         'global-nav'         	=> __( 'Global Navigation', 'largo' ),
+        'sticky-nav'          => __( 'Sticky Navigation', 'largo' ),
         'navbar-categories'     => __( 'Navbar Categories List', 'largo' ),
         'navbar-supplemental'	=> __( 'Navbar Supplemental Links', 'largo' ),
         'dont-miss'       		=> __( 'Don\'t Miss', 'largo' ),
@@ -132,7 +133,6 @@ class Bootstrap_Walker_Nav_Menu extends Walker_Nav_Menu {
 	}
 
 	function display_element( $element, &$children_elements, $max_depth, $depth=0, $args, &$output ) {
-
 		if ( !$element )
 			return;
 

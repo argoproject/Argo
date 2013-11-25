@@ -60,10 +60,6 @@
  			<?php endif; ?>
 
 		<?php
-		// Author bio and social links
-		if ( largo_show_author_box() )
-			get_template_part( 'largo-author-box' );
-
 		// Related posts
 		if ( of_get_option( 'show_related_content' ) )
 			get_template_part( 'largo-related-posts' );
