@@ -115,3 +115,28 @@ if ( ! function_exists( 'largo_setup' ) ) {
 	}
 }
 add_action( 'after_setup_theme', 'largo_setup' );
+
+
+/**
+ * Helper for setting specific theme options (optionsframework)
+ * Would be nice if optionsframework included this natively
+ * See https://github.com/devinsays/options-framework-plugin/issues/167
+ */
+if ( ! function_exists( 'of_set_option' ) ) {
+	function of_set_option( $option_name, $option_value ) {
+		$config = get_option( 'optionsframework' );
+
+		if ( ! isset( $config['id'] ) ) {
+			return false;
+		}
+
+		$options = get_option( $config['id'] );
+
+		if ( $options ) {
+			$options[$option_name] = $option_value;
+			return update_option( $config['id'], $options );
+		}
+
+		return false;
+	}
+}

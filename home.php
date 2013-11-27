@@ -9,18 +9,18 @@ get_header();
  * and get the theme option to determine if this is a two column or three column layout
  */
 $shown_ids = array();
-$layout = of_get_option('homepage_layout');
+$home_template = str_replace('.php', '', of_get_option( 'home_template', 'blog.php' ) );
+$layout_class = of_get_option('home_template');
 $tags = of_get_option ('tag_display');
 ?>
 
-<div id="content" class="stories span8 <?php echo $layout; ?>" role="main">
+<div id="content" class="stories span8 <?php echo sanitize_html_class(basename($home_template)); ?>" role="main">
 
-	<?php if ( $layout === '3col' ) { ?>
+	<?php if ( is_active_sidebar('homepage-left-rail') ) { ?>
 	<div id="content-main" class="span8">
 	<?php }
 
-		$home_template = str_replace('.php', '', of_get_option( 'home_template', 'blog.php' ) );
-		get_template_part( $home_template );
+	get_template_part( $home_template );
 
 
 	// sticky posts box if this site uses it
@@ -60,12 +60,10 @@ $tags = of_get_option ('tag_display');
 		}
 	}
 
-	if ( $layout === '3col' ) { ?>
+	if ( is_active_sidebar('homepage-left-rail') ) { ?>
 	</div>
 	<div id="left-rail" class="span4">
-	<?php if ( ! dynamic_sidebar( 'homepage-left-rail' ) ) : ?>
-		<p><?php _e('Please add widgets to this content area in the WordPress admin area under appearance > widgets.', 'largo'); ?></p>
-	<?php endif; ?>
+	<?php dynamic_sidebar( 'homepage-left-rail' ) ?>
 	</div>
 	<?php } ?>
 

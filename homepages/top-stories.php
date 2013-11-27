@@ -2,7 +2,7 @@
 /**
  * Home Template: Top Stories
  * Description: A newspaper-like layout highlighting featured stories
- * Sidebars: One Sidebar, sans description | Second SB (with a description) | Third (double (parens))
+ * Sidebars: Homepage Left Rail (An optional widget area that, when enabled, appears to the left of the main content area on the homepage)
  */
 
 global $shown_ids, $layout, $tags;

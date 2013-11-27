@@ -123,3 +123,20 @@ function largo_enqueue_home_assets() {
 
 }
 add_action( 'wp_enqueue_scripts', 'largo_enqueue_home_assets' );
+
+/**
+ * Backwards-compatibility with older versions of Largo
+ */
+function largo_home_transition() {
+	$old_regime = of_get_option('homepage_top', 0);
+	$new_regime = of_get_option('home_template', 0);
+
+	// we're using the old system and the new one isn't in place, act accordingly
+	// the home template sidebars have same names as old regime so that *shouldn't* be an issue
+	if ( $old_regime && ! $new_regime ) {
+		//minor name change
+		if ( $old_regime == 'topstories' ) $old_regime = 'top-stories';
+		of_set_option( 'home_template', 'homepages/'.$old_regime.".php" );
+	}
+}
+add_action('init', 'largo_home_transition');
