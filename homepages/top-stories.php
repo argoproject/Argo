@@ -5,10 +5,10 @@
  * Sidebars: Homepage Left Rail (An optional widget area that, when enabled, appears to the left of the main content area on the homepage)
  */
 
-global $shown_ids, $layout, $tags;
+global $largo, $shown_ids, $tags;
 ?>
 <div id="homepage-featured" class="row-fluid clearfix">
-	<?php if ( $layout === '3col' ) { ?>
+	<?php if ( is_active_sidebar('homepage-left-rail') ) { ?>
 	<div class="top-story span12">
 	<?php } else { ?>
 	<div class="top-story span8">
@@ -51,7 +51,7 @@ global $shown_ids, $layout, $tags;
 		endif; // end top story ?>
 	</div>
 
-	<?php if ( $layout === '2col' ) { ?>
+	<?php if ( !is_active_sidebar('homepage-left-rail') ) { ?>
 	<div class="sub-stories span4">
 		<?php $substories = largo_get_featured_posts( array(
 			'tax_query' => array(
@@ -62,7 +62,7 @@ global $shown_ids, $layout, $tags;
 				)
 			),
 			'showposts'		=> 6,
-			'post__not_in' 	=> $ids
+			'post__not_in' 	=> $shown_ids
 		) );
 		if ( $substories->have_posts() ) :
 			$count = 1;

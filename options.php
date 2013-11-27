@@ -370,6 +370,7 @@ function optionsframework_options() {
 		'name' 	=> __('Layout Options', 'largo'),
 		'type' 	=> 'heading');
 
+	/*
 	$options[] = array(
 		'name' 	=> __('Overall Homepage Layout', 'largo'),
 		'desc' 	=> __('<strong>Select the overall layout you would like to use for your site\'s homepage.</strong> By default, Largo has a two column layout with a main content area on the left and a configurable sidebar on the right, but you can add a skinny side rail (configurable under the appearance > widgets tab) to left of the main content area by selecting the three-column option.', 'largo'),
@@ -381,7 +382,6 @@ function optionsframework_options() {
 			'3col' => $imagepath . '3col.png')
 	);
 
-	/*
 	$options[] = array(
 		'name' 	=> __('Homepage Top', 'largo'),
 		'desc' 	=> __('<strong>Select the layout to use for the top of the homepage.</strong> Largo currently supports three homepage options: a blog-like list of posts with the ability to stick a post to the op of the homepage, a newspaper-like layout highlighting featured stories and an animated carousel of featured stories with large images.', 'largo'),
@@ -418,13 +418,14 @@ function optionsframework_options() {
 
 	$options[] = array(
 		'name' 	=> __('Homepage Bottom', 'largo'),
-		'desc' 	=> __('<strong>Select the layout to use for the bottom of the homepage.</strong> Largo currently supports two options: a single column list of recent posts with photos and excerpts or a two column widget area', 'largo'),
-		'id' 	=> 'homepage_bottom',
+		'desc' 	=> __('<strong>Select the layout to use for the bottom of the homepage.</strong> Largo supports three options: a single column list of recent posts with photos and excerpts, a two column widget area, or nothing whatsoever', 'largo'),
+		'id' 		=> 'homepage_bottom',
 		'std' 	=> 'list',
 		'type' 	=> 'images',
-		'options' 	=> array(
+		'options' => array(
 			'list' 		=> $imagepath . 'list.png',
-			'widgets' 	=> $imagepath . 'widgets.png')
+			'widgets' => $imagepath . 'widgets.png',
+			'none'		=> $imagepath . 'none.png')
 	);
 
 	$options[] = array(

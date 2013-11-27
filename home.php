@@ -12,12 +12,15 @@ $shown_ids = array();
 $home_template = str_replace('.php', '', of_get_option( 'home_template', 'blog.php' ) );
 $layout_class = of_get_option('home_template');
 $tags = of_get_option ('tag_display');
+
+global $largo;
+$span_class = ( $largo['home_rail'] ) ? 'span8' : 'span12' ;
 ?>
 
-<div id="content" class="stories span8 <?php echo sanitize_html_class(basename($home_template)); ?>" role="main">
+<div id="content" class="stories <?php echo $span_class; ?> <?php echo sanitize_html_class(basename($home_template)); ?>" role="main">
 
 	<?php if ( is_active_sidebar('homepage-left-rail') ) { ?>
-	<div id="content-main" class="span8">
+	<div id="content-main" class="<?php echo $span_class; ?>">
 	<?php }
 
 	get_template_part( $home_template );
@@ -68,6 +71,7 @@ $tags = of_get_option ('tag_display');
 	<?php } ?>
 
 </div><!-- #content-->
-
-<?php get_sidebar(); ?>
+<?php
+ if ($largo['home_rail']) get_sidebar();
+?>
 <?php get_footer(); ?>

@@ -40,6 +40,10 @@ if ( ! defined( 'INN_MEMBER' ) )
 if ( ! isset( $content_width ) )
 	$content_width = 771;
 
+// Set the global $largo var
+if ( ! isset( $largo ) )
+	$largo = array();
+
 // load the options framework (used for our theme options pages)
 if ( ! function_exists( 'optionsframework_init' ) ) {
 	define( 'OPTIONS_FRAMEWORK_DIRECTORY', get_template_directory_uri() . '/lib/options-framework/' );

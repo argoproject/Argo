@@ -26,7 +26,7 @@ function largo_series_custom_order ( $sql, $my_query ) {
 	global $wpdb;
 
 	//only do this if we're a series page
-	if ( $my_query->query_vars['taxonomy'] == 'series' ) :
+	if ( array_key_exists('taxonomy', $my_query->query_vars) && $my_query->query_vars['taxonomy'] == 'series' ) :
 
 		//get the term object to set the proper meta stuff and whatnot
 		$term = get_term_by( 'slug', $my_query->query_vars['term'], 'series' );
