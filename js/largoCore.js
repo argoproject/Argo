@@ -38,6 +38,17 @@ jQuery(document).ready(function($) {
 		});
 	}
 
+	//homepage alert CSS hacks
+	if ( $('.alert-wrapper').length ) {
+		var $wrapper = $('.alert-wrapper'), $container = $('#alert-container');
+		$(window).on('resize', function() {
+			var $marginWidth = ( $(window).width() - $container.width() ) / -2;
+			$marginWidth = ( $marginWidth > 0 ) ? 0 : parseInt( $marginWidth ) ;
+			$wrapper.css( {marginLeft: $marginWidth, marginRight: $marginWidth} );
+		});
+		$(window).trigger('resize');
+	}
+
 	//enable "clean read" functionality
 	$('a.clean-read').on('click', function() {
 		$('body').addClass('clean-read').append('<a class="clean-read-close" href="#">Exit "Clean Read" mode</a>');
@@ -92,7 +103,7 @@ jQuery(document).ready(function($) {
 		  		// The caret when the menu is open
 		  		li.removeClass('open');
 		  		openMenu = false;
-		  		
+
 		  		event.preventDefault();
 		  		event.stopPropagation();
 		  	}
@@ -115,7 +126,7 @@ jQuery(document).ready(function($) {
 	(function(){
 		var stickyNavEl = $( '.sticky-nav-holder' );
 		var mainEl = $('#main');
-		
+
 		mainEl.waypoint( function( direction ) {
 			stickyNavEl.toggleClass( 'show', direction == 'down' );
 		}, { offset: $('#wpadminbar').height() + parseInt( mainEl.css('marginTop') ) 	});

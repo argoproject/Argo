@@ -276,4 +276,13 @@
 	</nav>
 	<?php endif; ?>
 
+	<?php if ( is_front_page() && is_active_sidebar( 'homepage-alert' ) ) :  // using is_front_page() instead of is_home() in case static page is used ?>
+	<div class="alert-wrapper">
+		<div id="alert-container">
+			<?php dynamic_sidebar( 'homepage-alert' ); ?>
+		</div>
+	</div>
+	<?php endif; ?>
+
+
 <div id="main" class="row-fluid clearfix">

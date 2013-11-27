@@ -39,8 +39,12 @@ function largo_register_sidebars() {
 			'name' 	=> __( 'Article Bottom', 'largo' ),
 			'desc' 	=> __( 'Footer widget area for posts', 'largo' ),
 			'id' 	=> 'article-bottom'
-		)
-	);
+		),
+		array(
+			'name' 	=> __( 'Homepage Alert', 'largo' ),
+			'desc' 	=> __( 'Region atop homepage reserved for breaking news and announcements', 'largo' ),
+			'id' 	=> 'homepage-alert'
+		),	);
 
 	// optional widget areas
 	if ( of_get_option( 'use_topic_sidebar' ) ) {
