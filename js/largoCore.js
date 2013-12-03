@@ -132,4 +132,145 @@ jQuery(document).ready(function($) {
 		}
 	})();
 
+
+	// Custom share buttons
+	(function() {
+		var sharer = {
+			// Initialize the singleton object
+			init: function() {
+				this.buttons = $('.custom-share-button');
+
+				if ( this.buttons.length == 0 ) {
+					// Abort if no buttons
+					return;
+				}
+
+				this.buttons.on( 'click', $.proxy( this, 'onClick' ) );
+			},
+
+			// Get the url, title, and description of the page
+			getPageData: function() {
+				if ( !this._data ) {
+					// Cache the data after the first get
+					var metaElements = $('meta');
+
+					this._data = {};
+					this._data.title = metaElements.filter('[property="og:title"]').attr('content') || document.title;
+					this._data.url = metaElements.filter('[property="og:url"]').attr('content') || document.location;
+					this._data.description = metaElements.filter('[property="og:description"]').attr('content') || metaElements.filter('[name="description"]').attr('content');
+					// this._data.siteName = ; // Print the value as a Javascript var
+				}
+
+				return this._data;
+			},
+
+			// Event handler for the share buttons
+			onClick: function( event ) {
+				var button = $(event.target);
+				var service = button.data('service');
+
+				if ( this['do_'+service] ) {
+					this['do_'+service]( this.getPageData() );
+				}
+
+				return false;
+			},
+
+			// Handle the Twitter service
+			do_twitter: function( data ) {
+
+				var url = 'https://twitter.com/intent/tweet?' + $.param({
+					original_referer: document.title,
+					text: data.title,
+					url: data.url
+				});
+
+				this.popup({
+					url: url,
+					name: 'twitter_share'
+				});
+			},
+
+			// Handle the Facebook service
+			do_facebook: function( data ) {
+				var url = 'https://www.facebook.com/sharer/sharer.php?' + $.param({
+					u: data.url
+				});
+
+				this.popup({
+					url: url,
+					name: 'facebook_share'
+				});
+			},
+
+			// Handle the email service
+			do_email: function( data ) {
+				var url = 'mailto:friend@example.com?' + $.param({
+					subject: data.title,
+					body: data.description + "\n" + data.url
+				});
+
+				this.popup({
+					url: url,
+					name: 'email_share'
+				});
+			},
+
+			// Handle the Google+ service
+			do_googleplus: function( data ) {
+				var url = 'https://plus.google.com/share?' + $.param({
+					url: data.url
+				});
+
+				this.popup({
+					url: url,
+					name: 'googleplus_share'
+				});
+			},
+
+			// Handle the LinkedIn service
+			do_linkedin: function( data ) {
+				var url = 'http://www.linkedin.com/shareArticle?' + $.param({
+					mini: 'true',
+					url: data.url,
+					title: data.title,
+					summary: data.description
+					// source: data.siteName
+				});
+
+				this.popup({
+					url: url,
+					name: 'linkedin_share'
+				});
+			},
+
+			// Create and open a popup
+			popup: function( data ) {
+				if ( !data.url ) {
+					return;
+				}
+
+				$.extend( data, {
+					name: '_blank',
+					height: 608,
+					width: 845,
+					menubar: 'no',
+					status: 'no',
+					toolbar: 'no',
+					resizable: 'yes',
+					left: Math.floor(screen.width/2 - 845/2),
+					top: Math.floor(screen.height/2 - 608/2)
+				});
+
+				var specNames = 'height width menubar status toolbar resizable left top'.split( ' ' );
+				var specs = [];
+				for( var i=0; i<specNames.length; ++i ) {
+					specs.push( specNames[i] + '=' + data[specNames[i]] );
+				}
+				return window.open( data.url, data.name, specs.join(',') );
+			}
+		};
+
+		sharer.init();
+	})();
 });
