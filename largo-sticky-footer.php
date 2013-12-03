@@ -1,18 +1,23 @@
 <?php if( is_single() ): ?>
 <div class="sticky-footer-holder">
-	<div class="sticky-footer-container">
+	<div class="sticky-footer-container social-icons">
 
 		<?php // Share the post using the ShareThis API. The class *_custom gives us a blank slate. ?>
 		<div class="share"><h4>Share</h4>
-			<span class="st_facebook_custom icon-facebook share-button"></span>
-			<span class="st_twitter_custom icon-twitter share-button"></span>
-			<span class="st_email_custom icon-mail share-button"></span>
+			<span data-service="facebook" class="custom-share-button icon-facebook share-button"></span>
+			<span data-service="twitter" class="custom-share-button icon-twitter share-button"></span>
+			<span data-service="email" class="custom-share-button icon-mail share-button"></span>
+			<?php
+			/*
+			<span data-service="googleplus" class="custom-share-button icon-gplus share-button"></span>
+			<span data-service="linkedin" class="custom-share-button icon-linkedin share-button"></span>
+			*/ ?>
 		</div>
 
 		<?php // Comment link ?>
 		<?php if ( comments_open() ): ?>
 		<div class="comments">
-			<a href="<?php comments_link(); ?>">Comment <i class="icon-comment"></i></a>
+			<a href="<?php comments_link(); ?>"><h4>Comment</h4> <i class="icon-comment"></i></a>
 		</div>
 		<?php endif; ?>
 
