@@ -71,7 +71,30 @@ global $largo, $shown_ids, $tags;
 							<?php
 								// if we didn't get any series posts
 								if ( count($shown_ids) == 1 ) :
-									echo "showing page 7: other homepage-featured items";
+
+								  $query_args = array(
+						        'showposts' 			=> 3,
+						        'orderby' 				=> 'date',
+						        'order' 				=> 'DESC',
+						        'ignore_sticky_posts' 	=> 1,
+						        'post__not_in' => $shown_ids,
+						        'prominence' => 'homepage-featured'
+							    );
+
+							    $featured = new WP_Query( $query_args );
+							    if ( $featured->have_posts() ) : while ( $featured->have_posts() ) :
+							    	$featured->next_post();
+							    	?>
+							    	<div class="featured-story">
+								    	<h5 class="top-tag"><?php largo_top_term( 'post='.$featured->post->ID ); ?></h5>
+								    	<h4 class="related-story"><a href="<?php echo esc_url( get_permalink( $featured->post->ID ) ); ?>"><?php echo get_the_title( $featured->post->ID ); ?></a></h4>
+								    	<?php /*
+								    	<h5 class="byline"><?php _e('By'); ?> <?php largo_author_link(); ?></h5>
+								    	*/ ?>
+							    	</div>
+							    <?php
+							    endwhile; endif;
+
 								endif;
 								?>
 							</div>
