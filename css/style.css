@@ -3762,6 +3762,40 @@ p.comment-form-comment {
   font-style: italic;
   color: inherit;
 }
+.widget.largo-series-posts {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.widget.largo-series-posts h4 {
+  margin-bottom: 0;
+}
+.widget.largo-series-posts ul {
+  margin-left: 0;
+  list-style: none;
+}
+.widget.largo-series-posts h4 {
+  line-height: 1.2em;
+}
+.widget.largo-series-posts i {
+  display: block;
+  float: left;
+  font-size: 110%;
+  margin-right: -100%;
+}
+.widget.largo-series-posts li a {
+  margin-left: 1.7em;
+  display: inline-block;
+}
+.widget.largo-series-posts p {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.widget.largo-series-posts a.more {
+  text-align: right;
+  font-weight: bold;
+  float: right;
+}
+.widget.largo-series-posts a.more:after {
+  content: " »";
+}
 .widget_archive select,
 .widget_categories select,
 .largo-taxonomy-list select,

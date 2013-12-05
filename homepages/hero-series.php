@@ -2,6 +2,7 @@
 /**
  * Home Template: Hero with Series
  * Description: Prominently features the top story along with other posts in its series
+ * Sidebars: Home Bottom Left | Home Bottom Center | Home Bottom Right
  * Right Rail: none
  */
 
@@ -103,6 +104,23 @@ global $largo, $shown_ids, $tags;
 		<?php
 		endwhile; endif; ?>
 			</div>
+		</div>
+	</div>
+</div>
+
+
+<div id="home-secondary" class="row-fluid">
+	<div class="span12">
+		<div class="row-fluid">
+			<aside class="span4">
+				<?php dynamic_sidebar('home-bottom-left'); ?>
+			</aside>
+			<aside class="span4">
+				<?php dynamic_sidebar('home-bottom-center'); ?>
+			</aside>
+			<aside class="span4">
+				<?php dynamic_sidebar('home-bottom-right'); ?>
+			</aside>
 		</div>
 	</div>
 </div>
