@@ -112,15 +112,15 @@ global $largo, $shown_ids, $tags;
 <div id="home-secondary" class="row-fluid">
 	<div class="span12">
 		<div class="row-fluid">
-			<aside class="span4">
+			<div class="span4">
 				<?php dynamic_sidebar('home-bottom-left'); ?>
-			</aside>
-			<aside class="span4">
+			</div>
+			<div class="span4">
 				<?php dynamic_sidebar('home-bottom-center'); ?>
-			</aside>
-			<aside class="span4">
+			</div>
+			<div class="span4">
 				<?php dynamic_sidebar('home-bottom-right'); ?>
-			</aside>
+			</div>
 		</div>
 	</div>
 </div>

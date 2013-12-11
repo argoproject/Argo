@@ -146,6 +146,12 @@ textarea {
  */
 /**
  * @group Color
+ * @label Pre-Footer Color
+ * @type color
+ * @default_value #ddd
+ */
+/**
+ * @group Color
  * @label Color of links
  * @type color
  * @default_value #2275bb
@@ -1768,7 +1774,8 @@ table .span24 {
 #site-footer,
 #footer-logos,
 .sticky-nav-container,
-.sticky-footer-container {
+.sticky-footer-container,
+#before-footer {
   max-width: 1170px;
   padding: 0 2.5%;
 }
@@ -3805,6 +3812,12 @@ p.comment-form-comment {
 #sidebar iframe {
   max-width: 100%;
 }
+.before-footer-wrapper {
+  background-color: #dddddd;
+}
+#before-footer .widget:last-child {
+  margin-bottom: 0;
+}
 .footer-bg {
   background-color: #222222;
   padding: 0 0 18px;
@@ -4228,7 +4241,8 @@ img[class*="wp-image-"] {
   .global-nav,
   #page,
   #site-footer,
-  #footer-logos {
+  #footer-logos,
+  #before-footer {
     margin: 0 auto;
   }
 }

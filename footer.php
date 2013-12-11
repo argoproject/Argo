@@ -9,6 +9,14 @@
 
 </div><!-- #page -->
 
+<?php if ( is_active_sidebar( 'before-footer' ) ) : ?>
+<div class="before-footer-wrapper">
+	<div id="before-footer">
+		<?php dynamic_sidebar( 'before-footer' ); ?>
+	</div>
+</div>
+<?php endif; ?>
+
 <div class="footer-bg clearfix">
 	<footer id="site-footer">
 		<div id="supplementary" class="row-fluid">

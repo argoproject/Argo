@@ -54,6 +54,13 @@ function largo_register_sidebars() {
 			'id' 	=> 'topic-sidebar'
 		);
 	}
+	if ( of_get_option( 'use_before_footer_sidebar' ) ) {
+		$sidebars[] = array(
+			'name' 	=> __( 'Before Footer', 'largo' ),
+			'desc' 	=> __( 'Full-width area immediately above footer', 'largo' ),
+			'id' 	=> 'before-footer'
+		);
+	}
 	if ( of_get_option('footer_layout') == '4col' ) {
 		$sidebars[] = array(
 			'name' 	=> __( 'Footer 4', 'largo' ),

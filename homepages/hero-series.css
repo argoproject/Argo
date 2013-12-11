@@ -223,5 +223,27 @@
 #home-secondary > div {
   background-color: white;
   padding: 20px;
+  padding-bottom: 0;
   margin-top: -15px;
+}
+/* line 138, hero-series.sass */
+#home-secondary .row-fluid > [class*='span'] .widget {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
+  border-radius: 0;
+  border: none;
+}
+/* line 141, hero-series.sass */
+#home-secondary .row-fluid > [class*='span']:last-child .widget {
+  border-right: none;
+}
+@media only screen and (max-width: 768px) {
+  /* line 137, hero-series.sass */
+  #home-secondary .row-fluid > [class*='span'] {
+    float: none;
+    width: 100%;
+    margin-left: 0;
+  }
 }
