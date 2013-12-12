@@ -31,6 +31,7 @@ if ( ! function_exists( 'largo_time' ) ) {
  */
 if ( ! function_exists( 'largo_author' ) ) {
 	function largo_author( $echo = true ) {
+		global $post;
 		$values = get_post_custom( $post->ID );
 		$byline_text = isset( $values['largo_byline_text'] ) ? esc_attr( $values['largo_byline_text'][0] ) : esc_html( get_the_author() );
 
@@ -514,5 +515,40 @@ if ( ! function_exists( 'largo_comment' ) ) {
 		<?php
 				break;
 		endswitch;
+	}
+}
+
+
+/**
+ * Post format icon
+ */
+if ( ! function_exists( 'post_type_icon' ) ) {
+	function post_type_icon( $options = array() ) {
+
+		global $largo;
+		if ( ! taxonomy_exists('post-type') || ! isset($largo['term-icons']) ) return false;
+
+		$defaults = array(
+			'echo' => TRUE,
+			'id' => get_the_ID()
+		);
+		$args = wp_parse_args( $options, $defaults );
+		$terms = wp_get_post_terms( $args['id'], 'post-type' );
+		if ( ! count($terms) ) return false;
+		//try to get a child term if there is one
+		$the_term = 0;
+		foreach ( $terms as $term ) {
+			if ( $term->parent ) {
+				$the_term = $term;
+				break;
+			}
+		}
+		//just grab the first one otherwise
+		if ( ! $the_term ) $the_term = $terms[0];
+
+		//get the icon value
+		if ( ! $args['echo'] ) ob_start();
+		$largo['term-icons']->the_icon( $the_term );
+		if ( ! $args['echo'] ) return ob_get_clean();
 	}
 }

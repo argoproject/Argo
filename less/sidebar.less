@@ -196,6 +196,43 @@
     }
   }
 }
+//series posts
+.widget.largo-series-posts {
+
+	font-family: @sansFontFamily;
+
+	h4 {
+		margin-bottom: 0;
+	}
+  ul {
+    margin-left: 0;
+    list-style: none;
+  }
+  h4 {
+	  line-height: 1.2em;
+  }
+	i {
+		display: block;
+		float: left;
+		font-size: 110%;
+		margin-right: -100%
+	}
+	li a {
+		margin-left: 1.7em;
+		display: inline-block;
+	}
+	p {
+		font-family: @sansFontFamily;
+	}
+	a.more {
+		text-align: right;
+		font-weight: bold;
+		float: right;
+		&:after {
+			content: " »";
+		}
+	}
+}
 //adjustments for default WP widgets
 .widget_archive select,
 .widget_categories select,

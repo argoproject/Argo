@@ -463,6 +463,12 @@ function optionsframework_options() {
 		'type' 	=> 'checkbox');
 
 	$widget_options[] = $options[] = array(
+		'desc' 	=> __('Include an additional widget region ("sidebar") just above the site footer region', 'largo'),
+		'id' 	=> 'use_before_footer_sidebar',
+		'std' 	=> '0',
+		'type' 	=> 'checkbox');
+
+	$widget_options[] = $options[] = array(
 		'desc' 	=> __('Check this box if you want to fade the sidebar out on single story pages as a reader scrolls.', 'largo'),
 		'id' 	=> 'showey_hidey',
 		'std' 	=> '0',

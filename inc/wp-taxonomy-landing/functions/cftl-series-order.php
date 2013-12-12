@@ -26,10 +26,11 @@ function largo_series_custom_order ( $sql, $my_query ) {
 	global $wpdb;
 
 	//only do this if we're a series page
-	if ( array_key_exists('taxonomy', $my_query->query_vars) && $my_query->query_vars['taxonomy'] == 'series' ) :
+	if ( array_key_exists('taxonomy', $my_query->query_vars) && $my_query->query_vars['taxonomy'] == 'series' && array_key_exists('term',$my_query->query_vars)) :
 
 		//get the term object to set the proper meta stuff and whatnot
 		$term = get_term_by( 'slug', $my_query->query_vars['term'], 'series' );
+		if ( ! $term ) $term = get_term_by( 'id', $my_query->query_vars['term'], 'series' );
 
 		//custom sort order
 		if ( $my_query->query_vars['orderby'] == 'series_custom' ) {
@@ -71,3 +72,56 @@ function largo_series_custom_order ( $sql, $my_query ) {
 
 }
 add_filter( 'posts_clauses', 'largo_series_custom_order', 10, 2);
+
+/**
+ * Helper function for getting posts in proper landing-page order for a series
+ * @param integer series term id
+ & @param inteter number of posts to fetch, defaults to all
+ */
+function largo_get_series_posts( $series_id, $number = -1 ) {
+
+	// get the cf-tax-landing
+	$args = array(
+		'post_type' => 'cftl-tax-landing',
+		'posts_per_page' => 1,
+		'tax_query' => array( array(
+			'taxonomy' => 'series',
+			'field' => 'id',
+			'terms' => $series_id
+		)),
+	);
+	$landing = new WP_Query( $args );
+
+	$series_args = array(
+		'post_type' 		=> 'post',
+		'taxonomy' => 'series',
+		'term' 				=> $series_id,
+		'order' 			=> 'DESC',
+		'orderby' 		=> 'date',
+		'posts_per_page' 	=> $number
+	);
+
+	if ( $landing->found_posts ) {
+		$landing->next_post();
+		$order = get_post_meta( $landing->post->ID, 'post_order', TRUE );
+		switch ( $order ) {
+			case 'ASC':
+				$series_args['order'] = 'ASC';
+				break;
+			case 'custom':
+				$series_args['orderby'] = 'series_custom';
+				break;
+			case 'featured, DESC':
+			case 'featured, ASC':
+				$series_args['orderby'] = $order;
+				break;
+		}
+	}
+
+	$series_posts = new WP_Query( $series_args );
+
+	if ( $series_posts->found_posts ) return $series_posts;
+
+	return false;
+
+}

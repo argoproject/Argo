@@ -34,7 +34,7 @@ $span_class = ( $largo['home_rail'] ) ? 'span8' : 'span12' ;
 	// bottom section, we'll either use a two-column widget area or a single column list of recent posts
 	if ( of_get_option( 'homepage_bottom') === 'widgets' ) {
 		get_template_part( 'home-part', 'bottom-widget-area' );
-	} else {
+	} else if ( of_get_option( 'homepage_bottom' ) === 'list' ) {
 		$args = array(
 			'paged'			=> $paged,
 			'post_status'	=> 'publish',

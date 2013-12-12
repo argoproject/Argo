@@ -63,10 +63,12 @@ $includes = array(
 	'/inc/robots.php',				// default robots.txt config
 	'/inc/custom-feeds.php',			// create custom RSS feeds
 	'/inc/users.php',				// add custom fields for user profiles
+	'/inc/term-meta.php',				// add custom fields for taxonomy terms
 	'/inc/sidebars.php',				// register sidebars
 	'/inc/widgets.php',				// register widgets
 	'/inc/nav-menus.php',			// register nav menus
 	'/inc/taxonomies.php',			// add our custom taxonomies
+	'/inc/term-icons.php',			// add our custom taxonomies
 	'/inc/images.php',				// setup custom image sizes
 	'/inc/editor.php',				// add tinymce customizations and shortcodes
 	'/inc/post-meta.php',			// add post meta boxes
