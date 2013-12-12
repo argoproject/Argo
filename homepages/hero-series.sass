@@ -2,6 +2,8 @@
 
 $sky: #6cb9e1
 $fog: #ddd
+$grey: #666
+
 
 .home .full-hero img
 	max-width: 1170px
@@ -43,6 +45,11 @@ $fog: #ddd
 		font-family: sans-serif
 	.active
 		font-weight: bold
+	.view-list &
+		color: $grey
+		+text-shadow(none)
+		a
+			color: inherit
 
 .home-top
 	position: relative
@@ -145,3 +152,9 @@ $fog: #ddd
 			float: none
 			width: 100%
 			margin-left: 0
+
+#home-river
+	display: none	//defaults to hidden
+	.span10
+		margin: 0 auto
+		float: none

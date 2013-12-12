@@ -525,9 +525,9 @@ if ( ! function_exists( 'largo_comment' ) ) {
 if ( ! function_exists( 'post_type_icon' ) ) {
 	function post_type_icon( $options = array() ) {
 
-		global $largo_child_term_fields;
+		global $largo;
+		if ( ! taxonomy_exists('post-type') || ! isset($largo['term-icons']) ) return false;
 
-		if ( ! taxonomy_exists('post-type') || ! isset($largo_child_term_fields) ) return false;
 		$defaults = array(
 			'echo' => TRUE,
 			'id' => get_the_ID()
@@ -548,7 +548,7 @@ if ( ! function_exists( 'post_type_icon' ) ) {
 
 		//get the icon value
 		if ( ! $args['echo'] ) ob_start();
-		$largo_child_term_fields->the_icon( $the_term );
+		$largo['term-icons']->the_icon( $the_term );
 		if ( ! $args['echo'] ) return ob_get_clean();
 	}
 }

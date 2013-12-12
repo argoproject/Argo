@@ -18,7 +18,17 @@ jQuery(document).ready(function($){
 
 	function changeStyle( style ) {
 		//show/hide stuff on the page based on the layout style
-
+		$('body').toggleClass('view-list');
+		switch ( style ) {
+			case "top":
+				$('#home-river:visible').fadeOut('fast');
+				$('.home-top, #home-secondary').filter(':hidden').slideDown('fast');
+				break;
+			case "list":
+				$('#home-river:hidden').fadeIn('fast');
+				$('.home-top, #home-secondary').filter(':visible').slideUp('fast');
+				break;
+		}
 	}
 
 });

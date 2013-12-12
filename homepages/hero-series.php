@@ -124,3 +124,21 @@ global $largo, $shown_ids, $tags;
 		</div>
 	</div>
 </div>
+
+<?php // The "river" content view ?>
+<div id="home-river" class="row-fluid">
+	<div class="span10 offset1">
+	<h1><?php _e( 'Latest Stories', 'largo' ); ?></h1>
+
+	<?php
+			//start at the beginning of the list
+			rewind_posts();
+
+			while ( have_posts() ) : the_post();
+				get_template_part( 'content', 'home' );
+			endwhile;
+
+			largo_content_nav( 'nav-below' );
+	?>
+	</div>
+</div>
