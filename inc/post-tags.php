@@ -424,14 +424,14 @@ if ( ! function_exists( 'largo_content_nav' ) ) {
 			<nav id="nav-below" class="pager post-nav clearfix">
 				<?php
 					if ( $prev = get_previous_post() ) {
-						printf( '<div class="previous"><a href="%1$s"><h5>Previous %2$s</h5><span class="meta-nav">%3$s</span></a></div>',
+						printf( __('<div class="previous"><a href="%1$s"><h5>Previous %2$s</h5><span class="meta-nav">%3$s</span></a></div>', 'largo'),
 							get_permalink( $prev->ID ),
 							of_get_option( 'posts_term_singular' ),
 							$prev->post_title
 						);
 					}
 					if ( $next = get_next_post() ) {
-						printf( '<div class="next"><a href="%1$s"><h5>Next %2$s</h5><span class="meta-nav">%3$s</span></a></div>',
+						printf( __('<div class="next"><a href="%1$s"><h5>Next %2$s</h5><span class="meta-nav">%3$s</span></a></div>', 'largo'),
 							get_permalink( $next->ID ),
 							of_get_option( 'posts_term_singular' ),
 							$next->post_title
@@ -442,11 +442,14 @@ if ( ! function_exists( 'largo_content_nav' ) ) {
 
 		<?php } elseif ( $wp_query->max_num_pages > 1 ) {
 			$posts_term = of_get_option( 'posts_term_plural' );
+			if ( !$posts_term ) $posts_term = 'Posts';
+			$previous_posts_term = sprintf( __( 'Newer %s &rarr;', 'largo' ), $posts_term );
+			$next_posts_term =  sprintf( __( '&larr; Older %s', 'largo' ), $posts_term );
 		?>
 
 			<nav id="<?php echo $nav_id; ?>" class="pager post-nav">
-				<div class="next"><?php previous_posts_link( __( 'Newer ' . $posts_term . ' &rarr;', 'largo' ) ); ?></div>
-				<div class="previous"><?php next_posts_link( __( '&larr; Older ' . $posts_term, 'largo' ) ); ?></div>
+				<div class="next"><?php previous_posts_link( $previous_posts_term ); ?></div>
+				<div class="previous"><?php next_posts_link( $next_posts_term ); ?></div>
 			</nav><!-- .post-nav -->
 
 		<?php }
