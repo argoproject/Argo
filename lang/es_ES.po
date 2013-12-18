@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Project Largo - Base Theme v0.9\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-10-18 23:44+0530\n"
-"PO-Revision-Date: 2013-12-12 14:47:32+0000\n"
+"PO-Revision-Date: 2013-12-18 17:50:42+0000\n"
 "Last-Translator: Eric Flores <eric@dashway.com>\n"
 "Language-Team: Investigative News Network <largo@investigativenewsnetwork.org>\n"
 "MIME-Version: 1.0\n"
@@ -54,7 +54,7 @@ msgstr "Una fuente RSS de las historias más recientes de miembros del INN."
 #: content-not-found.php:7
 #@ largo
 msgid "Apologies, but no results were found. Perhaps searching will help."
-msgstr "Disculpas, pero no se encontraron resultados. Quizás buscar pueda ayudar."
+msgstr "Disculpe, pero no se encontraron resultados. Quizás la búsqueda le pueda ayudar."
 
 #: archive.php:94
 #: inc/wp-taxonomy-landing/functions/cftl-admin.php:121
@@ -66,7 +66,7 @@ msgstr "Archivos"
 #: inc/widgets/largo-recent-posts.php:156
 #@ largo
 msgid "Avoid Duplicate Posts?"
-msgstr "Prevenir Entradas duplicadas?"
+msgstr "Evitar entradas duplicadas?"
 
 #: footer.php:24
 #@ largo
@@ -91,12 +91,12 @@ msgstr "Abajo"
 #: footer-part-widget-area.php:30
 #@ largo
 msgid "Browse Archives"
-msgstr "Navegar Archivos"
+msgstr "Navegar por los archivos"
 
 #: inc/widgets/largo-donate.php:10
 #@ largo
 msgid "Call-to-action for donations"
-msgstr "Llamada-a-acción para donaciones"
+msgstr "Invitación a donar"
 
 #: inc/widgets/largo-taxonomy-list.php:18
 #@ largo
@@ -112,7 +112,7 @@ msgstr "Comentarios están cerrados."
 #: content.php:26
 #@ largo
 msgid "Continue&nbsp;Reading&nbsp;&rarr;"
-msgstr "Continue&nbsp;Leyendo&nbsp;&rarr;"
+msgstr "Continuar&nbsp;leyendo&nbsp;&rarr;"
 
 #: options.php:130
 #@ largo
@@ -122,7 +122,7 @@ msgstr "Mensaje de Copyright"
 #: inc/widgets/largo-twitter.php:85
 #@ largo
 msgid "Dark"
-msgstr "Obscuro"
+msgstr "Oscuro"
 
 #: lib/class-tgm-plugin-activation.php:704
 #@ largo
@@ -160,7 +160,7 @@ msgstr "Edite esta página"
 #: options.php:49
 #@ largo
 msgid "Email"
-msgstr "Email"
+msgstr "Correo electrónico"
 
 #: options.php:77
 #@ largo
@@ -193,7 +193,7 @@ msgstr "Enlace Externo"
 #: home-part-sticky-posts.php:51
 #@ largo
 msgid "FEATURED"
-msgstr "DESCATADO"
+msgstr "DESTACADO"
 
 #: options.php:83
 #@ largo
@@ -203,16 +203,16 @@ msgstr "URL de Contenido Sindicado (feed)"
 #: content-single.php:49
 #@ largo
 msgid "Filed Under:"
-msgstr "Archivado Bajo:"
+msgstr "Archivado como:"
 
 #: content-series.php:31
 #: content.php:29
 #@ largo
 msgid "Filed under:"
-msgstr "Archivado bajo:"
+msgstr "Archivado como:"
 
 #: inc/widgets/largo-follow.php:43
-#: largo-author-box.php:42
+#: largo-author-box.php:40
 #, php-format
 #@ largo
 msgid "Follow @%1$s"
@@ -253,7 +253,7 @@ msgstr ""
 #: inc/widgets/largo-inn-rss.php:14
 #@ largo
 msgid "INN Member Stories"
-msgstr "Historias de miembresod de INN"
+msgstr "Historias de miembros de INN"
 
 #: footer-part-widget-area.php:23
 #: inc/widgets/largo-footer-featured.php:18
@@ -285,7 +285,7 @@ msgstr "Entradas destacadas de el pié de la página de Largo"
 #: inc/widgets/largo-recent-comments.php:19
 #@ largo
 msgid "Largo Recent Comments"
-msgstr "Comentarios Recientex"
+msgstr "Comentarios recientes"
 
 #: inc/widgets/largo-recent-posts.php:12
 #@ largo
@@ -310,7 +310,7 @@ msgstr "Claro"
 #: options.php:62
 #@ largo
 msgid "Like"
-msgstr "Gustar"
+msgstr "Me gusta"
 
 #: inc/widgets/largo-recent-posts.php:183
 #@ largo
@@ -514,7 +514,7 @@ msgstr "Repetir Verticalmente"
 #: lib/class-tgm-plugin-activation.php:1106
 #@ largo
 msgid "Required"
-msgstr "Requeridp"
+msgstr "Requerido"
 
 #: inc/widgets.php:131
 #@ largo
@@ -608,7 +608,7 @@ msgstr "Estatus"
 #: options.php:376
 #@ largo
 msgid "Sticky Posts"
-msgstr "Entradas Permanentex"
+msgstr "Entradas Permanentes"
 
 #: inc/widgets/largo-inn-rss.php:21
 #: sidebar.php:49
@@ -639,7 +639,7 @@ msgstr "Imagen de muestra"
 #: inc/widgets/largo-twitter.php:74
 #@ largo
 msgid "Timeline"
-msgstr "Chronología"
+msgstr "Cronología"
 
 #: inc/widgets/largo-about.php:45
 #: inc/widgets/largo-donate.php:55
@@ -726,7 +726,7 @@ msgstr "No existen entradas en la categoría de pie (footer).</strong> Marque ma
 #: inc/widgets/largo-about.php:27
 #@ largo
 msgid "You have not set a description for your site.</strong> Add a site description by visiting the Largo Theme Options page."
-msgstr "Usted no a especificado una descripción de su sitio.</strong> Añada una descripción visitando la página de opciones de el Tema Largo."
+msgstr "Usted no ha especificado una descripción de su sitio.</strong> Añada una descripción visitando la página de opciones del Tema Largo."
 
 #: search.php:14
 #, php-format
@@ -1057,13 +1057,13 @@ msgstr "<a href=\"#\" class=\"clean-read\">Ver como \"Clean Read\"</a>"
 #, php-format
 #@ largo
 msgid "<div class=\"previous\"><a href=\"%1$s\"><h5>Previous %2$s</h5><span class=\"meta-nav\">%3$s</span></a></div>"
-msgstr "<div class=\"previous\"><a href=\"%1$s\"><h5>Anteriores %2$s</h5><span class=\"meta-nav\">%3$s</span></a></div>"
+msgstr "<div class=\"previous\"><a href=\"%1$s\"><h5>Historias anteriores</h5><span class=\"meta-nav\">%3$s</span></a></div>"
 
 #: inc/post-tags.php:434
 #, php-format
 #@ largo
 msgid "<div class=\"next\"><a href=\"%1$s\"><h5>Next %2$s</h5><span class=\"meta-nav\">%3$s</span></a></div>"
-msgstr "<div class=\"next\"><a href=\"%1$s\"><h5>Próximas %2$s</h5><span class=\"meta-nav\">%3$s</span></a></div>"
+msgstr "<div class=\"next\"><a href=\"%1$s\"><h5>Próximas historias</h5><span class=\"meta-nav\">%3$s</span></a></div>"
 
 #: inc/related-content.php:242
 #, php-format
@@ -1788,7 +1788,7 @@ msgstr ""
 msgid "Save & Close"
 msgstr ""
 
-#: largo-author-box.php:16
+#: largo-author-box.php:14
 #, php-format
 #@ largo
 msgid "<h5>About <span class=\"fn n\">%1$s</span><span class=\"author-posts-link\"><a class=\"url\" href=\"%2$s\" rel=\"author\" title=\"See all posts by %1$s\">More by this author</a></span></h5>"
@@ -1798,7 +1798,7 @@ msgstr ""
 #, php-format
 #@ largo
 msgid "View all %1$s %2$s &rarr;"
-msgstr ""
+msgstr "Ver todas las %1$s %2$s &rarr;"
 
 #: lib/class-tgm-plugin-activation.php:180
 #, php-format
@@ -2473,7 +2473,7 @@ msgstr ""
 #, php-format
 #@ largo
 msgid "<span class=\"by-author\"><span class=\"by\">By:</span> <span class=\"author vcard\" itemprop=\"author\">%1$s</span></span><span class=\"sep\"> | </span><time class=\"entry-date updated dtstamp pubdate\" datetime=\"%2$s\">%3$s</time>"
-msgstr "<span class=\"by-author\"><span class=\"by\">Por:</span> <span class=\"author vcard\" itemprop=\"author\">%1$s</span></span><span class=\"sep\"> | </span><time class=\"entry-date updated dtstamp pubdate\" datetime=\"%2$s\">%3$s</time>"
+msgstr "<span class=\"by-author\"><span class=\"by\">por</span> <span class=\"author vcard\" itemprop=\"author\">%1$s</span></span><span class=\"sep\"> | </span><time class=\"entry-date updated dtstamp pubdate\" datetime=\"%2$s\">%3$s</time>"
 
 #: inc/post-tags.php:91
 #, php-format
@@ -2492,4 +2492,25 @@ msgstr "%s Más Recientes &rarr;"
 #@ largo
 msgid "&larr; Older %s"
 msgstr "&larr;  %s Anteriores"
+
+#: inc/post-tags.php:121
+#, php-format
+#@ largo
+msgid "<span class=\"twitter\"><a href=\"http://twitter.com/share\" class=\"twitter-share-button\" data-url=\"%1$s\" data-text=\"%2$s\" %3$s %4$s %5$s>Tweet</a></span>"
+msgstr "<span class=\"twitter\"><a href=\"http://twitter.com/share\" class=\"twitter-share-button\" data-url=\"%1$s\" data-text=\"%2$s\" %3$s %4$s %5$s>Twittear</a></span>"
+
+#: inc/post-tags.php:139
+#@ largo
+msgid "<span class=\"st_sharethis\" displayText=\"Share\"></span>"
+msgstr "<span class=\"st_sharethis\" displayText=\"Compartir\"></span>"
+
+#: inc/post-tags.php:142
+#@ largo
+msgid "<span class=\"st_email\" displayText=\"Email\"></span>"
+msgstr "<span class=\"st_email\" displayText=\"Correo electrónico\"></span>"
+
+#: inc/post-tags.php:145
+#@ largo
+msgid "<span class=\"print\"><a href=\"#\" onclick=\"window.print()\" title=\"print this article\" rel=\"nofollow\"><i class=\"icon-print\"></i> Print</a></span>"
+msgstr "<span class=\"print\"><a href=\"#\" onclick=\"window.print()\" title=\"print this article\" rel=\"nofollow\"><i class=\"icon-print\"></i> Imprimir</a></span>"
 
