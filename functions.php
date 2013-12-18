@@ -69,6 +69,7 @@ $includes = array(
 	'/inc/nav-menus.php',			// register nav menus
 	'/inc/taxonomies.php',			// add our custom taxonomies
 	'/inc/term-icons.php',			// add our custom taxonomies
+	'/inc/term-sidebars.php',			// add our custom taxonomies
 	'/inc/images.php',				// setup custom image sizes
 	'/inc/editor.php',				// add tinymce customizations and shortcodes
 	'/inc/post-meta.php',			// add post meta boxes
