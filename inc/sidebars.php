@@ -145,7 +145,6 @@ if( !function_exists( 'custom_sidebars_dropdown' ) ) {
 		$the_id = ( $post_id ) ? $post_id : $post->ID ;
 		$custom = ( $selected ) ? $selected : get_post_meta( $the_id, 'custom_sidebar', true );
 		$val = ( $custom ) ? $custom : 'default';
-		echo "banana";
 
 		// Add a default option
 		if ( ! $skip_default ) {
