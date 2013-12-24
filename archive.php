@@ -86,6 +86,8 @@ get_header();
 						$term_id = intval( $queried_object->term_id );
 						$tax = $queried_object->taxonomy;
 						printf(__('Recent %1$s<a class="rss-link" href="%2$s"><i class="icon-rss"></i></a>', 'largo'), $posts_term, get_term_feed_link( $term_id, $tax ) );
+					} elseif ( is_post_type_archive( 'argolinks' ) ) {
+						_e('Recent Links<a class="rss-link" href="/argolinks/feed"><i class="icon-rss"></i></a>', 'largo');
 					} elseif ( is_month() ) {
 						printf(__('Monthly Archives: <span>%s</span>', 'largo'), get_the_date('F Y') );
 					} elseif ( is_year() ) {
@@ -102,7 +104,11 @@ get_header();
 			rewind_posts();
 
 			while ( have_posts() ) : the_post();
-				get_template_part( 'content', 'archive' );
+				if ( get_post_type( $post ) == 'argolinks' ) {
+					get_template_part( 'content', 'argolinks' );
+				} else {
+					get_template_part( 'content', 'archive' );
+				}
 			endwhile;
 			largo_content_nav( 'nav-below' );
 		} else {
