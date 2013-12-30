@@ -3,7 +3,8 @@
 	<div class="sticky-footer-container social-icons">
 
 		<?php // Share the post using the ShareThis API. The class *_custom gives us a blank slate. ?>
-		<div class="share"><h4>Share</h4>
+		<div class="share">
+			<h4><?php _e('Share', 'largo'); ?></h4>
 			<span data-service="facebook" class="custom-share-button icon-facebook share-button"></span>
 			<span data-service="twitter" class="custom-share-button icon-twitter share-button"></span>
 			<span data-service="email" class="custom-share-button icon-mail share-button"></span>
@@ -21,6 +22,12 @@
 		</div>
 		<?php endif; ?>
 
+		<div class="dismiss">
+			<a href="#">
+			<i class="icon-cancel"></i>
+			</a>
+		</div>
+
 		<?php // The category RSS and author follow links ?>
 		<?php
 		// Get the category object
@@ -33,7 +40,7 @@
 		if ( !empty($byline_text) ) {
 			$author = null;
 		}
-		
+
 		if ( !empty($author) || !empty($cat_feed_link) ): ?>
 		<div class="follow">
 			<h4>Follow</h4>
@@ -55,6 +62,7 @@
 				<?php endif; ?>
 		</div>
 		<?php endif; ?>
+
 	</div>
 </div>
 <?php endif; ?>

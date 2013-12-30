@@ -4051,6 +4051,14 @@ p.comment-form-comment {
   font-size: 125%;
   vertical-align: bottom;
 }
+.sticky-footer-holder .dismiss {
+  float: right;
+  margin-left: 1.2em;
+}
+.sticky-footer-holder .dismiss a {
+  opacity: 0.75;
+  filter: alpha(opacity=75);
+}
 .byline .clean-read {
   float: right;
 }
