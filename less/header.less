@@ -122,30 +122,6 @@ h2.branding {
 .print-header {
 	display: none;
 }
-.sticky-nav-holder {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 99998;
-  visibility: hidden;
-  opacity: 0;
-
-  .transition( opacity 0.3s );
-
-  &.show {
-    visibility: visible;
-    opacity: 1;
-  }
-
-  body.admin-bar & {
-    top: 28px;
-  }
-
-  .sticky-nav-container {
-    margin: 0 auto;
-  }
-}
 .alert-wrapper {
 	background-color: @red;
 }

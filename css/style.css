@@ -1985,30 +1985,6 @@ h2.branding .tagline {
 .print-header {
   display: none;
 }
-.sticky-nav-holder {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 99998;
-  visibility: hidden;
-  opacity: 0;
-  -webkit-transition: opacity 0.3s;
-  -moz-transition: opacity 0.3s;
-  -ms-transition: opacity 0.3s;
-  -o-transition: opacity 0.3s;
-  transition: opacity 0.3s;
-}
-.sticky-nav-holder.show {
-  visibility: visible;
-  opacity: 1;
-}
-body.admin-bar .sticky-nav-holder {
-  top: 28px;
-}
-.sticky-nav-holder .sticky-nav-container {
-  margin: 0 auto;
-}
 .alert-wrapper {
   background-color: #bd261d;
 }
@@ -2470,6 +2446,48 @@ html.touch ul.nav li.dropdown.open ul.dropdown-menu {
 #topics-bar ul li.menu-label {
   font-size: 16px;
   font-weight: bold;
+}
+.sticky-nav-holder {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 99998;
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: opacity 0.3s;
+  -moz-transition: opacity 0.3s;
+  -ms-transition: opacity 0.3s;
+  -o-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-bottom: solid #2275bb 1px;
+}
+.sticky-nav-holder.show {
+  visibility: visible;
+  opacity: 1;
+}
+body.admin-bar .sticky-nav-holder {
+  top: 28px;
+}
+.sticky-nav-holder .sticky-nav-container {
+  margin: 0 auto;
+}
+.sticky-nav-holder .navbar {
+  margin-bottom: 0;
+}
+.sticky-nav-holder .navbar li > a {
+  color: #2275bb;
+}
+.sticky-nav-holder .navbar li .caret {
+  border-top-color: #2275bb !important;
+  border-top-color: rgba(34, 117, 187, 0.8) !important;
+}
+.sticky-nav-holder .navbar li > a:hover .caret {
+  border-top-color: #ffffff !important;
+}
+.sticky-nav-holder .navbar .divider-vertical {
+  display: none;
 }
 .post-header,
 .page-header,
