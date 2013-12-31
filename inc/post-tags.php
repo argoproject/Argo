@@ -81,14 +81,14 @@ if ( ! function_exists( 'largo_byline' ) ) {
 		$values = get_post_custom( $post->ID );
 		$authors = ( function_exists( 'coauthors_posts_links' ) && !isset( $values['largo_byline_text'] ) ) ? coauthors_posts_links( null, null, null, null, false ) : largo_author_link( false );
 
-		$output = sprintf( '<span class="by-author"><span class="by">By:</span> <span class="author vcard" itemprop="author">%1$s</span></span><span class="sep"> | </span><time class="entry-date updated dtstamp pubdate" datetime="%2$s">%3$s</time>',
+		$output = sprintf( __('<span class="by-author"><span class="by">By:</span> <span class="author vcard" itemprop="author">%1$s</span></span><span class="sep"> | </span><time class="entry-date updated dtstamp pubdate" datetime="%2$s">%3$s</time>', 'largo'),
 			$authors,
 			esc_attr( get_the_date( 'c' ) ),
 			largo_time( false )
 		);
 
 		if ( current_user_can( 'edit_post', $post->ID ) )
-			$output .=  sprintf( ' | <span class="edit-link"><a href="%1$s">Edit This Post</a></span>', get_edit_post_link() );
+			$output .=  sprintf( __(' | <span class="edit-link"><a href="%1$s">Edit This Post</a></span>', 'largo'), get_edit_post_link() );
 
 	 	if ( is_single() && of_get_option( 'clean_read' ) === 'byline' )
 	 		$output .=	__('<a href="#" class="clean-read">View as "Clean Read"</a>', 'largo');
@@ -118,7 +118,7 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 			$twitter_related = get_the_author_meta( 'twitter' ) ? get_the_author_meta( 'twitter' ) . ':Follow the author of this article' : '';
 			$twitter_count = (of_get_option( 'show_twitter_count' ) == 0) ? 'data-count="none"' : '';
 
-			$output .= sprintf( '<span class="twitter"><a href="http://twitter.com/share" class="twitter-share-button" data-url="%1$s" data-text="%2$s" %3$s %4$s %5$s>Tweet</a></span>',
+			$output .= sprintf(__('<span class="twitter"><a href="http://twitter.com/share" class="twitter-share-button" data-url="%1$s" data-text="%2$s" %3$s %4$s %5$s>Tweet</a></span>', 'largo'),
 				get_permalink(),
 				get_the_title(),
 				$twitter_link,
@@ -136,13 +136,13 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 		$output .= '</div><div class="right">';
 
 		if ( $utilities['sharethis'] === '1' )
-			$output .= '<span class="st_sharethis" displayText="Share"></span>';
+			$output .= __('<span class="st_sharethis" displayText="Share"></span>', 'largo');
 
 		if ( $utilities['email'] === '1' )
-			$output .= '<span class="st_email" displayText="Email"></span>';
+			$output .= __('<span class="st_email" displayText="Email"></span>', 'largo');
 
 		if ( $utilities['print'] === '1' )
-			$output .= '<span class="print"><a href="#" onclick="window.print()" title="print this article" rel="nofollow"><i class="icon-print"></i> Print</a></span>';
+			$output .= __('<span class="print"><a href="#" onclick="window.print()" title="print this article" rel="nofollow"><i class="icon-print"></i> Print</a></span>', 'largo');
 
 		$output .= '</div></div>';
 
@@ -424,14 +424,14 @@ if ( ! function_exists( 'largo_content_nav' ) ) {
 			<nav id="nav-below" class="pager post-nav clearfix">
 				<?php
 					if ( $prev = get_previous_post() ) {
-						printf( '<div class="previous"><a href="%1$s"><h5>Previous %2$s</h5><span class="meta-nav">%3$s</span></a></div>',
+						printf( __('<div class="previous"><a href="%1$s"><h5>Previous %2$s</h5><span class="meta-nav">%3$s</span></a></div>', 'largo'),
 							get_permalink( $prev->ID ),
 							of_get_option( 'posts_term_singular' ),
 							$prev->post_title
 						);
 					}
 					if ( $next = get_next_post() ) {
-						printf( '<div class="next"><a href="%1$s"><h5>Next %2$s</h5><span class="meta-nav">%3$s</span></a></div>',
+						printf( __('<div class="next"><a href="%1$s"><h5>Next %2$s</h5><span class="meta-nav">%3$s</span></a></div>', 'largo'),
 							get_permalink( $next->ID ),
 							of_get_option( 'posts_term_singular' ),
 							$next->post_title
@@ -442,11 +442,14 @@ if ( ! function_exists( 'largo_content_nav' ) ) {
 
 		<?php } elseif ( $wp_query->max_num_pages > 1 ) {
 			$posts_term = of_get_option( 'posts_term_plural' );
+			if ( !$posts_term ) $posts_term = 'Posts';
+			$previous_posts_term = sprintf( __( 'Newer %s &rarr;', 'largo' ), $posts_term );
+			$next_posts_term =  sprintf( __( '&larr; Older %s', 'largo' ), $posts_term );
 		?>
 
 			<nav id="<?php echo $nav_id; ?>" class="pager post-nav">
-				<div class="next"><?php previous_posts_link( __( 'Newer ' . $posts_term . ' &rarr;', 'largo' ) ); ?></div>
-				<div class="previous"><?php next_posts_link( __( '&larr; Older ' . $posts_term, 'largo' ) ); ?></div>
+				<div class="next"><?php previous_posts_link( $previous_posts_term ); ?></div>
+				<div class="previous"><?php next_posts_link( $next_posts_term ); ?></div>
 			</nav><!-- .post-nav -->
 
 		<?php }

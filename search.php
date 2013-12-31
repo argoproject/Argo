@@ -19,7 +19,11 @@ get_header();
 
 		<?php
 			while ( have_posts() ) : the_post();
-				get_template_part( 'content', 'search' );
+				if ( get_post_type( $post ) == 'argolinks' ) {
+					get_template_part( 'content', 'argolinks' );
+				} else {
+					get_template_part( 'content', 'search' );
+				}
 			endwhile;
     		largo_content_nav( 'nav-below' );
     	} else {

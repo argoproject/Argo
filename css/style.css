@@ -2857,7 +2857,7 @@ h3.recent-posts a.rss-link:hover,
   background-color: #ffffff;
   color: #000000;
   position: relative;
-  top: -2px;
+  top: 4px;
 }
 .author-box ul li.gplus i.icon-mail:hover,
 .author-box ul li.linkedin i.icon-mail:hover,
@@ -4053,11 +4053,11 @@ p.comment-form-comment {
 }
 .sticky-footer-holder .dismiss {
   float: right;
-  margin-left: 1.2em;
+  margin-left: 1em;
 }
 .sticky-footer-holder .dismiss a {
-  opacity: 0.75;
-  filter: alpha(opacity=75);
+  opacity: 0.5;
+  filter: alpha(opacity=50);
 }
 .byline .clean-read {
   float: right;
