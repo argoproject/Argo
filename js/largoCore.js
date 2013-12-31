@@ -131,7 +131,7 @@ jQuery(document).ready(function($) {
 			stickyNavEl.toggleClass( 'show', direction == 'down' );
 		}, { offset: $('#wpadminbar').height() + parseInt( mainEl.css('marginTop') ) 	});
 
-		// Check if their is a sticky footer
+		// Check if there is a sticky footer
 		var stickyFooterEl = $( '.sticky-footer-holder' );
 		if ( stickyFooterEl.length ) {
 			// Show the sticky footer by default
@@ -140,6 +140,11 @@ jQuery(document).ready(function($) {
 			$('#site-footer').waypoint( function( direction ) {
 				stickyFooterEl.toggleClass( 'show', direction == 'up' );
 			}, { offset: '100%' } );
+
+			$('.dismiss a').on( 'click', function() {
+				stickyFooterEl.remove();	//so it never comes back
+				return false;
+			});
 		}
 	})();
 
