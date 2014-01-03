@@ -66,14 +66,16 @@ add_filter( 'pre_update_option_sticky_posts', 'largo_scrub_sticky_posts', 10, 2 
 
 /**
  * If the main query is for a taxonomy term archive page, remove the
- * featured posts. 
+ * featured posts.
  *
  * @param WP_Query $query - the query object
  */
 function largo_scrub_taxonomy_featured_posts( &$query ) {
+
     if ( $query->is_main_query() && ( $query->is_tax() || $query->is_category() || $query->is_tag() ) ) {
+
         // Get the term ID for the ones to filter out
-        $terms = array( 
+        $terms = array(
             get_term_by( 'name', __('Featured in Taxonomy', 'largo'), 'prominence' ),
             get_term_by( 'name', __('Secondary Featured in Taxonomy', 'largo'), 'prominence' ),
         );
@@ -94,4 +96,35 @@ function largo_scrub_taxonomy_featured_posts( &$query ) {
         $query->set( 'tax_query', $query->tax_query->queries );
     }
 }
-add_action( 'pre_get_posts', 'largo_scrub_taxonomy_featured_posts', 20 );
+add_action( 'pre_get_posts', 'largo_scrub_taxonomy_featured_posts', 9 );	// run before other potential stuff
+
+/**
+ * Determine if we have any 'featured' posts on archive pages
+ */
+function largo_have_featured_posts() {
+
+	if ( is_category() || is_tax() || is_tag() ) {
+		$obj = get_queried_object();
+
+		$featured_query = array(
+			'tax_query' => array(
+				'relation' => 'AND',
+				array(
+					'taxonomy' => $obj->taxonomy,
+					'field' => 'slug',
+					'terms' => $obj->slug,
+				),
+				array(
+					'taxonomy' => 'prominence',
+					'field' => 'slug',
+					'terms' => array( 'taxonomy-featured', 'taxonomy-secondary-featured' ),
+				)
+			)
+		);
+		$featured_query = new WP_Query( $featured_query );
+		return $featured_query->have_posts();
+	}
+
+	return false;
+
+}

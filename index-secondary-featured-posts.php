@@ -24,8 +24,9 @@
 
 	if ( $featured_posts->found_posts ):
 ?>
-<div class="secondary-featured-post row-fluid clearfix">
-	<?php 
+<div class="secondary-featured-post">
+	<div class="row-fluid clearfix">
+	<?php
 	$_the_post = $post;
 	while ( $featured_posts->have_posts() ) {
 		$featured_posts->the_post();
@@ -38,6 +39,7 @@
 		setup_postdata( $post );
 	}
 	?>
+	</div>
 </div>
 
 <?php endif; ?>

@@ -7,7 +7,7 @@ get_header();
 
 <div class="clearfix">
 
-		<?php if ( have_posts() ) { ?>
+		<?php if ( have_posts() || largo_have_featured_posts() ) { ?>
 
 		<?php
 
@@ -103,7 +103,6 @@ get_header();
 		<div class="stories span8" role="main" id="content">
 		<?php
 				// and finally wind the posts back so we can go through the loop as usual
-
 				rewind_posts();
 
 				while ( have_posts() ) : the_post();
