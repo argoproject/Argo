@@ -308,6 +308,12 @@ function largo_top_term( $options = array() ) {
 	$args = wp_parse_args( $options, $defaults );
 
 	$term_id = get_post_meta( $args['post'], 'top_term', TRUE );
+	if ( empty( $term_id ) ) {	// if no top_term specified, fall back to the first category
+		$term_id = get_the_category( $args['post'] );
+		if ( !is_array( $term_id ) ) return;	//no categories OR top term? Do nothing
+		$term_id = $term_id->term_id;
+	}
+
 	$icon = ( $args['use_icon'] ) ?  '<i class="icon-white icon-tag"></i>' : '' ;	//this will probably change to a callback largo_term_icon() someday
 	$link = ( $args['link'] ) ? array('<a href="%2$s" title="Read %3$s in the %4$s category">','</a>') : array('', '') ;
 	if ( $term_id ) {
