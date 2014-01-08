@@ -10,10 +10,18 @@ do_action('largo_before_sidebar');
 	<div class="widget-area<?php if ( is_single() && of_get_option( 'showey-hidey' ) ) echo ' showey-hidey'; ?>" role="complementary">
 		<?php
 			do_action('largo_before_sidebar_widgets');
-			$custom_sidebar = get_post_meta(get_the_ID(), 'custom_sidebar', true);
+
+			$custom_sidebar = false;
+			//get a custom sidebar if appropriate
+			if ( is_singular() ) {
+				$custom_sidebar = get_post_meta(get_the_ID(), 'custom_sidebar', true);
+			} else if ( is_archive() ) {
+				$term = get_queried_object();
+				$custom_sidebar = largo_get_term_meta( $term->taxonomy, $term->term_id, 'custom_sidebar', true );
+			}
 
 			//load custom sidebar if appropriate
-			if ( is_singular() && $custom_sidebar && $custom_sidebar !== 'default') {
+			if ( $custom_sidebar && $custom_sidebar !== 'default') {
 				dynamic_sidebar($custom_sidebar);
 
 			//load single-post sidebar if it has things

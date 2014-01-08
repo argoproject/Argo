@@ -140,15 +140,23 @@ function largo_make_slug($string, $maxLength = 63) {
  * @since 1.0
  */
 if( !function_exists( 'custom_sidebars_dropdown' ) ) {
-	function custom_sidebars_dropdown( $selected = '', $skip_default = false ) {
+	function custom_sidebars_dropdown( $selected = '', $skip_default = false, $post_id = NULL ) {
 		global $wp_registered_sidebars, $post;
-		$custom = ( $selected ) ? $selected : get_post_meta( $post->ID, 'custom_sidebar', true );
-		$val = ( $custom ) ? $custom : 'none';
+		$the_id = ( $post_id ) ? $post_id : $post->ID ;
+		$custom = ( $selected ) ? $selected : get_post_meta( $the_id, 'custom_sidebar', true );
+		$val = ( $custom ) ? $custom : 'default';
 
 		// Add a default option
 		if ( ! $skip_default ) {
-			$output .= '<option value="default" '.selected('default',$val).'>' . __( 'Default', 'largo' ) . '</option>';
+			$output .= '<option value="default" ';
+			$output .= selected( 'default', $val, false );
+			$output .= '>' . __( 'Default', 'largo' ) . '</option>';
 		}
+
+		// Add a 'none' option
+		$output .= '<option value="none" ';
+		$output .= selected( 'none', $val, false );
+		$output .= '>' . __( 'None', 'largo' ) . '</option>';
 
 		// Filter list of sidebars to exclude those we don't want users to choose
 		$excluded = array(
@@ -161,7 +169,7 @@ if( !function_exists( 'custom_sidebars_dropdown' ) ) {
 			//check if excluded
 			if ( in_array( $sidebar_id, $excluded ) || in_array( $sidebar['name'], $excluded ) ) continue;
 
-			$output .= '<option value="' . $sidebar_id . '" ' . selected($sidebar_id, $val) . '>' . $sidebar['name'] . '</option>';
+			$output .= '<option value="' . $sidebar_id . '" ' . selected($sidebar_id, $val, false) . '>' . $sidebar['name'] . '</option>';
 		}
 
 		echo $output;
