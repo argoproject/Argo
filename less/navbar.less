@@ -519,3 +519,52 @@ html.touch ul.nav li.dropdown.open ul.dropdown-menu {
     }
   }
 }
+
+// Sticky nav
+.sticky-nav-holder {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 99998;
+  visibility: hidden;
+  opacity: 0;
+
+  .transition( opacity 0.3s );
+
+  &.show {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  background-color: rgba( red(@bodyBackground), green(@bodyBackground), blue(@bodyBackground), 0.9);
+  border-bottom: solid @baseColor 1px;
+
+  body.admin-bar & {
+    top: 28px;
+  }
+
+  .sticky-nav-container {
+    margin: 0 auto;
+  }
+
+  .navbar {
+  	margin-bottom: 0;
+	  li {
+		  > a {
+				color: @linkColor;
+		  }
+		  .caret {
+			  border-top-color: @linkColor !important;
+			  border-top-color: rgba( red(@linkColor), green(@linkColor), blue(@linkColor), 0.8) !important;
+		  }
+		  > a:hover .caret {
+			  border-top-color: @bodyBackground !important;
+		  }
+	  }
+
+	  .divider-vertical {
+		  display: none;
+	  }
+  }
+}

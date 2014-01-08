@@ -18,7 +18,9 @@ if ( ! function_exists( 'largo_enqueue_js' ) ) {
 
 		//only load sharethis on single pages and load jquery tabs for the related content box if it's active
 		if ( is_single() ) {
-			wp_enqueue_script( 'sharethis', get_template_directory_uri() . '/js/st_buttons.js', array( 'jquery' ), '1.0', true );
+			$utilities = of_get_option( 'article_utilities' );
+			if ( of_get_option( 'social_icons_display' ) != 'none' && ( $utilities['sharethis'] === '1' || $utilities['email'] === '1' ) )
+				wp_enqueue_script( 'sharethis', get_template_directory_uri() . '/js/st_buttons.js', array( 'jquery' ), '1.0', true );
 			if ( of_get_option( 'show_related_content' ) )
 				wp_enqueue_script( 'idTabs', get_template_directory_uri() . '/js/jquery.idTabs.js', array( 'jquery' ), '1.0', true );
 		}
@@ -73,7 +75,7 @@ if ( ! function_exists( 'largo_footer_js' ) ) {
 		  var js, fjs = d.getElementsByTagName(s)[0];
 		  if (d.getElementById(id)) return;
 		  js = d.createElement(s); js.id = id;
-		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+		  js.src = "//connect.facebook.net/<?php echo get_locale() ?>/all.js#xfbml=1";
 		  fjs.parentNode.insertBefore(js, fjs);
 		}(document, 'script', 'facebook-jssdk'));</script>
 
