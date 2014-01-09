@@ -80,7 +80,11 @@ get_header();
 					$posts_term = of_get_option( 'posts_term_plural', 'Stories' );
 
 					if ( is_author() ) {
-						printf(__('Recent %1$s<a class="rss-link" href="%2$s"><i class="icon-rss"></i></a>', 'largo'), $posts_term, get_author_feed_link( get_the_author_meta('ID') ) );
+						if ( function_exists( 'get_coauthors' ) && $author = get_coauthors( $post->ID ) ) {
+							printf(__('Recent %1$s<a class="rss-link" href="/author/%2$s/feed/"><i class="icon-rss"></i></a>', 'largo'), $posts_term, $author[0]->user_login );
+						} else {
+							printf(__('Recent %1$s<a class="rss-link" href="%2$s"><i class="icon-rss"></i></a>', 'largo'), $posts_term, get_author_feed_link( get_the_author_meta('ID') ) );
+						}
 					} elseif ( is_category() ) {
 						printf(__('Recent %1$s<a class="rss-link" href="%2$s"><i class="icon-rss"></i></a>', 'largo'), $posts_term, get_category_feed_link( get_queried_object_id() ) );
 					} elseif ( is_tag() ) {

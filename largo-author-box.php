@@ -1,7 +1,7 @@
 
 <?php
 
-if ( function_exists( 'get_coauthors' )  && !is_author() )
+if ( function_exists( 'get_coauthors' ) )
 	$authors = get_coauthors( $post->ID );
 else
 	$authors[] = get_userdata( get_the_author_meta( 'ID' ) );
@@ -10,25 +10,38 @@ foreach( $authors as $author ) {
 ?>
 
 <div class="author-box author vcard clearfix">
-	<?php if ( is_author() ) { ?>
-		<h1 class="fn n"><?php echo $author->display_name; ?></h1>
-	<?php } else {
-		printf( __('<h5>About <span class="fn n">%1$s</span><span class="author-posts-link"><a class="url" href="%2$s" rel="author" title="See all posts by %1$s">More by this author</a></span></h5>', 'largo'),
-			esc_attr( $author->display_name ),
-			esc_url( get_author_posts_url( $author->ID ) )
+	<?php
+		if ( is_author() ) {
+			echo '<h1 class="fn n">' . $author->display_name . '</h1>';
+		} else if ( $author->type == 'guest-author' ) {
+			printf( __('<h5>About <span class="fn n">%1$s</span><span class="author-posts-link"><a class="url" href="/author/%2$s/" rel="author" title="See all posts by %1$s">More by this author</a></span></h5>', 'largo'),
+				esc_attr( $author->display_name ),
+				$author->user_login
 			);
-	} ?>
+		} else {
+			printf( __('<h5>About <span class="fn n">%1$s</span><span class="author-posts-link"><a class="url" href="%2$s" rel="author" title="See all posts by %1$s">More by this author</a></span></h5>', 'largo'),
+				esc_attr( $author->display_name ),
+				esc_url( get_author_posts_url( $author->ID ) )
+			);
+		}
 
-	<?php if ( largo_has_gravatar( $author->user_email ) ) : ?>
-			<div class="photo">
-			<?php echo get_avatar( $author->ID, 96, '', $author->display_name ); ?>
-			</div>
-		<?php endif;
+		// Avatar
+		if ( largo_has_gravatar( $author->user_email ) ) {
+			echo '<div class="photo">' . get_avatar( $author->ID, 96, '', $author->display_name ) . '</div>';
+		} elseif ( $author->type == 'guest-author' && get_the_post_thumbnail( $author->ID ) ) {
+			$photo = get_the_post_thumbnail( $author->ID, array(96,96) );
+			$photo = str_replace( 'attachment-96x96 wp-post-image', 'avatar avatar-96 photo', $photo );
+			echo '<div class="photo">' . $photo . '</div>';
+		}
+
+		// Description
+		if ( $author->type == 'guest-author' && $author->description ) {
+			echo '<p>' . esc_attr( $author->description ) . '</p>';
+		} else if ( $description = get_the_author_meta( 'description', $author->ID ) ) {
+			echo '<p>' . esc_attr( $description ) . '</p>';
+		}
+
 	?>
-
-	<?php if ( $description = get_the_author_meta( 'description', $author->ID ) ) : ?>
-		<p><?php echo esc_attr( $description ); ?></p>
-	<?php endif; ?>
 
 	<ul class="social-links">
 		<?php if ( $fb = get_the_author_meta( 'fb', $author->ID ) ) : ?>
@@ -43,11 +56,15 @@ foreach( $authors as $author ) {
 		</li>
 		<?php endif; ?>
 
-		<?php if ( $email = get_the_author_meta( 'user_email', $author->ID ) ) : ?>
-		<li class="email">
-			<a href="mailto:<?php echo esc_attr( $email ); ?>" title="e-mail <?php echo esc_attr( $author->display_name ); ?>"><i class="icon-mail"></i></a>
-		</li>
-		<?php endif; ?>
+		<?php if ( $author->type == 'guest-author' && $author->user_email ) { ?>
+			<li class="email">
+				<a href="mailto:<?php echo esc_attr( $author->user_email ); ?>" title="e-mail <?php echo esc_attr( $author->display_name ); ?>"><i class="icon-mail"></i></a>
+			</li>
+		<?php } else if ( $email = get_the_author_meta( 'user_email', $author->ID ) ) { ?>
+			<li class="email">
+				<a href="mailto:<?php echo esc_attr( $email ); ?>" title="e-mail <?php echo esc_attr( $author->display_name ); ?>"><i class="icon-mail"></i></a>
+			</li>
+		<?php } ?>
 
 		<?php if ( $googleplus = get_the_author_meta( 'googleplus', $author->ID ) ) : ?>
 		<li class="gplus">
