@@ -35,10 +35,11 @@ $tags = of_get_option ('tag_display');
 		get_template_part( 'home-part', 'bottom-widget-area' );
 	} else {
 		$args = array(
-			'paged'			=> $paged,
-			'post_status'	=> 'publish',
-			'posts_per_page'=> 10,
-			'post__not_in' 	=> $ids
+			'paged'					=> $paged,
+			'post_status'			=> 'publish',
+			'posts_per_page'		=> 10,
+			'post__not_in' 			=> $ids,
+			'ignore_sticky_posts' 	=> true
 			);
 		if ( of_get_option('num_posts_home') )
 			$args['posts_per_page'] = of_get_option('num_posts_home');
