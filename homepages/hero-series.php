@@ -56,6 +56,10 @@ global $largo, $shown_ids, $tags;
 								if ( largo_post_in_series() ):
 									$feature = largo_get_the_main_feature();
 									$feature_posts = largo_get_recent_posts_for_term( $feature, 3, 2 );
+									echo "<!-- ";
+									print_r($feature);
+									print_r($feature_posts);
+									echo "-->";
 									if ( $feature_posts ):
 										?>
 										<h5 class="top-tag"><a class="post-category-link" href="<?php echo get_term_link( $feature ); ?>"><?php echo $feature->name ?></a></h5>
