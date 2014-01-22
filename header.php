@@ -51,6 +51,7 @@
         	<span class="visuallyhidden">
         		<a href="#main" title="Skip to content"><?php _e('Skip to content', 'largo'); ?></a>
         	</span>
+
         	<?php
 				$args = array(
 					'theme_location' => 'global-nav',
