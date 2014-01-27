@@ -4047,6 +4047,9 @@ p.comment-form-comment {
 .sticky-footer-holder .share-button:hover {
   color: #2275bb;
 }
+.sticky-footer-holder .share-button:before {
+  margin: 0;
+}
 .sticky-footer-holder a {
   color: #333333;
 }
@@ -4078,8 +4081,8 @@ p.comment-form-comment {
 }
 .sticky-footer-holder [class^="icon-"]:before,
 .sticky-footer-holder [class*=" icon-"]:before {
-  font-size: 125%;
-  vertical-align: bottom;
+  font-size: 110%;
+  width: auto;
 }
 .sticky-footer-holder .dismiss {
   position: absolute;
