@@ -2063,6 +2063,7 @@ h2.branding .tagline {
   padding: 10px;
   color: #ffffff;
   text-decoration: none;
+  line-height: 20px;
 }
 .navbar li.dropdown > a {
   padding-right: 0;
@@ -2454,6 +2455,9 @@ html.touch ul.nav li.dropdown.open ul.dropdown-menu {
   font-size: 16px;
   font-weight: bold;
 }
+.sticky-nav-wrapper {
+  height: 43px;
+}
 .sticky-nav-holder {
   position: fixed;
   top: 0;
@@ -2475,7 +2479,7 @@ html.touch ul.nav li.dropdown.open ul.dropdown-menu {
   opacity: 1;
 }
 body.admin-bar .sticky-nav-holder {
-  top: 28px;
+  top: 32px;
 }
 .sticky-nav-holder .sticky-nav-container {
   margin: 0 auto;

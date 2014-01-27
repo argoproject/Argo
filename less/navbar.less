@@ -71,6 +71,7 @@
   padding: @navbarHeight/4;
   color: @navbarLinkColor;
   text-decoration: none;
+  line-height: @navbarFontSize + 5;
 }
 .navbar li.dropdown > a {
   padding-right: 0;
@@ -521,6 +522,9 @@ html.touch ul.nav li.dropdown.open ul.dropdown-menu {
 }
 
 // Sticky nav
+.sticky-nav-wrapper {
+  height: 43px;
+}
 .sticky-nav-holder {
   position: fixed;
   top: 0;
@@ -541,7 +545,7 @@ html.touch ul.nav li.dropdown.open ul.dropdown-menu {
   border-bottom: solid @baseColor 1px;
 
   body.admin-bar & {
-    top: 28px;
+    top: 32px;
   }
 
   .sticky-nav-container {

@@ -127,6 +127,13 @@ jQuery(document).ready(function($) {
 		var stickyNavEl = $( '.sticky-nav-holder' );
 		var mainEl = $('#main');
 
+		// Do we show it regardless?
+		if ( stickyNavEl.data( 'hideAtTop') === false ) {
+			stickyFooterEl.addClass( 'show' );
+			return;
+		}
+
+
 		mainEl.waypoint( function( direction ) {
 			stickyNavEl.toggleClass( 'show', direction == 'down' );
 		}, { offset: $('#wpadminbar').height() + parseInt( mainEl.css('marginTop') ) 	});
