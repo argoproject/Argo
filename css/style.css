@@ -2966,6 +2966,10 @@ p.wp-caption-text {
 .full {
   width: 100%;
 }
+.full-image {
+  text-align: center;
+  background-color: #dddddd;
+}
 .pull-quote,
 .type-pull-quote {
   border-left: 4px solid #333333;
