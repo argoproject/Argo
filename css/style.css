@@ -2500,6 +2500,13 @@ body.admin-bar .sticky-nav-holder {
 .sticky-nav-holder .navbar .divider-vertical {
   display: none;
 }
+.sticky-nav-holder .nav-right {
+  float: right;
+}
+.sticky-nav-holder .nav-right .donate-btn {
+  float: left;
+  margin: 5px;
+}
 .post-header,
 .page-header,
 .entry-content,

@@ -290,6 +290,19 @@
 					</ul>
 		      </div>
 
+		      <div class="nav-right">
+			      <?php if ( of_get_option( 'show_donate_button') )
+	      			largo_donate_button();
+	      		?>
+
+						<div id="header-search">
+							<form class="form-search" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+								<div class="input-append">
+									<input type="text" placeholder="<?php _e('Search', 'largo'); ?>" class="input-medium appendedInputButton search-query" value="" name="s" /><button type="submit" class="search-submit btn"><?php _e('GO', 'largo'); ?></button>
+								</div>
+							</form>
+						</div>
+					</div>
 		    </div>
 		</nav>
 	</div></div>
