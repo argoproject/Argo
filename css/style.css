@@ -3562,8 +3562,7 @@ p.comment-form-comment {
   display: none;
 }
 .widget {
-  margin-bottom: 24px;
-  padding: 12px;
+  padding: 15px;
 }
 .widget p,
 .widget ul {
@@ -3579,6 +3578,9 @@ p.comment-form-comment {
 }
 .widget p.morelink {
   margin: -6px 0 0;
+}
+.widget + .widget {
+  border-top: 1px solid #dddddd;
 }
 .widgettitle,
 .stories h3.widgettitle {

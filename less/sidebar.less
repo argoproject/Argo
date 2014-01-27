@@ -1,6 +1,5 @@
 .widget {
-  margin-bottom: @baseline;
-  padding: 12px;
+  padding: 15px;
 
   p, ul {
     padding: 0 3px;
@@ -15,6 +14,10 @@
   }
   p.morelink {
     margin: -@baseline/4 0 0;
+  }
+
+  + .widget {
+    border-top: 1px solid @grayLighter;
   }
 }
 .widgettitle,
