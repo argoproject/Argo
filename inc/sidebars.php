@@ -187,8 +187,35 @@ function largo_widget_settings() {
 			    <div id="optionsframework" class="postbox">
 					<form action="options.php" method="post">
 						<div> <?php // Extra open <div> because optinosframework_fields() adds an extra closing </div> ?>
-					<?php settings_fields('optionsframework'); ?>
-					<?php optionsframework_fields(); /* Settings */ ?>
+					<?php 
+					// Prints hidden tags for WP's options.php to save the value
+					settings_fields('optionsframework');
+					
+					// Print all the currently saved values for those fields that aren't outputted
+					$options_to_show = optionsframework_options();
+					$config = get_option( 'optionsframework', array() );
+					// Gets the unique option id
+					if ( isset( $config['id'] ) ) {
+						$option_name = $config['id'];
+					}
+					else {
+						$option_name = 'optionsframework';
+					};
+
+					$current_values = get_option( $option_name, array() );
+
+					foreach ( $options_to_show as $key => $field ) {
+						if ( isset($field['id']) && isset($current_values[$field['id']]) ) {
+							unset( $current_values[$field['id']] );
+						}
+					}
+
+					foreach ( $current_values as $key => $val ) {
+						echo '<input type="hidden" name="', esc_attr( $option_name . '[' . $key . ']'), '" value="', esc_attr( $val ) ,'" />';
+					}
+
+					// Prints the fields
+					optionsframework_fields(); /* Settings */ ?>
 					<div id="optionsframework-submit">
 						<input type="submit" class="button-primary" name="update" value="<?php esc_attr_e( 'Save Options', 'options_framework_theme' ); ?>" />
 						<input type="submit" class="reset-button button-secondary" name="reset" value="<?php esc_attr_e( 'Restore Defaults', 'options_framework_theme' ); ?>" onclick="return confirm( '<?php print esc_js( __( 'Click OK to reset. Any theme settings will be lost!', 'options_framework_theme' ) ); ?>' );" />
