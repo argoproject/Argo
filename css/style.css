@@ -2599,7 +2599,7 @@ article.story {
 .tags h5,
 .pager h5,
 #related-posts h5 {
-  font-size: 16px;
+  font-size: 19.2px;
   margin-bottom: 6px;
 }
 .tags,
@@ -2608,24 +2608,12 @@ article.story {
   font-size: 16px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-.single-post .author-box,
-.single-argolinkroundups .author-box,
-.labels {
-  background-color: #ffffff;
-  border: 1px solid #dddddd;
-  border-top: 3px solid #999999;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-}
 .single-post .author-box h5,
 .single-argolinkroundups .author-box h5,
 .labels h5 {
-  font-size: 16px;
+  font-size: 19.2px;
   line-height: 1;
-  background-color: #e6e6e6;
   margin-bottom: 0;
-  padding: 8px;
 }
 h3.recent-posts a.rss-link,
 .labels .series-label h5 a.rss-link {
@@ -2642,10 +2630,6 @@ h3.recent-posts a.rss-link:hover,
 .labels .series-label {
   margin: 5px;
   padding: 8px;
-  background-color: #e6e6e6;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
 }
 .labels .series-label h5 {
   background: none;
@@ -2722,14 +2706,6 @@ h3.recent-posts a.rss-link:hover,
   float: left;
   text-align: left;
 }
-#related-posts {
-  background-color: #ffffff;
-  border: 1px solid #dddddd;
-  border-top: 3px solid #999999;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-}
 #related-post-nav {
   padding: 8px 0;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -2743,7 +2719,7 @@ h3.recent-posts a.rss-link:hover,
   border-bottom: 1px solid #999999;
 }
 #related-post-nav h5 {
-  margin: 0 0 5px 5px;
+  margin: 0 0 5px 0;
 }
 #related-post-nav a {
   display: block;
@@ -3588,10 +3564,6 @@ p.comment-form-comment {
 .widget {
   margin-bottom: 24px;
   padding: 12px;
-  border: 1px solid #dddddd;
-  -webkit-border-radius: 8px;
-  -moz-border-radius: 8px;
-  border-radius: 8px;
 }
 .widget p,
 .widget ul {
@@ -3611,20 +3583,14 @@ p.comment-form-comment {
 .widgettitle,
 .stories h3.widgettitle {
   margin-bottom: 8px;
-  padding: 5px 8px;
-  border: 1px solid #dddddd;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
-  background-color: #2275bb;
-  font-size: 13.04px;
+  font-size: 16px;
   text-transform: uppercase;
   font-weight: bold;
-  color: #ffffff;
+  color: #000000;
 }
 .widgettitle a,
 .stories h3.widgettitle a {
-  color: #ffffff;
+  color: #000000;
 }
 #site-footer .widget,
 #site-footer .widgettitle,
