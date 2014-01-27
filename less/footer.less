@@ -273,10 +273,18 @@
   }
 
   .dismiss {
-	  float: right;
-	  margin-left: 1em;
+	  position: absolute;
+    top: 5px;
+    right: 5px;  
+
 	  a {
     	.opacity(50);
 	  }
+  }
+}
+
+@media ( max-width: @containerMaxWidth ) {
+  .sticky-footer-container {
+    padding-right: 40px;
   }
 }

@@ -4082,12 +4082,18 @@ p.comment-form-comment {
   vertical-align: bottom;
 }
 .sticky-footer-holder .dismiss {
-  float: right;
-  margin-left: 1em;
+  position: absolute;
+  top: 5px;
+  right: 5px;
 }
 .sticky-footer-holder .dismiss a {
   opacity: 0.5;
   filter: alpha(opacity=50);
+}
+@media (max-width: 1170px) {
+  .sticky-footer-container {
+    padding-right: 40px;
+  }
 }
 .byline .clean-read {
   float: right;
