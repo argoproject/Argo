@@ -2525,6 +2525,7 @@ body.admin-bar .sticky-nav-holder {
 }
 .sticky-nav-holder .nav-right {
   float: right;
+  padding-top: 5px;
 }
 .sticky-nav-holder .nav-right .donate-btn {
   float: left;
