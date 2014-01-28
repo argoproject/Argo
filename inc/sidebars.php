@@ -181,8 +181,8 @@ if( !function_exists( 'custom_sidebars_dropdown' ) ) {
  */
 function largo_widget_settings() {
 	?>
-	<div class="wrap">
-		<div class="advance-widget-settings">
+ 		<div class="advance-widget-settings">
+ 			<div class="advance-widget-settings-title"><?php _e( 'Largo Sidebar Options', 'largo' ); ?></div>
 			<div id="optionsframework-metabox" class="metabox-holder">
 			    <div id="optionsframework" class="postbox">
 					<form action="options.php" method="post">
@@ -225,12 +225,9 @@ function largo_widget_settings() {
 				</div>
 			</div>
 		</div>
-		<br class="clear" />
-	</div>
-	<br class="clear" />
 	<?php
 }
-add_action( 'sidebar_admin_page', 'largo_widget_settings' );
+add_action( 'widgets_admin_page', 'largo_widget_settings' );
 
 /**
  * Load up the scripts for options framework on the widgets
