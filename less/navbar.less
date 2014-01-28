@@ -105,6 +105,12 @@ li.home-link:hover i {
     display: block;
     padding: @navbarHeight/4 5px @navbarHeight/4 10px;
   }
+
+  img {
+    display: block;
+    height: @navbarHeight;
+    width: @navbarHeight;
+  }
 }
 
 // Active nav items
@@ -539,7 +545,7 @@ html.touch ul.nav li.dropdown.open ul.dropdown-menu {
 
 // Sticky nav
 .sticky-nav-wrapper {
-  height: 43px;
+  height: @navbarHeight + 13px;
 }
 .sticky-nav-holder {
   position: fixed;
@@ -583,9 +589,15 @@ html.touch ul.nav li.dropdown.open ul.dropdown-menu {
 		  }
 	  }
 
+    .nav > li > a {
+      padding-top: 15px;
+      padding-bottom: 15px;
+    }
+
 	  .divider-vertical {
 		  display: none;
 	  }
+
   }
 
   .nav-right {
@@ -601,7 +613,31 @@ html.touch ul.nav li.dropdown.open ul.dropdown-menu {
     color: @white;
   }
 
-  .navbar li.home-link {
+  .navbar .nav li.dropdown.open > .dropdown-toggle,
+  .navbar .nav li.dropdown.active > .dropdown-toggle,
+  .navbar .nav li.dropdown.open.active > .dropdown-toggle {
+    color: mix( @linkColor, @white );
+    background: @linkColor;
+
+    .caret {
+      border-top-color: @white !important;
+    }
+
+    &:hover {
+      color: @white;
+    }
+  }
+
+  .navbar .nav > li.home-link {
     .border-radius(0);
+    a {
+      padding: 0;
+
+      img {
+        width: @navbarHeight + 10px;
+        height: @navbarHeight + 10px;
+
+      }
+    }
   }
 }

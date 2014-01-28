@@ -24,7 +24,7 @@ if ( ! function_exists( 'largo_create_image_sizes' ) ) {
 	function largo_create_image_sizes() {
 		add_theme_support( 'post-thumbnails' );
 		set_post_thumbnail_size( 140, 140, true ); // thumbnail
-		add_image_size( 'home-logo', 40, 40, true ); // small thumbnail
+		add_image_size( 'home-logo', 50, 50, true ); // small thumbnail
 		add_image_size( '60x60', 60, 60, true ); // small thumbnail
 		add_image_size( 'medium', MEDIUM_WIDTH, 9999 ); // medium width scaling
 		add_image_size( 'large', LARGE_WIDTH, 9999 ); // large width scaling

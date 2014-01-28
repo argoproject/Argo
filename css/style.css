@@ -2099,6 +2099,11 @@ li.home-link:hover i {
   display: block;
   padding: 10px 5px 10px 10px;
 }
+.navbar li.home-link > a img {
+  display: block;
+  height: 40px;
+  width: 40px;
+}
 .navbar .active > a,
 .navbar .active > a:hover {
   color: #dddddd;
@@ -2470,7 +2475,7 @@ html.touch ul.nav li.dropdown.open ul.dropdown-menu {
   font-weight: bold;
 }
 .sticky-nav-wrapper {
-  height: 43px;
+  height: 53px;
 }
 .sticky-nav-holder {
   position: fixed;
@@ -2511,6 +2516,10 @@ body.admin-bar .sticky-nav-holder {
 .sticky-nav-holder .navbar li > a:hover .caret {
   border-top-color: #ffffff !important;
 }
+.sticky-nav-holder .navbar .nav > li > a {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
 .sticky-nav-holder .navbar .divider-vertical {
   display: none;
 }
@@ -2524,10 +2533,33 @@ body.admin-bar .sticky-nav-holder {
 .sticky-nav-holder .navbar .active > a {
   color: #ffffff;
 }
-.sticky-nav-holder .navbar li.home-link {
+.sticky-nav-holder .navbar .nav li.dropdown.open > .dropdown-toggle,
+.sticky-nav-holder .navbar .nav li.dropdown.active > .dropdown-toggle,
+.sticky-nav-holder .navbar .nav li.dropdown.open.active > .dropdown-toggle {
+  color: #91badd;
+  background: #2275bb;
+}
+.sticky-nav-holder .navbar .nav li.dropdown.open > .dropdown-toggle .caret,
+.sticky-nav-holder .navbar .nav li.dropdown.active > .dropdown-toggle .caret,
+.sticky-nav-holder .navbar .nav li.dropdown.open.active > .dropdown-toggle .caret {
+  border-top-color: #ffffff !important;
+}
+.sticky-nav-holder .navbar .nav li.dropdown.open > .dropdown-toggle:hover,
+.sticky-nav-holder .navbar .nav li.dropdown.active > .dropdown-toggle:hover,
+.sticky-nav-holder .navbar .nav li.dropdown.open.active > .dropdown-toggle:hover {
+  color: #ffffff;
+}
+.sticky-nav-holder .navbar .nav > li.home-link {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   border-radius: 0;
+}
+.sticky-nav-holder .navbar .nav > li.home-link a {
+  padding: 0;
+}
+.sticky-nav-holder .navbar .nav > li.home-link a img {
+  width: 50px;
+  height: 50px;
 }
 .post-header,
 .page-header,
