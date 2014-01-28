@@ -40,7 +40,7 @@ global $largo, $shown_ids, $tags;
 				<?php } else { ?>
 					<div class="full-hero max-wide"><a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'full' ); ?></a></div>
 				<?php } ?>
-				<div id="dark-top">
+				<div id="dark-top" <?php echo (!$has_video) ? 'class="overlay"' : ''; ?>>
 					<div class="span10">
 						<div class="row-fluid">
 							<article class="span8">
