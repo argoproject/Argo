@@ -68,6 +68,7 @@
 }
 .navbar li > a {
   float: none;
+  display: block;
   padding: @navbarHeight/4;
   color: @navbarLinkColor;
   text-decoration: none;
@@ -87,11 +88,22 @@ html.no-touch .navbar li > a:hover {
 li.home-link:hover i {
   .opacity(85);
 }
+.navbar li.home-link {
+  .border-radius(4px 0 0 4px);
+  overflow: hidden;
+}
+
 .navbar li.home-link > a {
   font-size: @navbarFontSize + 5;
-  padding: @navbarHeight/4 5px @navbarHeight/4 10px;
+  padding: 0;
+  display: block;
   &:hover {
     background:none;
+  }
+
+  i {
+    display: block;
+    padding: @navbarHeight/4 5px @navbarHeight/4 10px;
   }
 }
 
@@ -110,7 +122,11 @@ li.home-link:hover i {
   margin: 0 0 0 2px;
   overflow: hidden;
   background-color: @navbarBackground;
-  border-left: 1px solid @navbarBackgroundHighlight;
+  // border-left: 1px solid @navbarBackgroundHighlight;
+}
+
+.navbar .home-link + .divider-vertical {
+  margin: 0;
 }
 
 // Navbar button for toggling navbar items in responsive layouts
@@ -181,7 +197,7 @@ li.home-link:hover i {
 
 // Place the caret
 .dropdown .caret {
-  margin: @navbarHeight/2 - 3 8px 0 3px;
+  margin: @navbarHeight/2 - 13px 8px 0 3px;
 }
 .dropdown:hover .caret,
 .open .caret {
@@ -579,5 +595,13 @@ html.touch ul.nav li.dropdown.open ul.dropdown-menu {
       float: left;
       margin: 5px;
     }
+  }
+
+  .navbar .active > a {
+    color: @white;
+  }
+
+  .navbar li.home-link {
+    .border-radius(0);
   }
 }

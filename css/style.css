@@ -2060,6 +2060,7 @@ h2.branding .tagline {
 }
 .navbar li > a {
   float: none;
+  display: block;
   padding: 10px;
   color: #ffffff;
   text-decoration: none;
@@ -2080,12 +2081,23 @@ li.home-link:hover i {
   opacity: 0.85;
   filter: alpha(opacity=85);
 }
+.navbar li.home-link {
+  -webkit-border-radius: 4px 0 0 4px;
+  -moz-border-radius: 4px 0 0 4px;
+  border-radius: 4px 0 0 4px;
+  overflow: hidden;
+}
 .navbar li.home-link > a {
   font-size: 20px;
-  padding: 10px 5px 10px 10px;
+  padding: 0;
+  display: block;
 }
 .navbar li.home-link > a:hover {
   background: none;
+}
+.navbar li.home-link > a i {
+  display: block;
+  padding: 10px 5px 10px 10px;
 }
 .navbar .active > a,
 .navbar .active > a:hover {
@@ -2099,7 +2111,9 @@ li.home-link:hover i {
   margin: 0 0 0 2px;
   overflow: hidden;
   background-color: #1e67a5;
-  border-left: 1px solid #2275bb;
+}
+.navbar .home-link + .divider-vertical {
+  margin: 0;
 }
 .navbar .btn-navbar {
   display: none;
@@ -2157,7 +2171,7 @@ li.home-link:hover i {
   filter: alpha(opacity=90);
 }
 .dropdown .caret {
-  margin: 17px 8px 0 3px;
+  margin: 7px 8px 0 3px;
 }
 .dropdown:hover .caret,
 .open .caret {
@@ -2506,6 +2520,14 @@ body.admin-bar .sticky-nav-holder {
 .sticky-nav-holder .nav-right .donate-btn {
   float: left;
   margin: 5px;
+}
+.sticky-nav-holder .navbar .active > a {
+  color: #ffffff;
+}
+.sticky-nav-holder .navbar li.home-link {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
 }
 .post-header,
 .page-header,
