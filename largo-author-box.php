@@ -13,15 +13,10 @@ foreach( $authors as $author ) {
 	<?php
 		if ( is_author() ) {
 			echo '<h1 class="fn n">' . $author->display_name . '</h1>';
-		} else if ( $author->type == 'guest-author' ) {
+		} else {
 			printf( __('<h5>About <span class="fn n">%1$s</span><span class="author-posts-link"><a class="url" href="/author/%2$s/" rel="author" title="See all posts by %1$s">More by this author</a></span></h5>', 'largo'),
 				esc_attr( $author->display_name ),
 				$author->user_login
-			);
-		} else {
-			printf( __('<h5>About <span class="fn n">%1$s</span><span class="author-posts-link"><a class="url" href="%2$s" rel="author" title="See all posts by %1$s">More by this author</a></span></h5>', 'largo'),
-				esc_attr( $author->display_name ),
-				esc_url( get_author_posts_url( $author->ID ) )
 			);
 		}
 
@@ -35,44 +30,37 @@ foreach( $authors as $author ) {
 		}
 
 		// Description
-		if ( $author->type == 'guest-author' && $author->description ) {
+		if ( $author->description ) {
 			echo '<p>' . esc_attr( $author->description ) . '</p>';
-		} else if ( $description = get_the_author_meta( 'description', $author->ID ) ) {
-			echo '<p>' . esc_attr( $description ) . '</p>';
 		}
-
 	?>
 
 	<ul class="social-links">
-		<?php if ( $fb = get_the_author_meta( 'fb', $author->ID ) ) : ?>
+		<?php if ( $fb = $author->fb ) : ?>
 		<li class="facebook">
 			<div class="fb-subscribe" data-href="<?php echo esc_url( $fb ); ?>" data-layout="button_count" data-show-faces="false" data-width="225"></div>
 		</li>
 		<?php endif; ?>
 
-		<?php if ( $twitter = get_the_author_meta( 'twitter', $author->ID ) ) : ?>
+		<?php if ( $twitter = $author->twitter ) : ?>
 		<li class="twitter">
 			<a href="<?php echo esc_url( $twitter ); ?>" class="twitter-follow-button" data-show-count="false" data-lang="en"><?php printf( __('Follow @%1$s', 'largo'), twitter_url_to_username ( $twitter ) ); ?></a>
 		</li>
 		<?php endif; ?>
 
-		<?php if ( $author->type == 'guest-author' && $author->user_email ) { ?>
-			<li class="email">
-				<a href="mailto:<?php echo esc_attr( $author->user_email ); ?>" title="e-mail <?php echo esc_attr( $author->display_name ); ?>"><i class="icon-mail"></i></a>
-			</li>
-		<?php } else if ( $email = get_the_author_meta( 'user_email', $author->ID ) ) { ?>
+		<?php if ( $email = $author->user_email ) : ?>
 			<li class="email">
 				<a href="mailto:<?php echo esc_attr( $email ); ?>" title="e-mail <?php echo esc_attr( $author->display_name ); ?>"><i class="icon-mail"></i></a>
 			</li>
-		<?php } ?>
+		<?php endif; ?>
 
-		<?php if ( $googleplus = get_the_author_meta( 'googleplus', $author->ID ) ) : ?>
+		<?php if ( $googleplus = $author->googleplus ) : ?>
 		<li class="gplus">
 			<a href="<?php echo esc_url( $googleplus ); ?>" title="<?php echo esc_attr( $author->display_name ); ?> on Google+" rel="me"><i class="icon-gplus"></i></a>
 		</li>
 		<?php endif; ?>
 
-		<?php if ( $linkedin = get_the_author_meta( 'linkedin', $author->ID ) ) : ?>
+		<?php if ( $linkedin = $author->linkedin ) : ?>
 		<li class="linkedin">
 			<a href="<?php echo esc_url( $linkedin ); ?>" title="<?php echo esc_attr( $author->display_name ); ?> on LinkedIn"><i class="icon-linkedin"></i></a>
 		</li>
@@ -81,4 +69,4 @@ foreach( $authors as $author ) {
 
 </div>
 
-<?php } ?>
+<?php } //foreach ?>
