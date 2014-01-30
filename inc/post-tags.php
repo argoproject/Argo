@@ -240,7 +240,7 @@ if ( ! function_exists( 'largo_entry_content' ) ) {
 		} else {
 		    the_content();
 		    if ( is_singular() && $numpages > 1 )
-		    	largo_custom_wp_link_pages( $args );
+		    	largo_custom_wp_link_pages('');
 		}
 	}
 }
