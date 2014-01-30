@@ -79,7 +79,35 @@ if ( ! function_exists( 'largo_byline' ) ) {
 	function largo_byline( $echo = true ) {
 		global $post;
 		$values = get_post_custom( $post->ID );
-		$authors = ( function_exists( 'coauthors_posts_links' ) && !isset( $values['largo_byline_text'] ) ) ? coauthors_posts_links( null, null, null, null, false ) : largo_author_link( false );
+
+		if ( function_exists( 'get_coauthors' ) && !isset( $values['largo_byline_text'] ) ) {
+			$coauthors = get_coauthors( $post->ID );
+			count($coauthors);
+			foreach( $coauthors as $author ) {
+				$byline_text = $author->display_name;
+				if ( $org = $author->organization )
+					$byline_text .= ' (' . $org . ')';
+
+				$out[]= sprintf('<a class="url fn n" href="/author/%1$s" title="Read All Posts By %2$s" rel="author">%3$s</a>',
+					$author->user_login,
+					$author->display_name,
+					$byline_text
+				);
+			}
+
+			if ( count($out) > 1 ) {
+				end($out);
+				$key = key($out);
+				reset($array);
+				$authors = implode( ', ', array_slice( $out, 0, -1 ) );
+				$authors .= ' <span class="and">and</span> ' . $out[$key];
+			} else {
+				$authors = $out[0];
+			}
+
+		} else {
+			$authors = largo_author_link( false );
+		}
 
 		$output = sprintf( __('<span class="by-author"><span class="by">By:</span> <span class="author vcard" itemprop="author">%1$s</span></span><span class="sep"> | </span><time class="entry-date updated dtstamp pubdate" datetime="%2$s">%3$s</time>', 'largo'),
 			$authors,
@@ -88,10 +116,10 @@ if ( ! function_exists( 'largo_byline' ) ) {
 		);
 
 		if ( current_user_can( 'edit_post', $post->ID ) )
-			$output .=  sprintf( __(' | <span class="edit-link"><a href="%1$s">Edit This Post</a></span>', 'largo'), get_edit_post_link() );
+			$output .=  sprintf( __('<span class="sep"> | </span><span class="edit-link"><a href="%1$s">Edit This Post</a></span>', 'largo'), get_edit_post_link() );
 
-	 	if ( is_single() && of_get_option( 'clean_read' ) === 'byline' )
-	 		$output .=	__('<a href="#" class="clean-read">View as "Clean Read"</a>', 'largo');
+		if ( is_single() && of_get_option( 'clean_read' ) === 'byline' )
+		 	$output .=	__('<a href="#" class="clean-read">View as "Clean Read"</a>', 'largo');
 
 		if ( $echo )
 			echo $output;
