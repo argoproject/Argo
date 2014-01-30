@@ -452,20 +452,40 @@ if ( ! function_exists( 'largo_content_nav' ) ) {
 			<nav id="nav-below" class="pager post-nav clearfix">
 				<?php
 					if ( $prev = get_previous_post() ) {
-						printf( __('<div class="previous"><a href="%1$s"><h5>Previous %2$s</h5><span class="meta-nav">%3$s</span></a></div>', 'largo'),
-							get_permalink( $prev->ID ),
-							of_get_option( 'posts_term_singular' ),
-							$prev->post_title
-						);
+						if( get_the_post_thumbnail( $prev->ID ) ) {
+							$image = wp_get_attachment_image_src( get_post_thumbnail_id( $prev->ID ) );
+							printf( __('<div class="previous"><a href="%1$s"><img class="thumb" src="%4$s" /><h5>Previous %2$s</h5><span class="meta-nav">%3$s</span></a></div>', 'largo'),
+								get_permalink( $prev->ID ),
+								of_get_option( 'posts_term_singular' ),
+								$prev->post_title,
+								$image[0]
+							);
+						} else {
+							printf( __('<div class="previous"><a href="%1$s"><h5>Previous %2$s</h5><span class="meta-nav">%3$s</span></a></div>', 'largo'),
+								get_permalink( $prev->ID ),
+								of_get_option( 'posts_term_singular' ),
+								$prev->post_title
+							);
+						}
 					}
 					if ( $next = get_next_post() ) {
-						printf( __('<div class="next"><a href="%1$s"><h5>Next %2$s</h5><span class="meta-nav">%3$s</span></a></div>', 'largo'),
-							get_permalink( $next->ID ),
-							of_get_option( 'posts_term_singular' ),
-							$next->post_title
-						);
+						if( get_the_post_thumbnail( $next->ID ) ) {
+							$image = wp_get_attachment_image_src( get_post_thumbnail_id( $next->ID ) );
+							printf( __('<div class="next"><a href="%1$s"><img class="thumb" src="%4$s" /><h5>Next %2$s</h5><span class="meta-nav">%3$s</span></a></div>', 'largo'),
+								get_permalink( $next->ID ),
+								of_get_option( 'posts_term_singular' ),
+								$next->post_title,
+								$image[0]
+							);
+						} else {
+							printf( __('<div class="next"><a href="%1$s"><h5>Next %2$s</h5><span class="meta-nav">%3$s</span></a></div>', 'largo'),
+								get_permalink( $next->ID ),
+								of_get_option( 'posts_term_singular' ),
+								$next->post_title
+							);
+						}
 					}
-				?>
+					?>
 			</nav><!-- #nav-below -->
 
 		<?php } elseif ( $wp_query->max_num_pages > 1 ) {

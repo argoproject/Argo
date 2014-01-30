@@ -2710,10 +2710,18 @@ h3.recent-posts a.rss-link:hover,
   float: right;
   text-align: right;
 }
+.next img {
+  float: right;
+  padding-left: 12px;
+}
 .previous {
   width: 48%;
   float: left;
   text-align: left;
+}
+.previous img {
+  float: left;
+  padding-right: 12px;
 }
 #related-posts {
   background-color: #ffffff;
