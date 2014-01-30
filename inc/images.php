@@ -79,7 +79,7 @@ add_filter( 'the_content', 'attachment_image_link_remove_filter' );
 //require_once(get_template_directory() . '/inc/picturefill/picturefill-wp.php');
 
 if ( ! function_exists( 'largo_home_icon' ) ) {
-	function largo_home_icon( $class='' ) {
+	function largo_home_icon( $class='', $size = 'home-logo' ) {
 		global $wpdb;
 
 		$logo = of_get_option( 'logo_thumbnail_sq' );
@@ -89,7 +89,7 @@ if ( ! function_exists( 'largo_home_icon' ) ) {
 		} else {
 			$logo = preg_replace( '#-\d+x\d+(\.[^.]+)$#', '\1', $logo );
 			$attachment_id = $wpdb->get_var( $wpdb->prepare("SELECT ID FROM {$wpdb->posts} WHERE guid = %s", $logo) );
-			echo wp_get_attachment_image( $attachment_id, 'home-logo' );
+			echo wp_get_attachment_image( $attachment_id, $size );
 		}
 	}
 }
