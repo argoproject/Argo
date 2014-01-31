@@ -3868,6 +3868,30 @@ p.comment-form-comment {
 #sidebar iframe {
   max-width: 100%;
 }
+.largo-related-posts ul.related {
+  margin: 0;
+}
+.largo-related-posts ul.related li {
+  list-style: none;
+  display: block;
+  *zoom: 1;
+}
+.largo-related-posts ul.related li:before,
+.largo-related-posts ul.related li:after {
+  display: table;
+  content: "";
+}
+.largo-related-posts ul.related li:after {
+  clear: both;
+}
+.largo-related-posts h4 {
+  font-size: 16px;
+  margin: 2px;
+}
+.largo-related-posts .wp-post-image {
+  float: left;
+  margin: 5px 10px 0 5px;
+}
 .before-footer-wrapper {
   background-color: #dddddd;
 }
