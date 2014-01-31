@@ -1108,6 +1108,8 @@ select:focus:required:invalid:focus {
 }
 .help-inline {
   display: inline-block;
+  /* IE7 inline-block hack */
+
   *display: inline;
   /* IE7 inline-block hack */
 
@@ -1256,6 +1258,8 @@ select:focus:required:invalid:focus {
 .form-inline .input-append,
 .form-horizontal .input-append {
   display: inline-block;
+  /* IE7 inline-block hack */
+
   *display: inline;
   /* IE7 inline-block hack */
 
@@ -1336,6 +1340,8 @@ legend + .control-group {
 }
 .btn {
   display: inline-block;
+  /* IE7 inline-block hack */
+
   *display: inline;
   /* IE7 inline-block hack */
 
@@ -2362,7 +2368,7 @@ li.home-link:hover i {
 }
 .navbar .btn-navbar {
   display: none;
-  float: right;
+  float: left;
   margin: 7px 0 0;
   margin-right: 10px;
   padding: 8px 10px;
@@ -2770,6 +2776,9 @@ body.admin-bar .sticky-nav-holder {
 .sticky-nav-holder .nav-right .donate-btn {
   float: left;
   margin: 5px;
+}
+.sticky-nav-holder .nav-right .form-search .toggle {
+  display: none;
 }
 .sticky-nav-holder .navbar .active > a {
   color: #ffffff;
@@ -4433,6 +4442,8 @@ p.comment-form-comment {
   background-color: #2275bb;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   display: inline-block;
+  /* IE7 inline-block hack */
+
   *display: inline;
   /* IE7 inline-block hack */
 
@@ -4871,6 +4882,64 @@ img[class*="wp-image-"] {
   }
   .sticky-footer-holder .follow {
     display: none;
+  }
+  .sticky-nav-container {
+    padding: 0 10px;
+  }
+  .sticky-nav-holder .nav-right .donate-btn i {
+    display: none;
+  }
+  .sticky-nav-holder .nav-right .form-search .toggle {
+    color: #2275bb;
+    display: inline-block;
+    width: 40px;
+    text-align: center;
+    cursor: pointer;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -ms-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+  }
+  .sticky-nav-holder .nav-right .form-search .input-append {
+    position: absolute;
+    left: 0;
+    right: 50px;
+    top: 0;
+    bottom: 0;
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -ms-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+    padding: 8px 10px;
+    z-index: 90;
+  }
+  .sticky-nav-holder .nav-right .form-search .input-append input {
+    width: 78% !important;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 30px !important;
+  }
+  .sticky-nav-holder .nav-right .form-search .input-append button {
+    width: 19% !important;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  .sticky-nav-holder .nav-right .form-search.show .input-append {
+    position: absolute;
+    opacity: 1;
+    visibility: visible;
+  }
+  .sticky-nav-holder .nav-right .form-search.show .input-append,
+  .sticky-nav-holder .nav-right .form-search.show .toggle {
+    background-color: rgba(255, 255, 255, 0.9);
   }
 }
 @media print {
