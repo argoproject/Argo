@@ -32,6 +32,19 @@ function remove_default_post_screen_metaboxes() {
 add_action('admin_menu','remove_default_post_screen_metaboxes');
 
 /**
+ * Show all of the other metaboxes by default (particularly to show the excerpt)
+ *
+ * @since 1.0
+ */
+add_filter( 'default_hidden_meta_boxes', 'largo_change_default_hidden_metaboxes', 10, 2 );
+function largo_change_default_hidden_metaboxes( $hidden, $screen ) {
+    if ( 'post' == $screen->base ) {
+        $hidden = array();
+    }
+    return $hidden;
+}
+
+/**
  * Adds custom meta boxes to the post edit screen for
  *  - custom byline and link
  *  - featured video link
