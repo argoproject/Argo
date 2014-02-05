@@ -3,6 +3,8 @@
 
 if ( function_exists( 'get_coauthors' ) )
 	$authors = get_coauthors( $post->ID );
+else if ( is_author() )
+	$authors[] = get_userdata( get_query_var('author') );
 else
 	$authors[] = get_userdata( get_the_author_meta( 'ID' ) );
 
