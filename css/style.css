@@ -1108,6 +1108,8 @@ select:focus:required:invalid:focus {
 }
 .help-inline {
   display: inline-block;
+  /* IE7 inline-block hack */
+
   *display: inline;
   /* IE7 inline-block hack */
 
@@ -1256,6 +1258,8 @@ select:focus:required:invalid:focus {
 .form-inline .input-append,
 .form-horizontal .input-append {
   display: inline-block;
+  /* IE7 inline-block hack */
+
   *display: inline;
   /* IE7 inline-block hack */
 
@@ -1336,6 +1340,8 @@ legend + .control-group {
 }
 .btn {
   display: inline-block;
+  /* IE7 inline-block hack */
+
   *display: inline;
   /* IE7 inline-block hack */
 
@@ -2252,6 +2258,80 @@ h2.branding .tagline {
   border: none;
   padding-left: 0;
 }
+.sticky-nav-holder .nav-right {
+  position: absolute;
+  right: 0;
+  padding-top: 5px;
+}
+.sticky-nav-holder .nav-right .donate-btn {
+  float: left;
+  margin: 5px;
+}
+.sticky-nav-holder .nav-right .donate-btn i {
+  display: none;
+}
+.sticky-nav-holder .nav-right .form-search .toggle {
+  color: #2275bb;
+  display: inline-block;
+  width: 40px;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  z-index: 91;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+}
+.sticky-nav-holder .nav-right .form-search .input-append {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+  padding: 8px 50px 8px 10px;
+  z-index: 90;
+}
+.sticky-nav-holder .nav-right .form-search .input-append .text-input-wrapper {
+  position: absolute;
+  left: 10px;
+  right: 125px;
+  display: block;
+}
+.sticky-nav-holder .nav-right .form-search .input-append input {
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 28px !important;
+}
+.sticky-nav-holder .nav-right .form-search .input-append button {
+  width: 50px !important;
+  position: absolute;
+  right: 75px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.sticky-nav-holder .nav-right .form-search.show .input-append {
+  position: absolute;
+  opacity: 1;
+  visibility: visible;
+}
+.sticky-nav-holder .nav-right .form-search.show .input-append,
+.sticky-nav-holder .nav-right .form-search.show .toggle {
+  background-color: rgba(255, 255, 255, 0.9);
+}
 .navbar {
   *position: relative;
   *z-index: 2;
@@ -2362,7 +2442,7 @@ li.home-link:hover i {
 }
 .navbar .btn-navbar {
   display: none;
-  float: right;
+  float: left;
   margin: 7px 0 0;
   margin-right: 10px;
   padding: 8px 10px;
@@ -2742,6 +2822,7 @@ body.admin-bar .sticky-nav-holder {
 }
 .sticky-nav-holder .sticky-nav-container {
   margin: 0 auto;
+  position: relative;
 }
 .sticky-nav-holder .navbar {
   margin-bottom: 0;
@@ -2762,14 +2843,6 @@ body.admin-bar .sticky-nav-holder {
 }
 .sticky-nav-holder .navbar .divider-vertical {
   display: none;
-}
-.sticky-nav-holder .nav-right {
-  float: right;
-  padding-top: 5px;
-}
-.sticky-nav-holder .nav-right .donate-btn {
-  float: left;
-  margin: 5px;
 }
 .sticky-nav-holder .navbar .active > a {
   color: #ffffff;
@@ -2801,6 +2874,9 @@ body.admin-bar .sticky-nav-holder {
 .sticky-nav-holder .navbar .nav > li.home-link a img {
   width: 50px;
   height: 50px;
+}
+html.no-touch .sticky-nav-holder .navbar .collapse li > a:hover {
+  color: #2275bb;
 }
 .post-header,
 .page-header,
@@ -4114,6 +4190,30 @@ p.comment-form-comment {
 #sidebar iframe {
   max-width: 100%;
 }
+.largo-related-posts ul.related {
+  margin: 0;
+}
+.largo-related-posts ul.related li {
+  list-style: none;
+  display: block;
+  *zoom: 1;
+}
+.largo-related-posts ul.related li:before,
+.largo-related-posts ul.related li:after {
+  display: table;
+  content: "";
+}
+.largo-related-posts ul.related li:after {
+  clear: both;
+}
+.largo-related-posts h4 {
+  font-size: 16px;
+  margin: 2px;
+}
+.largo-related-posts .wp-post-image {
+  float: left;
+  margin: 5px 10px 0 5px;
+}
 .before-footer-wrapper {
   background-color: #dddddd;
 }
@@ -4411,6 +4511,8 @@ p.comment-form-comment {
   background-color: #2275bb;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   display: inline-block;
+  /* IE7 inline-block hack */
+
   *display: inline;
   /* IE7 inline-block hack */
 
@@ -4798,6 +4900,9 @@ img[class*="wp-image-"] {
   }
   .sticky-footer-holder .follow-author {
     display: none;
+  }
+  .sticky-nav-container {
+    padding: 0 10px;
   }
 }
 @media (max-width: 480px) {
