@@ -49,8 +49,8 @@ if ( ! function_exists( 'largo_author' ) ) {
  * @since 1.0
  */
 if ( ! function_exists( 'largo_author_link' ) ) {
-	function largo_author_link( $echo = true ) {
-		global $post;
+	function largo_author_link( $echo = true, $post=null ) {
+		$post = get_post( $post );
 		$values = get_post_custom( $post->ID );
 		$byline_text = isset( $values['largo_byline_text'] ) ? esc_attr( $values['largo_byline_text'][0] ) : esc_html( get_the_author() );
 
