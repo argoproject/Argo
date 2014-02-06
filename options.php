@@ -32,7 +32,7 @@ function optionsframework_options() {
 	$home_templates_data = largo_get_home_templates();
 	if ( count($home_templates_data) ) {
 		foreach ($home_templates_data as $name => $data) {
-			$home_templates[ $data['path'] ] = '<img src="'.$data['thumb'].'" style="float: left; margin-right: 10px;"><strong>'.$name.'</strong> '.$data['desc'];
+			$home_templates[ $data['path'] ] = '<img src="'.$data['thumb'].'" style="float: left; margin-right: 8px; max-width: 120px; height: auto; border: 1px solid #ddd;"><strong>'.$name.'</strong> '.$data['desc'];
 		}
 	}
 

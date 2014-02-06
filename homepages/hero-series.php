@@ -1,7 +1,7 @@
 <?php
 /**
  * Home Template: Hero with Series
- * Description: Prominently features the top story along with other posts in its series
+ * Description: Prominently features the top story along with other posts in its series, or other top posts if not in a series. Best with Homepage Bottom set to 'blank'
  * Sidebars: Home Bottom Left | Home Bottom Center | Home Bottom Right
  * Right Rail: none
  */
