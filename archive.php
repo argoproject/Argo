@@ -1,6 +1,6 @@
 <?php
 /**
- * Template for various archive pages (category, tag, term, date, etc.
+ * Template for various non-category archive pages (tag, term, date, etc.)
  */
 get_header();
 ?>
@@ -23,12 +23,9 @@ get_header();
 			if ( is_author() ) {
 				get_template_part( 'largo-author-box' );
 
-			// for categories, tags, and custom taxonomies we show the term name and description
-			} elseif ( is_category() || is_tag() || is_tax() ) {
-				if ( is_category() ) {
-					$title = single_cat_title( '', false );
-					$description = category_description();
-				} elseif ( is_tag() ) {
+			// for tags, and custom taxonomies we show the term name and description
+			} elseif ( is_tag() || is_tax() ) {
+				if ( is_tag() ) {
 					$title = single_tag_title( '', false );
 					$description = tag_description();
 				} elseif ( is_tax() ) {
@@ -47,8 +44,6 @@ get_header();
 
 					if ( is_author() ) {
 						$rss_link =  get_author_feed_link( get_the_author_meta('ID') );
-					} elseif ( is_category() ) {
-						$rss_link =  get_category_feed_link( get_queried_object_id() );
 					} elseif ( is_tag() ) {
 						$rss_link =  get_tag_feed_link( get_queried_object_id() );
 					} elseif ( is_tax() ) {
@@ -67,18 +62,6 @@ get_header();
 					if ( $description )
 						echo '<div class="archive-description">' . $description . '</div>';
 
-					// category pages show a list of related terms
-					if ( is_category() && largo_get_related_topics_for_category( get_queried_object() ) != '<ul></ul>' ) { ?>
-						<div class="related-topics">
-							<h5><?php _e('Related Topics:', 'largo'); ?> </h5>
-							<?php echo largo_get_related_topics_for_category( get_queried_object() ); ?>
-						</div>
-				<?php
-					}
-				?>
-
-		<?php
-
 			// if it's a date archive we'll show the date dropdown in lieu of a description
 			} elseif ( is_date() ) {
 		?>
@@ -92,13 +75,6 @@ get_header();
 		?>
 			</header>
 
-
-		<?php
-			if ( $paged < 2 && ( is_category() || is_tag() || is_tax() ) ) {
-				get_template_part( 'index-primary-featured-posts' );
-				get_template_part( 'index-secondary-featured-posts' );
-			}
-		?>
 	<div class="row-fluid clearfix">
 		<div class="stories span8" role="main" id="content">
 		<?php

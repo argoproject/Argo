@@ -65,40 +65,6 @@ add_filter( 'pre_update_option_sticky_posts', 'largo_scrub_sticky_posts', 10, 2 
 
 
 /**
- * If the main query is for a taxonomy term archive page, remove the
- * featured posts.
- *
- * @param WP_Query $query - the query object
- */
-function largo_scrub_taxonomy_featured_posts( &$query ) {
-
-    if ( $query->is_main_query() && ( $query->is_tax() || $query->is_category() || $query->is_tag() ) ) {
-
-        // Get the term ID for the ones to filter out
-        $terms = array(
-            get_term_by( 'name', __('Featured in Taxonomy', 'largo'), 'prominence' ),
-            get_term_by( 'name', __('Secondary Featured in Taxonomy', 'largo'), 'prominence' ),
-        );
-
-        foreach ($terms as $key => $term ) {
-            $terms[$key] = $term->term_id;
-        }
-
-        // The `tax_query` query variable is not expliclty set for taxonomy archive pages.
-        // Use the generated `tax_query` query variable in the internal Tax_Query object
-        $query->tax_query->queries[] = array(
-            'taxonomy' => 'prominence',
-            'operator' => 'NOT IN',
-            'terms' => $terms,
-        );
-        // Set it twice because wp_query recalculates the internal Tax_Query object.
-        // When it is recalculated, it will use the `tax_query` query var before using the taxonomy query vars.
-        $query->set( 'tax_query', $query->tax_query->queries );
-    }
-}
-add_action( 'pre_get_posts', 'largo_scrub_taxonomy_featured_posts', 9 );	// run before other potential stuff
-
-/**
  * Determine if we have any 'featured' posts on archive pages
  */
 function largo_have_featured_posts() {
