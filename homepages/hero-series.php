@@ -48,7 +48,7 @@ global $largo, $shown_ids, $tags;
 					<?php if ( $side_stories_display != 'hide' ): ?>
 					<div class="span4 <?php echo $side_stories_display == 'series' ? 'side-series' : 'side-articles'; ?>">
 						<?php if ( $side_stories_display == 'series' && !empty($side_stories_term) ): ?>
-							<h3><?php echo esc_html( $side_stories_term->name ); ?></h3>
+							<h3><a href="<?php echo get_term_link( $side_stories_term ); ?>"><?php echo esc_html( $side_stories_term->name ); ?></a></h3>
 						<?php endif; ?>
 
 						<?php foreach ( $side_stories as $side_story ): ?>

@@ -102,6 +102,68 @@
   background-color: black;
   font-family: sans-serif;
 }
+/* line 66, hero-series.sass */
+#dark-top .side-articles h5.byline, #dark-top .side-articles h5.top-tag, #dark-top .side-articles h4 {
+  margin: 0;
+}
+/* line 68, hero-series.sass */
+#dark-top .side-articles h4 {
+  font-size: 18px;
+}
+/* line 70, hero-series.sass */
+#dark-top .side-articles h4 a {
+  color: white;
+}
+/* line 72, hero-series.sass */
+#dark-top .side-articles h5 {
+  font-size: 80%;
+}
+/* line 74, hero-series.sass */
+#dark-top .side-articles h5.byline {
+  color: #dddddd;
+}
+/* line 77, hero-series.sass */
+#dark-top .side-articles article {
+  border-top: solid 3px rgba(108, 185, 225, 0.5);
+  padding: 10px 0;
+}
+/* line 81, hero-series.sass */
+#dark-top .side-articles article:first-child {
+  border-top: 0 none;
+}
+/* line 85, hero-series.sass */
+#dark-top .side-series h3 {
+  color: #6cb9e1;
+  font-size: 100%;
+  text-transform: uppercase;
+  margin: 0;
+}
+/* line 91, hero-series.sass */
+#dark-top .side-series h3 a {
+  color: #6cb9e1;
+}
+/* line 93, hero-series.sass */
+#dark-top .side-series h4 {
+  font-size: 18px;
+  margin: 0;
+}
+/* line 96, hero-series.sass */
+#dark-top .side-series h4 a {
+  color: white;
+}
+/* line 98, hero-series.sass */
+#dark-top .side-series article {
+  padding: 5px 0;
+}
+/* line 100, hero-series.sass */
+#dark-top .side-series .read-more {
+  text-align: right;
+  font-size: 80%;
+}
+/* line 104, hero-series.sass */
+#dark-top .side-series .read-more a {
+  color: #6cb9e1;
+}
 @media only screen and (max-width: 768px) {
   /* line 59, hero-series.sass */
   #dark-top {
@@ -109,17 +171,17 @@
     margin-top: -140px;
     bottom: auto;
   }
-  /* line 68, hero-series.sass */
+  /* line 111, hero-series.sass */
   #dark-top .span10 {
     width: 100%;
   }
-  /* line 70, hero-series.sass */
+  /* line 113, hero-series.sass */
   #dark-top .row-fluid [class*='span'] {
     float: none;
     width: 100%;
     margin: 0 0 0 0;
   }
-  /* line 74, hero-series.sass */
+  /* line 117, hero-series.sass */
   #dark-top .span4 {
     margin-top: 30px !important;
   }
@@ -129,67 +191,67 @@
   #dark-top {
     margin-top: -40px;
   }
-  /* line 78, hero-series.sass */
+  /* line 121, hero-series.sass */
   #dark-top .span10 {
     padding: 15px 18px !important;
   }
 }
-/* line 81, hero-series.sass */
+/* line 124, hero-series.sass */
 #dark-top .span10 {
   background-color: rgba(0, 0, 0, 0.85);
   margin: 0 auto 0;
   padding: 25px 30px;
   float: none;
 }
-/* line 86, hero-series.sass */
+/* line 129, hero-series.sass */
 #dark-top article {
   margin-bottom: 0;
   border-bottom: none;
 }
-/* line 89, hero-series.sass */
+/* line 132, hero-series.sass */
 #dark-top p {
   font-size: 93%;
   line-height: 1.4em;
   margin-bottom: 0;
 }
-/* line 93, hero-series.sass */
+/* line 136, hero-series.sass */
 #dark-top h2 {
   font-size: 38px;
   line-height: 1.1em;
   margin-bottom: 0.3em;
 }
-/* line 98, hero-series.sass */
+/* line 141, hero-series.sass */
 #dark-top h5 {
   font-size: 100%;
 }
-/* line 100, hero-series.sass */
+/* line 143, hero-series.sass */
 #dark-top h5 a {
   color: #6cb9e1;
 }
-/* line 102, hero-series.sass */
+/* line 145, hero-series.sass */
 #dark-top h2 a {
   color: white;
 }
-/* line 104, hero-series.sass */
+/* line 147, hero-series.sass */
 #dark-top .byline,
 #dark-top .byline a,
 #dark-top section {
   color: #dddddd;
 }
-/* line 109, hero-series.sass */
+/* line 152, hero-series.sass */
 #dark-top .byline {
   font-weight: bold;
   font-size: 110%;
 }
-/* line 112, hero-series.sass */
+/* line 155, hero-series.sass */
 #dark-top .byline a {
   text-transform: uppercase;
 }
-/* line 115, hero-series.sass */
+/* line 158, hero-series.sass */
 #dark-top .span4 .top-tag {
   margin-bottom: 0.7em;
 }
-/* line 117, hero-series.sass */
+/* line 160, hero-series.sass */
 #dark-top .related-story {
   font-size: 18px;
   line-height: 1.2em;
@@ -197,31 +259,31 @@
   margin-bottom: 1em;
 }
 @media only screen and (max-width: 768px) {
-  /* line 117, hero-series.sass */
+  /* line 160, hero-series.sass */
   #dark-top .related-story {
     margin-left: 0;
   }
 }
-/* line 124, hero-series.sass */
+/* line 167, hero-series.sass */
 #dark-top .related-story a {
   color: white;
 }
-/* line 126, hero-series.sass */
+/* line 169, hero-series.sass */
 #dark-top .more {
   text-align: right;
   margin-bottom: 0;
   font-weight: bold;
   font-size: 16px;
 }
-/* line 132, hero-series.sass */
+/* line 175, hero-series.sass */
 #dark-top .more a {
   color: #6cb9e1;
 }
-/* line 134, hero-series.sass */
+/* line 177, hero-series.sass */
 #dark-top .more a:after {
   content: " »";
 }
-/* line 136, hero-series.sass */
+/* line 179, hero-series.sass */
 #dark-top.overlay {
   background-color: transparent;
   margin-top: 0;
@@ -229,24 +291,24 @@
   bottom: 50px;
 }
 @media only screen and (max-width: 980px) {
-  /* line 136, hero-series.sass */
+  /* line 179, hero-series.sass */
   #dark-top.overlay {
     bottom: 15px;
   }
 }
 
-/* line 144, hero-series.sass */
+/* line 187, hero-series.sass */
 #home-secondary {
   position: relative;
 }
-/* line 146, hero-series.sass */
+/* line 189, hero-series.sass */
 #home-secondary > div {
   background-color: white;
   padding: 20px;
   padding-bottom: 0;
   margin-top: -15px;
 }
-/* line 152, hero-series.sass */
+/* line 195, hero-series.sass */
 #home-secondary .row-fluid > [class*='span'] .widget {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -255,12 +317,12 @@
   border-radius: 0;
   border: none;
 }
-/* line 155, hero-series.sass */
+/* line 198, hero-series.sass */
 #home-secondary .row-fluid > [class*='span']:last-child .widget {
   border-right: none;
 }
 @media only screen and (max-width: 768px) {
-  /* line 151, hero-series.sass */
+  /* line 194, hero-series.sass */
   #home-secondary .row-fluid > [class*='span'] {
     float: none;
     width: 100%;
@@ -268,11 +330,11 @@
   }
 }
 
-/* line 163, hero-series.sass */
+/* line 206, hero-series.sass */
 #home-river {
   display: none;
 }
-/* line 165, hero-series.sass */
+/* line 208, hero-series.sass */
 #home-river .span10 {
   margin: 0 auto;
   float: none;

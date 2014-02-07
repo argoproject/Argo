@@ -61,6 +61,49 @@ $grey: #666
 	color: white
 	background-color: #000
 	font-family: sans-serif
+
+	.side-articles
+		h5.byline, h5.top-tag, h4
+			margin: 0
+		h4
+			font-size: 18px
+		h4 a
+			color: white
+		h5
+			font-size: 80%
+		h5.byline
+			color: $fog
+
+		article
+			border-top: solid 3px rgba( $sky, 0.5 )
+			padding: 10px 0
+
+			&:first-child
+				border-top: 0 none
+
+	.side-series
+		h3
+			color: $sky
+			font-size: 100%
+			text-transform: uppercase
+			margin: 0
+
+			a
+				color: $sky
+		h4
+			font-size: 18px
+			margin: 0
+		h4 a
+			color: white
+		article
+			padding: 5px 0
+		.read-more
+			text-align: right
+			font-size: 80%
+
+			a
+				color: $sky
+
 	@media only screen and (max-width: 768px)
 		position: relative
 		margin-top: -140px
