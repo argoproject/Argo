@@ -121,11 +121,9 @@ $grey: #666
 		.span10
 			padding: 15px 18px !important
 
-	.span10
+	.overlay-pane
 		background-color: rgba(black, 0.85)
-		margin: 0 auto 0
 		padding: 25px 30px
-		float: none
 	article
 		margin-bottom: 0
 		border-bottom: none
@@ -180,9 +178,16 @@ $grey: #666
 		background-color: transparent
 		margin-top: 0
 		position: absolute
-		bottom: 50px
+		top: 0
+		right: 0
+		bottom: 0
+		left: 0
+
+		.overlay-pane
+			position: absolute
+			right: 0
 		@media only screen and (max-width: 980px)
-			bottom: 15px
+			
 
 #home-secondary
 	position: relative

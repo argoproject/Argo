@@ -197,61 +197,59 @@
   }
 }
 /* line 124, hero-series-side.sass */
-#dark-top .span10 {
+#dark-top .overlay-pane {
   background-color: rgba(0, 0, 0, 0.85);
-  margin: 0 auto 0;
   padding: 25px 30px;
-  float: none;
 }
-/* line 129, hero-series-side.sass */
+/* line 127, hero-series-side.sass */
 #dark-top article {
   margin-bottom: 0;
   border-bottom: none;
 }
-/* line 132, hero-series-side.sass */
+/* line 130, hero-series-side.sass */
 #dark-top p {
   font-size: 93%;
   line-height: 1.4em;
   margin-bottom: 0;
 }
-/* line 136, hero-series-side.sass */
+/* line 134, hero-series-side.sass */
 #dark-top h2 {
   font-size: 38px;
   line-height: 1.1em;
   margin-bottom: 0.3em;
 }
-/* line 141, hero-series-side.sass */
+/* line 139, hero-series-side.sass */
 #dark-top h5 {
   font-size: 100%;
 }
-/* line 143, hero-series-side.sass */
+/* line 141, hero-series-side.sass */
 #dark-top h5 a {
   color: #6cb9e1;
 }
-/* line 145, hero-series-side.sass */
+/* line 143, hero-series-side.sass */
 #dark-top h2 a {
   color: white;
 }
-/* line 147, hero-series-side.sass */
+/* line 145, hero-series-side.sass */
 #dark-top .byline,
 #dark-top .byline a,
 #dark-top section {
   color: #dddddd;
 }
-/* line 152, hero-series-side.sass */
+/* line 150, hero-series-side.sass */
 #dark-top .byline {
   font-weight: bold;
   font-size: 110%;
 }
-/* line 155, hero-series-side.sass */
+/* line 153, hero-series-side.sass */
 #dark-top .byline a {
   text-transform: uppercase;
 }
-/* line 158, hero-series-side.sass */
+/* line 156, hero-series-side.sass */
 #dark-top .span4 .top-tag {
   margin-bottom: 0.7em;
 }
-/* line 160, hero-series-side.sass */
+/* line 158, hero-series-side.sass */
 #dark-top .related-story {
   font-size: 18px;
   line-height: 1.2em;
@@ -259,56 +257,58 @@
   margin-bottom: 1em;
 }
 @media only screen and (max-width: 768px) {
-  /* line 160, hero-series-side.sass */
+  /* line 158, hero-series-side.sass */
   #dark-top .related-story {
     margin-left: 0;
   }
 }
-/* line 167, hero-series-side.sass */
+/* line 165, hero-series-side.sass */
 #dark-top .related-story a {
   color: white;
 }
-/* line 169, hero-series-side.sass */
+/* line 167, hero-series-side.sass */
 #dark-top .more {
   text-align: right;
   margin-bottom: 0;
   font-weight: bold;
   font-size: 16px;
 }
-/* line 175, hero-series-side.sass */
+/* line 173, hero-series-side.sass */
 #dark-top .more a {
   color: #6cb9e1;
 }
-/* line 177, hero-series-side.sass */
+/* line 175, hero-series-side.sass */
 #dark-top .more a:after {
   content: " »";
 }
-/* line 179, hero-series-side.sass */
+/* line 177, hero-series-side.sass */
 #dark-top.overlay {
   background-color: transparent;
   margin-top: 0;
   position: absolute;
-  bottom: 50px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
-@media only screen and (max-width: 980px) {
-  /* line 179, hero-series-side.sass */
-  #dark-top.overlay {
-    bottom: 15px;
-  }
+/* line 186, hero-series-side.sass */
+#dark-top.overlay .overlay-pane {
+  position: absolute;
+  right: 0;
 }
 
-/* line 187, hero-series-side.sass */
+/* line 192, hero-series-side.sass */
 #home-secondary {
   position: relative;
 }
-/* line 189, hero-series-side.sass */
+/* line 194, hero-series-side.sass */
 #home-secondary > div {
   background-color: white;
   padding: 20px;
   padding-bottom: 0;
   margin-top: -15px;
 }
-/* line 195, hero-series-side.sass */
+/* line 200, hero-series-side.sass */
 #home-secondary .row-fluid > [class*='span'] .widget {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -317,12 +317,12 @@
   border-radius: 0;
   border: none;
 }
-/* line 198, hero-series-side.sass */
+/* line 203, hero-series-side.sass */
 #home-secondary .row-fluid > [class*='span']:last-child .widget {
   border-right: none;
 }
 @media only screen and (max-width: 768px) {
-  /* line 194, hero-series-side.sass */
+  /* line 199, hero-series-side.sass */
   #home-secondary .row-fluid > [class*='span'] {
     float: none;
     width: 100%;
@@ -330,11 +330,11 @@
   }
 }
 
-/* line 206, hero-series-side.sass */
+/* line 211, hero-series-side.sass */
 #home-river {
   display: none;
 }
-/* line 208, hero-series-side.sass */
+/* line 213, hero-series-side.sass */
 #home-river .span10 {
   margin: 0 auto;
   float: none;

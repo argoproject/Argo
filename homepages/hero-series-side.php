@@ -41,18 +41,18 @@ global $largo, $shown_ids, $tags;
 		<?php endif; ?>
 
 		<div id="dark-top" <?php echo (!$has_video) ? 'class="overlay"' : ''; ?>>
-			<div class="span10">
+			<div class="overlay-pane <?php echo empty( $featured_stories ) ? 'span4' : 'span8' ?>">
 				<div class="row-fluid">
-					<article class="span8">
-						<h5 class="top-tag"><?php largo_top_term( array('post'=>$big_story->ID) ); ?></h5>
-						<h2><a href="<?php echo esc_attr( get_permalink( $big_story->ID ) ); ?>"><?php echo get_the_title( $big_story->ID ); ?></a></h2>
-						<h5 class="byline"><?php _e('By'); ?> <?php largo_author_link( true, $big_story ); ?></h5>
-						<section>
-							<?php largo_excerpt( $big_story, 2, false ); ?>
-						</section>
-					</article>
-
-					<div class="span4">
+					<div class="<?php echo empty( $featured_stories ) ? 'span12' : 'span6' ?>">
+						<article>
+							<h5 class="top-tag"><?php largo_top_term( array('post'=>$big_story->ID) ); ?></h5>
+							<h2><a href="<?php echo esc_attr( get_permalink( $big_story->ID ) ); ?>"><?php echo get_the_title( $big_story->ID ); ?></a></h2>
+							<h5 class="byline"><?php _e('By'); ?> <?php largo_author_link( true, $big_story ); ?></h5>
+							<section>
+								<?php largo_excerpt( $big_story, 2, false ); ?>
+							</section>
+						</article>
+					
 						<h3><a href="<?php echo get_term_link( $series_stories_term ); ?>"><?php _e('Explore:', 'largo'); ?></a></h3>
 
 						<?php foreach ( $series_stories as $series_story ): ?>
@@ -63,7 +63,7 @@ global $largo, $shown_ids, $tags;
 					</div>
 
 					<?php if ( !empty( $featured_stories ) ): ?>
-					<div class="span4">
+					<div class="span6">
 						<?php foreach ( $featured_stories as $featured_story ): ?>
 						<article>
 							<h5 class="top-tag"><?php largo_top_term( array( 'post' => $featured_story->ID ) ); ?></h5>
