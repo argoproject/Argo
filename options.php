@@ -467,6 +467,25 @@ function optionsframework_options() {
 		'std' 	=> '0',
 		'type' 	=> 'checkbox');
 
+	$options[] = array(
+		'name' => __('Search options', 'largo'),
+		'desc' 	=> __('Replace WordPress search with Google Custom Search (recommended)', 'largo'),
+		'id' 	=> 'use_gcs',
+		'std' 	=> '0',
+		'type' 	=> 'checkbox');
+
+	$options[] = array(
+		'desc' 	=> __('Search engine ID (something like 012174647732932797336:f2lixuynrs0) ', 'largo'),
+		'id' 	=> 'gcs_id',
+		'std' 	=> '',
+		'type' 	=> 'text');
+
+	$options[] = array(
+		'desc' 	=> __('INN strongly recommends using Google Custom Search. You can get your ID and configure it at <a href="https://www.google.com/cse/create/new">https://www.google.com/cse/create/new</a>.', 'largo'),
+		'id' 	=> 'gcs_help',
+		'std' 	=> '',
+		'type' 	=> 'info');
+
 	return $options;
 }
 

@@ -581,3 +581,64 @@ legend + .control-group {
     padding-left: 160px;
   }
 }
+
+/**
+ * Fixes to Google Custom Search
+ */
+.gcs_container {
+	//outer wrapper
+	.gsc-control-cse {
+		width: auto;
+		padding: 0;
+		background-color: transparent;
+		border: none;
+	}
+	.gsc-input-box {
+		.border-radius(@inputBorderRadius);
+	}
+	.gsc-search-button {
+		margin-top: 0 !important;
+	}
+
+
+	.gsc-search-box,
+	.gsc-results-wrapper-overlay {
+		.gsc-input {
+			padding-right: 5px !important;
+		}
+		table {
+			border: 0;
+			border-collapse: separate;
+			margin-bottom: 0;
+		}
+		td {
+			border: 0;
+			padding: 0;
+			&.gsib_a {
+				padding: 3px 6px 0 !important;
+			}
+		}
+		td.gsc-search-button {
+			padding: 0;
+			line-height: normal;
+		}
+		input[type='text'] {
+			.border-radius(0);
+			.box-shadow(none);
+		}
+		input.gsc-search-button-v2 {
+			padding: 6px 15px !important;
+			height: 13px !important;
+			font-size: 15px;
+			#gradient > .vertical( lighten(@baseColor, 2%), darken(@baseColor, 2%) );
+			&:hover {
+				#gradient > .vertical(darken(@baseColor, 2%), lighten(@baseColor, 2%));
+			}
+		}
+	}
+}
+
+
+#header-search {
+	max-width: 210px;
+}
