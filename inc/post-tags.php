@@ -338,7 +338,7 @@ if ( ! function_exists( 'largo_excerpt' ) ) {
 				$content .= '<a href="' . get_permalink( $the_post->ID ) . '">' . $more_link . '</a>';
 		}
 
-		$post = $_post;
+		$post = $_post; // Set it back
 
 		// optionally strip shortcodes and html, wrap everything in <p> tags
 		$output = '<p>';

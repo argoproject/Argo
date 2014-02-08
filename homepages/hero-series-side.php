@@ -37,7 +37,7 @@ global $largo, $shown_ids, $tags;
 				<iframe src="http://www.youtube.com/embed/<?php echo substr(strrchr( $has_video, "="), 1 ); ?>?modestbranding=1" frameborder="0" allowfullscreen></iframe>
 			</div>
 		<?php else: ?>
-			<div class="full-hero max-wide"><a href="<?php echo esc_attr( get_permalink( $big_story->ID ) ); ?>"><?php echo get_the_post_thumbnail( $big_story->ID, 'full' ); ?></a></div>
+			<div class="full-hero max-wide <?php echo empty( $featured_stories ) ? 'two-third-width' : 'one-third-width'; ?>"><a href="<?php echo esc_attr( get_permalink( $big_story->ID ) ); ?>"><?php echo get_the_post_thumbnail( $big_story->ID, ( empty( $featured_stories ) ? 'two-third-full' : 'third-full') ); ?></a></div>
 		<?php endif; ?>
 
 		<div id="dark-top" <?php echo (!$has_video) ? 'class="overlay"' : ''; ?>>
@@ -49,26 +49,35 @@ global $largo, $shown_ids, $tags;
 							<h2><a href="<?php echo esc_attr( get_permalink( $big_story->ID ) ); ?>"><?php echo get_the_title( $big_story->ID ); ?></a></h2>
 							<h5 class="byline"><?php _e('By'); ?> <?php largo_author_link( true, $big_story ); ?></h5>
 							<section>
-								<?php largo_excerpt( $big_story, 2, false ); ?>
+								<?php largo_excerpt( $big_story, 2, true, __('Continue&nbsp;Reading&nbsp;&rarr;', 'largo'), true, false ); ?>
 							</section>
 						</article>
 					
-						<h3><a href="<?php echo get_term_link( $series_stories_term ); ?>"><?php _e('Explore:', 'largo'); ?></a></h3>
+						<?php if ( !empty($series_stories) ): ?>
+						<div class="series-stories">
+							<h3><a href="<?php echo get_term_link( $series_stories_term ); ?>"><?php _e('Explore:', 'largo'); ?></a></h3>
 
-						<?php foreach ( $series_stories as $series_story ): ?>
-						<article>
-							<h4><a href="<?php echo get_permalink( $series_story->ID ); ?>"><?php echo get_the_title( $series_story->ID ); ?></a></h4>
-						</article>
-						<?php endforeach; ?>
+							<ul>
+							<?php foreach ( $series_stories as $series_story ): ?>
+							<li>
+								<a href="<?php echo get_permalink( $series_story->ID ); ?>"><?php post_type_icon( array( 'id' => $series_story->ID ) ); ?><?php echo get_the_title( $series_story->ID ); ?></a></h4>
+							</li>
+							<?php endforeach; ?>
+							</ul>
+						</div>
+						<?php endif; ?>
 					</div>
 
 					<?php if ( !empty( $featured_stories ) ): ?>
-					<div class="span6">
-						<?php foreach ( $featured_stories as $featured_story ): ?>
+					<div class="span6 featured-stories">
+						<?php foreach ( $featured_stories as $featured_story ): setup_postdata($featured_story); ?>
 						<article>
 							<h5 class="top-tag"><?php largo_top_term( array( 'post' => $featured_story->ID ) ); ?></h5>
 							<h4><a href="<?php echo get_permalink( $featured_story->ID ); ?>"><?php echo get_the_title( $featured_story->ID ); ?></a></h4>
 							<h5 class="byline"><?php _e('By'); ?> <?php largo_author_link( true, $featured_story ); ?></h5>
+							<section>
+								<?php largo_excerpt( $featured_story, 2, true ); ?>
+							</section>
 						</article>
 						<?php endforeach; ?>
 					</div>

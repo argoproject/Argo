@@ -7,11 +7,23 @@ $grey: #666
 
 .home .full-hero
 	background-color: $grey
-	img
-		max-width: 1170px
-		width: 100%
-		margin: 0 auto
+	a
 		display: block
+		margin: 0 auto
+		width: 100%
+		max-width: 1170px
+	img
+		margin: 0 
+		display: block
+
+	&.one-third-width img
+		max-width: (1170/3)px
+		width: 34.1%
+
+	&.two-third-width img
+		max-width: (1170/3*2)px
+		width: (34.1% * 2)
+
 
 #main
 	position: relative
@@ -122,8 +134,14 @@ $grey: #666
 			padding: 15px 18px !important
 
 	.overlay-pane
-		background-color: rgba(black, 0.85)
-		padding: 25px 30px
+		background-color: #333
+
+		&.span8
+			+background-image(linear-gradient(90deg, #333 0%, #333 50%, #fff 50%, #fff 100%))
+		padding: 25px 0
+
+		[class*="span"]
+			padding: 0 20px
 	article
 		margin-bottom: 0
 		border-bottom: none
@@ -132,7 +150,7 @@ $grey: #666
 		line-height: 1.4em
 		margin-bottom: 0
 	h2
-		font-size: 38px
+		font-size: 30px
 		line-height: 1.1em
 		margin-bottom: 0.3em
 
@@ -186,6 +204,61 @@ $grey: #666
 		.overlay-pane
 			position: absolute
 			right: 0
+			top: 0
+			bottom: 0
+
+		section a
+			color: $sky
+
+		.series-stories
+			margin-top: 20px
+
+			h3
+				color: $sky
+				text-transform: uppercase
+				font-size: 100%
+				margin: 0
+				a
+					color: $sky
+
+			ul, li
+				margin: 0
+				padding: 0
+				display: block
+				font-size: 90%
+				line-height: 1.1
+			ul li
+				margin-top: 0.5em
+				padding-left: 1.5em
+			ul a
+				color: white
+			i
+				color: black
+				display: block
+				position: absolute
+				margin-left: -1.5em
+
+		.featured-stories
+			background-color: white
+			color: black
+
+			h5.byline, h5.top-tag, h4
+				margin: 0
+			h4
+				font-size: 18px
+			h4 a, section
+				color: black
+			h5
+				font-size: 80%
+			h5.byline, h5.byline a
+				color: #444
+
+			article
+				border-top: solid 3px rgba( $sky, 0.5 )
+				padding: 10px 0
+
+				&:first-child
+					border-top: 0 none
 		@media only screen and (max-width: 980px)
 			
 
@@ -195,7 +268,6 @@ $grey: #666
 		background-color: white
 		padding: 20px
 		padding-bottom: 0
-		margin-top: -15px
 	.row-fluid>[class*='span']
 		.widget
 			+border-radius(0)

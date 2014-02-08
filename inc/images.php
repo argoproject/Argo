@@ -29,6 +29,8 @@ if ( ! function_exists( 'largo_create_image_sizes' ) ) {
 		add_image_size( 'medium', MEDIUM_WIDTH, 9999 ); // medium width scaling
 		add_image_size( 'large', LARGE_WIDTH, 9999 ); // large width scaling
 		add_image_size( 'full', FULL_WIDTH, 9999 ); // large width scaling
+		add_image_size( 'third-full', FULL_WIDTH / 3, FULL_WIDTH / 2, true ); // large width scaling
+		add_image_size( 'two-third-full', FULL_WIDTH / 3 * 2, FULL_WIDTH / 2, true ); // large width scaling
 	}
 }
 add_action( 'after_setup_theme', 'largo_create_image_sizes' );
