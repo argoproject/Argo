@@ -32,7 +32,7 @@ function optionsframework_options() {
 	$home_templates_data = largo_get_home_templates();
 	if ( count($home_templates_data) ) {
 		foreach ($home_templates_data as $name => $data) {
-			$home_templates[ $data['path'] ] = '<img src="'.$data['thumb'].'" style="float: left; margin-right: 10px;"><strong>'.$name.'</strong> '.$data['desc'];
+			$home_templates[ $data['path'] ] = '<img src="'.$data['thumb'].'" style="float: left; margin-right: 8px; max-width: 120px; height: auto; border: 1px solid #ddd;"><strong>'.$name.'</strong> '.$data['desc'];
 		}
 	}
 
@@ -109,7 +109,7 @@ function optionsframework_options() {
 
 	$options[] = array(
 		'name' 	=> __('Donate Button', 'largo'),
-		'desc' 	=> __('<strong>Show/Hide</strong> a button in the top header to link to your donation page or form.', 'largo'),
+		'desc' 	=> __('<strong>Show</strong> a button in the top header to link to your donation page or form.', 'largo'),
 		'id' 	=> 'show_donate_button',
 		'type' 	=> 'checkbox');
 
@@ -129,7 +129,7 @@ function optionsframework_options() {
 
 	$options[] = array(
 		'name' 	=> __('Don\'t Miss Menu', 'largo'),
-		'desc' 	=> __('<strong>Show/Hide</strong> the "Don\'t Miss" menu under the main site navigation. Add links to this menu under <strong>Appearance > Menus</strong>.', 'largo'),
+		'desc' 	=> __('<strong>Show</strong> the "Don\'t Miss" menu under the main site navigation. Add links to this menu under <strong>Appearance > Menus</strong>.', 'largo'),
 		'id' 	=> 'show_dont_miss_menu',
 		'type' 	=> 'checkbox');
 
@@ -242,7 +242,7 @@ function optionsframework_options() {
 		'type' 	=> 'info');
 
 	$options[] = array(
-		'desc' 	=> __('<strong>Show/Hide list of tags</strong> at the bottom of single posts.', 'largo'),
+		'desc' 	=> __('<strong>Show list of tags</strong> at the bottom of single posts.', 'largo'),
 		'id' 	=> 'show_tags',
 		'std' 	=> '1',
 		'type' 	=> 'checkbox');
@@ -255,19 +255,19 @@ function optionsframework_options() {
 		'type' 	=> 'text');
 
 	$options[] = array(
-		'desc' 	=> __('<strong>Show/Hide the author bio</strong> at the bottom of single posts.', 'largo'),
+		'desc' 	=> __('<strong>Show the author bio</strong> at the bottom of single posts.', 'largo'),
 		'id' 	=> 'show_author_box',
 		'std' 	=> '1',
 		'type' 	=> 'checkbox');
 
 	$options[] = array(
-		'desc' 	=> __('<strong>Show/Hide related posts</strong> at the bottom of single posts.', 'largo'),
+		'desc' 	=> __('<strong>Show related posts</strong> at the bottom of single posts.', 'largo'),
 		'id' 	=> 'show_related_content',
 		'std' 	=> '1',
 		'type' 	=> 'checkbox');
 
 	$options[] = array(
-		'desc' 	=> __('<strong>Show/Hide next/prev post navigation</strong> at the bottom of single posts.', 'largo'),
+		'desc' 	=> __('<strong>Show next/prev post navigation</strong> at the bottom of single posts.', 'largo'),
 		'id' 	=> 'show_next_prev_nav_single',
 		'std' 	=> '1',
 		'type' 	=> 'checkbox');
@@ -308,7 +308,7 @@ function optionsframework_options() {
 		));
 
 	$options[] = array(
-		'desc' 	=> __('<strong>Show/Hide share count</strong> with Twitter buttons.', 'largo'),
+		'desc' 	=> __('<strong>Show share count</strong> with Twitter buttons.', 'largo'),
 		'id' 	=> 'show_twitter_count',
 		'std' 	=> '1',
 		'type' 	=> 'checkbox');
