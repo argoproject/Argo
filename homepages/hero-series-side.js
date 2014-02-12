@@ -31,4 +31,25 @@ jQuery(document).ready(function($){
 		}
 	}
 
+	//height setting for the main div. This is awkward
+	function setFeaturedHeight() {
+		$('.full-hero, .home #dark-top .row-fluid').removeAttr('style');
+
+		if ( $(window).width() > 480 ) {
+			var col_height = $('.home #dark-top .row-fluid').height(),
+				pane_height = $('#homepage-featured').height();
+
+			if ( col_height +25 > pane_height ) $('.full-hero').height( col_height + 25 );
+			else {
+				$('.home #dark-top .row-fluid').height( pane_height );
+			}
+		}
+	}
+
+	$(window).on('resize', function() {
+		setFeaturedHeight();
+	});
+
+	$(window).trigger('resize');
+
 });

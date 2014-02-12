@@ -37,7 +37,7 @@ global $largo, $shown_ids, $tags;
 				<iframe src="http://www.youtube.com/embed/<?php echo substr(strrchr( $has_video, "="), 1 ); ?>?modestbranding=1" frameborder="0" allowfullscreen></iframe>
 			</div>
 		<?php else: ?>
-			<div class="full-hero max-wide <?php echo empty( $featured_stories ) ? 'two-third-width' : 'one-third-width'; ?>"><a href="<?php echo esc_attr( get_permalink( $big_story->ID ) ); ?>"><?php echo get_the_post_thumbnail( $big_story->ID, ( empty( $featured_stories ) ? 'two-third-full' : 'third-full') ); ?></a></div>
+			<div class="full-hero <?php echo empty( $featured_stories ) ? 'two-third-width' : 'one-third-width'; ?>"><a href="<?php echo esc_attr( get_permalink( $big_story->ID ) ); ?>"><?php echo get_the_post_thumbnail( $big_story->ID, ( empty( $featured_stories ) ? 'two-third-full' : 'third-full') ); ?></a></div>
 		<?php endif; ?>
 
 		<div id="dark-top" <?php echo (!$has_video) ? 'class="overlay"' : ''; ?>>
@@ -52,7 +52,7 @@ global $largo, $shown_ids, $tags;
 								<?php largo_excerpt( $big_story, 2, true, __('Continue&nbsp;Reading&nbsp;&rarr;', 'largo'), true, false ); ?>
 							</section>
 						</article>
-					
+
 						<?php if ( !empty($series_stories) ): ?>
 						<div class="series-stories">
 							<h3><a href="<?php echo get_term_link( $series_stories_term ); ?>"><?php _e('Explore:', 'largo'); ?></a></h3>
