@@ -204,7 +204,21 @@ $grey: #666
 			margin-left: 0
 
 #home-river
+	header
+		+clearfix
+	.hero
+		text-align: center
+		background-color: #eee
 	display: none	//defaults to hidden
 	.span10
 		margin: 0 auto
 		float: none
+		position: relative
+		&:before
+			height: 25px
+			background-color: white
+			position: absolute
+			top: -25px
+			left: -4%
+			right: -4%
+			content: " "

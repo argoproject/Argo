@@ -334,8 +334,29 @@
 #home-river {
   display: none;
 }
-/* line 208, hero-series.sass */
+/* line 207, hero-series.sass */
+#home-river header {
+  overflow: hidden;
+  *zoom: 1;
+}
+/* line 209, hero-series.sass */
+#home-river .hero {
+  text-align: center;
+  background-color: #eeeeee;
+}
+/* line 213, hero-series.sass */
 #home-river .span10 {
   margin: 0 auto;
   float: none;
+  position: relative;
+}
+/* line 217, hero-series.sass */
+#home-river .span10:before {
+  height: 25px;
+  background-color: white;
+  position: absolute;
+  top: -25px;
+  left: -4%;
+  right: -4%;
+  content: " ";
 }

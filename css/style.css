@@ -4149,14 +4149,16 @@ p.comment-form-comment {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .widget.largo-series-posts h4 {
-  margin-bottom: 0;
+  margin-bottom: 0.4em;
+  line-height: 1.2em;
+  font-size: 20.8px;
 }
 .widget.largo-series-posts ul {
   margin-left: 0;
   list-style: none;
 }
-.widget.largo-series-posts h4 {
-  line-height: 1.2em;
+.widget.largo-series-posts img {
+  max-width: 100px;
 }
 .widget.largo-series-posts i {
   display: block;
