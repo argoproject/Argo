@@ -51,6 +51,33 @@ class largo_follow_widget extends WP_Widget {
 				<a class="subscribe" href="<?php echo esc_url( of_get_option( 'linkedin_link' ) ); ?>"><i class="icon-linkedin"></i>Find Us on LinkedIn</a>
 			<?php endif;
 
+			if ( of_get_option( 'gplus_link' ) ) : ?>
+				<div class="g-follow" data-annotation="none" data-height="24" data-href="<?php echo esc_url( of_get_option( 'gplus_link' ) ); ?>" data-rel="publisher"></div>
+
+			<?php endif;
+
+			if ( of_get_option( 'flickr_link' ) ) : ?>
+				<a href="<?php echo esc_url( of_get_option( 'flickr_link' ) ); ?>" title="See our photos on Flickr!"><img src="https://s.yimg.com/pw/images/goodies/white-flickr.png" width="56" height="26" alt=""></a>
+			<?php endif;
+
+			if ( of_get_option( 'youtube_link' ) ) :
+				$path = parse_url( of_get_option( 'youtube_link' ), PHP_URL_PATH);
+				$pathFragments = explode('/', $path);
+				$yt_user = end($pathFragments);
+				?>
+				<div class="g-ytsubscribe" data-channel="<?php echo $yt_user; ?>" data-layout="default" data-count="hidden"></div>
+			<?php endif;
+
+			//the below is for G+ and YouTube subscribe buttons
+			?>
+			<script type="text/javascript">
+			  (function() {
+			    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+			    po.src = 'https://apis.google.com/js/platform.js';
+			    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+			  })();
+			</script>
+		<?php
 		echo $after_widget;
 	}
 
