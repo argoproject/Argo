@@ -242,25 +242,6 @@ function optionsframework_options() {
 		'type' 	=> 'info');
 
 	$options[] = array(
-		'desc' 	=> __('<strong>Show list of tags</strong> at the bottom of single posts.', 'largo'),
-		'id' 	=> 'show_tags',
-		'std' 	=> '1',
-		'type' 	=> 'checkbox');
-
-	$options[] = array(
-		'desc' 	=> __('Enter the <strong>maximum number of tags to show</strong>.', 'largo'),
-		'id' 	=> 'tag_limit',
-		'std' 	=> 20,
-		'class' => 'hidden',
-		'type' 	=> 'text');
-
-	$options[] = array(
-		'desc' 	=> __('<strong>Show related posts</strong> at the bottom of single posts.', 'largo'),
-		'id' 	=> 'show_related_content',
-		'std' 	=> '1',
-		'type' 	=> 'checkbox');
-
-	$options[] = array(
 		'desc' 	=> __('<strong>Show next/prev post navigation</strong> at the bottom of single posts.', 'largo'),
 		'id' 	=> 'show_next_prev_nav_single',
 		'std' 	=> '1',
