@@ -154,21 +154,6 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 }
 
 /**
- * Show the author box on single posts when activated in theme options
- * Don't show it on posts with custom bylines or if a user has not filled out their profile
- *
- * @return bool true if the author box should be displayed
- * @since 1.0
- */
-function largo_show_author_box() {
-	global $post;
-	$byline_text = get_post_meta( $post->ID, 'largo_byline_text' ) ? esc_attr( get_post_meta( $post->ID, 'largo_byline_text', true ) ) : '';
-	if ( of_get_option( 'show_author_box' ) && get_the_author_meta( 'description' ) && $byline_text == '' )
-		return true;
-	return false;
-}
-
-/**
  * Determine whether or not an author has a valid gravatar image
  * see: http://codex.wordpress.org/Using_Gravatars
  *

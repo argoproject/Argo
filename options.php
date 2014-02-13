@@ -255,12 +255,6 @@ function optionsframework_options() {
 		'type' 	=> 'text');
 
 	$options[] = array(
-		'desc' 	=> __('<strong>Show the author bio</strong> at the bottom of single posts.', 'largo'),
-		'id' 	=> 'show_author_box',
-		'std' 	=> '1',
-		'type' 	=> 'checkbox');
-
-	$options[] = array(
 		'desc' 	=> __('<strong>Show related posts</strong> at the bottom of single posts.', 'largo'),
 		'id' 	=> 'show_related_content',
 		'std' 	=> '1',

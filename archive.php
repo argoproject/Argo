@@ -21,7 +21,11 @@ get_header();
 
 			// if it's an author page, show the author box with their bio, social links, etc.
 			if ( is_author() ) {
-				get_template_part( 'largo-author-box' );
+				the_widget(
+					'largo_author_widget',
+					array( 'title' => 'Hello world')
+				);
+				print "Hello world";
 
 			// for tags, and custom taxonomies we show the term name and description
 			} elseif ( is_tag() || is_tax() ) {
