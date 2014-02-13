@@ -242,12 +242,6 @@ function optionsframework_options() {
 		'type' 	=> 'info');
 
 	$options[] = array(
-		'desc' 	=> __('<strong>Show next/prev post navigation</strong> at the bottom of single posts.', 'largo'),
-		'id' 	=> 'show_next_prev_nav_single',
-		'std' 	=> '1',
-		'type' 	=> 'checkbox');
-
-	$options[] = array(
 		'desc' 		=> __('<strong>Where would you like to display share icons on single posts?</strong> By default social icons appear at both the top and the bottom of single posts but you can choose to show them in only one or the other or to not show them at all.', 'largo'),
 		'id' 		=> 'social_icons_display',
 		'std' 		=> 'both',
