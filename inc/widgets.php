@@ -36,7 +36,8 @@ function largo_widgets() {
 		'largo_related_posts_widget'			=> '/inc/widgets/largo-related-posts.php',
 		'largo_author_widget'			=> '/inc/widgets/largo-author-bio.php',
 		'largo_series_posts_widget'			=> '/inc/widgets/largo-series-posts.php',
-		'largo_disclaimer_widget'			=> '/inc/widgets/largo-disclaimer-widget.php'
+		'largo_disclaimer_widget'			=> '/inc/widgets/largo-disclaimer-widget.php',
+		'largo_featured_widget'			=> '/inc/widgets/largo-featured.php'
 	);
 	foreach ( $register as $key => $val ) {
 		require_once( get_template_directory() . $val );
