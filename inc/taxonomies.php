@@ -97,24 +97,6 @@ function largo_post_in_series() {
 }
 
 /**
- * Outputs a list of series a post is in
- * Called in content-single.php
- *
- * @since 1.0
- */
-if ( ! function_exists( 'largo_the_series_list' ) ) {
-	function largo_the_series_list() {
-		global $post;
-		$post_terms = largo_custom_taxonomy_terms( $post->ID );
-		foreach ( $post_terms as $term ) {
-			if ( strtolower( $term->name ) == 'series' )
-				continue;
-			echo largo_term_to_label( $term );
-		}
-	}
-}
-
-/**
  * Outputs custom taxonomy terms attached to a post
  *
  * @return array of terms
