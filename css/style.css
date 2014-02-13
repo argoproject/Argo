@@ -3016,17 +3016,18 @@ h3.recent-posts a.rss-link:hover,
   font-size: 13.04px;
   margin-bottom: 0;
 }
-.tags {
+#main .tags {
   height: 100%;
   overflow: auto;
   margin-bottom: 12px;
 }
-.tags ul {
+#main .tags ul {
   padding: 0;
   margin: 0;
   font-size: 13px;
+  line-height: 1.5;
 }
-.tags ul li {
+#main .tags ul li {
   display: inline;
   letter-spacing: 1px;
   margin: 0 8px 8px 0;
@@ -3040,16 +3041,16 @@ h3.recent-posts a.rss-link:hover,
   -moz-border-radius: 3px;
   border-radius: 3px;
 }
-.tags ul li:hover {
+#main .tags ul li:hover {
   background-color: #1a5a90;
 }
-.tags ul li i {
+#main .tags ul li i {
   margin: 1px 3px 0 0;
 }
-.tags ul li a {
+#main .tags ul li a {
   color: #ffffff;
 }
-.tags ul li a:hover {
+#main .tags ul li a:hover {
   text-decoration: none;
 }
 .pager {
