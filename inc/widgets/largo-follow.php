@@ -33,7 +33,13 @@ class largo_follow_widget extends WP_Widget {
 		if ( $title )
 			echo $before_title . $title . $after_title;
 
-			$feed = get_feed_link();
+		$feed = get_feed_link();
+
+		if ( is_single() && $id == 'article-bottom' ) :
+			// display the post social bar
+			largo_post_social_links();
+		else :
+			// display the usual buttons and whatnot
 			if ( of_get_option( 'rss_link' ) )
 				$feed = esc_url (of_get_option( 'rss_link' ) );
 
@@ -52,12 +58,12 @@ class largo_follow_widget extends WP_Widget {
 			<?php endif;
 
 			if ( of_get_option( 'gplus_link' ) ) : ?>
-				<div class="g-follow" data-annotation="none" data-height="24" data-href="<?php echo esc_url( of_get_option( 'gplus_link' ) ); ?>" data-rel="publisher"></div>
+				<div class="g-follow" data-annotation="bubble" data-height="24" data-href="<?php echo esc_url( of_get_option( 'gplus_link' ) ); ?>" data-rel="publisher"></div>
 
 			<?php endif;
 
 			if ( of_get_option( 'flickr_link' ) ) : ?>
-				<a href="<?php echo esc_url( of_get_option( 'flickr_link' ) ); ?>" title="See our photos on Flickr!"><img src="https://s.yimg.com/pw/images/goodies/white-flickr.png" width="56" height="26" alt=""></a>
+				<div class="flickr-follow"><a href="<?php echo esc_url( of_get_option( 'flickr_link' ) ); ?>" title="See our photos on Flickr!"><img src="https://s.yimg.com/pw/images/goodies/white-flickr.png" width="56" height="26" alt=""></a></div>
 			<?php endif;
 
 			if ( of_get_option( 'youtube_link' ) ) :
@@ -65,7 +71,7 @@ class largo_follow_widget extends WP_Widget {
 				$pathFragments = explode('/', $path);
 				$yt_user = end($pathFragments);
 				?>
-				<div class="g-ytsubscribe" data-channel="<?php echo $yt_user; ?>" data-layout="default" data-count="hidden"></div>
+				<div class="g-ytsubscribe" data-channel="<?php echo $yt_user; ?>" data-layout="default" data-count="default"></div>
 			<?php endif;
 
 			//the below is for G+ and YouTube subscribe buttons
@@ -78,6 +84,8 @@ class largo_follow_widget extends WP_Widget {
 			  })();
 			</script>
 		<?php
+		endif;
+
 		echo $after_widget;
 	}
 

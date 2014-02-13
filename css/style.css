@@ -1108,8 +1108,6 @@ select:focus:required:invalid:focus {
 }
 .help-inline {
   display: inline-block;
-  /* IE7 inline-block hack */
-
   *display: inline;
   /* IE7 inline-block hack */
 
@@ -1258,8 +1256,6 @@ select:focus:required:invalid:focus {
 .form-inline .input-append,
 .form-horizontal .input-append {
   display: inline-block;
-  /* IE7 inline-block hack */
-
   *display: inline;
   /* IE7 inline-block hack */
 
@@ -1340,8 +1336,6 @@ legend + .control-group {
 }
 .btn {
   display: inline-block;
-  /* IE7 inline-block hack */
-
   *display: inline;
   /* IE7 inline-block hack */
 
@@ -4076,6 +4070,9 @@ p.comment-form-comment {
   background: white !important;
   background-color: white !important;
 }
+.flickr-follow {
+  margin-bottom: 8px;
+}
 .largo-about p {
   margin-bottom: 0;
 }
@@ -4511,8 +4508,6 @@ p.comment-form-comment {
   background-color: #2275bb;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   display: inline-block;
-  /* IE7 inline-block hack */
-
   *display: inline;
   /* IE7 inline-block hack */
 
