@@ -40,6 +40,7 @@ function largo_widgets() {
 		'largo_disclaimer_widget'			=> '/inc/widgets/largo-disclaimer-widget.php',
 		'largo_featured_widget'			=> '/inc/widgets/largo-featured.php',
 		'largo_tag_list_widget'			=> '/inc/widgets/largo-tag-list.php',
+		'largo_prev_next_post_links_widget'			=> '/inc/widgets/largo-prev-next-post-links.php',
 	);
 	foreach ( $register as $key => $val ) {
 		require_once( get_template_directory() . $val );
