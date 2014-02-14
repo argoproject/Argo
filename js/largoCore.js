@@ -38,15 +38,15 @@ jQuery(document).ready(function($) {
 		});
 	}
 
-	//homepage alert CSS hacks
-	if ( $('.alert-wrapper').length ) {
-		var $wrapper = $('.alert-wrapper'), $container = $('#alert-container');
-		$(window).on('resize', function() {
+	//homepage alert & hero CSS hacks
+	if ( $('.max-wide').length ) {
+		var $wrapper = $('.max-wide'), $container = $('#content');
+		$(window).on('throttledresize', function() {
 			var $marginWidth = ( $(window).width() - $container.width() ) / -2;
 			$marginWidth = ( $marginWidth > 0 ) ? 0 : parseInt( $marginWidth ) ;
 			$wrapper.css( {marginLeft: $marginWidth, marginRight: $marginWidth} );
 		});
-		$(window).trigger('resize');
+		$(window).trigger('throttledresize');
 	}
 
 	//enable "clean read" functionality
@@ -127,9 +127,13 @@ jQuery(document).ready(function($) {
 		var stickyNavEl = $( '.sticky-nav-holder' );
 		var mainEl = $('#main');
 
-		mainEl.waypoint( function( direction ) {
+		if ( stickyNavEl.data( 'hideAtTop') === false ) {
+			stickyNavEl.addClass( 'show' );
+		} else {
+			mainEl.waypoint( function( direction ) {
 			stickyNavEl.toggleClass( 'show', direction == 'down' );
 		}, { offset: $('#wpadminbar').height() + parseInt( mainEl.css('marginTop') ) 	});
+		}
 
 		// Check if there is a sticky footer
 		var stickyFooterEl = $( '.sticky-footer-holder' );
@@ -288,5 +292,15 @@ jQuery(document).ready(function($) {
 		};
 
 		sharer.init();
+	})();
+
+	// Search slide out for mobile
+	(function() {
+		var searchForm = $('.sticky-nav-holder .form-search');
+		var toggle = searchForm.find( '.toggle' );
+    toggle.on( 'click', function() {
+    	searchForm.toggleClass( 'show' );
+    });
+
 	})();
 });

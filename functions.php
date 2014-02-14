@@ -40,6 +40,10 @@ if ( ! defined( 'INN_MEMBER' ) )
 if ( ! isset( $content_width ) )
 	$content_width = 771;
 
+// Set the global $largo var
+if ( ! isset( $largo ) )
+	$largo = array();
+
 // load the options framework (used for our theme options pages)
 if ( ! function_exists( 'optionsframework_init' ) ) {
 	define( 'OPTIONS_FRAMEWORK_DIRECTORY', get_template_directory_uri() . '/lib/options-framework/' );
@@ -59,10 +63,13 @@ $includes = array(
 	'/inc/robots.php',				// default robots.txt config
 	'/inc/custom-feeds.php',			// create custom RSS feeds
 	'/inc/users.php',				// add custom fields for user profiles
+	'/inc/term-meta.php',				// add custom fields for taxonomy terms
 	'/inc/sidebars.php',				// register sidebars
 	'/inc/widgets.php',				// register widgets
 	'/inc/nav-menus.php',			// register nav menus
 	'/inc/taxonomies.php',			// add our custom taxonomies
+	'/inc/term-icons.php',			// add our custom taxonomies
+	'/inc/term-sidebars.php',			// add our custom taxonomies
 	'/inc/images.php',				// setup custom image sizes
 	'/inc/editor.php',				// add tinymce customizations and shortcodes
 	'/inc/post-meta.php',			// add post meta boxes
@@ -73,6 +80,8 @@ $includes = array(
 	'/inc/featured-content.php',		// functions dealing with featured content
 	'/inc/enqueue.php',				// enqueue our js and css files
 	'/inc/post-templates.php',		// single post templates
+	'/inc/home-templates.php',		// homepage templates
+	'/inc/update.php',		// handling updates from old to new Largo. Should always be last
 );
 
 // This functionality is probably not for everyone so we'll make it easy to turn it on or off
@@ -114,3 +123,28 @@ if ( ! function_exists( 'largo_setup' ) ) {
 	}
 }
 add_action( 'after_setup_theme', 'largo_setup' );
+
+
+/**
+ * Helper for setting specific theme options (optionsframework)
+ * Would be nice if optionsframework included this natively
+ * See https://github.com/devinsays/options-framework-plugin/issues/167
+ */
+if ( ! function_exists( 'of_set_option' ) ) {
+	function of_set_option( $option_name, $option_value ) {
+		$config = get_option( 'optionsframework' );
+
+		if ( ! isset( $config['id'] ) ) {
+			return false;
+		}
+
+		$options = get_option( $config['id'] );
+
+		if ( $options ) {
+			$options[$option_name] = $option_value;
+			return update_option( $config['id'], $options );
+		}
+
+		return false;
+	}
+}

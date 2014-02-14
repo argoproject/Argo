@@ -54,6 +54,13 @@ function largo_register_sidebars() {
 			'id' 	=> 'topic-sidebar'
 		);
 	}
+	if ( of_get_option( 'use_before_footer_sidebar' ) ) {
+		$sidebars[] = array(
+			'name' 	=> __( 'Before Footer', 'largo' ),
+			'desc' 	=> __( 'Full-width area immediately above footer', 'largo' ),
+			'id' 	=> 'before-footer'
+		);
+	}
 	if ( of_get_option('footer_layout') == '4col' ) {
 		$sidebars[] = array(
 			'name' 	=> __( 'Footer 4', 'largo' ),
@@ -133,15 +140,23 @@ function largo_make_slug($string, $maxLength = 63) {
  * @since 1.0
  */
 if( !function_exists( 'custom_sidebars_dropdown' ) ) {
-	function custom_sidebars_dropdown( $selected = '', $skip_default = false ) {
+	function custom_sidebars_dropdown( $selected = '', $skip_default = false, $post_id = NULL ) {
 		global $wp_registered_sidebars, $post;
-		$custom = ( $selected ) ? $selected : get_post_meta( $post->ID, 'custom_sidebar', true );
-		$val = ( $custom ) ? $custom : 'none';
+		$the_id = ( $post_id ) ? $post_id : $post->ID ;
+		$custom = ( $selected ) ? $selected : get_post_meta( $the_id, 'custom_sidebar', true );
+		$val = ( $custom ) ? $custom : 'default';
 
 		// Add a default option
 		if ( ! $skip_default ) {
-			$output .= '<option value="default" '.selected('default',$val).'>' . __( 'Default', 'largo' ) . '</option>';
+			$output .= '<option value="default" ';
+			$output .= selected( 'default', $val, false );
+			$output .= '>' . __( 'Default', 'largo' ) . '</option>';
 		}
+
+		// Add a 'none' option
+		$output .= '<option value="none" ';
+		$output .= selected( 'none', $val, false );
+		$output .= '>' . __( 'None', 'largo' ) . '</option>';
 
 		// Filter list of sidebars to exclude those we don't want users to choose
 		$excluded = array(
@@ -154,7 +169,7 @@ if( !function_exists( 'custom_sidebars_dropdown' ) ) {
 			//check if excluded
 			if ( in_array( $sidebar_id, $excluded ) || in_array( $sidebar['name'], $excluded ) ) continue;
 
-			$output .= '<option value="' . $sidebar_id . '" ' . selected($sidebar_id, $val) . '>' . $sidebar['name'] . '</option>';
+			$output .= '<option value="' . $sidebar_id . '" ' . selected($sidebar_id, $val, false) . '>' . $sidebar['name'] . '</option>';
 		}
 
 		echo $output;
@@ -166,14 +181,41 @@ if( !function_exists( 'custom_sidebars_dropdown' ) ) {
  */
 function largo_widget_settings() {
 	?>
-	<div class="wrap">
-		<div class="advance-widget-settings">
+ 		<div class="advance-widget-settings">
+ 			<div class="advance-widget-settings-title"><?php _e( 'Largo Sidebar Options', 'largo' ); ?></div>
 			<div id="optionsframework-metabox" class="metabox-holder">
 			    <div id="optionsframework" class="postbox">
 					<form action="options.php" method="post">
 						<div> <?php // Extra open <div> because optinosframework_fields() adds an extra closing </div> ?>
-					<?php settings_fields('optionsframework'); ?>
-					<?php optionsframework_fields(); /* Settings */ ?>
+					<?php 
+					// Prints hidden tags for WP's options.php to save the value
+					settings_fields('optionsframework');
+					
+					// Print all the currently saved values for those fields that aren't outputted
+					$options_to_show = optionsframework_options();
+					$config = get_option( 'optionsframework', array() );
+					// Gets the unique option id
+					if ( isset( $config['id'] ) ) {
+						$option_name = $config['id'];
+					}
+					else {
+						$option_name = 'optionsframework';
+					};
+
+					$current_values = get_option( $option_name, array() );
+
+					foreach ( $options_to_show as $key => $field ) {
+						if ( isset($field['id']) && isset($current_values[$field['id']]) ) {
+							unset( $current_values[$field['id']] );
+						}
+					}
+
+					foreach ( $current_values as $key => $val ) {
+						echo '<input type="hidden" name="', esc_attr( $option_name . '[' . $key . ']'), '" value="', esc_attr( $val ) ,'" />';
+					}
+
+					// Prints the fields
+					optionsframework_fields(); /* Settings */ ?>
 					<div id="optionsframework-submit">
 						<input type="submit" class="button-primary" name="update" value="<?php esc_attr_e( 'Save Options', 'options_framework_theme' ); ?>" />
 						<input type="submit" class="reset-button button-secondary" name="reset" value="<?php esc_attr_e( 'Restore Defaults', 'options_framework_theme' ); ?>" onclick="return confirm( '<?php print esc_js( __( 'Click OK to reset. Any theme settings will be lost!', 'options_framework_theme' ) ); ?>' );" />
@@ -183,12 +225,9 @@ function largo_widget_settings() {
 				</div>
 			</div>
 		</div>
-		<br class="clear" />
-	</div>
-	<br class="clear" />
 	<?php
 }
-add_action( 'sidebar_admin_page', 'largo_widget_settings' );
+add_action( 'widgets_admin_page', 'largo_widget_settings' );
 
 /**
  * Load up the scripts for options framework on the widgets

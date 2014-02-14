@@ -31,6 +31,7 @@ if ( ! function_exists( 'largo_time' ) ) {
  */
 if ( ! function_exists( 'largo_author' ) ) {
 	function largo_author( $echo = true ) {
+		global $post;
 		$values = get_post_custom( $post->ID );
 		$byline_text = isset( $values['largo_byline_text'] ) ? esc_attr( $values['largo_byline_text'][0] ) : esc_html( get_the_author() );
 
@@ -48,8 +49,8 @@ if ( ! function_exists( 'largo_author' ) ) {
  * @since 1.0
  */
 if ( ! function_exists( 'largo_author_link' ) ) {
-	function largo_author_link( $echo = true ) {
-		global $post;
+	function largo_author_link( $echo = true, $post=null ) {
+		$post = get_post( $post );
 		$values = get_post_custom( $post->ID );
 		$byline_text = isset( $values['largo_byline_text'] ) ? esc_attr( $values['largo_byline_text'][0] ) : esc_html( get_the_author() );
 
@@ -178,21 +179,6 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 			echo $output;
 		return $output;
 	}
-}
-
-/**
- * Show the author box on single posts when activated in theme options
- * Don't show it on posts with custom bylines or if a user has not filled out their profile
- *
- * @return bool true if the author box should be displayed
- * @since 1.0
- */
-function largo_show_author_box() {
-	global $post;
-	$byline_text = get_post_meta( $post->ID, 'largo_byline_text' ) ? esc_attr( get_post_meta( $post->ID, 'largo_byline_text', true ) ) : '';
-	if ( of_get_option( 'show_author_box' ) && get_the_author_meta( 'description' ) && $byline_text == '' )
-		return true;
-	return false;
 }
 
 /**
@@ -334,30 +320,38 @@ if ( ! function_exists( 'largo_custom_wp_link_pages' ) ) {
  * @since 1.0
  */
 if ( ! function_exists( 'largo_excerpt' ) ) {
-	function largo_excerpt( $post, $sentence_count = 5, $use_more = true, $more_link = '', $echo = true, $strip_tags = true, $strip_shortcodes = true ) {
+	function largo_excerpt( $the_post=null, $sentence_count = 5, $use_more = true, $more_link = '', $echo = true, $strip_tags = true, $strip_shortcodes = true ) {
+		$the_post = get_post($the_post); // Normalize it into a post object
+
+		// Save the global $post object and then push our current post object so that certain functions (get_the_content) will work
+		global $post;
+		$_post = $post;
+		$post = $the_post;
 
 		// handle annoying WP default '(more...' added to the end of excerpts
 		if ( !$use_more || !$more_link )
 			$more_link = '';
 
 		// if a post has a custom excerpt set, we'll use that
-		if ( $post->post_excerpt ) {
+		if ( $the_post->post_excerpt ) {
 			if ( !$use_more ) {
-				$content = get_the_excerpt();
+				$content = apply_filters( 'get_the_excerpt', $the_post->post_excerpt );
 			} else {
-				$content = get_the_excerpt() . ' <a href="' . get_permalink() . '">' . $more_link . '</a>';
+				$content = apply_filters( 'get_the_excerpt', $the_post->post_excerpt ) . ' <a href="' . get_permalink( $the_post->ID ) . '">' . $more_link . '</a>';
 			}
 
 		// if we're on the homepage and the post has a more tag, use that
-		} else if ( is_home() && strpos( $post->post_content, '<!--more-->' ) ) {
+		} else if ( is_home() && strpos( $the_post->post_content, '<!--more-->' ) ) {
 			$content = get_the_content( $more_link );
 
 		// otherwise we'll just do our best and make the prettiest excerpt we can muster
 		} else {
 			$content = largo_trim_sentences( get_the_content(), $sentence_count );
 			if ( $use_more )
-				$content .= '<a href="' . get_permalink() . '">' . $more_link . '</a>';
+				$content .= '<a href="' . get_permalink( $the_post->ID ) . '">' . $more_link . '</a>';
 		}
+
+		$post = $_post; // Set it back
 
 		// optionally strip shortcodes and html, wrap everything in <p> tags
 		$output = '<p>';
@@ -565,5 +559,40 @@ if ( ! function_exists( 'largo_comment' ) ) {
 		<?php
 				break;
 		endswitch;
+	}
+}
+
+
+/**
+ * Post format icon
+ */
+if ( ! function_exists( 'post_type_icon' ) ) {
+	function post_type_icon( $options = array() ) {
+
+		global $largo;
+		if ( ! taxonomy_exists('post-type') || ! isset($largo['term-icons']) ) return false;
+
+		$defaults = array(
+			'echo' => TRUE,
+			'id' => get_the_ID()
+		);
+		$args = wp_parse_args( $options, $defaults );
+		$terms = wp_get_post_terms( $args['id'], 'post-type' );
+		if ( ! count($terms) ) return false;
+		//try to get a child term if there is one
+		$the_term = 0;
+		foreach ( $terms as $term ) {
+			if ( $term->parent ) {
+				$the_term = $term;
+				break;
+			}
+		}
+		//just grab the first one otherwise
+		if ( ! $the_term ) $the_term = $terms[0];
+
+		//get the icon value
+		if ( ! $args['echo'] ) ob_start();
+		$largo['term-icons']->the_icon( $the_term );
+		if ( ! $args['echo'] ) return ob_get_clean();
 	}
 }
