@@ -25,7 +25,7 @@ class largo_follow_widget extends WP_Widget {
 	function widget( $args, $instance ) {
 		extract( $args );
 
-		$title = apply_filters('widget_title', empty( $instance['title'] ) ? __('Follow ' . get_bloginfo('name'), 'largo') : $instance['title'], $instance, $this->id_base);
+		$title = apply_filters('widget_title',  $instance['title'], $instance, $this->id_base);
 
 		echo $before_widget;
 
