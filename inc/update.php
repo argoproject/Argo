@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains functions and tool for transitioning between Largo 0.2 and Largo 0.5
+ * Contains functions and tool for transitioning between Largo 0.2 and Largo 0.3
  */
 
 /**
@@ -17,9 +17,9 @@ function largo_version() {
 function largo_need_updates() {
 
 	// only do this for newer versions of largo
-	if ( largo_version() < 0.5 ) return false;
+	if ( largo_version() < 0.3 ) return false;
 
-	// try to figure out which versions of the options are stored. Implemented in 0.5
+	// try to figure out which versions of the options are stored. Implemented in 0.3
 	if ( of_get_option('largo_version') ) {
 		$old_version = floatval( of_get_option('largo_version') );
 		if ( $old_version < largo_version() ) {
@@ -34,19 +34,19 @@ function largo_need_updates() {
 }
 
 /**
- * Performs various database updates upon Largo version change. Fairly primitive as of 0.5
+ * Performs various database updates upon Largo version change. Fairly primitive as of 0.3
  *
- * @since 0.5
+ * @since 0.3
  */
 function largo_perform_update() {
 	if ( largo_need_updates() ) {
-		if ( largo_version() == 0.5 ) largo_update_widgets();
+		if ( largo_version() == 0.3 ) largo_update_widgets();
 	}
 }
 add_action( 'widgets_init', 'largo_perform_update', 20 );
 
 /**
- * Upgrades for moving from 0.2 to 0.5
+ * Upgrades for moving from 0.2 to 0.3
  * In which many theme options became widgets
  */
 function largo_update_widgets() {
