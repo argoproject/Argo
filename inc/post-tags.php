@@ -52,13 +52,15 @@ if ( ! function_exists( 'largo_author_link' ) ) {
 	function largo_author_link( $echo = true, $post=null ) {
 		$post = get_post( $post );
 		$values = get_post_custom( $post->ID );
-		$byline_text = isset( $values['largo_byline_text'] ) ? esc_attr( $values['largo_byline_text'][0] ) : esc_html( get_the_author() );
+		$author_id = ( $post ) ? $post->post_author : get_the_author_meta( 'ID' );
+
+		$byline_text = isset( $values['largo_byline_text'] ) ? esc_attr( $values['largo_byline_text'][0] ) : esc_html( get_the_author_meta('display_name', $author_id) );
 
 		// if it's a custom byline but there's no link, just output the byline text
 		if ( isset( $values['largo_byline_text'] ) && !isset( $values['largo_byline_link'] ) ) {
 			$output = $byline_text;
 		} else {
-			$byline_link = isset( $values['largo_byline_link'] ) ? esc_url( $values['largo_byline_link'][0] ) : get_author_posts_url( get_the_author_meta( 'ID' ) );
+			$byline_link = isset( $values['largo_byline_link'] ) ? esc_url( $values['largo_byline_link'][0] ) : get_author_posts_url( get_the_author_meta( 'ID', $author_id ) );
 			$byline_title_attr = esc_attr( sprintf( __( 'More from %s','largo' ), $byline_text ) );
 			$output = '<a class="url fn n" href="' . $byline_link . '" title="' . $byline_title_attr . '" rel="author">' . $byline_text . '</a>';
 		}
