@@ -4063,6 +4063,9 @@ p.comment-form-comment {
 .subscribe i.icon-linkedin:hover {
   background-color: #238cc3;
 }
+.widget.largo-follow {
+  padding: 0 0 0 0;
+}
 .twitter-follow-button {
   display: block;
   margin: 0 0 10px;
