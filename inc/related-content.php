@@ -316,7 +316,7 @@ function largo_top_term( $options = array() ) {
 
 	$icon = ( $args['use_icon'] ) ?  '<i class="icon-white icon-tag"></i>' : '' ;	//this will probably change to a callback largo_term_icon() someday
 	$link = ( $args['link'] ) ? array('<a href="%2$s" title="Read %3$s in the %4$s category">','</a>') : array('', '') ;
-	if ( $term_id ) {
+	if ( $term_id && !is_wp_error($term_id) ) {
 		//get the taxonomy slug
 		$taxonomy = $wpdb->get_var( $wpdb->prepare( "SELECT taxonomy FROM $wpdb->term_taxonomy WHERE term_id = %d LIMIT 1", $term_id) );
 		// get the term object
@@ -466,6 +466,7 @@ class Largo_Related {
 					'term' => $term->slug,
 					'orderby' => 'date',
 					'order' => 'DESC',
+          'ignore_sticky_posts'   => 1,
 				);
 
 				// see if there's a post that has the sort order info for this series
@@ -531,6 +532,7 @@ class Largo_Related {
 					'term' => $term->slug,
 					'orderby' => 'date',
 					'order' => 'DESC',
+          'ignore_sticky_posts'   => 1,
 				);
 			}
 			// run the query

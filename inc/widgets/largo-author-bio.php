@@ -14,10 +14,26 @@ class largo_author_widget extends WP_Widget {
 
 	function widget( $args, $instance ) {
 		extract( $args );
+		$authors = array();
+		$bios = "";
 
 		$title = apply_filters('widget_title', empty( $instance['title'] ) ? __('Author', 'largo') : $instance['title'], $instance, $this->id_base);
 
 		if( is_single() || is_author() ):
+
+				if ( function_exists( 'get_coauthors' )  && !is_author() )
+					$authors = get_coauthors( $post->ID );
+				else
+					$authors[] = get_userdata( get_the_author_meta( 'ID' ) );
+
+				// make sure we have at least one bio before we show the widget
+				foreach ( $authors as $key => $author ) {
+					$bio = trim( get_the_author_meta( 'description', $author->ID ) );
+					if ( empty( $bio ) ) unset( $authors[$key] );
+					else $bios .= $bio;
+				}
+				if ( !is_author() && empty($bios) ) return;
+
 				echo $before_widget;
 				echo $before_title . $title . $after_title;
 
@@ -91,7 +107,7 @@ class largo_author_widget extends WP_Widget {
 
 				echo $after_widget;
 		else:
-			echo "Not a valid author context";
+			_e("Not a valid author context");
 		endif;
 
 	}
