@@ -175,6 +175,15 @@ function largo_get_recent_posts_for_term( $term, $max = 5, $min = 1 ) {
         $query_args[ 'series' ] = $term->slug;
     }
 
+		//if this is a fake term, just grab post ids
+		if ( $term->term_id == -90 && $post ) {
+			$post_ids = preg_split( '#\s*,\s*#', get_post_meta( $post->ID, 'largo_custom_related_posts', true ) );
+			$query_args[ 'post__in' ] = $post_ids;
+			$query_args[ 'orderby' ] = 'post__in';
+			$query_args['showposts'] = count($post_ids);
+			//print_r($query_args);
+		}
+
     $query_args = apply_filters( 'largo_get_recent_posts_for_term_query_args', $query_args, $term, $max, $min, $post );
 
     $query = new WP_Query( $query_args );
@@ -342,11 +351,9 @@ function largo_top_term( $options = array() ) {
  */
 function largo_filter_get_post_related_topics( $topics, $max ) {
     $post = get_post();
-
     if ( $post ) {
         $posts = preg_split( '#\s*,\s*#', get_post_meta( $post->ID, 'largo_custom_related_posts', true ) );
-
-        if ( !empty( $posts ) ) {
+        if ( !empty( $posts[0] ) ) {
             // Add a fake term with the ID of -90
             $top_posts = new stdClass();
             $top_posts->term_id = -90;

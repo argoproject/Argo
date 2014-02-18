@@ -37,12 +37,15 @@ class largo_explore_related_widget extends WP_Widget {
 
 				<div class="related-items span8">
 					<?php foreach ( $rel_topics as $count => $topic ):
-						$rel_posts = largo_get_recent_posts_for_term( $topic, $instance['posts'] ); ?>
+						$rel_posts = largo_get_recent_posts_for_term( $topic, $instance['posts'] );
+						?>
 						<div id="rp<?php echo $count; ?>">
 							<ul>
 							<?php
 								// the top related post
-								$top_post = array_shift( $rel_posts ); ?>
+								$top_post = array_shift( $rel_posts );
+								?>
+
 								<li class="top-related clearfix">
 								<?php
 									$permalink = get_permalink( $top_post->ID );
