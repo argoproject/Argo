@@ -207,7 +207,7 @@
 					</div>
 
 		      <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
-		      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse" title="<?php esc_attr_e('More', 'largo'); ?>">
+		      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse, .nav-middle" title="<?php esc_attr_e('More', 'largo'); ?>">
 		        <div class="bars">
 			        <span class="icon-bar"></span>
 			        <span class="icon-bar"></span>
@@ -219,89 +219,60 @@
 		        <li class="home-link"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php largo_home_icon( 'icon-white' ); ?></a></li>
 		        <li class="divider-vertical"></li>
 		      </ul>
-		      <ul class="nav hidden-phone">
-		        <?php
-						$args = array(
-							'theme_location' => 'navbar-categories',
-							'depth'		 => 0,
-							'container'	 => false,
-							'items_wrap' => '%3$s',
-							'menu_class' => 'nav',
-							'walker'	 => new Bootstrap_Walker_Nav_Menu()
-						);
-						wp_nav_menu($args);
-					?>
-		      </ul>
-		      <?php /*
-		      <ul class="nav">
-		        <li class="dropdown visible-phone" id="category-list">
-				  <a class="dropdown-toggle" data-toggle="dropdown" href="#category-list">
-				    Categories
-					<b class="caret"></b>
-				  </a>
-				  <ul class="dropdown-menu">
-				    <?php
-						$args = array(
-							'theme_location' => 'navbar-categories',
-							'depth'		 => 1,
-							'container'	 => false,
-							'items_wrap' => '%3$s'
-						);
-						wp_nav_menu($args);
-					?>
-				  </ul>
-				</li>
-		      </ul>
-		      */ ?>
 
-		      <!-- Everything you want hidden at 940px or less, place within here -->
-		      <div class="nav-collapse">
-		        <ul class="nav">
-		        	<?php
-						$args = array(
-							'theme_location' => 'navbar-supplemental',
-							'depth'		 => 1,
-							'container'	 => false,
-							'items_wrap' => '%3$s'
-						);
-
-						wp_nav_menu($args);
-					?>
-		        </ul>
-		        <ul class="nav visible-phone">
-			        <li class="divider"></li>
+					<div class="nav-middle">
+						<ul class="nav">
 			        <?php
-						$args = array(
-							'theme_location' => 'global-nav',
-							'depth'		 => 1,
-							'container'	 => false,
-							'items_wrap' => '%3$s'
-						);
-						wp_nav_menu($args);
-					?>
-		         </ul>
-		      <ul class="nav" id="global-addition">
-		        <li class="divider"></li>
-						<li class="menu-item-has-childen dropdown">
-							<a href="javascript:void(0);" class="dropdown-toggle">
-								<?php
-									//try to get the menu name from global-nav
-									$menus = get_nav_menu_locations();
-									$menu_title = wp_get_nav_menu_object($menus['global-nav'])->name;
-									echo ( $menu_title ) ? $menu_title : __('About', 'largo');
-								?> <b class="caret"></b>
-							</a>
-							<?php
 							$args = array(
-								'theme_location' => 'global-nav',
-								'depth'		 => 1,
+								'theme_location' => 'navbar-categories',
+								'depth'		 => 0,
 								'container'	 => false,
-								'menu_class' => 'dropdown-menu',
+								'items_wrap' => '%3$s',
+								'menu_class' => 'nav',
+								'walker'	 => new Bootstrap_Walker_Nav_Menu()
 							);
 							wp_nav_menu($args);
 						?>
-						</li>
-					</ul>
+			      </ul>
+					</div>
+
+		      <!-- Everything you want hidden at 940px or less, place within here -->
+		      <div class="nav-collapse">
+						<ul class="nav supplemental">
+			        <?php
+							$args = array(
+								'theme_location' => 'navbar-supplemental',
+								'depth'		 => 0,
+								'container'	 => false,
+								'items_wrap' => '%3$s',
+								'menu_class' => 'nav',
+								'walker'	 => new Bootstrap_Walker_Nav_Menu()
+							);
+							wp_nav_menu($args);
+						?>
+			      </ul>
+			      <ul class="nav" id="global-addition">
+		        	<li class="divider"></li>
+							<li class="menu-item-has-childen dropdown">
+								<a href="javascript:void(0);" class="dropdown-toggle">
+									<?php
+										//try to get the menu name from global-nav
+										$menus = get_nav_menu_locations();
+										$menu_title = wp_get_nav_menu_object($menus['global-nav'])->name;
+										echo ( $menu_title ) ? $menu_title : __('About', 'largo');
+									?> <b class="caret"></b>
+								</a>
+								<?php
+								$args = array(
+									'theme_location' => 'global-nav',
+									'depth'		 => 1,
+									'container'	 => false,
+									'menu_class' => 'dropdown-menu',
+								);
+								wp_nav_menu($args);
+							?>
+							</li>
+						</ul>
 		      </div>
 		    </div>
 		</nav>

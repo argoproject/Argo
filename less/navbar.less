@@ -140,7 +140,7 @@ li.home-link:hover i {
 .navbar .btn-navbar {
   display: none;
   float: left;
-  margin: @navbarHeight/4 - @navbarFontSize/5 0 0;
+  margin: 9px 0 0;
   margin-right: 10px;
   padding: @navbarHeight/5 10px;
   background-color: @navbarBackgroundHighlight;
@@ -163,7 +163,7 @@ li.home-link:hover i {
 .navbar .btn-navbar .icon-bar {
   display: block;
   width: 18px;
-  height: 2px;
+  height: 3px;
   background-color: @navbarText;
 }
 .btn-navbar .icon-bar + .icon-bar {
@@ -409,6 +409,13 @@ html.touch ul.nav li.dropdown.open ul.dropdown-menu {
 // TABLETS AND BELOW
 // -----------------
 @media (max-width: 979px) {
+	.supplemental {
+    overflow: hidden;
+    height: 0;
+	}
+}
+
+@media (max-width: 768px) {
 
   .navbar .container {
     width: auto;
@@ -418,97 +425,103 @@ html.touch ul.nav li.dropdown.open ul.dropdown-menu {
   // COLLAPSIBLE NAVBAR
   // ------------------
   // Nav collapse clears brand
-  .nav-collapse {
+  .sticky-nav-holder .nav-collapse,
+  .sticky-nav-holder .nav-middle {
     clear: both;
-  }
-  // Block-level the nav
-  .nav-collapse .nav {
-    float: none;
-    margin: 0 0 (@baseline / 2);
-  }
-  .nav-collapse .nav > li,
-  .nav-collapse .nav > span > li {
-    float: none;
-    display: list-item;
-    line-height: 2;
-  }
-  .nav-collapse .nav > .divider-vertical {
-    display: none;
-  }
-  .nav-collapse .nav .nav-header {
-    color: @navbarText;
-    text-shadow: none;
-  }
-  // Nav and dropdown links in navbar
-  .nav-collapse .nav > li > a,
-  .nav-collapse .nav > span > li > a,
-  .nav-collapse .dropdown-menu a {
-    color: @navbarLinkColor;
-    &:hover {
-	  background:none !important;
-	  color: @grayLighter;
-    }
-  }
-  .nav-collapse .nav > li:hover > a,
-  .nav-collapse .nav > span > li:hover > a {
-    background:none;
-  }
-  .nav-collapse .divider {
-    height: 1px;
-    width: 94%;
-    margin: 10px 10px 5px;
-    padding:0;
-    overflow: hidden;
-    background-color: @white;
-    border-bottom: 1px solid @navbarBackground;
-  }
-  // Buttons
-  .nav-collapse .btn {
-    padding: 4px 10px 4px;
-    font-weight: normal;
-    .border-radius(4px);
-  }
-  .nav-collapse .dropdown-menu li + li a {
-    margin-bottom: 2px;
-  }
-  .nav-collapse .nav > li > a:hover,
-  .nav-collapse .dropdown-menu a:hover {
-    background-color: @navbarBackground;
-  }
-  // Dropdowns in the navbar
-  .nav-collapse .dropdown-menu {
-    position: static;
-    top: auto;
-    left: auto;
-    float: none;
-    display: block;
-    max-width: none;
-    margin: 0 15px;
-    padding: 0;
-    background-color: transparent;
-    border: none;
-    .border-radius(0);
-    .box-shadow(none);
-  }
-  .nav-collapse .dropdown-menu:before,
-  .nav-collapse .dropdown-menu:after {
-    display: none;
-  }
-  .nav-collapse .dropdown-menu .divider {
-    display: none;
-  }
-  // Hide everything in the navbar save .brand and toggle button */
-  .nav-collapse,
-  .nav-collapse.collapse {
     overflow: hidden;
     height: 0;
-  }
-  // Navbar button
-  .navbar .btn-navbar {
-    display: block;
-  }
-}
+    background-color: @navbarBackground;
+    color: @navbarLinkColor;
 
+		.nav {
+	    float: none;
+	    margin: 0 0 (@baseline / 2);
+	    > li,
+	    > span > li {
+		    float: none;
+		    display: block;
+		    line-height: 2;
+		    > a {
+			    color: @navbarLinkColor;
+			    display: block;
+			    padding: 10px !important;
+			    &:hover {
+				  	background:none !important;
+						color: @navbarLinkColorHover;
+					}
+					.caret {
+						float: right;
+						border-top-color: @navbarLinkColor !important;
+					}
+		    }
+		    &:hover > a {
+					background:none;
+		    }
+		  }
+		  > .divider-vertical {
+			  display: none;
+		  }
+			.nav-header {
+		    color: @navbarText;
+		    text-shadow: none;
+			}
+			.dropdown-menu a {
+		    color: @navbarLinkColor;
+		    &:hover {
+			  	background:none !important;
+					color: @grayLighter;
+				}
+			}
+	  }
+
+	  .divider {
+	    height: 1px;
+	    width: 94%;
+	    margin: 10px 10px 5px;
+	    padding:0;
+	    overflow: hidden;
+	    background-color: @white;
+	    border-bottom: 1px solid @navbarBackground;
+	  }
+
+		.btn {
+	    padding: 4px 10px 4px;
+	    font-weight: normal;
+	    .border-radius(4px);
+	  }
+
+		.dropdown-menu li + li a {
+    	margin-bottom: 2px;
+		}
+
+	  .nav-collapse .nav > li > a:hover,
+	  .nav-collapse .dropdown-menu a:hover {
+	    background-color: @navbarBackground;
+	  }
+	  // Dropdowns in the navbar
+	  .dropdown-menu {
+	    position: static;
+	    top: auto;
+	    left: auto;
+	    float: none;
+	    display: block;
+	    max-width: none;
+	    margin: 0 15px;
+	    padding: 0;
+	    background-color: transparent;
+	    border: none;
+	    .border-radius(0);
+	    .box-shadow(none);
+		  &:before,
+		  &:after {
+		    display: none;
+		  }
+		  .divider {
+	    	display: none;
+			}
+	  }
+	}
+}
 
 // DEFAULT DESKTOP
 // ---------------
@@ -632,8 +645,80 @@ html.touch ul.nav li.dropdown.open ul.dropdown-menu {
       }
     }
   }
-}
 
-html.no-touch .sticky-nav-holder .navbar .collapse li > a:hover {
-  color: @linkColor;
+	.nav-right {
+    position: absolute;
+    right: 0;
+    padding-top: 5px;
+
+    .donate-btn {
+      float: left;
+      margin: 5px;
+
+      i {
+		    display: none;
+		  }
+    }
+  }
+
+  .nav-right .form-search {
+    .toggle {
+      display: inline-block;
+      color: @baseColor;
+      display: inline-block;
+      width: 40px;
+      text-align: center;
+      cursor: pointer;
+      position: relative;
+      z-index: 91;
+			font-size: 18px;
+			height: 42px;
+      .transition( 0.3s );
+      margin-top: -9px;
+      padding-top: 9px;
+    }
+
+    .input-append {
+      position: absolute;
+      right: 0;
+      top: 50px;
+      opacity: 0;
+      visibility: hidden;
+      .transition( 0.3s );
+      padding: 8px 10px;
+      z-index: 90;
+      width: 300px;
+
+      .text-input-wrapper {
+        display: block;
+        float: left;
+        width: 250px;
+      }
+      input {
+        width: 100%;
+        .box-sizing( border-box );
+        height: 28px !important;
+      }
+
+      button {
+        width: 50px !important;
+				float: left;
+        .box-sizing( border-box );
+      }
+    }
+
+    &.show {
+      .input-append {
+        position: absolute;
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .input-append,
+      .toggle {
+        background-color: rgba( red(@baseColor), green(@baseColor), blue(@baseColor), 0.9);
+        color: @bodyBackground;
+      }
+    }
+  }
 }
