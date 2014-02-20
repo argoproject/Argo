@@ -1108,6 +1108,8 @@ select:focus:required:invalid:focus {
 }
 .help-inline {
   display: inline-block;
+  /* IE7 inline-block hack */
+
   *display: inline;
   /* IE7 inline-block hack */
 
@@ -1256,6 +1258,8 @@ select:focus:required:invalid:focus {
 .form-inline .input-append,
 .form-horizontal .input-append {
   display: inline-block;
+  /* IE7 inline-block hack */
+
   *display: inline;
   /* IE7 inline-block hack */
 
@@ -1336,6 +1340,8 @@ legend + .control-group {
 }
 .btn {
   display: inline-block;
+  /* IE7 inline-block hack */
+
   *display: inline;
   /* IE7 inline-block hack */
 
@@ -2279,6 +2285,9 @@ h2.branding .tagline {
   margin-bottom: 0;
   line-height: 40px;
 }
+.navbar .toggle-nav-bar {
+  display: none;
+}
 .navbar .nav {
   position: relative;
   left: 0;
@@ -2363,7 +2372,7 @@ li.home-link:hover i {
 .navbar .btn-navbar {
   display: none;
   float: left;
-  margin: 9px 0 0;
+  margin: 4px 0 0;
   margin-right: 10px;
   padding: 8px 10px;
   background-color: #2275bb;
@@ -2405,18 +2414,28 @@ li.home-link:hover i {
 }
 .caret {
   display: inline-block;
+  position: relative;
+  width: 10px;
+  padding: 0 5px;
+  opacity: 0.9;
+  filter: alpha(opacity=90);
+}
+.caret:before {
+  display: block;
+  position: absolute;
+  top: 50%;
+  margin-top: -3px;
+  left: 50%;
+  margin-left: -5px;
   width: 0;
   height: 0;
-  vertical-align: top;
   border-top: 6px solid #000000;
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
   content: "";
-  opacity: 0.9;
-  filter: alpha(opacity=90);
 }
-.dropdown .caret {
-  margin: 7px 8px 0 3px;
+.caret:after {
+  content: "\0000a0";
 }
 .dropdown:hover .caret,
 .open .caret {
@@ -2473,9 +2492,11 @@ li.home-link:hover i {
   white-space: nowrap;
   text-shadow: none;
 }
-html.no-touch ul.nav li.dropdown:hover ul.dropdown-menu,
-html.touch ul.nav li.dropdown.open ul.dropdown-menu {
-  display: block;
+@media (min-width: 769px) {
+  html.no-touch ul.nav li.dropdown:hover ul.dropdown-menu,
+  html.touch ul.nav li.dropdown.open ul.dropdown-menu {
+    display: block;
+  }
 }
 .navbar .dropdown-menu .active > a,
 .navbar .dropdown-menu .active > a:hover {
@@ -2600,9 +2621,93 @@ html.touch ul.nav li.dropdown.open ul.dropdown-menu {
   }
 }
 @media (max-width: 768px) {
+  .navbar {
+    position: relative;
+    z-index: 9;
+  }
   .navbar .container {
     width: auto;
     padding: 0;
+  }
+  .navbar .toggle-nav-bar {
+    display: static;
+  }
+  .navbar .nav-shelf {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    visibility: hidden;
+    opacity: 0;
+  }
+  .navbar.open .nav-shelf {
+    visibility: visible;
+    opacity: 1;
+    border-bottom: solid 1px rgba(0, 0, 0, 0.2);
+  }
+  .navbar.open .nav-shelf:after {
+    position: absolute;
+    content: " ";
+    display: block;
+    bottom: -5px;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background-color: rgba(0, 0, 0, 0.3);
+    background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+    background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0)));
+    background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+    background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+    background-image: linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='rgba(0, 0, 0, 0.5)', endColorstr='rgba(0, 0, 0, 0)', GradientType=0);
+    background-color: transparent;
+  }
+  .navbar .nav-shelf {
+    background: #ffffff;
+  }
+  .navbar .nav-shelf ul,
+  .navbar .nav-shelf li {
+    float: none;
+  }
+  .navbar .nav-shelf li .caret {
+    float: right;
+  }
+  .navbar .nav-shelf li .caret:before {
+    border-top-color: #2275bb !important;
+    border-top-color: rgba(34, 117, 187, 0.8) !important;
+  }
+  .navbar .nav-shelf a {
+    color: #2275bb;
+  }
+  .navbar .nav-shelf li.dropdown.open > a.dropdown-toggle {
+    background-color: #2275bb;
+    color: #ffffff;
+  }
+  .navbar .nav-shelf li.dropdown.open > a.dropdown-toggle .caret:before {
+    border-top-color: #ffffff !important;
+  }
+  .navbar .nav-shelf li.open > a .caret {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+  .navbar .nav-shelf li.open > ul.dropdown-menu {
+    display: block;
+    position: relative;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+  }
+  .navbar .nav-shelf li.open > ul.dropdown-menu:before,
+  .navbar .nav-shelf li.open > ul.dropdown-menu:after {
+    display: none;
   }
   .sticky-nav-holder .nav-collapse,
   .sticky-nav-holder .nav-middle {
@@ -2789,12 +2894,15 @@ body.admin-bar .sticky-nav-holder {
 .sticky-nav-holder .navbar li > a {
   color: #2275bb;
 }
-.sticky-nav-holder .navbar li .caret {
+.sticky-nav-holder .navbar li .caret:before {
   border-top-color: #2275bb !important;
   border-top-color: rgba(34, 117, 187, 0.8) !important;
 }
-.sticky-nav-holder .navbar li > a:hover .caret {
+.sticky-nav-holder .navbar li > a:hover:before .caret {
   border-top-color: #ffffff !important;
+}
+.sticky-nav-holder .navbar .btn-navbar {
+  margin-top: 9px;
 }
 .sticky-nav-holder .navbar .nav > li > a {
   padding-top: 15px;
@@ -2812,9 +2920,9 @@ body.admin-bar .sticky-nav-holder {
   color: #91badd;
   background: #2275bb;
 }
-.sticky-nav-holder .navbar .nav li.dropdown.open > .dropdown-toggle .caret,
-.sticky-nav-holder .navbar .nav li.dropdown.active > .dropdown-toggle .caret,
-.sticky-nav-holder .navbar .nav li.dropdown.open.active > .dropdown-toggle .caret {
+.sticky-nav-holder .navbar .nav li.dropdown.open > .dropdown-toggle .caret:before,
+.sticky-nav-holder .navbar .nav li.dropdown.active > .dropdown-toggle .caret:before,
+.sticky-nav-holder .navbar .nav li.dropdown.open.active > .dropdown-toggle .caret:before {
   border-top-color: #ffffff !important;
 }
 .sticky-nav-holder .navbar .nav li.dropdown.open > .dropdown-toggle:hover,
@@ -4561,6 +4669,8 @@ p.comment-form-comment {
   background-color: #2275bb;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   display: inline-block;
+  /* IE7 inline-block hack */
+
   *display: inline;
   /* IE7 inline-block hack */
 

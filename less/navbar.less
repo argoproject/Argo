@@ -44,6 +44,10 @@
   }
 }
 
+.navbar .toggle-nav-bar {
+  display: none;
+}
+
 // NAVIGATION
 // ----------
 
@@ -140,7 +144,7 @@ li.home-link:hover i {
 .navbar .btn-navbar {
   display: none;
   float: left;
-  margin: 9px 0 0;
+  margin: 4px 0 0;
   margin-right: 10px;
   padding: @navbarHeight/5 10px;
   background-color: @navbarBackgroundHighlight;
@@ -191,19 +195,36 @@ li.home-link:hover i {
 // --------------------
 .caret {
   display: inline-block;
-  width: 0;
-  height: 0;
-  vertical-align: top;
-  border-top:   6px solid @black;
-  border-right: 5px solid transparent;
-  border-left:  5px solid transparent;
-  content: "";
+  position: relative;
+  width: 10px;
+  padding: 0 5px;
+
+  &:before {
+    display: block;
+    position: absolute;
+    top: 50%;
+    margin-top: -3px;
+    left: 50%;
+    margin-left: -5px;
+
+    width: 0;
+    height: 0;
+    border-top:   6px solid @black;
+    border-right: 5px solid transparent;
+    border-left:  5px solid transparent;
+    content: "";
+  }
+
+  &:after {
+    content: "\0000a0";
+  }
+  
   .opacity(90);
 }
 
 // Place the caret
 .dropdown .caret {
-  margin: @navbarHeight/2 - 13px 8px 0 3px;
+  //margin: @navbarHeight/2 - 13px 8px 0 3px;
 }
 .dropdown:hover .caret,
 .open .caret {
@@ -254,9 +275,11 @@ li.home-link:hover i {
     text-shadow: none;
   }
 }
-html.no-touch ul.nav li.dropdown:hover ul.dropdown-menu,
-html.touch ul.nav li.dropdown.open ul.dropdown-menu {
-    display: block;
+@media (min-width: 769px) {
+  html.no-touch ul.nav li.dropdown:hover ul.dropdown-menu,
+  html.touch ul.nav li.dropdown.open ul.dropdown-menu {
+      display: block;
+  }
 }
 
 .navbar .dropdown-menu .active > a,
@@ -417,9 +440,93 @@ html.touch ul.nav li.dropdown.open ul.dropdown-menu {
 
 @media (max-width: 768px) {
 
+  .navbar {
+    position: relative;
+    z-index: 9;
+  }
+
   .navbar .container {
     width: auto;
     padding: 0;
+  }
+
+  // Responsive navigation
+  .navbar .toggle-nav-bar {
+    display: static;
+  }
+
+  .navbar .nav-shelf {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    visibility: hidden;
+    opacity: 0;
+
+    //.transition( 0.3s );
+  }
+
+  .navbar.open .nav-shelf {
+    visibility: visible;
+    opacity: 1;
+    border-bottom: solid 1px @dropdownBorder;
+
+    &:after {
+      position: absolute;
+      content: " ";
+      display: block;
+      bottom: -5px;
+      left: 0;
+      right: 0;
+      height: 5px;
+      #gradient > .vertical( rgba(0,0,0,0.5), rgba(0,0,0,0) );
+      background-color: transparent;
+    }
+  }
+
+  .navbar .nav-shelf {
+    background: @dropdownBackground;
+
+    ul, li {
+      float: none;
+    }
+
+    li .caret {
+      float: right;
+
+      &:before {
+        border-top-color: @linkColor !important;
+        border-top-color: rgba( red(@linkColor), green(@linkColor), blue(@linkColor), 0.8) !important;
+      }
+    }
+
+    a {
+      color: @linkColor;
+    }
+
+    li.dropdown.open > a.dropdown-toggle {
+      background-color: @linkColor;
+      color: @dropdownBackground;
+
+      .caret:before {
+        border-top-color: @dropdownBackground !important;
+      }
+    }
+
+    li.open > a .caret {
+      .rotate( 180deg );
+    }
+
+    li.open > ul.dropdown-menu {
+      display: block;
+      position: relative;
+      .box-shadow( none );
+      .border-radius( 0 );
+
+      &:before, &:after {
+        display: none;
+      }
+    }
   }
 
   // COLLAPSIBLE NAVBAR
@@ -594,14 +701,18 @@ html.touch ul.nav li.dropdown.open ul.dropdown-menu {
 		  > a {
 				color: @linkColor;
 		  }
-		  .caret {
+		  .caret:before {
 			  border-top-color: @linkColor !important;
 			  border-top-color: rgba( red(@linkColor), green(@linkColor), blue(@linkColor), 0.8) !important;
 		  }
-		  > a:hover .caret {
+		  > a:hover:before .caret {
 			  border-top-color: @bodyBackground !important;
 		  }
 	  }
+
+    .btn-navbar {
+      margin-top: 9px;
+    }
 
     .nav > li > a {
       padding-top: 15px;
@@ -624,7 +735,7 @@ html.touch ul.nav li.dropdown.open ul.dropdown-menu {
     color: mix( @linkColor, @white );
     background: @linkColor;
 
-    .caret {
+    .caret:before {
       border-top-color: @white !important;
     }
 
