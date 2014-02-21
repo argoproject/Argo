@@ -168,9 +168,9 @@
 @media only screen and (max-width: 768px) {
   /* line 60, hero-series.sass */
   #dark-top {
-    position: relative;
-    margin-top: -140px;
-    bottom: auto;
+    position: relative !important;
+    margin-top: -140px !important;
+    bottom: auto !important;
   }
   /* line 112, hero-series.sass */
   #dark-top .span10 {
@@ -190,7 +190,7 @@
 @media only screen and (max-width: 480px) {
   /* line 60, hero-series.sass */
   #dark-top {
-    margin-top: -40px;
+    margin-top: -40px !important;
   }
   /* line 122, hero-series.sass */
   #dark-top .span10 {
