@@ -124,7 +124,7 @@
 	      </ul>
 
 	      <div class="nav-shelf">
-	      <ul class="nav">
+	      	<ul class="nav">
 	        <?php
 				$args = array(
 					'theme_location' => 'navbar-categories',
@@ -137,56 +137,7 @@
 				wp_nav_menu($args);
 			?>
 	      </ul>
-	    </div>
-	    <?php /*
-	      <ul class="nav">
-	        <li class="dropdown visible-phone" id="category-list">
-			  <a class="dropdown-toggle" data-toggle="dropdown" href="#category-list">
-			    Categories
-				<b class="caret"></b>
-			  </a>
-			  <ul class="dropdown-menu">
-			    <?php
-					$args = array(
-						'theme_location' => 'navbar-categories',
-						'depth'		 => 1,
-						'container'	 => false,
-						'items_wrap' => '%3$s'
-					);
-					wp_nav_menu($args);
-				?>
-			  </ul>
-			</li>
-	      </ul>
-
-	      <!-- Everything you want hidden at 940px or less, place within here -->
-	      <div class="nav-collapse">
-	        <ul class="nav">
-	        	<?php
-					$args = array(
-						'theme_location' => 'navbar-supplemental',
-						'depth'		 => 1,
-						'container'	 => false,
-						'items_wrap' => '%3$s'
-					);
-
-					wp_nav_menu($args);
-				?>
-	        </ul>
-	        <ul class="nav visible-phone">
-		        <li class="divider"></li>
-		        <?php
-					$args = array(
-						'theme_location' => 'global-nav',
-						'depth'		 => 1,
-						'container'	 => false,
-						'items_wrap' => '%3$s'
-					);
-					wp_nav_menu($args);
-				?>
-	         </ul>
-	         <?php */ ?>
-	      </div>
+				</div>
 	    </div>
 	  </div>
 	</nav>
@@ -220,7 +171,7 @@
 		        </div>
 		      </a>
 
-		      
+
 		      <ul class="nav">
 		        <li class="home-link"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php largo_home_icon( 'icon-white' ); ?></a></li>
 		        <li class="divider-vertical"></li>
