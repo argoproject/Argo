@@ -12,7 +12,9 @@ if ( ! function_exists( 'largo_time' ) ) {
 		$time_difference = current_time('timestamp') - get_the_time('U');
 
 		if ( $time_difference < 86400 )
-			$output = '<span class="time-ago">' . human_time_diff(get_the_time('U'), current_time('timestamp')) . __(' ago', 'largo') . '</span>';
+			$output = sprintf( __('<span class="time-ago">%s ago</span>'), 'largo' ),
+				human_time_diff( get_the_time( 'U' ), current_time( 'timestamp' ) )
+			);
 		else
 			$output = get_the_date();
 
@@ -117,7 +119,9 @@ if ( ! function_exists( 'largo_byline' ) ) {
 		);
 
 		if ( current_user_can( 'edit_post', $post->ID ) )
-			$output .=  sprintf( __('<span class="sep"> | </span><span class="edit-link"><a href="%1$s">Edit This Post</a></span>', 'largo'), get_edit_post_link() );
+			$output .=  sprintf( __('<span class="sep"> | </span><span class="edit-link"><a href="%s">Edit This Post</a></span>', 'largo'),
+				get_edit_post_link()
+			);
 
 		if ( is_single() && of_get_option( 'clean_read' ) === 'byline' )
 		 	$output .=	__('<a href="#" class="clean-read">View as "Clean Read"</a>', 'largo');
