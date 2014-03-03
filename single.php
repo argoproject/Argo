@@ -12,10 +12,12 @@ get_header();
 
 			if ( is_active_sidebar( 'article-bottom' ) && is_single() ){
 				do_action('largo_before_sidebar_widgets');
+				echo '<div class="article-bottom">';
 				dynamic_sidebar( 'article-bottom' );
+				echo '</div>';
 				do_action('largo_after_sidebar_widgets');
 			}
-			
+
 			comments_template( '', true );
 		endwhile;
 	?>

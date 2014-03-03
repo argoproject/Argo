@@ -1108,8 +1108,6 @@ select:focus:required:invalid:focus {
 }
 .help-inline {
   display: inline-block;
-  /* IE7 inline-block hack */
-
   *display: inline;
   /* IE7 inline-block hack */
 
@@ -1258,8 +1256,6 @@ select:focus:required:invalid:focus {
 .form-inline .input-append,
 .form-horizontal .input-append {
   display: inline-block;
-  /* IE7 inline-block hack */
-
   *display: inline;
   /* IE7 inline-block hack */
 
@@ -1340,8 +1336,6 @@ legend + .control-group {
 }
 .btn {
   display: inline-block;
-  /* IE7 inline-block hack */
-
   *display: inline;
   /* IE7 inline-block hack */
 
@@ -3115,7 +3109,8 @@ article.story {
 .labels,
 .tags,
 .pager,
-#related-posts {
+#related-posts,
+.largo-post-series-links {
   clear: both;
   margin: 0 0 24px;
   width: 100%;
@@ -3123,9 +3118,12 @@ article.story {
 .labels h5,
 .tags h5,
 .pager h5,
-#related-posts h5 {
-  font-size: 19.2px;
+#related-posts h5,
+.largo-post-series-links h5 {
+  font-size: 16px;
   margin-bottom: 6px;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 .tags,
 .pager {
@@ -3151,6 +3149,17 @@ h3.recent-posts a.rss-link:hover,
 .labels .series-label h5 a.rss-link:hover {
   opacity: 0.85;
   filter: alpha(opacity=85);
+}
+.article-bottom .widget {
+  padding: 15px 0;
+}
+.article-bottom .widget p {
+  padding-left: 0;
+  padding-right: 0;
+}
+.article-bottom .post-social {
+  border-top: none;
+  border-bottom: none;
 }
 .labels .series-label {
   margin: 5px;
@@ -3205,17 +3214,11 @@ h3.recent-posts a.rss-link:hover,
 .pager {
   line-height: 1.2;
 }
-.pager h5 {
-  margin-bottom: 0;
-}
 .pager a {
   display: inline-block;
   padding: 10px 15px;
   color: #333333;
   background-color: #e6e6e6;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
 }
 .pager a:hover {
   background-color: #a6a6a6;
@@ -3416,7 +3419,7 @@ h3.recent-posts a.rss-link:hover,
 .single-argolinkroundups .author-box p,
 .single-post .author-box ul,
 .single-argolinkroundups .author-box ul {
-  margin: 10px;
+  margin: 10px 0;
 }
 .single-post .author-box .gplus img,
 .single-argolinkroundups .author-box .gplus img {
@@ -4669,8 +4672,6 @@ p.comment-form-comment {
   background-color: #2275bb;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   display: inline-block;
-  /* IE7 inline-block hack */
-
   *display: inline;
   /* IE7 inline-block hack */
 

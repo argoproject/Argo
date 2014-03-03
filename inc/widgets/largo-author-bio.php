@@ -21,10 +21,12 @@ class largo_author_widget extends WP_Widget {
 
 		if( is_single() || is_author() ):
 
-				if ( function_exists( 'get_coauthors' )  && !is_author() )
+				if ( function_exists( 'get_coauthors' )  && !is_author() ) {
 					$authors = get_coauthors( $post->ID );
-				else
+				} else {
 					$authors[] = get_userdata( get_the_author_meta( 'ID' ) );
+				}
+
 
 				// make sure we have at least one bio before we show the widget
 				foreach ( $authors as $key => $author ) {
@@ -38,11 +40,6 @@ class largo_author_widget extends WP_Widget {
 				echo $before_title . $title . $after_title;
 
 				// BEGIN what used to be in largo-author-box.php
-
-				if ( function_exists( 'get_coauthors' )  && !is_author() )
-					$authors = get_coauthors( $post->ID );
-				else
-					$authors[] = get_userdata( get_the_author_meta( 'ID' ) );
 
 				foreach( $authors as $author ) {
 				?>

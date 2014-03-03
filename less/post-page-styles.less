@@ -106,13 +106,16 @@ article.story {
 .labels,
 .tags,
 .pager,
-#related-posts {
+#related-posts,
+.largo-post-series-links {
   clear: both;
   margin: 0 0 @baseline;
   width: 100%;
   h5 {
-    font-size: @baseFontSize * 1.2;
+    font-size: @baseFontSize;
     margin-bottom: @baseline / 4;
+    text-transform: uppercase;
+    font-weight: bold;
   }
 }
 .tags,
@@ -141,6 +144,22 @@ h3.recent-posts,
       .opacity(85);
     }
   }
+}
+
+
+// ARTICLE-BOTTOM REGION
+.article-bottom {
+	.widget {
+		padding: 15px 0;
+		p {
+			padding-left: 0;
+			padding-right: 0;
+		}
+	}
+	.post-social {
+		border-top: none;
+		border-bottom: none;
+	}
 }
 
 // LABELS
@@ -198,15 +217,11 @@ h3.recent-posts,
 // NEXT - PREV NAVIGATION
 .pager {
   line-height: 1.2;
-  h5 {
-    margin-bottom: 0;
-  }
   a {
     display: inline-block;
     padding: 10px 15px;
     color: @textColor;
     background-color: darken(@postBoxBackgroundColor, 10%);
-    .border-radius(5px);
     &:hover {
   	  background-color: darken(@postBoxBackgroundColor, 35%);
   	  color: @white;
@@ -393,7 +408,7 @@ h3.recent-posts,
 	margin: 10px 20px 10px 10px;
   }
   p, ul {
-    margin: 10px;
+    margin: 10px 0;
   }
   .gplus img {
     margin: 0;
@@ -1291,22 +1306,22 @@ h5.top-tag {
       list-style: none;
     }
   }
-}
-#homepage-bottom .widget {
-  width: 42.5%;
-  padding: 2.5%;
-}
-#homepage-bottom .rev .widgettitle {
-  color: @white;
-}
-#homepage-bottom .widget.odd {
-  float: left;
-  clear: both;
-  margin-left: 0;
-}
-#homepage-bottom .widget.even {
-  float: right;
-  clear: none;
+	.widget {
+	  width: 42.5%;
+	  padding: 2.5%;
+	}
+	.rev .widgettitle {
+	  color: @white;
+	}
+	.widget.odd {
+	  float: left;
+	  clear: both;
+	  margin-left: 0;
+	}
+	.widget.even {
+	  float: right;
+	  clear: none;
+	}
 }
 
 // --------------------------------------------
