@@ -42,6 +42,9 @@ function largo_perform_update() {
 	if ( largo_need_updates() ) {
 		if ( largo_version() == 0.3 ) largo_update_widgets();
 	}
+	if ( is_admin() ) {
+		largo_check_deprecated_widgets();
+	}
 }
 add_action( 'widgets_init', 'largo_perform_update', 20 );
 
@@ -178,4 +181,43 @@ function largo_instantiate_widget( $kind, $instance_settings, $region ) {
 	$region_widgets[ $region ][] = $kind . '-widget-' . $instance_id;
 	update_option( 'sidebars_widgets', $region_widgets );
 
+}
+
+/**
+ * Checks for use of deprecated widgets and posts an alert
+ */
+function largo_check_deprecated_widgets() {
+
+	$deprecated = array(
+		'largo-footer-featured' => 'largo_deprecated_footer_widget',
+		'largo-sidebar-featured' => 'largo_depcreated_sidebar_widget'
+	);
+
+	$widgets = get_option( 'sidebars_widgets ');
+	foreach ( $widgets as $region => $widgets ) {
+		if ( $region != 'wp_inactive_widgets' && $region != 'array_version' && is_array($widgets) ) {
+			foreach ( $widgets as $widget_instance ) {
+				foreach ( $deprecated as $widget_name => $callback ) {
+					if (strpos($widget_instance, $widget_name) === 0) {
+						add_action( 'admin_notices', $callback );
+						unset( $deprecated[$widget_name] ); //no need to flag the same widget multiple times
+					}
+				}
+			}
+		}
+	}
+}
+
+function largo_deprecated_footer_widget() { ?>
+	<div class="update-nag"><p>
+	<?php _e('You are using the <strong>Largo Footer Featured Posts</strong> widget, which is deprecated and will be removed from future versions of Largo. Please <a href="'.admin_url('widgets.php').'">change your widget settings</a> to use its replacement, <strong>Largo Featured Posts</strong>.'); ?>
+	</p></div>
+	<?php
+}
+
+function largo_deprecated_sidebar_widget() { ?>
+	<div class="update-nag"><p>
+	<?php _e('You are using the <strong>Largo Sidebar Featured Posts</strong> widget, which is deprecated and will be removed from future versions of Largo. Please <a href="'.admin_url('widgets.php').'">change your widget settings</a> to use its replacement, <strong>Largo Featured Posts</strong>.'); ?>
+	</p></div>
+	<?php
 }

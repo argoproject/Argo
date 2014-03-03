@@ -30,13 +30,6 @@
 	</div><!-- .entry-content -->
 	<?php do_action('largo_after_post_content'); ?>
 	<footer class="post-meta bottom-meta">
- 		<!-- Other posts in this series -->
- 		<?php if ( largo_post_in_series() ): ?>
-			<div class="labels clearfix">
-      	<h5><?php _e('More In This Series', 'largo'); ?></h5>
-        <?php largo_the_series_list(); ?>
-			</div>
-    <?php endif; ?>
 
     <?php if ( of_get_option( 'clean_read' ) === 'footer' ) : ?>
     <div class="clean-read-container clearfix">
@@ -47,8 +40,3 @@
 	</footer><!-- /.post-meta -->
 	<?php do_action('largo_after_post_footer'); ?>
 </article><!-- #post-<?php the_ID(); ?> -->
-
-<?php if ( of_get_option( 'show_next_prev_nav_single' ) )
-	largo_content_nav( 'single-post-nav-below' );
-?>
-

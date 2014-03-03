@@ -21,27 +21,8 @@ class largo_prev_next_post_links_widget extends WP_Widget {
 
 		echo $before_widget;
 
-		//Someday we may want to have widget options for language for "Previous" and "Next," but for now this should suffice.
-		?>
-		<nav id="nav-below" class="pager post-nav clearfix">
-			<?php
-				if ( $prev = get_previous_post() ) {
-					printf( __('<div class="previous"><a href="%1$s"><h5>Previous %2$s</h5><span class="meta-nav">%3$s</span></a></div>', 'largo'),
-						get_permalink( $prev->ID ),
-						of_get_option( 'posts_term_singular' ),
-						$prev->post_title
-					);
-				}
-				if ( $next = get_next_post() ) {
-					printf( __('<div class="next"><a href="%1$s"><h5>Next %2$s</h5><span class="meta-nav">%3$s</span></a></div>', 'largo'),
-						get_permalink( $next->ID ),
-						of_get_option( 'posts_term_singular' ),
-						$next->post_title
-					);
-				}
-			?>
-		</nav><!-- #nav-below -->
-		<?php
+		largo_content_nav('single-post-nav-below');
+
 		echo $after_widget;
 	}
 
