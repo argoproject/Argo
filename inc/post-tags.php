@@ -12,7 +12,9 @@ if ( ! function_exists( 'largo_time' ) ) {
 		$time_difference = current_time('timestamp') - get_the_time('U');
 
 		if ( $time_difference < 86400 )
-			$output = '<span class="time-ago">' . human_time_diff(get_the_time('U'), current_time('timestamp')) . __(' ago', 'largo') . '</span>';
+			$output = sprintf( __('<span class="time-ago">%s ago</span>'), 'largo' ),
+				human_time_diff( get_the_time( 'U' ), current_time( 'timestamp' ) )
+			);
 		else
 			$output = get_the_date();
 
