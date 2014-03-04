@@ -116,7 +116,7 @@ global $largo, $shown_ids, $tags;
 			rewind_posts();
 
 			while ( have_posts() ) : the_post();
-				get_template_part( 'content', 'home' );
+				get_template_part( 'content', 'river' );
 			endwhile;
 
 			largo_content_nav( 'nav-below' );

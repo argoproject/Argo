@@ -2,6 +2,14 @@
 /**
  * The homepage template
  */
+
+/**
+ * ======== DO NOT EDIT OR CLONE THIS FILE FOR A CHILD THEME =======
+ *
+ * Largo comes with a built-in homepage template system, documented in homepages/README.md
+ * It's generally better to use that system than to have your child theme use its own home.php template
+ */
+
 get_header();
 
 /*
@@ -22,7 +30,7 @@ $span_class = ( $largo['home_rail'] ) ? 'span8' : 'span12' ;
 	<?php if ( is_active_sidebar('homepage-left-rail') ) { ?>
 	<div id="content-main" class="<?php echo $span_class; ?>">
 	<?php }
-	
+
 	largo_load_custom_template_functions();
 	get_template_part( $home_template );
 

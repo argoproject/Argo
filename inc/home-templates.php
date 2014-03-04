@@ -122,6 +122,7 @@ function largo_enqueue_home_assets() {
 
 	$path = largo_home_template_path();
 	$pathinfo = pathinfo( $path );
+	$template = of_get_option('home_template');
 	//determine if child or parent
 	if ( strpos( $pathinfo['dirname'] , get_stylesheet_directory() ) === FALSE ) {
 		$uri = get_template_directory_uri() . "/";
@@ -129,13 +130,18 @@ function largo_enqueue_home_assets() {
 		$uri = get_stylesheet_directory_uri() . "/";
 	}
 
-	if ( is_file( str_replace('.php', '.js', $path )) ) {
-		wp_enqueue_script( 'largo-home-tpl-js', $uri . str_replace('.php', '.js', of_get_option('home_template') ), array('jquery'), TRUE );	//in footer for now
+	if ( is_file( str_replace(array('homepages/', '.php'), array('homepages/js/', '.js'), $path )) ) {
+		wp_enqueue_script( 'largo-home-tpl-js',
+			$uri . str_replace(array('homepages/', '.php'), array('homepages/js/', '.js'), $template ),
+			array('jquery'),
+			TRUE //in footer for now
+		);
 	}
-	if ( is_file( str_replace('.php', '.css', $path )) ) {
-		wp_enqueue_style( 'largo-home-tpl-css', $uri. str_replace('.php', '.css', of_get_option('home_template') ) );
+	if ( is_file( str_replace(array('homepages/', '.php'), array('homepages/css/', '.css'), $path )) ) {
+		wp_enqueue_style( 'largo-home-tpl-css',
+			$uri . str_replace(array('homepages/', '.php'), array('homepages/css/', '.css'), $template )
+		);
 	}
-
 }
 add_action( 'wp_enqueue_scripts', 'largo_enqueue_home_assets' );
 
