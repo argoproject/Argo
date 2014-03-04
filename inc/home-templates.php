@@ -8,8 +8,6 @@
 /**
  * Scans theme (and parent theme) for homepage templates.
  *
- * @todo Also enqueue CSS files and JS files specific to the template (like the screenshot, look for matching filename)
- *
  * @return array An array of templates, with friendly names as keys and arrays with 'path' and 'thumb' as values
  */
 if( !function_exists( 'get_homepage_templates' ) ) {
@@ -46,6 +44,8 @@ if( !function_exists( 'get_homepage_templates' ) ) {
 }
 
 /**
+ * Retrieves the thumbnail image for a homepage template, or a default
+ *
  * @return string The public url of the image file to use for the given template's screenshot
  */
 function largo_get_home_thumb( $theme, $file ) {
@@ -63,6 +63,8 @@ function largo_get_home_thumb( $theme, $file ) {
 
 /**
  * Get the server path of the current homepage template
+ *
+ * @return string The full path to the PHP file of the current homepage template
  */
 function largo_home_template_path() {
 	$tpl = of_get_option( 'home_template', 'homepages/blog.php' );
@@ -99,7 +101,7 @@ function largo_register_home_sidebars() {
 		}
 	}
 
-	// while we're at it, set the $largo['hide_home_rail'] value
+	// while we're at it, set the $largo['home_rail'] value
 	global $largo;
 	$rail = $largo['home_rail'] = TRUE;
 	preg_match( '|Right Rail:(.*)$|mi', $template_data, $rail );
@@ -144,23 +146,6 @@ function largo_enqueue_home_assets() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'largo_enqueue_home_assets' );
-
-/**
- * Backwards-compatibility with older versions of Largo
- */
-function largo_home_transition() {
-	$old_regime = of_get_option('homepage_top', 0);
-	$new_regime = of_get_option('home_template', 0);
-
-	// we're using the old system and the new one isn't in place, act accordingly
-	// the home template sidebars have same names as old regime so that *shouldn't* be an issue
-	if ( $old_regime && ! $new_regime ) {
-		//minor name change
-		if ( $old_regime == 'topstories' ) $old_regime = 'top-stories';
-		of_set_option( 'home_template', 'homepages/'.$old_regime.".php" );
-	}
-}
-add_action('init', 'largo_home_transition');
 
 
 /**
