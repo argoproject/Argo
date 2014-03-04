@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains functions and tool for transitioning between Largo 0.2 and Largo 0.3
+ * Contains functions and tools for transitioning between Largo 0.2 and Largo 0.3
  */
 
 /**
@@ -17,7 +17,7 @@ function largo_version() {
 function largo_need_updates() {
 
 	// only do this for newer versions of largo
-	if ( largo_version() < 0.3 ) return false;
+	if ( version_compare(largo_version(), '0.3.0', '<' )) return false;
 
 	// try to figure out which versions of the options are stored. Implemented in 0.3
 	if ( of_get_option('largo_version') ) {
@@ -40,7 +40,10 @@ function largo_need_updates() {
  */
 function largo_perform_update() {
 	if ( largo_need_updates() ) {
-		if ( largo_version() == 0.3 ) largo_update_widgets();
+		if ( largo_version() == 0.3 ) {
+			largo_update_widgets();
+		largo_home_transition();
+		}
 	}
 	if ( is_admin() ) {
 		largo_check_deprecated_widgets();
@@ -51,12 +54,34 @@ add_action( 'widgets_init', 'largo_perform_update', 20 );
 /**
  * Upgrades for moving from 0.2 to 0.3
  * In which many theme options became widgets
+ * And homepage templates are implemented
+ */
+
+/**
+ * Convert old theme option of 'homepage_top' to new option of 'home_template'
+ */
+function largo_home_transition() {
+	$old_regime = of_get_option('homepage_top', 0);
+	$new_regime = of_get_option('home_template', 0);
+
+	// we're using the old system and the new one isn't in place, act accordingly
+	// this should ALWAYS happen when this function is called, as there's a separate version check before this is invoked
+	// the home template sidebars have same names as old regime so that *shouldn't* be an issue
+	if ( $old_regime && ! $new_regime ) {
+		//minor name change
+		if ( $old_regime == 'topstories' ) $old_regime = 'top-stories';
+		of_set_option( 'home_template', 'homepages/'.$old_regime.".php" );
+	}
+}
+
+/**
+ * Puts new widgets into sidebars as appropriate based on old theme options
  */
 function largo_update_widgets() {
 
-	/* check and add if necessary:
+	/* checks and adds if necessary:
 		social_icons_display ('btm' or 'both')
-		-- add series widget
+		add series widget
 		show_tags
 		show_author_box
 		show_related_content
@@ -208,6 +233,9 @@ function largo_check_deprecated_widgets() {
 	}
 }
 
+/**
+ * Admin notices of older widgets
+ */
 function largo_deprecated_footer_widget() { ?>
 	<div class="update-nag"><p>
 	<?php _e('You are using the <strong>Largo Footer Featured Posts</strong> widget, which is deprecated and will be removed from future versions of Largo. Please <a href="'.admin_url('widgets.php').'">change your widget settings</a> to use its replacement, <strong>Largo Featured Posts</strong>.'); ?>
