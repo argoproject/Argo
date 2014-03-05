@@ -24,12 +24,15 @@ class largo_related_posts_widget extends WP_Widget {
 		echo $before_widget;
 
 		if ( $title ) echo $before_title . $title . $after_title;
+
  		$related = new Largo_Related( $instance['qty'] );
 
  		//get the related posts
  		$rel_posts = new WP_Query( array(
  			'post__in' => $related->ids(),
- 			'nopaging' => 1
+ 			'nopaging' => 1,
+ 			'posts_per_page' => $instance['qty'],
+ 			'ignore_sticky_posts' => 1
  		) );
 
  		if ( $rel_posts->have_posts() ) {
@@ -39,7 +42,7 @@ class largo_related_posts_widget extends WP_Widget {
 	 		while ( $rel_posts->have_posts() ) {
 		 		$rel_posts->the_post();
 		 		echo '<li>';
-		 		get_template_part( 'content', 'tiny' );
+		 		include(locate_template('content-tiny.php'));
 		 		echo '</li>';
 	 		}
 
@@ -53,12 +56,14 @@ class largo_related_posts_widget extends WP_Widget {
 		$instance = $old_instance;
 		$instance['title'] = strip_tags($new_instance['title']);
 		$instance['qty'] = $new_instance['qty'];
+		$instance['show_byline'] = (int) $new_instance['show_byline'];
+		$instance['thumbnail_location'] = $new_instance['thumbnail_location'];
 		return $instance;
 	}
 
 	function form( $instance ) {
 		//Defaults
-		$instance = wp_parse_args( (array) $instance, array( 'title' => 'Read Next', 'qty' => 1) );
+		$instance = wp_parse_args( (array) $instance, array( 'title' => 'Read Next', 'qty' => 1, 'show_byline' => 0, 'thumbnail_location' => 'before') );
 		$title = esc_attr( $instance['title'] );
 		$qty = $instance['qty'];
 		?>
@@ -74,6 +79,21 @@ class largo_related_posts_widget extends WP_Widget {
 			} ?>
 			</select>
 			<div class="description">It's best to keep this at just one.</div>
+		</p>
+
+		<p><input id="<?php echo $this->get_field_id('show_byline'); ?>" name="<?php echo $this->get_field_name('show_byline'); ?>" type="checkbox" value="1" <?php checked( $instance['show_byline'], 1);?> />
+			<label for="<?php echo $this->get_field_id('show_byline'); ?>"><?php _e( 'Show date with each post', 'largo' ); ?></label>
+		</p>
+
+		<p>
+			<label for="<?php echo $this->get_field_id('thumbnail_location'); ?>"><?php _e('Thumbnail position: ', 'largo'); ?></label>
+			<select name="<?php echo $this->get_field_name('thumbnail_location'); ?>" id="<?php echo $this->get_field_id('thumbnail_location'); ?>">
+			<?php
+			$choices = array( 'before' => 'Before Headline', 'after' => 'After Headline' );
+			foreach( $choices as $i => $display ) {
+				echo '<option value="', $i, '"', selected($instance['thumbnail_location'], $i, false), '>', $display, '</option>';
+			} ?>
+			</select>
 		</p>
 
 	<?php

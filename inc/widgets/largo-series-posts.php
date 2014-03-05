@@ -33,7 +33,9 @@ class largo_series_posts_widget extends WP_Widget {
 
 	 	//first post
 	 	$series_posts->the_post();
-	 	get_template_part( 'content', 'tiny-widget' );
+	 	$instance['test'] = 'banana';
+
+	 	include(locate_template('content-tiny.php'));
 
  		//divider
  		echo '<h5 class="series-split top-tag">', $instance['heading'], '</h5><ul>';
@@ -63,6 +65,8 @@ class largo_series_posts_widget extends WP_Widget {
 		$instance['heading'] = $new_instance['heading'];
 		$instance['num'] = $new_instance['num'];
 		$instance['series'] = $new_instance['series'];
+		$instance['show_byline'] = (int) $new_instance['show_byline'];
+		$instance['thumbnail_location'] = $new_instance['thumbnail_location'];
 		return $instance;
 	}
 
@@ -70,7 +74,7 @@ class largo_series_posts_widget extends WP_Widget {
 		//Defaults
 		// to control: which series, # of posts, explore heading...
 		// @todo enhance with more control over thumbnail, icon, etc
-		$instance = wp_parse_args( (array) $instance, array( 'num' => 4, 'heading' => 'Explore:') );
+		$instance = wp_parse_args( (array) $instance, array( 'num' => 4, 'heading' => 'Explore:', 'thumbnail_location' => 'before', 'show_byline' => 0) );
 		//$title = esc_attr( $instance['title'] );
 		$num = $instance['num'];
 		$heading = esc_attr( $instance['heading'] );
@@ -97,6 +101,21 @@ class largo_series_posts_widget extends WP_Widget {
 			<?php
 			for ($i = 1; $i < 6; $i++) {
 				echo '<option value="', $i, '"', selected($num, $i, FALSE), '>', $i, '</option>';
+			} ?>
+			</select>
+		</p>
+
+		<p><input id="<?php echo $this->get_field_id('show_byline'); ?>" name="<?php echo $this->get_field_name('show_byline'); ?>" type="checkbox" value="1" <?php checked( $instance['show_byline'], 1);?> />
+			<label for="<?php echo $this->get_field_id('show_byline'); ?>"><?php _e( 'Show date on first post', 'largo' ); ?></label>
+		</p>
+
+		<p>
+			<label for="<?php echo $this->get_field_id('thumbnail_location'); ?>"><?php _e('Thumbnail position on first post: ', 'largo'); ?></label>
+			<select name="<?php echo $this->get_field_name('thumbnail_location'); ?>" id="<?php echo $this->get_field_id('thumbnail_location'); ?>">
+			<?php
+			$choices = array( 'before' => 'Before Headline', 'after' => 'After Headline' );
+			foreach( $choices as $i => $display ) {
+				echo '<option value="', $i, '"', selected($instance['thumbnail_location'], $i, false), '>', $display, '</option>';
 			} ?>
 			</select>
 		</p>
