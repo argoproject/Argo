@@ -5108,11 +5108,11 @@ img[class*="wp-image-"] {
 }
 @media print {
   * {
-    background: transparent !important;
-    color: black !important;
-    box-shadow: none !important;
-    text-shadow: none !important;
-    filter: none !important;
+    background: transparent!important;
+    color: #000!important;
+    box-shadow: none!important;
+    text-shadow: none!important;
+    filter: none!important;
     -ms-filter: none !important;
   }
   a,
@@ -5161,8 +5161,20 @@ img[class*="wp-image-"] {
   #comments,
   .post-nav,
   #sidebar,
-  #site-footer {
+  #site-footer,
+  .sticky-nav-wrapper,
+  .sticky-footer-holder,
+  .article-bottom .widget:not(.largo-disclaimer) {
     display: none;
+  }
+  .article-bottom {
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+  }
+  .module.image,
+  .largo-disclaimer {
+    font-size: 10px !important;
+    font-style: italic;
   }
   .print-header {
     display: block;
