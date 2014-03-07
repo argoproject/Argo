@@ -1,6 +1,6 @@
 <?php
 /**
- * Get the data for the home-series template 
+ * Get the data for the home-series template
  *
  *	Big_Story is the bigest post on the left
  *	Side_Stories are the smaller three posts on the right
@@ -14,7 +14,7 @@
  *		ELSE
  *			Big_Stories := the most recent post in "Homepage Featured"
  *		ENDIF
- *		
+ *
  *		Side_Stories := Up to 3 "Homepage Featured" posts excluding Big_Story
  *		Side_Stories_Display := Display as separate articles
  *
@@ -28,7 +28,7 @@
  *		ELSE
  *			Big_Story := the most recent post
  *		ENDIF
- *		
+ *
  *		IF Big_Story is part of a series
  *		THEN
  *			Side_Stories := the 3 most recent posts in the Big_Story series excluding Big_Story
@@ -184,11 +184,6 @@ function largo_home_single_top() {
 	$top_story_posts = get_posts(array(
 		'tax_query' => array(
 			'relation' => 'AND',
-			// array(
-			// 	'taxonomy' => 'prominence',
-			// 	'field' => 'term_id',
-			// 	'terms' => $homepage_feature_term->term_id
-			// ),
 			array(
 				'taxonomy' => 'prominence',
 				'field' => 'term_id',
@@ -203,7 +198,7 @@ function largo_home_single_top() {
 	}
 
 
-	// Get the posts that are in "Homepage Featured" but not "Top Story"
+	// Fallback: get the posts that are in "Homepage Featured" but not "Top Story"
 	$homepage_featured_posts = get_posts(array(
 		'tax_query' => array(
 			array(
@@ -212,8 +207,7 @@ function largo_home_single_top() {
 				'terms' => $homepage_feature_term->term_id
 			)
 		),
-		'posts_per_page' => 1,
-		'post__not_in' => $homepage_featured_and_top_story_posts_ids
+		'posts_per_page' => 1
 	));
 
 	if ( !empty( $homepage_featured_posts ) ) {
@@ -221,7 +215,7 @@ function largo_home_single_top() {
 	}
 
 
-	// Get the most recent post
+	// Double fallback: Get the most recent post
 	$posts = get_posts( array(
 		'orderby' => 'date',
 		'order' => 'DESC',
@@ -256,7 +250,7 @@ function largo_home_hero_side_series() {
 	$uncategorized_term = get_term_by( 'name', __('Uncategorized'), 'category' );
 
 
-	// Get the homepage featured posts 
+	// Get the homepage featured posts
 	$featured_stories = get_posts(array(
 		'tax_query' => array(
 			array(

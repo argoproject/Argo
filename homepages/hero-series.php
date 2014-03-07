@@ -1,30 +1,29 @@
 <?php
 /**
  * Home Template: Hero with Series
- * Description: Prominently features the top story along with other posts in its series, or other top posts if not in a series. Best with Homepage Bottom set to 'blank'
+ * Description: Prominently features the top story along with other posts in its series, or by itself if not in a series. Best with Homepage Bottom set to 'blank'
  * Sidebars: Home Bottom Left | Home Bottom Center | Home Bottom Right
  * Right Rail: none
  */
 
-global $largo, $shown_ids, $tags;
+global $largo, $shown_ids, $tags, $post;
 
 ?>
 <div id="homepage-featured" class="row-fluid clearfix">
 	<div class="hero-series span12">
 		<aside id="view-format">
-			<?php // @todo Make this check the cookie server-side ?>
 			<h1><?php _e('View', 'largo'); ?></h1>
 			<ul>
 				<li><a href="#" class="active" data-style="top">Top Stories</a></li>
 				<li><a href="#" data-style="list">List</a></li>
+			</ul>
 		</aside>
 
 		<div class="home-top">
 	<?php
 
-		$post_states = largo_home_series_states();
-		extract( $post_states ); // $big_story, $side_stories, $side_stories_display
-
+		$post = largo_home_single_top();
+		$has_series = largo_post_in_series();
 
 		if( $has_video = get_post_meta( $big_story->ID, 'youtube_url', true ) ): ?>
 			<div class="embed-container max-wide">
@@ -37,42 +36,35 @@ global $largo, $shown_ids, $tags;
 		<div id="dark-top" <?php echo (!$has_video) ? 'class="overlay"' : ''; ?>>
 			<div class="span10">
 				<div class="row-fluid">
-					<article class="<?php echo ($side_stories_display == 'hide') ? '' : 'span8'; ?>">
-						<h5 class="top-tag"><?php largo_top_term( array('post'=>$big_story->ID) ); ?></h5>
-						<h2><a href="<?php echo esc_attr( get_permalink( $big_story->ID ) ); ?>"><?php echo get_the_title( $big_story->ID ); ?></a></h2>
-						<h5 class="byline"><?php _e('By'); ?> <?php largo_author_link( true, $big_story ); ?></h5>
+
+					<article class="<?php if ($has_series) echo 'span8'; ?>">
+						<h5 class="top-tag"><?php largo_top_term( array('post'=>$post->ID) ); ?></h5>
+						<h2><a href="<?php the_permalink(); ?>"><?php echo the_title(); ?></a></h2>
+						<h5 class="byline"><?php _e('By'); ?> <?php largo_author_link( true, $post ); ?></h5>
 						<section>
-							<?php largo_excerpt( $big_story, 2, false ); ?>
+							<?php largo_excerpt( $post, 2, false ); ?>
 						</section>
 					</article>
-					<?php if ( $side_stories_display != 'hide' ): ?>
-					<div class="span4 <?php echo $side_stories_display == 'series' ? 'side-series' : 'side-articles'; ?>">
-						<?php if ( $side_stories_display == 'series' && !empty($side_stories_term) ): ?>
-							<h3><a href="<?php echo get_term_link( $side_stories_term ); ?>"><?php echo esc_html( $side_stories_term->name ); ?></a></h3>
-						<?php endif; ?>
 
-						<?php foreach ( $side_stories as $side_story ): ?>
-						<article>
-							<?php if ( $side_stories_display == 'articles' ): ?>
-								<h5 class="top-tag"><?php largo_top_term( array( 'post' => $side_story->ID ) ); ?></h5>
-							<?php endif; ?>
-							<h4><a href="<?php echo get_permalink( $side_story->ID ); ?>"><?php echo get_the_title( $side_story->ID ); ?></a></h4>
-							<?php if ( $side_stories_display == 'articles' ): ?>
-								<h5 class="byline"><?php _e('By'); ?> <?php largo_author_link( true, $side_story ); ?></h5>
-							<?php endif; ?>
-						</article>
+					<?php if ( $has_series ):
+						$feature = largo_get_the_main_feature();
+						$feature_posts = largo_get_recent_posts_for_term( $feature, 3, 2 );
+					 ?>
+					<div class="span4 side-series">
+						<h5 class="top-tag"><a class="post-category-link" href="<?php echo get_term_link( $feature ); ?>"><?php echo $feature->name ?></a></h5>
+						<?php foreach ( $feature_posts as $feature_post ):
+							$shown_ids[] = $feature_post->ID; ?>
+							<h4 class="related-story"><a href="<?php echo esc_url( get_permalink( $feature_post->ID ) ); ?>"><?php echo get_the_title( $feature_post->ID ); ?></a></h4>
 						<?php endforeach; ?>
-
-						<?php if ( $side_stories_display == 'series' && !empty($side_stories_term) ): ?>
-							<div class="read-more"><a href="<?php echo get_term_link( $side_stories_term ); ?>"><?php _e( 'Complete Coverage >', 'largo'); ?></a></div>
-						<?php endif; ?>
-					</div>
-					<?php endif; ?>
+						<h6 class="more"><a href="<?php echo get_term_link( $feature ); ?>"><?php _e('Complete Coverage', 'largo'); ?></a></h6>
+						<?php
+						endif; // $has_series ?>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
 </div>
 
 

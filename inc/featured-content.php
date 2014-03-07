@@ -38,11 +38,11 @@ function largo_get_featured_posts( $args = array() ) {
  * @since 1.0
  */
 function largo_get_the_main_feature() {
-    global $post;
-    $features = get_the_terms( $post->ID, 'series' );
-    if ( ! $features )
-        return false;
-    return array_shift( $features );
+  global $post;
+  $features = get_the_terms( $post->ID, 'series' );
+  if ( ! $features )
+      return false;
+  return array_shift( $features );
 }
 
 /**
