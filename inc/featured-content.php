@@ -94,3 +94,22 @@ function largo_have_featured_posts() {
 	return false;
 
 }
+
+/**
+ * Determine if we have any 'featured' posts on homepage
+ */
+function largo_have_homepage_featured_posts() {
+
+	$featured_query = array(
+		'tax_query' => array(
+			array(
+				'taxonomy' => 'prominence',
+				'field' => 'slug',
+				'terms' => array( 'taxonomy-featured', 'homepage-featured' ),
+			)
+		)
+	);
+	$featured_query = new WP_Query( $featured_query );
+	return $featured_query->have_posts();
+
+}
