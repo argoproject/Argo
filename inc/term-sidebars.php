@@ -18,7 +18,7 @@ class Largo_Term_Sidebars {
 	 */
 	function get_sidebar_taxonomies() {
 		if ( empty($this->_sidebar_taxonomies) ) {
-			$this->_sidebar_taxonomies = apply_filters( 'largo_get_sidebar_taxonomies', array( 'category', 'post_tag' ) );
+			$this->_sidebar_taxonomies = apply_filters( 'largo_get_sidebar_taxonomies', array( 'category', 'post_tag', 'series' ) );
 		}
 		return $this->_sidebar_taxonomies;
 	}
