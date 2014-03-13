@@ -231,7 +231,7 @@ function largo_category_archive_posts( $query ) {
 		$category_post_ids[] = $ppost->ID;
 
 	//rewrite our main query to fetch these IDs
-	$query->set( 'category_name', NULL );
+	//$query->set( 'category_name', NULL );
 	$query->set( 'post__in', $category_post_ids );
 	$query->set( 'orderby', 'post__in');
 	$query->set( 'tax_query', NULL );

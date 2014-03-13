@@ -27,10 +27,8 @@ global $tags;
 
 					printf(__('<a class="rss-link rss-subscribe-link" href="%1$s">Subscribe <i class="icon-rss"></i></a>', 'largo'), $rss_link );
 
-					if ( $title)
-						echo '<h1 class="page-title">' . $title . '</h1>';
-					if ( $description )
-						echo '<div class="archive-description">' . $description . '</div>';
+					echo '<h1 class="page-title">' . $title . '</h1>';
+					echo '<div class="archive-description">' . $description . '</div>';
 
 					// category pages show a list of related terms
 					if ( is_category() && largo_get_related_topics_for_category( get_queried_object() ) != '<ul></ul>' ) { ?>
