@@ -25,12 +25,12 @@ global $largo, $shown_ids, $tags, $post;
 		$post = largo_home_single_top();
 		$has_series = largo_post_in_series();
 
-		if( $has_video = get_post_meta( $big_story->ID, 'youtube_url', true ) ): ?>
+		if( $has_video = get_post_meta( $post->ID, 'youtube_url', true ) ): ?>
 			<div class="embed-container max-wide">
 				<iframe src="http://www.youtube.com/embed/<?php echo substr(strrchr( $has_video, "="), 1 ); ?>?modestbranding=1" frameborder="0" allowfullscreen></iframe>
 			</div>
 		<?php else: ?>
-			<div class="full-hero max-wide"><a href="<?php echo esc_attr( get_permalink( $big_story->ID ) ); ?>"><?php echo get_the_post_thumbnail( $big_story->ID, 'full' ); ?></a></div>
+			<div class="full-hero max-wide"><a href="<?php echo esc_attr( get_permalink( $post->ID ) ); ?>"><?php echo get_the_post_thumbnail( $post->ID, 'full' ); ?></a></div>
 		<?php endif; ?>
 
 		<div id="dark-top" <?php echo (!$has_video) ? 'class="overlay"' : ''; ?>>

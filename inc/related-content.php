@@ -303,7 +303,6 @@ if ( ! function_exists( 'largo_categories_and_tags' ) ) {
 function largo_top_term( $options = array() ) {
 
 	global $wpdb;
-	//print_r( $wpdb );
 
 	$defaults = array(
 		'post' => get_the_ID(),
@@ -317,19 +316,21 @@ function largo_top_term( $options = array() ) {
 	$args = wp_parse_args( $options, $defaults );
 
 	$term_id = get_post_meta( $args['post'], 'top_term', TRUE );
-	if ( empty( $term_id ) ) {	// if no top_term specified, fall back to the first category
+	//get the taxonomy slug
+	$taxonomy = $wpdb->get_var( $wpdb->prepare( "SELECT taxonomy FROM $wpdb->term_taxonomy WHERE term_id = %d LIMIT 1", $term_id) );
+
+	if ( empty( $term_id ) || empty($taxonomy) ) {	// if no top_term specified, fall back to the first category
 		$term_id = get_the_category( $args['post'] );
 		if ( !is_array( $term_id ) ) return;	//no categories OR top term? Do nothing
-		$term_id = $term_id->term_id;
+		$term_id = $term_id[0]->term_id;
 	}
 
-	$icon = ( $args['use_icon'] ) ?  '<i class="icon-white icon-tag"></i>' : '' ;	//this will probably change to a callback largo_term_icon() someday
-	$link = ( $args['link'] ) ? array('<a href="%2$s" title="Read %3$s in the %4$s category">','</a>') : array('', '') ;
-	if ( $term_id && !is_wp_error($term_id) ) {
-		//get the taxonomy slug
-		$taxonomy = $wpdb->get_var( $wpdb->prepare( "SELECT taxonomy FROM $wpdb->term_taxonomy WHERE term_id = %d LIMIT 1", $term_id) );
+	if ( $term_id ) {
+		$icon = ( $args['use_icon'] ) ?  '<i class="icon-white icon-tag"></i>' : '' ;	//this will probably change to a callback largo_term_icon() someday
+		$link = ( $args['link'] ) ? array('<a href="%2$s" title="Read %3$s in the %4$s category">','</a>') : array('', '') ;
 		// get the term object
 		$term = get_term( $term_id, $taxonomy );
+		if (is_wp_error($term)) return;	// do nothing if a bad term
 		$output = sprintf(
 			'<%1$s class="post-category-link">'.$link[0].'%5$s%4$s'.$link[1].'</%1$s>',
 			$args['wrapper'],
