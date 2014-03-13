@@ -8,18 +8,18 @@
 global $post;
 
 // post thumbnail, possibly before headline
-if ( get_the_post_thumbnail() && ( !isset($instance) || $instance['thumbnail_location'] != 'after' )) {
+if ( get_the_post_thumbnail() && ( !isset($instance) || !isset($instance['thumbnail_location']) || $instance['thumbnail_location'] != 'after' )) {
 	echo '<a href="' . get_permalink() . '"/>' . get_the_post_thumbnail( get_the_ID(), 'thumbnail', array('class'=>'alignleft') ) . '</a>';
 } ?>
 <h4><a href="<?php the_permalink(); ?>" title="Read: <?php esc_attr( the_title('','', FALSE) ); ?>"><?php the_title(); ?></a></h4>
 <?php
 // post thumbnail, by default after headline
-if ( get_the_post_thumbnail() && isset($instance) && $instance['thumbnail_location'] == 'after' ) {
+if ( get_the_post_thumbnail() && isset($instance) && isset($instance['thumbnail_location']) && $instance['thumbnail_location'] == 'after' ) {
 	echo '<a href="' . get_permalink() . '"/>' . get_the_post_thumbnail( get_the_ID(), 'thumbnail', array('class'=>'alignleft') ) . '</a>';
 }
 
 // post byline, if indicated
-if ( isset($instance) && $instance['show_byline'] ) : ?>
+if ( isset($instance) && isset($instance['show_byline']) && $instance['show_byline'] ) : ?>
 <h5 class="byline"><time class="entry-date updated dtstamp pubdate" datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>"><?php largo_time(); ?></time></h5>
 <?php endif;
 
