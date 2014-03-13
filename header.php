@@ -118,10 +118,10 @@
 	        </div>
 	      </a>
 
-	      <ul class="nav">
-	        <li class="home-link"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php largo_home_icon( 'icon-white' ); ?></a></li>
+	      <!-- ul class="nav">
+	        <li class="home-link"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><i class="icon-home icon-white"></i></a></li>
 	        <li class="divider-vertical"></li>
-	      </ul>
+	      </ul -->
 
 	      <div class="nav-shelf">
 	      	<ul class="nav">
