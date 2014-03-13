@@ -5073,6 +5073,21 @@ img[class*="wp-image-"] {
     overflow: hidden;
     height: 0;
   }
+  .category .row-fluid > * {
+    width: 100%;
+    margin-left: 0;
+  }
+  .category .span4 img {
+    display: block;
+    margin: 0 auto 1em;
+  }
+  .category .secondary-featured-post img {
+    float: left;
+    max-width: 23%;
+    margin-right: 3%;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+  }
 }
 @media (max-width: 480px) {
   .global-nav .org-logo,
