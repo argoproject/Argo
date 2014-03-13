@@ -2665,10 +2665,16 @@ li.home-link:hover i {
   }
   .navbar .nav-shelf li .caret {
     float: right;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    background-color: #2275bb;
+    margin-right: 5px;
+    padding: 2px 7px;
+    top: -3px;
   }
   .navbar .nav-shelf li .caret:before {
-    border-top-color: #2275bb !important;
-    border-top-color: rgba(34, 117, 187, 0.8) !important;
+    border-top-color: #ffffff !important;
   }
   .navbar .nav-shelf a {
     color: #2275bb;
@@ -2888,10 +2894,10 @@ body.admin-bar .sticky-nav-holder {
   color: #2275bb;
 }
 .sticky-nav-holder .navbar li .caret:before {
-  border-top-color: #2275bb !important;
-  border-top-color: rgba(34, 117, 187, 0.8) !important;
+  border-top-color: #2275bb;
+  border-top-color: rgba(34, 117, 187, 0.8);
 }
-.sticky-nav-holder .navbar li > a:hover:before .caret {
+.sticky-nav-holder .navbar li > a:hover .caret:before {
   border-top-color: #ffffff !important;
 }
 .sticky-nav-holder .navbar .btn-navbar {

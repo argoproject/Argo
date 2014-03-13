@@ -493,10 +493,14 @@ li.home-link:hover i {
 
     li .caret {
       float: right;
+      .border-radius(4px);
+      background-color: @linkColor;
+      margin-right: 5px;
+      padding: 2px 7px;
+      top: -3px;
 
       &:before {
-        border-top-color: @linkColor !important;
-        border-top-color: rgba( red(@linkColor), green(@linkColor), blue(@linkColor), 0.8) !important;
+        border-top-color: @dropdownBackground !important;
       }
     }
 
@@ -703,10 +707,10 @@ li.home-link:hover i {
 				color: @linkColor;
 		  }
 		  .caret:before {
-			  border-top-color: @linkColor !important;
-			  border-top-color: rgba( red(@linkColor), green(@linkColor), blue(@linkColor), 0.8) !important;
+			  border-top-color: @linkColor;
+			  border-top-color: rgba( red(@linkColor), green(@linkColor), blue(@linkColor), 0.8);
 		  }
-		  > a:hover:before .caret {
+		  > a:hover .caret:before {
 			  border-top-color: @bodyBackground !important;
 		  }
 	  }
