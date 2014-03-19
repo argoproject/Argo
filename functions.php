@@ -53,12 +53,13 @@ include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
  * Load up all of the other goodies from the /inc directory
  */
 $includes = array(
+	'/largo-apis.php',				// APIs for inclusion in child themes
 	'/inc/largo-plugin-init.php',	// a list of recommended plugins
 	'/inc/dashboard.php',			// custom dashboard widgets
 	'/inc/robots.php',				// default robots.txt config
-	'/inc/custom-feeds.php',			// create custom RSS feeds
+	'/inc/custom-feeds.php',		// create custom RSS feeds
 	'/inc/users.php',				// add custom fields for user profiles
-	'/inc/sidebars.php',				// register sidebars
+	'/inc/sidebars.php',			// register sidebars
 	'/inc/widgets.php',				// register widgets
 	'/inc/nav-menus.php',			// register nav menus
 	'/inc/taxonomies.php',			// add our custom taxonomies
@@ -69,10 +70,10 @@ $includes = array(
 	'/inc/post-tags.php',			// add some custom template tags (mostly used in single posts)
 	'/inc/header-footer.php',		// some additional template tags used in the header and footer
 	'/inc/related-content.php',		// functions dealing with related content
-	'/inc/featured-content.php',		// functions dealing with featured content
+	'/inc/featured-content.php',	// functions dealing with featured content
 	'/inc/enqueue.php',				// enqueue our js and css files
 	'/inc/post-templates.php',		// single post templates
-	'/inc/post-meta.php'				// add post meta boxes
+	'/inc/post-meta.php'			// add post meta boxes
 );
 
 // This functionality is probably not for everyone so we'll make it easy to turn it on or off
