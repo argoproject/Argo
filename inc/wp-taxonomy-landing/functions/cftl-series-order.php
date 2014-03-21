@@ -33,7 +33,7 @@ function largo_series_custom_order ( $sql, $my_query ) {
 		if ( ! $term ) $term = get_term_by( 'id', $my_query->query_vars['term'], 'series' );
 
 		//custom sort order
-		if ( $my_query->query_vars['orderby'] == 'series_custom' ) {
+		if ( isset($my_query->query_vars['orderby']) && $my_query->query_vars['orderby'] == 'series_custom' ) {
 
 			$meta_key = 'series_' . $term->term_taxonomy_id . '_order';
 
@@ -48,7 +48,7 @@ function largo_series_custom_order ( $sql, $my_query ) {
 			$sql['orderby'] = "ISNULL(meta.meta_value+0) ASC, meta.meta_value+0 ASC, $wpdb->posts.post_date DESC";
 
 		//featured stories first
-		}  elseif ( strpos( $my_query->query_vars['orderby'], 'featured,' ) === 0 ) {
+		}  elseif ( isset($my_query->query_vars['orderby']) && strpos( $my_query->query_vars['orderby'], 'featured,' ) === 0 ) {
 
 			list( $top, $sort ) = explode( " ", $my_query->query_vars['orderby'] );
 			$top_term = get_term_by( 'slug', 'series-featured', 'prominence' );
