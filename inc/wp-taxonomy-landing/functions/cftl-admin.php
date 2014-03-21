@@ -581,10 +581,10 @@ function cftl_custom_sidebars() {
 	//get all the footer ones and the titles they connect to
 	$footer_widgets = cftl_get_meta_values( 'footer_style', 'widget' );
 	foreach ($footer_widgets as $widget ) {
-		$sidebar_slug = largo_make_slug( $widget_title  );
+		$sidebar_slug = largo_make_slug( $widget->post_title  );
 		if ( $sidebar_slug ) {
 			register_sidebar( array(
-				'name'       	=> __( 'Series ' . $widget_title  . ": Footer", 'largo' ),
+				'name'       	=> __( 'Series ' . $widget->post_title  . ": Footer", 'largo' ),
 				'id' 			=> $sidebar_slug . "_footer",
 				'before_widget' => '<aside id="%1$s" class="%2$s clearfix">',
 				'after_widget' 	=> '</aside>',
