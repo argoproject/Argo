@@ -46,7 +46,7 @@ foreach( $authors as $author ) {
 
 		<?php if ( $twitter = $author->twitter ) : ?>
 		<li class="twitter">
-			<a href="<?php echo esc_url( $twitter ); ?>" class="twitter-follow-button" data-show-count="false" data-lang="en"><?php printf( __('Follow @%1$s', 'largo'), twitter_url_to_username ( $twitter ) ); ?></a>
+			<a href="<?php echo esc_url( $twitter ); ?>" class="twitter-follow-button" data-show-count="false"><?php printf( __('Follow @%1$s', 'largo'), twitter_url_to_username ( $twitter ) ); ?></a>
 		</li>
 		<?php endif; ?>
 
