@@ -81,7 +81,7 @@ if ( ! function_exists( 'largo_author_link' ) ) {
  * @since 1.0
  */
 if ( ! function_exists( 'largo_byline' ) ) {
-	function largo_byline( $echo = true ) {
+	function largo_byline( $echo = true, $exclude_date = false ) {
 		global $post;
 		$values = get_post_custom( $post->ID );
 
@@ -114,7 +114,12 @@ if ( ! function_exists( 'largo_byline' ) ) {
 			$authors = largo_author_link( false );
 		}
 
-		$output = sprintf( __('<span class="by-author"><span class="by">By:</span> <span class="author vcard" itemprop="author">%1$s</span></span><span class="sep"> | </span><time class="entry-date updated dtstamp pubdate" datetime="%2$s">%3$s</time>', 'largo'),
+		$markup = '<span class="by-author"><span class="by">By:</span> <span class="author vcard" itemprop="author">%1$s</span></span><span class="sep"> | </span><time class="entry-date updated dtstamp pubdate" datetime="%2$s">%3$s</time>';
+		if ( $exclude_date ) {
+			$markup = '<span class="by-author"><span class="by">By:</span> <span class="author vcard" itemprop="author">%1$s</span></span>';
+		}
+
+		$output = sprintf( __($markup, 'largo'),
 			$authors,
 			esc_attr( get_the_date( 'c' ) ),
 			largo_time( false )
