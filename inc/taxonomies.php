@@ -237,4 +237,4 @@ function largo_category_archive_posts( $query ) {
 	$query->set( 'tax_query', NULL );
 	$query->tax_query = NULL;	//unsetting it twice because WP is weird like that
 }
-add_action( 'pre_get_posts', 'largo_category_archive_posts' );
+add_action( 'pre_get_posts', 'largo_category_archive_posts', 15 );
