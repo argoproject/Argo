@@ -460,7 +460,7 @@ class Largo_Related {
 	protected function get_series_posts() {
 		//try to get posts by series, if this post is in a series
 		$series = get_the_terms( $this->post_id, 'series' );
-		if ( count($series) ) {
+		if ( is_array($series) ) {
 
 			//loop thru all the series this post belongs to
 			foreach ( $series as $term ) {
