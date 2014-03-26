@@ -35,7 +35,7 @@ class largo_follow_widget extends WP_Widget {
 
 		$feed = get_feed_link();
 
-		if ( is_single() && $id == 'article-bottom' ) :
+		if ( is_single() && isset($id) && $id == 'article-bottom' ) :
 			// display the post social bar
 			largo_post_social_links();
 		else :
