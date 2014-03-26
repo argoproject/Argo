@@ -103,7 +103,7 @@ if ( ! function_exists( 'largo_byline' ) ) {
 			if ( count($out) > 1 ) {
 				end($out);
 				$key = key($out);
-				reset($array);
+				reset($out);
 				$authors = implode( ', ', array_slice( $out, 0, -1 ) );
 				$authors .= ' <span class="and">and</span> ' . $out[$key];
 			} else {
