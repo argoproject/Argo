@@ -49,13 +49,13 @@
 	        		<a href="#main" title="Skip to content"><?php _e('Skip to content', 'largo'); ?></a>
 	        	</span>
 	        	<?php
-					$args = array(
-						'theme_location' => 'global-nav',
-						'depth'		 => 1,
-						'container'	 => false,
-					);
-					wp_nav_menu($args);
-				?>
+							$top_args = array(
+								'theme_location' => 'global-nav',
+								'depth'		 => 1,
+								'container'	 => false,
+							);
+							wp_nav_menu($top_args);
+						?>
 	        	<div class="nav-right">
 
 	        		<?php if ( of_get_option( 'show_header_social') ) { ?>
@@ -114,25 +114,40 @@
 	        </div>
 	      </a>
 
-	      <!-- ul class="nav">
-	        <li class="home-link"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><i class="icon-home icon-white"></i></a></li>
-	        <li class="divider-vertical"></li>
-	      </ul -->
-
 	      <div class="nav-shelf">
 	      	<ul class="nav">
-	        <?php
-				$args = array(
-					'theme_location' => 'navbar-categories',
-					'depth'		 => 0,
-					'container'	 => false,
-					'items_wrap' => '%3$s',
-					'menu_class' => 'nav',
-					'walker'	 => new Bootstrap_Walker_Nav_Menu()
-				);
-				wp_nav_menu($args);
-			?>
-	      </ul>
+			    <?php
+						$args = array(
+							'theme_location' => 'navbar-categories',
+							'depth'		 => 0,
+							'container'	 => false,
+							'items_wrap' => '%3$s',
+							'menu_class' => 'nav',
+							'walker'	 => new Bootstrap_Walker_Nav_Menu()
+						);
+						wp_nav_menu($args);
+					?>
+					</ul>
+					<ul class="nav visible-phone">
+						<li class="menu-item-has-childen dropdown">
+							<a href="javascript:void(0);" class="dropdown-toggle"><?php
+									//try to get the menu name from global-nav
+									$menus = get_nav_menu_locations();
+									$menu_title = wp_get_nav_menu_object($menus['global-nav'])->name;
+									echo ( $menu_title ) ? $menu_title : __('About', 'largo');
+								?> <b class="caret"></b>
+							</a>
+							<?php
+								$args = array(
+									'theme_location' => 'global-nav',
+									'depth'		 => 1,
+									'container'	 => false,
+									'menu_class' => 'dropdown-menu',
+								);
+								wp_nav_menu($args);
+							?>
+						</li>
+					</ul>
 				</div>
 	    </div>
 	  </div>
