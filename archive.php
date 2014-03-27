@@ -23,9 +23,8 @@ get_header();
 			if ( is_author() ) {
 				the_widget(
 					'largo_author_widget',
-					array( 'title' => 'Hello world')
+					array( 'title' => '')
 				);
-				print "Hello world";
 
 			// for tags, and custom taxonomies we show the term name and description
 			} elseif ( is_tag() || is_tax() ) {
