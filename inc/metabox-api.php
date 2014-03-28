@@ -82,8 +82,9 @@ function largo_register_meta_input( $input_names, $presave_fn=null ) {
 	if ( is_string( $input_names ) ) $input_names = array($input_names);
 
 	foreach( $input_names as $name ) {
-		if (! in_array($name, $largo_metas))
-		$largo_metas[] = array( 'name' => $name, 'presave_fn' => $presave_fn );
+		if (! array_key_exists( $name, $largo_metas) ) {
+			$largo_metas[ $name ] = array( 'name' => $name, 'presave_fn' => $presave_fn );
+		}
 	}
 
 	update_option('largo_meta_inputs', $largo_metas);
@@ -133,6 +134,7 @@ function _largo_metaboxes_content( $post, $callbacks = array() ) {
  */
  // Save our custom meta box values as custom fields
 function _largo_meta_box_save( $post_id ) {
+
 	global $post, $largo;
 
 	// Bail if we're doing an auto save
@@ -147,16 +149,13 @@ function _largo_meta_box_save( $post_id ) {
 	// set up our array of data
 	$mydata = array();
 	$registered_inputs = get_option('largo_meta_inputs', array());
-	foreach ( $registered_inputs as $input_name ) {
 
-		if ( array_key_exists($input_name['name'], $_POST) ) {
-			if ( is_array( $input_name ) ) {
-				$mydata[ $input_name['name'] ] = $_POST[ $input_name['name'] ];
-				if ( is_callable( $input_name['presave_fn'] ) ) {
-					$mydata[ $input_name['name'] ] = call_user_func( $input_name['presave_fn'], $mydata[ $input_name['name'] ], $input_name['name'] );
-				}
-			} else {
-				$mydata[ $input_name ] = $_POST[ $input_name ];
+	foreach ( $registered_inputs as $input_name => $handlers ) {
+
+		if ( array_key_exists($input_name, $_POST) ) {
+			$mydata[ $input_name ] = $_POST[ $input_name ];
+			if ( is_callable( $handlers['presave_fn'] ) ) {
+				$mydata[ $input_name ] = call_user_func( $handlers['presave_fn'], $mydata[ $input_name ], $input_name );
 			}
 		}
 	}
