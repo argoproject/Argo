@@ -17,7 +17,7 @@ class largo_author_widget extends WP_Widget {
 		$authors = array();
 		$bios = "";
 
-		$title = apply_filters('widget_title', empty( $instance['title'] ) ? __('Author', 'largo') : $instance['title'], $instance, $this->id_base);
+		$title = apply_filters('widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base);
 
 		if( is_single() || is_author() ):
 
@@ -38,7 +38,9 @@ class largo_author_widget extends WP_Widget {
 				if ( !is_author() && empty($bios) ) return;
 
 				echo $before_widget;
-				echo $before_title . $title . $after_title;
+				if ($title) {
+					echo $before_title . $title . $after_title;
+				}
 
 				// BEGIN what used to be in largo-author-box.php
 

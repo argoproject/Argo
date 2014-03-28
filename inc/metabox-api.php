@@ -149,14 +149,15 @@ function _largo_meta_box_save( $post_id ) {
 	$registered_inputs = get_option('largo_meta_inputs', array());
 	foreach ( $registered_inputs as $input_name ) {
 
-		if ( is_array( $input_name ) ) {
-			$mydata[ $input_name['name'] ] = $_POST[ $input_name['name'] ];
-
-			if ( is_callable( $input_name['presave_fn'] ) ) {
-				$mydata[ $input_name['name'] ] = call_user_func( $input_name['presave_fn'], $mydata[ $input_name['name'] ], $input_name['name'] );
+		if ( array_key_exists($input_name['name'], $_POST) ) {
+			if ( is_array( $input_name ) ) {
+				$mydata[ $input_name['name'] ] = $_POST[ $input_name['name'] ];
+				if ( is_callable( $input_name['presave_fn'] ) ) {
+					$mydata[ $input_name['name'] ] = call_user_func( $input_name['presave_fn'], $mydata[ $input_name['name'] ], $input_name['name'] );
+				}
+			} else {
+				$mydata[ $input_name ] = $_POST[ $input_name ];
 			}
-		} else {
-			$mydata[ $input_name ] = $_POST[ $input_name ];
 		}
 	}
 

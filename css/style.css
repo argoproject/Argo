@@ -2858,7 +2858,7 @@ li.home-link:hover i {
   font-weight: bold;
 }
 .sticky-nav-wrapper {
-  height: 53px;
+  height: 25px;
 }
 .sticky-nav-holder {
   position: fixed;
@@ -4369,9 +4369,12 @@ p.comment-form-comment {
 .largo-related-posts ul.related li:after {
   clear: both;
 }
+.largo-related-posts ul.related p {
+  margin-bottom: 1em;
+}
 .largo-related-posts h4 {
-  font-size: 16px;
-  margin: 2px;
+  font-size: 19.2px;
+  margin: 2px 0 5px;
 }
 .largo-related-posts .wp-post-image {
   float: left;
