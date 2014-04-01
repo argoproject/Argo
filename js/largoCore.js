@@ -127,7 +127,7 @@ jQuery(document).ready(function($) {
 		var stickyNavEl = $( '.sticky-nav-holder' );
 		var mainEl = $('#main');
 
-		if ( stickyNavEl.data( 'hideAtTop') === false ) {
+		if ( stickyNavEl.data( 'hideAtTop') === false || $(window).width() < 768 ) {
 			stickyNavEl.addClass( 'show' );
 		} else {
 			mainEl.waypoint( function( direction ) {
@@ -327,7 +327,7 @@ jQuery(document).ready(function($) {
 
 		// Secondary nav
 		navbar.on( 'touchstart.toggleNav click.toggleNav', '.nav-shelf .caret', function( event ) {
-			// Only handle when 
+			// Only handle when
 			if ( toggleButton.css( 'display') == 'none' ) {
 				return;
 			}

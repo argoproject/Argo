@@ -2489,6 +2489,9 @@ li.home-link:hover i {
   html.touch ul.nav li.dropdown.open ul.dropdown-menu {
     display: block;
   }
+  .home .sticky-nav-wrapper {
+    height: 0;
+  }
 }
 .navbar .dropdown-menu .active > a,
 .navbar .dropdown-menu .active > a:hover {
@@ -2879,6 +2882,10 @@ li.home-link:hover i {
 .sticky-nav-holder.show {
   visibility: visible;
   opacity: 1;
+}
+.home .sticky-nav-holder.show {
+  visibility: hidden;
+  opacity: 0;
 }
 body.admin-bar .sticky-nav-holder {
   top: 32px;
@@ -5064,6 +5071,14 @@ img[class*="wp-image-"] {
     margin-left: 0;
   }
   .sticky-footer-holder .follow-author {
+    display: none;
+  }
+  .home .sticky-nav-holder.show {
+    visibility: visible;
+    opacity: 1;
+  }
+  .home #main-nav,
+  .global-nav-bg {
     display: none;
   }
   .sticky-nav-container {

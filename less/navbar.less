@@ -280,6 +280,9 @@ li.home-link:hover i {
   html.touch ul.nav li.dropdown.open ul.dropdown-menu {
       display: block;
   }
+  .home .sticky-nav-wrapper {
+	  height: 0;
+  }
 }
 
 .navbar .dropdown-menu .active > a,
@@ -686,6 +689,11 @@ li.home-link:hover i {
   &.show {
     visibility: visible;
     opacity: 1;
+  }
+
+  .home &.show {
+	  visibility: hidden;
+	  opacity: 0;
   }
 
   background-color: @white;
