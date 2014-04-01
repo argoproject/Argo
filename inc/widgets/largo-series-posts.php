@@ -74,15 +74,17 @@ class largo_series_posts_widget extends WP_Widget {
 		//Defaults
 		// to control: which series, # of posts, explore heading...
 		// @todo enhance with more control over thumbnail, icon, etc
-		$instance = wp_parse_args( (array) $instance, array( 'num' => 4, 'heading' => 'Explore:', 'thumbnail_location' => 'before', 'show_byline' => 0) );
+		$instance = wp_parse_args( (array) $instance, array(
+			'num' => 4,
+			'heading' => 'Explore:',
+			'thumbnail_location' => 'before',
+			'show_byline' => 0,
+			'series' => 'null')
+		);
 		//$title = esc_attr( $instance['title'] );
 		$num = $instance['num'];
 		$heading = esc_attr( $instance['heading'] );
 		?>
-		<?php /*
-			<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e( 'Title:', 'largo' ); ?></label>
-		<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" /></p>
-		*/ ?>
 
 		<p>
 			<label for="<?php echo $this->get_field_id('series'); ?>"><?php _e( 'Series:', 'largo'); ?></label><br/>
