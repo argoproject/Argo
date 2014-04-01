@@ -60,7 +60,7 @@ $youtube_url = isset( $values['youtube_url'] ) ? esc_attr( $values['youtube_url'
 
 	<header>
 
- 		<?php if ( is_home() && largo_has_categories_or_tags() && $tags === 'top' ) { ?>
+ 		<?php if ( is_home() || ( largo_has_categories_or_tags() && $tags === 'top' ) ) { ?>
 	 		<h5 class="top-tag"><?php largo_top_term(); ?></h5>
 	 	<?php } ?>
 
@@ -77,7 +77,7 @@ $youtube_url = isset( $values['youtube_url'] ) ? esc_attr( $values['youtube_url'
 
 		<?php largo_excerpt( $post, 5, true, __('Continue&nbsp;Reading&nbsp;&rarr;', 'largo'), true, false ); ?>
 
-    <?php if ( !is_home() || ( largo_has_categories_or_tags() && $tags === 'btm' ) ) : ?>
+    <?php if ( !is_home() && largo_has_categories_or_tags() && $tags === 'btm' ) : ?>
 		<h5 class="tag-list"><strong><?php _e('Filed under:', 'largo'); ?></strong> <?php largo_categories_and_tags( 8 ); ?></h5>
 		<?php endif; ?>
 
