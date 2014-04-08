@@ -317,7 +317,7 @@ function cftl_tax_landing_header($post) {
 	</label>
 	</div>
 </div>
-<div class="form-field">
+<div class="form-field_enabled">
 	<h4>Show Series Byline?</h4>
 	<div>
 	<label for="cftl_show_series_byline">
@@ -325,7 +325,7 @@ function cftl_tax_landing_header($post) {
 	</label>
 	</div>
 </div>
-<div class="form-field">
+<div class="form-field_enabled">
 	<h4>Show Social Media Sharing Links?</h4>
 	<div>
 	<label for="cftl_show_sharebar">
