@@ -2,13 +2,19 @@
 /**
  * The template for displaying content on a series landing page
  */
-global $opt, $tags;	//get display options for the loop
+global $opt;	//get display options for the loop
+$tags = of_get_option ('tag_display');
 
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?>>
 
 	<header>
+
+ 		<?php if ( isset($opt['show']['tags']) && largo_has_categories_or_tags() && $tags === 'top' ) { ?>
+    		<h5 class="top-tag"><?php largo_top_term(); ?></h5>
+    	<?php } ?>
+
  		<h2 class="entry-title">
  			<a href="<?php the_permalink(); ?>" title="Permalink to <?php the_title_attribute(); ?>" rel="bookmark"><?php the_title(); ?></a>
  		</h2>
@@ -27,8 +33,8 @@ global $opt, $tags;	//get display options for the loop
 			largo_excerpt( $post, 5, true, __('Continue&nbsp;Reading&nbsp;&rarr;', 'largo'), true, false );
 		endif; ?>
 
-    <?php if ( isset($opt['show']['tags']) && largo_has_categories_or_tags() ) { ?>
-    	<h5 class="tag-list"><strong><?php _e('Filed under:', 'largo'); ?></strong> <?php largo_categories_and_tags( 8 ); ?></h5>
+		<?php if ( isset($opt['show']['tags']) && largo_has_categories_or_tags() && $tags === 'btm' ) { ?>
+    		<h5 class="tag-list"><strong><?php _e('Filed under:', 'largo'); ?></strong> <?php largo_categories_and_tags( 8 ); ?></h5>
     	<?php } ?>
 
 	</div><!-- .entry-content -->
