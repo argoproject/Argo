@@ -98,7 +98,7 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
 
 			// thumbnail url
 			if ( $thumbnailURL )
-				echo '<meta property="og:image" content="' . $thumbnailURL . '" />';
+				echo '<meta property="og:image" content="' . esc_url( $thumbnailURL ) . '" />';
 
 			// google author/publisher markup
 			// see: https://support.google.com/webmasters/answer/1408986
