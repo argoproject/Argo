@@ -73,7 +73,7 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
 		?>
 				<meta property="og:title" content="<?php bloginfo( 'name' ); wp_title(); ?>" />
 				<meta property="og:type" content="article" />
-				<meta property="og:url" content="<?php echo $current_url; ?>"/>
+				<meta property="og:url" content="<?php echo esc_url( $current_url ); ?>"/>
 			<?php
 				//let's try to get a better description when available
 				if ( is_category() && category_description() ) {
