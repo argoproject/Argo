@@ -28,7 +28,7 @@ if ( ! function_exists( 'largo_header' ) ) {
 	    	echo '<a itemprop="url" href="' . esc_url( home_url( '/' ) ) . '"><img class="header_img" src="" alt="" /></a>';
 
 	    if ( of_get_option( 'logo_thumbnail_sq' ) )
-			echo '<meta itemprop="logo" content="' . of_get_option( 'logo_thumbnail_sq' ) . '"/>';
+			echo '<meta itemprop="logo" content="' . esc_url( of_get_option( 'logo_thumbnail_sq' ) ) . '"/>';
 	}
 }
 
