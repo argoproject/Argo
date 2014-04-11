@@ -28,7 +28,7 @@ if ( ! function_exists( 'largo_header' ) ) {
 	    	echo '<a itemprop="url" href="' . esc_url( home_url( '/' ) ) . '"><img class="header_img" src="" alt="" /></a>';
 
 	    if ( of_get_option( 'logo_thumbnail_sq' ) )
-			echo '<meta itemprop="logo" content="' . of_get_option( 'logo_thumbnail_sq' ) . '"/>';
+			echo '<meta itemprop="logo" content="' . esc_url( of_get_option( 'logo_thumbnail_sq' ) ) . '"/>';
 	}
 }
 
@@ -83,9 +83,9 @@ if ( ! function_exists( 'largo_social_links' ) ) {
 if ( ! function_exists( 'largo_shortcut_icons' ) ) {
 	function largo_shortcut_icons() {
 		if ( of_get_option( 'logo_thumbnail_sq' ) )
-			echo '<link rel="apple-touch-icon" href="' . of_get_option( 'logo_thumbnail_sq' ) . '"/>';
+			echo '<link rel="apple-touch-icon" href="' . esc_url( of_get_option( 'logo_thumbnail_sq' ) ) . '"/>';
 		if ( of_get_option( 'favicon' ) )
-			echo '<link rel="shortcut icon" href="' . of_get_option( 'favicon' ) . '"/>';
+			echo '<link rel="shortcut icon" href="' . esc_url( of_get_option( 'favicon' ) ) . '"/>';
 	}
 }
 add_action( 'wp_head', 'largo_shortcut_icons' );
