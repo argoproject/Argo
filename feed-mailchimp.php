@@ -40,7 +40,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
     <guid><?php the_permalink(); ?></guid>
     <dc:creator><?php $curuser = get_user_by( 'id', $post->post_author ); echo $curuser->first_name . ' ' . $curuser->last_name; ?></dc:creator>
 	<?php if( get_the_post_thumbnail( $post->ID ) ): $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ) ); ?>
-    <media:content url="<?php echo $image[0]; ?>" medium="image" />
+    <media:content url="<?php echo esc_url( $image[0] ); ?>" medium="image" />
 	<?php endif; ?>
   </item>
 <?php } // foreach ?>
