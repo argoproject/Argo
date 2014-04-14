@@ -71,7 +71,7 @@ class largo_taxonomy_list_widget extends WP_Widget {
 
 	function form( $instance ) {
 		//Defaults
-		$instance = wp_parse_args( (array) $instance, array( 'title' => '') );
+		$instance = wp_parse_args( (array) $instance, array( 'title' => '', 'taxonomy' => '' ) );
 		$title = esc_attr( $instance['title'] );
 		$taxonomy = esc_attr( $instance['taxonomy'] );
 		$dropdown = isset( $instance['dropdown'] ) ? (bool) $instance['dropdown'] : false;

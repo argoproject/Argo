@@ -49,13 +49,13 @@
 	        		<a href="#main" title="Skip to content"><?php _e('Skip to content', 'largo'); ?></a>
 	        	</span>
 	        	<?php
-					$args = array(
-						'theme_location' => 'global-nav',
-						'depth'		 => 1,
-						'container'	 => false,
-					);
-					wp_nav_menu($args);
-				?>
+							$top_args = array(
+								'theme_location' => 'global-nav',
+								'depth'		 => 1,
+								'container'	 => false,
+							);
+							wp_nav_menu($top_args);
+						?>
 	        	<div class="nav-right">
 
 	        		<?php if ( of_get_option( 'show_header_social') ) { ?>
@@ -100,6 +100,76 @@
 		<p><strong><?php echo esc_attr( get_bloginfo( 'name' ) ); ?></strong> (<?php echo esc_url( $current_url ); ?>)</p>
 	</header>
 
+	<div class="sticky-nav-wrapper">
+		<div class="sticky-nav-holder show" data-hide-at-top="<?php echo (is_front_page() || is_home()) ? 'true' : 'false'; ?>"><div class="sticky-nav-container">
+			<nav id="sticky-nav" class="sticky-navbar navbar clearfix">
+		    <div class="container">
+		    	<div class="nav-right">
+			      <?php if ( of_get_option( 'show_donate_button') )
+	      			largo_donate_button();
+	      		?>
+
+						<div id="header-search">
+							<form class="form-search" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+								<i class="icon-search toggle" title="<?php esc_attr_e('Search', 'largo'); ?>" role="button"></i>
+								<div class="input-append">
+									<span class="text-input-wrapper"><input type="text" placeholder="<?php esc_attr_e('Search', 'largo'); ?>" class="input-medium appendedInputButton search-query" value="" name="s" /></span><button type="submit" class="search-submit btn"><?php _e('GO', 'largo'); ?></button>
+								</div>
+							</form>
+						</div>
+					</div>
+
+		      <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+		      <a class="btn btn-navbar toggle-nav-bar" title="<?php esc_attr_e('More', 'largo'); ?>">
+		        <div class="bars">
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+		        </div>
+		      </a>
+
+		      <ul class="nav">
+		        <li class="home-link"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php largo_home_icon( 'icon-white' ); ?></a></li>
+		        <li class="divider-vertical"></li>
+					</ul>
+
+		      <div class="nav-shelf">
+						<ul class="nav"><?php
+							$args = array(
+								'theme_location' => 'navbar-categories',
+								'depth'		 => 0,
+								'container'	 => false,
+								'items_wrap' => '%3$s',
+								'menu_class' => 'nav',
+								'walker'	 => new Bootstrap_Walker_Nav_Menu()
+							);
+							wp_nav_menu($args);
+							?>
+							<li class="menu-item-has-childen dropdown">
+								<a href="javascript:void(0);" class="dropdown-toggle"><?php
+										//try to get the menu name from global-nav
+										$menus = get_nav_menu_locations();
+										$menu_title = wp_get_nav_menu_object($menus['global-nav'])->name;
+										echo ( $menu_title ) ? $menu_title : __('About', 'largo');
+									?> <b class="caret"></b>
+								</a>
+								<?php
+									$args = array(
+										'theme_location' => 'global-nav',
+										'depth'		 => 1,
+										'container'	 => false,
+										'menu_class' => 'dropdown-menu',
+									);
+									wp_nav_menu($args);
+								?>
+							</li>
+						</ul>
+					</div>
+		    </div>
+			</nav>
+		</div></div>
+	</div>
+
 	<?php if ( is_front_page() || is_home() ): ?>
 	<nav id="main-nav" class="navbar clearfix">
 	  <div class="navbar-inner">
@@ -114,66 +184,9 @@
 	        </div>
 	      </a>
 
-	      <!-- ul class="nav">
-	        <li class="home-link"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><i class="icon-home icon-white"></i></a></li>
-	        <li class="divider-vertical"></li>
-	      </ul -->
-
 	      <div class="nav-shelf">
 	      	<ul class="nav">
-	        <?php
-				$args = array(
-					'theme_location' => 'navbar-categories',
-					'depth'		 => 0,
-					'container'	 => false,
-					'items_wrap' => '%3$s',
-					'menu_class' => 'nav',
-					'walker'	 => new Bootstrap_Walker_Nav_Menu()
-				);
-				wp_nav_menu($args);
-			?>
-	      </ul>
-				</div>
-	    </div>
-	  </div>
-	</nav>
-	<?php endif; ?>
-
-<?php echo (is_front_page() || is_home()) ? '' : '<div class="sticky-nav-wrapper">'; ?>
-	<div class="sticky-nav-holder <?php echo (is_front_page() || is_home()) ? 'hide' : 'show'; ?>" data-hide-at-top="<?php echo (is_front_page() || is_home()) ? 'true' : 'false'; ?>"><div class="sticky-nav-container">
-		<nav id="sticky-nav" class="sticky-navbar navbar clearfix">
-	    <div class="container">
-	    	<div class="nav-right">
-		      <?php if ( of_get_option( 'show_donate_button') )
-      			largo_donate_button();
-      		?>
-
-					<div id="header-search">
-						<form class="form-search" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-							<i class="icon-search toggle" title="<?php esc_attr_e('Search', 'largo'); ?>" role="button"></i>
-							<div class="input-append">
-								<span class="text-input-wrapper"><input type="text" placeholder="<?php esc_attr_e('Search', 'largo'); ?>" class="input-medium appendedInputButton search-query" value="" name="s" /></span><button type="submit" class="search-submit btn"><?php _e('GO', 'largo'); ?></button>
-							</div>
-						</form>
-					</div>
-				</div>
-
-	      <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
-	      <a class="btn btn-navbar toggle-nav-bar" title="<?php esc_attr_e('More', 'largo'); ?>">
-	        <div class="bars">
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-	        </div>
-	      </a>
-
-	      <ul class="nav">
-	        <li class="home-link"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php largo_home_icon( 'icon-white' ); ?></a></li>
-	        <li class="divider-vertical"></li>
-				</ul>
-
-	      <div class="nav-shelf">
-					<ul class="nav"><?php
+			    <?php
 						$args = array(
 							'theme_location' => 'navbar-categories',
 							'depth'		 => 0,
@@ -183,7 +196,9 @@
 							'walker'	 => new Bootstrap_Walker_Nav_Menu()
 						);
 						wp_nav_menu($args);
-						?>
+					?>
+					</ul>
+					<ul class="nav visible-phone">
 						<li class="menu-item-has-childen dropdown">
 							<a href="javascript:void(0);" class="dropdown-toggle"><?php
 									//try to get the menu name from global-nav
@@ -205,9 +220,9 @@
 					</ul>
 				</div>
 	    </div>
-		</nav>
-	</div></div>
-<?php echo (is_front_page() || is_home()) ? '' : '</div>'; ?>
+	  </div>
+	</nav>
+	<?php endif; ?>
 
 <?php if ( of_get_option( 'show_dont_miss_menu') ) : ?>
 <nav id="secondary-nav" class="clearfix">

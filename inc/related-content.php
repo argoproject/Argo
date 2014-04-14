@@ -303,6 +303,7 @@ if ( ! function_exists( 'largo_categories_and_tags' ) ) {
 function largo_top_term( $options = array() ) {
 
 	global $wpdb;
+	//print_r( $wpdb );
 
 	$defaults = array(
 		'post' => get_the_ID(),
@@ -330,7 +331,7 @@ function largo_top_term( $options = array() ) {
 		$link = ( $args['link'] ) ? array('<a href="%2$s" title="Read %3$s in the %4$s category">','</a>') : array('', '') ;
 		// get the term object
 		$term = get_term( $term_id, $taxonomy );
-		if (is_wp_error($term)) return;	// do nothing if a bad term
+		if (is_wp_error($term)) return;
 		$output = sprintf(
 			'<%1$s class="post-category-link">'.$link[0].'%5$s%4$s'.$link[1].'</%1$s>',
 			$args['wrapper'],
@@ -568,7 +569,7 @@ class Largo_Related {
 		$posts_query = new WP_Query( $args );
 
 		if ( $posts_query->have_posts() ) {
-			while ( $posts_query->next_post() ) {
+			while ( $posts_query->the_post() ) {
 				if ( !in_array($posts_query->post->ID, $this->post_ids) ) $this->post_ids[] = $posts_query->post->ID;
 			}
 		}
@@ -619,7 +620,7 @@ class Largo_Related {
 		$found_ours = FALSE;
 
 		while ( $q->have_posts() ) {
-			$q->next_post();
+			$q->the_post();
 			//don't show our post, but record that we've found it
 			if ( $q->post->ID == $this->post_id ) {
 				$found_ours = TRUE;

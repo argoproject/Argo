@@ -2489,6 +2489,9 @@ li.home-link:hover i {
   html.touch ul.nav li.dropdown.open ul.dropdown-menu {
     display: block;
   }
+  .home .sticky-nav-wrapper {
+    height: 0;
+  }
 }
 .navbar .dropdown-menu .active > a,
 .navbar .dropdown-menu .active > a:hover {
@@ -2879,6 +2882,10 @@ li.home-link:hover i {
 .sticky-nav-holder.show {
   visibility: visible;
   opacity: 1;
+}
+.home .sticky-nav-holder.show {
+  visibility: hidden;
+  opacity: 0;
 }
 body.admin-bar .sticky-nav-holder {
   top: 32px;
@@ -4246,23 +4253,27 @@ p.comment-form-comment {
   margin-bottom: 8px;
 }
 .largo-sidebar-featured .post-lead,
+.largo-featured .post-lead,
 .largo-recent-posts .post-lead,
 .largo-INN-RSS .post-lead {
   overflow: hidden;
   margin-bottom: 10px;
 }
 .largo-sidebar-featured img,
+.largo-featured img,
 .largo-recent-posts img,
 .largo-INN-RSS img {
   float: left;
   margin: 5px 10px 0 5px;
 }
 .largo-sidebar-featured img.attachment-large,
+.largo-featured img.attachment-large,
 .largo-recent-posts img.attachment-large,
 .largo-INN-RSS img.attachment-large {
   margin: 5px 0 10px;
 }
 .largo-sidebar-featured h5,
+.largo-featured h5,
 .largo-recent-posts h5,
 .largo-INN-RSS h5 {
   margin-bottom: 2px;
@@ -4270,6 +4281,7 @@ p.comment-form-comment {
   font-size: 16px;
 }
 .largo-sidebar-featured p,
+.largo-featured p,
 .largo-recent-posts p,
 .largo-INN-RSS p {
   font-size: 10.672px;
@@ -5064,6 +5076,14 @@ img[class*="wp-image-"] {
     margin-left: 0;
   }
   .sticky-footer-holder .follow-author {
+    display: none;
+  }
+  .home .sticky-nav-holder.show {
+    visibility: visible;
+    opacity: 1;
+  }
+  .home #main-nav,
+  .global-nav-bg {
     display: none;
   }
   .sticky-nav-container {

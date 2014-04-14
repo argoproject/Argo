@@ -22,7 +22,7 @@ global $largo, $shown_ids, $tags, $post;
 		<div class="home-top">
 	<?php
 
-		$post = largo_home_single_top();
+		$big_story = largo_home_single_top();
 		$has_featured = largo_have_homepage_featured_posts();
 
 		if( $has_video = get_post_meta( $big_story->ID, 'youtube_url', true ) ): ?>
@@ -38,18 +38,18 @@ global $largo, $shown_ids, $tags, $post;
 				<div class="row-fluid">
 
 					<article class="<?php if ($has_featured) echo 'span8'; ?>">
-						<h5 class="top-tag"><?php largo_top_term( array('post'=>$post->ID) ); ?></h5>
+						<h5 class="top-tag"><?php largo_top_term( array('post'=> $big_story->ID ) ); ?></h5>
 						<h2><a href="<?php the_permalink(); ?>"><?php echo the_title(); ?></a></h2>
-						<h5 class="byline"><?php _e('By'); ?> <?php largo_author_link( true, $post ); ?></h5>
+						<h5 class="byline"><?php _e('By'); ?> <?php largo_author_link( true, $big_story ); ?></h5>
 						<section>
-							<?php largo_excerpt( $post, 2, false ); ?>
+							<?php largo_excerpt( $big_story, 2, false ); ?>
 						</section>
 					</article>
 
 					<?php if ( $has_featured ): ?>
 					<div class="span4 side-articles">
 						<?php
-							$shown_ids[] = $post->ID;	//don't repeat the current post
+							$shown_ids[] = $big_story->ID;	//don't repeat the current post
 							$query_args = array(
 						  	'showposts' 					=> 3,
 						    'orderby' 						=> 'date',
