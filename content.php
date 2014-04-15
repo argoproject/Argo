@@ -2,7 +2,7 @@
 /**
  * The default template for displaying content
  */
-global $tags;
+$tags = of_get_option ('tag_display');
 $is_featured = has_term('homepage-featured', 'prominence');
 $youtube_url = isset( $values['youtube_url'] ) ? esc_attr( $values['youtube_url'][0] ) : '';
 
