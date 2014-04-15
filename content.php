@@ -38,7 +38,7 @@ $youtube_url = isset( $values['youtube_url'] ) ? esc_attr( $values['youtube_url'
 	</header>
 	<div class="span10 with-hero entry-content">
 
- 		<?php if ( is_home() && largo_has_categories_or_tags() && $tags === 'top' ) { ?>
+ 		<?php if ( largo_has_categories_or_tags() && $tags === 'top' ) { ?>
 	 		<h5 class="top-tag"><?php largo_top_term(); ?></h5>
 	 	<?php } ?>
 
@@ -60,7 +60,7 @@ $youtube_url = isset( $values['youtube_url'] ) ? esc_attr( $values['youtube_url'
 
 	<header>
 
- 		<?php if ( is_home() || ( largo_has_categories_or_tags() && $tags === 'top' ) ) { ?>
+ 		<?php if ( largo_has_categories_or_tags() && $tags === 'top' ) { ?>
 	 		<h5 class="top-tag"><?php largo_top_term(); ?></h5>
 	 	<?php } ?>
 
