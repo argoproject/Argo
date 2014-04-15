@@ -449,14 +449,14 @@ function largo_trim_sentences( $input, $sentences, $echo = false ) {
  * @since 1.0
  */
 if ( ! function_exists( 'largo_content_nav' ) ) {
-	function largo_content_nav( $nav_id ) {
+	function largo_content_nav( $nav_id, $in_same_cat = false ) {
 		global $wp_query;
 
 		if ( $nav_id === 'single-post-nav-below' ) { ?>
 
 			<nav id="nav-below" class="pager post-nav clearfix">
 				<?php
-					if ( $prev = get_previous_post() ) {
+					if ( $prev = get_previous_post( $in_same_cat ) ) {
 						if( get_the_post_thumbnail( $prev->ID ) ) {
 							$image = wp_get_attachment_image_src( get_post_thumbnail_id( $prev->ID ) );
 							printf( __('<div class="previous"><a href="%1$s"><img class="thumb" src="%4$s" /><h5>Previous %2$s</h5><span class="meta-nav">%3$s</span></a></div>', 'largo'),
@@ -473,7 +473,7 @@ if ( ! function_exists( 'largo_content_nav' ) ) {
 							);
 						}
 					}
-					if ( $next = get_next_post() ) {
+					if ( $next = get_next_post( $in_same_cat ) ) {
 						if( get_the_post_thumbnail( $next->ID ) ) {
 							$image = wp_get_attachment_image_src( get_post_thumbnail_id( $next->ID ) );
 							printf( __('<div class="next"><a href="%1$s"><img class="thumb" src="%4$s" /><h5>Next %2$s</h5><span class="meta-nav">%3$s</span></a></div>', 'largo'),

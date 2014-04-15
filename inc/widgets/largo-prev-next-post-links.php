@@ -21,18 +21,25 @@ class largo_prev_next_post_links_widget extends WP_Widget {
 
 		echo $before_widget;
 
-		largo_content_nav('single-post-nav-below');
+		largo_content_nav( 'single-post-nav-below', $instance['in_same_cat'] );
 
 		echo $after_widget;
 	}
 
 	function update( $new_instance, $old_instance ) {
-		//$instance = $old_instance;
-		//$instance['title'] = strip_tags($new_instance['title']);
+		$instance = $old_instance;
+		$instance['in_same_cat'] = !empty($new_instance['in_same_cat']) ? 1 : 0;
 		return $new_instance;
 	}
 
-	//nothing to see here
-	function form( $instance ) {}
+	function form( $instance ) {
+		$instance = wp_parse_args( (array) $instance );
+		$in_same_cat = isset( $instance['in_same_cat'] ) ? (bool) $instance['in_same_cat'] : false;
+		?>
+
+		<p><input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('in_same_cat'); ?>" name="<?php echo $this->get_field_name('in_same_cat'); ?>"<?php checked( $in_same_cat ); ?> />
+		<label for="<?php echo $this->get_field_id('in_same_cat'); ?>"><?php _e( 'Limit to same category?', 'largo' ); ?></label></p>
+	<?php
+	}
 
 }
