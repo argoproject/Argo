@@ -181,7 +181,6 @@ function largo_get_recent_posts_for_term( $term, $max = 5, $min = 1 ) {
 			$query_args[ 'post__in' ] = $post_ids;
 			$query_args[ 'orderby' ] = 'post__in';
 			$query_args['showposts'] = count($post_ids);
-			//print_r($query_args);
 		}
 
     $query_args = apply_filters( 'largo_get_recent_posts_for_term_query_args', $query_args, $term, $max, $min, $post );
@@ -303,7 +302,6 @@ if ( ! function_exists( 'largo_categories_and_tags' ) ) {
 function largo_top_term( $options = array() ) {
 
 	global $wpdb;
-	//print_r( $wpdb );
 
 	$defaults = array(
 		'post' => get_the_ID(),
@@ -459,8 +457,10 @@ class Largo_Related {
 	 * @access protected
 	 */
 	protected function get_series_posts() {
+
 		//try to get posts by series, if this post is in a series
 		$series = get_the_terms( $this->post_id, 'series' );
+
 		if ( is_array($series) ) {
 
 			//loop thru all the series this post belongs to
@@ -469,13 +469,13 @@ class Largo_Related {
 				//start to build our query of posts in this series
 				// get the posts in this series, ordered by rank or (if missing?) date
 				$args = array(
-					'post_type' => 'post',
-					'posts_per_page' => 20,	//should usually be enough
-					'taxonomy' 			=> 'series',
-					'term' => $term->slug,
-					'orderby' => 'date',
-					'order' => 'DESC',
-          'ignore_sticky_posts'   => 1,
+					'post_type'           => 'post',
+					'posts_per_page'      => -1,	//should usually be enough
+					'taxonomy' 			      => 'series',
+					'term'                => $term->slug,
+					'orderby'             => 'date',
+					'order'               => 'ASC',
+          'ignore_sticky_posts' => 1,
 				);
 
 				// see if there's a post that has the sort order info for this series
@@ -506,13 +506,9 @@ class Largo_Related {
 
 				// build the query with the sort defined
 				$series_query = new WP_Query( $args );
+
 				if ( $series_query->have_posts() ) {
-
-					//flip our results
-					//$series_query->posts = array_reverse($series_query->posts);
-					//$series_query->rewind_posts();
 					$this->add_from_query( $series_query );
-
 				}
 			}
 		}
@@ -535,13 +531,13 @@ class Largo_Related {
 
 			foreach ( $taxonomies as $term ) {
 				$args = array(
-					'post_type' => 'post',
-					'posts_per_page' => 20,	//should usually be enough
-					'taxonomy' 			=> $term->taxonomy,
-					'term' => $term->slug,
-					'orderby' => 'date',
-					'order' => 'DESC',
-          'ignore_sticky_posts'   => 1,
+					'post_type'           => 'post',
+					'posts_per_page'      => -1,
+					'taxonomy' 		 	      => $term->taxonomy,
+					'term'                => $term->slug,
+					'orderby'             => 'date',
+					'order'               => 'ASC',
+          'ignore_sticky_posts' => 1,
 				);
 			}
 			// run the query
@@ -562,14 +558,15 @@ class Largo_Related {
 
 		$args = array(
 			'post_type' => 'post',
-			'posts_per_page' => $this->number,
+			'posts_per_page' => $this->number + 1,
 			'post__not_in' => array( $this->post_id ),
 		);
 
 		$posts_query = new WP_Query( $args );
 
 		if ( $posts_query->have_posts() ) {
-			while ( $posts_query->the_post() ) {
+			while ( $posts_query->have_posts() ) {
+				$posts_query->the_post();
 				if ( !in_array($posts_query->post->ID, $this->post_ids) ) $this->post_ids[] = $posts_query->post->ID;
 			}
 		}
@@ -594,14 +591,12 @@ class Largo_Related {
 		}
 
 		$this->get_series_posts();
-
 		//are we done yet?
-		if ( count($this->post_ids) == $this->number ) return $this->cleanup_ids();
+		if ( count($this->post_ids) >= $this->number ) return $this->cleanup_ids();
 
 		$this->get_term_posts();
-
 		//are we done yet?
-		if ( count($this->post_ids) == $this->number ) return $this->cleanup_ids();
+		if ( count($this->post_ids) >= $this->number ) return $this->cleanup_ids();
 
 		$this->get_recent_posts();
 		return $this->cleanup_ids();
@@ -632,7 +627,7 @@ class Largo_Related {
 			} else if ( ! in_array( $q->post->ID, $this->post_ids ) ) {	// only add it if it wasn't already there
 				$this->post_ids[] = $q->post->ID;
 				// stop if we have enough
-				if ( count( $this->post_ids ) == $this->number ) return;
+				if ( count( $this->post_ids ) >= $this->number ) return;
 			}
 		}
 
