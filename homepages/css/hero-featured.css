@@ -195,7 +195,7 @@
 }
 #home-river .hero {
   text-align: center;
-  background-color: #eeeeee;
+  background-color: #eee;
 }
 #home-river .span10 {
   margin: 0 auto;
@@ -228,7 +228,7 @@
   #dark-top .row-fluid [class*='span'] {
     float: none;
     width: 100%;
-    margin: 0 0 0 0;
+    margin: 0;
   }
   #dark-top .span4 {
     margin-top: 30px !important;

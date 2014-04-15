@@ -1,8 +1,8 @@
 @import "../../less/mixins.less";
 
 @sky: #6cb9e1;
-@fog: #dddddd;
-@grey: #666666;
+@fog: #ddd;
+@grey: #666;
 
 .home .full-hero {
   min-height: 400px;
@@ -194,19 +194,19 @@
 
 #home-river {
   header {
-	  *zoom: 1;
-	  &:before,
-	  &:after {
-	    display: table;
-	    content: "";
-	  }
-	  &:after {
-	    clear: both;
-	  }
+    *zoom: 1;
+    &:before,
+    &:after {
+      display: table;
+      content: "";
+    }
+    &:after {
+      clear: both;
+    }
   }
   .hero {
     text-align: center;
-    background-color: #eeeeee;
+    background-color: #eee;
   }
   display: none;
   .span10 {
@@ -226,14 +226,14 @@
 }
 
 @media screen and (max-width: 980px) {
-	#dark-top.overlay {
+  #dark-top.overlay {
     bottom: 15px;
-	}
+  }
 }
 
 @media screen and (max-width: 768px) {
-	#dark-top {
-		position: relative !important;
+  #dark-top {
+    position: relative !important;
     margin-top: -140px !important;
     bottom: auto !important;
     .span10 {
@@ -242,34 +242,32 @@
     .row-fluid [class*='span'] {
       float: none;
       width: 100%;
-      margin: 0 0 0 0;
+      margin: 0;
     }
     .span4 {
       margin-top: 30px !important;
     }
     .related-story {
-	    margin-left: 0;
+      margin-left: 0;
     }
-	}
-
-	#home-secondary {
-		.row-fluid>[class*='span'] {
+  }
+  #home-secondary {
+    .row-fluid>[class*='span'] {
       float: none;
       width: 100%;
       margin-left: 0;
-		}
 	}
+  }
 }
 
 @media screen and (max-width: 480px) {
-	.home .full-hero {
+  .home .full-hero {
     min-height: 50px;
-	}
-
-	#dark-top {
+  }
+  #dark-top {
     margin-top: -40px !important;
     .span10 {
       padding: 15px 18px !important;
     }
-	}
+  }
 }

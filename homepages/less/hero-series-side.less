@@ -1,11 +1,11 @@
 @import "../../less/mixins.less";
 
 @sky: #6cb9e1;
-@fog: #dddddd;
-@grey: #666666;
+@fog: #ddd;
+@grey: #666;
 
 .home .full-hero {
-  background-color: #eeeeee;
+  background-color: #eee;
   a {
     display: block;
     margin: 0 auto;
@@ -138,14 +138,14 @@
   }
 
   .overlay-pane {
-    background-color: #333333;
+    background-color: #333;
     &.span8 {
-			background-image: -ms-linear-gradient(left, #333333 0%, #333333 50%, #FFFFFF 50%, #FFFFFF 100%);
-			background-image: -moz-linear-gradient(left, #333333 0%, #333333 50%, #FFFFFF 50%, #FFFFFF 100%);
-			background-image: -o-linear-gradient(left, #333333 0%, #333333 50%, #FFFFFF 50%, #FFFFFF 100%);
-			background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #333333), color-stop(0.5, #333333), color-stop(0.5, #FFFFFF), color-stop(1, #FFFFFF));
-			background-image: -webkit-linear-gradient(left, #333333 0%, #333333 50%, #FFFFFF 50%, #FFFFFF 100%);
-			background-image: linear-gradient(to right, #333333 0%, #333333 50%, #FFFFFF 50%, #FFFFFF 100%);
+      background-image: -ms-linear-gradient(left, #333 0%, #333 50%, #FFF 50%, #FFF 100%);
+      background-image: -moz-linear-gradient(left, #333 0%, #333 50%, #FFF 50%, #FFF 100%);
+      background-image: -o-linear-gradient(left, #333 0%, 3333 50%, #FFF 50%, FFFF 100%);
+      background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #333), color-stop(0.5, #333), color-stop(0.5, #FFF), color-stop(1, #FFF));
+      background-image: -webkit-linear-gradient(left, #333 0%, #333 50%, #FFF 50%, #FFF 100%);
+      background-image: linear-gradient(to right, #333 0%, #333 50%, #FFF 50%, #FFF 100%);
     }
     padding: 20px 0;
     [class*="span"] {
@@ -203,7 +203,7 @@
     text-align: right;
     margin-bottom: 0;
     font-weight: bold;
-		font-size: 16px;
+    font-size: 16px;
     a {
       color: @sky;
       &:after {
@@ -276,7 +276,7 @@
         font-size: 80%;
       }
       h5.byline, h5.byline a {
-        color: #444444;
+        color: #444;
       }
       article {
         border-top: solid 3px rgba(red(@sky), green(@sky), blue(@sky), 0.5);
@@ -317,19 +317,18 @@
 
 
 @media screen and (max-width: 768px) {
-	.home .full-hero.one-third-width img {
-		width: 50%;
-	}
-
-	#dark-top {
-	  position: relative;
+  .home .full-hero.one-third-width img {
+    width: 50%;
+  }
+  #dark-top {
+    position: relative;
     margin-top: -140px;
     bottom: auto;
     .overlay-pane {
-	    width: 50%;
-	    &.span8 {
-		    background-image: none;
-	    }
+      width: 50%;
+      &.span8 {
+        background-image: none;
+      }
     }
     .span10 {
       width: 100%;
@@ -337,43 +336,42 @@
     .row-fluid [class*='span'] {
       float: none;
       width: 100%;
-      margin: 0 0 0 0;
+      margin: 0;
     }
     .span4 {
       margin-top: 30px !important;
     }
     .related-story {
-	    margin-left: 0;
+      margin-left: 0;
     }
     &.overlay {
-	    .featured-stories {
-		    display: none;
-	    }
+      .featured-stories {
+        display: none;
+      }
     }
-	}
-	#home-secondary .row-fluid>[class*='span'] {
+  }
+  #home-secondary .row-fluid>[class*='span'] {
     float: none;
     width: 100%;
     margin-left: 0;
-	}
+  }
 }
 
 @media screen and (max-width: 480px) {
-	.home .full-hero.one-third-width img {
-		width: 100%;
-	}
-
-	#dark-top {
-		margin-top: -40px;
+  .home .full-hero.one-third-width img {
+    width: 100%;
+  }
+  #dark-top {
+    margin-top: -40px;
     .span10 {
       padding: 15px 18px !important;
     }
     &.overlay {
-	  	position: relative;
-			.overlay-pane {
-				position: relative;
+      position: relative;
+	  .overlay-pane {
+        position: relative;
         width: 100%;
-			}
+	  }
     }
-	}
+  }
 }

@@ -1,8 +1,8 @@
 @import "../../less/mixins.less";
 
 @sky: #6cb9e1;
-@fog: #dddddd;
-@grey: #666666;
+@fog: #ddd;
+@grey: #666;
 
 .home .full-hero {
   background-color: @grey;
@@ -38,8 +38,8 @@
   }
   ul {
     display: inline-block;
-    margin: 0 0 0 0;
-    padding: 0 0 0 0;
+    margin: 0;
+    padding: 0;
     font-size: 12px;
   }
   li {
@@ -176,14 +176,14 @@
 }
 
 @media screen and (max-width: 980px) {
-	#dark-top.overlay {
+  #dark-top.overlay {
     bottom: 15px;
-	}
+  }
 }
 
 @media screen and (max-width: 768px) {
-	#dark-top {
-		position: relative;
+  #dark-top {
+    position: relative;
     margin-top: -140px;
     bottom: auto;
     .span10 {
@@ -192,7 +192,7 @@
     .row-fluid [class*='span'] {
       float: none;
       width: 100%;
-      margin: 0 0 0 0;
+      margin: 0;
     }
     .span4 {
       margin-top: 30px !important;
@@ -200,9 +200,8 @@
     .related-story {
       margin-left: 0;
     }
-	}
-
-	#home-secondary .row-fluid>[class*='span'] {
+  }
+  #home-secondary .row-fluid>[class*='span'] {
     float: none;
     width: 100%;
     margin-left: 0;
@@ -210,10 +209,10 @@
 }
 
 @media screen and (max-width: 480px) {
-	#dark-top {
+  #dark-top {
     margin-top: -40px;
     .span10 {
       padding: 15px 18px !important;
     }
-	}
+  }
 }

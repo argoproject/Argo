@@ -1,5 +1,5 @@
 .home .full-hero {
-  background-color: #eeeeee;
+  background-color: #eee;
 }
 .home .full-hero a {
   display: block;
@@ -126,13 +126,13 @@
   color: #6cb9e1;
 }
 #dark-top .overlay-pane {
-  background-color: #333333;
+  background-color: #333;
   padding: 20px 0;
 }
 #dark-top .overlay-pane.span8 {
   background-image: -ms-linear-gradient(left, #333333 0%, #333333 50%, #ffffff 50%, #ffffff 100%);
   background-image: -moz-linear-gradient(left, #333333 0%, #333333 50%, #ffffff 50%, #ffffff 100%);
-  background-image: -o-linear-gradient(left, #333333 0%, #333333 50%, #ffffff 50%, #ffffff 100%);
+  background-image: -o-linear-gradient(left, #333333 0%, 3333 50%, #ffffff 50%, FFFF 100%);
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #333333), color-stop(0.5, #333333), color-stop(0.5, #ffffff), color-stop(1, #ffffff));
   background-image: -webkit-linear-gradient(left, #333333 0%, #333333 50%, #ffffff 50%, #ffffff 100%);
   background-image: linear-gradient(to right, #333333 0%, #333333 50%, #ffffff 50%, #ffffff 100%);
@@ -271,7 +271,7 @@
 }
 #dark-top.overlay .featured-stories h5.byline,
 #dark-top.overlay .featured-stories h5.byline a {
-  color: #444444;
+  color: #444;
 }
 #dark-top.overlay .featured-stories article {
   border-top: solid 3px rgba(108, 185, 225, 0.5);
@@ -325,7 +325,7 @@
   #dark-top .row-fluid [class*='span'] {
     float: none;
     width: 100%;
-    margin: 0 0 0 0;
+    margin: 0;
   }
   #dark-top .span4 {
     margin-top: 30px !important;
