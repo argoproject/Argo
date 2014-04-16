@@ -87,7 +87,6 @@ if ( ! function_exists( 'largo_byline' ) ) {
 
 		if ( function_exists( 'get_coauthors' ) && !isset( $values['largo_byline_text'] ) ) {
 			$coauthors = get_coauthors( $post->ID );
-			count($coauthors);
 			foreach( $coauthors as $author ) {
 				$byline_text = $author->display_name;
 				if ( $org = $author->organization )
