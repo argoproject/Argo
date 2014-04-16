@@ -15,7 +15,7 @@ class largo_about_widget extends WP_Widget {
 	function widget( $args, $instance ) {
 		extract( $args );
 
-		$title = apply_filters('widget_title', empty( $instance['title'] ) ? __('About ' . get_bloginfo('name'), 'largo') : $instance['title'], $instance, $this->id_base);
+		$title = apply_filters('widget_title', empty( $instance['title'] ) ? sprintf( __( 'About %s', 'largo' ), get_bloginfo('name') ) : $instance['title'], $instance, $this->id_base);
 
 		echo $before_widget;
 		if ( $title )
@@ -38,7 +38,7 @@ class largo_about_widget extends WP_Widget {
 	}
 
 	function form( $instance ) {
-		$defaults = array( 'title' => __('About ' . get_bloginfo('name'), 'largo') );
+		$defaults = array( 'title' => sprintf( __( 'About %s', 'largo' ), get_bloginfo('name') ) );
 		$instance = wp_parse_args( (array) $instance, $defaults );
 		?>
 		<p>
