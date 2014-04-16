@@ -103,22 +103,22 @@ class largo_image_widget extends WP_Widget {
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
 		$new_instance = wp_parse_args( (array) $new_instance, self::get_defaults() );
-		$instance['title'] = strip_tags($new_instance['title']);
+		$instance['title'] = sanitize_text_field( $new_instance['title'] );
 		if ( current_user_can('unfiltered_html') ) {
 			$instance['description'] = $new_instance['description'];
 		} else {
-			$instance['description'] = wp_filter_post_kses($new_instance['description']);
+			$instance['description'] = wp_filter_post_kses( $new_instance['description'] );
 		}
-		$instance['link'] = $new_instance['link'];
-		$instance['linktarget'] = $new_instance['linktarget'];
+		$instance['link'] = esc_url_raw( $new_instance['link'] );
+		$instance['linktarget'] = sanitize_key( $new_instance['linktarget'] );
 		$instance['width'] = abs( $new_instance['width'] );
 		$instance['height'] =abs( $new_instance['height'] );
 		if ( !defined( 'IMAGE_WIDGET_COMPATIBILITY_TEST' ) ) {
-			$instance['size'] = $new_instance['size'];
+			$instance['size'] = sanitize_key( $new_instance['size'] );
 		}
-		$instance['align'] = $new_instance['align'];
-		$instance['alt'] = $new_instance['alt'];
-		$instance['track'] = $new_instance['track'];
+		$instance['align'] = sanitize_key( $new_instance['align'] );
+		$instance['alt'] = sanitize_text_field( $new_instance['alt'] );
+		$instance['track'] = ! empty( $new_instance['track'] ) ? 1 : 0;
 
 		// Reverse compatibility with $image, now called $attachement_id
 		if ( !defined( 'IMAGE_WIDGET_COMPATIBILITY_TEST' ) && $new_instance['attachment_id'] > 0 ) {
