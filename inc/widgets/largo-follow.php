@@ -104,7 +104,7 @@ class largo_follow_widget extends WP_Widget {
 	function form( $instance ) {
 
 		/* Set up some default widget settings. */
-		$defaults = array( 'title' => __('Follow ' . get_bloginfo('name'), 'largo') );
+		$defaults = array( 'title' => sprintf( __('Follow %s', 'largo'), get_bloginfo('name') ) );
 		$instance = wp_parse_args( (array) $instance, $defaults );
 		?>
 
