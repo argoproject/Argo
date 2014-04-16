@@ -46,7 +46,7 @@
 		<div class="global-nav">
 			<nav id="top-nav" class="span12">
 	        	<span class="visuallyhidden">
-	        		<a href="#main" title="Skip to content"><?php _e('Skip to content', 'largo'); ?></a>
+	        		<a href="#main" title="<?php esc_attr_e( 'Skip to content', 'largo' ); ?>"><?php _e( 'Skip to content', 'largo' ); ?></a>
 	        	</span>
 	        	<?php
 							$top_args = array(
