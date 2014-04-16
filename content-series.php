@@ -16,7 +16,7 @@ $tags = of_get_option ('tag_display');
     	<?php } ?>
 
  		<h2 class="entry-title">
- 			<a href="<?php the_permalink(); ?>" title="Permalink to <?php the_title_attribute(); ?>" rel="bookmark"><?php the_title(); ?></a>
+ 			<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute( array( 'before' => __( 'Permalink to', 'largo' ) . ' ' ) )?>" rel="bookmark"><?php the_title(); ?></a>
  		</h2>
 
  		<?php if ( isset($opt['show']['byline']) ) : ?>

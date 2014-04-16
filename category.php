@@ -62,7 +62,7 @@ global $tags;
 					<?php } ?>
 							<header>
 						 		<h2 class="entry-title">
-						 			<a href="<?php the_permalink(); ?>" title="Permalink to <?php the_title_attribute(); ?>" rel="bookmark"><?php the_title(); ?></a>
+						 			<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute( array( 'before' => __( 'Permalink to', 'largo' ) . ' ' ) )?>" rel="bookmark"><?php the_title(); ?></a>
 						 		</h2>
 
 						 		<h5 class="byline"><?php largo_byline(); ?></h5>
@@ -86,7 +86,7 @@ global $tags;
 						<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'medium' ); ?></a>
 
 							<h2 class="entry-title">
-								<a href="<?php the_permalink(); ?>" title="Permalink to <?php the_title_attribute(); ?>" rel="bookmark"><?php the_title(); ?></a>
+								<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute( array( 'before' => __( 'Permalink to', 'largo' ) . ' ' ) )?>" rel="bookmark"><?php the_title(); ?></a>
 							</h2>
 					</article><!-- #post-<?php the_ID(); ?> -->
 				<?php
