@@ -42,8 +42,8 @@ class largo_about_widget extends WP_Widget {
 		$instance = wp_parse_args( (array) $instance, $defaults );
 		?>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e('Title:', 'largo'); ?></label>
-			<input id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" style="width:90%;" />
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title', 'largo' ); ?>:</label>
+			<input id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $instance['title'] ); ?>" style="width:90%;" />
 		</p>
 	<?php
 	}
