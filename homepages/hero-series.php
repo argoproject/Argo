@@ -14,8 +14,8 @@ global $largo, $shown_ids, $tags, $post;
 		<aside id="view-format">
 			<h1><?php _e('View', 'largo'); ?></h1>
 			<ul>
-				<li><a href="#" class="active" data-style="top">Top Stories</a></li>
-				<li><a href="#" data-style="list">List</a></li>
+				<li><a href="#" class="active" data-style="top"><?php _e( 'Top Stories', 'largo' ); ?></a></li>
+				<li><a href="#" data-style="list"><?php _e( 'List', 'largo' ); ?></a></li>
 			</ul>
 		</aside>
 
@@ -40,7 +40,7 @@ global $largo, $shown_ids, $tags, $post;
 					<article class="<?php if ($has_series) echo 'span8'; ?>">
 						<h5 class="top-tag"><?php largo_top_term( array('post'=>$post->ID) ); ?></h5>
 						<h2><a href="<?php the_permalink(); ?>"><?php echo the_title(); ?></a></h2>
-						<h5 class="byline"><?php _e('By'); ?> <?php largo_author_link( true, $post ); ?></h5>
+						<h5 class="byline"><?php _e( 'By', 'largo' ); ?> <?php largo_author_link( true, $post ); ?></h5>
 						<section>
 							<?php largo_excerpt( $post, 2, false ); ?>
 						</section>
