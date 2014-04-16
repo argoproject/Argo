@@ -131,9 +131,9 @@ add_filter('get_sidebar','widget_counter_reset', 99);
  * @uses add_action() 'in_widget_form'
  */
 function largo_widget_custom_fields_form( $widget, $args, $instance ) {
-	$desktop = $instance['hidden_desktop'] ? 'checked="checked"' : '';
-	$tablet = $instance['hidden_tablet'] ? 'checked="checked"' : '';
-	$phone = $instance['hidden_phone'] ? 'checked="checked"' : '';
+	$desktop = ! empty( $instance['hidden_desktop'] ) ? 'checked="checked"' : '';
+	$tablet = ! empty( $instance['hidden_tablet'] ) ? 'checked="checked"' : '';
+	$phone = ! empty( $instance['hidden_phone'] ) ? 'checked="checked"' : '';
 ?>
   <label for="<?php echo $widget->get_field_id( 'widget_class' ); ?>"><?php _e('Widget Background', 'largo'); ?></label>
   <select id="<?php echo $widget->get_field_id('widget_class'); ?>" name="<?php echo $widget->get_field_name('widget_class'); ?>" class="widefat" style="width:90%;">
@@ -187,9 +187,9 @@ add_filter('widget_form_callback', 'largo_register_widget_custom_fields', 10, 2)
  */
 function largo_widget_update_extend ( $instance, $new_instance ) {
   $instance['widget_class'] = $new_instance['widget_class'];
-  $instance['hidden_desktop'] = $new_instance['hidden_desktop'] ? 1 : 0;
-  $instance['hidden_tablet'] = $new_instance['hidden_tablet'] ? 1 : 0;
-  $instance['hidden_phone'] = $new_instance['hidden_phone'] ? 1 : 0;
+  $instance['hidden_desktop'] = ! empty( $new_instance['hidden_desktop'] ) ? 1 : 0;
+  $instance['hidden_tablet'] = ! empty( $new_instance['hidden_tablet'] ) ? 1 : 0;
+  $instance['hidden_phone'] = ! empty( $new_instance['hidden_phone'] ) ? 1 : 0;
   $instance['title_link'] = esc_url( $new_instance['title_link'] );
   return $instance;
 }
