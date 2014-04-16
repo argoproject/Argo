@@ -97,7 +97,7 @@
 	</header>
 
 	<header class="print-header">
-		<p><strong><?php echo esc_attr( get_bloginfo( 'name' ) ); ?></strong> (<?php echo esc_url( $current_url ); ?>)</p>
+		<p><strong><?php echo esc_html( get_bloginfo( 'name' ) ); ?></strong> (<?php echo esc_url( $current_url ); ?>)</p>
 	</header>
 
 	<div class="sticky-nav-wrapper">
