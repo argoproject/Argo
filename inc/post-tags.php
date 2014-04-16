@@ -145,41 +145,47 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 		$output = '<div class="post-social clearfix"><div class="left">';
 
 		if ( $utilities['twitter'] === '1' ) {
-			$twitter_link = of_get_option( 'twitter_link' ) ? 'data-via="' . twitter_url_to_username( of_get_option( 'twitter_link' ) ) . '"' : '';
-			$twitter_related = get_the_author_meta( 'twitter' ) ? get_the_author_meta( 'twitter' ) . ':Follow the author of this article' : '';
+			$twitter_link = of_get_option( 'twitter_link' ) ? 'data-via="' . esc_url( twitter_url_to_username( of_get_option( 'twitter_link' ) ) ) . '"' : '';
+			$twitter_related = get_the_author_meta( 'twitter' ) ? sprintf( __( '%s:Follow the author of this article', 'largo' ), get_the_author_meta( 'twitter' ) ) : '';
 			$twitter_count = (of_get_option( 'show_twitter_count' ) == 0) ? 'data-count="none"' : '';
 
-			$output .= sprintf(__('<span class="twitter"><a href="http://twitter.com/share" class="twitter-share-button" data-url="%1$s" data-text="%2$s" %3$s %4$s %5$s>Tweet</a></span>', 'largo'),
+			$output .= sprintf( '<span class="twitter"><a href="http://twitter.com/share" class="twitter-share-button" data-url="%1$s" data-text="%2$s" %3$s %4$s %5$s>%6$s</a></span>',
 				get_permalink(),
 				get_the_title(),
 				$twitter_link,
 				$twitter_related,
-				$twitter_count
+				$twitter_count,
+				esc_attr( __( 'Tweet', 'largo' ) )
 			);
 		}
 
 		if ( $utilities['facebook'] === '1' )
 			$output .= sprintf( '<span class="facebook"><fb:like href="%1$s" send="false" layout="button_count" show_faces="false" action="%2$s"></fb:like></span>',
 				get_permalink(),
-				of_get_option( 'fb_verb' )
+				esc_attr( of_get_option( 'fb_verb' ) )
 			);
 
 		$output .= '</div><div class="right">';
 
-		if ( $utilities['sharethis'] === '1' )
-			$output .= __('<span class="st_sharethis" displayText="Share"></span>', 'largo');
+		if ( $utilities['sharethis'] === '1' ) {
+			$output .= '<span class="st_sharethis" displayText="' . esc_attr( __( 'Share', 'largo' ) ) . '"></span>';
+		}
 
-		if ( $utilities['email'] === '1' )
-			$output .= __('<span class="st_email" displayText="Email"></span>', 'largo');
+		if ( $utilities['email'] === '1' ) {
+			$output .= '<span class="st_email" displayText="' . esc_attr( __( 'Email', 'largo' ) ) . '"></span>';
+		}
 
-		if ( $utilities['print'] === '1' )
-			$output .= __('<span class="print"><a href="#" onclick="window.print()" title="print this article" rel="nofollow"><i class="icon-print"></i> Print</a></span>', 'largo');
+		if ( $utilities['print'] === '1' ) {
+			$output .= '<span class="print"><a href="#" onclick="window.print()" title="' . esc_attr( __( 'Print this article', 'largo' ) ) . '" rel="nofollow"><i class="icon-print"></i> ' . esc_attr( __( 'Print', 'largo' ) ) . '</a></span>';
+		}
 
 		$output .= '</div></div>';
 
-		if ( $echo )
+		if ( $echo ) {
 			echo $output;
-		return $output;
+		} else {
+			return $output;
+		}
 	}
 }
 
