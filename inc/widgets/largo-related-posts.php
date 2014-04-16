@@ -79,18 +79,18 @@ class largo_related_posts_widget extends WP_Widget {
 		$title = esc_attr( $instance['title'] );
 		$qty = $instance['qty'];
 		?>
-		<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e( 'Title:', 'largo' ); ?></label>
+		<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e( 'Title', 'largo' ); ?>:</label>
 		<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" /></p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id('qty'); ?>"><?php _e('Number of Posts to Display:', 'largo'); ?></label>
+			<label for="<?php echo $this->get_field_id('qty'); ?>"><?php _e('Number of Posts to Display', 'largo'); ?>:</label>
 			<select name="<?php echo $this->get_field_name('qty'); ?>" id="<?php echo $this->get_field_id('qty'); ?>">
 			<?php
 			for ($i = 1; $i < 6; $i++) {
 				echo '<option value="', $i, '"', selected($qty, $i, FALSE), '>', $i, '</option>';
 			} ?>
 			</select>
-			<div class="description">It's best to keep this at just one.</div>
+			<div class="description"><?php _e( "It's best to keep this at just one.", 'largo' ); ?></div>
 		</p>
 
 		<p><input id="<?php echo $this->get_field_id('show_byline'); ?>" name="<?php echo $this->get_field_name('show_byline'); ?>" type="checkbox" value="1" <?php checked( $instance['show_byline'], 1);?> />
@@ -98,10 +98,10 @@ class largo_related_posts_widget extends WP_Widget {
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id('thumbnail_location'); ?>"><?php _e('Thumbnail position: ', 'largo'); ?></label>
+			<label for="<?php echo $this->get_field_id('thumbnail_location'); ?>"><?php _e('Thumbnail position', 'largo'); ?>:</label>
 			<select name="<?php echo $this->get_field_name('thumbnail_location'); ?>" id="<?php echo $this->get_field_id('thumbnail_location'); ?>">
 			<?php
-			$choices = array( 'before' => 'Before Headline', 'after' => 'After Headline' );
+			$choices = array( 'before' => __( 'Before Headline', 'largo' ), 'after' => __( 'After Headline', 'largo' ) );
 			foreach( $choices as $i => $display ) {
 				echo '<option value="', $i, '"', selected($instance['thumbnail_location'], $i, false), '>', $display, '</option>';
 			} ?>
