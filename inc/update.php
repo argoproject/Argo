@@ -147,7 +147,7 @@ function largo_widget_in_region( $widget_name, $region = 'article-bottom' ) {
 	$widgets = get_option( 'sidebars_widgets ');
 
 	if ( !isset( $widgets[$region] ) ) {
-		return new WP_Error( 'region-missing', __('Invalid region specified.') );
+		return new WP_Error( 'region-missing', __('Invalid region specified.', 'largo' ) );
 	}
 
 	foreach( $widgets[$region] as $key => $widget ) {

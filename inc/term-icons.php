@@ -84,17 +84,17 @@ class Largo_Term_Icons {
 		$current_value = largo_get_term_meta( $term->taxonomy, $term->term_id, 'associated_icon_uid', true );
 		?>
 		<tr class="form-field">
-			<th scope="row" valign="top"><label for="associated_icon"><?php _e('Term Icon', 'largo-child'); ?></label></th>
+			<th scope="row" valign="top"><label for="associated_icon"><?php _e('Term Icon', 'largo'); ?></label></th>
 			<td>
 				<select name="associated_icon" id="associated_icon" style="min-width: 300px;">
-					<option value="" <?php selected( $current_value, '' ); ?>><?php _e( 'No Icon', 'largo-child'); ?></option>
+					<option value="" <?php selected( $current_value, '' ); ?>><?php _e( 'No Icon', 'largo'); ?></option>
 					<?php foreach( $config->glyphs as $glyph ) {
 						$name = ucwords( str_replace( '-', ' ', $glyph->css ) );
 						echo '<option value="', esc_attr( $glyph->uid ), '" data-css="', esc_attr($config->css_prefix_text . $glyph->css), '" ', selected( $glyph->uid, $current_value ) ,'>',esc_html($name),'</option>';
 					} ?>
 				</select>
 				<br/>
-				<p class="description"><?php _e('The icon the theme may use with the term.', 'largo-child'); ?></p>
+				<p class="description"><?php _e('The icon the theme may use with the term.', 'largo'); ?></p>
 				<?php
 				wp_nonce_field( 'associated_icon-'.$term->term_id, '_associated_icon_nonce' );
 				?>
