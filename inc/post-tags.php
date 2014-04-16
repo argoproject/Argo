@@ -112,16 +112,10 @@ if ( ! function_exists( 'largo_byline' ) ) {
 			$authors = largo_author_link( false );
 		}
 
-		$markup = '<span class="by-author"><span class="by">By:</span> <span class="author vcard" itemprop="author">%1$s</span></span><span class="sep"> | </span><time class="entry-date updated dtstamp pubdate" datetime="%2$s">%3$s</time>';
-		if ( $exclude_date ) {
-			$markup = '<span class="by-author"><span class="by">By:</span> <span class="author vcard" itemprop="author">%1$s</span></span>';
+		$output = '<span class="by-author"><span class="by">' . __( 'By', 'largo' ) . ':</span> <span class="author vcard" itemprop="author">' . $authors . '</span></span>';
+		if ( ! $exclude_date ) {
+			$output .= '<span class="sep"> | </span><time class="entry-date updated dtstamp pubdate" datetime="' . esc_attr( get_the_date( 'c' ) ) . '">' . largo_time( false ) . '</time>';
 		}
-
-		$output = sprintf( __($markup, 'largo'),
-			$authors,
-			esc_attr( get_the_date( 'c' ) ),
-			largo_time( false )
-		);
 
 		if ( current_user_can( 'edit_post', get_the_ID() ) ) {
 			$output .= '<span class="sep"> | </span><span class="edit-link"><a href="' . get_edit_post_link( get_the_ID() ) . '">' . __( 'Edit This Post', 'largo' ) . '</a></span>';
