@@ -91,11 +91,8 @@ if ( ! function_exists( 'largo_byline' ) ) {
 				if ( $org = $author->organization )
 					$byline_text .= ' (' . $org . ')';
 
-				$out[]= sprintf('<a class="url fn n" href="/author/%1$s" title="Read All Posts By %2$s" rel="author">%3$s</a>',
-					$author->user_login,
-					$author->display_name,
-					$byline_text
-				);
+				$out[] = '<a class="url fn n" href="' . get_author_posts_url( $author->ID, $author->user_nicename ) . '" title="' . esc_attr( sprintf( __( 'Read All Posts By %s', 'largo' ), $author->display_name ) ) . '" rel="author">' . esc_html( $byline_text ) . '</a>';
+
 			}
 
 			if ( count($out) > 1 ) {
