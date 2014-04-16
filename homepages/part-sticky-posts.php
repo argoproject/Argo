@@ -65,7 +65,7 @@ if ( $query->have_posts() ) {
 ?>
 					<div class="sticky-features-list span4">
 						<ul>
-							<li><h4><?php _e('More from', 'largo'); ?><br /><span class="series-name"><?php echo $feature->name; ?></span></h4></li>
+							<li><h4><?php _e('More from', 'largo'); ?><br /><span class="series-name"><?php echo esc_html( $feature->name ); ?></span></h4></li>
 							<?php
 								foreach ( $feature_posts as $feature_post ):
 									printf( '<li><a href="%1$s">%2$s</a></li>',
