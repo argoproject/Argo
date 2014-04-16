@@ -57,7 +57,7 @@ get_header();
 					}
 
 					if ( $rss_link ) {
-						printf(__('<a class="rss-link rss-subscribe-link" href="%1$s">Subscribe <i class="icon-rss"></i></a>', 'largo'), $rss_link );
+						printf( '<a class="rss-link rss-subscribe-link" href="%1$s">%2$s <i class="icon-rss"></i></a>', $rss_link, __( 'Subscribe', 'largo' ) );
 					}
 
 					if ( $title)
