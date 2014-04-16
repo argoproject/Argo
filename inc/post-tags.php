@@ -103,7 +103,7 @@ if ( ! function_exists( 'largo_byline' ) ) {
 				$key = key($out);
 				reset($out);
 				$authors = implode( ', ', array_slice( $out, 0, -1 ) );
-				$authors .= ' <span class="and">and</span> ' . $out[$key];
+				$authors .= ' <span class="and">' . __( 'and', 'largo' ) . '</span> ' . $out[$key];
 			} else {
 				$authors = $out[0];
 			}
