@@ -66,10 +66,10 @@ class largo_related_posts_widget extends WP_Widget {
 
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
-		$instance['title'] = strip_tags($new_instance['title']);
-		$instance['qty'] = $new_instance['qty'];
+		$instance['title'] = sanitize_text_field($new_instance['title']);
+		$instance['qty'] = (int) $new_instance['qty'];
 		$instance['show_byline'] = (int) $new_instance['show_byline'];
-		$instance['thumbnail_location'] = $new_instance['thumbnail_location'];
+		$instance['thumbnail_location'] = sanitize_key( $new_instance['thumbnail_location'] );
 		return $instance;
 	}
 

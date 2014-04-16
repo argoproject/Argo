@@ -42,7 +42,7 @@ class largo_post_series_links_widget extends WP_Widget {
 	 */
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
-		$instance['title'] = strip_tags( $new_instance['title'] );
+		$instance['title'] = sanitize_text_field( $new_instance['title'] );
 		return $instance;
 	}
 
