@@ -26,7 +26,7 @@ class largo_tag_list_widget extends WP_Widget {
 	      <!-- Post tags -->
         <?php if ( largo_has_categories_or_tags() ): ?>
     		<div class="tags clearfix">
-    			<h5><?php echo $title; ?></h5>
+    			<h5><?php echo esc_attr( $title ); ?></h5>
     			<ul>
     				<?php largo_categories_and_tags( $instance['tag_limit'], true, true, true, '', 'li' ); ?>
     			</ul>
@@ -38,8 +38,8 @@ class largo_tag_list_widget extends WP_Widget {
 
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
-		$instance['title'] = strip_tags($new_instance['title']);
-		$instance['tag_limit'] = $new_instance['tag_limit'];
+		$instance['title'] = sanitize_text_field( $new_instance['title'] );
+		$instance['tag_limit'] = (int) $new_instance['tag_limit'];
 		return $instance;
 	}
 
@@ -50,7 +50,7 @@ class largo_tag_list_widget extends WP_Widget {
 		$tag_limit = $instance['tag_limit'];
 		?>
 		<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e( 'Title:', 'largo' ); ?></label>
-		<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" /></p>
+		<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" /></p>
 
 		<p>
 			<label for="<?php echo $this->get_field_id('tag_limit'); ?>"><?php _e('Max # of tags to show:', 'largo'); ?></label>
