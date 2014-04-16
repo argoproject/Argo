@@ -13,10 +13,10 @@ global $largo, $shown_ids, $tags;
 	<div class="hero-series-side span12">
 		<aside id="view-format">
 			<?php // @todo Make this check the cookie server-side ?>
-			<h1><?php _e('View', 'largo'); ?></h1>
+			<h1><?php _e( 'View', 'largo' ); ?></h1>
 			<ul>
-				<li><a href="#" class="active" data-style="top">Top Stories</a></li>
-				<li><a href="#" data-style="list">List</a></li>
+				<li><a href="#" class="active" data-style="top"><?php _e( 'Top Stories', 'largo' ); ?></a></li>
+				<li><a href="#" data-style="list"><?php _e( 'List', 'largo' ); ?></a></li>
 		</aside>
 
 		<div class="home-top">
@@ -47,7 +47,7 @@ global $largo, $shown_ids, $tags;
 						<article>
 							<h5 class="top-tag"><?php largo_top_term( array('post'=>$big_story->ID) ); ?></h5>
 							<h2><a href="<?php echo esc_url( get_permalink( $big_story->ID ) ); ?>"><?php echo get_the_title( $big_story->ID ); ?></a></h2>
-							<h5 class="byline"><?php _e('By'); ?> <?php largo_author_link( true, $big_story ); ?></h5>
+							<h5 class="byline"><?php _e( 'By', 'largo' ); ?> <?php largo_author_link( true, $big_story ); ?></h5>
 							<section>
 								<?php largo_excerpt( $big_story, 2, true, __('Continue&nbsp;Reading&nbsp;&rarr;', 'largo'), true, false ); ?>
 							</section>
@@ -74,7 +74,7 @@ global $largo, $shown_ids, $tags;
 						<article>
 							<h5 class="top-tag"><?php largo_top_term( array( 'post' => $featured_story->ID ) ); ?></h5>
 							<h4><a href="<?php echo get_permalink( $featured_story->ID ); ?>"><?php echo get_the_title( $featured_story->ID ); ?></a></h4>
-							<h5 class="byline"><?php _e('By'); ?> <?php largo_author_link( true, $featured_story ); ?></h5>
+							<h5 class="byline"><?php _e( 'By', 'largo' ); ?> <?php largo_author_link( true, $featured_story ); ?></h5>
 							<section>
 								<?php largo_excerpt( $featured_story, 2, true ); ?>
 							</section>
