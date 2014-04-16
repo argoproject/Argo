@@ -34,10 +34,10 @@ global $largo, $shown_ids, $tags;
 
 		if( $has_video = get_post_meta( $big_story->ID, 'youtube_url', true ) ): ?>
 			<div class="embed-container max-wide">
-				<iframe src="http://www.youtube.com/embed/<?php echo substr(strrchr( $has_video, "="), 1 ); ?>?modestbranding=1" frameborder="0" allowfullscreen></iframe>
+				<iframe src="<?php echo esc_url( 'http://www.youtube.com/embed/' . substr(strrchr( $has_video, "="), 1 ) . '?modestbranding=1' ); ?>" frameborder="0" allowfullscreen></iframe>
 			</div>
 		<?php else: ?>
-			<div class="full-hero <?php echo empty( $featured_stories ) ? 'two-third-width' : 'one-third-width'; ?>"><a href="<?php echo esc_attr( get_permalink( $big_story->ID ) ); ?>"><?php echo get_the_post_thumbnail( $big_story->ID, ( empty( $featured_stories ) ? 'two-third-full' : 'third-full') ); ?></a></div>
+			<div class="full-hero <?php echo empty( $featured_stories ) ? 'two-third-width' : 'one-third-width'; ?>"><a href="<?php echo esc_url( get_permalink( $big_story->ID ) ); ?>"><?php echo get_the_post_thumbnail( $big_story->ID, ( empty( $featured_stories ) ? 'two-third-full' : 'third-full') ); ?></a></div>
 		<?php endif; ?>
 
 		<div id="dark-top" <?php echo (!$has_video) ? 'class="overlay"' : ''; ?>>
@@ -46,7 +46,7 @@ global $largo, $shown_ids, $tags;
 					<div class="<?php echo empty( $featured_stories ) ? 'span12' : 'span6' ?>">
 						<article>
 							<h5 class="top-tag"><?php largo_top_term( array('post'=>$big_story->ID) ); ?></h5>
-							<h2><a href="<?php echo esc_attr( get_permalink( $big_story->ID ) ); ?>"><?php echo get_the_title( $big_story->ID ); ?></a></h2>
+							<h2><a href="<?php echo esc_url( get_permalink( $big_story->ID ) ); ?>"><?php echo get_the_title( $big_story->ID ); ?></a></h2>
 							<h5 class="byline"><?php _e('By'); ?> <?php largo_author_link( true, $big_story ); ?></h5>
 							<section>
 								<?php largo_excerpt( $big_story, 2, true, __('Continue&nbsp;Reading&nbsp;&rarr;', 'largo'), true, false ); ?>
