@@ -522,7 +522,7 @@ if ( ! function_exists( 'largo_comment' ) ) {
 			case 'trackback' :
 		?>
 		<li class="post pingback">
-			<p>Pingback: <?php comment_author_link(); ?><?php edit_comment_link( 'Edit', '<span class="edit-link">', '</span>' ); ?></p>
+			<p><?php _e( 'Pingback', 'largo' ); ?>: <?php comment_author_link(); ?><?php edit_comment_link( __( 'Edit', 'largo' ), '<span class="edit-link">', '</span>' ); ?></p>
 		<?php
 				break;
 			default :
@@ -550,11 +550,11 @@ if ( ! function_exists( 'largo_comment' ) ) {
 							);
 						?>
 
-						<?php edit_comment_link( 'Edit', '<span class="edit-link">', '</span>' ); ?>
+						<?php edit_comment_link( __( 'Edit', 'largo' ), '<span class="edit-link">', '</span>' ); ?>
 					</div><!-- .comment-author .vcard -->
 
 					<?php if ( $comment->comment_approved == '0' ) : ?>
-						<em class="comment-awaiting-moderation">Your comment is awaiting moderation.</em>
+						<em class="comment-awaiting-moderation"><?php _e( 'Your comment is awaiting moderation.', 'largo' ); ?></em>
 						<br />
 					<?php endif; ?>
 
@@ -563,7 +563,7 @@ if ( ! function_exists( 'largo_comment' ) ) {
 				<div class="comment-content"><?php comment_text(); ?></div>
 
 				<div class="reply">
-					<?php comment_reply_link( array_merge( $args, array( 'reply_text' => 'Reply <span>&darr;</span>', 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
+					<?php comment_reply_link( array_merge( $args, array( 'reply_text' => sprintf( '%s <span>&darr;</span>', __( 'Reply', 'largo' ) ), 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
 				</div><!-- .reply -->
 			</article><!-- #comment-## -->
 
