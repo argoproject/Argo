@@ -145,7 +145,7 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 		$output = '<div class="post-social clearfix"><div class="left">';
 
 		if ( $utilities['twitter'] === '1' ) {
-			$twitter_link = of_get_option( 'twitter_link' ) ? 'data-via="' . esc_url( twitter_url_to_username( of_get_option( 'twitter_link' ) ) ) . '"' : '';
+			$twitter_link = of_get_option( 'twitter_link' ) ? 'data-via="' . esc_attr( twitter_url_to_username( of_get_option( 'twitter_link' ) ) ) . '"' : '';
 			$twitter_related = get_the_author_meta( 'twitter' ) ? sprintf( __( '%s:Follow the author of this article', 'largo' ), get_the_author_meta( 'twitter' ) ) : '';
 			$twitter_count = (of_get_option( 'show_twitter_count' ) == 0) ? 'data-count="none"' : '';
 
