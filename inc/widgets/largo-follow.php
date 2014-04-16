@@ -71,7 +71,7 @@ class largo_follow_widget extends WP_Widget {
 				$pathFragments = explode('/', $path);
 				$yt_user = end($pathFragments);
 				?>
-				<div class="g-ytsubscribe" data-channel="<?php echo $yt_user; ?>" data-layout="default" data-count="default"></div>
+				<div class="g-ytsubscribe" data-channel="<?php echo esc_attr( $yt_user ); ?>" data-layout="default" data-count="default"></div>
 			<?php endif;
 
 			//the below is for G+ and YouTube subscribe buttons
@@ -94,7 +94,7 @@ class largo_follow_widget extends WP_Widget {
 	 */
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
-		$instance['title'] = strip_tags( $new_instance['title'] );
+		$instance['title'] = sanitize_text_field( $new_instance['title'] );
 		return $instance;
 	}
 
@@ -109,7 +109,7 @@ class largo_follow_widget extends WP_Widget {
 		?>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e('Title:', 'largo'); ?></label>
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e('Title', 'largo'); ?>:</label>
 			<input id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $instance['title'] ); ?>" style="width:90%;" />
 		</p>
 
