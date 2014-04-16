@@ -130,7 +130,7 @@ if ( ! function_exists( 'largo_byline' ) ) {
 			);
 
 		if ( is_single() && of_get_option( 'clean_read' ) === 'byline' )
-		 	$output .=	__('<a href="#" class="clean-read">View as "Clean Read"</a>', 'largo');
+			$output .= '<a href="#" class="clean-read">' . __( 'View as "Clean Read"', 'largo') . '</a>';
 
 		if ( $echo )
 			echo $output;
