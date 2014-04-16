@@ -157,11 +157,11 @@ function largo_layout_meta_box_display () {
 function largo_featured_video_meta_box_display() {
   global $post;
   $values = get_post_custom( $post->ID );
-  $youtube_url = isset( $values['youtube_url'] ) ? esc_attr( $values['youtube_url'][0] ) : '';
+  $youtube_url = isset( $values['youtube_url'] ) ? $values['youtube_url'][0] : '';
   wp_nonce_field( 'largo_meta_box_nonce', 'meta_box_nonce' );
 
   echo __('<p>In some cases you might want to use a video in the place of the featured image. If you would prefer to use a video, enter the URL for the video (YouTube only) here:</p>', 'largo');
-  echo '<input type="text" name="youtube_url" id="youtube_url" value="' . $youtube_url . '" />';
+  echo '<input type="text" name="youtube_url" id="youtube_url" value="' . esc_url( $youtube_url ) . '" />';
   echo __('<p class="small">Note that at the moment this is only used for the top story on the homepage but future versions of Largo might enable this functionality elsewhere in the theme.</p>', 'largo');
 
 	largo_register_meta_input('youtube_url');
@@ -195,7 +195,7 @@ function largo_custom_disclaimer_meta_box_display() {
 	}
 
 	echo '<p><strong>' . __('Disclaimer', 'largo') . '</strong><br />';
-	echo '<textarea name="disclaimer" style="width: 98%;">' . esc_html($value) . '</textarea>';
+	echo '<textarea name="disclaimer" style="width: 98%;">' . esc_textarea( $value ) . '</textarea>';
 
 	largo_register_meta_input('disclaimer', '_largo_custom_disclaimer_value' );
 }
@@ -227,7 +227,7 @@ function largo_top_tag_display() {
 	echo '<select name="top_term" id="top_term" class="dropdown">';
 
 	foreach( $terms as $term ) {
-		echo '<option value="' . $term->term_id . '"' . selected( $term->term_id, $top_term, FALSE ) . ">" . $term->name . '</option>';
+		echo '<option value="' . (int) $term->term_id . '"' . selected( $term->term_id, $top_term, FALSE ) . ">" . $term->name . '</option>';
 	}
 
 	echo '</select>';
