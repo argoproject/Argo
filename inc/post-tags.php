@@ -82,11 +82,10 @@ if ( ! function_exists( 'largo_author_link' ) ) {
  */
 if ( ! function_exists( 'largo_byline' ) ) {
 	function largo_byline( $echo = true, $exclude_date = false ) {
-		global $post;
-		$values = get_post_custom( $post->ID );
+		$values = get_post_custom( get_the_ID() );
 
 		if ( function_exists( 'get_coauthors' ) && !isset( $values['largo_byline_text'] ) ) {
-			$coauthors = get_coauthors( $post->ID );
+			$coauthors = get_coauthors( get_the_ID() );
 			foreach( $coauthors as $author ) {
 				$byline_text = $author->display_name;
 				if ( $org = $author->organization )
@@ -124,7 +123,7 @@ if ( ! function_exists( 'largo_byline' ) ) {
 			largo_time( false )
 		);
 
-		if ( current_user_can( 'edit_post', $post->ID ) )
+		if ( current_user_can( 'edit_post', get_the_ID() ) )
 			$output .=  sprintf( __('<span class="sep"> | </span><span class="edit-link"><a href="%s">Edit This Post</a></span>', 'largo'),
 				get_edit_post_link()
 			);
