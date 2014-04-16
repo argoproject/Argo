@@ -63,7 +63,7 @@ class largo_taxonomy_list_widget extends WP_Widget {
 
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
-		$instance['title'] = strip_tags($new_instance['title']);
+		$instance['title'] = sanitize_text_field($new_instance['title']);
 		$instance['taxonomy'] = strtolower(strip_tags($new_instance['taxonomy']));
 		$instance['dropdown'] = !empty($new_instance['dropdown']) ? 1 : 0;
 		return $instance;

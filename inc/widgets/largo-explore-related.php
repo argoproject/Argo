@@ -27,10 +27,10 @@ class largo_explore_related_widget extends WP_Widget {
 
 			<div id="related-posts" class="idTabs row-fluid clearfix">
 				<ul id="related-post-nav" class="span4">
-					<li><h5><?php echo $title; ?></h5></li>
+					<li><h5><?php echo esc_html( $title ); ?></h5></li>
 					<?php
 						foreach ( $rel_topics as $count => $topic ) {
-							echo '<li><a href="#rp' . $count . '">' . $topic->name . '</a></li>';
+							echo '<li><a href="#rp' . (int) $count . '">' . esc_html( $topic->name ) . '</a></li>';
 						}
 					?>
 				</ul>
@@ -39,7 +39,7 @@ class largo_explore_related_widget extends WP_Widget {
 					<?php foreach ( $rel_topics as $count => $topic ):
 						$rel_posts = largo_get_recent_posts_for_term( $topic, $instance['posts'] );
 						?>
-						<div id="rp<?php echo $count; ?>">
+						<div id="rp<?php echo (int) $count; ?>">
 							<ul>
 							<?php
 								// the top related post
@@ -50,9 +50,9 @@ class largo_explore_related_widget extends WP_Widget {
 								<?php
 									$permalink = get_permalink( $top_post->ID );
 									$post_title = $top_post->post_title;
-									echo '<h3><a href="' . $permalink . '" title="Read: ' . $post_title . '">' . $post_title . '</a></h3>';
+									echo '<h3><a href="' . esc_url( $permalink ) . '" title="' . esc_attr( sprintf( __( 'Read %s', 'largo' ), $post_title ) ) . '">' . esc_html( $post_title ) . '</a></h3>';
 									if ( get_the_post_thumbnail( $top_post->ID ) )
-										echo '<a href="' . $permalink . '"/>' . get_the_post_thumbnail( $top_post->ID, '60x60' ) . '</a>';
+										echo '<a href="' . esc_url( $permalink ) . '"/>' . get_the_post_thumbnail( $top_post->ID, '60x60' ) . '</a>';
 									if ($top_post->post_excerpt) {
 										echo '<p>' . $top_post->post_excerpt . '</p>';
 									} else {
@@ -83,9 +83,9 @@ class largo_explore_related_widget extends WP_Widget {
 
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
-		$instance['title'] = strip_tags($new_instance['title']);
-		$instance['topics'] = $new_instance['topics'];
-		$instance['posts'] = $new_instance['posts'];
+		$instance['title'] = sanitize_text_field( $new_instance['title'] );
+		$instance['topics'] = (int) $new_instance['topics'];
+		$instance['posts'] = (int) $new_instance['posts'];
 		return $instance;
 	}
 
@@ -96,29 +96,29 @@ class largo_explore_related_widget extends WP_Widget {
 		$topics = $instance['topics'];
 		$posts = $instance['posts'];
 		?>
-		<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e( 'Title:', 'largo' ); ?></label>
+		<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e( 'Title', 'largo' ); ?>:</label>
 		<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" /></p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id('topics'); ?>"><?php _e('Max # of terms to include:', 'largo'); ?></label>
+			<label for="<?php echo $this->get_field_id('topics'); ?>"><?php _e('Max # of terms to include', 'largo'); ?>:</label>
 			<select name="<?php echo $this->get_field_name('topics'); ?>" id="<?php echo $this->get_field_id('topics'); ?>">
 			<?php
 			for ($i = 1; $i < 10; $i++) {
 				echo '<option value="', $i, '"', selected($topics, $i, FALSE), '>', $i, '</option>';
 			} ?>
 			</select>
-			<div class="description">Previous versions of Largo set this at 6.</div>
+			<div class="description"><?php _e( 'Previous versions of Largo set this at 6.', 'largo' ); ?></div>
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id('posts'); ?>"><?php _e('Max # of posts per term:', 'largo'); ?></label>
+			<label for="<?php echo $this->get_field_id('posts'); ?>"><?php _e('Max # of posts per term', 'largo'); ?>:</label>
 			<select name="<?php echo $this->get_field_name('posts'); ?>" id="<?php echo $this->get_field_id('posts'); ?>">
 			<?php
 			for ($i = 1; $i < 10; $i++) {
 				echo '<option value="', $i, '"', selected($posts, $i, FALSE), '>', $i, '</option>';
 			} ?>
 			</select>
-			<div class="description">Previous versions of Largo set this at 3.</div>
+			<div class="description"><?php _e( 'Previous versions of Largo set this at 3.', 'largo' ); ?></div>
 		</p>
 
 	<?php
