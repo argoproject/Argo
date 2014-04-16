@@ -82,21 +82,17 @@ if ( ! function_exists( 'largo_author_link' ) ) {
  */
 if ( ! function_exists( 'largo_byline' ) ) {
 	function largo_byline( $echo = true, $exclude_date = false ) {
-		global $post;
-		$values = get_post_custom( $post->ID );
+		$values = get_post_custom( get_the_ID() );
 
 		if ( function_exists( 'get_coauthors' ) && !isset( $values['largo_byline_text'] ) ) {
-			$coauthors = get_coauthors( $post->ID );
+			$coauthors = get_coauthors( get_the_ID() );
 			foreach( $coauthors as $author ) {
 				$byline_text = $author->display_name;
 				if ( $org = $author->organization )
 					$byline_text .= ' (' . $org . ')';
 
-				$out[]= sprintf('<a class="url fn n" href="/author/%1$s" title="Read All Posts By %2$s" rel="author">%3$s</a>',
-					$author->user_login,
-					$author->display_name,
-					$byline_text
-				);
+				$out[] = '<a class="url fn n" href="' . get_author_posts_url( $author->ID, $author->user_nicename ) . '" title="' . esc_attr( sprintf( __( 'Read All Posts By %s', 'largo' ), $author->display_name ) ) . '" rel="author">' . esc_html( $byline_text ) . '</a>';
+
 			}
 
 			if ( count($out) > 1 ) {
@@ -104,7 +100,7 @@ if ( ! function_exists( 'largo_byline' ) ) {
 				$key = key($out);
 				reset($out);
 				$authors = implode( ', ', array_slice( $out, 0, -1 ) );
-				$authors .= ' <span class="and">and</span> ' . $out[$key];
+				$authors .= ' <span class="and">' . __( 'and', 'largo' ) . '</span> ' . $out[$key];
 			} else {
 				$authors = $out[0];
 			}
@@ -113,28 +109,24 @@ if ( ! function_exists( 'largo_byline' ) ) {
 			$authors = largo_author_link( false );
 		}
 
-		$markup = '<span class="by-author"><span class="by">By:</span> <span class="author vcard" itemprop="author">%1$s</span></span><span class="sep"> | </span><time class="entry-date updated dtstamp pubdate" datetime="%2$s">%3$s</time>';
-		if ( $exclude_date ) {
-			$markup = '<span class="by-author"><span class="by">By:</span> <span class="author vcard" itemprop="author">%1$s</span></span>';
+		$output = '<span class="by-author"><span class="by">' . __( 'By', 'largo' ) . ':</span> <span class="author vcard" itemprop="author">' . $authors . '</span></span>';
+		if ( ! $exclude_date ) {
+			$output .= '<span class="sep"> | </span><time class="entry-date updated dtstamp pubdate" datetime="' . esc_attr( get_the_date( 'c' ) ) . '">' . largo_time( false ) . '</time>';
 		}
 
-		$output = sprintf( __($markup, 'largo'),
-			$authors,
-			esc_attr( get_the_date( 'c' ) ),
-			largo_time( false )
-		);
+		if ( current_user_can( 'edit_post', get_the_ID() ) ) {
+			$output .= '<span class="sep"> | </span><span class="edit-link"><a href="' . get_edit_post_link( get_the_ID() ) . '">' . __( 'Edit This Post', 'largo' ) . '</a></span>';
+		}
 
-		if ( current_user_can( 'edit_post', $post->ID ) )
-			$output .=  sprintf( __('<span class="sep"> | </span><span class="edit-link"><a href="%s">Edit This Post</a></span>', 'largo'),
-				get_edit_post_link()
-			);
+		if ( is_single() && of_get_option( 'clean_read' ) === 'byline' ) {
+			$output .= '<a href="#" class="clean-read">' . __( 'View as "Clean Read"', 'largo') . '</a>';
+		}
 
-		if ( is_single() && of_get_option( 'clean_read' ) === 'byline' )
-		 	$output .=	__('<a href="#" class="clean-read">View as "Clean Read"</a>', 'largo');
-
-		if ( $echo )
+		if ( $echo ) {
 			echo $output;
-		return $output;
+		} else {
+			return $output;
+		}
 	}
 }
 
