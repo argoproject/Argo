@@ -27,10 +27,10 @@ class largo_explore_related_widget extends WP_Widget {
 
 			<div id="related-posts" class="idTabs row-fluid clearfix">
 				<ul id="related-post-nav" class="span4">
-					<li><h5><?php echo $title; ?></h5></li>
+					<li><h5><?php echo esc_html( $title ); ?></h5></li>
 					<?php
 						foreach ( $rel_topics as $count => $topic ) {
-							echo '<li><a href="#rp' . $count . '">' . $topic->name . '</a></li>';
+							echo '<li><a href="#rp' . (int) $count . '">' . esc_html( $topic->name ) . '</a></li>';
 						}
 					?>
 				</ul>
@@ -39,7 +39,7 @@ class largo_explore_related_widget extends WP_Widget {
 					<?php foreach ( $rel_topics as $count => $topic ):
 						$rel_posts = largo_get_recent_posts_for_term( $topic, $instance['posts'] );
 						?>
-						<div id="rp<?php echo $count; ?>">
+						<div id="rp<?php echo (int) $count; ?>">
 							<ul>
 							<?php
 								// the top related post
@@ -83,9 +83,9 @@ class largo_explore_related_widget extends WP_Widget {
 
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
-		$instance['title'] = strip_tags($new_instance['title']);
-		$instance['topics'] = $new_instance['topics'];
-		$instance['posts'] = $new_instance['posts'];
+		$instance['title'] = sanitize_text_field( $new_instance['title'] );
+		$instance['topics'] = (int) $new_instance['topics'];
+		$instance['posts'] = (int) $new_instance['posts'];
 		return $instance;
 	}
 
