@@ -127,12 +127,15 @@ if ( ! function_exists( 'largo_byline' ) ) {
 			$output .= '<span class="sep"> | </span><span class="edit-link"><a href="' . get_edit_post_link( get_the_ID() ) . '">' . __( 'Edit This Post', 'largo' ) . '</a></span>';
 		}
 
-		if ( is_single() && of_get_option( 'clean_read' ) === 'byline' )
+		if ( is_single() && of_get_option( 'clean_read' ) === 'byline' ) {
 			$output .= '<a href="#" class="clean-read">' . __( 'View as "Clean Read"', 'largo') . '</a>';
+		}
 
-		if ( $echo )
+		if ( $echo ) {
 			echo $output;
-		return $output;
+		} else {
+			return $output;
+		}
 	}
 }
 
