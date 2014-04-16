@@ -186,7 +186,7 @@ add_filter('widget_form_callback', 'largo_register_widget_custom_fields', 10, 2)
  * @uses add_filter() 'widget_update_callback'
  */
 function largo_widget_update_extend ( $instance, $new_instance ) {
-  $instance['widget_class'] = $new_instance['widget_class'];
+  $instance['widget_class'] = sanitize_key( $new_instance['widget_class'] );
   $instance['hidden_desktop'] = ! empty( $new_instance['hidden_desktop'] ) ? 1 : 0;
   $instance['hidden_tablet'] = ! empty( $new_instance['hidden_tablet'] ) ? 1 : 0;
   $instance['hidden_phone'] = ! empty( $new_instance['hidden_phone'] ) ? 1 : 0;
