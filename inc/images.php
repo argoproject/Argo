@@ -42,16 +42,34 @@ add_action( 'after_setup_theme', 'largo_create_image_sizes' );
  */
 if ( ! function_exists( 'largo_set_media_options' ) ) {
 	function largo_set_media_options() {
-		update_option('thumbnail_size_w', 140);
-		update_option('thumbnail_size_h', 140);
-		update_option('thumbnail_crop', 1);
-		update_option('medium_size_w', MEDIUM_WIDTH);
-		update_option('medium_size_h', 9999);
-		update_option('large_size_w', LARGE_WIDTH);
-		update_option('large_size_h', 9999);
-		update_option('embed_autourls', 1);
-		update_option('embed_size_w', LARGE_WIDTH);
-		update_option('embed_size_h', 9999);
+
+		add_filter( 'pre_option_thumbnail_size_w', function(){
+			return 140;
+		});
+		add_filter( 'pre_option_thumbnail_size_h', function(){
+			return 140;
+		});
+		add_filter( 'pre_option_thumbnail_crop', '__return_true' );
+		add_filter( 'pre_option_medium_size_w', function(){
+			return MEDIUM_WIDTH;
+		});
+		add_filter( 'pre_option_medium_size_h', function(){
+			return 9999;
+		});
+		add_filter( 'pre_option_large_size_w', function(){
+			return LARGE_WIDTH;
+		});
+		add_filter( 'pre_option_large_size_h', function(){
+			return 9999;
+		});
+		add_filter( 'pre_option_embed_autourls', '__return_true' );
+		add_filter( 'pre_option_embed_size_w', function(){
+			return LARGE_WIDTH;
+		});
+		add_filter( 'pre_option_embed_size_h', function(){
+			return 9999;
+		});
+
 	}
 }
 add_action( 'after_setup_theme', 'largo_set_media_options' );
