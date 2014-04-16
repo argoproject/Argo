@@ -204,9 +204,10 @@ function largo_has_gravatar( $email ) {
 	// Craft a potential url and test its headers
 	$hash = md5(strtolower(trim($email)));
 	$uri = 'http://www.gravatar.com/avatar/' . $hash . '?d=404';
-	$headers = @get_headers($uri);
-	if (preg_match("|200|", $headers[0]))
+	$response = wp_remote_head( $uri );
+	if ( 200 == wp_remote_retrieve_response_code( $response ) ) {
 		return true;
+	}
 	return false;
 }
 
