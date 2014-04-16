@@ -27,7 +27,7 @@ global $largo, $shown_ids, $tags, $post;
 
 		if( $has_video = get_post_meta( $post->ID, 'youtube_url', true ) ): ?>
 			<div class="embed-container max-wide">
-				<iframe src="http://www.youtube.com/embed/<?php echo substr(strrchr( $has_video, "="), 1 ); ?>?modestbranding=1" frameborder="0" allowfullscreen></iframe>
+				<iframe src="<?php echo esc_url( 'http://www.youtube.com/embed/' . substr(strrchr( $has_video, "="), 1 ) . '?modestbranding=1' ); ?>" frameborder="0" allowfullscreen></iframe>
 			</div>
 		<?php else: ?>
 			<div class="full-hero max-wide"><a href="<?php echo esc_attr( get_permalink( $post->ID ) ); ?>"><?php echo get_the_post_thumbnail( $post->ID, 'full' ); ?></a></div>
@@ -51,7 +51,7 @@ global $largo, $shown_ids, $tags, $post;
 						$feature_posts = largo_get_recent_posts_for_term( $feature, 3, 2 );
 					 ?>
 					<div class="span4 side-series">
-						<h5 class="top-tag"><a class="post-category-link" href="<?php echo get_term_link( $feature ); ?>"><?php echo $feature->name ?></a></h5>
+						<h5 class="top-tag"><a class="post-category-link" href="<?php echo get_term_link( $feature ); ?>"><?php echo esc_html( $feature->name ) ?></a></h5>
 						<?php foreach ( $feature_posts as $feature_post ):
 							$shown_ids[] = $feature_post->ID; ?>
 							<h4 class="related-story"><a href="<?php echo esc_url( get_permalink( $feature_post->ID ) ); ?>"><?php echo get_the_title( $feature_post->ID ); ?></a></h4>
