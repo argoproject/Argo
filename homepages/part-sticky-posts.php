@@ -74,7 +74,8 @@ if ( $query->have_posts() ) {
 									);
 								endforeach;
 								if ( count( $feature_posts ) == 3 )
-									printf( __('<li class="sticky-all"><a href="%1$s">Full&nbsp;Coverage&nbsp;&rarr;</a></li>', 'largo'),
+									printf( '<li class="sticky-all"><a href="%1$s">%2$s &rarr;</a></li>',
+										__( 'Full Coverage', 'largo' ),
 										esc_url( get_term_link( $feature ) )
 									);
 							?>
