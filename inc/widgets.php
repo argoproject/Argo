@@ -190,7 +190,7 @@ function largo_widget_update_extend ( $instance, $new_instance ) {
   $instance['hidden_desktop'] = ! empty( $new_instance['hidden_desktop'] ) ? 1 : 0;
   $instance['hidden_tablet'] = ! empty( $new_instance['hidden_tablet'] ) ? 1 : 0;
   $instance['hidden_phone'] = ! empty( $new_instance['hidden_phone'] ) ? 1 : 0;
-  $instance['title_link'] = esc_url( $new_instance['title_link'] );
+  $instance['title_link'] = esc_url_raw( $new_instance['title_link'] );
   return $instance;
 }
 add_filter( 'widget_update_callback', 'largo_widget_update_extend', 10, 2 );
