@@ -136,7 +136,7 @@ if ( ! function_exists( 'largo_term_to_label' ) ) {
 /**
  * Helper function for getting posts in proper landing-page order for a series
  * @param integer series term id
- & @param inteter number of posts to fetch, defaults to all
+ * @param integer number of posts to fetch, defaults to all
  */
 function largo_get_series_posts( $series_id, $number = -1 ) {
 
