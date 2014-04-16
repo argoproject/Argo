@@ -52,7 +52,7 @@ add_filter( 'default_hidden_meta_boxes', 'largo_change_default_hidden_metaboxes'
 // Related posts controls
 largo_add_meta_box(
 	'largo_additional_options',
-	'Additional Options',
+	__( 'Additional Options', 'largo' ),
 	'largo_custom_related_meta_box_display', //could also be added with largo_add_meta_content('largo_custom_related_meta_box_display', 'largo_additional_options')
 	'post',
 	'side',
@@ -62,7 +62,7 @@ largo_add_meta_box(
 // Related posts controls
 largo_add_meta_box(
 	'largo_byline_meta',
-	'Custom Byline Options',
+	__( 'Custom Byline Options', 'largo' ),
 	'largo_byline_meta_box_display',
 	( of_get_option( 'custom_landing_enabled' ) ) ? array('post', 'cftl-tax-landing') : 'post',
 	'side',
@@ -72,7 +72,7 @@ largo_add_meta_box(
 // Layout options for post templates, custom sidebars
 largo_add_meta_box(
 	'largo_layout_meta',
-	'Layout Options',
+	__( 'Layout Options', 'largo' ),
 	'largo_layout_meta_box_display',
 	array('post', 'page'),
 	'side',
@@ -82,7 +82,7 @@ largo_add_meta_box(
 // Featured video instead of featured image
 largo_add_meta_box(
 	'largo_featured_video',
-	'Featured Video',
+	__( 'Featured Video', 'largo' ),
 	'largo_featured_video_meta_box_display',
 	'post',
 	'side',
@@ -92,7 +92,7 @@ largo_add_meta_box(
 // Disclaimer
 largo_add_meta_box(
 	'largo_custom_disclaimer',
-	'Disclaimer',
+	__( 'Disclaimer', 'largo' ),
 	'largo_custom_disclaimer_meta_box_display', //could also be added with largo_add_meta_content('largo_custom_related_meta_box_display', 'largo_additional_options')
 	'post',
 	'normal',
@@ -136,7 +136,7 @@ function largo_layout_meta_box_display () {
 		echo __('Select the Post Template you wish this post to use.', 'largo' ) . '</p>';
 		echo '<label class="hidden" for="post_template">' . __("Post Template", 'largo' ) . '</label>';
 		echo '<select name="_wp_post_template" id="post_template" class="dropdown">';
-		echo '<option value="">Default</option>';
+		echo '<option value="">' . __( 'Default', 'largo' ) . '</option>';
 		post_templates_dropdown(); //get the options
 		echo '</select>';
 		largo_register_meta_input('_wp_post_template');
