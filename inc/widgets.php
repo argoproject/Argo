@@ -152,7 +152,7 @@ function largo_widget_custom_fields_form( $widget, $args, $instance ) {
 
   <p>
   	<label for="<?php echo $widget->get_field_id('title_link'); ?>"><?php _e('Widget Title Link <small class="description">(Example: http://google.com)</small>', 'largo'); ?></label>
-    <input type="text" name="<?php echo $widget->get_field_name('title_link'); ?>" id="<?php echo $widget->get_field_id('title_link'); ?>"" class="widefat" value="<?php echo $instance['title_link']; ?>"" />
+    <input type="text" name="<?php echo $widget->get_field_name('title_link'); ?>" id="<?php echo $widget->get_field_id('title_link'); ?>"" class="widefat" value="<?php echo esc_attr( $instance['title_link'] ); ?>"" />
   </p>
 <?php
 }
@@ -203,7 +203,7 @@ add_filter( 'widget_update_callback', 'largo_widget_update_extend', 10, 2 );
  */
 function largo_add_link_to_widget_title( $title, $instance = null ) {
   if (!empty($title) && !empty($instance['title_link'])) {
-    $title = '<a href="' . $instance['title_link'] . '">' . $title . '</a>';
+    $title = '<a href="' . esc_url( $instance['title_link'] ) . '">' . esc_html( $title ) . '</a>';
   }
   return $title;
 }
