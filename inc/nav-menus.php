@@ -18,6 +18,11 @@ function largo_register_custom_menus() {
     );
     register_nav_menus( $menus );
 
+    // Avoid database writes on the frontend
+    if ( ! is_admin() ) {
+    	return;
+    }
+
     //Try to automatically link menus to each of the locations.
     foreach ( $menus as $location => $label ) {
         // if a location isn't wired up...

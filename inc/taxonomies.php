@@ -43,31 +43,36 @@ function largo_custom_taxonomies() {
 				'slug' 			=> 'category-featured'
 			)
 		);
-		foreach ( $prominence_terms as $term ) {
-			if ( ! term_exists( $term['name'], 'prominence' ) ) {
-				wp_insert_term(
-					$term['name'], 'prominence',
-					array(
-						'description' 	=> $term['description'],
-						'slug' 			=> $term['slug']
-					)
-				);
+
+		// Avoid writes on the frontend
+		if ( is_admin() ) {
+
+			foreach ( $prominence_terms as $term ) {
+				if ( ! term_exists( $term['name'], 'prominence' ) ) {
+					wp_insert_term(
+						$term['name'], 'prominence',
+						array(
+							'description' 	=> $term['description'],
+							'slug' 			=> $term['slug']
+						)
+					);
+				}
 			}
-		}
 
-        if ( ! term_exists('Top Story', 'prominence') ) {
-		    $parent_term = term_exists( 'Homepage Featured', 'prominence' );
-		    $parent_term_id = $parent_term['term_id'];
-		    wp_insert_term(
-		    	__('Top Story', 'largo'), 'prominence',
-		    	array(
-		    		'parent'		=> $parent_term_id,
-		    		'description' 	=> __('If you are using the Newspaper or Carousel optional homepage layout, add this label to a post to make it the top story on the homepage', 'largo'),
-		    		'slug' 			=> 'top-story' )
-		    	);
-		}
+	        if ( ! term_exists('Top Story', 'prominence') ) {
+			    $parent_term = term_exists( 'Homepage Featured', 'prominence' );
+			    $parent_term_id = $parent_term['term_id'];
+			    wp_insert_term(
+			    	__('Top Story', 'largo'), 'prominence',
+			    	array(
+			    		'parent'		=> $parent_term_id,
+			    		'description' 	=> __('If you are using the Newspaper or Carousel optional homepage layout, add this label to a post to make it the top story on the homepage', 'largo'),
+			    		'slug' 			=> 'top-story' )
+			    	);
+			}
 
-		delete_option( 'prominence_children' );
+			delete_option( 'prominence_children' );
+		}
     }
 
     // SERIES
