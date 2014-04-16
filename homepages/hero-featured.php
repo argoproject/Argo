@@ -12,10 +12,10 @@ global $largo, $shown_ids, $tags, $post;
 <div id="homepage-featured" class="row-fluid clearfix">
 	<div class="hero-featured span12">
 		<aside id="view-format">
-			<h1><?php _e('View', 'largo'); ?></h1>
+			<h1><?php _e( 'View', 'largo' ); ?></h1>
 			<ul>
-				<li><a href="#" class="active" data-style="top">Top Stories</a></li>
-				<li><a href="#" data-style="list">List</a></li>
+				<li><a href="#" class="active" data-style="top"><?php _e( 'Top Stories', 'largo' ); ?></a></li>
+				<li><a href="#" data-style="list"><?php _e( 'List', 'largo' ); ?></a></li>
 			</ul>
 		</aside>
 
@@ -40,7 +40,7 @@ global $largo, $shown_ids, $tags, $post;
 					<article class="<?php if ($has_featured) echo 'span8'; ?>">
 						<h5 class="top-tag"><?php largo_top_term( array('post'=> $big_story->ID ) ); ?></h5>
 						<h2><a href="<?php the_permalink(); ?>"><?php echo the_title(); ?></a></h2>
-						<h5 class="byline"><?php _e('By'); ?> <?php largo_author_link( true, $big_story ); ?></h5>
+						<h5 class="byline"><?php _e( 'By', 'largo' ); ?> <?php largo_author_link( true, $big_story ); ?></h5>
 						<section>
 							<?php largo_excerpt( $big_story, 2, false ); ?>
 						</section>
