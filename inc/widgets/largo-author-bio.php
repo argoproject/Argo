@@ -21,21 +21,28 @@ class largo_author_widget extends WP_Widget {
 
 		if( is_single() || is_author() ):
 
-				if ( function_exists( 'get_coauthors' )  && !is_author() ) {
-					global $post;
-					$authors = get_coauthors( $post->ID );
-				} else {
-					$authors[] = get_userdata( get_the_author_meta( 'ID' ) );
+				if ( is_single() ) {
+					if ( function_exists( 'get_coauthors' ) ) {
+						$authors = get_coauthors( get_queried_object_id() );
+					} else {
+						$authors = array( get_user_by( 'id', get_queried_object()->post_author ) );
+					}
+				} else if ( is_author() ) {
+					$authors = array( get_queried_object() );
 				}
-
 
 				// make sure we have at least one bio before we show the widget
 				foreach ( $authors as $key => $author ) {
-					$bio = trim( get_the_author_meta( 'description', $author->ID ) );
-					if ( empty( $bio ) ) unset( $authors[$key] );
-					else $bios .= $bio;
+					$bio = trim( $author->description );
+					if ( empty( $bio ) ) {
+						unset( $authors[$key] );
+					} else {
+						$bios .= $bio;
+					}
 				}
-				if ( !is_author() && empty($bios) ) return;
+				if ( !is_author() && empty($bios) ) {
+					return;
+				}
 
 				echo $before_widget;
 				if ($title) {

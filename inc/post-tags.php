@@ -202,12 +202,22 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
  */
 function largo_has_gravatar( $email ) {
 	// Craft a potential url and test its headers
-	$hash = md5(strtolower(trim($email)));
+	$hash = md5( strtolower( trim( $email ) ) );
+
+	$cache_key = 'largo_has_gravatar_' . $hash;
+	if ( false !== ( $cache_value = get_transient( $cache_key ) ) ) {
+		return (bool) $cache_value;
+	}
+
 	$uri = 'http://www.gravatar.com/avatar/' . $hash . '?d=404';
-	$headers = @get_headers($uri);
-	if (preg_match("|200|", $headers[0]))
-		return true;
-	return false;
+	$response = wp_remote_head( $uri );
+	if ( 200 == wp_remote_retrieve_response_code( $response ) ) {
+		$cache_value = '1';
+	} else {
+		$cache_value = '0';
+	}
+	set_transient( $cache_key, $cache_value );
+	return (bool) $cache_value;
 }
 
 /**
