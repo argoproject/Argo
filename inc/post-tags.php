@@ -56,15 +56,15 @@ if ( ! function_exists( 'largo_author_link' ) ) {
 		$values = get_post_custom( $post->ID );
 		$author_id = ( $post ) ? $post->post_author : get_the_author_meta( 'ID' );
 
-		$byline_text = isset( $values['largo_byline_text'] ) ? esc_attr( $values['largo_byline_text'][0] ) : esc_html( get_the_author_meta('display_name', $author_id) );
+		$byline_text = isset( $values['largo_byline_text'] ) ? $values['largo_byline_text'][0] : get_the_author_meta('display_name', $author_id);
 
 		// if it's a custom byline but there's no link, just output the byline text
 		if ( isset( $values['largo_byline_text'] ) && !isset( $values['largo_byline_link'] ) ) {
-			$output = $byline_text;
+			$output = esc_html( $byline_text );
 		} else {
-			$byline_link = isset( $values['largo_byline_link'] ) ? esc_url( $values['largo_byline_link'][0] ) : get_author_posts_url( get_the_author_meta( 'ID', $author_id ) );
+			$byline_link = isset( $values['largo_byline_link'] ) ? $values['largo_byline_link'][0] : get_author_posts_url( get_the_author_meta( 'ID', $author_id ) );
 			$byline_title_attr = esc_attr( sprintf( __( 'More from %s','largo' ), $byline_text ) );
-			$output = '<a class="url fn n" href="' . $byline_link . '" title="' . $byline_title_attr . '" rel="author">' . $byline_text . '</a>';
+			$output = '<a class="url fn n" href="' . esc_url( $byline_link ) . '" title="' . esc_attr( $byline_title_attr ) . '" rel="author">' . esc_html( $byline_text ) . '</a>';
 		}
 
 		if ( $echo )
@@ -522,7 +522,7 @@ if ( ! function_exists( 'largo_comment' ) ) {
 			case 'trackback' :
 		?>
 		<li class="post pingback">
-			<p>Pingback: <?php comment_author_link(); ?><?php edit_comment_link( 'Edit', '<span class="edit-link">', '</span>' ); ?></p>
+			<p><?php _e( 'Pingback', 'largo' ); ?>: <?php comment_author_link(); ?><?php edit_comment_link( __( 'Edit', 'largo' ), '<span class="edit-link">', '</span>' ); ?></p>
 		<?php
 				break;
 			default :
@@ -550,11 +550,11 @@ if ( ! function_exists( 'largo_comment' ) ) {
 							);
 						?>
 
-						<?php edit_comment_link( 'Edit', '<span class="edit-link">', '</span>' ); ?>
+						<?php edit_comment_link( __( 'Edit', 'largo' ), '<span class="edit-link">', '</span>' ); ?>
 					</div><!-- .comment-author .vcard -->
 
 					<?php if ( $comment->comment_approved == '0' ) : ?>
-						<em class="comment-awaiting-moderation">Your comment is awaiting moderation.</em>
+						<em class="comment-awaiting-moderation"><?php _e( 'Your comment is awaiting moderation.', 'largo' ); ?></em>
 						<br />
 					<?php endif; ?>
 
@@ -563,7 +563,7 @@ if ( ! function_exists( 'largo_comment' ) ) {
 				<div class="comment-content"><?php comment_text(); ?></div>
 
 				<div class="reply">
-					<?php comment_reply_link( array_merge( $args, array( 'reply_text' => 'Reply <span>&darr;</span>', 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
+					<?php comment_reply_link( array_merge( $args, array( 'reply_text' => sprintf( '%s <span>&darr;</span>', __( 'Reply', 'largo' ) ), 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
 				</div><!-- .reply -->
 			</article><!-- #comment-## -->
 

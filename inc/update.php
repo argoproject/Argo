@@ -99,25 +99,25 @@ function largo_update_widgets() {
 	$checks['in_series'] = array(
 		'values' => NULL,
 		'widget' => 'largo-post-series-links',
-		'settings' => array('title' => 'Related Series'),
+		'settings' => array( 'title' => __( 'Related Series', 'largo' ) ),
 	);
 
 	$checks['show_tags'] = array(
 		'values' => array(1),
 		'widget' => 'largo-tag-list',
-		'settings' => array('title' => 'Filed Under:', 'tag_limit' => 20),
+		'settings' => array('title' => __( 'Filed Under:', 'largo' ), 'tag_limit' => 20),
 	);
 
 	$checks['show_author_box'] = array(
 		'values' => array('1'),
 		'widget' => 'largo-author-bio',
-		'settings' => array('title' => 'Author'),
+		'settings' => array('title' => __( 'Author', 'largo' ) ),
 	);
 
 	$checks['show_related_content'] = array(
 		'values' => array('1'),
 		'widget' => 'largo-explore-related',
-		'settings' => array('title' => 'More About', 'topics' => 6, 'posts' => 3),
+		'settings' => array('title' => __( 'More About', 'largo' ), 'topics' => 6, 'posts' => 3),
 	);
 
 	$checks['show_next_prev_nav_single'] = array(
@@ -147,7 +147,7 @@ function largo_widget_in_region( $widget_name, $region = 'article-bottom' ) {
 	$widgets = get_option( 'sidebars_widgets ');
 
 	if ( !isset( $widgets[$region] ) ) {
-		return new WP_Error( 'region-missing', __('Invalid region specified.') );
+		return new WP_Error( 'region-missing', __('Invalid region specified.', 'largo' ) );
 	}
 
 	foreach( $widgets[$region] as $key => $widget ) {
@@ -238,14 +238,14 @@ function largo_check_deprecated_widgets() {
  */
 function largo_deprecated_footer_widget() { ?>
 	<div class="update-nag"><p>
-	<?php _e('You are using the <strong>Largo Footer Featured Posts</strong> widget, which is deprecated and will be removed from future versions of Largo. Please <a href="'.admin_url('widgets.php').'">change your widget settings</a> to use its replacement, <strong>Largo Featured Posts</strong>.'); ?>
+	<?php printf( __('You are using the <strong>Largo Footer Featured Posts</strong> widget, which is deprecated and will be removed from future versions of Largo. Please <a href="%s">change your widget settings</a> to use its replacement, <strong>Largo Featured Posts</strong>.', 'largo' ), admin_url( 'widgets.php' ) ); ?>
 	</p></div>
 	<?php
 }
 
 function largo_deprecated_sidebar_widget() { ?>
 	<div class="update-nag"><p>
-	<?php _e('You are using the <strong>Largo Sidebar Featured Posts</strong> widget, which is deprecated and will be removed from future versions of Largo. Please <a href="'.admin_url('widgets.php').'">change your widget settings</a> to use its replacement, <strong>Largo Featured Posts</strong>.'); ?>
+	<?php printf( __( 'You are using the <strong>Largo Sidebar Featured Posts</strong> widget, which is deprecated and will be removed from future versions of Largo. Please <a href="%s">change your widget settings</a> to use its replacement, <strong>Largo Featured Posts</strong>.', 'largo' ), admin_url( 'widgets.php' ) ); ?>
 	</p></div>
 	<?php
 }

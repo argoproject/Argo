@@ -43,7 +43,7 @@ $youtube_url = isset( $values['youtube_url'] ) ? esc_attr( $values['youtube_url'
 	 	<?php } ?>
 
  		<h2 class="entry-title">
- 			<a href="<?php the_permalink(); ?>" title="Permalink to <?php the_title_attribute(); ?>" rel="bookmark"><?php the_title(); ?></a>
+ 			<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute( array( 'before' => __( 'Permalink to', 'largo' ) . ' ' ) )?>" rel="bookmark"><?php the_title(); ?></a>
  		</h2>
 
  		<h5 class="byline"><?php largo_byline(); ?></h5>
@@ -65,7 +65,7 @@ $youtube_url = isset( $values['youtube_url'] ) ? esc_attr( $values['youtube_url'
 	 	<?php } ?>
 
  		<h2 class="entry-title">
- 			<a href="<?php the_permalink(); ?>" title="Permalink to <?php the_title_attribute(); ?>" rel="bookmark"><?php the_title(); ?></a>
+ 			<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute( array( 'before' => __( 'Permalink to', 'largo' ) . ' ' ) )?>" rel="bookmark"><?php the_title(); ?></a>
  		</h2>
 
  		<h5 class="byline"><?php largo_byline(); ?></h5>

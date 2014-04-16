@@ -18,7 +18,7 @@
 		<?php // Comment link ?>
 		<?php if ( comments_open() ): ?>
 		<div class="comments">
-			<a href="<?php comments_link(); ?>"><h4>Comment</h4> <i class="icon-comment"></i></a>
+			<a href="<?php comments_link(); ?>"><h4><?php _e( 'Comment', 'largo' ); ?></h4> <i class="icon-comment"></i></a>
 		</div>
 		<?php endif; ?>
 
@@ -43,7 +43,7 @@
 
 		if ( !empty($author) || !empty($cat_feed_link) ): ?>
 		<div class="follow">
-			<h4>Follow</h4>
+			<h4><?php _e( 'Follow', 'largo' ); ?></h4>
 
 			<?php
 				if ( $cat_feed_link ) {

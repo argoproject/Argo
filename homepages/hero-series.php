@@ -14,8 +14,8 @@ global $largo, $shown_ids, $tags, $post;
 		<aside id="view-format">
 			<h1><?php _e('View', 'largo'); ?></h1>
 			<ul>
-				<li><a href="#" class="active" data-style="top">Top Stories</a></li>
-				<li><a href="#" data-style="list">List</a></li>
+				<li><a href="#" class="active" data-style="top"><?php _e( 'Top Stories', 'largo' ); ?></a></li>
+				<li><a href="#" data-style="list"><?php _e( 'List', 'largo' ); ?></a></li>
 			</ul>
 		</aside>
 
@@ -27,7 +27,7 @@ global $largo, $shown_ids, $tags, $post;
 
 		if( $has_video = get_post_meta( $post->ID, 'youtube_url', true ) ): ?>
 			<div class="embed-container max-wide">
-				<iframe src="http://www.youtube.com/embed/<?php echo substr(strrchr( $has_video, "="), 1 ); ?>?modestbranding=1" frameborder="0" allowfullscreen></iframe>
+				<iframe src="<?php echo esc_url( 'http://www.youtube.com/embed/' . substr(strrchr( $has_video, "="), 1 ) . '?modestbranding=1' ); ?>" frameborder="0" allowfullscreen></iframe>
 			</div>
 		<?php else: ?>
 			<div class="full-hero max-wide"><a href="<?php echo esc_attr( get_permalink( $post->ID ) ); ?>"><?php echo get_the_post_thumbnail( $post->ID, 'full' ); ?></a></div>
@@ -40,7 +40,7 @@ global $largo, $shown_ids, $tags, $post;
 					<article class="<?php if ($has_series) echo 'span8'; ?>">
 						<h5 class="top-tag"><?php largo_top_term( array('post'=>$post->ID) ); ?></h5>
 						<h2><a href="<?php the_permalink(); ?>"><?php echo the_title(); ?></a></h2>
-						<h5 class="byline"><?php _e('By'); ?> <?php largo_author_link( true, $post ); ?></h5>
+						<h5 class="byline"><?php _e( 'By', 'largo' ); ?> <?php largo_author_link( true, $post ); ?></h5>
 						<section>
 							<?php largo_excerpt( $post, 2, false ); ?>
 						</section>
@@ -51,7 +51,7 @@ global $largo, $shown_ids, $tags, $post;
 						$feature_posts = largo_get_recent_posts_for_term( $feature, 3, 2 );
 					 ?>
 					<div class="span4 side-series">
-						<h5 class="top-tag"><a class="post-category-link" href="<?php echo get_term_link( $feature ); ?>"><?php echo $feature->name ?></a></h5>
+						<h5 class="top-tag"><a class="post-category-link" href="<?php echo get_term_link( $feature ); ?>"><?php echo esc_html( $feature->name ) ?></a></h5>
 						<?php foreach ( $feature_posts as $feature_post ):
 							$shown_ids[] = $feature_post->ID; ?>
 							<h4 class="related-story"><a href="<?php echo esc_url( get_permalink( $feature_post->ID ) ); ?>"><?php echo get_the_title( $feature_post->ID ); ?></a></h4>

@@ -10,7 +10,7 @@ if ( !is_plugin_active('co-authors-plus/co-authors-plus.php') ) {
 	function move_author_to_publish_metabox() {
 		global $post_ID;
 		$post = get_post( $post_ID );
-		echo '<div id="author" class="misc-pub-section" style="padding: 8px 10px;">Author: ';
+		printf( '<div id="author" class="misc-pub-section" style="padding: 8px 10px;">%s: ', __( 'Author', 'largo' ) );
 		post_author_meta_box( $post );
 		echo '</div>';
 	}
@@ -52,7 +52,7 @@ add_filter( 'default_hidden_meta_boxes', 'largo_change_default_hidden_metaboxes'
 // Related posts controls
 largo_add_meta_box(
 	'largo_additional_options',
-	'Additional Options',
+	__( 'Additional Options', 'largo' ),
 	'largo_custom_related_meta_box_display', //could also be added with largo_add_meta_content('largo_custom_related_meta_box_display', 'largo_additional_options')
 	'post',
 	'side',
@@ -62,7 +62,7 @@ largo_add_meta_box(
 // Related posts controls
 largo_add_meta_box(
 	'largo_byline_meta',
-	'Custom Byline Options',
+	__( 'Custom Byline Options', 'largo' ),
 	'largo_byline_meta_box_display',
 	( of_get_option( 'custom_landing_enabled' ) ) ? array('post', 'cftl-tax-landing') : 'post',
 	'side',
@@ -72,7 +72,7 @@ largo_add_meta_box(
 // Layout options for post templates, custom sidebars
 largo_add_meta_box(
 	'largo_layout_meta',
-	'Layout Options',
+	__( 'Layout Options', 'largo' ),
 	'largo_layout_meta_box_display',
 	array('post', 'page'),
 	'side',
@@ -82,7 +82,7 @@ largo_add_meta_box(
 // Featured video instead of featured image
 largo_add_meta_box(
 	'largo_featured_video',
-	'Featured Video',
+	__( 'Featured Video', 'largo' ),
 	'largo_featured_video_meta_box_display',
 	'post',
 	'side',
@@ -92,7 +92,7 @@ largo_add_meta_box(
 // Disclaimer
 largo_add_meta_box(
 	'largo_custom_disclaimer',
-	'Disclaimer',
+	__( 'Disclaimer', 'largo' ),
 	'largo_custom_disclaimer_meta_box_display', //could also be added with largo_add_meta_content('largo_custom_related_meta_box_display', 'largo_additional_options')
 	'post',
 	'normal',
@@ -136,7 +136,7 @@ function largo_layout_meta_box_display () {
 		echo __('Select the Post Template you wish this post to use.', 'largo' ) . '</p>';
 		echo '<label class="hidden" for="post_template">' . __("Post Template", 'largo' ) . '</label>';
 		echo '<select name="_wp_post_template" id="post_template" class="dropdown">';
-		echo '<option value="">Default</option>';
+		echo '<option value="">' . __( 'Default', 'largo' ) . '</option>';
 		post_templates_dropdown(); //get the options
 		echo '</select>';
 		largo_register_meta_input('_wp_post_template');
@@ -157,11 +157,11 @@ function largo_layout_meta_box_display () {
 function largo_featured_video_meta_box_display() {
   global $post;
   $values = get_post_custom( $post->ID );
-  $youtube_url = isset( $values['youtube_url'] ) ? esc_attr( $values['youtube_url'][0] ) : '';
+  $youtube_url = isset( $values['youtube_url'] ) ? $values['youtube_url'][0] : '';
   wp_nonce_field( 'largo_meta_box_nonce', 'meta_box_nonce' );
 
   echo __('<p>In some cases you might want to use a video in the place of the featured image. If you would prefer to use a video, enter the URL for the video (YouTube only) here:</p>', 'largo');
-  echo '<input type="text" name="youtube_url" id="youtube_url" value="' . $youtube_url . '" />';
+  echo '<input type="text" name="youtube_url" id="youtube_url" value="' . esc_url( $youtube_url ) . '" />';
   echo __('<p class="small">Note that at the moment this is only used for the top story on the homepage but future versions of Largo might enable this functionality elsewhere in the theme.</p>', 'largo');
 
 	largo_register_meta_input('youtube_url');
@@ -195,7 +195,7 @@ function largo_custom_disclaimer_meta_box_display() {
 	}
 
 	echo '<p><strong>' . __('Disclaimer', 'largo') . '</strong><br />';
-	echo '<textarea name="disclaimer" style="width: 98%;">' . esc_html($value) . '</textarea>';
+	echo '<textarea name="disclaimer" style="width: 98%;">' . esc_textarea( $value ) . '</textarea>';
 
 	largo_register_meta_input('disclaimer', '_largo_custom_disclaimer_value' );
 }
@@ -227,7 +227,7 @@ function largo_top_tag_display() {
 	echo '<select name="top_term" id="top_term" class="dropdown">';
 
 	foreach( $terms as $term ) {
-		echo '<option value="' . $term->term_id . '"' . selected( $term->term_id, $top_term, FALSE ) . ">" . $term->name . '</option>';
+		echo '<option value="' . (int) $term->term_id . '"' . selected( $term->term_id, $top_term, FALSE ) . ">" . $term->name . '</option>';
 	}
 
 	echo '</select>';

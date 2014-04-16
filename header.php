@@ -46,7 +46,7 @@
 		<div class="global-nav">
 			<nav id="top-nav" class="span12">
 	        	<span class="visuallyhidden">
-	        		<a href="#main" title="Skip to content"><?php _e('Skip to content', 'largo'); ?></a>
+	        		<a href="#main" title="<?php esc_attr_e( 'Skip to content', 'largo' ); ?>"><?php _e( 'Skip to content', 'largo' ); ?></a>
 	        	</span>
 	        	<?php
 							$top_args = array(
@@ -97,7 +97,7 @@
 	</header>
 
 	<header class="print-header">
-		<p><strong><?php echo esc_attr( get_bloginfo( 'name' ) ); ?></strong> (<?php echo esc_url( $current_url ); ?>)</p>
+		<p><strong><?php echo esc_html( get_bloginfo( 'name' ) ); ?></strong> (<?php echo esc_url( $current_url ); ?>)</p>
 	</header>
 
 	<div class="sticky-nav-wrapper">

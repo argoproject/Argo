@@ -20,14 +20,14 @@ function largo_dashboard_widgets_member() {
           $wp_meta_boxes['dashboard']['side']['core']['dashboard_quick_press']
      );
 
-     wp_add_dashboard_widget( 'dashboard_quick_links', 'Project Largo Help', 'dashboard_quick_links' );
+     wp_add_dashboard_widget( 'dashboard_quick_links', __( 'Project Largo Help', 'largo' ), 'dashboard_quick_links' );
 
-     wp_add_dashboard_widget( 'dashboard_member_news', 'Recent Stories from INN Members', 'dashboard_member_news' );
+     wp_add_dashboard_widget( 'dashboard_member_news', __( 'Recent Stories from INN Members', 'largo' ), 'dashboard_member_news' );
      $my_widget = $wp_meta_boxes['dashboard']['normal']['core']['dashboard_member_news'];
      unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_member_news']);
      $wp_meta_boxes['dashboard']['side']['core']['dashboard_member_news'] = $my_widget;
 
-     wp_add_dashboard_widget( 'dashboard_network_news', 'INN Network News', 'dashboard_network_news' );
+     wp_add_dashboard_widget( 'dashboard_network_news', __( 'INN Network News', 'largo' ), 'dashboard_network_news' );
      $my_widget = $wp_meta_boxes['dashboard']['normal']['core']['dashboard_network_news'];
      unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_network_news']);
      $wp_meta_boxes['dashboard']['side']['core']['dashboard_network_news'] = $my_widget;
@@ -45,9 +45,9 @@ function largo_dashboard_widgets_nonmember() {
           $wp_meta_boxes['dashboard']['normal']['core']['dashboard_recent_comments']
      );
 
-     wp_add_dashboard_widget( 'dashboard_quick_links', 'Project Largo Help', 'dashboard_quick_links' );
+     wp_add_dashboard_widget( 'dashboard_quick_links', __( 'Project Largo Help', 'largo' ), 'dashboard_quick_links' );
 
-     wp_add_dashboard_widget( 'dashboard_network_news', 'INN Network News', 'dashboard_network_news' );
+     wp_add_dashboard_widget( 'dashboard_network_news', __( 'INN Network News', 'largo' ), 'dashboard_network_news' );
      $my_widget = $wp_meta_boxes['dashboard']['normal']['core']['dashboard_network_news'];
      unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_network_news']);
      $wp_meta_boxes['dashboard']['side']['core']['dashboard_network_news'] = $my_widget;
@@ -58,7 +58,7 @@ function dashboard_network_news() {
      echo '<div class="rss-widget">';
      wp_widget_rss_output(array(
           'url' => 'http://feeds.feedburner.com/INNArticles',
-          'title' => 'INN Network News',
+          'title' => __( 'INN Network News', 'largo' ),
           'items' => 1,
           'show_summary' => 1,
           'show_author' => 0,
@@ -70,7 +70,7 @@ function dashboard_member_news() {
      echo '<div class="rss-widget">';
      wp_widget_rss_output(array(
           'url' => 'http://feeds.feedburner.com/INNMemberInvestigations',
-          'title' => 'Recent Stories from INN Members',
+          'title' => __( 'Recent Stories from INN Members', 'largo' ),
           'items' => 3,
           'show_summary' => 1,
           'show_author' => 1,
