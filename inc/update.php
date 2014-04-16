@@ -99,25 +99,25 @@ function largo_update_widgets() {
 	$checks['in_series'] = array(
 		'values' => NULL,
 		'widget' => 'largo-post-series-links',
-		'settings' => array('title' => 'Related Series'),
+		'settings' => array( 'title' => __( 'Related Series', 'largo' ) ),
 	);
 
 	$checks['show_tags'] = array(
 		'values' => array(1),
 		'widget' => 'largo-tag-list',
-		'settings' => array('title' => 'Filed Under:', 'tag_limit' => 20),
+		'settings' => array('title' => __( 'Filed Under:', 'largo' ), 'tag_limit' => 20),
 	);
 
 	$checks['show_author_box'] = array(
 		'values' => array('1'),
 		'widget' => 'largo-author-bio',
-		'settings' => array('title' => 'Author'),
+		'settings' => array('title' => __( 'Author', 'largo' ) ),
 	);
 
 	$checks['show_related_content'] = array(
 		'values' => array('1'),
 		'widget' => 'largo-explore-related',
-		'settings' => array('title' => 'More About', 'topics' => 6, 'posts' => 3),
+		'settings' => array('title' => __( 'More About', 'largo' ), 'topics' => 6, 'posts' => 3),
 	);
 
 	$checks['show_next_prev_nav_single'] = array(
