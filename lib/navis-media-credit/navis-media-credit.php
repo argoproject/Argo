@@ -59,6 +59,8 @@ class Navis_Media_Credit {
                 'mce_external_plugins',
                 array( &$this, 'plugins_monkeypatching' )
             );
+        } else {
+            add_filter( 'pre_post_content', array( $this, 'filter_pre_post_content_fix_credit' ) );
         }
     }
 
@@ -196,6 +198,22 @@ class Navis_Media_Credit {
     function plugins_monkeypatching( $plugins ) {
         $plugins[ 'argo_wpeditimage' ] = get_stylesheet_directory_uri() . '/lib/navis-media-credit/js/media_credit_editor_plugin.js';
         return $plugins;
+    }
+
+    /**
+     * For TinyMCE 4 and greater, fix mangled [caption shortcodes]
+     */
+    function filter_pre_post_content_fix_credit( $post_content ) {
+
+        if ( empty( $post_content ) || false === strpos( $post_content, '\\" credit=\\"' ) ) {
+            return $post_content;
+        }
+
+        // [caption id="attachment_18" align="alignright" width="336" caption=" " credit="Daniel Bachhuber / The pants"]<a href="http://largo.dev/wp-content/uploads/2014/04/IMG_0502.jpg"><img class="size-medium wp-image-18" alt="IMG_0502" src="http://largo.dev/wp-content/uploads/2014/04/IMG_0502-336x252.jpg" width="336" height="252" /></a>[/caption]
+        // [caption id="attachment_18" align="alignright" width="336"]<a href="http://largo.dev/wp-content/uploads/2014/04/IMG_0502.jpg"><img class="size-medium wp-image-18" src="http://largo.dev/wp-content/uploads/2014/04/IMG_0502-336x252.jpg" alt="IMG_0502" width="336" height="252" /></a>  " credit="Daniel Bachhuber / The pants[/caption]
+        $post_content = preg_replace( '/\\"\scredit=\\\"[\w\s\/\\\]+[^"[]/', '', $post_content );
+
+        return $post_content;
     }
 
 }
