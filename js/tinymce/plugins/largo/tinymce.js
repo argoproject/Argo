@@ -4,11 +4,7 @@ function init() {	//this doesn't seem to actually be getting called, despite wha
 
 function insertModuleCode(){
 
-	if ( tinyMCE.majorVersion >= '4' ) {
-		var inst = tinyMCE.EditorManager.get('content');
-	} else {
-		var inst = tinyMCE.getInstanceById('content');
-	}
+	var inst = tinyMCE.EditorManager.get('content');
 
 	var html = inst.selection.getContent(),
 		mod_width = $("input[name='mod_width']:checked").val(),
