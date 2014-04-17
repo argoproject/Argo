@@ -178,7 +178,7 @@ class Navis_Media_Credit {
 
 
     function plugins_monkeypatching( $plugins ) {
-        $plugins[ 'argo_wpeditimage' ] = plugins_url( 'js/media_credit_editor_plugin.js', __FILE__ );
+        $plugins[ 'argo_wpeditimage' ] = get_stylesheet_directory_uri() . '/lib/navis-media-credit/js/media_credit_editor_plugin.js';
         return $plugins;
     }
 
