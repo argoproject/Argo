@@ -54,7 +54,7 @@ class Navis_Media_Credit {
 
         // Custom plugin only works for TinyMCE 3
         global $tinymce_version;
-        if ( ! version_compare( $tinymce_version, '4018-20140303' ) ) {
+        if ( -1 === version_compare( $tinymce_version, '4018-20140303' ) ) {
             add_filter(
                 'mce_external_plugins',
                 array( &$this, 'plugins_monkeypatching' )
@@ -145,11 +145,9 @@ class Navis_Media_Credit {
             $align = 'none';
 
         $shcode = '[caption id="' . $id . '" align="align' . $align .
-            '" width="' . $width . '" caption="' . addslashes( $caption ) .
-            '"';
-        // Our custom plugin doesn't work with TinyMCE
+            '" width="' . $width . '" caption="' . addslashes( $caption ) . '"';
         global $tinymce_version;
-        if ( ! version_compare( $tinymce_version, '4018-20140303' ) ) {
+        if ( -1 === version_compare( $tinymce_version, '4018-20140303' ) ) {
             $shcode .= ' credit="' . addslashes( $creditor->to_string() ) . '"';
         }
         $shcode .= ']' .  $html . '[/caption]';
