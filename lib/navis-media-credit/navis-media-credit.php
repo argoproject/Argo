@@ -52,10 +52,14 @@ class Navis_Media_Credit {
             array( &$this, 'add_caption_shortcode' ), 19, 8
         );
 
-        add_filter(
-            'mce_external_plugins',
-            array( &$this, 'plugins_monkeypatching' )
-        );
+        // Custom plugin only works for TinyMCE 3
+        global $tinymce_version;
+        if ( ! version_compare( $tinymce_version, '4018-20140303' ) ) {
+            add_filter(
+                'mce_external_plugins',
+                array( &$this, 'plugins_monkeypatching' )
+            );
+        }
     }
 
     function admin_init() {
@@ -142,7 +146,13 @@ class Navis_Media_Credit {
 
         $shcode = '[caption id="' . $id . '" align="align' . $align .
             '" width="' . $width . '" caption="' . addslashes( $caption ) .
-            '" credit="' . addslashes( $creditor->to_string() ) . '"]' .  $html . '[/caption]';
+            '"';
+        // Our custom plugin doesn't work with TinyMCE
+        global $tinymce_version;
+        if ( ! version_compare( $tinymce_version, '4018-20140303' ) ) {
+            $shcode .= ' credit="' . addslashes( $creditor->to_string() ) . '"';
+        }
+        $shcode .= ']' .  $html . '[/caption]';
         return $shcode;
     }
 
@@ -161,7 +171,15 @@ class Navis_Media_Credit {
         $atts = apply_filters( 'navis_image_layout_defaults', $atts );
         extract( $atts );
 
-        if ( $id ) $id = 'id="' . esc_attr($id) . '" ';
+        if ( $id && ! $credit ) {
+            $post_id = str_replace( 'attachment_', '', $id );
+            $creditor = navis_get_media_credit( $post_id );
+            $credit = $creditor->to_string();
+        }
+
+        if ( $id ) {
+            $id = 'id="' . esc_attr($id) . '" ';
+        }
 
         // XXX: maybe remove module and image classes at some point
         $out = sprintf( '<div %s class="wp-caption module image %s" style="max-width: %spx;">%s', $id, $align, $width, do_shortcode( $content ) );
