@@ -97,15 +97,19 @@ class Navis_Media_Credit {
     function save_media_credit( $post, $attachment ) {
         $creditor = new Media_Credit( $post['ID'] );
         $fields = array( 'media_credit', 'navis_media_credit_org', 'navis_media_can_distribute' );
+
         foreach ( $fields as $field ) {
-            if ( $_POST['attachments'] ) {
-                $input = $_POST['attachments'][$post['ID']][$field];
+            if ( $_POST['attachments'] && isset( $_POST['attachments'][$post['ID']][$field] ) ) {
+                $input = sanitize_text_field( $_POST['attachments'][$post['ID']][$field] );
             }
             else {
                 // XXX: not sure if this branch is ever followed
-                $input = $_POST[ $field ];
-                if ( ! $input ) {
-                    $input = $_POST[ "attachments[" . $post['ID'] . "][" . $field . "]" ];
+                if ( isset( $_POST[ $field ] ) ) {
+                    $input = sanitize_text_field( $_POST[ $field ] );
+                } else if ( isset( $_POST[ "attachments[" . $post['ID'] . "][" . $field . "]" ] ) ) {
+                    $input = sanitize_text_field( $_POST[ "attachments[" . $post['ID'] . "][" . $field . "]" ] );
+                } else {
+                    $input = '';
                 }
             }
             $creditor->update( $field, $input );
