@@ -69,10 +69,7 @@ class Largo_Customizer {
 				)
 			);
 		foreach( $settings as $setting => $options ) {
-			$wp_customize->add_setting( $setting, array(
-				'type'              => $options['type'],
-				'sanitize_callback' => $options['sanitize_callback'],
-			) );
+			$wp_customize->add_setting( $setting, $options );
 		}
 
 		// Site description
