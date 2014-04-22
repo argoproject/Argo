@@ -582,9 +582,12 @@ class Largo_Custom_Less_Variables {
 	 * Get the post the data is saved to
 	 */
 	static function get_post() {
+
+		$theme_data = wp_get_theme();
+
 		$post = get_posts( array(
 			'post_type'      => self::POST_TYPE,
-			'post_name'      => sanitize_title( $theme ),
+			'post_name'      => sanitize_title( $theme_data->get_stylesheet() ),
 			'posts_per_page' => 1,
 		));
 
