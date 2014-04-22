@@ -120,10 +120,21 @@ class Largo {
 			'/inc/update.php',
 		);
 
+		if ( $this->is_less_enabled() ) {
+			$includes[] = '/inc/custom-less-variables.php';
+		}
+
 		foreach ( $includes as $include ) {
 			require_once( get_template_directory() . $include );
 		}
 
+	}
+
+	/**
+	 * Is the LESS feature enabled?
+	 */
+	public function is_less_enabled() {
+		return (bool) of_get_option( 'less_enabled' );
 	}
 
 }
