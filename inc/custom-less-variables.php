@@ -298,9 +298,15 @@ class Largo_Custom_Less_Variables {
 		foreach ( self::$css_files as $key => $filename ) {
 			if ( preg_match( '!^'.$base_url_escape. preg_quote( $filename ) .'(?<extra>[#\?].*)?$!', $src, $matches ) ) {
 				$variables = self::get_custom_values();
-				if (is_null($variables['meta'])) $variables['meta'] = (object) array('post_modified_gmt' => 0);	//check if none defined
+				if ( is_null( $variables['meta'] ) ) {
+					$variables['meta'] = (object) array('post_modified_gmt' => 0);
+				}
 				return add_query_arg(
-					array( 'largo_custom_less_variable' => 1, 'css_file' => $filename, 'timestamp' => $variables['meta']->post_modified_gmt ),
+					array(
+						'largo_custom_less_variable' => 1,
+						'css_file' => $filename,
+						'timestamp' => $variables['meta']->post_modified_gmt,
+					),
 					home_url( $matches['extra'] )
 				);
 			}
