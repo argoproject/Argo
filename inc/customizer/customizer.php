@@ -66,7 +66,7 @@ class Largo_Customizer {
 			'largo[site_blurb]'          => array(
 				'type'                  => 'option',
 				'sanitize_callback'     => 'wp_filter_nohtml_kses',
-				)
+				),
 			);
 		foreach( $settings as $setting => $options ) {
 			$wp_customize->add_setting( $setting, $options );
@@ -79,15 +79,58 @@ class Largo_Customizer {
 			'settings'          => 'largo[site_blurb]',
 		) ) );
 
+		/**
+		 * Colors
+		 */
+		if ( Largo()->is_less_enabled() ) {
 
-		// Because the Customizer doesn't easily support custom callbacks, let's add our own
-		foreach( array_keys( $settings ) as $setting ) {
-			add_filter( 'customize_value_' . $setting, array( $this, 'filter_customize_value' ) );
+			$wp_customize->add_section( 'largo_colors' , array(
+				'title'      => __( 'Colors', 'largo' ),
+				'priority'   => 30,
+			) );
+
+			$colors = array(
+				'baseColor'            => __( 'Base', 'largo' ),
+				'headerFooterColor'    => __( 'Header / Footer', 'largo' ),
+			);
+
+			foreach( $colors as $color => $label ) {
+				$setting = 'largo_color_' . $color;
+				$wp_customize->add_setting( $setting, array(
+					'type'              => $setting,
+					'sanitize_callback' => 'sanitize_hex_color',
+					) );
+				$wp_customize->add_control( new WP_Customize_Color_Control(
+					$wp_customize,
+					$setting,
+					array(
+						'label'       => $label,
+						'section'     => 'largo_colors',
+						'settings'    => $setting,
+						)
+					) );
+				$settings[$setting] = array(
+					'type'          => $setting,
+					);
+			}
+
+			add_action( 'customize_save', array( $this, 'action_customize_save_fetch_less_variables' ) );
+			add_action( 'customize_save_after', array( $this, 'action_customize_save_after_save_less_variables' ) );
+
 		}
 
-		foreach( array_values( $settings ) as $type ) {
-			add_action( 'customize_update_' . $type, array( $this, 'action_customize_update' ) );
-			add_action( 'customize_preview_' . $type, array( $this, 'action_customize_preview' ) );
+		// Because the Customizer doesn't easily support custom callbacks, let's add our own
+		foreach( $settings as $setting => $options ) {
+
+			// These types have native support
+			if ( in_array( $options['type'], array( 'option', 'theme_mod' ) ) ) {
+				continue;
+			}
+
+			add_filter( 'customize_value_' . $setting, array( $this, 'filter_customize_value' ) );
+
+			add_action( 'customize_update_' . $options['type'], array( $this, 'action_customize_update' ) );
+			add_action( 'customize_preview_' . $options['type'], array( $this, 'action_customize_preview' ) );
 		}
 
 	}
@@ -102,15 +145,18 @@ class Largo_Customizer {
 
 		$setting = str_replace( 'customize_value_', '', current_filter() );
 
-		$settings_to_options = array(
-			'largo_site_description'    => 'site_blurb',
-			);
+		if ( 0 === strpos( $setting, 'largo_color_' ) ) {
+			$color = str_replace( 'largo_color_', '', $setting );
 
-		if ( ! empty( $settings_to_options[ $setting ] ) ) {
-			return of_get_option( $settings_to_options[ $setting ] );
-		} else {
-			return $default;
+			$values = Largo_Custom_Less_Variables::get_custom_values();
+
+			if ( ! empty( $values['variables'][$color] ) ) {
+				return $values['variables'][$color];
+			}
+
 		}
+
+		return $default;
 
 	}
 
@@ -123,11 +169,12 @@ class Largo_Customizer {
 
 		// current_filter(), although semantically incorrect, offers backwards compat to 2.5
 		$current_action = current_filter();
-		$option = str_replace( 'customize_update_', '', $current_action );
+		$setting = str_replace( 'customize_update_', '', current_filter() );
 
-		if ( 0 === strpos( $current_action, 'customize_update_of_' ) ) {
-			$option = str_replace( 'customize_update_of_', '', $current_action );
-			of_set_option( $option, $value );
+		// Colors
+		if ( 0 === strpos( $setting, 'largo_color_' ) ) {
+			$color = str_replace( 'largo_color_', '', $setting );
+			$this->less_variables[ $color ] = $value;
 		}
 
 	}
@@ -138,6 +185,29 @@ class Largo_Customizer {
 	public function action_customize_preview() {
 		// @todo
 		$setting = str_replace( 'customizer_preview_', '', current_filter() );
+	}
+
+	/**
+	 * Cache all of the LESS variables to a class variable for updating
+	 */
+	public function action_customize_save_fetch_less_variables() {
+
+		$values = Largo_Custom_Less_Variables::get_custom_values();
+		$this->less_variables = $values['variables'];
+
+	}
+
+	/**
+	 * If the values have changed, save and regenerate the stylesheet
+	 */
+	public function action_customize_save_after_save_less_variables() {
+
+		$values = Largo_Custom_Less_Variables::get_custom_values();
+		if ( $this->less_variables != $values['variables'] ) {
+			$variables = array_merge( $values['variables'], $this->less_variables );
+			Largo_Custom_Less_Variables::update_custom_values( $variables );
+		}
+
 	}
 
 }
