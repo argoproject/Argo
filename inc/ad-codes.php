@@ -62,8 +62,8 @@ if ( ! function_exists( 'largo_ad_tags_ids' ) ) {
 						'url_vars'  => array(
 								'tag'       => '300x250',
 								'sz'        => '300x250',
-								'width'    => '300',
-								'height'     => '250',
+								'height'    => '250',
+								'width'     => '300',
 							),
 						'enable_ui_mapping' => true,
 					),

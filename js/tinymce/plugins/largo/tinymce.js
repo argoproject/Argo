@@ -3,8 +3,10 @@ function init() {	//this doesn't seem to actually be getting called, despite wha
 }
 
 function insertModuleCode(){
-	var inst = tinyMCE.getInstanceById('content'),
-		html = inst.selection.getContent(),
+
+	var inst = tinyMCE.EditorManager.get('content');
+
+	var html = inst.selection.getContent(),
 		mod_width = $("input[name='mod_width']:checked").val(),
 		mod_align = $("input[name='mod_align']:checked").val(),
 		mod_type  = $("input[name='mod_type']:checked").val(),
@@ -25,7 +27,7 @@ function insertModuleCode(){
 		}
 	}
 
-	window.tinyMCE.execInstanceCommand('content', 'mceInsertContent', false, start_tag + html + end_tag);
+	inst.execCommand('mceInsertContent', false, start_tag + html + end_tag);
 	tinyMCEPopup.editor.execCommand('mceRepaint');
 	tinyMCEPopup.close();
 	return;

@@ -46,7 +46,9 @@ get_header();
 					$posts_term = of_get_option( 'posts_term_plural', 'Stories' );
 
 					if ( is_author() ) {
-						$rss_link =  get_author_feed_link( get_the_author_meta('ID') );
+						printf(__('Recent %1$s<a class="rss-link" href="%2$s"><i class="icon-rss"></i></a>', 'largo'), $posts_term, get_author_feed_link( get_the_author_meta('ID') ) );
+					} elseif ( is_category() ) {
+						printf(__('Recent %1$s<a class="rss-link" href="%2$s"><i class="icon-rss"></i></a>', 'largo'), $posts_term, get_category_feed_link( get_queried_object_id() ) );
 					} elseif ( is_tag() ) {
 						$rss_link =  get_tag_feed_link( get_queried_object_id() );
 					} elseif ( is_tax() ) {

@@ -50,6 +50,11 @@ if ( ! function_exists( 'optionsframework_init' ) ) {
 	require_once dirname( __FILE__ ) . '/lib/options-framework/options-framework.php';
 }
 
+// If the plugin is already active, don't cause fatals
+if ( ! class_exists( 'Navis_Media_Credit' ) ) {
+	require_once dirname( __FILE__ ) . '/lib/navis-media-credit/navis-media-credit.php';
+}
+
 // need to include this explicitly to allow us to check if certain plugins are active.
 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 
@@ -57,11 +62,12 @@ include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
  * Load up all of the other goodies from the /inc directory
  */
 $includes = array(
-	'/largo-apis.php',	// APIs for inclusion in child themes
+
+	'/largo-apis.php',				// APIs for inclusion in child themes
 	'/inc/largo-plugin-init.php',	// a list of recommended plugins
 	'/inc/dashboard.php',			// custom dashboard widgets
 	'/inc/robots.php',				// default robots.txt config
-	'/inc/custom-feeds.php',			// create custom RSS feeds
+	'/inc/custom-feeds.php',		// create custom RSS feeds
 	'/inc/users.php',				// add custom fields for user profiles
 	'/inc/term-meta.php',				// add custom fields for taxonomy terms
 	'/inc/sidebars.php',				// register sidebars
@@ -77,7 +83,7 @@ $includes = array(
 	'/inc/post-tags.php',			// add some custom template tags (mostly used in single posts)
 	'/inc/header-footer.php',		// some additional template tags used in the header and footer
 	'/inc/related-content.php',		// functions dealing with related content
-	'/inc/featured-content.php',		// functions dealing with featured content
+	'/inc/featured-content.php',	// functions dealing with featured content
 	'/inc/enqueue.php',				// enqueue our js and css files
 	'/inc/post-templates.php',		// single post templates
 	'/inc/home-templates.php',		// homepage templates
