@@ -69,10 +69,21 @@ class Largo {
 
 		if ( ! isset( self::$instance ) ) {
 			self::$instance = new Largo;
-			self::$instance->require_files();
+			self::$instance->load();
 		}
 
 		return self::$instance;
+	}
+
+	/**
+	 * Load the theme
+	 */
+	private function load() {
+
+		$this->require_files();
+
+		$this->customizer = Largo_Customizer::get_instance();
+
 	}
 
 	/**
@@ -89,6 +100,7 @@ class Largo {
 			'/inc/users.php',
 			'/inc/term-meta.php',
 			'/inc/sidebars.php',
+			'/inc/customizer/customizer.php',
 			'/inc/widgets.php',
 			'/inc/nav-menus.php',
 			'/inc/taxonomies.php',
