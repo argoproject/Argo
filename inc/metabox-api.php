@@ -10,10 +10,7 @@
  * Otherwise we get function redeclarations.
  * Since we're using include_once() this is unlikely, but possible and worth checking.
  */
-
-if ( isset($largo) && array_key_exists('meta', $largo) ) {
-	return;
-}
+if ( isset($largo) && array_key_exists('meta', $largo) ) return;
 
 $largo['meta'] = array(
 	'boxes' => array(),		// the metaboxes to generate, including callbacks for the content
@@ -79,15 +76,12 @@ function largo_add_meta_content( $callback, $box_id ) {
  *
  * TODO: Include a validation parameter so meta fields can be validated easily.
  */
-
 function largo_register_meta_input( $input_names, $presave_fn=null ) {
-
 	global $largo;
 	$largo_metas = get_option('largo_meta_inputs');
 	if ( is_string( $input_names ) ) $input_names = array($input_names);
 
 	foreach( $input_names as $name ) {
-
 		if (! array_key_exists( $name, $largo_metas) ) {
 			$largo_metas[ $name ] = array( 'name' => $name, 'presave_fn' => $presave_fn );
 		}
@@ -164,7 +158,6 @@ function _largo_meta_box_save( $post_id ) {
 				$mydata[ $input_name ] = call_user_func( $handlers['presave_fn'], $mydata[ $input_name ], $input_name );
 			}
 		}
-
 	}
 
 	// process our posts
@@ -178,5 +171,4 @@ function _largo_meta_box_save( $post_id ) {
 	}
 
 }
-
 add_action( 'save_post', '_largo_meta_box_save' );
