@@ -63,11 +63,15 @@ class Largo_Customizer {
 
 		// Register the settings
 		$settings = array(
-			'largo[site_blurb]'          => 'option',
+			'largo[site_blurb]'          => array(
+				'type'                  => 'option',
+				'sanitize_callback'     => 'wp_filter_nohtml_kses',
+				)
 			);
-		foreach( $settings as $setting => $type ) {
+		foreach( $settings as $setting => $options ) {
 			$wp_customize->add_setting( $setting, array(
-				'type'      => $type,
+				'type'              => $options['type'],
+				'sanitize_callback' => $options['sanitize_callback'],
 			) );
 		}
 
