@@ -89,22 +89,33 @@ class Largo_Customizer {
 				'priority'   => 30,
 			) );
 
-			$colors = array(
-				'baseColor'            => __( 'Base', 'largo' ),
-				'headerFooterColor'    => __( 'Header / Footer', 'largo' ),
-			);
+			$field_groups = Largo_Custom_Less_Variables::get_editable_variables();
+			$colors = array();
+			foreach( $field_groups as $field_group => $fields ) {
 
-			foreach( $colors as $color => $label ) {
+				foreach( $fields as $field_name => $field ) {
+
+					if ( 'color' !== $field['type'] ) {
+						continue;
+					}
+
+					$colors[ $field_name ] = $field;
+				}
+
+			}
+
+			foreach( $colors as $color => $options ) {
 				$setting = 'largo_color_' . $color;
 				$wp_customize->add_setting( $setting, array(
 					'type'              => $setting,
+					'default'           => $options['default_value'],
 					'sanitize_callback' => 'sanitize_hex_color',
 					) );
 				$wp_customize->add_control( new WP_Customize_Color_Control(
 					$wp_customize,
 					$setting,
 					array(
-						'label'       => $label,
+						'label'       => $options['label'],
 						'section'     => 'largo_colors',
 						'settings'    => $setting,
 						)
