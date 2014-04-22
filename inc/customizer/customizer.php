@@ -74,9 +74,9 @@ class Largo_Customizer {
 
 		// Site description
 		$wp_customize->add_control( new Largo_WP_Customize_Textarea_Control( $wp_customize, 'largo_site_description', array(
-			'label'      => __( 'Site Description', 'largo' ),
-			'section'    => 'title_tagline',
-			'settings'   => 'largo[site_blurb]',
+			'label'             => __( 'Site Description', 'largo' ),
+			'section'           => 'title_tagline',
+			'settings'          => 'largo[site_blurb]',
 		) ) );
 
 
