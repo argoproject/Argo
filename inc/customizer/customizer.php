@@ -63,7 +63,7 @@ class Largo_Customizer {
 
 		// Register the settings
 		$settings = array(
-			'largo_site_description'     => 'of_site_blurb',
+			'largo[site_blurb]'          => 'option',
 			);
 		foreach( $settings as $setting => $type ) {
 			$wp_customize->add_setting( $setting, array(
@@ -75,7 +75,7 @@ class Largo_Customizer {
 		$wp_customize->add_control( new Largo_WP_Customize_Textarea_Control( $wp_customize, 'largo_site_description', array(
 			'label'      => __( 'Site Description', 'largo' ),
 			'section'    => 'title_tagline',
-			'settings'   => 'largo_site_description',
+			'settings'   => 'largo[site_blurb]',
 		) ) );
 
 
