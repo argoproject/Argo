@@ -88,6 +88,7 @@
 	    </div> <!-- /.global-nav -->
 	</div> <!-- /.global-nav-bg -->
 <?php endif; ?>
+
 <div id="page" class="hfeed clearfix">
 
 	<?php // if (function_exists('dynamic_sidebar')) { dynamic_sidebar("Header"); } ?>
