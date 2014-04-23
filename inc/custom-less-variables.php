@@ -178,8 +178,9 @@ class Largo_Custom_Less_Variables {
 			if ( !empty( $css ) ) {
 				$css = $css[0];
 			} else {
-				$css = self::compile_less( $less_file );
+				$css = self::compile_less( $less_file, $variables['variables'] );
 				add_post_meta( $variables['meta']->ID, $less_file, addslashes( $css ) );
+
 			}
 
 			return $css;
