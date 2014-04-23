@@ -48,6 +48,7 @@ class Largo_Customizer {
 	private function require_controls() {
 
 		require_once dirname( __FILE__ ) . '/class-largo-wp-customize-textarea-control.php';
+		require_once dirname( __FILE__ ) . '/class-largo-wp-customize-rich-radio-control.php';
 
 	}
 
@@ -67,6 +68,10 @@ class Largo_Customizer {
 				'type'                  => 'option',
 				'sanitize_callback'     => 'wp_filter_nohtml_kses',
 				),
+			'largo[home_template]'      => array(
+				'type'                  => 'option',
+				'sanitize_callback'     => 'sanitize_text_field',
+				),
 			);
 		foreach( $settings as $setting => $options ) {
 			$wp_customize->add_setting( $setting, $options );
@@ -78,6 +83,33 @@ class Largo_Customizer {
 			'section'           => 'title_tagline',
 			'settings'          => 'largo[site_blurb]',
 		) ) );
+
+		/**
+		 * Homepage layout
+		 */
+		$wp_customize->add_section( 'largo_homepage', array(
+			'title'          => __( 'Home Layout', 'largo' ),
+			'priority'       => 20,
+			) );
+
+		$home_templates = array();
+		$home_templates_data = largo_get_home_templates();
+		if ( count($home_templates_data) ) {
+			foreach ($home_templates_data as $name => $data ) {
+				$home_templates[ $data['path'] ] = array(
+					'img'         => $data['thumb'],
+					'label'       => $name,
+					'desc'        => $data['desc'],
+					);
+			}
+		}
+		$wp_customize->add_control( new Largo_WP_Customize_Rich_Radio_Control( $wp_customize, 'largo_home_template', array(
+			'label'              => __( 'Body', 'largo' ),
+			'section'            => 'largo_homepage',
+			'settings'           => 'largo[home_template]',
+			'type'               => 'radio',
+			'choices'            => $home_templates,
+			) ) );
 
 		/**
 		 * Colors
