@@ -169,8 +169,7 @@ class Largo_Custom_Less_Variables {
 	 *
 	 * @return string the generated CSS
 	 */
-	static function get_css( $less_file ) {
-		$variables = self::get_custom_values();
+	static function get_css( $less_file, $variables ) {
 
 		// Use the cached version saved to the DB
 		if ( !empty( $variables['meta']->ID ) ) {
@@ -186,7 +185,7 @@ class Largo_Custom_Less_Variables {
 			return $css;
 		}
 
-		return self::compile_less( $less_file );
+		return self::compile_less( $less_file, $variables['variables'] );
 	}
 
 
@@ -197,7 +196,7 @@ class Largo_Custom_Less_Variables {
 	 *
 	 * @return string - the resulting CSS
 	 */
-	static function compile_less( $less_file ) {
+	static function compile_less( $less_file, $variables ) {
 
 		// Load LESS compiler if loaded
 		if ( !class_exists('lessc') ) {
@@ -214,7 +213,7 @@ class Largo_Custom_Less_Variables {
 		try {
 			// Get the Less file and then replace variables.less with the update version
 			$less = file_get_contents( self::$less_dir . $less_file );
-			$less = self::replace_with_custom_variables( $less );
+			$less = self::replace_with_custom_variables( $less, $variables );
 
 			$css = $compiler->compile( $less );
 			$css = self::fix_urls( $css );
@@ -236,7 +235,7 @@ class Largo_Custom_Less_Variables {
 	 * Replace the include for the variable file with a modified version
 	 * with the custom values.
 	 */
-	static function replace_with_custom_variables( $less ) {
+	static function replace_with_custom_variables( $less, $variables ) {
 
 		// First, take variables.less and replace the values of the over-ridden variables.
 		$variables_less = file_get_contents( self::variable_file_path() );
@@ -244,13 +243,11 @@ class Largo_Custom_Less_Variables {
 		// Parse out the variables. Each is defined per line in format: @<varName>: <varValue>;
 		preg_match_all( '#^\s*@(?P<name>[\w-_]+):\s*(?P<value>[^;]*);#m', $variables_less, $matches );
 
-		$variables = self::get_custom_values();
-
 		foreach ( $matches[0] as $index => $rule ) {
 			$name = $matches['name'][$index];
 
-			if ( !empty( $variables['variables'][$name] ) ) {
-				$replacement_rule = "@{$name}: {$variables['variables'][$name]};";
+			if ( !empty( $variables[$name] ) ) {
+				$replacement_rule = "@{$name}: {$variables[$name]};";
 				$variables_less = str_replace( $rule, $replacement_rule, $variables_less);
 			}
 		}
@@ -345,7 +342,7 @@ class Largo_Custom_Less_Variables {
 
 		$variables = self::get_custom_values();
 		echo "/* Custom LESS Variables {$variables['meta']->post_modified_gmt} */\n";
-		echo self::get_css( self::$less_files[$key] );
+		echo self::get_css( self::$less_files[$key], $variables );
 
 		exit;
 	}
