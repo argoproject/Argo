@@ -647,17 +647,10 @@ class Largo_Custom_Less_Variables {
 		}
 
 		// Need the current version of the settings
-		$post = get_posts( array(
-			'post_type'      => self::POST_TYPE,
-			'post_name'      => $theme,
-			'posts_per_page' => 1,
-			'post_status'    => 'any'
-		));
-
-		$post_id = null;
-
-		if ( count( $post ) != 0 ) {
-			$post_id = $post[0]->ID;
+		if ( $post = self::get_post() ) {
+			$post_id = $post->ID;
+		} else {
+			$post_id = false;
 		}
 
 		if ( !is_array( $values ) ) {
