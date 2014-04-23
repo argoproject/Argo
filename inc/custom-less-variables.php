@@ -698,6 +698,14 @@ class Largo_Custom_Less_Variables {
 		// clear cache
 		$cache_key = 'customlessvars_'.$theme.'_current';
 		delete_transient( $cache_key );
+
+		// Regenerate and cache
+		foreach( self::$less_files as $less_file ) {
+			if ( $compiled = self::compile_less( $less_file, $values ) ) {
+				update_post_meta( $post_id, $less_file, $compiled );
+			}
+		}
+
 	}
 
 	/**
