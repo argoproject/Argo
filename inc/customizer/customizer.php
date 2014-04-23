@@ -72,6 +72,10 @@ class Largo_Customizer {
 				'type'                  => 'option',
 				'sanitize_callback'     => 'sanitize_text_field',
 				),
+			'largo[footer_layout]'      => array(
+				'type'                  => 'option',
+				'sanitize_callback'     => 'sanitize_key',
+				),
 			);
 		foreach( $settings as $setting => $options ) {
 			$wp_customize->add_setting( $setting, $options );
@@ -107,8 +111,37 @@ class Largo_Customizer {
 			'label'              => __( 'Body', 'largo' ),
 			'section'            => 'largo_homepage',
 			'settings'           => 'largo[home_template]',
-			'type'               => 'radio',
+			'type'               => 'rich_radio',
 			'choices'            => $home_templates,
+			) ) );
+
+		/**
+		 * Footer layout
+		 */
+		$wp_customize->add_section( 'largo_footer_layout', array(
+			'title'          => __( 'Footer Layout', 'largo' ),
+			'priority'       => 25,
+			) );
+		$imagepath =  get_template_directory_uri() . '/lib/options-framework/images/';
+		$wp_customize->add_control( new Largo_WP_Customize_Rich_Radio_Control( $wp_customize, 'largo_footer_layout', array(
+			'label'              => false,
+			'section'            => 'largo_footer_layout',
+			'settings'           => 'largo[footer_layout]',
+			'type'               => 'rich_radio',
+			'choices'            => array(
+				'3col-default'	 => array(
+					'label'      => __( '3 column large center', 'largo' ),
+					'img'        => $imagepath . 'footer-3col-lg-center.png',
+				),
+				'3col-equal'	 => array(
+					'label'      => __( '3 column equal', 'largo' ),
+					'img'        => $imagepath . 'footer-3col-equal.png',
+				),
+				'4col'	 => array(
+					'label'      => __( '4 column', 'largo' ),
+					'img'        => $imagepath . 'footer-4col.png'
+				),
+			),
 			) ) );
 
 		/**
