@@ -706,7 +706,7 @@ class Largo_Custom_Less_Variables {
 		// Regenerate and cache
 		foreach( self::$less_files as $less_file ) {
 			if ( $compiled = self::compile_less( $less_file, $values ) ) {
-				update_post_meta( $post_id, $less_file, $compiled );
+				update_post_meta( $post_id, $less_file, addslashes( $compiled ) );
 			}
 		}
 
