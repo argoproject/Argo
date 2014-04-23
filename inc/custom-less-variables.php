@@ -298,12 +298,18 @@ class Largo_Custom_Less_Variables {
 				if ( is_null( $variables['meta'] ) ) {
 					$variables['meta'] = (object) array('post_modified_gmt' => 0);
 				}
-				return add_query_arg(
-					array(
+				$query_args = array(
 						'largo_custom_less_variable' => 1,
 						'css_file' => $filename,
 						'timestamp' => $variables['meta']->post_modified_gmt,
-					),
+					);
+
+				if ( isset( $_REQUEST['wp_customize'] ) && 'on' == $_REQUEST['wp_customize'] ) {
+					$query_args['doing_customizer'] = 1;
+				}
+
+				return add_query_arg(
+					$query_args,
 					home_url( $matches['extra'] )
 				);
 			}
@@ -340,7 +346,12 @@ class Largo_Custom_Less_Variables {
 			exit;
 		}
 
-		$variables = self::get_custom_values();
+		if ( isset( $_REQUEST['doing_customizer'] ) && 1 == $_REQUEST['doing_customizer'] ) {
+			$variables = get_transient( 'largo_customizer_less_variables' );
+		}
+		if ( empty( $variables ) ) {
+			$variables = self::get_custom_values();
+		}
 		echo "/* Custom LESS Variables {$variables['meta']->post_modified_gmt} */\n";
 		echo self::get_css( self::$less_files[$key], $variables );
 

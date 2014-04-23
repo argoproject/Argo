@@ -192,9 +192,24 @@ class Largo_Customizer {
 	/**
 	 * Handle the preview of one of our setting values
 	 */
-	public function action_customize_preview() {
-		// @todo
-		$setting = str_replace( 'customizer_preview_', '', current_filter() );
+	public function action_customize_preview( $id ) {
+		global $wp_customize;
+
+		$setting = str_replace( 'customize_preview_', '', current_filter() );
+
+		if ( 0 === strpos( $setting, 'largo_color_' ) ) {
+			$color = str_replace( 'largo_color_', '', $setting );
+			$variables = get_transient( 'largo_customizer_less_variables' );
+			if ( ! is_array( $variables ) ) {
+				$variables = Largo_Custom_Less_Variables::get_custom_values();
+			}
+
+			$variables['meta'] = new stdClass;
+			$variables['meta']->post_modified_gmt = date( 'Y-m-s H:i:s' );
+			$variables['variables'][ $color ] = $wp_customize->get_setting( $setting )->post_value();
+			set_transient( 'largo_customizer_less_variables', $variables );
+		}
+
 	}
 
 	/**
