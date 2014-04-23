@@ -169,8 +169,7 @@ class Largo_Custom_Less_Variables {
 	 *
 	 * @return string the generated CSS
 	 */
-	static function get_css( $less_file ) {
-		$variables = self::get_custom_values();
+	static function get_css( $less_file, $variables ) {
 
 		// Use the cached version saved to the DB
 		if ( !empty( $variables['meta']->ID ) ) {
@@ -179,14 +178,15 @@ class Largo_Custom_Less_Variables {
 			if ( !empty( $css ) ) {
 				$css = $css[0];
 			} else {
-				$css = self::compile_less( $less_file );
+				$css = self::compile_less( $less_file, $variables['variables'] );
 				add_post_meta( $variables['meta']->ID, $less_file, addslashes( $css ) );
+
 			}
 
 			return $css;
 		}
 
-		return self::compile_less( $less_file );
+		return self::compile_less( $less_file, $variables['variables'] );
 	}
 
 
@@ -197,7 +197,7 @@ class Largo_Custom_Less_Variables {
 	 *
 	 * @return string - the resulting CSS
 	 */
-	static function compile_less( $less_file ) {
+	static function compile_less( $less_file, $variables ) {
 
 		// Load LESS compiler if loaded
 		if ( !class_exists('lessc') ) {
@@ -214,7 +214,7 @@ class Largo_Custom_Less_Variables {
 		try {
 			// Get the Less file and then replace variables.less with the update version
 			$less = file_get_contents( self::$less_dir . $less_file );
-			$less = self::replace_with_custom_variables( $less );
+			$less = self::replace_with_custom_variables( $less, $variables );
 
 			$css = $compiler->compile( $less );
 			$css = self::fix_urls( $css );
@@ -236,7 +236,7 @@ class Largo_Custom_Less_Variables {
 	 * Replace the include for the variable file with a modified version
 	 * with the custom values.
 	 */
-	static function replace_with_custom_variables( $less ) {
+	static function replace_with_custom_variables( $less, $variables ) {
 
 		// First, take variables.less and replace the values of the over-ridden variables.
 		$variables_less = file_get_contents( self::variable_file_path() );
@@ -244,13 +244,11 @@ class Largo_Custom_Less_Variables {
 		// Parse out the variables. Each is defined per line in format: @<varName>: <varValue>;
 		preg_match_all( '#^\s*@(?P<name>[\w-_]+):\s*(?P<value>[^;]*);#m', $variables_less, $matches );
 
-		$variables = self::get_custom_values();
-
 		foreach ( $matches[0] as $index => $rule ) {
 			$name = $matches['name'][$index];
 
-			if ( !empty( $variables['variables'][$name] ) ) {
-				$replacement_rule = "@{$name}: {$variables['variables'][$name]};";
+			if ( !empty( $variables[$name] ) ) {
+				$replacement_rule = "@{$name}: {$variables[$name]};";
 				$variables_less = str_replace( $rule, $replacement_rule, $variables_less);
 			}
 		}
@@ -298,9 +296,21 @@ class Largo_Custom_Less_Variables {
 		foreach ( self::$css_files as $key => $filename ) {
 			if ( preg_match( '!^'.$base_url_escape. preg_quote( $filename ) .'(?<extra>[#\?].*)?$!', $src, $matches ) ) {
 				$variables = self::get_custom_values();
-				if (is_null($variables['meta'])) $variables['meta'] = (object) array('post_modified_gmt' => 0);	//check if none defined
+				if ( is_null( $variables['meta'] ) ) {
+					$variables['meta'] = (object) array('post_modified_gmt' => 0);
+				}
+				$query_args = array(
+						'largo_custom_less_variable' => 1,
+						'css_file' => $filename,
+						'timestamp' => $variables['meta']->post_modified_gmt,
+					);
+
+				if ( isset( $_REQUEST['wp_customize'] ) && 'on' == $_REQUEST['wp_customize'] ) {
+					$query_args['doing_customizer'] = 1;
+				}
+
 				return add_query_arg(
-					array( 'largo_custom_less_variable' => 1, 'css_file' => $filename, 'timestamp' => $variables['meta']->post_modified_gmt ),
+					$query_args,
 					home_url( $matches['extra'] )
 				);
 			}
@@ -337,9 +347,14 @@ class Largo_Custom_Less_Variables {
 			exit;
 		}
 
-		$variables = self::get_custom_values();
+		if ( isset( $_REQUEST['doing_customizer'] ) && 1 == $_REQUEST['doing_customizer'] ) {
+			$variables = get_transient( 'largo_customizer_less_variables' );
+		}
+		if ( empty( $variables ) ) {
+			$variables = self::get_custom_values();
+		}
 		echo "/* Custom LESS Variables {$variables['meta']->post_modified_gmt} */\n";
-		echo self::get_css( self::$less_files[$key] );
+		echo self::get_css( self::$less_files[$key], $variables );
 
 		exit;
 	}
@@ -582,9 +597,12 @@ class Largo_Custom_Less_Variables {
 	 * Get the post the data is saved to
 	 */
 	static function get_post() {
+
+		$theme_data = wp_get_theme();
+
 		$post = get_posts( array(
 			'post_type'      => self::POST_TYPE,
-			'post_name'      => sanitize_title( $theme ),
+			'post_name'      => sanitize_title( $theme_data->get_stylesheet() ),
 			'posts_per_page' => 1,
 		));
 
@@ -598,6 +616,9 @@ class Largo_Custom_Less_Variables {
 	 * Delete all custom variables saved
 	 */
 	static function reset_all() {
+
+		$theme_data = wp_get_theme();
+		$theme = $theme_data->get_stylesheet();
 
 		//delete from posts
 		$clv_posts = get_posts('numberposts=-1&post_type='.self::POST_TYPE.'&post_status=any');
@@ -623,24 +644,17 @@ class Largo_Custom_Less_Variables {
 	 * @param string $theme optional - the theme name, defaults to the active the theme
 	 */
 	static function update_custom_values( $values, $theme = null ) {
-		global $post;
+
 		if ( empty( $theme ) ) {
 			$theme_data = wp_get_theme();
 			$theme = $theme_data->get_stylesheet();
 		}
 
 		// Need the current version of the settings
-		$post = get_posts( array(
-			'post_type'      => self::POST_TYPE,
-			'post_name'      => $theme,
-			'posts_per_page' => 1,
-			'post_status'    => 'any'
-		));
-
-		$post_id = null;
-
-		if ( count( $post ) != 0 ) {
-			$post_id = $post[0]->ID;
+		if ( $post = self::get_post() ) {
+			$post_id = $post->ID;
+		} else {
+			$post_id = false;
 		}
 
 		if ( !is_array( $values ) ) {
@@ -688,6 +702,14 @@ class Largo_Custom_Less_Variables {
 		// clear cache
 		$cache_key = 'customlessvars_'.$theme.'_current';
 		delete_transient( $cache_key );
+
+		// Regenerate and cache
+		foreach( self::$less_files as $less_file ) {
+			if ( $compiled = self::compile_less( $less_file, $values ) ) {
+				update_post_meta( $post_id, $less_file, addslashes( $compiled ) );
+			}
+		}
+
 	}
 
 	/**

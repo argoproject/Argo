@@ -59,42 +59,103 @@ if ( ! class_exists( 'Navis_Media_Credit' ) ) {
 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 
 /**
+ * A class to represent the one true Largo theme instance
+ */
+class Largo {
+
+	private static $instance;
+
+	public static function get_instance() {
+
+		if ( ! isset( self::$instance ) ) {
+			self::$instance = new Largo;
+			self::$instance->load();
+		}
+
+		return self::$instance;
+	}
+
+	/**
+	 * Load the theme
+	 */
+	private function load() {
+
+		$this->require_files();
+
+		$this->customizer = Largo_Customizer::get_instance();
+
+	}
+
+	/**
+	 * Load required files
+	 */
+	private function require_files() {
+
+		$includes = array(
+			'/largo-apis.php',
+			'/inc/largo-plugin-init.php',
+			'/inc/dashboard.php',
+			'/inc/robots.php',
+			'/inc/custom-feeds.php',
+			'/inc/users.php',
+			'/inc/term-meta.php',
+			'/inc/sidebars.php',
+			'/inc/customizer/customizer.php',
+			'/inc/widgets.php',
+			'/inc/nav-menus.php',
+			'/inc/taxonomies.php',
+			'/inc/term-icons.php',
+			'/inc/term-sidebars.php',
+			'/inc/images.php',
+			'/inc/editor.php',
+			'/inc/post-meta.php',
+			'/inc/open-graph.php',
+			'/inc/post-tags.php',
+			'/inc/header-footer.php',
+			'/inc/related-content.php',
+			'/inc/featured-content.php',
+			'/inc/enqueue.php',
+			'/inc/post-templates.php',
+			'/inc/home-templates.php',
+			'/inc/update.php',
+		);
+
+		if ( $this->is_less_enabled() ) {
+			$includes[] = '/inc/custom-less-variables.php';
+		}
+
+		foreach ( $includes as $include ) {
+			require_once( get_template_directory() . $include );
+		}
+
+	}
+
+	/**
+	 * Is the LESS feature enabled?
+	 */
+	public function is_less_enabled() {
+		return (bool) of_get_option( 'less_enabled' );
+	}
+
+}
+
+/**
+ * Load the theme
+ */
+function Largo() {
+	return Largo::get_instance();
+}
+add_action( 'after_setup_theme', 'Largo' );
+
+
+/**
  * Load up all of the other goodies from the /inc directory
  */
-$includes = array(
-
-	'/largo-apis.php',				// APIs for inclusion in child themes
-	'/inc/largo-plugin-init.php',	// a list of recommended plugins
-	'/inc/dashboard.php',			// custom dashboard widgets
-	'/inc/robots.php',				// default robots.txt config
-	'/inc/custom-feeds.php',		// create custom RSS feeds
-	'/inc/users.php',				// add custom fields for user profiles
-	'/inc/term-meta.php',				// add custom fields for taxonomy terms
-	'/inc/sidebars.php',				// register sidebars
-	'/inc/widgets.php',				// register widgets
-	'/inc/nav-menus.php',			// register nav menus
-	'/inc/taxonomies.php',			// add our custom taxonomies
-	'/inc/term-icons.php',			// add our custom taxonomies
-	'/inc/term-sidebars.php',			// add our custom taxonomies
-	'/inc/images.php',				// setup custom image sizes
-	'/inc/editor.php',				// add tinymce customizations and shortcodes
-	'/inc/post-meta.php',			// add post meta boxes
-	'/inc/open-graph.php',			// add open graph, twittercard and google publisher markup to the header
-	'/inc/post-tags.php',			// add some custom template tags (mostly used in single posts)
-	'/inc/header-footer.php',		// some additional template tags used in the header and footer
-	'/inc/related-content.php',		// functions dealing with related content
-	'/inc/featured-content.php',	// functions dealing with featured content
-	'/inc/enqueue.php',				// enqueue our js and css files
-	'/inc/post-templates.php',		// single post templates
-	'/inc/home-templates.php',		// homepage templates
-	'/inc/update.php',		// handling updates from old to new Largo. Should always be last
-);
+$includes = array();
 
 // This functionality is probably not for everyone so we'll make it easy to turn it on or off
 if ( is_plugin_active('ad-code-manager/ad-code-manager.php') )
 	$includes[] = '/inc/ad-codes.php'; // register ad codes
-if ( of_get_option( 'less_enabled' ) )
-	$includes[] = '/inc/custom-less-variables.php';	// add UI to alter variables.less
 if ( of_get_option( 'custom_landing_enabled' ) )
 	$includes[] = '/inc/wp-taxonomy-landing/taxonomy-landing.php'; // adds taxonomy landing plugin
 
