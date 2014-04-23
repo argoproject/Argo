@@ -179,7 +179,6 @@ class Largo_Customizer {
 	public function action_customize_update( $value ) {
 
 		// current_filter(), although semantically incorrect, offers backwards compat to 2.5
-		$current_action = current_filter();
 		$setting = str_replace( 'customize_update_', '', current_filter() );
 
 		// Colors
