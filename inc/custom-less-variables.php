@@ -616,6 +616,9 @@ class Largo_Custom_Less_Variables {
 	 */
 	static function reset_all() {
 
+		$theme_data = wp_get_theme();
+		$theme = $theme_data->get_stylesheet();
+
 		//delete from posts
 		$clv_posts = get_posts('numberposts=-1&post_type='.self::POST_TYPE.'&post_status=any');
 		foreach ($clv_posts as $clv_post) {
