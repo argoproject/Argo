@@ -644,7 +644,7 @@ class Largo_Custom_Less_Variables {
 	 * @param string $theme optional - the theme name, defaults to the active the theme
 	 */
 	static function update_custom_values( $values, $theme = null ) {
-		global $post;
+
 		if ( empty( $theme ) ) {
 			$theme_data = wp_get_theme();
 			$theme = $theme_data->get_stylesheet();
