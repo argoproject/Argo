@@ -55,9 +55,6 @@ if ( ! class_exists( 'Navis_Media_Credit' ) ) {
 	require_once dirname( __FILE__ ) . '/lib/navis-media-credit/navis-media-credit.php';
 }
 
-// need to include this explicitly to allow us to check if certain plugins are active.
-include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-
 /**
  * A class to represent the one true Largo theme instance
  */
@@ -124,6 +121,10 @@ class Largo {
 			$includes[] = '/inc/custom-less-variables.php';
 		}
 
+		if ( $this->is_plugin_active( 'ad-code-manager' ) ) {
+			$includes[] = '/inc/ad-codes.php';
+		}
+
 		foreach ( $includes as $include ) {
 			require_once( get_template_directory() . $include );
 		}
@@ -135,6 +136,27 @@ class Largo {
 	 */
 	public function is_less_enabled() {
 		return (bool) of_get_option( 'less_enabled' );
+	}
+
+	/**
+	 * Is a given plugin active?
+	 *
+	 * @param string $plugin_slug
+	 * @return bool
+	 */
+	public function is_plugin_active( $plugin_slug ) {
+
+		switch ( $plugin_slug ) {
+			case 'ad-code-manager':
+				return (bool) class_exists( 'Ad_Code_Manager' );
+
+			case 'co-authors-plus':
+				return (bool) class_exists( 'coauthors_plus' );
+
+			default:
+				return false;
+		}
+
 	}
 
 }
@@ -154,8 +176,6 @@ add_action( 'after_setup_theme', 'Largo' );
 $includes = array();
 
 // This functionality is probably not for everyone so we'll make it easy to turn it on or off
-if ( is_plugin_active('ad-code-manager/ad-code-manager.php') )
-	$includes[] = '/inc/ad-codes.php'; // register ad codes
 if ( of_get_option( 'custom_landing_enabled' ) )
 	$includes[] = '/inc/wp-taxonomy-landing/taxonomy-landing.php'; // adds taxonomy landing plugin
 

@@ -6,7 +6,7 @@
  * @since 1.0
  */
 //
-if ( !is_plugin_active('co-authors-plus/co-authors-plus.php') ) {
+if ( ! Largo()->is_plugin_active( 'co-authors-plus' ) ) {
 	function move_author_to_publish_metabox() {
 		global $post_ID;
 		$post = get_post( $post_ID );
