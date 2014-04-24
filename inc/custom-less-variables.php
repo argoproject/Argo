@@ -548,10 +548,10 @@ class Largo_Custom_Less_Variables {
 		}
 
 		// Try to retrieve cached values
-		$cache_key = 'customlessvars_'.$theme.'_'.(empty($revision) ? 'current' : $revision);
+		$cache_key = 'customlessvars_' . $theme . '_' . ( empty( $revision ) ? 'current' : $revision );
 		$cached = get_transient( $cache_key );
 		if ( $cached !== false ) {
-			//return $cached;
+			return $cached;
 		}
 
 		// Need the current version of the settings

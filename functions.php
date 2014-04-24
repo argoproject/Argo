@@ -97,6 +97,7 @@ class Largo {
 			'/inc/users.php',
 			'/inc/term-meta.php',
 			'/inc/sidebars.php',
+			'/inc/cached-core-functions.php',
 			'/inc/customizer/customizer.php',
 			'/inc/widgets.php',
 			'/inc/nav-menus.php',
