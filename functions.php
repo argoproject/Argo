@@ -55,9 +55,6 @@ if ( ! class_exists( 'Navis_Media_Credit' ) ) {
 	require_once dirname( __FILE__ ) . '/lib/navis-media-credit/navis-media-credit.php';
 }
 
-// need to include this explicitly to allow us to check if certain plugins are active.
-include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-
 /**
  * A class to represent the one true Largo theme instance
  */
