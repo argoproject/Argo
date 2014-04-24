@@ -150,6 +150,9 @@ class Largo {
 			case 'ad-code-manager':
 				return (bool) class_exists( 'Ad_Code_Manager' );
 
+			case 'co-authors-plus':
+				return (bool) class_exists( 'coauthors_plus' );
+
 			default:
 				return false;
 		}
