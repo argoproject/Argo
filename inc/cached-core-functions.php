@@ -9,7 +9,9 @@ function largo_cached_nav_menu( $args = array(), $prime_cache = false ) {
 
 	$queried_object_id = empty( $wp_query->queried_object_id ) ? 0 : (int) $wp_query->queried_object_id;
 
-	$nav_menu_key = 'nav-menu-' . md5( serialize( $args ) . '-' . $queried_object_id );
+	$last_edit = get_option( 'nav_menu_last_edit', 0 );
+
+	$nav_menu_key = 'nav-menu-' . md5( serialize( $args ) . '-' . $queried_object_id . '-' . $last_edit );
 	$my_args = wp_parse_args( $args );
 	$my_args = apply_filters( 'wp_nav_menu_args', $my_args );
 	$my_args = (object) $my_args;
@@ -38,3 +40,11 @@ function largo_cached_nav_menu( $args = array(), $prime_cache = false ) {
 	}
 }
 
+/**
+ * Tracking when any nav menus were last edited
+ * makes cache purging much easier
+ */
+function _largo_action_wp_update_nav_menu() {
+	update_option( 'nav_menu_last_edit', time() );
+}
+add_action( 'wp_update_nav_menu', '_largo_action_wp_update_nav_menu' );
