@@ -54,7 +54,7 @@
 								'depth'		 => 1,
 								'container'	 => false,
 							);
-							wp_nav_menu($top_args);
+							largo_cached_nav_menu($top_args);
 						?>
 	        	<div class="nav-right">
 
@@ -144,7 +144,7 @@
 								'menu_class' => 'nav',
 								'walker'	 => new Bootstrap_Walker_Nav_Menu()
 							);
-							wp_nav_menu($args);
+							largo_cached_nav_menu($args);
 							?>
 							<li class="menu-item-has-childen dropdown">
 								<a href="javascript:void(0);" class="dropdown-toggle"><?php
@@ -161,7 +161,7 @@
 										'container'	 => false,
 										'menu_class' => 'dropdown-menu',
 									);
-									wp_nav_menu($args);
+									largo_cached_nav_menu($args);
 								?>
 							</li>
 						</ul>
@@ -196,7 +196,7 @@
 							'menu_class' => 'nav',
 							'walker'	 => new Bootstrap_Walker_Nav_Menu()
 						);
-						wp_nav_menu($args);
+						largo_cached_nav_menu($args);
 					?>
 					</ul>
 					<ul class="nav visible-phone">
@@ -215,7 +215,7 @@
 									'container'	 => false,
 									'menu_class' => 'dropdown-menu',
 								);
-								wp_nav_menu($args);
+								largo_cached_nav_menu($args);
 							?>
 						</li>
 					</ul>
@@ -228,7 +228,7 @@
 <?php if ( of_get_option( 'show_dont_miss_menu') ) : ?>
 <nav id="secondary-nav" class="clearfix">
   	<div id="topics-bar" class="span12 hidden-phone">
-		<?php wp_nav_menu( array( 'theme_location' => 'dont-miss', 'container' => false, 'depth' => 1 ) ); ?>
+		<?php largo_cached_nav_menu( array( 'theme_location' => 'dont-miss', 'container' => false, 'depth' => 1 ) ); ?>
 	</div>
 </nav>
 <?php endif; ?>
