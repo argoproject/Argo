@@ -104,12 +104,12 @@ if ( ! function_exists( 'largo_home_icon' ) ) {
 
 		$logo = of_get_option( 'logo_thumbnail_sq' );
 
-		if ( empty( $logo ) ) {
-			echo '<i class="icon-home ' . esc_attr( $class ) . '"></i>';
-		} else {
+		if ( ! empty( $logo ) ) {
 			$logo = preg_replace( '#-\d+x\d+(\.[^.]+)$#', '\1', $logo );
 			$attachment_id = $wpdb->get_var( $wpdb->prepare("SELECT ID FROM {$wpdb->posts} WHERE guid = %s", $logo) );
 			echo wp_get_attachment_image( $attachment_id, $size );
+		} else {
+			echo '<i class="icon-home ' . esc_attr( $class ) . '"></i>';
 		}
 	}
 }
