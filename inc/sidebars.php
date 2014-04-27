@@ -147,6 +147,7 @@ if( !function_exists( 'largo_custom_sidebars_dropdown' ) ) {
 		$val = ( $custom ) ? $custom : 'default';
 
 		// Add a default option
+		$output = '';
 		if ( ! $skip_default ) {
 			$output .= '<option value="default" ';
 			$output .= selected( 'default', $val, false );
