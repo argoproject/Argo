@@ -50,11 +50,6 @@ if ( ! function_exists( 'optionsframework_init' ) ) {
 	require_once dirname( __FILE__ ) . '/lib/options-framework/options-framework.php';
 }
 
-// If the plugin is already active, don't cause fatals
-if ( ! class_exists( 'Navis_Media_Credit' ) ) {
-	require_once dirname( __FILE__ ) . '/lib/navis-media-credit/navis-media-credit.php';
-}
-
 /**
  * A class to represent the one true Largo theme instance
  */
@@ -128,6 +123,11 @@ class Largo {
 
 		foreach ( $includes as $include ) {
 			require_once( get_template_directory() . $include );
+		}
+
+		// If the plugin is already active, don't cause fatals
+		if ( ! class_exists( 'Navis_Media_Credit' ) ) {
+			require_once dirname( __FILE__ ) . '/lib/navis-media-credit/navis-media-credit.php';
 		}
 
 	}
