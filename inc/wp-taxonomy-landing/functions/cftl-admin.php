@@ -672,9 +672,15 @@ ORDER BY ISNULL(mt2.meta_value+0) ASC, mt2.meta_value+0 ASC, p.post_date DESC");
  */
 add_action('wp_ajax_series_sort', 'cftl_order_save');
 function cftl_order_save() {
-	$meta_key = "series_" . $_POST['series_id'] . "_order";
+
+	if ( ! current_user_can( 'edit_post', (int) $_POST['post_id'] ) 
+		|| ! wp_verify_nonce( $_POST['nonce'], 'update-post_' . (int) $_POST['post_id'] ) ) {
+		wp_die( __( "You don't have permission to do this.", 'largo' ) );
+	}
+
+	$meta_key = "series_" . (int) $_POST['series_id'] . "_order";
 	for ($i = 1; $i <= count($_POST['pid']); $i++ ) {
-		update_post_meta( $_POST['pid'][$i-1], $meta_key, $i);
+		update_post_meta( (int) $_POST['pid'][$i-1], $meta_key, $i);
 	}
 	echo "updated";
 }

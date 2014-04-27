@@ -65,6 +65,7 @@
 		$('#save-order').on('click', function() {
 			tb_remove();
 			var orderdata = 'action=series_sort&series_id=' + $sort.data('series-id') + '&' + $sort.sortable('serialize');
+			orderdata += '&nonce=' + $('#_wpnonce').val() + '&post_id=' + $('#post_ID').val();
 			$.post( ajaxurl, orderdata, function(resp) {
 				console.log(resp);
 			});
