@@ -128,7 +128,7 @@ if ( ! function_exists( 'largo_google_analytics' ) ) {
 			    _gaq.push(
 					["largo._setAccount", "UA-17578670-4"],
 					["largo._setCustomVar", 1, "SiteName", "<?php bloginfo('name') ?>"],
-					["largo._setDomainName", "<?php echo str_replace( 'http://' , '' , home_url()) ?>"],
+					["largo._setDomainName", "<?php echo parse_url( home_url(), PHP_URL_HOST ); ?>"],
 					["largo._setAllowLinker", true],
 					["largo._trackPageview"]
 				);
