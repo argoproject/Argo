@@ -104,12 +104,29 @@ if ( ! function_exists( 'largo_home_icon' ) ) {
 
 		$logo = of_get_option( 'logo_thumbnail_sq' );
 
-		if ( empty( $logo ) ) {
-			echo '<i class="icon-home ', esc_attr($class),'"></i>';
-		} else {
+		if ( ! empty( $logo ) ) {
 			$logo = preg_replace( '#-\d+x\d+(\.[^.]+)$#', '\1', $logo );
-			$attachment_id = $wpdb->get_var( $wpdb->prepare("SELECT ID FROM {$wpdb->posts} WHERE guid = %s", $logo) );
+
+			$cache_key = 'largo_logo_thumbnail_sq_attachment_id';
+			if ( false === ( $attachment_id = get_transient( $cache_key ) ) ) {
+				$attachment_id = $wpdb->get_var( $wpdb->prepare("SELECT ID FROM {$wpdb->posts} WHERE guid = %s", $logo) );
+				set_transient( $cache_key, $attachment_id );
+			}
 			echo wp_get_attachment_image( $attachment_id, $size );
+		} else {
+			echo '<i class="icon-home ' . esc_attr( $class ) . '"></i>';
 		}
 	}
 }
+
+/**
+ * Clear the home icon cache when options are updated
+ */
+function largo_clear_home_icon_cache( $option ) {
+
+	if ( 'largo' === $option ) {
+		delete_transient( 'largo_logo_thumbnail_sq_attachment_id' );
+	}
+
+}
+add_action( 'update_option', 'largo_clear_home_icon_cache' );
