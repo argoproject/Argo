@@ -7,14 +7,14 @@
  */
 //
 if ( ! Largo()->is_plugin_active( 'co-authors-plus' ) ) {
-	function move_author_to_publish_metabox() {
+	function largo_move_author_to_publish_metabox() {
 		global $post_ID;
 		$post = get_post( $post_ID );
 		printf( '<div id="author" class="misc-pub-section" style="padding: 8px 10px;">%s: ', __( 'Author', 'largo' ) );
 		post_author_meta_box( $post );
 		echo '</div>';
 	}
-	add_action( 'post_submitbox_misc_actions', 'move_author_to_publish_metabox' );
+	add_action( 'post_submitbox_misc_actions', 'largo_move_author_to_publish_metabox' );
 }
 
 /**
@@ -22,14 +22,14 @@ if ( ! Largo()->is_plugin_active( 'co-authors-plus' ) ) {
  *
  * @since 1.0
  */
-function remove_default_post_screen_metaboxes() {
+function largo_remove_default_post_screen_metaboxes() {
 	remove_meta_box( 'trackbacksdiv','post','normal' ); // trackbacks
 	remove_meta_box( 'slugdiv','post','normal' ); // slug
 	remove_meta_box( 'revisionsdiv','post','normal' ); // revisions
 	remove_meta_box( 'authordiv', 'post', 'normal' ); // author
 	remove_meta_box( 'commentsdiv','post','normal' ); // comments
 }
-add_action('admin_menu','remove_default_post_screen_metaboxes');
+add_action('admin_menu','largo_remove_default_post_screen_metaboxes');
 
 /**
  * Show all of the other metaboxes by default (particularly to show the excerpt)
@@ -146,7 +146,7 @@ function largo_layout_meta_box_display () {
 	echo __('Select a custom sidebar to display.', 'largo' ) . '</p>';
 	echo '<label class="hidden" for="custom_sidebar">' . __("Custom Sidebar", 'largo' ) . '</label>';
 	echo '<select name="custom_sidebar" id="custom_sidebar" class="dropdown">';
-	custom_sidebars_dropdown(); //get the options
+	largo_custom_sidebars_dropdown(); //get the options
 	echo '</select>';
 	largo_register_meta_input('custom_sidebar');
 }

@@ -81,7 +81,7 @@ add_action( 'after_setup_theme', 'largo_set_media_options' );
  * @return object post content with image links stripped out
  * @since 1.0
  */
-function attachment_image_link_remove_filter( $content ) {
+function largo_attachment_image_link_remove_filter( $content ) {
 	$content =
     preg_replace(
       array('{<a(.*?)(wp-att|wp-content\/uploads)[^>]*><img}',
@@ -91,7 +91,7 @@ function attachment_image_link_remove_filter( $content ) {
     );
 	return $content;
 }
-add_filter( 'the_content', 'attachment_image_link_remove_filter' );
+add_filter( 'the_content', 'largo_attachment_image_link_remove_filter' );
 
 /**
  * Load the picturefill.wp plugin
