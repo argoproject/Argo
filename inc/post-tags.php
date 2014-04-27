@@ -35,7 +35,7 @@ if ( ! function_exists( 'largo_author' ) ) {
 	function largo_author( $echo = true ) {
 		global $post;
 		$values = get_post_custom( $post->ID );
-		$byline_text = isset( $values['largo_byline_text'] ) ? esc_attr( $values['largo_byline_text'][0] ) : esc_html( get_the_author() );
+		$byline_text = isset( $values['largo_byline_text'] ) ? $values['largo_byline_text'][0] ) : get_the_author();
 
 		if ( $echo )
 			echo $byline_text;
@@ -63,7 +63,7 @@ if ( ! function_exists( 'largo_author_link' ) ) {
 			$output = esc_html( $byline_text );
 		} else {
 			$byline_link = isset( $values['largo_byline_link'] ) ? $values['largo_byline_link'][0] : get_author_posts_url( get_the_author_meta( 'ID', $author_id ) );
-			$byline_title_attr = esc_attr( sprintf( __( 'More from %s','largo' ), $byline_text ) );
+			$byline_title_attr = sprintf( __( 'More from %s','largo' ), $byline_text );
 			$output = '<a class="url fn n" href="' . esc_url( $byline_link ) . '" title="' . esc_attr( $byline_title_attr ) . '" rel="author">' . esc_html( $byline_text ) . '</a>';
 		}
 
