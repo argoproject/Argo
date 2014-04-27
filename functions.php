@@ -130,6 +130,10 @@ class Largo {
 			require_once dirname( __FILE__ ) . '/lib/navis-media-credit/navis-media-credit.php';
 		}
 
+		if ( ! class_exists( 'Navis_Slideshows' ) ) {
+			require_once dirname( __FILE__ ) . '/lib/navis-slideshows/navis-slideshows.php';
+		}
+
 	}
 
 	/**

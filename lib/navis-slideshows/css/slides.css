@@ -1,0 +1,158 @@
+.navis-slideshow {
+    background-color: #efefef;
+    font-family: Arial;
+    margin-bottom: 20px;
+    padding: 10px 2.5%;
+    font-size: 11px;
+    color: #666;
+    -webkit-box-shadow: 3px 4px 4px #ccc;
+    -moz-box-shadow: 3px 6px 4px #999;
+    position: relative;
+    border: 1px solid #ddd;
+}
+
+.navis-slideshow a {
+    outline: none;
+}
+
+.navis-slideshow .pagination li {
+  list-style-type:none !important;
+}
+
+/* Set the width of your slides container */
+.slides_container {
+    width: 100%;
+    margin-top: 20px;
+    display: none;
+    padding:5px 0;
+}
+
+.ie6 .slides_container {
+    display: block;
+}
+
+#content .slides_container img {
+    display: block;
+    margin: 0 auto;
+    border: 1px solid #ddd;
+    width:100%;
+}
+
+.slides_container p {
+    margin: 10px 0;
+    line-height: 1.5;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+    font-size: 12px;
+}
+
+#content .slides_container h6 {
+    margin: 6px 1px 4px 0;
+    text-align: right;
+    font-weight: normal;
+    font-size: 11px;
+    font-style: italic;
+    color: #999;
+}
+
+#content .slide-permalink {
+    font-weight: normal;
+    margin-left: 5px;
+    margin-right: -1px;
+    color: #999;
+    font-style: normal;
+    background-color: #ddd;
+    padding: 3px 5px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+#content .slide-permalink:hover {
+    text-decoration: none;
+    background-color: #ccc;
+    color: #666;
+}
+
+
+/* Set the width of your slides */
+.slides_container div {
+    width: 100%;
+    display: block;
+}
+div.slides_control {
+	width: 100% !important;
+}
+
+.navis-slideshow .pagination {
+    margin: 0 !important;
+    width: 95%;
+    padding: 0;
+    position: absolute;
+    top: 10px;
+    left: 10px
+}
+
+.navis-slideshow .pagination li {
+    float: left;
+    margin: 0 1px !important;
+    list-style: none;
+    background: none !important;
+    padding: 0 !important;
+}
+
+.navis-slideshow .pagination li a {
+    display: block;
+    width: 12px;
+    height: 0;
+    padding-top: 12px;
+    background-image: url(../img/pagination.png);
+    background-position: 0 0;
+    float: left;
+    overflow: hidden
+}
+
+.navis-slideshow .pagination li.current a {
+    background-position: 0 -12px
+}
+
+.slide-nav a {
+    background: url(../img/slide-nav.png) no-repeat top left;
+    text-indent: -10000px;
+    display: block;
+    text-decoration: none;
+    outline: none;
+}
+
+.navis-slideshow a.prev {
+    position: absolute;
+    top: 5px;
+    right: 32px;
+    background-position: 0 -213px;
+    width: 21px;
+    height: 21px;
+    z-index: 10;
+    outline: none;
+}
+
+.navis-slideshow a.prev:hover {
+    background-position: 0 -142px;
+    width: 21px;
+    height: 21px;
+}
+
+.navis-slideshow a.next {
+    position: absolute;
+    top: 5px;
+    right: 7px;
+    background-position: 0 -71px;
+    width: 21px;
+    height: 21px;
+    z-index: 10;
+    outline: none;
+}
+
+.navis-slideshow a.next:hover {
+    background-position: 0 0;
+    width: 21px;
+    height: 21px
+}
