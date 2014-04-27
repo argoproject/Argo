@@ -142,7 +142,7 @@ class Navis_Slideshows {
 				'post_mime_type' => 'image',
 				'order'		  => $order,
 				'orderby'		=> $orderby,
-				'numberposts' => -1
+				'numberposts' => 200
 			) );
 		} else {
 
@@ -150,7 +150,7 @@ class Navis_Slideshows {
 				'post__in'		 => $ids,
 				'post_type'	  => 'attachment',
 				'post_mime_type' => 'image',
-				'numberposts' => -1
+				'numberposts' => 200
 			) );
 
 			// If attachments are returned, put them into the array in the order specified
