@@ -545,32 +545,61 @@ function cftl_title( $post ) {
 
 
 function cftl_tax_landing_save_layout($post_id) {
-	if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
-	if (!isset($_POST['post_type']) || $_POST['post_type'] != 'cftl-tax-landing') return;
-	if (!current_user_can('edit_post', $post_id)) return;
+
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+		return;
+	}
+
+	if ( ! isset( $_POST['post_type'] )
+		|| $_POST['post_type'] != 'cftl-tax-landing') {
+		return;
+	}
+
+	if ( ! current_user_can( 'edit_post', $post_id ) ) {
+		return;
+	}
 
 	if (!isset($_POST['cftl_tax_landing_header']) || !wp_verify_nonce($_POST['cftl_tax_landing_header'], plugin_basename(__FILE__))) {
 		return;	//TO DO: verify main and footer nonces too?
 	}
 
-	//update all the post meta stuff
 	$layout_fields = array(
-		'header_enabled',
-		'show_series_byline',
-		'show_sharebar',
-		'header_style',
-		'cftl_layout',
-		'left_region',
-		'right_region',
-		'per_page',
-		'post_order',
-		'show',	//maybe serialize these four?
-		'footer_style',
-		'footerhtml',	//instantiate another widget region
+		'header_enabled'         => 'bool',
+		'show_series_byline'     => 'bool',
+		'show_sharebar'          => 'bool',
+		'header_style'           => 'sanitize_key',
+		'cftl_layout'            => 'sanitize_key',
+		'left_region'            => 'sanitize_key',
+		'right_region'           => 'sanitize_key',
+		'per_page'               => 'intval',
+		'post_order'             => 'sanitize_text_field',
+		'show'                   => 'sanitize_show',
+		'footer_style'           => 'sanitize_key',
+		'footerhtml'             => 'wp_filter_post_kses',
 	);
 
-	foreach ($layout_fields as $field_name) {
-		update_post_meta($post_id, $field_name, $_POST[$field_name]);	//do I need to sanitize this?
+	foreach ($layout_fields as $field_name => $sanitize ) {
+
+		switch ( $sanitize ) {
+			case 'bool':
+				$safe_value = ! empty( $_POST[ $field_name ] ) ? true : false;
+				break;
+
+			case 'sanitize_show':
+
+				$safe_value = array();
+				foreach( array( 'image', 'excerpt', 'byline', 'tags' ) as $key ) {
+					$safe_value[ $key ] = ! empty( $_POST[ $field_name ][ $key ] ) ? true : false;
+				}
+				break;
+
+			default:
+				$safe_value = ! empty( $_POST[ $field_name ] ) ? call_user_func( $sanitize, $_POST[ $field_name ] ) : '';
+				break;
+
+		}
+
+		update_post_meta( $post_id, $field_name, $safe_value );
 	}
 }
 add_action('save_post', 'cftl_tax_landing_save_layout');
@@ -672,9 +701,15 @@ ORDER BY ISNULL(mt2.meta_value+0) ASC, mt2.meta_value+0 ASC, p.post_date DESC");
  */
 add_action('wp_ajax_series_sort', 'cftl_order_save');
 function cftl_order_save() {
-	$meta_key = "series_" . $_POST['series_id'] . "_order";
+
+	if ( ! current_user_can( 'edit_post', (int) $_POST['post_id'] ) 
+		|| ! wp_verify_nonce( $_POST['nonce'], 'update-post_' . (int) $_POST['post_id'] ) ) {
+		wp_die( __( "You don't have permission to do this.", 'largo' ) );
+	}
+
+	$meta_key = "series_" . (int) $_POST['series_id'] . "_order";
 	for ($i = 1; $i <= count($_POST['pid']); $i++ ) {
-		update_post_meta( $_POST['pid'][$i-1], $meta_key, $i);
+		update_post_meta( (int) $_POST['pid'][$i-1], $meta_key, $i);
 	}
 	echo "updated";
 }
