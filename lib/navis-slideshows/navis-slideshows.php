@@ -265,6 +265,11 @@ class Navis_Slideshows {
 	 * @todo add checks for post type, taxonomy existence, etc.
 	 */
 	function tag_post_as_slideshow( $post_ID, $post, $taxonomy = 'feature' ) {
+
+		if ( ! is_object_in_taxonomy( $post->post_type, $taxonomy ) ) {
+			return;
+		}
+
 		$ss_term = get_term_by( 'slug', 'slideshow', $taxonomy );
 		$post_terms = wp_get_object_terms( $post_ID, $taxonomy );
 
