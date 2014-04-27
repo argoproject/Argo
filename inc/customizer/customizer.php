@@ -39,6 +39,7 @@ class Largo_Customizer {
 	private function setup_actions() {
 
 		add_action( 'customize_register', array( $this, 'action_customize_register' ) );
+		add_action( 'customize_preview_init', array( $this, 'action_customize_preview_init' ) );
 
 	}
 
@@ -208,6 +209,45 @@ class Largo_Customizer {
 			add_action( 'customize_update_' . $options['type'], array( $this, 'action_customize_update' ) );
 			add_action( 'customize_preview_' . $options['type'], array( $this, 'action_customize_preview' ) );
 		}
+
+	}
+
+	/**
+	 * Add contextual information when the Customizer is loaded
+	 */
+	public function action_customize_preview_init() {
+
+		add_action( 'wp_enqueue_scripts', array( $this, 'action_preview_enqueue_scripts' ) );
+		add_action( 'wp_footer', array( $this, 'action_preview_wp_footer' ) );
+
+	}
+
+	/**
+	 * Enqueue scripts and styles specific to the Largo Customizer
+	 */
+	public function action_preview_enqueue_scripts() {
+
+		wp_enqueue_script( 'largo-customizer', get_template_directory_uri() . '/inc/customizer/js/customizer.js', array( 'jquery' ) );
+
+	}
+
+	/**
+	 * Customizer settings based on context
+	 */
+	public function action_preview_wp_footer() {
+
+		$settings = array(
+			'hidden_sections' => array(),
+			);
+		if ( ! is_home() ) {
+			$settings['hidden_sections'][] = 'largo_homepage';
+		}
+
+		?>
+		<script type="text/javascript">
+			var _largoCustomizerPreviewSettings = <?php echo json_encode( $settings ); ?>;
+		</script>
+		<?php
 
 	}
 
