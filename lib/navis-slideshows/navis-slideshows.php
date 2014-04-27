@@ -102,13 +102,7 @@ class Navis_Slideshows {
 		global $post;
 		self::$include_slideshow_deps = true;
 
-		if ( isset( $attr['orderby'] ) ) {
-			$attr['orderby'] = sanitize_sql_orderby( $attr['orderby'] );
-			if ( !$attr['orderby'] )
-				unset( $attr['orderby'] );
-		}
-
-		extract( shortcode_atts( array(
+		$attr = shortcode_atts( array(
 			'order'	  => 'ASC',
 			'orderby'	=> 'menu_order ID',
 			'id'		 => $post->ID,
@@ -119,13 +113,28 @@ class Navis_Slideshows {
 			'size'	   => 'thumbnail',
 			'link' => 'file',
 			'ids'		 => '',
-		), $attr ) );
+		), $attr );
 
-		$id = intval( $id );
+		$id = intval( $attr['id'] );
+		$order = ( $attr['order'] == 'ASC' ) ? 'ASC' : 'DESC';
+		if ( isset( $attr['orderby'] ) ) {
+			$attr['orderby'] = sanitize_sql_orderby( $attr['orderby'] );
+			if ( ! $attr['orderby'] )
+				unset( $attr['orderby'] );
+		}
+		$itemtag = sanitize_key( $attr['itemtag'] );
+		$icontag = sanitize_key( $attr['icontag'] );
+		$captiontag = sanitize_key( $attr['captiontag'] );
+		$columns = intval( $attr['columns'] );
+		$size = sanitize_key( $attr['size'] );
+		$link = sanitize_key( $attr['link'] );
+		$ids = array_map( 'intval', explode(',', $attr['ids'] ) );
+
+
 		// XXX: this could be factored out to a common function for getting
 		// a post's images
 		//if no IDs set, get attached posts
-		if ($ids == '') {
+		if ( empty( $ids ) ) {
 			$attachments = get_children( array(
 				'post_parent'	=> $id,
 				'post_status'	=> 'inherit',
@@ -136,8 +145,6 @@ class Navis_Slideshows {
 				'numberposts' => -1
 			) );
 		} else {
-			$ids = str_replace(' ', '', $ids);
-			$ids = explode(',', $ids);
 
 			$raw_attachments = get_posts( array(
 				'post__in'		 => $ids,
@@ -173,7 +180,7 @@ class Navis_Slideshows {
 		$post_html_id = $postid . "-" . wp_create_nonce( 'slideshow' . time() . rand(0,10000) );	//appending a random value so that 2 slideshows can peacefully coexist
 
 		$output .= '
-			<div id="slides-'.$post_html_id.'" class="navis-slideshow">
+			<div id="slides-' . esc_attr( $post_html_id ) . '" class="navis-slideshow">
 			<p class="slide-nav">
 
 			<a href="#" class="prev"></a>
@@ -209,25 +216,25 @@ class Navis_Slideshows {
 			if ( $count < 3 || $count == $total ) {
 				if ( 'file' == $link) {
 					$output .= sprintf(
-						'<div id="%s"><a href="%s" target="_blank"><img src="%s" /></a>',
-						$slidediv, $img_url, $image[0], $image[1], $image[2]
+						'<div id="%s"><a href="%s" target="_blank"><img src="%s" width="%d" height="%d" /></a>',
+						esc_attr( $slidediv ), esc_url( $img_url ), esc_url( $image[0] ), (int) $image[1], (int) $image[2]
 					);
 				} else {
 					$output .= sprintf(
-						'<div id="%s"><img src="%s" />',
-						$slidediv, $image[0], $image[1], $image[2]
+						'<div id="%s"><img src="%s" width="%d" height="%d" />',
+						esc_attr( $slidediv ), esc_url( $image[0] ), (int) $image[1], (int) $image[2]
 					);
 				}
 			} else {
 				if ( 'file' == $link ) {
 					$output .= sprintf(
 						'<div id="%s" data-src="%s*%d*%d" data-href="%s" />',
-						$slidediv, $image[0], $image[1], $image[2], $img_url
+						esc_attr( $slidediv ), esc_url( $image[0] ), (int) $image[1], (int) $image[2], esc_url( $img_url )
 					);
 				} else {
 					$output .= sprintf(
 						'<div id="%s" data-src="%s*%d*%d" />',
-						$slidediv, $image[0], $image[1], $image[2]
+						esc_attr( $slidediv ), esc_url( $image[0] ), (int) $image[1], (int) $image[2]
 					);
 				}
 			}
@@ -235,10 +242,10 @@ class Navis_Slideshows {
 			$output .= '<h6>';
 
 			if ( isset( $credit ) )
-				$output .= $credit;
+				$output .= wp_post_kses( $credit );
 
 			$output .= ' <a href="#" class="slide-permalink">permalink</a></h6>';
-			$output .= '<p>'.$caption.'</p></div>';
+			$output .= '<p>' . wp_post_kses( $caption ) . '</p></div>';
 		}
 		$output .= '</div></div>';
 
