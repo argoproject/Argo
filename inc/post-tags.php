@@ -35,7 +35,7 @@ if ( ! function_exists( 'largo_author' ) ) {
 	function largo_author( $echo = true ) {
 		global $post;
 		$values = get_post_custom( $post->ID );
-		$byline_text = isset( $values['largo_byline_text'] ) ? $values['largo_byline_text'][0] ) : get_the_author();
+		$byline_text = isset( $values['largo_byline_text'] ) ? $values['largo_byline_text'][0] : get_the_author();
 
 		if ( $echo )
 			echo $byline_text;
