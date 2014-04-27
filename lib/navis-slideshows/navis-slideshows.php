@@ -51,7 +51,7 @@ class Navis_Slideshows {
 
 	function add_slideshow_header() {
 		// slides-specific CSS
-		$slides_css = plugins_url( 'css/slides.css', __FILE__ );
+		$slides_css = get_template_directory_uri() . '/lib/navis-slideshows/css/slides.css';
  		wp_enqueue_script("jquery");
 		wp_enqueue_style(
 			'navis-slides', $slides_css, array(), '1.0'
