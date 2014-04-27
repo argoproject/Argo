@@ -76,18 +76,17 @@ function largo_add_meta_content( $callback, $box_id ) {
  *
  * TODO: Include a validation parameter so meta fields can be validated easily.
  */
-function largo_register_meta_input( $input_names, $presave_fn=null ) {
+function largo_register_meta_input( $input_names, $presave_fn ) {
 	global $largo;
-	$largo_metas = get_option('largo_meta_inputs');
-	if ( is_string( $input_names ) ) $input_names = array($input_names);
 
-	foreach( $input_names as $name ) {
-		if (! array_key_exists( $name, $largo_metas) ) {
-			$largo_metas[ $name ] = array( 'name' => $name, 'presave_fn' => $presave_fn );
-		}
+	if ( is_string( $input_names ) ) {
+		$input_names = array( $input_names );
 	}
 
-	update_option('largo_meta_inputs', $largo_metas);
+	foreach( $input_names as $name ) {
+		$largo[ 'inputs' ][ $name ] = array( 'name' => $name, 'presave_fn' => $presave_fn );
+	}
+
 }
 
 /**
@@ -138,25 +137,26 @@ function _largo_meta_box_save( $post_id ) {
 	global $post, $largo;
 
 	// Bail if we're doing an auto save
-	if( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+		return;
+	}
 
 	// if our nonce isn't there, or we can't verify it, bail
-	if( !isset( $_POST['meta_box_nonce'] ) || !wp_verify_nonce( $_POST['meta_box_nonce'], 'largo_meta_box_nonce' ) ) return;
+	if ( ! isset( $_POST['meta_box_nonce'] ) || ! wp_verify_nonce( $_POST['meta_box_nonce'], 'largo_meta_box_nonce' ) ) {
+		return;
+	}
 
 	// if our current user can't edit this post, bail
-	if( !current_user_can( 'edit_post' ) ) return;
+	if ( ! current_user_can( 'edit_post' ) ) {
+		return;
+	}
 
 	// set up our array of data
 	$mydata = array();
-	$registered_inputs = get_option('largo_meta_inputs', array());
+	foreach ( $largo['inputs'] as $input_name => $handlers ) {
 
-	foreach ( $registered_inputs as $input_name => $handlers ) {
-
-		if ( array_key_exists($input_name, $_POST) ) {
-			$mydata[ $input_name ] = $_POST[ $input_name ];
-			if ( is_callable( $handlers['presave_fn'] ) ) {
-				$mydata[ $input_name ] = call_user_func( $handlers['presave_fn'], $mydata[ $input_name ], $input_name );
-			}
+		if ( array_key_exists( $input_name, $_POST ) ) {
+			$mydata[ $input_name ] = call_user_func( $handlers['presave_fn'], $_POST[ $input_name ] );
 		}
 	}
 
@@ -167,7 +167,9 @@ function _largo_meta_box_save( $post_id ) {
 		} else {
 			add_post_meta( $post->ID, $key, $value );//if the custom field doesn't have a value, add the data
 		}
-		if ( !$value ) delete_post_meta( $post->ID, $key ); //and delete if blank
+		if ( ! $value ) {
+			delete_post_meta( $post->ID, $key ); //and delete if blank
+		}
 	}
 
 }

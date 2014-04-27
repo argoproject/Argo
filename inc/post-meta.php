@@ -120,8 +120,8 @@ function largo_byline_meta_box_display() {
 		<input type="text" name="largo_byline_link" id="largo_byline_link" value="<?php echo $byline_link; ?>" />
 	</p>
 	<?php
-	largo_register_meta_input( array('largo_byline_text', 'largo_byline_link') );
 }
+largo_register_meta_input( array('largo_byline_text', 'largo_byline_link'), 'sanitize_text_field' );
 
 /**
  * Contents for the Layout Options metabox
@@ -139,7 +139,6 @@ function largo_layout_meta_box_display () {
 		echo '<option value="">' . __( 'Default', 'largo' ) . '</option>';
 		post_templates_dropdown(); //get the options
 		echo '</select>';
-		largo_register_meta_input('_wp_post_template');
 	}
 
 	echo '<p><strong>' . __('Custom Sidebar', 'largo' ) . '</strong><br />';
@@ -148,25 +147,24 @@ function largo_layout_meta_box_display () {
 	echo '<select name="custom_sidebar" id="custom_sidebar" class="dropdown">';
 	largo_custom_sidebars_dropdown(); //get the options
 	echo '</select>';
-	largo_register_meta_input('custom_sidebar');
 }
+largo_register_meta_input( '_wp_post_template', 'sanitize_text_field' );
+largo_register_meta_input( 'custom_sidebar', 'sanitize_key' );
 
 /**
  * Content for the Featured Videometabox
  */
 function largo_featured_video_meta_box_display() {
   global $post;
-  $values = get_post_custom( $post->ID );
-  $youtube_url = isset( $values['youtube_url'] ) ? $values['youtube_url'][0] : '';
+  $youtube_url = get_post_meta( $post->ID, 'youtube_url', true );
   wp_nonce_field( 'largo_meta_box_nonce', 'meta_box_nonce' );
 
   echo __('<p>In some cases you might want to use a video in the place of the featured image. If you would prefer to use a video, enter the URL for the video (YouTube only) here:</p>', 'largo');
   echo '<input type="text" name="youtube_url" id="youtube_url" value="' . esc_url( $youtube_url ) . '" />';
   echo __('<p class="small">Note that at the moment this is only used for the top story on the homepage but future versions of Largo might enable this functionality elsewhere in the theme.</p>', 'largo');
 
-	largo_register_meta_input('youtube_url');
-
 }
+largo_register_meta_input( 'youtube_url', 'esc_url_raw' );
 
 /**
  * Content for the Additional Options metabox
@@ -174,13 +172,13 @@ function largo_featured_video_meta_box_display() {
 function largo_custom_related_meta_box_display() {
 	global $post;
 
-	$value = get_post_meta( $post->ID, '_largo_custom_related_posts', true );
+	$value = get_post_meta( $post->ID, 'largo_custom_related_posts', true );
 
 	echo '<p><strong>' . __('Related Posts', 'largo') . '</strong><br />';
 	echo __('To override the default related posts functionality enter specific related post IDs separated by commas.') . '</p>';
-	echo '<input type="text" name="largo_custom_related_posts" value="', esc_attr($value),'" />';
-	largo_register_meta_input('largo_custom_related_posts');
+	echo '<input type="text" name="largo_custom_related_posts" value="' . esc_attr( $value ) . '" />';
 }
+largo_register_meta_input( 'largo_custom_related_posts', 'sanitize_text_field' );
 
 /**
  * Content for the Additional Options metabox
@@ -197,19 +195,8 @@ function largo_custom_disclaimer_meta_box_display() {
 	echo '<p><strong>' . __('Disclaimer', 'largo') . '</strong><br />';
 	echo '<textarea name="disclaimer" style="width: 98%;">' . esc_textarea( $value ) . '</textarea>';
 
-	largo_register_meta_input('disclaimer', '_largo_custom_disclaimer_value' );
 }
-
-function _largo_custom_disclaimer_value( $value ) {
-	$value = trim( $value );
-
-	if ( of_get_option( 'default_disclaimer' ) == $value ) {
-		return null;
-	}
-
-	return $value;
-}
-
+largo_register_meta_input( 'disclaimer', 'wp_filter_post_kses' );
 
 /**
  * Additional content for the Additional Options metabox
@@ -220,7 +207,9 @@ function largo_top_tag_display() {
 	$top_term = get_post_meta( $post->ID, 'top_term', TRUE );
 	$terms = get_the_terms( $post->ID, array( 'series', 'category', 'post_tag' ) );
 
-	if ( ! $terms ) return; //no post terms yet? Disregard this then
+	if ( ! $terms ) {
+		return; //no post terms yet? Disregard this then
+	}
 
 	echo '<p><strong>' . __('Top Term', 'largo') . '</strong><br />';
 	echo __('Identify which of this posts\'s terms is primary.') . '</p>';
@@ -231,10 +220,9 @@ function largo_top_tag_display() {
 	}
 
 	echo '</select>';
-
-	largo_register_meta_input('top_term');
 }
 largo_add_meta_content('largo_top_tag_display', 'largo_additional_options');
+largo_register_meta_input( 'top_term', 'intval' );
 
 /**
  * Load JS for our top-terms select
