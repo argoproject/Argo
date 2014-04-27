@@ -59,7 +59,7 @@ class largo_twitter_widget extends WP_Widget {
 	function form( $instance ) {
 		$defaults = array(
 			'widget_ID' 		=> '',
-			'twitter_username' 	=> twitter_url_to_username( of_get_option( 'twitter_link' ) ),
+			'twitter_username' 	=> largo_twitter_url_to_username( of_get_option( 'twitter_link' ) ),
 			'twitter_list_slug' => 'inn-staff-and-associates',
 			'twitter_search' 	=> __('your search', 'largo'),
 			'widget_type' 		=> 'timeline',

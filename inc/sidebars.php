@@ -139,8 +139,8 @@ function largo_make_slug($string, $maxLength = 63) {
  *
  * @since 1.0
  */
-if( !function_exists( 'custom_sidebars_dropdown' ) ) {
-	function custom_sidebars_dropdown( $selected = '', $skip_default = false, $post_id = NULL ) {
+if( !function_exists( 'largo_custom_sidebars_dropdown' ) ) {
+	function largo_custom_sidebars_dropdown( $selected = '', $skip_default = false, $post_id = NULL ) {
 		global $wp_registered_sidebars, $post;
 		$the_id = ( $post_id ) ? $post_id : $post->ID ;
 		$custom = ( $selected ) ? $selected : get_post_meta( $the_id, 'custom_sidebar', true );

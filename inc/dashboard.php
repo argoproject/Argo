@@ -20,14 +20,14 @@ function largo_dashboard_widgets_member() {
           $wp_meta_boxes['dashboard']['side']['core']['dashboard_quick_press']
      );
 
-     wp_add_dashboard_widget( 'dashboard_quick_links', __( 'Project Largo Help', 'largo' ), 'dashboard_quick_links' );
+     wp_add_dashboard_widget( 'dashboard_quick_links', __( 'Project Largo Help', 'largo' ), 'largo_dashboard_quick_links' );
 
-     wp_add_dashboard_widget( 'dashboard_member_news', __( 'Recent Stories from INN Members', 'largo' ), 'dashboard_member_news' );
+     wp_add_dashboard_widget( 'dashboard_member_news', __( 'Recent Stories from INN Members', 'largo' ), 'largo_dashboard_member_news' );
      $my_widget = $wp_meta_boxes['dashboard']['normal']['core']['dashboard_member_news'];
      unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_member_news']);
      $wp_meta_boxes['dashboard']['side']['core']['dashboard_member_news'] = $my_widget;
 
-     wp_add_dashboard_widget( 'dashboard_network_news', __( 'INN Network News', 'largo' ), 'dashboard_network_news' );
+     wp_add_dashboard_widget( 'dashboard_network_news', __( 'INN Network News', 'largo' ), 'largo_dashboard_network_news' );
      $my_widget = $wp_meta_boxes['dashboard']['normal']['core']['dashboard_network_news'];
      unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_network_news']);
      $wp_meta_boxes['dashboard']['side']['core']['dashboard_network_news'] = $my_widget;
@@ -45,16 +45,16 @@ function largo_dashboard_widgets_nonmember() {
           $wp_meta_boxes['dashboard']['normal']['core']['dashboard_recent_comments']
      );
 
-     wp_add_dashboard_widget( 'dashboard_quick_links', __( 'Project Largo Help', 'largo' ), 'dashboard_quick_links' );
+     wp_add_dashboard_widget( 'dashboard_quick_links', __( 'Project Largo Help', 'largo' ), 'largo_dashboard_quick_links' );
 
-     wp_add_dashboard_widget( 'dashboard_network_news', __( 'INN Network News', 'largo' ), 'dashboard_network_news' );
+     wp_add_dashboard_widget( 'dashboard_network_news', __( 'INN Network News', 'largo' ), 'largo_dashboard_network_news' );
      $my_widget = $wp_meta_boxes['dashboard']['normal']['core']['dashboard_network_news'];
      unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_network_news']);
      $wp_meta_boxes['dashboard']['side']['core']['dashboard_network_news'] = $my_widget;
 }
 
 // custom dashboard widgets for INN members
-function dashboard_network_news() {
+function largo_dashboard_network_news() {
      echo '<div class="rss-widget">';
      wp_widget_rss_output(array(
           'url' => 'http://feeds.feedburner.com/INNArticles',
@@ -66,7 +66,7 @@ function dashboard_network_news() {
      ));
      echo "</div>";
 }
-function dashboard_member_news() {
+function largo_dashboard_member_news() {
      echo '<div class="rss-widget">';
      wp_widget_rss_output(array(
           'url' => 'http://feeds.feedburner.com/INNMemberInvestigations',
@@ -78,7 +78,7 @@ function dashboard_member_news() {
      ));
      echo "</div>";
 }
-function dashboard_quick_links() {
+function largo_dashboard_quick_links() {
      echo '
      	<div class="list-widget">
      		<p>If you\'re having trouble with your site, want to request a new feature or are just interested in learning more about Project Largo, here are a few helpful links:</p>

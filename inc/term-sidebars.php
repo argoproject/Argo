@@ -40,7 +40,7 @@ class Largo_Term_Sidebars {
 			<th scope="row" valign="top"><label for="custom_sidebar"><?php _e('Archive Sidebar', 'largo'); ?></label></th>
 			<td>
 				<select name="custom_sidebar" id="custom_sidebar" style="min-width: 300px;">
-					<?php custom_sidebars_dropdown( $current_value, false, $post_id ); //get the options ?>
+					<?php largo_custom_sidebars_dropdown( $current_value, false, $post_id ); //get the options ?>
 				</select>
 				<br/>
 				<p class="description"><?php _e("The sidebar to display on this term's archive page.", 'largo'); ?></p>
@@ -57,7 +57,7 @@ class Largo_Term_Sidebars {
 		<div class="form-field">
 			<label for="custom_sidebar"><?php _e('Archive Sidebar', 'largo'); ?></label>
 			<select name="custom_sidebar" id="custom_sidebar" style="min-width: 300px;">
-				<?php custom_sidebars_dropdown( '', false, 0 ); //get the options ?>
+				<?php largo_custom_sidebars_dropdown( '', false, 0 ); //get the options ?>
 			</select>
 			<p class="description"><?php _e('The sidebar to show on this term\'s archive.', 'largo'); ?></p>
 			<?php wp_nonce_field( 'custom_sidebar-new', '_custom_sidebar_nonce' ); ?>

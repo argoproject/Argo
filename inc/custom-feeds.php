@@ -21,8 +21,8 @@ add_feed('fulltext', 'largo_full_text_feed');
  * @package Largo
  * @since 1.0
  */
-function mailchimp_rss() {
+function largo_mailchimp_rss() {
 	add_filter('pre_option_rss_use_excerpt', '__return_zero');
 	load_template( get_template_directory() . '/feed-mailchimp.php' );
 }
-add_feed('mailchimp', 'mailchimp_rss');
+add_feed('mailchimp', 'largo_mailchimp_rss');
