@@ -51,8 +51,10 @@ function largo_get_related_topics_for_category( $obj ) {
 
 function _tags_associated_with_category( $cat_id, $max = 5 ) {
     $query = new WP_Query( array(
-        'posts_per_page' => -1,
-        'cat' => $cat_id,
+        'posts_per_page'         => 100,
+        'cat'                    => $cat_id,
+        'update_post_meta_cache' => false,
+        'no_found_rows'          => true,
     ) );
 
     // Get a list of the tags used in posts in this category.
