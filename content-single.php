@@ -31,6 +31,11 @@
 	<?php do_action('largo_after_post_content'); ?>
 	<footer class="post-meta bottom-meta">
 
+	<?php
+		if ( of_get_option( 'social_icons_display' ) === 'btm' || of_get_option( 'social_icons_display' ) === 'both' )
+			largo_post_social_links();
+	?>
+
     <?php if ( of_get_option( 'clean_read' ) === 'footer' ) : ?>
     <div class="clean-read-container clearfix">
  			<a href="#" class="clean-read"><?php _e("View as 'Clean Read'", 'largo') ?></a>
