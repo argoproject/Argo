@@ -71,6 +71,7 @@ class Largo_Customizer {
 				'type'                  => 'option',
 				'sanitize_callback'     => 'wp_filter_nohtml_kses',
 				),
+			// Homepage
 			'largo[home_template]'      => array(
 				'type'                  => 'option',
 				'sanitize_callback'     => 'sanitize_text_field',
@@ -83,6 +84,16 @@ class Largo_Customizer {
 				'type'                  => 'option',
 				'sanitize_callback'     => 'sanitize_key',
 				),
+			// Single
+			'largo[social_icons_display]' => array(
+				'type'                  => 'option',
+				'sanitize_callback'     => 'sanitize_key',
+				),
+			'largo[fb_verb]' => array(
+				'type'                  => 'option',
+				'sanitize_callback'     => 'sanitize_key',
+				),
+			// Footer
 			'largo[footer_layout]'      => array(
 				'type'                  => 'option',
 				'sanitize_callback'     => 'sanitize_key',
@@ -154,6 +165,37 @@ class Largo_Customizer {
 					'label'      => __( 'None', 'largo' ),
 					'img'        => get_template_directory_uri() . '/lib/options-framework/images/none.png',
 					),
+				),
+			) ) );
+
+		/**
+		 * Single Post Options
+		 */
+		$wp_customize->add_section( 'largo_single_post', array(
+			'title'          => __( 'Single Post', 'largo' ),
+			'priority'       => 24,
+			) );
+		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'largo_social_icons_display', array(
+			'label'              => __( 'Social Icons Position', 'largo' ),
+			'section'            => 'largo_single_post',
+			'settings'           => 'largo[social_icons_display]',
+			'type'               => 'select',
+			'choices'            => array(
+				'top'            => __( 'Top', 'largo' ),
+				'btm'            => __( 'Bottom', 'largo' ),
+				'both'           => __( 'Both', 'largo' ),
+				'none'           => __( 'None', 'largo' ),
+				),
+			) ) );
+		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'largo_fb_verb', array(
+			'label'              => __( 'Facebook Button Text', 'largo' ),
+			'section'            => 'largo_single_post',
+			'settings'           => 'largo[fb_verb]',
+			'type'               => 'select',
+			'choices'            => array(
+				// intentionally not translated
+				'like'           => 'Like',
+				'recommend'      => 'Recommend',
 				),
 			) ) );
 
@@ -282,6 +324,9 @@ class Largo_Customizer {
 			);
 		if ( ! is_home() ) {
 			$settings['hidden_sections'][] = 'largo_homepage';
+		}
+		if ( ! is_single() ) {
+			$settings['hidden_sections'][] = 'largo_single_post';
 		}
 
 		?>

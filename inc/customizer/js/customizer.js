@@ -3,7 +3,7 @@
  */
 function largoCustomizerPreviewSettings( settings ) {
 
-	var sections = [ 'largo_homepage', 'largo_footer_layout', 'largo_colors' ];
+	var sections = [ 'largo_homepage', 'largo_footer_layout', 'largo_colors', 'largo_single_post' ];
 
 	// Show the sections that should appear on this view
 	jQuery.each( sections, function( index, value ){
