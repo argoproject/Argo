@@ -41,6 +41,8 @@ class Largo_Customizer {
 		add_action( 'customize_register', array( $this, 'action_customize_register' ) );
 		add_action( 'customize_preview_init', array( $this, 'action_customize_preview_init' ) );
 
+		add_action( 'customize_controls_enqueue_scripts', array( $this, 'action_customize_controls_enqueue_scripts' ) );
+
 	}
 
 	/**
@@ -217,7 +219,6 @@ class Largo_Customizer {
 	 */
 	public function action_customize_preview_init() {
 
-		add_action( 'wp_enqueue_scripts', array( $this, 'action_preview_enqueue_scripts' ) );
 		add_action( 'wp_footer', array( $this, 'action_preview_wp_footer' ) );
 
 	}
@@ -225,9 +226,10 @@ class Largo_Customizer {
 	/**
 	 * Enqueue scripts and styles specific to the Largo Customizer
 	 */
-	public function action_preview_enqueue_scripts() {
+	public function action_customize_controls_enqueue_scripts() {
 
 		wp_enqueue_script( 'largo-customizer', get_template_directory_uri() . '/inc/customizer/js/customizer.js', array( 'jquery' ) );
+		wp_enqueue_style( 'largo-customizer', get_template_directory_uri() . '/inc/customizer/css/customizer.css' );
 
 	}
 
@@ -245,7 +247,10 @@ class Largo_Customizer {
 
 		?>
 		<script type="text/javascript">
-			var _largoCustomizerPreviewSettings = <?php echo json_encode( $settings ); ?>;
+			var _wplargoCustomizerPreviewSettings = <?php echo json_encode( $settings ); ?>;
+			if ( typeof window.parent.largoCustomizerPreviewSettings == 'function' ) {
+				window.parent.largoCustomizerPreviewSettings( _wplargoCustomizerPreviewSettings );
+			}
 		</script>
 		<?php
 
