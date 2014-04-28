@@ -1,50 +1,6 @@
 <?php
 
 /**
- * Register our custom nav menus
- * and link menus to locations
- *
- * @since 1.0
- */
-function largo_register_custom_menus() {
-    $menus = array(
-        'global-nav'         	=> __( 'Global Navigation', 'largo' ),
-        'sticky-nav'          => __( 'Sticky Navigation', 'largo' ),
-        'navbar-categories'     => __( 'Navbar Categories List', 'largo' ),
-        'navbar-supplemental'	=> __( 'Navbar Supplemental Links', 'largo' ),
-        'dont-miss'       		=> __( 'Don\'t Miss', 'largo' ),
-        'footer'          		=> __( 'Footer Navigation', 'largo' ),
-        'footer-bottom'			=> __( 'Footer Bottom', 'largo' )
-    );
-    register_nav_menus( $menus );
-
-    // Avoid database writes on the frontend
-    if ( ! is_admin() ) {
-    	return;
-    }
-
-    //Try to automatically link menus to each of the locations.
-    foreach ( $menus as $location => $label ) {
-        // if a location isn't wired up...
-        if ( ! has_nav_menu( $location ) ) {
-
-            // get or create the nav menu
-            $nav_menu = wp_get_nav_menu_object( $label );
-            if ( ! $nav_menu ) {
-                $new_menu_id = wp_create_nav_menu( $label );
-                $nav_menu = wp_get_nav_menu_object( $new_menu_id );
-            }
-
-            // wire it up to the location
-            $locations = get_theme_mod( 'nav_menu_locations' );
-            $locations[ $location ] = $nav_menu->term_id;
-            set_theme_mod( 'nav_menu_locations', $locations );
-        }
-    }
-}
-add_action( 'after_setup_theme', 'largo_register_custom_menus' );
-
-/**
  * Output a donate button from theme options
  * used by default in the global nav area
  *
