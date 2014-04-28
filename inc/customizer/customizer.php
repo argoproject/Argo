@@ -75,6 +75,10 @@ class Largo_Customizer {
 				'type'                  => 'option',
 				'sanitize_callback'     => 'sanitize_text_field',
 				),
+			'largo[num_posts_home]'     => array(
+				'type'                  => 'option',
+				'sanitize_callback'     => 'absint',
+				),
 			'largo[homepage_bottom]'    => array(
 				'type'                  => 'option',
 				'sanitize_callback'     => 'sanitize_key',
@@ -120,6 +124,17 @@ class Largo_Customizer {
 			'settings'           => 'largo[home_template]',
 			'type'               => 'rich_radio',
 			'choices'            => $home_templates,
+			) ) );
+		$post_choices = array();
+		for( $i = 1; $i <= 20; $i++ ) {
+			$post_choices[ $i ] = $i;
+		}
+		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'largo_num_posts_home', array(
+			'label'              => __( 'Number of Posts', 'largo' ),
+			'section'            => 'largo_homepage',
+			'settings'           => 'largo[num_posts_home]',
+			'type'               => 'select',
+			'choices'            => $post_choices
 			) ) );
 		$wp_customize->add_control( new Largo_WP_Customize_Rich_Radio_Control( $wp_customize, 'largo_homepage_bottom', array(
 			'label'              => __( 'Bottom', 'largo' ),
