@@ -36,6 +36,16 @@
 if ( ! defined( 'INN_MEMBER' ) )
 	define( 'INN_MEMBER', FALSE );
 
+if ( ! defined( 'FULL_WIDTH' ) ) {
+	define( 'FULL_WIDTH', 1170 );
+}
+if ( ! defined( 'LARGE_WIDTH' ) ) {
+	define( 'LARGE_WIDTH', 771 );
+}
+if ( ! defined( 'MEDIUM_WIDTH' ) ) {
+	define( 'MEDIUM_WIDTH', 336 );
+}
+
 // Set the content width based on the theme's design and stylesheet.
 if ( ! isset( $content_width ) )
 	$content_width = 771;
@@ -73,6 +83,9 @@ class Largo {
 	private function load() {
 
 		$this->require_files();
+
+		$this->register_nav_menus();
+		$this->register_media_sizes();
 
 		$this->customizer = Largo_Customizer::get_instance();
 
@@ -133,6 +146,92 @@ class Largo {
 		if ( ! class_exists( 'Navis_Slideshows' ) ) {
 			require_once dirname( __FILE__ ) . '/lib/navis-slideshows/navis-slideshows.php';
 		}
+
+	}
+
+	/**
+	 * Register the nav menus for the theme
+	 */
+	private function register_nav_menus() {
+
+		$menus = array(
+			'global-nav'         	=> __( 'Global Navigation', 'largo' ),
+			'sticky-nav'          => __( 'Sticky Navigation', 'largo' ),
+			'navbar-categories'     => __( 'Navbar Categories List', 'largo' ),
+			'navbar-supplemental'	=> __( 'Navbar Supplemental Links', 'largo' ),
+			'dont-miss'       		=> __( 'Don\'t Miss', 'largo' ),
+			'footer'          		=> __( 'Footer Navigation', 'largo' ),
+			'footer-bottom'			=> __( 'Footer Bottom', 'largo' )
+		);
+		register_nav_menus( $menus );
+
+		// Avoid database writes on the frontend
+		if ( ! is_admin() ) {
+			return;
+		}
+
+		//Try to automatically link menus to each of the locations.
+		foreach ( $menus as $location => $label ) {
+			// if a location isn't wired up...
+			if ( ! has_nav_menu( $location ) ) {
+
+				// get or create the nav menu
+				$nav_menu = wp_get_nav_menu_object( $label );
+				if ( ! $nav_menu ) {
+					$new_menu_id = wp_create_nav_menu( $label );
+					$nav_menu = wp_get_nav_menu_object( $new_menu_id );
+				}
+
+				// wire it up to the location
+				$locations = get_theme_mod( 'nav_menu_locations' );
+				$locations[ $location ] = $nav_menu->term_id;
+				set_theme_mod( 'nav_menu_locations', $locations );
+			}
+		}
+
+	}
+
+	/**
+	 * Register image and media sizes associated with the theme
+	 */
+	private function register_media_sizes() {
+
+		add_theme_support( 'post-thumbnails' );
+		set_post_thumbnail_size( 140, 140, true ); // thumbnail
+		add_image_size( 'home-logo', 50, 50, true ); // small thumbnail
+		add_image_size( '60x60', 60, 60, true ); // small thumbnail
+		add_image_size( 'medium', MEDIUM_WIDTH, 9999 ); // medium width scaling
+		add_image_size( 'large', LARGE_WIDTH, 9999 ); // large width scaling
+		add_image_size( 'full', FULL_WIDTH, 9999 ); // large width scaling
+		add_image_size( 'third-full', FULL_WIDTH / 3, 500, true ); // large width scaling
+		add_image_size( 'two-third-full', FULL_WIDTH / 3 * 2, 500, true ); // large width scaling
+
+		add_filter( 'pre_option_thumbnail_size_w', function(){
+			return 140;
+		});
+		add_filter( 'pre_option_thumbnail_size_h', function(){
+			return 140;
+		});
+		add_filter( 'pre_option_thumbnail_crop', '__return_true' );
+		add_filter( 'pre_option_medium_size_w', function(){
+			return MEDIUM_WIDTH;
+		});
+		add_filter( 'pre_option_medium_size_h', function(){
+			return 9999;
+		});
+		add_filter( 'pre_option_large_size_w', function(){
+			return LARGE_WIDTH;
+		});
+		add_filter( 'pre_option_large_size_h', function(){
+			return 9999;
+		});
+		add_filter( 'pre_option_embed_autourls', '__return_true' );
+		add_filter( 'pre_option_embed_size_w', function(){
+			return LARGE_WIDTH;
+		});
+		add_filter( 'pre_option_embed_size_h', function(){
+			return 9999;
+		});
 
 	}
 
