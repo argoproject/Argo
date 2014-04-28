@@ -243,8 +243,6 @@ class Largo_Customizer {
 			);
 		if ( ! is_home() ) {
 			$settings['hidden_sections'][] = 'largo_homepage';
-			$settings['hidden_sections'][] = 'largo_footer_layout';
-			$settings['hidden_sections'][] = 'largo_colors';
 		}
 
 		?>
