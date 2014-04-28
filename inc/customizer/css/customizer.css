@@ -1,4 +1,5 @@
-.control-section[id^=accordion-section-largo_] {
+.control-section[id^=accordion-section-largo_],
+#accordion-section-nav {
 	display:none;
 }
 
