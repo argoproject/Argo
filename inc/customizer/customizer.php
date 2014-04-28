@@ -75,6 +75,10 @@ class Largo_Customizer {
 				'type'                  => 'option',
 				'sanitize_callback'     => 'sanitize_text_field',
 				),
+			'largo[homepage_bottom]'    => array(
+				'type'                  => 'option',
+				'sanitize_callback'     => 'sanitize_key',
+				),
 			'largo[footer_layout]'      => array(
 				'type'                  => 'option',
 				'sanitize_callback'     => 'sanitize_key',
@@ -116,6 +120,26 @@ class Largo_Customizer {
 			'settings'           => 'largo[home_template]',
 			'type'               => 'rich_radio',
 			'choices'            => $home_templates,
+			) ) );
+		$wp_customize->add_control( new Largo_WP_Customize_Rich_Radio_Control( $wp_customize, 'largo_homepage_bottom', array(
+			'label'              => __( 'Bottom', 'largo' ),
+			'section'            => 'largo_homepage',
+			'settings'           => 'largo[homepage_bottom]',
+			'type'               => 'rich_radio',
+			'choices'            => array(
+				'list'           => array(
+					'label'      => __( 'List', 'largo' ),
+					'img'        => get_template_directory_uri() . '/lib/options-framework/images/list.png',
+					),
+				'widgets'        => array(
+					'label'      => __( 'Widgets', 'largo' ),
+					'img'        => get_template_directory_uri() . '/lib/options-framework/images/widgets.png',
+					),
+				'none'           => array(
+					'label'      => __( 'None', 'largo' ),
+					'img'        => get_template_directory_uri() . '/lib/options-framework/images/none.png',
+					),
+				),
 			) ) );
 
 		/**
