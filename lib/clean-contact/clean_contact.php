@@ -25,8 +25,6 @@ Author URI: http://www.checkfront.com/
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-if ( ! defined( 'WP_PLUGIN_URL' ) ) define( 'WP_PLUGIN_URL', WP_CONTENT_URL. '/plugins' );
-if ( ! defined( 'WP_PLUGIN_DIR' ) ) define( 'WP_PLUGIN_DIR', WP_CONTENT_DIR . '/plugins' );
 load_plugin_textdomain('clean-contact', constant('WP_PLUGIN_DIR'), basename(dirname(__FILE__)));
 
 //Shortcode [clean-contact parameter="value"]
