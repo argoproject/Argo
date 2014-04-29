@@ -109,17 +109,6 @@ function clean_contact_akismet($body,$subject,$email,$name) {
 	}
 }
 
-// {{{ clean_contact_valid_email()
-/*
- * Validate email via regex
- * @param string
- * @return bool
- */
-function clean_contact_valid_email($str) {
-	$pattern = '/^([a-z0-9])(([-a-z0-9._])*([a-z0-9]))*\@([a-z0-9])(([a-z0-9-])*([a-z0-9]))+' . '(\.([a-z0-9])([-a-z0-9_-])?([a-z0-9])+)+$/i';
-	return preg_match($pattern,$str);
-}
-
 // {{{ clean_contact_send()
 /*
  * Deliver e-mail via SMTP
