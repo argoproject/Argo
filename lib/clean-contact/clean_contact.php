@@ -28,6 +28,7 @@ Author URI: http://www.checkfront.com/
 load_plugin_textdomain('clean-contact', constant('WP_PLUGIN_DIR'), basename(dirname(__FILE__)));
 
 //Shortcode [clean-contact parameter="value"]
+add_shortcode( 'clean-contact', 'clean_contact_func' );
 function clean_contact_func($atts, $content=null) {
 	$atts=shortcode_atts(array(
 		'fail' => '0',
@@ -96,8 +97,8 @@ function clean_contact_akismet($body,$subject,$email,$name) {
 	$comment['referrer']   = $_SERVER['HTTP_REFERER'];
 	$comment['blog']       = get_option('home');
 	$comment['comment_author_email']  = $email;
-	$comment['comment_author']  = clean_contact_scrub($name);
-	$comment['comment_content']  = clean_contact_scrub($body);
+	$comment['comment_author']  = $name;
+	$comment['comment_content']  = $body;
 	$query_string = '';
 	foreach ( $comment as $key => $data )
 		$query_string .= $key . '=' . urlencode( stripslashes($data) ) . '&';
@@ -126,28 +127,43 @@ function clean_contact_valid_email($str) {
  * @return bool
 */
 function clean_contact_send($atts) {
-	$to_email = ($atts['email']) ? $atts['email'] :  cc_get_option('clean_contact_email');
-	$to_email = clean_contact_scrub($to_email);
+	$to_email = ! empty( $atts['email'] ) ? $atts['email'] :  cc_get_option('clean_contact_email');
+	$to_email = sanitize_email( $to_email );
 
-	$bcc = ($atts['bcc']) ? $atts['bcc'] :  cc_get_option('clean_contact_bcc');
-	$bcc = clean_contact_scrub($bbc);
+	$bcc = ! empty( $atts['bcc'] ) ? $atts['bcc'] :  cc_get_option('clean_contact_bcc');
+	if ( ! empty( $bcc ) ) {
+		$bcc = implode( ',', array_map( 'sanitize_email', explode( ',', $bcc ) ) );
+	} else {
+		$bcc = '';
+	}
 
 	$cc = ($atts['cc']) ? $atts['cc'] :  cc_get_option('clean_contact_cc');
-	$cc = clean_contact_scrub($cc);
+	if ( ! empty( $cc ) ) {
+		$cc = implode( ',', array_map( 'sanitize_email', explode( ',', $cc ) ) );
+	} else {
+		$cc = '';
+	}
 
-	$body = clean_contact_scrub($_POST['clean_contact_body']);
+	$subject = sanitize_text_field( $_POST['clean_contact_subject'] );
+	$prefix = ! empty( $atts['prefix'] ) ? $atts['prefix'] :  cc_get_option('clean_contact_prefix');
+	if( $prefix ) {
+		$subject = "[{$prefix}] {$subject}";
+	}
 
-	$from_name = clean_contact_scrub(($_POST['clean_contact_from_name']));
-	$from_email = clean_contact_scrub($_POST['clean_contact_from_email']);
-	$from = ($from_name) ? "{$from_name} <$from_email>" : $from_email;
+	$body = wp_filter_nohtml_kses( $_POST['clean_contact_body'] );
 
+	$from_name = sanitize_text_field( $_POST['clean_contact_from_name'] );
+	$from_email = sanitize_email( $_POST['clean_contact_from_email'] );
+	$from = ! empty( $from_name ) ? "{$from_name} <$from_email>" : $from_email;
 
-	if(!clean_contact_valid_email($from_email) or !clean_contact_valid_email($to_email)  ) return false;
+	if ( ! is_email( $from_email ) || ! is_email( $to_email ) ) {
+		return false;
+	}
 
 	$headers = array();
 
-	if($from_email_set = cc_get_option('clean_contact_from_email')) {
-		if(clean_contact_valid_email($from_email_set)) {
+	if ( $from_email_set = cc_get_option('clean_contact_from_email') ) {
+		if ( is_email( $from_email_set ) ) {
 			$from_email = $from_email_set;
 			$from = $from_email_set;
 			$headers[] = "Reply-To: {$from}";
@@ -158,77 +174,76 @@ function clean_contact_send($atts) {
 
 	$to =   '"' . addslashes(get_bloginfo('name'))  . '" ' . "<$to_email>";
 
-	if(clean_contact_valid_email($cc)) $headers[] = "CC: {$cc}";
-	if(clean_contact_valid_email($bcc)) $headers[] = "BCC: {$bcc}";
+	if ( ! empty( $cc ) ) {
+		$headers[] = "CC: {$cc}";
+	}
+	if ( ! empty( $bcc ) ) {
+		$headers[] = "BCC: {$bcc}";
+	}
 
-	$headers[] = 'X-Originating-IP: ' . $_SERVER['REMOTE_ADDR'];
-	$headers[] = 'X-Mailer: WP Clean-Contact (' . $_SERVER['SERVER_NAME'] . ')';
+	$headers[] = 'X-Originating-IP: ' . sanitize_text_field( $_SERVER['REMOTE_ADDR'] );
+	$headers[] = 'X-Mailer: WP Clean-Contact (' . sanitize_text_field( $_SERVER['SERVER_NAME'] ) . ')';
 
 	$headers[]  = 'MIME-Version: 1.0';
 	$headers[] = 'Content-type: text/plain; charset=' . get_bloginfo('charset');
 
-	if(cc_get_option('clean_contact_akismet') == 1 and clean_contact_akismet($body,$subject,$from_email,$from_name)) {
+	if ( cc_get_option('clean_contact_akismet') == 1 && clean_contact_akismet( $body, $subject, $from_email, $from_name ) ) {
 		return false;
 	} else {
-		$prefix = ($atts['prefix']) ? $atts['prefix'] :  cc_get_option('clean_contact_prefix');
-		$subject = clean_contact_scrub($_POST['clean_contact_subject']);
-		if($prefix) {
-			$subject = "[{$prefix}] {$subject}";
-		}
-		ini_set('mail.add_x_header','Off');
-		mail($to, $subject, $body, implode("\n",$headers));
+		wp_mail( $to, $subject, $body, $headers );
 		return true;
 	}
 }
 
-// {{{ clean_contact_scrub()
-/*
- * Display e-mail from
- * @param array
- * @return string
- */
-function clean_contact_scrub($str) {
-	return stripslashes(trim(strip_tags($str)));
-}
-
 function clean_contact_strings() {
 	$strings = array();
-	$strings['str_clean_contact_send'] = __('Send');
-	$strings['str_clean_contact_error'] = __('Error');
-	$strings['str_clean_contact_name'] = __('Name');
-	$strings['str_clean_contact_email'] = __('Your e-mail address');
-	$strings['str_clean_contact_subject'] = __('Subject');
-	$strings['str_clean_contact_body'] = __('Message');
+	$strings['str_clean_contact_send'] = __( 'Send', 'largo' );
+	$strings['str_clean_contact_error'] = __( 'Error', 'largo' );
+	$strings['str_clean_contact_name'] = __( 'Name', 'largo' );
+	$strings['str_clean_contact_email'] = __( 'Your e-mail address', 'largo' );
+	$strings['str_clean_contact_subject'] = __( 'Subject', 'largo' );
+	$strings['str_clean_contact_body'] = __( 'Message', 'largo' );
 
-	foreach($strings as $id => $str) {
-		$html .= '<input type="hidden" id="' . $id . '" value="' . $str . '" />';
+	$html = '';
+	foreach( $strings as $id => $str ) {
+		$html .= '<input type="hidden" id="' . esc_attr( $id ) . '" value="' . esc_attr( $str ) . '" />';
 	}
 
 	return $html;
 }
 
-function clean_contact($atts) {
-	if(!is_page() or is_single()) return;
-	if(!cc_get_option('clean_contact_nocss')) {
-		$html = clean_contact_css();
+function clean_contact( $atts ) {
+
+	if ( is_archive() ) {
+		return;
 	}
+
+	if ( ! cc_get_option( 'clean_contact_nocss' ) ) {
+		$html = clean_contact_css();
+	} else {
+		$html = '';
+	}
+
 	$html .= clean_contact_strings();
-	$html .= '<a name="clean_contact"></a><script src="' .  WP_PLUGIN_URL . '/largo-clean-contact/fieldset.js" type="text/javascript"></script>';
-	$thanks= (!empty($atts['thanks'])) ? $atts['thanks'] : cc_get_option('clean_contact_thanks');
-	$thanks_url= (!empty($atts['thanks_url'])) ? $atts['thanks_url'] : cc_get_option('clean_contact_thanks_url');
-	if(empty($thanks)) $thanks = __('Thank you. Message sent!');
-	if($atts['sent']) {
-		if($thanks_url) {
+	$html .= '<a name="clean_contact"></a><script src="' .  get_template_directory_uri() . '/lib/clean-contact/fieldset.js" type="text/javascript"></script>';
+	$thanks = ! empty( $atts['thanks'] ) ? $atts['thanks'] : cc_get_option('clean_contact_thanks');
+	$thanks_url= ! empty( $atts['thanks_url'] ) ? $atts['thanks_url'] : cc_get_option('clean_contact_thanks_url');
+	if ( empty( $thanks ) ) {
+		$thanks = __( 'Thank you. Message sent!', 'largo' );
+	}
+
+	if( $atts['sent'] ) {
+		if ( $thanks_url ) {
 			$html .= "<script>clean_contact_url('{$thanks_url}');</script>" . "\n";
 		} else {
-		$html .= '<div class="CleanContact_msg ok">'  . $thanks . '</div>';
+			$html .= '<div class="CleanContact_msg ok">'  . esc_html( $thanks ) . '</div>';
 		}
-	} elseif($atts['fail']) {
-		$html .= '<p class="CleanContact_msg err">' . __('Sorry, unable to deliver this message') . '</p>';
+	} else if( $atts['fail'] ) {
+		$html .= '<p class="CleanContact_msg err">' . __( 'Sorry, unable to deliver this message', 'largo' ) . '</p>';
 	} else {
 		$html .= '<script type="text/javascript">clean_contact_form();</script>' . "\n";
 	}
-	$html .= '<noscript><p class="CleanContact_msg err">' . __('Sorry, due to anti-spam measures, this contact form requires that javascript be enabled on your browser.') . '</p></noscript>';
+	$html .= '<noscript><p class="CleanContact_msg err">' . __('Sorry, due to anti-spam measures, this contact form requires that javascript be enabled on your browser.', 'largo' ) . '</p></noscript>';
 	return $html;
 }
 
@@ -261,7 +276,7 @@ function clean_contact_conf_page() {
  * @return void
 */
 function clean_contact_css() {
-	$html .= '<style  type="text/css" media="screen">';
+	$html = '<style  type="text/css" media="screen">';
 	$html .= file_get_contents(dirname(__FILE__).'/style.css');
 	$html .= '</style>';
 	return $html;
@@ -284,5 +299,4 @@ function cc_get_option( $option ) {
 	return get_option( $option, $default );
 }
 
-add_shortcode('clean-contact', 'clean_contact_func');
 add_action( 'admin_menu', 'clean_contact_conf' );
