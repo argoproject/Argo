@@ -51,6 +51,7 @@ class Largo_Customizer {
 	private function require_controls() {
 
 		require_once dirname( __FILE__ ) . '/class-largo-wp-customize-textarea-control.php';
+		require_once dirname( __FILE__ ) . '/class-largo-wp-customize-multi-checkbox-control.php';
 		require_once dirname( __FILE__ ) . '/class-largo-wp-customize-rich-radio-control.php';
 
 	}
@@ -71,6 +72,7 @@ class Largo_Customizer {
 				'type'                  => 'option',
 				'sanitize_callback'     => 'wp_filter_nohtml_kses',
 				),
+			// Homepage
 			'largo[home_template]'      => array(
 				'type'                  => 'option',
 				'sanitize_callback'     => 'sanitize_text_field',
@@ -83,6 +85,20 @@ class Largo_Customizer {
 				'type'                  => 'option',
 				'sanitize_callback'     => 'sanitize_key',
 				),
+			// Single
+			'largo[social_icons_display]' => array(
+				'type'                  => 'option',
+				'sanitize_callback'     => 'sanitize_key',
+				),
+			'largo[fb_verb]'            => array(
+				'type'                  => 'option',
+				'sanitize_callback'     => 'sanitize_key',
+				),
+			'largo[show_twitter_count]' => array(
+				'type'                  => 'option',
+				'sanitize_callback'     => 'sanitize_key',
+				),
+			// Footer
 			'largo[footer_layout]'      => array(
 				'type'                  => 'option',
 				'sanitize_callback'     => 'sanitize_key',
@@ -155,6 +171,65 @@ class Largo_Customizer {
 					'img'        => get_template_directory_uri() . '/lib/options-framework/images/none.png',
 					),
 				),
+			) ) );
+
+		/**
+		 * Single Post Options
+		 */
+		$wp_customize->add_section( 'largo_single_post', array(
+			'title'          => __( 'Single Post', 'largo' ),
+			'priority'       => 24,
+			) );
+		$services = array( 'facebook', 'twitter', 'sharethis', 'print', 'email' );
+		$service_settings = array();
+		foreach( $services as $service ) {
+			$service_settings[$service] = 'largo[article_utilities][' . $service . ']';
+			$wp_customize->add_setting( 'largo[article_utilities][' . $service . ']', array(
+				'type'                  => 'option',
+				'sanitize_callback'     => 'sanitize_key',
+				) );
+		}
+		$wp_customize->add_control( new Largo_WP_Customize_Multi_Checkbox_Control( $wp_customize, 'largo_article_utilities', array(
+			'label'              => __( 'Social Icons to Display', 'largo' ),
+			'section'            => 'largo_single_post',
+			'settings'           => $service_settings,
+			'type'               => 'multi_checkbox',
+			'choices'            => array(
+				'facebook'       => __( 'Facebook', 'largo' ),
+				'twitter'        => __( 'Twitter', 'largo' ),
+				'sharethis'      => __( 'ShareThis', 'largo' ),
+				'email'          => __( 'Email', 'largo' ),
+				'print'          => __( 'Print', 'largo' ),
+				),
+			) ) );
+		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'largo_social_icons_display', array(
+			'label'              => __( 'Social Icons Position', 'largo' ),
+			'section'            => 'largo_single_post',
+			'settings'           => 'largo[social_icons_display]',
+			'type'               => 'select',
+			'choices'            => array(
+				'top'            => __( 'Top', 'largo' ),
+				'btm'            => __( 'Bottom', 'largo' ),
+				'both'           => __( 'Both', 'largo' ),
+				'none'           => __( 'None', 'largo' ),
+				),
+			) ) );
+		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'largo_fb_verb', array(
+			'label'              => __( 'Facebook Button Text', 'largo' ),
+			'section'            => 'largo_single_post',
+			'settings'           => 'largo[fb_verb]',
+			'type'               => 'select',
+			'choices'            => array(
+				// intentionally not translated
+				'like'           => 'Like',
+				'recommend'      => 'Recommend',
+				),
+			) ) );
+		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'largo_show_twitter_count', array(
+			'label'              => __( 'Show Twitter Share Count', 'largo' ),
+			'section'            => 'largo_single_post',
+			'settings'           => 'largo[show_twitter_count]',
+			'type'               => 'checkbox',
 			) ) );
 
 		/**
@@ -282,6 +357,9 @@ class Largo_Customizer {
 			);
 		if ( ! is_home() ) {
 			$settings['hidden_sections'][] = 'largo_homepage';
+		}
+		if ( ! is_single() ) {
+			$settings['hidden_sections'][] = 'largo_single_post';
 		}
 
 		?>
