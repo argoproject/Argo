@@ -242,10 +242,10 @@ class Navis_Slideshows {
 			$output .= '<h6>';
 
 			if ( isset( $credit ) )
-				$output .= wp_post_kses( $credit );
+				$output .= wp_kses_post( $credit );
 
 			$output .= ' <a href="#" class="slide-permalink">permalink</a></h6>';
-			$output .= '<p>' . wp_post_kses( $caption ) . '</p></div>';
+			$output .= '<p>' . wp_kses_post( $caption ) . '</p></div>';
 		}
 		$output .= '</div></div>';
 
