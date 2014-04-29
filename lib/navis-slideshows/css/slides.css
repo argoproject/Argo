@@ -15,30 +15,30 @@
     outline: none;
 }
 
-.navis-slideshow .pagination li {
+.navis-slideshow .slidesjs-pagination li {
   list-style-type:none !important;
 }
 
 /* Set the width of your slides container */
-.slides_container {
+.navis-slideshow {
     width: 100%;
     margin-top: 20px;
     display: none;
     padding:5px 0;
 }
 
-.ie6 .slides_container {
+.ie6 .navis-slideshow {
     display: block;
 }
 
-#content .slides_container img {
+#content .navis-slideshow img {
     display: block;
     margin: 0 auto;
     border: 1px solid #ddd;
     width:100%;
 }
 
-.slides_container p {
+.navis-slideshow p {
     margin: 10px 0;
     line-height: 1.5;
     border-top: 1px solid #ccc;
@@ -46,7 +46,7 @@
     font-size: 12px;
 }
 
-#content .slides_container h6 {
+#content .navis-slideshow h6 {
     margin: 6px 1px 4px 0;
     text-align: right;
     font-weight: normal;
@@ -75,15 +75,19 @@
 
 
 /* Set the width of your slides */
-.slides_container div {
+.slidesjs-slide div {
     width: 100%;
     display: block;
 }
-div.slides_control {
+div.slidesjs-control {
 	width: 100% !important;
 }
 
-.navis-slideshow .pagination {
+.navis-slideshow .slidesjs-container {
+    padding-top: 25px;
+}
+
+.navis-slideshow .slidesjs-pagination {
     margin: 0 !important;
     width: 95%;
     padding: 0;
@@ -92,7 +96,7 @@ div.slides_control {
     left: 10px
 }
 
-.navis-slideshow .pagination li {
+.navis-slideshow .slidesjs-pagination li {
     float: left;
     margin: 0 1px !important;
     list-style: none;
@@ -100,7 +104,7 @@ div.slides_control {
     padding: 0 !important;
 }
 
-.navis-slideshow .pagination li a {
+.navis-slideshow .slidesjs-pagination li a {
     display: block;
     width: 12px;
     height: 0;
@@ -111,11 +115,11 @@ div.slides_control {
     overflow: hidden
 }
 
-.navis-slideshow .pagination li.current a {
+.navis-slideshow .slidesjs-pagination li.current a {
     background-position: 0 -12px
 }
 
-.slide-nav a {
+.navis-slideshow a.slidesjs-navigation {
     background: url(../img/slide-nav.png) no-repeat top left;
     text-indent: -10000px;
     display: block;
@@ -123,7 +127,7 @@ div.slides_control {
     outline: none;
 }
 
-.navis-slideshow a.prev {
+.navis-slideshow a.slidesjs-previous {
     position: absolute;
     top: 5px;
     right: 32px;
@@ -134,13 +138,13 @@ div.slides_control {
     outline: none;
 }
 
-.navis-slideshow a.prev:hover {
+.navis-slideshow a.slidesjs-previous:hover {
     background-position: 0 -142px;
     width: 21px;
     height: 21px;
 }
 
-.navis-slideshow a.next {
+.navis-slideshow a.slidesjs-next {
     position: absolute;
     top: 5px;
     right: 7px;
@@ -151,7 +155,9 @@ div.slides_control {
     outline: none;
 }
 
-.navis-slideshow a.next:hover {
+
+
+.navis-slideshow a.slidesjs-next:hover {
     background-position: 0 0;
     width: 21px;
     height: 21px
