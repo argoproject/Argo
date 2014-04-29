@@ -50,7 +50,32 @@ function clean_contact_func($atts, $content=null) {
 	return clean_contact($atts);
 }
 
+/**
+ * Handle the updating of plugin settings
+ */
+function clean_contact_handle_settings() {
 
+	if ( ! current_user_can( 'manage_options' )
+		|| ! wp_verify_nonce( $_POST['nonce'], 'clean-contact' ) ) {
+		wp_die( __( "You shouldn't be doing this.", 'largo' ) );
+	}
+
+	update_option( 'clean_contact_email', sanitize_email( $_POST['clean_contact_email'] ) );
+	update_option( 'clean_contact_thanks', sanitize_text_field( $_POST['clean_contact_thanks'] ) );
+	update_option( 'clean_contact_prefix', sanitize_text_field( $_POST['clean_contact_prefix'] ) );
+	update_option( 'clean_contact_cc', implode( ', ', array_map( 'sanitize_email', explode( ',', $_POST['clean_contact_cc'] ) ) ) );
+	update_option( 'clean_contact_bcc', implode( ', ', array_map( 'sanitize_email', explode( ',', $_POST['clean_contact_bcc'] ) ) ) );
+	update_option( 'clean_contact_akismet', isset( $_POST['clean_contact_akismet'] ) ? 1 : 0 );
+	update_option( 'clean_contact_thanks_url', esc_url_raw( $_POST['clean_contact_thanks_url'] ) );
+	update_option( 'clean_contact_nocss', isset( $_POST['clean_contact_nocss'] ) ? 1 : 0 );
+	update_option( 'clean_contact_from_email', sanitize_email( $_POST['clean_contact_from_email'] ) );
+
+	wp_safe_redirect( add_query_arg( 'message', 'updated', admin_url( 'options-general.php?page=clean-contact' ) ) );
+	exit;
+
+}
+
+add_action( 'admin_post_clean_contact_settings', 'clean_contact_handle_settings' );
 
 
 // {{{ clean_contact_akismet()
@@ -101,13 +126,13 @@ function clean_contact_valid_email($str) {
  * @return bool
 */
 function clean_contact_send($atts) {
-	$to_email = ($atts['email']) ? $atts['email'] :  get_option('clean_contact_email');
+	$to_email = ($atts['email']) ? $atts['email'] :  cc_get_option('clean_contact_email');
 	$to_email = clean_contact_scrub($to_email);
 
-	$bcc = ($atts['bcc']) ? $atts['bcc'] :  get_option('clean_contact_bcc');
+	$bcc = ($atts['bcc']) ? $atts['bcc'] :  cc_get_option('clean_contact_bcc');
 	$bcc = clean_contact_scrub($bbc);
 
-	$cc = ($atts['cc']) ? $atts['cc'] :  get_option('clean_contact_cc');
+	$cc = ($atts['cc']) ? $atts['cc'] :  cc_get_option('clean_contact_cc');
 	$cc = clean_contact_scrub($cc);
 
 	$body = clean_contact_scrub($_POST['clean_contact_body']);
@@ -121,7 +146,7 @@ function clean_contact_send($atts) {
 
 	$headers = array();
 
-	if($from_email_set = get_option('clean_contact_from_email')) {
+	if($from_email_set = cc_get_option('clean_contact_from_email')) {
 		if(clean_contact_valid_email($from_email_set)) {
 			$from_email = $from_email_set;
 			$from = $from_email_set;
@@ -142,10 +167,10 @@ function clean_contact_send($atts) {
 	$headers[]  = 'MIME-Version: 1.0';
 	$headers[] = 'Content-type: text/plain; charset=' . get_bloginfo('charset');
 
-	if(get_option('clean_contact_akismet') == 1 and clean_contact_akismet($body,$subject,$from_email,$from_name)) {
+	if(cc_get_option('clean_contact_akismet') == 1 and clean_contact_akismet($body,$subject,$from_email,$from_name)) {
 		return false;
 	} else {
-		$prefix = ($atts['prefix']) ? $atts['prefix'] :  get_option('clean_contact_prefix');
+		$prefix = ($atts['prefix']) ? $atts['prefix'] :  cc_get_option('clean_contact_prefix');
 		$subject = clean_contact_scrub($_POST['clean_contact_subject']);
 		if($prefix) {
 			$subject = "[{$prefix}] {$subject}";
@@ -184,13 +209,13 @@ function clean_contact_strings() {
 
 function clean_contact($atts) {
 	if(!is_page() or is_single()) return;
-	if(!get_option('clean_contact_nocss')) {
+	if(!cc_get_option('clean_contact_nocss')) {
 		$html = clean_contact_css();
 	}
 	$html .= clean_contact_strings();
 	$html .= '<a name="clean_contact"></a><script src="' .  WP_PLUGIN_URL . '/largo-clean-contact/fieldset.js" type="text/javascript"></script>';
-	$thanks= (!empty($atts['thanks'])) ? $atts['thanks'] : get_option('clean_contact_thanks');
-	$thanks_url= (!empty($atts['thanks_url'])) ? $atts['thanks_url'] : get_option('clean_contact_thanks_url');
+	$thanks= (!empty($atts['thanks'])) ? $atts['thanks'] : cc_get_option('clean_contact_thanks');
+	$thanks_url= (!empty($atts['thanks_url'])) ? $atts['thanks_url'] : cc_get_option('clean_contact_thanks_url');
 	if(empty($thanks)) $thanks = __('Thank you. Message sent!');
 	if($atts['sent']) {
 		if($thanks_url) {
@@ -214,11 +239,8 @@ function clean_contact($atts) {
  * @return void
 */
 function clean_contact_conf() {
-	clean_contact_setup();
-	if ( function_exists('add_submenu_page') ) {
-		add_submenu_page('plugins.php', __('Clean-Contact'), __('Clean-Contact'), 'manage_options', 'clean_contact', 'clean_contact_conf_page');
-	}
-    add_filter('plugin_row_meta', 'clean_contact_plugin_meta', 10, 2 );
+
+	add_options_page( __( 'Clean Contact', 'largo' ), __( 'Clean Contact', 'largo' ), 'manage_options', 'clean-contact', 'clean_contact_conf_page' );
 
 }
 
@@ -245,37 +267,22 @@ function clean_contact_css() {
 	return $html;
 }
 
-// {{{ clean_contact_setup()
-/*
- * Include css
- * @param void
- * @return void
-*/
-function clean_contact_setup() {
-	if($_SERVER['REQUEST_METHOD'] == 'POST') return;
-	if(!get_option('clean_contact_email')) {
-		update_option('clean_contact_email',get_bloginfo('admin_email'));
-		update_option('clean_contact_prefix','clean-contact');
-		update_option('clean_contact_thanks',__('Thank you.  Message sent!'));
-		if(!function_exists('akismet_http_post')) {
-			update_option('clean_contact_akismet','-1');
-		} elseif(get_option('wordpress_api_key')) {
-			update_option('clean_contact_akismet','1');
-		}
-	}
-}
-function clean_contact_plugin_meta($links, $file) {
+function cc_get_option( $option ) {
 
-    // create link
-    if (basename($file,'.php') == 'clean_contact') {
-        return array_merge(
-            $links,
-            array( '<a href="plugins.php?page=clean_contact">' . __('Settings') . '</a>')
-        );
-    }
-    return $links;
+	$defaults = array(
+		'clean_contact_email'    => get_bloginfo( 'admin_email' ),
+		'clean_contact_prefix'   => 'clean-contact',
+		'clean_contact_thanks'   => __( 'Thank you. Message sent!', 'largo' ),
+		);
+
+	if ( isset( $defaults[ $option ] ) ) {
+		$default = $defaults[ $option ];
+	} else {
+		$default = '';
+	}
+
+	return get_option( $option, $default );
 }
 
 add_shortcode('clean-contact', 'clean_contact_func');
-add_action('admin_menu', 'clean_contact_conf');
-?>
+add_action( 'admin_menu', 'clean_contact_conf' );
