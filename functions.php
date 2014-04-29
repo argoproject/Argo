@@ -147,6 +147,10 @@ class Largo {
 			require_once dirname( __FILE__ ) . '/lib/navis-slideshows/navis-slideshows.php';
 		}
 
+		if ( ! function_exists( 'clean_contact_func' ) ) {
+			require_once dirname( __FILE__ ) . '/lib/clean-contact/clean_contact.php';
+		}
+
 	}
 
 	/**
