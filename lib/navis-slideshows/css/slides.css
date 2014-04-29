@@ -115,7 +115,7 @@ div.slidesjs-control {
     overflow: hidden
 }
 
-.navis-slideshow .slidesjs-pagination li.current a {
+.navis-slideshow .slidesjs-pagination li a.active {
     background-position: 0 -12px
 }
 
