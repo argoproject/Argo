@@ -1,0 +1,119 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Clean-contact\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-06-24 17:14-0800\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Jason Morehouse <jm@checkfront.com>\n"
+"Language-Team:  <jm@onisland.ca>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: /home/jm/clean-contact\n"
+
+#: /home/jm/clean-contact/trunk/clean_contact.php:167
+msgid "Send"
+msgstr ""
+
+#: /home/jm/clean-contact/trunk/clean_contact.php:168
+msgid "Error"
+msgstr ""
+
+#: /home/jm/clean-contact/trunk/clean_contact.php:169
+msgid "Name"
+msgstr ""
+
+#: /home/jm/clean-contact/trunk/clean_contact.php:170
+msgid "Your e-mail address"
+msgstr ""
+
+#: /home/jm/clean-contact/trunk/clean_contact.php:171
+msgid "Subject"
+msgstr ""
+
+#: /home/jm/clean-contact/trunk/clean_contact.php:172
+msgid "Message"
+msgstr ""
+
+#: /home/jm/clean-contact/trunk/clean_contact.php:190
+msgid "Thank you. Message sent!"
+msgstr ""
+
+#: /home/jm/clean-contact/trunk/clean_contact.php:198
+msgid "Sorry, unable to deliver this message"
+msgstr ""
+
+#: /home/jm/clean-contact/trunk/clean_contact.php:202
+msgid "Sorry, due to anti-spam measures, this contact form requires that javascript be enabled on your browser."
+msgstr ""
+
+#: /home/jm/clean-contact/trunk/clean_contact.php:215
+msgid "Clean-Contact"
+msgstr ""
+
+#: /home/jm/clean-contact/trunk/clean_contact.php:255
+msgid "Thank you.  Message sent!"
+msgstr ""
+
+#: /home/jm/clean-contact/trunk/clean_contact.php:269
+msgid "Settings"
+msgstr ""
+
+#: /home/jm/clean-contact/trunk/clean_contact_conf.php:17
+msgid "Settings saved"
+msgstr ""
+
+#: /home/jm/clean-contact/trunk/clean_contact_conf.php:24
+msgid "To E-mail address"
+msgstr ""
+
+#: /home/jm/clean-contact/trunk/clean_contact_conf.php:28
+msgid "CC E-mail address"
+msgstr ""
+
+#: /home/jm/clean-contact/trunk/clean_contact_conf.php:32
+msgid "BCC E-mail address"
+msgstr ""
+
+#: /home/jm/clean-contact/trunk/clean_contact_conf.php:36
+msgid "Subject prefix"
+msgstr ""
+
+#: /home/jm/clean-contact/trunk/clean_contact_conf.php:40
+msgid "Thank you message"
+msgstr ""
+
+#: /home/jm/clean-contact/trunk/clean_contact_conf.php:44
+msgid "Thank you url"
+msgstr ""
+
+#: /home/jm/clean-contact/trunk/clean_contact_conf.php:48
+msgid "From address"
+msgstr ""
+
+#: /home/jm/clean-contact/trunk/clean_contact_conf.php:52
+msgid "Filter messages for SPAM through the"
+msgstr ""
+
+#: /home/jm/clean-contact/trunk/clean_contact_conf.php:55
+msgid "Don't use default CSS"
+msgstr ""
+
+#: /home/jm/clean-contact/trunk/clean_contact_conf.php:60
+msgid "Invoke the Clean Contact e-mail form on and page or post with the shortcode:"
+msgstr ""
+
+#: /home/jm/clean-contact/trunk/clean_contact_conf.php:61
+msgid "You can override all or any of the settings above in the shortcode"
+msgstr ""
+
+#: /home/jm/clean-contact/trunk/clean_contact_conf.php:62
+msgid "Greetings"
+msgstr ""
+
+#: /home/jm/clean-contact/trunk/clean_contact_conf.php:63
+msgid "More information on this plugin and feedback"
+msgstr ""
+
