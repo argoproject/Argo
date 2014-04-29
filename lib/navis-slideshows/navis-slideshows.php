@@ -24,15 +24,10 @@
 */
 
 class Navis_Slideshows {
-	static $include_slideshow_deps;
 
 	function __construct() {
 		add_action( 'init', array( &$this, 'add_slideshow_header' ) );
 		add_action('wp_head', array( &$this, 'argo_slideshow_css' ) );
-
-		add_filter(
-			'wp_footer', array( &$this, 'conditionally_add_slideshow_deps' )
-		);
 
 		add_filter(
 			'post_gallery', array( &$this, 'handle_slideshow' ), 10, 2
@@ -67,31 +62,6 @@ class Navis_Slideshows {
 
 
 	/**
-	 * Register and enqueue the javascript and CSS dependencies
-	 */
-	function conditionally_add_slideshow_deps() {
-		if ( ! self::$include_slideshow_deps )
-			return;
-
-		// jQuery slides plugin, available at http://slidesjs.com/
-		$slides_src = plugins_url( 'js/slides.min.jquery.js', __FILE__ );
-		wp_register_script(
-			'jquery-slides', $slides_src, array( 'jquery' ), '1.1.8', true
-		);
-		wp_print_scripts( 'jquery-slides' );
-
-		// our custom js
-		$show_src = plugins_url( 'js/navis-slideshows.js', __FILE__ );
-		wp_register_script(
-			'navis-slideshows', $show_src, array( 'jquery-slides' ),
-			'0.1', true
-		);
-		wp_print_scripts( 'navis-slideshows' );
-
-	}
-
-
-	/**
 	 *
 	 * @uses global $post WP Post object
 	 */
@@ -100,7 +70,19 @@ class Navis_Slideshows {
 		 * Grab attachments
 		 */
 		global $post;
-		self::$include_slideshow_deps = true;
+
+		// jQuery slides plugin, available at http://slidesjs.com/
+		$slides_src = get_template_directory_uri() . '/lib/navis-slideshows/js/slides.min.jquery.js';
+		wp_enqueue_script(
+			'jquery-slides', $slides_src, array( 'jquery' ), '1.1.8', true
+		);
+
+		// our custom js
+		$show_src = get_template_directory_uri() . '/lib/navis-slideshows/js/navis-slideshows.js';
+		wp_enqueue_script(
+			'navis-slideshows', $show_src, array( 'jquery-slides' ),
+			'0.1', true
+		);
 
 		$attr = shortcode_atts( array(
 			'order'	  => 'ASC',
