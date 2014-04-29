@@ -71,7 +71,7 @@
 
 		<p><?php _e( 'You can override all or any of the settings above in the shortcode', 'largo' )?></p>
 
-		<code style="font-size: 1.1em"><strong>[clean-contact</strong> <strong>email="</strong><?php echo get_option('clean_contact_email')?><strong>"</strong> <strong>prefix="</strong>contact<strong>"</strong> <strong>bcc=""</strong> <strong>subject=</strong>"<?php echo __('Greetings')?>" <strong>thanks_url=</strong>"<?php echo get_bloginfo('url')?><strong>"]</strong></code>
+		<code style="font-size: 1.1em"><strong>[clean-contact</strong> <strong>email="</strong><?php echo cc_get_option('clean_contact_email') ?><strong>"</strong> <strong>prefix="</strong><?php echo cc_get_option('clean_contact_prefix') ?><strong>"</strong> <strong>bcc=""</strong> <strong>subject=</strong>"<?php echo __('Greetings')?>" <strong>thanks_url=</strong>"<?php echo cc_get_option('clean_contact_thanks_url') ?><strong>"]</strong></code>
 
 	</form>
 
