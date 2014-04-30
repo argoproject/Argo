@@ -214,11 +214,16 @@ class Navis_Slideshows {
 
 			$output .= '<h6>';
 
-			if ( isset( $credit ) )
+			if ( ! empty( $credit ) ) {
 				$output .= wp_kses_post( $credit );
+			}
 
 			$output .= ' <a href="#" class="slide-permalink">' . esc_attr( __( 'permalink', 'largo' ) ) . '</a></h6>';
-			$output .= '<p>' . wp_kses_post( $caption ) . '</p></div>';
+			if ( ! empty( $caption ) ) {
+				$output .= '<p>' . wp_kses_post( $caption ) . '</p>';
+			}
+
+			$output .= '</div>';
 		}
 		$output .= '</div>';
 
