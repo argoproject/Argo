@@ -9,7 +9,7 @@
  */
 function largo_twitter_url_to_username ($url) {
 	$urlParts = explode("/", $url);
-	$username = $urlParts[3];
+	$username = ! empty( $urlParts[3] ) ? $urlParts[3] : '';
 	return $username;
 }
 
