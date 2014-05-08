@@ -7,6 +7,8 @@ class Largo_Customizer {
 
 	private static $instance;
 
+	private $option_key;
+
 	/**
 	 * Get the instance of the Largo Customizer
 	 */
@@ -30,6 +32,9 @@ class Largo_Customizer {
 	private function load() {
 
 		$this->setup_actions();
+
+		// See optionsframework_option_name()
+		$this->option_key = preg_replace("/\W/", "_", strtolower( get_option( 'stylesheet' ) ) );
 
 	}
 
@@ -57,6 +62,16 @@ class Largo_Customizer {
 	}
 
 	/**
+	 * Get a settings key with its option key prefixed
+	 *
+	 * @param string $settings_key
+	 * @return string
+	 */
+	private function get_setting_key( $setting_key ) {
+		return $this->option_key . $setting_key;
+	}
+
+	/**
 	 * Register our customizer options
 	 */
 	public function action_customize_register( $wp_customize ) {
@@ -68,51 +83,51 @@ class Largo_Customizer {
 
 		// Register the settings
 		$settings = array(
-			'largo[site_blurb]'          => array(
+			'[site_blurb]'          => array(
 				'type'                  => 'option',
 				'sanitize_callback'     => 'wp_filter_nohtml_kses',
 				),
 			// Homepage
-			'largo[home_template]'      => array(
+			'[home_template]'      => array(
 				'type'                  => 'option',
 				'sanitize_callback'     => 'sanitize_text_field',
 				),
-			'largo[num_posts_home]'     => array(
+			'[num_posts_home]'     => array(
 				'type'                  => 'option',
 				'sanitize_callback'     => 'absint',
 				),
-			'largo[homepage_bottom]'    => array(
+			'[homepage_bottom]'    => array(
 				'type'                  => 'option',
 				'sanitize_callback'     => 'sanitize_key',
 				),
 			// Single
-			'largo[social_icons_display]' => array(
+			'[social_icons_display]' => array(
 				'type'                  => 'option',
 				'sanitize_callback'     => 'sanitize_key',
 				),
-			'largo[fb_verb]'            => array(
+			'[fb_verb]'            => array(
 				'type'                  => 'option',
 				'sanitize_callback'     => 'sanitize_key',
 				),
-			'largo[show_twitter_count]' => array(
+			'[show_twitter_count]' => array(
 				'type'                  => 'option',
 				'sanitize_callback'     => 'sanitize_key',
 				),
 			// Footer
-			'largo[footer_layout]'      => array(
+			'[footer_layout]'      => array(
 				'type'                  => 'option',
 				'sanitize_callback'     => 'sanitize_key',
 				),
 			);
 		foreach( $settings as $setting => $options ) {
-			$wp_customize->add_setting( $setting, $options );
+			$wp_customize->add_setting( $this->get_setting_key( $setting ), $options );
 		}
 
 		// Site description
 		$wp_customize->add_control( new Largo_WP_Customize_Textarea_Control( $wp_customize, 'largo_site_description', array(
 			'label'             => __( 'Site Description', 'largo' ),
 			'section'           => 'title_tagline',
-			'settings'          => 'largo[site_blurb]',
+			'settings'          => $this->get_setting_key( '[site_blurb]' ),
 		) ) );
 
 		/**
@@ -137,7 +152,7 @@ class Largo_Customizer {
 		$wp_customize->add_control( new Largo_WP_Customize_Rich_Radio_Control( $wp_customize, 'largo_home_template', array(
 			'label'              => __( 'Body', 'largo' ),
 			'section'            => 'largo_homepage',
-			'settings'           => 'largo[home_template]',
+			'settings'           => $this->get_setting_key( '[home_template]' ),
 			'type'               => 'rich_radio',
 			'choices'            => $home_templates,
 			) ) );
@@ -148,14 +163,14 @@ class Largo_Customizer {
 		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'largo_num_posts_home', array(
 			'label'              => __( 'Number of Posts', 'largo' ),
 			'section'            => 'largo_homepage',
-			'settings'           => 'largo[num_posts_home]',
+			'settings'           => $this->get_setting_key( '[num_posts_home]' ),
 			'type'               => 'select',
 			'choices'            => $post_choices
 			) ) );
 		$wp_customize->add_control( new Largo_WP_Customize_Rich_Radio_Control( $wp_customize, 'largo_homepage_bottom', array(
 			'label'              => __( 'Bottom', 'largo' ),
 			'section'            => 'largo_homepage',
-			'settings'           => 'largo[homepage_bottom]',
+			'settings'           => $this->get_setting_key( '[homepage_bottom]' ),
 			'type'               => 'rich_radio',
 			'choices'            => array(
 				'list'           => array(
@@ -183,8 +198,8 @@ class Largo_Customizer {
 		$services = array( 'facebook', 'twitter', 'sharethis', 'print', 'email' );
 		$service_settings = array();
 		foreach( $services as $service ) {
-			$service_settings[$service] = 'largo[article_utilities][' . $service . ']';
-			$wp_customize->add_setting( 'largo[article_utilities][' . $service . ']', array(
+			$service_settings[$service] = $this->get_setting_key( '[article_utilities][' . $service . ']' );
+			$wp_customize->add_setting( $this->get_setting_key( '[article_utilities][' . $service . ']' ), array(
 				'type'                  => 'option',
 				'sanitize_callback'     => 'sanitize_key',
 				) );
@@ -205,7 +220,7 @@ class Largo_Customizer {
 		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'largo_social_icons_display', array(
 			'label'              => __( 'Social Icons Position', 'largo' ),
 			'section'            => 'largo_single_post',
-			'settings'           => 'largo[social_icons_display]',
+			'settings'           => $this->get_setting_key( '[social_icons_display]' ),
 			'type'               => 'select',
 			'choices'            => array(
 				'top'            => __( 'Top', 'largo' ),
@@ -217,7 +232,7 @@ class Largo_Customizer {
 		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'largo_fb_verb', array(
 			'label'              => __( 'Facebook Button Text', 'largo' ),
 			'section'            => 'largo_single_post',
-			'settings'           => 'largo[fb_verb]',
+			'settings'           => $this->get_setting_key( '[fb_verb]' ),
 			'type'               => 'select',
 			'choices'            => array(
 				// intentionally not translated
@@ -228,7 +243,7 @@ class Largo_Customizer {
 		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'largo_show_twitter_count', array(
 			'label'              => __( 'Show Twitter Share Count', 'largo' ),
 			'section'            => 'largo_single_post',
-			'settings'           => 'largo[show_twitter_count]',
+			'settings'           => $this->get_setting_key( '[show_twitter_count]' ),
 			'type'               => 'checkbox',
 			) ) );
 
@@ -243,7 +258,7 @@ class Largo_Customizer {
 		$wp_customize->add_control( new Largo_WP_Customize_Rich_Radio_Control( $wp_customize, 'largo_footer_layout', array(
 			'label'              => false,
 			'section'            => 'largo_footer_layout',
-			'settings'           => 'largo[footer_layout]',
+			'settings'           => $this->get_setting_key( '[footer_layout]' ),
 			'type'               => 'rich_radio',
 			'choices'            => array(
 				'3col-default'	 => array(

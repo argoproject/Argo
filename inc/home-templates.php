@@ -14,29 +14,43 @@ if( !function_exists( 'get_homepage_templates' ) ) {
 
 	function largo_get_home_templates() {
 
-		$theme = wp_get_theme();
-		$php_files = $theme->get_files( 'php', 1, true );
-		$home_templates = array();
-
-		$base = array(trailingslashit(get_template_directory()), trailingslashit(get_stylesheet_directory()));
-
-		foreach ( (array)$php_files as $template ) {
-			$template = WP_CONTENT_DIR . str_replace(WP_CONTENT_DIR, '', $template);
-			$basename = str_replace($base, '', $template);
-
-			$template_data = implode('', file( $template ));
-
-			$name = $desc = '';
-			if ( basename($template) != basename(__FILE__) && preg_match( '|Home Template:(.*)$|mi', $template_data, $name) ) {
-				$name = _cleanup_header_comment($name[1]);
-				preg_match( '|Description:(.*)$|mi', $template_data, $desc);
-				$home_templates[ trim($name) ] = array(
-					'path' => $basename,	//eg 'homepages/my-homepage.php'
-					'thumb' => largo_get_home_thumb( $theme, $basename ),
-					'desc' => _cleanup_header_comment($desc[1])
-				);
-			}
+		$cache_key = 'largo_home_templates_' . get_option( 'stylesheet' );
+		if ( false !== ( $home_templates = get_transient( $cache_key ) ) ) {
+			return $home_templates;
 		}
+
+		$home_templates = array();
+		$previous = false;
+		foreach( array( 'template', 'stylesheet' ) as $option_name ) {
+
+			$option_value = get_option( $option_name );
+
+			// Skip second time if it's not a child theme
+			if ( $option_value == $previous ) {
+				break;
+			}
+			$previous = $option_value;
+
+			$theme = wp_get_theme( $option_value );
+			foreach( $theme->get_files( 'php', 1, true ) as $php_file ) {
+
+				$name = $desc = '';
+				$basename = str_replace( trailingslashit( $theme->get_template_directory() ), '', $php_file );
+				$template_data = file_get_contents( $php_file );
+				if ( basename( $php_file ) !== basename( __FILE__ ) && preg_match( '|Home Template:(.*)$|mi', $template_data, $name ) ) {
+					$name = _cleanup_header_comment( $name[1] );
+					preg_match( '|Description:(.*)$|mi', $template_data, $desc);
+					$home_templates[ trim( $name ) ] = array(
+						'path' => $basename,	//eg 'homepages/my-homepage.php'
+						'thumb' => largo_get_home_thumb( $theme, $basename ),
+						'desc' => _cleanup_header_comment( $desc[1] )
+					);
+				}
+			}
+
+		}
+
+		set_transient( $cache_key, $home_templates, DAY_IN_SECONDS );
 
 		return $home_templates;
 
