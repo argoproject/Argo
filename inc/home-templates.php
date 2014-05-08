@@ -14,6 +14,11 @@ if( !function_exists( 'get_homepage_templates' ) ) {
 
 	function largo_get_home_templates() {
 
+		$cache_key = 'largo_home_templates_' . get_option( 'stylesheet' );
+		if ( false !== ( $home_templates = get_transient( $cache_key ) ) ) {
+			return $home_templates;
+		}
+
 		$home_templates = array();
 		$previous = false;
 		foreach( array( 'template', 'stylesheet' ) as $option_name ) {
@@ -43,8 +48,9 @@ if( !function_exists( 'get_homepage_templates' ) ) {
 				}
 			}
 
-
 		}
+
+		set_transient( $cache_key, $home_templates, DAY_IN_SECONDS );
 
 		return $home_templates;
 
