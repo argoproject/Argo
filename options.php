@@ -483,7 +483,7 @@ function optionsframework_options() {
 
 
 	$screen = get_current_screen();
-	if ( $screen->base == 'widgets' ) {
+	if ( is_object( $screen ) && $screen->base == 'widgets' ) {
 		return $widget_options;
 	}
 
