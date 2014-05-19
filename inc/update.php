@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains functions and tools for transitioning between Largo 0.2 and Largo 0.3
+ * Contains functions and tools for transitioning between Largo 0.3 and Largo 0.4
  */
 
 /**
@@ -52,7 +52,7 @@ function largo_perform_update() {
 add_action( 'widgets_init', 'largo_perform_update', 20 );
 
 /**
- * Upgrades for moving from 0.2 to 0.3
+ * Upgrades for moving from 0.3 to 0.4
  * In which many theme options became widgets
  * And homepage templates are implemented
  */
