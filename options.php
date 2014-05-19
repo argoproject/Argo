@@ -233,6 +233,12 @@ function optionsframework_options() {
 		'type' 	=> 'text');
 
 	$options[] = array(
+		'desc' 	=> __('<strong>Link to Github Page</strong> (http://github.com/username)', 'largo'),
+		'id' 	=> 'github_link',
+		'std' 	=> '',
+		'type' 	=> 'text');
+
+	$options[] = array(
 		'desc' 	=> __('By default, a row of social media icons is shown in the site footer. <strong>Check this box is you want to show them in the header as well</strong>. Note that they will only display on desktops and larger tablets.', 'largo'),
 		'id' 	=> 'show_header_social',
 		'type' 	=> 'checkbox');

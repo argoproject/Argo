@@ -62,7 +62,8 @@ if ( ! function_exists( 'largo_social_links' ) ) {
 			'flickr' 	=> __( 'Link to Flickr Page', 'largo' ),
 			'tumblr' 	=> __( 'Link to Tumblr', 'largo' ),
 			'gplus' 	=> __( 'Link to Google Plus Page', 'largo' ),
-			'linkedin' 	=> __( 'Link to LinkedIn Page', 'largo' )
+			'linkedin' 	=> __( 'Link to LinkedIn Page', 'largo' ),
+			'github' 	=> __( 'Link to Github Page', 'largo' )
 		);
 
 		foreach ( $fields as $field => $title ) {
