@@ -20,16 +20,16 @@ class Largo_Term_Icons {
 	 */
 	function register_taxonomy() {
 		register_taxonomy( 'post-type', array( 'post' ), array(
-			'label' => __( 'Post Types', 'largo-child' ),
+			'label' => __( 'Post Types', 'largo' ),
 			'labels' => array(
-				'name' => __( 'Post Types', 'largo-child' ),
-				'singular_name' => __( 'Post Type', 'largo-child' ),
-				'all_items' => __( 'All Post Types', 'largo-child' ),
-				'edit_item' => __( 'Edit Post Type', 'largo-child' ),
-				'update_item' => __( 'Update Post Type', 'largo-child' ),
-				'view_item' => __( 'View Post Type', 'largo-child' ),
-				'add_new_item' => __( 'Add New Post Type', 'largo-child' ),
-				'new_item_name' => __( 'New Post Type Name', 'largo-child' ),
+				'name' => __( 'Post Types', 'largo' ),
+				'singular_name' => __( 'Post Type', 'largo' ),
+				'all_items' => __( 'All Post Types', 'largo' ),
+				'edit_item' => __( 'Edit Post Type', 'largo' ),
+				'update_item' => __( 'Update Post Type', 'largo' ),
+				'view_item' => __( 'View Post Type', 'largo' ),
+				'add_new_item' => __( 'Add New Post Type', 'largo' ),
+				'new_item_name' => __( 'New Post Type Name', 'largo' ),
 				'search_items' => __( 'Search Post Type'),
 			),
 			'public' => true,
@@ -84,17 +84,17 @@ class Largo_Term_Icons {
 		$current_value = largo_get_term_meta( $term->taxonomy, $term->term_id, 'associated_icon_uid', true );
 		?>
 		<tr class="form-field">
-			<th scope="row" valign="top"><label for="associated_icon"><?php _e('Term Icon', 'largo-child'); ?></label></th>
+			<th scope="row" valign="top"><label for="associated_icon"><?php _e('Term Icon', 'largo'); ?></label></th>
 			<td>
 				<select name="associated_icon" id="associated_icon" style="min-width: 300px;">
-					<option value="" <?php selected( $current_value, '' ); ?>><?php _e( 'No Icon', 'largo-child'); ?></option>
+					<option value="" <?php selected( $current_value, '' ); ?>><?php _e( 'No Icon', 'largo'); ?></option>
 					<?php foreach( $config->glyphs as $glyph ) {
 						$name = ucwords( str_replace( '-', ' ', $glyph->css ) );
 						echo '<option value="', esc_attr( $glyph->uid ), '" data-css="', esc_attr($config->css_prefix_text . $glyph->css), '" ', selected( $glyph->uid, $current_value ) ,'>',esc_html($name),'</option>';
 					} ?>
 				</select>
 				<br/>
-				<p class="description"><?php _e('The icon the theme may use with the term.', 'largo-child'); ?></p>
+				<p class="description"><?php _e('The icon the theme may use with the term.', 'largo'); ?></p>
 				<?php
 				wp_nonce_field( 'associated_icon-'.$term->term_id, '_associated_icon_nonce' );
 				?>
@@ -107,15 +107,15 @@ class Largo_Term_Icons {
 		$config = $this->get_icons_config();
 		?>
 		<div class="form-field">
-			<label for="associated_icon"><?php _e('Term Icon', 'largo-child'); ?></label>
+			<label for="associated_icon"><?php _e('Term Icon', 'largo'); ?></label>
 			<select name="associated_icon" id="associated_icon" style="min-width: 300px;">
-				<option value=""><?php _e( 'No Icon', 'largo-child'); ?></option>
+				<option value=""><?php _e( 'No Icon', 'largo'); ?></option>
 				<?php foreach( $config->glyphs as $glyph ) {
 					$name = ucwords( str_replace( '-', ' ', $glyph->css ) );
 					echo '<option value="', esc_attr( $glyph->uid ), '" data-css="', esc_attr($config->css_prefix_text . $glyph->css), '">',esc_html($name),'</option>';
 				} ?>
 			</select>
-			<p class="description"><?php _e('The icon the theme may use with the term.', 'largo-child'); ?></p>
+			<p class="description"><?php _e('The icon the theme may use with the term.', 'largo'); ?></p>
 			<?php wp_nonce_field( 'associated_icon-new', '_associated_icon_nonce' ); ?>
 		</div>
 		<?php
