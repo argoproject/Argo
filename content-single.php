@@ -8,12 +8,11 @@
 	<?php do_action('largo_before_post_header'); ?>
 	<header>
  		<h1 class="entry-title" itemprop="headline"><?php the_title(); ?></h1>
+ 		<?php if ( $subtitle = get_post_meta( $post->ID, 'subtitle', true ) )
+ 			echo '<h2 class="subtitle">' . $subtitle . '</h2>';
+ 		?>
  		<h5 class="byline"><?php largo_byline(); ?></h5>
 
- 		<?php
- 			if ( of_get_option( 'social_icons_display' ) === 'top' || of_get_option( 'social_icons_display' ) === 'both' )
- 				largo_post_social_links();
- 		?>
  		<meta itemprop="description" content="<?php echo strip_tags(largo_excerpt( $post, 5, false, '', false ) ); ?>" />
  		<meta itemprop="datePublished" content="<?php echo get_the_date( 'c' ); ?>" />
  		<meta itemprop="dateModified" content="<?php echo get_the_modified_date( 'c' ); ?>" />
@@ -24,24 +23,61 @@
 			}
  		?>
 	</header><!-- / entry header -->
+
+	<?php
+		$values = get_post_custom( get_the_id() );
+		$youtube_url = isset( $values['youtube_url'] ) ? esc_attr( $values['youtube_url'][0] ) : '';
+
+		$hero_class = "is-image";
+		if ( $youtube_url ) {
+			$hero_class = "is-video";
+		} else if ( !has_post_thumbnail() ) {
+			$hero_class = "is-empty";
+		}
+	?>
+
+	<?php if ( !isset( $values["featured-image-display"] ) ) : ?>
+	<div class="hero span12 <?php echo $hero_class; ?>">
+		<?php
+			if( $youtube_url ){
+
+				// get embed ID
+				parse_str( parse_url( $youtube_url, PHP_URL_QUERY ), $var_array );
+				$youtubeID = $var_array['v'];
+
+				?>
+					<div class="video-container">
+						<iframe  src="//www.youtube.com/embed/<?php echo $youtubeID ?>" frameborder="0" allowfullscreen></iframe>
+					</div>
+				<?php
+			} elseif( has_post_thumbnail() ){
+				the_post_thumbnail( 'full');
+				if ( $thumb = get_post_thumbnail_id() ) {
+					$thumb_content = get_post( $thumb );
+					$thumb_custom = get_post_custom( $thumb );
+					if ( isset($thumb_custom['_media_credit'][0]) ) {
+						echo '<p class="wp-media-credit">' . $thumb_custom['_media_credit'][0];
+						if ( $thumb_custom['_navis_media_credit_org'][0] ) {
+							echo '/' . $thumb_custom['_navis_media_credit_org'][0];
+						}
+						echo '</p>';
+					}
+					if ( $thumb_content->post_excerpt ) {
+						echo '<p class="wp-caption-text">' . $thumb_content->post_excerpt . '</p>';
+					}
+				}
+			}
+		?>
+	</div>
+	<?php endif; ?>
+
 	<?php do_action('largo_after_post_header'); ?>
+
+	<?php get_sidebar(); ?>
+
 	<div class="entry-content clearfix" itemprop="articleBody">
 		<?php largo_entry_content( $post ); ?>
 	</div><!-- .entry-content -->
 	<?php do_action('largo_after_post_content'); ?>
-	<footer class="post-meta bottom-meta">
-
-	<?php
-		if ( of_get_option( 'social_icons_display' ) === 'btm' || of_get_option( 'social_icons_display' ) === 'both' )
-			largo_post_social_links();
-	?>
-
-    <?php if ( of_get_option( 'clean_read' ) === 'footer' ) : ?>
-    <div class="clean-read-container clearfix">
- 			<a href="#" class="clean-read"><?php _e("View as 'Clean Read'", 'largo') ?></a>
- 		</div>
- 		<?php endif; ?>
-
-	</footer><!-- /.post-meta -->
 	<?php do_action('largo_after_post_footer'); ?>
 </article><!-- #post-<?php the_ID(); ?> -->

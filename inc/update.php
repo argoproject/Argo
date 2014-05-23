@@ -42,7 +42,8 @@ function largo_perform_update() {
 	if ( largo_need_updates() ) {
 		if ( largo_version() == 0.3 ) {
 			largo_update_widgets();
-		largo_home_transition();
+			largo_home_transition();
+			of_set_option('single_template', 'classic');
 		}
 	}
 	if ( is_admin() ) {
