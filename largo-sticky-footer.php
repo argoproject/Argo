@@ -34,7 +34,7 @@
 		$cat_feed_link = largo_top_term( array( 'use_icon' => 'rss', 'rss' => true, 'echo' => false ) );
 
 		// Get the author object
-		$author = get_userdata( get_the_author_meta( 'ID' ) );
+		$author = get_userdata( $post->post_author );
 		$byline_text = get_post_meta( $post->ID, 'largo_byline_text' ) ? esc_attr( get_post_meta( $wp_query->post->ID, 'largo_byline_text', true ) ) : '';
 		// If the byline override is being used, then don't use it
 		if ( !empty($byline_text) ) {
