@@ -409,6 +409,21 @@ function optionsframework_options() {
 		'std' 	=> '',
 		'type' 	=> 'text');
 
+	$options[] = array(
+		'name' 	=> __('Single Article Template', 'largo'),
+		'type' 	=> 'info');
+
+	$options[] = array(
+		'desc' 	=> __('Starting with version 0.3, Largo introduced a new single-post template that more prominently highlights article content, which is the default. For backward compatibility, the pre-0.3 version is also available.', 'largo'),
+		'id' 	=> 'single_template',
+		'std' 	=> 'normal',
+		'type' 	=> 'select',
+		'options' => array(
+			'normal' => 'Standard (hero image, no rail)',
+			'classic' => 'Classic (no hero, right rail)'
+			)
+		);
+
 	$widget_options[] = $options[] = array(
 		'name' 	=> __('Sidebar Options', 'largo'),
 		'type' 	=> 'info');

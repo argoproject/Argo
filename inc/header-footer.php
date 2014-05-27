@@ -153,3 +153,18 @@ add_action( 'wp_head', 'largo_seo' );
 remove_action( 'wp_head', 'rsd_link' );
 remove_action( 'wp_head', 'wlwmanifest_link' );
 remove_action( 'wp_head', 'wp_generator' );
+
+
+
+/**
+ * Add a class to the body on single article pages when in 'classic' mode
+ *
+ * @since 0.3
+ */
+function largo_body_class( $classes ) {
+	if ( is_single() && of_get_option( 'single_template' ) == 'classic' ) {
+		$classes[] = "classic";
+	}
+	return $classes;
+}
+add_filter( 'body_class', 'largo_body_class' );
