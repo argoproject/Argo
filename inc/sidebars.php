@@ -136,6 +136,7 @@ function largo_make_slug($string, $maxLength = 63) {
 /**
  * Builds a dropdown menu of the custom sidebars
  * Used in the meta box on post/page edit screen and landing page edit screen
+ * $skip_default was deprecated in Largo 0.4
  *
  * @since 1.0
  */
@@ -144,15 +145,18 @@ if( !function_exists( 'largo_custom_sidebars_dropdown' ) ) {
 		global $wp_registered_sidebars, $post;
 		$the_id = ( $post_id ) ? $post_id : $post->ID ;
 		$custom = ( $selected ) ? $selected : get_post_meta( $the_id, 'custom_sidebar', true );
-		$val = ( $custom ) ? $custom : 'default';
 
-		// Add a default option
+		// for backwards compatibility if nothing's set or using deprecated 'default'
+		$val = 'sidebar-single';
+
+		// for new posts
+		$admin_page = get_current_screen();
+		if ( $admin_page->action == 'add' && $admin_page->base == 'post' ) $val = 'none';
+
+		// for posts with values set
+		if ( $custom ) $val = $custom;
+
 		$output = '';
-		if ( ! $skip_default ) {
-			$output .= '<option value="default" ';
-			$output .= selected( 'default', $val, false );
-			$output .= '>' . __( 'Default', 'largo' ) . '</option>';
-		}
 
 		// Add a 'none' option
 		$output .= '<option value="none" ';
@@ -188,10 +192,10 @@ function largo_widget_settings() {
 			    <div id="optionsframework" class="postbox">
 					<form action="options.php" method="post">
 						<div> <?php // Extra open <div> because optinosframework_fields() adds an extra closing </div> ?>
-					<?php 
+					<?php
 					// Prints hidden tags for WP's options.php to save the value
 					settings_fields('optionsframework');
-					
+
 					// Print all the currently saved values for those fields that aren't outputted
 					$options_to_show = optionsframework_options();
 					$config = get_option( 'optionsframework', array() );
