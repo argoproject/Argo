@@ -16,6 +16,8 @@ do_action('largo_before_sidebar');
 			//get a custom sidebar if appropriate
 			if ( is_singular() ) {
 				$custom_sidebar = get_post_meta(get_the_ID(), 'custom_sidebar', true);
+				// for backward compatibility
+				if ( $custom_sidebar == 'default' ) $custom_sidebar == 'sidebar-single';
 			} else if ( is_archive() ) {
 				$term = get_queried_object();
 				$custom_sidebar = largo_get_term_meta( $term->taxonomy, $term->term_id, 'custom_sidebar', true );
@@ -23,9 +25,12 @@ do_action('largo_before_sidebar');
 
 			//load custom sidebar if appropriate
 			if ( $custom_sidebar ) {
-				if ($custom_sidebar !== 'none' && $custom_sidebar !== 'default' ) {
-					dynamic_sidebar($custom_sidebar);
-				} else if ( is_archive() || $custom_sidebar == 'default' ) {
+				if ($custom_sidebar !== 'none' ) {	// just in case someone creates a sidebar region named 'none', we check this
+					dynamic_sidebar( $custom_sidebar );
+					if ( $custom_sidebar == 'sidebar-single' && !is_active_sidebar( $custom_sidebar ) ) {
+						dynamic_sidebar( 'sidebar-main' );
+					}
+				} else if ( is_archive() ) {
 					dynamic_sidebar( 'sidebar-main' );
 				}
 			//else load single sidebar if it has things
