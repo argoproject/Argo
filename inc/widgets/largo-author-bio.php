@@ -19,9 +19,9 @@ class largo_author_widget extends WP_Widget {
 
 		$title = apply_filters('widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base);
 
-		if( is_single() || is_author() ):
+		if( is_singular() || is_author() ):
 
-				if ( is_single() ) {
+				if ( is_singular() ) {
 					if ( function_exists( 'get_coauthors' ) ) {
 						$authors = get_coauthors( get_queried_object_id() );
 					} else {
