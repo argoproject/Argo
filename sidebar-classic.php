@@ -8,22 +8,31 @@ do_action('largo_before_sidebar');
 	<?php do_action('largo_before_sidebar_content'); ?>
 	<div class="widget-area<?php if ( is_single() && of_get_option( 'showey-hidey' ) ) echo ' showey-hidey'; ?>" role="complementary">
 		<?php
+			<?php
 			do_action('largo_before_sidebar_widgets');
 
 			$custom_sidebar = false;
 			//get a custom sidebar if appropriate
 			if ( is_singular() ) {
 				$custom_sidebar = get_post_meta(get_the_ID(), 'custom_sidebar', true);
+				// for backward compatibility
+				if ( $custom_sidebar == 'default' ) $custom_sidebar == 'sidebar-single';
 			} else if ( is_archive() ) {
 				$term = get_queried_object();
 				$custom_sidebar = largo_get_term_meta( $term->taxonomy, $term->term_id, 'custom_sidebar', true );
 			}
 
 			//load custom sidebar if appropriate
-			if ( $custom_sidebar && $custom_sidebar !== 'default') {
-				dynamic_sidebar($custom_sidebar);
-
-			//load single-post sidebar if it has things
+			if ( $custom_sidebar ) {
+				if ($custom_sidebar !== 'none' ) {	// just in case someone creates a sidebar region named 'none', we check this
+					dynamic_sidebar( $custom_sidebar );
+					if ( $custom_sidebar == 'sidebar-single' && !is_active_sidebar( $custom_sidebar ) ) {
+						dynamic_sidebar( 'sidebar-main' );
+					}
+				} else if ( is_archive() ) {
+					dynamic_sidebar( 'sidebar-main' );
+				}
+			//else load single sidebar if it has things
 			} elseif ( is_singular() && is_active_sidebar( 'sidebar-single' )) {
 				dynamic_sidebar( 'sidebar-single' );
 
@@ -37,7 +46,7 @@ do_action('largo_before_sidebar');
 				the_widget( 'largo_follow_widget', array( 'title' => __('Follow Us', 'largo') ) );
 				if ( of_get_option( 'donate_link' ) )
 					the_widget( 'largo_donate_widget', array(
-						'title' 		=> sprintf( __('Support %s', 'largo'), get_bloginfo('name') ),
+						'title' 		=> __('Support ' . get_bloginfo('name'), 'largo'),
 						'cta_text' 		=> __('We depend on your support. A generous gift in any amount helps us continue to bring you this service.', 'largo'),
 						'button_text' 	=> __('Donate Now', 'largo'),
 						'button_url' 	=> esc_url( of_get_option( 'donate_link' ) ),

@@ -17,7 +17,7 @@ do_action('largo_before_sidebar');
 			if ( is_singular() ) {
 				$custom_sidebar = get_post_meta(get_the_ID(), 'custom_sidebar', true);
 				// for backward compatibility
-				if ( $custom_sidebar == 'default' ) $custom_sidebar == 'sidebar-single';
+				if ( $custom_sidebar == 'default' ) $custom_sidebar == 'none';
 			} else if ( is_archive() ) {
 				$term = get_queried_object();
 				$custom_sidebar = largo_get_term_meta( $term->taxonomy, $term->term_id, 'custom_sidebar', true );
@@ -33,9 +33,9 @@ do_action('largo_before_sidebar');
 				} else if ( is_archive() ) {
 					dynamic_sidebar( 'sidebar-main' );
 				}
-			//else load single sidebar if it has things
-			} elseif ( is_singular() && is_active_sidebar( 'sidebar-single' )) {
-				dynamic_sidebar( 'sidebar-single' );
+			//show nothing on a single post/page
+			} elseif ( is_singular() ) {
+				// do nothing. sidebars on the new post template are bad, m'kay?
 
 			//load archive/topic sidebar if activated
 			} elseif ( ( is_archive() || is_tax() ) && of_get_option( 'use_topic_sidebar' ) && is_active_sidebar( 'topic-sidebar' ) ) {
