@@ -146,15 +146,16 @@ if( !function_exists( 'largo_custom_sidebars_dropdown' ) ) {
 		$the_id = ( $post_id ) ? $post_id : $post->ID ;
 		$custom = ( $selected ) ? $selected : get_post_meta( $the_id, 'custom_sidebar', true );
 
-		// for backwards compatibility if nothing's set or using deprecated 'default'
-		$val = 'sidebar-single';
+		// for the ultimate in backwards compatibility, if nothing's set or using deprecated 'default'
+		$default = ( of_get_option('single_template') == 'classic' ) ? 'sidebar-single' : 'none';
+		$val = $default;
 
 		// for new posts
 		$admin_page = get_current_screen();
 		if ( $admin_page->action == 'add' && $admin_page->base == 'post' ) $val = 'none';
 
 		// for posts with values set
-		if ( $custom ) $val = $custom;
+		if ( $custom && $custom !== 'default' ) $val = $custom;
 
 		$output = '';
 
