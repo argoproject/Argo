@@ -1,9 +1,8 @@
 .widget {
-  padding: 15px;
-
+  padding: @baseline * 0.75 0;
   p, ul {
     padding: 0 3px;
-    font-size: @baseFontSize * 0.815;
+    font-size: @baseFontSize;
   }
   ul {
     margin: @baseline/5 0 0 16px;
@@ -15,7 +14,6 @@
   p.morelink {
     margin: -@baseline/4 0 0;
   }
-
   + .widget {
     border-top: 1px solid @grayLighter;
   }
@@ -23,7 +21,6 @@
 .widgettitle,
 .stories h3.widgettitle {
   margin-bottom: @baseline/3;
-
   font-size: @baseFontSize;
   text-transform: uppercase;
   font-weight: bold;
@@ -157,7 +154,7 @@
     font-size: @baseFontSize;
   }
   p {
-  	font-size: @baseFontSize * 0.667;
+  	font-size: @baseFontSize * 0.815;
   	margin-bottom: 0;
   }
 }
@@ -253,24 +250,19 @@
 .largo-related-posts {
   ul.related {
     margin: 0;
-
     li {
       list-style: none;
       display: block;
       .clearfix();
     }
-
     p {
 	    margin-bottom: 1em;
     }
-
   }
-
   h4 {
     font-size: @baseFontSize * 1.2;
     margin: 2px 0 5px;
   }
-
   .wp-post-image {
     float: left;
     margin: 5px 10px 0 5px;
