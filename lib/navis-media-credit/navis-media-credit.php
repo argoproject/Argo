@@ -14,6 +14,9 @@ define( 'MEDIA_CREDIT_POSTMETA_KEY', '_media_credit' );
 function navis_get_media_credit( $id ) {
     // XXX: do we need to get the post->ID or can we just use this ID??
     $post = get_post( $id );
+    if ( ! $post ) {
+        return false;
+    }
     $creditor = new Media_Credit( $post->ID );
     return $creditor;
 }
@@ -70,6 +73,9 @@ class Navis_Media_Credit {
 
     function get_media_credit_for_attachment( $text = '', $id ) {
         $creditor = navis_get_media_credit( $id );
+        if ( ! $creditor ) {
+            return $text;
+        }
         return $text . $creditor->to_string();
     }
 
@@ -79,17 +85,16 @@ class Navis_Media_Credit {
         $fields[ 'media_credit' ] = array(
             'label' => 'Credit',
             'input' => 'text',
-            'value' => $creditor->credit,
+            'value' => ! empty( $creditor ) ? $creditor->credit : '',
         );
 
         $fields[ 'navis_media_credit_org' ] = array(
             'label' => 'Organization',
             'input' => 'text',
-            'value' => $creditor->org
+            'value' => ! empty( $creditor->org ) ? $creditor->org : '',
         );
 
-        $can_distribute = $creditor->can_distribute;
-        $checked = $can_distribute ? 'checked="checked"' : "";
+        $checked = ! empty( $creditor->can_distribute ) ? 'checked="checked"' : "";
         $distfield = 'attachments[' . $post->ID . '][navis_media_can_distribute]';
         $fields[ 'navis_media_can_distribute' ] = array(
             'label' => 'Can distribute?',
@@ -174,7 +179,7 @@ class Navis_Media_Credit {
         if ( $id && ! $credit ) {
             $post_id = str_replace( 'attachment_', '', $id );
             $creditor = navis_get_media_credit( $post_id );
-            $credit = $creditor->to_string();
+            $credit = ! empty( $creditor ) ? $creditor->to_string() : '';
         }
 
         if ( $id ) {
