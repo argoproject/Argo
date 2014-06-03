@@ -45,6 +45,15 @@ if ( ! defined( 'LARGE_WIDTH' ) ) {
 if ( ! defined( 'MEDIUM_WIDTH' ) ) {
 	define( 'MEDIUM_WIDTH', 336 );
 }
+if ( ! defined( 'FULL_HEIGHT' ) ) {
+	define( 'FULL_HEIGHT', 9999 );
+}
+if ( ! defined( 'LARGE_HEIGHT' ) ) {
+	define( 'LARGE_HEIGHT', 9999 );
+}
+if ( ! defined( 'MEDIUM_HEIGHT' ) ) {
+	define( 'MEDIUM_HEIGHT', 9999 );
+}
 
 // Set the content width based on the theme's design and stylesheet.
 if ( ! isset( $content_width ) )
@@ -204,9 +213,9 @@ class Largo {
 		set_post_thumbnail_size( 140, 140, true ); // thumbnail
 		add_image_size( 'home-logo', 50, 50, true ); // small thumbnail
 		add_image_size( '60x60', 60, 60, true ); // small thumbnail
-		add_image_size( 'medium', MEDIUM_WIDTH, 9999 ); // medium width scaling
-		add_image_size( 'large', LARGE_WIDTH, 9999 ); // large width scaling
-		add_image_size( 'full', FULL_WIDTH, 9999 ); // large width scaling
+		add_image_size( 'medium', MEDIUM_WIDTH, MEDIUM_HEIGHT ); // medium width scaling
+		add_image_size( 'large', LARGE_WIDTH, LARGE_HEIGHT ); // large width scaling
+		add_image_size( 'full', FULL_WIDTH, FULL_HEIGHT ); // full width scaling
 		add_image_size( 'third-full', FULL_WIDTH / 3, 500, true ); // large width scaling
 		add_image_size( 'two-third-full', FULL_WIDTH / 3 * 2, 500, true ); // large width scaling
 
