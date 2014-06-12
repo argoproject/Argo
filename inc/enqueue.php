@@ -125,6 +125,13 @@ if ( ! function_exists( 'largo_google_analytics' ) ) {
 				_gaq.push(['_setAccount', '<?php echo of_get_option( "ga_id" ) ?>']);
 				_gaq.push(['_trackPageview']);
 			<?php endif; ?>
+				<?php if (defined('INN_MEMBER') && INN_MEMBER) { ?>
+				_gaq.push(
+					["inn._setAccount", "UA-17578670-2"],
+					["inn._setCustomVar", 1, "MemberName", "<?php bloginfo('name') ?>"],
+					["inn._trackPageview"]
+				);
+				<?php } ?>
 			    _gaq.push(
 					["largo._setAccount", "UA-17578670-4"],
 					["largo._setCustomVar", 1, "SiteName", "<?php bloginfo('name') ?>"],

@@ -527,7 +527,7 @@ function optionsframework_options() {
 		'std' 	=> '',
 		'type' 	=> 'info');
 
-	return $options;
+	return apply_filters('largo_options', $options);
 }
 
 /*
