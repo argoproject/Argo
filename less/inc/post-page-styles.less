@@ -410,20 +410,20 @@ h3.recent-posts,
 // AUTHOR BOX
 .author-box {
   clear: both;
-  margin-bottom: @baseline;
-  h1, h3 {
-    font-size: @baseFontSize * 2;
-    margin-bottom: @baseline/5;
-  }
+  margin: 0;
   img.avatar {
-    float:left;
-    margin: 0 20px 0 0;
-    padding:4px;
+	float: left;
+	margin: 5px 15px 10px 0;
+    padding: 4px;
     border: 1px solid @grayLighter;
   }
   p {
     font-size: @baseFontSize * 0.815;
     margin-bottom: @baseline/3;
+  }
+  span.author-posts-link {
+	float: right;
+    font-size: @baseFontSize * 0.815;
   }
   ul {
     list-style:none;
@@ -476,25 +476,11 @@ h3.recent-posts,
 	  }
     }
   }
-  iframe { margin: 0; }
-}
-.single-post .author-box,
-.single-argolinkroundups .author-box {
-  h5 span.author-posts-link {
-    float: right;
-    text-align: right;
-    font-size: @baseFontSize * 0.667;
-	padding-top: 4px;
-  }
-  img {
-	margin: 10px 20px 10px 0;
-  }
-  p, ul {
-    margin: 10px 0;
-  }
-  .gplus img {
+  ul.social-links {
     margin: 0;
+    float: left;
   }
+  iframe { margin: 0; }
 }
 
 // --------------------------------------------
