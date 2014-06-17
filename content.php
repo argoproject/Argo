@@ -48,7 +48,7 @@ $youtube_url = isset( $values['youtube_url'] ) ? esc_attr( $values['youtube_url'
 
  		<h5 class="byline"><?php largo_byline(); ?></h5>
 
-		<?php largo_excerpt( $post, 5, true, __('Continue&nbsp;Reading&nbsp;&rarr;', 'largo'), true, false ); ?>
+		<?php largo_excerpt( $post, 5, true, __('Continue&nbsp;Reading', 'largo'), true, false ); ?>
 
     <?php if ( !is_home() || ( largo_has_categories_or_tags() && $tags === 'btm' ) ) : ?>
     		<h5 class="tag-list"><strong><?php _e('Filed under:', 'largo'); ?></strong> <?php largo_categories_and_tags( 8 ); ?></h5>
@@ -75,7 +75,7 @@ $youtube_url = isset( $values['youtube_url'] ) ? esc_attr( $values['youtube_url'
 	<div class="entry-content">
 		<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
 
-		<?php largo_excerpt( $post, 5, true, __('Continue&nbsp;Reading&nbsp;&rarr;', 'largo'), true, false ); ?>
+		<?php largo_excerpt( $post, 5, true, __('Continue&nbsp;Reading', 'largo'), true, false ); ?>
 
     <?php if ( !is_home() && largo_has_categories_or_tags() && $tags === 'btm' ) : ?>
 		<h5 class="tag-list"><strong><?php _e('Filed under:', 'largo'); ?></strong> <?php largo_categories_and_tags( 8 ); ?></h5>
