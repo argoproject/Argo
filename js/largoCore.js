@@ -38,17 +38,6 @@ jQuery(document).ready(function($) {
 		});
 	}
 
-	//homepage alert & hero CSS hacks
-	if ( $('.max-wide').length ) {
-		var $wrapper = $('.max-wide'), $container = $('#content');
-		$(window).on('throttledresize', function() {
-			var $marginWidth = ( $(window).width() - $container.width() ) / -2;
-			$marginWidth = ( $marginWidth > 0 ) ? 0 : parseInt( $marginWidth ) ;
-			$wrapper.css( {marginLeft: $marginWidth, marginRight: $marginWidth} );
-		});
-		$(window).trigger('throttledresize');
-	}
-
 	//enable "clean read" functionality
 	$('a.clean-read').on('click', function() {
 		$('body').addClass('clean-read').append('<a class="clean-read-close" href="#">Exit "Clean Read" mode</a>');
