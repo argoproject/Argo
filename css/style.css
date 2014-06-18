@@ -4234,7 +4234,7 @@ p.comment-form-comment {
 .widget.largo-series-posts h4 {
   margin-bottom: 0.4em;
   line-height: 1.2em;
-  font-size: 20.8px;
+  font-size: 24px;
 }
 .widget.largo-series-posts ul {
   margin-left: 0;
@@ -4255,6 +4255,8 @@ p.comment-form-comment {
 }
 .widget.largo-series-posts p {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.4;
 }
 .widget.largo-series-posts a.more {
   text-align: right;
