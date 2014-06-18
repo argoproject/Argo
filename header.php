@@ -105,10 +105,16 @@
 		<div class="sticky-nav-holder show" data-hide-at-top="<?php echo (is_front_page() || is_home()) ? 'true' : 'false'; ?>"><div class="sticky-nav-container">
 			<nav id="sticky-nav" class="sticky-navbar navbar clearfix">
 		    <div class="container">
-		    	<div class="nav-right">
-			      <?php if ( of_get_option( 'show_donate_button') )
-	      			largo_donate_button();
-	      		?>
+				<div class="nav-right">
+					<?php if ( of_get_option( 'show_header_social') ) { ?>
+						<ul id="header-social" class="social-icons visible-desktop">
+							<?php largo_social_links(); ?>
+						</ul>
+					<?php } ?>
+
+					<?php if ( of_get_option( 'show_donate_button') )
+						largo_donate_button();
+					?>
 
 						<div id="header-search">
 							<form class="form-search" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
