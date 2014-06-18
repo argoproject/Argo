@@ -56,7 +56,7 @@ global $largo, $shown_ids, $tags, $post;
 							$shown_ids[] = $feature_post->ID; ?>
 							<h4 class="related-story"><a href="<?php echo esc_url( get_permalink( $feature_post->ID ) ); ?>"><?php echo get_the_title( $feature_post->ID ); ?></a></h4>
 						<?php endforeach; ?>
-						<h6 class="more"><a href="<?php echo get_term_link( $feature ); ?>"><?php _e('Complete Coverage', 'largo'); ?></a></h6>
+						<p class="more"><a href="<?php echo get_term_link( $feature ); ?>"><?php _e('Complete Coverage', 'largo'); ?></a></p>
 						<?php
 						endif; // $has_series
 						wp_reset_postdata(); ?>

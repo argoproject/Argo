@@ -102,8 +102,8 @@
   border-bottom: none;
 }
 #dark-top p {
-  font-size: 93%;
-  line-height: 1.4em;
+  font-size: 15px;
+  line-height: 1.4;
   margin-bottom: 0;
 }
 #dark-top h2 {
@@ -127,7 +127,6 @@
 }
 #dark-top .byline {
   font-weight: bold;
-  font-size: 110%;
 }
 #dark-top .byline a {
   text-transform: uppercase;
