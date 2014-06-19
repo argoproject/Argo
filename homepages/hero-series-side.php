@@ -16,7 +16,7 @@ global $largo, $shown_ids, $tags;
 			<h1><?php _e( 'View', 'largo' ); ?></h1>
 			<ul>
 				<li><a href="#" class="active" data-style="top"><?php _e( 'Top Stories', 'largo' ); ?></a></li>
-				<li><a href="#" data-style="list"><?php _e( 'List', 'largo' ); ?></a></li>
+				<li><a href="#" data-style="list"><?php _e( 'Recent Stories', 'largo' ); ?></a></li>
 		</aside>
 
 		<div class="home-top">
