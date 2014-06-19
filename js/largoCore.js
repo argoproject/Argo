@@ -116,34 +116,39 @@ jQuery(document).ready(function($) {
 		var stickyNavEl = $('.sticky-nav-holder');
 		var mainEl = $('.home #main');
 
-    if (mainEl.length) {
-      mainEl.waypoint(function(direction) {
-          if ($(window).width() < 768)
-            return false;
+		if (mainEl.length) {
+			mainEl.waypoint(function(direction) {
+				if ($(window).width() < 768)
+					return false;
 
-          stickyNavEl.toggleClass('show', direction == 'down');
-          stickyNavEl.data('hideAtTop', true);
-        }, {
-          offset: $('#wpadminbar').height() + parseInt(mainEl.css('marginTop'))
-        });
+				stickyNavEl.toggleClass('show', direction == 'down');
+				stickyNavEl.data('hideAtTop', true);
+			}, {
+				offset: $('#wpadminbar').height() + parseInt(mainEl.css('marginTop'))
+			});
 
-      if ($(window).width() < 768) {
-        stickyNavEl.addClass('show');
-        stickyNavEl.data('hideAtTop', false);
-      }
+			if ($(window).width() < 768) {
+				stickyNavEl.addClass('show');
+				stickyNavEl.data('hideAtTop', false);
+			}
 
-      $(window).on('resize', function() {
-        if ($(window).width() < 768) {
-          stickyNavEl.addClass('show');
-          stickyNavEl.data('hideAtTop', false);
-        } else {
-          if ($(window).scrollTop() <= mainEl.offset().top)
-            stickyNavEl.removeClass('show');
+			$(window).on('resize', function() {
+				if ($(window).width() < 768) {
+					stickyNavEl.addClass('show');
+					stickyNavEl.data('hideAtTop', false);
+				} else {
+					if ($(window).scrollTop() <= mainEl.offset().top)
+						stickyNavEl.removeClass('show');
 
-          stickyNavEl.data('hideAtTop', true);
-        }
-      });
-    }
+					stickyNavEl.data('hideAtTop', true);
+				}
+			});
+		}
+
+		// Account for sticky nav with fixed position at top of page
+		var stickyNavWrapper = $('.sticky-nav-wrapper');
+		if (stickyNavWrapper.length && !$('body').hasClass('home'))
+			stickyNavWrapper.height(stickyNavEl.outerHeight());
 
 		// Check if there is a sticky footer
 		var stickyFooterEl = $( '.sticky-footer-holder' );
