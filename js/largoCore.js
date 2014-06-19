@@ -25,11 +25,16 @@ jQuery(document).ready(function($) {
 		});
 	}
 
-	//get the correct sized image for the header, replace it with a new one if the window is resized
-	$('.header_img').attr('src', banner_img_src);
-	$(window).resize(function() {
-		$('.header_img').attr('src', whichHeader());
-	});
+	// get the correct sized image for the header, replace it with a new one if the window is resized.
+	// if `banner_img_src` is empty, remove it and its parent container
+	if (banner_img_src) {
+		$('.header_img').attr('src', banner_img_src);
+		$(window).resize(function() {
+			$('.header_img').attr('src', whichHeader());
+		});
+	} else {
+		$('.header_img').parent().remove();
+	}
 
 	//the homepage carousel, make sure we don't load this unless .carousel is defined
 	if($().carousel) {
