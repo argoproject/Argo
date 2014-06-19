@@ -90,17 +90,6 @@
 <?php endif; ?>
 
 <div id="page" class="hfeed clearfix">
-
-	<?php // if (function_exists('dynamic_sidebar')) { dynamic_sidebar("Header"); } ?>
-
-	<header id="site-header" class="clearfix" itemscope itemtype="http://schema.org/Organization">
-		<?php largo_header(); ?>
-	</header>
-
-	<header class="print-header">
-		<p><strong><?php echo esc_html( get_bloginfo( 'name' ) ); ?></strong> (<?php echo esc_url( $current_url ); ?>)</p>
-	</header>
-
 	<div class="sticky-nav-wrapper">
 		<div class="sticky-nav-holder show" data-hide-at-top="<?php echo (is_front_page() || is_home()) ? 'true' : 'false'; ?>"><div class="sticky-nav-container">
 			<nav id="sticky-nav" class="sticky-navbar navbar clearfix">
@@ -176,6 +165,16 @@
 			</nav>
 		</div></div>
 	</div>
+
+	<?php // if (function_exists('dynamic_sidebar')) { dynamic_sidebar("Header"); } ?>
+
+	<header id="site-header" class="clearfix" itemscope itemtype="http://schema.org/Organization">
+		<?php largo_header(); ?>
+	</header>
+
+	<header class="print-header">
+		<p><strong><?php echo esc_html( get_bloginfo( 'name' ) ); ?></strong> (<?php echo esc_url( $current_url ); ?>)</p>
+	</header>
 
 	<?php if ( is_front_page() || is_home() ): ?>
 	<nav id="main-nav" class="navbar clearfix">

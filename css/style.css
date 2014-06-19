@@ -608,7 +608,6 @@ input[type="color"]:focus,
   outline: 0;
   outline: thin dotted \9;
   /* IE6-9 */
-
   -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
   -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
   box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
@@ -618,7 +617,6 @@ input[type="checkbox"] {
   margin: 3px 0;
   *margin-top: 0;
   /* IE7 */
-
   line-height: normal;
   cursor: pointer;
 }
@@ -637,10 +635,8 @@ select,
 input[type="file"] {
   height: 28px;
   /* In IE7, the height of the select element cannot be changed by height, only font-size */
-
   *margin-top: 4px;
   /* For IE7, add top margin to align select with labels */
-
   line-height: 28px;
 }
 select {
@@ -729,62 +725,62 @@ textarea,
 input.span12,
 textarea.span12,
 .uneditable-input.span12 {
-  width: 89.99999998999999%;
+  width: 89.99999999%;
 }
 input.span11,
 textarea.span11,
 .uneditable-input.span11 {
-  width: 81.489361693%;
+  width: 81.48936169%;
 }
 input.span10,
 textarea.span10,
 .uneditable-input.span10 {
-  width: 72.97872339599999%;
+  width: 72.9787234%;
 }
 input.span9,
 textarea.span9,
 .uneditable-input.span9 {
-  width: 64.468085099%;
+  width: 64.4680851%;
 }
 input.span8,
 textarea.span8,
 .uneditable-input.span8 {
-  width: 55.95744680199999%;
+  width: 55.9574468%;
 }
 input.span7,
 textarea.span7,
 .uneditable-input.span7 {
-  width: 47.446808505%;
+  width: 47.4468085%;
 }
 input.span6,
 textarea.span6,
 .uneditable-input.span6 {
-  width: 38.93617020799999%;
+  width: 38.93617021%;
 }
 input.span5,
 textarea.span5,
 .uneditable-input.span5 {
-  width: 30.425531911%;
+  width: 30.42553191%;
 }
 input.span4,
 textarea.span4,
 .uneditable-input.span4 {
-  width: 21.914893614%;
+  width: 21.91489361%;
 }
 input.span3,
 textarea.span3,
 .uneditable-input.span3 {
-  width: 13.404255317%;
+  width: 13.40425532%;
 }
 input.span2,
 textarea.span2,
 .uneditable-input.span2 {
-  width: 4.893617020000001%;
+  width: 4.89361702%;
 }
 input.span1,
 textarea.span1,
 .uneditable-input.span1 {
-  width: -3.617021277%;
+  width: -3.61702128%;
 }
 input[disabled],
 select[disabled],
@@ -950,7 +946,6 @@ select:focus:required:invalid:focus {
   display: inline-block;
   *display: inline;
   /* IE7 inline-block hack */
-
   *zoom: 1;
   vertical-align: middle;
   padding-left: 5px;
@@ -1068,7 +1063,6 @@ select:focus:required:invalid:focus {
   padding-left: 14px;
   padding-left: 4px \9;
   /* IE7-8 doesn't have border-radius, so don't indent the padding */
-
   margin-bottom: 0;
   -webkit-border-radius: 14px;
   -moz-border-radius: 14px;
@@ -1098,7 +1092,6 @@ select:focus:required:invalid:focus {
   display: inline-block;
   *display: inline;
   /* IE7 inline-block hack */
-
   *zoom: 1;
   margin-bottom: 0;
 }
@@ -1259,7 +1252,6 @@ legend + .control-group {
   display: inline-block;
   *display: inline;
   /* IE7 inline-block hack */
-
   *zoom: 1;
   padding: 4px 10px 4px;
   margin-bottom: 0;
@@ -1289,7 +1281,6 @@ legend + .control-group {
   background-color: #e6e6e6;
   *background-color: #d9d9d9;
   /* Buttons in IE7 don't get borders, so darken on hover */
-
   background-position: 0 -15px;
   -webkit-transition: background-position 0.1s linear;
   -moz-transition: background-position 0.1s linear;
@@ -1364,7 +1355,6 @@ legend + .control-group {
   background-color: #1a5a90;
   *background-color: #164c7a;
   /* Buttons in IE7 don't get borders, so darken on hover */
-
   background-position: 0 -15px;
   -webkit-transition: background-position 0.1s linear;
   -moz-transition: background-position 0.1s linear;
@@ -1460,122 +1450,122 @@ table tbody:first-child tr:first-child td {
 }
 table .span1 {
   float: none;
-  width: -9.617021277%;
+  width: -9.61702128%;
   margin-left: 0;
 }
 table .span2 {
   float: none;
-  width: -1.1063829799999993%;
+  width: -1.10638298%;
   margin-left: 0;
 }
 table .span3 {
   float: none;
-  width: 7.4042553170000005%;
+  width: 7.40425532%;
   margin-left: 0;
 }
 table .span4 {
   float: none;
-  width: 15.914893614%;
+  width: 15.91489361%;
   margin-left: 0;
 }
 table .span5 {
   float: none;
-  width: 24.425531911%;
+  width: 24.42553191%;
   margin-left: 0;
 }
 table .span6 {
   float: none;
-  width: 32.93617020799999%;
+  width: 32.93617021%;
   margin-left: 0;
 }
 table .span7 {
   float: none;
-  width: 41.446808505%;
+  width: 41.4468085%;
   margin-left: 0;
 }
 table .span8 {
   float: none;
-  width: 49.95744680199999%;
+  width: 49.9574468%;
   margin-left: 0;
 }
 table .span9 {
   float: none;
-  width: 58.46808509900001%;
+  width: 58.4680851%;
   margin-left: 0;
 }
 table .span10 {
   float: none;
-  width: 66.97872339599999%;
+  width: 66.9787234%;
   margin-left: 0;
 }
 table .span11 {
   float: none;
-  width: 75.489361693%;
+  width: 75.48936169%;
   margin-left: 0;
 }
 table .span12 {
   float: none;
-  width: 83.99999998999999%;
+  width: 83.99999999%;
   margin-left: 0;
 }
 table .span13 {
   float: none;
-  width: 92.510638287%;
+  width: 92.51063829%;
   margin-left: 0;
 }
 table .span14 {
   float: none;
-  width: 101.02127658399999%;
+  width: 101.02127658%;
   margin-left: 0;
 }
 table .span15 {
   float: none;
-  width: 109.531914881%;
+  width: 109.53191488%;
   margin-left: 0;
 }
 table .span16 {
   float: none;
-  width: 118.04255317799999%;
+  width: 118.04255318%;
   margin-left: 0;
 }
 table .span17 {
   float: none;
-  width: 126.553191475%;
+  width: 126.55319148%;
   margin-left: 0;
 }
 table .span18 {
   float: none;
-  width: 135.063829772%;
+  width: 135.06382977%;
   margin-left: 0;
 }
 table .span19 {
   float: none;
-  width: 143.57446806899998%;
+  width: 143.57446807%;
   margin-left: 0;
 }
 table .span20 {
   float: none;
-  width: 152.085106366%;
+  width: 152.08510637%;
   margin-left: 0;
 }
 table .span21 {
   float: none;
-  width: 160.595744663%;
+  width: 160.59574466%;
   margin-left: 0;
 }
 table .span22 {
   float: none;
-  width: 169.10638296000002%;
+  width: 169.10638296%;
   margin-left: 0;
 }
 table .span23 {
   float: none;
-  width: 177.617021257%;
+  width: 177.61702126%;
   margin-left: 0;
 }
 table .span24 {
   float: none;
-  width: 186.127659554%;
+  width: 186.12765955%;
   margin-left: 0;
 }
 @font-face {
@@ -1889,59 +1879,59 @@ table .span24 {
   -ms-box-sizing: border-box;
   box-sizing: border-box;
   float: left;
-  margin-left: 2.127659574%;
-  *margin-left: 1.627659574%;
+  margin-left: 2.12765957%;
+  *margin-left: 1.62765957%;
 }
 .row-fluid [class*="span"]:first-child {
   margin-left: 0;
 }
 .row-fluid .span12 {
-  width: 99.99999998999999%;
-  *width: 99.49999998999999%;
+  width: 99.99999999%;
+  *width: 99.49999999%;
 }
 .row-fluid .span11 {
-  width: 91.489361693%;
-  *width: 90.989361693%;
+  width: 91.48936169%;
+  *width: 90.98936169%;
 }
 .row-fluid .span10 {
-  width: 82.97872339599999%;
-  *width: 82.47872339599999%;
+  width: 82.9787234%;
+  *width: 82.4787234%;
 }
 .row-fluid .span9 {
-  width: 74.468085099%;
-  *width: 73.968085099%;
+  width: 74.4680851%;
+  *width: 73.9680851%;
 }
 .row-fluid .span8 {
-  width: 65.95744680199999%;
-  *width: 65.45744680199999%;
+  width: 65.9574468%;
+  *width: 65.4574468%;
 }
 .row-fluid .span7 {
-  width: 57.446808505%;
-  *width: 56.946808505%;
+  width: 57.4468085%;
+  *width: 56.9468085%;
 }
 .row-fluid .span6 {
-  width: 48.93617020799999%;
-  *width: 48.43617020799999%;
+  width: 48.93617021%;
+  *width: 48.43617021%;
 }
 .row-fluid .span5 {
-  width: 40.425531911%;
-  *width: 39.925531911%;
+  width: 40.42553191%;
+  *width: 39.92553191%;
 }
 .row-fluid .span4 {
-  width: 31.914893614%;
-  *width: 31.414893614%;
+  width: 31.91489361%;
+  *width: 31.41489361%;
 }
 .row-fluid .span3 {
-  width: 23.404255317%;
-  *width: 22.904255317%;
+  width: 23.40425532%;
+  *width: 22.90425532%;
 }
 .row-fluid .span2 {
   width: 14.89361702%;
   *width: 14.39361702%;
 }
 .row-fluid .span1 {
-  width: 6.382978723%;
-  *width: 5.882978723%;
+  width: 6.38297872%;
+  *width: 5.88297872%;
 }
 .global-nav-bg {
   height: 38px;
@@ -2041,6 +2031,9 @@ table .span24 {
 #header-search button {
   height: 28px;
   text-transform: uppercase;
+}
+.home #site-header {
+  min-height: 25px;
 }
 #site-header {
   margin: 0;
@@ -3120,6 +3113,11 @@ h3.recent-posts a.rss-link:hover,
 .article-bottom .post-social {
   border-top: none;
   border-bottom: none;
+}
+.article-bottom .largo-disclaimer {
+  color: #454545;
+  font-size: 15px;
+  font-style: italic;
 }
 .labels .series-label {
   margin: 5px;
@@ -4624,7 +4622,6 @@ p.comment-form-comment {
   display: inline-block;
   *display: inline;
   /* IE7 inline-block hack */
-
   *zoom: 1;
   padding: 0.3em 1em;
 }
@@ -4637,7 +4634,6 @@ p.comment-form-comment {
  */
 body.clean-read {
   /* Hide lots of things */
-
 }
 body.clean-read .global-nav-bg,
 body.clean-read #main-nav,
@@ -4721,10 +4717,8 @@ img[class*="wp-image-"] {
   position: relative;
   padding-bottom: 56.25%;
   /* 16/9 ratio */
-
   padding-top: 30px;
   /* IE6 workaround*/
-
   height: 0;
   overflow: hidden;
   margin-bottom: 28px;
@@ -5123,7 +5117,7 @@ img[class*="wp-image-"] {
   img {
     max-width: 100% !important;
   }
-  @page  {
+  @page {
     margin: 0.5cm 0.5cm 1cm;
   }
   p,
