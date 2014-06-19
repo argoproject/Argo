@@ -3101,6 +3101,9 @@ h3.recent-posts a.rss-link:hover,
 .page p.wp-caption-text {
   font-style: normal;
 }
+.page-template-full-page-php #content {
+  margin-left: 0;
+}
 .single-post.classic #content {
   margin-left: 0;
 }
@@ -3394,6 +3397,9 @@ h3.recent-posts a.rss-link:hover,
 .module dd {
   font-size: 13.04px;
   margin: 0 0 12px;
+}
+.module ul {
+  font-size: 13.04px;
 }
 .type-aside p {
   font-size: 0.815em;
