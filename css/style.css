@@ -1817,8 +1817,8 @@ table .span24 {
 }
 #header-social i {
   position: relative;
-  top: -1px;
-  padding: 4px;
+  top: 0;
+  padding: 4px 3px 1px 4px;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
@@ -2757,10 +2757,6 @@ body.admin-bar .sticky-nav-holder {
 }
 .sticky-nav-holder .navbar .social-icons li > a:hover {
   background-color: transparent;
-}
-.sticky-nav-holder .navbar .social-icons i {
-  top: 0;
-  padding: 4px 3px 1px 4px;
 }
 .sticky-nav-holder .navbar .btn-navbar {
   margin-top: 9px;
