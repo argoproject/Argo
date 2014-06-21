@@ -128,8 +128,8 @@ function clean_contact_send($atts) {
 			$subject_options[ $subject ] = $email;
 		}
 	}
-	if ( isset( $_POST['clean_contact_router'] ) && array_key_exists( wp_filter_kses($_POST['clean_contact_router']), $subject_options) ) {
-		$to_email = $subject_options[ wp_filter_kses($_POST['clean_contact_router']) ];
+	if ( isset( $_POST['clean_contact_router'] ) && array_key_exists( stripslashes($_POST['clean_contact_router']), $subject_options) ) {
+		$to_email = sanitize_email( $subject_options[ stripslashes($_POST['clean_contact_router']) ] );
 	}
 
 	$bcc = ! empty( $atts['bcc'] ) ? $atts['bcc'] :  cc_get_option('clean_contact_bcc');
@@ -152,7 +152,7 @@ function clean_contact_send($atts) {
 		$subject = "[{$prefix}] {$subject}";
 	}
 
-	$body = wp_filter_nohtml_kses( $_POST['clean_contact_body'] );
+	$body = stripslashes( wp_filter_nohtml_kses( $_POST['clean_contact_body'] ) );
 
 	$from_name = sanitize_text_field( $_POST['clean_contact_from_name'] );
 	$from_email = sanitize_email( $_POST['clean_contact_from_email'] );
