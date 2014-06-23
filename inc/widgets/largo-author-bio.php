@@ -56,11 +56,15 @@ class largo_author_widget extends WP_Widget {
 						printf( __('<h3 class="widgettitle">About <span class="fn n">%1$s</span></h3>', 'largo'), esc_attr( $author->display_name ) );
 					} ?>
 
-					<?php if ( largo_has_gravatar( $author->user_email ) ) : ?>
-							<div class="photo">
-							<?php echo get_avatar( $author->ID, 96, '', $author->display_name ); ?>
-							</div>
-					<?php endif; ?>
+					<?php
+						if ( largo_has_gravatar( $author->user_email ) ) {
+						  echo '<div class="photo">' . get_avatar( $author->ID, 96, '', $author->display_name ) . '</div>';
+						} elseif ( $author->type == 'guest-author' && get_the_post_thumbnail( $author->ID ) ) {
+						  $photo = get_the_post_thumbnail( $author->ID, array(96,96) );
+						  $photo = str_replace( 'attachment-96x96 wp-post-image', 'avatar avatar-96 photo', $photo );
+						  echo '<div class="photo">' . $photo . '</div>';
+						}
+						?>
 
 					<?php // Description
 					   if ( $author->description ) {
@@ -101,7 +105,7 @@ class largo_author_widget extends WP_Widget {
 					</ul>
 
 					<?php
-					printf( __('<span class="author-posts-link"><a class="url" href="%1$s" rel="author" title="See all posts by %1$s">More by %2$s</a></span>', 'largo'), esc_url( get_author_posts_url( $author->ID )), esc_attr( $author->display_name )); ?>
+					printf( __('<span class="author-posts-link"><a class="url" href="/author/%1$s/" rel="author" title="See all posts by %1$s">More by %2$s</a></span>', 'largo'), $author->user_login, esc_attr( $author->display_name )); ?>
 
 				</div>
 
