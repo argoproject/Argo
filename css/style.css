@@ -3314,7 +3314,7 @@ h3.recent-posts a.rss-link:hover,
 }
 .author-box ul li.facebook {
   position: relative;
-  top: -4px;
+  top: 1px;
 }
 .author-box ul li.gplus,
 .author-box ul li.linkedin,
