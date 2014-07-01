@@ -35,7 +35,8 @@ if( !function_exists( 'get_homepage_templates' ) ) {
 			foreach( $theme->get_files( 'php', 1, true ) as $php_file ) {
 
 				$name = $desc = '';
-				$basename = str_replace( trailingslashit( $theme->get_template_directory() ), '', $php_file );
+				$basename = str_replace( trailingslashit( $theme->get_stylesheet_directory() ), '', $php_file );
+				$basename = str_replace( trailingslashit( $theme->get_template_directory() ), '', $basename );
 				$template_data = file_get_contents( $php_file );
 				if ( basename( $php_file ) !== basename( __FILE__ ) && preg_match( '|Home Template:(.*)$|mi', $template_data, $name ) ) {
 					$name = _cleanup_header_comment( $name[1] );
@@ -50,7 +51,7 @@ if( !function_exists( 'get_homepage_templates' ) ) {
 
 		}
 
-		set_transient( $cache_key, $home_templates, DAY_IN_SECONDS );
+		set_transient( $cache_key, $home_templates, HOUR_IN_SECONDS );
 
 		return $home_templates;
 
