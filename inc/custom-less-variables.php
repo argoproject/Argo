@@ -17,9 +17,9 @@
  */
 add_action( 'largo_custom_less_variables_init', 'largo_custom_less_variables_init', 1 );
 function largo_custom_less_variables_init() {
-	largo_clv_register_files( array( 'carousel.less', 'editor-style.less', 'style.less', 'top-stories.less' ) );
+	largo_clv_register_files( array( 'inc/carousel.less', 'editor-style.less', 'style.less', 'top-stories.less' ) );
 	largo_clv_register_directory_paths( get_template_directory() . '/less/', get_template_directory_uri() . '/css/' );
-	largo_clv_register_variables_less_file( 'variables.less' );
+	largo_clv_register_variables_less_file( 'inc/variables.less' );
 }
 
 
@@ -170,7 +170,6 @@ class Largo_Custom_Less_Variables {
 	 * @return string the generated CSS
 	 */
 	static function get_css( $less_file, $variables ) {
-
 		// Use the cached version saved to the DB
 		if ( !empty( $variables['meta']->ID ) ) {
 			$css = get_post_meta( $variables['meta']->ID, $less_file );
@@ -661,9 +660,10 @@ class Largo_Custom_Less_Variables {
 			$values = array();
 		} else {
 			foreach ($values as $field => $value) {
+				$values[$field] = stripslashes( $value );
 				//fix the pixels ones
 				if (strpos($field, "-pixels")) {
-					$values[ str_replace("-pixels", "", $field) ] = $value . "px";
+					$values[ str_replace("-pixels", "", $field) ] = stripslashes( $value ) . "px";
 					unset($values[$field]);
 				}
 			}
