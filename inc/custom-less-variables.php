@@ -197,6 +197,7 @@ class Largo_Custom_Less_Variables {
 	 * @return string - the resulting CSS
 	 */
 	static function compile_less( $less_file, $variables ) {
+		$variables = array_map(function($var) { return stripslashes($var); }, $variables);
 
 		// Load LESS compiler if loaded
 		if ( !class_exists('lessc') ) {
@@ -660,10 +661,9 @@ class Largo_Custom_Less_Variables {
 			$values = array();
 		} else {
 			foreach ($values as $field => $value) {
-				$values[$field] = stripslashes( $value );
 				//fix the pixels ones
 				if (strpos($field, "-pixels")) {
-					$values[ str_replace("-pixels", "", $field) ] = stripslashes( $value ) . "px";
+					$values[ str_replace("-pixels", "", $field) ] = $value . "px";
 					unset($values[$field]);
 				}
 			}
