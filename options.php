@@ -468,6 +468,12 @@ function optionsframework_options() {
 		'type' 	=> 'checkbox');
 
 	$options[] = array(
+		'desc' 	=> __('Enable Optional Leaderboard Ad Zone.', 'largo'),
+		'id' 	=> 'leaderboard_enabled',
+		'std' 	=> '0',
+		'type' 	=> 'checkbox');
+
+	$options[] = array(
 		'name' => __('Search options', 'largo'),
 		'desc' 	=> __('Replace WordPress search with Google Custom Search (recommended)', 'largo'),
 		'id' 	=> 'use_gcs',

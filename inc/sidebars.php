@@ -66,6 +66,13 @@ function largo_register_sidebars() {
 			'id' 	=> 'homepage-bottom'
 		);
 	}
+	if ( of_get_option( 'leaderboard_enabled' ) ) {
+		$sidebars[] = array(
+	 		'name' 	=> __( 'Header Ad Zone', 'largo'),
+	 		'desc' 	=> __( 'An optional leaderboard (728x90) ad zone above the main site header', 'largo' ),
+	 		'id' 	=> 'header-ad'
+	 	);
+	 }
 
 	// user-defined custom widget areas
 	$custom_sidebars = preg_split( '/$\R?^/m', of_get_option( 'custom_sidebars' ) );

@@ -17,7 +17,7 @@ do_action('largo_before_sidebar');
 				dynamic_sidebar($custom_sidebar);
 
 			//load single-post sidebar if it has things
-			} elseif ( is_singular() && is_active_sidebar( 'sidebar-single' )) {
+			} elseif ( is_singular() && is_active_sidebar( 'sidebar-single' ) ) {
 				dynamic_sidebar( 'sidebar-single' );
 
 			//load archive/topic sidebar if activated

@@ -103,7 +103,6 @@
 					<?php endif; ?>
 				</div>
 
-
 				<?php if ( INN_MEMBER === TRUE ) { ?>
 				<div class="org-logo">
         			<a href="http://investigativenewsnetwork.org/" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/img/inn-logo-80-55.jpg" height="55" alt="INN logo" /></a>
@@ -114,6 +113,14 @@
         </nav>
     </div> <!-- /.global-nav -->
 </div> <!-- /.global-nav-bg -->
+
+<?php
+if ( is_active_sidebar( 'header-ad' ) ) {
+ echo '<div id="header-ad">';
+ dynamic_sidebar( 'header-ad' );
+ echo '</div>';
+}
+?>
 
 <div id="page" class="hfeed clearfix">
 
