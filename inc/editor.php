@@ -47,9 +47,9 @@ add_shortcode( 'module', 'largo_module_shortcode' );
  */
 function largo_tinymce_config( $init ) {
 	if ( isset( $init['extended_valid_elements'] ) ) {
-		$init['extended_valid_elements'] .= "span[!class]";
+		$init['extended_valid_elements'] .= ",span[!class],iframe[*]";
 	} else {
-		$init['extended_valid_elements'] = "span[!class]";
+		$init['extended_valid_elements'] = "span[!class],iframe[*]";
 	}
 	return $init;
 }
