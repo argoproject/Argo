@@ -13,6 +13,12 @@
 if( !function_exists( 'get_homepage_templates' ) ) {
 
 	function largo_get_home_templates() {
+		global $wp_filesystem;
+
+		if (empty($wp_filesystem)) {
+			require_once(ABSPATH . 'wp-admin/includes/file.php');
+			WP_Filesystem();
+		}
 
 		$cache_key = 'largo_home_templates_' . get_option( 'stylesheet' );
 		if ( false !== ( $home_templates = get_transient( $cache_key ) ) ) {
@@ -37,7 +43,7 @@ if( !function_exists( 'get_homepage_templates' ) ) {
 				$name = $desc = '';
 				$basename = str_replace( trailingslashit( $theme->get_stylesheet_directory() ), '', $php_file );
 				$basename = str_replace( trailingslashit( $theme->get_template_directory() ), '', $basename );
-				$template_data = file_get_contents( $php_file );
+				$template_data = $wp_filesystem->get_contents( $php_file );
 				if ( basename( $php_file ) !== basename( __FILE__ ) && preg_match( '|Home Template:(.*)$|mi', $template_data, $name ) ) {
 					$name = _cleanup_header_comment( $name[1] );
 					preg_match( '|Description:(.*)$|mi', $template_data, $desc);

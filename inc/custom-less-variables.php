@@ -123,6 +123,39 @@ class Largo_Custom_Less_Variables {
 	}
 
 	/**
+	* Write a file to disk.
+	*
+	* @param string $file - path of file to write
+	* @param string $contents - the content to be written to the file
+	*/
+	protected function put_contents($file, $contents) {
+		global $wp_filesystem;
+
+		if (empty($wp_filesystem)) {
+			require_once(ABSPATH . 'wp-admin/includes/file.php');
+			WP_Filesystem();
+		}
+
+		return $wp_filesystem->put_contents($file, $contents);
+	}
+
+	/**
+	* Read a file's contents.
+	*
+	* @param string $file - path of file to read
+	*/
+	protected function get_contents($file) {
+		global $wp_filesystem;
+
+		if (empty($wp_filesystem)) {
+			require_once(ABSPATH . 'wp-admin/includes/file.php');
+			WP_Filesystem();
+		}
+
+		return $wp_filesystem->get_contents($file);
+	}
+
+	/**
 	 * Register the Less files to compile into CSS files
 	 *
 	 * @param array $files - the LESS files to compile into CSS
@@ -213,7 +246,7 @@ class Largo_Custom_Less_Variables {
 
 		try {
 			// Get the Less file and then replace variables.less with the update version
-			$less = file_get_contents( self::$less_dir . $less_file );
+			$less = self::get_contents( self::$less_dir . $less_file );
 			$less = self::replace_with_custom_variables( $less, $variables );
 
 			$css = $compiler->compile( $less );
@@ -239,7 +272,7 @@ class Largo_Custom_Less_Variables {
 	static function replace_with_custom_variables( $less, $variables ) {
 
 		// First, take variables.less and replace the values of the over-ridden variables.
-		$variables_less = file_get_contents( self::variable_file_path() );
+		$variables_less = self::get_contents( self::variable_file_path() );
 
 		// Parse out the variables. Each is defined per line in format: @<varName>: <varValue>;
 		preg_match_all( '#^\s*@(?P<name>[\w-_]+):\s*(?P<value>[^;]*);#m', $variables_less, $matches );
@@ -720,7 +753,7 @@ class Largo_Custom_Less_Variables {
 			'_default' => array()
 		);
 
-		$less = file_get_contents( self::variable_file_path() );
+		$less = self::get_contents( self::variable_file_path() );
 
 		// Parse
 		$pattern = '#/\*\*\s+(?<comment>.*)\s+\*/\s*@(?P<name>[\w-_]+):\s*(?P<value>[^;]*);#Us';
