@@ -1943,6 +1943,11 @@ table .span24 {
   width: 6.382978723%;
   *width: 5.882978723%;
 }
+@media screen and (max-width: 480px) {
+  .home #main {
+    margin-top: 32px;
+  }
+}
 .global-nav-bg {
   height: 38px;
   background-color: #222222;
@@ -4956,6 +4961,9 @@ img[class*="wp-image-"] {
     font-size: 32px;
     line-height: 1.2;
   }
+  .home #site-header {
+    display: none;
+  }
   .category-background .related-topics ul {
     line-height: 1.5;
   }
@@ -5078,9 +5086,6 @@ img[class*="wp-image-"] {
   }
   #header-search .input-medium {
     width: 110px;
-  }
-  #site-header img {
-    margin-top: 5px;
   }
   h1.branding,
   h2.branding {

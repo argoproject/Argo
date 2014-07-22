@@ -35,7 +35,7 @@ jQuery(document).ready(function($){
 	function setFeaturedHeight() {
 		$('.full-hero, .home #dark-top .row-fluid').removeAttr('style');
 
-		if ( $(window).width() > 480 ) {
+		if ( $(window).width() > 768 ) {
 			var col_height = $('.home #dark-top .row-fluid').height(),
 				pane_height = $('#homepage-featured').height();
 
