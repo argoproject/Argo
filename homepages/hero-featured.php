@@ -39,7 +39,7 @@ global $largo, $shown_ids, $tags, $post;
 
 					<article class="<?php if ($has_featured) echo 'span8'; ?>">
 						<h5 class="top-tag"><?php largo_top_term( array('post'=> $big_story->ID ) ); ?></h5>
-						<h2><a href="<?php the_permalink(); ?>"><?php echo the_title(); ?></a></h2>
+						<h2><a href="<?php echo esc_url( get_permalink( $big_story->ID ) ); ?>"><?php echo $big_story->post_title; ?></a></h2>
 						<h5 class="byline"><?php _e( 'By', 'largo' ); ?> <?php largo_author_link( true, $big_story ); ?></h5>
 						<section>
 							<?php largo_excerpt( $big_story, 2, false ); ?>
