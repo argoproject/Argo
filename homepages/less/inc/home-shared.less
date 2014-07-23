@@ -1,3 +1,5 @@
+@import "../../../less/inc/mixins.less";
+
 @sky: #6cb9e1;
 @fog: #ddd;
 @grey: #666;
@@ -6,6 +8,8 @@
 .home-top {
   position: relative;
 }
+
+.home-top { float: left; }
 
 #view-format {
   position: absolute;
@@ -62,6 +66,7 @@
     width: 100%;
     margin: 0 auto;
     display: block;
+    float: left;
   }
   &.one-third-width img {
     width: 34.1%;
@@ -77,7 +82,6 @@
   background-color: black;
   font-family: sans-serif;
 
-  // Shared by hero-featured and hero-series-side
   .side-articles {
     h5.byline, h5.top-tag, h4 {
       margin: 0;
@@ -103,7 +107,6 @@
     }
   }
 
-  // Shared by hero-series-side and hero-series
   .side-series {
     h3 {
       color: @sky;
@@ -132,12 +135,10 @@
     }
   }
 
-  // Shared by hero-featured, hero-series-side, hero-series and single
   .span10 {
     background-color: rgba(0, 0, 0, 0.85);
-    margin: 0 auto 0;
+    margin: 0 8.510638302%;
     padding: 25px 30px;
-    float: none;
   }
   article {
     margin-bottom: 0;
@@ -201,12 +202,98 @@
 
   &.overlay {
     background-color: transparent;
+    margin-top: 0;
+    position: absolute;
+    bottom: 50px;
+  }
+}
+
+#home-secondary {
+  position: relative;
+  > div {
+    background-color: white;
+    padding: 20px;
+    padding-bottom: 0;
+  }
+  .row-fluid>[class*='span'] {
+    .widget {
+      .border-radius(0);
+      border: none;
+    }
+    &:last-child .widget {
+      border-right: none;
+    }
+  }
+}
+
+#home-river {
+  display: none;
+  header {
+    *zoom: 1;
+    &:before,
+    &:after {
+      display: table;
+      content: "";
+    }
+    &:after {
+      clear: both;
+    }
+  }
+  .hero {
+    text-align: center;
+    background-color: #eee;
+  }
+  .span10 {
+    margin: 0 auto;
+    float: none;
+    position: relative;
+    &:before {
+      height: 25px;
+      background-color: white;
+      position: absolute;
+      top: -25px;
+      left: -4%;
+      right: -4%;
+      content: " ";
+    }
+  }
+}
+
+@media screen and (max-width: 980px) {
+  #dark-top.overlay {
+    bottom: 15px;
   }
 }
 
 @media screen and (max-width: 768px) {
-  #dark-top.overlay {
-    background-color: black;
+  #dark-top{
+    position: relative !important;
+    margin-top: -140px !important;
+    bottom: auto !important;
+    .span10 {
+      width: 100%;
+      margin: 0 auto;
+    }
+    .row-fluid [class*='span'] {
+      /*float: none;*/
+      width: 100%;
+      margin: 0;
+    }
+    .span4 {
+      margin-top: 30px !important;
+    }
+    .related-story {
+      margin-left: 0;
+    }
+    &.overlay {
+      background-color: black;
+    }
+  }
+
+  #home-secondary .row-fluid>[class*='span'] {
+    float: none;
+    width: 100%;
+    margin-left: 0;
   }
 }
 
