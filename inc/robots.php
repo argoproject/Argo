@@ -17,7 +17,6 @@ function largo_robots() {
 	echo "Disallow: /trackback\n";
 	echo "Disallow: /feed\n";
 	echo "Disallow: /comments\n";
-	echo "Disallow: /category/*/*\n";
 	echo "Disallow: */trackback\n";
 	echo "Disallow: */feed\n";
 	echo "Disallow: */comments\n";
