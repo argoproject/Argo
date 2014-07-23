@@ -9,79 +9,13 @@
     width: 100%;
     max-width: 1170px;
   }
-  img {
-    margin: 0;
-    display: block;
-  }
-  &.one-third-width img {
-    width: 34.1%;
-  }
-  &.two-third-width img {
-    width: 34.1% * 2;
-  }
+  img { margin: 0; }
 }
 
 #dark-top {
-  margin-top: -28px;
-  color: white;
-  background-color: black;
-  font-family: sans-serif;
   article {
     margin-top: 8px;
   }
-  .side-articles {
-    h5.byline, h5.top-tag, h4 {
-      margin: 0;
-    }
-    h4 {
-      font-size: 18px;
-    }
-    h4 a {
-      color: white;
-    }
-    h5 {
-      font-size: 80%;
-    }
-    h5.byline {
-      color: @fog;
-    }
-    article {
-      border-top: solid 3px rgba(red(@sky), green(@sky), blue(@sky), 0.5);
-      padding: 10px 0;
-      &:first-child {
-        border-top: 0 none;
-      }
-    }
-  }
-  .side-series {
-    h3 {
-      color: @sky;
-      font-size: 100%;
-      text-transform: uppercase;
-      margin: 0;
-      a {
-        color: @sky;
-      }
-    }
-    h4 {
-      font-size: 18px;
-      margin: 0;
-    }
-    h4 a {
-      color: white;
-    }
-    article {
-      padding: 5px 0;
-    }
-    .read-more {
-      text-align: right;
-      font-size: 80%;
-      a {
-        color: @sky;
-      }
-    }
-  }
-
   .overlay-pane {
     background-color: #333;
     &.span8 {
@@ -95,65 +29,6 @@
     padding: 25px 0;
     [class*="span"] {
       padding: 0 20px;
-    }
-  }
-  article {
-    margin-bottom: 0;
-    border-bottom: none;
-  }
-  p {
-    font-size: 93%;
-    line-height: 1.4em;
-    margin-bottom: 0;
-  }
-  h2 {
-    font-size: 30px;
-    line-height: 1.1em;
-    margin-bottom: 0.3em;
-  }
-  h5 {
-    font-size: 100%;
-    a {
-      color: @sky;
-    }
-  }
-  h2 a {
-    color: white;
-  }
-  .byline,
-  .byline a,
-  section {
-    color: @fog;
-  }
-  .byline {
-    font-weight: bold;
-    font-size: 110%;
-  }
-  .byline a {
-    text-transform: uppercase;
-  }
-  .span4 .top-tag {
-    margin-bottom: 0.7em;
-  }
-  .related-story {
-    font-size: 18px;
-    line-height: 1.2em;
-    margin-left: 0.2em;
-    margin-bottom: 1em;
-    a {
-      color: white;
-    }
-  }
-  .more {
-    text-align: right;
-    margin-bottom: 0;
-    font-weight: bold;
-    font-size: 16px;
-    a {
-      color: @sky;
-      &:after {
-        content: " »";
-      }
     }
   }
   &.overlay {

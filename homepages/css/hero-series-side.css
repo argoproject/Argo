@@ -49,49 +49,13 @@
 .view-list #view-format a {
   color: inherit;
 }
-#dark-top.overlay {
-  background-color: transparent;
-}
-@media screen and (max-width: 768px) {
-  #dark-top.overlay {
-    background-color: black;
-  }
-}
-@media screen and (max-width: 480px) {
-  .home .full-hero {
-    min-height: 50px;
-  }
-  #dark-top {
-    margin-top: -40px !important;
-  }
-  #dark-top .span10 {
-    padding: 15px 18px !important;
-  }
-  #home-river {
-    margin-top: 24px;
-  }
-  #home-river h1 {
-    font-size: 36px;
-    line-height: 1.1;
-  }
-  #view-format {
-    width: 100%;
-    right: 0;
-    left: 0;
-    text-align: center;
-  }
-}
 .home .full-hero {
-  background-color: #eee;
-}
-.home .full-hero a {
-  display: block;
-  margin: 0 auto;
-  width: 100%;
-  max-width: 1170px;
+  min-height: 400px;
 }
 .home .full-hero img {
-  margin: 0;
+  max-width: 1170px;
+  width: 100%;
+  margin: 0 auto;
   display: block;
 }
 .home .full-hero.one-third-width img {
@@ -105,9 +69,6 @@
   color: white;
   background-color: black;
   font-family: sans-serif;
-}
-#dark-top article {
-  margin-top: 8px;
 }
 #dark-top .side-articles h5.byline,
 #dark-top .side-articles h5.top-tag,
@@ -144,10 +105,9 @@
 }
 #dark-top .side-series h4 {
   font-size: 18px;
-  margin: 0;
 }
 #dark-top .side-series h4 a {
-  color: white;
+  color: #fff;
 }
 #dark-top .side-series article {
   padding: 5px 0;
@@ -159,20 +119,11 @@
 #dark-top .side-series .read-more a {
   color: #6cb9e1;
 }
-#dark-top .overlay-pane {
-  background-color: #333;
-  padding: 25px 0;
-}
-#dark-top .overlay-pane.span8 {
-  background-image: -ms-linear-gradient(left, #333333 0%, #333333 50%, #ffffff 50%, #ffffff 100%);
-  background-image: -moz-linear-gradient(left, #333333 0%, #333333 50%, #ffffff 50%, #ffffff 100%);
-  background-image: -o-linear-gradient(left, #333333 0%, 3333 50%, #ffffff 50%, FFFF 100%);
-  background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #333333), color-stop(0.5, #333333), color-stop(0.5, #ffffff), color-stop(1, #ffffff));
-  background-image: -webkit-linear-gradient(left, #333333 0%, #333333 50%, #ffffff 50%, #ffffff 100%);
-  background-image: linear-gradient(to right, #333333 0%, #333333 50%, #ffffff 50%, #ffffff 100%);
-}
-#dark-top .overlay-pane [class*="span"] {
-  padding: 0 20px;
+#dark-top .span10 {
+  background-color: rgba(0, 0, 0, 0.85);
+  margin: 0 auto 0;
+  padding: 25px 30px;
+  float: none;
 }
 #dark-top article {
   margin-bottom: 0;
@@ -184,7 +135,7 @@
   margin-bottom: 0;
 }
 #dark-top h2 {
-  font-size: 30px;
+  font-size: 38px;
   line-height: 1.1em;
   margin-bottom: 0.3em;
 }
@@ -232,6 +183,68 @@
 }
 #dark-top .more a:after {
   content: " »";
+}
+#dark-top.overlay {
+  background-color: transparent;
+}
+@media screen and (max-width: 768px) {
+  #dark-top.overlay {
+    background-color: black;
+  }
+}
+@media screen and (max-width: 480px) {
+  .home .full-hero {
+    min-height: 50px;
+  }
+  #dark-top {
+    margin-top: -40px !important;
+  }
+  #dark-top .span10 {
+    padding: 15px 18px !important;
+  }
+  #home-river {
+    margin-top: 24px;
+  }
+  #home-river h1 {
+    font-size: 36px;
+    line-height: 1.1;
+  }
+  #view-format {
+    width: 100%;
+    right: 0;
+    left: 0;
+    text-align: center;
+  }
+}
+.home .full-hero {
+  background-color: #eee;
+}
+.home .full-hero a {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1170px;
+}
+.home .full-hero img {
+  margin: 0;
+}
+#dark-top article {
+  margin-top: 8px;
+}
+#dark-top .overlay-pane {
+  background-color: #333;
+  padding: 25px 0;
+}
+#dark-top .overlay-pane.span8 {
+  background-image: -ms-linear-gradient(left, #333333 0%, #333333 50%, #ffffff 50%, #ffffff 100%);
+  background-image: -moz-linear-gradient(left, #333333 0%, #333333 50%, #ffffff 50%, #ffffff 100%);
+  background-image: -o-linear-gradient(left, #333333 0%, 3333 50%, #ffffff 50%, FFFF 100%);
+  background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #333333), color-stop(0.5, #333333), color-stop(0.5, #ffffff), color-stop(1, #ffffff));
+  background-image: -webkit-linear-gradient(left, #333333 0%, #333333 50%, #ffffff 50%, #ffffff 100%);
+  background-image: linear-gradient(to right, #333333 0%, #333333 50%, #ffffff 50%, #ffffff 100%);
+}
+#dark-top .overlay-pane [class*="span"] {
+  padding: 0 20px;
 }
 #dark-top.overlay {
   background-color: transparent;
