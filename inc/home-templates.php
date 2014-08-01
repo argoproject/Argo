@@ -13,12 +13,7 @@
 if( !function_exists( 'get_homepage_templates' ) ) {
 
 	function largo_get_home_templates() {
-		global $wp_filesystem;
-
-		if (empty($wp_filesystem)) {
-			require_once(ABSPATH . 'wp-admin/includes/file.php');
-			WP_Filesystem();
-		}
+		global $largo_homepage_factory;
 
 		$cache_key = 'largo_home_templates_' . get_option( 'stylesheet' );
 		if ( false !== ( $home_templates = get_transient( $cache_key ) ) ) {
@@ -26,41 +21,16 @@ if( !function_exists( 'get_homepage_templates' ) ) {
 		}
 
 		$home_templates = array();
-		$previous = false;
-		foreach( array( 'template', 'stylesheet' ) as $option_name ) {
-
-			$option_value = get_option( $option_name );
-
-			// Skip second time if it's not a child theme
-			if ( $option_value == $previous ) {
-				break;
-			}
-			$previous = $option_value;
-
-			$theme = wp_get_theme( $option_value );
-			foreach( $theme->get_files( 'php', 1, true ) as $php_file ) {
-
-				$name = $desc = '';
-				$basename = str_replace( trailingslashit( $theme->get_stylesheet_directory() ), '', $php_file );
-				$basename = str_replace( trailingslashit( $theme->get_template_directory() ), '', $basename );
-				$template_data = $wp_filesystem->get_contents( $php_file );
-				if ( basename( $php_file ) !== basename( __FILE__ ) && preg_match( '|Home Template:(.*)$|mi', $template_data, $name ) ) {
-					$name = _cleanup_header_comment( $name[1] );
-					preg_match( '|Description:(.*)$|mi', $template_data, $desc);
-					$home_templates[ trim( $name ) ] = array(
-						'path' => $basename,	//eg 'homepages/my-homepage.php'
-						'thumb' => largo_get_home_thumb( $theme, $basename ),
-						'desc' => _cleanup_header_comment( $desc[1] )
-					);
-				}
-			}
-
+		foreach ($largo_homepage_factory->layouts as $key => $layout) {
+			$home_templates[ trim( $layout->name ) ] = array(
+				'path' => $key,
+				'thumb' => largo_get_home_thumb(),
+				'desc' => $layout->description
+			);
 		}
 
 		set_transient( $cache_key, $home_templates, HOUR_IN_SECONDS );
-
 		return $home_templates;
-
 	}
 }
 
@@ -69,16 +39,8 @@ if( !function_exists( 'get_homepage_templates' ) ) {
  *
  * @return string The public url of the image file to use for the given template's screenshot
  */
-function largo_get_home_thumb( $theme, $file ) {
-	$pngs = $theme->get_files( 'png', 1, true );
-	$our_filename = basename( $file, '.php' ) . '.png';
-	foreach ( (array)$pngs as $filename => $server_path ) {
-		if ( basename($filename) == $our_filename ) {
-			return str_replace( WP_CONTENT_DIR, content_url(), $server_path);
-		}
-	}
-
-	//still here? Use a default
+function largo_get_home_thumb() {
+	var_log(get_template_directory_uri() . '/homepages/no-thumb.png');
 	return get_template_directory_uri() . '/homepages/no-thumb.png';
 }
 
@@ -133,7 +95,7 @@ function largo_register_home_sidebars() {
 		}
 	}
 }
-add_action( 'widgets_init', 'largo_register_home_sidebars' );
+//add_action( 'widgets_init', 'largo_register_home_sidebars' );
 
 
 /**
@@ -175,3 +137,5 @@ add_action( 'wp_enqueue_scripts', 'largo_enqueue_home_assets' );
 function largo_load_custom_template_functions() {
 	include_once __DIR__ . '/home-template-functions.php';
 }
+
+include_once dirname(__DIR__) . '/homepages/homepage.php';

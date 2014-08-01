@@ -31,9 +31,7 @@ $span_class = ( $largo['home_rail'] ) ? 'span8' : 'span12' ;
 	<div id="content-main" class="<?php echo $span_class; ?>">
 	<?php }
 
-	largo_load_custom_template_functions();
-	get_template_part( $home_template );
-
+	render_homepage_layout($home_template);
 
 	// sticky posts box if this site uses it
 	if ( of_get_option( 'show_sticky_posts' ) ) {
