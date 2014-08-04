@@ -52,10 +52,10 @@ if (!function_exists('largo_get_home_layouts')) {
 	function largo_get_home_layouts() {
 		global $largo_homepage_factory;
 
-		//$cache_key = 'largo_home_layouts_' . get_option( 'stylesheet' );
-		//if ( false !== ( $layouts = get_transient( $cache_key ) ) ) {
-			//return $layouts;
-		//}
+		$cache_key = 'largo_home_layouts_' . get_option( 'stylesheet' );
+		if ( false !== ( $layouts = get_transient( $cache_key ) ) ) {
+			return $layouts;
+		}
 
 		$layouts = array();
 		foreach ($largo_homepage_factory->layouts as $className => $layout) {
@@ -66,7 +66,7 @@ if (!function_exists('largo_get_home_layouts')) {
 			);
 		}
 
-		//set_transient( $cache_key, $layouts, HOUR_IN_SECONDS );
+		set_transient( $cache_key, $layouts, HOUR_IN_SECONDS );
 		return $layouts;
 	}
 }

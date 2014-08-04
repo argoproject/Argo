@@ -119,5 +119,3 @@ function unregister_homepage_layout($layoutClass) {
 }
 
 $GLOBALS['largo_homepage_factory'] = new HomepageLayoutFactory();
-
-

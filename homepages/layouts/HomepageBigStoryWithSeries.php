@@ -18,4 +18,8 @@ class HomepageBigStoryWithSeries extends HomepageSingle {
 		$options = array_merge($defaults, $options);
 		$this->load($options);
 	}
+
+	public function bigStory() {
+		return homepage_big_story_headline(true);
+	}
 }

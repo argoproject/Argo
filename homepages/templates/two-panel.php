@@ -1,5 +1,5 @@
 <?php
-$post_states = largo_home_hero_side_series();
+$post_states = largo_home_get_single_featured_and_series();
 if (empty($post_states)) {
 	$big_story = null;
 	$series_stories = array();

@@ -26,7 +26,6 @@ function largo_home_single_top() {
 		return $top_story_posts[0];
 	}
 
-
 	// Fallback: get the posts that are in "Homepage Featured" but not "Top Story"
 	$homepage_featured_posts = get_posts(array(
 		'tax_query' => array(
@@ -43,7 +42,6 @@ function largo_home_single_top() {
 		return $homepage_featured_posts[0];
 	}
 
-
 	// Double fallback: Get the most recent post
 	$posts = get_posts( array(
 		'orderby' => 'date',
@@ -58,26 +56,9 @@ function largo_home_single_top() {
 	return null;
 }
 
-
-/**
- * Get the various posts for the homepage hero-series-side template
- */
-function largo_home_hero_side_series() {
-	$big_story = largo_home_single_top();
-	$series_stories = array();
-	$featured_stories = array();
-	$series_stories_term = null;
-
-	if ( empty( $big_story ) ) {
-		// Something bad has happened!
-		return array();
-	}
-
-	// Cache the terms
+function largo_home_featured_stories() {
 	$homepage_feature_term = get_term_by( 'name', __('Homepage Featured', 'largo'), 'prominence' );
-	// $top_story_term = get_term_by( 'name', __('Top Story', 'largo'), 'prominence' );
 	$uncategorized_term = get_term_by( 'name', __('Uncategorized'), 'category' );
-
 
 	// Get the homepage featured posts
 	$featured_stories = get_posts(array(
@@ -92,15 +73,30 @@ function largo_home_hero_side_series() {
 		'post__not_in' => array( $big_story->ID )
 	));
 
-	// Get the series posts
-	$series_terms = wp_get_post_terms( $big_story->ID, 'series' );
-	$category_terms = wp_list_filter( wp_get_post_terms( $big_story->ID, 'category' ), array( 'name' => $uncategorized_term->name ), 'NOT' );
-	$tags_terms = wp_get_post_terms( $big_story->ID, 'post_tag' );
+	return $featured_stories;
+}
+
+function largo_home_series_stories_data() {
+	$big_story = largo_home_single_top();
+
+	$cache_key = 'largo_home_series_stories_data_' . $big_story->ID;
+	if (false !== ($cached_data = get_transient($cache_key)))
+		return $cached_data;
+
+	$series_stories = array();
+
+	$uncategorized_term = get_term_by('name', __('Uncategorized'), 'category');
+	$series_terms = wp_get_post_terms($big_story->ID, 'series');
+	$category_terms = wp_list_filter(
+		wp_get_post_terms($big_story->ID, 'category'),
+		array('name' => $uncategorized_term->name), 'NOT'
+	);
+	$tags_terms = wp_get_post_terms($big_story->ID, 'post_tag');
 
 	$terms = array_merge( $series_terms, $category_terms, $tags_terms );
 
-	foreach ( $terms as $term ) {
-		$posts = get_posts( array(
+	foreach ($terms as $term) {
+		$posts = get_posts(array(
 			'posts_per_page' => 3,
 			'tax_query' => array(
 				array(
@@ -109,10 +105,10 @@ function largo_home_hero_side_series() {
 					'terms' => $term->term_id
 				)
 			)
-		) );
+		));
 
 		// If we got more series posts than there is currently, use the more complete set
-		if ( count($posts) > count($series_stories) ) {
+		if (count($posts) > count($series_stories)) {
 			$series_stories = $posts;
 			$series_stories_term = $term;
 
@@ -121,6 +117,38 @@ function largo_home_hero_side_series() {
 				break;
 			}
 		}
+	}
+
+	$ret = array(
+		'series_stories' => $series_stories,
+		'series_stories_term' => $series_stories_term
+	);
+	set_transient($cache_key, $ret, HOUR_IN_SECONDS);
+	return $ret;
+}
+
+function largo_home_series_stories_term() {
+	$ret = largo_home_series_stories_data();
+	return $ret['series_stories_term'];
+}
+
+function largo_home_series_stories() {
+	$ret = largo_home_series_stories_data();
+	return $ret['series_stories'];
+}
+
+/**
+ * Get the various posts for the homepage two and three panel layouts
+ */
+function largo_home_get_single_featured_and_series() {
+	$big_story = largo_home_single_top();
+	$featured_stories = largo_home_featured_stories();
+	$series_stories = largo_home_series_stories();
+	$series_stories_term = largo_home_series_stories_term();
+
+	if ( empty( $big_story ) ) {
+		// Something bad has happened!
+		return array();
 	}
 
 	return array(

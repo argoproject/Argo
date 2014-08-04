@@ -20,6 +20,6 @@ class HomepageBigStoryWithSeriesAndFeatured extends HomepageSingle {
 	}
 
 	public function bigStory() {
-		return homepage_big_story_headline_small();
+		return homepage_big_story_headline(true);
 	}
 }

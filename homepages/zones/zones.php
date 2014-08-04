@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Returns markup for the homepage view toggle
+ **/
 function homepage_view_toggle() {
 	ob_start();
 ?>
@@ -16,16 +19,23 @@ function homepage_view_toggle() {
 	return $ret;
 }
 
-function homepage_big_story_headline() {
+/**
+ * Returns markup for the headline of the top story
+ **/
+function homepage_big_story_headline($moreLink=false) {
 	$bigStoryPost = largo_home_single_top();
 	ob_start();
 ?>
 	<article>
 		<h5 class="top-tag"><?php largo_top_term(array('post'=> $bigStoryPost->ID)); ?></h5>
-		<h2><a href="<?php the_permalink(); ?>"><?php echo the_title(); ?></a></h2>
+		<h2><a href="<?php echo get_permalink($bigStoryPost->ID); ?>"><?php echo $bigStoryPost->post_title; ?></a></h2>
 		<h5 class="byline"><?php _e('By', 'largo'); ?> <?php largo_author_link(true, $bigStoryPost); ?></h5>
 		<section>
-			<?php largo_excerpt($bigStoryPost, 2, false); ?>
+			<?php if (empty($moreLink)) {
+					largo_excerpt($bigStoryPost, 2, false);
+				} else {
+					largo_excerpt($bigStoryPost, 2, true, __('Continue&nbsp;Reading&nbsp;&rarr;', 'largo'), true, false);
+				} ?>
 		</section>
 	</article>
 <?php
@@ -35,6 +45,9 @@ function homepage_big_story_headline() {
 	return $ret;
 }
 
+/**
+ * Returns a short list (3 posts) of stories in the same series as the main feature
+ **/
 function homepage_series_stories_list() {
 	global $shown_ids;
 
@@ -61,53 +74,18 @@ function homepage_series_stories_list() {
 }
 
 function homepage_feature_stories_list() {
-	global $shown_ids;
-
-	$query_args = array(
-		'showposts' => 3,
-		'orderby' => 'date',
-		'order' => 'DESC',
-		'ignore_sticky_posts' => 1,
-		'post__not_in' => $shown_ids,
-		'prominence' => 'homepage-featured'
-	);
-
-	$featured = new WP_Query( $query_args );
-
 	ob_start();
-	// IF should always be true thanks to previous $has_featured check
-	if ($featured->have_posts()) {
-		while ($featured->have_posts()) {
-			$featured->next_post();
+	$featured_stories = largo_home_featured_stories();
+	foreach ($featured_stories as $featured) {
 ?>
-			<article class="featured-story">
-				<h5 class="top-tag"><?php largo_top_term('post=' . $featured->post->ID); ?></h5>
-				<h4 class="related-story"><a href="<?php echo esc_url(get_permalink($featured->post->ID)); ?>">
-					<?php echo get_the_title($featured->post->ID); ?></a></h4>
-			</article>
+		<article class="featured-story">
+			<h5 class="top-tag"><?php largo_top_term('post=' . $featured->ID); ?></h5>
+			<h4 class="related-story"><a href="<?php echo esc_url(get_permalink($featured->ID)); ?>">
+				<?php echo $featured->post_title; ?></a></h4>
+		</article>
 <?php
-		}
 	}
 	$ret = ob_get_contents();
 	ob_end_clean();
 	return $ret;
-}
-
-function homepage_big_story_headline_small() {
-	$bigStoryPost = largo_home_single_top();
-	ob_start();
-?>
-	<article>
-		<h5 class="top-tag"><?php largo_top_term(array('post' => $bigStoryPost->ID)); ?></h5>
-		<h2><a href="<?php echo esc_url(get_permalink($bigStoryPost->ID)); ?>"><?php echo get_the_title($bigStoryPost->ID); ?></a></h2>
-		<h5 class="byline"><?php _e('By', 'largo'); ?> <?php largo_author_link(true, $bigStoryPost); ?></h5>
-		<section>
-			<?php largo_excerpt($bigStoryPost, 2, true, __('Continue&nbsp;Reading&nbsp;&rarr;', 'largo'), true, false); ?>
-		</section>
-	</article>
-<?php
-	$ret = ob_get_contents();
-	ob_end_clean();
-	return $ret;
-
 }
