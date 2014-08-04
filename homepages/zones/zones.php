@@ -92,3 +92,22 @@ function homepage_feature_stories_list() {
 	ob_end_clean();
 	return $ret;
 }
+
+function homepage_big_story_headline_small() {
+	$bigStoryPost = largo_home_single_top();
+	ob_start();
+?>
+	<article>
+		<h5 class="top-tag"><?php largo_top_term(array('post' => $bigStoryPost->ID)); ?></h5>
+		<h2><a href="<?php echo esc_url(get_permalink($bigStoryPost->ID)); ?>"><?php echo get_the_title($bigStoryPost->ID); ?></a></h2>
+		<h5 class="byline"><?php _e('By', 'largo'); ?> <?php largo_author_link(true, $bigStoryPost); ?></h5>
+		<section>
+			<?php largo_excerpt($bigStoryPost, 2, true, __('Continue&nbsp;Reading&nbsp;&rarr;', 'largo'), true, false); ?>
+		</section>
+	</article>
+<?php
+	$ret = ob_get_contents();
+	ob_end_clean();
+	return $ret;
+
+}

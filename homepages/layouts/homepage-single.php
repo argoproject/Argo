@@ -1,5 +1,7 @@
 <?php
 
+include_once dirname(__DIR__) . '/homepage-class.php';
+
 class HomepageSingle extends Homepage {
 	var $name = 'Big story, full-width image';
 	var $type = 'single';

@@ -1,5 +1,7 @@
 <?php
 
+include_once __DIR__ . '/homepage-single.php';
+
 class HomepageSingleWithSeriesStories extends HomepageSingle {
 	var $name = 'One big story and list of stories from the same series';
 	var $type = 'series';

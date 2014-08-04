@@ -7,6 +7,16 @@ function var_log($stuff) {
 function register_default_layouts() {
 	largo_load_custom_template_functions();
 
+	// Load layouts from `layouts/`
+	$layouts = glob(__DIR__ . '/layouts/*.php');
+	foreach ($layouts as $layout)
+		include_once $layout;
+
+	// Load zone components from `zones/`
+	$zones = glob(__DIR__ . '/zones/*.php');
+	foreach ($zones as $zone)
+		include_once $zone;
+
 	$default_layouts = array(
 		'HomepageSingle',
 		'HomepageSingleWithFeatured',
@@ -24,11 +34,3 @@ function render_homepage_layout($layout) {
 	$hp = new $layout();
 	$hp->render();
 }
-
-include_once __DIR__ . '/homepage-class.php';
-
-$layouts = glob(__DIR__ . '/layouts/*.php');
-foreach ($layouts as $layout)
-	include_once $layout;
-
-include_once __DIR__ . '/zones.php';
