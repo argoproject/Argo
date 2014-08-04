@@ -11,8 +11,8 @@ class HomepageBigStoryWithSeries extends HomepageSingle {
 		$defaults = array(
 			'template' => get_template_directory() . '/homepages/templates/two-panel.php',
 			'assets' => array(
-				array('homepage-single', get_template_directory_uri() . '/homepages/css/hero-series-side.css', array()),
-				array('homepage-single', get_template_directory_uri() . '/homepages/js/hero-series-side.js', array('jquery'))
+				array('homepage-single', get_template_directory_uri() . '/homepages/assets/css/hero-series-side.css', array()),
+				array('homepage-single', get_template_directory_uri() . '/homepages/assets/js/hero-series-side.js', array('jquery'))
 			)
 		);
 		$options = array_merge($defaults, $options);

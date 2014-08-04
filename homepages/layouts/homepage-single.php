@@ -11,8 +11,8 @@ class HomepageSingle extends Homepage {
 		$defaults = array(
 			'template' => get_template_directory() . '/homepages/templates/full-width-image.php',
 			'assets' => array(
-				array('homepage-single', get_template_directory_uri() . '/homepages/css/single.css', array()),
-				array('homepage-single', get_template_directory_uri() . '/homepages/js/single.js', array('jquery'))
+				array('homepage-single', get_template_directory_uri() . '/homepages/assets/css/single.css', array()),
+				array('homepage-single', get_template_directory_uri() . '/homepages/assets/js/single.js', array('jquery'))
 			)
 		);
 		$options = array_merge($defaults, $options);

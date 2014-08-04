@@ -18,6 +18,7 @@ function register_default_layouts() {
 		include_once $zone;
 
 	$default_layouts = array(
+		'HomepageBlog',
 		'HomepageSingle',
 		'HomepageSingleWithFeatured',
 		'HomepageSingleWithSeriesStories',

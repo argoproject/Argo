@@ -40,7 +40,7 @@ if( !function_exists( 'get_homepage_templates' ) ) {
  * @return string The public url of the image file to use for the given template's screenshot
  */
 function largo_get_home_thumb() {
-	return get_template_directory_uri() . '/homepages/img/no-thumb.png';
+	return get_template_directory_uri() . '/homepages/assets/img/no-thumb.png';
 }
 
 /**
