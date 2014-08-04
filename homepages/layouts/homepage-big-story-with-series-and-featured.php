@@ -1,8 +1,8 @@
 <?php
 
-include_once dirname(__DIR__) . '/homepage-class.php';
+include_once __DIR__ . '/homepage-single.php';
 
-class HomepageBigStoryWithSeriesAndFeatured extends Homepage {
+class HomepageBigStoryWithSeriesAndFeatured extends HomepageSingle {
 	var $name = 'Three panel homepage layout';
 	var $type = 'three-panel';
 	var $description = 'Three panel homepage with one big story, stories from the series and finally, featured stories.';

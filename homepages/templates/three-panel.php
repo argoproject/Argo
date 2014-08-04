@@ -71,3 +71,35 @@ if (empty($post_states)) {
 		</div> <!-- End home-single -->
 	</div>
 </div>
+
+<div id="home-secondary" class="row-fluid">
+	<div class="span12">
+		<div class="row-fluid">
+			<div class="span4">
+				<?php dynamic_sidebar('home-bottom-left'); ?>
+			</div>
+			<div class="span4">
+				<?php dynamic_sidebar('home-bottom-center'); ?>
+			</div>
+			<div class="span4">
+				<?php dynamic_sidebar('home-bottom-right'); ?>
+			</div>
+		</div>
+	</div>
+</div>
+
+<?php // The "river" content view ?>
+<div id="home-river" class="row-fluid">
+	<div class="span10 offset1">
+		<h1><?php _e('Latest Stories', 'largo'); ?></h1>
+		<?php
+			//start at the beginning of the list
+			rewind_posts();
+			while (have_posts()) {
+				the_post();
+				get_template_part('content', 'river');
+			}
+			largo_content_nav('nav-below');
+		?>
+	</div>
+</div>

@@ -1,10 +1,4 @@
 <?php
-/**
- * Home Template: Single
- * Description: Prominently features the top story by itself
- * Sidebars: Home Bottom Left | Home Bottom Center | Home Bottom Right
- * Right Rail: none
- */
 
 global $shown_ids;
 
