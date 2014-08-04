@@ -12,6 +12,9 @@
 		<?php echo $zoneOne; ?>
 		<div class="home-top">
 		<?php echo $zoneTwo; ?>
+		<?php if (!empty($zoneThree)) { ?>
+			<div><h2><?php echo $zoneThree; ?></h3></div>
+		<?php } ?>
 		</div>
 	</div>
 </div>

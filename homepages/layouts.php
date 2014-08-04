@@ -28,4 +28,21 @@ class HomepageSingleWithFeatured extends HomepageSingle {
 	public function zoneTwo() {
 		return homepage_big_story_headline();
 	}
+
+	public function zoneThree() {
+		return 'Featured stories go here';
+	}
+}
+
+class HomepageSingleWithSeriesStories extends HomepageSingle {
+	var $name = 'One big story and list of stories from the same series';
+	var $description = 'A single story with full-width image treatment. Series stories appear to the right of the big story\'s headline and excerpt.';
+
+	public function zoneTwo() {
+		return homepage_big_story_headline();
+	}
+
+	public function zoneThree() {
+		return 'Series stores go here.';
+	}
 }

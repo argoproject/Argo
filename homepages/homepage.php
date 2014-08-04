@@ -9,7 +9,8 @@ function register_default_layouts() {
 
 	$default_layouts = array(
 		'HomepageSingle',
-		'HomepageSingleWithFeatured'
+		'HomepageSingleWithFeatured',
+		'HomepageSingleWithSeriesStories'
 	);
 
 	foreach ($default_layouts as $layout)
