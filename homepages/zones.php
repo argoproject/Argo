@@ -35,13 +35,14 @@ function homepage_big_story_headline() {
 	return $ret;
 }
 
-function homepage_feature_stories_list() {
+function homepage_series_stories_list() {
 	global $shown_ids;
 
 	$feature = largo_get_the_main_feature();
 	$feature_posts = largo_get_recent_posts_for_term($feature, 3, 2);
 
 	if (!empty($feature)) {
+		ob_start();
 ?>
 	<h5 class="top-tag"><a class="post-category-link" href="<?php echo get_term_link($feature); ?>">
 		<?php echo esc_html($feature->name) ?></a></h5>
@@ -54,8 +55,40 @@ function homepage_feature_stories_list() {
 				<?php _e('Complete Coverage', 'largo'); ?></a></p>
 <?php
 	}
+	$ret = ob_get_contents();
+	ob_end_clean();
+	return $ret;
 }
 
-function homepage_series_stories_list() {
-	return 'Series stories list...';
+function homepage_feature_stories_list() {
+	global $shown_ids;
+
+	$query_args = array(
+		'showposts' => 3,
+		'orderby' => 'date',
+		'order' => 'DESC',
+		'ignore_sticky_posts' => 1,
+		'post__not_in' => $shown_ids,
+		'prominence' => 'homepage-featured'
+	);
+
+	$featured = new WP_Query( $query_args );
+
+	ob_start();
+	// IF should always be true thanks to previous $has_featured check
+	if ($featured->have_posts()) {
+		while ($featured->have_posts()) {
+			$featured->next_post();
+?>
+			<article class="featured-story">
+				<h5 class="top-tag"><?php largo_top_term('post=' . $featured->post->ID); ?></h5>
+				<h4 class="related-story"><a href="<?php echo esc_url(get_permalink($featured->post->ID)); ?>">
+					<?php echo get_the_title($featured->post->ID); ?></a></h4>
+			</article>
+<?php
+		}
+	}
+	$ret = ob_get_contents();
+	ob_end_clean();
+	return $ret;
 }

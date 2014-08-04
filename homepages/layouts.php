@@ -2,6 +2,7 @@
 
 class HomepageSingle extends Homepage {
 	var $name = 'Big story, full-width image';
+	var $type = 'single';
 	var $description = 'A single story with full-width image treatment. Includes a headline and excerpt.';
 
 	function __construct($options=array()) {
@@ -27,6 +28,7 @@ class HomepageSingle extends Homepage {
 
 class HomepageSingleWithFeatured extends HomepageSingle {
 	var $name = 'One big story and list of featured stories';
+	var $type = 'featured';
 	var $description = 'A single story with full-width image treatment. Featured stories appear to the right of the big story\'s headline and excerpt.';
 
 	public function moreStories() {
@@ -36,6 +38,7 @@ class HomepageSingleWithFeatured extends HomepageSingle {
 
 class HomepageSingleWithSeriesStories extends HomepageSingle {
 	var $name = 'One big story and list of stories from the same series';
+	var $type = 'series';
 	var $description = 'A single story with full-width image treatment. Series stories appear to the right of the big story\'s headline and excerpt.';
 
 	public function moreStories() {

@@ -31,6 +31,8 @@ if (empty($wp_filesystem)) {
 class Homepage {
 
 	var $name = 'Homepage';
+	var $id;
+	var $type = 'homepage';
 	var $description;
 	var $template;
 	var $assets;
@@ -46,7 +48,16 @@ class Homepage {
 			if (in_array($k, array_keys($vars)))
 				$this->{$k} = $v;
 		}
+		if (empty($this->id))
+			$this->populateId();
+		else if (sanitize_title($this->id) !== $this->id)
+			throw new Exception('Homepage `id` can only contain letters, numbers and hyphens.');
+
 		$this->readZones();
+	}
+
+	private function populateId() {
+		$this->id = sanitize_title($this->name);
 	}
 
 	private function readZones() {
@@ -62,7 +73,10 @@ class Homepage {
 	}
 
 	public function render() {
-		$vars = array();
+		$vars = array(
+			'templateId' => $this->id,
+			'templateType' => $this->type
+		);
 		foreach ($this->zones as $zone) {
 			if (!empty($this->{$zone})) {
 				if (function_exists($this->{$zone})) {
