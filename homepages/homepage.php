@@ -19,7 +19,6 @@ function register_default_layouts() {
 add_action('init', 'register_default_layouts', 0);
 
 function render_homepage_layout($layout) {
-	// Get the selected homepage layout
 	$hp = new $layout();
 	$hp->render();
 }
@@ -32,7 +31,6 @@ if (empty($wp_filesystem)) {
 class Homepage {
 
 	var $name = 'Homepage';
-	var $id;
 	var $description;
 	var $template;
 	var $assets;
