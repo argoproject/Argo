@@ -1,6 +1,6 @@
 <?php
 
-include_once __DIR__ . '/homepage-single.php';
+include_once __DIR__ . '/HomepageSingle.php';
 
 class HomepageBigStoryWithSeriesAndFeatured extends HomepageSingle {
 	var $name = 'Three panel homepage layout';

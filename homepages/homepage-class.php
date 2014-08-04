@@ -88,7 +88,7 @@ class HomepageLayoutFactory {
 	var $layouts = array();
 
 	function __construct() {
-		add_action('widgets_init', array($this, 'register_layouts'), 100);
+		add_action('widgets_init', array($this, 'register_active_layout'), 100);
 	}
 
 	function register($layoutClass) {
@@ -100,9 +100,9 @@ class HomepageLayoutFactory {
 			unset($this->layouts[$layoutClass]);
 	}
 
-	function register_layouts() {
-		foreach ($this->layouts as $layout)
-			$layout->register();
+	function register_active_layout() {
+		$active = str_replace('.php', '', of_get_option('home_template', 'HomepageBlog.php'));
+		$this->layouts[$active]->register();
 	}
 }
 

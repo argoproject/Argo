@@ -1,6 +1,6 @@
 <?php
 
-include_once __DIR__ . '/homepage-single.php';
+include_once __DIR__ . '/HomepageSingle.php';
 
 class HomepageSingleWithFeatured extends HomepageSingle {
 	var $name = 'One big story and list of featured stories';

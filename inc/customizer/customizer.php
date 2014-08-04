@@ -139,7 +139,7 @@ class Largo_Customizer {
 			) );
 
 		$home_templates = array();
-		$home_templates_data = largo_get_home_templates();
+		$home_templates_data = largo_get_home_layouts();
 		if ( count($home_templates_data) ) {
 			foreach ($home_templates_data as $name => $data ) {
 				$home_templates[ $data['path'] ] = array(
