@@ -15,10 +15,10 @@ if( !function_exists( 'get_homepage_templates' ) ) {
 	function largo_get_home_templates() {
 		global $largo_homepage_factory;
 
-		$cache_key = 'largo_home_templates_' . get_option( 'stylesheet' );
-		if ( false !== ( $home_templates = get_transient( $cache_key ) ) ) {
-			return $home_templates;
-		}
+		//$cache_key = 'largo_home_templates_' . get_option( 'stylesheet' );
+		//if ( false !== ( $home_templates = get_transient( $cache_key ) ) ) {
+			//return $home_templates;
+		//}
 
 		$home_templates = array();
 		foreach ($largo_homepage_factory->layouts as $key => $layout) {
@@ -29,7 +29,7 @@ if( !function_exists( 'get_homepage_templates' ) ) {
 			);
 		}
 
-		set_transient( $cache_key, $home_templates, HOUR_IN_SECONDS );
+		//set_transient( $cache_key, $home_templates, HOUR_IN_SECONDS );
 		return $home_templates;
 	}
 }
@@ -40,7 +40,7 @@ if( !function_exists( 'get_homepage_templates' ) ) {
  * @return string The public url of the image file to use for the given template's screenshot
  */
 function largo_get_home_thumb() {
-	return get_template_directory_uri() . '/homepages/no-thumb.png';
+	return get_template_directory_uri() . '/homepages/img/no-thumb.png';
 }
 
 /**
