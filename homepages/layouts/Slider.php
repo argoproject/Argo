@@ -6,6 +6,9 @@ class Slider extends Homepage {
 	var $name = 'Slider';
 	var $type = 'slider';
 	var $description = 'An animated carousel of featured stories with large images. Not recommended but available for backward compatibility.';
+	var $sidebars = array(
+		'Homepage Left Rail (An optional widget area that, when enabled, appears to the left of the main content area on the homepage)'
+	);
 
 	function __construct($options=array()) {
 		$defaults = array('template' => get_template_directory() . '/homepages/templates/slider.php');

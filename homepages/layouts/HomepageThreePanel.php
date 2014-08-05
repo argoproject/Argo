@@ -2,7 +2,7 @@
 
 include_once __DIR__ . '/HomepageSingle.php';
 
-class HomepageBigStoryWithSeriesAndFeatured extends HomepageSingle {
+class HomepageThreePanel extends HomepageSingle {
 	var $name = 'Three panel homepage layout';
 	var $type = 'three-panel';
 	var $description = 'Three panel homepage with one big story, stories from the series and finally, featured stories.';

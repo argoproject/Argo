@@ -2,10 +2,13 @@
 
 include_once __DIR__ . '/HomepageSingle.php';
 
-class HomepageBigStoryWithSeries extends HomepageSingle {
+class HomepageTwoPanel extends HomepageSingle {
 	var $name = 'Two panel homepage layout';
 	var $type = 'two-panel';
 	var $description = 'Two panel homepage with one big story and stories.';
+	var $sidebars = array(
+		'Home Bottom Left', 'Home Bottom Center', 'Home Bottom Right'
+	);
 
 	function __construct($options=array()) {
 		$defaults = array(

@@ -6,6 +6,9 @@ class HomepageSingle extends Homepage {
 	var $name = 'Big story, full-width image';
 	var $type = 'single';
 	var $description = 'A single story with full-width image treatment. Includes a headline and excerpt.';
+	var $sidebars = array(
+		'Home Bottom Left', 'Home Bottom Center', 'Home Bottom Right'
+	);
 
 	function __construct($options=array()) {
 		$defaults = array(
