@@ -12,6 +12,7 @@ class Homepage {
 	var $id;
 	var $description;
 	var $template;
+	var $zones;
 	var $assets = array();
 	var $sidebars = array();
 	var $rightRail = false;
