@@ -12,7 +12,13 @@ class Slider extends Homepage {
 	var $rightRail = true;
 
 	function __construct($options=array()) {
-		$defaults = array('template' => get_template_directory() . '/homepages/templates/slider.php');
+		$defaults = array(
+			'template' => get_template_directory() . '/homepages/templates/slider.php',
+			'assets' => array(
+				array('homepage-slider', get_template_directory_uri() . '/homepages/assets/css/slider.css', array()),
+				array('homepage-slider', get_template_directory_uri() . '/homepages/assets/js/slider.js', array('jquery'))
+			)
+		);
 		$options = array_merge($defaults, $options);
 		$this->load($options);
 	}
