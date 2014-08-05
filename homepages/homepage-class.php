@@ -12,7 +12,7 @@ class Homepage {
 	var $type = 'homepage';
 	var $description;
 	var $template;
-	var $assets;
+	var $assets = array();
 	var $zones;
 
 	function __construct($options=array()) {
