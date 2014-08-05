@@ -4,8 +4,6 @@
  * Registers all of the standard Largo homepage layout classes
  */
 function largo_register_default_homepage_layouts() {
-	include_once __DIR__ . '/functions.php';
-
 	// Load layouts from `layouts/`
 	$layouts = glob(__DIR__ . '/layouts/*.php');
 	foreach ($layouts as $layout)
@@ -21,8 +19,6 @@ function largo_register_default_homepage_layouts() {
 		'HomepageSingle',
 		'HomepageSingleWithFeatured',
 		'HomepageSingleWithSeriesStories',
-		'HomepageTwoPanel',
-		'HomepageThreePanel',
 		'TopStories',
 		'Slider'
 	);
@@ -41,7 +37,7 @@ add_action('init', 'largo_register_default_homepage_layouts', 0);
 function largo_get_home_layouts() {
 	global $largo_homepage_factory;
 
-	$cache_key = 'largo_home_layouts_' . get_option( 'stylesheet' );
+	$cache_key = 'largo_home_layouts_' . get_option('stylesheet');
 	if ( false !== ( $layouts = get_transient( $cache_key ) ) ) {
 		return $layouts;
 	}
