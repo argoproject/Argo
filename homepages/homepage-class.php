@@ -126,7 +126,8 @@ class HomepageLayoutFactory {
 
 	function register_active_layout() {
 		$active = largo_get_active_homepage_layout();
-		$this->layouts[$active]->register();
+		if (!empty($active) && !empty($this->layouts[$active]))
+			$this->layouts[$active]->register();
 	}
 }
 
