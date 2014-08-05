@@ -9,6 +9,7 @@ class TopStories extends Homepage {
 	var $sidebars = array(
 		'Homepage Left Rail (An optional widget area that, when enabled, appears to the left of the main content area on the homepage)'
 	);
+	var $rightRail = true;
 
 	function __construct($options=array()) {
 		$defaults = array('template' => get_template_directory() . '/homepages/templates/top-stories.php');
