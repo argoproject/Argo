@@ -49,7 +49,7 @@ class Largo_Term_Icons {
 	 * Retrieves the Fontello config.json information about the glyphs
 	 */
 	function get_icons_config() {
-		$wp_filesystem;
+		global $wp_filesystem;
 
 		if ( !empty( $this->_icons_config ) ) {
 			return $this->_icons_config;
