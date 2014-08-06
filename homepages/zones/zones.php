@@ -29,7 +29,7 @@ function homepage_big_story_headline($moreLink=false) {
 	<article>
 		<h5 class="top-tag"><?php largo_top_term(array('post'=> $bigStoryPost->ID)); ?></h5>
 		<h2><a href="<?php echo get_permalink($bigStoryPost->ID); ?>"><?php echo $bigStoryPost->post_title; ?></a></h2>
-		<h5 class="byline"><?php _e('By', 'largo'); ?> <?php largo_author_link(true, $bigStoryPost); ?></h5>
+		<h5 class="byline"><?php largo_byline(true, true, $bigStoryPost); ?></h5>
 		<section>
 			<?php if (empty($moreLink)) {
 					largo_excerpt($bigStoryPost, 2, false);
@@ -52,17 +52,17 @@ function homepage_series_stories_list() {
 	global $shown_ids;
 
 	$feature = largo_get_the_main_feature();
-	$feature_posts = largo_get_recent_posts_for_term($feature, 3, 2);
+	$series_posts = largo_get_recent_posts_for_term($feature, 3, 2);
 
 	if (!empty($feature)) {
 		ob_start();
 ?>
 	<h5 class="top-tag"><a class="post-category-link" href="<?php echo get_term_link($feature); ?>">
 		<?php echo esc_html($feature->name) ?></a></h5>
-			<?php foreach ($feature_posts as $feature_post) {
-				$shown_ids[] = $feature_post->ID; ?>
-				<h4 class="related-story"><a href="<?php echo esc_url(get_permalink($feature_post->ID)); ?>">
-					<?php echo get_the_title($feature_post->ID); ?></a></h4>
+			<?php foreach ($series_posts as $series_post) {
+				$shown_ids[] = $series_post->ID; ?>
+				<h4 class="related-story"><a href="<?php echo esc_url(get_permalink($series_post->ID)); ?>">
+					<?php echo get_the_title($series_post->ID); ?></a></h4>
 			<?php } ?>
 			<p class="more"><a href="<?php echo get_term_link($feature); ?>">
 				<?php _e('Complete Coverage', 'largo'); ?></a></p>
@@ -74,9 +74,12 @@ function homepage_series_stories_list() {
 }
 
 function homepage_feature_stories_list() {
+	global $shown_ids;
+
 	ob_start();
 	$featured_stories = largo_home_featured_stories();
 	foreach ($featured_stories as $featured) {
+		$shown_ids[] = $featured->ID;
 ?>
 		<article class="featured-story">
 			<h5 class="top-tag"><?php largo_top_term('post=' . $featured->ID); ?></h5>

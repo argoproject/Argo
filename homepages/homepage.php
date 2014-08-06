@@ -142,6 +142,7 @@ function largo_home_single_top() {
  * Returns featured stories for the homepage.
  */
 function largo_home_featured_stories() {
+	$big_story = largo_home_single_top();
 	$homepage_feature_term = get_term_by( 'name', __('Homepage Featured', 'largo'), 'prominence' );
 	$uncategorized_term = get_term_by( 'name', __('Uncategorized'), 'category' );
 
