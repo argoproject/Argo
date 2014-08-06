@@ -54,8 +54,8 @@ function homepage_series_stories_list() {
 	$feature = largo_get_the_main_feature();
 	$series_posts = largo_get_recent_posts_for_term($feature, 3, 2);
 
+	ob_start();
 	if (!empty($feature)) {
-		ob_start();
 ?>
 	<h5 class="top-tag"><a class="post-category-link" href="<?php echo get_term_link($feature); ?>">
 		<?php echo esc_html($feature->name) ?></a></h5>
