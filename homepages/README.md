@@ -107,7 +107,7 @@ You can also use a few helper functions to render the currently active homepage 
 
 There are no hard and fast rules for directory structure when it comes to custom homepage layouts.
 
-A good place to start would be mirroring the basic structure Largo's homepages directory.
+You can start by mirroring the structure Largo's homepages directory.
 
 For example:
 
@@ -127,7 +127,7 @@ If you want to remove a layout, you must unregister it. For example:
     function unregister_a_layout() {
         unregister_homepage_layout('HomepageSingle');
     }
-    add_action('init', unregister_a_layout, 10);
+    add_action('init', 'unregister_a_layout', 10);
 
 This will remove the included homepage layout. This layout resides at homepages/layouts/HomepageSingle.php
 
