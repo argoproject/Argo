@@ -7,8 +7,12 @@
  * Returns current version of largo
  */
 function largo_version() {
-	$largo = wp_get_theme( 'largo' );
-	return floatval( $largo->get( 'Version' ) );
+	$theme = wp_get_theme();
+
+	if (strstr($theme->template, 'largo') && strstr($theme->stylesheet, 'largo') && strstr($theme->get('Name'), 'Project Largo'))
+		return $theme->get('Version');
+
+	return false;
 }
 
 /**
@@ -17,7 +21,7 @@ function largo_version() {
 function largo_need_updates() {
 
 	// only do this for newer versions of largo
-	if ( version_compare(largo_version(), '0.3.0', '<' )) return false;
+	if ( version_compare(largo_version(), '0.3', '<' )) return false;
 
 	// try to figure out which versions of the options are stored. Implemented in 0.3
 	if ( of_get_option('largo_version') ) {
@@ -68,11 +72,14 @@ function largo_home_transition() {
 	// we're using the old system and the new one isn't in place, act accordingly
 	// this should ALWAYS happen when this function is called, as there's a separate version check before this is invoked
 	// the home template sidebars have same names as old regime so that *shouldn't* be an issue
-	if ( $old_regime && ! $new_regime ) {
-		//minor name change
-		if ( $old_regime == 'topstories' ) $old_regime = 'top-stories';
-		of_set_option( 'home_template', 'homepages/'.$old_regime.".php" );
-	}
+	if ($old_regime && !$new_regime) {
+		if ($old_regime == 'topstories')
+			$home_template = 'TopStories';
+		if ($old_regime == 'blog')
+			$home_template = 'HomepageBlog';
+		of_set_option('home_template', $home_template);
+	} else
+		of_set_option('home_template', 'HomepageBlog');
 }
 
 /**
