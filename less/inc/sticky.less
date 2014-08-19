@@ -1,0 +1,99 @@
+.stories article.sticky {
+  margin-bottom: @baseline;
+  border-bottom: none;
+}
+.sticky-related,
+.sticky-solo {
+  background-color: @baseColor;
+  border: 1px solid darken(@baseColor, 5%);
+  .border-radius(8px);
+   a {
+     color: darken(@baseColor, 15%);
+     &:hover {
+	   .opacity(90);
+	   text-decoration: none;
+     }
+   }
+}
+.sticky-main-feature {
+  .image-wrap {
+    float: left;
+    margin: 15px 15px 0;
+    min-height: 150px;
+    h4 {
+      background-color: @black;
+      color: @white;
+      padding: 2px 5px;
+      width: 130px;
+      .opacity (80);
+      display: block;
+      position: relative;
+      z-index: 10;
+    }
+    img {
+      float: left;
+      display: block;
+      position: relative;
+      top: -20px;
+      z-index: 1;
+      max-width: 100%;
+      margin: 0;
+    }
+  }
+  h4 {
+    font-size: @baseFontSize * 0.815;
+    color: @grayLighter;
+    margin-bottom:0;
+    &.no-image {
+      margin: 2px 0 0 15px;
+      position: relative;
+      top: 8px;
+    }
+  }
+  h2 {
+    font-size: @baseFontSize * 1.5;
+    margin: 10px 15px 4px;
+    line-height: 1;
+    a {
+      color: @white;
+    }
+  }
+  p {
+    color: @white;
+    font-size: @baseFontSize - 4;
+    margin: 0 15px 10px;
+    a {
+      color: @white;
+      font-weight: bold;
+      white-space: nowrap;
+	}
+  }
+}
+.sticky-features-list {
+  padding: 10px;
+  ul {
+    margin: 0;
+    padding: 10px;
+    list-style: none;
+    background-color: lighten(@baseColor, 25%);
+    .border-radius(4px);
+    li {
+      h4 {
+        color: @grayDark;
+        font-size: @baseFontSize - 7;
+        text-transform: uppercase;
+        margin-bottom: 5px;
+        span {
+          font-size: @baseFontSize - 4 ;
+        }
+	  }
+	  font-size: @baseFontSize - 2;
+	  margin-bottom: 7px;
+	  line-height: 1.2;
+	  &.sticky-all {
+	    font-weight: bold;
+	    font-size: @baseFontSize * 0.667;
+      }
+    }
+  }
+}

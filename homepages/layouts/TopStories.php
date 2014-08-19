@@ -12,7 +12,12 @@ class TopStories extends Homepage {
 	var $rightRail = true;
 
 	function __construct($options=array()) {
-		$defaults = array('template' => get_template_directory() . '/homepages/templates/top-stories.php');
+		$defaults = array(
+			'template' => get_template_directory() . '/homepages/templates/top-stories.php',
+			'assets' => array(
+				array('homepage-slider', get_template_directory_uri() . '/homepages/assets/css/top-stories.css', array())
+			)
+		);
 		$options = array_merge($defaults, $options);
 		$this->load($options);
 	}
