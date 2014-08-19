@@ -1868,6 +1868,13 @@ table .span24 {
 #main {
   margin: 18px 0;
 }
+#left-rail {
+  float: left;
+  margin-left: 0;
+}
+#content-main {
+  float: right;
+}
 .row-fluid {
   width: 100%;
   *zoom: 1;
@@ -2902,6 +2909,33 @@ article.story {
 article.story {
   padding-bottom: 12px;
 }
+.stories article {
+  border-bottom: 1px dotted #999999;
+  margin-bottom: 12px;
+}
+.stories article[class*="span"] {
+  margin-left: 0;
+}
+.stories h2.entry-title {
+  font-size: 32px;
+  margin-bottom: 8px;
+  line-height: 1.1;
+}
+.stories .entry-content p {
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+.stories h5.tag-list {
+  font-size: 13.04px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  line-height: 1.5;
+  margin-bottom: 0;
+}
+.rss-subscribe-link {
+  float: right;
+  text-transform: uppercase;
+}
 .archive-background {
   margin-bottom: 24px;
 }
@@ -3178,6 +3212,22 @@ article img.attachment-post-thumbnail {
 .page-template-full-page-php #content {
   margin-left: 0;
 }
+.article-bottom .widget {
+  padding: 15px 0;
+}
+.article-bottom .widget p {
+  padding-left: 0;
+  padding-right: 0;
+}
+.article-bottom .post-social {
+  border-top: none;
+  border-bottom: none;
+}
+.article-bottom .largo-disclaimer {
+  color: #454545;
+  font-size: 15px;
+  font-style: italic;
+}
 .single-post.classic #content {
   margin-left: 0;
 }
@@ -3283,297 +3333,73 @@ article img.attachment-post-thumbnail {
 .widget .author-box ul {
   padding: 0;
 }
-.byline {
-  margin-bottom: 12px;
-  font-weight: normal;
-  font-size: 13.04px;
+.home .stories article img.attachment-medium,
+.sub-stories img.attachment-post-thumbnail {
+  max-width: 30%;
+  float: right;
+  margin: 0 0 10px 20px;
 }
-.byline a {
-  color: #333333;
-}
-.byline .author,
-.byline .time-ago,
-.byline .edit-link a {
+h5.top-tag {
+  font-size: 16px;
+  margin-bottom: 4.8px;
   text-transform: uppercase;
 }
-.byline .author {
-  font-weight: bold;
+h5.top-tag a {
+  color: #999999;
 }
-.byline .time-ago,
-.byline .edit-link a {
-  color: #bd261d;
+#homepage-bottom {
+  margin-top: 24px;
 }
-.post-social {
-  min-height: 28px;
-  height: auto;
-  margin-bottom: 24px;
-  border-top: 1px solid #dddddd;
-  border-bottom: 1px solid #dddddd;
+#homepage-bottom .widget {
+  width: 42.5%;
+  padding: 2.5%;
 }
-.post-social .right,
-.post-social .left {
-  margin: 0;
-  height: auto;
-}
-.post-social .left {
-  padding: 6px 0 0;
-}
-.post-social .right {
-  padding: 1px 0 0;
-}
-.post-social span {
-  position: relative;
-}
-.post-social span.twitter {
-  margin-right: 8px;
-}
-.post-social span.facebook {
-  top: -7px;
-}
-.post-social span.print {
-  font-family: Verdana, Helvetica, sans-serif;
-  font-size: 11px;
-  top: 1px;
-}
-.post-social span.print i.icon-print {
-  font-size: 18px;
-  margin: 0 -3px 0 2px;
-  position: relative;
-  top: 2px;
-}
-.post-social span.print:hover {
-  opacity: 0.85;
-  filter: alpha(opacity=85);
-}
-.post-social span.print a {
-  color: black;
-}
-.post-social span.print a:hover {
-  text-decoration: none;
-}
-.article-bottom .widget {
-  padding: 15px 0;
-}
-.article-bottom .widget p {
-  padding-left: 0;
-  padding-right: 0;
-}
-.article-bottom .post-social {
-  border-top: none;
-  border-bottom: none;
-}
-.article-bottom .largo-disclaimer {
-  color: #454545;
-  font-size: 15px;
-  font-style: italic;
-}
-.post-pagination a,
-.post-pagination span {
-  padding: 5px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  text-transform: uppercase;
-  font-size: 13.04px;
-}
-.post-pagination a:first-child,
-.post-pagination span:first-child {
-  padding-left: 0;
-}
-.labels,
-.tags,
-.pager,
-#related-posts,
-.largo-post-series-links {
+#homepage-bottom .widget.odd {
+  float: left;
   clear: both;
-  margin: 0 0 24px;
-  width: 100%;
-}
-.labels h5,
-.tags h5,
-.pager h5,
-#related-posts h5,
-.largo-post-series-links h5 {
-  font-size: 16px;
-  margin-bottom: 6px;
-  text-transform: uppercase;
-  font-weight: bold;
-}
-.tags,
-.pager {
-  list-style: none;
-  font-size: 16px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-.single-post .author-box h5,
-.single-argolinkroundups .author-box h5,
-.labels h5 {
-  font-size: 19.2px;
-  line-height: 1;
-  margin-bottom: 0;
-}
-h3.recent-posts a.rss-link,
-.labels .series-label h5 a.rss-link {
-  float: right;
-  margin-top: 4px;
-  color: #f89406;
-  font-size: 18px;
-}
-h3.recent-posts a.rss-link:hover,
-.labels .series-label h5 a.rss-link:hover {
-  opacity: 0.85;
-  filter: alpha(opacity=85);
-}
-.series-label {
-  margin: 5px;
-  padding: 8px;
-}
-.series-label h5 {
-  background: none;
-  padding: 0;
-  margin-bottom: 2px;
-}
-.series-label p {
-  font-size: 13.04px;
-  margin-bottom: 0;
-}
-.tags {
-  height: 100%;
-  overflow: auto;
-  margin-bottom: 12px;
-}
-.tags ul {
-  padding: 0;
-  margin: 0;
-  font-size: 13px;
-  line-height: 1.5;
-}
-.tags ul li {
-  display: inline;
-  letter-spacing: 1px;
-  margin: 0 8px 8px 0;
-  vertical-align: baseline;
-  font-weight: 300;
-  white-space: nowrap;
-  float: left;
-  background-color: #2275bb;
-  padding: 4px 8px 4px 5px;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-}
-.tags ul li:hover {
-  background-color: #1a5a90;
-}
-.tags ul li i {
-  margin: 1px 3px 0 0;
-}
-.tags ul li a {
-  color: #ffffff;
-}
-.tags ul li a:hover {
-  text-decoration: none;
-}
-.pager {
-  line-height: 1.2;
-}
-.pager a {
-  display: inline-block;
-  padding: 10px 15px;
-  color: #333333;
-  background-color: #e6e6e6;
-}
-.pager a:hover {
-  background-color: #a6a6a6;
-  color: #ffffff;
-  text-decoration: none;
-}
-.next {
-  width: 48%;
-  float: right;
-  text-align: right;
-}
-.next img {
-  float: right;
-  padding-left: 12px;
-}
-.previous {
-  width: 48%;
-  float: left;
-  text-align: left;
-}
-.previous img {
-  float: left;
-  padding-right: 12px;
-}
-#related-post-nav {
-  padding: 8px 0;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-#related-post-nav li {
-  list-style-type: none;
-  margin-bottom: 0;
-  font-size: 14px;
-}
-#related-post-nav li:last-child a {
-  border-bottom: 1px solid #999999;
-}
-#related-post-nav h5 {
-  margin: 0 0 5px 0;
-}
-#related-post-nav a {
-  display: block;
-  padding: 6px;
-  font-weight: normal;
-  text-decoration: none;
-  border-top: 1px solid #999999;
-  outline: none;
-}
-#related-post-nav a:hover {
-  background-color: #dddddd;
-}
-#related-post-nav a.selected {
-  color: #ffffff;
-  background: #2275bb;
-  border: none;
-  letter-spacing: 1px;
-}
-.related-items div {
-  display: none;
-  padding: 0 2.5%;
-}
-.related-items div img {
-  float: left;
-  margin: 0 10px 10px 0;
-}
-.related-items ul {
-  margin: 5px 0;
-}
-.related-items ul li {
-  list-style: disc;
-  margin-left: 15px;
-  margin-bottom: 0;
-  font-size: 13.04px;
-}
-.related-items ul li.top-related {
-  list-style: none;
   margin-left: 0;
+}
+#homepage-bottom .widget.even {
+  float: right;
+  clear: none;
+}
+#homepage-bottom .widgettitle {
+  margin: 0 0 8px;
+  padding: 0 0 5px;
+  font-size: 16px;
+  background: none;
+  color: #333333;
+  border: none;
   border-bottom: 1px solid #dddddd;
-  margin-bottom: 12px;
-  font-size: 8px;
 }
-.related-items ul li.top-related h3 {
-  font-size: 19.552px;
-  font-weight: bold;
-  margin-bottom: 6px;
+#homepage-bottom .widgettitle a,
+#homepage-bottom .widgettitle a:hover {
+  color: #333333;
 }
-.related-items ul li.top-related p {
-  font-family: Georgia, "Times New Roman", Times, serif;
-  font-size: 10.672px;
-  margin-bottom: 12px;
+#homepage-bottom .rev .widgettitle {
+  color: #ffffff;
 }
-.related-items p {
+#homepage-bottom h5 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+#homepage-bottom img {
+  max-width: 35%;
+}
+#homepage-bottom img.attachment-large {
+  max-width: 100%;
+}
+#homepage-bottom p {
+  font-size: 16px;
+}
+#homepage-bottom ul {
+  margin: 0;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 13.04px;
-  margin-bottom: 6px;
+  font-size: 16px;
+  font-weight: bold;
+}
+#homepage-bottom ul li {
+  list-style: none;
 }
 .module {
   margin-bottom: 12px;
@@ -3607,14 +3433,14 @@ h3.recent-posts a.rss-link:hover,
   display: block;
 }
 p.wp-media-credit {
-  font-size: 10.672px !important;
+  font-size: 13.04px !important;
   margin: 0;
   text-align: right;
   color: #555555;
   display: block;
 }
 p.wp-caption-text {
-  font-size: 13.04px !important;
+  font-size: 16px !important;
   margin: 5px 0 0;
   color: #555555;
   font-style: italic;
@@ -3658,108 +3484,6 @@ p.wp-caption-text {
 }
 .DV-container {
   margin-bottom: 8px;
-}
-.stories article {
-  border-bottom: 1px dotted #999999;
-  margin-bottom: 12px;
-}
-.stories article[class*="span"] {
-  margin-left: 0;
-}
-.stories h2.entry-title {
-  font-size: 32px;
-  margin-bottom: 8px;
-  line-height: 1.1;
-}
-.stories .entry-content p {
-  font-size: 16px;
-  margin-bottom: 12px;
-}
-.stories h5.tag-list {
-  font-size: 13.04px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: normal;
-  line-height: 1.5;
-  margin-bottom: 0;
-}
-.rss-subscribe-link {
-  float: right;
-  text-transform: uppercase;
-}
-#left-rail {
-  float: left;
-  margin-left: 0;
-}
-#content-main {
-  float: right;
-}
-.home .stories article img.attachment-medium,
-.sub-stories img.attachment-post-thumbnail {
-  max-width: 30%;
-  float: right;
-  margin: 0 0 10px 20px;
-}
-h5.top-tag {
-  font-size: 16px;
-  margin-bottom: 4.8px;
-  text-transform: uppercase;
-}
-h5.top-tag a {
-  color: #999999;
-}
-#homepage-bottom {
-  margin-top: 24px;
-}
-#homepage-bottom .widgettitle {
-  margin: 0 0 8px;
-  padding: 0 0 5px;
-  font-size: 16px;
-  background: none;
-  color: #333333;
-  border: none;
-  border-bottom: 1px solid #dddddd;
-}
-#homepage-bottom .widgettitle a,
-#homepage-bottom .widgettitle a:hover {
-  color: #333333;
-}
-#homepage-bottom h5 {
-  font-size: 18px;
-  margin-bottom: 5px;
-}
-#homepage-bottom img {
-  max-width: 35%;
-}
-#homepage-bottom img.attachment-large {
-  max-width: 100%;
-}
-#homepage-bottom p {
-  font-size: 16px;
-}
-#homepage-bottom ul {
-  margin: 0;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  font-weight: bold;
-}
-#homepage-bottom ul li {
-  list-style: none;
-}
-#homepage-bottom .widget {
-  width: 42.5%;
-  padding: 2.5%;
-}
-#homepage-bottom .widget.odd {
-  float: left;
-  clear: both;
-  margin-left: 0;
-}
-#homepage-bottom .widget.even {
-  float: right;
-  clear: none;
-}
-#homepage-bottom .rev .widgettitle {
-  color: #ffffff;
 }
 #disqus_thread {
   background-color: #dddddd;
