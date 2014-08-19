@@ -6,6 +6,13 @@
 class Largo_Term_Icons {
 
 	function __construct() {
+		global $wp_filesystem;
+
+		if (empty($wp_filesystem)) {
+			require_once(ABSPATH . 'wp-admin/includes/file.php');
+			WP_Filesystem();
+		}
+
 		add_action( 'edit_category_form_fields', array( $this, 'display_fields' ) );
 		add_action( 'edit_tag_form_fields', array( $this, 'display_fields' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts') );
@@ -42,15 +49,17 @@ class Largo_Term_Icons {
 	 * Retrieves the Fontello config.json information about the glyphs
 	 */
 	function get_icons_config() {
+		global $wp_filesystem;
+
 		if ( !empty( $this->_icons_config ) ) {
 			return $this->_icons_config;
 		}
 
 		if ( is_file( get_stylesheet_directory() . '/fonts/fontello/config.json' ) ) {
-			$config = json_decode( file_get_contents( get_stylesheet_directory() . '/fonts/fontello/config.json' ) );
+			$config = json_decode( $wp_filesystem->get_contents( get_stylesheet_directory() . '/fonts/fontello/config.json' ) );
 			$css_file = get_stylesheet_directory_uri() . '/fonts/fontello/css/fontello.css';
 		} else {
-			$config = json_decode( file_get_contents( get_template_directory() . '/fonts/fontello/config.json' ) );
+			$config = json_decode( $wp_filesystem->get_contents( get_template_directory() . '/fonts/fontello/config.json' ) );
 			$css_file = get_template_directory_uri() . '/fonts/fontello/css/fontello.css';
 		}
 

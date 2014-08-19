@@ -1,0 +1,86 @@
+.single-post,
+.page {
+  #content {
+  	position: relative;
+	margin-left: 17.021276594%;
+  }
+  .hero {
+    text-align: center;
+    background-color: #efefef;
+    width: 151.5%;
+    margin: 0 -25.75% 24px;
+    p.wp-caption-text,
+    p.wp-media-credit {
+      float: none;
+      margin: 0 auto;
+      text-align: left;
+      font-size: @baseFontSize !important;
+      margin-bottom: 12px;
+      padding-top: 4px;
+      width: 70%;
+    }
+    p.wp-media-credit {
+      text-align: right;
+      margin-top: 4px;
+      min-height: 0;
+    }
+    &.is-video {
+      margin-bottom: 24px;
+    }
+	&.is-empty {
+      min-height: 0;
+      height: 0;
+	}
+  }
+  #sidebar {
+    overflow: hidden;
+    margin-left: -25.75%;
+    margin-right: 0;
+    width: 23.25%;
+    clear: left;
+  }
+  .top-tag {
+    float: left;
+  }
+  .top-date {
+    float: right;
+    font-size: @baseFontSize - 2;
+    font-weight: normal;
+    margin-bottom: 0;
+	line-height: 1.5;
+  }
+  article.post > header {
+    clear: both;
+  }
+  article.post .sep,
+  article.post .entry-date {
+    display: none;
+  }
+  h2.subtitle {
+    font-size: @baseFontSize * 1.222;
+    font-weight: normal;
+    color: #999;
+  }
+  p.intro,
+  p.wp-caption-text {
+    font-style: normal;
+  }
+}
+.page-template-full-page-php #content {
+  margin-left: 0;
+}
+// CLASSIC STYLE SINGLE POSTS
+.single-post.classic {
+  #content {
+    margin-left: 0;
+  }
+  #sidebar {
+    margin-left: 2.127659574%;
+	width: 31.914893614%;
+	clear: none;
+  }
+  article.post .sep,
+  article.post .entry-date {
+    display: inline;
+  }
+}

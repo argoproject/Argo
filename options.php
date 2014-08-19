@@ -29,7 +29,7 @@ function optionsframework_options() {
 
 	$imagepath =  get_template_directory_uri() . '/lib/options-framework/images/';
 	$home_templates = array();
-	$home_templates_data = largo_get_home_templates();
+	$home_templates_data = largo_get_home_layouts();
 	if ( count($home_templates_data) ) {
 		foreach ($home_templates_data as $name => $data) {
 			$home_templates[ $data['path'] ] = '<img src="'.$data['thumb'].'" style="float: left; margin-right: 8px; max-width: 120px; height: auto; border: 1px solid #ddd;"><strong>'.$name.'</strong> '.$data['desc'];

@@ -76,16 +76,26 @@ if ( ! function_exists( 'largo_author_link' ) ) {
 /**
  * Outputs custom byline and link (if set), otherwise outputs author link and post date
  *
- * @param $echo bool echo the string or return it (default: echo)
- * @return string byline as formatted html
+ * @param $echo bool Echo the string or return it (default: echo)
+ * @param $exclude_date bool Whether to exclude the date from byline (default: false)
+ * @param $post object or int The post object or ID to get the byline for. Defaults to current post.
+ * @return string Byline as formatted html
  * @since 1.0
  */
 if ( ! function_exists( 'largo_byline' ) ) {
-	function largo_byline( $echo = true, $exclude_date = false ) {
-		$values = get_post_custom( get_the_ID() );
+	function largo_byline( $echo = true, $exclude_date = false, $post = null ) {
+		if (!empty($post)) {
+			if (is_object($post))
+				$post_id = $post->ID;
+			else
+				$post_id = $post;
+		} else
+			$post_id = get_the_ID();
+
+		$values = get_post_custom( $post_id );
 
 		if ( function_exists( 'get_coauthors' ) && !isset( $values['largo_byline_text'] ) ) {
-			$coauthors = get_coauthors( get_the_ID() );
+			$coauthors = get_coauthors( $post_id );
 			foreach( $coauthors as $author ) {
 				$byline_text = $author->display_name;
 				if ( $org = $author->organization )
@@ -114,8 +124,8 @@ if ( ! function_exists( 'largo_byline' ) ) {
 			$output .= '<span class="sep"> | </span><time class="entry-date updated dtstamp pubdate" datetime="' . esc_attr( get_the_date( 'c' ) ) . '">' . largo_time( false ) . '</time>';
 		}
 
-		if ( current_user_can( 'edit_post', get_the_ID() ) ) {
-			$output .= '<span class="sep"> | </span><span class="edit-link"><a href="' . get_edit_post_link( get_the_ID() ) . '">' . __( 'Edit This Post', 'largo' ) . '</a></span>';
+		if ( current_user_can( 'edit_post', $post_id ) ) {
+			$output .= '<span class="sep"> | </span><span class="edit-link"><a href="' . get_edit_post_link( $post_id ) . '">' . __( 'Edit This Post', 'largo' ) . '</a></span>';
 		}
 
 		if ( is_single() && of_get_option( 'clean_read' ) === 'byline' ) {

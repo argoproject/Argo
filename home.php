@@ -17,7 +17,7 @@ get_header();
  * and get the theme option to determine if this is a two column or three column layout
  */
 $shown_ids = array();
-$home_template = str_replace('.php', '', of_get_option( 'home_template', 'blog.php' ) );
+$home_template = largo_get_active_homepage_layout();
 $layout_class = of_get_option('home_template');
 $tags = of_get_option ('tag_display');
 
@@ -31,9 +31,7 @@ $span_class = ( $largo['home_rail'] ) ? 'span8' : 'span12' ;
 	<div id="content-main" class="<?php echo $span_class; ?>">
 	<?php }
 
-	largo_load_custom_template_functions();
-	get_template_part( $home_template );
-
+	largo_render_homepage_layout($home_template);
 
 	// sticky posts box if this site uses it
 	if ( of_get_option( 'show_sticky_posts' ) ) {

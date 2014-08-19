@@ -1,43 +1,150 @@
-Largo Homepage Template Documentation
-=====================================
+# Homepage layouts
 
-This document explains the homepage template system implemented in Largo. You can leverage this system in your child theme.
+## Concept and goals
 
-TL;DR
------
-1. In a homepages directory of your theme, create a PHP file.
-2. Similar to how WP page templates work, add comments giving your template a name (required) and description
-3. Optionally instantiate new sidebar regions, separated by pipes (|) with descriptions in parentheticals
-4. Deactivate the standard Largo rail by specifying Right rail: none
-5. To incorporate CSS or JS specific to you template, add css/js files with the same name as your template inside their respective subdirectories in homepages/
-6. We recommend you also include a .png thumbnail of your layout
+We need a way to easily override and reuse existing homepage templates in child themes, but also
+wanted to build something extensible enough that it could be used in the future to create custom
+homepage layouts on-the-fly, either purely programmatically or via some to-be-determined interface
+in the WordPress dashboard.
 
-Overview
---------
+## The basics
 
-The Largo homepage template system allows you to customize the upper portion of the site homepage, integrating with other Largo theme options to give significant control within child themes to the layout of the homepage.
+Largo registers several default homepage layouts. Each homepage layout is a class, similar to the
+way each widget is an instance of WP_Widget.
 
-Specifically, the template system controls what comes just beneath the horizontal navigation bar, and the region identified in the Theme Options controls as "homepage bottom." With this system you can load custom JavaScript and CSS along with your template, if it requires them.
+Here's an example of a dead simple homepage layout class:
 
-Assets for homepage templates should be stored in a "homepages" directory in the root of your theme. Thus is your Largo child theme is at "wp-content/themes/kiddo", your homepage template assets should be in "wp-content/themes/kiddo/homepages"
+    <?php
 
-Template File
--------------
+    include_once get_template_directory() . '/homepages/homepage-class.php';
 
-The only requirement for creating a new template is a PHP file within the homepages directory that has the necessary PHP comments to be recognized by the system. It works much like declaring WordPress page templates; attributes are named and described in colon-separated pairs. The attributes are as follows:
+    class MyCustomLayout extends Homepage {
+      var $name = 'My Custom Homepage Layout';
+      var $description = 'Lorem ipsum dolor sit amet.';
 
-Home Template: (required) This is the name of your template, e.g. "Kiddo Feature"
-Description: This is a brief description of yoru template, which appears on the Theme Options page where site administrators select the active template
-Sidebars: If you would like to use widget regions specific to your template, you can specify them here. Sidebars are pipe-separated and can optionally include descriptions in parentheses, e.g.:
-	Sidebar name (a helpful description) | Other Sidebar Name | Kiddo Homepage Region Three
-Right Rail: If you wish to suppress the righthand rail that typically appears on Largo pages, you can disable it by passing "none" as the value for this
+      function __construct($options=array()) {
+        $defaults = array(
+          'template' => get_stylesheet_directory() . '/homepages/templates/my-custom-homepage-template.php'
+        );
+        $options = array_merge($defaults, $options);
+        $this->load($options);
+      }
+    }
 
-Related Assets
---------------
+Every homepage should have, at minimum, a $name, $description and $template defined.
 
-The Largo Home Template system will automatically enqueue CSS and JS files for your template if they share the same file name as your template (preceeding the extension) and are placed in css and js subfolders, respectively. For example, if your homepage template is located at homepages/sample-template.php, the system will look for and automatically load homepages/js/sample-template.js and/or homepages/css/sample-template.css if either are present.
+The next thing to do is register your homepage:
 
-Thumbnail
----------
+    function register_my_custom_homepage_layout() {
+        register_homepage_layout('MyCustomLayout');
+    }
+    add_action('init', 'register_my_custom_homepage_layout', 0);
 
-It is strongly recommended that you include a 240x180 pixel PNG screenshot of your template in addition to a name and description to help site administrators understand what your template displays. This file should be located in the same directory as your template and share the same name, except the file extension will of course need to be png instead of php.
+Once this is done, your homepage layout will show as an option in Theme Options > Layout as well as
+the Customizer.
+
+# Defining zones
+
+Zones are areas of your homepage layout that mark where content can be placed.
+
+You mark zones by changing your homepage layout template.
+
+Here's an example of what the template for MyCustomLayout might look like:
+
+    <?php
+
+    <div class="container">
+        <div class="row-fluid">
+            <div class="span8">
+                <?php echo $bigStory; ?>
+            </div>
+            <div class="span4">
+                <?php echo $extraContent; ?>
+            </div>
+        </div>
+    </div>
+
+The way you then provide the content to be placed in your template at those markers is by defining
+methods on your class that correspond to said markers. For example, for this template, we could expand
+our MyCustomLayout class:
+
+    class MyCustomLayout extends Homepage {
+      var $name = 'My Custom Homepage Layout';
+      var $description = 'Lorem ipsum dolor sit amet.';
+
+      function __construct($options=array()) {
+        $defaults = array(
+          'template' => get_stylesheet_directory() . '/homepages/templates/my-custom-homepage-template.php'
+        );
+        $options = array_merge($defaults, $options);
+        $this->load($options);
+      }
+
+      function bigStory() {
+        return 'Hello! This is where my BIG STORY would show up if I had one.';
+      }
+
+      function extraContent() {
+        return 'I can put any extra content I want to display next to the big story here. Maybe related articles?';
+      }
+    }
+
+Each method is expected to return a string.
+
+# Render the layout
+
+To render your homepage layout, you simply:
+
+    $homepage_layout = new MyCustomLayout();
+    $homepage_layout->render();
+
+You can also use a few helper functions to render the currently active homepage layout:
+
+    $active_layout = largo_get_active_homepage_layout();
+    largo_render_homepage_layout($active_layout);
+
+# Directory layout
+
+There are no hard and fast rules for directory structure when it comes to custom homepage layouts.
+
+You can start by mirroring the structure Largo's homepages directory.
+
+For example:
+
+    my_child_theme/
+        homepages/
+            assets/
+            layouts/
+                MyCustomLayout.php
+            templates/
+                my-custom-homepage-template.php
+
+
+# Removing or modifying existing layouts
+
+If you want to remove a layout, you must unregister it. For example:
+
+    function unregister_a_layout() {
+        unregister_homepage_layout('HomepageSingle');
+    }
+    add_action('init', 'unregister_a_layout', 10);
+
+This will remove the included homepage layout. This layout resides at homepages/layouts/HomepageSingle.php
+
+To modify the HomepageSingle layout, you can unregister the default and provide your own class
+that inherits from HomepageSingle. For example:
+
+    class MyOtherCustomHomepageLayout extends HomepageSingle {
+        $name = "Homepage layout based on Largo's 'HomepageSingle' layout";
+        $description = "Modified version of the default layout with a different big story zone.";
+
+        function bigStory() {
+            return "We transformed the big story into something else! Err, I mean we got rid of it!";
+        }
+    }
+
+    function replace_a_default_homepage_layout() {
+        unregister_homepage_layout('HomepageSingle');
+        register_homepage_layout('MyOtherCustomHomepageLayout');
+    }
+    add_action('init', 'replace_a_default_homepage_layout', 10);

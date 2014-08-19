@@ -94,7 +94,7 @@ function clean_contact_akismet($body,$subject,$email,$name) {
 	$comment['user_ip']    = preg_replace( '/[^0-9., ]/', '', $_SERVER['REMOTE_ADDR'] );
 	$comment['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
 	$comment['referrer']   = $_SERVER['HTTP_REFERER'];
-	$comment['blog']       = get_option('home');
+	$comment['blog']       = home_url();
 	$comment['comment_author_email']  = $email;
 	$comment['comment_author']  = $name;
 	$comment['comment_content']  = $body;
@@ -269,7 +269,7 @@ function clean_contact( $atts ) {
 */
 function clean_contact_conf() {
 
-	add_options_page( __( 'Clean Contact', 'largo' ), __( 'Clean Contact', 'largo' ), 'manage_options', 'clean-contact', 'clean_contact_conf_page' );
+	add_theme_page( __( 'Clean Contact', 'largo' ), __( 'Clean Contact', 'largo' ), 'manage_options', 'clean-contact', 'clean_contact_conf_page' );
 
 }
 
@@ -290,8 +290,15 @@ function clean_contact_conf_page() {
  * @return void
 */
 function clean_contact_css() {
+	global $wp_filesystem;
+
+	if (empty($wp_filesystem)) {
+		require_once(ABSPATH . 'wp-admin/includes/file.php');
+		WP_Filesystem();
+	}
+
 	$html = '<style  type="text/css" media="screen">';
-	$html .= file_get_contents(dirname(__FILE__).'/style.css');
+	$html .= $wp_filesystem->get_contents(dirname(__FILE__).'/style.css');
 	$html .= '</style>';
 	return $html;
 }
