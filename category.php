@@ -53,7 +53,7 @@ global $tags;
 						 		<h5 class="top-tag"><?php largo_categories_and_tags( 1 ); ?></h5>
 						 	<?php } ?>
 
-							<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'medium' ); ?></a>
+							<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'rect_thumb' ); ?></a>
 						</div>
 
 						<div class="span8">
@@ -83,7 +83,7 @@ global $tags;
 					 		<h5 class="top-tag"><?php largo_categories_and_tags( 1 ); ?></h5>
 					 	<?php } ?>
 
-						<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'medium' ); ?></a>
+						<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'rect_thumb' ); ?></a>
 
 							<h2 class="entry-title">
 								<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute( array( 'before' => __( 'Permalink to', 'largo' ) . ' ' ) )?>" rel="bookmark"><?php the_title(); ?></a>
