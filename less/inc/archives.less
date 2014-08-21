@@ -15,14 +15,14 @@
 	  display: inline;
 	  float: left;
 	  font-size: @baseFontSize;
-	  margin: 0 5px 0 0;
+	  margin: 0 5px 0;
 	  line-height: 1.3;
     }
 	ul {
-	  font-size: @baseFontSize;
+	  font-size: @baseFontSize - 1;
 	  float: left;
 	  list-style: none;
-	  margin: 1px 0 0;
+	  margin: 0;
 	  line-height: 1.3;
 	  li {
 	    display: inline;
@@ -49,6 +49,45 @@ article img.attachment-post-thumbnail {
   max-width: 30%;
   margin: 0 0 10px 20px;
 }
+
+/**
+ * hierarchical category pages
+ */
+.primary-featured-post,
+.secondary-featured-post {
+  padding: 0 0 24px;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 24px;
+}
+.primary-featured-post {
+  h2 {
+    line-height: 1.1;
+    margin-bottom: @baseline/3;
+    font-size: @baseFontSize * 2.25;
+  }
+  .entry-content p,
+  .entry-content ul,
+  .entry-content ol {
+    font-size: @baseFontSize;
+  }
+}
+.secondary-featured-post {
+  img {
+    margin-bottom: @baseline/4;
+  }
+  h2 {
+    margin-bottom: 12px;
+    line-height: 1.3;
+    font-size: @baseFontSize * 1.5;
+  }
+}
+.archive .stories .entry-content.with-hero {
+  margin: -22px 7% 10px 7%;
+  padding: 22px 18px;
+  width: 86%;
+  background: #fff;
+}
+
 // Date Archive
 .archive-dropdown {
   margin-bottom: @baseline/2;

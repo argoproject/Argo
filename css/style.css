@@ -2954,14 +2954,14 @@ article.story {
   display: inline;
   float: left;
   font-size: 16px;
-  margin: 0 5px 0 0;
+  margin: 0 5px 0;
   line-height: 1.3;
 }
 .archive-background .related-topics ul {
-  font-size: 16px;
+  font-size: 15px;
   float: left;
   list-style: none;
-  margin: 1px 0 0;
+  margin: 0;
   line-height: 1.3;
 }
 .archive-background .related-topics ul li {
@@ -2985,6 +2985,39 @@ article img.attachment-post-thumbnail {
   float: right;
   max-width: 30%;
   margin: 0 0 10px 20px;
+}
+/**
+ * hierarchical category pages
+ */
+.primary-featured-post,
+.secondary-featured-post {
+  padding: 0 0 24px;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 24px;
+}
+.primary-featured-post h2 {
+  line-height: 1.1;
+  margin-bottom: 8px;
+  font-size: 36px;
+}
+.primary-featured-post .entry-content p,
+.primary-featured-post .entry-content ul,
+.primary-featured-post .entry-content ol {
+  font-size: 16px;
+}
+.secondary-featured-post img {
+  margin-bottom: 6px;
+}
+.secondary-featured-post h2 {
+  margin-bottom: 12px;
+  line-height: 1.3;
+  font-size: 24px;
+}
+.archive .stories .entry-content.with-hero {
+  margin: -22px 7% 10px 7%;
+  padding: 22px 18px;
+  width: 86%;
+  background: #fff;
 }
 .archive-dropdown {
   margin-bottom: 12px;
