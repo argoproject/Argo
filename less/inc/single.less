@@ -3,6 +3,9 @@
   #content {
   	position: relative;
 	margin-left: 17.021276594%;
+	@media only screen and (max-width: 768px) {
+	  margin-left: 0;
+	}
   }
   .hero {
     text-align: center;
@@ -30,6 +33,10 @@
 	&.is-empty {
       min-height: 0;
       height: 0;
+	}
+	@media only screen and (max-width: 980px) {
+	  margin: 0 0 24px;
+	  width: 100%;
 	}
   }
   #sidebar {
