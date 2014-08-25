@@ -63,7 +63,7 @@ $youtube_url = isset( $values['youtube_url'] ) ? esc_attr( $values['youtube_url'
  		<?php if ( largo_has_categories_or_tags() && $tags === 'top' ) { ?>
 	 		<h5 class="top-tag"><?php largo_top_term(); ?></h5>
 	 	<?php } ?>
-
+	 	<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
  		<h2 class="entry-title">
  			<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute( array( 'before' => __( 'Permalink to', 'largo' ) . ' ' ) )?>" rel="bookmark"><?php the_title(); ?></a>
  		</h2>
@@ -73,7 +73,7 @@ $youtube_url = isset( $values['youtube_url'] ) ? esc_attr( $values['youtube_url'
 	</header><!-- / entry header -->
 
 	<div class="entry-content">
-		<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
+
 
 		<?php largo_excerpt( $post, 5, true, __('Continue&nbsp;Reading', 'largo'), true, false ); ?>
 
