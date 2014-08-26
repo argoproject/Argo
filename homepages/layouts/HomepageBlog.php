@@ -10,6 +10,7 @@ class HomepageBlog extends Homepage {
 	function __construct($options=array()) {
 		$defaults = array('template' => get_template_directory() . '/homepages/templates/blog.php');
 		$options = array_merge($defaults, $options);
+		$this->init($options);
 		$this->load($options);
 	}
 }

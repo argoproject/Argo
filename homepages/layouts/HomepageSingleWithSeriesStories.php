@@ -10,6 +10,16 @@ class HomepageSingleWithSeriesStories extends HomepageSingle {
 		'Home Bottom Left', 'Home Bottom Center', 'Home Bottom Right'
 	);
 
+	public function init($options=array()) {
+		$this->prominenceTerms = array(
+			array(
+				'name' => __('Homepage Top Story', 'largo'),
+				'description' => __('If you are using the Newspaper or Carousel optional homepage layout, add this label to a post to make it the top story on the homepage', 'largo'),
+				'slug' => 'top-story'
+			)
+		);
+	}
+
 	public function moreStories() {
 		return homepage_series_stories_list();
 	}

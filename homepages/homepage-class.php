@@ -19,8 +19,8 @@ class Homepage {
 	var $prominenceTerms = array();
 
 	function __construct($options=array()) {
-		$this->load($options);
 		$this->init($options);
+		$this->load($options);
 	}
 
 	public function load($options) {
