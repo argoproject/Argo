@@ -12,30 +12,20 @@ class HomepageSingleWithFeatured extends HomepageSingle {
 
 	function __construct($options=array()) {
 		$this->prominenceTerms = array(
-			//array(
-				//'name' 			=> __('Homepage Featured', 'largo'),
-				//'description' 	=> __('If you are using the Newspaper or Carousel optional homepage layout, add this label to posts to display them in the featured area on the homepage.', 'largo'),
-				//'slug' 			=> 'homepage-featured'
-			//),
 			array(
-				'name' 			=> __('Sidebar Featured Widget', 'largo'),
-				'description' 	=> __('If you are using the Sidebar Featured Posts widget, add this label to posts to determine which to display in the widget.', 'largo'),
-				'slug' 			=> 'sidebar-featured'
+				'name' => __('Homepage Featured', 'largo'),
+				'description' => __('If you are using the Newspaper or Carousel optional homepage layout, add this label to posts to display them in the featured area on the homepage.', 'largo'),
+				'slug' => 'homepage-featured'
 			),
 			array(
-				'name' 			=> __('Footer Featured Widget', 'largo'),
-				'description' 	=> __('If you are using the Footer Featured Posts widget, add this label to posts to determine which to display in the widget.', 'largo'),
-				'slug' 			=> 'footer-featured'
+				'name' => __('Featured in Series', 'largo'),
+				'description' => __('Select this option to allow this post to float to the top of any/all series landing pages sorting by Featured first.', 'largo'),
+				'slug' => 'series-featured'
 			),
 			array(
-				'name' 			=> __('Featured in Series', 'largo'),
-				'description' 	=> __('Select this option to allow this post to float to the top of any/all series landing pages sorting by Featured first.', 'largo'),
-				'slug' 			=> 'series-featured'
-			),
-			array(
-				'name' 			=> __('Featured in Category', 'largo'),
-				'description' 	=> __('This will allow you to designate a story to appear more prominently on category archive pages.', 'largo'),
-				'slug' 			=> 'category-featured'
+				'name' => __('Featured in Category', 'largo'),
+				'description' => __('This will allow you to designate a story to appear more prominently on category archive pages.', 'largo'),
+				'slug' => 'category-featured'
 			)
 		);
 

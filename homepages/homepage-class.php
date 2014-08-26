@@ -35,7 +35,7 @@ class Homepage {
 			throw new Exception('Homepage `id` can only contain letters, numbers and hyphens.');
 
 		$this->readZones();
-		$this->activateTerms();
+		add_filter('largo_prominence_terms', array($this, 'activateTerms'), 10, 1);
 	}
 
 	public function init($options=null) {}
@@ -45,82 +45,11 @@ class Homepage {
 		return get_class($this) == $activeLayout;
 	}
 
-	private function populateId() {
-		$this->id = sanitize_title($this->name);
-	}
-
-	private function activateTerms() {
-		if ($this->isActiveHomepageLayout()) {
-
-			if (!taxonomy_exists('prominence')) {
-				register_taxonomy('prominence', 'post', array(
-					'hierarchical' => true,
-					'label' => __('Post Prominence', 'largo'),
-					'query_var' => true,
-					'rewrite' => true,
-				));
-			}
-
-			if (is_admin()) {
-				$changed = false;
-				$terms = get_terms('prominence', array(
-					'hide_empty' => false,
-					'fields' => 'all'
-				));
-				$names = array_map(function($arg) { return $arg->name; }, $terms);
-
-				$term_ids = array();
-				foreach ($this->prominenceTerms as $term ) {
-					if (!in_array($term['name'], $names)) {
-						$new_id = wp_insert_term(
-							$term['name'], 'prominence',
-							array(
-								'description' => $term['description'],
-								'slug' => $term['slug']
-							)
-						);
-						$term_ids[] = $new_id;
-						$changed = true;
-					} else {
-						foreach ($terms as $idx => $val) {
-							if ($val->name == $term['name']) {
-								$term_ids[] = $val->term_id;
-								break;
-							}
-						}
-					}
-				}
-
-				$this->prominenceTermsIds = $term_ids;
-				//error_log(var_export($this->prominenceTermsIds, true));
-
-				if ($changed)
-					delete_option('prominence_children');
-
-				add_filter('wp_terms_checklist_args', array(
-					$this, 'filterProminenceTermsChecklistArgs'), 10, 2);
-			}
-		}
-	}
-
-	public function filterProminenceTermsChecklistArgs($args, $post_id) {
-		//error_log(var_export($args, true));
-		if ($args['taxonomy'] == 'prominence')
-			$args['popular_cats'] = $this->prominenceTermsIds;
-
-		return $args;
-	}
-
-	private function readZones() {
-		global $wp_filesystem;
-
-		$contents = $wp_filesystem->get_contents($this->template);
-		$tokens = token_get_all($contents);
-		$filtered = array_filter($tokens, function($t) { return $t[0] == T_VARIABLE; });
-		$variables = array_map(function($item) { return str_replace("$", "", $item[1]); }, $filtered);
-		$uniques = array_values(array_unique($variables));
-
-		$this->zones = $uniques;
+	public function activateTerms($largoProminenceTerms=array()) {
+		if ($this->isActiveHomepageLayout())
+			return array_merge($largoProminenceTerms, $this->prominenceTerms);
+		else
+			return $largoProminenceTerms;
 	}
 
 	public function render() {
@@ -177,6 +106,22 @@ class Homepage {
 	public function setRightRail() {
 		global $largo;
 		$rail = $largo['home_rail'] = $this->rightRail;
+	}
+
+	private function populateId() {
+		$this->id = sanitize_title($this->name);
+	}
+
+	private function readZones() {
+		global $wp_filesystem;
+
+		$contents = $wp_filesystem->get_contents($this->template);
+		$tokens = token_get_all($contents);
+		$filtered = array_filter($tokens, function($t) { return $t[0] == T_VARIABLE; });
+		$variables = array_map(function($item) { return str_replace("$", "", $item[1]); }, $filtered);
+		$uniques = array_values(array_unique($variables));
+
+		$this->zones = $uniques;
 	}
 }
 
