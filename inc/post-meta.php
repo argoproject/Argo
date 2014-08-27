@@ -32,6 +32,17 @@ function largo_remove_default_post_screen_metaboxes() {
 add_action('admin_menu','largo_remove_default_post_screen_metaboxes');
 
 /**
+ * Remove meta boxes that are generated automatically by WordPress (i.e. for custom taxonomies)
+ * or other non-default WordPress meta boxes that we want to hide or customize.
+ *
+ * @since 0.4
+ */
+function largo_remove_other_post_screen_metaboxes() {
+	remove_meta_box('prominencediv', 'post', 'normal');
+}
+add_action('admin_menu', 'largo_remove_other_post_screen_metaboxes');
+
+/**
  * Show all of the other metaboxes by default (particularly to show the excerpt)
  *
  * @since 1.0
@@ -98,6 +109,24 @@ largo_add_meta_box(
 	'normal',
 	'core'
 );
+
+/**
+ * Add our prominence taxonomy meta box with custom behavior.
+ */
+function largo_add_custom_prominence_meta_box($largoProminenceTerms) {
+	add_action('add_meta_boxes', function() use ($largoProminenceTerms) {
+		add_meta_box(
+			'largo_prominence_meta',
+			__( 'Post Prominence', 'largo' ),
+			'largo_prominence_meta_box',
+			'post',
+			'side',
+			'default',
+			$largoProminenceTerms
+		);
+	}, 10);
+}
+add_action('largo_after_create_prominence_taxonomy', 'largo_add_custom_prominence_meta_box', 10, 1);
 
 
 /**
@@ -234,3 +263,58 @@ function largo_top_terms_js() {
   }
 }
 add_action( 'admin_enqueue_scripts', 'largo_top_terms_js' );
+
+/**
+ * Callback function to draw our custom meta box for the prominence taxonomy
+ */
+function largo_prominence_meta_box($post, $args) {
+	$largoProminenceTerms = $args['args'];
+
+	$terms = get_terms('prominence', array(
+		'hide_empty' => false,
+		'fields' => 'all'
+	));
+
+	$slugs = array_map(function($arg) { return $arg['slug']; }, $largoProminenceTerms);
+
+	$termList = array();
+	foreach ($terms as $k => $v) {
+		if (in_array($v->slug, $slugs))
+			$termList[] = $v;
+	}
+
+	$args = array(
+		'taxonomy' => 'prominence',
+		'disabled' => !current_user_can($tax->cap->assign_terms),
+		'popular_cats' => array()
+	);
+
+	$args['selected_cats'] = wp_get_object_terms(
+		$post->ID, 'prominence', array_merge($args, array('fields' => 'ids'))
+	);
+
+	$walker = new Walker_Category_Checklist;
+
+?>
+	<div id="prominence-all" class="tabs-panel">
+		<input type='hidden' name='tax_input[prominence][]' value='0' />
+		<ul id="prominencechecklist" data-wp-lists="list:prominence" class="categorychecklist form-no-clear">
+<?php
+	$checkedTerms = array();
+	$keys = array_keys($termList);
+
+	foreach($keys as $k) {
+		if (in_array($termList[$k]->term_id, $args['selected_cats'])) {
+			$checkedTerms[] = $termList[$k];
+			unset($termList[$k]);
+		}
+	}
+
+	// Put checked terms on top
+	echo call_user_func_array(array(&$walker, 'walk'), array($checkedTerms, 0, $args));
+	echo call_user_func_array(array(&$walker, 'walk'), array($termList, 0, $args));
+?>
+		</ul>
+	</div>
+<?php
+}
