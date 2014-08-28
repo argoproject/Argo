@@ -234,7 +234,7 @@ function largo_top_tag_display() {
 	global $post;
 
 	$top_term = get_post_meta( $post->ID, 'top_term', TRUE );
-	$terms = get_the_terms( $post->ID, array( 'series', 'category', 'post_tag' ) );
+	$terms = wp_get_object_terms($post->ID, array( 'series', 'category', 'post_tag' ) );
 
 	if ( ! $terms ) {
 		return; //no post terms yet? Disregard this then
