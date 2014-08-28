@@ -10,6 +10,9 @@
 			$checklists = $('.categorychecklist').not( "[id^='prominence'], [id^='post-type']" );
 
 		$("input[type='checkbox']", $checklists).on( 'click', function() {
+      if ($dropdown.is(':disabled'))
+        $dropdown.removeAttr('disabled');
+
 			var value = $(this).val();
 			if (this.checked) {
 				//make sure it exists

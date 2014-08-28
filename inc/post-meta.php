@@ -236,17 +236,14 @@ function largo_top_tag_display() {
 	$top_term = get_post_meta( $post->ID, 'top_term', TRUE );
 	$terms = wp_get_object_terms($post->ID, array( 'series', 'category', 'post_tag' ) );
 
-	if ( ! $terms ) {
-		return; //no post terms yet? Disregard this then
-	}
-
 	echo '<p><strong>' . __('Top Term', 'largo') . '</strong><br />';
 	echo __('Identify which of this posts\'s terms is primary.') . '</p>';
-	echo '<select name="top_term" id="top_term" class="dropdown">';
 
-	foreach( $terms as $term ) {
+	$disabled = (empty($terms))? 'disabled':'';
+	echo '<select style="min-width: 5em;" name="top_term" id="top_term" class="dropdown" ' . $disabled . '>';
+
+	foreach ($terms as $term)
 		echo '<option value="' . (int) $term->term_id . '"' . selected( $term->term_id, $top_term, FALSE ) . ">" . $term->name . '</option>';
-	}
 
 	echo '</select>';
 }
