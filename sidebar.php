@@ -4,7 +4,19 @@
  */
 $span_class = is_single() ? "span2" : "span4" ;
 
-do_action('largo_before_sidebar');
+$custom_sidebar = false;
+//get a custom sidebar if appropriate
+if ( is_singular() ) {
+	$custom_sidebar = get_post_meta(get_the_ID(), 'custom_sidebar', true);
+	// for backward compatibility
+	if ( $custom_sidebar == 'default' ) $custom_sidebar == 'none';
+} else if ( is_archive() ) {
+	$term = get_queried_object();
+	$custom_sidebar = largo_get_term_meta( $term->taxonomy, $term->term_id, 'custom_sidebar', true );
+}
+
+if (($custom_sidebar !== 'none' && is_singular()) || !is_singular()) {
+	do_action('largo_before_sidebar');
 ?>
 <aside id="sidebar" class="<?php echo $span_class; ?>">
 	<?php do_action('largo_before_sidebar_content'); ?>
@@ -12,35 +24,16 @@ do_action('largo_before_sidebar');
 		<?php
 			do_action('largo_before_sidebar_widgets');
 
-			$custom_sidebar = false;
-			//get a custom sidebar if appropriate
-			if ( is_singular() ) {
-				$custom_sidebar = get_post_meta(get_the_ID(), 'custom_sidebar', true);
-				// for backward compatibility
-				if ( $custom_sidebar == 'default' ) $custom_sidebar == 'none';
-			} else if ( is_archive() ) {
-				$term = get_queried_object();
-				$custom_sidebar = largo_get_term_meta( $term->taxonomy, $term->term_id, 'custom_sidebar', true );
-			}
-
 			//load custom sidebar if appropriate
 			if ( $custom_sidebar ) {
-				if ($custom_sidebar !== 'none' ) {	// just in case someone creates a sidebar region named 'none', we check this
-					dynamic_sidebar( $custom_sidebar );
-					if ( $custom_sidebar == 'sidebar-single' && !is_active_sidebar( $custom_sidebar ) ) {
-						dynamic_sidebar( 'sidebar-main' );
-					}
-				} else if ( is_archive() ) {
+				dynamic_sidebar( $custom_sidebar );
+				if ( $custom_sidebar == 'sidebar-single' && !is_active_sidebar( $custom_sidebar ) )
 					dynamic_sidebar( 'sidebar-main' );
-				}
-			//show nothing on a single post/page
-			} elseif ( is_singular() ) {
-				// do nothing. sidebars on the new post template are bad, m'kay?
-
 			//load archive/topic sidebar if activated
 			} elseif ( ( is_archive() || is_tax() ) && of_get_option( 'use_topic_sidebar' ) && is_active_sidebar( 'topic-sidebar' ) ) {
 				dynamic_sidebar( 'topic-sidebar' );
-
+			} elseif ( is_archive() ) {
+				dynamic_sidebar( 'sidebar-main' );
 			//load some widgets if the main sidebar is empty
 			} elseif ( ! dynamic_sidebar( 'sidebar-main' ) ) {
 				the_widget( 'largo_about_widget', array( 'title' => __('About This Site', 'largo') ) );
@@ -75,4 +68,5 @@ do_action('largo_before_sidebar');
 	<?php do_action('largo_after_sidebar_content'); ?>
 </aside>
 <?php
-do_action('largo_after_sidebar');
+	do_action('largo_after_sidebar');
+}
