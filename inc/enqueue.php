@@ -26,7 +26,7 @@ if ( ! function_exists( 'largo_enqueue_js' ) ) {
 
 		//Load the child theme's style.css if we're actually running a child theme of Largo
 		$theme = wp_get_theme();
-		if ( is_object($theme->parent()) && $theme->parent()->Template == 'largo' ) {
+		if ( is_object($theme->parent()) && preg_match('/^largo/', $theme->parent()->Template) ) {
 			wp_enqueue_style( 'largo-child-styles', get_stylesheet_directory_uri() . '/style.css', array('largo-stylesheet'));
 		}
 	}
