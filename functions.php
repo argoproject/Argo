@@ -133,6 +133,7 @@ class Largo {
 			'/inc/post-templates.php',
 			'/inc/home-templates.php',
 			'/inc/update.php',
+			'/inc/registration.php',
 		);
 
 		if ( $this->is_less_enabled() ) {
