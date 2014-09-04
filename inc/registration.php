@@ -7,19 +7,18 @@
  *
  * @uses apply_filters() filter $filtered_results
  * @uses largo_show_user_form() to display the user registration form
- * @param string $user_login The username
- * @param string $user_email The user's email
+ * @param array $values the values for the sign up form inputs
  * @param array $errors
  */
-function largo_signup_user( $user_login = '', $user_email = '', $errors = '' ) {
+function largo_signup_user($values=array(), $errors = '' ) {
 	if ( !is_wp_error($errors) )
 		$errors = new WP_Error();
 
-	$signup_user_defaults = array(
-		'user_login'  => $user_login,
-		'user_email' => $user_email,
+	$form_values = array_merge(array(
+		'user_login'  => '',
+		'user_email' => '',
 		'errors'     => $errors,
-	);
+	), $values);
 
 	/**
 	 * Filter the default user variables used on the user sign-up form.
@@ -34,18 +33,14 @@ function largo_signup_user( $user_login = '', $user_email = '', $errors = '' ) {
 	 *     @type array  $errors     An array of possible errors relevant to the sign-up user.
 	 * }
 	 */
-	$filtered_results = apply_filters( 'signup_user_init', $signup_user_defaults );
-	$user_login = $filtered_results['user_login'];
-	$user_email = $filtered_results['user_email'];
-	$errors = $filtered_results['errors'];
+	$form_values = apply_filters('largo_signup_user_init', $form_values);
+	$errors = $form_values['errors'];
 	?>
 	<form id="setupform" method="post">
 		<?php
-		/** This action is documented in wp-signup.php */
 		do_action( 'signup_hidden_fields', 'validate-user' );
 		?>
-		<?php largo_show_user_form($user_login, $user_email, $errors); ?>
-
+		<?php largo_show_user_form($form_values, $errors); ?>
 		<input id="signupblog" type="hidden" name="signup_for" value="user" />
 		<p class="submit"><input type="submit" name="submit" class="btn btn-default submit" value="<?php esc_attr_e('Submit', 'largo') ?>" /></p>
 		<?php wp_nonce_field('largo_user_registration', 'largo_user_registration_nonce'); ?>
@@ -62,7 +57,8 @@ function largo_signup_user( $user_login = '', $user_email = '', $errors = '' ) {
  * @param string $user_email The entered email address
  * @param array $errors
  */
-function largo_show_user_form($user_login = '', $user_email = '', $errors = '') {
+function largo_show_user_form($values=array(), $errors='') {
+	extract($values);
 ?>
 	<div class="form-group">
 		<label for="user_login"><?php _e('Username', 'largo'); ?></label>
@@ -99,9 +95,17 @@ function largo_show_user_form($user_login = '', $user_email = '', $errors = '') 
 	 *
 	 * @param array $errors An array possibly containing 'user_login' or 'user_email' errors.
 	 */
-	do_action('signup_extra_fields', $errors);
+	do_action('largo_registration_extra_fields', $values, $errors);
 }
 
+/**
+ * Validates Larog user registration fields.
+ *
+ * @since 0.4
+ *
+ * @uses apply_filters() largo_validate_user_signup_extra_fields to validate extra/custom signup
+ * fields and return error messages when appropriate.
+ */
 function largo_validate_user_signup() {
 	$result = wpmu_validate_user_signup($_POST['user_login'], $_POST['user_email']);
 	extract($result);
@@ -115,19 +119,28 @@ function largo_validate_user_signup() {
 	}
 
 	$extras = largo_registration_get_extra_fields($_POST);
+	$result = array_merge($result, $extras);
 
 	/**
 	 * Fires at the end of the largo user signup validation.
 	 *
 	 * @since 0.4
 	 *
+	 * @param array $result An array of the original form values and any errors associated with them
 	 * @param array $extras An array of any custom fields added to the registration form.
 	 */
-	do_action('largo_validate_user_signup_extra_fields', $extras);
+	$result = apply_filters('largo_validate_user_signup_extra_fields', $result, $extras);
 
 	return $result;
 }
 
+/**
+ * Processes the data from the user registration form, creating a new user
+ *
+ * @since 0.4
+ *
+ * @param array $postData All of the registration form's data from the $_POST variable
+ */
 function largo_process_registration_form($postData) {
 	$defaults = largo_get_default_user_field_names();
 
@@ -150,6 +163,13 @@ function largo_process_registration_form($postData) {
 	return $userId;
 }
 
+/**
+ * Returns an array containing a list of the names of default fields for WordPress users.
+ *
+ * @since 0.4
+ *
+ * TODO: This might be better placed somewhere else as a general utility
+ */
 function largo_get_default_user_field_names() {
 	global $wpdb;
 
@@ -161,6 +181,13 @@ function largo_get_default_user_field_names() {
 	return $fields;
 }
 
+/**
+ * Separates the standard registration fields (user_login, user_email, user_pass) from any
+ * custom fields that were submitted along with them. Returns the custom/extra fields as an
+ * array.
+ *
+ * @since 0.4
+ */
 function largo_registration_get_extra_fields($postData) {
 	$extras = $postData;
 	$default_fields = array_merge(largo_get_default_user_field_names(), array(
@@ -176,6 +203,11 @@ function largo_registration_get_extra_fields($postData) {
 	return $extras;
 }
 
+/**
+ * Verify the Largo user registration form nonce field
+ *
+ * @since 0.4
+ */
 function largo_verify_user_registration_nonce() {
 	if (!isset($_POST['largo_user_registration_nonce']) || !wp_verify_nonce($_POST['largo_user_registration_nonce'], 'largo_user_registration'))
 		return false;
@@ -183,7 +215,13 @@ function largo_verify_user_registration_nonce() {
 		return true;
 }
 
+/**
+ * Renders the Largo user registration form. Can be used as a shortcode: [largo_registration_form]
+ *
+ * @since 0.4
+ */
 function largo_registration_form() {
+	// TODO use sprintf and __ for the success message
 	$registerSuccessMessage = apply_filters(
 		'largo_registration_success_message',
 		'Thanks for registering! Login to ' . get_bloginfo('name') . ' by <a href="' . wp_login_url() . '">clicking here</a>.'
@@ -197,23 +235,25 @@ function largo_registration_form() {
 				return false;
 			}
 
-			$result = largo_validate_user_signup($_POST['user_login'], $_POST['user_email']);
-			extract($result);
+			$form_values = largo_validate_user_signup($_POST['user_login'], $_POST['user_email']);
+			$errors = $form_values['errors'];
+			unset($form_values['errors']);
 
 			if ($errors->get_error_code()) {
-				largo_signup_user($user_login, $user_email, $errors);
+				largo_signup_user($form_values, $errors);
 				return false;
 			}
 
 			$register = largo_process_registration_form($_POST);
 			if (is_wp_error($register)) {
-				largo_signup_user($user_login, $user_email, $register);
+				largo_signup_user($form_values, $register);
 			} else {
 				echo '<div id="largo-registration-success-msg">' . $registerSuccessMessage . '</div>';
 			}
 		} else
 			largo_signup_user();
 	} else {
+		// TODO use sprintf and __ for the logged in message
 		$userLoggedInMessage = apply_filters(
 			'largo_user_logged_in_message',
 			'No need to register, you\'re already logged in. Continue to <a href="' . get_site_url() . '">' . get_bloginfo('name') . '</a>.'
