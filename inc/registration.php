@@ -184,12 +184,6 @@ function largo_verify_user_registration_nonce() {
 }
 
 function largo_registration_form() {
-	$proceed = largo_verify_user_registration_nonce();
-	if (!$proceed) {
-		echo '<div class="alert alert-error>' . _e('We were unable to verify the origin of your form submission.', 'largo') . '</div>';
-		return false;
-	}
-
 	$registerSuccessMessage = apply_filters(
 		'largo_registration_success_message',
 		'Thanks for registering! Login to ' . get_bloginfo('name') . ' by <a href="' . wp_login_url() . '">clicking here</a>.'
@@ -197,6 +191,12 @@ function largo_registration_form() {
 
 	if (!is_user_logged_in()) {
 		if (!empty($_POST)) {
+			$proceed = largo_verify_user_registration_nonce();
+			if (!$proceed) {
+				echo '<div class="alert alert-error>' . _e('We were unable to verify the origin of your form submission.', 'largo') . '</div>';
+				return false;
+			}
+
 			$result = largo_validate_user_signup($_POST['user_login'], $_POST['user_email']);
 			extract($result);
 
