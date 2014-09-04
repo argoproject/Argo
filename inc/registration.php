@@ -207,7 +207,6 @@ function largo_registration_form() {
 
 			$register = largo_process_registration_form($_POST);
 			if (is_wp_error($register)) {
-				var_log($register);
 				largo_signup_user($user_login, $user_email, $register);
 			} else {
 				echo '<div id="largo-registration-success-msg">' . $registerSuccessMessage . '</div>';
