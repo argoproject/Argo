@@ -186,7 +186,7 @@ function largo_verify_user_registration_nonce() {
 function largo_registration_form() {
 	$proceed = largo_verify_user_registration_nonce();
 	if (!$proceed) {
-		'We were unable to verify the origin of your form submission.';
+		echo '<div class="alert alert-error>' . _e('We were unable to verify the origin of your form submission.', 'largo') . '</div>';
 		return false;
 	}
 
