@@ -48,6 +48,7 @@ function largo_signup_user( $user_login = '', $user_email = '', $errors = '' ) {
 
 		<input id="signupblog" type="hidden" name="signup_for" value="user" />
 		<p class="submit"><input type="submit" name="submit" class="btn btn-default submit" value="<?php esc_attr_e('Submit', 'largo') ?>" /></p>
+		<?php wp_nonce_field('largo_user_registration', 'largo_user_registration_nonce'); ?>
 	</form>
 	<?php
 }
@@ -175,7 +176,20 @@ function largo_registration_get_extra_fields($postData) {
 	return $extras;
 }
 
+function largo_verify_user_registration_nonce() {
+	if (!isset($_POST['largo_user_registration_nonce']) || !wp_verify_nonce($_POST['largo_user_registration_nonce'], 'largo_user_registration'))
+		return false;
+	else
+		return true;
+}
+
 function largo_registration_form() {
+	$proceed = largo_verify_user_registration_nonce();
+	if (!$proceed) {
+		'We were unable to verify the origin of your form submission.';
+		return false;
+	}
+
 	$registerSuccessMessage = apply_filters(
 		'largo_registration_success_message',
 		'Thanks for registering! Login to ' . get_bloginfo('name') . ' by <a href="' . wp_login_url() . '">clicking here</a>.'
