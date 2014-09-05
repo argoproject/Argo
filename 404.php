@@ -5,7 +5,7 @@
 get_header(); ?>
 
 <div id="content" class="span8" role="main">
-	<?php get_template_part( 'content', 'not-found' ); ?>
+	<?php get_template_part( 'partials/content', 'not-found' ); ?>
 </div><!--#content -->
 
 <?php get_sidebar(); ?>

@@ -87,12 +87,12 @@ get_header();
 				rewind_posts();
 
 				while ( have_posts() ) : the_post();
-					get_template_part( 'content', 'archive' );
+					get_template_part( 'partials/content', 'archive' );
 				endwhile;
 
 				largo_content_nav( 'nav-below' );
 			} else {
-				get_template_part( 'content', 'not-found' );
+				get_template_part( 'partials/content', 'not-found' );
 			}
 		?>
 		</div><!--#content-->

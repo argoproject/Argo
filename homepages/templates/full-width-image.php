@@ -68,7 +68,7 @@ $shown_ids[] = $bigStoryPost->ID; //don't repeat the current post
 			rewind_posts();
 			while (have_posts()) {
 				the_post();
-				get_template_part('content', 'river');
+				get_template_part('partials/content', 'river');
 			}
 			largo_content_nav('nav-below');
 		?>

@@ -9,9 +9,9 @@ get_header();
 	<?php
 		while ( have_posts() ) : the_post();
 			if ( of_get_option( 'single_template' ) == 'classic' ) {
-				get_template_part( 'content', 'single-classic' );
+				get_template_part( 'partials/content', 'single-classic' );
 			} else {
-				get_template_part( 'content', 'single' );
+				get_template_part( 'partials/content', 'single' );
 			}
 
 			if ( is_active_sidebar( 'article-bottom' ) && is_single() ){

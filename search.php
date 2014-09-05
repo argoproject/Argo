@@ -20,14 +20,14 @@ get_header();
 		<?php
 			while ( have_posts() ) : the_post();
 				if ( get_post_type( $post ) == 'argolinks' ) {
-					get_template_part( 'content', 'argolinks' );
+					get_template_part( 'partials/content', 'argolinks' );
 				} else {
-					get_template_part( 'content', 'search' );
+					get_template_part( 'partials/content', 'search' );
 				}
 			endwhile;
     		largo_content_nav( 'nav-below' );
     	} else {
-			get_template_part( 'content', 'not-found' );
+			get_template_part( 'partials/content', 'not-found' );
 		}
     ?>
 </div><!--#content-->

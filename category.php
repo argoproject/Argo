@@ -100,12 +100,12 @@ global $tags;
 				// and finally  go through the loop as usual
 
 				while ( have_posts() ) : the_post();
-					get_template_part( 'content', 'archive' );
+					get_template_part( 'partials/content', 'archive' );
 				endwhile;
 
 				largo_content_nav( 'nav-below' );
 			} else {
-				get_template_part( 'content', 'not-found' );
+				get_template_part( 'partials/content', 'not-found' );
 			}
 		?>
 		</div><!--#content-->

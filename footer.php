@@ -20,7 +20,7 @@
 <div class="footer-bg clearfix">
 	<footer id="site-footer">
 		<div id="supplementary" class="row-fluid">
-			<?php get_template_part( 'footer-part', 'widget-area' ); ?>
+			<?php get_template_part( 'partials/footer-part', 'widget-area' ); ?>
 		</div>
 		<div id="boilerplate" class="row-fluid clearfix">
 			<p><?php largo_copyright_message(); ?></p>
@@ -35,7 +35,7 @@
 	</footer>
 </div>
 
-<?php get_template_part( 'largo-sticky-footer' ); ?>
+<?php get_template_part( 'partials/largo-sticky-footer' ); ?>
 
 <?php wp_footer(); ?>
 

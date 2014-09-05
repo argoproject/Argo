@@ -8,7 +8,7 @@ get_header();
 <div id="content" class="span8" role="main">
 	<?php
 		the_post();
-		get_template_part( 'content', 'page' );
+		get_template_part( 'partials/content', 'page' );
 	?>
 </div><!-- #content -->
 
