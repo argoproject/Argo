@@ -29,6 +29,7 @@ if ( is_front_page() || is_home() ): ?>
 				?>
 				</ul>
 				<ul class="nav visible-phone">
+					<?php if (has_nav_menu('global-nav')) { ?>
 					<li class="menu-item-has-childen dropdown">
 						<a href="javascript:void(0);" class="dropdown-toggle"><?php
 								//try to get the menu name from global-nav
@@ -47,6 +48,7 @@ if ( is_front_page() || is_home() ): ?>
 							largo_cached_nav_menu($args);
 						?>
 					</li>
+					<?php } ?>
 				</ul>
 			</div>
 	</div>

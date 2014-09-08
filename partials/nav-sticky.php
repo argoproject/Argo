@@ -48,6 +48,8 @@
 							'walker'	 => new Bootstrap_Walker_Nav_Menu()
 						);
 						largo_cached_nav_menu($args);
+
+						if (has_nav_menu('global-nav')) {
 						?>
 						<li class="menu-item-has-childen dropdown">
 							<a href="javascript:void(0);" class="dropdown-toggle"><?php
@@ -67,6 +69,7 @@
 								largo_cached_nav_menu($args);
 							?>
 						</li>
+						<?php } ?>
 					</ul>
 				</div>
 		</div>
