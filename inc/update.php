@@ -8,11 +8,7 @@
  */
 function largo_version() {
 	$theme = wp_get_theme();
-
-	if (strstr($theme->template, 'largo') && strstr($theme->stylesheet, 'largo') && strstr($theme->get('Name'), 'Project Largo'))
-		return $theme->get('Version');
-
-	return false;
+	return $theme->get('Version');
 }
 
 /**
