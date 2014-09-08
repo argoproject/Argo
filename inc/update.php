@@ -8,6 +8,9 @@
  */
 function largo_version() {
 	$theme = wp_get_theme();
+	$parent = $theme->parent();
+	if (!empty($parent))
+		return $parent->get('Version');
 	return $theme->get('Version');
 }
 
@@ -15,18 +18,13 @@ function largo_version() {
  * Checks if widgets need to be placed by checking old theme settings
  */
 function largo_need_updates() {
-
-	// only do this for newer versions of largo
-	if ( version_compare(largo_version(), '0.3', '<' )) return false;
-
 	// try to figure out which versions of the options are stored. Implemented in 0.3
-	if ( of_get_option('largo_version') ) {
-		$old_version = floatval( of_get_option('largo_version') );
-		if ( $old_version < largo_version() ) {
+	if (of_get_option('largo_version')) {
+		$compare = version_compare(largo_version(), of_get_option('largo_version'));
+		if ($compare == 1)
 			return true;
-		} else {
+		else
 			return false;
-		}
 	}
 
 	// if 'largo_version' isn't present, the settings are old!
@@ -39,14 +37,14 @@ function largo_need_updates() {
  * @since 0.3
  */
 function largo_perform_update() {
-	if ( largo_need_updates() ) {
-		if ( largo_version() == 0.3 ) {
-			largo_update_widgets();
-			largo_home_transition();
-			largo_transition_nav_menus();
-			of_set_option('single_template', 'classic');
-		}
+	if (largo_need_updates()) {
+		largo_update_widgets();
+		largo_home_transition();
+		largo_transition_nav_menus();
+		of_set_option('single_template', 'classic');
+		of_set_option('largo_version', largo_version());
 	}
+
 	if ( is_admin() ) {
 		largo_check_deprecated_widgets();
 	}
@@ -270,8 +268,8 @@ function largo_transition_nav_menus() {
 	foreach ($locations as $location => $id)
 		$existing_items[$location] = wp_get_nav_menu_items($id);
 
-	// These nav menu locations get folded into main-nav
-	$transition = array('navbar-categories', 'navbar-supplemental');
+	// These nav menu locations/menus get folded into main-nav menu
+	$transition = array('navbar-categories', 'navbar-supplemental', 'sticky-nav');
 
 	// Move all the category, supplemental items to main-nav.
 	// Remove category and supplemental navs.
@@ -296,13 +294,10 @@ function largo_transition_nav_menus() {
 				wp_update_nav_menu_item($locations['main-nav'], $item->ID, $attrs);
 			}
 		}
+		// Get rid of the menu
 		wp_delete_nav_menu($locations[$location_slug]);
+		unset($locations[$location_slug]);
 	}
 
-	// Get rid of the sticky-nav
-	wp_delete_nav_menu($locations['sticky-nav']);
-
-	unset($locations['navbar-categories']);
-	unset($locations['navbar-supplemental']);
 	set_theme_mod('nav_menu_locations', $locations);
 }
