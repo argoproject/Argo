@@ -28,7 +28,7 @@ class TopStories extends Homepage {
 			array(
 				'name' => __('Top Story', 'largo'),
 				'description' 	=> __('If you are using the Newspaper or Carousel optional homepage layout, add this label to a post to make it the top story on the homepage', 'largo'),
-		    	'slug' 			=> 'top-story' )
+		    	'slug' 			=> 'top-story'
 			),
 			array(
 				'name' => __('Homepage Featured', 'largo'),
