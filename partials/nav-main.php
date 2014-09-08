@@ -18,7 +18,7 @@ if ( is_front_page() || is_home() ): ?>
 		<ul class="nav">
 			<?php
 					$args = array(
-						'theme_location' => 'navbar-categories',
+						'theme_location' => 'main-nav',
 						'depth'		 => 0,
 						'container'	 => false,
 						'items_wrap' => '%3$s',

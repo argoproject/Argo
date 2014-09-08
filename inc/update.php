@@ -43,6 +43,7 @@ function largo_perform_update() {
 		if ( largo_version() == 0.3 ) {
 			largo_update_widgets();
 			largo_home_transition();
+			largo_transition_nav_menus();
 			of_set_option('single_template', 'classic');
 		}
 	}
@@ -252,4 +253,56 @@ function largo_deprecated_sidebar_widget() { ?>
 	<?php printf( __( 'You are using the <strong>Largo Sidebar Featured Posts</strong> widget, which is deprecated and will be removed from future versions of Largo. Please <a href="%s">change your widget settings</a> to use its replacement, <strong>Largo Featured Posts</strong>.', 'largo' ), admin_url( 'widgets.php' ) ); ?>
 	</p></div>
 	<?php
+}
+
+function largo_transition_nav_menus() {
+	$locations = get_nav_menu_locations();
+	$main_nav = wp_get_nav_menu_object('Main Navigation');
+	if (!$main_nav) {
+		$main_nav_id = wp_create_nav_menu('Main Navigation');
+		$locations['main-nav'] = $main_nav_id;
+	} else {
+		$locations['main-nav'] = $main_nav->term_id;
+	}
+
+	// Get the menu items for each menu
+	$existing_items = array();
+	foreach ($locations as $location => $id)
+		$existing_items[$location] = wp_get_nav_menu_items($id);
+
+	// These nav menu locations get folded into main-nav
+	$transition = array('navbar-categories', 'navbar-supplemental');
+
+	// Move all the category, supplemental items to main-nav.
+	// Remove category and supplemental navs.
+	foreach ($transition as $location_slug) {
+		$items = $existing_items[$location_slug];
+		if ($items) {
+			foreach ($items as $idx => $item) {
+				$meta = get_metadata('post', $item->ID);
+				$attrs = array(
+					'menu-item-type' => $meta['_menu_item_type'][0],
+					'menu-item-menu-item-parent' => $meta['_menu_item_menu_item_parent'][0],
+					'menu-item-parent-id' => $meta['_menu_item_menu_item_parent'][0],
+					'menu-item-object-id' => $meta['_menu_item_object_id'][0],
+					'menu-item-object' => $meta['_menu_item_object'][0],
+					'menu-item-target' => $meta['_menu_item_target'][0],
+					'menu-item-classes' => $meta['_menu_item_classes'][0],
+					'menu-item-xfn' => $meta['_menu_item_xfn'][0],
+					'menu-item-url' => $meta['_menu_item_url'][0],
+					'menu-item-title' => $item->post_title,
+					'menu-item-attr-title' => $item->post_excerpt
+				);
+				wp_update_nav_menu_item($locations['main-nav'], $item->ID, $attrs);
+			}
+		}
+		wp_delete_nav_menu($locations[$location_slug]);
+	}
+
+	// Get rid of the sticky-nav
+	wp_delete_nav_menu($locations['sticky-nav']);
+
+	unset($locations['navbar-categories']);
+	unset($locations['navbar-supplemental']);
+	set_theme_mod('nav_menu_locations', $locations);
 }

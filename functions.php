@@ -170,9 +170,7 @@ class Largo {
 
 		$menus = array(
 			'global-nav'         	=> __( 'Global Navigation', 'largo' ),
-			'sticky-nav'          => __( 'Sticky Navigation', 'largo' ),
-			'navbar-categories'     => __( 'Navbar Categories List', 'largo' ),
-			'navbar-supplemental'	=> __( 'Navbar Supplemental Links', 'largo' ),
+			'main-nav'          => __( 'Main Navigation', 'largo' ),
 			'dont-miss'       		=> __( 'Don\'t Miss', 'largo' ),
 			'footer'          		=> __( 'Footer Navigation', 'largo' ),
 			'footer-bottom'			=> __( 'Footer Bottom', 'largo' )
