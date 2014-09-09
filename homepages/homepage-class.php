@@ -129,7 +129,7 @@ class HomepageLayoutFactory {
 	var $layouts = array();
 
 	function __construct() {
-		add_action('widgets_init', array($this, 'register_active_layout'), 100);
+		add_action('init', array($this, 'register_active_layout'), 100);
 	}
 
 	function register($layoutClass) {
