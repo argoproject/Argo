@@ -126,7 +126,7 @@ function largo_show_user_form($values=array(), $errors='', $options=array()) {
  * @uses apply_filters() largo_validate_user_signup_extra_fields to validate extra/custom signup
  * fields and return error messages when appropriate.
  */
-function largo_validate_user_signup() {
+function largo_validate_user_signup($options=array()) {
 	$result = wpmu_validate_user_signup($_POST['user_login'], $_POST['user_email']);
 
 	// Since wpmu_validate_user_signup doesn't use the same fields as WP User,
@@ -145,6 +145,11 @@ function largo_validate_user_signup() {
 
 		$errors->add('user_pass', __('Please enter a password.', 'largo'));
 		$result['errors'] = $errors;
+	}
+
+	foreach ($options as $option) {
+		if (empty($_POST[$option]))
+			$errors->add($option, __('This field is required.', 'largo'));
 	}
 
 	$extras = largo_registration_get_extra_fields($_POST);
@@ -267,7 +272,7 @@ function largo_registration_form($attrs) {
 				return false;
 			}
 
-			$form_values = largo_validate_user_signup($_POST['user_login'], $_POST['user_email']);
+			$form_values = largo_validate_user_signup($attrs);
 			$errors = $form_values['errors'];
 			unset($form_values['errors']);
 
