@@ -268,8 +268,7 @@ function largo_registration_form($attrs) {
 		if (!empty($_POST)) {
 			$proceed = largo_verify_user_registration_nonce();
 			if (!$proceed) {
-				echo '<div class="alert alert-error>' . _e('We were unable to verify the origin of your form submission.', 'largo') . '</div>';
-				return false;
+				return '<div class="alert alert-error>' . _e('We were unable to verify the origin of your form submission.', 'largo') . '</div>';
 			}
 
 			$form_values = largo_validate_user_signup($attrs);
@@ -277,25 +276,37 @@ function largo_registration_form($attrs) {
 			unset($form_values['errors']);
 
 			if ($errors->get_error_code()) {
+				ob_start();
 				largo_signup_user($form_values, $errors, $attrs);
-				return false;
+				$ret = ob_get_contents();
+				ob_end_clean();
+				return $ret;
 			}
 
 			$register = largo_process_registration_form($_POST);
 			if (is_wp_error($register)) {
+				ob_start();
 				largo_signup_user($form_values, $register, $attrs);
+				$ret = ob_get_contents();
+				ob_end_clean();
+				return $ret;
 			} else {
-				echo '<div id="largo-registration-success-msg">' . $registerSuccessMessage . '</div>';
+				return '<div id="largo-registration-success-msg">' . $registerSuccessMessage . '</div>';
 			}
-		} else
+		} else {
+			ob_start();
 			largo_signup_user(array(), array(), $attrs);
+			$ret = ob_get_contents();
+			ob_end_clean();
+			return $ret;
+		}
 	} else {
 		// TODO use sprintf and __ for the logged in message
 		$userLoggedInMessage = apply_filters(
 			'largo_user_logged_in_message',
 			'No need to register, you\'re already logged in. Continue to <a href="' . get_site_url() . '">' . get_bloginfo('name') . '</a>.'
 		);
-		echo '<div id="largo-user-logged-in-message">' . $userLoggedInMessage . '</div>';
+		return '<div id="largo-user-logged-in-message">' . $userLoggedInMessage . '</div>';
 	}
 }
 add_shortcode('largo_registration_form', 'largo_registration_form');
