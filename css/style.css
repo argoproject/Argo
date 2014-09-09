@@ -2789,7 +2789,7 @@ body.admin-bar .sticky-nav-holder {
 .sticky-nav-holder .navbar .nav li.dropdown.open > .dropdown-toggle,
 .sticky-nav-holder .navbar .nav li.dropdown.active > .dropdown-toggle,
 .sticky-nav-holder .navbar .nav li.dropdown.open.active > .dropdown-toggle {
-  color: #2275bb;
+  color: #dddddd;
   background: #2275bb;
 }
 .sticky-nav-holder .navbar .nav li.dropdown.open > .dropdown-toggle .caret:before,
