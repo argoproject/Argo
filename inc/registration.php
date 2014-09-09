@@ -109,6 +109,15 @@ function largo_show_user_form($values=array(), $errors='') {
  */
 function largo_validate_user_signup() {
 	$result = wpmu_validate_user_signup($_POST['user_login'], $_POST['user_email']);
+
+	// Since wpmu_validate_user_signup doesn't use the same fields as WP User,
+	// we have to map user_name errors to user_login errors
+	$user_login_errors = $result['errors']->get_error_messages('user_name');
+	if (!empty($user_login_errors)) {
+		foreach ($user_login_errors as $error)
+			$result['errors']->add('user_login', $error);
+	}
+
 	extract($result);
 
 	if (empty($_POST['user_pass'])) {
