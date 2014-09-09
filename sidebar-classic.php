@@ -8,7 +8,6 @@ do_action('largo_before_sidebar');
 	<?php do_action('largo_before_sidebar_content'); ?>
 	<div class="widget-area<?php if ( is_single() && of_get_option( 'showey-hidey' ) ) echo ' showey-hidey'; ?>" role="complementary">
 		<?php
-			<?php
 			do_action('largo_before_sidebar_widgets');
 
 			$custom_sidebar = false;
