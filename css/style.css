@@ -2739,10 +2739,6 @@ li.home-link:hover i {
   visibility: visible;
   opacity: 1;
 }
-.home .sticky-nav-holder.show {
-  visibility: hidden;
-  opacity: 0;
-}
 body.admin-bar .sticky-nav-holder {
   top: 32px;
 }
