@@ -13,21 +13,21 @@ if ( ! function_exists( 'largo_header' ) ) {
 		$header_class = of_get_option( 'no_header_image' ) ? 'branding' : 'visuallyhidden';
 		$divider = $header_class == 'branding' ? '' : ' - ';
 
-    	// print the text-only version of the site title
-    	printf('<%1$s class="%2$s"><a itemprop="url" href="%3$s"><span itemprop="name">%4$s</span>%5$s<span class="tagline" itemprop="description">%6$s</span></a></%1$s>',
-	    	$header_tag,
-	    	$header_class,
-	    	esc_url( home_url( '/' ) ),
-	    	esc_attr( get_bloginfo('name') ),
-	    	$divider,
-	    	esc_attr( get_bloginfo('description') )
-	    );
+		// print the text-only version of the site title
+		printf('<%1$s class="%2$s"><a itemprop="url" href="%3$s"><span itemprop="name">%4$s</span>%5$s<span class="tagline" itemprop="description">%6$s</span></a></%1$s>',
+			$header_tag,
+			$header_class,
+			esc_url( home_url( '/' ) ),
+			esc_attr( get_bloginfo('name') ),
+			$divider,
+			esc_attr( get_bloginfo('description') )
+		);
 
-	    // add an image placeholder, the src is added by largo_header_js() in inc/enqueue.php
-	    if ($header_class != 'branding')
-	    	echo '<a itemprop="url" href="' . esc_url( home_url( '/' ) ) . '"><img class="header_img" src="" alt="" /></a>';
+		// add an image placeholder, the src is added by largo_header_js() in inc/enqueue.php
+		if ($header_class != 'branding')
+			echo '<a itemprop="url" href="' . esc_url( home_url( '/' ) ) . '"><img class="header_img" src="" alt="" /></a>';
 
-	    if ( of_get_option( 'logo_thumbnail_sq' ) )
+		if ( of_get_option( 'logo_thumbnail_sq' ) )
 			echo '<meta itemprop="logo" content="' . esc_url( of_get_option( 'logo_thumbnail_sq' ) ) . '"/>';
 	}
 }
@@ -39,10 +39,10 @@ if ( ! function_exists( 'largo_header' ) ) {
  */
 if ( ! function_exists( 'largo_copyright_message' ) ) {
 	function largo_copyright_message() {
-	    $msg = of_get_option( 'copyright_msg' );
-	    if ( ! $msg )
-	    	$msg = __( 'Copyright %s', 'largo' );
-	    printf( $msg, date( 'Y' ) );
+		$msg = of_get_option( 'copyright_msg' );
+		if ( ! $msg )
+			$msg = __( 'Copyright %s', 'largo' );
+		printf( $msg, date( 'Y' ) );
 	}
 }
 
@@ -160,8 +160,12 @@ remove_action( 'wp_head', 'wp_generator' );
  * @since 0.3
  */
 function largo_body_class( $classes ) {
-	if ( is_single() && of_get_option( 'single_template' ) == 'classic' ) {
-		$classes[] = "classic";
+	if (is_singular()) {
+		if (of_get_option('single_template') == 'classic' || !of_get_option('single_template')) {
+			$classes[] = "classic";
+		} else {
+			$classes[] = 'normal';
+		}
 	}
 	return $classes;
 }

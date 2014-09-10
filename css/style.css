@@ -3165,28 +3165,28 @@ article img.attachment-post-thumbnail {
   font-weight: bold;
   font-size: 10.672px;
 }
-.single-post #content,
-.page #content {
+body.normal.single-post #content,
+body.normal.page #content {
   position: relative;
   margin-left: 17.021276594%;
 }
 @media only screen and (max-width: 768px) {
-  .single-post #content,
-  .page #content {
+  body.normal.single-post #content,
+  body.normal.page #content {
     margin-left: 0;
   }
 }
-.single-post .hero,
-.page .hero {
+body.normal.single-post .hero,
+body.normal.page .hero {
   text-align: center;
   background-color: #efefef;
   width: 151.5%;
   margin: 0 -25.75% 24px;
 }
-.single-post .hero p.wp-caption-text,
-.page .hero p.wp-caption-text,
-.single-post .hero p.wp-media-credit,
-.page .hero p.wp-media-credit {
+body.normal.single-post .hero p.wp-caption-text,
+body.normal.page .hero p.wp-caption-text,
+body.normal.single-post .hero p.wp-media-credit,
+body.normal.page .hero p.wp-media-credit {
   float: none;
   margin: 0 auto;
   text-align: left;
@@ -3195,68 +3195,68 @@ article img.attachment-post-thumbnail {
   padding-top: 4px;
   width: 70%;
 }
-.single-post .hero p.wp-media-credit,
-.page .hero p.wp-media-credit {
+body.normal.single-post .hero p.wp-media-credit,
+body.normal.page .hero p.wp-media-credit {
   text-align: right;
   margin-top: 4px;
   min-height: 0;
 }
-.single-post .hero.is-video,
-.page .hero.is-video {
+body.normal.single-post .hero.is-video,
+body.normal.page .hero.is-video {
   margin-bottom: 24px;
 }
-.single-post .hero.is-empty,
-.page .hero.is-empty {
+body.normal.single-post .hero.is-empty,
+body.normal.page .hero.is-empty {
   min-height: 0;
   height: 0;
 }
 @media only screen and (max-width: 980px) {
-  .single-post .hero,
-  .page .hero {
+  body.normal.single-post .hero,
+  body.normal.page .hero {
     margin: 0 0 24px;
     width: 100%;
   }
 }
-.single-post #sidebar,
-.page #sidebar {
+body.normal.single-post #sidebar,
+body.normal.page #sidebar {
   overflow: hidden;
   margin-left: -25.75%;
   margin-right: 0;
   width: 23.25%;
   clear: left;
 }
-.single-post .top-tag,
-.page .top-tag {
+body.normal.single-post .top-tag,
+body.normal.page .top-tag {
   float: left;
 }
-.single-post .top-date,
-.page .top-date {
+body.normal.single-post .top-date,
+body.normal.page .top-date {
   float: right;
   font-size: 14px;
   font-weight: normal;
   margin-bottom: 0;
   line-height: 1.5;
 }
-.single-post article.post > header,
-.page article.post > header {
+body.normal.single-post article.post > header,
+body.normal.page article.post > header {
   clear: both;
 }
-.single-post article.post .sep,
-.page article.post .sep,
-.single-post article.post .entry-date,
-.page article.post .entry-date {
+body.normal.single-post article.post .sep,
+body.normal.page article.post .sep,
+body.normal.single-post article.post .entry-date,
+body.normal.page article.post .entry-date {
   display: none;
 }
-.single-post h2.subtitle,
-.page h2.subtitle {
+body.normal.single-post h2.subtitle,
+body.normal.page h2.subtitle {
   font-size: 19.552px;
   font-weight: normal;
   color: #999;
 }
-.single-post p.intro,
-.page p.intro,
-.single-post p.wp-caption-text,
-.page p.wp-caption-text {
+body.normal.single-post p.intro,
+body.normal.page p.intro,
+body.normal.single-post p.wp-caption-text,
+body.normal.page p.wp-caption-text {
   font-style: normal;
 }
 .page-template-full-page-php #content {

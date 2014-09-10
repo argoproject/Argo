@@ -12,5 +12,5 @@ get_header();
 	?>
 </div><!-- #content -->
 
-<?php get_sidebar( of_get_option( 'single_template' ) ); ?>
+<?php get_sidebar(of_get_option('single_template')); ?>
 <?php get_footer(); ?>

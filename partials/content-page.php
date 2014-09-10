@@ -10,6 +10,8 @@
 		<?php edit_post_link(__('Edit This Page', 'largo'), '<h5 class="byline"><span class="edit-link">', '</span></h5>'); ?>
 	</header><!-- .entry-header -->
 
+	<?php get_sidebar(); ?>
+
 	<div class="entry-content">
 		<?php the_content(); ?>
 	</div><!-- .entry-content -->
