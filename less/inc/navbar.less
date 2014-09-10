@@ -667,6 +667,14 @@ li.home-link:hover i {
   body.admin-bar & {
     top: 32px;
   }
+  .home & {
+    visibility: hidden;
+    opacity: 0;
+    &.show {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
   .sticky-nav-container {
     margin: 0 auto;
     position: relative;

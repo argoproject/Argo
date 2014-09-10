@@ -2742,6 +2742,14 @@ li.home-link:hover i {
 body.admin-bar .sticky-nav-holder {
   top: 32px;
 }
+.home .sticky-nav-holder {
+  visibility: hidden;
+  opacity: 0;
+}
+.home .sticky-nav-holder.show {
+  opacity: 1;
+  visibility: visible;
+}
 .sticky-nav-holder .sticky-nav-container {
   margin: 0 auto;
   position: relative;
