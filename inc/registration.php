@@ -10,7 +10,7 @@
  * @param array $values the values for the sign up form inputs
  * @param array $errors
  */
-function largo_signup_user($values=array(), $errors = '' ) {
+function largo_signup_user($values=array(), $errors = '', $options) {
 	if ( !is_wp_error($errors) )
 		$errors = new WP_Error();
 
@@ -40,7 +40,7 @@ function largo_signup_user($values=array(), $errors = '' ) {
 		<?php
 		do_action( 'signup_hidden_fields', 'validate-user' );
 		?>
-		<?php largo_show_user_form($form_values, $errors); ?>
+		<?php largo_show_user_form($form_values, $errors, $options); ?>
 		<input id="signupblog" type="hidden" name="signup_for" value="user" />
 		<p class="submit"><input type="submit" name="submit" class="btn btn-default submit" value="<?php esc_attr_e('Submit', 'largo') ?>" /></p>
 		<?php wp_nonce_field('largo_user_registration', 'largo_user_registration_nonce'); ?>
@@ -57,9 +57,29 @@ function largo_signup_user($values=array(), $errors = '' ) {
  * @param string $user_email The entered email address
  * @param array $errors
  */
-function largo_show_user_form($values=array(), $errors='') {
+function largo_show_user_form($values=array(), $errors='', $options=array()) {
 	extract($values);
-?>
+
+	if (in_array('first_name', $options)) { ?>
+	<div class="form-group">
+		<label for="first_name"><?php _e('First name', 'largo'); ?></label>
+		<input value="<?php if (!empty($first_name)) { echo $first_name; } ?>" name="first_name" type="text" />
+		<?php if ( $errmsg = $errors->get_error_message('first_name') ) { ?>
+			<p class="alert alert-error"><?php echo $errmsg; ?></p>
+		<?php } ?>
+	</div>
+	<?php }
+
+	if (in_array('last_name', $options)) { ?>
+	<div class="form-group">
+		<label for="last_name"><?php _e('Last name', 'largo'); ?></label>
+		<input value="<?php if (!empty($last_name)) { echo $last_name; } ?>" name="last_name" type="text" />
+		<?php if ( $errmsg = $errors->get_error_message('last_name') ) { ?>
+			<p class="alert alert-error"><?php echo $errmsg; ?></p>
+		<?php } ?>
+	</div>
+	<?php } ?>
+
 	<div class="form-group">
 		<label for="user_login"><?php _e('Username', 'largo'); ?></label>
 		<input name="user_login" type="text" id="user_login" value="<?php echo esc_attr($user_login); ?>" maxlength="60" />
@@ -96,7 +116,6 @@ function largo_show_user_form($values=array(), $errors='') {
 	 * @param array $errors An array possibly containing 'user_login' or 'user_email' errors.
 	 */
 	do_action('largo_registration_extra_fields', $values, $errors);
-	//do_action('signup_extra_fields', $errors);
 }
 
 /**
@@ -107,7 +126,7 @@ function largo_show_user_form($values=array(), $errors='') {
  * @uses apply_filters() largo_validate_user_signup_extra_fields to validate extra/custom signup
  * fields and return error messages when appropriate.
  */
-function largo_validate_user_signup() {
+function largo_validate_user_signup($options=array()) {
 	$result = wpmu_validate_user_signup($_POST['user_login'], $_POST['user_email']);
 
 	// Since wpmu_validate_user_signup doesn't use the same fields as WP User,
@@ -126,6 +145,11 @@ function largo_validate_user_signup() {
 
 		$errors->add('user_pass', __('Please enter a password.', 'largo'));
 		$result['errors'] = $errors;
+	}
+
+	foreach ($options as $option) {
+		if (empty($_POST[$option]))
+			$errors->add($option, __('This field is required.', 'largo'));
 	}
 
 	$extras = largo_registration_get_extra_fields($_POST);
@@ -230,7 +254,10 @@ function largo_verify_user_registration_nonce() {
  *
  * @since 0.4
  */
-function largo_registration_form() {
+function largo_registration_form($attrs) {
+	if (empty($attrs))
+		$attrs = array();
+
 	// TODO use sprintf and __ for the success message
 	$registerSuccessMessage = apply_filters(
 		'largo_registration_success_message',
@@ -241,34 +268,45 @@ function largo_registration_form() {
 		if (!empty($_POST)) {
 			$proceed = largo_verify_user_registration_nonce();
 			if (!$proceed) {
-				echo '<div class="alert alert-error>' . _e('We were unable to verify the origin of your form submission.', 'largo') . '</div>';
-				return false;
+				return '<div class="alert alert-error>' . _e('We were unable to verify the origin of your form submission.', 'largo') . '</div>';
 			}
 
-			$form_values = largo_validate_user_signup($_POST['user_login'], $_POST['user_email']);
+			$form_values = largo_validate_user_signup($attrs);
 			$errors = $form_values['errors'];
 			unset($form_values['errors']);
 
 			if ($errors->get_error_code()) {
-				largo_signup_user($form_values, $errors);
-				return false;
+				ob_start();
+				largo_signup_user($form_values, $errors, $attrs);
+				$ret = ob_get_contents();
+				ob_end_clean();
+				return $ret;
 			}
 
 			$register = largo_process_registration_form($_POST);
 			if (is_wp_error($register)) {
-				largo_signup_user($form_values, $register);
+				ob_start();
+				largo_signup_user($form_values, $register, $attrs);
+				$ret = ob_get_contents();
+				ob_end_clean();
+				return $ret;
 			} else {
-				echo '<div id="largo-registration-success-msg">' . $registerSuccessMessage . '</div>';
+				return '<div id="largo-registration-success-msg">' . $registerSuccessMessage . '</div>';
 			}
-		} else
-			largo_signup_user();
+		} else {
+			ob_start();
+			largo_signup_user(array(), array(), $attrs);
+			$ret = ob_get_contents();
+			ob_end_clean();
+			return $ret;
+		}
 	} else {
 		// TODO use sprintf and __ for the logged in message
 		$userLoggedInMessage = apply_filters(
 			'largo_user_logged_in_message',
 			'No need to register, you\'re already logged in. Continue to <a href="' . get_site_url() . '">' . get_bloginfo('name') . '</a>.'
 		);
-		echo '<div id="largo-user-logged-in-message">' . $userLoggedInMessage . '</div>';
+		return '<div id="largo-user-logged-in-message">' . $userLoggedInMessage . '</div>';
 	}
 }
 add_shortcode('largo_registration_form', 'largo_registration_form');

@@ -9,7 +9,8 @@ $custom_sidebar = false;
 if ( is_singular() ) {
 	$custom_sidebar = get_post_meta(get_the_ID(), 'custom_sidebar', true);
 	// for backward compatibility
-	if ( $custom_sidebar == 'default' ) $custom_sidebar == 'none';
+	if ($custom_sidebar == 'default')
+		$custom_sidebar = 'none';
 } else if ( is_archive() ) {
 	$term = get_queried_object();
 	$custom_sidebar = largo_get_term_meta( $term->taxonomy, $term->term_id, 'custom_sidebar', true );
