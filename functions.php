@@ -125,6 +125,7 @@ class Largo {
 			'/inc/editor.php',
 			'/inc/post-meta.php',
 			'/inc/open-graph.php',
+			'/inc/verify.php',
 			'/inc/post-tags.php',
 			'/inc/header-footer.php',
 			'/inc/related-content.php',
