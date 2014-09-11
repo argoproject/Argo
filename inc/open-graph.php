@@ -5,7 +5,7 @@
  *
  * @param 	string 	$url a twitter url
  * @return 	string	the twitter username extracted from the input string
- * @since 1.0
+ * @since 0.3
  */
 function twitter_url_to_username ($url) {
 	$urlParts = explode("/", $url);
@@ -19,7 +19,7 @@ function twitter_url_to_username ($url) {
  *
  * @uses twitter_url_to_username()
  * @uses global $current_url
- * @since 1.0
+ * @since 0.3
  */
 if ( ! function_exists( 'largo_opengraph' ) ) {
 	function largo_opengraph() {
