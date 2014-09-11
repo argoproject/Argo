@@ -510,7 +510,7 @@ function optionsframework_options() {
 
 	$options[] = array(
 		'name' => __('Search options', 'largo'),
-		'desc' 	=> __('Replace WordPress search with Google Custom Search (recommended)', 'largo'),
+		'desc' 	=> __('Replace WordPress search with Google Custom Search', 'largo'),
 		'id' 	=> 'use_gcs',
 		'std' 	=> '0',
 		'type' 	=> 'checkbox');
@@ -522,10 +522,41 @@ function optionsframework_options() {
 		'type' 	=> 'text');
 
 	$options[] = array(
-		'desc' 	=> __('INN strongly recommends using Google Custom Search. You can get your ID and configure it at <a href="https://www.google.com/cse/create/new">https://www.google.com/cse/create/new</a>.', 'largo'),
+		'desc' 	=> __('Google Custom Search typically returns better results than the search engine built into WordPress. You can get your ID and configure it at <a href="https://www.google.com/cse/create/new">https://www.google.com/cse/create/new</a>.', 'largo'),
 		'id' 	=> 'gcs_help',
 		'std' 	=> '',
 		'type' 	=> 'info');
+
+	$options[] = array(
+		'name' => __('Site verification', 'largo'),
+		'desc' 	=> __('<strong>Twitter Account ID.</strong> This is used for verifying your site for Twitter Analytics. This is NOT your username, it will be a 9 digit number.', 'largo'),
+		'id' 	=> 'twitter_acct_id',
+		'std' 	=> '',
+		'type' 	=> 'text');
+
+	$options[] = array(
+		'desc' 	=> __('<strong>Google site verification meta tag.</strong> Used to verify a site in Google Webmaster Tools. This will be a long string of numbers and letters.', 'largo'),
+		'id' 	=> 'google_site_verification',
+		'std' 	=> '',
+		'type' 	=> 'text');
+
+	$options[] = array(
+		'desc' 	=> __('<strong>Facebook admins meta tag.</strong> This is a comma-separated list of numerical FB user IDs you want to allow to access Facebook insights for your site.', 'largo'),
+		'id' 	=> 'fb_admins',
+		'std' 	=> '',
+		'type' 	=> 'text');
+
+	$options[] = array(
+		'desc' 	=> __('<strong>Facebook app ID meta tag.</strong> This is a numerical app ID that will allow Facebook to capture insights for any social plugins active on your site and display them in your Facebook app/page insights.', 'largo'),
+		'id' 	=> 'fb_app_id',
+		'std' 	=> '',
+		'type' 	=> 'text');
+
+	$options[] = array(
+		'desc' 	=> __('<strong>Bitly site verification.</strong> This is a string of numbers and letters used to verify your site with bitly analytics.', 'largo'),
+		'id' 	=> 'bitly_verification',
+		'std' 	=> '',
+		'type' 	=> 'text');
 
 	return apply_filters('largo_options', $options);
 }
