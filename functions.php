@@ -72,6 +72,7 @@ $includes = array(
 	'/inc/editor.php',				// add tinymce customizations and shortcodes
 	'/inc/post-meta.php',			// add post meta boxes
 	'/inc/open-graph.php',			// add open graph, twittercard and google publisher markup to the header
+	'/inc/verify.php',				// add various verification meta tags to header
 	'/inc/post-tags.php',			// add some custom template tags (mostly used in single posts)
 	'/inc/header-footer.php',		// some additional template tags used in the header and footer
 	'/inc/related-content.php',		// functions dealing with related content
