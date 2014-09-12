@@ -13,7 +13,7 @@ function largo_verify() {
 		if ( of_get_option( 'twitter_acct_id') ) {
 			echo '<meta property="twitter:account_id" content="' . of_get_option( 'twitter_acct_id') . '" />';
 		}
-		if ( of_get_option( 'google_site_verificatio') ) {
+		if ( of_get_option( 'google_site_verification') ) {
 			echo '<meta name="google-site-verification" content="' . of_get_option( 'google_site_verification') . '" />';
 		}
 		if ( of_get_option( 'bitly_verification') ) {
@@ -23,10 +23,10 @@ function largo_verify() {
 
 	// Facebook uses these for any page that creates an associated open graph object so we need them on every page
 	if ( of_get_option( 'fb_admins') ) {
-		echo '<meta property="fb:admins" content="' . of_get_option( 'google_site_verification') . '" />';
+		echo '<meta property="fb:admins" content="' . of_get_option( 'fb_admins') . '" />';
 	}
 	if ( of_get_option( 'fb_app_id') ) {
-		echo '<meta property="fb:app_id" content="' . of_get_option( 'google_site_verification') . '" />';
+		echo '<meta property="fb:app_id" content="' . of_get_option( 'fb_app_id') . '" />';
 	}
 }
 add_action( 'wp_head', 'largo_verify' );
