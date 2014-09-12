@@ -116,6 +116,7 @@ function largo_show_user_form($values=array(), $errors='', $options=array()) {
 	 * @param array $errors An array possibly containing 'user_login' or 'user_email' errors.
 	 */
 	do_action('largo_registration_extra_fields', $values, $errors);
+	do_action('signup_extra_fields', $errors);
 }
 
 /**
