@@ -36,6 +36,9 @@
 if ( ! defined( 'INN_MEMBER' ) )
 	define( 'INN_MEMBER', FALSE );
 
+/**
+ * Image size constants, almost 100% that you won't need to change these
+ */
 if ( ! defined( 'FULL_WIDTH' ) ) {
 	define( 'FULL_WIDTH', 1170 );
 }
@@ -95,6 +98,7 @@ class Largo {
 
 		$this->register_nav_menus();
 		$this->register_media_sizes();
+		$this->show_menus();
 
 		$this->customizer = Largo_Customizer::get_instance();
 
@@ -246,6 +250,30 @@ class Largo {
 			return 9999;
 		});
 
+	}
+
+	/**
+	 * Menu display constants, you can override these in your child theme's
+	 * functions.php by doing something like:
+	 * define( 'SHOW_GLOBAL_NAV', FALSE );
+	 */
+	private function show_menus() {
+		if ( ! defined( 'SHOW_GLOBAL_NAV' ) ) {
+			define( 'SHOW_GLOBAL_NAV', TRUE );
+		}
+		if ( ! defined( 'SHOW_STICKY_NAV' ) ) {
+			define( 'SHOW_STICKY_NAV', TRUE );
+		}
+		if ( ! defined( 'SHOW_MAIN_NAV' ) ) {
+			define( 'SHOW_MAIN_NAV', TRUE );
+		}
+		if ( ! defined( 'SHOW_SECONDARY_NAV' ) ) {
+			if ( of_get_option( 'show_dont_miss_menu' ) ) {
+				define( 'SHOW_SECONDARY_NAV', TRUE );
+			} else {
+				define( 'SHOW_SECONDARY_NAV', FALSE );
+			}
+		}
 	}
 
 	/**

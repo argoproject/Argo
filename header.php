@@ -43,19 +43,41 @@
 
 	<div id="top"></div>
 
-	<?php get_template_part('partials/nav', 'global'); ?>
+	<?php do_action( 'largo_top' ); ?>
+
+	<?php
+		if (SHOW_GLOBAL_NAV === TRUE) {
+			do_action( 'largo_before_global_nav' );
+			get_template_part( 'partials/nav', 'global' );
+			do_action( 'largo_after_global_nav' );
+		}
+	?>
 
 	<div id="page" class="hfeed clearfix">
-		<?php get_template_part('partials/nav', 'sticky'); ?>
 
-		<header id="site-header" class="clearfix" itemscope itemtype="http://schema.org/Organization">
-			<?php largo_header(); ?>
-		</header>
-		<header class="print-header">
-			<p><strong><?php echo esc_html( get_bloginfo( 'name' ) ); ?></strong> (<?php echo esc_url( $current_url ); ?>)</p>
-		</header>
+		<?php
+			if (SHOW_STICKY_NAV === TRUE) {
+				get_template_part( 'partials/nav', 'sticky' );
+			}
+		?>
 
-		<?php get_template_part('partials/nav', 'main'); ?>
-		<?php get_template_part('partials/nav', 'secondary'); ?>
+		<?php
+			do_action( 'largo_before_header' );
+			get_template_part( 'partials/largo-header' );
+			do_action( 'largo_after_header' );
+		?>
+
+		<?php
+			if (SHOW_MAIN_NAV === TRUE) {
+				get_template_part( 'partials/nav', 'main' );
+			}
+			if (SHOW_SECONDARY_NAV === TRUE) {
+				get_template_part( 'partials/nav', 'secondary' );
+			}
+		?>
+
+		<?php do_action( 'largo_after_nav' ); ?>
 
 		<div id="main" class="row-fluid clearfix">
+
+		<?php do_action( 'largo_main_top' ); ?>
