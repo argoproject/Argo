@@ -46,7 +46,7 @@
 	<?php do_action( 'largo_top' ); ?>
 
 	<?php
-		if (SHOW_GLOBAL_NAV === TRUE) {
+		if ( SHOW_GLOBAL_NAV === TRUE ) {
 			do_action( 'largo_before_global_nav' );
 			get_template_part( 'partials/nav', 'global' );
 			do_action( 'largo_after_global_nav' );
@@ -56,7 +56,7 @@
 	<div id="page" class="hfeed clearfix">
 
 		<?php
-			if (SHOW_STICKY_NAV === TRUE) {
+			if ( SHOW_STICKY_NAV === TRUE ) {
 				get_template_part( 'partials/nav', 'sticky' );
 			}
 		?>
@@ -68,10 +68,10 @@
 		?>
 
 		<?php
-			if (SHOW_MAIN_NAV === TRUE) {
+			if ( SHOW_MAIN_NAV === TRUE ) {
 				get_template_part( 'partials/nav', 'main' );
 			}
-			if (SHOW_SECONDARY_NAV === TRUE) {
+			if ( SHOW_SECONDARY_NAV === TRUE ) {
 				get_template_part( 'partials/nav', 'secondary' );
 			}
 		?>
