@@ -5,7 +5,7 @@
  *
  * @param $echo bool echo the string or return itv (default: echo)
  * @return string date and time as formatted html
- * @since 1.0
+ * @since 0.3
  */
 if ( ! function_exists( 'largo_time' ) ) {
 	function largo_time( $echo = true ) {
@@ -29,7 +29,7 @@ if ( ! function_exists( 'largo_time' ) ) {
  *
  * @param $echo bool echo the string or return it (default: echo)
  * @return string author name as formatted html
- * @since 1.0
+ * @since 0.3
  */
 if ( ! function_exists( 'largo_author' ) ) {
 	function largo_author( $echo = true ) {
@@ -48,7 +48,7 @@ if ( ! function_exists( 'largo_author' ) ) {
  *
  * @param $echo bool echo the string or return it (default: echo)
  * @return string author link as formatted html
- * @since 1.0
+ * @since 0.3
  */
 if ( ! function_exists( 'largo_author_link' ) ) {
 	function largo_author_link( $echo = true, $post=null ) {
@@ -80,7 +80,7 @@ if ( ! function_exists( 'largo_author_link' ) ) {
  * @param $exclude_date bool Whether to exclude the date from byline (default: false)
  * @param $post object or int The post object or ID to get the byline for. Defaults to current post.
  * @return string Byline as formatted html
- * @since 1.0
+ * @since 0.3
  */
 if ( ! function_exists( 'largo_byline' ) ) {
 	function largo_byline( $echo = true, $exclude_date = false, $post = null ) {
@@ -145,7 +145,7 @@ if ( ! function_exists( 'largo_byline' ) ) {
  *
  * @param $echo bool echo the string or return it (default: echo)
  * @return string social icon area markup as formatted html
- * @since 1.0
+ * @since 0.3
  * @todo maybe let people re-arrange the order of the links or have more control over how they appear
  */
 if ( ! function_exists( 'largo_post_social_links' ) ) {
@@ -205,7 +205,7 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
  *
  * @param $email string an author's email address
  * @return bool true if a gravatar is available for this user
- * @since 1.0
+ * @since 0.3
  */
 function largo_has_gravatar( $email ) {
 	// Craft a potential url and test its headers
@@ -230,7 +230,7 @@ function largo_has_gravatar( $email ) {
 /**
  * Replaces the_content() with paginated content (if <!--nextpage--> is used in the post)
  *
- * @since 1.0
+ * @since 0.3
  */
 if ( ! function_exists( 'largo_entry_content' ) ) {
 	function my_queryvars( $qvars ) {
@@ -266,7 +266,7 @@ if ( ! function_exists( 'largo_entry_content' ) ) {
  * @params $args same array of arguments as accepted by wp_link_pages
  * See: http://codex.wordpress.org/Function_Reference/wp_link_pages
  * @return formatted output in html (or echo)
- * @since 1.0
+ * @since 0.3
  */
 if ( ! function_exists( 'largo_custom_wp_link_pages' ) ) {
 	function largo_custom_wp_link_pages( $args ) {
@@ -345,7 +345,7 @@ if ( ! function_exists( 'largo_custom_wp_link_pages' ) ) {
  * @param $strip_tags|$strip_shortcodes bool
  * @uses largo_trim_sentences
  * @package largo
- * @since 1.0
+ * @since 0.3
  */
 if ( ! function_exists( 'largo_excerpt' ) ) {
 	function largo_excerpt( $the_post=null, $sentence_count = 5, $use_more = true, $more_link = '', $echo = true, $strip_tags = true, $strip_shortcodes = true ) {
@@ -412,7 +412,7 @@ if ( ! function_exists( 'largo_excerpt' ) ) {
  * @param $echo echo the string or return it (default: return)
  * @return $output trimmed string
  *
- * @since 1.0
+ * @since 0.3
  */
 function largo_trim_sentences( $input, $sentences, $echo = false ) {
 	$re = '/# Split sentences on whitespace between them.
@@ -463,7 +463,7 @@ function largo_trim_sentences( $input, $sentences, $echo = false ) {
 /**
  * Display navigation to next/previous pages when applicable
  *
- * @since 1.0
+ * @since 0.3
  */
 if ( ! function_exists( 'largo_content_nav' ) ) {
 	function largo_content_nav( $nav_id, $in_same_cat = false ) {
@@ -530,6 +530,7 @@ if ( ! function_exists( 'largo_content_nav' ) ) {
  * Template for comments and pingbacks.
  *
  * Used as a callback by wp_list_comments() for displaying the comments.
+ * @since 0.3
  */
 if ( ! function_exists( 'largo_comment' ) ) {
 	function largo_comment( $comment, $args, $depth ) {
@@ -593,6 +594,7 @@ if ( ! function_exists( 'largo_comment' ) ) {
 
 /**
  * Post format icon
+ * @since 0.4
  */
 if ( ! function_exists( 'post_type_icon' ) ) {
 	function post_type_icon( $options = array() ) {
@@ -622,5 +624,77 @@ if ( ! function_exists( 'post_type_icon' ) ) {
 		$icons = new Largo_Term_Icons();
 		$icons->the_icon( $the_term );
 		if ( ! $args['echo'] ) return ob_get_clean();
+	}
+}
+
+/**
+ * Determines what type of hero image/video a single post should use
+ * and returns a class that gets added to its container div
+ *
+ * @since 0.4
+ */
+if ( ! function_exists( 'largo_hero_class' ) ) {
+	function largo_hero_class( $post_id, $echo = TRUE ) {
+		$hero_class = "is-empty";
+		if ( get_post_meta( $post_id, 'youtube_url', true ) ) {
+			$hero_class = "is-video";
+		} elseif ( has_post_thumbnail( $post_id ) ) {
+			$hero_class = "is-image";
+		}
+		if ( $echo ) {
+			echo $hero_class;
+		} else {
+			return $hero_class;
+		}
+	}
+}
+
+/**
+ * Returns the featured image for a post
+ * to be used as the hero image with caption and credit (if available)
+ *
+ * @since 0.4
+ */
+if ( ! function_exists( 'largo_hero_with_caption' ) ) {
+	function largo_hero_with_caption( $post_id ) {
+		echo get_the_post_thumbnail( $post_id, 'full' );
+		if ( $thumb = get_post_thumbnail_id( $post_id ) ) {
+			$thumb_content = get_post( $thumb );
+			$thumb_custom = get_post_custom( $thumb );
+			if ( isset($thumb_custom['_media_credit'][0]) ) {
+				echo '<p class="wp-media-credit">' . $thumb_custom['_media_credit'][0];
+				if ( $thumb_custom['_navis_media_credit_org'][0] ) {
+					echo '/' . $thumb_custom['_navis_media_credit_org'][0];
+				}
+				echo '</p>';
+			}
+			if ( $thumb_content->post_excerpt ) {
+				echo '<p class="wp-caption-text">' . $thumb_content->post_excerpt . '</p>';
+			}
+		}
+	}
+}
+
+/**
+ * Schema.org article metadata we include in the header of each single post
+ *
+ * @since 0.4
+ */
+if ( ! function_exists( 'largo_post_metadata' ) ) {
+	function largo_post_metadata( $post_id, $echo = TRUE ) {
+		$out = '<meta itemprop="description" content="' . strip_tags( largo_excerpt( get_post( $post_id ), 5, false, '', false ) ) . '" />' . "\n";
+	 	$out .= '<meta itemprop="datePublished" content="' . get_the_date( 'c', $post_id ) . '" />' . "\n";
+	 	$out .= '<meta itemprop="dateModified" content="' . get_the_modified_date( 'c', $post_id ) . '" />' . "\n";
+
+	 	if ( has_post_thumbnail( $post_id ) ) {
+			$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'thumbnail' );
+			$out .= '<meta itemprop="image" content="' . $image[0] . '" />';
+		}
+
+	 	if ( $echo ) {
+			echo $out;
+		} else {
+			return $out;
+		}
 	}
 }

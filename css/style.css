@@ -3205,6 +3205,10 @@ body.normal.single-post .hero.is-video,
 body.normal.page .hero.is-video {
   margin-bottom: 24px;
 }
+body.normal.single-post .hero.is-video .embed-container,
+body.normal.page .hero.is-video .embed-container {
+  margin-bottom: 0;
+}
 body.normal.single-post .hero.is-empty,
 body.normal.page .hero.is-empty {
   min-height: 0;

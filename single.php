@@ -4,7 +4,7 @@
  */
 get_header();
 ?>
-<div>
+
 <div id="content" class="span8" role="main">
 	<?php
 		while ( have_posts() ) : the_post();
@@ -14,19 +14,30 @@ get_header();
 				get_template_part( 'partials/content', 'single' );
 			}
 
-			if ( is_active_sidebar( 'article-bottom' ) && is_single() ){
-				do_action('largo_before_sidebar_widgets');
+			if ( is_active_sidebar( 'article-bottom' ) ) {
+
+				do_action( 'largo_before_post_bottom_widget_area' );
+
 				echo '<div class="article-bottom">';
 				dynamic_sidebar( 'article-bottom' );
 				echo '</div>';
-				do_action('largo_after_sidebar_widgets');
+
+				do_action( 'largo_after_post_bottom_widget_area' );
+
 			}
 
+			do_action('largo_before_comments');
+
 			comments_template( '', true );
+
+			do_action('largo_after_comments');
+
 		endwhile;
 	?>
 </div>
-</div><!--#content-->
+
+<?php do_action('largo_after_content'); ?>
 
 <?php get_sidebar( of_get_option( 'single_template' ) ); ?>
+
 <?php get_footer(); ?>

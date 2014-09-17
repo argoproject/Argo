@@ -3,7 +3,7 @@
 /**
  * Move the author dropdown to the publish metabox so it's easier to find
  *
- * @since 1.0
+ * @since 0.3
  */
 //
 if ( ! Largo()->is_plugin_active( 'co-authors-plus' ) ) {
@@ -20,7 +20,7 @@ if ( ! Largo()->is_plugin_active( 'co-authors-plus' ) ) {
 /**
  * Hide some of the less commonly used metaboxes to cleanup the post and page edit screens
  *
- * @since 1.0
+ * @since 0.3
  */
 function largo_remove_default_post_screen_metaboxes() {
 	remove_meta_box( 'trackbacksdiv','post','normal' ); // trackbacks
@@ -45,7 +45,7 @@ add_action('admin_menu', 'largo_remove_other_post_screen_metaboxes');
 /**
  * Show all of the other metaboxes by default (particularly to show the excerpt)
  *
- * @since 1.0
+ * @since 0.3
  */
 function largo_change_default_hidden_metaboxes( $hidden, $screen ) {
     if ( 'post' == $screen->base ) {
@@ -58,6 +58,8 @@ add_filter( 'default_hidden_meta_boxes', 'largo_change_default_hidden_metaboxes'
 /**
  * Creates custom meta boxes to the post edit screens using the Largo Metabox API
  * Which lives in inc/metabox-api.php
+ *
+ * @since 0.4
  */
 
 // Related posts controls
