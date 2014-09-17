@@ -47,9 +47,13 @@
 
 	<?php
 		if ( SHOW_GLOBAL_NAV === TRUE ) {
+
 			do_action( 'largo_before_global_nav' );
+
 			get_template_part( 'partials/nav', 'global' );
+
 			do_action( 'largo_after_global_nav' );
+
 		}
 	?>
 
@@ -63,7 +67,9 @@
 
 		<?php
 			do_action( 'largo_before_header' );
+
 			get_template_part( 'partials/largo-header' );
+
 			do_action( 'largo_after_header' );
 		?>
 
