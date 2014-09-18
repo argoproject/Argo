@@ -41,7 +41,11 @@
 
 					<ul class="nav">
 						<li class="home-link"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php largo_home_icon( 'icon-white' ); ?></a></li>
-						<li class="divider-vertical"></li>
+						<?php
+							if ( of_get_option( 'show_sitename_in_sticky_nav', 1 ) ) {
+								echo '<span class="site-name"><a href="/">' . get_bloginfo('name') . '</a></span>';
+							}
+						?>
 					</ul>
 
 					<div class="nav-shelf">

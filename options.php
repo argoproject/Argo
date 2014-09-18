@@ -128,31 +128,36 @@ function optionsframework_options() {
 		'type' 	=> 'text');
 
 	$options[] = array(
-		'name' 	=> __('Don\'t Miss Menu', 'largo'),
+		'name' 	=> __('Menu Options', 'largo'),
 		'desc' 	=> __('<strong>Show</strong> the "Don\'t Miss" menu under the main site navigation. Add links to this menu under <strong>Appearance > Menus</strong>.', 'largo'),
 		'id' 	=> 'show_dont_miss_menu',
 		'type' 	=> 'checkbox');
 
 	$options[] = array(
-		'desc' 	=> __('Enter the <strong>label that appears in front of the menu links</strong>. You can delete this default and no label will appear.', 'largo'),
+		'desc' 	=> __('Enter the <strong>label that appears in front of the menu links in the "Don\'t Miss" menu</strong>. You can delete this default and no label will appear.', 'largo'),
 		'id' 	=> 'dont_miss_label',
 		'std' 	=> __('Don\'t Miss', 'largo'),
 		'class' => 'hidden',
 		'type' 	=> 'text');
 
-		$options[] = array(
+	$options[] = array(
+		'desc' 	=> __('Enter the <strong>label that appears before the menu links in the Footer Nav Menu</strong>. You can delete this default and no label will appear.', 'largo'),
+		'id' 	=> 'footer_menu_label',
+		'std' 	=> get_bloginfo('name'),
+		'type' 	=> 'text');
+
+	$options[] = array(
+		'desc' 	=> __('Show the <strong>site name in the sticky nav</strong>? Default is to show, but in some cases you might want to hide it to save space or if your logo is clear enough to not need it.', 'largo'),
+		'id' 	=> 'show_sitename_in_sticky_nav',
+		'std' 	=> '1',
+		'type' 	=> 'checkbox');
+
+	$options[] = array(
 		'name' 	=> __('Disclaimer', 'largo'),
 		'desc' 	=> __('Enter a default disclaimer', 'largo'),
 		'id' 	=> 'default_disclaimer',
 		'std' 	=> '',
 		'type' 	=> 'textarea');
-
-	$options[] = array(
-		'name' 	=> __('Footer Nav Menu', 'largo'),
-		'desc' 	=> __('Enter the <strong>label that appears before the menu links</strong>. You can delete this default and no label will appear.', 'largo'),
-		'id' 	=> 'footer_menu_label',
-		'std' 	=> get_bloginfo('name'),
-		'type' 	=> 'text');
 
 	$options[] = array(
 		'name' 	=> __('Copyright Message', 'largo'),
@@ -286,16 +291,6 @@ function optionsframework_options() {
 		'desc' 	=> __('<strong>Show share count</strong> with Twitter buttons.', 'largo'),
 		'id' 	=> 'show_twitter_count',
 		'std' 	=> '1',
-		'type' 	=> 'checkbox');
-
-	$options[] = array(
-		'name' 	=> __('SEO Options', 'largo'),
-		'type'	=> 'info');
-
-	$options[] = array(
-		'desc' 	=> __('Use noindex for all archive pages (default is to use noindex for just date archives).', 'largo'),
-		'id' 	=> 'noindex_archives',
-		'std' 	=> '0',
 		'type' 	=> 'checkbox');
 
 	/**
@@ -557,6 +552,17 @@ function optionsframework_options() {
 		'id' 	=> 'bitly_verification',
 		'std' 	=> '',
 		'type' 	=> 'text');
+
+	$options[] = array(
+		'name' 	=> __('SEO Options', 'largo'),
+		'type'	=> 'info');
+
+	$options[] = array(
+		'desc' 	=> __('Use noindex for all archive pages (default is to use noindex for just date archives).', 'largo'),
+		'id' 	=> 'noindex_archives',
+		'std' 	=> '0',
+		'type' 	=> 'checkbox');
+
 
 	return apply_filters('largo_options', $options);
 }

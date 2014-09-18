@@ -2769,6 +2769,7 @@ body.admin-bar .sticky-nav-holder {
 }
 .sticky-nav-holder .navbar .social-icons {
   float: left;
+  margin: 0;
 }
 .sticky-nav-holder .navbar .social-icons li > a {
   color: #fff;
@@ -2790,9 +2791,6 @@ body.admin-bar .sticky-nav-holder {
 }
 .sticky-nav-holder .navbar .nav > li.home-link {
   margin-right: 10px;
-}
-.sticky-nav-holder .navbar .divider-vertical {
-  display: none;
 }
 .sticky-nav-holder .navbar .nav li.dropdown.open > .dropdown-toggle,
 .sticky-nav-holder .navbar .nav li.dropdown.active > .dropdown-toggle,
@@ -2822,9 +2820,30 @@ body.admin-bar .sticky-nav-holder {
   width: 50px;
   height: 50px;
 }
+.sticky-nav-holder .site-name {
+  display: block;
+  float: left;
+  color: #343434;
+  line-height: 50px;
+  font-size: 18px;
+  margin-right: 8px;
+  font-weight: 900;
+}
+.sticky-nav-holder .site-name a {
+  color: #343434;
+}
+.sticky-nav-holder .site-name a:hover {
+  background-color: #fff;
+  color: #666;
+  text-decoration: none;
+}
+@media only screen and (max-width: 320px) {
+  .sticky-nav-holder .site-name {
+    display: none;
+  }
+}
 .sticky-nav-holder .nav-right {
-  position: absolute;
-  right: 0;
+  float: right;
   padding-top: 5px;
 }
 .sticky-nav-holder .nav-right .donate-btn {
@@ -2843,7 +2862,7 @@ body.admin-bar .sticky-nav-holder {
   position: relative;
   z-index: 91;
   font-size: 18px;
-  height: 41px;
+  height: 42px;
   -webkit-transition: 0.3s;
   -moz-transition: 0.3s;
   -ms-transition: 0.3s;
@@ -2854,8 +2873,8 @@ body.admin-bar .sticky-nav-holder {
 }
 .sticky-nav-holder .nav-right .form-search .input-append {
   position: absolute;
-  right: 0;
-  top: 50px;
+  right: 48px;
+  top: 51px;
   opacity: 0;
   visibility: hidden;
   -webkit-transition: 0.3s;
@@ -2863,14 +2882,14 @@ body.admin-bar .sticky-nav-holder {
   -ms-transition: 0.3s;
   -o-transition: 0.3s;
   transition: 0.3s;
-  padding: 8px 10px;
+  padding: 10px;
   z-index: 90;
-  width: 300px;
+  width: 340px;
 }
 .sticky-nav-holder .nav-right .form-search .input-append .text-input-wrapper {
   display: block;
   float: left;
-  width: 250px;
+  width: 290px;
 }
 .sticky-nav-holder .nav-right .form-search .input-append input {
   width: 100%;
@@ -2878,10 +2897,11 @@ body.admin-bar .sticky-nav-holder {
   -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
   box-sizing: border-box;
-  height: 28px !important;
+  height: 36px !important;
 }
 .sticky-nav-holder .nav-right .form-search .input-append button {
   width: 50px !important;
+  height: 36px !important;
   float: left;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -2895,7 +2915,7 @@ body.admin-bar .sticky-nav-holder {
 }
 .sticky-nav-holder .nav-right .form-search.show .input-append,
 .sticky-nav-holder .nav-right .form-search.show .toggle {
-  background-color: rgba(34, 117, 187, 0.9);
+  background-color: #343434;
   color: #ffffff;
 }
 .post-header,
