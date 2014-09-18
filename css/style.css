@@ -2873,7 +2873,7 @@ body.admin-bar .sticky-nav-holder {
 }
 .sticky-nav-holder .nav-right .form-search .input-append {
   position: absolute;
-  right: 48px;
+  right: 44px;
   top: 51px;
   opacity: 0;
   visibility: hidden;
