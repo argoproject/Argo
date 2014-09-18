@@ -3263,7 +3263,7 @@ body.normal.single-post p.wp-caption-text,
 body.normal.page p.wp-caption-text {
   font-style: normal;
 }
-.page-template-full-page-php #content {
+body.normal.page.page-template-full-page-php #content {
   margin-left: 0;
 }
 .article-bottom .widget {
