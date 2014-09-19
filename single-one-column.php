@@ -1,6 +1,6 @@
 <?php
 /**
- * Single Post Template: One Column (New Layout)
+ * Single Post Template: One Column (Standard Layout)
  * Description: Shows the post but does not load any sidebars.
  */
 

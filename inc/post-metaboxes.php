@@ -162,12 +162,18 @@ function largo_layout_meta_box_display () {
 
 	wp_nonce_field( 'largo_meta_box_nonce', 'meta_box_nonce' );
 
+	$current_template = (of_get_option('single_template') == 'normal')? __('One Column (Standard)', 'largo'):__('Two Column (Classic)', 'largo');
+
 	if ( $post->post_type != 'page' ) {
-		echo '<p><strong>' . __('Template', 'largo' ) . '</strong><br />';
-		echo __('Select the Post Template you wish this post to use.', 'largo' ) . '</p>';
+		echo '<p><strong>' . __('Template', 'largo' ) . '</strong></p>';
+		echo '<p>' . __('Select the post template you wish this post to use.', 'largo') . '</p>';
+		echo '<p>' . sprintf(
+				__('<a href="%s">Click here</a> to change the default post template.', 'largo' ),
+				admin_url('themes.php?page=options-framework#of-option-layoutoptions41'));
+		echo '</p>';
 		echo '<label class="hidden" for="post_template">' . __("Post Template", 'largo' ) . '</label>';
 		echo '<select name="_wp_post_template" id="post_template" class="dropdown">';
-		echo '<option value="">' . __( 'Default', 'largo' ) . '</option>';
+		echo '<option value="">' . sprintf(__( 'Default: %s', 'largo' ), $current_template) . '</option>';
 		post_templates_dropdown(); //get the options
 		echo '</select>';
 	}

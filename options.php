@@ -414,8 +414,8 @@ function optionsframework_options() {
 		'std' 	=> 'normal',
 		'type' 	=> 'select',
 		'options' => array(
-			'normal' => 'Standard (hero image, no rail)',
-			'classic' => 'Classic (no hero, right rail)'
+			'normal' => 'One Column (Standard Layout)',
+			'classic' => 'Two Column (Classic Layout)'
 			)
 		);
 
