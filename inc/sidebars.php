@@ -166,7 +166,7 @@ if( !function_exists( 'largo_custom_sidebars_dropdown' ) ) {
 
 		// Filter list of sidebars to exclude those we don't want users to choose
 		$excluded = array(
-			'Footer 1', 'Footer 2', 'Footer 3', 'Article Bottom', 'Header Ad Zone'
+			'Footer 1', 'Footer 2', 'Footer 3', 'Article Bottom', 'Header Ad Zone', 'Homepage Alert'
 		);
 	  // Let others change the list
 	  $excluded = apply_filters( 'largo_excluded_sidebars', $excluded );
