@@ -15,7 +15,7 @@ class largo_author_widget extends WP_Widget {
 	function widget( $args, $instance ) {
 		extract( $args );
 		$authors = array();
-		$bios = "";
+		$bios = '';
 
 		if( is_singular() || is_author() ):
 
@@ -32,13 +32,13 @@ class largo_author_widget extends WP_Widget {
 				// make sure we have at least one bio before we show the widget
 				foreach ( $authors as $key => $author ) {
 					$bio = trim( $author->description );
-					if ( empty( $bio ) ) {
+					if ( !is_author() && empty( $bio ) ) {
 						unset( $authors[$key] );
 					} else {
 						$bios .= $bio;
 					}
 				}
-				if ( !is_author() && empty($bios) ) {
+				if ( !is_author() && empty( $bios ) ) {
 					return;
 				}
 
@@ -50,71 +50,81 @@ class largo_author_widget extends WP_Widget {
 				?>
 
 				<div class="author-box author vcard clearfix">
-					<?php if ( is_author() ) { ?>
-						<h1 class="fn n"><?php echo $author->display_name; ?></h1>
-					<?php } else {
-						printf( __('<h3 class="widgettitle">About <span class="fn n">%1$s</span></h3>', 'largo'), esc_attr( $author->display_name ) );
-					} ?>
-
 					<?php
-						if ( largo_has_gravatar( $author->user_email ) ) {
-						  echo '<div class="photo">' . get_avatar( $author->ID, 96, '', $author->display_name ) . '</div>';
-						} elseif ( $author->type == 'guest-author' && get_the_post_thumbnail( $author->ID ) ) {
-						  $photo = get_the_post_thumbnail( $author->ID, array(96,96) );
-						  $photo = str_replace( 'attachment-96x96 wp-post-image', 'avatar avatar-96 photo', $photo );
-						  echo '<div class="photo">' . $photo . '</div>';
+						// Author name
+						if ( is_author() ) {
+							echo '<h1 class="fn n">' . $author->display_name . '</h1>';
+						} else {
+							printf( __( '<h3 class="widgettitle">About <span class="fn n"><a class="url" href="/author/%1$s/" rel="author" title="See all posts by %1$s">%2$s</a></span></h3>', 'largo' ),
+								$author->user_login,
+								esc_attr( $author->display_name )
+							);
 						}
-						?>
 
-					<?php // Description
-					   if ( $author->description ) {
-							   echo '<p>' . esc_attr( $author->description ) . '</p>';
-					   }
+						// Avatar
+						if ( largo_has_gravatar( $author->user_email ) ) {
+							echo '<div class="photo">' . get_avatar( $author->ID, 96, '', $author->display_name ) . '</div>';
+						} elseif ( $author->type == 'guest-author' && get_the_post_thumbnail( $author->ID ) ) {
+							$photo = get_the_post_thumbnail( $author->ID, array( 96,96 ) );
+							$photo = str_replace( 'attachment-96x96 wp-post-image', 'avatar avatar-96 photo', $photo );
+							echo '<div class="photo">' . $photo . '</div>';
+						}
+
+						// Description
+						if ( $author->description ) {
+							echo '<p>' . esc_attr( $author->description ) . '</p>';
+						}
 					?>
 
 					<ul class="social-links">
-						<?php if ( $fb = $author->fb ) : ?>
-						<li class="facebook">
-							<div class="fb-subscribe" data-href="<?php echo esc_url( $fb ); ?>" data-layout="button_count" data-show-faces="false" data-width="225"></div>
-						</li>
-						<?php endif; ?>
+						<?php if ( $fb = $author->fb ) { ?>
+							<li class="facebook">
+								<div class="fb-subscribe" data-href="<?php echo esc_url( $fb ); ?>" data-layout="button_count" data-show-faces="false" data-width="225"></div>
+							</li>
+						<?php } ?>
 
-						<?php if ( $twitter = $author->twitter ) : ?>
-						<li class="twitter">
-							<a href="<?php echo esc_url( $twitter ); ?>" class="twitter-follow-button" data-show-count="false"><?php printf( __('Follow @%1$s', 'largo'), largo_twitter_url_to_username ( $twitter ) ); ?></a>
-						</li>
-						<?php endif; ?>
+						<?php if ( $twitter = $author->twitter ) { ?>
+							<li class="twitter">
+								<a href="<?php echo esc_url( $twitter ); ?>" class="twitter-follow-button" data-show-count="false"><?php printf( __('Follow @%1$s', 'largo'), largo_twitter_url_to_username ( $twitter ) ); ?></a>
+							</li>
+						<?php } ?>
 
-						<?php if ( $email = $author->user_email ) : ?>
+						<?php if ( $email = $author->user_email ) { ?>
 							<li class="email">
 								<a href="mailto:<?php echo esc_attr( $email ); ?>" title="e-mail <?php echo esc_attr( $author->display_name ); ?>"><i class="icon-mail"></i></a>
 							</li>
-						<?php endif; ?>
+						<?php } ?>
 
-						<?php if ( $googleplus = $author->googleplus ) : ?>
-						<li class="gplus">
-							<a href="<?php echo esc_url( $googleplus ); ?>" title="<?php echo esc_attr( $author->display_name ); ?> on Google+" rel="me"><i class="icon-gplus"></i></a>
-						</li>
-						<?php endif; ?>
+						<?php if ( $googleplus = $author->googleplus ) { ?>
+							<li class="gplus">
+								<a href="<?php echo esc_url( $googleplus ); ?>" title="<?php echo esc_attr( $author->display_name ); ?> on Google+" rel="me"><i class="icon-gplus"></i></a>
+							</li>
+						<?php } ?>
 
-						<?php if ( $linkedin = $author->linkedin ) : ?>
-						<li class="linkedin">
-							<a href="<?php echo esc_url( $linkedin ); ?>" title="<?php echo esc_attr( $author->display_name ); ?> on LinkedIn"><i class="icon-linkedin"></i></a>
-						</li>
-						<?php endif; ?>
+						<?php if ( $linkedin = $author->linkedin ) { ?>
+							<li class="linkedin">
+								<a href="<?php echo esc_url( $linkedin ); ?>" title="<?php echo esc_attr( $author->display_name ); ?> on LinkedIn"><i class="icon-linkedin"></i></a>
+							</li>
+						<?php } ?>
+
+						<?php
+							if ( !is_author() ) {
+								printf( __( '<li class="author-posts-link"><a class="url" href="/author/%1$s/" rel="author" title="See all posts by %1$s">More by %2$s</a></li>', 'largo' ),
+									$author->user_login,
+									esc_attr( $author->first_name )
+								);
+							}
+						?>
 					</ul>
-
-					<?php
-					printf( __('<span class="author-posts-link"><a class="url" href="/author/%1$s/" rel="author" title="See all posts by %1$s">More by %2$s</a></span>', 'largo'), $author->user_login, esc_attr( $author->display_name )); ?>
 
 				</div>
 
-				<?php }
+				<?php }  // foreach
 				// END what used to be in largo-author-box.php
 
 				echo $after_widget;
 		else:
-			_e("Not a valid author context");
+			_e( 'Not a valid author context' );
 		endif;
 
 	}

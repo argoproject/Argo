@@ -11,7 +11,7 @@ if ( is_singular() ) {
 	// for backward compatibility
 	if ($custom_sidebar == 'default')
 		$custom_sidebar = 'none';
-} else if ( is_archive() ) {
+} else if ( is_archive() && !is_date() ) {
 	$term = get_queried_object();
 	$custom_sidebar = largo_get_term_meta( $term->taxonomy, $term->term_id, 'custom_sidebar', true );
 }

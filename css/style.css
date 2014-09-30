@@ -3034,6 +3034,13 @@ article img.attachment-post-thumbnail {
   line-height: 1.3;
   font-size: 24px;
 }
+.archive .stories .hero.is-image img,
+.home .stories .hero.is-image img {
+  clear: both;
+  float: none;
+  display: block;
+  margin: 0 auto;
+}
 .archive .entry-content.with-hero,
 .home .entry-content.with-hero {
   margin: -22px 7% 0;
@@ -3055,7 +3062,7 @@ article img.attachment-post-thumbnail {
   margin-bottom: 12px;
 }
 .archive-dropdown {
-  margin-bottom: 12px;
+  margin: 12px 0;
 }
 #series-footer {
   clear: both;
@@ -3615,10 +3622,6 @@ h3.recent-posts a.rss-link:hover,
   font-size: 16px;
   margin-bottom: 8px;
 }
-.author-box span.author-posts-link {
-  font-size: 16px;
-  display: block;
-}
 .author-box ul {
   list-style: none;
   margin: 0;
@@ -3688,11 +3691,30 @@ h3.recent-posts a.rss-link:hover,
 .author-box ul li.email i.icon-linkedin:hover {
   background-color: #1a5a90;
 }
+.author-box ul li.author-posts-link {
+  font-size: 13px;
+  background-color: #333333;
+  padding: 3px 10px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  font-weight: bold;
+}
+.author-box ul li.author-posts-link a {
+  color: #ffffff;
+}
+.author-box ul li.author-posts-link a:hover {
+  text-decoration: none;
+}
+.author-box ul li.author-posts-link:hover {
+  background-color: #737373;
+}
 .author-box iframe {
   margin: 0;
 }
 .widget .author-box ul {
   padding: 0;
+  margin: 0;
 }
 .home .stories article img.attachment-medium,
 .sub-stories img.attachment-post-thumbnail {
@@ -4256,7 +4278,7 @@ p.comment-form-comment {
   background-color: #238cc3;
 }
 .article-bottom .largo-follow {
-  padding: 0 0 0 0;
+  padding: 0;
 }
 .twitter-follow-button {
   display: block;

@@ -81,28 +81,36 @@ article img.attachment-post-thumbnail {
 }
 
 // posts on archive pages
-.archive .entry-content,
-.home .entry-content {
-  &.with-hero {
-    margin: -22px 7% 0;
-    padding: 22px 18px;
-    width: 86%;
-    background: #fff;
-    @media screen and (max-width: 768px) {
-      margin: 8px 0 0;
-      padding: 0;
-      width: 100%;
-    }
+.archive,
+.home {
+  .stories .hero.is-image img {
+    clear: both;
+    float: none;
+    display: block;
+    margin: 0 auto;
   }
-  h5.byline {
-    font-size: @baseFontSize * 0.815;
-    margin-bottom: @baseline / 2;
+  .entry-content {
+    &.with-hero {
+      margin: -22px 7% 0;
+      padding: 22px 18px;
+      width: 86%;
+      background: #fff;
+      @media screen and (max-width: 768px) {
+        margin: 8px 0 0;
+        padding: 0;
+        width: 100%;
+      }
+    }
+    h5.byline {
+      font-size: @baseFontSize * 0.815;
+      margin-bottom: @baseline / 2;
+    }
   }
 }
 
 // Date Archive
 .archive-dropdown {
-  margin-bottom: @baseline/2;
+  margin: @baseline/2 0;
 }
 
 // Series Landings
