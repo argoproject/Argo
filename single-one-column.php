@@ -4,10 +4,10 @@
  * Description: Shows the post but does not load any sidebars.
  */
 
-add_filter('body_class', function($classes) {
+add_filter( 'body_class', function( $classes ) {
 	$classes[] = 'normal';
 	return $classes;
-});
+} );
 
 get_header();
 ?>
@@ -29,16 +29,16 @@ get_header();
 
 			}
 
-			do_action('largo_before_comments');
+			do_action(' largo_before_comments' );
 
 			comments_template( '', true );
 
-			do_action('largo_after_comments');
+			do_action( 'largo_after_comments' );
 
 		endwhile;
 	?>
 </div>
 
-<?php do_action('largo_after_content'); ?>
+<?php do_action( 'largo_after_content' ); ?>
 
 <?php get_footer(); ?>

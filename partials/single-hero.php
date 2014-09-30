@@ -4,7 +4,7 @@ $values = get_post_custom( $post->ID );
 
 // If the box is checked to override the featured image display we'll treat the hero as if it was empty
 // EXCEPT if a featured video is specified
-if ( isset($values['featured-image-display'][0] ) && !isset( $values['youtube_url'] ) ) $hero_class = 'is-empty';
+if ( isset( $values['featured-image-display'][0] ) && !isset( $values['youtube_url'] ) ) $hero_class = 'is-empty';
 
 if ( $hero_class != 'is-empty') {
 	echo '<div class="hero span12 ' . $hero_class . '">';

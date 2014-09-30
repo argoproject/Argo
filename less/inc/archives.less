@@ -82,24 +82,26 @@ article img.attachment-post-thumbnail {
   }
 }
 
-// Featured post on archive pages
-.entry-content.with-hero {
-  margin: -22px 7% 10px;
-  padding: 22px 18px;
-  width: 86%;
-  background: #fff;
+// postson archive pages
+.archive .entry-content,
+.home .entry-content {
+  &.with-hero {
+    margin: -22px 7% 0;
+    padding: 22px 18px;
+    width: 86%;
+    background: #fff;
+    @media screen and (max-width: 768px) {
+      margin: 8px 0 0;
+      padding: 0;
+      width: 100%;
+    }
+  }
   h5.byline {
     font-size: @baseFontSize * 0.815;
     margin-bottom: @baseline / 2;
   }
 }
-@media screen and (max-width: 768px) {
-  .entry-content.with-hero {
-    margin: 8px 0 0;
-    padding: 0;
-    width: 100%;
-  }
-}
+
 
 // Date Archive
 .archive-dropdown {

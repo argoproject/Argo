@@ -2,87 +2,57 @@
 /**
  * The default template for displaying content
  */
-$tags = of_get_option ('tag_display');
-$is_featured = has_term('homepage-featured', 'prominence');
-$youtube_url = isset( $values['youtube_url'] ) ? esc_attr( $values['youtube_url'][0] ) : '';
-
+$tags = of_get_option( 'tag_display' );
+$hero_class = largo_hero_class( $post->ID, FALSE );
+$values = get_post_custom( $post->ID );
+$featured = has_term( 'homepage-featured', 'prominence' )
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?>>
 
-	<?php if ( $is_featured && ( has_post_thumbnail() || $youtube_url ) ) : ?>
-	<header>
-		<?php
-			$hero_class = ( $youtube_url ) ? "is-image" : "is-video" ;
-		?>
-		<div class="hero span12 <?php echo $hero_class; ?>">
-		<?php
-		  $values = get_post_custom( get_the_id() );
+	<?php
+		if ( $featured && ( has_post_thumbnail() || $values['youtube_url'] ) ) {
+	?>
+		<header>
+			<div class="hero span12 <?php echo $hero_class; ?>">
+			<?php
+				if ( $youtube_url = $values['youtube_url'][0] ) {
+					echo '<div class="embed-container">';
+					largo_youtube_iframe_from_url( $youtube_url );
+					echo '</div>';
+				} elseif( has_post_thumbnail() ){
+					the_post_thumbnail( 'full' );
+				}
+			?>
+			</div>
+		</header>
+	<?php
+		}
+		$entry_classes = 'entry-content';
+		if ( $featured ) $entry_classes .= ' span10 with-hero';
+		echo '<div class="' . $entry_classes . '">';
 
-			if($youtube_url){
+		if ( largo_has_categories_or_tags() && $tags === 'top' ) {
+		 	echo '<h5 class="top-tag">' . largo_top_term( $args = array( 'echo' => FALSE ) ) . '</h5>';
+		}
 
-				// get embed ID
-				parse_str( parse_url( $youtube_url, PHP_URL_QUERY ), $var_array );
-				$youtubeID = $var_array['v'];
+		if ( !$featured ) {
+			echo '<a href="' . get_permalink() . '">' . get_the_post_thumbnail() . '</a>';
+		}
+	?>
 
-				?>
-					<div class="video-container">
-						<iframe  src="//www.youtube.com/embed/<?php echo $youtubeID ?>" frameborder="0" allowfullscreen></iframe>
-					</div>
-				<?php
-			} elseif(has_post_thumbnail()){
-				the_post_thumbnail( 'full');
-			}
-		?>
-		</div>
-	</header>
-	<div class="span10 with-hero entry-content">
+	 	<h2 class="entry-title">
+	 		<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute( array( 'before' => __( 'Permalink to', 'largo' ) . ' ' ) )?>" rel="bookmark"><?php the_title(); ?></a>
+	 	</h2>
 
- 		<?php if ( largo_has_categories_or_tags() && $tags === 'top' ) { ?>
-	 		<h5 class="top-tag"><?php largo_top_term(); ?></h5>
-	 	<?php } ?>
-
- 		<h2 class="entry-title">
- 			<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute( array( 'before' => __( 'Permalink to', 'largo' ) . ' ' ) )?>" rel="bookmark"><?php the_title(); ?></a>
- 		</h2>
-
- 		<h5 class="byline"><?php largo_byline(); ?></h5>
-
-		<?php largo_excerpt( $post, 5, true, __('Continue&nbsp;Reading', 'largo'), true, false ); ?>
-
-    <?php if ( !is_home() || ( largo_has_categories_or_tags() && $tags === 'btm' ) ) : ?>
-    		<h5 class="tag-list"><strong><?php _e('Filed under:', 'largo'); ?></strong> <?php largo_categories_and_tags( 8 ); ?></h5>
-    <?php endif; ?>
-
-	</div><!-- .entry-content -->
-
-	<?php	else : ?>
-
-	<header>
-
- 		<?php if ( largo_has_categories_or_tags() && $tags === 'top' ) { ?>
-	 		<h5 class="top-tag"><?php largo_top_term(); ?></h5>
-	 	<?php } ?>
-	 	<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
- 		<h2 class="entry-title">
- 			<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute( array( 'before' => __( 'Permalink to', 'largo' ) . ' ' ) )?>" rel="bookmark"><?php the_title(); ?></a>
- 		</h2>
-
- 		<h5 class="byline"><?php largo_byline(); ?></h5>
-
-	</header><!-- / entry header -->
-
-	<div class="entry-content">
-
+	 	<h5 class="byline"><?php largo_byline(); ?></h5>
 
 		<?php largo_excerpt( $post, 5, true, __('Continue&nbsp;Reading', 'largo'), true, false ); ?>
 
-    <?php if ( !is_home() && largo_has_categories_or_tags() && $tags === 'btm' ) : ?>
-		<h5 class="tag-list"><strong><?php _e('Filed under:', 'largo'); ?></strong> <?php largo_categories_and_tags( 8 ); ?></h5>
-		<?php endif; ?>
+		<?php if ( !is_home() && largo_has_categories_or_tags() && $tags === 'btm' ) { ?>
+	    	<h5 class="tag-list"><strong><?php _e('More about:', 'largo'); ?></strong> <?php largo_categories_and_tags( 8 ); ?></h5>
+	    <?php } ?>
 
-	</div><!-- .entry-content -->
-
-	<?php endif; ?>
+		</div><!-- .entry-content -->
 
 </article><!-- #post-<?php the_ID(); ?> -->

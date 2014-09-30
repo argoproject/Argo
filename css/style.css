@@ -2935,7 +2935,7 @@ article.story {
 }
 .stories article {
   border-bottom: 1px dotted #999999;
-  margin-bottom: 12px;
+  margin-bottom: 24px;
 }
 .stories article[class*="span"] {
   margin-left: 0;
@@ -3037,22 +3037,25 @@ article img.attachment-post-thumbnail {
   line-height: 1.3;
   font-size: 24px;
 }
-.entry-content.with-hero {
-  margin: -22px 7% 10px;
+.archive .entry-content.with-hero,
+.home .entry-content.with-hero {
+  margin: -22px 7% 0;
   padding: 22px 18px;
   width: 86%;
   background: #fff;
 }
-.entry-content.with-hero h5.byline {
-  font-size: 13.04px;
-  margin-bottom: 12px;
-}
 @media screen and (max-width: 768px) {
-  .entry-content.with-hero {
+  .archive .entry-content.with-hero,
+  .home .entry-content.with-hero {
     margin: 8px 0 0;
     padding: 0;
     width: 100%;
   }
+}
+.archive .entry-content h5.byline,
+.home .entry-content h5.byline {
+  font-size: 13.04px;
+  margin-bottom: 12px;
 }
 .archive-dropdown {
   margin-bottom: 12px;
