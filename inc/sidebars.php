@@ -248,3 +248,21 @@ function largo_load_of_script_for_widget( $hook ) {
 }
 add_action('admin_enqueue_scripts', 'largo_load_of_script_for_widget');
 
+/**
+ * Returns slug of custom sidebar that should be used
+ */
+function largo_get_custom_sidebar() {
+	$custom_sidebar = false;
+
+	if ( is_singular() ) {
+		$custom_sidebar = get_post_meta(get_the_ID(), 'custom_sidebar', true);
+		if ($custom_sidebar == 'default')
+			$custom_sidebar = 'none';
+	} else if ( is_archive() ) {
+		$term = get_queried_object();
+		$custom_sidebar = largo_get_term_meta(
+			$term->taxonomy, $term->term_id, 'custom_sidebar', true);
+	}
+
+	return $custom_sidebar;
+}
