@@ -266,3 +266,25 @@ function largo_get_custom_sidebar() {
 
 	return $custom_sidebar;
 }
+
+/**
+ * Determines whether the current context requires a sidebar
+ */
+function largo_is_sidebar_required() {
+	$default_template = of_get_option('single_template');
+	$custom_template = get_post_meta($post->ID, '_wp_post_template', true);
+	$custom_sidebar = largo_get_custom_sidebar();
+
+	$two_column_layout_test_forced = ($custom_template == 'single-two-column.php');
+	$two_column_layout_test = (
+		$default_template == 'classic' &&
+		in_array($custom_template, array('', 'single-two-column.php'))
+	);
+	$one_column_layout_test = (
+		in_array($default_template, array('normal', 'classic')) &&
+		in_array($custom_template, array('', 'single-one-column.php')) &&
+		$custom_sidebar !== 'none'
+	);
+
+	return ($two_column_layout_test || $two_column_layout_test_forced || $one_column_layout_test);
+}
