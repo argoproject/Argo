@@ -288,6 +288,7 @@ function largo_prominence_meta_box($post, $args) {
 			$termList[] = $v;
 	}
 
+	$tax = get_taxonomy('prominence');
 	$args = array(
 		'taxonomy' => 'prominence',
 		'disabled' => !current_user_can($tax->cap->assign_terms),
