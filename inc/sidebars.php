@@ -140,59 +140,92 @@ function largo_make_slug($string, $maxLength = 63) {
  *
  * @since 1.0
  */
-if( !function_exists( 'largo_custom_sidebars_dropdown' ) ) {
-	function largo_custom_sidebars_dropdown( $selected = '', $skip_default = false, $post_id = NULL ) {
+if(!function_exists('largo_custom_sidebars_dropdown')) {
+	function largo_custom_sidebars_dropdown($selected='', $skip_default=false, $post_id=NULL) {
 		global $wp_registered_sidebars, $post;
-		$the_id = ( $post_id ) ? $post_id : $post->ID ;
-		$custom = ( $selected ) ? $selected : get_post_meta( $the_id, 'custom_sidebar', true );
+		$the_id = ($post_id)? $post_id:$post->ID;
+		$custom = ($selected)? $selected:get_post_meta($the_id, 'custom_sidebar', true);
 
 		// for the ultimate in backwards compatibility, if nothing's set or using deprecated 'default'
-		$default = ( of_get_option('single_template') == 'classic' ) ? 'sidebar-single' : 'none';
+		$default = (of_get_option('single_template') == 'classic')? 'sidebar-single':'none';
 		$val = $default;
 
-		// for new posts
 		$admin_page = get_current_screen();
-		if ( $admin_page->action == 'add' && $admin_page->base == 'post' ) $val = 'none';
-
-		// for posts with values set
-		if ( $custom && $custom !== 'default' ) $val = $custom;
-
 		$output = '';
+		if ($admin_page->base == 'post') {
+			// for new posts
+			if ($admin_page->action == 'add')
+				$val = 'none';
 
-		// Add a default (i.e. 'none') option
-		$default_label = __('Default', 'largo');
-		if ($_SERVER['PHP_SELF'] == '/wp-admin/post.php') {
+			// for posts with values set
+			if ($custom && $custom !== 'default')
+				$val = $custom;
+
+			// Add a default option for one column post/page layout (e.g. no sidebar)
 			$default_template = of_get_option('single_template');
 			$custom_template = get_post_meta($post->ID, '_wp_post_template', true);
 
 			$one_column_layout_test = (
-				in_array($default_template, array('normal', 'classic')) &&
-				in_array($custom_template, array('', 'single-one-column.php'))
+				(
+					in_array($default_template, array('normal')) &&
+					in_array($custom_template, array('', 'single-one-column.php', 'full-page.php'))
+				) ||
+				$custom_template == 'single-one-column.php'
 			);
 
-			$default_label = ($one_column_layout_test)? __('Default (no sidebar)', 'largo' ):$default_label;
+			if ($one_column_layout_test) {
+				$default_label = __('Default (no sidebar)', 'largo');
+			} else {
+				// Posts with classic layout should default to single sidebar
+				$default_label = sprintf(__('Default (%s)', 'largo'), $wp_registered_sidebars['sidebar-single']['name']);
+			}
+
+			$output .= '<option value="none" ';
+			$output .= selected('none', $val, false);
+			$output .= '>' . $default_label . '</option>';
 		}
 
-		$output .= '<option value="none" ';
-		$output .= selected('none', $val, false);
-		$output .= '>' . __($default_label, 'largo' ) . '</option>';
+		if ($admin_page->base == 'edit-tags') {
+			if (of_get_option('use_topic_sidebar') && is_active_sidebar('topic-sidebar'))
+				$default_label = sprintf(__('Default (%s)', 'largo'), $wp_registered_sidebars['topic-sidebar']['name']);
+			else
+				$default_label = sprintf(__('Default (%s)', 'largo'), $wp_registered_sidebars['sidebar-main']['name']);
+
+			$output .= '<option value="none" ';
+			$output .= selected('none', $val, false);
+			$output .= '>' . $default_label . '</option>';
+		}
 
 		// Filter list of sidebars to exclude those we don't want users to choose
-		$excluded = array(
-			'Footer 1', 'Footer 2', 'Footer 3', 'Article Bottom', 'Header Ad Zone', 'Homepage Alert'
-		);
-		// Let others change the list
-		$excluded = apply_filters( 'largo_excluded_sidebars', $excluded );
+		$excluded = largo_get_excluded_sidebars();
+
 		// Fill the select element with all registered sidebars that are custom
-		foreach( $wp_registered_sidebars as $sidebar_id => $sidebar ) {
-			//check if excluded
-			if ( in_array( $sidebar_id, $excluded ) || in_array( $sidebar['name'], $excluded ) ) continue;
+		foreach ($wp_registered_sidebars as $sidebar_id => $sidebar) {
+			if (in_array($sidebar_id, $excluded) || in_array($sidebar['name'], $excluded))
+				continue;
 
 			$output .= '<option value="' . $sidebar_id . '" ' . selected($sidebar_id, $val, false) . '>' . $sidebar['name'] . '</option>';
 		}
 
 		echo $output;
 	}
+}
+
+/**
+ * Returns sidebars that users should not be able to select for post, page and taxonomy layouts
+ */
+function largo_get_excluded_sidebars() {
+	$excluded = array(
+		'Footer 1',
+		'Footer 2',
+		'Footer 3',
+		'Article Bottom',
+		'Header Ad Zone',
+		'Homepage Alert'
+	);
+	// Let others change the list
+	$excluded = apply_filters('largo_excluded_sidebars', $excluded);
+	return $excluded;
 }
 
 /**
