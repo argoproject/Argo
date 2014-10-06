@@ -159,17 +159,30 @@ if( !function_exists( 'largo_custom_sidebars_dropdown' ) ) {
 
 		$output = '';
 
-		// Add a 'none' option
+		// Add a default (i.e. 'none') option
+		$default_label = __('Default', 'largo');
+		if ($_SERVER['PHP_SELF'] == '/wp-admin/post.php') {
+			$default_template = of_get_option('single_template');
+			$custom_template = get_post_meta($post->ID, '_wp_post_template', true);
+
+			$one_column_layout_test = (
+				in_array($default_template, array('normal', 'classic')) &&
+				in_array($custom_template, array('', 'single-one-column.php'))
+			);
+
+			$default_label = ($one_column_layout_test)? __('Default (no sidebar)', 'largo' ):$default_label;
+		}
+
 		$output .= '<option value="none" ';
-		$output .= selected( 'none', $val, false );
-		$output .= '>' . __( 'None', 'largo' ) . '</option>';
+		$output .= selected('none', $val, false);
+		$output .= '>' . __($default_label, 'largo' ) . '</option>';
 
 		// Filter list of sidebars to exclude those we don't want users to choose
 		$excluded = array(
 			'Footer 1', 'Footer 2', 'Footer 3', 'Article Bottom', 'Header Ad Zone', 'Homepage Alert'
 		);
-	  // Let others change the list
-	  $excluded = apply_filters( 'largo_excluded_sidebars', $excluded );
+		// Let others change the list
+		$excluded = apply_filters( 'largo_excluded_sidebars', $excluded );
 		// Fill the select element with all registered sidebars that are custom
 		foreach( $wp_registered_sidebars as $sidebar_id => $sidebar ) {
 			//check if excluded
@@ -256,7 +269,7 @@ function largo_get_custom_sidebar() {
 
 	if ( is_singular() ) {
 		$custom_sidebar = get_post_meta(get_the_ID(), 'custom_sidebar', true);
-		if ($custom_sidebar == 'default')
+		if (in_array($custom_sidebar, array('', 'default')))
 			$custom_sidebar = 'none';
 	} else if ( is_archive() ) {
 		$term = get_queried_object();

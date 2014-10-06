@@ -15,6 +15,8 @@ do_action('largo_before_sidebar'); ?>
 
 			if (is_archive() && !is_date())
 				get_template_part('partials/sidebar', 'archive');
+			else if (is_single() || is_singular())
+				get_template_part('partials/sidebar', 'single');
 			else
 				get_template_part('partials/sidebar');
 
