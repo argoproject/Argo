@@ -13,12 +13,10 @@ do_action('largo_before_sidebar'); ?>
 		<?php
 			do_action('largo_before_sidebar_widgets');
 
-			if (is_single())
-				get_template_part('partials/sidebar', 'single');
-			else if (is_archive() && !is_date())
+			if (is_archive() && !is_date())
 				get_template_part('partials/sidebar', 'archive');
 			else
-				get_template_part('partials/sidebar', 'fallback');
+				get_template_part('partials/sidebar');
 
 			do_action('largo_after_sidebar_widgets');
 		?>

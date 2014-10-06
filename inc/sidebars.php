@@ -268,9 +268,11 @@ function largo_get_custom_sidebar() {
 }
 
 /**
- * Determines whether the current context requires a sidebar
+ * Determines if is_single or is_singular context requires a sidebar
  */
 function largo_is_sidebar_required() {
+	global $post;
+
 	$default_template = of_get_option('single_template');
 	$custom_template = get_post_meta($post->ID, '_wp_post_template', true);
 	$custom_sidebar = largo_get_custom_sidebar();
