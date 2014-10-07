@@ -167,15 +167,15 @@ function largo_layout_meta_box_display () {
 	if ( $post->post_type != 'page' ) {
 		echo '<p><strong>' . __('Template', 'largo' ) . '</strong></p>';
 		echo '<p>' . __('Select the post template you wish this post to use.', 'largo') . '</p>';
-		echo '<p>' . sprintf(
-				__('<a href="%s">Click here</a> to change the default post template.', 'largo' ),
-				admin_url('themes.php?page=options-framework#of-option-layoutoptions41'));
-		echo '</p>';
 		echo '<label class="hidden" for="post_template">' . __("Post Template", 'largo' ) . '</label>';
 		echo '<select name="_wp_post_template" id="post_template" class="dropdown">';
 		echo '<option value="">' . sprintf(__( 'Default: %s', 'largo' ), $current_template) . '</option>';
 		post_templates_dropdown(); //get the options
 		echo '</select>';
+		echo '<p>' . sprintf(
+			__('<a href="%s">Click here</a> to change the default post template.', 'largo' ),
+			admin_url('themes.php?page=options-framework#of-option-layoutoptions41'));
+		echo '</p>';
 	}
 
 	echo '<p><strong>' . __('Custom Sidebar', 'largo' ) . '</strong><br />';
