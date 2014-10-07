@@ -143,6 +143,7 @@ function largo_make_slug($string, $maxLength = 63) {
 if(!function_exists('largo_custom_sidebars_dropdown')) {
 	function largo_custom_sidebars_dropdown($selected='', $skip_default=false, $post_id=NULL) {
 		global $wp_registered_sidebars, $post;
+
 		$the_id = ($post_id)? $post_id:$post->ID;
 		$custom = ($selected)? $selected:get_post_meta($the_id, 'custom_sidebar', true);
 
@@ -150,20 +151,21 @@ if(!function_exists('largo_custom_sidebars_dropdown')) {
 		$default = (of_get_option('single_template') == 'classic')? 'sidebar-single':'none';
 		$val = $default;
 
+		// for new posts
+		if ($admin_page->action == 'add')
+			$val = 'none';
+
+		// for posts and taxonomies with values set
+		if ($custom && $custom !== 'default')
+			$val = $custom;
+
 		$admin_page = get_current_screen();
 		$output = '';
 		if ($admin_page->base == 'post') {
-			// for new posts
-			if ($admin_page->action == 'add')
-				$val = 'none';
-
-			// for posts with values set
-			if ($custom && $custom !== 'default')
-				$val = $custom;
 
 			// Add a default option for one column post/page layout (e.g. no sidebar)
 			$default_template = of_get_option('single_template');
-			$custom_template = get_post_meta($post->ID, '_wp_post_template', true);
+			$custom_template = get_post_meta($the_id, '_wp_post_template', true);
 
 			$one_column_layout_test = (
 				(
