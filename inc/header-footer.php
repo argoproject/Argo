@@ -24,7 +24,7 @@ if ( ! function_exists( 'largo_header' ) ) {
 		);
 
 		// add an image placeholder, the src is added by largo_header_js() in inc/enqueue.php
-		if ($header_class != 'branding')
+		if ( $header_class != 'branding' && is_home() )
 			echo '<a itemprop="url" href="' . esc_url( home_url( '/' ) ) . '"><img class="header_img" src="" alt="" /></a>';
 
 		if ( of_get_option( 'logo_thumbnail_sq' ) )
