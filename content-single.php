@@ -75,4 +75,3 @@
 <?php if ( of_get_option( 'show_next_prev_nav_single' ) )
 	largo_content_nav( 'single-post-nav-below' );
 ?>
-
