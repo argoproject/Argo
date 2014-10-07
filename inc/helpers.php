@@ -42,3 +42,40 @@ function largo_youtube_iframe_from_url( $url, $echo = TRUE ) {
 		return $output;
 	}
 }
+
+/**
+ * For a given YouTube URL, return the image url for various thumbnail sizes
+ *
+ * @param 	string 	$url a YouTube URL (e.g. - https://www.youtube.com/watch?v=i5vfw5f1CZo)
+ * @param	string the image size you'd like (options are: thumb | small | medium | large)
+ * @param 	bool 	$echo return or echo the output
+ * @return 	string	a youtube image url
+ * @uses 	largo_youtube_url_to_ID
+ * @since 0.4
+ */
+
+function largo_youtube_image_from_url( $url, $size = large, $echo = TRUE ) {
+	$id = largo_youtube_url_to_ID( $url );
+
+	$output = 'http://img.youtube.com/vi/' . $id;
+	switch( $size ) {
+		case 'thumb':
+			$output .= '/default.jpg'; // 120 x 90
+			break;
+		case 'small':
+			$output .= '/hqdefault.jpg'; // 480 x 360
+			break;
+		case 'medium':
+			$output .= '/sddefault.jpg'; // 640 x 480
+			break;
+		case 'large':
+			$output .= '/maxresdefault.jpg'; // 1280 x 720
+			break;
+	}
+
+	if ( $echo ) {
+		echo $output;
+	} else {
+		return $output;
+	}
+}
