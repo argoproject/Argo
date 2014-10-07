@@ -8,7 +8,7 @@ if ( isset( $values['featured-image-display'][0] ) && !isset( $values['youtube_u
 
 if ( $hero_class != 'is-empty') {
 	echo '<div class="hero span12 ' . $hero_class . '">';
-		if ( $youtube_url = $values['youtube_url'] ) {
+		if ( $youtube_url = $values['youtube_url'][0] ) {
 			echo '<div class="embed-container">';
 			largo_youtube_iframe_from_url( $youtube_url );
 			echo '</div>';
