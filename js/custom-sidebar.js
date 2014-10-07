@@ -10,7 +10,12 @@
 
     post_template.on('change', function() {
       if (post_template.val() == '') {
-        none_option.text(default_text);
+        if (post_template.text().match(/Two Column/g))
+          none_option.text(default_sidebar_labels['single-two-column.php']);
+
+        if (post_template.text().match(/One Column/g))
+          none_option.text(default_sidebar_labels['single-one-column.php']);
+
         custom_sidebar.removeAttr('disabled');
       }
 
