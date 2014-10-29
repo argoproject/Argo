@@ -82,6 +82,8 @@
 			}
 		?>
 
+		<?php get_template_part('partials/homepage-alert'); ?>
+
 		<?php do_action( 'largo_after_nav' ); ?>
 
 		<div id="main" class="row-fluid clearfix">
