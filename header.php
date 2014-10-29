@@ -65,6 +65,8 @@
 			}
 		?>
 
+		<?php get_template_part('partials/header-ad-zone'); ?>
+
 		<?php
 			do_action( 'largo_before_header' );
 
