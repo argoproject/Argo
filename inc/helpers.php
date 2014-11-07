@@ -4,7 +4,7 @@
  *
  * @param 	string 	$url a twitter url
  * @return 	string	the twitter username extracted from the input string
- * @since 0.3
+ * @since 	0.3
  */
 function largo_twitter_url_to_username( $url ) {
 	$urlParts = explode("/", $url);
@@ -32,7 +32,7 @@ function largo_youtube_url_to_ID( $url ) {
  * @param 	bool 	$echo return or echo the output
  * @return 	string	a standard YouTube iframe embed code
  * @uses 	largo_youtube_url_to_ID
- * @since 0.4
+ * @since 	0.4
  */
 function largo_youtube_iframe_from_url( $url, $echo = TRUE ) {
 	$output = '<iframe  src="//www.youtube.com/embed/' . largo_youtube_url_to_ID( $url ) . '" frameborder="0" allowfullscreen></iframe>';
@@ -78,4 +78,18 @@ function largo_youtube_image_from_url( $url, $size = large, $echo = TRUE ) {
 	} else {
 		return $output;
 	}
+}
+
+/**
+ * Transform user-entered text into WP-compatible slugs
+ *
+ * @param 	string 	$string		the string to turn into a slug
+ * @param 	string	$maxLength 	the max length for the slug in characters
+ * @since 	0.4
+ */
+function largo_make_slug( $string, $maxLength = 63 ) {
+  $result = preg_replace( '/[^a-z0-9\s-]/', '', strtolower( $string ) );
+  $result = trim( preg_replace( '/[\s-]+/', ' ', $result ) );
+  $result = trim( substr( $result, 0, $maxLength ) );
+  return preg_replace( '/\s/', '-', $result );
 }
