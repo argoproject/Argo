@@ -1,6 +1,7 @@
 <?php
 /**
  * Single Post Template: Two Column (Classic Layout)
+ * Template Name: Two Column (Classic Layout)
  * Description: Shows the post and sidebar if specified.
  */
 
@@ -15,7 +16,8 @@ get_header();
 <div id="content" class="span8" role="main">
 	<?php
 		while ( have_posts() ) : the_post();
-			get_template_part( 'partials/content', 'single-classic' );
+			$partial = (is_page())? 'page':'single-classic';
+			get_template_part( 'partials/content', $partial );
 
 			if ( is_active_sidebar( 'article-bottom' ) ) {
 

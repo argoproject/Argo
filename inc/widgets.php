@@ -117,12 +117,12 @@ add_filter('dynamic_sidebar_params', 'largo_add_widget_classes');
  *
  * @since 1.0
  */
-function largo_widget_counter_reset( $text ) {
+function largo_widget_counter_reset() {
    global $widget_num;
    $widget_num = 0;
-   return $text;
 }
-add_filter('get_sidebar','largo_widget_counter_reset', 99);
+add_action('dynamic_sidebar_after', 'largo_widget_counter_reset', 99);
+add_action('get_sidebar', 'largo_widget_counter_reset', 99);
 
 /**
  * Add custom fields to widget forms

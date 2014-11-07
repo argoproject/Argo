@@ -1,6 +1,7 @@
 <?php
 /**
  * Single Post Template: One Column (Standard Layout)
+ * Template Name: One Column (Standard Layout)
  * Description: Shows the post but does not load any sidebars.
  */
 
@@ -15,7 +16,8 @@ get_header();
 <div id="content" class="span8" role="main">
 	<?php
 		while ( have_posts() ) : the_post();
-			get_template_part( 'partials/content', 'single' );
+			$partial = (is_page())? 'page':'single';
+			get_template_part( 'partials/content', $partial );
 
 			if ( is_active_sidebar( 'article-bottom' ) ) {
 

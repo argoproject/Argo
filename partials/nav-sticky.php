@@ -60,25 +60,28 @@
 							);
 							largo_cached_nav_menu($args);
 
-							if (has_nav_menu('global-nav')) { ?>
-								<li class="menu-item-has-childen dropdown">
-									<a href="javascript:void(0);" class="dropdown-toggle"><?php
-										//try to get the menu name from global-nav
-										$menus = get_nav_menu_locations();
-										$menu_title = wp_get_nav_menu_object($menus['global-nav'])->name;
-										echo ( $menu_title ) ? $menu_title : __('About', 'largo');
-										?> <b class="caret"></b>
-									</a>
-									<?php
-										$args = array(
-											'theme_location' => 'global-nav',
-											'depth'		 => 1,
-											'container'	 => false,
-											'menu_class' => 'dropdown-menu',
-										);
-										largo_cached_nav_menu($args);
-									?>
-								</li>
+							if (has_nav_menu('global-nav')) {
+								$args = array(
+									'theme_location' => 'global-nav',
+									'depth'		 => 1,
+									'container'	 => false,
+									'menu_class' => 'dropdown-menu',
+									'echo' => false
+								);
+								$global_nav = largo_cached_nav_menu($args);
+
+								if (!empty($global_nav)) { ?>
+									<li class="menu-item-has-childen dropdown">
+										<a href="javascript:void(0);" class="dropdown-toggle"><?php
+											//try to get the menu name from global-nav
+											$menus = get_nav_menu_locations();
+											$menu_title = wp_get_nav_menu_object($menus['global-nav'])->name;
+											echo ( $menu_title ) ? $menu_title : __('About', 'largo');
+											?> <b class="caret"></b>
+										</a>
+										<?php echo $global_nav; ?>
+									</li>
+								<?php } ?>
 							<?php } ?>
 						</ul>
 					</div>

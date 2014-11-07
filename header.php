@@ -65,6 +65,8 @@
 			}
 		?>
 
+		<?php get_template_part('partials/header-ad-zone'); ?>
+
 		<?php
 			do_action( 'largo_before_header' );
 
@@ -81,6 +83,8 @@
 				get_template_part( 'partials/nav', 'secondary' );
 			}
 		?>
+
+		<?php get_template_part('partials/homepage-alert'); ?>
 
 		<?php do_action( 'largo_after_nav' ); ?>
 
