@@ -111,6 +111,7 @@ class Largo {
 
 		$includes = array(
 			'/largo-apis.php',
+			'/inc/helpers.php',
 			'/inc/largo-plugin-init.php',
 			'/inc/dashboard.php',
 			'/inc/robots.php',
@@ -128,7 +129,6 @@ class Largo {
 			'/inc/images.php',
 			'/inc/editor.php',
 			'/inc/post-metaboxes.php',
-			'/inc/helpers.php',
 			'/inc/open-graph.php',
 			'/inc/verify.php',
 			'/inc/post-tags.php',
