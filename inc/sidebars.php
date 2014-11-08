@@ -226,7 +226,7 @@ function largo_get_custom_sidebar() {
 
 	if ( is_singular() ) {
 		$custom_sidebar = get_post_meta( get_the_ID(), 'custom_sidebar', true) ;
-		if (in_array($custom_sidebar, array('', 'default')))
+		if ( in_array( $custom_sidebar, array( '', 'default' ) ) )
 			$custom_sidebar = 'none';
 	} else if ( is_archive() ) {
 		$term = get_queried_object();
@@ -243,7 +243,7 @@ function largo_get_custom_sidebar() {
 function largo_is_sidebar_required() {
 	global $post;
 
-	$default_template = of_get_option(' single_template' );
+	$default_template = of_get_option( 'single_template' );
 	$custom_template = get_post_meta( $post->ID, '_wp_post_template', true );
 	$custom_sidebar = largo_get_custom_sidebar();
 
