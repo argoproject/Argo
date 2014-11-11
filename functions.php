@@ -98,7 +98,7 @@ class Largo {
 
 		$this->register_nav_menus();
 		$this->register_media_sizes();
-		$this->show_menus();
+		$this->template_constants();
 
 		$this->customizer = Largo_Customizer::get_instance();
 
@@ -254,11 +254,12 @@ class Largo {
 	}
 
 	/**
-	 * Menu display constants, you can override these in your child theme's
+	 * Template display constants, you can override these in your child theme's
 	 * functions.php by doing something like:
 	 * define( 'SHOW_GLOBAL_NAV', FALSE );
 	 */
-	private function show_menus() {
+	private function template_constants() {
+		/* Navigation */
 		if ( ! defined( 'SHOW_GLOBAL_NAV' ) ) {
 			define( 'SHOW_GLOBAL_NAV', TRUE );
 		}
@@ -274,6 +275,11 @@ class Largo {
 			} else {
 				define( 'SHOW_SECONDARY_NAV', FALSE );
 			}
+		}
+
+		/* Category */
+		if ( ! defined( 'SHOW_CATEGORY_RELATED_TOPICS' ) ) {
+			define( 'SHOW_CATEGORY_RELATED_TOPICS', TRUE );
 		}
 	}
 
