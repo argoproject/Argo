@@ -19,8 +19,7 @@ function largo_register_default_homepage_layouts() {
 		'HomepageSingle',
 		'HomepageSingleWithFeatured',
 		'HomepageSingleWithSeriesStories',
-		'TopStories',
-		'Slider'
+		'TopStories'
 	);
 
 	foreach ($default_layouts as $layout)

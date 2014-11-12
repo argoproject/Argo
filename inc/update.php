@@ -70,6 +70,8 @@ function largo_home_transition() {
 	if ($old_regime && !$new_regime) {
 		if ($old_regime == 'topstories')
 			$home_template = 'TopStories';
+		if ($old_regime == 'slider')
+			$home_template = 'HomepageBlog';
 		if ($old_regime == 'blog')
 			$home_template = 'HomepageBlog';
 		of_set_option('home_template', $home_template);
