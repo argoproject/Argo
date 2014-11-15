@@ -31,4 +31,4 @@ before_script:
     - sed -i "s/yourpasswordhere//" wp-tests-config.php
     - cd "/tmp/wordpress/src/wp-content/themes/$SLUG"
 
-script: phpunit
+script: phpunit --verbose
