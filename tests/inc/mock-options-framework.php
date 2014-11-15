@@ -14,7 +14,7 @@ class MockOptionsFramework {
 
 	public function populate_defaults() {
 		include_once(ABSPATH . 'wp-admin/includes/screen.php');
-		include_once(get_stylesheet_directory() . '/options.php');
+		include_once(dirname(dirname(__DIR__)) . '/options.php');
 		// Suppress notices resulting from call to of_get_default_values.
 		// We're not testing the options framework here.
 		$this->options = array_merge($this->options, @of_get_default_values());
