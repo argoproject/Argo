@@ -84,7 +84,10 @@ class Largo_Term_Sidebars {
 	 * Save the results from the term edit page
 	 */
 	function edit_terms( $term_id ) {
-		$nonce_action = $_POST['action'] == 'add-tag' ? 'custom_sidebar-new' : 'custom_sidebar-'.$term_id ;
+		if (isset($_POST['action']) && $_POST['action'] == 'add-tag')
+			$nonce_action = 'custom_sidebar-new';
+		else
+			$nonce_action = 'custom_sidebar-' . $term_id;
 
 		if ( isset($_POST['_custom_sidebar_nonce']) && wp_verify_nonce($_POST['_custom_sidebar_nonce'], $nonce_action ) ) {
 			$taxonomy = $_REQUEST['taxonomy'];

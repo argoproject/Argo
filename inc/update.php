@@ -276,29 +276,31 @@ function largo_transition_nav_menus() {
 	// Move all the category, supplemental items to main-nav.
 	// Remove category and supplemental navs.
 	foreach ($transition as $location_slug) {
-		$items = $existing_items[$location_slug];
-		if ($items) {
-			foreach ($items as $idx => $item) {
-				$meta = get_metadata('post', $item->ID);
-				$attrs = array(
-					'menu-item-type' => $meta['_menu_item_type'][0],
-					'menu-item-menu-item-parent' => $meta['_menu_item_menu_item_parent'][0],
-					'menu-item-parent-id' => $meta['_menu_item_menu_item_parent'][0],
-					'menu-item-object-id' => $meta['_menu_item_object_id'][0],
-					'menu-item-object' => $meta['_menu_item_object'][0],
-					'menu-item-target' => $meta['_menu_item_target'][0],
-					'menu-item-classes' => $meta['_menu_item_classes'][0],
-					'menu-item-xfn' => $meta['_menu_item_xfn'][0],
-					'menu-item-url' => $meta['_menu_item_url'][0],
-					'menu-item-title' => $item->post_title,
-					'menu-item-attr-title' => $item->post_excerpt
-				);
-				wp_update_nav_menu_item($locations['main-nav'], $item->ID, $attrs);
+		if (isset($existing_items[$location_slug])) {
+			$items = $existing_items[$location_slug];
+			if ($items) {
+				foreach ($items as $idx => $item) {
+					$meta = get_metadata('post', $item->ID);
+					$attrs = array(
+						'menu-item-type' => $meta['_menu_item_type'][0],
+						'menu-item-menu-item-parent' => $meta['_menu_item_menu_item_parent'][0],
+						'menu-item-parent-id' => $meta['_menu_item_menu_item_parent'][0],
+						'menu-item-object-id' => $meta['_menu_item_object_id'][0],
+						'menu-item-object' => $meta['_menu_item_object'][0],
+						'menu-item-target' => $meta['_menu_item_target'][0],
+						'menu-item-classes' => $meta['_menu_item_classes'][0],
+						'menu-item-xfn' => $meta['_menu_item_xfn'][0],
+						'menu-item-url' => $meta['_menu_item_url'][0],
+						'menu-item-title' => $item->post_title,
+						'menu-item-attr-title' => $item->post_excerpt
+					);
+					wp_update_nav_menu_item($locations['main-nav'], $item->ID, $attrs);
+				}
 			}
+			// Get rid of the menu
+			wp_delete_nav_menu($locations[$location_slug]);
+			unset($locations[$location_slug]);
 		}
-		// Get rid of the menu
-		wp_delete_nav_menu($locations[$location_slug]);
-		unset($locations[$location_slug]);
 	}
 
 	set_theme_mod('nav_menu_locations', $locations);
