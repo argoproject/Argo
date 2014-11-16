@@ -29,6 +29,7 @@ before_script:
     - sed -i "s/youremptytestdbnamehere/wordpress_tests/" wp-tests-config.php
     - sed -i "s/yourusernamehere/travis/" wp-tests-config.php
     - sed -i "s/yourpasswordhere//" wp-tests-config.php
+    - mv wp-tests-config.php "$WP_TESTS_DIR/wp-tests-config.php"
     - cd "/tmp/wordpress/src/wp-content/themes/$SLUG"
 
-script: phpunit --verbose
+script: phpunit
