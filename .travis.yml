@@ -14,7 +14,7 @@ env:
 # Only test the unittests branch for now
 branches:
     only:
-        - unittests
+        - develop
 
 # Clones WordPress and configures our testing environment.
 before_script:
