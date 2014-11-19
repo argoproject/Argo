@@ -111,6 +111,7 @@ class Largo {
 
 		$includes = array(
 			'/largo-apis.php',
+			'/inc/ajax-functions.php',
 			'/inc/helpers.php',
 			'/inc/largo-plugin-init.php',
 			'/inc/dashboard.php',

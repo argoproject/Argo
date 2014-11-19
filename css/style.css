@@ -3075,6 +3075,15 @@ article img.attachment-post-thumbnail {
 #series-header .byline .sep {
   display: none;
 }
+.load-more {
+  display: inline-block;
+}
+.load-more.loading {
+  padding-right: 32px;
+  background-image: url(/wp-admin/images/loading.gif);
+  background-position: 96% center;
+  background-repeat: no-repeat;
+}
 .search-results .form-search {
   margin-bottom: 16px;
 }

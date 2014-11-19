@@ -512,16 +512,12 @@ if ( ! function_exists( 'largo_content_nav' ) ) {
 
 		<?php } elseif ( $wp_query->max_num_pages > 1 ) {
 			$posts_term = of_get_option( 'posts_term_plural' );
-			if ( !$posts_term ) $posts_term = 'Posts';
-			$previous_posts_term = sprintf( __( 'Newer %s &rarr;', 'largo' ), $posts_term );
-			$next_posts_term =  sprintf( __( '&larr; Older %s', 'largo' ), $posts_term );
-		?>
-
+			if ( !$posts_term ) $posts_term = 'Posts'; ?>
 			<nav id="<?php echo $nav_id; ?>" class="pager post-nav">
-				<div class="next"><?php previous_posts_link( $previous_posts_term ); ?></div>
-				<div class="previous"><?php next_posts_link( $next_posts_term ); ?></div>
-			</nav><!-- .post-nav -->
-
+				<div class="load-more">
+					<?php next_posts_link( 'Load more ' . strtolower($posts_term) ); ?>
+				</div>
+			</nav>
 		<?php }
 	}
 }
