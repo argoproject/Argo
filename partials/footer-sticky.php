@@ -33,15 +33,20 @@
 		// Get the category object
 		$cat_feed_link = largo_top_term( array( 'use_icon' => 'rss', 'rss' => true, 'echo' => false ) );
 
-		// Get the author object
-		$author = get_userdata( $post->post_author );
-		$byline_text = get_post_meta( $post->ID, 'largo_byline_text' ) ? esc_attr( get_post_meta( $wp_query->post->ID, 'largo_byline_text', true ) ) : '';
-		// If the byline override is being used, then don't use it
-		if ( !empty($byline_text) ) {
-			$author = null;
-		}
+		// Set one of two author objects (leave other null).
+		// We make $coauthor a one dimensional array if author hasn't been overwritten.
+		$byline_text = null;
+		$coauthors = null;
 
-		if ( !empty($author) || !empty($cat_feed_link) ): ?>
+		if( get_post_meta( $post->ID, 'largo_byline_text' ) ) {
+			$byline_text = esc_attr( get_post_meta( $wp_query->post->ID, 'largo_byline_text', true ) );
+		} else if ( function_exists('get_coauthors') ) {
+			$coauthors =  get_coauthors( $post->ID );
+		} else {
+			$coauthors = array( get_userdata( $post->post_author ));
+		}
+		
+		?>
 		<div class="follow">
 			<h4><?php _e( 'Follow', 'largo' ); ?></h4>
 
@@ -49,19 +54,23 @@
 				if ( $cat_feed_link ) {
 					echo $cat_feed_link;
 			} ?>
-
-				<?php if ( $author ): ?>
-				<div class="follow-author">
+				
+			<?php if ( $byline_text ): ?>
+				<a href="<?php echo $byline_link; ?>" class="icon-link"><?php echo esc_html( $byline_text ); ?></a>
+			<?php else : ?>
+				<?php // $coauthor covers base case (1 dimensional) or where coauthors were defined. ?>
+				<?php foreach( $coauthors as $author ) : ?>
+					<div class="follow-author">
 					<a href="<?php echo get_author_feed_link($author->ID); ?>" class="icon-rss"></a>
 					<?php if ( $twitter = get_the_author_meta( 'twitter', $author->ID ) ) : ?>
 						<a href="<?php echo esc_url( $twitter ); ?>" class="icon-twitter"></a>
 					<?php endif; ?>
-
 					<a href="<?php echo get_author_posts_url( $author->ID ); ?>"><?php echo esc_html( $author->display_name ); ?></a>
-				</div>
-				<?php endif; ?>
+					</div>
+				<?php endforeach; ?>
+			<?php endif; ?>
+			
 		</div>
-		<?php endif; ?>
 
 	</div>
 </div>
