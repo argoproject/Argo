@@ -91,7 +91,7 @@ function largo_custom_taxonomies() {
 		        'labels'        => array(
 		        	'name'              => _x( 'Series', 'taxonomy general name' ),
 					'singular_name'     => _x( 'Series', 'taxonomy singular name' ),
-					'search_items'      => __( 'Search Senres' ),
+					'search_items'      => __( 'Search Series' ),
 					'all_items'         => __( 'All Series' ),
 					'parent_item'       => __( 'Parent Series' ),
 					'parent_item_colon' => __( 'Parent Series:' ),
