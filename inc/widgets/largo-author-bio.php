@@ -85,7 +85,7 @@ class largo_author_widget extends WP_Widget {
 
 						<?php if ( $twitter = $author->twitter ) { ?>
 							<li class="twitter">
-								<a href="<?php echo esc_url( $twitter ); ?>" class="twitter-follow-button" data-show-count="false"><?php printf( __('Follow @%1$s', 'largo'), largo_twitter_url_to_username ( $twitter ) ); ?></a>
+								<a href="https://twitter.com/<?php echo largo_twitter_url_to_username ( $twitter ); ?>" class="twitter-follow-button" data-show-count="false"><?php printf( __('Follow @%1$s', 'largo'), largo_twitter_url_to_username ( $twitter ) ); ?></a>
 							</li>
 						<?php } ?>
 
