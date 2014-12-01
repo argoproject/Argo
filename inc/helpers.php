@@ -106,8 +106,10 @@ function largo_render_template($slug, $name=null, $context=array()) {
   if (is_array($name) && empty($context))
     $context = $name;
 
-  if (!empty($context))
-    $wp_query->query_vars = array_merge($wp_query->query_vars, $context);
+  if (!empty($context)) {
+	  $context = apply_filters('largo_render_template_context', $context, $slug, $name);
+	  $wp_query->query_vars = array_merge($wp_query->query_vars, $context);
+  }
 
   get_template_part($slug, $name);
 }
