@@ -93,3 +93,21 @@ function largo_make_slug( $string, $maxLength = 63 ) {
   $result = trim( substr( $result, 0, $maxLength ) );
   return preg_replace( '/\s/', '-', $result );
 }
+
+/**
+ * @param string $slug the slug of the template file to render.
+ * @param string $name the name identifier for the template file; works like get_template_part.
+ * @param array $context an array with the variables that should be made available in the template being loaded.
+ * @since 0.4*
+ */
+function largo_render_template($slug, $name=null, $context=array()) {
+  global $wp_query;
+
+  if (is_array($name) && empty($context))
+    $context = $name;
+
+  if (!empty($context))
+    $wp_query->query_vars = array_merge($wp_query->query_vars, $context);
+
+  get_template_part($slug, $name);
+}

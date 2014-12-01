@@ -49,7 +49,7 @@ function largo_widgets() {
 		register_widget( $key );
 	}
 }
-add_action( 'widgets_init', 'largo_widgets' );
+add_action( 'widgets_init', 'largo_widgets', 1 );
 
 
 /**
