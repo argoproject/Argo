@@ -103,7 +103,7 @@ class Largo {
 		$this->customizer = Largo_Customizer::get_instance();
 
 	}
-
+ 
 	/**
 	 * Load required files
 	 */
@@ -322,6 +322,23 @@ function Largo() {
 }
 add_action( 'after_setup_theme', 'Largo' );
 
+/**
+ * Prints an admin warning if php is out of date.
+ */
+function largo_php_warning() {
+
+	$minver = "5.3.0";
+	$curver = phpversion();
+
+	if( current_user_can('update_themes') && version_compare( $curver, $minver, "<" ) ) :
+		$warning = "Largo requires <b>PHP $minver</b>. You're running <b>$curver</b>. Please upgrade your version of php.";
+ 		echo "<div class='update-nag'>";
+    	_e( $warning, 'largo' );
+ 		echo "</div>";
+ 	endif;
+
+}
+add_action( 'admin_notices', 'largo_php_warning' );
 
 /**
  * Load up all of the other goodies from the /inc directory
