@@ -70,7 +70,7 @@ class AvatarsTestFunctions extends WP_UnitTestCase {
 		largo_add_edit_form_multipart_encoding();
 	}
 
-	// TODO: Figure out how to test these last three functions
+	// TODO: Figure out how to test these last few functions
 	function test_largo_add_avatar_field() {
 		$this->markTestSkipped("Not implemented");
 	}
