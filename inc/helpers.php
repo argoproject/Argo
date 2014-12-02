@@ -8,7 +8,11 @@
  */
 function largo_twitter_url_to_username( $url ) {
 	$urlParts = explode("/", $url);
-	$username = $urlParts[3];
+	if ( end($urlParts) == '' ) {
+		// URL has a trailing slash
+		$urlParts = array_slice($urlParts, 0 , -1);
+	}
+	$username = preg_replace( "/@/", '', end($urlParts) );
 	return $username;
 }
 
