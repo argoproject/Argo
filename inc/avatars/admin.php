@@ -87,7 +87,7 @@ function largo_remove_avatar() {
 		echo json_encode(array('success' => true));
 	else
 		echo json_encode(array('success' => false));
-	die();
+	wp_die();
 }
 add_action('wp_ajax_largo_remove_avatar', 'largo_remove_avatar');
 
