@@ -26,7 +26,7 @@ function largo_add_avatar_field($user) {
 					<p id="largo-avatar-display">
 						<?php if (!empty($image_src)) { ?>
 							<img src="<?php echo $image_src[0]; ?>" width="<?php echo $image_src[1]; ?>" height="<?php echo $image_src[2]; ?>" /><br />
-							<a id="largo-remove-avatar" href="#">Delete avatar</a>
+							<a href="<?php echo get_edit_post_link(largo_get_user_avatar_id($user->ID)); ?>">Edit</a> | <a id="largo-remove-avatar" href="#">Remove</a>
 						<?php }
 
 						if (empty($image_src) && largo_has_gravatar($user->user_email)) { ?>
