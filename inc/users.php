@@ -143,9 +143,10 @@ add_action('edit_user_profile_update', 'clean_user_twitter_username');
 add_action('personal_options_update', 'clean_user_twitter_username');
 
 function clean_user_twitter_username($user_id) {
+
 	if ( current_user_can('edit_user', $user_id) ) {
 		$twitter = largo_twitter_url_to_username( $_POST['twitter'] );
-		if ( preg_match( '/[^a-zA-Z0-9_]/', largo_twitter_url_to_username( $tw_suspect ) ) ) {
+		if ( preg_match( '/[^a-zA-Z0-9_]/', $twitter ) ) {
 			// it's not a valid twitter username, because it's got an invalid character
 			$twitter = "";
 		}
@@ -153,6 +154,7 @@ function clean_user_twitter_username($user_id) {
 		if ( get_user_meta($user_id, 'twitter_link', true) != $twitter ) {
 			wp_die(__('An error occurred.'));
 		}
+		$_POST['twitter'] = $twitter;
 	}
 }
 
@@ -170,7 +172,7 @@ function validate_twitter_username( $errors, $update, $user ) {
 		if( ! empty( $tw_suspect ) ) {
 			if ( preg_match( '/[^a-zA-Z0-9_]/', largo_twitter_url_to_username( $tw_suspect ) ) ) {
 				// it's not a valid twitter username, because it's got an invalid character
-				$errors->add('twitter_username', __('The Twitter username entered, <b>' . $tw_suspect . '</b>, is invalid. Twitter usernames only use the uppercase and lowercase alphabet letters (a-z A-Z), the Arabic numbers (0-9), and underscores (_). '));
+				$errors->add('twitter_username', '<p>' . '<b>' . $tw_suspect . '</b>' . __('is an invalid Twitter username.') . '</p>' . '<p>' . __('Twitter usernames only use the uppercase and lowercase alphabet letters (a-z A-Z), the Arabic numbers (0-9), and underscores (_).') . '</p>');
 			}
 		}
 	}
