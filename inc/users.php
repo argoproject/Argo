@@ -178,7 +178,9 @@ function largo_render_user_list($users, $show_users_with_empty_desc=false) {
 			continue;
 
 		$ctx = array('author_obj' => $user);
+		echo '<div class="author-box">';
 		largo_render_template('partials/author-bio', 'description', $ctx);
+		echo '</div>';
 	}
 }
 
