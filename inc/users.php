@@ -131,3 +131,87 @@ function largo_edit_permission_check() {
 
 }
 add_filter( 'admin_head', 'largo_edit_permission_check', 1, 4 );
+
+
+/**
+ * Get users based on a role. Defaults to fetching all authors for the current blog.
+ *
+ * @param $args array Same as the options one would pass to `get_users` with one extra
+ * key -- `roles` -- which should be an array of roles to include in the query.
+ * @since 0.4
+ */
+function largo_get_user_list($args=array()) {
+	$roles = ($args['roles'])? $args['roles'] : null;
+	unset($args['roles']);
+
+	$args = array_merge(array(
+		'blog_id' => get_current_blog_id(),
+		'include' => array(),
+		'exclude' => array(),
+		'role' => 'author'
+	), $args);
+
+	if (empty($roles)) {
+		$users = get_users($args);
+	} else {
+		$users = array();
+		foreach ($roles as $role) {
+			$args['role'] = $role;
+			$result = get_users($args);
+			$users = array_merge($users, $result);
+		}
+	}
+	return $users;
+}
+
+/**
+ * Render a list of user profiles based on the array of users passed
+ *
+ * @param $users array The WP_User objects to use in rendering the list
+ * @since 0.4
+ */
+function largo_render_user_list($users) {
+	foreach ($users as $user) {
+		$ctx = array('author_obj' => $user);
+		largo_render_template('partials/author-bio', 'description', $ctx);
+	}
+}
+
+/**
+ * Shortcode version of `largo_render_user_list`
+ *
+ * @param $atts array The attributes of the shortcode.
+ *
+ * Example of possible attributes:
+ *
+ * 	[roster roles="author,contributor" include="292,12312" exclude="5002,2320"]
+ *
+ * @since 0.4
+ */
+function largo_render_staff_list_shortcode($atts=array()) {
+	$options = array();
+
+	if (!empty($atts['roles'])) {
+		$roles = explode(',', $atts['roles']);
+		$options['roles'] = array_map(function($arg) { return trim($arg); }, $roles);
+	}
+
+	if (!empty($atts['exclude'])) {
+		$exclude = explode(',', $atts['exclude']);
+		$options['exclude'] = array_map(function($arg) { return trim($arg); }, $exclude);
+	}
+
+	if (!empty($atts['include'])) {
+		$exclude = explode(',', $atts['include']);
+		$options['include'] = array_map(function($arg) { return trim($arg); }, $exclude);
+	}
+
+	$defaults = array(
+		'roles' => array(
+			'author'
+		)
+	);
+	$args = array_merge($defaults, $options);
+	largo_render_user_list(largo_get_user_list($args));
+}
+add_shortcode('roster', 'largo_render_staff_list_shortcode');
