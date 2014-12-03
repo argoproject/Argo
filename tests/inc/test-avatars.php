@@ -12,7 +12,7 @@ class AvatarsTestFunctions extends WP_UnitTestCase {
 
 		// Test data
 		$this->avatar_id = $this->factory->post->create(array('post_type' => 'attachment'));
-		$this->user_id = $this->factory->user->create();;
+		$this->user_id = $this->factory->user->create();
 	}
 
 	function test_largo_get_user_avatar_id() {
