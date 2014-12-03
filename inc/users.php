@@ -170,8 +170,12 @@ function largo_get_user_list($args=array()) {
  * @param $users array The WP_User objects to use in rendering the list
  * @since 0.4
  */
-function largo_render_user_list($users) {
+function largo_render_user_list($users, $show_users_with_empty_desc=false) {
 	foreach ($users as $user) {
+		$desc = trim($user->description);
+		if (empty($desc) && empty($show_users_with_empty_desc))
+			continue;
+
 		$ctx = array('author_obj' => $user);
 		largo_render_template('partials/author-bio', 'description', $ctx);
 	}
@@ -184,12 +188,18 @@ function largo_render_user_list($users) {
  *
  * Example of possible attributes:
  *
- * 	[roster roles="author,contributor" include="292,12312" exclude="5002,2320"]
+ * 	[roster roles="author,contributor" include="292,12312" exclude="5002,2320" show_users_with_empty_desc="true"]
  *
  * @since 0.4
  */
 function largo_render_staff_list_shortcode($atts=array()) {
 	$options = array();
+
+	$show_users_with_empty_desc = false;
+	if (!empty($atts['show_users_with_empty_desc'])) {
+		$show_users_with_empty_desc = ($atts['show_users_with_empty_desc'] == 'false')? false : true;
+		unset($atts['show_users_with_empty_desc']);
+	}
 
 	if (!empty($atts['roles'])) {
 		$roles = explode(',', $atts['roles']);
@@ -212,6 +222,6 @@ function largo_render_staff_list_shortcode($atts=array()) {
 		)
 	);
 	$args = array_merge($defaults, $options);
-	largo_render_user_list(largo_get_user_list($args));
+	largo_render_user_list(largo_get_user_list($args), $show_users_with_empty_desc);
 }
 add_shortcode('roster', 'largo_render_staff_list_shortcode');
