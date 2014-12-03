@@ -141,7 +141,7 @@ add_filter( 'admin_head', 'largo_edit_permission_check', 1, 4 );
  * @since 0.4
  */
 function largo_get_user_list($args=array()) {
-	$roles = ($args['roles'])? $args['roles'] : null;
+	$roles = (isset($args['roles']))? $args['roles'] : null;
 	unset($args['roles']);
 
 	$args = array_merge(array(
@@ -167,7 +167,8 @@ function largo_get_user_list($args=array()) {
 /**
  * Render a list of user profiles based on the array of users passed
  *
- * @param $users array The WP_User objects to use in rendering the list
+ * @param $users array The WP_User objects to use in rendering the list.
+ * @param $show_users_with_empty_desc bool Whether we should skip users that have no bio/description.
  * @since 0.4
  */
 function largo_render_user_list($users, $show_users_with_empty_desc=false) {

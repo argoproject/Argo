@@ -6,7 +6,7 @@ class AvatarsTestFunctions extends WP_UnitTestCase {
 	function setUp() {
 		parent::setUp();
 
-		include_once dirname(__DIR__) . '/inc/avatars/admin.php';
+		include_once dirname(dirname(__DIR__)) . '/inc/avatars/admin.php';
 
 		$this->test_file_id = 'test-file-id';
 

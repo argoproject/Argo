@@ -13,7 +13,7 @@ class HomepageClassTest extends WP_UnitTestCase {
 			'name' => 'Test Homepage Layout',
 			'type' => 'homepage',
 			'rightRail' => true,
-			'template' => dirname(__FILE__) . '/templates/test-homepage.php',
+			'template' => dirname(__DIR__) . '/templates/test-homepage.php',
 			'sidebars' => array('Homepage Test Layout Sidebar'),
 			'prominenceTerms' => array(
 				array(
