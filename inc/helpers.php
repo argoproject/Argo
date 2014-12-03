@@ -97,3 +97,13 @@ function largo_make_slug( $string, $maxLength = 63 ) {
   $result = trim( substr( $result, 0, $maxLength ) );
   return preg_replace( '/\s/', '-', $result );
 }
+
+/**
+ * Send anything to the error log in a human-readable format
+ *
+ * @param 	mixed $stuff the stuff to be sent to the error log.
+ * @since 	0.4
+ */
+function var_log($stuff) {
+	error_log(var_export($stuff, true));
+}

@@ -249,7 +249,3 @@ function largo_home_get_single_featured_and_series() {
 		'series_stories_term' => $series_stories_term,
 	);
 }
-
-function var_log($stuff) {
-	error_log(var_export($stuff, true));
-}
