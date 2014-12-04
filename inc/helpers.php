@@ -14,8 +14,11 @@ function largo_twitter_url_to_username( $url ) {
 	}
 	$username = preg_replace( "/@/", '', end($urlParts) );
 	// strip the ?&# URL parameters if they're present
-	preg_match( "/([a-zA-Z0-9_]+)[\?&#]?/", $username, $matches);
-	$username = $matches[1];
+	// this will let through all other characters
+	preg_match( "/[^\?&#]+/", $username, $matches);
+	if (isset($matches[0])){
+		$username = $matches[0];
+	}
 	return $username;
 }
 
