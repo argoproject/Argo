@@ -12,7 +12,7 @@
 	<testsuites>
 		<testsuite>
 			<directory prefix="test-" suffix=".php">./tests/</directory>
-			<exclude>./tests/inc/</exclude>
+			<exclude>./tests/mock/</exclude>
 			<exclude>./tests/templates/</exclude>
 		</testsuite>
 	</testsuites>

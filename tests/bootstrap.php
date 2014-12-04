@@ -20,5 +20,5 @@ tests_add_filter('filesystem_method', function($arg) {
 	return 'direct';
 }, 1, 10);
 
-require dirname(__FILE__) . '/inc/mock-options-framework.php';
+require dirname(__FILE__) . '/mock/mock-options-framework.php';
 require $wp_tests_dir . '/includes/bootstrap.php';

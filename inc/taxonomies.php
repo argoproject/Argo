@@ -8,12 +8,29 @@
  */
 function largo_custom_taxonomies() {
 	if (!taxonomy_exists('prominence')) {
-		register_taxonomy('prominence', 'post', array(
-			'hierarchical' => true,
-			'label' => __('Post Prominence', 'largo'),
-			'query_var' => true,
-			'rewrite' => true,
-		));
+		register_taxonomy(
+        	'prominence',
+        	'post',
+        	array(
+		        'hierarchical'  => true,
+		        'labels'        => array(
+		        	'name'              => _x( 'Post Prominence', 'taxonomy general name' ),
+					'singular_name'     => _x( 'Post Prominence', 'taxonomy singular name' ),
+					'search_items'      => __( 'Search Post Prominences' ),
+					'all_items'         => __( 'All Post Prominences' ),
+					'parent_item'       => __( 'Parent Post Prominence' ),
+					'parent_item_colon' => __( 'Parent Post Prominence:' ),
+					'edit_item'         => __( 'Edit Post Prominence' ),
+					'view_item'         => __( 'View Post Prominence' ),
+					'update_item'       => __( 'Update Post Prominence' ),
+					'add_new_item'      => __( 'Add New Post Prominence' ),
+					'new_item_name'     => __( 'New Post Prominence Name' ),
+					'menu_name'         => __( 'Post Prominence' ),
+		        ),
+		        'query_var'     => true,
+		        'rewrite'       => true,
+        	)
+        );
 	}
 
 	$largoProminenceTerms = apply_filters('largo_prominence_terms', array(
@@ -66,12 +83,29 @@ function largo_custom_taxonomies() {
 	do_action('largo_after_create_prominence_taxonomy', $largoProminenceTerms);
 
 	if ( ! taxonomy_exists( 'series' ) ) {
-		register_taxonomy( 'series', 'post', array(
-			'hierarchical' 	=> true,
-			'label' 		=> __('Series', 'largo'),
-			'query_var' 	=> true,
-			'rewrite' 		=> true,
-		) );
+		register_taxonomy( 
+        	'series', 
+        	'post', 
+        	array(
+		        'hierarchical' 	=> true,
+		        'labels'        => array(
+		        	'name'              => _x( 'Series', 'taxonomy general name' ),
+					'singular_name'     => _x( 'Series', 'taxonomy singular name' ),
+					'search_items'      => __( 'Search Series' ),
+					'all_items'         => __( 'All Series' ),
+					'parent_item'       => __( 'Parent Series' ),
+					'parent_item_colon' => __( 'Parent Series:' ),
+					'edit_item'         => __( 'Edit Series' ),
+					'view_item'         => __( 'View Series' ),
+					'update_item'       => __( 'Update Series' ),
+					'add_new_item'      => __( 'Add New Series' ),
+					'new_item_name'     => __( 'New Series Name' ),
+					'menu_name'         => __( 'Series' ),
+	        	),
+            'query_var' 	=> true,
+            'rewrite' 		=> true,
+        	) 
+        );
 	}
 }
 add_action( 'init', 'largo_custom_taxonomies' );
