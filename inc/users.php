@@ -16,7 +16,7 @@ function largo_contactmethods( $contactmethods ) {
 	}
 
 	$add = array(
-		'twitter' 	=> 'Twitter<br><em>https://twitter.com/username<em>',
+		'twitter' 	=> 'Twitter<br><em>https://twitter.com/username</em> or <em>@username</em> or <em>username</em>',
 		'fb' 		=> 'Facebook<br><em>https://www.facebook.com/username<em>',
 		'linkedin' 	=> 'LinkedIn<br><em>http://www.linkedin.com/in/username<em>'
 	);
