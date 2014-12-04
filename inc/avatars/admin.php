@@ -82,11 +82,17 @@ add_action('personal_options_update', 'largo_save_avatar_field');
 
 // AJAX functions
 function largo_remove_avatar() {
-	$ret = largo_remove_user_avatar();
+	$user_id = false;
+
+	if (!empty($_POST['user_id']))
+		$user_id = $_POST['user_id'];
+
+	$ret = largo_remove_user_avatar($user_id);
 	if (!empty($ret))
 		echo json_encode(array('success' => true));
 	else
 		echo json_encode(array('success' => false));
+
 	wp_die();
 }
 add_action('wp_ajax_largo_remove_avatar', 'largo_remove_avatar');

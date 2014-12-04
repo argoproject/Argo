@@ -101,13 +101,14 @@ class AvatarsTestAdminAjaxFunctions extends WP_Ajax_UnitTestCase {
 
 		// Test data
 		$this->avatar_id = $this->factory->post->create(array('post_type' => 'attachment'));
+		$this->user_id = $this->factory->user->create();
 	}
 
-	function test_largo_remove_avatar() {
+	function test_largo_remove_avatar_current_user() {
 		$current_user = wp_get_current_user();
 		$user_id = $current_user->ID;
 
-		// Set the avatar for $user_id to $avatar_id
+		// Set the avatar for $user_id (current user) to $avatar_id
 		largo_associate_avatar_with_user($user_id, $this->avatar_id);
 
 		try {
@@ -115,6 +116,25 @@ class AvatarsTestAdminAjaxFunctions extends WP_Ajax_UnitTestCase {
 		} catch (WPAjaxDieContinueException $e) {
 			// Retrieve the $avatar_id.
 			$retrieved = largo_get_user_avatar_id($user_id);
+
+			// $retrieved should be empty at this point
+			$this->assertEmpty($retrieved);
+		}
+
+	}
+
+	function test_largo_remove_avatar() {
+		// Should also work if we're editing another user's profile
+		largo_associate_avatar_with_user($this->user_id, $this->avatar_id);
+
+		// We can simulate editing another user's profile by setting the $_POST['user_id'] key.
+		$_POST['user_id'] = $this->user_id;
+
+		try {
+			$this->_handleAjax("largo_remove_avatar");
+		} catch (WPAjaxDieContinueException $e) {
+			// Retrieve the $avatar_id.
+			$retrieved = largo_get_user_avatar_id($this->user_id);
 
 			// $retrieved should be empty at this point
 			$this->assertEmpty($retrieved);

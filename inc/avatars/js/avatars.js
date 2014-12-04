@@ -11,14 +11,20 @@
                 data: {
                     action: 'largo_remove_avatar'
                 },
-                dataType: 'json'
+                dataType: 'json',
+                success: function(data) {
+                    if (data.success) {
+                        avatar_input.show();
+                        avatar_display.empty();
+                    }
+                }
             };
 
         avatar_remove.click(function() {
-            ajax_opts.success = function(data) {
-                if (data.success) {
-                    avatar_input.show();
-                    avatar_display.empty();
+            if (location.search.search(/user_id/gi) > -1) {
+                var matches = location.search.match(/user_id=(\d+)/);
+                if (matches.length > 1) {
+                    ajax_opts.data.user_id = matches[1];
                 }
             }
             $.ajax(ajax_opts);

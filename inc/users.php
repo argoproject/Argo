@@ -148,7 +148,8 @@ function largo_get_user_list($args=array()) {
 		'blog_id' => get_current_blog_id(),
 		'include' => array(),
 		'exclude' => array(),
-		'role' => 'author'
+		'role' => 'author',
+		'orderby' => 'display_name'
 	), $args);
 
 	if (empty($roles)) {

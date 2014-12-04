@@ -11,7 +11,7 @@ if ( is_author() ) {
 }
 
 // Avatar
-if ( largo_has_gravatar( $author_obj->user_email ) ) {
+if ( largo_has_avatar( $author_obj->user_email ) ) {
 	echo '<div class="photo">' . get_avatar( $author_obj->ID, 96, '', $author_obj->display_name ) . '</div>';
 } elseif ( $author_obj->type == 'guest-author' && get_the_post_thumbnail( $author_obj->ID ) ) {
 	$photo = get_the_post_thumbnail( $author_obj->ID, array( 96,96 ) );

@@ -226,6 +226,24 @@ function largo_has_gravatar( $email ) {
 	set_transient( $cache_key, $cache_value );
 	return (bool) $cache_value;
 }
+/**
+ * Determine whether or not a user has an avatar. Fallback checks if user has a gravatar.
+ *
+ * @param $email string an author's email address
+ * @return bool true if an avatar is available for this user
+ * @since 0.4
+ */
+function largo_has_avatar($email) {
+	$user = get_user_by('email', $email);
+	$result = largo_get_user_avatar_id($user->ID);
+	if (!empty($result))
+		return true;
+	else {
+		if (largo_has_gravatar($email))
+			return true;
+	}
+	return false;
+}
 
 /**
  * Replaces the_content() with paginated content (if <!--nextpage--> is used in the post)
