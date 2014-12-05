@@ -27,6 +27,14 @@ class UsersTestFunctions extends WP_UnitTestCase {
 		$this->markTestSkipped("Not implemented");
 	}
 
+	function test_clean_user_twitter_username() {
+		$this->markTestSkipped("Not implemented");
+	}
+
+	function test_validate_twitter_username() {
+		$this->markTestSkipped("Not implemented");
+	}
+
 	function test_largo_get_user_list() {
 		/**
 		 * With no arguments, `largo_get_user_list` should get a list of all authors for the current blog;

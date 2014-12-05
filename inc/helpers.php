@@ -8,7 +8,17 @@
  */
 function largo_twitter_url_to_username( $url ) {
 	$urlParts = explode("/", $url);
-	$username = $urlParts[3];
+	if ( end($urlParts) == '' ) {
+		// URL has a trailing slash
+		$urlParts = array_slice($urlParts, 0 , -1);
+	}
+	$username = preg_replace( "/@/", '', end($urlParts) );
+	// strip the ?&# URL parameters if they're present
+	// this will let through all other characters
+	preg_match( "/[^\?&#]+/", $username, $matches);
+	if (isset($matches[0])){
+		$username = $matches[0];
+	}
 	return $username;
 }
 
@@ -94,6 +104,15 @@ function largo_make_slug( $string, $maxLength = 63 ) {
   return preg_replace( '/\s/', '-', $result );
 }
 
+/**
+ * Send anything to the error log in a human-readable format
+ *
+ * @param 	mixed $stuff the stuff to be sent to the error log.
+ * @since 	0.4
+ */
+function var_log($stuff) {
+	error_log(var_export($stuff, true));
+}
 /**
  * @param string $slug the slug of the template file to render.
  * @param string $name the name identifier for the template file; works like get_template_part.

@@ -16,9 +16,9 @@ function largo_contactmethods( $contactmethods ) {
 	}
 
 	$add = array(
-		'twitter' 	=> 'Twitter<br><em>https://twitter.com/username<em>',
-		'fb' 		=> 'Facebook<br><em>https://www.facebook.com/username<em>',
-		'linkedin' 	=> 'LinkedIn<br><em>http://www.linkedin.com/in/username<em>'
+		'twitter' 	=> 'Twitter<br><em>https://twitter.com/username</em> or <em>@username</em> or <em>username</em>',
+		'fb' 		=> 'Facebook<br><em>https://www.facebook.com/username</em>',
+		'linkedin' 	=> 'LinkedIn<br><em>http://www.linkedin.com/in/username</em>'
 	);
 	foreach ( $add as $service => $format ) {
 		if ( !isset( $contactmethods[$service] ) )
@@ -26,7 +26,7 @@ function largo_contactmethods( $contactmethods ) {
 	}
 
 	// Add a format hint for G+
-	$contactmethods['googleplus'] = 'Google+<br><em>https://plus.google.com/userID/<em>';
+	$contactmethods['googleplus'] = 'Google+<br><em>https://plus.google.com/userID/</em>';
 
 	return $contactmethods;
 }
@@ -44,22 +44,22 @@ function largo_filter_guest_author_fields( $fields_to_return, $groups ) {
 	if ( in_array( 'all', $groups ) || in_array( 'contact-info', $groups ) ) {
 		$fields_to_return[] = array(
 			'key'      => 'twitter',
-			'label'    => 'Twitter<br><em>https://twitter.com/username<em>',
+			'label'    => 'Twitter<br><em>https://twitter.com/username</em>',
 			'group'    => 'contact-info',
 		);
 		$fields_to_return[] = array(
 			'key'      => 'fb',
-			'label'    => 'Facebook<br><em>https://www.facebook.com/username<em>',
+			'label'    => 'Facebook<br><em>https://www.facebook.com/username</em>',
 			'group'    => 'contact-info',
 		);
 		$fields_to_return[] = array(
 			'key'      => 'linkedin',
-			'label'    => 'LinkedIn<br><em>http://www.linkedin.com/in/username<em>',
+			'label'    => 'LinkedIn<br><em>http://www.linkedin.com/in/username</em>',
 			'group'    => 'contact-info',
 		);
 		$fields_to_return[] = array(
 			'key'      => 'googleplus',
-			'label'    => 'Google+<br><em>https://plus.google.com/userID/<em>',
+			'label'    => 'Google+<br><em>https://plus.google.com/userID/</em>',
 			'group'    => 'contact-info',
 		);
 	}
@@ -133,6 +133,50 @@ function largo_edit_permission_check() {
 add_filter( 'admin_head', 'largo_edit_permission_check', 1, 4 );
 
 
+/**
+ * Cleans a Twitter url or an @username to the bare username
+ * @param user_id 
+ * @uses largo_twitter_url_to_username
+ */
+
+add_action('edit_user_profile_update', 'clean_user_twitter_username');
+add_action('personal_options_update', 'clean_user_twitter_username');
+
+function clean_user_twitter_username($user_id) {
+
+	if ( current_user_can('edit_user', $user_id) ) {
+		$twitter = largo_twitter_url_to_username( $_POST['twitter'] );
+		if ( preg_match( '/[^a-zA-Z0-9_]/', $twitter ) ) {
+			// it's not a valid twitter username, because it's got an invalid character
+			$twitter = "";
+		}
+		update_user_meta($user_id, 'twitter_link', $twitter);
+		if ( get_user_meta($user_id, 'twitter_link', true) != $twitter ) {
+			wp_die(__('An error occurred.'));
+		}
+		$_POST['twitter'] = $twitter;
+	}
+}
+
+/**
+ * Checks that the Twitter URL is valid and chops it down to just the username
+ * @uses largo_twitter_url_to_username
+ */
+
+add_action( 'user_profile_update_errors', 'validate_twitter_username', 10, 3);
+
+function validate_twitter_username( $errors, $update, $user ) {
+
+	if ( isset( $_POST["twitter"] ) ) {
+		$tw_suspect = trim( $_POST["twitter"] );
+		if( ! empty( $tw_suspect ) ) {
+			if ( preg_match( '/[^a-zA-Z0-9_]/', largo_twitter_url_to_username( $tw_suspect ) ) ) {
+				// it's not a valid twitter username, because it's got an invalid character
+				$errors->add('twitter_username', '<p>' . '<b>' . $tw_suspect . '</b>' . __('is an invalid Twitter username.') . '</p>' . '<p>' . __('Twitter usernames only use the uppercase and lowercase alphabet letters (a-z A-Z), the Arabic numbers (0-9), and underscores (_).') . '</p>');
+			}
+		}
+	}
+}
 /**
  * Get users based on a role. Defaults to fetching all authors for the current blog.
  *
