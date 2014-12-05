@@ -63,7 +63,7 @@
 					<div class="follow-author">
 					<a href="<?php echo get_author_feed_link($author->ID); ?>" class="icon-rss"></a>
 					<?php if ( $twitter = get_the_author_meta( 'twitter', $author->ID ) ) : ?>
-						<a href="<?php echo esc_url( $twitter ); ?>" class="icon-twitter"></a>
+						<a href="https://twitter.com/<?php echo largo_twitter_url_to_username( esc_url( $twitter ) ); ?>" class="icon-twitter"></a>
 					<?php endif; ?>
 					<a href="<?php echo get_author_posts_url( $author->ID ); ?>"><?php echo esc_html( $author->display_name ); ?></a>
 					</div>
