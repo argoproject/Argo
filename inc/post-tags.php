@@ -156,10 +156,10 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 
 		if ( $utilities['twitter'] === '1' ) {
 			$twitter_link = of_get_option( 'twitter_link' ) ? 'data-via="' . esc_attr( largo_twitter_url_to_username( of_get_option( 'twitter_link' ) ) ) . '"' : '';
-			$twitter_related = get_the_author_meta( 'twitter' ) ? sprintf( __( '%s:Follow the author of this article', 'largo' ), get_the_author_meta( 'twitter' ) ) : '';
+			$twitter_related = get_the_author_meta( 'twitter' ) ? sprintf( '%s:' . __( 'Follow the author of this article', 'largo' ), get_the_author_meta( 'twitter' ) ) : '';
 			$twitter_count = (of_get_option( 'show_twitter_count' ) == 0) ? 'data-count="none"' : '';
 
-			$output .= sprintf( '<span class="twitter"><a href="http://twitter.com/share" class="twitter-share-button" data-url="%1$s" data-text="%2$s" %3$s %4$s %5$s>%6$s</a></span>',
+			$output .= sprintf( '<span class="twitter"><a href="http://twitter.com/share" class="twitter-share-button" data-url="%1$s" data-text="%2$s" %3$s data-via="%4$s" %5$s>%6$s</a></span>',
 				get_permalink(),
 				get_the_title(),
 				$twitter_link,
