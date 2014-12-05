@@ -134,9 +134,18 @@ add_filter( 'admin_head', 'largo_edit_permission_check', 1, 4 );
 
 
 /**
- * Cleans a Twitter url or an @username to the bare username
- * @param user_id 
- * @uses largo_twitter_url_to_username
+ * Cleans a Twitter url or an @username to the bare username when the user is edited
+ *
+ * Edits $_POST directly because there's no other way to save the corrected username
+ * from this callback. The action hooks this is used for run before edit_user in 
+ * wp-admin/user-edit.php, which overwrites the user's contact methods. edit_user 
+ * reads from $_POST. 
+ *
+ * @param  user_id  the user being edited
+ * @since  0.4
+ * @uses   largo_twitter_url_to_username
+ * @link   http://codex.wordpress.org/Plugin_API/Action_Reference/edit_user_profile_update
+ * @link   http://codex.wordpress.org/Plugin_API/Action_Reference/personal_options_update
  */
 
 add_action('edit_user_profile_update', 'clean_user_twitter_username');
@@ -159,8 +168,15 @@ function clean_user_twitter_username($user_id) {
 }
 
 /**
- * Checks that the Twitter URL is valid and chops it down to just the username
- * @uses largo_twitter_url_to_username
+ * Checks that the Twitter URL is composed of valid characters [a-zA-Z0-9_] and 
+ * causes an error if there is not.
+ *
+ * @param   $errors the error object
+ * @param   bool    $update whether this is a user update
+ * @param   object  $user a WP_User object
+ * @uses    largo_twitter_url_to_username
+ * @link    http://codex.wordpress.org/Plugin_API/Action_Reference/user_profile_update_errors
+ * @since   0.4
  */
 
 add_action( 'user_profile_update_errors', 'validate_twitter_username', 10, 3);
