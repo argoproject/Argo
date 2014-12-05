@@ -10,6 +10,7 @@
 
 ## Misc
 .idea/
+node_modules
 
 #######################
 #  sphinx .gitignore  #
