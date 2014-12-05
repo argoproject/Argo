@@ -141,7 +141,8 @@ add_filter( 'admin_head', 'largo_edit_permission_check', 1, 4 );
  * wp-admin/user-edit.php, which overwrites the user's contact methods. edit_user 
  * reads from $_POST. 
  *
- * @param  user_id  the user being edited
+ * @param  object  $user_id the WP_User object being edited
+ * @param  array   $_POST
  * @since  0.4
  * @uses   largo_twitter_url_to_username
  * @link   http://codex.wordpress.org/Plugin_API/Action_Reference/edit_user_profile_update
@@ -193,6 +194,37 @@ function validate_twitter_username( $errors, $update, $user ) {
 		}
 	}
 }
+
+/**
+ * Cleans a Facebook url to the bare username or id when the user is edited
+ *
+ * Edits $_POST directly because there's no other way to save the corrected username
+ * from this callback. The action hooks this is used for run before edit_user in 
+ * wp-admin/user-edit.php, which overwrites the user's contact methods. edit_user 
+ * reads from $_POST. 
+ *
+ * @TODO
+ * @param  object  $user_id the WP_User object being edited
+ * @param  array   $_POST
+ * @since  0.4
+ * @uses   largo_fb_url_to_username
+ * @link   http://codex.wordpress.org/Plugin_API/Action_Reference/edit_user_profile_update
+ * @link   http://codex.wordpress.org/Plugin_API/Action_Reference/personal_options_update
+ */
+
+/**
+ * Checks that the Facebook URL submitted is valid and causes an error if not
+ *
+ * @TODO
+ * @uses  largo_fb_url_to_username
+ * @uses  largo_fb_user_is_followable
+ * @param   $errors the error object
+ * @param   bool    $update whether this is a user update
+ * @param   object  $user a WP_User object
+ * @link    http://codex.wordpress.org/Plugin_API/Action_Reference/user_profile_update_errors
+ * @since   0.4
+ */
+
 /**
  * Get users based on a role. Defaults to fetching all authors for the current blog.
  *
