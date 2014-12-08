@@ -189,7 +189,7 @@ function validate_twitter_username( $errors, $update, $user ) {
 		if( ! empty( $tw_suspect ) ) {
 			if ( preg_match( '/[^a-zA-Z0-9_]/', largo_twitter_url_to_username( $tw_suspect ) ) ) {
 				// it's not a valid twitter username, because it uses an invalid character
-				$errors->add('twitter_username', '<p>' . '<b>' . $tw_suspect . '</b>' . __('is an invalid Twitter username.') . '</p>' . '<p>' . __('Twitter usernames only use the uppercase and lowercase alphabet letters (a-z A-Z), the Arabic numbers (0-9), and underscores (_).') . '</p>');
+				$errors->add('twitter_username', '<b>' . $tw_suspect . '</b>' . __('is an invalid Twitter username.') . '</p>' . '<p>' . __('Twitter usernames only use the uppercase and lowercase alphabet letters (a-z A-Z), the Arabic numbers (0-9), and underscores (_).') );
 			}
 		}
 	}
@@ -249,10 +249,10 @@ function validate_fb_username( $errors, $update, $user ) {
 			$fb_user = largo_fb_url_to_username( $fb_suspect );
 			if ( preg_match( '/[^a-zA-Z0-9\.\-]/', $fb_user ) ) {
 				// it's not a valid Facebook username, because it uses an invalid character
-				$errors->add('fb_username', '<p>' . '<b>' . $fb_suspect . '</b> ' . __('is an invalid Facebook username.') . '</p>' . '<p>' . __('Facebook usernames only use the uppercase and lowercase alphabet letters (a-z A-Z), the Arabic numbers (0-9), periods (.) and dashes (-)') . '</p>');
+				$errors->add('fb_username', '<b>' . $fb_suspect . '</b> ' . __('is an invalid Facebook username.') . '</p>' . '<p>' . __('Facebook usernames only use the uppercase and lowercase alphabet letters (a-z A-Z), the Arabic numbers (0-9), periods (.) and dashes (-)') );
 			}
 			if ( ! largo_fb_user_is_followable( $fb_user ) ) {
-				$errors->add('fb_username', '<p>The Facebook user' . '<b>' . $fb_suspect . '</b> ' . __('does not allow followers.') . '</p>' . '<p>' . __('<a href="https://www.facebook.com/help/201148673283205#How-can-I-let-people-follow-me?">Follow these instructions</a> to allow others to follow you.') . '</p>');
+				$errors->add('fb_username',' <b>' . $fb_suspect . '</b> ' . __('does not allow followers on Facebook.') . '</p>' . '<p>' . __('<a href="https://www.facebook.com/help/201148673283205#How-can-I-let-people-follow-me?">Follow these instructions</a> to allow others to follow you.') );
 			}
 		}
 	}
