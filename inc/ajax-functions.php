@@ -15,7 +15,7 @@ if (!function_exists('largo_load_more_posts_enqueue_script')) {
 		wp_localize_script(
 			'load-more-posts', 'LMP', array(
 				'ajax_url' => admin_url('admin-ajax.php'),
-				'paged' => $wp_query->query_vars['paged'],
+				'paged' => (!empty($wp_query->query_vars['paged']))? $wp_query->query_vars['paged'] : 0,
 				'query' => $wp_query->query
 			)
 		);
@@ -29,14 +29,14 @@ if (!function_exists('largo_load_more_posts_enqueue_script')) {
 if (!function_exists('largo_load_more_posts')) {
 	function largo_load_more_posts() {
 		$paged = $_POST['paged'];
-		$query = $_POST['query'];
+		$context = $_POST['query'];
 
 		$args = array_merge(array(
 			'paged' => $paged,
 			'post_status' => 'publish',
 			'posts_per_page' => 10,
 			'ignore_sticky_posts' => true
-		), $query);
+		), $context);
 
 		if ( of_get_option('num_posts_home') )
 			$args['posts_per_page'] = of_get_option('num_posts_home');
@@ -44,17 +44,12 @@ if (!function_exists('largo_load_more_posts')) {
 			$args['cat'] = of_get_option('cats_home');
 		$query = new WP_Query($args);
 
-		ob_start();
 		if ( $query->have_posts() ) {
 			while ( $query->have_posts() ) : $query->the_post();
 				get_template_part( 'partials/content', 'home' );
 			endwhile;
 		}
-		$ret = ob_get_contents();
-		ob_end_clean();
-
-		echo $ret;
-		die();
+		wp_die();
 	}
 	add_action('wp_ajax_nopriv_load_more_posts', 'largo_load_more_posts');
 	add_action('wp_ajax_load_more_posts', 'largo_load_more_posts');
