@@ -15,7 +15,8 @@ if (!function_exists('largo_load_more_posts_enqueue_script')) {
 		wp_localize_script(
 			'load-more-posts', 'LMP', array(
 				'ajax_url' => admin_url('admin-ajax.php'),
-				'paged' => $wp_query->query_vars['paged']
+				'paged' => $wp_query->query_vars['paged'],
+				'query' => $wp_query->query
 			)
 		);
 	}
@@ -28,13 +29,14 @@ if (!function_exists('largo_load_more_posts_enqueue_script')) {
 if (!function_exists('largo_load_more_posts')) {
 	function largo_load_more_posts() {
 		$paged = $_POST['paged'];
+		$query = $_POST['query'];
 
-		$args = array(
+		$args = array_merge(array(
 			'paged' => $paged,
 			'post_status' => 'publish',
 			'posts_per_page' => 10,
 			'ignore_sticky_posts' => true
-		);
+		), $query);
 
 		if ( of_get_option('num_posts_home') )
 			$args['posts_per_page'] = of_get_option('num_posts_home');
