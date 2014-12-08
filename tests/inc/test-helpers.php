@@ -31,8 +31,8 @@ class HelpersTestFunctions extends WP_UnitTestCase {
 		/**
 		 * With a valid username, it should return that username
 		 */
-		$result = largo_fb_url_to_username("Foo-bar.1");
-		$this->assertEquals("Foo-bar.1", $result);
+		$result = largo_fb_url_to_username("Foo-bar.0");
+		$this->assertEquals("Foo-bar.0", $result);
 		unset($result);
 		$result = largo_fb_url_to_username("012345678901234");
 		$this->assertEquals("012345678901234", $result);
@@ -50,8 +50,9 @@ class HelpersTestFunctions extends WP_UnitTestCase {
 		$result = largo_fb_url_to_username("https://www.facebook.com/Foo-bar.2?rf=012345678901234");
 		$this->assertEquals("Foo-bar.2", $result);
 		unset($result);
+		// For making a URL, Foo-bar.3 is a valid username, but so is the ID listed here.
 		$result = largo_fb_url_to_username("https://www.facebook.com/pages/Foo-bar.3/012345678901234");
-		$this->assertEquals("Foo-bar.3", $result);
+		$this->assertEquals("012345678901234", $result);
 		unset($result);
 		$result = largo_fb_url_to_username("https://m.facebook.com/Foo-bar.4?_e_pi_=7%2CPAGE_ID10%2C0123456789");
 		$this->assertEquals("Foo-bar.4", $result);
@@ -60,8 +61,35 @@ class HelpersTestFunctions extends WP_UnitTestCase {
 		$this->assertEquals("012345678901234", $result);
 		unset($result);
 		$result = largo_fb_url_to_username("https://m.facebook.com/?_rdr#!/Foo-bar.5?__user=012345678901234");
-		$this->assertEquals("012345678901234", $result);
+		$this->assertEquals("Foo-bar.5", $result);
 		unset($result);
+		
+	}
+	
+	function test_largo_fb_user_is_followable() {
+		/**
+		 * With no input, there should be no <table> in the resulting iframe
+		 */
+		$result = largo_fb_user_is_followable("");
+		$this->assertFalse($result, "The Facebook follow button iframe HTML structure has changed and largo_fb_url_to_username no longer operates predictably. Please fix.");
+		
+		/**
+		 * With Mark Zuckerberg, we hope that he will remain followable.
+		 */
+		$result = largo_fb_user_is_followable("zuck");
+		$this->assertTrue($result, "Either Mark Zuckerberg is no longer followable, or the Facebook follow button iframe HTML structure has changed and largo_fb_url_to_username no longer operates predictably. Please log into Facebook and check that https://www.facebook.com/zuck has a 'Follow' button.");
+		
+		/**
+		 * With a user that does not exist, we hope that the user will continue to not exist
+		 */
+		$result = largo_fb_user_is_followable("abcdefghijklmnopqrstuvwxyz12");
+		$this->assertFalse($result, "Either https://www.facebook.com/abcdefghijklmnopqrstuvwxyz12 is user that exists and allows follows, or the Facebook follow button iframe HTML structure has changed and largo_fb_url_to_username no longer operates predictably.");
+		
+		/**
+		 * With an invalid username, this should return false
+		 */
+		$result = largo_fb_user_is_followable("%22Aardvarks+lurk%2C+OK%3F%22");
+		$this->assertFalse($result, "Either https://www.facebook.com/%22Aardvarks+lurk%2C+OK%3F%22 is user that exists and allows follows (not at all likely), or the Facebook follow button iframe HTML structure has changed and largo_fb_url_to_username no longer operates predictably.");
 		
 	}
 	
