@@ -1,22 +1,45 @@
-.. Largo Project documentation master file, created by
-   sphinx-quickstart on Fri Dec  5 10:49:47 2014.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+Welcome to the Largo Project
+============================
 
-Welcome to Largo Project's documentation!
-=========================================
+`The Largo Project`_ is a responsive WordPress starter/parent theme designed with the needs of news publisers in mind.
 
-Contents:
+.. _The Largo Project: https://github.com/inn/largo
+
+This documentation contains to ols for users, administrators and developers
+
+* :ref:`user-docs`
+* :ref:`admin-docs`
+* :ref:`dev-docs`
+
+.. _user-docs:
+
+User Documentation
+------------------
 
 .. toctree::
-   :maxdepth: 2
+    :maxdepth: 2
 
+    users/welcome
 
+.. _admin-docs:
 
-Indices and tables
-==================
+Administrators Documentation
+----------------------------
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+.. toctree::
+    :maxdepth: 2
+
+    administrators/getting-started
+    administrators/installing
+    administrators/mailchimp
+
+.. _dev-docs:
+
+Developers
+----------
+
+.. toctree::
+    :maxdepth: 2
+
+    developers/guide
 
