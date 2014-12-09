@@ -127,11 +127,11 @@ class UsersTestFunctions extends WP_UnitTestCase {
 
 		// Three inputs should be present and they should be checked or "on" after running
 		// `save_more_profile_info`.
-		$this->assertEqual(substr_count($output, 'checked'), 3);
+		$this->assertEquals(substr_count($output, 'checked'), 3);
 
 		// There should be one job_title input and it should be populated with the value set by
 		// `save_more_profile_info`.
-		$this->assertEqual(substr_count($output, 'value="' . $job_title), 1);
+		$this->assertEquals(substr_count($output, 'value="' . $job_title), 1);
 	}
 
 	function test_save_more_profile_info() {
