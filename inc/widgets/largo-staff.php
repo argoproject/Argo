@@ -4,8 +4,8 @@ class largo_staff_widget extends WP_Widget {
 
 	function __construct() {
 		parent::__construct(
-			'staff_widget', // Base ID
-			'Staff Roster Widget', // Name
+			'largo_staff_widget', // Base ID
+			'Largo Staff Roster Widget', // Name
 			array( 'description' => 'Display a list of staff members with photos and bios.' ) // Args
 		);
 	}

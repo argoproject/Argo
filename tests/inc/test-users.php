@@ -34,11 +34,11 @@ class UsersTestFunctions extends WP_UnitTestCase {
 	function test_validate_twitter_username() {
 		$this->markTestSkipped("Not implemented");
 	}
-	
+
 	function test_clean_user_fb_username() {
 		$this->markTestSkipped("Not implemented");
 	}
-	
+
 	function test_validate_fb_username() {
 		$this->markTestSkipped("Not implemented");
 	}
@@ -112,4 +112,13 @@ class UsersTestFunctions extends WP_UnitTestCase {
 	function test_largo_render_staff_list_shortcode() {
 		$this->markTestSkipped("Not implemented");
 	}
+
+	function test_more_profile_info() {
+		$this->markTestSkipped("Not implemented");
+	}
+
+	function test_save_more_profile_info() {
+		$this->markTestSkipped("Not implemented");
+	}
+
 }
