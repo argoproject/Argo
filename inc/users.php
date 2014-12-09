@@ -302,6 +302,9 @@ function largo_render_user_list($users, $show_users_with_empty_desc=false) {
 		if (empty($desc) && empty($show_users_with_empty_desc))
 			continue;
 
+		if (get_user_meta($user->ID, 'hide', true))
+			continue;
+
 		$ctx = array('author_obj' => $user);
 		echo '<div class="author-box">';
 		largo_render_template('partials/author-bio', 'description', $ctx);
@@ -354,6 +357,12 @@ function largo_render_staff_list_shortcode($atts=array()) {
 }
 add_shortcode('roster', 'largo_render_staff_list_shortcode');
 
+/**
+ * Display extra profile fields related to staff member status
+ *
+ * @param $users array The WP_User object for the current profile.
+ * @since 0.4
+ */
 function more_profile_info($user) {
 	$hide = get_user_meta( $user->ID, "hide", true );
 	$emeritus = get_user_meta( $user->ID, "emeritus", true );
@@ -368,6 +377,7 @@ function more_profile_info($user) {
 				<span class="description">Please enter your job title.</span>
 			</td>
 		</tr>
+		<?php if (current_user_can('edit_users')) { ?>
 		<tr>
 			<th><label for="staff_widget">Staff status</label></th>
 			<td>
@@ -384,20 +394,30 @@ function more_profile_info($user) {
 				<label for="honorary"><?php _e("Honorary?"); ?></label>
 			</td>
 		</tr>
+		<?php } ?>
 		<?php do_action('largo_more_profile_information', $user); ?>
 	</table>
 <?php }
 add_action( 'show_user_profile', 'more_profile_info' );
 add_action( 'edit_user_profile', 'more_profile_info' );
 
+/**
+ * Save data from form elements added to profile via `more_profile_info`
+ *
+ * @param $user_id array The ID of the user for the profile being saved.
+ * @since 0.4
+ */
 function save_more_profile_info($user_id) {
 	if (!current_user_can('edit_user', $user_id ))
 		return false;
 
 	update_user_meta($user_id, 'job_title', $_POST['job_title']);
-	update_user_meta($user_id, 'hide', $_POST['hide']);
-	update_user_meta($user_id, 'emeritus', $_POST['emeritus']);
-	update_user_meta($user_id, 'honorary', $_POST['honorary']);
+	if (isset($_POST['hide']))
+		update_user_meta($user_id, 'hide', $_POST['hide']);
+	if (isset($_POST['emeritus']))
+		update_user_meta($user_id, 'emeritus', $_POST['emeritus']);
+	if (isset($_POST['honorary']))
+		update_user_meta($user_id, 'honorary', $_POST['honorary']);
 }
 add_action('personal_options_update', 'save_more_profile_info');
 add_action('edit_user_profile_update', 'save_more_profile_info');
