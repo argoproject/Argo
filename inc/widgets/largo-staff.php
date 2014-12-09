@@ -35,7 +35,7 @@ class largo_staff_widget extends WP_Widget {
 			}
 		}
 
-		$markup = '<ul id="staff-roster">';
+		$markup = '<ul class="staff-roster">';
 		foreach ($users as $user) {
 			if (get_user_meta($user->ID, 'hide', true))
 				continue;
