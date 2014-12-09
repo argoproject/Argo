@@ -34,6 +34,14 @@ class UsersTestFunctions extends WP_UnitTestCase {
 	function test_validate_twitter_username() {
 		$this->markTestSkipped("Not implemented");
 	}
+	
+	function test_clean_user_fb_username() {
+		$this->markTestSkipped("Not implemented");
+	}
+	
+	function test_validate_fb_username() {
+		$this->markTestSkipped("Not implemented");
+	}
 
 	function test_largo_get_user_list() {
 		/**
