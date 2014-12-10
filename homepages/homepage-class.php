@@ -16,8 +16,10 @@ class Homepage {
 	var $assets = array();
 	var $sidebars = array();
 	var $rightRail = false;
+	var $prominenceTerms = array();
 
 	function __construct($options=array()) {
+		$this->init($options);
 		$this->load($options);
 	}
 
@@ -33,22 +35,21 @@ class Homepage {
 			throw new Exception('Homepage `id` can only contain letters, numbers and hyphens.');
 
 		$this->readZones();
+		add_filter('largo_prominence_terms', array($this, 'activateTerms'), 10, 1);
 	}
 
-	private function populateId() {
-		$this->id = sanitize_title($this->name);
+	public function init($options=null) {}
+
+	public function isActiveHomepageLayout() {
+		$activeLayout = largo_get_active_homepage_layout();
+		return get_class($this) == $activeLayout;
 	}
 
-	private function readZones() {
-		global $wp_filesystem;
-
-		$contents = $wp_filesystem->get_contents($this->template);
-		$tokens = token_get_all($contents);
-		$filtered = array_filter($tokens, function($t) { return $t[0] == T_VARIABLE; });
-		$variables = array_map(function($item) { return str_replace("$", "", $item[1]); }, $filtered);
-		$uniques = array_values(array_unique($variables));
-
-		$this->zones = $uniques;
+	public function activateTerms($largoProminenceTerms=array()) {
+		if ($this->isActiveHomepageLayout())
+			return array_merge($largoProminenceTerms, $this->prominenceTerms);
+		else
+			return $largoProminenceTerms;
 	}
 
 	public function render() {
@@ -106,13 +107,29 @@ class Homepage {
 		global $largo;
 		$rail = $largo['home_rail'] = $this->rightRail;
 	}
+
+	private function populateId() {
+		$this->id = sanitize_title($this->name);
+	}
+
+	private function readZones() {
+		global $wp_filesystem;
+
+		$contents = $wp_filesystem->get_contents($this->template);
+		$tokens = token_get_all($contents);
+		$filtered = array_filter($tokens, function($t) { return $t[0] == T_VARIABLE; });
+		$variables = array_map(function($item) { return str_replace("$", "", $item[1]); }, $filtered);
+		$uniques = array_values(array_unique($variables));
+
+		$this->zones = $uniques;
+	}
 }
 
 class HomepageLayoutFactory {
 	var $layouts = array();
 
 	function __construct() {
-		add_action('widgets_init', array($this, 'register_active_layout'), 100);
+		add_action('init', array($this, 'register_active_layout'), 100);
 	}
 
 	function register($layoutClass) {

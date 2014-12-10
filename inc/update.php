@@ -8,29 +8,23 @@
  */
 function largo_version() {
 	$theme = wp_get_theme();
-
-	if (strstr($theme->template, 'largo') && strstr($theme->stylesheet, 'largo') && strstr($theme->get('Name'), 'Project Largo'))
-		return $theme->get('Version');
-
-	return false;
+	$parent = $theme->parent();
+	if (!empty($parent))
+		return $parent->get('Version');
+	return $theme->get('Version');
 }
 
 /**
  * Checks if widgets need to be placed by checking old theme settings
  */
 function largo_need_updates() {
-
-	// only do this for newer versions of largo
-	if ( version_compare(largo_version(), '0.3', '<' )) return false;
-
 	// try to figure out which versions of the options are stored. Implemented in 0.3
-	if ( of_get_option('largo_version') ) {
-		$old_version = floatval( of_get_option('largo_version') );
-		if ( $old_version < largo_version() ) {
+	if (of_get_option('largo_version')) {
+		$compare = version_compare(largo_version(), of_get_option('largo_version'));
+		if ($compare == 1)
 			return true;
-		} else {
+		else
 			return false;
-		}
 	}
 
 	// if 'largo_version' isn't present, the settings are old!
@@ -43,13 +37,14 @@ function largo_need_updates() {
  * @since 0.3
  */
 function largo_perform_update() {
-	if ( largo_need_updates() ) {
-		if ( largo_version() == 0.3 ) {
-			largo_update_widgets();
-			largo_home_transition();
-			of_set_option('single_template', 'classic');
-		}
+	if (largo_need_updates()) {
+		largo_update_widgets();
+		largo_home_transition();
+		largo_transition_nav_menus();
+		of_set_option('single_template', 'classic');
+		of_set_option('largo_version', largo_version());
 	}
+
 	if ( is_admin() ) {
 		largo_check_deprecated_widgets();
 	}
@@ -75,6 +70,8 @@ function largo_home_transition() {
 	if ($old_regime && !$new_regime) {
 		if ($old_regime == 'topstories')
 			$home_template = 'TopStories';
+		if ($old_regime == 'slider')
+			$home_template = 'HomepageBlog';
 		if ($old_regime == 'blog')
 			$home_template = 'HomepageBlog';
 		of_set_option('home_template', $home_template);
@@ -256,4 +253,55 @@ function largo_deprecated_sidebar_widget() { ?>
 	<?php printf( __( 'You are using the <strong>Largo Sidebar Featured Posts</strong> widget, which is deprecated and will be removed from future versions of Largo. Please <a href="%s">change your widget settings</a> to use its replacement, <strong>Largo Featured Posts</strong>.', 'largo' ), admin_url( 'widgets.php' ) ); ?>
 	</p></div>
 	<?php
+}
+
+function largo_transition_nav_menus() {
+	$locations = get_nav_menu_locations();
+	$main_nav = wp_get_nav_menu_object('Main Navigation');
+	if (!$main_nav) {
+		$main_nav_id = wp_create_nav_menu('Main Navigation');
+		$locations['main-nav'] = $main_nav_id;
+	} else {
+		$locations['main-nav'] = $main_nav->term_id;
+	}
+
+	// Get the menu items for each menu
+	$existing_items = array();
+	foreach ($locations as $location => $id)
+		$existing_items[$location] = wp_get_nav_menu_items($id);
+
+	// These nav menu locations/menus get folded into main-nav menu
+	$transition = array('navbar-categories', 'navbar-supplemental', 'sticky-nav');
+
+	// Move all the category, supplemental items to main-nav.
+	// Remove category and supplemental navs.
+	foreach ($transition as $location_slug) {
+		if (isset($existing_items[$location_slug])) {
+			$items = $existing_items[$location_slug];
+			if ($items) {
+				foreach ($items as $idx => $item) {
+					$meta = get_metadata('post', $item->ID);
+					$attrs = array(
+						'menu-item-type' => $meta['_menu_item_type'][0],
+						'menu-item-menu-item-parent' => $meta['_menu_item_menu_item_parent'][0],
+						'menu-item-parent-id' => $meta['_menu_item_menu_item_parent'][0],
+						'menu-item-object-id' => $meta['_menu_item_object_id'][0],
+						'menu-item-object' => $meta['_menu_item_object'][0],
+						'menu-item-target' => $meta['_menu_item_target'][0],
+						'menu-item-classes' => $meta['_menu_item_classes'][0],
+						'menu-item-xfn' => $meta['_menu_item_xfn'][0],
+						'menu-item-url' => $meta['_menu_item_url'][0],
+						'menu-item-title' => $item->post_title,
+						'menu-item-attr-title' => $item->post_excerpt
+					);
+					wp_update_nav_menu_item($locations['main-nav'], $item->ID, $attrs);
+				}
+			}
+			// Get rid of the menu
+			wp_delete_nav_menu($locations[$location_slug]);
+			unset($locations[$location_slug]);
+		}
+	}
+
+	set_theme_mod('nav_menu_locations', $locations);
 }

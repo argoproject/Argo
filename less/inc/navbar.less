@@ -664,12 +664,16 @@ li.home-link:hover i {
     visibility: visible;
     opacity: 1;
   }
-  .home &.show {
-    visibility: hidden;
-    opacity: 0;
-  }
   body.admin-bar & {
     top: 32px;
+  }
+  .home & {
+    visibility: hidden;
+    opacity: 0;
+    &.show {
+      opacity: 1;
+      visibility: visible;
+    }
   }
   .sticky-nav-container {
     margin: 0 auto;
@@ -691,6 +695,7 @@ li.home-link:hover i {
 	}
 	.social-icons {
 	  float: left;
+	  margin: 0;
 	  li > a {
 	    color: #fff;
 		padding: 10px 3px;
@@ -715,14 +720,11 @@ li.home-link:hover i {
 	    margin-right: 10px;
       }
     }
-	.divider-vertical {
-      display: none;
-	}
   }
   .navbar .nav li.dropdown.open > .dropdown-toggle,
   .navbar .nav li.dropdown.active > .dropdown-toggle,
   .navbar .nav li.dropdown.open.active > .dropdown-toggle {
-    color: mix( @linkColor, @white, 100% );
+	color: @grayLighter;
     background: @linkColor;
     .caret:before {
       border-top-color: @white !important;
@@ -741,9 +743,28 @@ li.home-link:hover i {
       }
     }
   }
+  .site-name {
+    display: block;
+    float: left;
+    color: #343434;
+    line-height: 50px;
+    font-size: 18px;
+    margin-right: 8px;
+    font-weight: 900;
+    a {
+      color: #343434;
+      &:hover {
+	    background-color: #fff;
+        color: #666;
+        text-decoration: none;
+      }
+    }
+    @media only screen and (max-width: 320px) {
+      display: none;
+    }
+  }
   .nav-right {
-    position: absolute;
-    right: 0;
+    float: right;
     padding-top: 5px;
     .donate-btn {
       float: left;
@@ -764,33 +785,34 @@ li.home-link:hover i {
       position: relative;
       z-index: 91;
 	  font-size: 18px;
-	  height: 41px;
+	  height: 42px;
       .transition( 0.3s );
       margin-top: -9px;
       padding-top: 9px;
     }
     .input-append {
       position: absolute;
-      right: 0;
-      top: 50px;
+      right: 44px;
+      top: 51px;
       opacity: 0;
       visibility: hidden;
       .transition( 0.3s );
-      padding: 8px 10px;
+      padding: 10px;
       z-index: 90;
-      width: 300px;
+      width: 340px;
       .text-input-wrapper {
         display: block;
         float: left;
-        width: 250px;
+        width: 290px;
       }
       input {
         width: 100%;
         .box-sizing( border-box );
-        height: 28px !important;
+        height: 36px !important;
       }
       button {
         width: 50px !important;
+        height: 36px !important;
 		float: left;
         .box-sizing( border-box );
       }
@@ -803,7 +825,7 @@ li.home-link:hover i {
       }
       .input-append,
       .toggle {
-        background-color: rgba( red(@baseColor), green(@baseColor), blue(@baseColor), 0.9);
+        background-color: #343434;
         color: @bodyBackground;
       }
     }

@@ -11,9 +11,9 @@ get_header();
 	<?php
 		while ( have_posts() ) : the_post();
 			if ( is_page() ) {
-				get_template_part( 'content', 'page' );
+				get_template_part( 'partials/content', 'page' );
 			} else {
-				get_template_part( 'content', 'single' );
+				get_template_part( 'partials/content', 'single' );
 				comments_template( '', true );
 			}
 		endwhile; // end of the loop.

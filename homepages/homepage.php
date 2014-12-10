@@ -19,8 +19,7 @@ function largo_register_default_homepage_layouts() {
 		'HomepageSingle',
 		'HomepageSingleWithFeatured',
 		'HomepageSingleWithSeriesStories',
-		'TopStories',
-		'Slider'
+		'TopStories'
 	);
 
 	foreach ($default_layouts as $layout)
@@ -37,11 +36,6 @@ add_action('init', 'largo_register_default_homepage_layouts', 0);
 function largo_get_home_layouts() {
 	global $largo_homepage_factory;
 
-	$cache_key = 'largo_home_layouts_' . get_option('stylesheet');
-	if ( false !== ( $layouts = get_transient( $cache_key ) ) ) {
-		return $layouts;
-	}
-
 	$layouts = array();
 	foreach ($largo_homepage_factory->layouts as $className => $layout) {
 		$layouts[trim($layout->name)] = array(
@@ -51,7 +45,6 @@ function largo_get_home_layouts() {
 		);
 	}
 
-	set_transient( $cache_key, $layouts, HOUR_IN_SECONDS );
 	return $layouts;
 }
 

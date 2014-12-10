@@ -31,12 +31,14 @@ global $tags;
 					echo '<div class="archive-description">' . $description . '</div>';
 
 					// category pages show a list of related terms
-					if ( is_category() && largo_get_related_topics_for_category( get_queried_object() ) != '<ul></ul>' ) { ?>
-						<div class="related-topics">
-							<h5><?php _e('Related Topics:', 'largo'); ?> </h5>
-							<?php echo largo_get_related_topics_for_category( get_queried_object() ); ?>
-						</div>
-				<?php
+					if ( defined('SHOW_CATEGORY_RELATED_TOPICS') && SHOW_CATEGORY_RELATED_TOPICS ) {
+						if ( is_category() && largo_get_related_topics_for_category( get_queried_object() ) != '<ul></ul>' ) { ?>
+							<div class="related-topics">
+								<h5><?php _e('Related Topics:', 'largo'); ?> </h5>
+								<?php echo largo_get_related_topics_for_category( get_queried_object() ); ?>
+							</div>
+					<?php
+						}
 					}
 				?>
 			</header>
@@ -53,7 +55,7 @@ global $tags;
 						 		<h5 class="top-tag"><?php largo_categories_and_tags( 1 ); ?></h5>
 						 	<?php } ?>
 
-							<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'medium' ); ?></a>
+							<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'rect_thumb' ); ?></a>
 						</div>
 
 						<div class="span8">
@@ -83,7 +85,7 @@ global $tags;
 					 		<h5 class="top-tag"><?php largo_categories_and_tags( 1 ); ?></h5>
 					 	<?php } ?>
 
-						<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'medium' ); ?></a>
+						<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'rect_thumb' ); ?></a>
 
 							<h2 class="entry-title">
 								<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute( array( 'before' => __( 'Permalink to', 'largo' ) . ' ' ) )?>" rel="bookmark"><?php the_title(); ?></a>
@@ -100,12 +102,12 @@ global $tags;
 				// and finally  go through the loop as usual
 
 				while ( have_posts() ) : the_post();
-					get_template_part( 'content', 'archive' );
+					get_template_part( 'partials/content', 'archive' );
 				endwhile;
 
 				largo_content_nav( 'nav-below' );
 			} else {
-				get_template_part( 'content', 'not-found' );
+				get_template_part( 'partials/content', 'not-found' );
 			}
 		?>
 		</div><!--#content-->

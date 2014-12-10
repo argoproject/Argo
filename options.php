@@ -128,31 +128,36 @@ function optionsframework_options() {
 		'type' 	=> 'text');
 
 	$options[] = array(
-		'name' 	=> __('Don\'t Miss Menu', 'largo'),
+		'name' 	=> __('Menu Options', 'largo'),
 		'desc' 	=> __('<strong>Show</strong> the "Don\'t Miss" menu under the main site navigation. Add links to this menu under <strong>Appearance > Menus</strong>.', 'largo'),
 		'id' 	=> 'show_dont_miss_menu',
 		'type' 	=> 'checkbox');
 
 	$options[] = array(
-		'desc' 	=> __('Enter the <strong>label that appears in front of the menu links</strong>. You can delete this default and no label will appear.', 'largo'),
+		'desc' 	=> __('Enter the <strong>label that appears in front of the menu links in the "Don\'t Miss" menu</strong>. You can delete this default and no label will appear.', 'largo'),
 		'id' 	=> 'dont_miss_label',
 		'std' 	=> __('Don\'t Miss', 'largo'),
 		'class' => 'hidden',
 		'type' 	=> 'text');
 
-		$options[] = array(
+	$options[] = array(
+		'desc' 	=> __('Enter the <strong>label that appears before the menu links in the Footer Nav Menu</strong>. You can delete this default and no label will appear.', 'largo'),
+		'id' 	=> 'footer_menu_label',
+		'std' 	=> get_bloginfo('name'),
+		'type' 	=> 'text');
+
+	$options[] = array(
+		'desc' 	=> __('Show the <strong>site name in the sticky nav</strong>? Default is to show, but in some cases you might want to hide it to save space or if your logo is clear enough to not need it.', 'largo'),
+		'id' 	=> 'show_sitename_in_sticky_nav',
+		'std' 	=> '1',
+		'type' 	=> 'checkbox');
+
+	$options[] = array(
 		'name' 	=> __('Disclaimer', 'largo'),
 		'desc' 	=> __('Enter a default disclaimer', 'largo'),
 		'id' 	=> 'default_disclaimer',
 		'std' 	=> '',
 		'type' 	=> 'textarea');
-
-	$options[] = array(
-		'name' 	=> __('Footer Nav Menu', 'largo'),
-		'desc' 	=> __('Enter the <strong>label that appears before the menu links</strong>. You can delete this default and no label will appear.', 'largo'),
-		'id' 	=> 'footer_menu_label',
-		'std' 	=> get_bloginfo('name'),
-		'type' 	=> 'text');
 
 	$options[] = array(
 		'name' 	=> __('Copyright Message', 'largo'),
@@ -288,16 +293,6 @@ function optionsframework_options() {
 		'std' 	=> '1',
 		'type' 	=> 'checkbox');
 
-	$options[] = array(
-		'name' 	=> __('SEO Options', 'largo'),
-		'type'	=> 'info');
-
-	$options[] = array(
-		'desc' 	=> __('Use noindex for all archive pages (default is to use noindex for just date archives).', 'largo'),
-		'id' 	=> 'noindex_archives',
-		'std' 	=> '0',
-		'type' 	=> 'checkbox');
-
 	/**
 	 * Images Options
 	 */
@@ -419,8 +414,8 @@ function optionsframework_options() {
 		'std' 	=> 'normal',
 		'type' 	=> 'select',
 		'options' => array(
-			'normal' => 'Standard (hero image, no rail)',
-			'classic' => 'Classic (no hero, right rail)'
+			'normal' => 'One Column (Standard Layout)',
+			'classic' => 'Two Column (Classic Layout)'
 			)
 		);
 
@@ -510,7 +505,7 @@ function optionsframework_options() {
 
 	$options[] = array(
 		'name' => __('Search options', 'largo'),
-		'desc' 	=> __('Replace WordPress search with Google Custom Search (recommended)', 'largo'),
+		'desc' 	=> __('Replace WordPress search with Google Custom Search', 'largo'),
 		'id' 	=> 'use_gcs',
 		'std' 	=> '0',
 		'type' 	=> 'checkbox');
@@ -522,10 +517,52 @@ function optionsframework_options() {
 		'type' 	=> 'text');
 
 	$options[] = array(
-		'desc' 	=> __('INN strongly recommends using Google Custom Search. You can get your ID and configure it at <a href="https://www.google.com/cse/create/new">https://www.google.com/cse/create/new</a>.', 'largo'),
+		'desc' 	=> __('Google Custom Search typically returns better results than the search engine built into WordPress. You can get your ID and configure it at <a href="https://www.google.com/cse/create/new">https://www.google.com/cse/create/new</a>.', 'largo'),
 		'id' 	=> 'gcs_help',
 		'std' 	=> '',
 		'type' 	=> 'info');
+
+	$options[] = array(
+		'name' => __('Site verification', 'largo'),
+		'desc' 	=> __('<strong>Twitter Account ID.</strong> This is used for verifying your site for Twitter Analytics. This is NOT your username, it will be a 9 digit number.', 'largo'),
+		'id' 	=> 'twitter_acct_id',
+		'std' 	=> '',
+		'type' 	=> 'text');
+
+	$options[] = array(
+		'desc' 	=> __('<strong>Google site verification meta tag.</strong> Used to verify a site in Google Webmaster Tools. This will be a long string of numbers and letters.', 'largo'),
+		'id' 	=> 'google_site_verification',
+		'std' 	=> '',
+		'type' 	=> 'text');
+
+	$options[] = array(
+		'desc' 	=> __('<strong>Facebook admins meta tag.</strong> This is a comma-separated list of numerical FB user IDs you want to allow to access Facebook insights for your site.', 'largo'),
+		'id' 	=> 'fb_admins',
+		'std' 	=> '',
+		'type' 	=> 'text');
+
+	$options[] = array(
+		'desc' 	=> __('<strong>Facebook app ID meta tag.</strong> This is a numerical app ID that will allow Facebook to capture insights for any social plugins active on your site and display them in your Facebook app/page insights.', 'largo'),
+		'id' 	=> 'fb_app_id',
+		'std' 	=> '',
+		'type' 	=> 'text');
+
+	$options[] = array(
+		'desc' 	=> __('<strong>Bitly site verification.</strong> This is a string of numbers and letters used to verify your site with bitly analytics.', 'largo'),
+		'id' 	=> 'bitly_verification',
+		'std' 	=> '',
+		'type' 	=> 'text');
+
+	$options[] = array(
+		'name' 	=> __('SEO Options', 'largo'),
+		'type'	=> 'info');
+
+	$options[] = array(
+		'desc' 	=> __('Use noindex for all archive pages (default is to use noindex for just date archives).', 'largo'),
+		'id' 	=> 'noindex_archives',
+		'std' 	=> '0',
+		'type' 	=> 'checkbox');
+
 
 	return apply_filters('largo_options', $options);
 }

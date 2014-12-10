@@ -35,12 +35,12 @@ $span_class = ( $largo['home_rail'] ) ? 'span8' : 'span12' ;
 
 	// sticky posts box if this site uses it
 	if ( of_get_option( 'show_sticky_posts' ) ) {
-		get_template_part( 'homepages/part', 'sticky-posts' );
+		get_template_part( 'partials/sticky-posts', 'home' );
 	}
 
 	// bottom section, we'll either use a two-column widget area or a single column list of recent posts
 	if ( of_get_option( 'homepage_bottom') === 'widgets' ) {
-		get_template_part( 'homepages/part', 'bottom-widget-area' );
+		get_template_part( 'partials/home-bottom', 'widget-area' );
 	} else if ( of_get_option( 'homepage_bottom' ) === 'list' ) {
 		$args = array(
 			'paged'					=> $paged,
@@ -63,12 +63,12 @@ $span_class = ( $largo['home_rail'] ) ? 'span8' : 'span12' ;
 					continue;
 				} else {
 					$ids[] = get_the_ID();
-					get_template_part( 'content', 'home' );
+					get_template_part( 'partials/content', 'home' );
 				}
 			endwhile;
 			largo_content_nav( 'nav-below' );
 		} else {
-			get_template_part( 'content', 'not-found' );
+			get_template_part( 'partials/content', 'not-found' );
 		}
 	}
 

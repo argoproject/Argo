@@ -132,7 +132,7 @@ if ( isset( $wp_query->query_vars['term'] )
 
 	// and finally wind the posts back so we can go through the loop as usual
 	while ( $wp_query->have_posts() ) : $wp_query->the_post();
-		get_template_part( 'content', 'series' );
+		get_template_part( 'partials/content', 'series' );
 	endwhile;
 
 	largo_content_nav( 'nav-below' );

@@ -7,93 +7,109 @@
  * @since 1.0
  */
 function largo_custom_taxonomies() {
-    // PROMINENCE
-    if ( ! taxonomy_exists( 'prominence' ) ) {
-        register_taxonomy( 'prominence', 'post', array(
-            'hierarchical' 	=> true,
-            'label' 		=> __('Post Prominence', 'largo'),
-            'query_var' 	=> true,
-            'rewrite' 		=> true,
-        ) );
+	if (!taxonomy_exists('prominence')) {
+		register_taxonomy(
+        	'prominence',
+        	'post',
+        	array(
+		        'hierarchical'  => true,
+		        'labels'        => array(
+		        	'name'              => _x( 'Post Prominence', 'taxonomy general name' ),
+					'singular_name'     => _x( 'Post Prominence', 'taxonomy singular name' ),
+					'search_items'      => __( 'Search Post Prominences' ),
+					'all_items'         => __( 'All Post Prominences' ),
+					'parent_item'       => __( 'Parent Post Prominence' ),
+					'parent_item_colon' => __( 'Parent Post Prominence:' ),
+					'edit_item'         => __( 'Edit Post Prominence' ),
+					'view_item'         => __( 'View Post Prominence' ),
+					'update_item'       => __( 'Update Post Prominence' ),
+					'add_new_item'      => __( 'Add New Post Prominence' ),
+					'new_item_name'     => __( 'New Post Prominence Name' ),
+					'menu_name'         => __( 'Post Prominence' ),
+		        ),
+		        'query_var'     => true,
+		        'rewrite'       => true,
+        	)
+        );
+	}
 
-		$prominence_terms = array(
-			array(
-				'name' 			=> __('Homepage Featured', 'largo'),
-				'description' 	=> __('If you are using the Newspaper or Carousel optional homepage layout, add this label to posts to display them in the featured area on the homepage.', 'largo'),
-				'slug' 			=> 'homepage-featured'
-			),
-			array(
-				'name' 			=> __('Sidebar Featured Widget', 'largo'),
-				'description' 	=> __('If you are using the Sidebar Featured Posts widget, add this label to posts to determine which to display in the widget.', 'largo'),
-				'slug' 			=> 'sidebar-featured'
-			),
-			array(
-				'name' 			=> __('Footer Featured Widget', 'largo'),
-				'description' 	=> __('If you are using the Footer Featured Posts widget, add this label to posts to determine which to display in the widget.', 'largo'),
-				'slug' 			=> 'footer-featured'
-			),
-			array(
-				'name' 			=> __('Featured in Series', 'largo'),
-				'description' 	=> __('Select this option to allow this post to float to the top of any/all series landing pages sorting by Featured first.', 'largo'),
-				'slug' 			=> 'series-featured'
-			),
-			array(
-				'name' 			=> __('Featured in Category', 'largo'),
-				'description' 	=> __('This will allow you to designate a story to appear more prominently on category archive pages.', 'largo'),
-				'slug' 			=> 'category-featured'
-			)
-		);
+	$largoProminenceTerms = apply_filters('largo_prominence_terms', array(
+		array(
+			'name' => __('Sidebar Featured Widget', 'largo'),
+			'description' => __('If you are using the Sidebar Featured Posts widget, add this label to posts to determine which to display in the widget.', 'largo'),
+			'slug' => 'sidebar-featured'
+		),
+		array(
+			'name' => __('Footer Featured Widget', 'largo'),
+			'description' => __('If you are using the Footer Featured Posts widget, add this label to posts to determine which to display in the widget.', 'largo'),
+			'slug' => 'footer-featured'
+		),
+		array(
+			'name' => __('Featured in Series', 'largo'),
+			'description' => __('Select this option to allow this post to float to the top of any/all series landing pages sorting by Featured first.', 'largo'),
+			'slug' => 'series-featured'
+		),
+		array(
+			'name' => __('Featured in Category', 'largo'),
+			'description' => __('This will allow you to designate a story to appear more prominently on category archive pages.', 'largo'),
+			'slug' => 'category-featured'
+		)
+	));
 
-		// Avoid writes on the frontend
-		if ( is_admin() ) {
+	$changed = false;
+	$terms = get_terms('prominence', array(
+		'hide_empty' => false,
+		'fields' => 'all'
+	));
+	$names = array_map(function($arg) { return $arg->name; }, $terms);
 
-			$changed = false;
-
-			$terms = get_terms( 'prominence', array( 'hide_empty' => false, 'fields' => 'names' ) );
-
-			foreach ( $prominence_terms as $term ) {
-				if ( ! in_array( $term['name'], $terms ) ) {
-					wp_insert_term(
-						$term['name'], 'prominence',
-						array(
-							'description' 	=> $term['description'],
-							'slug' 			=> $term['slug']
-						)
-					);
-					$changed = true;
-				}
-			}
-
-	        if ( ! in_array( 'Top Story', $terms ) ) {
-			    $parent_term = term_exists( 'Homepage Featured', 'prominence' );
-			    $parent_term_id = $parent_term['term_id'];
-			    wp_insert_term(
-			    	__('Top Story', 'largo'), 'prominence',
-			    	array(
-			    		'parent'		=> $parent_term_id,
-			    		'description' 	=> __('If you are using the Newspaper or Carousel optional homepage layout, add this label to a post to make it the top story on the homepage', 'largo'),
-			    		'slug' 			=> 'top-story' )
-			    	);
-			    $changed = true;
-			}
-
-			if ( $changed ) {
-				delete_option( 'prominence_children' );
-			}
+	$term_ids = array();
+	foreach ($largoProminenceTerms as $term ) {
+		if (!in_array($term['name'], $names)) {
+			wp_insert_term(
+				$term['name'], 'prominence',
+				array(
+					'description' => $term['description'],
+					'slug' => $term['slug']
+				)
+			);
+			$changed = true;
 		}
-    }
+	}
 
-    // SERIES
-    if ( ! taxonomy_exists( 'series' ) ) {
-        register_taxonomy( 'series', 'post', array(
-            'hierarchical' 	=> true,
-            'label' 		=> __('Series', 'largo'),
+	if ($changed)
+		delete_option('prominence_children');
+
+	do_action('largo_after_create_prominence_taxonomy', $largoProminenceTerms);
+
+	if ( ! taxonomy_exists( 'series' ) ) {
+		register_taxonomy( 
+        	'series', 
+        	'post', 
+        	array(
+		        'hierarchical' 	=> true,
+		        'labels'        => array(
+		        	'name'              => _x( 'Series', 'taxonomy general name' ),
+					'singular_name'     => _x( 'Series', 'taxonomy singular name' ),
+					'search_items'      => __( 'Search Series' ),
+					'all_items'         => __( 'All Series' ),
+					'parent_item'       => __( 'Parent Series' ),
+					'parent_item_colon' => __( 'Parent Series:' ),
+					'edit_item'         => __( 'Edit Series' ),
+					'view_item'         => __( 'View Series' ),
+					'update_item'       => __( 'Update Series' ),
+					'add_new_item'      => __( 'Add New Series' ),
+					'new_item_name'     => __( 'New Series Name' ),
+					'menu_name'         => __( 'Series' ),
+	        	),
             'query_var' 	=> true,
             'rewrite' 		=> true,
-        ) );
-    }
+        	) 
+        );
+	}
 }
 add_action( 'init', 'largo_custom_taxonomies' );
+
 
 /**
  * Determines whether a post is in a series

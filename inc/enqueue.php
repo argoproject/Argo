@@ -26,7 +26,7 @@ if ( ! function_exists( 'largo_enqueue_js' ) ) {
 
 		//Load the child theme's style.css if we're actually running a child theme of Largo
 		$theme = wp_get_theme();
-		if ( is_object($theme->parent()) && $theme->parent()->Template == 'largo' ) {
+		if (is_object($theme->parent())) {
 			wp_enqueue_style( 'largo-child-styles', get_stylesheet_directory_uri() . '/style.css', array('largo-stylesheet'));
 		}
 	}
@@ -110,7 +110,7 @@ add_action( 'wp_footer', 'largo_footer_js' );
  */
 if ( ! function_exists( 'largo_google_analytics' ) ) {
 	function largo_google_analytics() {
-		if ( !is_user_logged_in() ) : // don't track logged in users ?>
+		if ( !current_user_can('edit_posts') ) : // don't track editors ?>
 			<script>
 			    var _gaq = _gaq || [];
 			<?php if ( of_get_option( 'ga_id', true ) ) : // make sure the ga_id setting is defined ?>
@@ -141,5 +141,5 @@ if ( ! function_exists( 'largo_google_analytics' ) ) {
 	<?php endif;
 	}
 }
-add_action( 'wp_enqueue_scripts', 'largo_google_analytics' );
+add_action( 'wp_head', 'largo_google_analytics' );
 

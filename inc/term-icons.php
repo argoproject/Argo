@@ -168,7 +168,10 @@ class Largo_Term_Icons {
 	 * Save the results from the term edit page
 	 */
 	function edit_terms( $term_id ) {
-		$nonce_action = $_POST['action'] == 'add-tag' ? 'associated_icon-new' : 'associated_icon-'.$term_id ;
+		if (isset($_POST['action']) && $_POST['action'] == 'add-tag')
+			$nonce_action = 'associated_icon-new';
+		else
+			$nonce_action = 'associated_icon-' . $term_id;
 
 		if ( isset($_POST['_associated_icon_nonce']) && wp_verify_nonce($_POST['_associated_icon_nonce'], $nonce_action ) ) {
 			$taxonomy = $_REQUEST['taxonomy'];

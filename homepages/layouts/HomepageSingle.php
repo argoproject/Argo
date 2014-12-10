@@ -19,7 +19,18 @@ class HomepageSingle extends Homepage {
 			)
 		);
 		$options = array_merge($defaults, $options);
+		$this->init($options);
 		$this->load($options);
+	}
+
+	public function init($options=array()) {
+		$this->prominenceTerms = array(
+			array(
+				'name' => __('Homepage Top Story', 'largo'),
+				'description' => __('If you are using the Newspaper or Carousel optional homepage layout, add this label to a post to make it the top story on the homepage', 'largo'),
+				'slug' => 'top-story'
+			)
+		);
 	}
 
 	public function viewToggle() {

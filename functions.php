@@ -36,6 +36,9 @@
 if ( ! defined( 'INN_MEMBER' ) )
 	define( 'INN_MEMBER', FALSE );
 
+/**
+ * Image size constants, almost 100% that you won't need to change these
+ */
 if ( ! defined( 'FULL_WIDTH' ) ) {
 	define( 'FULL_WIDTH', 1170 );
 }
@@ -95,11 +98,12 @@ class Largo {
 
 		$this->register_nav_menus();
 		$this->register_media_sizes();
+		$this->template_constants();
 
 		$this->customizer = Largo_Customizer::get_instance();
 
 	}
-
+ 
 	/**
 	 * Load required files
 	 */
@@ -107,6 +111,8 @@ class Largo {
 
 		$includes = array(
 			'/largo-apis.php',
+			'/inc/ajax-functions.php',
+			'/inc/helpers.php',
 			'/inc/largo-plugin-init.php',
 			'/inc/dashboard.php',
 			'/inc/robots.php',
@@ -123,8 +129,9 @@ class Largo {
 			'/inc/term-sidebars.php',
 			'/inc/images.php',
 			'/inc/editor.php',
-			'/inc/post-meta.php',
+			'/inc/post-metaboxes.php',
 			'/inc/open-graph.php',
+			'/inc/verify.php',
 			'/inc/post-tags.php',
 			'/inc/header-footer.php',
 			'/inc/related-content.php',
@@ -133,6 +140,7 @@ class Largo {
 			'/inc/post-templates.php',
 			'/inc/home-templates.php',
 			'/inc/update.php',
+			'/inc/avatars.php',
 		);
 
 		if ( $this->is_less_enabled() ) {
@@ -169,9 +177,7 @@ class Largo {
 
 		$menus = array(
 			'global-nav'         	=> __( 'Global Navigation', 'largo' ),
-			'sticky-nav'          => __( 'Sticky Navigation', 'largo' ),
-			'navbar-categories'     => __( 'Navbar Categories List', 'largo' ),
-			'navbar-supplemental'	=> __( 'Navbar Supplemental Links', 'largo' ),
+			'main-nav'          => __( 'Main Navigation', 'largo' ),
 			'dont-miss'       		=> __( 'Don\'t Miss', 'largo' ),
 			'footer'          		=> __( 'Footer Navigation', 'largo' ),
 			'footer-bottom'			=> __( 'Footer Bottom', 'largo' )
@@ -218,6 +224,7 @@ class Largo {
 		add_image_size( 'full', FULL_WIDTH, FULL_HEIGHT ); // full width scaling
 		add_image_size( 'third-full', FULL_WIDTH / 3, 500, true ); // large width scaling
 		add_image_size( 'two-third-full', FULL_WIDTH / 3 * 2, 500, true ); // large width scaling
+		add_image_size( 'rect_thumb', 800, 600, true ); // used for cat/tax archive pages
 
 		add_filter( 'pre_option_thumbnail_size_w', function(){
 			return 140;
@@ -246,6 +253,36 @@ class Largo {
 			return 9999;
 		});
 
+	}
+
+	/**
+	 * Template display constants, you can override these in your child theme's
+	 * functions.php by doing something like:
+	 * define( 'SHOW_GLOBAL_NAV', FALSE );
+	 */
+	private function template_constants() {
+		/* Navigation */
+		if ( ! defined( 'SHOW_GLOBAL_NAV' ) ) {
+			define( 'SHOW_GLOBAL_NAV', TRUE );
+		}
+		if ( ! defined( 'SHOW_STICKY_NAV' ) ) {
+			define( 'SHOW_STICKY_NAV', TRUE );
+		}
+		if ( ! defined( 'SHOW_MAIN_NAV' ) ) {
+			define( 'SHOW_MAIN_NAV', TRUE );
+		}
+		if ( ! defined( 'SHOW_SECONDARY_NAV' ) ) {
+			if ( of_get_option( 'show_dont_miss_menu' ) ) {
+				define( 'SHOW_SECONDARY_NAV', TRUE );
+			} else {
+				define( 'SHOW_SECONDARY_NAV', FALSE );
+			}
+		}
+
+		/* Category */
+		if ( ! defined( 'SHOW_CATEGORY_RELATED_TOPICS' ) ) {
+			define( 'SHOW_CATEGORY_RELATED_TOPICS', TRUE );
+		}
 	}
 
 	/**
@@ -286,6 +323,23 @@ function Largo() {
 }
 add_action( 'after_setup_theme', 'Largo' );
 
+/**
+ * Prints an admin warning if php is out of date.
+ */
+function largo_php_warning() {
+
+	$minver = "5.3.0";
+	$curver = phpversion();
+
+	if( current_user_can('update_themes') && version_compare( $curver, $minver, "<" ) ) :
+		$warning = "Largo requires <b>PHP $minver</b>. You're running <b>$curver</b>. Please upgrade your version of php.";
+ 		echo "<div class='update-nag'>";
+    	_e( $warning, 'largo' );
+ 		echo "</div>";
+ 	endif;
+
+}
+add_action( 'admin_notices', 'largo_php_warning' );
 
 /**
  * Load up all of the other goodies from the /inc directory

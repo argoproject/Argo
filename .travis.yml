@@ -1,0 +1,36 @@
+# Travis CI Configuration File
+
+# Tell Travis CI we're using PHP
+language: php
+
+# PHP version used in first build configuration.
+php:
+    - "5.3"
+
+# WordPress version used in first build configuration.
+env:
+    - WP_VERSION=3.9.1 WP_TESTS_DIR=/tmp/wordpress/tests/phpunit WP_CORE_DIR=/tmp/wordpress
+    - WP_VERSION=4.0.1 WP_TESTS_DIR=/tmp/wordpress/tests/phpunit WP_CORE_DIR=/tmp/wordpress
+
+# Only test the unittests branch for now
+branches:
+    only:
+        - develop
+
+# Clones WordPress and configures our testing environment.
+before_script:
+    - export SLUG=$(basename $(pwd))
+    - svn co --quiet http://develop.svn.wordpress.org/tags/$WP_VERSION $WP_CORE_DIR
+    - cd ..
+    - mv $SLUG "$WP_CORE_DIR/src/wp-content/themes/$SLUG"
+    - cd $WP_CORE_DIR
+    - mysql -e "CREATE DATABASE wordpress_tests;" -uroot
+    - cp wp-tests-config-sample.php wp-tests-config.php
+    - sed -i "s:dirname( __FILE__ ) . '/src/':'$WP_CORE_DIR/src/':" wp-tests-config.php
+    - sed -i "s/youremptytestdbnamehere/wordpress_tests/" wp-tests-config.php
+    - sed -i "s/yourusernamehere/travis/" wp-tests-config.php
+    - sed -i "s/yourpasswordhere//" wp-tests-config.php
+    - mv wp-tests-config.php "$WP_TESTS_DIR/wp-tests-config.php"
+    - cd "$WP_CORE_DIR/src/wp-content/themes/$SLUG"
+
+script: phpunit
