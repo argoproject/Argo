@@ -590,7 +590,7 @@ jQuery(document).ready(function($) {
   		$('#section-dont_miss_label').fadeToggle(400);
 	});
 
-	if ($('#show_dont_miss_menu').val() !== undefined) {
+	if ($('#show_dont_miss_menu:checked').val() !== undefined) {
 		$('#section-dont_miss_label').show();
 	}
 
