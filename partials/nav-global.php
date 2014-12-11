@@ -1,7 +1,4 @@
 <?php
-
-var_log(SHOW_STICKY_NAV);
-var_log(of_get_option( 'show_sticky_nav' ));
 if ( is_front_page() || is_home() || !of_get_option( 'show_sticky_nav' ) ): ?>
 	<div class="global-nav-bg">
 		<div class="global-nav">
