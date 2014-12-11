@@ -147,9 +147,16 @@ function optionsframework_options() {
 		'type' 	=> 'text');
 
 	$options[] = array(
+		'desc'  => __('Show the <strong>sticky nav</strong>? Default is to show, but in some cases you may want to hide it.'),
+		'id'    => 'show_sticky_nav',
+		'std' 	=> '1',
+		'type' 	=> 'checkbox');
+
+	$options[] = array(
 		'desc' 	=> __('Show the <strong>site name in the sticky nav</strong>? Default is to show, but in some cases you might want to hide it to save space or if your logo is clear enough to not need it.', 'largo'),
 		'id' 	=> 'show_sitename_in_sticky_nav',
 		'std' 	=> '1',
+		'class' => 'hidden',
 		'type' 	=> 'checkbox');
 
 	$options[] = array(
@@ -583,10 +590,18 @@ jQuery(document).ready(function($) {
   		$('#section-dont_miss_label').fadeToggle(400);
 	});
 
-	if ($('#show_dont_miss_menu:checked').val() !== undefined) {
+	if ($('#show_dont_miss_menu').val() !== undefined) {
 		$('#section-dont_miss_label').show();
 	}
 
+	$('#show_sticky_nav').click(function() {
+  		$('#section-show_sitename_in_sticky_nav').fadeToggle(400);
+	});
+
+	if ($('#show_sticky_nav:checked').val() !== undefined) {
+		$('#section-show_sitename_in_sticky_nav').show();
+	}
+console.log($('#show_sticky_nav').val());
 	$('#show_donate_button').click(function() {
   		$('#section-donate_link').fadeToggle(400);
   		$('#section-donate_button_text').fadeToggle(400);
