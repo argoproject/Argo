@@ -83,13 +83,13 @@ function largo_register_sidebars() {
 		);
 	}
 
-	// @todo - probably add an option to enable this because not everyone is going to have ads here
-	// @todo - add additional widget area in the footer for a leaderboard ad unit there too
-	$sidebars[] = array(
-		'name' 	=> __( 'Header Ad Zone', 'largo'),
-		'desc' 	=> __( 'An optional leaderboard ad zone above the main site header', 'largo' ),
-		'id' 	=> 'header-ads'
-	);
+	if ( of_get_option( 'leaderboard_enabled' ) ) {
+		$sidebars[] = array(
+	 		'name' 	=> __( 'Header Ad Zone', 'largo'),
+	 		'desc' 	=> __( 'An optional leaderboard (728x90) ad zone above the main site header', 'largo' ),
+	 		'id' 	=> 'header-ad'
+	 	);
+	 }
 
 	// user-defined custom widget areas
 	$custom_sidebars = preg_split( '/$\R?^/m', of_get_option( 'custom_sidebars' ) );
