@@ -87,7 +87,7 @@ function largo_register_sidebars() {
 		$sidebars[] = array(
 	 		'name' 	=> __( 'Header Ad Zone', 'largo'),
 	 		'desc' 	=> __( 'An optional leaderboard (728x90) ad zone above the main site header', 'largo' ),
-	 		'id' 	=> 'header-ad'
+	 		'id' 	=> 'header-ads'
 	 	);
 	 }
 
