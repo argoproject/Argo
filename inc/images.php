@@ -31,8 +31,6 @@ if ( ! function_exists( 'largo_home_icon' ) ) {
 		$logo = of_get_option( 'logo_thumbnail_sq' );
 
 		if ( ! empty( $logo ) ) {
-			$logo = preg_replace( '#-\d+x\d+(\.[^.]+)$#', '\1', $logo );
-
 			$cache_key = 'largo_logo_thumbnail_sq_attachment_id';
 			if ( false === ( $attachment_id = get_transient( $cache_key ) ) ) {
 				$attachment_id = $wpdb->get_var( $wpdb->prepare("SELECT ID FROM {$wpdb->posts} WHERE guid = %s", $logo) );
