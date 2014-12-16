@@ -348,7 +348,6 @@ ul,
 ol {
   padding: 0;
   margin: 0 0 24px 25px;
-  font-size: 17px;
 }
 ul ul,
 ul ol,
@@ -2123,7 +2122,7 @@ h2.branding .tagline {
 }
 .navbar .navbar-text {
   margin-bottom: 0;
-  line-height: 40px;
+  /*line-height: @navbarHeight;*/
 }
 .navbar .toggle-nav-bar {
   display: none;
@@ -2138,14 +2137,11 @@ h2.branding .tagline {
 .navbar .nav.pull-right {
   float: right;
 }
-.navbar ul {
-  font-size: 15px;
-}
 .navbar li {
   display: block;
   float: left;
   margin-bottom: 0;
-  line-height: 40px;
+  /*line-height: @navbarHeight;*/
 }
 .navbar li > a {
   float: none;
@@ -2153,7 +2149,7 @@ h2.branding .tagline {
   padding: 10px;
   color: #ffffff;
   text-decoration: none;
-  line-height: 20px;
+  /*line-height: @navbarFontSize + 5;*/
 }
 .navbar li.dropdown > a {
   padding-right: 0;
@@ -2177,7 +2173,7 @@ li.home-link:hover i {
   overflow: hidden;
 }
 .navbar li.home-link > a {
-  font-size: 20px;
+  /*font-size: @navbarFontSize + 5;*/
   padding: 0;
   display: block;
 }
@@ -2327,7 +2323,7 @@ li.home-link:hover i {
   padding: 3px 15px;
   clear: both;
   font-weight: normal;
-  line-height: 24px;
+  /*line-height: @baseline;*/
   color: #333333;
   white-space: nowrap;
   text-shadow: none;
@@ -2578,7 +2574,7 @@ li.home-link:hover i {
   .sticky-nav-holder .nav-middle .nav > span > li {
     float: none;
     display: block;
-    line-height: 2;
+    /*line-height: 2;*/
   }
   .sticky-nav-holder .nav-collapse .nav > li > a,
   .sticky-nav-holder .nav-middle .nav > li > a,
@@ -2707,7 +2703,7 @@ li.home-link:hover i {
   font-weight: bold;
 }
 .sticky-nav-wrapper {
-  height: 25px;
+  /*height: 25px;*/
 }
 .sticky-nav-holder {
   position: fixed;
@@ -2726,6 +2722,62 @@ li.home-link:hover i {
   -webkit-box-shadow: 0 0 16px #555555;
   -moz-box-shadow: 0 0 16px #555555;
   box-shadow: 0 0 16px #555555;
+  /*.nav-right .form-search {*/
+  /*.toggle {*/
+  /*display: inline-block;*/
+  /*color: @baseColor;*/
+  /*display: inline-block;*/
+  /*[>width: 40px;<]*/
+  /*text-align: center;*/
+  /*cursor: pointer;*/
+  /*position: relative;*/
+  /*z-index: 91;*/
+  /*[>font-size: 18px;<]*/
+  /*[>height: 42px;<]*/
+  /*.transition( 0.3s );*/
+  /*[>margin-top: -9px;<]*/
+  /*[>padding-top: 9px;<]*/
+  /*}*/
+  /*.input-append {*/
+  /*position: absolute;*/
+  /*right: 44px;*/
+  /*top: 51px;*/
+  /*opacity: 0;*/
+  /*visibility: hidden;*/
+  /*.transition( 0.3s );*/
+  /*padding: 10px;*/
+  /*z-index: 90;*/
+  /*width: 340px;*/
+  /*.text-input-wrapper {*/
+  /*display: block;*/
+  /*float: left;*/
+  /*width: 290px;*/
+  /*}*/
+  /*input {*/
+  /*width: 100%;*/
+  /*.box-sizing( border-box );*/
+  /*height: 36px !important;*/
+  /*}*/
+  /*button {*/
+  /*width: 50px !important;*/
+  /*height: 36px !important;*/
+  /*float: left;*/
+  /*.box-sizing( border-box );*/
+  /*}*/
+  /*}*/
+  /*&.show {*/
+  /*.input-append {*/
+  /*position: absolute;*/
+  /*opacity: 1;*/
+  /*visibility: visible;*/
+  /*}*/
+  /*.input-append,*/
+  /*.toggle {*/
+  /*background-color: #343434;*/
+  /*color: @bodyBackground;*/
+  /*}*/
+  /*}*/
+  /*}*/
 }
 .sticky-nav-holder.show {
   visibility: visible;
@@ -2743,7 +2795,7 @@ body.admin-bar .sticky-nav-holder {
   visibility: visible;
 }
 .sticky-nav-holder .sticky-nav-container {
-  margin: 0 auto;
+  /*margin: 0 auto;*/
   position: relative;
 }
 .sticky-nav-holder .navbar {
@@ -2761,28 +2813,28 @@ body.admin-bar .sticky-nav-holder {
 }
 .sticky-nav-holder .navbar .social-icons {
   float: left;
-  margin: 0;
+  /*margin: 0;*/
 }
 .sticky-nav-holder .navbar .social-icons li > a {
   color: #fff;
-  padding: 10px 3px;
+  /*padding: 10px 3px;*/
 }
 .sticky-nav-holder .navbar .social-icons li > a:hover {
   background-color: transparent;
 }
 .sticky-nav-holder .navbar .btn-navbar {
-  margin-top: 9px;
+  /*margin-top: 9px;*/
 }
 .sticky-nav-holder .navbar .nav > li > a {
-  padding-top: 15px;
-  padding-bottom: 15px;
+  /*padding-top: 15px;*/
+  /*padding-bottom: 15px;*/
 }
 .sticky-nav-holder .navbar .nav > li.active > a,
 .sticky-nav-holder .navbar .nav > li.active > a:hover {
   color: #fff;
 }
 .sticky-nav-holder .navbar .nav > li.home-link {
-  margin-right: 10px;
+  /*margin-right: 10px;*/
 }
 .sticky-nav-holder .navbar .nav li.dropdown.open > .dropdown-toggle,
 .sticky-nav-holder .navbar .nav li.dropdown.active > .dropdown-toggle,
@@ -2806,7 +2858,7 @@ body.admin-bar .sticky-nav-holder {
   border-radius: 0;
 }
 .sticky-nav-holder .navbar .nav > li.home-link a {
-  padding: 0;
+  /*padding: 0;*/
 }
 .sticky-nav-holder .navbar .nav > li.home-link a img {
   width: 50px;
@@ -2814,12 +2866,12 @@ body.admin-bar .sticky-nav-holder {
 }
 .sticky-nav-holder .site-name {
   display: block;
-  float: left;
+  /*float: left;*/
   color: #343434;
-  line-height: 50px;
-  font-size: 18px;
-  margin-right: 8px;
-  font-weight: 900;
+  /*line-height: 50px;*/
+  /*font-size: 18px;*/
+  /*margin-right: 8px;*/
+  /*font-weight: 900;*/
 }
 .sticky-nav-holder .site-name a {
   color: #343434;
@@ -2836,79 +2888,14 @@ body.admin-bar .sticky-nav-holder {
 }
 .sticky-nav-holder .nav-right {
   float: right;
-  padding-top: 5px;
+  /*padding-top: 5px;*/
 }
 .sticky-nav-holder .nav-right .donate-btn {
-  float: left;
-  margin: 5px;
+  /*float: left;*/
+  /*margin: 5px;*/
 }
 .sticky-nav-holder .nav-right .donate-btn i {
   display: none;
-}
-.sticky-nav-holder .nav-right .form-search .toggle {
-  color: #2275bb;
-  display: inline-block;
-  width: 40px;
-  text-align: center;
-  cursor: pointer;
-  position: relative;
-  z-index: 91;
-  font-size: 18px;
-  height: 42px;
-  -webkit-transition: 0.3s;
-  -moz-transition: 0.3s;
-  -ms-transition: 0.3s;
-  -o-transition: 0.3s;
-  transition: 0.3s;
-  margin-top: -9px;
-  padding-top: 9px;
-}
-.sticky-nav-holder .nav-right .form-search .input-append {
-  position: absolute;
-  right: 44px;
-  top: 51px;
-  opacity: 0;
-  visibility: hidden;
-  -webkit-transition: 0.3s;
-  -moz-transition: 0.3s;
-  -ms-transition: 0.3s;
-  -o-transition: 0.3s;
-  transition: 0.3s;
-  padding: 10px;
-  z-index: 90;
-  width: 340px;
-}
-.sticky-nav-holder .nav-right .form-search .input-append .text-input-wrapper {
-  display: block;
-  float: left;
-  width: 290px;
-}
-.sticky-nav-holder .nav-right .form-search .input-append input {
-  width: 100%;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  box-sizing: border-box;
-  height: 36px !important;
-}
-.sticky-nav-holder .nav-right .form-search .input-append button {
-  width: 50px !important;
-  height: 36px !important;
-  float: left;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  box-sizing: border-box;
-}
-.sticky-nav-holder .nav-right .form-search.show .input-append {
-  position: absolute;
-  opacity: 1;
-  visibility: visible;
-}
-.sticky-nav-holder .nav-right .form-search.show .input-append,
-.sticky-nav-holder .nav-right .form-search.show .toggle {
-  background-color: #343434;
-  color: #ffffff;
 }
 .post-header,
 .page-header,

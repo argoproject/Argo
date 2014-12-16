@@ -8,6 +8,7 @@
 			<nav id="sticky-nav" class="sticky-navbar navbar clearfix">
 				<div class="container">
 					<div class="nav-right">
+					<?php /* TODO: Remove social icons from sticky nav */ ?>
 					<?php if ( of_get_option( 'show_header_social') ) { ?>
 						<ul id="header-social" class="social-icons visible-desktop">
 							<?php largo_social_links(); ?>
@@ -16,6 +17,7 @@
 
 					<?php if ( of_get_option( 'show_donate_button') ) largo_donate_button(); ?>
 
+					<?php /*
 						<div id="header-search">
 							<form class="form-search" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 								<i class="icon-search toggle" title="<?php esc_attr_e('Search', 'largo'); ?>" role="button"></i>
@@ -27,7 +29,8 @@
 									<button type="submit" class="search-submit btn"><?php _e('GO', 'largo'); ?></button>
 								</div>
 							</form>
-						</div>
+							</div>
+					 */ ?>
 					</div>
 
 					<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
@@ -39,17 +42,13 @@
 						</div>
 					</a>
 
+					<div class="nav-shelf">
 					<ul class="nav">
 						<li class="home-link"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php largo_home_icon( 'icon-white' ); ?></a></li>
 						<?php
-							if ( of_get_option( 'show_sitename_in_sticky_nav', 1 ) ) {
-								echo '<span class="site-name"><a href="/">' . get_bloginfo('name') . '</a></span>';
-							}
-						?>
-					</ul>
+							if ( of_get_option( 'show_sitename_in_sticky_nav', 1 ) )
+								echo '<li class="site-name"><a href="/">' . get_bloginfo('name') . '</a></li>';
 
-					<div class="nav-shelf">
-						<ul class="nav"><?php
 							$args = array(
 							'theme_location' => 'main-nav',
 							'depth'		 => 0,

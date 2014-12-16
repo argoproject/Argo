@@ -176,11 +176,11 @@ class Largo {
 	private function register_nav_menus() {
 
 		$menus = array(
-			'global-nav'         	=> __( 'Global Navigation', 'largo' ),
-			'main-nav'          => __( 'Main Navigation', 'largo' ),
-			'dont-miss'       		=> __( 'Don\'t Miss', 'largo' ),
-			'footer'          		=> __( 'Footer Navigation', 'largo' ),
-			'footer-bottom'			=> __( 'Footer Bottom', 'largo' )
+			'global-nav' => __( 'Global Navigation', 'largo' ),
+			'main-nav' => __( 'Main Navigation', 'largo' ),
+			'dont-miss' => __( 'Don\'t Miss', 'largo' ),
+			'footer' => __( 'Footer Navigation', 'largo' ),
+			'footer-bottom' => __( 'Footer Bottom', 'largo' )
 		);
 		register_nav_menus( $menus );
 
