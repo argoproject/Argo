@@ -2723,7 +2723,9 @@ li.home-link:hover i {
   -o-transition: opacity 0.3s;
   transition: opacity 0.3s;
   background-color: #ffffff;
-  border-bottom: solid #2275bb 1px;
+  -webkit-box-shadow: 0 0 16px #555555;
+  -moz-box-shadow: 0 0 16px #555555;
+  box-shadow: 0 0 16px #555555;
 }
 .sticky-nav-holder.show {
   visibility: visible;
