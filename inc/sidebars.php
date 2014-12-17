@@ -260,3 +260,10 @@ function largo_is_sidebar_required() {
 
 	return ( $two_column_layout_test || $two_column_layout_test_forced || $one_column_layout_test );
 }
+
+function largo_sidebar_span_class() {
+	global $post;
+	$default_template = of_get_option( 'single_template' );
+	$custom_template = get_post_meta( $post->ID, '_wp_post_template', true );
+	return ($default_template == 'normal' || $custom_template == 'single-one-column.php')? 'span2':'span4';
+}

@@ -58,6 +58,8 @@
  * @type pixels
  * @default_value 24px
  */
+/*@fluidGridColumnWidth:    6.382978723%;*/
+/*@fluidGridGutterWidth:    2.127659574%;*/
 /**
  * @group Typography
  * @label Sans Font Family
@@ -1035,14 +1037,6 @@ h3.recent-posts a.rss-link:hover,
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 13.04px;
   margin-bottom: 6px;
-}
-.single-post.classic #content {
-  margin-left: 0;
-}
-.single-post.classic #sidebar {
-  margin-left: 2.127659574%;
-  width: 31.914893614%;
-  clear: none;
 }
 .single-post.classic article.post .sep,
 .single-post.classic article.post .entry-date {
