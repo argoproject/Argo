@@ -1807,11 +1807,10 @@ table .span24 {
 #header-social i {
   position: relative;
   top: 0;
-  padding: 4px 3px 1px 4px;
+  padding: 4px;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
-  font-size: 18px;
 }
 #header-social i:hover {
   color: #fff !important;
@@ -2024,7 +2023,6 @@ table .span24 {
 }
 #header-search {
   float: left;
-  margin-top: 4px;
 }
 #header-search form {
   margin: 0;
@@ -2735,6 +2733,7 @@ body.admin-bar .sticky-nav-holder {
   visibility: visible;
 }
 .sticky-nav-holder .sticky-nav-container {
+  margin: 0 auto;
   position: relative;
 }
 .sticky-nav-holder .navbar {
@@ -2751,6 +2750,7 @@ body.admin-bar .sticky-nav-holder {
   border-top-color: #ffffff !important;
 }
 .sticky-nav-holder .navbar .social-icons {
+  margin: 0;
   float: left;
 }
 .sticky-nav-holder .navbar .social-icons li > a {
@@ -2814,31 +2814,48 @@ body.admin-bar .sticky-nav-holder {
 .sticky-nav-holder .nav-right {
   float: right;
 }
-.sticky-nav-holder .nav-right .donate-btn i {
+.sticky-nav-holder .nav-right #header-extras {
+  float: left;
+  margin: 0;
+}
+.sticky-nav-holder .nav-right #header-extras a.donate-link:hover {
+  background: transparent;
+}
+.sticky-nav-holder .nav-right #header-extras a span {
+  padding: 4px 8px;
+  color: #ffffff;
+  background-color: #bd261d;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+.sticky-nav-holder .nav-right #header-extras a span:hover {
+  background-color: #d32a20;
+}
+.sticky-nav-holder .nav-right #header-extras a span i {
   display: none;
+}
+.sticky-nav-holder .nav-right .form-search {
+  position: relative;
 }
 .sticky-nav-holder .nav-right .form-search .toggle {
   color: #2275bb;
   display: inline-block;
-  /*width: 40px;*/
   text-align: center;
   cursor: pointer;
   position: relative;
   z-index: 91;
-  /*font-size: 18px;*/
-  /*height: 42px;*/
   -webkit-transition: 0.3s;
   -moz-transition: 0.3s;
   -ms-transition: 0.3s;
   -o-transition: 0.3s;
   transition: 0.3s;
-  /*margin-top: -9px;*/
-  /*padding-top: 9px;*/
 }
 .sticky-nav-holder .nav-right .form-search .input-append {
   position: absolute;
   right: 44px;
-  top: 51px;
+  top: 0;
+  right: 0;
   opacity: 0;
   visibility: hidden;
   -webkit-transition: 0.3s;
@@ -2872,13 +2889,13 @@ body.admin-bar .sticky-nav-holder {
   -ms-box-sizing: border-box;
   box-sizing: border-box;
 }
-.sticky-nav-holder .nav-right .form-search.show .input-append {
+.sticky-nav-holder #header-search.show .input-append {
   position: absolute;
   opacity: 1;
   visibility: visible;
 }
-.sticky-nav-holder .nav-right .form-search.show .input-append,
-.sticky-nav-holder .nav-right .form-search.show .toggle {
+.sticky-nav-holder #header-search.show .input-append,
+.sticky-nav-holder #header-search.show .toggle {
   background-color: #343434;
   color: #ffffff;
 }
