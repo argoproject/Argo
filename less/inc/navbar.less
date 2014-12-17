@@ -9,15 +9,14 @@
   // Fix for IE7's bad z-indexing so dropdowns don't appear below content that follows the navbar
   *position: relative;
   *z-index: 2;
-
   overflow: visible;
   margin-bottom: @baseline/5;
 }
 
 // Gradient is applied to it's own element because overflow visible is not honored by IE when filter is present
 .navbar-inner {
-	float: left;
-	width: 100%;
+  float: left;
+  width: 100%;
   background-color: @baseColor;
   padding-left: 5px;
 }
@@ -85,7 +84,7 @@
 }
 .navbar .open > a,
 html.no-touch .navbar li > a:hover {
-	.transition(background-color 300ms ease-out);
+  .transition(background-color 300ms ease-out);
   background-color: @navbarLinkBackgroundActive;
   color: #eee;
 }
@@ -269,7 +268,7 @@ li.home-link:hover i {
       display: block;
   }
   .home .sticky-nav-wrapper {
-	  height: 0;
+    height: 0;
   }
 }
 
@@ -284,7 +283,7 @@ li.home-link:hover i {
 // -----------
 
 .dropdown-menu li a:hover {
-	background: none;
+  background: none;
 }
 .dropdown-menu li a:hover {
   color: @dropdownLinkColorHover;
@@ -423,10 +422,10 @@ li.home-link:hover i {
 // TABLETS AND BELOW
 // -----------------
 @media (max-width: 979px) {
-	.supplemental {
+  .supplemental {
     overflow: hidden;
     height: 0;
-	}
+  }
 }
 
 @media (max-width: 768px) {
@@ -516,87 +515,87 @@ li.home-link:hover i {
     height: 0;
     background-color: @navbarBackground;
     color: @navbarLinkColor;
-		.nav {
-	    float: none;
-	    margin: 0 0 (@baseline / 2);
-	    > li,
-	    > span > li {
-		    float: none;
-		    display: block;
-		    > a {
-			    color: @navbarLinkColor;
-			    display: block;
-			    padding: 10px !important;
-			    &:hover {
-				  	background:none !important;
-						color: @navbarLinkColorHover;
-					}
-					.caret {
-						float: right;
-						border-top-color: @navbarLinkColor !important;
-					}
-		    }
-		    &:hover > a {
-					background:none;
-		    }
-		  }
-		  > .divider-vertical {
-			  display: none;
-		  }
-			.nav-header {
-		    color: @navbarText;
-		    text-shadow: none;
-			}
-			.dropdown-menu a {
-		    color: @navbarLinkColor;
-		    &:hover {
-			  	background:none !important;
-					color: @grayLighter;
-				}
-			}
-	  }
-	  .divider {
-	    height: 1px;
-	    width: 94%;
-	    margin: 10px 10px 5px;
-	    padding:0;
-	    overflow: hidden;
-	    background-color: @white;
-	    border-bottom: 1px solid @navbarBackground;
-	  }
-	  .btn {
-	    padding: 4px 10px 4px;
-	    font-weight: normal;
-	    .border-radius(4px);
-	  }
+    .nav {
+      float: none;
+      margin: 0 0 (@baseline / 2);
+      > li,
+      > span > li {
+        float: none;
+        display: block;
+        > a {
+          color: @navbarLinkColor;
+          display: block;
+          padding: 10px !important;
+          &:hover {
+            background:none !important;
+            color: @navbarLinkColorHover;
+          }
+          .caret {
+            float: right;
+            border-top-color: @navbarLinkColor !important;
+          }
+        }
+        &:hover > a {
+          background:none;
+        }
+      }
+      > .divider-vertical {
+        display: none;
+      }
+      .nav-header {
+        color: @navbarText;
+        text-shadow: none;
+      }
+      .dropdown-menu a {
+        color: @navbarLinkColor;
+        &:hover {
+          background:none !important;
+          color: @grayLighter;
+        }
+      }
+    }
+    .divider {
+      height: 1px;
+      width: 94%;
+      margin: 10px 10px 5px;
+      padding:0;
+      overflow: hidden;
+      background-color: @white;
+      border-bottom: 1px solid @navbarBackground;
+    }
+    .btn {
+      padding: 4px 10px 4px;
+      font-weight: normal;
+      .border-radius(4px);
+    }
       .dropdown-menu li + li a {
-    	margin-bottom: 2px;
-	  }
-	  .nav-collapse .nav > li > a:hover,
-	  .nav-collapse .dropdown-menu a:hover {
-	    background-color: @navbarBackground;
-	  }
-	  // Dropdowns in the navbar
-	  .dropdown-menu {
-	    position: static;
-	    top: auto;
-	    left: auto;
-	    float: none;
-	    display: block;
-	    max-width: none;
-	    margin: 0 15px;
-	    padding: 0;
-	    background-color: transparent;
-	    border: none;
-	    .border-radius(0);
-	    .box-shadow(none);
-		&:before,
-		&:after,
-		.divider {
-	      display: none;
-		}
-	  }
-	}
+      margin-bottom: 2px;
+    }
+    .nav-collapse .nav > li > a:hover,
+    .nav-collapse .dropdown-menu a:hover {
+      background-color: @navbarBackground;
+    }
+    // Dropdowns in the navbar
+    .dropdown-menu {
+      position: static;
+      top: auto;
+      left: auto;
+      float: none;
+      display: block;
+      max-width: none;
+      margin: 0 15px;
+      padding: 0;
+      background-color: transparent;
+      border: none;
+      .border-radius(0);
+      .box-shadow(none);
+    &:before,
+    &:after,
+    .divider {
+        display: none;
+    }
+    }
+  }
 }
 
 // DEFAULT DESKTOP
@@ -625,7 +624,7 @@ li.home-link:hover i {
       white-space: nowrap;
       font-size: 14px;
       &.menu-label {
-      	font-size: 15px;
+        font-size: 15px;
         font-weight: bold;
       }
     }
@@ -691,15 +690,15 @@ li.home-link:hover i {
         color: #fff;
       }
       &.home-link {
-		.border-radius(0);
-		min-width: 40px;
-		text-align: center;
-		a {
-		  img {
-			width: 50px;
-			height: 50px;
-		  }
-		}
+    .border-radius(0);
+    min-width: 40px;
+    text-align: center;
+    a {
+      img {
+      width: 50px;
+      height: 50px;
+      }
+    }
         .icon-home:before {
           position: relative;
           top: 0px;
