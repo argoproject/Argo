@@ -29,6 +29,7 @@ if ( ! function_exists( 'largo_home_icon' ) ) {
 		global $wpdb;
 
 		$logo = of_get_option( 'logo_thumbnail_sq' );
+		$default = '<i class="icon-home ' . esc_attr( $class ) . '"></i>';
 
 		if ( ! empty( $logo ) ) {
 			$cache_key = 'largo_logo_thumbnail_sq_attachment_id';
@@ -41,9 +42,11 @@ if ( ! function_exists( 'largo_home_icon' ) ) {
 			else {
 				if (preg_match('/^http(s)?\:\/\//', $logo))
 					echo '<img width="50" height="50" src="' . $logo . '" class="attachment-home-logo" alt="logo">';
+				else
+					echo $default;
 			}
 		} else {
-			echo '<i class="icon-home ' . esc_attr( $class ) . '"></i>';
+			echo $default;
 		}
 	}
 }
