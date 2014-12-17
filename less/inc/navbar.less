@@ -134,7 +134,7 @@ li.home-link:hover i {
 .navbar .btn-navbar {
   display: none;
   float: left;
-  margin: 4px 0 0;
+  margin: 4px 0;
   margin-right: 10px;
   padding: @navbarHeight/5 10px;
   background-color: @navbarBackgroundHighlight;
@@ -469,6 +469,7 @@ li.home-link:hover i {
     ul, li {
       float: none;
     }
+    li.home-link { display: none; }
     li .caret {
       float: right;
       .border-radius(4px);
@@ -589,7 +590,7 @@ li.home-link:hover i {
       border: none;
       .border-radius(0);
       .box-shadow(none);
-    &:before,
+   &:before,
     &:after,
     .divider {
         display: none;
@@ -689,16 +690,16 @@ li.home-link:hover i {
       &.active > a:hover {
         color: #fff;
       }
-      &.home-link {
-    .border-radius(0);
-    min-width: 40px;
-    text-align: center;
-    a {
-      img {
-      width: 50px;
-      height: 50px;
-      }
-    }
+    &.home-link {
+      .border-radius(0);
+      min-width: 40px;
+      text-align: center;
+        a {
+          img {
+            width: 1.49em;
+            height: 1.49em;
+          }
+        }
         .icon-home:before {
           position: relative;
           top: 0px;
@@ -741,60 +742,60 @@ li.home-link:hover i {
       }
     }
   }
-  /*.nav-right .form-search {*/
-    /*.toggle {*/
-      /*display: inline-block;*/
-      /*color: @baseColor;*/
-      /*display: inline-block;*/
-      /*[>width: 40px;<]*/
-      /*text-align: center;*/
-      /*cursor: pointer;*/
-      /*position: relative;*/
-      /*z-index: 91;*/
-      /*[>font-size: 18px;<]*/
-      /*[>height: 42px;<]*/
-      /*.transition( 0.3s );*/
-      /*[>margin-top: -9px;<]*/
-      /*[>padding-top: 9px;<]*/
-    /*}*/
-    /*.input-append {*/
-      /*position: absolute;*/
-      /*right: 44px;*/
-      /*top: 51px;*/
-      /*opacity: 0;*/
-      /*visibility: hidden;*/
-      /*.transition( 0.3s );*/
-      /*padding: 10px;*/
-      /*z-index: 90;*/
-      /*width: 340px;*/
-      /*.text-input-wrapper {*/
-        /*display: block;*/
-        /*float: left;*/
-        /*width: 290px;*/
-      /*}*/
-      /*input {*/
-        /*width: 100%;*/
-        /*.box-sizing( border-box );*/
-        /*height: 36px !important;*/
-      /*}*/
-      /*button {*/
-        /*width: 50px !important;*/
-        /*height: 36px !important;*/
-        /*float: left;*/
-        /*.box-sizing( border-box );*/
-      /*}*/
-    /*}*/
-    /*&.show {*/
-      /*.input-append {*/
-        /*position: absolute;*/
-        /*opacity: 1;*/
-        /*visibility: visible;*/
-      /*}*/
-      /*.input-append,*/
-      /*.toggle {*/
-        /*background-color: #343434;*/
-        /*color: @bodyBackground;*/
-      /*}*/
-    /*}*/
-  /*}*/
+  .nav-right .form-search {
+    .toggle {
+      display: inline-block;
+      color: @baseColor;
+      display: inline-block;
+      /*width: 40px;*/
+      text-align: center;
+      cursor: pointer;
+      position: relative;
+      z-index: 91;
+      /*font-size: 18px;*/
+      /*height: 42px;*/
+      .transition( 0.3s );
+      /*margin-top: -9px;*/
+      /*padding-top: 9px;*/
+    }
+    .input-append {
+      position: absolute;
+      right: 44px;
+      top: 51px;
+      opacity: 0;
+      visibility: hidden;
+      .transition( 0.3s );
+      padding: 10px;
+      z-index: 90;
+      width: 340px;
+      .text-input-wrapper {
+      display: block;
+      float: left;
+      width: 290px;
+      }
+      input {
+      width: 100%;
+      .box-sizing( border-box );
+      height: 36px !important;
+      }
+      button {
+      width: 50px !important;
+      height: 36px !important;
+      float: left;
+      .box-sizing( border-box );
+      }
+    }
+    &.show {
+      .input-append {
+      position: absolute;
+      opacity: 1;
+      visibility: visible;
+      }
+      .input-append,
+      .toggle {
+      background-color: #343434;
+      color: @bodyBackground;
+      }
+    }
+  }
 }
