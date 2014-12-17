@@ -2127,6 +2127,10 @@ h2.branding .tagline {
 .navbar .toggle-nav-bar {
   display: none;
 }
+.navbar li i {
+  height: 1em;
+  font-size: 1em;
+}
 .navbar .nav {
   position: relative;
   left: 0;
@@ -2141,15 +2145,13 @@ h2.branding .tagline {
   display: block;
   float: left;
   margin-bottom: 0;
-  /*line-height: @navbarHeight;*/
 }
 .navbar li > a {
-  float: none;
+  /*float: none;*/
   display: block;
   padding: 10px;
   color: #ffffff;
   text-decoration: none;
-  /*line-height: @navbarFontSize + 5;*/
 }
 .navbar li.dropdown > a {
   padding-right: 0;
@@ -2173,16 +2175,10 @@ li.home-link:hover i {
   overflow: hidden;
 }
 .navbar li.home-link > a {
-  /*font-size: @navbarFontSize + 5;*/
-  padding: 0;
   display: block;
 }
 .navbar li.home-link > a:hover {
   background: none;
-}
-.navbar li.home-link > a i {
-  display: block;
-  padding: 10px 5px 10px 10px;
 }
 .navbar li.home-link > a img {
   display: block;
@@ -2253,6 +2249,7 @@ li.home-link:hover i {
   position: relative;
   width: 10px;
   padding: 0 5px;
+  font-size: 0.99em;
   opacity: 0.9;
   filter: alpha(opacity=90);
 }
@@ -2702,9 +2699,6 @@ li.home-link:hover i {
   font-size: 15px;
   font-weight: bold;
 }
-.sticky-nav-wrapper {
-  /*height: 25px;*/
-}
 .sticky-nav-holder {
   position: fixed;
   top: 0;
@@ -2795,7 +2789,6 @@ body.admin-bar .sticky-nav-holder {
   visibility: visible;
 }
 .sticky-nav-holder .sticky-nav-container {
-  /*margin: 0 auto;*/
   position: relative;
 }
 .sticky-nav-holder .navbar {
@@ -2813,28 +2806,31 @@ body.admin-bar .sticky-nav-holder {
 }
 .sticky-nav-holder .navbar .social-icons {
   float: left;
-  /*margin: 0;*/
 }
 .sticky-nav-holder .navbar .social-icons li > a {
   color: #fff;
-  /*padding: 10px 3px;*/
 }
 .sticky-nav-holder .navbar .social-icons li > a:hover {
   background-color: transparent;
-}
-.sticky-nav-holder .navbar .btn-navbar {
-  /*margin-top: 9px;*/
-}
-.sticky-nav-holder .navbar .nav > li > a {
-  /*padding-top: 15px;*/
-  /*padding-bottom: 15px;*/
 }
 .sticky-nav-holder .navbar .nav > li.active > a,
 .sticky-nav-holder .navbar .nav > li.active > a:hover {
   color: #fff;
 }
 .sticky-nav-holder .navbar .nav > li.home-link {
-  /*margin-right: 10px;*/
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  min-width: 40px;
+  text-align: center;
+}
+.sticky-nav-holder .navbar .nav > li.home-link a img {
+  width: 50px;
+  height: 50px;
+}
+.sticky-nav-holder .navbar .nav > li.home-link .icon-home:before {
+  position: relative;
+  top: 0px;
 }
 .sticky-nav-holder .navbar .nav li.dropdown.open > .dropdown-toggle,
 .sticky-nav-holder .navbar .nav li.dropdown.active > .dropdown-toggle,
@@ -2852,26 +2848,9 @@ body.admin-bar .sticky-nav-holder {
 .sticky-nav-holder .navbar .nav li.dropdown.open.active > .dropdown-toggle:hover {
   color: #ffffff;
 }
-.sticky-nav-holder .navbar .nav > li.home-link {
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
-  border-radius: 0;
-}
-.sticky-nav-holder .navbar .nav > li.home-link a {
-  /*padding: 0;*/
-}
-.sticky-nav-holder .navbar .nav > li.home-link a img {
-  width: 50px;
-  height: 50px;
-}
 .sticky-nav-holder .site-name {
   display: block;
-  /*float: left;*/
   color: #343434;
-  /*line-height: 50px;*/
-  /*font-size: 18px;*/
-  /*margin-right: 8px;*/
-  /*font-weight: 900;*/
 }
 .sticky-nav-holder .site-name a {
   color: #343434;
@@ -2888,11 +2867,6 @@ body.admin-bar .sticky-nav-holder {
 }
 .sticky-nav-holder .nav-right {
   float: right;
-  /*padding-top: 5px;*/
-}
-.sticky-nav-holder .nav-right .donate-btn {
-  /*float: left;*/
-  /*margin: 5px;*/
 }
 .sticky-nav-holder .nav-right .donate-btn i {
   display: none;
