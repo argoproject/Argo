@@ -2106,7 +2106,8 @@ h2.branding .tagline {
   margin-bottom: 4.8px;
 }
 .navbar-inner {
-  min-height: 40px;
+  float: left;
+  width: 100%;
   background-color: #2275bb;
   padding-left: 5px;
 }
@@ -2122,14 +2123,13 @@ h2.branding .tagline {
 }
 .navbar .navbar-text {
   margin-bottom: 0;
-  /*line-height: @navbarHeight;*/
 }
 .navbar .toggle-nav-bar {
   display: none;
 }
 .navbar li i {
   height: 1em;
-  font-size: 1em;
+  font-size: 0.9em;
 }
 .navbar .nav {
   position: relative;
@@ -2147,7 +2147,6 @@ h2.branding .tagline {
   margin-bottom: 0;
 }
 .navbar li > a {
-  /*float: none;*/
   display: block;
   padding: 10px;
   color: #ffffff;
@@ -2161,6 +2160,11 @@ h2.branding .tagline {
 }
 .navbar .open > a,
 html.no-touch .navbar li > a:hover {
+  -webkit-transition: background-color 300ms ease-out;
+  -moz-transition: background-color 300ms ease-out;
+  -ms-transition: background-color 300ms ease-out;
+  -o-transition: background-color 300ms ease-out;
+  transition: background-color 300ms ease-out;
   background-color: #1e67a5;
   color: #eee;
 }
@@ -2169,9 +2173,6 @@ li.home-link:hover i {
   filter: alpha(opacity=85);
 }
 .navbar li.home-link {
-  -webkit-border-radius: 4px 0 0 4px;
-  -moz-border-radius: 4px 0 0 4px;
-  border-radius: 4px 0 0 4px;
   overflow: hidden;
 }
 .navbar li.home-link > a {
@@ -2320,7 +2321,6 @@ li.home-link:hover i {
   padding: 3px 15px;
   clear: both;
   font-weight: normal;
-  /*line-height: @baseline;*/
   color: #333333;
   white-space: nowrap;
   text-shadow: none;
@@ -2571,7 +2571,6 @@ li.home-link:hover i {
   .sticky-nav-holder .nav-middle .nav > span > li {
     float: none;
     display: block;
-    /*line-height: 2;*/
   }
   .sticky-nav-holder .nav-collapse .nav > li > a,
   .sticky-nav-holder .nav-middle .nav > li > a,
