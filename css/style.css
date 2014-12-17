@@ -3942,9 +3942,6 @@ http://wordpress.org/extend/themes/twentyeleven
 .commentlist .children li.comment .comment-content {
   margin: 1.625em 0 0;
 }
-.comment-meta a {
-  font-weight: bold;
-}
 .commentlist .avatar {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -4349,22 +4346,34 @@ p.comment-form-comment {
 .widget.rev .widgettitle a {
   color: #333333;
 }
+.widget.largo-recent-comments {
+  margin-bottom: 2em;
+}
 .widget.largo-recent-comments ul {
   margin-left: 0;
   list-style: none;
 }
+.widget.largo-recent-comments li {
+  float: left;
+  margin-bottom: 2em;
+}
 .widget.largo-recent-comments p {
   margin-bottom: 3px;
+  line-height: 1.3em;
 }
-.widget.largo-recent-comments p.comment-excerpt:before {
-  content: open-quote;
+.widget.largo-recent-comments p.comment-excerpt {
+  font-size: 24px;
 }
-.widget.largo-recent-comments p.comment-excerpt:after {
-  content: close-quote;
+.widget.largo-recent-comments p.comment-post {
+  float: left;
 }
 .widget.largo-recent-comments p.comment-meta {
-  font-style: italic;
+  float: left;
+  clear: both;
   color: inherit;
+}
+.widget.largo-recent-comments p.comment-meta a {
+  font-style: italic;
 }
 .widget.largo-series-posts {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
