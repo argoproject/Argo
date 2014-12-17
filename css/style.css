@@ -3324,7 +3324,7 @@ body.normal.page.page-template-full-page-php #content {
 .byline {
   margin-bottom: 12px;
   font-weight: normal;
-  font-size: 13.04px;
+  font-size: 14.64px;
 }
 .byline a {
   color: #333333;
@@ -3332,7 +3332,7 @@ body.normal.page.page-template-full-page-php #content {
 .byline .author,
 .byline .time-ago,
 .byline .edit-link a {
-  text-transform: uppercase;
+  /*text-transform: uppercase;*/
 }
 .byline .author {
   font-weight: bold;
