@@ -2749,7 +2749,7 @@ body.admin-bar .sticky-nav-holder {
   border-top-color: rgba(34, 117, 187, 0.8);
 }
 .sticky-nav-holder .navbar li > a:hover .caret:before {
-  border-top-color: #ffffff !important;
+  border-top-color: #ffffff;
 }
 .sticky-nav-holder .navbar .social-icons {
   margin: 0;
@@ -2789,7 +2789,7 @@ body.admin-bar .sticky-nav-holder {
 .sticky-nav-holder .navbar .nav li.dropdown.open > .dropdown-toggle .caret:before,
 .sticky-nav-holder .navbar .nav li.dropdown.active > .dropdown-toggle .caret:before,
 .sticky-nav-holder .navbar .nav li.dropdown.open.active > .dropdown-toggle .caret:before {
-  border-top-color: #ffffff !important;
+  border-top-color: #ffffff;
 }
 .sticky-nav-holder .navbar .nav li.dropdown.open > .dropdown-toggle:hover,
 .sticky-nav-holder .navbar .nav li.dropdown.active > .dropdown-toggle:hover,
@@ -4704,9 +4704,11 @@ ul.staff-roster p {
   opacity: 0;
   height: 36px;
   background-color: #ffffff;
-  border-top: solid #2275bb 1px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   padding: 7px 0;
+  -webkit-box-shadow: 0 2px 12px #555555;
+  -moz-box-shadow: 0 2px 12px #555555;
+  box-shadow: 0 2px 12px #555555;
   -webkit-transition: opacity 0.3s;
   -moz-transition: opacity 0.3s;
   -ms-transition: opacity 0.3s;
