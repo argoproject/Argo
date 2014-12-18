@@ -263,7 +263,11 @@ function largo_is_sidebar_required() {
 
 function largo_sidebar_span_class() {
 	global $post;
-	$default_template = of_get_option( 'single_template' );
-	$custom_template = get_post_meta( $post->ID, '_wp_post_template', true );
-	return ($default_template == 'normal' || $custom_template == 'single-one-column.php')? 'span2':'span4';
+
+	if (is_single() || is_singular()) {
+		$default_template = of_get_option( 'single_template' );
+		$custom_template = get_post_meta( $post->ID, '_wp_post_template', true );
+		return ($default_template == 'normal' || $custom_template == 'single-one-column.php')? 'span2':'span4';
+	} else
+		return 'span4';
 }
