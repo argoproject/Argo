@@ -9,12 +9,12 @@
 function largo_custom_taxonomies() {
 	if (!taxonomy_exists('prominence')) {
 		register_taxonomy(
-        	'prominence',
-        	'post',
-        	array(
-		        'hierarchical'  => true,
-		        'labels'        => array(
-		        	'name'              => _x( 'Post Prominence', 'taxonomy general name' ),
+			'prominence',
+			'post',
+			array(
+				'hierarchical'  => true,
+				'labels'        => array(
+					'name'              => _x( 'Post Prominence', 'taxonomy general name' ),
 					'singular_name'     => _x( 'Post Prominence', 'taxonomy singular name' ),
 					'search_items'      => __( 'Search Post Prominences' ),
 					'all_items'         => __( 'All Post Prominences' ),
@@ -26,11 +26,11 @@ function largo_custom_taxonomies() {
 					'add_new_item'      => __( 'Add New Post Prominence' ),
 					'new_item_name'     => __( 'New Post Prominence Name' ),
 					'menu_name'         => __( 'Post Prominence' ),
-		        ),
-		        'query_var'     => true,
-		        'rewrite'       => true,
-        	)
-        );
+				),
+				'query_var'     => true,
+				'rewrite'       => true,
+			)
+		);
 	}
 
 	$largoProminenceTerms = apply_filters('largo_prominence_terms', array(
@@ -53,6 +53,11 @@ function largo_custom_taxonomies() {
 			'name' => __('Featured in Category', 'largo'),
 			'description' => __('This will allow you to designate a story to appear more prominently on category archive pages.', 'largo'),
 			'slug' => 'category-featured'
+		),
+		array(
+			'name' => __('Homepage Featured', 'largo'),
+			'description' => __('Add this label to posts to display them in the featured area on the homepage.', 'largo'),
+			'slug' => 'homepage-featured'
 		)
 	));
 
@@ -83,29 +88,29 @@ function largo_custom_taxonomies() {
 	do_action('largo_after_create_prominence_taxonomy', $largoProminenceTerms);
 
 	if ( ! taxonomy_exists( 'series' ) ) {
-		register_taxonomy( 
-        	'series', 
-        	'post', 
-        	array(
-		        'hierarchical' 	=> true,
-		        'labels'        => array(
-		        	'name'              => _x( 'Series', 'taxonomy general name' ),
-					'singular_name'     => _x( 'Series', 'taxonomy singular name' ),
-					'search_items'      => __( 'Search Series' ),
-					'all_items'         => __( 'All Series' ),
-					'parent_item'       => __( 'Parent Series' ),
+		register_taxonomy(
+			'series',
+			'post',
+			array(
+				'hierarchical' => true,
+				'labels' => array(
+					'name' => _x( 'Series', 'taxonomy general name' ),
+					'singular_name' => _x( 'Series', 'taxonomy singular name' ),
+					'search_items' => __( 'Search Series' ),
+					'all_items' => __( 'All Series' ),
+					'parent_item' => __( 'Parent Series' ),
 					'parent_item_colon' => __( 'Parent Series:' ),
-					'edit_item'         => __( 'Edit Series' ),
-					'view_item'         => __( 'View Series' ),
-					'update_item'       => __( 'Update Series' ),
-					'add_new_item'      => __( 'Add New Series' ),
-					'new_item_name'     => __( 'New Series Name' ),
-					'menu_name'         => __( 'Series' ),
-	        	),
-            'query_var' 	=> true,
-            'rewrite' 		=> true,
-        	) 
-        );
+					'edit_item' => __( 'Edit Series' ),
+					'view_item' => __( 'View Series' ),
+					'update_item' => __( 'Update Series' ),
+					'add_new_item' => __( 'Add New Series' ),
+					'new_item_name' => __( 'New Series Name' ),
+					'menu_name' => __( 'Series' ),
+				),
+				'query_var' => true,
+				'rewrite' => true,
+			)
+		);
 	}
 }
 add_action( 'init', 'largo_custom_taxonomies' );
