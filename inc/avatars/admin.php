@@ -26,13 +26,14 @@ function largo_add_avatar_field($user) {
 					<p id="largo-avatar-display">
 						<?php if (!empty($image_src)) { ?>
 							<img src="<?php echo $image_src[0]; ?>" width="<?php echo $image_src[1]; ?>" height="<?php echo $image_src[2]; ?>" /><br />
-							<a href="<?php echo get_edit_post_link(largo_get_user_avatar_id($user->ID)); ?>">Edit</a> | <a id="largo-remove-avatar" href="#">Remove</a>
+							<a href="<?php echo get_edit_post_link(largo_get_user_avatar_id($user->ID)); ?>"><?php _e('Edit', 'largo'); ?></a> | <a id="largo-remove-avatar" href="#"><?php _e('Remove', 'largo'); ?></a>
 						<?php }
 
-						if (empty($image_src) && largo_has_gravatar($user->user_email)) { ?>
-							<?php echo get_avatar($user->ID); ?><br />
-							Currently using Gravatar. Change at <a href="http://gravatar.com/">gravatar.com</a> or choose a different image below.
-						<?php } ?>
+						if (empty($image_src) && largo_has_gravatar($user->user_email)) {
+								echo get_avatar($user->ID);
+								echo '<br />';
+								_e('Currently using Gravatar. Change at <a href="http://gravatar.com/">gravatar.com</a> or choose a different image below.', 'largo');
+						} ?>
 					</p>
 
 					<p id="largo-avatar-input" <?php if (!empty($image_src)) { ?>style="display:none;"<?php } ?>>
