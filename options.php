@@ -483,6 +483,12 @@ function optionsframework_options() {
 		'type' 	=> 'checkbox');
 
 	$options[] = array(
+		'desc' 	=> __('Enable Optional Leaderboard Ad Zone.', 'largo'),
+		'id' 	=> 'leaderboard_enabled',
+		'std' 	=> '0',
+		'type' 	=> 'checkbox');
+
+	$options[] = array(
 		'desc' 	=> __('Default region in lefthand column of Landing Pages', 'largo'),
 		'id' 	=> 'landing_left_region_default',
 		'std' 	=> 'sidebar-main',
