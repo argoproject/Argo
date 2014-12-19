@@ -35,7 +35,7 @@
 											<input type="text" placeholder="<?php esc_attr_e('Search', 'largo'); ?>"
 												class="input-medium appendedInputButton search-query" value="" name="s" />
 										</span>
-										<button type="submit" class="search-submit btn"><?php _e('GO', 'largo'); ?></button>
+										<button type="submit" class="search-submit btn"><?php _e('Go', 'largo'); ?></button>
 									</div>
 								</form>
 							</li>
