@@ -2,6 +2,9 @@
 
 function largo_load_avatar_js() {
 	wp_enqueue_script('largo_avatar_js', get_template_directory_uri() . '/inc/avatars/js/avatars.js', array('jquery'));
+	wp_localize_script('largo_avatar_js', 'largo_avatar_js_L10n', array(
+		'update_text' => __('Click "Update Profile" to save your avatar.', 'largo')
+	));
 }
 add_action('admin_enqueue_scripts', 'largo_load_avatar_js');
 
