@@ -38,8 +38,6 @@ function optionsframework_options() {
 
 	$display_options = array(
 		'top' 	=> __('Top', 'largo'),
-		'btm' 	=> __('Bottom', 'largo'),
-		'both' 	=> __('Both', 'largo'),
 		'none' 	=> __('None', 'largo')
 	);
 
@@ -260,9 +258,9 @@ function optionsframework_options() {
 		'type' 	=> 'info');
 
 	$options[] = array(
-		'desc' 		=> __('<strong>Where would you like to display share icons on single posts?</strong> By default social icons appear at both the top and the bottom of single posts but you can choose to show them in only one or the other or to not show them at all.', 'largo'),
+		'desc' 		=> __('<strong>Where would you like to display share icons on single posts?</strong> By default social icons appear at the top of single posts but you can choose to not show them at all.', 'largo'),
 		'id' 		=> 'social_icons_display',
-		'std' 		=> 'both',
+		'std' 		=> 'top',
 		'type' 		=> 'select',
 		'class'		=> 'mini',
 		'options' 	=> $display_options);
