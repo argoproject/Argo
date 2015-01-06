@@ -34,16 +34,7 @@ class TaxonomiesTestFunctions extends WP_UnitTestCase {
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 	function test_hide_post_type_taxonomy_table() {
-		mock_in_admin('site');
-		$columns = array (
-			'taxonomy-post-type' => 'Post Types',
-			);
-		$columns = hide_post_type_taxonomy_table($columns);
-		$this->assertEquals(
-			array(),
-			$columns
-			);
-		unmock_in_admin();
+		$this->markTestSkipped('This function has not been written yet.');
 	}
 }
 
