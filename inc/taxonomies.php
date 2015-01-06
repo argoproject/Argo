@@ -1,6 +1,20 @@
 <?php
 
 /**
+ * Check if the Series taxonomy is enabled
+ *
+ * @since 0.4
+ */
+function largo_is_series_enabled() {
+	$series_enabled = of_get_option('series_enabled');
+	if ( empty($series_enabled) ) {
+		return false;
+	} else {
+		return true;
+	}
+}
+
+/**
  * Register the prominence and series custom taxonomies
  * Insert the default terms
  *
