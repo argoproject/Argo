@@ -11,22 +11,17 @@ class HomepageSingleWithSeriesStories extends HomepageSingle {
 	 * For each default layout, register_homepage_layout is called on that layout class.
 	 * register_homepage_layout calls the HomepageLayoutFactory method register on that class instance
 	 * the register method creates a new instance of that class
-	 * therefore the __construct method here checks largo_is_series_enabled 
+	 * therefore the __construct method below checks largo_is_series_enabled 
+	 * and adds an auto-removal function to the init hook of series are not enabled.
 	 */
+	function unregister_HomepageSingleWithSeriesStories() {
+		global $largo_homepage_factory;
+		unset($largo_homepage_factory->layouts[get_class($this)]);
+	}
+
 	function __construct($options=array()) {
 		if ( !largo_is_series_enabled() ){
-			
-			global $largo_homepage_factory;
-			
-			$layoutClass = get_class($this);
-			var_log($layoutClass);
-			var_log($largo_homepage_factory->layouts);
-			var_log($largo_homepage_factory->layouts[$layoutClass]);
-			// Read the logs. This object hasn't been created yet, so it can't be removed from within the constructor.
-			
-			unset($largo_homepage_factory->layouts[get_class($this)]);
-			unset($this);
-			unregister_homepage_layout(get_class($this));
+			add_action('init', array($this, 'unregister_HomepageSingleWithSeriesStories'), 105);
 		} else {
 			$defaults = array(
 				'name' => __('One big story and list of stories from the same series', 'largo'),
