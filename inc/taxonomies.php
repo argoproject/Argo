@@ -4,6 +4,7 @@
  * Check if the Series taxonomy is enabled
  *
  * @since 0.4
+ * @return bool Whether or not the Series taxonomy option is enabled in the Theme Options > Advanced
  */
 function largo_is_series_enabled() {
 	$series_enabled = of_get_option('series_enabled');
