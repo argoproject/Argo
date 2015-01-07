@@ -217,15 +217,15 @@ class Navis_Slideshows {
 				}
 			}
 
-			$output .= '<h6>';
-
 			if ( ! empty( $credit ) ) {
+				$output .= '<h6 class="credit">';
 				$output .= wp_kses_post( $credit );
+				$output .= '</h6>';
 			}
 
-			$output .= ' <a href="#" class="slide-permalink">' . esc_attr( __( 'permalink', 'largo' ) ) . '</a></h6>';
+			$output .= '<h6 class="permalink"><a href="#" class="slide-permalink"><i class="icon-link"></i> ' . esc_attr( __( 'permalink', 'largo' ) ) . '</a></h6>';
 			if ( ! empty( $caption ) ) {
-				$output .= '<p>' . wp_kses_post( $caption ) . '</p>';
+				$output .= '<p class="wp-caption-text">' . wp_kses_post( $caption ) . '</p>';
 			}
 
 			$output .= '</div>';
