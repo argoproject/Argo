@@ -39,37 +39,10 @@ $span_class = ( $largo['home_rail'] ) ? 'span8' : 'span12' ;
 	}
 
 	// bottom section, we'll either use a two-column widget area or a single column list of recent posts
-	if ( of_get_option( 'homepage_bottom') === 'widgets' ) {
-		get_template_part( 'partials/home-bottom', 'widget-area' );
-	} else if ( of_get_option( 'homepage_bottom' ) === 'list' ) {
-		$args = array(
-			'paged'					=> $paged,
-			'post_status'			=> 'publish',
-			'posts_per_page'		=> 10,
-			'post__not_in' 			=> $shown_ids,
-			'ignore_sticky_posts' 	=> true
-			);
-
-		if ( of_get_option('num_posts_home') )
-			$args['posts_per_page'] = of_get_option('num_posts_home');
-		if ( of_get_option('cats_home') )
-			$args['cat'] = of_get_option('cats_home');
-		$query = new WP_Query( $args );
-
-		if ( $query->have_posts() ) {
-			while ( $query->have_posts() ) : $query->the_post();
-				//if the post is in the array of post IDs already on this page, skip it. Just a double-check
-				if ( in_array( get_the_ID(), $shown_ids ) ) {
-					continue;
-				} else {
-					$ids[] = get_the_ID();
-					get_template_part( 'partials/content', 'home' );
-				}
-			endwhile;
-			largo_content_nav( 'nav-below' );
-		} else {
-			get_template_part( 'partials/content', 'not-found' );
-		}
+	if ( of_get_option('homepage_bottom') === 'widgets' ) {
+		get_template_part('partials/home-bottom', 'widget-area');
+	} else if (of_get_option('homepage_bottom') === 'list') {
+		get_template_part('partials/home-post-list');
 	}
 
 	if ( is_active_sidebar('homepage-left-rail') ) { ?>

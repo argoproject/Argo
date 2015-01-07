@@ -47,7 +47,6 @@ class Navis_Slideshows {
 	function add_slideshow_header() {
 		// slides-specific CSS
 		$slides_css = get_template_directory_uri() . '/lib/navis-slideshows/css/slides.css';
- 		wp_enqueue_script("jquery");
 		wp_enqueue_style(
 			'navis-slides', $slides_css, array(), '1.0'
 		);
@@ -56,7 +55,7 @@ class Navis_Slideshows {
 	//add slideshow width to header
 	function argo_slideshow_css() {
 	?>
-		<style type="text/css">.navis-slideshow  {width: 94%;} .navis-slideshow .slides_container div {width: 100%;}</style>
+		<style type="text/css">.navis-slideshow .slides_container div {width: 100%;}</style>
 	<?php
 	}
 
@@ -72,9 +71,14 @@ class Navis_Slideshows {
 		global $post;
 
 		// jQuery slides plugin, available at http://slidesjs.com/
-		$slides_src = get_template_directory_uri() . '/lib/navis-slideshows/js/slides.min.jquery.js';
+		$slides_src = get_template_directory_uri() . '/lib/navis-slideshows/js/jquery.slides.min.js';
 		wp_enqueue_script(
-			'jquery-slides', $slides_src, array( 'jquery' ), '1.1.8', true
+			'jquery-slides', $slides_src, array( 'jquery' ), '3.0', true
+		);
+
+		$imagesloaded_src = get_template_directory_uri() . '/lib/navis-slideshows/js/imagesloaded.pkgd.min.js';
+		wp_enqueue_script(
+			'imagesloaded', $imagesloaded_src, array('jquery'), '3.1.8', true
 		);
 
 		// our custom js
@@ -162,15 +166,7 @@ class Navis_Slideshows {
 		$post_html_id = $postid . "-" . wp_create_nonce( 'slideshow' . time() . rand(0,10000) );	//appending a random value so that 2 slideshows can peacefully coexist
 
 		$output .= '
-			<div id="slides-' . esc_attr( $post_html_id ) . '" class="navis-slideshow">
-			<p class="slide-nav">
-
-			<a href="#" class="prev"></a>
-			<a href="#" class="next"></a>
-
-			</p>
-
-			<div class="slides_container">';
+			<div id="slides-' . esc_attr( $post_html_id ) . '" class="navis-slideshow">';
 
 		/*-- Add images --*/
 		$count = 0;
@@ -223,13 +219,18 @@ class Navis_Slideshows {
 
 			$output .= '<h6>';
 
-			if ( isset( $credit ) )
+			if ( ! empty( $credit ) ) {
 				$output .= wp_kses_post( $credit );
+			}
 
-			$output .= ' <a href="#" class="slide-permalink">permalink</a></h6>';
-			$output .= '<p>' . wp_kses_post( $caption ) . '</p></div>';
+			$output .= ' <a href="#" class="slide-permalink">' . esc_attr( __( 'permalink', 'largo' ) ) . '</a></h6>';
+			if ( ! empty( $caption ) ) {
+				$output .= '<p>' . wp_kses_post( $caption ) . '</p>';
+			}
+
+			$output .= '</div>';
 		}
-		$output .= '</div></div>';
+		$output .= '</div>';
 
 		$this->postid = $post_html_id;
 		$this->permalink = $plink;
@@ -237,7 +238,7 @@ class Navis_Slideshows {
 
 		$output .= sprintf(
 			"<script>jQuery( document ).ready( function() { " .
-				"loadSlideshow( '%s', '%s', %d ) } );</script>",
+				"navisloadSlideshow( '%s', '%s', %d ) } );</script>",
 			$this->postid, $this->permalink, $this->slide_count
 		);
 

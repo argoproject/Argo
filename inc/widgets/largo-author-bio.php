@@ -47,7 +47,7 @@ class largo_author_widget extends WP_Widget {
 				foreach( $authors as $author_obj ) {
 					$ctx = array('author_obj' => $author_obj); ?>
 
-				<div class="author-box author vcard clearfix">
+				<div class="author-box row-fluid author vcard clearfix">
 					<?php largo_render_template('partials/author-bio', 'description', $ctx); ?>
 					<?php largo_render_template('partials/author-bio', 'social-links', $ctx); ?>
 				</div>
