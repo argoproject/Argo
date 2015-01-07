@@ -55,7 +55,7 @@ class Navis_Slideshows {
 	//add slideshow width to header
 	function argo_slideshow_css() {
 	?>
-		<style type="text/css">.navis-slideshow  {width: 94%;} .navis-slideshow .slides_container div {width: 100%;}</style>
+		<style type="text/css">.navis-slideshow .slides_container div {width: 100%;}</style>
 	<?php
 	}
 
@@ -74,6 +74,11 @@ class Navis_Slideshows {
 		$slides_src = get_template_directory_uri() . '/lib/navis-slideshows/js/jquery.slides.min.js';
 		wp_enqueue_script(
 			'jquery-slides', $slides_src, array( 'jquery' ), '3.0', true
+		);
+
+		$imagesloaded_src = get_template_directory_uri() . '/lib/navis-slideshows/js/imagesloaded.pkgd.min.js';
+		wp_enqueue_script(
+			'imagesloaded', $imagesloaded_src, array('jquery'), '3.1.8', true
 		);
 
 		// our custom js

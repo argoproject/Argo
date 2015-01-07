@@ -58,7 +58,7 @@
 #content .slide-permalink {
     font-weight: normal;
     margin-left: 5px;
-    margin-right: -1px;
+    margin-right: 5px;
     color: #999;
     font-style: normal;
     background-color: #ddd;
