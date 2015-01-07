@@ -3104,7 +3104,6 @@ article img.attachment-post-thumbnail {
 }
 .sticky-main-feature .image-wrap {
   float: left;
-  min-height: 150px;
 }
 .sticky-main-feature .image-wrap img {
   float: left;
