@@ -158,13 +158,6 @@ function optionsframework_options() {
 		'type' 	=> 'checkbox');
 
 	$options[] = array(
-		'name' 	=> __('Disclaimer', 'largo'),
-		'desc' 	=> __('Enter a default disclaimer', 'largo'),
-		'id' 	=> 'default_disclaimer',
-		'std' 	=> '',
-		'type' 	=> 'textarea');
-
-	$options[] = array(
 		'name' 	=> __('Copyright Message', 'largo'),
 		'desc' 	=> __('Enter the <strong>copyright and credit information</strong> to display in the footer. You can use <code>%d</code> to output the current year.', 'largo'),
 		'id' 	=> 'copyright_msg',
@@ -464,6 +457,10 @@ function optionsframework_options() {
 			'4col' 			=> $imagepath . 'footer-4col.png')
 	);
 
+	/*
+	 * Advanced
+	 */
+
 	$options[] = array(
 		'name' 	=> __('Advanced', 'largo'),
 		'type' 	=> 'heading');
@@ -513,6 +510,26 @@ function optionsframework_options() {
 	if ( is_object( $screen ) && $screen->base == 'widgets' ) {
 		return $widget_options;
 	}
+
+
+	/* Disclaimer */
+
+	$options[] = array(
+		'name'	=> __('Disclaimer', 'largo'),
+		'desc' 	=> __('Enable Disclaimer Widget.', 'largo'),
+		'id' 	=> 'disclaimer_enabled',
+		'std' 	=> '0',
+		'type' 	=> 'checkbox');
+
+	$options[] = array(
+		'desc' 	=> __('Enter a default disclaimer', 'largo'),
+		'id' 	=> 'default_disclaimer',
+		'std' 	=> '',
+		'type' 	=> 'textarea');
+
+
+
+	/* Search Options */
 
 	$options[] = array(
 		'name' => __('Search options', 'largo'),
@@ -590,6 +607,8 @@ function optionsframework_custom_scripts() { ?>
 <script type="text/javascript">
 jQuery(document).ready(function($) {
 
+	// show/hide don't miss.
+
 	$('#show_dont_miss_menu').click(function() {
   		$('#section-dont_miss_label').fadeToggle(400);
 	});
@@ -598,6 +617,8 @@ jQuery(document).ready(function($) {
 		$('#section-dont_miss_label').show();
 	}
 
+	// show/hide sticky nav.
+
 	$('#show_sticky_nav').click(function() {
   		$('#section-show_sitename_in_sticky_nav').fadeToggle(400);
 	});
@@ -605,7 +626,9 @@ jQuery(document).ready(function($) {
 	if ($('#show_sticky_nav:checked').val() !== undefined) {
 		$('#section-show_sitename_in_sticky_nav').show();
 	}
-console.log($('#show_sticky_nav').val());
+
+	// show/hide donate button.
+
 	$('#show_donate_button').click(function() {
   		$('#section-donate_link').fadeToggle(400);
   		$('#section-donate_button_text').fadeToggle(400);
@@ -615,6 +638,18 @@ console.log($('#show_sticky_nav').val());
 		$('#section-donate_link').show();
 		$('#section-donate_button_text').show();
 	}
+
+	// show/hide disclaimer.
+
+	$('#disclaimer_enabled').click(function() {
+  		$('#section-default_disclaimer').fadeToggle(400);
+	});
+
+	if ($('#disclaimer_enabled:checked').val() == undefined) {
+		$('#section-default_disclaimer').hide();
+	}
+
+	// show/hide show tags.
 
 	$('#show_tags').click(function() {
   		$('#section-tag_limit').fadeToggle(400);

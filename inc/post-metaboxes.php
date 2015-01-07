@@ -103,14 +103,18 @@ largo_add_meta_box(
 );
 
 // Disclaimer
-largo_add_meta_box(
-	'largo_custom_disclaimer',
-	__( 'Disclaimer', 'largo' ),
-	'largo_custom_disclaimer_meta_box_display', //could also be added with largo_add_meta_content('largo_custom_related_meta_box_display', 'largo_additional_options')
-	'post',
-	'normal',
-	'core'
-);
+
+if( of_get_option('disclaimer_enabled') ) {
+	largo_add_meta_box(
+		'largo_custom_disclaimer',
+		__( 'Disclaimer', 'largo' ),
+		'largo_custom_disclaimer_meta_box_display', //could also be added with largo_add_meta_content('largo_custom_related_meta_box_display', 'largo_additional_options')
+		'post',
+		'normal',
+		'core'
+	);
+}
+
 
 /**
  * Add our prominence taxonomy meta box with custom behavior.
