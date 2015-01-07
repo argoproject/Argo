@@ -140,10 +140,11 @@ add_action( 'init', 'largo_custom_taxonomies' );
  * @since 1.0
  */
 function largo_post_in_series( $post_id = NULL ) {
-  global $post;
-  $the_id = ($post_id) ? $post_id : $post->ID ;
-  $features = get_the_terms( $the_id, 'series' );
-  return ( $features ) ? true : false;
+	if ( !largo_post_in_series() ) return false;
+	global $post;
+	$the_id = ($post_id) ? $post_id : $post->ID ;
+	$features = get_the_terms( $the_id, 'series' );
+	return ( $features ) ? true : false;
 }
 
 /**
