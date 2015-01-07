@@ -300,7 +300,7 @@ add_action( 'pre_get_posts', 'largo_category_archive_posts', 15 );
  */
 function hide_series_taxonomy_menu() {
 	if (! is_admin() ) return;
-	if ( of_get_option('series_enabled') == false ) {
+	if ( !largo_is_series_enabled() ) {
 		$page = remove_submenu_page('edit.php', 'edit-tags.php?taxonomy=series');
 	}
 }
@@ -313,7 +313,7 @@ add_action( 'admin_menu', 'hide_series_taxonomy_menu', 999 );
  */
 function hide_series_taxonomy_metabox() {
 	if (! is_admin() ) return;
-	if ( of_get_option('series_enabled') == false ) {
+	if ( !largo_is_series_enabled() ) {
 		remove_meta_box('seriesdiv', 'post', 'normal');
 		remove_meta_box('seriesdiv', 'page', 'normal');
 		remove_meta_box('seriesdiv', 'post', 'side');
@@ -344,7 +344,6 @@ add_action( 'admin_menu', 'hide_post_type_taxonomy_menu', 999 );
  * @uses   of_get_option
  * @since  0.4
  */
- 
 function hide_post_type_taxonomy_metabox() {
 	if (! is_admin() ) return;
 	if ( of_get_option('post_types_enabled') == 0 ) {
