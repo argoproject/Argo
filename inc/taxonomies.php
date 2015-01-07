@@ -190,6 +190,9 @@ if ( ! function_exists( 'largo_term_to_label' ) ) {
  */
 function largo_get_series_posts( $series_id, $number = -1 ) {
 
+	// If series are not enabled, then there are no posts in a series.
+	if ( !largo_is_series_enabled() ) return;
+
 	// get the cf-tax-landing
 	$args = array(
 		'post_type' => 'cftl-tax-landing',
