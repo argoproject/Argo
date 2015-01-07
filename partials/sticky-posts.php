@@ -47,32 +47,35 @@ if ( $query->have_posts() ) {
 
 						<h2 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
 						<h5 class="byline"><?php largo_byline(); ?></h5>
-					<?php
-						largo_excerpt( $post, 2, false );
-						$ids[] = get_the_ID();
 
-					if ( $feature_posts ) { //if the sticky post is in a series, show up to 3 other posts in that series ?>
-						<div class="sticky-features-list">
-							<h4><?php _e('More from', 'largo'); ?> <span class="series-name"><?php echo esc_html( $feature->name ); ?></span></h4>
-							<ul>
+						<div class="entry-content">
+						<?php
+							largo_excerpt( $post, 2, false );
+							$ids[] = get_the_ID();
+
+						if ( $feature_posts ) { //if the sticky post is in a series, show up to 3 other posts in that series ?>
+							<div class="sticky-features-list">
+								<h4><?php _e('More from', 'largo'); ?> <span class="series-name"><?php echo esc_html( $feature->name ); ?></span></h4>
+								<ul>
+									<?php
+										foreach ( $feature_posts as $feature_post ):
+											printf( '<li><a href="%1$s">%2$s</a></li>',
+												esc_url( get_permalink( $feature_post->ID ) ),
+												esc_attr( get_the_title( $feature_post->ID ) )
+											);
+										endforeach;
+									?>
+								</ul>
 								<?php
-									foreach ( $feature_posts as $feature_post ):
-										printf( '<li><a href="%1$s">%2$s</a></li>',
-											esc_url( get_permalink( $feature_post->ID ) ),
-											esc_attr( get_the_title( $feature_post->ID ) )
-										);
-									endforeach;
+								if ( count( $feature_posts ) == 3 )
+											printf( '<p class="sticky-all"><a href="%1$s">%2$s &raquo;</a></p>',
+												esc_url( get_term_link( $feature ) ),
+												__( 'Full Coverage', 'largo' )
+											);
 								?>
-							</ul>
-							<?php
-							if ( count( $feature_posts ) == 3 )
-										printf( '<p class="sticky-all"><a href="%1$s">%2$s &raquo;</a></p>',
-											esc_url( get_term_link( $feature ) ),
-											__( 'Full Coverage', 'largo' )
-										);
-							?>
+							</div>
+						<?php } // feature_posts ?>
 						</div>
-					<?php } // feature_posts ?>
 					</div>
 				</div> <!-- end sticky-main-feature -->
 			</div> <!-- end sticky-solo or sticky-related -->
