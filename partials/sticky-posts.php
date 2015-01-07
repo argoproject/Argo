@@ -15,59 +15,66 @@ if ( $query->have_posts() ) {
 
 		if ( $sticky && $sticky[0] && ! is_paged() ) { ?>
 
-			<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix sticky '); ?>>
+			<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix sticky entry-content '); ?>>
 
 			<?php if ( largo_post_in_series() ) {
 				// if the sticky post is part of a series, see if there are any other posts in that series
 				$feature = largo_get_the_main_feature();
 				$feature_posts = largo_get_recent_posts_for_term( $feature, 3, 1 );
-			}
+			} ?>
 
-			// if there are related posts, modify the sticky posts wrapper div so we have room to show them
-			if ( $feature_posts ) { ?>
-				<div class="sticky-related row-fluid clearfix">
-					<div class="sticky-main-feature span8">
-			<?php } else { // otherwise we'll just show the single sticky post ?>
-				<div class="sticky-solo row-fluid clearfix">
-					<div class="sticky-main-feature span12">
-			<?php } // end feature_posts
+			<div class="sticky-solo">
 
-			// if we have a thumbnail image, show it
-			if ( has_post_thumbnail() ) { ?>
-				<div class="image-wrap">
-					<h4><?php _e('Featured', 'largo'); ?></h4>
-					<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
-				</div>
-			<?php } else { ?>
-				<h4 class="no-image"><?php _e('Featured', 'largo'); ?></h4>
-			<?php } // end thumbnail ?>
-				<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-			<?php
-				largo_excerpt( $post, 2, false );
-				$ids[] = get_the_ID();
-			?>
-			</div> <!-- end sticky-main-feature -->
+				<h4><?php _e('Featured', 'largo'); ?></h4>
 
-			<?php if ( $feature_posts ) { //if the sticky post is in a series, show up to 3 other posts in that series ?>
-				<div class="sticky-features-list span4">
-					<ul>
-						<li><h4><?php _e('More from', 'largo'); ?><br /><span class="series-name"><?php echo esc_html( $feature->name ); ?></span></h4></li>
-						<?php
-							foreach ( $feature_posts as $feature_post ):
-								printf( '<li><a href="%1$s">%2$s</a></li>',
-									esc_url( get_permalink( $feature_post->ID ) ),
-									esc_attr( get_the_title( $feature_post->ID ) )
-								);
-							endforeach;
+				<div class="sticky-main-feature row-fluid">
+
+
+					<?php // if we have a thumbnail image, show it
+					if ( has_post_thumbnail() ) { ?>
+						<div class="image-wrap span3 hidden-phone">
+							<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
+						</div>
+					<?php } // end thumbnail ?>
+
+					<div class="<?php echo (has_post_thumbnail())? "span9" : "span12"; ?>">
+
+						<?php if ( has_post_thumbnail() ) { ?>
+							<div class="image-wrap visible-phone">
+								<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
+							</div>
+						<?php } ?>
+
+						<h2 class="entry-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+						<h5 class="byline"><?php largo_byline(); ?></h5>
+					<?php
+						largo_excerpt( $post, 2, false );
+						$ids[] = get_the_ID();
+
+					if ( $feature_posts ) { //if the sticky post is in a series, show up to 3 other posts in that series ?>
+						<div class="sticky-features-list">
+							<h4><?php _e('More from', 'largo'); ?> <span class="series-name"><?php echo esc_html( $feature->name ); ?></span></h4>
+							<ul>
+								<?php
+									foreach ( $feature_posts as $feature_post ):
+										printf( '<li><a href="%1$s">%2$s</a></li>',
+											esc_url( get_permalink( $feature_post->ID ) ),
+											esc_attr( get_the_title( $feature_post->ID ) )
+										);
+									endforeach;
+								?>
+							</ul>
+							<?php
 							if ( count( $feature_posts ) == 3 )
-								printf( '<li class="sticky-all"><a href="%1$s">%2$s &rarr;</a></li>',
-									__( 'Full Coverage', 'largo' ),
-									esc_url( get_term_link( $feature ) )
-								);
-						?>
-					</ul>
-				</div>
-			<?php } // feature_posts ?>
+										printf( '<p class="sticky-all"><a href="%1$s">%2$s &raquo;</a></p>',
+											esc_url( get_term_link( $feature ) ),
+											__( 'Full Coverage', 'largo' )
+										);
+							?>
+						</div>
+					<?php } // feature_posts ?>
+					</div>
+				</div> <!-- end sticky-main-feature -->
 			</div> <!-- end sticky-solo or sticky-related -->
 		</article>
 	<?php } // is_paged
