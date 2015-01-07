@@ -587,7 +587,7 @@ class Largo_Related {
 		$post_ids = get_post_meta( $this->post_id, 'largo_custom_related_posts', true );
 		if ( ! empty( $post_ids ) ) {
 			$this->post_ids = explode( ",", $post_ids );
-			if ( count( $this->post_ids ) >= $number ) {
+			if ( count( $this->post_ids ) >= $this->number ) {
 				return $this->cleanup_ids();
 			}
 		}

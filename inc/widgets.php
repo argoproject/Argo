@@ -21,35 +21,39 @@ function largo_widgets() {
 		unregister_widget( $widget );
 	}
 	$register = array(
-		'largo_about_widget'			=> '/inc/widgets/largo-about.php',
-		'largo_donate_widget'			=> '/inc/widgets/largo-donate.php',
-		'largo_facebook_widget'			=> '/inc/widgets/largo-facebook.php',
-		'largo_follow_widget' 			=> '/inc/widgets/largo-follow.php',
-		'largo_footer_featured_widget'	=> '/inc/widgets/largo-footer-featured.php',
-		'largo_image_widget'			=> '/inc/widgets/largo-image-widget.php',
-		'largo_INN_RSS_widget'			=> '/inc/widgets/largo-inn-rss.php',
-		'largo_recent_comments_widget'	=> '/inc/widgets/largo-recent-comments.php',
-		'largo_recent_posts_widget'		=> '/inc/widgets/largo-recent-posts.php',
-		'largo_sidebar_featured_widget'	=> '/inc/widgets/largo-sidebar-featured.php',
-		'largo_taxonomy_list_widget'	=> '/inc/widgets/largo-taxonomy-list.php',
-		'largo_twitter_widget'			=> '/inc/widgets/largo-twitter.php',
-		'largo_related_posts_widget'			=> '/inc/widgets/largo-related-posts.php',
-		'largo_explore_related_widget'			=> '/inc/widgets/largo-explore-related.php',
-		'largo_author_widget'			=> '/inc/widgets/largo-author-bio.php',
-		'largo_series_posts_widget'			=> '/inc/widgets/largo-series-posts.php',
-		'largo_disclaimer_widget'			=> '/inc/widgets/largo-disclaimer-widget.php',
-		'largo_featured_widget'			=> '/inc/widgets/largo-featured.php',
-		'largo_tag_list_widget'			=> '/inc/widgets/largo-tag-list.php',
-		'largo_prev_next_post_links_widget'			=> '/inc/widgets/largo-prev-next-post-links.php',
-		'largo_post_series_links_widget'			=> '/inc/widgets/largo-post-series-links.php',
-
+		'largo_about_widget' => '/inc/widgets/largo-about.php',
+		'largo_donate_widget' => '/inc/widgets/largo-donate.php',
+		'largo_facebook_widget' => '/inc/widgets/largo-facebook.php',
+		'largo_follow_widget' => '/inc/widgets/largo-follow.php',
+		'largo_footer_featured_widget' => '/inc/widgets/largo-footer-featured.php',
+		'largo_image_widget' => '/inc/widgets/largo-image-widget.php',
+		'largo_INN_RSS_widget' => '/inc/widgets/largo-inn-rss.php',
+		'largo_recent_comments_widget' => '/inc/widgets/largo-recent-comments.php',
+		'largo_recent_posts_widget' => '/inc/widgets/largo-recent-posts.php',
+		'largo_sidebar_featured_widget' => '/inc/widgets/largo-sidebar-featured.php',
+		'largo_taxonomy_list_widget' => '/inc/widgets/largo-taxonomy-list.php',
+		'largo_twitter_widget' => '/inc/widgets/largo-twitter.php',
+		'largo_related_posts_widget' => '/inc/widgets/largo-related-posts.php',
+		'largo_explore_related_widget' => '/inc/widgets/largo-explore-related.php',
+		'largo_author_widget' => '/inc/widgets/largo-author-bio.php',
+		'largo_series_posts_widget' => '/inc/widgets/largo-series-posts.php',
+		'largo_featured_widget' => '/inc/widgets/largo-featured.php',
+		'largo_tag_list_widget' => '/inc/widgets/largo-tag-list.php',
+		'largo_prev_next_post_links_widget' => '/inc/widgets/largo-prev-next-post-links.php',
+		'largo_post_series_links_widget' => '/inc/widgets/largo-post-series-links.php',
+		'largo_staff_widget' => '/inc/widgets/largo-staff.php'
 	);
+
+	/* If disclaimer is enabled */
+	if( of_get_option('disclaimer_enabled') )
+		$register['largo_disclaimer_widget'] = '/inc/widgets/largo-disclaimer-widget.php';
+
 	foreach ( $register as $key => $val ) {
 		require_once( get_template_directory() . $val );
 		register_widget( $key );
 	}
 }
-add_action( 'widgets_init', 'largo_widgets' );
+add_action( 'widgets_init', 'largo_widgets', 1 );
 
 
 /**
@@ -117,12 +121,12 @@ add_filter('dynamic_sidebar_params', 'largo_add_widget_classes');
  *
  * @since 1.0
  */
-function largo_widget_counter_reset( $text ) {
+function largo_widget_counter_reset() {
    global $widget_num;
    $widget_num = 0;
-   return $text;
 }
-add_filter('get_sidebar','largo_widget_counter_reset', 99);
+add_action('dynamic_sidebar_after', 'largo_widget_counter_reset', 99);
+add_action('get_sidebar', 'largo_widget_counter_reset', 99);
 
 /**
  * Add custom fields to widget forms

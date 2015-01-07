@@ -16,14 +16,6 @@ if ( ! function_exists( 'largo_enqueue_js' ) ) {
 		wp_enqueue_script( 'largoPlugins', get_template_directory_uri() . '/js/largoPlugins.js', array( 'jquery' ), '1.0', true );
 		wp_enqueue_script( 'largoCore', get_template_directory_uri() . '/js/largoCore.js', array( 'jquery' ), '1.0', true );
 
-		//only load the carousel and top stories js and css if those homepage options are selected
-		if ( is_home() && of_get_option( 'homepage_top') == 'slider' ) {
-			wp_enqueue_script( 'bootstrap-carousel', get_template_directory_uri() . '/js/bootstrap-carousel.min.js', array( 'jquery' ), '1.0', true );
-			wp_enqueue_style( 'carousel-styles', get_template_directory_uri() . '/css/carousel.css', false, false, 'screen' );
-		}
-		if ( (is_home() && of_get_option( 'homepage_top') == 'topstories') || (is_tax() || is_category() || is_tag()) )
-			wp_enqueue_style( 'topstory-styles', get_template_directory_uri() . '/css/top-stories.css', false, false, 'screen' );
-
 		//only load sharethis on single pages and load jquery tabs for the related content box if it's active
 		if ( is_single() ) {
 			$utilities = of_get_option( 'article_utilities' );
@@ -34,7 +26,7 @@ if ( ! function_exists( 'largo_enqueue_js' ) ) {
 
 		//Load the child theme's style.css if we're actually running a child theme of Largo
 		$theme = wp_get_theme();
-		if ( is_object($theme->parent()) && $theme->parent()->Template == 'largo' ) {
+		if (is_object($theme->parent())) {
 			wp_enqueue_style( 'largo-child-styles', get_stylesheet_directory_uri() . '/style.css', array('largo-stylesheet'));
 		}
 	}
@@ -118,13 +110,20 @@ add_action( 'wp_footer', 'largo_footer_js' );
  */
 if ( ! function_exists( 'largo_google_analytics' ) ) {
 	function largo_google_analytics() {
-		if ( !is_user_logged_in() ) : // don't track logged in users ?>
+		if ( !current_user_can('edit_posts') ) : // don't track editors ?>
 			<script>
 			    var _gaq = _gaq || [];
 			<?php if ( of_get_option( 'ga_id', true ) ) : // make sure the ga_id setting is defined ?>
 				_gaq.push(['_setAccount', '<?php echo of_get_option( "ga_id" ) ?>']);
 				_gaq.push(['_trackPageview']);
 			<?php endif; ?>
+				<?php if (defined('INN_MEMBER') && INN_MEMBER) { ?>
+				_gaq.push(
+					["inn._setAccount", "UA-17578670-2"],
+					["inn._setCustomVar", 1, "MemberName", "<?php bloginfo('name') ?>"],
+					["inn._trackPageview"]
+				);
+				<?php } ?>
 			    _gaq.push(
 					["largo._setAccount", "UA-17578670-4"],
 					["largo._setCustomVar", 1, "SiteName", "<?php bloginfo('name') ?>"],
@@ -142,5 +141,5 @@ if ( ! function_exists( 'largo_google_analytics' ) ) {
 	<?php endif;
 	}
 }
-add_action( 'wp_enqueue_scripts', 'largo_google_analytics' );
+add_action( 'wp_head', 'largo_google_analytics' );
 

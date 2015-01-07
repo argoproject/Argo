@@ -25,28 +25,22 @@ jQuery(document).ready(function($) {
 		});
 	}
 
-	//get the correct sized image for the header, replace it with a new one if the window is resized
-	$('.header_img').attr('src', banner_img_src);
-	$(window).resize(function() {
-		$('.header_img').attr('src', whichHeader());
-	});
+	// get the correct sized image for the header, replace it with a new one if the window is resized.
+	// if `banner_img_src` is empty, remove it and its parent container
+	if (banner_img_src) {
+		$('.header_img').attr('src', banner_img_src);
+		$(window).resize(function() {
+			$('.header_img').attr('src', whichHeader());
+		});
+	} else {
+		$('.header_img').parent().remove();
+	}
 
 	//the homepage carousel, make sure we don't load this unless .carousel is defined
 	if($().carousel) {
 		$('.carousel').carousel({
 			interval: 6000
 		});
-	}
-
-	//homepage alert & hero CSS hacks
-	if ( $('.max-wide').length ) {
-		var $wrapper = $('.max-wide'), $container = $('#content');
-		$(window).on('throttledresize', function() {
-			var $marginWidth = ( $(window).width() - $container.width() ) / -2;
-			$marginWidth = ( $marginWidth > 0 ) ? 0 : parseInt( $marginWidth ) ;
-			$wrapper.css( {marginLeft: $marginWidth, marginRight: $marginWidth} );
-		});
-		$(window).trigger('throttledresize');
 	}
 
 	//enable "clean read" functionality
@@ -77,63 +71,92 @@ jQuery(document).ready(function($) {
 
   // Touch enable the drop-down menus
   (function() {
-	  if ( Modernizr.touch ) {
+    if (Modernizr.touch) {
+      // iOS Safari works with touchstart, the rest work with click
+      var mobileEvent = /Mobile\/.+Safari/.test(navigator.userAgent) ? 'touchstart' : 'click',
+          // Open the drop down
+          openMenu = false;
 
-	  	// iOS Safari works with touchstart, the rest work with click
-			mobileEvent = /Mobile\/.+Safari/.test(navigator.userAgent) ? 'touchstart' : 'click';
+      // Handle the tap for the drop down
+      $('ul.nav').on(mobileEvent + '.largo', 'li', function(event) {
+        var li = $(event.currentTarget);
 
-			// Open the drop down
-			var openMenu = false;
+        if (!li.hasClass('dropdown')) {
+          window.location.href = li.find('a').attr('href');
+          event.preventDefault();
+          event.stopPropagation();
+          return false;
+        }
 
-			// Handle the tap for the drop down
-		  $('ul.nav').on( mobileEvent+'.largo', 'li.dropdown', function( event ) {
-		  	var li = $(event.currentTarget);
-		  	console.log(event.target, event.currentTarget);
+        if (!li.is('.open')) {
+          // The link when the menu is closed
+          closeOpenMenu();
+          li.addClass('open');
+          openMenu = li;
 
-		  	if ( !li.is('.open') ) {
-		  		// The link when the menu is closed
-		  		closeOpenMenu();
-		  		li.addClass('open');
-		  		openMenu = li;
+          event.preventDefault();
+          event.stopPropagation();
+        } else if ($(event.target).is('b.caret')) {
+          // The caret when the menu is open
+          li.removeClass('open');
+          openMenu = false;
 
-		  		event.preventDefault();
-		  		event.stopPropagation();
+          event.preventDefault();
+          event.stopPropagation();
+        }
+      });
 
-		  	} else if ( $(event.target).is('b.caret') ) {
-		  		// The caret when the menu is open
-		  		li.removeClass('open');
-		  		openMenu = false;
+      // Call this to call the open menu
+      var closeOpenMenu = function() {
+        if (openMenu) {
+          openMenu.removeClass('open');
+          openMenu = false;
+        }
+      }
 
-		  		event.preventDefault();
-		  		event.stopPropagation();
-		  	}
-		  });
-
-		  // Call this to call the open menu
-		  var closeOpenMenu = function() {
-		  	if ( openMenu ) {
-		  		openMenu.removeClass('open');
-		  		openMenu = false;
-		  	}
-		  }
-
-		  // Close the open menu when the user taps elsewhere
-		  $('body').on( mobileEvent, closeOpenMenu);
-		}
-	})();
+      // Close the open menu when the user taps elsewhere
+      $('body').on(mobileEvent, closeOpenMenu);
+    }
+  })();
 
 	// Sticky header and footer
 	(function(){
-		var stickyNavEl = $( '.sticky-nav-holder' );
-		var mainEl = $('#main');
+		var stickyNavEl = $('.sticky-nav-holder');
+		var mainEl = $('.home #main');
 
-		if ( stickyNavEl.data( 'hideAtTop') === false || $(window).width() < 768 ) {
-			stickyNavEl.addClass( 'show' );
-		} else {
-			mainEl.waypoint( function( direction ) {
-			stickyNavEl.toggleClass( 'show', direction == 'down' );
-		}, { offset: $('#wpadminbar').height() + parseInt( mainEl.css('marginTop') ) 	});
+		if (mainEl.length) {
+			mainEl.waypoint(function(direction) {
+				if ($(window).width() < 768)
+					return false;
+
+				stickyNavEl.toggleClass('show', direction == 'down');
+				stickyNavEl.data('hideAtTop', true);
+			}, {
+				offset: $('#wpadminbar').height() + parseInt(mainEl.css('marginTop'))
+			});
+
+			if ($(window).width() < 768) {
+				stickyNavEl.addClass('show');
+				stickyNavEl.data('hideAtTop', false);
+			}
+
+			$(window).on('resize', function() {
+				if ($(window).width() < 768) {
+					stickyNavEl.addClass('show');
+					stickyNavEl.data('hideAtTop', false);
+				} else {
+					if ($(window).scrollTop() <= mainEl.offset().top)
+						stickyNavEl.removeClass('show');
+
+					stickyNavEl.data('hideAtTop', true);
+				}
+			});
 		}
+
+		// Account for sticky nav with fixed position at top of page
+		var stickyNavWrapper = $('.sticky-nav-wrapper');
+		if (stickyNavWrapper.length && !$('body').hasClass('home'))
+			stickyNavWrapper.height(stickyNavEl.outerHeight());
 
 		// Check if there is a sticky footer
 		var stickyFooterEl = $( '.sticky-footer-holder' );
@@ -295,58 +318,53 @@ jQuery(document).ready(function($) {
 	})();
 
 	// Search slide out for mobile
-	(function() {
-		var searchForm = $('.sticky-nav-holder .form-search');
-		var toggle = searchForm.find( '.toggle' );
-    toggle.on( 'click', function() {
-    	searchForm.toggleClass( 'show' );
-    });
-
-	})();
+    (function() {
+        var searchForm = $('.sticky-nav-holder .form-search');
+        var toggle = searchForm.parent().find('.toggle');
+        toggle.on('click', function() {
+            searchForm.parent().toggleClass('show');
+            return false;
+        });
+    })();
 
 	// Responsive navigation
-	$('.navbar .toggle-nav-bar').each( function() {
+	$('.navbar .toggle-nav-bar').each(function() {
 		var toggleButton = $(this);
 		var navbar = toggleButton.closest('.navbar');
 
 		// Support both touch and click events
-		toggleButton.on( 'touchstart.toggleNav', function() {
+		toggleButton.on('touchstart.toggleNav', function() {
 			// If it is a touch event, get rid of the click events.
-			toggleButton.off( 'click.toggleNav' );
-			navbar.toggleClass( 'open' );
+			toggleButton.off('click.toggleNav');
+			navbar.toggleClass('open');
 
 			// Close all the open sub navigation upon closing the menu
-			if ( !navbar.hasClass( 'open' ) ) {
-				navbar.find( '.nav-shelf li.open' ).removeClass( 'open' );
-			}
+			if (!navbar.hasClass('open'))
+				navbar.find('.nav-shelf li.open').removeClass('open');
 		});
 
-		toggleButton.on( 'click.toggleNav', function() {
-			navbar.toggleClass( 'open' );
+		toggleButton.on('click.toggleNav', function() {
+			navbar.toggleClass('open');
 		});
 
 		// Secondary nav
-		navbar.on( 'touchstart.toggleNav click.toggleNav', '.nav-shelf .caret', function( event ) {
+		navbar.on('touchstart.toggleNav click.toggleNav', '.nav-shelf .dropdown-toggle', function(event) {
 			// Only handle when
-			if ( toggleButton.css( 'display') == 'none' ) {
+			if (toggleButton.css('display') == 'none')
 				return;
-			}
 
-			if ( event.type == 'touchstart' ) {
-				navbar.off( 'click.toggleNav', '.nav-shelf .caret' );
-			}
+			if (event.type == 'touchstart')
+				navbar.off('click.toggleNav', '.nav-shelf .dropdown-toggle');
 
 			var li = $( event.target ).closest('li');
 
 			// Close the others if we are opening
-			if ( !li.hasClass('open') ) {
-				navbar.find( '.nav-shelf li.open' ).removeClass( 'open' );
-			}
+			if (!li.hasClass('open'))
+				navbar.find('.nav-shelf li.open').removeClass('open');
 
 			// Open ours
-			li.toggleClass( 'open' );
-
+			li.toggleClass('open');
 			event.preventDefault();
 		});
-	} );
+	});
 });

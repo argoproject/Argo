@@ -64,6 +64,39 @@ class lessc {
 
   static protected $nextImportId = 0; // uniquely identify imports
 
+  /**
+   * Write a file to disk.
+   *
+   * @param string $file - path of file to write
+   * @param string $contents - the content to be written to the file
+   */
+  protected function put_contents($file, $contents) {
+    global $wp_filesystem;
+
+    if (empty($wp_filesystem)) {
+      require_once(ABSPATH . 'wp-admin/includes/file.php');
+      WP_Filesystem();
+    }
+
+    return $wp_filesystem->put_contents($file, $contents);
+  }
+
+  /**
+   * Read a file's contents.
+   *
+   * @param string $file - path of file to read
+   */
+  protected function get_contents($file) {
+    global $wp_filesystem;
+
+    if (empty($wp_filesystem)) {
+      require_once(ABSPATH . 'wp-admin/includes/file.php');
+      WP_Filesystem();
+    }
+
+    return $wp_filesystem->get_contents($file);
+  }
+
   // attempts to find the path of an import url, returns null for css files
   protected function findImport($url) {
     foreach ((array)$this->importDir as $dir) {
@@ -111,7 +144,7 @@ class lessc {
 
     $this->addParsedFile($realPath);
     $parser = $this->makeParser($realPath);
-    $root = $parser->parse(file_get_contents($realPath));
+    $root = $parser->parse($this->get_contents($realPath));
 
     // set the parents of all the block props
     foreach ($root->props as $prop) {
@@ -1684,12 +1717,12 @@ class lessc {
     $this->allParsedFiles = array();
     $this->addParsedFile($fname);
 
-    $out = $this->compile(file_get_contents($fname), $fname);
+    $out = $this->compile($this->get_contents($fname), $fname);
 
     $this->importDir = $oldImport;
 
     if ($outFname !== null) {
-      return file_put_contents($outFname, $out);
+      return $this->put_contents($outFname, $out);
     }
 
     return $out;

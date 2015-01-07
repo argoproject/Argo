@@ -29,7 +29,7 @@ function optionsframework_options() {
 
 	$imagepath =  get_template_directory_uri() . '/lib/options-framework/images/';
 	$home_templates = array();
-	$home_templates_data = largo_get_home_templates();
+	$home_templates_data = largo_get_home_layouts();
 	if ( count($home_templates_data) ) {
 		foreach ($home_templates_data as $name => $data) {
 			$home_templates[ $data['path'] ] = '<img src="'.$data['thumb'].'" style="float: left; margin-right: 8px; max-width: 120px; height: auto; border: 1px solid #ddd;"><strong>'.$name.'</strong> '.$data['desc'];
@@ -38,8 +38,6 @@ function optionsframework_options() {
 
 	$display_options = array(
 		'top' 	=> __('Top', 'largo'),
-		'btm' 	=> __('Bottom', 'largo'),
-		'both' 	=> __('Both', 'largo'),
 		'none' 	=> __('None', 'largo')
 	);
 
@@ -128,31 +126,36 @@ function optionsframework_options() {
 		'type' 	=> 'text');
 
 	$options[] = array(
-		'name' 	=> __('Don\'t Miss Menu', 'largo'),
+		'name' 	=> __('Menu Options', 'largo'),
 		'desc' 	=> __('<strong>Show</strong> the "Don\'t Miss" menu under the main site navigation. Add links to this menu under <strong>Appearance > Menus</strong>.', 'largo'),
 		'id' 	=> 'show_dont_miss_menu',
 		'type' 	=> 'checkbox');
 
 	$options[] = array(
-		'desc' 	=> __('Enter the <strong>label that appears in front of the menu links</strong>. You can delete this default and no label will appear.', 'largo'),
+		'desc' 	=> __('Enter the <strong>label that appears in front of the menu links in the "Don\'t Miss" menu</strong>. You can delete this default and no label will appear.', 'largo'),
 		'id' 	=> 'dont_miss_label',
 		'std' 	=> __('Don\'t Miss', 'largo'),
 		'class' => 'hidden',
 		'type' 	=> 'text');
 
-		$options[] = array(
-		'name' 	=> __('Disclaimer', 'largo'),
-		'desc' 	=> __('Enter a default disclaimer', 'largo'),
-		'id' 	=> 'default_disclaimer',
-		'std' 	=> '',
-		'type' 	=> 'textarea');
-
 	$options[] = array(
-		'name' 	=> __('Footer Nav Menu', 'largo'),
-		'desc' 	=> __('Enter the <strong>label that appears before the menu links</strong>. You can delete this default and no label will appear.', 'largo'),
+		'desc' 	=> __('Enter the <strong>label that appears before the menu links in the Footer Nav Menu</strong>. You can delete this default and no label will appear.', 'largo'),
 		'id' 	=> 'footer_menu_label',
 		'std' 	=> get_bloginfo('name'),
 		'type' 	=> 'text');
+
+	$options[] = array(
+		'desc'  => __('Show the <strong>sticky nav</strong>? Default is to show, but in some cases you may want to hide it.'),
+		'id'    => 'show_sticky_nav',
+		'std' 	=> '1',
+		'type' 	=> 'checkbox');
+
+	$options[] = array(
+		'desc' 	=> __('Show the <strong>site name in the sticky nav</strong>? Default is to show, but in some cases you might want to hide it to save space or if your logo is clear enough to not need it.', 'largo'),
+		'id' 	=> 'show_sitename_in_sticky_nav',
+		'std' 	=> '1',
+		'class' => 'hidden',
+		'type' 	=> 'checkbox');
 
 	$options[] = array(
 		'name' 	=> __('Copyright Message', 'largo'),
@@ -233,6 +236,12 @@ function optionsframework_options() {
 		'type' 	=> 'text');
 
 	$options[] = array(
+		'desc' 	=> __('<strong>Link to Github Page</strong> (http://github.com/username)', 'largo'),
+		'id' 	=> 'github_link',
+		'std' 	=> '',
+		'type' 	=> 'text');
+
+	$options[] = array(
 		'desc' 	=> __('By default, a row of social media icons is shown in the site footer. <strong>Check this box is you want to show them in the header as well</strong>. Note that they will only display on desktops and larger tablets.', 'largo'),
 		'id' 	=> 'show_header_social',
 		'type' 	=> 'checkbox');
@@ -242,9 +251,9 @@ function optionsframework_options() {
 		'type' 	=> 'info');
 
 	$options[] = array(
-		'desc' 		=> __('<strong>Where would you like to display share icons on single posts?</strong> By default social icons appear at both the top and the bottom of single posts but you can choose to show them in only one or the other or to not show them at all.', 'largo'),
+		'desc' 		=> __('<strong>Where would you like to display share icons on single posts?</strong> By default social icons appear at the top of single posts but you can choose to not show them at all.', 'largo'),
 		'id' 		=> 'social_icons_display',
-		'std' 		=> 'both',
+		'std' 		=> 'top',
 		'type' 		=> 'select',
 		'class'		=> 'mini',
 		'options' 	=> $display_options);
@@ -280,16 +289,6 @@ function optionsframework_options() {
 		'desc' 	=> __('<strong>Show share count</strong> with Twitter buttons.', 'largo'),
 		'id' 	=> 'show_twitter_count',
 		'std' 	=> '1',
-		'type' 	=> 'checkbox');
-
-	$options[] = array(
-		'name' 	=> __('SEO Options', 'largo'),
-		'type'	=> 'info');
-
-	$options[] = array(
-		'desc' 	=> __('Use noindex for all archive pages (default is to use noindex for just date archives).', 'largo'),
-		'id' 	=> 'noindex_archives',
-		'std' 	=> '0',
 		'type' 	=> 'checkbox');
 
 	/**
@@ -403,6 +402,21 @@ function optionsframework_options() {
 		'std' 	=> '',
 		'type' 	=> 'text');
 
+	$options[] = array(
+		'name' 	=> __('Single Article Template', 'largo'),
+		'type' 	=> 'info');
+
+	$options[] = array(
+		'desc' 	=> __('Starting with version 0.3, Largo introduced a new single-post template that more prominently highlights article content, which is the default. For backward compatibility, the pre-0.3 version is also available.', 'largo'),
+		'id' 	=> 'single_template',
+		'std' 	=> 'normal',
+		'type' 	=> 'select',
+		'options' => array(
+			'normal' => 'One Column (Standard Layout)',
+			'classic' => 'Two Column (Classic Layout)'
+			)
+		);
+
 	$widget_options[] = $options[] = array(
 		'name' 	=> __('Sidebar Options', 'largo'),
 		'type' 	=> 'info');
@@ -443,6 +457,10 @@ function optionsframework_options() {
 			'4col' 			=> $imagepath . 'footer-4col.png')
 	);
 
+	/*
+	 * Advanced
+	 */
+
 	$options[] = array(
 		'name' 	=> __('Advanced', 'largo'),
 		'type' 	=> 'heading');
@@ -456,6 +474,18 @@ function optionsframework_options() {
 	$options[] = array(
 		'desc' 	=> __('Enable Custom Landing Pages for Series/Project Pages.', 'largo'),
 		'id' 	=> 'custom_landing_enabled',
+		'std' 	=> '0',
+		'type' 	=> 'checkbox');
+
+	$options[] = array(
+		'desc' 	=> __('Enable Optional Leaderboard Ad Zone.', 'largo'),
+		'id' 	=> 'leaderboard_enabled',
+		'std' 	=> '0',
+		'type' 	=> 'checkbox');
+
+	$options[] = array(
+		'desc' 	=> __('Enable Post Types.', 'largo'),
+		'id' 	=> 'post_types_enabled',
 		'std' 	=> '0',
 		'type' 	=> 'checkbox');
 
@@ -483,13 +513,33 @@ function optionsframework_options() {
 
 
 	$screen = get_current_screen();
-	if ( $screen->base == 'widgets' ) {
+	if ( is_object( $screen ) && $screen->base == 'widgets' ) {
 		return $widget_options;
 	}
 
+
+	/* Disclaimer */
+
+	$options[] = array(
+		'name'	=> __('Disclaimer', 'largo'),
+		'desc' 	=> __('Enable Disclaimer Widget.', 'largo'),
+		'id' 	=> 'disclaimer_enabled',
+		'std' 	=> '0',
+		'type' 	=> 'checkbox');
+
+	$options[] = array(
+		'desc' 	=> __('Enter a default disclaimer', 'largo'),
+		'id' 	=> 'default_disclaimer',
+		'std' 	=> '',
+		'type' 	=> 'textarea');
+
+
+
+	/* Search Options */
+
 	$options[] = array(
 		'name' => __('Search options', 'largo'),
-		'desc' 	=> __('Replace WordPress search with Google Custom Search (recommended)', 'largo'),
+		'desc' 	=> __('Replace WordPress search with Google Custom Search', 'largo'),
 		'id' 	=> 'use_gcs',
 		'std' 	=> '0',
 		'type' 	=> 'checkbox');
@@ -501,12 +551,54 @@ function optionsframework_options() {
 		'type' 	=> 'text');
 
 	$options[] = array(
-		'desc' 	=> __('INN strongly recommends using Google Custom Search. You can get your ID and configure it at <a href="https://www.google.com/cse/create/new">https://www.google.com/cse/create/new</a>.', 'largo'),
+		'desc' 	=> __('Google Custom Search typically returns better results than the search engine built into WordPress. You can get your ID and configure it at <a href="https://www.google.com/cse/create/new">https://www.google.com/cse/create/new</a>.', 'largo'),
 		'id' 	=> 'gcs_help',
 		'std' 	=> '',
 		'type' 	=> 'info');
 
-	return $options;
+	$options[] = array(
+		'name' => __('Site verification', 'largo'),
+		'desc' 	=> __('<strong>Twitter Account ID.</strong> This is used for verifying your site for Twitter Analytics. This is NOT your username, it will be a 9 digit number.', 'largo'),
+		'id' 	=> 'twitter_acct_id',
+		'std' 	=> '',
+		'type' 	=> 'text');
+
+	$options[] = array(
+		'desc' 	=> __('<strong>Google site verification meta tag.</strong> Used to verify a site in Google Webmaster Tools. This will be a long string of numbers and letters.', 'largo'),
+		'id' 	=> 'google_site_verification',
+		'std' 	=> '',
+		'type' 	=> 'text');
+
+	$options[] = array(
+		'desc' 	=> __('<strong>Facebook admins meta tag.</strong> This is a comma-separated list of numerical FB user IDs you want to allow to access Facebook insights for your site.', 'largo'),
+		'id' 	=> 'fb_admins',
+		'std' 	=> '',
+		'type' 	=> 'text');
+
+	$options[] = array(
+		'desc' 	=> __('<strong>Facebook app ID meta tag.</strong> This is a numerical app ID that will allow Facebook to capture insights for any social plugins active on your site and display them in your Facebook app/page insights.', 'largo'),
+		'id' 	=> 'fb_app_id',
+		'std' 	=> '',
+		'type' 	=> 'text');
+
+	$options[] = array(
+		'desc' 	=> __('<strong>Bitly site verification.</strong> This is a string of numbers and letters used to verify your site with bitly analytics.', 'largo'),
+		'id' 	=> 'bitly_verification',
+		'std' 	=> '',
+		'type' 	=> 'text');
+
+	$options[] = array(
+		'name' 	=> __('SEO Options', 'largo'),
+		'type'	=> 'info');
+
+	$options[] = array(
+		'desc' 	=> __('Use noindex for all archive pages (default is to use noindex for just date archives).', 'largo'),
+		'id' 	=> 'noindex_archives',
+		'std' 	=> '0',
+		'type' 	=> 'checkbox');
+
+
+	return apply_filters('largo_options', $options);
 }
 
 /*
@@ -521,6 +613,8 @@ function optionsframework_custom_scripts() { ?>
 <script type="text/javascript">
 jQuery(document).ready(function($) {
 
+	// show/hide don't miss.
+
 	$('#show_dont_miss_menu').click(function() {
   		$('#section-dont_miss_label').fadeToggle(400);
 	});
@@ -528,6 +622,18 @@ jQuery(document).ready(function($) {
 	if ($('#show_dont_miss_menu:checked').val() !== undefined) {
 		$('#section-dont_miss_label').show();
 	}
+
+	// show/hide sticky nav.
+
+	$('#show_sticky_nav').click(function() {
+  		$('#section-show_sitename_in_sticky_nav').fadeToggle(400);
+	});
+
+	if ($('#show_sticky_nav:checked').val() !== undefined) {
+		$('#section-show_sitename_in_sticky_nav').show();
+	}
+
+	// show/hide donate button.
 
 	$('#show_donate_button').click(function() {
   		$('#section-donate_link').fadeToggle(400);
@@ -538,6 +644,18 @@ jQuery(document).ready(function($) {
 		$('#section-donate_link').show();
 		$('#section-donate_button_text').show();
 	}
+
+	// show/hide disclaimer.
+
+	$('#disclaimer_enabled').click(function() {
+  		$('#section-default_disclaimer').fadeToggle(400);
+	});
+
+	if ($('#disclaimer_enabled:checked').val() == undefined) {
+		$('#section-default_disclaimer').hide();
+	}
+
+	// show/hide show tags.
 
 	$('#show_tags').click(function() {
   		$('#section-tag_limit').fadeToggle(400);

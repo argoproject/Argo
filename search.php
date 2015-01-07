@@ -13,24 +13,24 @@ get_header();
 			<?php
 				printf( __('Your search for <span class="search-term">%s</span> returned ', 'largo'), get_search_query() );
 				printf( _n( '%s result', '%s results', $wp_query->found_posts ), number_format_i18n( $wp_query->found_posts ) );
-				printf( '<a class="rss-link" href="%1$s"><i class="icon-rss"></i></a>', get_search_feed_link( $search_query, $feed ) );
+				printf( '<a class="rss-link" href="%1$s"><i class="icon-rss"></i></a>', get_search_feed_link() );
 			?>
 		</h3>
 
 		<?php
 			while ( have_posts() ) : the_post();
 				if ( get_post_type( $post ) == 'argolinks' ) {
-					get_template_part( 'content', 'argolinks' );
+					get_template_part( 'partials/content', 'argolinks' );
 				} else {
-					get_template_part( 'content', 'search' );
+					get_template_part( 'partials/content', 'search' );
 				}
 			endwhile;
     		largo_content_nav( 'nav-below' );
     	} else {
-			get_template_part( 'content', 'not-found' );
+			get_template_part( 'partials/content', 'not-found' );
 		}
     ?>
 </div><!--#content-->
 
 <?php get_sidebar(); ?>
-<?php get_footer(); ?>
+<?php get_footer();

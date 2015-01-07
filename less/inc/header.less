@@ -1,0 +1,146 @@
+.global-nav-bg {
+  height: 38px;
+  background-color: @headerFooterColor;
+}
+.global-nav {
+  font-family: @sansFontFamily;
+  position: relative;
+  height: 38px;
+  overflow:visible;
+  z-index: 1030;
+  ul {
+    margin: 0;
+    list-style:none;
+    font-size: 11px;
+    line-height: 24px;
+	li {
+	  float: left;
+	  margin: 9px 18px 0 0;
+    }
+    a {
+	  .darkLight(@headerFooterColor);
+      &:hover {
+	    text-decoration:none;
+	    color: darken(@white, 15%);
+      }
+    }
+  }
+  .nav-right {
+    float: right;
+    ul#header-social {
+	  float:left;
+	  margin: 0 10px 0 0;
+	  font-size: 14px;
+	  height: 20px;
+	  li {
+	    margin: 8px 0 0;
+	    a {
+		  color: @white;
+		  padding: 5px;
+	    }
+	  }
+    }
+    .donate-btn {
+	  float: left;
+	  margin: 5px 10px 0;
+	}
+	.org-logo {
+ 	  float: left;
+ 	  .box-shadow(0 3px 4px -2px @black);
+	  height: 32px;
+	  overflow: visible;
+	  margin: 0 5px 0 10px;
+    }
+  }
+}
+.donate-btn {
+  font-size: 14px;
+  line-height: 2;
+  background-color: @red;
+  .border-radius(4px);
+  &:hover {
+    background-color: lighten(@red, 5%);
+  }
+  a {
+    padding: 24px 7px;
+    color: @white;
+    &:hover {
+      text-decoration:none;
+    }
+  }
+  i {
+    margin: 1px 3px 0 0;
+  }
+}
+#header-search {
+  float:left;
+  form {
+    margin: 0;
+  }
+  input, button {
+	font-family: @sansFontFamily;
+	font-size: 13px;
+	line-height: 1;
+  }
+  input {
+	height: 18px;
+	padding: 6px 4px 2px;
+  }
+  button {
+	height: 28px;
+	text-transform: uppercase;
+  }
+}
+.home #site-header {
+  min-height: 25px;
+}
+#site-header {
+  margin: 0;
+  width: auto;
+  img {
+    clear: none;
+    margin: 5px 0;
+  }
+}
+h1.branding,
+h2.branding {
+  clear: both;
+  margin: 20px 0;
+  font-size: @baseFontSize * 3.375;
+  line-height: 1;
+  a {
+    color: @textColor;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  .tagline {
+    font-size: @baseFontSize * 1.5;
+    font-weight: normal;
+    color: @gray;
+    padding-left: 10px;
+  }
+}
+.print-header {
+  display: none;
+}
+.alert-wrapper {
+  background-color: @red;
+}
+#alert-container {
+  max-width: @containerMaxWidth;
+  padding: 0 2.5%;
+  margin: 1em auto;
+  color: white;
+  a {
+    color: white;
+  }
+  .widget {
+    border: none;
+  }
+  .widgettitle {
+    background-color: transparent;
+    border: none;
+    padding-left: 0;
+  }
+}

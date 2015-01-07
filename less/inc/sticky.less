@@ -1,0 +1,83 @@
+.sticky-related,
+.sticky-solo {
+  a {
+    &:hover {
+      .opacity(90);
+      text-decoration: none;
+    }
+  }
+  h4 {
+    color: @gray;
+    margin-bottom: 12px;
+  }
+}
+.sticky-main-feature {
+  .image-wrap {
+    float: left;
+    img {
+      float: left;
+      display: block;
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      max-width: 100%;
+    }
+    &.span3 img {
+      width: 100%;
+    }
+  }
+  h2 {
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+  p {
+    a {
+      font-weight: bold;
+      white-space: nowrap;
+    }
+  }
+}
+.sticky-features-list {
+  h4 {
+    font-size: @baseFontSize * 1.2;
+    margin: 0 0 8px 0;
+  }
+  ul {
+    margin: 0;
+    list-style: none;
+    li {
+      list-style-type: disc;
+      margin-left: 20px;
+      margin-bottom: 7px;
+      line-height: 1.2;
+      &.sticky-all {
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+@media (max-width: 360px) {
+  .sticky-main-feature {
+    .image-wrap img {
+      margin: 0 15px 15px 0;
+    }
+    h5.byline {
+      clear: both;
+    }
+    .span9 {
+      width: 100%;
+    }
+  }
+}
+
+@media (min-width: 360px) {
+  .sticky-main-feature {
+    .hidden-phone {
+      display: inherit !important;
+    }
+    .visible-phone {
+      display: none !important;
+    }
+  }
+}

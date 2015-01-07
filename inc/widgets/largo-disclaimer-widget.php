@@ -9,7 +9,7 @@ class largo_disclaimer_widget extends WP_Widget {
 			'classname' 	=> 'largo-disclaimer',
 			'description'	=> __('Show the article disclaimer', 'largo')
 		);
-		$this->WP_Widget( 'largo-disclaimer-widget', __('Largo Disclaimer Site', 'largo'), $widget_ops);
+		$this->WP_Widget( 'largo-disclaimer-widget', __('Largo Disclaimer', 'largo'), $widget_ops);
 	}
 
 	function widget( $args, $instance ) {
@@ -42,7 +42,5 @@ class largo_disclaimer_widget extends WP_Widget {
 	function form( $instance ) {
 		$defaults = array( 'title' => __('About ' . get_bloginfo('name'), 'largo') );
 		$instance = wp_parse_args( (array) $instance, $defaults );
-		?>
-	<?php
 	}
 }

@@ -1,0 +1,273 @@
+body {
+  margin: 0;
+  font-family: @baseFontFamily;
+  font-size: @baseFontSize;
+  font-weight: @baseFontWeight;
+  line-height: @baseLineHeight;
+  color: @textColor;
+  background-color: @bodyBackground;
+}
+#page {
+  background-color: @pageBackground;
+  padding: 0 20px;
+}
+
+// --------------------------------------------
+// Links
+// --------------------------------------------
+
+a {
+  color: @linkColor;
+  text-decoration: none;
+  &:hover {
+    color: @linkColorHover;
+    text-decoration: underline;
+  }
+  &.more-link {
+    white-space: nowrap;
+  }
+}
+
+// --------------------------------------------
+// General Typography
+// --------------------------------------------
+
+p,
+dl,
+hr,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ol,
+ul,
+pre,
+table,
+address,
+fieldset {
+  margin: 0 0 @baseline;
+}
+h1 {
+  font-size: @baseFontSize * 3.375;
+  &.entry-title {
+    font-size: @baseFontSize * 2.75;
+    margin-bottom: @baseline / 2;
+    line-height: 1;
+  }
+}
+h2 {
+  font-size: @baseFontSize * 2.75;
+}
+h3 {
+  font-size: @baseFontSize * 2.25;
+}
+h4,
+.entry-content h1,
+.entry-content h2,
+.entry-content h3 {
+  font-size: @baseFontSize * 1.833;
+}
+h5,
+.stories h3,
+.entry-content h4 {
+  font-size: @baseFontSize * 1.5;
+}
+h6,
+.entry-content h5 {
+  font-size: @baseFontSize * 1.222;
+}
+.entry-content h6 {
+  font-size: @baseFontSize;
+  text-transform: uppercase;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: @headingsFontFamily;
+  font-weight: @headingsFontWeight;
+  color: @headingsColor;
+  line-height: 1.3;
+  text-rendering: optimizelegibility;
+  small {
+    font-size: 0.815em;
+  }
+}
+.entry-content h2,
+.entry-content h3,
+.entry-content h4,
+.entry-content h5,
+.entry-content h6 {
+  margin-bottom: @baseline;
+}
+p {
+  font-size: @baseFontSize * 1.222;
+  line-height: 1.5;
+  margin: 0 0 @baseline;
+  small,
+  &.small {
+    font-size: @baseFontSize * 0.815;
+    color: @grayLight;
+  }
+  &.xsmall {
+	font-size: @baseFontSize * 0.667;
+	color: @grayLight;
+  }
+  &.intro {
+    font-size: @baseFontSize * 1.5;
+    color: @gray;
+    font-style: italic;
+  }
+}
+.widget p {
+  font-size: @baseFontSize;
+}
+
+ul, ol {
+  padding: 0;
+  margin: 0 0 @baseline 25px;
+}
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+  margin-top: @baseline / 3;
+  margin-bottom: 0;
+}
+ul {
+  list-style: disc;
+}
+ol {
+  list-style: decimal;
+  ol {
+    list-style: lower-alpha;
+    ol {
+	  list-style: lower-roman;
+    }
+  }
+}
+li {
+  margin-bottom: @baseline * 0.5;
+}
+ul.unstyled,
+ol.unstyled {
+  margin-left: 0;
+  list-style: none;
+}
+dl dt {
+  font-weight: bold;
+}
+dd {
+  margin-left: 5px;
+}
+strong, dfn {
+  font-weight: bold;
+}
+em, dfn {
+  font-style: italic;
+}
+abbr, acronym {
+  border-bottom: 1px dotted @grayLight;
+}
+address {
+  margin: 0 0 @baseline;
+  font-style: italic;
+}
+del {
+  color: @grayLight;
+}
+
+// --------------------------------------------
+// Fancy Post Formatting
+// --------------------------------------------
+
+blockquote {
+  clear: both;
+  padding: 5px 15px;
+  margin: 0 0 @baseline;
+  background-color: @grayLighter;
+  border-left: 5px solid @grayLight;
+  p {
+    font-size: @baseFontSize;
+    margin: @baseline/2 0;
+    line-height: 1.5;
+  }
+  small {
+    display: block;
+    line-height: @baseline;
+    color: @grayLight;
+    &:before {
+      content: '\2014 \00A0';
+    }
+  }
+  // Float right with text-align: right
+  &.pull-right {
+    float: right;
+    padding-left: 0;
+    border-right: 5px solid @grayLighter;
+    border-left: 0;
+    p,
+    small {
+      text-align: right;
+    }
+  }
+}
+
+code,
+pre {
+  padding: 0 3px 2px;
+  #font > #family > .monospace;
+  font-size: @baseFontSize - 2;
+  color: @grayDark;
+  .border-radius(3px);
+}
+
+// Inline code
+code {
+  padding: 2px 4px;
+  color: #d14;
+  background-color: #f7f7f9;
+  border: 1px solid #e1e1e8;
+}
+
+// Blocks of code
+pre {
+  display: block;
+  padding: @baseline / 2;
+  margin: 0 0 @baseline;
+  font-size: @baseFontSize * .925; // 13px to 12px
+  line-height: @baseline;
+  word-break: break-all;
+  word-wrap: break-word;
+  white-space: pre;
+  white-space: pre-wrap;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc; // fallback for IE7-8
+  border: 1px solid rgba(0,0,0,.15);
+  .border-radius(4px);
+
+  // Make prettyprint styles more spaced out for readability
+  &.prettyprint {
+    margin-bottom: @baseline;
+  }
+
+  // Account for some code outputs that place code tags in pre tags
+  code {
+    padding: 0;
+    color: inherit;
+    background-color: transparent;
+    border: 0;
+  }
+}
+
+// Enable scrollable blocks of code
+.pre-scrollable {
+  max-height: 340px;
+  overflow-y: scroll;
+}
+
+hr {
+  margin: @baseline 0;
+  border: 0;
+  border-top: 1px solid @grayLighter;
+  border-bottom: 1px solid @white;
+}

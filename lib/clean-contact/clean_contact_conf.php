@@ -34,6 +34,12 @@
 				</tr>
 
 				<tr valign="top">
+					<th scope="row"><label for="clean_contact_router"><?php echo __('Contact Reasons & Recipients')?>:</label></th>
+					<td><textarea name="clean_contact_router" id="clean_contact_router" class="regular-text" style="width:25em;" rows="4"><?php echo esc_textarea( cc_get_option('clean_contact_router') ); ?></textarea>
+					<div class="description">Separate reasons and recipients with |, one per line, e.g. Zombie Invasion|shaun@inn.org</div>
+				</tr>
+
+				<tr valign="top">
 					<th scope="row"><label for="clean_contact_prefix"><?php _e( 'Subject prefix', 'largo' ) ?>:</label></th>
 					<td><input name="clean_contact_prefix" id="clean_contact_prefix" value="<?php echo esc_attr( cc_get_option( 'clean_contact_prefix' ) ); ?>" class="regular-text" type="text" />
 				</tr>

@@ -68,6 +68,7 @@ function clean_contact_handle_settings() {
 	update_option( 'clean_contact_thanks_url', esc_url_raw( $_POST['clean_contact_thanks_url'] ) );
 	update_option( 'clean_contact_nocss', isset( $_POST['clean_contact_nocss'] ) ? 1 : 0 );
 	update_option( 'clean_contact_from_email', sanitize_email( $_POST['clean_contact_from_email'] ) );
+	update_option( 'clean_contact_router', stripslashes( $_POST['clean_contact_router'] ) );
 
 	wp_safe_redirect( add_query_arg( 'message', 'updated', admin_url( 'options-general.php?page=clean-contact' ) ) );
 	exit;
@@ -93,7 +94,7 @@ function clean_contact_akismet($body,$subject,$email,$name) {
 	$comment['user_ip']    = preg_replace( '/[^0-9., ]/', '', $_SERVER['REMOTE_ADDR'] );
 	$comment['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
 	$comment['referrer']   = $_SERVER['HTTP_REFERER'];
-	$comment['blog']       = get_option('home');
+	$comment['blog']       = home_url();
 	$comment['comment_author_email']  = $email;
 	$comment['comment_author']  = $name;
 	$comment['comment_content']  = $body;
@@ -117,6 +118,20 @@ function clean_contact_send($atts) {
 	$to_email = ! empty( $atts['email'] ) ? $atts['email'] :  cc_get_option('clean_contact_email');
 	$to_email = sanitize_email( $to_email );
 
+	//alter to_email if $_POST['clean_contact_router'] is present and matches
+	$route_options = cc_get_option('clean_contact_router');
+	if ( $route_options ) {
+		$subject_options = array();
+		$rows = preg_split( "/\r\n|\n|\r/", $route_options );
+		foreach ( $rows as $row ) {
+			list( $subject, $email ) = explode( '|', $row, 2 );
+			$subject_options[ $subject ] = $email;
+		}
+	}
+	if ( isset( $_POST['clean_contact_router'] ) && array_key_exists( stripslashes($_POST['clean_contact_router']), $subject_options) ) {
+		$to_email = sanitize_email( $subject_options[ stripslashes($_POST['clean_contact_router']) ] );
+	}
+
 	$bcc = ! empty( $atts['bcc'] ) ? $atts['bcc'] :  cc_get_option('clean_contact_bcc');
 	if ( ! empty( $bcc ) ) {
 		$bcc = implode( ',', array_map( 'sanitize_email', explode( ',', $bcc ) ) );
@@ -137,7 +152,7 @@ function clean_contact_send($atts) {
 		$subject = "[{$prefix}] {$subject}";
 	}
 
-	$body = wp_filter_nohtml_kses( $_POST['clean_contact_body'] );
+	$body = stripslashes( wp_filter_nohtml_kses( $_POST['clean_contact_body'] ) );
 
 	$from_name = sanitize_text_field( $_POST['clean_contact_from_name'] );
 	$from_email = sanitize_email( $_POST['clean_contact_from_email'] );
@@ -191,6 +206,18 @@ function clean_contact_strings() {
 	$strings['str_clean_contact_subject'] = __( 'Subject', 'largo' );
 	$strings['str_clean_contact_body'] = __( 'Message', 'largo' );
 
+	//router options
+	$options = cc_get_option( 'clean_contact_router' );
+	if ( $options ) {
+		$subject_options = array();
+		$rows = preg_split( "/\r\n|\n|\r/", $options );
+		foreach ( $rows as $row ) {
+			list( $subject, $email ) = explode( '|', $row, 2 );
+			$subject_options[] = $subject;
+		}
+		$strings['str_clean_contact_router'] = implode( '|', $subject_options );
+	}
+
 	$html = '';
 	foreach( $strings as $id => $str ) {
 		$html .= '<input type="hidden" id="' . esc_attr( $id ) . '" value="' . esc_attr( $str ) . '" />';
@@ -242,7 +269,7 @@ function clean_contact( $atts ) {
 */
 function clean_contact_conf() {
 
-	add_options_page( __( 'Clean Contact', 'largo' ), __( 'Clean Contact', 'largo' ), 'manage_options', 'clean-contact', 'clean_contact_conf_page' );
+	add_theme_page( __( 'Clean Contact', 'largo' ), __( 'Clean Contact', 'largo' ), 'manage_options', 'clean-contact', 'clean_contact_conf_page' );
 
 }
 
@@ -263,8 +290,15 @@ function clean_contact_conf_page() {
  * @return void
 */
 function clean_contact_css() {
+	global $wp_filesystem;
+
+	if (empty($wp_filesystem)) {
+		require_once(ABSPATH . 'wp-admin/includes/file.php');
+		WP_Filesystem();
+	}
+
 	$html = '<style  type="text/css" media="screen">';
-	$html .= file_get_contents(dirname(__FILE__).'/style.css');
+	$html .= $wp_filesystem->get_contents(dirname(__FILE__).'/style.css');
 	$html .= '</style>';
 	return $html;
 }

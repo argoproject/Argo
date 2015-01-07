@@ -6,6 +6,13 @@
 class Largo_Term_Icons {
 
 	function __construct() {
+		global $wp_filesystem;
+
+		if (empty($wp_filesystem)) {
+			require_once(ABSPATH . 'wp-admin/includes/file.php');
+			WP_Filesystem();
+		}
+
 		add_action( 'edit_category_form_fields', array( $this, 'display_fields' ) );
 		add_action( 'edit_tag_form_fields', array( $this, 'display_fields' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts') );
@@ -20,16 +27,16 @@ class Largo_Term_Icons {
 	 */
 	function register_taxonomy() {
 		register_taxonomy( 'post-type', array( 'post' ), array(
-			'label' => __( 'Post Types', 'largo-child' ),
+			'label' => __( 'Post Types', 'largo' ),
 			'labels' => array(
-				'name' => __( 'Post Types', 'largo-child' ),
-				'singular_name' => __( 'Post Type', 'largo-child' ),
-				'all_items' => __( 'All Post Types', 'largo-child' ),
-				'edit_item' => __( 'Edit Post Type', 'largo-child' ),
-				'update_item' => __( 'Update Post Type', 'largo-child' ),
-				'view_item' => __( 'View Post Type', 'largo-child' ),
-				'add_new_item' => __( 'Add New Post Type', 'largo-child' ),
-				'new_item_name' => __( 'New Post Type Name', 'largo-child' ),
+				'name' => __( 'Post Types', 'largo' ),
+				'singular_name' => __( 'Post Type', 'largo' ),
+				'all_items' => __( 'All Post Types', 'largo' ),
+				'edit_item' => __( 'Edit Post Type', 'largo' ),
+				'update_item' => __( 'Update Post Type', 'largo' ),
+				'view_item' => __( 'View Post Type', 'largo' ),
+				'add_new_item' => __( 'Add New Post Type', 'largo' ),
+				'new_item_name' => __( 'New Post Type Name', 'largo' ),
 				'search_items' => __( 'Search Post Type'),
 			),
 			'public' => true,
@@ -42,15 +49,17 @@ class Largo_Term_Icons {
 	 * Retrieves the Fontello config.json information about the glyphs
 	 */
 	function get_icons_config() {
+		global $wp_filesystem;
+
 		if ( !empty( $this->_icons_config ) ) {
 			return $this->_icons_config;
 		}
 
 		if ( is_file( get_stylesheet_directory() . '/fonts/fontello/config.json' ) ) {
-			$config = json_decode( file_get_contents( get_stylesheet_directory() . '/fonts/fontello/config.json' ) );
+			$config = json_decode( $wp_filesystem->get_contents( get_stylesheet_directory() . '/fonts/fontello/config.json' ) );
 			$css_file = get_stylesheet_directory_uri() . '/fonts/fontello/css/fontello.css';
 		} else {
-			$config = json_decode( file_get_contents( get_template_directory() . '/fonts/fontello/config.json' ) );
+			$config = json_decode( $wp_filesystem->get_contents( get_template_directory() . '/fonts/fontello/config.json' ) );
 			$css_file = get_template_directory_uri() . '/fonts/fontello/css/fontello.css';
 		}
 
@@ -107,15 +116,15 @@ class Largo_Term_Icons {
 		$config = $this->get_icons_config();
 		?>
 		<div class="form-field">
-			<label for="associated_icon"><?php _e('Term Icon', 'largo-child'); ?></label>
+			<label for="associated_icon"><?php _e('Term Icon', 'largo'); ?></label>
 			<select name="associated_icon" id="associated_icon" style="min-width: 300px;">
-				<option value=""><?php _e( 'No Icon', 'largo-child'); ?></option>
+				<option value=""><?php _e( 'No Icon', 'largo'); ?></option>
 				<?php foreach( $config->glyphs as $glyph ) {
 					$name = ucwords( str_replace( '-', ' ', $glyph->css ) );
 					echo '<option value="', esc_attr( $glyph->uid ), '" data-css="', esc_attr($config->css_prefix_text . $glyph->css), '">',esc_html($name),'</option>';
 				} ?>
 			</select>
-			<p class="description"><?php _e('The icon the theme may use with the term.', 'largo-child'); ?></p>
+			<p class="description"><?php _e('The icon the theme may use with the term.', 'largo'); ?></p>
 			<?php wp_nonce_field( 'associated_icon-new', '_associated_icon_nonce' ); ?>
 		</div>
 		<?php
@@ -138,8 +147,8 @@ class Largo_Term_Icons {
 
 			wp_enqueue_style( 'fontello', $this->_css_file );
 
-			$path = get_stylesheet_directory();
-			$dir = get_stylesheet_directory_uri();
+			$path = get_template_directory();
+			$dir = get_template_directory_uri();
 			$locale = explode( '_', get_locale() );
 
 			wp_enqueue_style( 'select2', $dir.'/js/select2/select2.css' );
@@ -159,7 +168,10 @@ class Largo_Term_Icons {
 	 * Save the results from the term edit page
 	 */
 	function edit_terms( $term_id ) {
-		$nonce_action = $_POST['action'] == 'add-tag' ? 'associated_icon-new' : 'associated_icon-'.$term_id ;
+		if (isset($_POST['action']) && $_POST['action'] == 'add-tag')
+			$nonce_action = 'associated_icon-new';
+		else
+			$nonce_action = 'associated_icon-' . $term_id;
 
 		if ( isset($_POST['_associated_icon_nonce']) && wp_verify_nonce($_POST['_associated_icon_nonce'], $nonce_action ) ) {
 			$taxonomy = $_REQUEST['taxonomy'];

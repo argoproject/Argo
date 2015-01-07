@@ -1,0 +1,249 @@
+// LANDSCAPE PHONE TO SMALL DESKTOP & PORTRAIT TABLET
+// --------------------------------------------------
+
+@media (max-width: 768px) {
+  #sidebar,
+  #site-footer .widget-area,
+  .half,
+  .full,
+  #left-rail,
+  #content-main,
+  #related-post-nav,
+  #related-posts .related-items {
+    clear: both;
+    float: none;
+    width: 100%;
+    margin: 0 0 @baseline;
+  }
+  #homepage-bottom .widget.odd,
+  #homepage-bottom .widget.even {
+    width: 95%;
+    clear: both;
+    float: none;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+  }
+  .half,
+  .full,
+  #content-main,
+  #related-post-nav,
+  #related-posts .related-items {
+    margin: 0;
+  }
+  #page {
+    padding-bottom: 12px;
+  }
+  #main {
+    margin: @baseline / 3 0 0;
+  }
+  #content {
+    width: 100%;
+  }
+  #related-post-nav a {
+    padding: 8px 5px;
+  }
+  #related-posts .related-items ul li.top-related {
+    margin-bottom: @baseline / 2;
+  }
+  #related-posts .related-items ul li.top-related h3 {
+    font-size: @baseFontSize * 1.5;
+    margin-bottom: @baseline / 3;
+  }
+  #related-posts .related-items ul li.top-related p,
+  #related-posts .related-items div img {
+    display: none;
+  }
+  #related-posts .related-items ul li {
+    font-size: @baseFontSize;
+    line-height: 1.2;
+    margin-bottom: @baseline / 3;
+  }
+  .global-nav ul {
+    display: none;
+  }
+  .global-nav .nav-right {
+    width: 100%;
+  }
+  .global-nav .nav-right .donate-btn {
+    float: left;
+    margin-left: 0;
+  }
+  .global-nav .nav-right .org-logo {
+    float: right;
+  }
+  h1.branding,
+  h2.branding {
+    font-size: @baseFontSize * 3.375;
+    span {
+      display:block;
+      clear:both;
+      margin: 6px 0 4px;
+      padding: 0;
+      font-size: @baseFontSize * 1.222;
+    }
+  }
+  h1.entry-title,
+  h1.page-title {
+    font-size: @baseFontSize * 2;
+    line-height: 1.2;
+  }
+  .home #site-header {
+    display: none;
+  }
+  .category-background .related-topics ul {
+	line-height: 1.5;
+  }
+  .stories h2.entry-title,
+  .sticky-main-feature h2,
+  .carousel-caption h2 {
+    font-size: @baseFontSize * 1.5;
+  }
+  .sticky-main-feature,
+  .sticky-features-list {
+    clear: both;
+    width: 100% !important;
+    margin: 0 !important;
+  }
+  #menu-footer-navigation li a {
+    font-size: @baseFontSize + 3;
+    padding: 10px 0;
+  }
+  #footer-logos .logo4 {
+    clear: both;
+  }
+  #footer-logos a {
+    width: 33.3333333333%;
+  }
+  #footer-logos h6 a {
+  	display: inline;
+  	clear: both;
+  	float: none;
+  	text-align: left;
+  }
+  #ft-social {
+    float: left;
+    li {
+      margin-right: 20px;
+      i {
+        font-size: @baseFontSize * 2;
+      }
+    }
+  }
+  #site-footer input {
+    margin-bottom: @baseline;
+  }
+  #site-footer input.search-query {
+    height: 32px;
+    width: 74%;
+    float: left;
+  }
+  #site-footer input.search-submit {
+    padding: 8px 2%;
+    width: 20%;
+    float: right;
+  }
+  #boilerplate p.back-to-top {
+    padding-top: @baseline / 2;
+    font-size: @baseFontSize;
+  }
+  .byline .clean-read {
+  	display: none;
+  }
+  #series-main #sidebar-left {
+    display: none;
+  }
+  #series-main #content {
+    margin-left: 0;
+  }
+  .sticky-footer-holder .follow-author {
+    display: none;
+  }
+  .home .sticky-nav-holder.show {
+    visibility: visible;
+    opacity: 1;
+  }
+  .home #main-nav,
+  .global-nav-bg {
+    display: none;
+  }
+  .sticky-nav-container {
+    padding: 0 10px;
+  }
+  .navbar .btn-navbar {
+    display: block;
+  }
+  .sticky-navbar .nav-middle {
+	  overflow: hidden;
+	  height: 0;
+  }
+  .category {
+    .row-fluid > * {
+      width: 100%;
+      margin-left: 0;
+    }
+    .span4 img {
+      display: block;
+      margin: 0 auto 1em;
+    }
+    .secondary-featured-post img {
+      float: left;
+      max-width: 23%;
+      margin-right: 3%;
+      margin-top: 1em;
+      margin-bottom: 0.5em;
+    }
+  }
+}
+
+// UP TO LANDSCAPE PHONE
+// ---------------------
+@media (max-width: 480px) {
+  .global-nav .org-logo,
+  .post-social .print {
+    display: none;
+  }
+  #header-search {
+    float:right;
+  }
+  #header-search input {
+    height: 23px;
+    padding: 2px 4px;
+    overflow: visible;
+    font-size: @baseFontSize;
+    line-height: 1;
+  }
+  #header-search button {
+    height: 29px;
+  }
+  #header-search .input-medium {
+    width: 110px;
+  }
+  h1.branding,
+  h2.branding {
+    margin-top: 10px;
+    font-size: @baseFontSize*3;
+    text-align: center;
+    span {
+      font-size: @baseFontSize;
+	}
+  }
+  #footer-logos h6 a {
+  	display: inline;
+  	clear: both;
+  	float: none;
+  	text-align: left;
+  }
+  .sticky-footer-holder {
+    .share {
+      margin-right: 0;
+    }
+    .comments {
+      margin-right: 0;
+      float: right;
+    }
+    .follow {
+      display: none;
+    }
+  }
+}
+
