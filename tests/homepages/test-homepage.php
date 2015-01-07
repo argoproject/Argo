@@ -7,21 +7,10 @@ class HomepageTest extends WP_UnitTestCase {
 	}
 
 	function test_largo_register_default_homepage_layouts() {
-		//if series are enabled
 		$GLOBALS['largo_homepage_factory'] = new HomepageLayoutFactory();
 		global $largo_homepage_factory;
-		of_set_option('series_enabled', 1);
 		largo_register_default_homepage_layouts(); // creates $largo_homepage_factory
 		$this->assertCount(5, $largo_homepage_factory->layouts, "Series enabled failed");
-		// cleanup
-		unset($GLOBALS['largo_homepage_factory']);
-		$GLOBALS['largo_homepage_factory'] = new HomepageLayoutFactory();
-
-		//if series are not enabled
-		global $largo_homepage_factory;
-		of_set_option('series_enabled', 0);
-		largo_register_default_homepage_layouts(); // creates $largo_homepage_factory
-		$this->assertCount(4, $largo_homepage_factory->layouts, "Series disabled failed");
 		// cleanup
 		unset($GLOBALS['largo_homepage_factory']);
 		$GLOBALS['largo_homepage_factory'] = new HomepageLayoutFactory();
