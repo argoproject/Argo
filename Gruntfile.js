@@ -19,18 +19,35 @@ module.exports = function(grunt) {
             }
         },
 
+        shell: {
+            sphinx: {
+                command: [
+                    'cd docs',
+                    'make html',
+                ].join('&&'),
+                options: {
+                    stdout: true
+                }
+            }
+        },
+        
+
         watch: {
-          less: {
-            files: 'less/**/*.less',
-            tasks: 'less'
-          }
+            less: {
+                files: 'less/**/*.less',
+                tasks: 'less'
+            },
+            sphinx: {
+                files: ['docs/*.rst'],
+                tasks: ['docs']
+            }
         },
 
         pot: {
             options: {
                 text_domain: 'largo',
                 dest: 'lang/',
-                keywords: [ //WordPress localisation functions
+                keywords: [ //WordPress localization functions
                     '__:1',
                     '_e:1',
                     '_x:1,2c',
@@ -62,4 +79,6 @@ module.exports = function(grunt) {
     });
 
     require('load-grunt-tasks')(grunt, { scope: 'devDependencies' });
+    grunt.loadNpmTasks('grunt-shell');
+    grunt.registerTask('docs', ['shell:sphinx']);
 }
