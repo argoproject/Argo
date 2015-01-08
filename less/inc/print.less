@@ -18,6 +18,24 @@
 		page-break-inside:avoid
 	}
 
+	/* One column display */
+
+	body.normal.single-post .hero, body.normal.page .hero {
+		width: 60%; /* save some paper. */
+		margin-left: 0;
+		float:none;
+	}
+	
+	#content img, #content .wp-caption > img {
+	//  Optional: control image sizes to save paper.
+	//	max-width: 60% !important;
+	//	height: auto;
+	}
+
+	#content.span8[role=main] {
+		margin-left: 0 !important;
+	}
+	
 	thead {
 		display:table-header-group
 	}
