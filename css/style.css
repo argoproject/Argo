@@ -2675,6 +2675,11 @@ li.home-link:hover i {
     display: none;
   }
 }
+@media (min-width: 769px) {
+  .navbar .nav-left {
+    display: none;
+  }
+}
 @media (min-width: 980px) {
   .nav-collapse.collapse {
     height: auto !important;
