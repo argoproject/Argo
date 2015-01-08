@@ -44,7 +44,7 @@ function largo_custom_taxonomies() {
 		);
 	}
 
-	$largoProminenceTerms = apply_filters('largo_prominence_terms', array(
+	$termsDefinitions = array(
 		array(
 			'name' => __('Sidebar Featured Widget', 'largo'),
 			'description' => __('If you are using the Sidebar Featured Posts widget, add this label to posts to determine which to display in the widget.', 'largo'),
@@ -56,11 +56,6 @@ function largo_custom_taxonomies() {
 			'slug' => 'footer-featured'
 		),
 		array(
-			'name' => __('Featured in Series', 'largo'),
-			'description' => __('Select this option to allow this post to float to the top of any/all series landing pages sorting by Featured first.', 'largo'),
-			'slug' => 'series-featured'
-		),
-		array(
 			'name' => __('Featured in Category', 'largo'),
 			'description' => __('This will allow you to designate a story to appear more prominently on category archive pages.', 'largo'),
 			'slug' => 'category-featured'
@@ -70,7 +65,17 @@ function largo_custom_taxonomies() {
 			'description' => __('Add this label to posts to display them in the featured area on the homepage.', 'largo'),
 			'slug' => 'homepage-featured'
 		)
-	));
+	);
+
+	if (largo_is_series_enabled()) {
+		$termsDefinitions[] = array(
+			'name' => __('Featured in Series', 'largo'),
+			'description' => __('Select this option to allow this post to float to the top of any/all series landing pages sorting by Featured first.', 'largo'),
+			'slug' => 'series-featured'
+		);
+	}
+
+	$largoProminenceTerms = apply_filters('largo_prominence_terms', $termsDefinitions);
 
 	$changed = false;
 	$terms = get_terms('prominence', array(
