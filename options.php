@@ -472,15 +472,16 @@ function optionsframework_options() {
 		'type' 	=> 'checkbox');
 
 	$options[] = array(
-		'desc' 	=> __('Enable Series in menus, and features that use series.', 'largo'),
+		'desc' 	=> __('Enable "Series" taxonomy.', 'largo'),
 		'id' 	=> 'series_enabled',
 		'std' 	=> '0',
 		'type' 	=> 'checkbox');
 
 	$options[] = array(
-		'desc' 	=> __('Enable Custom Landing Pages for Series/Project Pages. Requires series to be enabled.', 'largo'),
+		'desc' 	=> __('Enable Custom Landing Pages for Series/Project Pages. Requires "Series" taxonomy to be enabled.', 'largo'),
 		'id' 	=> 'custom_landing_enabled',
 		'std' 	=> '0',
+		'class' => 'hidden',
 		'type' 	=> 'checkbox');
 
 	$options[] = array(
@@ -490,7 +491,7 @@ function optionsframework_options() {
 		'type' 	=> 'checkbox');
 
 	$options[] = array(
-		'desc' 	=> __('Enable Post Types.', 'largo'),
+		'desc' 	=> __('Enable "Post Types" taxonomy.', 'largo'),
 		'id' 	=> 'post_types_enabled',
 		'std' 	=> '0',
 		'type' 	=> 'checkbox');
@@ -669,6 +670,17 @@ jQuery(document).ready(function($) {
 
 	if ($('#show_tags:checked').val() !== undefined) {
 		$('#section-tag_limit').show();
+	}
+
+	// show/hide custom series landing pages.
+
+	$('#series_enabled').click(function() {
+		$('#section-custom_landing_enabled').fadeToggle(400);
+		$('#section-custom_landing_enabled input').removeAttr('checked');
+	});
+
+	if ($('#series_enabled:checked').val() !== undefined) {
+		$('#section-custom_landing_enabled').show();
 	}
 
 });

@@ -20,9 +20,8 @@ class HomepageSingleWithSeriesStories extends HomepageSingle {
 	}
 
 	function __construct($options=array()) {
-		if ( !largo_is_series_enabled() ){
+		if ( !largo_is_series_enabled() && !$this->isActiveHomepageLayout() )
 			add_action('init', array($this, 'unregister_HomepageSingleWithSeriesStories'), 105);
-		}
 
 		$defaults = array(
 			'name' => __('One big story and list of stories from the same series', 'largo'),

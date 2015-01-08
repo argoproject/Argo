@@ -8,11 +8,7 @@
  */
 function largo_is_series_enabled() {
 	$series_enabled = of_get_option('series_enabled');
-	if ( empty($series_enabled) ) {
-		return false;
-	} else {
-		return true;
-	}
+	return !empty($series_enabled);
 }
 
 /**
