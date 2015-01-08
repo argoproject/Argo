@@ -6,7 +6,7 @@ Documentation in this directory is written in [reStructuredText](http://docutils
 
 ### Contributing
 
-We'd love your help! We host the documentation with the code so it's as simple as possible to get started. Editing the docs is a three step process:
+We'd love your help!!! We host the documentation with the code so it's as simple as possible to get started. Editing the docs is a three step process:
 
 1. Edit the .rst files in the `docs/` folder.
 2. Compile these changes locally to check the work.
