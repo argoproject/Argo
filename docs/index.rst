@@ -5,7 +5,7 @@ Welcome to the Largo Project
 
 .. _The Largo Project: https://github.com/inn/largo
 
-This documentation contains tools for users, administrators and developers
+This documentation contains tools for users and developers
 
 * :ref:`user-docs`
 * :ref:`admin-docs`
