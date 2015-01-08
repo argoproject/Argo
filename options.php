@@ -36,11 +36,6 @@ function optionsframework_options() {
 		}
 	}
 
-	$display_options = array(
-		'top' 	=> __('Top', 'largo'),
-		'none' 	=> __('None', 'largo')
-	);
-
 	$tag_display_options = array(
 		'top' 	=> __('Single Tag Above', 'largo'),
 		'btm' 	=> __('List Below', 'largo'),
@@ -251,12 +246,11 @@ function optionsframework_options() {
 		'type' 	=> 'info');
 
 	$options[] = array(
-		'desc' 		=> __('<strong>Where would you like to display share icons on single posts?</strong> By default social icons appear at the top of single posts but you can choose to not show them at all.', 'largo'),
-		'id' 		=> 'social_icons_display',
-		'std' 		=> 'top',
-		'type' 		=> 'select',
-		'class'		=> 'mini',
-		'options' 	=> $display_options);
+		'desc' 		=> __('<strong>Would you like to display share icons on single posts?</strong> By default social icons appear at the top of single posts but you can choose to not show them at all.', 'largo'),
+		'id' 		=> 'single_social_icons',
+		'std' 		=> '1',
+		'type' 		=> 'checkbox',
+		'class'		=> 'mini');
 
 	$options[] = array(
 		'desc' 		=> __('Select the <strong>share icons</strong> to display on single posts.', 'largo'),
