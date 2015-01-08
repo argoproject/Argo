@@ -4,7 +4,25 @@ include_once __DIR__ . '/HomepageSingle.php';
 
 class HomepageSingleWithSeriesStories extends HomepageSingle {
 
+	/**
+	 * If the Series taxonomy is not enabled, this class should unregister itself.
+	 *
+	 * The default homepage layouts are listed in homepages/homepage.php.
+	 * For each default layout, register_homepage_layout is called on that layout class.
+	 * register_homepage_layout calls the HomepageLayoutFactory method register on that class instance
+	 * the register method creates a new instance of that class
+	 * therefore the __construct method below checks largo_is_series_enabled 
+	 * and adds an auto-removal function to the init hook of series are not enabled.
+	 */
+	function unregister_HomepageSingleWithSeriesStories() {
+		global $largo_homepage_factory;
+		unset($largo_homepage_factory->layouts[get_class($this)]);
+	}
+
 	function __construct($options=array()) {
+		if ( !largo_is_series_enabled() && !$this->isActiveHomepageLayout() )
+			add_action('init', array($this, 'unregister_HomepageSingleWithSeriesStories'), 105);
+
 		$defaults = array(
 			'name' => __('One big story and list of stories from the same series', 'largo'),
 			'type' => 'series',

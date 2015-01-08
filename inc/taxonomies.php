@@ -1,6 +1,17 @@
 <?php
 
 /**
+ * Check if the Series taxonomy is enabled
+ *
+ * @since 0.4
+ * @return bool Whether or not the Series taxonomy option is enabled in the Theme Options > Advanced
+ */
+function largo_is_series_enabled() {
+	$series_enabled = of_get_option('series_enabled');
+	return !empty($series_enabled);
+}
+
+/**
  * Register the prominence and series custom taxonomies
  * Insert the default terms
  *
@@ -125,10 +136,11 @@ add_action( 'init', 'largo_custom_taxonomies' );
  * @since 1.0
  */
 function largo_post_in_series( $post_id = NULL ) {
-  global $post;
-  $the_id = ($post_id) ? $post_id : $post->ID ;
-  $features = get_the_terms( $the_id, 'series' );
-  return ( $features ) ? true : false;
+	if ( !largo_is_series_enabled() ) return false;
+	global $post;
+	$the_id = ($post_id) ? $post_id : $post->ID ;
+	$features = get_the_terms( $the_id, 'series' );
+	return ( $features ) ? true : false;
 }
 
 /**
@@ -173,6 +185,9 @@ if ( ! function_exists( 'largo_term_to_label' ) ) {
  * @param integer number of posts to fetch, defaults to all
  */
 function largo_get_series_posts( $series_id, $number = -1 ) {
+
+	// If series are not enabled, then there are no posts in a series.
+	if ( !largo_is_series_enabled() ) return;
 
 	// get the cf-tax-landing
 	$args = array(
@@ -272,6 +287,38 @@ function largo_category_archive_posts( $query ) {
 	$query->tax_query = NULL;	//unsetting it twice because WP is weird like that
 }
 add_action( 'pre_get_posts', 'largo_category_archive_posts', 15 );
+
+/**
+ * If the option in Advanced Options is unchecked, remove the "Series" menu item from the admin menu.
+ *
+ * @uses   of_get_option
+ * @since  0.4
+ */
+function hide_series_taxonomy_menu() {
+	if (! is_admin() ) return;
+	if ( !largo_is_series_enabled() ) {
+		$page = remove_submenu_page('edit.php', 'edit-tags.php?taxonomy=series');
+	}
+}
+add_action( 'admin_menu', 'hide_series_taxonomy_menu', 999 );
+/**
+ * If the option in Advanced Options is unchecked, remove the "Series" metabox from the editor 
+ *
+ * @uses   of_get_option
+ * @since  0.4
+ */
+function hide_series_taxonomy_metabox() {
+	if (! is_admin() ) return;
+	if ( !largo_is_series_enabled() ) {
+		remove_meta_box('seriesdiv', 'post', 'normal');
+		remove_meta_box('seriesdiv', 'page', 'normal');
+		remove_meta_box('seriesdiv', 'post', 'side');
+		remove_meta_box('seriesdiv', 'page', 'side');
+		remove_meta_box('seriesdiv', 'post', 'advanced');
+		remove_meta_box('seriesdiv', 'page', 'advanced');
+	}
+}
+add_action( 'admin_menu' , 'hide_series_taxonomy_metabox', 999 );
 
 /**
  * If the option in Advanced Options is unchecked, remove the "Post Types" menu item from the admin menu.
