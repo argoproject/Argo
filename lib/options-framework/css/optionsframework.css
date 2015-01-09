@@ -269,28 +269,19 @@
 }
 #optionsframework #section-show_next_prev_nav_single,
 #optionsframework #section-tag_limit,
-#optionsframework #section-article_utilities,
-#optionsframework #section-social_icons_display {
+#optionsframework #section-article_utilities {
 	margin-bottom:20px;
 }
 
 #optionsframework #section-article_utilities .explain,
-#optionsframework #section-fb_verb .explain,
-#optionsframework #section-social_icons_display .explain {
+#optionsframework #section-fb_verb .explain {
 	float:left;
 	width:30%;
 }
-#optionsframework #section-social_icons_display .explain {
-	width:65%;
-}
 #optionsframework #section-article_utilities .controls,
-#optionsframework #section-fb_verb .controls,
-#optionsframework #section-social_icons_display .controls  {
+#optionsframework #section-fb_verb .controls {
 	float:right;
 	width:65%;
-}
-#optionsframework #section-social_icons_display .controls {
-	width:30%;
 }
 #optionsframework #section-article_utilities input,
 #optionsframework #section-article_utilities label {

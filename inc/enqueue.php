@@ -19,7 +19,7 @@ if ( ! function_exists( 'largo_enqueue_js' ) ) {
 		//only load sharethis on single pages and load jquery tabs for the related content box if it's active
 		if ( is_single() ) {
 			$utilities = of_get_option( 'article_utilities' );
-			if ( of_get_option( 'social_icons_display' ) != 'none' && ( $utilities['sharethis'] === '1' || $utilities['email'] === '1' ) )
+			if ( of_get_option( 'single_social_icons' ) == '1' && ( $utilities['sharethis'] === '1' || $utilities['email'] === '1' ) )
 				wp_enqueue_script( 'sharethis', get_template_directory_uri() . '/js/st_buttons.js', array( 'jquery' ), '1.0', true );
 			wp_enqueue_script( 'idTabs', get_template_directory_uri() . '/js/jquery.idTabs.js', array( 'jquery' ), '1.0', true );
 		}

@@ -36,11 +36,6 @@ function optionsframework_options() {
 		}
 	}
 
-	$display_options = array(
-		'top' 	=> __('Top', 'largo'),
-		'none' 	=> __('None', 'largo')
-	);
-
 	$tag_display_options = array(
 		'top' 	=> __('Single Tag Above', 'largo'),
 		'btm' 	=> __('List Below', 'largo'),
@@ -251,12 +246,10 @@ function optionsframework_options() {
 		'type' 	=> 'info');
 
 	$options[] = array(
-		'desc' 		=> __('<strong>Where would you like to display share icons on single posts?</strong> By default social icons appear at the top of single posts but you can choose to not show them at all.', 'largo'),
-		'id' 		=> 'social_icons_display',
-		'std' 		=> 'top',
-		'type' 		=> 'select',
-		'class'		=> 'mini',
-		'options' 	=> $display_options);
+		'desc' 		=> __('<strong>Would you like to display share icons on single posts?</strong> By default social icons appear at the top of single posts but you can choose to not show them at all.', 'largo'),
+		'id' 		=> 'single_social_icons',
+		'std' 		=> '1',
+		'type' 		=> 'checkbox',);
 
 	$options[] = array(
 		'desc' 		=> __('Select the <strong>share icons</strong> to display on single posts.', 'largo'),
@@ -472,9 +465,16 @@ function optionsframework_options() {
 		'type' 	=> 'checkbox');
 
 	$options[] = array(
-		'desc' 	=> __('Enable Custom Landing Pages for Series/Project Pages.', 'largo'),
+		'desc' 	=> __('Enable "Series" taxonomy.', 'largo'),
+		'id' 	=> 'series_enabled',
+		'std' 	=> '0',
+		'type' 	=> 'checkbox');
+
+	$options[] = array(
+		'desc' 	=> __('Enable Custom Landing Pages for Series/Project Pages. Requires "Series" taxonomy to be enabled.', 'largo'),
 		'id' 	=> 'custom_landing_enabled',
 		'std' 	=> '0',
+		'class' => 'hidden',
 		'type' 	=> 'checkbox');
 
 	$options[] = array(
@@ -484,7 +484,7 @@ function optionsframework_options() {
 		'type' 	=> 'checkbox');
 
 	$options[] = array(
-		'desc' 	=> __('Enable Post Types.', 'largo'),
+		'desc' 	=> __('Enable "Post Types" taxonomy.', 'largo'),
 		'id' 	=> 'post_types_enabled',
 		'std' 	=> '0',
 		'type' 	=> 'checkbox');
@@ -663,6 +663,17 @@ jQuery(document).ready(function($) {
 
 	if ($('#show_tags:checked').val() !== undefined) {
 		$('#section-tag_limit').show();
+	}
+
+	// show/hide custom series landing pages.
+
+	$('#series_enabled').click(function() {
+		$('#section-custom_landing_enabled').fadeToggle(400);
+		$('#section-custom_landing_enabled input').removeAttr('checked');
+	});
+
+	if ($('#series_enabled:checked').val() !== undefined) {
+		$('#section-custom_landing_enabled').show();
 	}
 
 });
