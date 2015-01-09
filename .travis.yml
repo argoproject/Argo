@@ -34,3 +34,8 @@ before_script:
     - cd "$WP_CORE_DIR/src/wp-content/themes/$SLUG"
 
 script: phpunit
+
+notifications:
+    hipchat:
+        rooms:
+            secure: mrJDwl2LYmWGY6gKUEsSnbGp3mQ8UhVQkb9oBmRSDx9T/hCSDx4Q2KDLo0OqCFIwDB5BevP16vDDWVmsg8Ldwk+Hh0YAmdUqBAXe21+17ojqSIAdQg6LgLrEFEBNVBlPu89xonRMnsai34RDCoRt5c9OLuWgGVMAcTojpQvPiII=
