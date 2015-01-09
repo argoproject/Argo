@@ -337,10 +337,10 @@ add_action( 'admin_menu' , 'hide_series_taxonomy_metabox', 999 );
  */
 function unregister_series_taxonomy() {
 	if ( !largo_is_series_enabled() ) {
-		register_taxonomy( 'series', 'post', array() );
+		register_taxonomy( 'series', array() );
 	}
 }
-add_action( 'admin_menu', 'unregister_series_taxonomy', 999 );
+add_action( 'init', 'unregister_series_taxonomy', 999 );
 /**
  * If the option in Advanced Options is unchecked, unregister the "Post Types" taxonomy
  *
@@ -349,10 +349,10 @@ add_action( 'admin_menu', 'unregister_series_taxonomy', 999 );
  */
 function unregister_post_types_taxonomy() {
 	if ( of_get_option('post_types_enabled') == 0 ) {
-		register_taxonomy( 'post-type', 'post', array() );
+		register_taxonomy( 'post-type', array() );
 	}
 }
-add_action( 'admin_menu', 'unregister_post_types_taxonomy', 999 );
+add_action( 'init', 'unregister_post_types_taxonomy', 999 );
 /**
  * If the option in Advanced Options is unchecked, remove the "Post Types" menu item from the admin menu.
  *
