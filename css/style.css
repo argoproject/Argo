@@ -2474,6 +2474,9 @@ li.home-link:hover i {
     visibility: hidden;
     opacity: 0;
   }
+  .navbar .nav-shelf .site-name {
+    display: none;
+  }
   .navbar.open .nav-shelf {
     visibility: visible;
     opacity: 1;
