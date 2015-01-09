@@ -101,7 +101,7 @@ class Largo_Customizer {
 				'sanitize_callback'     => 'sanitize_key',
 				),
 			// Single
-			'[social_icons_display]' => array(
+			'[single_social_icons]' => array(
 				'type'                  => 'option',
 				'sanitize_callback'     => 'sanitize_key',
 				),
@@ -217,17 +217,11 @@ class Largo_Customizer {
 				'print'          => __( 'Print', 'largo' ),
 				),
 			) ) );
-		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'largo_social_icons_display', array(
-			'label'              => __( 'Social Icons Position', 'largo' ),
+		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'largo_single_social_icons', array(
+			'label'              => __( 'Display Social Icons', 'largo' ),
 			'section'            => 'largo_single_post',
-			'settings'           => $this->get_setting_key( '[social_icons_display]' ),
-			'type'               => 'select',
-			'choices'            => array(
-				'top'            => __( 'Top', 'largo' ),
-				'btm'            => __( 'Bottom', 'largo' ),
-				'both'           => __( 'Both', 'largo' ),
-				'none'           => __( 'None', 'largo' ),
-				),
+			'settings'           => $this->get_setting_key( '[single_social_icons]' ),
+			'type'               => 'checkbox',
 			) ) );
 		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'largo_fb_verb', array(
 			'label'              => __( 'Facebook Button Text', 'largo' ),
