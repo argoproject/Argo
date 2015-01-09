@@ -49,26 +49,11 @@ class TaxonomiesTestFunctions extends WP_UnitTestCase {
 	function test_largo_categoy_archive_posts() {
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	function test_hide_series_taxonomy_menu() {
-		$this->markTestIncomplete('This test has not been implemented yet.');
-	}
-	function test_hide_series_taxonomy_metabox() {
-		$this->markTestIncomplete('This test has not been implemented yet.');
-	}
 	function test_unregister_series_taxonomy() {
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 	function test_unregister_post_types_taxonomy() {
 		$this->markTestIncomplete('This test has not been implemented yet.');
-	}
-	function test_hide_post_type_taxonomy_menu() {
-		$this->markTestIncomplete('This test has not been implemented yet.');
-	}
-	function test_hide_post_type_taxonomy_metabox() {
-		$this->markTestIncomplete('This test has not been implemented yet.');
-	}
-	function test_hide_post_type_taxonomy_table() {
-		$this->markTestSkipped('This function has not been written yet.');
 	}
 }
 
