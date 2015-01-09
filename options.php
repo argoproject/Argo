@@ -249,8 +249,7 @@ function optionsframework_options() {
 		'desc' 		=> __('<strong>Would you like to display share icons on single posts?</strong> By default social icons appear at the top of single posts but you can choose to not show them at all.', 'largo'),
 		'id' 		=> 'single_social_icons',
 		'std' 		=> '1',
-		'type' 		=> 'checkbox',
-		'class'		=> 'mini');
+		'type' 		=> 'checkbox',);
 
 	$options[] = array(
 		'desc' 		=> __('Select the <strong>share icons</strong> to display on single posts.', 'largo'),
