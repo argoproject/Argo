@@ -220,7 +220,7 @@ function largo_check_deprecated_widgets() {
 
 	$deprecated = array(
 		'largo-footer-featured' => 'largo_deprecated_footer_widget',
-		'largo-sidebar-featured' => 'largo_depcreated_sidebar_widget'
+		'largo-sidebar-featured' => 'largo_deprecated_sidebar_widget'
 	);
 
 	$widgets = get_option( 'sidebars_widgets ');
