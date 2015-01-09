@@ -41,7 +41,7 @@ The **Basic Settings** tab allows you to enter some basic information about your
 
 The **Theme Images** tab is where you will upload a number of images that the Largo theme requires. These include a thumbnail-sized logo image and three banner images that are used as the site's top banner on different screen sizes.
 
-And finally, the **Homepage Options** tab allows you to choose between three different homepage layouts. The first (and default) setting is a reverse chronological blog style layout, the second is a more newspaper-style layout and the third adds a homepage carousel for featured stories.
+And finally, the **Homepage Options** tab allows you to choose between different homepage layouts. The first (and default) setting is a reverse chronological blog style layout and a more newspaper-style layout.  Do these have names?
 
 For more on Theme Options and an explanation of what each of them does, please visit our Theme Options documentation page.
 
