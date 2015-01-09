@@ -601,7 +601,12 @@ li.home-link:hover i {
 
 // DEFAULT DESKTOP
 // ---------------
-
+// Hides the second site name in the sticky header when .nav-shelf is visible
+@media (min-width: 769px) {
+  .navbar .nav-left {
+    display: none;
+  }
+}
 // Required to make the collapsing navbar work on regular desktops
 @media (min-width: 980px) {
   .nav-collapse.collapse {
