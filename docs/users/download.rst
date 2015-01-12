@@ -1,4 +1,6 @@
-**Download and Install Wordpress**
+Download and Install Wordpress
+==============================
+
 
 The Largo parent theme and plugins have been tested with the latest version of WordPress. Some hosting providers offer one-click installation of WordPress and that should get you the latest version. If that does not work for you, download the latest version from the `WordPress downloads <https://wordpress.org/download/>`_  page and follow their `instructions <http://codex.wordpress.org/Installing_WordPress>`_ to get it setup.
 
@@ -13,8 +15,21 @@ In order to make it easier to upgrade to future versions of the Largo parent the
 At a minimum you will need to create a new theme folder (call it something like "largo-child" in your wp-content/themes directory and add one file to it called style.css. That file would be used to add any custom CSS unique to your child theme, but it also tells WordPress where to find the parent theme.
 
 At the very top of the file you need to add at least the following:
+	
+.. code::
 
-*missing image*
+    /*
+    Theme Name:     Your Child Theme's Name
+    Theme URI:      Your Site URL
+    Description:    Your Theme Description
+    Author:         Your Name
+    Author URI:     Author URL
+    Template:       largo
+    Version:        0.1.0
+    */
+
+    @import url("../largo/style.css");	
+
 
 The line starting with "Template" must include the name of the parent theme (this should be "largo" unless you rename it) and the line starting with @import must include the path to the stylesheet for the Largo parent theme's stylesheet (in most cases it will be as shown above).
 
@@ -27,15 +42,13 @@ Simply unzip this file and upload the folder to your wp-content/themes directory
 
 Now that you have a child theme created, login to your WordPress site and in the left sidebar click on "Appearance" and then "Themes". Find your child theme, click activate and then you should see your new child theme in action on your site and can begin customizing.
 
-*missing image*
-
 **Configure theme options**
 
 Now that you have activated your theme you will want to configure some of the built-in options that come with Largo. You can find these in the Appearance > Theme Options menu.
 
 There are three tabs across the top of the page that allow you to access different sections of the Theme Options.
 
-*missing image*
+Basic Settings Theeme Settings Homepage Options
 
 The **Basic Settings** tab allows you to enter some basic information about your site such as a short description and social media links and to enable/disable and configure some of the built-in functionality in the Largo theme such as related content at the bottom of single articles and a number of menu areas that you will configure in the next step.
 
