@@ -15,6 +15,7 @@ function largo_is_series_enabled() {
  * Register the prominence and series custom taxonomies
  * Insert the default terms
  *
+ * @uses  largo_is_series_enabled
  * @since 1.0
  */
 function largo_custom_taxonomies() {
@@ -137,6 +138,7 @@ add_action( 'init', 'largo_custom_taxonomies' );
  * Expects to be called from within The Loop.
  *
  * @uses global $post
+ * @uses largo_is_series_enabled
  * @return bool
  * @since 1.0
  */
@@ -186,6 +188,8 @@ if ( ! function_exists( 'largo_term_to_label' ) ) {
 
 /**
  * Helper function for getting posts in proper landing-page order for a series
+ *
+ * @uses largo_is_series_enabled
  * @param integer series term id
  * @param integer number of posts to fetch, defaults to all
  */
@@ -294,81 +298,26 @@ function largo_category_archive_posts( $query ) {
 add_action( 'pre_get_posts', 'largo_category_archive_posts', 15 );
 
 /**
- * If the option in Advanced Options is unchecked, remove the "Series" menu item from the admin menu.
+ * If the option in Advanced Options is unchecked, unregister the "Series" taxonomy
  *
- * @uses   of_get_option
- * @since  0.4
+ * @uses largo_is_series_enabled
+ * @since 0.4
  */
-function hide_series_taxonomy_menu() {
-	if (! is_admin() ) return;
+function unregister_series_taxonomy() {
 	if ( !largo_is_series_enabled() ) {
-		$page = remove_submenu_page('edit.php', 'edit-tags.php?taxonomy=series');
+		register_taxonomy( 'series', array() );
 	}
 }
-add_action( 'admin_menu', 'hide_series_taxonomy_menu', 999 );
+add_action( 'init', 'unregister_series_taxonomy', 999 );
 /**
- * If the option in Advanced Options is unchecked, remove the "Series" metabox from the editor 
+ * If the option in Advanced Options is unchecked, unregister the "Post Types" taxonomy
  *
- * @uses   of_get_option
- * @since  0.4
+ * @uses of_get_option
+ * @since 0.4
  */
-function hide_series_taxonomy_metabox() {
-	if (! is_admin() ) return;
-	if ( !largo_is_series_enabled() ) {
-		remove_meta_box('seriesdiv', 'post', 'normal');
-		remove_meta_box('seriesdiv', 'page', 'normal');
-		remove_meta_box('seriesdiv', 'post', 'side');
-		remove_meta_box('seriesdiv', 'page', 'side');
-		remove_meta_box('seriesdiv', 'post', 'advanced');
-		remove_meta_box('seriesdiv', 'page', 'advanced');
-	}
-}
-add_action( 'admin_menu' , 'hide_series_taxonomy_metabox', 999 );
-
-/**
- * If the option in Advanced Options is unchecked, remove the "Post Types" menu item from the admin menu.
- *
- * @uses   of_get_option
- * @since  0.4
- */
-function hide_post_type_taxonomy_menu() {
-	if (! is_admin() ) return;
+function unregister_post_types_taxonomy() {
 	if ( of_get_option('post_types_enabled') == 0 ) {
-		$page = remove_submenu_page('edit.php', 'edit-tags.php?taxonomy=post-type');
+		register_taxonomy( 'post-type', array() );
 	}
 }
-add_action( 'admin_menu', 'hide_post_type_taxonomy_menu', 999 );
-
-/**
- * If the option in Advanced Options is unchecked, remove the "Post Types" metabox from the editor
- *
- * @uses   of_get_option
- * @since  0.4
- */
-function hide_post_type_taxonomy_metabox() {
-	if (! is_admin() ) return;
-	if ( of_get_option('post_types_enabled') == 0 ) {
-		remove_meta_box('post-typediv', 'post', 'normal');
-		remove_meta_box('post-typediv', 'page', 'normal');
-		remove_meta_box('post-typediv', 'post', 'side');
-		remove_meta_box('post-typediv', 'page', 'side');
-		remove_meta_box('post-typediv', 'post', 'advanced');
-		remove_meta_box('post-typediv', 'page', 'advanced');
-	}
-}
-add_action( 'admin_menu' , 'hide_post_type_taxonomy_metabox', 999 );
-
-/**
- * If the option in Advanced Options is unchecked, remove the "Post Types" column from the post table.
- *
- * @TODO this is broken. Attaching anything to this filter results in errors in wp-admin/class-wp-list-table.php
- * @param  array  $columns http://codex.wordpress.org/Plugin_API/Filter_Reference/manage_posts_columns
- * @uses   of_get_option
- * @since  0.4
- */
-function hide_post_type_taxonomy_table($columns) {
-	if (! is_admin() ) return $columns;
-	unset($columns['taxonomy-post-type']);
-	return $columns;
-}
-add_action('manage_posts_columns' , 'hide_post_type_taxonomy_table');
+add_action( 'init', 'unregister_post_types_taxonomy', 999 );
