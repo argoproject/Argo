@@ -1,30 +1,49 @@
-var featuredMedia = {
+var LFM = _.extend(LFM || {}, {
+    Utils: {},
     Views: {},
     instances: {},
-};
+});
 
 (function() {
     var $ = jQuery;
 
     var featuredMediaIdToView = {
         'embed-code': 'featuredEmbedCodeView',
-        'video': 'featuredVideoView',
-        'photo-gallery': 'featuredPhotoGalleryView',
-        'image': 'featuredImageView'
+        //'video': 'featuredVideoView',
+        //'photo-gallery': 'featuredPhotoGalleryView',
+        //'image': 'featuredImageView'
     };
 
     /* Models */
-    var featuredMediaModel = Backbone.Model.extend({});
+    var featuredMediaModel = Backbone.Model.extend({
+        url: window.ajaxurl,
+
+        sync: function(method, model, options) {
+            var data;
+
+            if (method == 'create' || method == 'update')
+                data =  model.toJSON();
+            else
+                data = {};
+
+            data = _.extend(data, { post_id: LFM.Utils.getPostId() });
+
+            var url = this.url;
+            var success = options.success;
+            var error = options.error;
+            LFM.Utils.doAjax(url, data, success, error);
+        }
+    });
 
     /* Collections */
-    var featuredMediaCollection = Backbone.Collection.extend({});
+    var featuredMediaCollection = Backbone.Collection.extend();
 
     /* Views for the modal and subviews for frames */
     var featuredMediaModal = wp.media.view.Modal.extend();
 
     var featuredMediaFrame = wp.Backbone.View.extend({
         events: {
-            'click a': 'setActive'
+            'click a.media-menu-item': 'setActive'
         },
 
         template: wp.media.template('featured-media-frame'),
@@ -45,14 +64,14 @@ var featuredMedia = {
             optionLink.siblings().removeClass('active');
             optionLink.addClass('active');
 
-            if (typeof featuredMedia.instances[id] == 'undefined') {
-                id = id.replace('media-type-', '');
+            id = id.replace('media-type-', '');
+            if (typeof LFM.instances[id] == 'undefined') {
                 view = featuredMediaIdToView[id];
-                featuredMedia.instances[id] = new featuredMedia.Views[view]({
-                    model: featuredMedia.options.findWhere({ id: id })
+                LFM.instances[id] = new LFM.Views[view]({
+                    option: _.findWhere(LFM.options, { id: id })
                 });
-                featuredMedia.instances.frame.views.set('.media-frame-content', featuredMedia.instances[id]);
             }
+            LFM.instances.frame.views.set('.media-frame-content', LFM.instances[id]);
         }
     });
 
@@ -63,53 +82,138 @@ var featuredMedia = {
     /* Views for media types */
     var featuredMediaBaseView = wp.Backbone.View.extend({
         id: function() {
-            return 'media-editor' + this.model.get('id');
+            return 'media-editor-' + this.options.option.id;
         }
     });
 
     var featuredEmbedCodeView;
-    featuredMedia.Views.featuredEmbedCodeView = featuredEmbedCodeView = featuredMediaBaseView.extend({
+    LFM.Views.featuredEmbedCodeView = featuredEmbedCodeView = featuredMediaBaseView.extend({
         template: wp.media.template('featured-embed-code')
     });
 
     var featuredPhotoGalleryView;
-    featuredMedia.Views.featuredPhotoGalleryView = featuredPhotoGalleryView = featuredMediaBaseView.extend({
+    LFM.Views.featuredPhotoGalleryView = featuredPhotoGalleryView = featuredMediaBaseView.extend({
         template: wp.media.template('featured-photo-gallery')
     });
 
+    /* View for save button */
+    var featuredSaveButtonView;
+    LFM.Views.featuredSaveButtonView = featuredSaveButtonView = wp.Backbone.View.extend({
+        className: 'media-toolbar',
+
+        events: {
+            'click a.button': 'save'
+        },
+
+        template: wp.media.template('featured-media-save'),
+
+        save: function() {
+            var currentView = LFM.instances.frame.views.get('.media-frame-content');
+
+            if (currentView.length > 0)
+                currentView = currentView[0];
+            else
+                return false;
+
+            if (typeof this.model == 'undefined')
+                this.model = new featuredMediaModel();
+
+            var attrs = LFM.Utils.formArrayToObj(currentView.$el.find('form').serializeArray());
+            this.model.save(attrs, { success: LFM.Utils.closeModal });
+        }
+    });
+
+    /* Utils */
+    var formArrayToObj = function(arr) {
+        var ret = {};
+        _.each(arr, function(item) {
+            ret[item.name] = item.value;
+        });
+        return ret;
+    };
+    LFM.Utils.formArrayToObj = formArrayToObj;
+
+    var doAjax = function(url, data, success, error) {
+        var json = JSON.stringify(data);
+
+        var action;
+        if (_.keys(data).length == 1)
+            action = 'largo_featured_media_read';
+        else
+            action = 'largo_featured_media_save';
+
+        params = {
+            url: ajaxurl,
+            type: 'POST',
+            data: {
+                action: action,
+                path: url,
+                data: json
+            },
+            dataType: 'json',
+            success: function(data, textStatus, jqXHR) {
+                if (success)
+                    success(data, textStatus, jqXHR);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                if (error)
+                    error(jqXHR, textStatus, errorThrown);
+            }
+        }
+
+        $.ajax(params);
+    };
+    LFM.Utils.doAjax = doAjax;
+
+    var getPostId = function() {
+        return $( '#post_ID' ).val();
+    }
+    LFM.Utils.getPostId = getPostId;
+
+    var closeModal = function() {
+        LFM.instances.modal.close();
+    };
+    LFM.Utils.closeModal = closeModal;
+
     $(document).ready(function() {
-        var instances;
-        featuredMedia.instances = instances = {};
-
-        var options;
-        featuredMedia.options = options = new featuredMediaCollection(LFM);
-
         $('#set-featured-media-button').click(function() {
-            if (typeof instances.modal == 'undefined') {
-                var mediaTypes;
-                featuredMedia.mediaTypes = mediaTypes = new featuredMediaCollection(LFM);
+            var initialViewId = 'embed-code';
 
-                instances.modal = new featuredMediaModal({ propagate: false });
+            if (typeof LFM.instances.modal == 'undefined') {
+                LFM.instances.modal = new featuredMediaModal({ propagate: false });
 
                 var frame;
-                instances.frame = frame = new featuredMediaFrame();
-                instances.modal.views.set('.media-modal-content', frame);
+                LFM.instances.frame = frame = new featuredMediaFrame();
+                LFM.instances.modal.views.set('.media-modal-content', frame);
 
                 var options;
-                instances.options = options = new featuredMediaOptions({ mediaTypes: mediaTypes });
+                LFM.instances.options = options = new featuredMediaOptions({ mediaTypes: LFM.options });
                 frame.views.set('.media-frame-menu', options);
 
-                var initialViewId = 'embed-code';
-                var initialView;
-                featuredMedia.instances[initialViewId] = initialView = new featuredEmbedCodeView({
-                    model: mediaTypes.findWhere({ id: initialViewId })
+                var initialView,
+                    option = _.findWhere(LFM.options, { id: initialViewId });
+
+                var model = new featuredMediaModel();
+                model.fetch({
+                    success: function(data) {
+                        LFM.instances[initialViewId] = initialView = new featuredEmbedCodeView({
+                            option: option,
+                            model: data
+                        });
+                        frame.views.set('.media-frame-content', initialView);
+
+                        var saveButtonView;
+                        LFM.instances.saveButtonView = saveButtonView = new featuredSaveButtonView({ model: model });
+                        frame.views.set('.media-frame-toolbar', saveButtonView);
+
+                        LFM.instances.modal.open();
+                        LFM.instances.frame.setActive(initialViewId);
+                    }
                 });
-                frame.views.set('.media-frame-content', initialView);
-
+            } else {
+                LFM.instances.modal.open();
+                LFM.instances.frame.setActive(initialViewId);
             }
-
-            instances.modal.open();
-            instances.frame.setActive(initialViewId);
             return false;
         });
     })
