@@ -47,12 +47,12 @@ function largo_custom_taxonomies() {
 	$termsDefinitions = array(
 		array(
 			'name' => __('Sidebar Featured Widget', 'largo'),
-			'description' => __('If you are using the Sidebar Featured Posts widget, add this label to posts to determine which to display in the widget.', 'largo'),
+			'description' => __('If you are using the Featured Posts widget in a sidebar, add this label to posts to determine which to display in the widget.', 'largo'),
 			'slug' => 'sidebar-featured'
 		),
 		array(
 			'name' => __('Footer Featured Widget', 'largo'),
-			'description' => __('If you are using the Footer Featured Posts widget, add this label to posts to determine which to display in the widget.', 'largo'),
+			'description' => __('If you are using the Featured Posts widget in the footer, add this label to posts to determine which to display in the widget.', 'largo'),
 			'slug' => 'footer-featured'
 		),
 		array(

@@ -20,7 +20,7 @@ class HomepageSingle extends Homepage {
 			'prominenceTerms' => array(
 				array(
 					'name' => __('Homepage Top Story', 'largo'),
-					'description' => __('If you are using the Newspaper or Carousel optional homepage layout, add this label to a post to make it the top story on the homepage', 'largo'),
+					'description' => __('If you are using a "Big story" homepage layout, add this label to a post to make it the top story on the homepage', 'largo'),
 					'slug' => 'top-story'
 				)
 			)
