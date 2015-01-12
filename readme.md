@@ -2,6 +2,8 @@
 
 A responsive WordPress framework designed for news publishers and developed by the Investigative News Network.
 
+<img src="https://travis-ci.org/INN/Largo.svg?branch=develop" /> <img src="https://readthedocs.org/projects/largo/badge/?version=develop" />
+
 ---
 
 **IMPORTANT!** THIS PROJECT IS UNDER ACTIVE DEVELOPMENT
@@ -34,7 +36,7 @@ Follow the [setup instructions in the documentation](http://largo.readthedocs.or
 
 ## Credits
 
-Built and maintained by the Investigative News Network news apps and technology team ([@INNNerds](http://twitter.com/INNNerds)):
+Built and maintained by the [Investigative News Network](http://investigativenewsnetwork.org) news apps and technology team ([@INNNerds](http://twitter.com/INNNerds)):
 
 -  **[Adam Schweigert](https://github.com/aschweigert)** ([@aschweig](http://twitter.com/aschweig)), Senior Director of Product and Technology
 -  **[Ryan Nagle](https://github.com/rnagle)** ([@ryannagle](http://twitter.com/ryannagle)), News Apps Developer
@@ -44,9 +46,9 @@ Built and maintained by the Investigative News Network news apps and technology 
 -  **[Ben Keith](https://github.com/benlk)** ([@benlkeith](http://twitter.com/benlkeith)), News Apps Developer
 -  **[Will Haynes](https://github.com/willhaynes)** ([@willhaynes](http://twitter.com/willhaynes)), Apprentice News Apps Developer
 
-Additional assistance from Ben Byrne and Seamus Leahy of [Cornershop Creative](http://cornershopcreative.com).
+Additional assistance from:
 
-* Investigative News Network: [investigativenewsnetwork.org](http://investigativenewsnetwork.org)
+- Ben Byrne and Seamus Leahy of [Cornershop Creative](http://cornershopcreative.com).
 
 This project builds on a number of great open source projects, including:
 
