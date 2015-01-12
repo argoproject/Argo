@@ -32,6 +32,7 @@ Administrators Documentation
     administrators/getting-started
     administrators/installing
     administrators/mailchimp
+    ads
 
 .. _dev-docs:
 
