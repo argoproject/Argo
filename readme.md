@@ -1,6 +1,6 @@
 # Project Largo
 
-A responsive WordPress framework developed by the Investigative News Network and specifically designed for news publishers.
+A responsive WordPress framework designed for news publishers and developed by the Investigative News Network.
 
 ---
 
@@ -17,29 +17,32 @@ Feedback, comments and questions to: [largo@investigativenewsnetwork.org](mailto
 ---
 
 ## About Project Largo
+
 <img align="right" src="http://i.imgur.com/nXAl3bC.png" />
+
 Project Largo is a responsive WordPress starter/parent theme designed with the needs of news publisers in mind.
 
 The project extends work done by [NPR's Project Argo](http://argoproject.org/).
 
 Documentation and more information at: [largoproject.org](http://largoproject.org)
 
-**VERSION**: 0.4
+**Current version:** v0.4
 
 ## Setup
 
-* Download and Install WordPress
-* Download the latest version of the Largo parent theme
-* Create a child theme and activate from the WordPress appearance menu. If you are not familiar with how child themes work, see: http://codex.wordpress.org/Child_Themes
-* Install required/recommended plugins
-* Configure your theme options in the Appearance > Theme Options menu
-* Configure your menus and sidebars (also in the Appearance menu)
-
-Additionally, you can customize your child theme's CSS by overriding Largo's default styles in the style.css file of your child theme and many of the Largo template functions are "pluggable" so you can write your own versions in the functions.php of your child theme to modify their behavior.
+Follow the [setup instructions in the documentation](http://largo.readthedocs.org/users/download.html).
 
 ## Credits
 
-Designed and built by Adam Schweigert ([@aschweig](http://twitter.com/aschweig)) for the Investigative News Network ([@INN](http://twitter.com/INN)).
+Built and maintained by the Investigative News Network news apps and technology team ([@INNNerds](http://twitter.com/INNNerds)):
+
+-  **[Adam Schweigert](https://github.com/aschweigert)** ([@aschweig](http://twitter.com/aschweig)), Senior Director of Product and Technology
+-  **[Ryan Nagle](https://github.com/rnagle)** ([@ryannagle](http://twitter.com/ryannagle)), News Apps Developer
+-  **[Kaeti Hinck](https://github.com/kaeti)** ([@kaeti](http://twitter.com/kaeti)), Design Director
+-  **[Denise Malan](https://github.com/dnmalan)** ([@denisemalan](http://twitter.com/denisemalan)), Director of Data Services
+-  **[Meredith Melragon](https://github.com/meredithinn)** ([@meredithm](http://twitter.com/meredithm)), Support Specialist
+-  **[Ben Keith](https://github.com/benlk)** ([@benlkeith](http://twitter.com/benlkeith)), News Apps Developer
+-  **[Will Haynes](https://github.com/willhaynes)** ([@willhaynes](http://twitter.com/willhaynes)), Apprentice News Apps Developer
 
 Additional assistance from Ben Byrne and Seamus Leahy of [Cornershop Creative](http://cornershopcreative.com).
 
