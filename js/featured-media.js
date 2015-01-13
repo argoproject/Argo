@@ -211,7 +211,7 @@ var LFM = _.extend(LFM || {}, {
                 model: state,
                 search: false,
                 dragInfo: false,
-                sidebar: false,
+                //sidebar: true,
                 id: 'media-editor-image'
             });
 
@@ -281,7 +281,7 @@ var LFM = _.extend(LFM || {}, {
             this.model.save(attrs, {
                 silent: true,
                 success: function(){
-                    LFM.Utils.closeModal();
+                    self.model.set(attrs, { silent: true });
                     self.hideSpinner();
                 }
             });
