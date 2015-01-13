@@ -1,4 +1,10 @@
 /* LFM -- Largo Featured Media modal */
+if (!window.console) {
+    console = {
+        log: function(){}
+    };
+}
+
 var LFM = _.extend(LFM || {}, {
     Utils: {},
     Views: {},
@@ -90,6 +96,14 @@ var LFM = _.extend(LFM || {}, {
     var featuredMediaBaseView = wp.media.View.extend({
         id: function() {
             return 'media-editor-' + this.options.option.id;
+        },
+
+        showSpinner: function() {
+            this.$el.find('.spinner').removeAttr('style');
+        },
+
+        hideSpinner: function() {
+            this.$el.find('.spinner').css({ display: 'none' });
         }
     });
 
@@ -99,8 +113,8 @@ var LFM = _.extend(LFM || {}, {
 
     LFM.Views.featuredVideoView = featuredMediaBaseView.extend({
         events: {
-            'paste input': 'fetchVideo',
-            'keypress input': 'fetchVideo'
+            'paste input.url': 'fetchVideo',
+            'keypress input.url': 'fetchVideo'
         },
 
         template: wp.media.template('featured-video'),
@@ -142,11 +156,13 @@ var LFM = _.extend(LFM || {}, {
                         error.html('Please enter a valid video URL.');
                     else
                         self.$el.find('textarea').html(data.embed);
+                    self.hideSpinner();
                 },
                 failure = function() {
                     console.log('An error ocurred');
                 };
 
+            this.showSpinner();
             LFM.Utils.doAjax('largo_fetch_video_oembed', {
                 action: 'largo_fetch_video_oembed',
                 url: address
@@ -195,15 +211,30 @@ var LFM = _.extend(LFM || {}, {
                 model: state,
                 search: false,
                 dragInfo: false,
-                sidebar: false
+                sidebar: false,
+                id: 'media-editor-image'
             });
 
             if (!!this.browser.dfd) {
                 this.browser.dfd.done(function() {
                     LFM.instances.frame.views.set('.media-frame-content', self.browser);
+                    self.updateSelection();
                 });
             } else {
                 LFM.instances.frame.views.set('.media-frame-content', this.browser);
+                this.updateSelection();
+            }
+        },
+
+        updateSelection: function() {
+            var selection = this.state().get('selection');
+
+            if (typeof this.model !== 'undefined') {
+                var attachmentId = this.model.get('attachment'),
+                    attachment = wp.media.model.Attachment.get(attachmentId);
+
+                attachment.fetch();
+                selection.reset((attachment)? [attachment] : []);
             }
         },
 
@@ -226,7 +257,8 @@ var LFM = _.extend(LFM || {}, {
         template: wp.media.template('featured-media-save'),
 
         save: function() {
-            var currentView = LFM.instances.frame.views.get('.media-frame-content');
+            var currentView = LFM.instances.frame.views.get('.media-frame-content'),
+                self = this;
 
             if (currentView.length > 0)
                 currentView = currentView[0];
@@ -239,7 +271,28 @@ var LFM = _.extend(LFM || {}, {
             var attrs = LFM.Utils.formArrayToObj(
                 currentView.$el.find('form').serializeArray());
 
-            this.model.save(attrs, { silent: true, success: LFM.Utils.closeModal });
+            if (currentView.$el.attr('id') == 'media-editor-image') {
+                attrs.type = 'image';
+                var selected = currentView.$el.find('.attachments .attachment.selected');
+                attrs.attachment = selected.data('id');
+            }
+
+            this.showSpinner();
+            this.model.save(attrs, {
+                silent: true,
+                success: function(){
+                    LFM.Utils.closeModal();
+                    self.hideSpinner();
+                }
+            });
+        },
+
+        showSpinner: function() {
+            this.$el.find('.spinner').removeAttr('style');
+        },
+
+        hideSpinner: function() {
+            this.$el.find('.spinner').css({ display: 'none' });
         }
     });
 
@@ -278,7 +331,7 @@ var LFM = _.extend(LFM || {}, {
     };
 
     LFM.Utils.getPostId = function() {
-        return $( '#post_ID' ).val();
+        return Number($( '#post_ID' ).val());
     };
 
     LFM.Utils.closeModal = function() {

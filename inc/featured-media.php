@@ -45,16 +45,16 @@ add_action('wp_ajax_largo_fetch_video_oembed', 'largo_fetch_video_oembed');
 function largo_default_featured_media_types() {
 	$media_types = apply_filters('largo_default_featured_media_types', array(
 		'embed' => array(
-			'title' => 'Embed code',
-			'id' => sanitize_title('Embed code')
+			'title' => 'Featured embed code',
+			'id' => 'embed-code'
 		),
 		'video' => array(
-			'title' => 'Video',
-			'id' => sanitize_title('Video')
+			'title' => 'Featured video',
+			'id' => 'video'
 		),
 		'image' => array(
-			'title' => 'Image',
-			'id' => sanitize_title('Image')
+			'title' => 'Featured image',
+			'id' => 'image'
 		),
 		//'gallery' => array(
 			//'title' => 'Photo gallery',
@@ -100,7 +100,7 @@ function largo_featured_media_templates() { ?>
 	<script type="text/template" id="tmpl-featured-media-frame">
 		<div class="media-frame-menu"></div>
 		<div class="media-frame-title"><h1>Set featured media</h1></div>
-		<div class="media-frame-router"></div>
+		<div class="media-frame-router"><p>Choose an item to feature prominently at the top of your post.</p></div>
 		<div class="media-frame-content"></div>
 		<div class="media-frame-toolbar"></div>
 		<div class="media-frame-uploader"></div>
@@ -108,7 +108,7 @@ function largo_featured_media_templates() { ?>
 
 	<script type="text/template" id="tmpl-featured-media-save">
 		<div class="media-toolbar-primary">
-			<a href="#" class="button media-button button-primary button-large">Set as featured</a>
+			<span class="spinner" style="display: none;"></span> <a href="#" class="button media-button button-primary button-large">Set as featured</a>
 		</div>
 	</script>
 
@@ -157,8 +157,8 @@ function largo_featured_media_templates() { ?>
 
 			<p>Enter a video URL to get started.</p>
 			<div>
-				<label for="url"><span>Video URL</span></label>
-				<input type="text" name="url" <# if (typeof data.model !== 'undefined') { #>value="{{ data.model.get('url') }}"<# } #>/>
+				<label for="url"><span>Video URL  <span class="spinner" style="display: none;"></span></label>
+				<input type="text" class="url" name="url" <# if (typeof data.model !== 'undefined') { #>value="{{ data.model.get('url') }}"<# } #>/>
 				<p class="error"></p>
 			</div>
 
@@ -168,7 +168,7 @@ function largo_featured_media_templates() { ?>
 			</div>
 
 			<div>
-				<label for="title"><span>Title</span></label>
+				<label for="title"><span>Title</span></span></label>
 				<input type="text" name="title" <# if (typeof data.model !== 'undefined') { #>value="{{ data.model.get('title') }}"<# } #> />
 			</div>
 
@@ -214,6 +214,24 @@ function largo_featured_media_css() { ?>
 		}
 		.featured-media-modal form textarea {
 			min-height: 120px;
+		}
+		.featured-media-modal .media-frame-router p {
+			margin: 0 0 0 15px;
+		}
+		.featured-media-modal .media-toolbar-primary span.spinner {
+			display: inline-block;
+			float: left;
+			margin: 0;
+			position: relative;
+			top: 20px;
+		}
+
+		.featured-media-modal #featured-video-form label[for="url"] span.spinner {
+			position: relative;
+			top: 3px;
+			float: none;
+			margin: 0;
+			display: inline-block;
 		}
 	</style>
 <?php }
