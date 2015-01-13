@@ -9,12 +9,12 @@ if (!is_admin())
 function largo_featured_media_read() {
 	if (!empty($_POST['data'])) {
 		$data = json_decode(stripslashes($_POST['data']), true);
+		$ret = get_post_meta($data['id'], 'featured_media', true);
 
 		// Check if the post has a thumbnail/featured image set.
 		// If yes, send that back as the featured media.
 		$post_thumbnail = get_post_thumbnail_id($data['id']);
-		var_log($post_thumbnail);
-		if (!empty($post_thumbnail)) {
+		if (empty($ret) && !empty($post_thumbnail)) {
 			print json_encode(array(
 				'id' => $data['id'],
 				'attachment' => $post_thumbnail,
@@ -24,7 +24,6 @@ function largo_featured_media_read() {
 		}
 
 		// Otherwise, check for `featured_media` post meta
-		$ret = get_post_meta($data['id'], 'featured_media', true);
 		if (!empty($ret)) {
 			print json_encode($ret);
 			wp_die();
@@ -46,9 +45,18 @@ function largo_featured_media_save() {
 		if (!empty($data['attachment']))
 			set_post_thumbnail($data['id'], $data['attachment']);
 
+		// If we have gallery image ID's, make sure they're "attached" to this post
+		if (!empty($data['gallery'])) {
+			foreach ($data['gallery'] as $image_id) {
+				wp_update_post(array(
+					'ID' => $image_id,
+					'post_parent' => $data['id']
+				));
+			}
+		}
+
 		// Save what's sent over the wire as `featured_media` post meta
 		$ret = update_post_meta($data['id'], 'featured_media', $data);
-
 		print json_encode($data);
 		wp_die();
 	}

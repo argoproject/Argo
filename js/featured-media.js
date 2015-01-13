@@ -171,10 +171,6 @@ var LFM = _.extend(LFM || {}, {
     });
 
     LFM.Views.featuredImageBaseView = wp.media.view.Frame.extend({
-        id: function() {
-            return 'media-editor-' + this.options.option.id;
-        },
-
         initialize: function() {
             wp.media.view.Frame.prototype.initialize.apply(this, arguments);
 
@@ -197,8 +193,13 @@ var LFM = _.extend(LFM || {}, {
             return this;
         },
 
+        setBrowserId: function() {
+            this.browser.$el.attr('id', this.id);
+        },
+
         render: function() {
             this.browseContent();
+            this.setBrowserId();
         },
 
         browseContent: function() {
@@ -228,6 +229,17 @@ var LFM = _.extend(LFM || {}, {
             }
         },
 
+        uploadContent: function() {
+            var region = new wp.media.view.UploaderInline({
+                controller: this
+            });
+            LFM.instances.frame.views.set('.media-frame-content', region);
+        }
+    });
+
+    LFM.Views.featuredImageView = LFM.Views.featuredImageBaseView.extend({
+        id: 'media-editor-image',
+
         updateSelection: function() {
             var selection = this.state().get('selection');
 
@@ -238,24 +250,31 @@ var LFM = _.extend(LFM || {}, {
                 attachment.fetch();
                 selection.reset((attachment)? [attachment] : []);
             }
-        },
-
-        uploadContent: function() {
-            var region = new wp.media.view.UploaderInline({
-                controller: this
-            });
-            LFM.instances.frame.views.set('.media-frame-content', region);
         }
     });
 
-    LFM.Views.featuredImageView = LFM.Views.featuredImageBaseView.extend();
-
     LFM.Views.featuredPhotoGalleryView = LFM.Views.featuredImageBaseView.extend({
+        id: 'media-editor-gallery',
+
         initialize: function() {
             this.options.multiple = 'add';
             LFM.Views.featuredImageBaseView.prototype.initialize.apply(this, arguments);
             return this;
-        }
+        },
+
+        updateSelection: function() {
+            var selection = this.state().get('selection');
+
+            if (typeof this.model !== 'undefined') {
+                var galleryIds = this.model.get('gallery'),
+                    galleryItems = _.map(galleryIds, function(imageId) {
+                        return wp.media.model.Attachment.get(imageId);
+                    });
+
+                _.each(galleryItems, function(item) { item.fetch(); });
+                selection.reset(galleryItems);
+            }
+        },
     });
 
     /* View for save button */
@@ -289,8 +308,15 @@ var LFM = _.extend(LFM || {}, {
                 attrs.attachment = selected.data('id');
             }
 
+            if (currentView.$el.attr('id') == 'media-editor-gallery') {
+                attrs.type = 'gallery';
+                var selected = currentView.$el.find('.attachments .attachment.selected');
+                attrs.gallery = _.map(selected, function(item) { return $(item).data('id'); });
+            }
+
             this.showSpinner();
-            this.model.save(attrs, {
+            this.model = new featuredMediaModel(attrs);
+            this.model.save({}, {
                 silent: true,
                 success: function(){
                     self.model.set(attrs, { silent: true });
