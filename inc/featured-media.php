@@ -9,11 +9,30 @@ if (!is_admin())
 function largo_featured_media_read() {
 	if (!empty($_POST['data'])) {
 		$data = json_decode(stripslashes($_POST['data']), true);
+
+		// Check if the post has a thumbnail/featured image set.
+		// If yes, send that back as the featured media.
+		$post_thumbnail = get_post_thumbnail_id($data['id']);
+		var_log($post_thumbnail);
+		if (!empty($post_thumbnail)) {
+			print json_encode(array(
+				'id' => $data['id'],
+				'attachment' => $post_thumbnail,
+				'type' => 'image'
+			));
+			wp_die();
+		}
+
+		// Otherwise, check for `featured_media` post meta
 		$ret = get_post_meta($data['id'], 'featured_media', true);
-		if (empty($ret))
-			print json_encode(array('id' => $data['id']));
-		else
+		if (!empty($ret)) {
 			print json_encode($ret);
+			wp_die();
+		}
+
+		// No featured thumbnail and not `featured_media`, so just return
+		// an array with the post ID
+		print json_encode(array('id' => $data['id']));
 		wp_die();
 	}
 }
@@ -22,7 +41,14 @@ add_action('wp_ajax_largo_featured_media_read', 'largo_featured_media_read');
 function largo_featured_media_save() {
 	if (!empty($_POST['data'])) {
 		$data = json_decode(stripslashes($_POST['data']), true);
+
+		// If an attachment ID is present, update the post thumbnail/featured image
+		if (!empty($data['attachment']))
+			set_post_thumbnail($data['id'], $data['attachment']);
+
+		// Save what's sent over the wire as `featured_media` post meta
 		$ret = update_post_meta($data['id'], 'featured_media', $data);
+
 		print json_encode($data);
 		wp_die();
 	}
@@ -56,10 +82,10 @@ function largo_default_featured_media_types() {
 			'title' => 'Featured image',
 			'id' => 'image'
 		),
-		//'gallery' => array(
-			//'title' => 'Photo gallery',
-			//'id' => sanitize_title('Photo gallery')
-		//)
+		'gallery' => array(
+			'title' => 'Featured photo gallery',
+			'id' => 'gallery'
+		)
 	));
 	return array_values($media_types);
 }

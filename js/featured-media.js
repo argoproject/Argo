@@ -18,7 +18,7 @@ var LFM = _.extend(LFM || {}, {
         'embed-code': 'featuredEmbedCodeView',
         'video': 'featuredVideoView',
         'image': 'featuredImageView',
-        //'photo-gallery': 'featuredPhotoGalleryView',
+        'gallery': 'featuredPhotoGalleryView',
     };
 
     /* Models */
@@ -170,7 +170,7 @@ var LFM = _.extend(LFM || {}, {
         }
     });
 
-    LFM.Views.featuredImageView = wp.media.view.Frame.extend({
+    LFM.Views.featuredImageBaseView = wp.media.view.Frame.extend({
         id: function() {
             return 'media-editor-' + this.options.option.id;
         },
@@ -188,9 +188,11 @@ var LFM = _.extend(LFM || {}, {
             });
             LFM.instances.modal.views.set('.media-frame-uploader', this.uploader);
 
-            this.states.add([
-                new wp.media.controller.Library()
-            ]);
+            var lib = new wp.media.controller.Library({
+                multiple: (this.options.multiple)? 'add' : false,
+                editable: false
+            });
+            this.states.add([lib]);
             this._state = 'library';
             return this;
         },
@@ -211,7 +213,7 @@ var LFM = _.extend(LFM || {}, {
                 model: state,
                 search: false,
                 dragInfo: false,
-                //sidebar: true,
+                sidebar: false,
                 id: 'media-editor-image'
             });
 
@@ -243,6 +245,16 @@ var LFM = _.extend(LFM || {}, {
                 controller: this
             });
             LFM.instances.frame.views.set('.media-frame-content', region);
+        }
+    });
+
+    LFM.Views.featuredImageView = LFM.Views.featuredImageBaseView.extend();
+
+    LFM.Views.featuredPhotoGalleryView = LFM.Views.featuredImageBaseView.extend({
+        initialize: function() {
+            this.options.multiple = 'add';
+            LFM.Views.featuredImageBaseView.prototype.initialize.apply(this, arguments);
+            return this;
         }
     });
 
@@ -348,33 +360,29 @@ var LFM = _.extend(LFM || {}, {
             if (typeof LFM.instances.modal == 'undefined') {
                 LFM.instances.modal = new featuredMediaModal({ propagate: false });
 
-                var frame;
-                LFM.instances.frame = frame = new featuredMediaFrame();
-                LFM.instances.modal.views.set('.media-modal-content', frame);
+                LFM.instances.frame = new featuredMediaFrame();
+                LFM.instances.modal.views.set('.media-modal-content', LFM.instances.frame);
 
-                var options;
-                LFM.instances.options = options = new featuredMediaOptions({ mediaTypes: LFM.options });
-                frame.views.set('.media-frame-menu', options);
+                LFM.instances.options = new featuredMediaOptions({ mediaTypes: LFM.options });
+                LFM.instances.frame.views.set('.media-frame-menu', LFM.instances.options);
 
-                var initialView,
-                    option;
+                var option,
+                    model = new featuredMediaModel();
 
-                var model = new featuredMediaModel();
                 model.fetch({
                     success: function(data) {
                         initialViewId = data.get('type') || 'embed-code';
                         option = _.findWhere(LFM.options, { id: initialViewId });
 
                         var view = featuredMediaIdToView[initialViewId];
-                        LFM.instances[initialViewId] = initialView = new LFM.Views[view]({
+                        LFM.instances[initialViewId] = new LFM.Views[view]({
                             option: option,
                             model: data
                         });
-                        frame.views.set('.media-frame-content', initialView);
+                        LFM.instances.frame.views.set('.media-frame-content', LFM.instances[initialViewId]);
 
-                        var saveButtonView;
-                        LFM.instances.saveButtonView = saveButtonView = new LFM.Views.featuredSaveButtonView({ model: model });
-                        frame.views.set('.media-frame-toolbar', saveButtonView);
+                        LFM.instances.save = new LFM.Views.featuredSaveButtonView({ model: model });
+                        LFM.instances.frame.views.set('.media-frame-toolbar', LFM.instances.save);
 
                         LFM.instances.modal.open();
                         LFM.instances.frame.setActive(initialViewId);
