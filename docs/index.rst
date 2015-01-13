@@ -20,11 +20,11 @@ User Documentation
     :maxdepth: 2
 
      users/welcome
-     users/sitesetup.rst
-     users/download.rst
-     users/configuremenus.rst
-     users/themeoptions.rst
-     users/sidebarwidgets.rst
+     users/sitesetup
+     users/download
+     users/configuremenus
+     users/themeoptions
+     users/sidebarwidgets
  
 
 .. _admin-docs:
