@@ -222,12 +222,22 @@ var LFM = _.extend(LFM || {}, {
                 this.browser.dfd.done(function() {
                     LFM.instances.frame.views.set('.media-frame-content', self.browser);
                     self.updateSelection();
+                    self.setColumns();
                 });
             } else {
                 LFM.instances.frame.views.set('.media-frame-content', this.browser);
                 this.updateSelection();
+                this.setColumns();
             }
         },
+
+        setColumns: _.debounce(function() {
+            var currentView = LFM.instances.frame.views.get('.media-frame-content')[0];
+            var attachments = _.find(currentView.views.get(''), function(v) {
+                return typeof v.setColumns !== 'undefined';
+            });
+            attachments.setColumns();
+        }, 250),
 
         uploadContent: function() {
             var region = new wp.media.view.UploaderInline({
