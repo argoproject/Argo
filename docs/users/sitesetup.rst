@@ -1,12 +1,6 @@
 Site Setup
 ==============================
 
-Site Setup
-==============================
-
-**Server PHP version**
-Largo requires a PHP version >=5.3.0.
-
 **Banner images**
 To accommodate a number of screen sizes, the Largo theme requires three image sizes for the top banner and automatically chooses the correct image size based on the size of a user's browser window.
 
