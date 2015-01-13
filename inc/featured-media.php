@@ -4,13 +4,16 @@ if (!is_admin())
 	return;
 
 /**
- *
+ * AJAX functions
  */
 function largo_featured_media_read() {
 	if (!empty($_POST['data'])) {
 		$data = json_decode(stripslashes($_POST['data']), true);
-		$ret = get_post_meta($data['post_id'], 'featured_media', true);
-		print json_encode($ret);
+		$ret = get_post_meta($data['id'], 'featured_media', true);
+		if (empty($ret))
+			print json_encode(array('id' => $data['id']));
+		else
+			print json_encode($ret);
 		wp_die();
 	}
 }
@@ -19,14 +22,22 @@ add_action('wp_ajax_largo_featured_media_read', 'largo_featured_media_read');
 function largo_featured_media_save() {
 	if (!empty($_POST['data'])) {
 		$data = json_decode(stripslashes($_POST['data']), true);
-		$post_id = $data['post_id'];
-		unset($data['post_id']);
-		update_post_meta($post_id, 'featured_media', $data);
+		$ret = update_post_meta($data['id'], 'featured_media', $data);
 		print json_encode($data);
 		wp_die();
 	}
 }
 add_action('wp_ajax_largo_featured_media_save', 'largo_featured_media_save');
+
+function largo_fetch_video_oembed() {
+	if (!empty($_POST['data'])) {
+		$data = json_decode(stripslashes($_POST['data']), true);
+		$ret = wp_oembed_get($data['url']);
+		print json_encode(array('embed' => $ret));
+		wp_die();
+	}
+}
+add_action('wp_ajax_largo_fetch_video_oembed', 'largo_fetch_video_oembed');
 
 /**
  * Returns the default available featured media types
@@ -37,14 +48,14 @@ function largo_default_featured_media_types() {
 			'title' => 'Embed code',
 			'id' => sanitize_title('Embed code')
 		),
-		//'video' => array(
-			//'title' => 'Video',
-			//'id' => sanitize_title('Video')
-		//),
-		//'image' => array(
-			//'title' => 'Image',
-			//'id' => sanitize_title('Image')
-		//),
+		'video' => array(
+			'title' => 'Video',
+			'id' => sanitize_title('Video')
+		),
+		'image' => array(
+			'title' => 'Image',
+			'id' => sanitize_title('Image')
+		),
 		//'gallery' => array(
 			//'title' => 'Photo gallery',
 			//'id' => sanitize_title('Photo gallery')
@@ -111,6 +122,8 @@ function largo_featured_media_templates() { ?>
 
 	<script type="text/template" id="tmpl-featured-embed-code">
 		<form id="featured-embed-code-form">
+			<input type="hidden" name="type" value="embed-code" />
+
 			<div>
 				<label for="title"><span>Title</span></label>
 				<input type="text" name="title" <# if (typeof data.model !== 'undefined') { #>value="{{ data.model.get('title') }}"<# } #> />
@@ -138,8 +151,38 @@ function largo_featured_media_templates() { ?>
 		</form>
 	</script>
 
-	<script type="text/template" id="tmpl-featured-photo-gallery">
-		TKTKTK
+	<script type="text/template" id="tmpl-featured-video">
+		<form id="featured-video-form">
+			<input type="hidden" name="type" value="video" />
+
+			<p>Enter a video URL to get started.</p>
+			<div>
+				<label for="url"><span>Video URL</span></label>
+				<input type="text" name="url" <# if (typeof data.model !== 'undefined') { #>value="{{ data.model.get('url') }}"<# } #>/>
+				<p class="error"></p>
+			</div>
+
+			<div>
+				<label for="embed"><span>Video embed code</span></label>
+				<textarea name="embed"><# if (typeof data.model !== 'undefined') { #>{{ data.model.get('embed') }}<# } #></textarea>
+			</div>
+
+			<div>
+				<label for="title"><span>Title</span></label>
+				<input type="text" name="title" <# if (typeof data.model !== 'undefined') { #>value="{{ data.model.get('title') }}"<# } #> />
+			</div>
+
+			<div>
+				<label for="caption"><span>Caption</span></label>
+				<input type="text" name="caption" <# if (typeof data.model !== 'undefined') { #>value="{{ data.model.get('caption') }}"<# } #> />
+			</div>
+
+			<div>
+				<label for="credit"><span>Credit</span></label>
+				<input type="text" name="credit" <# if (typeof data.model !== 'undefined') { #>value="{{ data.model.get('credit') }}"<# } #> />
+			</div>
+
+		</form>
 	</script>
 <?php }
 add_action('admin_print_footer_scripts', 'largo_featured_media_templates', 1);
@@ -147,30 +190,30 @@ add_action('admin_print_footer_scripts', 'largo_featured_media_templates', 1);
 
 function largo_featured_media_css() { ?>
 	<style type="text/css">
-		#featured-embed-code-form {
+		.featured-media-modal form {
 			margin: 20px;
 		}
-		#featured-embed-code-form div {
+		.featured-media-modal form div {
 			margin: 0 0 20px 0;
 		}
-		#featured-embed-code-form label {
+		.featured-media-modal form label {
 			clear: both;
 			padding: 10px 0;
 			margin: 0 0 10px 0;
 		}
-		#featured-embed-code-form label span {
+		.featured-media-modal form label span {
 			display: block;
 			font-size: 18px;
 			line-height: 22px;
 			margin: 6px 0;
 		}
-		#featured-embed-code-form textarea,
-		#featured-embed-code-form input {
+		.featured-media-modal form textarea,
+		.featured-media-modal form input {
 			width: 100%;
 			max-width: 700px;
 		}
-		#featured-embed-code-form textarea {
-			min-height: 180px;
+		.featured-media-modal form textarea {
+			min-height: 120px;
 		}
 	</style>
 <?php }
