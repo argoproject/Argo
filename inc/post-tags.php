@@ -650,9 +650,11 @@ if ( ! function_exists( 'post_type_icon' ) ) {
 if ( ! function_exists( 'largo_hero_class' ) ) {
 	function largo_hero_class( $post_id, $echo = TRUE ) {
 		$hero_class = "is-empty";
-		if ( get_post_meta( $post_id, 'youtube_url', true ) ) {
+		$featured_media = (largo_has_featured_media($post_id))? largo_get_featured_media($post_id) : array();
+
+		if (get_post_meta( $post_id, 'youtube_url', true ) || $featured_media['type'] == 'video') {
 			$hero_class = "is-video";
-		} elseif ( has_post_thumbnail( $post_id ) ) {
+		} elseif (has_post_thumbnail( $post_id ) || $featured_media['type'] == 'image' || $featured_media['gallery']) {
 			$hero_class = "is-image";
 		}
 		if ( $echo ) {
