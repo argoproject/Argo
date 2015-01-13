@@ -19,12 +19,12 @@ User Documentation
 .. toctree::
     :maxdepth: 2
 
-     users/welcome
-     users/sitesetup
-     users/download
-     users/configuremenus
-     users/themeoptions
-     users/sidebarwidgets
+    users/welcome
+    users/sitesetup
+    users/download
+    users/configuremenus
+    users/themeoptions
+    users/sidebarswidgets
  
 
 .. _admin-docs:
