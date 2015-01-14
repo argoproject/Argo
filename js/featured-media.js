@@ -8,27 +8,24 @@ if (!window.console) {
 var LFM = _.extend(LFM || {}, {
     Utils: {},
     Views: {},
+    Models: {},
     instances: {},
 });
 
 (function() {
-    var $ = jQuery;
-
-    var featuredMediaIdToView = {
-        'embed-code': 'featuredEmbedCodeView',
-        'video': 'featuredVideoView',
-        'image': 'featuredImageView',
-        'gallery': 'featuredPhotoGalleryView',
-    };
+    var $ = jQuery,
+        l10n = _wpMediaViewsL10n,
+        isTouchDevice = ( 'ontouchend' in document );
 
     /* Models */
-    var featuredMediaModel = Backbone.Model.extend({
-        url: function() {
-            if (this.get('id') == null)
-                return 'largo_featured_media_read';
-            else
-                return 'largo_featured_media_save';
+    var featuredMediaModel;
+    LFM.Models.featuredMediaModel = featuredMediaModel = Backbone.Model.extend({
+        initialize: function() {
+            Backbone.Model.prototype.initialize.apply(this, arguments);
+            this.set({ id: LFM.Utils.getPostId() });
         },
+
+        url: ajaxurl,
 
         sync: function(method, model, options) {
             var data;
@@ -41,77 +38,293 @@ var LFM = _.extend(LFM || {}, {
             // Make sure we tell the backend what post ID we're dealing with.
             data = _.extend(data, { id: LFM.Utils.getPostId() });
 
-            var action = this.url();
+            var action;
+            if (method == 'read')
+                action = 'largo_featured_media_read';
+            else if (method == 'update' || method ==  'create')
+                action = 'largo_featured_media_save';
+            else
+                return false;
+
             var success = options.success;
             var error = options.error;
             LFM.Utils.doAjax(action, data, success, error);
         }
     });
 
-    /* Views for the modal and subviews for frames */
-    var featuredMediaModal = wp.media.view.Modal.extend({
-        className: 'featured-media-modal'
-    });
-
-    var featuredMediaFrame = wp.media.view.Frame.extend({
-        events: {
-            'click a.media-menu-item': 'setActive'
+    /* Featured Media Modal (Controller) */
+    LFM.Views.featuredMediaFrame = wp.media.view.MediaFrame.Select.extend({
+        initialize: function() {
+            _.defaults(this.options, {
+                multiple:  true,
+                editing:   false,
+                state:    'image',
+                metadata:  {},
+                className: 'featured-media-modal',
+                model: new featuredMediaModel()
+            });
+            wp.media.view.MediaFrame.Select.prototype.initialize.apply(this, arguments);
+            this.createIframeStates();
+            this.$el.addClass(this.options.className);
         },
 
-        template: wp.media.template('featured-media-frame'),
+        createStates: function() {
+            var options = this.options;
 
-        setActive: function(id_or_event) {
-            var id,
-                selector;
+            this.states.add([
+                // Embed code
+                new wp.media.controller.Embed({
+                    title: 'Featured embed code',
+                    metadata: options.metadata,
+                    id: 'embed-code',
+                    priority: 0
+                }),
 
-            if (typeof id_or_event.type !== 'undefined') {
-                id = $(id_or_event.currentTarget).attr('id');
-                selector = 'a#' + id;
-            } else {
-                id = id_or_event;
-                selector = 'a#media-type-' + id;
-            }
+                // Featured image
+                new wp.media.controller.FeaturedImage({
+                    title: 'Featured image',
+                    priority: 10,
+                    id: 'image',
+                }),
 
-            var optionLink = this.$el.find(selector);
-            optionLink.siblings().removeClass('active');
-            optionLink.addClass('active');
+                // Featured gallery
+                new wp.media.controller.Library({
+                    id: 'gallery',
+                    title: 'Featured gallery',
+                    priority: 20,
+                    toolbar: 'main-gallery',
+                    filterable: 'uploaded',
+                    multiple: 'add',
+                    editable: false,
+                    library: wp.media.query(_.defaults({
+                        type: 'image'
+                    }, options.library))
+                }),
 
-            id = id.replace('media-type-', '');
-            if (typeof LFM.instances[id] == 'undefined') {
-                var view = featuredMediaIdToView[id];
-                LFM.instances[id] = new LFM.Views[view]({
-                    option: _.findWhere(LFM.options, { id: id })
-                });
-            }
-            LFM.instances.frame.views.set('.media-frame-content', LFM.instances[id]);
-            LFM.instances[id].render();
+                // Gallery states.
+                new wp.media.controller.GalleryEdit({
+                    library: options.selection,
+                    editing: options.editing,
+                    menu: 'gallery'
+                }),
+
+                new wp.media.controller.GalleryAdd()
+            ]);
+        },
+
+        bindHandlers: function() {
+            var handlers;
+
+            wp.media.view.MediaFrame.Select.prototype.bindHandlers.apply( this, arguments );
+
+            this.on( 'menu:create:gallery', this.createMenu, this );
+            this.on( 'toolbar:create:main-gallery', this.createToolbar, this );
+            this.on( 'toolbar:create:featured-image', this.featuredImageToolbar, this );
+            this.on( 'toolbar:create:main-embed', this.mainEmbedToolbar, this );
+
+            handlers = {
+                menu: {
+                    'default': 'mainMenu',
+                    'gallery': 'galleryMenu',
+                },
+
+                content: {
+                    'embed':          'embedContent',
+                    'edit-image':     'editImageContent',
+                    'edit-selection': 'editSelectionContent'
+                },
+
+                toolbar: {
+                    'main-gallery':     'mainGalleryToolbar',
+                    'gallery-edit':     'galleryEditToolbar',
+                    'gallery-add':      'galleryAddToolbar'
+                }
+            };
+
+            _.each( handlers, function( regionHandlers, region ) {
+                _.each( regionHandlers, function( callback, handler ) {
+                    this.on( region + ':render:' + handler, this[ callback ], this );
+                }, this );
+            }, this );
+        },
+
+        galleryMenu: function( view ) {
+            var lastState = this.lastState(),
+            previous = lastState && lastState.id,
+            frame = this;
+
+            view.set({
+                cancel: {
+                    text:     l10n.cancelGalleryTitle,
+                    priority: 20,
+                    click:    function() {
+                        if ( previous ) {
+                            frame.setState( previous );
+                        } else {
+                            frame.close();
+                        }
+
+                        // Keep focus inside media modal
+                        // after canceling a gallery
+                        this.controller.modal.focusManager.focus();
+                    }
+                },
+                separateCancel: new wp.media.View({
+                    className: 'separator',
+                    priority: 40
+                })
+            });
+        },
+
+        // Content
+        embedContent: function() {
+            var view = new LFM.Views.featuredEmbedCodeView({
+                controller: this,
+                model: this.state()
+            }).render();
+
+            this.content.set(view);
+        },
+
+        editSelectionContent: function() {
+            var state = this.state(),
+            selection = state.get('selection'),
+            view;
+
+            view = new wp.media.view.AttachmentsBrowser({
+                controller: this,
+                collection: selection,
+                selection:  selection,
+                model:      state,
+                sortable:   true,
+                search:     false,
+                dragInfo:   true,
+
+                AttachmentView: wp.media.view.Attachment.EditSelection
+            }).render();
+
+            view.toolbar.set( 'backToLibrary', {
+                text:     l10n.returnToLibrary,
+                priority: -100,
+
+                click: function() {
+                    this.controller.content.mode('browse');
+                }
+            });
+
+            // Browse our library of attachments.
+            this.content.set( view );
+        },
+
+        editImageContent: function() {
+            var image = this.state().get('image'),
+            view = new wp.media.view.EditImage( { model: image, controller: this } ).render();
+
+            this.content.set( view );
+
+            // after creating the wrapper view, load the actual editor via an ajax call
+            view.loadEditor();
+        },
+
+        selectionStatusToolbar: function( view ) {
+            var editable = this.state().get('editable');
+
+            view.set( 'selection', new wp.media.view.Selection({
+                controller: this,
+                collection: this.state().get('selection'),
+                priority:   -40,
+
+                // If the selection is editable, pass the callback to
+                // switch the content mode.
+                editable: editable && function() {
+                    this.controller.content.mode('edit-selection');
+                }
+            }).render() );
+        },
+
+        mainGalleryToolbar: function( view ) {
+            var controller = this;
+
+            this.selectionStatusToolbar( view );
+
+            view.set( 'gallery', {
+                style:    'primary',
+                text:     l10n.createNewGallery,
+                priority: 60,
+                requires: { selection: true },
+
+                click: function() {
+                    var selection = controller.state().get('selection'),
+                    edit = controller.state('gallery-edit'),
+                    models = selection.where({ type: 'image' });
+
+                    edit.set( 'library', new wp.media.model.Selection( models, {
+                        props:    selection.props.toJSON(),
+                        multiple: true
+                    }) );
+
+                    this.controller.setState('gallery-edit');
+
+                    // Keep focus inside media modal
+                    // after jumping to gallery view
+                    this.controller.modal.focusManager.focus();
+                }
+            });
+        },
+
+        featuredImageToolbar: function(toolbar) {
+            toolbar.view = new LFM.Views.defaultToolbar({
+                controller: this
+            });
+        },
+
+        mainEmbedToolbar: function(toolbar) {
+            toolbar.view = new LFM.Views.defaultToolbar({
+                controller: this
+            });
+        },
+
+        galleryEditToolbar: function() {
+            this.toolbar.set(new LFM.Views.defaultToolbar({
+                controller: this
+            }));
+        },
+
+        galleryAddToolbar: function() {
+            this.toolbar.set( new wp.media.view.Toolbar({
+                controller: this,
+                items: {
+                    insert: {
+                        style:    'primary',
+                        text:     l10n.addToGallery,
+                        priority: 80,
+                        requires: { selection: true },
+
+                        /**
+                         * @fires wp.wp.media.controller.State#reset
+                         */
+                        click: function() {
+                            var controller = this.controller,
+                            state = controller.state(),
+                            edit = controller.state('gallery-edit');
+
+                            edit.get('library').add( state.get('selection').models );
+                            state.trigger('reset');
+                            controller.setState('gallery-edit');
+                        }
+                    }
+                }
+            }) );
         }
-    });
-
-    var featuredMediaOptions = wp.Backbone.View.extend({
-        template: wp.media.template('featured-media-options'),
     });
 
     /* Views for media types */
-    var featuredMediaBaseView = wp.media.View.extend({
-        id: function() {
-            return 'media-editor-' + this.options.option.id;
-        },
-
-        showSpinner: function() {
-            this.$el.find('.spinner').removeAttr('style');
-        },
-
-        hideSpinner: function() {
-            this.$el.find('.spinner').css({ display: 'none' });
-        }
-    });
-
-    LFM.Views.featuredEmbedCodeView = featuredMediaBaseView.extend({
+    LFM.Views.featuredEmbedCodeView = wp.media.View.extend({
+        id: 'media-editor-embed-code',
         template: wp.media.template('featured-embed-code')
     });
 
-    LFM.Views.featuredVideoView = featuredMediaBaseView.extend({
+    LFM.Views.featuredVideoView = wp.media.View.extend({
         events: {
             'paste input.url': 'fetchVideo',
             'keypress input.url': 'fetchVideo'
@@ -167,6 +380,14 @@ var LFM = _.extend(LFM || {}, {
                 action: 'largo_fetch_video_oembed',
                 url: address
             }, success, failure);
+        },
+
+        showSpinner: function() {
+            this.$el.find('.spinner').removeAttr('style');
+        },
+
+        hideSpinner: function() {
+            this.$el.find('.spinner').css({ display: 'none' });
         }
     });
 
@@ -247,22 +468,6 @@ var LFM = _.extend(LFM || {}, {
         }
     });
 
-    LFM.Views.featuredImageView = LFM.Views.featuredImageBaseView.extend({
-        id: 'media-editor-image',
-
-        updateSelection: function() {
-            var selection = this.state().get('selection');
-
-            if (typeof this.model !== 'undefined') {
-                var attachmentId = this.model.get('attachment'),
-                    attachment = wp.media.model.Attachment.get(attachmentId);
-
-                attachment.fetch();
-                selection.reset((attachment)? [attachment] : []);
-            }
-        }
-    });
-
     LFM.Views.featuredPhotoGalleryView = LFM.Views.featuredImageBaseView.extend({
         id: 'media-editor-gallery',
 
@@ -287,51 +492,56 @@ var LFM = _.extend(LFM || {}, {
         },
     });
 
-    /* View for save button */
-    LFM.Views.featuredSaveButtonView = wp.Backbone.View.extend({
-        className: 'media-toolbar',
+    LFM.Views.defaultToolbar = wp.media.view.Toolbar.extend({
+        initialize: function() {
+            var self = this;
 
-        events: {
-            'click a.button': 'save'
+            _.defaults(this.options, {
+                items: {
+                    submit: {
+                        style: 'primary',
+                        priority: 10,
+                        requires: false,
+                        text: 'Set as featured',
+                        click: self.save.bind(this)
+                    }
+                }
+            });
+
+            wp.media.view.Toolbar.prototype.initialize.apply( this, arguments );
+
+            // Add the "loading" indicator to the submit button container
+            this.primary.$el.prepend('<span class="spinner" style="display: none;"></span>');
         },
 
-        template: wp.media.template('featured-media-save'),
-
         save: function() {
-            var currentView = LFM.instances.frame.views.get('.media-frame-content'),
-                self = this;
+            var self = this,
+                view = this.controller,
+                state = view.state(),
+                attrs = {};
 
-            if (currentView.length > 0)
-                currentView = currentView[0];
-            else
-                return false;
-
-            if (typeof this.model == 'undefined')
-                this.model = new featuredMediaModel();
-
-            var attrs = LFM.Utils.formArrayToObj(
-                currentView.$el.find('form').serializeArray());
-
-            if (currentView.$el.attr('id') == 'media-editor-image') {
+            if (state.get('id') == 'image') {
                 attrs.type = 'image';
-                var selected = currentView.$el.find('.attachments .attachment.selected');
-                attrs.attachment = selected.data('id');
-            }
+                var selection = state.get('selection'),
+                    selected = selection.map(function(m) { return m.get('id'); });
 
-            if (currentView.$el.attr('id') == 'media-editor-gallery') {
+                if (selected.length > 0)
+                    attrs.attachment = selected[0];
+            } else if (state.get('id') == 'gallery-edit') {
                 attrs.type = 'gallery';
-                var selected = currentView.$el.find('.attachments .attachment.selected');
-                attrs.gallery = _.map(selected, function(item) { return $(item).data('id'); });
+                var library = state.get('library'),
+                    selected = library.map(function(m) { return m.get('id'); });
+
+                if (selected.length > 0)
+                    attrs.gallery = selected;
+            } else {
+                attrs = LFM.Utils.formArrayToObj(view.$el.find('form').serializeArray());
             }
 
             this.showSpinner();
-            this.model = new featuredMediaModel(attrs);
-            this.model.save({}, {
-                silent: true,
-                success: function(){
-                    self.model.set(attrs, { silent: true });
-                    self.hideSpinner();
-                }
+            view.model = new featuredMediaModel(attrs);
+            view.model.save({}, {
+                success: self.hideSpinner.bind(this)
             });
         },
 
@@ -350,7 +560,6 @@ var LFM = _.extend(LFM || {}, {
         _.each(arr, function(item) {
             ret[item.name] = item.value;
         });
-        ret = _.extend(ret, { id: LFM.Utils.getPostId() });
         return ret;
     };
 
@@ -382,55 +591,23 @@ var LFM = _.extend(LFM || {}, {
         return Number($( '#post_ID' ).val());
     };
 
-    LFM.Utils.closeModal = function() {
-        LFM.instances.modal.close();
-        LFM.Utils.resetModal();
-    };
-
-    LFM.Utils.resetModal = function() {
-        LFM.instances = {};
-    };
-
     $(document).ready(function() {
         $('#set-featured-media-button').click(function() {
-            if (typeof LFM.instances.modal == 'undefined') {
-                LFM.instances.modal = new featuredMediaModal({ propagate: false });
+            var model = new featuredMediaModel();
 
-                LFM.instances.frame = new featuredMediaFrame();
-                LFM.instances.modal.views.set('.media-modal-content', LFM.instances.frame);
-
-                LFM.instances.options = new featuredMediaOptions({ mediaTypes: LFM.options });
-                LFM.instances.frame.views.set('.media-frame-menu', LFM.instances.options);
-
-                var option,
-                    model = new featuredMediaModel();
-
-                model.fetch({
-                    success: function(data) {
-                        initialViewId = data.get('type') || 'embed-code';
-                        option = _.findWhere(LFM.options, { id: initialViewId });
-
-                        var view = featuredMediaIdToView[initialViewId];
-                        LFM.instances[initialViewId] = new LFM.Views[view]({
-                            option: option,
-                            model: data
+            model.fetch({
+                success: function(data) {
+                    var initialViewId = data.get('type') || 'embed-code',
+                        option = _.findWhere(LFM.options, { id: initialViewId }),
+                        modal = new LFM.Views.featuredMediaFrame({
+                            state: option.id,
+                            model: model
                         });
-                        LFM.instances.frame.views.set('.media-frame-content', LFM.instances[initialViewId]);
 
-                        LFM.instances.save = new LFM.Views.featuredSaveButtonView({ model: model });
-                        LFM.instances.frame.views.set('.media-frame-toolbar', LFM.instances.save);
-
-                        LFM.instances.modal.open();
-                        LFM.instances.frame.setActive(initialViewId);
-                    }
-                });
-            } else {
-                LFM.instances.modal.open();
-                LFM.instances.frame.setActive(initialViewId);
-            }
-
-            return false;
+                    modal.open();
+                    LFM.instances.modal = modal;
+                }
+            });
         });
-    })
-
+    });
 }());

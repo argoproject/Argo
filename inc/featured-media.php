@@ -56,16 +56,8 @@ function largo_featured_media_save() {
 		// If an attachment ID is present, update the post thumbnail/featured image
 		if (!empty($data['attachment']))
 			set_post_thumbnail($data['id'], $data['attachment']);
-
-		// If we have gallery image ID's, make sure they're "attached" to this post
-		if (!empty($data['gallery'])) {
-			foreach ($data['gallery'] as $image_id) {
-				wp_update_post(array(
-					'ID' => $image_id,
-					'post_parent' => $data['id']
-				));
-			}
-		}
+		else
+			delete_post_thumbnail($data['id']);
 
 		// Save what's sent over the wire as `featured_media` post meta
 		$ret = update_post_meta($data['id'], 'featured_media', $data);
@@ -144,26 +136,9 @@ if (defined('FEATURED_MEDIA') && FEATURED_MEDIA) {
 	 * Prints the templates used by featured media modal.
 	 */
 	function largo_featured_media_templates() { ?>
-		<script type="text/template" id="tmpl-featured-media-frame">
-			<div class="media-frame-menu"></div>
-			<div class="media-frame-title"><h1>Set featured media</h1></div>
-			<div class="media-frame-router"><p>Choose an item to feature prominently at the top of your post.</p></div>
-			<div class="media-frame-content"></div>
-			<div class="media-frame-toolbar"></div>
-			<div class="media-frame-uploader"></div>
-		</script>
-
 		<script type="text/template" id="tmpl-featured-media-save">
 			<div class="media-toolbar-primary">
 				<span class="spinner" style="display: none;"></span> <a href="#" class="button media-button button-primary button-large">Set as featured</a>
-			</div>
-		</script>
-
-		<script type="text/template" id="tmpl-featured-media-options">
-			<div class="media-menu">
-			<# _.each(data.mediaTypes, function(type) { #>
-				<a id="media-type-{{ type.id }}" class="media-menu-item" href="#">{{ type.title }}</a>
-			<# }) #>
 			</div>
 		</script>
 
@@ -171,29 +146,30 @@ if (defined('FEATURED_MEDIA') && FEATURED_MEDIA) {
 			<form id="featured-embed-code-form">
 				<input type="hidden" name="type" value="embed-code" />
 
+				<# var model = data.controller.model #>
 				<div>
 					<label for="title"><span>Title</span></label>
-					<input type="text" name="title" <# if (typeof data.model !== 'undefined') { #>value="{{ data.model.get('title') }}"<# } #> />
+					<input type="text" name="title" <# if (typeof model !== 'undefined') { #>value="{{ model.get('title') }}"<# } #> />
 				</div>
 
 				<div>
 					<label for="caption"><span>Caption</span></label>
-					<input type="text" name="caption" <# if (typeof data.model !== 'undefined') { #>value="{{ data.model.get('caption') }}"<# } #> />
+					<input type="text" name="caption" <# if (typeof model !== 'undefined') { #>value="{{ model.get('caption') }}"<# } #> />
 				</div>
 
 				<div>
 					<label for="credit"><span>Credit</span></label>
-					<input type="text" name="credit" <# if (typeof data.model !== 'undefined') { #>value="{{ data.model.get('credit') }}"<# } #> />
+					<input type="text" name="credit" <# if (typeof model !== 'undefined') { #>value="{{ model.get('credit') }}"<# } #> />
 				</div>
 
 				<div>
 					<label for="url"><span>URL</span></label>
-					<input type="text" name="url" <# if (typeof data.model !== 'undefined') { #>value="{{ data.model.get('url') }}"<# } #> />
+					<input type="text" name="url" <# if (typeof model !== 'undefined') { #>value="{{ model.get('url') }}"<# } #> />
 				</div>
 
 				<div>
 					<label for="embed"><span>Embed code</span></label>
-					<textarea name="embed"><# if (typeof data.model !== 'undefined') { #>{{ data.model.get('embed') }}<# } #></textarea>
+					<textarea name="embed"><# if (typeof model !== 'undefined') { #>{{ model.get('embed') }}<# } #></textarea>
 				</div>
 			</form>
 		</script>
@@ -203,30 +179,31 @@ if (defined('FEATURED_MEDIA') && FEATURED_MEDIA) {
 				<input type="hidden" name="type" value="video" />
 
 				<p>Enter a video URL to get started.</p>
+				<# var model = data.controller.model #>
 				<div>
 					<label for="url"><span>Video URL  <span class="spinner" style="display: none;"></span></label>
-					<input type="text" class="url" name="url" <# if (typeof data.model !== 'undefined') { #>value="{{ data.model.get('url') }}"<# } #>/>
+					<input type="text" class="url" name="url" <# if (typeof model !== 'undefined') { #>value="{{ model.get('url') }}"<# } #>/>
 					<p class="error"></p>
 				</div>
 
 				<div>
 					<label for="embed"><span>Video embed code</span></label>
-					<textarea name="embed"><# if (typeof data.model !== 'undefined') { #>{{ data.model.get('embed') }}<# } #></textarea>
+					<textarea name="embed"><# if (typeof model !== 'undefined') { #>{{ model.get('embed') }}<# } #></textarea>
 				</div>
 
 				<div>
 					<label for="title"><span>Title</span></span></label>
-					<input type="text" name="title" <# if (typeof data.model !== 'undefined') { #>value="{{ data.model.get('title') }}"<# } #> />
+					<input type="text" name="title" <# if (typeof model !== 'undefined') { #>value="{{ model.get('title') }}"<# } #> />
 				</div>
 
 				<div>
 					<label for="caption"><span>Caption</span></label>
-					<input type="text" name="caption" <# if (typeof data.model !== 'undefined') { #>value="{{ data.model.get('caption') }}"<# } #> />
+					<input type="text" name="caption" <# if (typeof model !== 'undefined') { #>value="{{ model.get('caption') }}"<# } #> />
 				</div>
 
 				<div>
 					<label for="credit"><span>Credit</span></label>
-					<input type="text" name="credit" <# if (typeof data.model !== 'undefined') { #>value="{{ data.model.get('credit') }}"<# } #> />
+					<input type="text" name="credit" <# if (typeof model !== 'undefined') { #>value="{{ model.get('credit') }}"<# } #> />
 				</div>
 
 			</form>
