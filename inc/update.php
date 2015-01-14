@@ -305,3 +305,38 @@ function largo_transition_nav_menus() {
 
 	set_theme_mod('nav_menu_locations', $locations);
 }
+
+/**
+ * Updates post prominence term descriptions iff they use the old language
+ *
+ */
+function largo_update_prominence_term_descriptions() {
+	// see https://github.com/INN/Largo/issues/210#issuecomment-69741599
+	/* Bad logic here
+	// missing prominence terms descriptions $largoProminenceTerms
+
+	$terms = get_terms('prominence', array(
+			'hide_empty' => false,
+			'fields' => 'all'
+		));
+		$names = array_map(function($arg) { return $arg->description; }, $terms);
+	
+	foreach ($largoProminenceTerms as $term ) {
+		if (!in_array($term['description'], $descriptions)) {
+		    $id = get_term_by('slug', $term['slug'], 'prominence', 'ARRAY_A' );
+		    wp_update_term(
+		        $id['term_id'], 'prominence',
+		        array(
+		            'name' => $term['name'],
+		            'description' => $term['description'],
+		            'slug' => $term['slug']
+		        )
+		    );
+		    // Clean the entire prominence term cache
+		    clean_term_cache( $id['term_id'], 'prominence', true );
+		}
+	}
+
+	*/
+
+}
