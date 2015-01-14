@@ -1,13 +1,4 @@
 <?php
-/*
-class MockWP_Theme {
-
-
-	function get($value) {
-		return $this->$value;
-	}
-}
-*/
 
 class UpdateTestFunctions extends WP_UnitTestCase {
 
@@ -15,16 +6,11 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 		of_reset_options();
 		parent::setUp();
 	}
-
-	function wp_get_theme() {
-		return true;
-	}
-
 	function test_largo_version() {
 		// depends upon wp_get_theme,
 		//   depends upon get_stylesheet
 		//   depends upon get_raw_theme_root, which does exist here
-#		var_dump($GLOBALS['wp_theme_directories']);
+		// var_dump($GLOBALS['wp_theme_directories']); does return useful info
 		
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
