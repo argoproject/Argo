@@ -66,28 +66,37 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 		of_reset_options();
 		largo_home_transition();
 		$this->assertEquals('HomepageBlog', of_get_option('home_template', 0));
-		
-		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 	function test_largo_update_widgets() {
+		// uses largo_widget_in_region
+		// uses largo_instantiate_widget
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 	function test_largo_widget_in_region() {
+		// uses WP_Error
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 	function test_largo_instantiate_widget() {
+		// uses wp_parse_args
+		// uses update_option, now mocked
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 	function test_largo_check_deprecated_widgets() {
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	function test_deprecated_footer_widget() {
-		$this->markTestIncomplete('This test has not been implemented yet.');
+	function test_largo_deprecated_footer_widget() {
+		// prints a nag
+		// uses __
+		$this->expectOutputRegex('/[.*]+/'); // This is excessively greedy, it expects any output at all
+		largo_deprecated_footer_widget();
 	}
-	function test_deprecated_sidebar_widget() {
-		$this->markTestIncomplete('This test has not been implemented yet.');
+	function test_largo_deprecated_sidebar_widget() {
+		// prints a nag
+		// uses __
+		$this->expectOutputRegex('/[.*]+/'); // This is excessively greedy, it expects any output at all
+		largo_deprecated_sidebar_widget();
 	}
-	function test_transition_nav_menus() {
+	function test_largo_transition_nav_menus() {
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
