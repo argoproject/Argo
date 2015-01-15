@@ -22,24 +22,27 @@ Applying a series to a post can be done by selecting the appropriate series from
 **Creating the landing page**
 
 Landing pages are created through the Landing Pages > Add New entry in the Dashboard sidebar. Landing pages have the following options:
-	-Title
-	-Display header
-	-Show series byline, with the byline setting elsewhere on the page,
-	-Show social media sharing links
-	-Layout style
-		-Standard: Uses title, description, and featured image
-		-Alternate: Uses title, description, and custom HTML		
-	-Number of widget columns and which widget region they are
-	-Number of posts per page
-	-Post order and display options
-		-Show featured image
-		=Show excerpt
-		-Show byline
-		-Show categories and tags
-	-Slug
-	-Author
-	-Footer layout style
-		-None
-		-Create a new "Series SeriesName: Bottom" [[widget area|Sidebars and widgets]], editable in 		*Appearance* > *Widgets*
-		-Custom HTML
+    - Title
+    - Display header
+    - Show series byline, with the byline setting elsewhere on the page,
+    - Show social media sharing links
+    - Layout style
+    
+       - Standard: Uses title, description, and featured image
+       - Alternate: Uses title, description, and custom HTML		
+       
+    - Number of widget columns and which widget region they are
+    - Number of posts per page
+    - Post order and display options
+      - Show featured image
+      - Show excerpt
+      - Show byline
+      - Show categories and tags
+      
+     - Slug
+     - Author
+     - Footer layout style
+       - None
+       - Create a new "Series SeriesName: Bottom" [[widget area|Sidebars and widgets]], editable in          *Appearance* > *Widgets*
+       - Custom HTML
         

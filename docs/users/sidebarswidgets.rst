@@ -46,24 +46,38 @@ In addition to these widget areas, the Largo theme includes a number of custom w
 **Largo Twitter** allows you display a Twitter widget showing either most recent tweets by an account, by the members of a list or for a particular Twitter search term.
 
 more widgets from Jira
+
 - **Largo Author Bio**: Show the author bio in a widget.
+
 - **Largo Custom Taxonomy List**: Lists all the terms in a chosen taxonomy with links to their archive pages. Examples of taxonomies are tags, categories, series and post prominence. Choosing "Series" would list all series.
+
 - **Largo Disclaimer Site**: Show the article disclaimer.
+
 - **Largo Explore Related**: A fancy tabbed interface showing posts related to the current post; formerly a theme option.
+
 - **Largo Facebook Widget**: Show a Facebook Like Box for your page.
+
 - **Largo Featured Posts**: Show recent featured posts with thumbnails and excerpts.
+
 - Largo Footer Featured Posts: **Deprecated**: Show recent featured posts with thumbnails and excerpts
+
 - **Largo Post Series Links**: Shows the titles/descriptions of the series the post belongs to.
+
 - **Largo Prev/Next Links**: Prev/next post navigation, typically at the bottom of single posts; formerly a theme option.
+
 - **Largo Recent Comments**: Show recent comments
+
 - **Largo Related Posts**: Lists posts related to the current post
+
 - **Largo Series Posts**: Lists posts in the given series
+
 Largo Sidebar Featured Posts: **Deprecated**: Show recent featured posts with thumbnails and excerpts
+
 - **Largo Tag List**: A list of tags for the current post; formerly a theme option.
+
 - **Largo Taxonomy List**: List all of the terms in a custom taxonomy with links
 
-All widgets have the choice of three backgrounds (default, reverse and none), the ability to be hidden on desktops, tablets and phones using 
-`Bootstrap 2.3's responsive utility classes <http://getbootstrap.com/2.3.2/scaffolding.html#responsive>`_ , and the ability to set a link for the widget title.
+All widgets have the choice of three backgrounds (default, reverse and none), the ability to be hidden on desktops, tablets and phones using `Bootstrap 2.3's responsive utility classes <http://getbootstrap.com/2.3.2/scaffolding.html#responsive>`_ , and the ability to set a link for the widget title.
 
 For more about widgets and how WordPress handles them, see 
-`the WordPress Codex article <http://link>`_the WordPress Codex article on widgets
+`the WordPress Codex article <http://codex.wordpress.org/WordPress_Widgets>`_ the WordPress Codex article on widgets

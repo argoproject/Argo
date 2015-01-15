@@ -10,7 +10,5 @@ Optimizing content
 6. Include links in your content:
     internal links to previous and current coverage
     external links to other coverage or to relevant websites
-    add relevant stories' `post IDs <http://codex.wordpress.org/FAQ_Working_with_WordPress#How_do_I_determine_a_Post.2C_Page.2C_Category.2C_Tag.2C_Link.2C_Link_Category.2C_or_User_ID.3F>`_to the "Related Posts" field in the Additional Options widget in the post editor.
-
-7. Include your word or phrase image filenames, title and alt tags.
-Tag your story with the term, and set it as the top term for that story in the Additional Options widget in the post editor.
+    add relevant stories `post IDs <http://codex.wordpress.org/FAQ_Working_with_WordPress#How_do_I_determine_a_Post.2C_Page.2C_Category.2C_Tag.2C_Link.2C_Link_Category.2C_or_User_ID.3F>`_ to the "Related Posts" field in the Additional Options widget in the post editor.
+7. Include your word or phrase image filenames, title and alt tags.  Tag your story with the term, and set it as the top term for that story in the Additional Options widget in the post editor.
