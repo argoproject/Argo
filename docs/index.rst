@@ -20,13 +20,18 @@ User Documentation
     :maxdepth: 2
 
     users/welcome
-    users/sitesetup
+    users/prelaunchchcklist
     users/download
-    users/configuremenus
+    users/sitesetup
     users/themeoptions
+    users/configuremenus
     users/sidebarswidgets
- 
+    users/plugins
+    users/customlanding
+    users/optimizingcontent
+    users/customtaxonomies
 
+	
 .. _admin-docs:
 
 Administrators Documentation
@@ -48,6 +53,7 @@ Developers
 .. toctree::
     :maxdepth: 2
 
+    fordevelopers
     developers/guide
     functions
     api/api
