@@ -66,6 +66,7 @@ function largo_home_transition() {
 
 	// we're using the old system and the new one isn't in place, act accordingly
 	// this should ALWAYS happen when this function is called, as there's a separate version check before this is invoked
+	// however, it will not run if the new system has already been set up, so largo-dev to 0.4 will not overwrite details.
 	// the home template sidebars have same names as old regime so that *shouldn't* be an issue
 	if ($old_regime && !$new_regime) {
 		if ($old_regime == 'topstories')
@@ -311,19 +312,54 @@ function largo_transition_nav_menus() {
  *
  */
 function largo_update_prominence_term_descriptions() {
-	// see https://github.com/INN/Largo/issues/210#issuecomment-69741599
-	/* Bad logic here
-	// missing prominence terms descriptions $largoProminenceTerms
+	// see https://github.com/INN/Largo/issues/210
+
+	$largoOldProminenceTerms = array(
+		array(
+			'name' => __('Sidebar Featured Widget', 'largo'),
+			'description' => __('If you are using the Featured Posts widget in a sidebar, add this label to posts to determine which to display in the widget.', 'largo'),
+			'olddesc' 	=> __('If you are using the Sidebar Featured Posts widget, add this label to posts to determine which to display in the widget.', 'largo'),
+			'slug' => 'sidebar-featured'
+		),
+		array(
+			'name' => __('Footer Featured Widget', 'largo'),
+			'description' => __('If you are using the Featured Posts widget in the footer, add this label to posts to determine which to display in the widget.', 'largo'),
+			'olddesc' => __('If you are using the Footer Featured Posts widget, add this label to posts to determine which to display in the widget.', 'largo'),
+			'slug' => 'footer-featured'
+		),
+		array(
+			'name' => __('Featured in Category', 'largo'),
+			'description' => __('This will allow you to designate a story to appear more prominently on category archive pages.', 'largo'),
+			'olddesc' 	=> __('Not yet implemented, in the future this will allow you to designate a story (or stories) to appear more prominently on category archive pages.', 'largo'),
+			'slug' => 'category-featured'
+		),
+		array(
+			'name' => __('Homepage Featured', 'largo'),
+			'description' => __('Add this label to posts to display them in the featured area on the homepage.', 'largo'),
+			'olddesc' => __('If you are using the Newspaper or Carousel optional homepage layout, add this label to posts to display them in the featured area on the homepage.', 'largo'),
+			'slug' => 'homepage-featured'
+		),
+		array(
+			'name' => __('Featured in Series', 'largo'),
+			'description' => __('Select this option to allow this post to float to the top of any/all series landing pages sorting by Featured first.', 'largo'),
+			'olddesc' 	=> __('Select this option to allow this post to float to the top of any/all series landing pages sorting by Featured first.', 'largo'),
+			'slug' => 'series-featured'
+		)
+	);
 
 	$terms = get_terms('prominence', array(
 			'hide_empty' => false,
 			'fields' => 'all'
 		));
-		$names = array_map(function($arg) { return $arg->description; }, $terms);
-	
-	foreach ($largoProminenceTerms as $term ) {
-		if (!in_array($term['description'], $descriptions)) {
+	$descriptions = array_map(function($arg) { return $arg->description; }, $terms);
+#	var_log($names);
+
+#	/* Bad logic here
+	$logarray = array();
+	foreach ($largoOldProminenceTerms as $term ) {
+		if (in_array($term['olddesc'], $descriptions)) {
 		    $id = get_term_by('slug', $term['slug'], 'prominence', 'ARRAY_A' );
+		    /*
 		    wp_update_term(
 		        $id['term_id'], 'prominence',
 		        array(
@@ -332,11 +368,15 @@ function largo_update_prominence_term_descriptions() {
 		            'slug' => $term['slug']
 		        )
 		    );
+		    */
+		    $logarray[] = 'Updated description of "' . $term['name'] . '" from "'. $term['olddesc'] . '" to "' . $term['description'] . '"';
 		    // Clean the entire prominence term cache
 		    clean_term_cache( $id['term_id'], 'prominence', true );
 		}
 	}
+	var_log($logarray);
 
-	*/
+#	*/
 
 }
+add_action('init', 'largo_update_prominence_term_descriptions');
