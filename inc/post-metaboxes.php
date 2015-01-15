@@ -92,16 +92,6 @@ largo_add_meta_box(
 	'core'
 );
 
-// Featured video instead of featured image
-largo_add_meta_box(
-	'largo_featured_video',
-	__( 'Featured Video', 'largo' ),
-	'largo_featured_video_meta_box_display',
-	'post',
-	'side',
-	'low'
-);
-
 // Disclaimer
 
 if( of_get_option('disclaimer_enabled') ) {
@@ -217,21 +207,6 @@ function largo_custom_sidebar_js() {
 	}
 }
 add_action('admin_enqueue_scripts', 'largo_custom_sidebar_js');
-
-/**
- * Content for the Featured Videometabox
- */
-function largo_featured_video_meta_box_display() {
-  global $post;
-  $youtube_url = get_post_meta( $post->ID, 'youtube_url', true );
-  wp_nonce_field( 'largo_meta_box_nonce', 'meta_box_nonce' );
-
-  echo __('<p>In some cases you might want to use a video in the place of the featured image. If you would prefer to use a video, enter the URL for the video (YouTube only) here:</p>', 'largo');
-  echo '<input type="text" name="youtube_url" id="youtube_url" value="' . esc_url( $youtube_url ) . '" />';
-  echo __('<p class="small">Note that at the moment this is only used for the top story on the homepage but future versions of Largo might enable this functionality elsewhere in the theme.</p>', 'largo');
-
-}
-largo_register_meta_input( 'youtube_url', 'esc_url_raw' );
 
 /**
  * Content for the Additional Options metabox

@@ -77,6 +77,13 @@ function largo_fetch_video_oembed() {
 }
 add_action('wp_ajax_largo_fetch_video_oembed', 'largo_fetch_video_oembed');
 
+function largo_remove_featured_image_meta_box() {
+	remove_meta_box('postimagediv', 'post', 'normal');
+	remove_meta_box('postimagediv', 'post', 'side');
+	remove_meta_box('postimagediv', 'post', 'advanced');
+}
+add_action('do_meta_boxes', 'largo_remove_featured_image_meta_box');
+
 /**
  * Returns the default available featured media types
  */
