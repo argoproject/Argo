@@ -136,12 +136,6 @@ if (defined('FEATURED_MEDIA') && FEATURED_MEDIA) {
 	 * Prints the templates used by featured media modal.
 	 */
 	function largo_featured_media_templates() { ?>
-		<script type="text/template" id="tmpl-featured-media-save">
-			<div class="media-toolbar-primary">
-				<span class="spinner" style="display: none;"></span> <a href="#" class="button media-button button-primary button-large">Set as featured</a>
-			</div>
-		</script>
-
 		<script type="text/template" id="tmpl-featured-embed-code">
 			<form id="featured-embed-code-form">
 				<input type="hidden" name="type" value="embed-code" />
@@ -214,35 +208,35 @@ if (defined('FEATURED_MEDIA') && FEATURED_MEDIA) {
 
 	function largo_featured_media_css() { ?>
 		<style type="text/css">
-			.featured-media-modal form {
+			.featured-media-modal .featured-media-view form {
 				margin: 20px;
 			}
-			.featured-media-modal form div {
+			.featured-media-modal .featured-media-view form div {
 				margin: 0 0 20px 0;
 			}
-			.featured-media-modal form label {
+			.featured-media-modal .featured-media-view form label {
 				clear: both;
 				padding: 10px 0;
 				margin: 0 0 10px 0;
 			}
-			.featured-media-modal form label span {
+			.featured-media-modal .featured-media-view form label span {
 				display: block;
 				font-size: 18px;
 				line-height: 22px;
 				margin: 6px 0;
 			}
-			.featured-media-modal form textarea,
-			.featured-media-modal form input {
+			.featured-media-modal .featured-media-view form textarea,
+			.featured-media-modal .featured-media-view form input {
 				width: 100%;
 				max-width: 700px;
 			}
-			.featured-media-modal form textarea {
+			.featured-media-modal .featured-media-view form textarea {
 				min-height: 120px;
 			}
-			.featured-media-modal .media-frame-router p {
+			.featured-media-modal .featured-media-view .media-frame-router p {
 				margin: 0 0 0 15px;
 			}
-			.featured-media-modal .media-toolbar-primary span.spinner {
+			.featured-media-modal .featured-media-view .media-toolbar-primary span.spinner {
 				display: inline-block;
 				float: left;
 				margin: 0;

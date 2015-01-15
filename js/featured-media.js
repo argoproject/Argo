@@ -15,7 +15,7 @@ var LFM = _.extend(LFM || {}, {
 (function() {
     var $ = jQuery,
         l10n = _wpMediaViewsL10n,
-        isTouchDevice = ( 'ontouchend' in document );
+        isTouchDevice = ('ontouchend' in document);
 
     /* Models */
     var featuredMediaModel;
@@ -56,13 +56,14 @@ var LFM = _.extend(LFM || {}, {
     LFM.Views.featuredMediaFrame = wp.media.view.MediaFrame.Select.extend({
         initialize: function() {
             _.defaults(this.options, {
-                multiple:  true,
-                editing:   false,
-                state:    'image',
-                metadata:  {},
+                multiple: true,
+                editing: false,
+                state: 'image',
+                metadata: {},
                 className: 'featured-media-modal',
                 model: new featuredMediaModel()
             });
+
             wp.media.view.MediaFrame.Select.prototype.initialize.apply(this, arguments);
             this.createIframeStates();
             this.$el.addClass(this.options.className);
@@ -75,23 +76,33 @@ var LFM = _.extend(LFM || {}, {
                 // Embed code
                 new wp.media.controller.Embed({
                     title: 'Featured embed code',
-                    metadata: options.metadata,
                     id: 'embed-code',
+                    content: 'embed',
                     priority: 0
+                }),
+
+                // Video embed
+                new wp.media.controller.Embed({
+                    title: 'Featured video',
+                    id: 'video',
+                    content: 'video',
+                    priority: 10
                 }),
 
                 // Featured image
                 new wp.media.controller.FeaturedImage({
                     title: 'Featured image',
-                    priority: 10,
+                    priority: 20,
                     id: 'image',
                 }),
+
+				new wp.media.controller.EditImage({ model: options.editImage }),
 
                 // Featured gallery
                 new wp.media.controller.Library({
                     id: 'gallery',
                     title: 'Featured gallery',
-                    priority: 20,
+                    priority: 30,
                     toolbar: 'main-gallery',
                     filterable: 'uploaded',
                     multiple: 'add',
@@ -115,12 +126,12 @@ var LFM = _.extend(LFM || {}, {
         bindHandlers: function() {
             var handlers;
 
-            wp.media.view.MediaFrame.Select.prototype.bindHandlers.apply( this, arguments );
+            wp.media.view.MediaFrame.Select.prototype.bindHandlers.apply(this, arguments);
 
-            this.on( 'menu:create:gallery', this.createMenu, this );
-            this.on( 'toolbar:create:main-gallery', this.createToolbar, this );
-            this.on( 'toolbar:create:featured-image', this.featuredImageToolbar, this );
-            this.on( 'toolbar:create:main-embed', this.mainEmbedToolbar, this );
+            this.on('menu:create:gallery', this.createMenu, this);
+            this.on('toolbar:create:main-gallery', this.createToolbar, this);
+            this.on('toolbar:create:featured-image', this.featuredImageToolbar, this);
+            this.on('toolbar:create:main-embed', this.mainEmbedToolbar, this);
 
             handlers = {
                 menu: {
@@ -129,15 +140,16 @@ var LFM = _.extend(LFM || {}, {
                 },
 
                 content: {
-                    'embed':          'embedContent',
-                    'edit-image':     'editImageContent',
+                    'embed': 'embedContent',
+                    'video': 'embedVideo',
+                    'edit-image': 'editImageContent',
                     'edit-selection': 'editSelectionContent'
                 },
 
                 toolbar: {
-                    'main-gallery':     'mainGalleryToolbar',
-                    'gallery-edit':     'galleryEditToolbar',
-                    'gallery-add':      'galleryAddToolbar'
+                    'main-gallery': 'mainGalleryToolbar',
+                    'gallery-edit': 'galleryEditToolbar',
+                    'gallery-add': 'galleryAddToolbar'
                 }
             };
 
@@ -149,20 +161,14 @@ var LFM = _.extend(LFM || {}, {
         },
 
         galleryMenu: function( view ) {
-            var lastState = this.lastState(),
-            previous = lastState && lastState.id,
-            frame = this;
+            var frame = this;
 
             view.set({
                 cancel: {
-                    text:     l10n.cancelGalleryTitle,
+                    text: l10n.cancelGalleryTitle,
                     priority: 20,
-                    click:    function() {
-                        if ( previous ) {
-                            frame.setState( previous );
-                        } else {
-                            frame.close();
-                        }
+                    click: function() {
+                        frame.setState(frame.state('gallery'));
 
                         // Keep focus inside media modal
                         // after canceling a gallery
@@ -177,6 +183,15 @@ var LFM = _.extend(LFM || {}, {
         },
 
         // Content
+        embedVideo: function() {
+            var view = new LFM.Views.featuredVideoView({
+                controller: this,
+                model: this.state()
+            });
+
+            this.content.set(view);
+        },
+
         embedContent: function() {
             var view = new LFM.Views.featuredEmbedCodeView({
                 controller: this,
@@ -194,16 +209,16 @@ var LFM = _.extend(LFM || {}, {
             view = new wp.media.view.AttachmentsBrowser({
                 controller: this,
                 collection: selection,
-                selection:  selection,
-                model:      state,
-                sortable:   true,
-                search:     false,
-                dragInfo:   true,
+                selection: selection,
+                model: state,
+                sortable: true,
+                search: false,
+                dragInfo: true,
 
                 AttachmentView: wp.media.view.Attachment.EditSelection
             }).render();
 
-            view.toolbar.set( 'backToLibrary', {
+            view.toolbar.set('backToLibrary', {
                 text:     l10n.returnToLibrary,
                 priority: -100,
 
@@ -218,38 +233,38 @@ var LFM = _.extend(LFM || {}, {
 
         editImageContent: function() {
             var image = this.state().get('image'),
-            view = new wp.media.view.EditImage( { model: image, controller: this } ).render();
+            view = new wp.media.view.EditImage({ model: image, controller: this }).render();
 
-            this.content.set( view );
+            this.content.set(view);
 
             // after creating the wrapper view, load the actual editor via an ajax call
             view.loadEditor();
         },
 
-        selectionStatusToolbar: function( view ) {
+        selectionStatusToolbar: function(view) {
             var editable = this.state().get('editable');
 
-            view.set( 'selection', new wp.media.view.Selection({
+            view.set('selection', new wp.media.view.Selection({
                 controller: this,
                 collection: this.state().get('selection'),
-                priority:   -40,
+                priority: -40,
 
                 // If the selection is editable, pass the callback to
                 // switch the content mode.
                 editable: editable && function() {
                     this.controller.content.mode('edit-selection');
                 }
-            }).render() );
+            }).render());
         },
 
-        mainGalleryToolbar: function( view ) {
+        mainGalleryToolbar: function(view) {
             var controller = this;
 
-            this.selectionStatusToolbar( view );
+            this.selectionStatusToolbar(view);
 
-            view.set( 'gallery', {
-                style:    'primary',
-                text:     l10n.createNewGallery,
+            view.set('gallery', {
+                style: 'primary',
+                text: l10n.createNewGallery,
                 priority: 60,
                 requires: { selection: true },
 
@@ -258,10 +273,10 @@ var LFM = _.extend(LFM || {}, {
                     edit = controller.state('gallery-edit'),
                     models = selection.where({ type: 'image' });
 
-                    edit.set( 'library', new wp.media.model.Selection( models, {
+                    edit.set('library', new wp.media.model.Selection(models, {
                         props:    selection.props.toJSON(),
                         multiple: true
-                    }) );
+                    }));
 
                     this.controller.setState('gallery-edit');
 
@@ -291,18 +306,15 @@ var LFM = _.extend(LFM || {}, {
         },
 
         galleryAddToolbar: function() {
-            this.toolbar.set( new wp.media.view.Toolbar({
+            this.toolbar.set(new wp.media.view.Toolbar({
                 controller: this,
                 items: {
                     insert: {
-                        style:    'primary',
-                        text:     l10n.addToGallery,
+                        style: 'primary',
+                        text: l10n.addToGallery,
                         priority: 80,
                         requires: { selection: true },
 
-                        /**
-                         * @fires wp.wp.media.controller.State#reset
-                         */
                         click: function() {
                             var controller = this.controller,
                             state = controller.state(),
@@ -314,17 +326,21 @@ var LFM = _.extend(LFM || {}, {
                         }
                     }
                 }
-            }) );
+            }));
         }
     });
 
     /* Views for media types */
-    LFM.Views.featuredEmbedCodeView = wp.media.View.extend({
+    LFM.Views.featuredBaseView = wp.media.View.extend({
+        className: 'featured-media-view'
+    });
+
+    LFM.Views.featuredEmbedCodeView = LFM.Views.featuredBaseView.extend({
         id: 'media-editor-embed-code',
         template: wp.media.template('featured-embed-code')
     });
 
-    LFM.Views.featuredVideoView = wp.media.View.extend({
+    LFM.Views.featuredVideoView = LFM.Views.featuredBaseView.extend({
         events: {
             'paste input.url': 'fetchVideo',
             'keypress input.url': 'fetchVideo'
@@ -389,107 +405,6 @@ var LFM = _.extend(LFM || {}, {
         hideSpinner: function() {
             this.$el.find('.spinner').css({ display: 'none' });
         }
-    });
-
-    LFM.Views.featuredImageBaseView = wp.media.view.Frame.extend({
-        initialize: function() {
-            wp.media.view.Frame.prototype.initialize.apply(this, arguments);
-
-            // Initialize window-wide uploader.
-            this.uploader = new wp.media.view.UploaderWindow({
-                controller: this,
-                uploader: {
-                    dropzone: LFM.instances.modal.$el,
-                    container: LFM.instances.modal.$el
-                }
-            });
-            LFM.instances.modal.views.set('.media-frame-uploader', this.uploader);
-
-            var lib = new wp.media.controller.Library({
-                multiple: (this.options.multiple)? 'add' : false,
-                editable: false
-            });
-            this.states.add([lib]);
-            this._state = 'library';
-            return this;
-        },
-
-        setBrowserId: function() {
-            this.browser.$el.attr('id', this.id);
-        },
-
-        render: function() {
-            this.browseContent();
-            this.setBrowserId();
-        },
-
-        browseContent: function() {
-            var self = this,
-                state = this.state();
-
-            // Browse our library of attachments.
-            this.browser = new wp.media.view.AttachmentsBrowser({
-                controller: this,
-                collection: state.get('library'),
-                selection: state.get('selection'),
-                model: state,
-                search: false,
-                dragInfo: false,
-                sidebar: false,
-                id: 'media-editor-image'
-            });
-
-            if (!!this.browser.dfd) {
-                this.browser.dfd.done(function() {
-                    LFM.instances.frame.views.set('.media-frame-content', self.browser);
-                    self.updateSelection();
-                    self.setColumns();
-                });
-            } else {
-                LFM.instances.frame.views.set('.media-frame-content', this.browser);
-                this.updateSelection();
-                this.setColumns();
-            }
-        },
-
-        setColumns: _.debounce(function() {
-            var currentView = LFM.instances.frame.views.get('.media-frame-content')[0];
-            var attachments = _.find(currentView.views.get(''), function(v) {
-                return typeof v.setColumns !== 'undefined';
-            });
-            attachments.setColumns();
-        }, 250),
-
-        uploadContent: function() {
-            var region = new wp.media.view.UploaderInline({
-                controller: this
-            });
-            LFM.instances.frame.views.set('.media-frame-content', region);
-        }
-    });
-
-    LFM.Views.featuredPhotoGalleryView = LFM.Views.featuredImageBaseView.extend({
-        id: 'media-editor-gallery',
-
-        initialize: function() {
-            this.options.multiple = 'add';
-            LFM.Views.featuredImageBaseView.prototype.initialize.apply(this, arguments);
-            return this;
-        },
-
-        updateSelection: function() {
-            var selection = this.state().get('selection');
-
-            if (typeof this.model !== 'undefined') {
-                var galleryIds = this.model.get('gallery'),
-                    galleryItems = _.map(galleryIds, function(imageId) {
-                        return wp.media.model.Attachment.get(imageId);
-                    });
-
-                _.each(galleryItems, function(item) { item.fetch(); });
-                selection.reset(galleryItems);
-            }
-        },
     });
 
     LFM.Views.defaultToolbar = wp.media.view.Toolbar.extend({
@@ -597,15 +512,38 @@ var LFM = _.extend(LFM || {}, {
 
             model.fetch({
                 success: function(data) {
-                    var initialViewId = data.get('type') || 'embed-code',
+                    var modal,
+                        initialViewId = data.get('type') || 'embed-code',
                         option = _.findWhere(LFM.options, { id: initialViewId }),
-                        modal = new LFM.Views.featuredMediaFrame({
+                        args = {
                             state: option.id,
                             model: model
+                        }
+
+                    if (initialViewId == 'gallery') {
+                        args.state = 'gallery-edit';
+                        args.editing = true;
+
+                        var query = new wp.media.model.Query([], {
+                            url: ajaxurl,
+                            args: {
+                                posts_per_page: -1,
+                                post__in: _.map(model.get('gallery'), function(id) { return id; })
+                            }
                         });
 
-                    modal.open();
-                    LFM.instances.modal = modal;
+                        query.on('sync', function() {
+                            args.selection = new wp.media.model.Selection(query.models, { multiple: true });
+                            modal = new LFM.Views.featuredMediaFrame(args);
+                            modal.open();
+                            LFM.instances.modal = modal;
+                        });
+                        query.fetch();
+                    } else {
+                        modal = new LFM.Views.featuredMediaFrame(args);
+                        modal.open();
+                        LFM.instances.modal = modal;
+                    }
                 }
             });
         });
