@@ -16,4 +16,3 @@ The Largo theme has six customizable menu areas:
 **Footer Bottom** - This is a special menu area that appears at the very bottom of the footer and should be used to link to things like your site's terms of service, privacy policy or other legal information that should appear with the copyright notice in the site footer.
 
 For a tutorial on how to add links to any of these menu areas, please see the `WordPress Menu User Guide <http://codex.wordpress.org/WordPress_Menu_User_Guide>`_.
-

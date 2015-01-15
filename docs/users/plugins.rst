@@ -12,7 +12,7 @@ We strongly recommend installing at least two of the plugins developed by Projec
 
   -The **Argo Links** plugin is a great way to collect links from around the web and create link roundup posts. We have not made any modifications to this plugin so it will work exactly as `documented on the Project Argo site <http://argoproject.org/argo-links.php>`_.
   
-  -The **Argo Audio Player** will enable you to easily add embedded audio to your posts. Depending on your specific needs you might prefer using a plugin called `PowerPress <https://wordpress.org/plugins/powerpress/>`_ to support podcasting or hosting your audio on SoundCloud and embedding the SoundCloud player. Documentation for the Argo Player can be found here.
+  -The **Argo Audio Player** will enable you to easily add embedded audio to your posts. Depending on your specific needs you might prefer using a plugin called `PowerPress <https://wordpress.org/plugins/powerpress/>`_ to support podcasting or hosting your audio on SoundCloud and embedding the SoundCloud player. Documentation for the Argo Player and `can be found here <http://argoproject.org/audio.php>`_.
 
   -And finally, the **Argo Jiffy Posts** plugin enables support for embed.ly's oEmbed API. This allows you to easily embed content in WordPress posts using nothing more than a URL. Note that embed.ly is not a free service (`pricing information here <http://embed.ly/cards>`_) but might be worth considering if your organization plans to embed a lot of third party content and rich media on your site.
 
@@ -36,3 +36,44 @@ In addition to the Argo plugins, we have included a curated list of other plugin
   
   -**Winer Links** is a simple plugin to automatically add paragraph level permalinks to your posts so that visitors can share a direct link to a particular section of a story. This plugin is a bit rough and can take some tweaking to get it to work properly, but you can find 
   `documentation and installation instructions here <http://link>`_.
+  
+from Jira different categorization 
+
+**Recommended**
+
+- Argo related
+
+*Argo Media Credit Included in Largo 0.4
+Argo Slideshow Included in Largo 0.4*
+
+- Tweetable Text
+- Clean-Contact
+
+- Curated
+
+ - Liveblog
+ - Redirection
+ - Simple Tages
+ - Table Press
+ - Tiny MCE Advanced
+
+- Utilities
+
+ - `Categories to Tags Converter <https://wordpress.org/plugins/wpcat2tag-importer/>`_ Note: Has not been updated since 2010-12-19
+ - `CodeStyling Localization <https://www.google.com/url?q=http://wordpress.org/plugins/codestyling-localization/&sa=U&ei=wL5rU9mCMuWwygGb_oCYDA&ved=0CAYQFjAA&client=internal-uds-cse&usg=AFQjCNHJAAab-tezj0GxaXZME5FV7rFV6Q>`_
+ -  `Core Control <http://wordpress.org/plugins/core-control/>`_ Note: Has not been updated since 2011-07-12
+ - `Theme Check <http://wordpress.org/plugins/theme-check/>`_
+ - `Vice Versa <http://wordpress.org/plugins/vice-versa/>`_
+ - `WordPress Importer <http://wordpress.org/plugins/wordpress-importer/>`_
+
+- Unsupported Plugins
+
+ - AdRotate
+ - Advanced Custom Fields
+ - Breadcrumb NavXT
+ - Charity-Thermometer
+ - WinerLinks
+ - WooDojo
+ - Pippity
+ - Facebook comments
+ - Iframe

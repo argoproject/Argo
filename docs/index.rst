@@ -27,9 +27,10 @@ User Documentation
     users/configuremenus
     users/sidebarswidgets
     users/plugins
-    users/customlanding
     users/optimizingcontent
+    users/customlanding
     users/customtaxonomies
+    users/largoposttemplate
 
 	
 .. _admin-docs:
@@ -53,8 +54,12 @@ Developers
 .. toctree::
     :maxdepth: 2
 
-    fordevelopers
-    developers/guide
+    developers/fordevelopers
+    developers/contentsincdir
+    developers/contentslibdir
+    developers/largocustomclasses
+    developers/modifyingchildthemes
+    
     functions
-    api/api
+    
 
