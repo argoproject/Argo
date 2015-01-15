@@ -351,7 +351,7 @@ add_action( 'admin_notices', 'largo_php_warning' );
 $includes = array();
 
 // This functionality is probably not for everyone so we'll make it easy to turn it on or off
-if ( of_get_option( 'custom_landing_enabled' ) )
+if ( of_get_option( 'custom_landing_enabled' ) && of_get_option( 'series_enabled' ) )
 	$includes[] = '/inc/wp-taxonomy-landing/taxonomy-landing.php'; // adds taxonomy landing plugin
 
 // Perform load
