@@ -33,6 +33,14 @@ Google AdSense ad code fields:
 	- Tag: Your name for this tag.
 	- Tag ID: If you have a tag name defined, use it here. Remember to escape forward slashes by replacing the forward slash with a double forward slash. For example, `foo/bar` becomes `foo//bar`
 	- Publisher ID: Your publisher ID
+	
+Enable the Leaderboard Ad Zone (optional)
+-----------------------------------------
+
+If you want to run ads at the top of the page, above your masthead:
+
+#. Go to Appearance > Theme Options > Advanced
+#. Check "Enable Optional Leaderboard Ad Zone"
 
 Create the ad widgets
 ---------------------
