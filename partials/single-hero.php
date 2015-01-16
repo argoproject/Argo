@@ -7,7 +7,7 @@ $values = get_post_custom($post->ID);
 if (isset($values['featured-image-display'][0]) && !isset($values['youtube_url']))
 	$hero_class = 'is-empty';
 
-if (largo_has_featured_media($post->ID)) {
+if (largo_has_featured_media($post->ID) && $hero_class !== 'is-empty') {
 	$featured_media = largo_get_featured_media($post->ID); ?>
 	<div class="hero span12 <?php echo $hero_class; ?>">
 		<?php if ($featured_media['type'] == 'embed-code') { ?>

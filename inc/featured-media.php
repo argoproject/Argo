@@ -257,7 +257,7 @@ if (defined('FEATURED_MEDIA') && FEATURED_MEDIA) {
 
 		<script type="text/template" id="tmpl-featured-image-override">
 			<form>
-				<input type="checkbox" name="featured-image-display" <# if (LFM.featured_image_display) { #>checked="checked"<# } #>/> Override display of featured image for this post?
+				<input type="checkbox" name="featured-image-display" <# if (LFM.featured_image_display !== '') { #>checked="checked"<# } #>/> Override display of featured image for this post?
 			</form>
 		</script>
 

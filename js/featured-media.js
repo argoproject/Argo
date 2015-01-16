@@ -538,6 +538,11 @@ var LFM = _.extend(LFM || {}, {
             var override = LFM.Utils.formArrayToObj(this.secondary.$el.find('form').serializeArray());
             override.id = LFM.Utils.getPostId();
 
+            if (typeof override['featured-image-display'] == 'undefined')
+                LFM.featured_image_display = '';
+            else
+                LFM.featured_image_display = 'on';
+
             this.showSpinner();
             LFM.Utils.doAjax('largo_save_featured_image_display', override, function() {
                 LFM.Views.defaultToolbar.prototype.save.apply(self, arguments);
