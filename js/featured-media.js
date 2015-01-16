@@ -442,8 +442,6 @@ var LFM = _.extend(LFM || {}, {
 
     LFM.Views.defaultToolbar = wp.media.view.Toolbar.extend({
         initialize: function() {
-            var self = this;
-
             _.defaults(this.options, {
                 items: {
                     submit: {
@@ -451,12 +449,12 @@ var LFM = _.extend(LFM || {}, {
                         priority: 10,
                         requires: false,
                         text: 'Set as featured',
-                        click: self.save.bind(this)
+                        click: this.save.bind(this)
                     }
                 }
             });
 
-            wp.media.view.Toolbar.prototype.initialize.apply( this, arguments );
+            wp.media.view.Toolbar.prototype.initialize.apply(this, arguments);
 
             // Add the "loading" indicator to the submit button container
             this.primary.$el.prepend('<span class="spinner" style="display: none;"></span>');
@@ -473,8 +471,14 @@ var LFM = _.extend(LFM || {}, {
                 var selection = state.get('selection'),
                     selected = selection.map(function(m) { return m.get('id'); });
 
-                if (selected.length > 0)
+
+                if (selected.length > 0) {
+                    // Make sure the featuredImageId is set so that the editor works properly
+                    // if reopened.
+                    wp.media.view.settings.post.featuredImageId = selected[0];
+                    // Set the attachment ID that will be sent over the wire.
                     attrs.attachment = selected[0];
+                }
             } else if (state.get('id') == 'gallery-edit') {
                 attrs.type = 'gallery';
                 var library = state.get('library'),
@@ -508,16 +512,32 @@ var LFM = _.extend(LFM || {}, {
 
     LFM.Views.featuredImageToolbar = LFM.Views.defaultToolbar.extend({
         initialize: function() {
+            _.defaults(this.options, {
+                items: {
+                    submit: {
+                        style: 'primary',
+                        priority: 10,
+                        requires: { selection: true },
+                        text: 'Set as featured',
+                        click: this.save.bind(this)
+                    }
+                }
+            });
+
             LFM.Views.defaultToolbar.prototype.initialize.apply(this, arguments);
+
             var override = wp.media.template('featured-image-override');
             this.secondary.$el.prepend(override());
         },
 
         save: function() {
-            var self = this;
-            this.showSpinner();
+            var self = this,
+                state = this.controller.state();
+
             var override = LFM.Utils.formArrayToObj(this.secondary.$el.find('form').serializeArray());
             override.id = LFM.Utils.getPostId();
+
+            this.showSpinner();
             LFM.Utils.doAjax('largo_save_featured_image_display', override, function() {
                 LFM.Views.defaultToolbar.prototype.save.apply(self, arguments);
             });
@@ -526,8 +546,6 @@ var LFM = _.extend(LFM || {}, {
 
     LFM.Views.removeFeaturedToolbar = wp.media.view.Toolbar.extend({
         initialize: function() {
-            var self = this;
-
             _.defaults(this.options, {
                 items: {
                     submit: {
@@ -535,7 +553,7 @@ var LFM = _.extend(LFM || {}, {
                         priority: 10,
                         requires: false,
                         text: 'Yes, remove featured media',
-                        click: self.clearFeatured.bind(this)
+                        click: this.clearFeatured.bind(this)
                     }
                 }
             });
@@ -558,6 +576,7 @@ var LFM = _.extend(LFM || {}, {
                     $('#set-featured-media-button').text('Set Featured Media');
                     LFM.instances.modal.close();
                     LFM.has_featured_media = false;
+                    wp.media.view.settings.post.featuredImageId = -1;
                 }
             });
         },
