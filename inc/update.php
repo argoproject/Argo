@@ -41,6 +41,7 @@ function largo_perform_update() {
 		largo_update_widgets();
 		largo_home_transition();
 		largo_transition_nav_menus();
+		largo_update_prominence_term_descriptions();
 		of_set_option('single_template', 'classic');
 		of_set_option('largo_version', largo_version());
 	}
