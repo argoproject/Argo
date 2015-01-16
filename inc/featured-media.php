@@ -167,7 +167,7 @@ if (defined('FEATURED_MEDIA') && FEATURED_MEDIA) {
 		$language = (!empty($has_featured_media))? 'Edit' : 'Set';
 		ob_start();
 	?>
-		<a href="#" id="set-featured-media-button" class="button set-featured-media add_media" data-editor="content" title="<?php echo $language; ?> Featured Media"><span class="wp-media-buttons-icon"></span> <?php echo $language; ?> Featured Media</a>
+		<a href="#" id="set-featured-media-button" class="button set-featured-media add_media" data-editor="content" title="<?php echo $language; ?> Featured Media"><?php echo $language; ?> Featured Media</a>
 	<?php
 		$context .= ob_get_contents();
 		ob_end_clean();
