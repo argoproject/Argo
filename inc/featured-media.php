@@ -7,6 +7,30 @@ if (!is_admin())
  * Template helpers
  */
 function largo_get_featured_media($id) {
+	$ret = get_post_meta($id, 'featured_media', true);
+
+	// Check if the post has a thumbnail/featured image set.
+	// If yes, send that back as the featured media.
+	$post_thumbnail = get_post_thumbnail_id($id);
+	if (empty($ret) && !empty($post_thumbnail)) {
+		return array(
+			'id' => $id,
+			'attachment' => $post_thumbnail,
+			'type' => 'image'
+		);
+	}
+
+	// Backwards compatibility with posts that have a youtube_url set
+	$youtube_url = get_post_meta($id, 'youtube_url', true);
+	if (empty($ret) && !empty($youtube_url)) {
+		return array(
+			'id' => $id,
+			'url' => $youtube_url,
+			'embed' => wp_oembed_get($youtube_url),
+			'type' => 'video'
+		);
+	}
+
 	return get_post_meta($id, 'featured_media', true);
 }
 
@@ -21,19 +45,7 @@ function largo_has_featured_media($id) {
 function largo_featured_media_read() {
 	if (!empty($_POST['data'])) {
 		$data = json_decode(stripslashes($_POST['data']), true);
-		$ret = get_post_meta($data['id'], 'featured_media', true);
-
-		// Check if the post has a thumbnail/featured image set.
-		// If yes, send that back as the featured media.
-		$post_thumbnail = get_post_thumbnail_id($data['id']);
-		if (empty($ret) && !empty($post_thumbnail)) {
-			print json_encode(array(
-				'id' => $data['id'],
-				'attachment' => $post_thumbnail,
-				'type' => 'image'
-			));
-			wp_die();
-		}
+		$ret = largo_get_featured_media($data['id']);
 
 		// Otherwise, check for `featured_media` post meta
 		if (!empty($ret)) {
@@ -59,6 +71,11 @@ function largo_featured_media_save() {
 		else
 			delete_post_thumbnail($data['id']);
 
+		// Get rid of the old youtube_url while we're saving
+		$youtube_url = get_post_meta($data['id'], 'youtube_url', true);
+		if (!empty($youtube_url))
+			delete_post_meta($data['id'], 'youtube_url');
+
 		// Don't save the post ID in post meta
 		$save = $data;
 		unset($save['id']);
@@ -71,7 +88,6 @@ function largo_featured_media_save() {
 	}
 }
 add_action('wp_ajax_largo_featured_media_save', 'largo_featured_media_save');
-
 
 function largo_save_featured_image_display() {
 	if (!empty($_POST['data'])) {
@@ -101,13 +117,6 @@ function largo_fetch_video_oembed() {
 	}
 }
 add_action('wp_ajax_largo_fetch_video_oembed', 'largo_fetch_video_oembed');
-
-function largo_remove_featured_image_meta_box() {
-	remove_meta_box('postimagediv', 'post', 'normal');
-	remove_meta_box('postimagediv', 'post', 'side');
-	remove_meta_box('postimagediv', 'post', 'advanced');
-}
-add_action('do_meta_boxes', 'largo_remove_featured_image_meta_box');
 
 /**
  * Returns the default available featured media types
@@ -186,27 +195,27 @@ if (defined('FEATURED_MEDIA') && FEATURED_MEDIA) {
 				<# var model = data.controller.model #>
 				<div>
 					<label for="title"><span>Title</span></label>
-					<input type="text" name="title" <# if (typeof model !== 'undefined') { #>value="{{ model.get('title') }}"<# } #> />
+					<input type="text" name="title" <# if (model.get('type') == 'embed-code') { #>value="{{ model.get('title') }}"<# } #> />
 				</div>
 
 				<div>
 					<label for="caption"><span>Caption</span></label>
-					<input type="text" name="caption" <# if (typeof model !== 'undefined') { #>value="{{ model.get('caption') }}"<# } #> />
+					<input type="text" name="caption" <# if (model.get('type') == 'embed-code') { #>value="{{ model.get('caption') }}"<# } #> />
 				</div>
 
 				<div>
 					<label for="credit"><span>Credit</span></label>
-					<input type="text" name="credit" <# if (typeof model !== 'undefined') { #>value="{{ model.get('credit') }}"<# } #> />
+					<input type="text" name="credit" <# if (model.get('type') == 'embed-code') { #>value="{{ model.get('credit') }}"<# } #> />
 				</div>
 
 				<div>
 					<label for="url"><span>URL</span></label>
-					<input type="text" name="url" <# if (typeof model !== 'undefined') { #>value="{{ model.get('url') }}"<# } #> />
+					<input type="text" name="url" <# if (model.get('type') == 'embed-code') { #>value="{{ model.get('url') }}"<# } #> />
 				</div>
 
 				<div>
 					<label for="embed"><span>Embed code</span></label>
-					<textarea name="embed"><# if (typeof model !== 'undefined') { #>{{ model.get('embed') }}<# } #></textarea>
+					<textarea name="embed"><# if (model.get('type') == 'embed-code') { #>{{ model.get('embed') }}<# } #></textarea>
 				</div>
 			</form>
 		</script>
@@ -219,28 +228,28 @@ if (defined('FEATURED_MEDIA') && FEATURED_MEDIA) {
 				<# var model = data.controller.model #>
 				<div>
 					<label for="url"><span>Video URL  <span class="spinner" style="display: none;"></span></label>
-					<input type="text" class="url" name="url" <# if (typeof model !== 'undefined') { #>value="{{ model.get('url') }}"<# } #>/>
+					<input type="text" class="url" name="url" <# if (model.get('type') == 'video') { #>value="{{ model.get('url') }}"<# } #>/>
 					<p class="error"></p>
 				</div>
 
 				<div>
 					<label for="embed"><span>Video embed code</span></label>
-					<textarea name="embed"><# if (typeof model !== 'undefined') { #>{{ model.get('embed') }}<# } #></textarea>
+					<textarea name="embed"><# if (model.get('type') == 'video') { #>{{ model.get('embed') }}<# } #></textarea>
 				</div>
 
 				<div>
 					<label for="title"><span>Title</span></span></label>
-					<input type="text" name="title" <# if (typeof model !== 'undefined') { #>value="{{ model.get('title') }}"<# } #> />
+					<input type="text" name="title" <# if (model.get('type') == 'video') { #>value="{{ model.get('title') }}"<# } #> />
 				</div>
 
 				<div>
 					<label for="caption"><span>Caption</span></label>
-					<input type="text" name="caption" <# if (typeof model !== 'undefined') { #>value="{{ model.get('caption') }}"<# } #> />
+					<input type="text" name="caption" <# if (model.get('type') == 'video') { #>value="{{ model.get('caption') }}"<# } #> />
 				</div>
 
 				<div>
 					<label for="credit"><span>Credit</span></label>
-					<input type="text" name="credit" <# if (typeof model !== 'undefined') { #>value="{{ model.get('credit') }}"<# } #> />
+					<input type="text" name="credit" <# if (model.get('type') == 'video') { #>value="{{ model.get('credit') }}"<# } #> />
 				</div>
 
 			</form>
@@ -316,4 +325,11 @@ if (defined('FEATURED_MEDIA') && FEATURED_MEDIA) {
 		</style>
 	<?php }
 	add_action('admin_head', 'largo_featured_media_css', 1);
+
+	function largo_remove_featured_image_meta_box() {
+		remove_meta_box('postimagediv', 'post', 'normal');
+		remove_meta_box('postimagediv', 'post', 'side');
+		remove_meta_box('postimagediv', 'post', 'advanced');
+	}
+	add_action('do_meta_boxes', 'largo_remove_featured_image_meta_box');
 }
