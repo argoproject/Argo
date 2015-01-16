@@ -496,6 +496,7 @@ var LFM = _.extend(LFM || {}, {
                 success: function() {
                     self.hideSpinner();
                     $('#set-featured-media-button').text('Edit Featured Media');
+                    LFM.has_featured_media = true;
                     LFM.instances.modal.close();
                 }
             });
