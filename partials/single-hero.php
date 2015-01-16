@@ -10,17 +10,13 @@ if (isset($values['featured-image-display'][0]) && !isset($values['youtube_url']
 if (largo_has_featured_media($post->ID) && $hero_class !== 'is-empty') {
 	$featured_media = largo_get_featured_media($post->ID); ?>
 	<div class="hero span12 <?php echo $hero_class; ?>">
-		<?php if ($featured_media['type'] == 'embed-code') { ?>
+		<?php if (in_array($featured_media['type'], array('embed-code', 'video'))) { ?>
 			<div class="embed-container">
 				<?php echo $featured_media['embed']; ?>
 			</div>
-		<?php } else if ($featured_media['type'] == 'video') { ?>
-			<div class="embed-container">
-				<?php echo $featured_media['embed'];
-				if (!empty($featured_media['title'])) { echo '<p class="featured-title">' . $featured_media['title'] . "</p>"; }
-				if (!empty($featured_media['caption'])) { echo '<p class="featured-caption">' . $featured_media['caption'] . "</p>"; }
-				if (!empty($featured_media['credit'])) { echo '<p class="featured-credit">' . $featured_media['credit'] . "</p>"; }
-				?>
+			<div class="embed-details wp-caption"><?php
+				if (!empty($featured_media['credit'])) { echo '<p class="wp-media-credit featured-credit">' . $featured_media['credit'] . "</p>"; }
+	if (!empty($featured_media['caption'])) { echo '<p class="wp-caption-text featured-caption">' . $featured_media['caption'] . "</p>"; } ?>
 			</div>
 		<?php } else if ($featured_media['type'] == 'image') {
 			largo_hero_with_caption($post->ID);
