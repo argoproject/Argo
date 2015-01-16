@@ -31,6 +31,8 @@ User Documentation
     users/customlanding
     users/customtaxonomies
     users/largoposttemplate
+    users/glossary
+    users/generalsettings
 
 	
 .. _admin-docs:
@@ -58,7 +60,10 @@ Developers
     developers/contentsincdir
     developers/contentslibdir
     developers/largocustomclasses
+    developers/largocustomfunctions
     developers/modifyingchildthemes
+    developers/hooksfilters
+    
     
     functions
     
