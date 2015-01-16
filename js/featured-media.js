@@ -288,7 +288,7 @@ var LFM = _.extend(LFM || {}, {
         },
 
         featuredImageToolbar: function(toolbar) {
-            toolbar.view = new LFM.Views.defaultToolbar({
+            toolbar.view = new LFM.Views.featuredImageToolbar({
                 controller: this
             });
         },
@@ -466,6 +466,24 @@ var LFM = _.extend(LFM || {}, {
 
         hideSpinner: function() {
             this.$el.find('.spinner').css({ display: 'none' });
+        }
+    });
+
+    LFM.Views.featuredImageToolbar = LFM.Views.defaultToolbar.extend({
+        initialize: function() {
+            LFM.Views.defaultToolbar.prototype.initialize.apply(this, arguments);
+            var override = wp.media.template('featured-image-override');
+            this.secondary.$el.prepend(override());
+        },
+
+        save: function() {
+            var self = this;
+            this.showSpinner();
+            var override = LFM.Utils.formArrayToObj(this.secondary.$el.find('form').serializeArray());
+            override.id = LFM.Utils.getPostId();
+            LFM.Utils.doAjax('largo_save_featured_image_display', override, function() {
+                LFM.Views.defaultToolbar.prototype.save.apply(self, arguments);
+            });
         }
     });
 

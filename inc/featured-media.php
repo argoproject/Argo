@@ -67,6 +67,26 @@ function largo_featured_media_save() {
 }
 add_action('wp_ajax_largo_featured_media_save', 'largo_featured_media_save');
 
+
+function largo_save_featured_image_display() {
+	if (!empty($_POST['data'])) {
+		$data = json_decode(stripslashes($_POST['data']), true);
+
+		$post_ID = (int) $data['id'];
+		$post_type = get_post_type($post_ID);
+		$post_status = get_post_status($post_ID);
+
+		if ($post_type && isset($data['featured-image-display']) && $data['featured-image-display'] == 'on') {
+			update_post_meta($post_ID, 'featured-image-display', 'false');
+		} else {
+			delete_post_meta($post_ID, 'featured-image-display');
+		}
+		print json_encode($data);
+		wp_die();
+	}
+}
+add_action('wp_ajax_largo_save_featured_image_display', 'largo_save_featured_image_display');
+
 function largo_fetch_video_oembed() {
 	if (!empty($_POST['data'])) {
 		$data = json_decode(stripslashes($_POST['data']), true);
@@ -117,11 +137,18 @@ if (defined('FEATURED_MEDIA') && FEATURED_MEDIA) {
 		if (!in_array($hook, array('edit.php', 'post-new.php', 'post.php')))
 			return;
 
+		global $post;
+
+		$featured_image_display = get_post_meta($post->ID, 'featured-image-display', true);
+
 		wp_enqueue_script(
 			'largo_featured_media', get_template_directory_uri() . '/js/featured-media.js',
 			array('media-models', 'media-views'), false, 1);
 
-		wp_localize_script('largo_featured_media', 'LFM', array('options' => largo_default_featured_media_types()));
+		wp_localize_script('largo_featured_media', 'LFM', array(
+			'options' => largo_default_featured_media_types(),
+			'featured_image_display' => !empty($featured_image_display)
+		));
 	}
 	add_action('admin_enqueue_scripts', 'largo_enqueue_featured_media_js');
 
@@ -209,6 +236,12 @@ if (defined('FEATURED_MEDIA') && FEATURED_MEDIA) {
 
 			</form>
 		</script>
+
+		<script type="text/template" id="tmpl-featured-image-override">
+			<form>
+				<input type="checkbox" name="featured-image-display" <# if (LFM.featured_image_display) { #>checked="checked"<# } #>/> Override display of featured image for this post?
+			</form>
+		</script>
 	<?php }
 	add_action('admin_print_footer_scripts', 'largo_featured_media_templates', 1);
 
@@ -243,20 +276,22 @@ if (defined('FEATURED_MEDIA') && FEATURED_MEDIA) {
 			.featured-media-modal .featured-media-view .media-frame-router p {
 				margin: 0 0 0 15px;
 			}
-			.featured-media-modal .featured-media-view .media-toolbar-primary span.spinner {
+			.featured-media-modal .media-toolbar-primary span.spinner {
 				display: inline-block;
 				float: left;
 				margin: 0;
 				position: relative;
 				top: 20px;
 			}
-
 			.featured-media-modal #featured-video-form label[for="url"] span.spinner {
 				position: relative;
 				top: 3px;
 				float: none;
 				margin: 0;
 				display: inline-block;
+			}
+			.featured-media-modal .media-toolbar-secondary form {
+				margin-top: 20px;
 			}
 		</style>
 	<?php }
