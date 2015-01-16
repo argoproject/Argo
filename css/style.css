@@ -3179,6 +3179,10 @@ body.normal.page #content {
     margin-left: 0;
   }
 }
+body.normal.single-post .entry-content,
+body.normal.page .entry-content {
+  clear: both;
+}
 body.normal.single-post .hero,
 body.normal.page .hero {
   text-align: center;
@@ -5256,6 +5260,17 @@ img[class*="wp-image-"] {
   blockquote {
     border: 1px solid #999;
     page-break-inside: avoid;
+  }
+  /* One column display */
+  body.normal.single-post .hero,
+  body.normal.page .hero {
+    width: 60%;
+    /* save some paper. */
+    margin-left: 0;
+    float: none;
+  }
+  #content.span8[role=main] {
+    margin-left: 0 !important;
   }
   thead {
     display: table-header-group;
