@@ -14,13 +14,15 @@ The three sidebars allow you to have different sidebar widgets on different type
 **The Topic sidebar** is used on category, tag and custom taxonomy pages.
 
 from Jira
-- Main Sidebar: used on the homepage as well as on archive, author and search results pages.
-- Single Sidebar: used for single posts and pages.
-- Topic (Conditional Home Page Options > Sidebars):
+
 - Footer 1, 2, and 3: The first, second and third widget areas in the footer. If you have chosen a four-column footer layout in *Dashboard* > *Appearance* > *Theme Options* > *Layout Options* > *Footer Layout*, then a fourth area will be available, called "Footer 4."
+
 - Article Bottom: Appears at the bottom of all posts.
+
 - Homepage Alert:
+
 - Header Ad Zone:
+
 - Homepage Left Rail: An optional widget area that, when enabled, appears to the left of the main content area on the homepage
 
 The two footer widget areas offer you additional flexibility in what appears in the site footer.
