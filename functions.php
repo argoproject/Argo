@@ -99,7 +99,6 @@ class Largo {
 		$this->register_nav_menus();
 		$this->register_media_sizes();
 		$this->template_constants();
-		$this->feature_constants();
 
 		$this->customizer = Largo_Customizer::get_instance();
 
@@ -289,14 +288,6 @@ class Largo {
 		if ( ! defined( 'SHOW_CATEGORY_RELATED_TOPICS' ) ) {
 			define( 'SHOW_CATEGORY_RELATED_TOPICS', TRUE );
 		}
-	}
-
-	/**
-	 * Enable/disable optional or in-development features with these constants
-	 */
-	private function feature_constants() {
-		if (!defined('FEATURED_MEDIA'))
-			define('FEATURED_MEDIA', false);
 	}
 
 	/**
