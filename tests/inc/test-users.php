@@ -7,7 +7,7 @@ class UsersTestFunctions extends WP_UnitTestCase {
 		parent::setUp();
 
 		// Test data
-		$this->author_user_ids = $this->factory->user->create_many(10, array('role' => 'author'));;
+		$this->author_user_ids = $this->factory->user->create_many(10, array('role' => 'author'));
 		$this->contributor_user_ids = $this->factory->user->create_many(5, array('role' => 'contributor'));
 	}
 
