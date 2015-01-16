@@ -9,6 +9,7 @@ var LFM = _.extend(LFM || {}, {
     Utils: {},
     Views: {},
     Models: {},
+    Controller: {},
     instances: {},
 });
 
@@ -119,8 +120,15 @@ var LFM = _.extend(LFM || {}, {
                     menu: 'gallery'
                 }),
 
-                new wp.media.controller.GalleryAdd()
+                new wp.media.controller.GalleryAdd(),
+
             ]);
+
+            if (LFM.has_featured_media) {
+                this.states.add([
+                    new LFM.Controller.removeFeaturedMedia()
+                ]);
+            }
         },
 
         bindHandlers: function() {
@@ -143,13 +151,15 @@ var LFM = _.extend(LFM || {}, {
                     'embed': 'embedContent',
                     'video': 'embedVideo',
                     'edit-image': 'editImageContent',
-                    'edit-selection': 'editSelectionContent'
+                    'edit-selection': 'editSelectionContent',
+                    'remove': 'removeFeaturedMedia'
                 },
 
                 toolbar: {
                     'main-gallery': 'mainGalleryToolbar',
                     'gallery-edit': 'galleryEditToolbar',
-                    'gallery-add': 'galleryAddToolbar'
+                    'gallery-add': 'galleryAddToolbar',
+                    'remove-featured': 'removeFeaturedToolbar'
                 }
             };
 
@@ -158,6 +168,23 @@ var LFM = _.extend(LFM || {}, {
                     this.on( region + ':render:' + handler, this[ callback ], this );
                 }, this );
             }, this );
+        },
+
+        mainMenu: function( view ) {
+            view.set({
+                'library-separator': new wp.media.View({
+                    className: 'separator',
+                    priority: 100
+                })
+            });
+        },
+
+        removeFeaturedMedia: function() {
+            var view = new LFM.Views.removeFeaturedView({
+                controller: this,
+                model: this.state()
+            });
+            this.content.set(view);
         },
 
         galleryMenu: function( view ) {
@@ -327,6 +354,12 @@ var LFM = _.extend(LFM || {}, {
                     }
                 }
             }));
+        },
+
+        removeFeaturedToolbar: function() {
+            this.toolbar.set(new LFM.Views.removeFeaturedToolbar({
+                controller: this
+            }));
         }
     });
 
@@ -456,7 +489,11 @@ var LFM = _.extend(LFM || {}, {
             this.showSpinner();
             view.model = new featuredMediaModel(attrs);
             view.model.save({}, {
-                success: self.hideSpinner.bind(this)
+                success: function() {
+                    self.hideSpinner();
+                    $('#set-featured-media-button').text('Edit Featured Media');
+                    LFM.instances.modal.close();
+                }
             });
         },
 
@@ -485,6 +522,58 @@ var LFM = _.extend(LFM || {}, {
                 LFM.Views.defaultToolbar.prototype.save.apply(self, arguments);
             });
         }
+    });
+
+    LFM.Views.removeFeaturedToolbar = wp.media.view.Toolbar.extend({
+        initialize: function() {
+            var self = this;
+
+            _.defaults(this.options, {
+                items: {
+                    submit: {
+                        style: 'primary',
+                        priority: 10,
+                        requires: false,
+                        text: 'Yes, remove featured media',
+                        click: self.clearFeatured.bind(this)
+                    }
+                }
+            });
+
+            wp.media.view.Toolbar.prototype.initialize.apply( this, arguments );
+
+            // Add the "loading" indicator to the submit button container
+            this.primary.$el.prepend('<span class="spinner" style="display: none;"></span>');
+        },
+
+        clearFeatured: function() {
+            var self = this,
+                view = this.controller;
+
+            this.showSpinner();
+            view.model = new featuredMediaModel();
+            view.model.save({}, {
+                success: function() {
+                    self.hideSpinner();
+                    $('#set-featured-media-button').text('Set Featured Media');
+                    LFM.instances.modal.close();
+                    LFM.has_featured_media = false;
+                }
+            });
+        },
+
+        showSpinner: function() {
+            this.$el.find('.spinner').removeAttr('style');
+        },
+
+        hideSpinner: function() {
+            this.$el.find('.spinner').css({ display: 'none' });
+        }
+    });
+
+    LFM.Views.removeFeaturedView = wp.media.View.extend({
+        className: 'featured-remove-featured-confirm',
+        template: wp.media.template('featured-remove-featured')
     });
 
     /* Utils */
@@ -523,6 +612,23 @@ var LFM = _.extend(LFM || {}, {
     LFM.Utils.getPostId = function() {
         return Number($( '#post_ID' ).val());
     };
+
+    /* Controller(s) */
+    LFM.Controller.removeFeaturedMedia = wp.media.controller.State.extend({
+        defaults: {
+            id: 'remove',
+            title: 'Remove featured',
+            content: 'remove',
+            menu: 'default',
+            toolbar: 'remove-featured',
+            priority: 120,
+            type: 'link',
+        },
+
+        initialize: function(options) {
+            this.props = new Backbone.Model( this.metadata || { url: '' });
+        }
+    });
 
     $(document).ready(function() {
         $('#set-featured-media-button').click(function() {

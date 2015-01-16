@@ -59,8 +59,13 @@ function largo_featured_media_save() {
 		else
 			delete_post_thumbnail($data['id']);
 
+		// Don't save the post ID in post meta
+		$save = $data;
+		unset($save['id']);
+
 		// Save what's sent over the wire as `featured_media` post meta
-		$ret = update_post_meta($data['id'], 'featured_media', $data);
+		$ret = update_post_meta($data['id'], 'featured_media', $save);
+
 		print json_encode($data);
 		wp_die();
 	}
@@ -147,7 +152,8 @@ if (defined('FEATURED_MEDIA') && FEATURED_MEDIA) {
 
 		wp_localize_script('largo_featured_media', 'LFM', array(
 			'options' => largo_default_featured_media_types(),
-			'featured_image_display' => !empty($featured_image_display)
+			'featured_image_display' => !empty($featured_image_display),
+			'has_featured_media' => (bool) largo_has_featured_media($post->ID)
 		));
 	}
 	add_action('admin_enqueue_scripts', 'largo_enqueue_featured_media_js');
@@ -156,9 +162,12 @@ if (defined('FEATURED_MEDIA') && FEATURED_MEDIA) {
 	 * Adds the "Set Featured Media" button above the post editor
 	 */
 	function largo_add_featured_media_button($context) {
+		global $post;
+		$has_featured_media = largo_has_featured_media($post->ID);
+		$language = (!empty($has_featured_media))? 'Edit' : 'Set';
 		ob_start();
 	?>
-		<a href="#" id="set-featured-media-button" class="button set-featured-media add_media" data-editor="content" title="Set Featured Media"><span class="wp-media-buttons-icon"></span> Set Featured Media</a>
+		<a href="#" id="set-featured-media-button" class="button set-featured-media add_media" data-editor="content" title="<?php echo $language; ?> Featured Media"><span class="wp-media-buttons-icon"></span> <?php echo $language; ?> Featured Media</a>
 	<?php
 		$context .= ob_get_contents();
 		ob_end_clean();
@@ -242,6 +251,10 @@ if (defined('FEATURED_MEDIA') && FEATURED_MEDIA) {
 				<input type="checkbox" name="featured-image-display" <# if (LFM.featured_image_display) { #>checked="checked"<# } #>/> Override display of featured image for this post?
 			</form>
 		</script>
+
+		<script type="text/template" id="tmpl-featured-remove-featured">
+			<h1>Are you sure you want to remove featured media from this post?</h1>
+		</script>
 	<?php }
 	add_action('admin_print_footer_scripts', 'largo_featured_media_templates', 1);
 
@@ -292,6 +305,13 @@ if (defined('FEATURED_MEDIA') && FEATURED_MEDIA) {
 			}
 			.featured-media-modal .media-toolbar-secondary form {
 				margin-top: 20px;
+			}
+			.featured-media-modal .featured-remove-featured-confirm {
+				text-align: center;
+			}
+			.featured-media-modal .featured-remove-featured-confirm h1 {
+				margin: 20px 50px 0 50px;
+				line-height: 42px;
 			}
 		</style>
 	<?php }
