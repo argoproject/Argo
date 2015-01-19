@@ -1,3 +1,5 @@
+.. _largocustomfunctions:
+
 Largo custom functions
 ======================
 

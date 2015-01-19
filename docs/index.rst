@@ -14,7 +14,7 @@ User Documentation
     :maxdepth: 2
 
     users/welcome
-    users/prelaunchchcklist
+    users/prelaunchchecklist
     users/download
     users/sitesetup
     users/themeoptions

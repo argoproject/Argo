@@ -42,7 +42,7 @@ This section allows you to upload images that are used primarily in the top head
 There is one additional option in this section, a checkbox that allows you to use text in the place of the banner images. It is unlikely that you will use this option, but if you do, selecting this checkbox will use the Site Title and Description from your **Settings** > **General** menu in the place of the the header images so make sure that you have set those options before you enable this feature.
 
 Homepage Options
----------------|
+----------------
 
 The third and final tab on the Theme Options page is for setting the template you would like to use for your site's homepage. You have two options that you can select by clicking on the relevant preview image and then clicking "Save Options" at the bottom of the page:
 
@@ -79,9 +79,9 @@ Homepage display options
 - No tags or categories
 
 - Number of posts to display in the main posts area on the homepage
-= Categories to include or exclude from the main posts area on the home page. Enter a comma-separated list of category names or ids:
+- Categories to include or exclude from the main posts area on the home page. Enter a comma-separated list of category names or ids:
 
-``news,sports,12,13,press-releases,blog``
+  ``news,sports,12,13,press-releases,blog``
 
 **Sidebar options**:
 These affect the presentation of the sidebar to the reader.
@@ -100,4 +100,5 @@ The default footer is a 3 column footer with a wide center column. Alternatively
 - Enable ``[[custom landing pages for series and projects|Custom landing pages]]``
 - Set the default region in the left-hand column of landing pages
 - Set the default region in the right-hand column of landing pages
-- Replace WordPress search with `Google Custom Search <https://support.google.com/customsearch/answer/2630963?hl=en&ctx=topic`_. This is highly recommended.
+- Replace WordPress search with `Google Custom Search <https://support.google.com/customsearch/answer/2630963?hl=en&ctx=topic>`_. This is highly recommended.
+
