@@ -327,6 +327,8 @@ function largo_transition_nav_menus() {
 function largo_update_prominence_term_descriptions() {
 	// see https://github.com/INN/Largo/issues/210
 
+	// Because this returns warnings
+
 	$largoOldProminenceTerms = array(
 		array(
 			'name' => __('Sidebar Featured Widget', 'largo'),
@@ -371,6 +373,11 @@ function largo_update_prominence_term_descriptions() {
 			'hide_empty' => false,
 			'fields' => 'all'
 		));
+
+	// prevent PHP warnings in case no terms returned
+	if ( gettype($terms) != "array" )
+		return false;
+
 	$descriptions = array_map(function($arg) { return $arg->description; }, $terms);
 
 	$logarray = array();
@@ -398,8 +405,8 @@ function largo_update_prominence_term_descriptions() {
 		}
 	}
 	// These are here so you can grep your server logs to see if the terms were updated.
-	var_log($logarray);
-	var_log("Done updating prominence terms");
+#	var_log($logarray);
+#	var_log("Done updating prominence terms");
 
 }
 // Uncomment this line if you would like to force prominence terms to update.
