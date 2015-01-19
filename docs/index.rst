@@ -7,12 +7,6 @@ Welcome to the Largo Project
 
 This documentation contains tools for users and developers
 
-* :ref:`user-docs`
-* :ref:`admin-docs`
-* :ref:`dev-docs`
-
-.. _user-docs:
-
 User Documentation
 ------------------
 
@@ -59,12 +53,13 @@ Developers
     developers/fordevelopers
     developers/contentsincdir
     developers/contentslibdir
+    developers/hooksfilters
     developers/largocustomclasses
     developers/largocustomfunctions
     developers/modifyingchildthemes
-    developers/hooksfilters
+   
     
     
-    functions
+  
     
 
