@@ -93,6 +93,21 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 	function test_largo_transition_nav_menus() {
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
+	function test_largo_update_prominence_term_description_single() {
+		$update = array(
+			'name' => 'Term 9',
+			'description' => 'Term 9 From Outer Space',
+			'olddescription' => 'Term Description 9',
+			'slug' => 'term-9'
+		);
+		$term_descriptions = array('Term Description 9');
+
+		$return = largo_update_prominence_term_description_single($update, $term_descriptions);
+		$this->assertTrue(is_array($return));
+
+		$term9 = get_term_by( 'slug', 'term-9', 'prominence', 'ARRAY_A' );
+		$this->assertEquals('Term 9 From Outer Space', $term9['description']);
+	}
 	function test_largo_update_prominence_term_descriptions() {
 
 		largo_update_prominence_term_descriptions();
@@ -101,7 +116,6 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 			'fields' => 'all'
 		));
 
-#		var_log(json_decode(json_encode($terms)));
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 }

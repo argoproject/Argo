@@ -309,16 +309,56 @@ function largo_transition_nav_menus() {
 }
 
 /**
+ * Compares an array containing an old and new prominence term description and the appropriate slug and name to an array of current term descriptions. For each term whose current description matches the old description, the function updates the current description to the new description.
+ *
+ * This function contains commented-out logic that will allow you to from description to olddescription
+ *
+ * @param array $update The new details for the prominence tax term to be updated
+ * @param array $term_descriptions Array of prominence terms, each prominence term as an associative array with keys: name, description, olddescription, slug
+ *
+ */
+function largo_update_prominence_term_description_single($update, $term_descriptions) {	
+	$logarray = array();
+
+	// Toggle comment on these two lines to revert to old descriptions.
+	if (in_array($update['olddescription'], $term_descriptions)) {
+#		if (in_array($update['description'], $term_descriptions)) {
+	    $id = get_term_by('slug', $update['slug'], 'prominence', 'ARRAY_A' );
+	    // Comment out this function to avoid all prominence term updates.
+#		    /*
+	    wp_update_term(
+	        $id['term_id'], 'prominence',
+	        array(
+	            'name' => $update['name'],
+	            // Toggle comment on these two lines to revert to old descriptions.
+	            'description' => $update['description'],
+#		            'description' => $update['olddescription'],
+	            'slug' => $update['slug']
+	        )
+	    );
+#		    */
+	    $logarray[] = 'Updated description of "' . $update['name'] . '" from "'. $update['olddescription'] . '" to "' . $update['description'] . '"';
+	    // Clean the entire prominence term cache
+	    clean_term_cache( $id['term_id'], 'prominence', true );
+	}
+	
+	// These are here so you can grep your server logs to see if the terms were updated.
+#	var_log($logarray);
+#	var_log("Done updating prominence terms");
+
+	return $update;
+}
+
+/**
  * Updates post prominence term descriptions iff they use the old language
  *
  * This function can be added to the `init` action to force an update of prominence term descriptions:
  *    add_action('init', 'largo_update_prominence_term_descriptions');
  *
- * This function contains commented-out logic that will allow you to switch back to using the 0.3 Prominence Term Descriptions.
- *
  * This function does not touch custom prominence term descriptions, except those that are identical to the descriptions of current or 0.3 prominence term descriptions.
  *
  * @since 0.4
+ * @uses largo_update_prominence_term_description_single
  * @uses wp_update_term
  * @uses clean_term_cache
  * @uses var_log
@@ -329,46 +369,6 @@ function largo_update_prominence_term_descriptions() {
 
 	// Because this returns warnings
 
-	$largoOldProminenceTerms = array(
-		array(
-			'name' => __('Sidebar Featured Widget', 'largo'),
-			'description' => __('If you are using the Featured Posts widget in a sidebar, add this label to posts to determine which to display in the widget.', 'largo'),
-			'olddesc' 	=> __('If you are using the Sidebar Featured Posts widget, add this label to posts to determine which to display in the widget.', 'largo'),
-			'slug' => 'sidebar-featured'
-		),
-		array(
-			'name' => __('Footer Featured Widget', 'largo'),
-			'description' => __('If you are using the Featured Posts widget in the footer, add this label to posts to determine which to display in the widget.', 'largo'),
-			'olddesc' => __('If you are using the Footer Featured Posts widget, add this label to posts to determine which to display in the widget.', 'largo'),
-			'slug' => 'footer-featured'
-		),
-		array(
-			'name' => __('Featured in Category', 'largo'),
-			'description' => __('This will allow you to designate a story to appear more prominently on category archive pages.', 'largo'),
-			'olddesc' 	=> __('Not yet implemented, in the future this will allow you to designate a story (or stories) to appear more prominently on category archive pages.', 'largo'),
-			'slug' => 'category-featured'
-		),
-		array(
-			'name' => __('Homepage Featured', 'largo'),
-			'description' => __('Add this label to posts to display them in the featured area on the homepage.', 'largo'),
-			'olddesc' => __('If you are using the Newspaper or Carousel optional homepage layout, add this label to posts to display them in the featured area on the homepage.', 'largo'),
-			'slug' => 'homepage-featured'
-		),
-		array(
-			'name' => __('Homepage Top Story', 'largo'),
-			'description' => __('If you are using a "Big story" homepage layout, add this label to a post to make it the top story on the homepage', 'largo'),
-			'olddesc' => __('If you are using the Newspaper or Carousel optional homepage layout, add this label to label to a post to make it the top story on the homepage.', 'largo'),
-			'slug' => 'top-story'
-		),
-		array(
-			'name' => __('Featured in Series', 'largo'),
-			// 0.4 description did not change from 0.3
-			'description' => __('Select this option to allow this post to float to the top of any/all series landing pages sorting by Featured first.', 'largo'),
-			'olddesc' 	=> __('Select this option to allow this post to float to the top of any/all series landing pages sorting by Featured first.', 'largo'),
-			'slug' => 'series-featured'
-		)
-	);
-
 	$terms = get_terms('prominence', array(
 			'hide_empty' => false,
 			'fields' => 'all'
@@ -378,36 +378,52 @@ function largo_update_prominence_term_descriptions() {
 	if ( gettype($terms) != "array" )
 		return false;
 
-	$descriptions = array_map(function($arg) { return $arg->description; }, $terms);
+	$term_descriptions = array_map(function($arg) { return $arg->description; }, $terms);
+	
+	$largoOldProminenceTerms = array(
+		array(
+			'name' => __('Sidebar Featured Widget', 'largo'),
+			'description' => __('If you are using the Featured Posts widget in a sidebar, add this label to posts to determine which to display in the widget.', 'largo'),
+			'olddescription' 	=> __('If you are using the Sidebar Featured Posts widget, add this label to posts to determine which to display in the widget.', 'largo'),
+			'slug' => 'sidebar-featured'
+		),
+		array(
+			'name' => __('Footer Featured Widget', 'largo'),
+			'description' => __('If you are using the Featured Posts widget in the footer, add this label to posts to determine which to display in the widget.', 'largo'),
+			'olddescription' => __('If you are using the Footer Featured Posts widget, add this label to posts to determine which to display in the widget.', 'largo'),
+			'slug' => 'footer-featured'
+		),
+		array(
+			'name' => __('Featured in Category', 'largo'),
+			'description' => __('This will allow you to designate a story to appear more prominently on category archive pages.', 'largo'),
+			'olddescription' 	=> __('Not yet implemented, in the future this will allow you to designate a story (or stories) to appear more prominently on category archive pages.', 'largo'),
+			'slug' => 'category-featured'
+		),
+		array(
+			'name' => __('Homepage Featured', 'largo'),
+			'description' => __('Add this label to posts to display them in the featured area on the homepage.', 'largo'),
+			'olddescription' => __('If you are using the Newspaper or Carousel optional homepage layout, add this label to posts to display them in the featured area on the homepage.', 'largo'),
+			'slug' => 'homepage-featured'
+		),
+		array(
+			'name' => __('Homepage Top Story', 'largo'),
+			'description' => __('If you are using a "Big story" homepage layout, add this label to a post to make it the top story on the homepage', 'largo'),
+			'olddescription' => __('If you are using the Newspaper or Carousel optional homepage layout, add this label to label to a post to make it the top story on the homepage.', 'largo'),
+			'slug' => 'top-story'
+		),
+		array(
+			'name' => __('Featured in Series', 'largo'),
+			// 0.4 description did not change from 0.3
+			'description' => __('Select this option to allow this post to float to the top of any/all series landing pages sorting by Featured first.', 'largo'),
+			'olddescription' 	=> __('Select this option to allow this post to float to the top of any/all series landing pages sorting by Featured first.', 'largo'),
+			'slug' => 'series-featured'
+		)
+	);
+	
+	foreach ($largoOldProminenceTerms as $update ) {
+		largo_update_prominence_term_description_single($update, $term_descriptions);
 
-	$logarray = array();
-	foreach ($largoOldProminenceTerms as $term ) {
-        // Toggle comment on these two lines to revert to old descriptions.
-		if (in_array($term['olddesc'], $descriptions)) {
-#		if (in_array($term['description'], $descriptions)) {
-		    $id = get_term_by('slug', $term['slug'], 'prominence', 'ARRAY_A' );
-		    // Comment out this function to avoid all prominence term updates.
-#		    /*
-		    wp_update_term(
-		        $id['term_id'], 'prominence',
-		        array(
-		            'name' => $term['name'],
-		            // Toggle comment on these two lines to revert to old descriptions.
-		            'description' => $term['description'],
-#		            'description' => $term['olddesc'],
-		            'slug' => $term['slug']
-		        )
-		    );
-#		    */
-		    $logarray[] = 'Updated description of "' . $term['name'] . '" from "'. $term['olddesc'] . '" to "' . $term['description'] . '"';
-		    // Clean the entire prominence term cache
-		    clean_term_cache( $id['term_id'], 'prominence', true );
-		}
 	}
-	// These are here so you can grep your server logs to see if the terms were updated.
-#	var_log($logarray);
-#	var_log("Done updating prominence terms");
-
 }
 // Uncomment this line if you would like to force prominence terms to update.
 # add_action('init', 'largo_update_prominence_term_descriptions');
