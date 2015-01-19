@@ -141,6 +141,7 @@ class Largo {
 			'/inc/home-templates.php',
 			'/inc/update.php',
 			'/inc/avatars.php',
+			'/inc/featured-media.php'
 		);
 
 		if ( $this->is_less_enabled() ) {
