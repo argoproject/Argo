@@ -26,7 +26,6 @@ if (largo_has_featured_media($post->ID) && $hero_class !== 'is-empty') {
 				<?php echo gallery_shortcode(array('ids' => $ids)); ?>
 			</div>
 		<?php } ?>
-		</div>
 	</div>
 <?php } else if ($hero_class != 'is-empty' && $youtube_url = $values['youtube_url'][0]) { ?>
 	<div class="hero span12 <?php echo $hero_class; ?>">
