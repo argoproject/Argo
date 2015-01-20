@@ -64,11 +64,68 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 	function test_largo_update_widgets() {
 		// uses largo_widget_in_region
 		// uses largo_instantiate_widget
+
+		of_set_option('social_icons_display', 'both');
+		//test
+		
+		of_set_option('social_icons_display', 'btm');
+		//test
+		
+		of_set_option('show_tags', array(1));
+		of_set_option('show_author_box', array('1'));
+		of_set_option('show_related_content', array('1'));
+		of_set_option('show_next_prev_nav_single', array('1'));
+		
 		$this->markTestIncomplete('This test has not been implemented yet.');
+		of_reset_options();
 	}
 	function test_largo_widget_in_region() {
 		// uses WP_Error
-		$this->markTestIncomplete('This test has not been implemented yet.');
+		$widgets_backup = get_option( 'sidebars_widgets ');
+
+		// A widget that exists in a sidebar that does
+		update_option( 'sidebars_widgets', array(
+			'sidebar-single' => array (
+				0 => 'archives-2',
+			),
+		) );
+		$return = largo_widget_in_region('archives', 'sidebar-single');
+		$this->assertTrue($return);
+		unset($return);
+
+		// A widget that does not exist in a sidebar that does
+		update_option( 'sidebars_widgets', array(
+			'sidebar-single' => array (
+				0 => 'archives-2',
+			),
+		) );
+		$return = largo_widget_in_region('wodget', 'sidebar-single');
+		$this->assertFalse($return);
+		unset($return);
+
+		// A widget that exists in a sidebar that does not
+		update_option( 'sidebars_widgets', array(
+			'sidebar-single' => array (
+				0 => 'archives-2',
+			),
+		) );
+		$return = largo_widget_in_region('archives', 'missing-region');
+		$this->assertTrue($return instanceof WP_Error);
+		unset($return);
+
+		// A widget that does not exist in a sidebar that also does not
+		update_option( 'sidebars_widgets', array(
+			'sidebar-single' => array (
+				0 => 'archives-2',
+			),
+		) );
+		$return = largo_widget_in_region('wodget', 'missing-region');
+		$this->assertTrue($return instanceof WP_Error);
+		unset($return);
+
+		delete_option('sidebars_widgets');
+		update_option('sidebars_widgets', $widgets_backup);
+		unset($widgets_backup);
 	}
 	function test_largo_instantiate_widget() {
 		// uses wp_parse_args, available here
