@@ -16,33 +16,20 @@ User Documentation
     users/welcome
     users/prelaunchchecklist
     users/download
-    users/sitesetup
+    users/setup
     users/themeoptions
-    users/configuremenus
+    users/menus
     users/sidebarswidgets
+    users/landingpages
+    users/taxonomies
+    users/posttemplates
     users/plugins
-    users/optimizingcontent
-    users/customlanding
-    users/customtaxonomies
-    users/largoposttemplate
+    users/contactforms
     users/glossary
     users/generalsettings
 
-	
 .. _admin-docs:
 
-Administrators Documentation
-----------------------------
-
-.. toctree::
-    :maxdepth: 2
-
-    administrators/getting-started
-    administrators/installing
-    administrators/mailchimp
-    ads
-
-.. _dev-docs:
 
 Developers
 ----------
