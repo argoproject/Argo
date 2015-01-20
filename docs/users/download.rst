@@ -63,7 +63,7 @@ There are tabs across the top of the page that allow you to access different sec
 
 - **Advanced** contains less frequently used functionality that can be toggled on/off and some other advanced settings.
 
-**More:** `Theme Options Detailed Documentation <users/themeoptions>`_
+**More:** `Theme Options Detailed Documentation <themeoptions>`_
 
 Configure Menus And Sidebars
 ----------------------------
@@ -75,11 +75,11 @@ These are configured from the Appearance > Menus and Appearance > Widgets menus,
 **More:**
 
 - `Menus Detailed Documentation <users/menus>`_
-- `Sidebars and Widgets Detailed Documentation <users/sidebarswidgets>`_
+- `Sidebars and Widgets Detailed Documentation <sidebarswidgets>`_
 
 Install Plugins
 ---------------
 
 The Largo theme comes packaged with a number of plugins developed by NPR as part of their Project Argo plus some additional recommended plugins that add various functionality to your Largo site. We have a complete list of these plugins and what they are used for on our plugins page.
 
-**More:** `Plugins Detailed Documentation <users/plugins>`_
+**More:** `Plugins Detailed Documentation <plugins>`_
