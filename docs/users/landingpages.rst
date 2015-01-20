@@ -1,6 +1,6 @@
-Custom landing pages
+Series Landing Pages
 ====================
- 
+
 Custom landing pages allow you to summarize a series of posts or tie a project together. For one example, see http://inewsnetwork.org/series/hit-and-run: the project page begins with a summary of the series, followed by posts within the series.
 Creating a custom landing page is a simple process.
 
@@ -8,7 +8,7 @@ Creating a custom landing page is a simple process.
 	2. Create a series
 	3. Add the series to posts
 	4. Create the landing page
-	
+
 **Creating a series**
 
 Create a series in *Posts* > *Series*. Each series should have a name and a slug. If the new series is part of an already-existing series, you can add the parent series from the drop-down. The description is displayed in the standard landing page layout. The sidebar can be chosen from a list of sidebars. If you want, you can [[create a sidebar just for this series|Theme options]] in *Appearance* > *Theme Options* > *Layout Options* > *Sidebar Options*.
@@ -29,10 +29,10 @@ Landing pages are created through the *Landing Pages* > *Add New Entry* in the D
     - Show series byline, with the byline setting elsewhere on the page,
     - Show social media sharing links
     - Layout style
-    
+
       - Standard: Uses title, description, and featured image
-      - Alternate: Uses title, description, and custom HTML		
-       
+      - Alternate: Uses title, description, and custom HTML
+
     - Number of widget columns and which widget region they are
     - Number of posts per page
     - Post order and display options
@@ -40,11 +40,11 @@ Landing pages are created through the *Landing Pages* > *Add New Entry* in the D
       - Show excerpt
       - Show byline
       - Show categories and tags
-      
+
      - Slug
      - Author
      - Footer layout style
        - None
        - Create a new "Series SeriesName: Bottom" [[widget area|Sidebars and widgets]], editable in *Appearance* > *Widgets*
        - Custom HTML
-        
+

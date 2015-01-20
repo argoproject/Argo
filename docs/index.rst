@@ -48,12 +48,6 @@ For Developers
     :maxdepth: 2
 
     developers/fordevelopers
-    developers/contentsincdir
-    developers/contentslibdir
-    developers/hooksfilters
-    developers/largocustomclasses
-    developers/largocustomfunctions
-    developers/modifyingchildthemes
 
 
 
