@@ -36,7 +36,7 @@ General Documentation
     users/plugins
     users/contactforms
     users/ads
-    users/thirdpartintegrations
+    users/thirdpartyintegrations
     users/glossary
 
 
