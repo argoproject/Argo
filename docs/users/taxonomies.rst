@@ -1,5 +1,5 @@
-Custom Taxonomies
-=================
+Taxonomies
+==========
 
 Overview
 --------
