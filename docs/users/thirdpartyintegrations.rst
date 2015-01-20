@@ -1,5 +1,8 @@
-Connecting Mailchimp
-====================
+Third-Party Integrations
+========================
+
+MailChimp
+---------
 
 This document will describe how to connect your Largo instance to an automated `Mailchimp`_ newsletter.
 
@@ -12,6 +15,5 @@ If you want to learn more here are two how-to resources from MailChimp that expl
 `RSS-to-Email <http://mailchimp.com/features/rss-to-email/>`_
 
 And to see an example of the Largo to MailChimp integration in action, check out the newsletters from `Aspen Journalism <http://aspenjournalism.org/>`_ or `Yellowstone Gate <http://www.yellowstonegate.com/>`_
-
 
 .. _Mailchimp : http://mailchimp.com

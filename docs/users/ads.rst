@@ -1,5 +1,7 @@
-Setting up Largo with Ad Code Manager
-=====================================
+Advertising
+===========
+
+Largo comes with some simple built in integration for a plugin called Ad Codes Manager which will allow you to ad standard advertising units to your site.
 
 You will neeed a `DoubleClick for Publishers`_ or `Google AdSense`_ account set up before you begin this process.
 
