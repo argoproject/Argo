@@ -1,32 +1,63 @@
-General Settings
-================
+The WordPress Settings Menu
+===========================
 
-Before you get started with the Largo-specific documentation, 
-`the Wordpress documentation <http://codex.wordpress.org/First_Steps_With_WordPress>`_. It will answer many of your questions about setting up your site, writing posts, uploading photos, and creating users.
+Before you get started with the Largo-specific documentation, you may want to review the basic `WordPress documentation <http://codex.wordpress.org/First_Steps_With_WordPress>`_. Particularly if you are new to WordPress it will answer many of your questions about setting up your site, writing posts, uploading photos, and creating users. We try, wherever possible, to build things "the WordPress way" and not get in the way of the things WordPress core does really well. As a result, often, a quick search will help you out with basic questions or problems that are not specific to Largo.
 
-**General Settings**
-This is where you set your site name, tagline, address, general admin user address, time format, and member permissions. Your site description is set in *Appearance* > *Theme Options* > *Basic Settings*.
+That said, here are some of the items under the Settings menu in the WordPress dashboard that you will want to be aware of as you are setting up your site.
 
-**Writing**
-The most important settings here are the Default Post Category and Default Post Format. You should consider setting the default category to something other than *Uncategorized*. The Default Post Format is ignored in favor of [[Largo post templates]].
+General
+-------
 
-**Reading**
-These settings are almost entirely overridden by the settings in *Appearance* > *Theme Options* >. The only setting that is not overridden controls whether or not search engines will be discouraged from reading your site and displaying it in search results. Enabling the discouraging feature inserts ``<meta name="robots" content="noindex,follow">`` into your site's ``<head>``. This 
-`does not guarantee <http://www.robotstxt.org/meta.html>`_ that your site will not be indexed, and you should include a 
-`robots.txt <http://www.robotstxt.org/robotstxt.html>`_ on your site for additional discouragement.
+Clicking on Settings > General will take you to a page where you can setup many of the general options for your site.
 
-**Discussion**
-The settings found in Settings > Discussion control commenting, comment moderation, commenter avatars, and 
-`pingbacks <http://codex.wordpress.org/Introduction_to_Blogging#Pingbacks>`_. For a more in-depth discussion, see the 
-`WP Codex entry on this screen <http://codex.wordpress.org/Settings_Discussion_Screen>`_ .
+This is where you set your site name, tagline, address, general admin user address, time format, and member permissions.
 
-If you want anyone to be able to sign up to comment, that setting is in Settings > General Settings.
+Your site description is set under Appearance > Theme Options > Basic Settings.
 
-**Media**
-The media settings in Settings > Media allow you to control the sizes that images get resized to upon uploads, and if uploaded files are kept in a pool or in folders organized by year and month.
+The site name, tagline and description are used in a number of places in Largo for SEO purposes (as the title tag on the homepage, for meta descriptions, as a fallback for pages where a title or description is not specified, etc.) so you'll want to make sure these are set.
 
-**Permalinks**
-Permalinks are the permanent URLs to your individual weblog posts, as well as categories and other lists of weblog postings. Readers and other sites will use these links to link to your articles, so you should pick a permalink format once and never change it.
-Some default options are included in WordPress, or you can create a custom structure. Change the setting in Settings > Permalinks.
-For more information about permalinks, see the 
-`WP Codx entry on permalinks <http://codex.wordpress.org/Using_Permalinks>`_
+The admin email address is also important because this is the email address that will be used for any notification emails WordPress sends, such as when a new user registers or when a new comment is posted. It is also used as the default address for your site's `contact form <contactform.html>`_.
+
+This tab also allows you to set the timezone and language for your site. If you set the language to something other than English, both WordPress and Largo do incorporate multi-lingual support. You can find some details on how that works in the `WordPress documentation <http://codex.wordpress.org/Translating_WordPress>`_.
+
+Writing
+-------
+
+The most important setting here is the Default Post Category. Typically you should consider setting the default category to something other than *Uncategorized*.
+
+Reading
+-------
+
+Largo does not use most of the settings in this menu, instead setting things like the homepage layout in the Appearance > Theme Options menu.
+
+The main setting to be aware of here controls whether or not search engines will be discouraged from crawling your site and displaying it in search results. Enabling this checkbox inserts ``<meta name="robots" content="noindex,follow">`` tag into your site's header which will discourage search engines from indexing your site. This is commonly used while sites are still under development to ensure that the site is not indexed and "visible" to search engines and users until you're ready to make it live.
+
+Discussion
+----------
+
+The settings found in Settings > Discussion control commenting, comment moderation and notifications.
+
+For an in-depth discussion of what these options do see the `WP Codex entry on this screen <http://codex.wordpress.org/Settings_Discussion_Screen>`_.
+
+Note that many sites use a third-party system or plugin such as `Disqus <https://wordpress.org/plugins/disqus-comment-system/>`_ or `Facebook <https://wordpress.org/plugins/facebook-comments-plugin/>`_ to replace the default WordPress comment engine. If you use one of these third-party systems it may or may not respect the settings from this menu and you should consult that plugin's documentation to be sure.
+
+Media
+-----
+
+Largo sets the media sizes required by the theme programmatically so you should not modify the settings in this menu.
+
+Permalinks
+----------
+
+The permalinks menu controls the format used for the URLs on your site.
+
+To avoid confusing users and search engines you will typically want to set this once and then not change it. WordPress does try to rewrite URLs if the format is changed so that links will not be broken but it is not 100% reliable.
+
+Note that for your content to be included in Google News the URLs for your articles `must contain at least three digits <https://support.google.com/news/publisher/answer/40787?hl=en>`_. To meet this requirement many news sites will choose to use either the "month and name" or the "day and name" permalink option.
+
+For more information about permalinks, see the `WordPress Codex entry on permalinks <http://codex.wordpress.org/Using_Permalinks>`_.
+
+Other
+-----
+
+Additionally, many plugins will add sub-items to the Settings menu with settings that are specific to that plugin. Those settings will typically be covered in the documentation for that plugin.

@@ -26,6 +26,7 @@ General Documentation
 .. toctree::
     :maxdepth: 2
 
+    users/generalsettings
     users/themeoptions
     users/menus
     users/sidebarswidgets
@@ -36,7 +37,6 @@ General Documentation
     users/contactforms
     users/ads
     users/glossary
-    users/generalsettings
 
 
 .. _dev-docs:
