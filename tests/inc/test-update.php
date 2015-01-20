@@ -64,6 +64,7 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 	function test_largo_update_widgets() {
 		// uses largo_widget_in_region
 		// uses largo_instantiate_widget
+		$widgets_backup = get_option( 'sidebars_widgets ');
 
 		of_set_option('social_icons_display', 'both');
 		//test
@@ -77,7 +78,12 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 		of_set_option('show_next_prev_nav_single', array('1'));
 		
 		$this->markTestIncomplete('This test has not been implemented yet.');
+
+		// Cleanup
 		of_reset_options();
+		delete_option('sidebars_widgets');
+		update_option('sidebars_widgets', $widgets_backup);
+		unset($widgets_backup);
 	}
 	function test_largo_widget_in_region() {
 		// uses WP_Error
@@ -123,6 +129,7 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 		$this->assertTrue($return instanceof WP_Error);
 		unset($return);
 
+		// Cleanup
 		delete_option('sidebars_widgets');
 		update_option('sidebars_widgets', $widgets_backup);
 		unset($widgets_backup);
@@ -130,7 +137,21 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 	function test_largo_instantiate_widget() {
 		// uses wp_parse_args, available here
 		// uses update_option, available here
-		$this->markTestIncomplete('This test has not been implemented yet.');
+		$widgets_backup = get_option( 'sidebars_widgets ');
+		update_option( 'sidebars_widgets', array(
+			'article-bottom' => array (),
+		) );
+
+		// instantiate the widget
+		largo_instantiate_widget( 'largo-follow', array( 'title' => '' ), 'article-bottom');
+
+		// Check
+		$widgets = get_option('sidebars_widgets');
+		$this->assertEquals('largo-follow-widget-2', $widgets['article-bottom'][0]);
+
+		delete_option('sidebars_widgets');
+		update_option('sidebars_widgets', $widgets_backup);
+		unset($widgets_backup);
 	}
 	function test_largo_check_deprecated_widgets() {
 		$this->markTestIncomplete('This test has not been implemented yet.');
