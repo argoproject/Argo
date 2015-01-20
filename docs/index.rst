@@ -5,10 +5,11 @@ Welcome to the Largo Project
 
 .. _The Largo Project: https://github.com/inn/largo
 
-This documentation contains tools for users and developers
 
-User Documentation
-------------------
+.. _setup-docs:
+
+Installation And Setup
+----------------------
 
 .. toctree::
     :maxdepth: 2
@@ -17,6 +18,16 @@ User Documentation
     users/prelaunchchecklist
     users/download
     users/setup
+
+
+.. _general-docs:
+
+General Documentation
+---------------------
+
+.. toctree::
+    :maxdepth: 2
+
     users/themeoptions
     users/menus
     users/sidebarswidgets
@@ -25,14 +36,15 @@ User Documentation
     users/posttemplates
     users/plugins
     users/contactforms
+    users/ads
     users/glossary
     users/generalsettings
 
-.. _admin-docs:
 
+.. _dev-docs:
 
-Developers
-----------
+For Developers
+--------------
 
 .. toctree::
     :maxdepth: 2
@@ -44,9 +56,9 @@ Developers
     developers/largocustomclasses
     developers/largocustomfunctions
     developers/modifyingchildthemes
-   
-    
-    
-  
-    
+
+
+
+
+
 
