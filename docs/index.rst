@@ -17,7 +17,6 @@ Installation And Setup
     users/welcome
     users/prelaunchchecklist
     users/download
-    users/setup
 
 
 .. _general-docs:
