@@ -200,7 +200,33 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 		unset($widgets_backup);
 	}
 	function test_largo_check_deprecated_widgets() {
-		$this->markTestIncomplete('This test has not been implemented yet.');
+
+		// Backup sidebar widgets
+		$widgets_backup = get_option( 'sidebars_widgets ');
+		// Create the deprecated widgets
+		update_option( 'sidebars_widgets', array(
+			'article-bottom' => array (
+				0 => 'largo-footer-featured-2',
+				1 => 'largo-sidebar-featured-2',
+			), // largo_instantiate_widget uses article-bottom for all its widgets
+		) );
+
+		largo_check_deprecated_widgets();
+
+		// Test that the requisite deprecated widgets actions have been added to the admin_notices hook
+		$return = has_action('admin_notices', 'largo_deprecated_footer_widget');
+		$this->assertTrue(isset($return));
+		unset($return);
+
+		$return = has_action('admin_notices', 'largo_deprecated_sidebar_widget');
+		$this->assertTrue(isset($return));
+		unset($return);
+
+		// Cleanup
+		of_reset_options();
+		delete_option('sidebars_widgets');
+		update_option('sidebars_widgets', $widgets_backup);
+		unset($widgets_backup);
 	}
 	function test_largo_deprecated_footer_widget() {
 		// prints a nag
