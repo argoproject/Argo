@@ -1,5 +1,5 @@
-Configure Menus
-===============
+Menus
+=====
 
 Available Menu Areas
 --------------------

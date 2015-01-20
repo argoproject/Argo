@@ -1,51 +1,48 @@
 Welcome to the Largo Project
 ============================
 
-`The Largo Project`_ is a responsive WordPress starter/parent theme designed with the needs of news publishers in mind.
+`Largo <http://largoproject.org>`_ is a responsive WordPress starter/parent theme built specifically with the needs of news publishers in mind and is built and maintained by the news apps and technology team at the `Investigative News Network (INN) <http://nerds.investigativenewsnetwork.org>`_.
 
-.. _The Largo Project: https://github.com/inn/largo
+Questions? Comments? `Get in touch with us <mailto:largo@investigativenewsnetwork.org>`_.
 
-This documentation contains tools for users and developers
 
-User Documentation
-------------------
+.. _setup-docs:
+
+Installation And Setup
+----------------------
 
 .. toctree::
     :maxdepth: 2
 
-    users/welcome
     users/prelaunchchecklist
     users/download
-    users/sitesetup
+
+
+.. _general-docs:
+
+General Documentation
+---------------------
+
+.. toctree::
+    :maxdepth: 2
+
     users/themeoptions
-    users/configuremenus
+    users/menus
     users/sidebarswidgets
+    users/landingpages
+    users/taxonomies
+    users/posttemplates
     users/plugins
-    users/optimizingcontent
-    users/customlanding
-    users/customtaxonomies
-    users/largoposttemplate
+    users/contactforms
+    users/ads
     users/glossary
     users/generalsettings
 
-	
-.. _admin-docs:
-
-Administrators Documentation
-----------------------------
-
-.. toctree::
-    :maxdepth: 2
-
-    administrators/getting-started
-    administrators/installing
-    administrators/mailchimp
-    ads
 
 .. _dev-docs:
 
-Developers
-----------
+For Developers
+--------------
 
 .. toctree::
     :maxdepth: 2
@@ -57,9 +54,9 @@ Developers
     developers/largocustomclasses
     developers/largocustomfunctions
     developers/modifyingchildthemes
-   
-    
-    
-  
-    
+
+
+
+
+
 
