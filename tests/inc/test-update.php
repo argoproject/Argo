@@ -18,18 +18,52 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 		// depends upon wp_get_theme,
 		//   depends upon get_stylesheet
 		//   depends upon get_raw_theme_root
-		// var_dump($GLOBALS['wp_theme_directories']); does return useful info
-		
-		$this->markTestIncomplete('This test has not been implemented yet.');
+
+		// We want some output
+		$return = largo_version();
+		$this->assertTrue(isset($return));
 	}
 	function test_largo_need_updates() {
 		// requires largo_version
-		$this->markTestIncomplete('This test has not been implemented yet.');
+
+		// force updates by setting current version of largo to 0.0
+		of_set_option('largo_version', '0.0');
+
+		// Run updates!
+		$this->assertTrue(largo_need_updates());
+
+		// Will we ever hit this version number?
+		of_set_option('largo_version', '999.999');
+
+		// Run updates!
+		$this->assertFalse(largo_need_updates());
+
+		of_reset_options();
 	}
 	
 	function test_largo_perform_update() {
 		// requires largo_need_updates
-		$this->markTestIncomplete('This test has not been implemented yet.');
+
+		// Backup sidebar widgets, create our own empty sidebar
+		$widgets_backup = get_option( 'sidebars_widgets ');
+		update_option( 'sidebars_widgets', array(
+			'article-bottom' => array (), // largo_instantiate_widget uses article-bottom for all its widgets
+		) );
+
+		// force updates by setting current version of largo to 0.0
+		of_set_option('largo_version', '0.0');
+
+		largo_perform_update();
+
+		// check that options have been set
+		$this->assertEquals('classic', of_get_option('single_template'));
+		$this->assertEquals(largo_version(), of_get_option('largo_version'));
+
+		// Cleanup
+		of_reset_options();
+		delete_option('sidebars_widgets');
+		update_option('sidebars_widgets', $widgets_backup);
+		unset($widgets_backup);
 	}
 	function test_largo_home_transition() {
 		// old topstories
@@ -64,20 +98,32 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 	function test_largo_update_widgets() {
 		// uses largo_widget_in_region
 		// uses largo_instantiate_widget
-		$widgets_backup = get_option( 'sidebars_widgets ');
 
+		// Backup sidebar widgets, create our own empty sidebar
+		$widgets_backup = get_option( 'sidebars_widgets ');
+		update_option( 'sidebars_widgets', array(
+			'article-bottom' => array (), // largo_instantiate_widget uses article-bottom for all its widgets
+		) );
+
+		// These should all trigger a widget addition.
 		of_set_option('social_icons_display', 'both');
-		//test
+		of_set_option('in_series', NULL);
+		of_set_option('show_tags', 1);
+		of_set_option('show_author_box', 1);
+		of_set_option('show_related_content', 1);
+		of_set_option('show_next_prev_nav_single', 1);
 		
-		of_set_option('social_icons_display', 'btm');
-		//test
+		largo_update_widgets();
 		
-		of_set_option('show_tags', array(1));
-		of_set_option('show_author_box', array('1'));
-		of_set_option('show_related_content', array('1'));
-		of_set_option('show_next_prev_nav_single', array('1'));
-		
-		$this->markTestIncomplete('This test has not been implemented yet.');
+		// Check for expected output
+		// These are all #2 because they are the first instance of the widget
+		$widgets = get_option('sidebars_widgets');
+		$this->assertEquals('largo-follow-widget-2', $widgets['article-bottom'][0]);
+		$this->assertEquals('largo-post-series-links-widget-2', $widgets['article-bottom'][1]);
+		$this->assertEquals('largo-tag-list-widget-2', $widgets['article-bottom'][2]);
+		$this->assertEquals('largo-author-bio-widget-2', $widgets['article-bottom'][3]);
+		$this->assertEquals('largo-explore-related-widget-2', $widgets['article-bottom'][4]);
+		$this->assertEquals('largo-prev-next-post-links-widget-2', $widgets['article-bottom'][5]);
 
 		// Cleanup
 		of_reset_options();
