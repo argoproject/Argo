@@ -73,6 +73,7 @@ Once you setup your theme options, you will likely want to configure the menu ar
 These are configured from the Appearance > Menus and Appearance > Widgets menus, respectively.
 
 **More:**
+
 - `Menus Detailed Documentation <menus.html>`_
 - `Sidebars and Widgets Detailed Documentation <sidebarswidgets.html>`_
 
