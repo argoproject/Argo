@@ -14,7 +14,6 @@ Installation And Setup
 .. toctree::
     :maxdepth: 2
 
-    users/welcome
     users/prelaunchchecklist
     users/download
 
