@@ -5,6 +5,18 @@ Welcome to the Largo Project
 
 Questions? Comments? `Get in touch with us <mailto:largo@investigativenewsnetwork.org>`_.
 
+Project Repository: https://github.com/INN/Largo/
+
+Technical Issues (Bugs, Feature Requests, etc.): https://github.com/INN/Largo/issues
+
+Help Desk (Support Requests): http://jira.investigativenewsnetwork.org/servicedesk/customer/portal/4
+
+Knowledge Base: http://confluence.investigativenewsnetwork.org/display/LKB/Largo+Knowledge+Base
+
+Twitter: http://twitter.com/largoproject
+
+Mailing List: http://eepurl.com/yu0bT
+
 
 .. _setup-docs:
 
