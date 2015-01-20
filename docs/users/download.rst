@@ -74,7 +74,7 @@ These are configured from the Appearance > Menus and Appearance > Widgets menus,
 
 **More:**
 
-- `Menus Detailed Documentation <users/menus.html>`_
+- `Menus Detailed Documentation <menus.html>`_
 - `Sidebars and Widgets Detailed Documentation <sidebarswidgets.html>`_
 
 Install Plugins
