@@ -49,7 +49,6 @@ General Documentation
     users/contactforms
     users/ads
     users/thirdpartyintegrations
-    users/glossary
 
 
 .. _dev-docs:
