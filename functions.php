@@ -120,7 +120,6 @@ class Largo {
 			'/inc/users.php',
 			'/inc/term-meta.php',
 			'/inc/sidebars.php',
-			'/inc/cached-core-functions.php',
 			'/inc/customizer/customizer.php',
 			'/inc/widgets.php',
 			'/inc/nav-menus.php',
@@ -141,7 +140,8 @@ class Largo {
 			'/inc/home-templates.php',
 			'/inc/update.php',
 			'/inc/avatars.php',
-			'/inc/featured-media.php'
+			'/inc/featured-media.php',
+			'/inc/deprecated.php'
 		);
 
 		if ( $this->is_less_enabled() ) {

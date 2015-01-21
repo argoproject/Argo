@@ -12,7 +12,7 @@ if ( is_front_page() || is_home() || !of_get_option( 'show_sticky_nav' ) ): ?>
 						'depth'		 => 1,
 						'container'	 => false,
 					);
-					largo_cached_nav_menu($top_args);
+					largo_nav_menu($top_args);
 				?>
 				<div class="nav-right">
 					<?php if ( of_get_option( 'show_header_social') ) { ?>

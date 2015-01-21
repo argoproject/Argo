@@ -2,7 +2,7 @@
 
 	<p class="copyright"><?php largo_copyright_message(); ?></p>
 
-	<?php largo_cached_nav_menu(
+	<?php largo_nav_menu(
 		array(
 			'theme_location' => 'footer-bottom',
 			'container' => false,

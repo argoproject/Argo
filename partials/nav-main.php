@@ -24,7 +24,7 @@ if ( is_front_page() || is_home() || !of_get_option( 'show_sticky_nav' ) ): ?>
 								'menu_class' => 'nav',
 								'walker'	 => new Bootstrap_Walker_Nav_Menu()
 							);
-							largo_cached_nav_menu($args);
+							largo_nav_menu($args);
 						?>
 				</ul>
 
@@ -45,7 +45,7 @@ if ( is_front_page() || is_home() || !of_get_option( 'show_sticky_nav' ) ): ?>
 								'container'	 => false,
 								'menu_class' => 'dropdown-menu',
 							);
-							largo_cached_nav_menu($args);
+							largo_nav_menu($args);
 						?>
 					</li>
 					<?php } ?>

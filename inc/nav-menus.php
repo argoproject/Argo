@@ -136,3 +136,32 @@ class Bootstrap_Walker_Nav_Menu extends Walker_Nav_Menu {
 
 	}
 }
+
+/**
+ * Wrapper function around wp_nav_menu()
+ *
+ *  @since 0.4
+ */
+function largo_nav_menu($args = array()) {
+	$my_args = wp_parse_args($args);
+	$my_args = apply_filters('wp_nav_menu_args', $my_args);
+	$my_args = (object) $my_args;
+
+	if ((isset($my_args->echo) && true === $my_args->echo) || !isset($my_args->echo))
+		$echo = true;
+	else
+		$echo = false;
+
+	if (false === $echo)
+		$nav_menu = wp_nav_menu($my_args);
+	else {
+		ob_start();
+		wp_nav_menu($my_args);
+		$nav_menu = ob_get_clean();
+	}
+
+	if (true === $echo)
+		echo $nav_menu;
+	else
+		return $nav_menu;
+}
