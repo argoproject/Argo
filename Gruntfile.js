@@ -38,7 +38,7 @@ module.exports = function(grunt) {
                 tasks: 'less'
             },
             sphinx: {
-                files: ['docs/*.rst'],
+                files: ['docs/*.rst', 'docs/*/*.rst'],
                 tasks: ['docs']
             }
         },
