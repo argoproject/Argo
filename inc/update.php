@@ -568,6 +568,11 @@ add_action('wp_ajax_largo_ajax_update_database', 'largo_ajax_update_database');
 function largo_update_custom_less_variables() {
 	if (Largo::is_less_enabled()) {
 		$variables = Largo_Custom_Less_Variables::get_custom_values();
-		Largo_Custom_Less_Variables::update_custom_values($variables['variables']);
+		$escaped = array();
+
+		foreach ($variables['variables'] as $key => $var)
+			$escaped[$key] = addslashes($var);
+
+		Largo_Custom_Less_Variables::update_custom_values($escaped);
 	}
 }
