@@ -9,7 +9,7 @@ WordPress has two default taxonomies:
 
 **Tags** - Keywords or topics used to group related posts together on a more micro level. For example, you might have a category called "Politics" and posts in that category might have tags like "Campaign Finance", "Election 2012", etc.
 
-In addition to these two taxonomies, Largo adds two more:
+In addition to those two taxonomies, Largo adds three more:
 
 **Post Prominence** - This is used to determine which posts to display on the homepage or in featured posts widgets in the sidebar and footer. You might also add additional categories to this taxonomy to create custom feeds for distribution to content partners (we will cover how to do that in a later post).
 
@@ -52,6 +52,7 @@ Taxonomy
 --------
 
 Default choices:
+
 - Top Story: If you are using the Newspaper or Carousel optional homepage layout, add this label to a post to make it the top story on the homepage
 - Featured in Category: This will allow you to designate a story to appear more prominently on category archive pages.
 - Featured in Series: Select this option to allow this post to float to the top of any/all series landing pages sorting by Featured first.
@@ -59,10 +60,13 @@ Default choices:
 - Homepage Featured: If you are using the Newspaper or Carousel optional homepage layout, add this label to posts to display them in the featured area on the homepage.
 - Sidebar Featured Widget: If you are using the Sidebar Featured Posts widget, add this label to posts to determine which to display in the widget.
 
+.. _series-tax:
+
 Series
 ------
 
 Options:
+
 - Name: The name is how it appears on your site.
 - Slug: The URL-friendly version of the name. It is usually all lowercase and contains only letters, numbers, and hyphens.
 - Parent: Drop-down of other series
@@ -70,8 +74,11 @@ Options:
 Description: The description is not prominent by default; however, some themes may show it.
 Archive Sidebar: The sidebar to show on this term's archive, chosen from a list of sidebars. Additional sidebars can be created in *Appearance* > *Theme Options* > *Layout Options* > *Sidebar Options* > by entering names of new sidebars in the box.
 
+.. _post-types-tax
+
 Post Types
 ----------
+
 Options:
 
 - Name: The name is how it appears on your site.
