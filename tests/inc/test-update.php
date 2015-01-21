@@ -251,7 +251,42 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 	}
 
 	function test_largo_transition_nav_menus() {
-		$this->markTestIncomplete('This test has not been implemented yet.');
+		// Test the function's ability to create the Main Navigation nav menu
+		$this->assertFalse(wp_get_nav_menu_object('Main Navigation'));
+		largo_transition_nav_menus();
+		$this->assertObjectHasAttribute('name', wp_get_nav_menu_object('Main Navigation'));
+
+		// Let's create some menus and menu items to be transitioned:
+		$locations = get_nav_menu_locations();
+		$navs = array(
+			'Navbar Categories' => 'navbar-categories',
+			'Navbar Supplemental' => 'navbar-supplemental',
+			'Sticky Nav' => 'sticky-nav',
+		);
+		foreach ($navs as $nav_title => $nav_slug) {
+			// create the menu
+			$id = wp_create_nav_menu($nav_title);
+			$locations[$nav_slug] = $id;
+
+			// create a nav menu item
+			wp_update_nav_menu_item($id, 0, array(
+				'menu-item-title' => $nav_title . ' item',
+				'menu-item-classes' => $nav_slug,
+				'menu-item-url' => home_url( '/' . $nav_slug . '/' ),
+				'menu-item-status' => 'publish'
+				));
+		}
+		set_theme_mod('nav_menu_locations', $locations);
+
+		// make sure that they're created, and we have no spares
+		$this->assertEquals(4, count(get_nav_menu_locations()));
+
+		largo_transition_nav_menus();
+
+		// make sure the old navs are deleted
+		$this->assertEquals(1, count(get_nav_menu_locations()));
+		// make sure the old navs' items made it to the Main Navigation menu
+		$this->assertEquals(3, count(wp_get_nav_menu_items('Main Navigation')));
 	}
 
 	function test_largo_update_prominence_term_description_single() {
@@ -283,7 +318,14 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 
 	// Test functions related to the WP admin workflow views
 	function test_largo_update_admin_notice() {
-		$this->markTestIncomplete('This test has not been implemented yet.');
+		$_GET['page'] = 'update-largo';
+		$this->expectOutputRegex('/[.*]+/'); // This is excessively greedy, it expects any output at all
+		$this->expectOutputRegex('/<div class="update-nag"/'); // Expecting an update nag
+		largo_update_admin_notice();
+
+		$_GET['page'] = '';
+		$this->expectOutputRegex('//'); // There should be no output because the update-largo page is not being GET'd
+		largo_update_admin_notice();
 	}
 
 	function test_largo_register_update_page() {
@@ -291,7 +333,8 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 	}
 
 	function test_largo_update_page_view() {
-		$this->markTestIncomplete('This test has not been implemented yet.');
+		$this->expectOutputRegex('/[.*]+/'); // This is excessively greedy, it expects any output at all
+		largo_update_page_view();
 	}
 
 	function test_largo_update_page_enqueue_js() {
