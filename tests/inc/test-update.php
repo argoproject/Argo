@@ -342,7 +342,9 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 	}
 
 	function test_largo_register_update_page() {
-		$this->markTestSkipped('This test would be a test of the WordPress function add_submenu_page.');
+		// Testing this would be the equivalent to a functional test of WordPress' core
+		// add_submenu_page, so let's just make sure the function exists.
+		$this->assertTrue(function_exists('largo_register_update_page'));
 	}
 
 	function test_largo_update_page_view() {
@@ -351,7 +353,14 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 	}
 
 	function test_largo_update_page_enqueue_js() {
-		$this->markTestSkipped('This test would be a test of the WordPress function enqueue_script.');
+		global $wp_scripts;
+
+		largo_update_page_enqueue_js();
+		$this->assertTrue(empty($wp_scripts->registered['largo_update_page']));
+
+		$_GET['page'] = 'update-largo';
+		largo_update_page_enqueue_js();
+		$this->assertTrue(!empty($wp_scripts->registered['largo_update_page']));
 	}
 
 	function test_largo_update_custom_less_variables() {
@@ -361,6 +370,46 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 
 class LargoUpdateTestAjaxFunctions extends WP_Ajax_UnitTestCase {
 	function test_largo_ajax_update_database() {
-		$this->markTestIncomplete('This test has not been implemented yet.');
+		// If the install doesn't need to be update, this should return json with success == false
+		of_set_option('largo_version', '0.4');
+		try {
+			$this->_handleAjax("largo_ajax_update_database");
+		} catch (WPAjaxDieContinueException $e) {
+			$resp = json_decode($this->_last_response, true);
+			$this->assertTrue($resp['success'] == false);
+		}
+
+		// If the install needs updated, this should return json with success == true
+		of_set_option('largo_version', '0.0');
+		try {
+			$this->_handleAjax("largo_ajax_update_database");
+		} catch (WPAjaxDieContinueException $e) {
+			$resp = json_decode($this->_last_response, true);
+			$this->assertTrue($resp['success'] == true);
+		}
+
+		// If a user with less than Administrator role tries to apply the update
+		// or otherwise access the update process, this should return json with success == false
+		$editor = $this->factory->user->create(array('role' => 'Editor'));
+		wp_set_current_user($editor);
+		of_set_option('largo_version', '0.0');
+		try {
+			$this->_handleAjax("largo_ajax_update_database");
+		} catch (WPAjaxDieContinueException $e) {
+			$resp = json_decode($this->_last_response, true);
+			$this->assertTrue($resp['success'] == false);
+		}
+
+		// If a user with less than Administrator role tries to apply the update
+		// or otherwise access the update process, this should return json with success == false
+		$administrator = $this->factory->user->create(array('role' => 'Editor'));
+		wp_set_current_user($administrator);
+		of_set_option('largo_version', '0.0');
+		try {
+			$this->_handleAjax("largo_ajax_update_database");
+		} catch (WPAjaxDieContinueException $e) {
+			$resp = json_decode($this->_last_response, true);
+			$this->assertTrue($resp['success'] == true);
+		}
 	}
 }
