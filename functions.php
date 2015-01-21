@@ -411,3 +411,83 @@ if ( ! function_exists( 'of_set_option' ) ) {
 		return false;
 	}
 }
+
+/**
+ * Retrieves the attachment ID from the file URL
+ * (or that of any thumbnail image)
+ * 
+ * @since v0.4
+ * @see https://pippinsplugins.com/retrieve-attachment-id-from-image-url/
+ * 
+ * @return Int ID of post attachment (or false if not found)
+ */ 
+function largo_url_to_attachmentid($url) {
+	global $wpdb;
+	$attachment = $wpdb->get_col($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE guid='%s';", $url )); 
+    
+    if( !empty( $attachment ) ) 
+    	return $attachement[0];
+
+    $url = preg_replace( '/-\d+x\d+(?=\.(jpg|jpeg|png|gif)$)/i', '', $url );
+	$attachment = $wpdb->get_col($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE guid='%s';", $url )); 
+
+	return print_r($attachment,true);
+    if( !empty( $attachment ) ) 
+    	return $attachement[0];
+    else
+    	return false;
+}
+
+/**
+ * Remove potentially duplicated hero image after upgrade to v0.4
+ * 
+ * The changes to the content in this function should eventually be made
+ * perminant in the database. (@see https://github.com/INN/Largo/issues/354)
+ * 
+ * @since v0.4
+ * 
+ * @param String $content the post content passed in by WordPress filter
+ * @return String filtered post content.
+ */
+function largo_remove_hero($content) {
+
+	global $post;
+
+	// 1: Only worry about this if it's a single template, and there's a feature image.
+
+	if( !is_single() ) 
+		return $content;
+
+	if( !has_post_thumbnail() ) 
+		return $content;
+
+	$p = explode("\n",$content);
+	
+	// 2: Find an image (regex)
+	//
+	// Creates the array:
+	// 		$matches[0] = <img src="..." class="..." id="..." />
+	//		$matches[1] = value of src.
+
+	$pattern = '#<img src="([^"]+)"[^>]*>#';
+	$hasImg = preg_match($pattern,$p[0],$matches);
+
+	// 3: if there's no image, there's nothing to worry about.
+
+	if( !$hasImg )
+		return $content;
+
+	// 4: Compare the src url to the feature image url.
+	// If they're the same, remove the top image.
+
+	$featureImgId = get_post_thumbnail_id();
+	$pImgId = largo_url_to_attachmentid($matches[1]);
+	if($pImgId = $featureImgId) {
+		array_shift($p);
+		$content = implode("\n",$p);
+	}
+	
+	return $content;
+
+}
+add_filter('the_content','largo_remove_hero');
