@@ -369,8 +369,6 @@ function largo_update_prominence_term_description_single($update, $term_descript
 function largo_update_prominence_term_descriptions() {
 	// see https://github.com/INN/Largo/issues/210
 
-	// Because this returns warnings
-
 	$terms = get_terms('prominence', array(
 			'hide_empty' => false,
 			'fields' => 'all'
