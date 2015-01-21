@@ -1,54 +1,69 @@
 Welcome to the Largo Project
 ============================
 
-`The Largo Project`_ is a responsive WordPress starter/parent theme designed with the needs of news publishers in mind.
+`Largo <http://largoproject.org>`_ is a responsive WordPress starter/parent theme built specifically with the needs of news publishers in mind and is built and maintained by the news apps and technology team at the `Investigative News Network (INN) <http://nerds.investigativenewsnetwork.org>`_.
 
-.. _The Largo Project: https://github.com/inn/largo
+Questions? Comments? `Get in touch with us <mailto:largo@investigativenewsnetwork.org>`_.
 
-This documentation contains tools for users and developers
+Project Repository: https://github.com/INN/Largo/
 
-* :ref:`user-docs`
-* :ref:`admin-docs`
-* :ref:`dev-docs`
+Technical Issues (Bugs, Feature Requests, etc.): https://github.com/INN/Largo/issues
 
-.. _user-docs:
+Help Desk (Support Requests): http://jira.investigativenewsnetwork.org/servicedesk/customer/portal/4
 
-User Documentation
-------------------
+Knowledge Base: http://confluence.investigativenewsnetwork.org/display/LKB/Largo+Knowledge+Base
 
-.. toctree::
-    :maxdepth: 2
+Twitter: http://twitter.com/largoproject
 
-     users/welcome
-     users/sitesetup.rst
-     users/download.rst
-     users/configuremenus.rst
-     users/themeoptions.rst
-     users/sidebarwidgets.rst
- 
+Mailing List: http://eepurl.com/yu0bT
 
-.. _admin-docs:
 
-Administrators Documentation
-----------------------------
+.. _setup-docs:
+
+Installation And Setup
+----------------------
 
 .. toctree::
     :maxdepth: 2
 
-    administrators/getting-started
-    administrators/installing
-    administrators/mailchimp
-    ads
+    users/prelaunchchecklist
+    users/download
+
+
+.. _general-docs:
+
+General Documentation
+---------------------
+
+.. toctree::
+    :maxdepth: 2
+
+    users/generalsettings
+    users/themeoptions
+    users/menus
+    users/sidebarswidgets
+    users/landingpages
+    users/taxonomies
+    users/posttemplates
+    users/plugins
+    users/contactforms
+    users/ads
+    users/thirdpartyintegrations
+    users/glossary
+
 
 .. _dev-docs:
 
-Developers
-----------
+For Developers
+--------------
 
 .. toctree::
     :maxdepth: 2
 
-    developers/guide
-    functions
-    api/api
+    developers/fordevelopers
+
+
+
+
+
 

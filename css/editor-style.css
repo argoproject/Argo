@@ -618,6 +618,10 @@ body.normal.page #content {
     margin-left: 0;
   }
 }
+body.normal.single-post .entry-content,
+body.normal.page .entry-content {
+  clear: both;
+}
 body.normal.single-post .hero,
 body.normal.page .hero {
   text-align: center;

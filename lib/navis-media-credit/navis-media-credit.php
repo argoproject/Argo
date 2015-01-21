@@ -97,7 +97,7 @@ class Navis_Media_Credit {
         $checked = ! empty( $creditor->can_distribute ) ? 'checked="checked"' : "";
         $distfield = 'attachments[' . $post->ID . '][navis_media_can_distribute]';
         $fields[ 'navis_media_can_distribute' ] = array(
-            'label' => 'Can distribute?',
+            'label' => 'Can<br />distribute?',
             'input' => 'html',
             'html'  => '<input id="' . $distfield . '" name="' . $distfield . '" type="checkbox" value="1" ' . $checked . ' />'
         );

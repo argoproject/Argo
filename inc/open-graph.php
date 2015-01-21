@@ -42,6 +42,7 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
 					<meta property="og:type" content="article" />
 					<meta property="og:url" content="<?php the_permalink(); ?>"/>
 					<meta property="og:description" content="<?php echo strip_tags( get_the_excerpt() ); ?>" />
+					<meta name="description" content="<?php echo strip_tags( get_the_excerpt() ); ?>" />
 			<?php
 				} // have_posts
 
@@ -53,7 +54,7 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
 				<meta property="og:type" content="website" />
 				<meta property="og:url" content="<?php echo home_url(); ?>"/>
 				<meta property="og:description" content="<?php bloginfo( 'description' ); ?>" />
-
+				<meta name="description" content="<?php bloginfo( 'description' ); ?>" />
 		<?php
 			} else {
 		?>
@@ -76,6 +77,7 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
 				}
 				if ( $description ) {
 					echo '<meta property="og:description" content="' . strip_tags( $description ) . '" />';
+					echo '<meta name="description" content="' . strip_tags( $description ) . '" />';
 				}
 			} // else
 
