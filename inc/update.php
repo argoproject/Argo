@@ -41,6 +41,7 @@ function largo_perform_update() {
 		largo_update_widgets();
 		largo_home_transition();
 		largo_transition_nav_menus();
+		largo_update_custom_less_variables();
 		largo_update_prominence_term_descriptions();
 		of_set_option('single_template', 'classic');
 		of_set_option('largo_version', largo_version());
@@ -560,3 +561,13 @@ function largo_ajax_update_database() {
 	}
 }
 add_action('wp_ajax_largo_ajax_update_database', 'largo_ajax_update_database');
+
+/**
+ * Make sure custom CSS is regenerated if we're using custom LESS variables
+ */
+function largo_update_custom_less_variables() {
+	if (Largo::is_less_enabled()) {
+		$variables = Largo_Custom_Less_Variables::get_custom_values();
+		Largo_Custom_Less_Variables::update_custom_values($variables['variables']);
+	}
+}
