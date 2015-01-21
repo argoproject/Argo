@@ -14,6 +14,7 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 			'taxonomy' => 'prominence'
 		));
 	}
+
 	function test_largo_version() {
 		// depends upon wp_get_theme,
 		//   depends upon get_stylesheet
@@ -23,6 +24,7 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 		$return = largo_version();
 		$this->assertTrue(isset($return));
 	}
+
 	function test_largo_need_updates() {
 		// requires largo_version
 
@@ -40,7 +42,7 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 
 		of_reset_options();
 	}
-	
+
 	function test_largo_perform_update() {
 		// requires largo_need_updates
 
@@ -65,36 +67,38 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 		update_option('sidebars_widgets', $widgets_backup);
 		unset($widgets_backup);
 	}
+
 	function test_largo_home_transition() {
 		// old topstories
 		of_reset_options();
 		of_set_option('homepage_top', 'topstories');
 		largo_home_transition();
 		$this->assertEquals('TopStories', of_get_option('home_template', 0));
-		
+
 		// old slider
 		of_reset_options();
 		of_set_option('homepage_top', 'slider');
 		largo_home_transition();
 		$this->assertEquals('HomepageBlog', of_get_option('home_template', 0));
-		
+
 		// old blog
 		of_reset_options();
 		of_set_option('homepage_top', 'blog');
 		largo_home_transition();
 		$this->assertEquals('HomepageBlog', of_get_option('home_template', 0));
-		
+
 		// Anything else
 		of_reset_options();
 		of_set_option('', 'slider');
 		largo_home_transition();
 		$this->assertEquals('HomepageBlog', of_get_option('home_template', 0));
-		
+
 		// Not actually set
 		of_reset_options();
 		largo_home_transition();
 		$this->assertEquals('HomepageBlog', of_get_option('home_template', 0));
 	}
+
 	function test_largo_update_widgets() {
 		// uses largo_widget_in_region
 		// uses largo_instantiate_widget
@@ -112,9 +116,9 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 		of_set_option('show_author_box', 1);
 		of_set_option('show_related_content', 1);
 		of_set_option('show_next_prev_nav_single', 1);
-		
+
 		largo_update_widgets();
-		
+
 		// Check for expected output
 		// These are all #2 because they are the first instance of the widget
 		$widgets = get_option('sidebars_widgets');
@@ -131,6 +135,7 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 		update_option('sidebars_widgets', $widgets_backup);
 		unset($widgets_backup);
 	}
+
 	function test_largo_widget_in_region() {
 		// uses WP_Error
 		$widgets_backup = get_option( 'sidebars_widgets ');
@@ -180,6 +185,7 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 		update_option('sidebars_widgets', $widgets_backup);
 		unset($widgets_backup);
 	}
+
 	function test_largo_instantiate_widget() {
 		// uses wp_parse_args, available here
 		// uses update_option, available here
@@ -199,6 +205,7 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 		update_option('sidebars_widgets', $widgets_backup);
 		unset($widgets_backup);
 	}
+
 	function test_largo_check_deprecated_widgets() {
 
 		// Backup sidebar widgets
@@ -228,21 +235,25 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 		update_option('sidebars_widgets', $widgets_backup);
 		unset($widgets_backup);
 	}
+
 	function test_largo_deprecated_footer_widget() {
 		// prints a nag
 		// uses __
 		$this->expectOutputRegex('/[.*]+/'); // This is excessively greedy, it expects any output at all
 		largo_deprecated_footer_widget();
 	}
+
 	function test_largo_deprecated_sidebar_widget() {
 		// prints a nag
 		// uses __
 		$this->expectOutputRegex('/[.*]+/'); // This is excessively greedy, it expects any output at all
 		largo_deprecated_sidebar_widget();
 	}
+
 	function test_largo_transition_nav_menus() {
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
+
 	function test_largo_update_prominence_term_description_single() {
 		$update = array(
 			'name' => 'Term 9',
@@ -258,6 +269,7 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 		$term9 = get_term_by( 'slug', 'term-9', 'prominence', 'ARRAY_A' );
 		$this->assertEquals('Term 9 From Outer Space', $term9['description']);
 	}
+
 	function test_largo_update_prominence_term_descriptions() {
 
 		largo_update_prominence_term_descriptions();
@@ -266,6 +278,29 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 			'fields' => 'all'
 		));
 
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
+
+	// Test functions related to the WP admin workflow views
+	function test_largo_update_admin_notice() {
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
+
+	function test_largo_register_update_page() {
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
+
+	function test_largo_update_page_view() {
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
+
+	function test_largo_update_page_enqueue_js() {
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
+}
+
+class LargoUpdateTestAjaxFunctions extends WP_Ajax_UnitTestCase {
+	function test_largo_ajax_update_database() {
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 }

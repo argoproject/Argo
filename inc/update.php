@@ -49,8 +49,9 @@ function largo_perform_update() {
 	if ( is_admin() ) {
 		largo_check_deprecated_widgets();
 	}
+
+	return true;
 }
-add_action( 'widgets_init', 'largo_perform_update', 20 );
 
 /**
  * Upgrades for moving from 0.3 to 0.4
@@ -427,3 +428,127 @@ function largo_update_prominence_term_descriptions() {
 }
 // Uncomment this line if you would like to force prominence terms to update.
 # add_action('init', 'largo_update_prominence_term_descriptions');
+
+// WP admin dashboard update workflow
+function largo_update_admin_notice() {
+	if (largo_need_updates() && !(isset($_GET['page']) && $_GET['page'] == 'update-largo')) {
+?>
+	<div class="update-nag" style="display: block;">
+		<p>Largo has been updated! Please <a href="<? echo admin_url('index.php?page=update-largo'); ?>">visit the update page</a> to apply a required database update.</p>
+	</div>
+<?php
+	}
+}
+add_action('admin_notices', 'largo_update_admin_notice');
+
+function largo_register_update_page() {
+	$parent_slug = null;
+	$page_title = "Update Largo";
+	$menu_title = "Update Largo";
+	$capability = "edit_theme_options";
+	$menu_slug = "update-largo";
+	$function = "largo_update_page_view";
+
+	if (largo_need_updates()) {
+		add_submenu_page(
+			$parent_slug, $page_title, $menu_title,
+			$capability, $menu_slug, $function
+		);
+	}
+}
+add_action('admin_menu', 'largo_register_update_page');
+
+function largo_update_page_view() { ?>
+	<style type="text/css">
+		.update-message {
+			max-width: 700px;
+		}
+		.update-message,
+		.update-message p {
+			font-size: 16px;
+		}
+		.update-message ul li {
+			list-style-type: disc;
+			list-style-position: inside;
+		}
+		.update-message .submit-container {
+			max-width: 178px;
+		}
+		.update-message .spinner {
+			background: url(../wp-includes/images/spinner.gif) 0 0/20px 20px no-repeat;
+			-webkit-background-size: 20px 20px;
+			display: none;
+			opacity: .7;
+			filter: alpha(opacity=70);
+			width: 20px;
+			height: 20px;
+			margin: 0;
+			position: relative;
+			top: 4px;
+		}
+		.update-message .updated,
+		.update-message .error {
+			padding-top: 16px;
+			padding-bottom: 16px;
+		}
+	</style>
+	<div class="wrap">
+		<div id="icon-tools" class="icon32"></div>
+		<h2>Largo Database Update</h2>
+		<div class="update-message">
+			<p><?php _e('This version of Largo includes a variety of updates, enhancements and changes.'); ?></p>
+			<p><?php _e('These changes affect'); ?>:
+				<ul>
+					<li><?php _e('Theme options'); ?></li>
+					<li><?php _e('Configured menus'); ?></li>
+					<li><?php _e('Site navigation'); ?></li>
+					<li><?php _e('Sidebars and widgets'); ?></li>
+				</ul>
+			<p><?php _e('The database update you are about to apply will take steps to migrate existing site settings.'); ?></p>
+			<p><?php _e('In the event that a site setting can not be migrated, the update will do its best to preserve it instead.'); ?></p>
+			<p><?php _e('For example, menus that existed in previous versions of Largo have been removed. If your site has been using one of these now-deprecated menus, the update process will merge it with the nearest related menu.'); ?></p>
+			<p><?php _e('Please be sure to review your site settings after applying the update to ensure all is well.'); ?></p>
+
+			<p class="submit-container">
+				<input type="submit" class="button-primary" id="update" name="update" value="<?php _e('Update the database!'); ?>">
+				<span class="spinner"></span>
+			<p>
+		</div>
+	</div>
+<?php
+}
+
+function largo_update_page_enqueue_js() {
+	if (isset($_GET['page']) && $_GET['page'] == 'update-largo') {
+		wp_enqueue_script(
+			'largo_update_page', get_template_directory_uri() . '/js/update-page.js',
+			array('jquery'), false, 1);
+	}
+}
+add_action('admin_enqueue_scripts', 'largo_update_page_enqueue_js');
+
+function largo_ajax_update_database() {
+	if (!largo_need_updates()) {
+		print json_encode(array(
+			"status" => __("Finished. No update was required."),
+			"success" => false
+		));
+		wp_die();
+	}
+
+	$ret = largo_perform_update();
+	if (!empty($ret)) {
+		print json_encode(array(
+			"status" => __("Thank you -- the update is complete. Don't forget to check your site settings!"),
+			"success" => true
+		));
+		wp_die();
+	} else {
+		print json_encode(array(
+			"status" => __("There was a problem applying the update. Please try again."),
+			"success" => false
+		));
+		wp_die();
+	}
+}
+add_action('wp_ajax_largo_ajax_update_database', 'largo_ajax_update_database');
