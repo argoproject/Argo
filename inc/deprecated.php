@@ -12,6 +12,6 @@
  * @param array $args
  */
 function largo_cached_nav_menu( $args = array(), $prime_cache = false ) {
+	_deprecated_function(__FUNCTION__, '0.4', 'largo_nav_menu');
 	return largo_nav_menu($args);
 }
-_deprecated_function('largo_cached_nav_menu', '0.4', 'largo_nav_menu');
