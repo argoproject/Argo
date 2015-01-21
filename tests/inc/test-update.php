@@ -306,14 +306,27 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 	}
 
 	function test_largo_update_prominence_term_descriptions() {
+		//This test checks that largo_update_prominence_term_description_single was run with certain arguments.
+
+		// This is the only term of the set that largo_update_prominence_term_descriptions updates that is not already created by the time the test is run.
+		$term_ids = $this->factory->term->create_many( 1, array(
+			'taxonomy' => 'prominence'
+		));
+		wp_update_term(
+			$term_ids[0], 'prominence',
+			array(
+				'name' => 'Top Story',
+				'description' => 'If you are using the Newspaper or Carousel optional homepage layout, add this label to label to a post to make it the top story on the homepage.',
+				'slug' => 'top-story'
+			)
+		);
 
 		largo_update_prominence_term_descriptions();
-		$terms = get_terms('prominence', array(
-			'hide_empty' => false,
-			'fields' => 'all'
-		));
 
-		$this->markTestIncomplete('This test has not been implemented yet.');
+		$test_post = get_term($term_ids[0], 'prominence', 'ARRAY_A');
+		$this->assertEquals('If you are using a "Big story" homepage layout, add this label to a post to make it the top story on the homepage', $test_post['description']);
+
+#		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
 	// Test functions related to the WP admin workflow views
@@ -329,7 +342,7 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 	}
 
 	function test_largo_register_update_page() {
-		$this->markTestIncomplete('This test has not been implemented yet.');
+		$this->markTestSkipped('This test would be a test of the WordPress function add_submenu_page.');
 	}
 
 	function test_largo_update_page_view() {
@@ -338,7 +351,7 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 	}
 
 	function test_largo_update_page_enqueue_js() {
-		$this->markTestIncomplete('This test has not been implemented yet.');
+		$this->markTestSkipped('This test would be a test of the WordPress function enqueue_script.');
 	}
 
 	function test_largo_update_custom_less_variables() {
