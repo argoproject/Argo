@@ -340,6 +340,10 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 	function test_largo_update_page_enqueue_js() {
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
+
+	function test_largo_update_custom_less_variables() {
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
 }
 
 class LargoUpdateTestAjaxFunctions extends WP_Ajax_UnitTestCase {
