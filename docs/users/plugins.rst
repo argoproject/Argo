@@ -80,7 +80,7 @@ Here is a complete list of the plugins currently installed and available.
 - `TinyMCE Advanced <https://wordpress.org/plugins/tinymce-advanced/>`_ - Enables advanced features and plugins in TinyMCE, the visual editor in WordPress.
 - `WP DS NPR API <https://github.com/npr/WP-DS-NPR-API>`_ - A collection of tools for reusing content from NPR.org supplied by NPR Digital Services.
 
-`Premium plugins <http://premium.wpmudev.org/projects/category/plugins/>`_ we've bought a site license for for INN member sites:
+`Premium plugins <http://premium.wpmudev.org/projects/category/plugins/>`_ we've bought a site license for INN member sites:
 
 - `Business Directory Plugin <https://wordpress.org/plugins/business-directory-plugin/>`_ - Provides the ability to maintain a free or paid business directory on your WordPress powered site. We also have a license for the Paypal Gateway Module.
 - `Gravity Forms <https://wordpress.org/plugins/gravity-forms-addons/>`_ - Easily create web forms and manage form entries within the WordPress admin. We also have a license for the Gravity Forms PayPal Add-On.
