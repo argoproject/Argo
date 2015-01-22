@@ -5,6 +5,8 @@ When you first activate the Largo theme, there are a number options that need to
 
 The Theme Options page is organized into four sections which you can access by clicking on the relevant tab across the top of the page: Basic Settings, Theme Images, Layout Options and Homepage Options.
 
+.. _basic-settings:
+
 Basic Settings
 --------------
 
@@ -14,9 +16,9 @@ Basic Settings
 
 **Donate Button** - The Largo theme includes an optional donate button in the top header. To enable the donate button, make sure the checkbox to show the donate button is checked and then add the link to your donation page, form or external payment processor here. Optionally, you can change the text of the button. The Largo theme also includes a sidebar widget that you can use to link to a donation page in addition to or instead of the link in the top header.
 
-**Don't Miss Menu** - Under the main navbar on your Largo site is an optional secondary navigation menu that, by default, is called "Don't Miss". To enable this menu make sure the checkbox to show the Don't Miss Menu is checked. Optionally, you can customize the label that appears at the beginning of the menu or remove it entirely. To add or remove links from this menu visit Appearance > Menus from the left sidebar in the WordPress administration interface.
+**Don't Miss Menu** - Under the main navbar on your Largo site is an optional secondary navigation menu that, by default, is called "Don't Miss". To enable this menu make sure the checkbox to show the Don't Miss Menu is checked. Optionally, you can customize the label that appears at the beginning of the menu or remove it entirely. To add or remove links from this menu visit **Appearance > Menus** from the left sidebar in the WordPress administration interface.
 
-**Footer Nav Menu** - On the left side of the site footer is a configurable menu area. By default the label for this menu will be your site name, but you can change it here. As with the Don't Miss menu area, to add or remove links from this menu visit Appearance > Menus from the left sidebar in the WordPress administration interface.
+**Footer Nav Menu** - On the left side of the site footer is a configurable menu area. By default the label for this menu will be your site name, but you can change it here. As with the Don't Miss menu area, to add or remove links from this menu visit **Appearance > Menus** from the left sidebar in the WordPress administration interface.
 
 **Sticky Nav** - The sticky navigation bar remains at the top of the reader's window as they scroll. The default is to show the sticky navbar, but you may want to hide it. You also have the option to show your site name in the sticky navbar, which is useful on smaller screens.
 
@@ -35,6 +37,8 @@ Note that authors can add links to their own social media profiles by editing th
 **Single Post Social Icons** - By default a box showing social media links will be shown at the top of single article pages. You can choose to hide this if you prefer. You can also choose which share icons should be displayed here, the verb used on Facebook buttons, whether or not your Twitter share count is displayed, and where the "Clean Read" link should be displayed on the page.
 
 In previous versions of Largo, the option to have the author's bio and social media links occupied this slot, and also governed the visibility of share icons and the author bio at the end of the article. The article-bottom author bio and social links are now available as widgets.
+
+.. _theme-images:
 
 Theme Images
 ------------
@@ -59,6 +63,8 @@ There is one additional option in this section, a checkbox that allows you to us
 
 .. _pre-launch checklist: :doc:`./prelaunchchecklist.rst`
 
+.. _layout-options:
+
 Layout Options
 --------------
 
@@ -78,11 +84,62 @@ Layout Options
 - A two-column widget area: This creates a new widget area in **Appearance > Widgets** that can be filled with widgets. It appears empty until widgets have been added to this area.
 - Nothing whatsoever
 
-**Category and Tag Display** - Largo can display a single category or tag above the headline for each story, a list of tags below the story's excerpt or nothing at all.
+**Category and Tag Display** - Largo can display:
 
-**Number of posts** - The number of posts displayed on the main area of the homepage, not counting posts in the top area of the homepage or in the sticky box. THe default is 10.
+- a single category or tag above the headline for each story
+- a list of tags below the story's excerpt
+- nothing at all
 
-**Categories to include or exclude** - enter a comma-separated list of category ID numbers here to exclude them from the front-page listing. in the main loop on the homepage (comma-separated list of values, see: http://bit.ly/XmDGgd for correct format).
+**Number of posts** - The number of posts displayed on the main area of the homepage, not counting posts in the top area of the homepage or in the sticky box. The default is 10.
+
+**Categories to include or exclude** - Enter a comma-separated list of category ID numbers here to exclude them from the front-page listing. in the main loop on the homepage (comma-separated list of values, see http://codex.wordpress.org/Class_Reference/WP_Query for correct format). The general approach is: 
+
+	``news,sports,12,13,press-releases,blog``
+	
+**Single Article Template** - Starting with version 0.3, Largo introduced a new single-post template that more prominently highlights article content, which is the default. For backward compatibility, the pre-0.3 version is also available, which by default includes a sidebar. The new template optionally includes a sidebar of your choice.
+
+**Sidebar Options** - These affect the presentation of the sidebar to the reader.
+
+- Add a third sidebar used only on archive pages (category, tag, author and series pages), configurable in Appearance > Widgets
+- An additional widget region just above the site footer region, configurable in Appearance > Widgets
+- Fade the sidebar out on single story pages as the reader scrolls
+
+You can also enter a list of additional sidebar regions that should be created, one on each line of the text box.
+
+**Footer Layout** - The default footer is a 3 column footer with a wide center column. Alternatively you can choose to have 3 or 4 equal columns. Each column is a widget area that can be configured under the **Appearance > Widgets** menu, where they will be labeled "Footer 1" through "Footer 3" or "Footer 4."
+
+.. _advanced-options:
+
+Advanced Options
+----------------
+
+**Custom LESS** - Enabling this will let you change the theme's colors and fonts in **Appearance > CSS Variables**. 
+
+**Enable Series** - Series are a way of tracking related stories over time. Enabling series allows you to display posts that aren't just in the same category, but are coverage of the same story at a different point in time, particularly useful for developing stories.
+
+**Enable Custom Landing Pages** - (requires Series to be enabled) Series landing pages allow you to summarize a series of posts or tie a project together. For one example, see http://inewsnetwork.org/series/hit-and-run: the project page begins with a summary of the series, followed by posts within the series. 
+For more information on creating a series landing page, see :doc:`landingpages`
+
+**Enable Optional Leaderboard Ad Zone** - This creates a widget area above your site's header that can be used to display ads. For more about this area, see :doc:`./ads`. 
+
+**Enable Post Types** - The Post Types taxonomy allows you to categorize posts by their "type." Example types can include video posts, documents, and interactive content, but this has no affect on their display. Developers of child themes may want to use this function to affect post display.
+
+**Sidebars for Landing Pages** - These set the default sidebars for custom landing pages, and can be overridden by the individual landing page.
+
+**Disclaimer** - If checked, you can enter a default disclaimer that will be displayed on all posts.
+
+**Search Options** - Google Custom Search generally returns better search results than WordPress' included search engine. If you would like to enable Google Custom Cearch, go to https://www.google.com/cse/create/new to set it up, then paste your search engine ID in the settings box and enable the checkbox.
+
+**Site Verification**:
+
+- Twitter Account ID: This is a 9-digit ID number used for verifying your site to Twitter Analytics
+- Google site verification meta tag: This will be a long string of numbers and letters. For more information, see `Google's documentation <https://support.google.com/webmasters/answer/35659?hl=en>`_.
+- Facebook admins meta tag: This is a comma-separated list of numerical FB user IDs you want to allow to access Facebook insights for your site.
+- Facebook app ID meta tag: This is a numerical app ID that will allow Facebook to capture insights for any social plugins active on your site and display them in your Facebook app/page insights. For more information, see `Facebook's documentation <https://developers.facebook.com/docs/platforminsights/domains>`_
+- Bitly site verification: This is a string of numbers and letters used to verify your site with bitly analytics. For more information, `contact bitly <http://support.bitly.com/knowledgebase/articles/103260-what-is-a-tracking-domain>`_.
+
+**SEO Options* - You may choose to ask search engines to not index archive pages in addition to date archives.
+
 
 Deprecated Options
 ------------------
@@ -90,41 +147,4 @@ Deprecated Options
 The following homepage layout templates are no longer included in Largo:
 
 - **Slider**: An animated carousel of featured stories with large images. This should be automatically updated to the "Blog" template after upgrading Largo.
-
-
-Homepage Options
-----------------
-
-
-
-Homepage display options
-- Display options for categories and tags on posts on the homepage
-- A single category or tag above the headline for each story
-- A list of tags below the story's excerpt
-- No tags or categories
-
-- Number of posts to display in the main posts area on the homepage
-- Categories to include or exclude from the main posts area on the home page. Enter a comma-separated list of category names or ids:
-
-  ``news,sports,12,13,press-releases,blog``
-
-**Sidebar options**:
-These affect the presentation of the sidebar to the reader.
-- Add a third sidebar used only on archive pages (category, tag, author and series pages), configurable in Appearance > Widgets
-- An additional widget region just above the site footer region, configurable in Appearance > Widgets
-- Fade the sidebar out on single story pages as the reader scrolls
-
-**Footer layout**
-
-[[footer-options.png]]
-
-The default footer is a 3 column footer with a wide center column. Alternatively you can choose to have 3 or 4 equal columns. Each column is a widget area that can be configured under the *Appearance* > *Widgets* menu, where they will be labeled "Footer 1" through "Footer 3" or "Footer 4."
-
-**Advanced Options**
-- Enable ``[[custom LESS compilation for theme customization|Modifying Largo styles]]``
-- Enable ``[[custom landing pages for series and projects|Custom landing pages]]``
-- Enable the _`Series` taxonomy.
-- Set the default region in the left-hand column of landing pages
-- Set the default region in the right-hand column of landing pages
-- Replace WordPress search with `Google Custom Search <https://support.google.com/customsearch/answer/2630963?hl=en&ctx=topic>`_. This is highly recommended.
 
