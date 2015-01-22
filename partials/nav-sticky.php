@@ -73,7 +73,7 @@
 							'menu_class' => 'nav',
 							'walker'	 => new Bootstrap_Walker_Nav_Menu()
 							);
-							largo_cached_nav_menu($args);
+							largo_nav_menu($args);
 
 							if (has_nav_menu('global-nav')) {
 								$args = array(
@@ -83,7 +83,7 @@
 									'menu_class' => 'dropdown-menu',
 									'echo' => false
 								);
-								$global_nav = largo_cached_nav_menu($args);
+								$global_nav = largo_nav_menu($args);
 
 								if (!empty($global_nav)) { ?>
 									<li class="menu-item-has-childen dropdown">
