@@ -1244,9 +1244,6 @@ legend + .control-group {
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2070b2', endColorstr='#247ac4', GradientType=0);
 }
-#header-search {
-  max-width: 210px;
-}
 .btn {
   display: inline-block;
   *display: inline;
@@ -2022,6 +2019,8 @@ table .span24 {
   margin: 1px 3px 0 0;
 }
 #header-search {
+  margin-top: 5px;
+  max-width: 210px;
   float: left;
 }
 #header-search form {
