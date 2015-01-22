@@ -168,7 +168,7 @@ function optionsframework_options() {
 
 	$options[] = array(
 		'name' 	=> __('Word to use for "Posts"', 'largo'),
-		'desc' 	=> __('WordPress calls single article pages "posts" but might prefer to use another name. <strong>Enter the singular and plural forms</strong> of the word you want to use here.', 'largo'),
+		'desc' 	=> __('WordPress calls single article pages "posts" but you might prefer to use another name. <strong>Enter the singular and plural forms</strong> of the word you want to use here.', 'largo'),
 		'type' 	=> 'info');
 
 	$options[] = array(
