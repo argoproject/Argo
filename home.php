@@ -22,36 +22,30 @@ $layout_class = of_get_option('home_template');
 $tags = of_get_option ('tag_display');
 
 global $largo;
-$span_class = ( $largo['home_rail'] ) ? 'span8' : 'span12' ;
+if ($home_template == 'LegacyThreeColumn')
+	$span_class = 'span8';
+else
+	$span_class = ( $largo['home_rail'] ) ? 'span8' : 'span12' ;
 ?>
 
 <div id="content" class="stories <?php echo $span_class; ?> <?php echo sanitize_html_class(basename($home_template)); ?>" role="main">
-
-	<?php if ( is_active_sidebar('homepage-left-rail') ) { ?>
-	<div id="content-main" class="<?php echo $span_class; ?>">
-	<?php }
-
+<?php
 	largo_render_homepage_layout($home_template);
 
-	// sticky posts box if this site uses it
-	if ( of_get_option( 'show_sticky_posts' ) ) {
-		get_template_part( 'partials/sticky-posts', 'home' );
+	if ($home_template !== 'LegacyThreeColumn') {
+		// sticky posts box if this site uses it
+		if ( of_get_option( 'show_sticky_posts' ) ) {
+			get_template_part( 'partials/sticky-posts', 'home' );
+		}
+
+		// bottom section, we'll either use a two-column widget area or a single column list of recent posts
+		if ( of_get_option('homepage_bottom') === 'widgets' ) {
+			get_template_part('partials/home-bottom', 'widget-area');
+		} else if (of_get_option('homepage_bottom') === 'list') {
+			get_template_part('partials/home-post-list');
+		}
 	}
-
-	// bottom section, we'll either use a two-column widget area or a single column list of recent posts
-	if ( of_get_option('homepage_bottom') === 'widgets' ) {
-		get_template_part('partials/home-bottom', 'widget-area');
-	} else if (of_get_option('homepage_bottom') === 'list') {
-		get_template_part('partials/home-post-list');
-	}
-
-	if ( is_active_sidebar('homepage-left-rail') ) { ?>
-	</div>
-	<div id="left-rail" class="span4">
-	<?php dynamic_sidebar( 'homepage-left-rail' ) ?>
-	</div>
-	<?php } ?>
-
+?>
 </div><!-- #content-->
 <?php if ($largo['home_rail']) get_sidebar(); ?>
 <?php get_footer();

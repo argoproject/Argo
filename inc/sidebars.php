@@ -68,6 +68,7 @@ function largo_register_sidebars() {
 			'id' 	=> 'footer-4'
 		);
 	}
+
 	if ( of_get_option('homepage_layout') == '3col' ) {
 		$sidebars[] = array(
 			'name' 	=> __( 'Homepage Left Rail', 'largo' ),
