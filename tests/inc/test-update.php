@@ -369,8 +369,14 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 }
 
 class LargoUpdateTestAjaxFunctions extends WP_Ajax_UnitTestCase {
-	function test_largo_ajax_update_database() {
-		// If the install doesn't need to be update, this should return json with success == false
+
+	function setUp() {
+		parent::setUp();
+		of_reset_options();
+	}
+
+	function test_largo_ajax_update_database_false() {
+		// If the install doesn't need to be updated, this should return json with success == false
 		of_set_option('largo_version', '0.4');
 		try {
 			$this->_handleAjax("largo_ajax_update_database");
@@ -378,33 +384,11 @@ class LargoUpdateTestAjaxFunctions extends WP_Ajax_UnitTestCase {
 			$resp = json_decode($this->_last_response, true);
 			$this->assertTrue($resp['success'] == false);
 		}
+	}
 
+	function test_largo_ajax_update_database_true() {
 		// If the install needs updated, this should return json with success == true
-		of_set_option('largo_version', '0.0');
-		try {
-			$this->_handleAjax("largo_ajax_update_database");
-		} catch (WPAjaxDieContinueException $e) {
-			$resp = json_decode($this->_last_response, true);
-			$this->assertTrue($resp['success'] == true);
-		}
-
-		// If a user with less than Administrator role tries to apply the update
-		// or otherwise access the update process, this should return json with success == false
-		$editor = $this->factory->user->create(array('role' => 'Editor'));
-		wp_set_current_user($editor);
-		of_set_option('largo_version', '0.0');
-		try {
-			$this->_handleAjax("largo_ajax_update_database");
-		} catch (WPAjaxDieContinueException $e) {
-			$resp = json_decode($this->_last_response, true);
-			$this->assertTrue($resp['success'] == false);
-		}
-
-		// If a user with less than Administrator role tries to apply the update
-		// or otherwise access the update process, this should return json with success == false
-		$administrator = $this->factory->user->create(array('role' => 'Editor'));
-		wp_set_current_user($administrator);
-		of_set_option('largo_version', '0.0');
+		of_set_option('largo_version', null);
 		try {
 			$this->_handleAjax("largo_ajax_update_database");
 		} catch (WPAjaxDieContinueException $e) {

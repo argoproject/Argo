@@ -527,7 +527,7 @@ function largo_update_page_enqueue_js() {
 add_action('admin_enqueue_scripts', 'largo_update_page_enqueue_js');
 
 function largo_ajax_update_database() {
-	if (!current_user_can('edit_theme_options')) {
+	if (!current_user_can('activate_plugins')) {
 		print json_encode(array(
 			"status" => __("An error occurred."),
 			"success" => false
