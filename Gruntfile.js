@@ -14,7 +14,10 @@ module.exports = function(grunt) {
                 },
                 files: {
                     'css/style.css': 'less/style.less',
-                    'css/editor-style.css': 'less/editor-style.less'
+                    'css/editor-style.css': 'less/editor-style.less',
+                    'homepages/assets/css/single.css': 'homepages/assets/less/single.less',
+                    'homepages/assets/css/top-stories.css': 'homepages/assets/less/top-stories.less',
+                    'homepages/assets/css/legacy-three-column.css': 'homepages/assets/less/legacy-three-column.less'
                 }
             }
         },
@@ -30,11 +33,13 @@ module.exports = function(grunt) {
                 }
             }
         },
-        
 
         watch: {
             less: {
-                files: 'less/**/*.less',
+                files: [
+                    'less/**/*.less',
+                    'homepages/assets/less/**/*.less'
+                ],
                 tasks: 'less'
             },
             sphinx: {

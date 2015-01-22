@@ -335,17 +335,25 @@ function optionsframework_options() {
 	 * Layout Options
 	 */
 	$options[] = array(
-		'name' 	=> __('Layout Options', 'largo'),
-		'type' 	=> 'heading');
+		'name' => __('Layout Options', 'largo'),
+		'type' => 'heading');
 
-	if ( count($home_templates) ) {
+	if (count($home_templates)) {
+		$home_std= 'HomepageBlog';
+
+		$home_template = of_get_option('home_template');
+		if (empty($home_template)) {
+			if (of_get_option('homepage_layout') == '3col')
+				$home_std= 'LegacyThreeColumn';
+		}
+
 		$options[] = array(
-			'name' 	=> __('Home Template', 'largo'),
-			'desc' 	=> __('<strong>Select the layout to use for the top of the homepage.</strong> These are Home Templates, defined much like post/page templates.', 'largo'),
-			'id' 	=> 'home_template',
-			'std' 	=> 'homepages/blog.php',
-			'type' 	=> 'radio',
-			'options' 	=> $home_templates
+			'name' => __('Home Template', 'largo'),
+			'desc' => __('<strong>Select the layout to use for the top of the homepage.</strong> These are Home Templates, defined much like post/page templates.', 'largo'),
+			'id' => 'home_template',
+			'std' => $home_std,
+			'type' => 'radio',
+			'options' => $home_templates
 		);
 	}
 
@@ -609,14 +617,11 @@ function optionsframework_options() {
 add_action('optionsframework_custom_scripts', 'optionsframework_custom_scripts');
 
 function optionsframework_custom_scripts() { ?>
-
 <script type="text/javascript">
 jQuery(document).ready(function($) {
-
 	// show/hide don't miss.
-
 	$('#show_dont_miss_menu').click(function() {
-  		$('#section-dont_miss_label').fadeToggle(400);
+		$('#section-dont_miss_label').fadeToggle(400);
 	});
 
 	if ($('#show_dont_miss_menu:checked').val() !== undefined) {
@@ -624,9 +629,8 @@ jQuery(document).ready(function($) {
 	}
 
 	// show/hide sticky nav.
-
 	$('#show_sticky_nav').click(function() {
-  		$('#section-show_sitename_in_sticky_nav').fadeToggle(400);
+		$('#section-show_sitename_in_sticky_nav').fadeToggle(400);
 	});
 
 	if ($('#show_sticky_nav:checked').val() !== undefined) {
@@ -634,10 +638,9 @@ jQuery(document).ready(function($) {
 	}
 
 	// show/hide donate button.
-
 	$('#show_donate_button').click(function() {
-  		$('#section-donate_link').fadeToggle(400);
-  		$('#section-donate_button_text').fadeToggle(400);
+		$('#section-donate_link').fadeToggle(400);
+		$('#section-donate_button_text').fadeToggle(400);
 	});
 
 	if ($('#show_donate_button:checked').val() !== undefined) {
@@ -646,9 +649,8 @@ jQuery(document).ready(function($) {
 	}
 
 	// show/hide disclaimer.
-
 	$('#disclaimer_enabled').click(function() {
-  		$('#section-default_disclaimer').fadeToggle(400);
+		$('#section-default_disclaimer').fadeToggle(400);
 	});
 
 	if ($('#disclaimer_enabled:checked').val() == undefined) {
@@ -656,9 +658,8 @@ jQuery(document).ready(function($) {
 	}
 
 	// show/hide show tags.
-
 	$('#show_tags').click(function() {
-  		$('#section-tag_limit').fadeToggle(400);
+		$('#section-tag_limit').fadeToggle(400);
 	});
 
 	if ($('#show_tags:checked').val() !== undefined) {
@@ -666,7 +667,6 @@ jQuery(document).ready(function($) {
 	}
 
 	// show/hide custom series landing pages.
-
 	$('#series_enabled').click(function() {
 		$('#section-custom_landing_enabled').fadeToggle(400);
 		$('#section-custom_landing_enabled input').removeAttr('checked');
@@ -675,9 +675,7 @@ jQuery(document).ready(function($) {
 	if ($('#series_enabled:checked').val() !== undefined) {
 		$('#section-custom_landing_enabled').show();
 	}
-
 });
 </script>
-
 <?php
 }

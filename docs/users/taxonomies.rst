@@ -1,6 +1,8 @@
 Taxonomies
 ==========
 
+.. _overview-tax:
+
 Overview
 --------
 
@@ -32,6 +34,8 @@ Additionally you can add a description for each category, tag or series and also
 
 Note that in some cases you may need to click on the "Screen Options" tab at the very top right corner of the post edit screen to ensure that all of the taxonomies are visible.
 
+.. _categories-tax:
+
 Categories
 ----------
 
@@ -48,6 +52,8 @@ Options:
 - **Archive Sidebar:** The sidebar to show on this category's archive page, chosen from a list of your currently registered sidebars. Additional sidebars can be created in Appearance > Theme Options > Layout Options > Sidebar Options by entering names of new sidebars in the box. These sidebars will then become available under the Appearance > Widgets menu where you can add and arrange the content you want to appear.
 
 Optionally, categories can be created while editing a post by clicking on "add new category" under the list of current categories in the category box in the right column.
+
+.. _tags-tax:
 
 Tags
 ----
@@ -88,7 +94,7 @@ It is rare that you will add additional terms to this taxonomy as they are typic
 Series
 ------
 
-This taxonomy is disabled by default, but you can enable it from the Appearance > Theme Options > Advanced menu.
+This taxonomy is disabled by default, but you can enable it from the **Appearance > Theme Options > Advanced Options** menu.
 
 Some sites may create a multi-part series or project that is only published for a set amount of time and then should fall into the archive or appear on a "projects" archive page. To support this and also to allow for the creation of custom landing pages, Largo adds an optional "series" taxonomy. When you create a new series, you can add a term to this taxonomy and then make sure all of the posts in that series have this label applied. This will enable the Largo theme to surface related posts in that series in at the bottom of a post (if you are using the "read next" widget) and, in some cases, also on the homepage (depending on the homepage layout you have selected). Largo also adds the ability to create custom sidebars and landing pages for series archive pages, replacing the default series archive template in WordPress.
 

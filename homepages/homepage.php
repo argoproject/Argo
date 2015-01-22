@@ -19,7 +19,8 @@ function largo_register_default_homepage_layouts() {
 		'HomepageSingle',
 		'HomepageSingleWithFeatured',
 		'HomepageSingleWithSeriesStories',
-		'TopStories'
+		'TopStories',
+		'LegacyThreeColumn'
 	);
 
 	foreach ($default_layouts as $layout)

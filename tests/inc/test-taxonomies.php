@@ -4,11 +4,14 @@ class TaxonomiesTestFunctions extends WP_UnitTestCase {
 	function setUp() {
 		parent::setUp();
 
+		// Make sure options are zeroed out after each test
+		of_reset_options();
+
 		// Test data
 		$this->author_user_ids = $this->factory->user->create_many(10, array('role' => 'author'));;
 		$this->contributor_user_ids = $this->factory->user->create_many(5, array('role' => 'contributor'));
 	}
-	
+
 	function test_largo_is_series_enabled() {
 		// Series option has not been touched yet (a new install)
 		$result = largo_is_series_enabled();
