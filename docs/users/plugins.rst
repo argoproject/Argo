@@ -110,7 +110,6 @@ Here is a complete list of the plugins currently installed and available.
 
 Plugins that we have reluctantly installed for and are in-use by typically one site that **we do not necessarily endorse or recommend** using:
 
-- **AdRotate**
 - **Advanced Custom Fields** including the Options Page and Repeater Field add-ons.
 - **Charity Thermometer**
 - **iframe**
