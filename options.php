@@ -335,8 +335,20 @@ function optionsframework_options() {
 	 * Layout Options
 	 */
 	$options[] = array(
-		'name' 	=> __('Layout Options', 'largo'),
-		'type' 	=> 'heading');
+		'name' => __('Layout Options', 'largo'),
+		'type' => 'heading');
+
+	$options[] = array(
+		'name' => __('Overall Homepage Layout', 'largo'),
+		'desc' => __('<strong>Select the overall layout you would like to use for your site\'s homepage.</strong> By default, Largo has a two column layout with a main content area on the left and a configurable sidebar on the right, but you can add a skinny side rail (configurable under the appearance > widgets tab) to left of the main content area by selecting the three-column option.', 'largo'),
+		'id' => 'homepage_layout',
+		'std' => '2col',
+		'type' => 'images',
+		'options' => array(
+			'2col' => $imagepath . '2col.png',
+			'3col' => $imagepath . '3col.png'
+		)
+	);
 
 	if ( count($home_templates) ) {
 		$options[] = array(
@@ -345,7 +357,8 @@ function optionsframework_options() {
 			'id' 	=> 'home_template',
 			'std' 	=> 'homepages/blog.php',
 			'type' 	=> 'radio',
-			'options' 	=> $home_templates
+			'options' 	=> $home_templates,
+			'class' => 'hidden'
 		);
 	}
 
@@ -609,14 +622,11 @@ function optionsframework_options() {
 add_action('optionsframework_custom_scripts', 'optionsframework_custom_scripts');
 
 function optionsframework_custom_scripts() { ?>
-
 <script type="text/javascript">
 jQuery(document).ready(function($) {
-
 	// show/hide don't miss.
-
 	$('#show_dont_miss_menu').click(function() {
-  		$('#section-dont_miss_label').fadeToggle(400);
+		$('#section-dont_miss_label').fadeToggle(400);
 	});
 
 	if ($('#show_dont_miss_menu:checked').val() !== undefined) {
@@ -624,9 +634,8 @@ jQuery(document).ready(function($) {
 	}
 
 	// show/hide sticky nav.
-
 	$('#show_sticky_nav').click(function() {
-  		$('#section-show_sitename_in_sticky_nav').fadeToggle(400);
+		$('#section-show_sitename_in_sticky_nav').fadeToggle(400);
 	});
 
 	if ($('#show_sticky_nav:checked').val() !== undefined) {
@@ -634,10 +643,9 @@ jQuery(document).ready(function($) {
 	}
 
 	// show/hide donate button.
-
 	$('#show_donate_button').click(function() {
-  		$('#section-donate_link').fadeToggle(400);
-  		$('#section-donate_button_text').fadeToggle(400);
+		$('#section-donate_link').fadeToggle(400);
+		$('#section-donate_button_text').fadeToggle(400);
 	});
 
 	if ($('#show_donate_button:checked').val() !== undefined) {
@@ -646,9 +654,8 @@ jQuery(document).ready(function($) {
 	}
 
 	// show/hide disclaimer.
-
 	$('#disclaimer_enabled').click(function() {
-  		$('#section-default_disclaimer').fadeToggle(400);
+		$('#section-default_disclaimer').fadeToggle(400);
 	});
 
 	if ($('#disclaimer_enabled:checked').val() == undefined) {
@@ -656,9 +663,8 @@ jQuery(document).ready(function($) {
 	}
 
 	// show/hide show tags.
-
 	$('#show_tags').click(function() {
-  		$('#section-tag_limit').fadeToggle(400);
+		$('#section-tag_limit').fadeToggle(400);
 	});
 
 	if ($('#show_tags:checked').val() !== undefined) {
@@ -666,7 +672,6 @@ jQuery(document).ready(function($) {
 	}
 
 	// show/hide custom series landing pages.
-
 	$('#series_enabled').click(function() {
 		$('#section-custom_landing_enabled').fadeToggle(400);
 		$('#section-custom_landing_enabled input').removeAttr('checked');
@@ -676,8 +681,17 @@ jQuery(document).ready(function($) {
 		$('#section-custom_landing_enabled').show();
 	}
 
+	// show/hide homepage template option
+	$('#section-homepage_layout img').click(function() {
+		var checked = $('#section-homepage_layout').find('input:checked');
+		if (checked.val() == '2col')
+			$('#section-home_template').fadeIn(400);
+	});
+
+	if ($('#section-homepage_layout').find('input:checked').val() == '2col') {
+		$('#section-home_template').fadeIn(400);
+	}
 });
 </script>
-
 <?php
 }
