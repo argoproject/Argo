@@ -1,136 +1,120 @@
 Plugins
 =======
 
-The Largo theme comes packaged with plugins original created by NPR for Project Argo. In some cases we have made minor modifications to these plugins to ensure compatibility with the Largo theme so we recommend using the included versions. When you activate the Largo theme you should receive a message at the top of the WordPress admin dashboard that prompts you to install required and recommended plugins.
+Overview
+--------
 
-We strongly recommend installing at least two of the plugins developed by Project Argo (you can
-`read the documentation <http://argoproject.org/plugin.php>`_ for all of their plugins here).
+WordPress plugins are modules that extend the functionality of WordPress. Anyone can write them and WordPress maintains a `directory of available plugins <https://wordpress.org/plugins/>`_. Since anyone can write them, this means that plugins vary widely in quality so we've curated a list of plugins that add functionality commonly needed by news organizations and that we have tested to ensure they work well together and do not cause compatibility issues that sometimes crop up when using less-trusted plugins.
 
-  -The **Argo Media Credit** and **Slideshow** plugins will enable better support for photos and galleries within the Largo theme. Documentation for the media credit plugin and slideshow plugin can be found on the Project Argo site `here <http://argoproject.org/media-credit.php>`_ and `here <http://argoproject.org/slideshow.php>`_, respectively.
+Plugins From Project Argo
+-------------------------
 
-  -We have also modified the **Argo Navis DocumentCloud** plugin to make it work a bit better within a responsive layout. We recommend using the version of the plugin that comes packaged with the Largo theme, but the instructions for `how to add a DocumentCloud document <http://argoproject.org/documentcloud.php>`_ to a post from the Project Argo site are still valid.
+The Largo theme comes packaged with a number of plugins original created by NPR for `Project Argo <http://argoproject.org>`_. In some cases we have made modifications to these plugins to ensure compatibility with the Largo theme so we recommend using the included versions (which are also available from our team's `github account <https://github.com/INN>`_). When you activate the Largo theme you should receive a message at the top of the WordPress admin dashboard that prompts you to install recommended plugins.
 
-  -The **Argo Links** plugin is a great way to collect links from around the web and create link roundup posts. We have not made any modifications to this plugin so it will work exactly as `documented on the Project Argo site <http://argoproject.org/argo-links.php>`_.
+Documentation for all of the Argo plugins, most of which remains applicable for our modified versions of the plugins, `can be found here <http://argoproject.org/plugin.php>`_.
 
-  -The **Argo Audio Player** will enable you to easily add embedded audio to your posts. Depending on your specific needs you might prefer using a plugin called `PowerPress <https://wordpress.org/plugins/powerpress/>`_ to support podcasting or hosting your audio on SoundCloud and embedding the SoundCloud player. Documentation for the Argo Player and `can be found here <http://argoproject.org/audio.php>`_.
+- As of version 0.4 the **Argo Media Credit** and **Slideshow** plugins have been folded directly into the Largo theme so they do not need to be installed separately. Documentation for the media credit plugin and slideshow plugin can be found on the Project Argo site `here <http://argoproject.org/media-credit.php>`_ and `here <http://argoproject.org/slideshow.php>`_, respectively.
 
-  -And finally, the **Argo Jiffy Posts** plugin enables support for embed.ly's oEmbed API. This allows you to easily embed content in WordPress posts using nothing more than a URL. Note that embed.ly is not a free service (`pricing information here <http://embed.ly/cards>`_) but might be worth considering if your organization plans to embed a lot of third party content and rich media on your site.
+- Additionally, version 0.4 now includes the **Clean Contact** plugin to allow you to easily add simple contact forms to pages on your site. You can find `documentation for this plugin <https://wordpress.org/plugins/clean-contact/>`_ in the WordPress plugin directory.
+
+- We have also modified the **Navis DocumentCloud** plugin to make it work a bit better within a responsive layout. We recommend using the version of the plugin that comes packaged with the Largo theme, but the instructions for `how to add a DocumentCloud document <http://argoproject.org/documentcloud.php>`_ to a post from the Project Argo site are still valid.
+
+- The **Argo Links** plugin is useful for collecting links from around the web and for creating link roundup posts. We have made some modifications to this plugin, most notably to add a sidebar widget to display your recently saved links, but for the most part it will work exactly as `documented on the Project Argo site <http://argoproject.org/argo-links.php>`_.
+
+The are two other plugins developed by NPR as part of Project Argo that we have not updated and we are not, at this point, 100% certain that they will work with the latest versions of WordPress and Largo so we do not necessarily recommend using them. That said, here's what they do in case you'd like to give them a try:
+
+- **Argo Audio Player** enables you to add embedded audio to your posts. Depending on your specific needs you might prefer using a plugin called `PowerPress <https://wordpress.org/plugins/powerpress/>`_ to support podcasting, or you might want to instead host your audio on SoundCloud and use their embedded player. If you want to give the Argo Audio Player a try, documentation `can be found here <http://argoproject.org/audio.php>`_.
+
+- **Argo Jiffy Posts** enables support for embed.ly's oEmbed API. This allows you to easily embed content in WordPress posts using nothing more than a URL. Note that embed.ly is not a free service (`pricing information here <http://embed.ly/cards>`_) but might be worth considering if your organization plans to embed a lot of third party content and rich media on your site.
+
+Other Recommended Plugins
+-------------------------
 
 In addition to the Argo plugins, we have included a curated list of other plugins that will enable various functionality that many news organizations might find useful. Note that while we have tested these plugins with the latest version of Largo and WordPress, they are developed and maintained by their respective third-party developers.
 
-  -**Akismet** is a widely used WordPress plugin to protect your site from comment and trackback spam. Activation of this plugin requires an Akismet API key which you can obtain for free from `Askimet <http://akismet.com/wordpress/>`_ .
+- **Akismet** is a widely used WordPress plugin to protect your site from comment and trackback spam. Activation of this plugin requires an Akismet API key which you can obtain for free from `Askimet <http://akismet.com/wordpress/>`_ .
 
-  -**All in One SEO Pack** is one of a couple SEO plugins used by many WordPress users to ensure their sites are well-optimized for search engines. Two common alternatives are `Platinum SEO Pack <https://wordpress.org/plugins/platinum-seo-pack/>`_ and `WordPress SEO <https://wordpress.org/plugins/wordpress-seo/>`_ by Yoast.
+- **Better WordPress Google XML Sitemaps** will create a sitemap index of your site that you can then submit to Google (and Google News) and other search engines to maximize the visibility of your content. Documentation for this plugin can be found on the `plug in website <http://betterwp.net/wordpress-plugins/google-xml-sitemaps/>`_
 
-  -**Better WordPress Google XML Sitemaps** will create a sitemap index of your site that you can then submit to Google (and Google News) and other search engines to maximize the visibility of your content. Documentation for this plugin can be found on the `plug in website <http://betterwp.net/wordpress-plugins/google-xml-sitemaps/>`_
+- **Disqus Comment System** replaces the default WordPress comment system with a more robust alternative that includes more community features and enhanced moderation capability. This plugin requires a Disqus account to activate but the setup process will walk you through creating one and adding your site. Documentation can be found `on the Disqus website <https://disqus.com/>`_.
 
-  -**Clean Contact** allows you to add contact forms to pages on your site. Largo comes packaged with a customized version of the plugin that, once configured, will let you add a contact form to any page on your site with the use of a simple shortcode. You can find `documentation for this plugin <https://wordpress.org/plugins/clean-contact/>`_ in the WordPress plugin directory. (*note has not been udpated in 2 years -- is it still relevant?*)
+- **Edit Flow** adds advanced workflow features to WordPress including the ability to manage additional user roles, editorial comments and an editorial calendar. Documentation can be found `on the Edit Flow website <http://editflow.org/>`_.
 
-  -**Disqus Comment System** replaces the default WordPress comment system with a more robust alternative that includes more community features and enhanced moderation capability. This plugin requires a Disqus account to activate but the setup process will walk you through creating one and adding your site. Documentation can be found `on the Disqus website <https://disqus.com/>`_.
+ - **W3 Total Cache** is a caching plugin for WordPress that will improve the load time of your site and help your server to better deal with large traffic spikes. Caching is heavily dependent on your server setup, and while `W3 Total Cache <https://wordpress.org/plugins/w3-total-cache/>`_ is one of the most powerful (and flexible) WordPress caching solutions out there, if it does not work for you `WP Super Cache <https://wordpress.org/plugins/wp-super-cache/>`_ is another popular alternative. Note that this is not relevant for sites that we host for INN members as our hosting company, WP Engine, has their own caching system.
 
-  -**Edit Flow** adds advanced workflow features to WordPress including the ability to manage additional user roles, editorial comments and an editorial calendar. Documentation can be found `on the Edit Flow website <http://editflow.org/>`_.
+ - `**Ad Code Manager** <https://wordpress.org/plugins/ad-code-manager/>`_) is used to insert standard ad units into Largo.
 
-  -**W3 Total Cache**  is an advanced caching plugin for WordPress that will improve the load time of your site and help your server to better deal with large traffic spikes. Caching is heavily dependent on your server setup, and while `W3 Total Cache <https://wordpress.org/plugins/w3-total-cache/>`_ is one of the most powerful (and flexible) WordPress caching solutions out there, if it does not work for you `WP Super Cache <https://wordpress.org/plugins/wp-super-cache/>`_ is another popular alternative.
+Complete List of Plugins Available
+----------------------------------
 
-  -**WP Google Ad Manager** (`documentation <https://wordpress.org/plugins/wp-google-ad-manager-plugin/>`_) is one of a few plugins that enable you to easily ad Google Ad units to a WordPress site. Note that incorporating ads into a responsive design can be tricky (and is rapidly evolving) so if your site does use Google Ad Manager or another ad network you may have to experiment some with different ad size and placements to get it to work well within the Largo framework.  (*note has not been udpated in 2 years -- is it still relevant?*)
+For hosted INN member sites using Largo, this is a complete list of the plugins that are currently installed and available in our production environment.
 
-  -**Winer Links** is a simple plugin to automatically add paragraph level permalinks to your posts so that visitors can share a direct link to a particular section of a story. This plugin is a bit rough and can take some tweaking to get it to work properly, but you can find
-  `documentation and installation instructions here <http://link>`_.
+Note that since we use WordPress multisite, individual site admins are not able to install and activate plugins; This needs to be done at the network level.
 
-from Jira different categorization
+If you would like to have a plugin added to this list or installed and activated for your site we prefer that you contact us through the Largo help desk and describe the functionality you are trying to add rather than asking if we'll install Plugin X for you. In some cases what you are after might already be possible in Largo and/or we might know of a better plugin to accomplish the desired result.
 
-**Recommended**
+We strive to maintain a secure environment for all of our hosted Largo sites and to avoid potential compatibility issues, so in some cases we may refuse to install a particular plugin if we believe it might cause problems for you or for us. We will, however, always try to work with you and recommend an alternative.
 
-- Argo related
+Here is a complete list of the plugins currently installed and available.
 
-*Argo Media Credit Included in Largo 0.4
-Argo Slideshow Included in Largo 0.4*
+**Recommended/curated plugins:**
 
-- Tweetable Text
-- Clean-Contact
+- **Ad Code Manager** - Easy ad code management
+- **Akismet** - Spam prevention
+- **Better WordPress Google XML Sitemaps** - Create and manage sitemaps for submission to Google and Google News
+- **Breadcrumb NavXT** - Used by some sites to add breadcrumb navigation
+- **Caspio Deploy2** - Enables ShortCode placeholders for use with the Caspio cloud computing database application service.
+- **Chartbeat** - Adds Chartbeat pinging to Wordpress.
+- **Co-Authors Plus** - Allows multiple authors to be assigned to a post.
+- **Constant Contact Plugin** - Adds integration for the Constant Contact email marketing service
+- **Disqus Comment System** - The Disqus comment system replaces your WordPress comment system with your comments hosted and powered by Disqus.
+- **Edit Flow** - Adds better editorial workflow options to the WordPress admin
+- **Facebook Comments** - Replaces the default WordPress comment system with Facebook comments
+- **Liveblog** - A simple way to add live blogs to your site.
+- **Navis DocumentCloud** - Embed DocumentCloud documents that won't be eaten by the visual editor
+- **News Quizzes** - A WordPress wrapper for Mother Jones' news quiz tool
+- **Redirection** - Manage all your 301 redirects and monitor 404 errors
+- **Simple Tags** - Extended Tagging for WordPress 4.0.x : Suggested Tags, Mass edit tags, Auto-tags, Autocompletion, Related Posts etc.
+- **TablePress** - TablePress enables you to create and manage tables in your posts and pages, without having to write HTML code. Also installed are the DataTables Counter Column, DataTables Sorting plugins and Pagination Length Change "All" entry extensions.
+- **Tweetable Text** - Make your posts more shareable. Add a Tweet and Buffer button to key sentences right inside each blog post with a simple [tweetable] tag.
+- **TinyMCE Advanced** - Enables advanced features and plugins in TinyMCE, the visual editor in WordPress.
+- **WP DS NPR API** - A collection of tools for reusing content from NPR.org supplied by NPR Digital Services.
 
-- Curated
+**Premium plugins** we've bought a site license for for INN member sites:
 
- - Liveblog
- - Redirection
- - Simple Tages
- - Table Press
- - Tiny MCE Advanced
+- **Business Directory Plugin** - Provides the ability to maintain a free or paid business directory on your WordPress powered site. We also have a license for the Paypal Gateway Module.
+- **Gravity Forms** - Easily create web forms and manage form entries within the WordPress admin. We also have a license for the Gravity Forms PayPal Add-On.
+- **The Events Calendar Pro** - The Events Calendar PRO, a premium add-on to the open source The Events Calendar plugin (required), enables recurring events, custom attributes, venue pages, new widgets and a host of other premium features.
+- **WPJobBoard** - Adds a job board to your site.
 
-- Utilities
+**Plugins from Project Argo:**
 
- - `Categories to Tags Converter <https://wordpress.org/plugins/wpcat2tag-importer/>`_ Note: Has not been updated since 2010-12-19
- - `CodeStyling Localization <https://www.google.com/url?q=http://wordpress.org/plugins/codestyling-localization/&sa=U&ei=wL5rU9mCMuWwygGb_oCYDA&ved=0CAYQFjAA&client=internal-uds-cse&usg=AFQjCNHJAAab-tezj0GxaXZME5FV7rFV6Q>`_
- -  `Core Control <http://wordpress.org/plugins/core-control/>`_ Note: Has not been updated since 2011-07-12
- - `Theme Check <http://wordpress.org/plugins/theme-check/>`_
- - `Vice Versa <http://wordpress.org/plugins/vice-versa/>`_
- - `WordPress Importer <http://wordpress.org/plugins/wordpress-importer/>`_
+- **Argo Audio Player** - No longer updated/maintained, we recommend using an alternative service such as SoundCloud for embedding audio in posts
+- **Argo Links** - Curate links and display them in a sidebar widget or create link roundup posts
+- **Navis Jiffy Posts** - Makes it easy to quickly create a post from a URL
+- **Navis Slideshows** - Slideshows that take advantage of the Slides jQuery plugin
 
-- Unsupported Plugins
+**Utilities:**
 
- - AdRotate
- - Advanced Custom Fields
- - Breadcrumb NavXT
- - Charity-Thermometer
- - WinerLinks
- - WooDojo
- - Pippity
- - Facebook comments
- - Iframe
+- **Categories to Tags Converter** - Convert existing categories to tags or tags to categories, selectively.
+- **CodeStyling Localization** - a utility for generating translation files from within the WordPress dashboard.
+- **Core Control** - Core Control is a set of plugin modules which can be used to control certain aspects of the WordPress control.
+- **Empty Tags Remover** - Removes the empty tags, tags with no posts attached.
+- **Regenerate Thumbnails** - Allows you to regenerate all thumbnails after changing the thumbnail sizes.
+- **Taxonomy Converter** - Copy or convert terms between taxonomies.
+- **Term Management Tools** - Allows you to merge terms and set term parents in bulk
+- **Vice Versa** - Convert Pages to Posts and Vice Versa
+- **Theme Check** - A simple and easy way to test your theme for all the latest WordPress standards and practices.
+- **WordPress Importer** - Import posts, pages, comments, custom fields, categories, tags and more from a WordPress export file.
+- **WP Maintenance Mode** - Adds a splash page to your site that lets visitors know your site is down for maintenance.
 
+Plugins that we have reluctantly installed for and are in-use by typically one site that **we do not necessarily endorse or recommend** using:
 
-
- ~~~~~~~
-
- Those below appear to be available on a WP Largo Install:
-
-Askimet
-Argo Audio Player
-Argo Links
-Business Directory Plugin
-Business Directory Plugin - Paypal Gateway Module
-Clean-Contact
-Largo Extended
-Navis DocumentCloud
-Navis Jiffy Posts
-Navis Sildeshows
-Navis Quizzes
-WP Member
-
-**Should any of these be deleted?**
-All in One SEO Pack
-Disqus Comment System
-Edit Flow
-WP Google Ad Manager
-Winer Links
-Tweetable Text
-Curated Plugins
-Caspio Deploy2
-Chartbeat
-Co-Authors Plus
-Liveblog
-Redirection
-Simple Tags
-Storify
-TablePress
-Tiny MCE Advanced
-
-Utilities:
-Categories to Tag Converter
-CodeStyling Localization
-Core Control
-Theme-Check
-Vice Versa
-Wordpress Importer
-
-**Unsupported Plugins -- any changes?**
-AdRotate
-Advanced Custom Fields
-Breadcrumb NavXT
-Charity-Thermometer
-WinerLinks
-WooDojo
-Pippity
-Facebook comments
-Iframe
-
+- **AdRotate**
+- **Advanced Custom Fields** including the Options Page and Repeater Field add-ons.
+- **Charity Thermometer**
+- **iframe**
+- **Membership Premium**
+- **Pippity**
+- **WooDojo**
+- **WP-Member**
