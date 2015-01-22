@@ -71,7 +71,9 @@ function largo_home_transition() {
 	// this should ALWAYS happen when this function is called, as there's a separate version check before this is invoked
 	// however, it will not run if the new system has already been set up, so largo-dev to 0.4 will not overwrite details.
 	// the home template sidebars have same names as old regime so that *shouldn't* be an issue
-	if ($old_regime && !$new_regime) {
+	if (of_get_option('homepage_layout') == '3col') {
+		of_set_option('home_template', 'LegacyThreeColumn');
+	} else if ($old_regime && !$new_regime) {
 		if ($old_regime == 'topstories')
 			$home_template = 'TopStories';
 		if ($old_regime == 'slider')
@@ -79,8 +81,9 @@ function largo_home_transition() {
 		if ($old_regime == 'blog')
 			$home_template = 'HomepageBlog';
 		of_set_option('home_template', $home_template);
-	} else
+	} else {
 		of_set_option('home_template', 'HomepageBlog');
+	}
 }
 
 /**
