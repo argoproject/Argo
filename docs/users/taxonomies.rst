@@ -58,7 +58,6 @@ Add a new tag by clicking on Posts > Tags and then provide the following informa
 
 Options:
 
-
 - **Name:** The name is how the tag appears to visitors on your site or in your site navigation.
 - **Slug:** The URL-friendly version of the name. It is usually all lowercase and contains only letters, numbers, and hyphens.
 - **Description:** In Largo the description is displayed at the top of the archive page for the category. It is also used as the meta description and in the open graph tag for that page (this controls how the page appears in search results or when it is shared on various social networks).
@@ -66,6 +65,7 @@ Options:
 
 Optionally, tags can be created while editing a post by entering a comma-separated list of tags in the "tags" box in the right column.
 
+.. _post-prominence-tax:
 
 Post Prominence
 ---------------
@@ -83,6 +83,8 @@ Default Terms (added by Largo when the theme is activated):
 
 It is rare that you will add additional terms to this taxonomy as they are typically added by your theme but should you need to they can be added from the Posts > Post Prominence menu.
 
+.. _series-tax:
+
 Series
 ------
 
@@ -97,6 +99,8 @@ Options:
 - **Parent:** A drop-down menu of other series, this allows you to set a parent/child relationship for your series. This does not make much of a difference for your visitors but it can be helpful to organize your series if you have a lot of them.
 - **Description:** In Largo the description is displayed at the top of the archive page for the series. It is also used as the meta description and in the open graph tag for that page (this controls how the page appears in search results or when it is shared on various social networks).
 - **Archive Sidebar:** The sidebar to show on this tag's archive page, chosen from a list of your currently registered sidebars. Additional sidebars can be created in Appearance > Theme Options > Layout Options > Sidebar Options by entering names of new sidebars in the box. These sidebars will then become available under the Appearance > Widgets menu where you can add and arrange the content you want to appear.
+
+.. _post-types-tax:
 
 Post Types
 ----------
