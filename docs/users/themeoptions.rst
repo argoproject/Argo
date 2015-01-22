@@ -115,16 +115,18 @@ Advanced Options
 
 **Custom LESS** - Enabling this will let you change the theme's colors and fonts in **Appearance > CSS Variables**.
 
-**Enable Series** - Series are a way of tracking related stories over time. Enabling series allows you to display posts that aren't just in the same category, but are coverage of the same story at a different point in time, particularly useful for developing stories.
+**Enable Series** - Some sites may create a multi-part series or project that is only published for a set amount of time and then should fall into the archive or appear on a “projects” archive page. To support this and also to allow for the creation of custom landing pages, Largo adds an optional “series” taxonomy. When you create a new series, you can add a term to this taxonomy and then make sure all of the posts in that series have this label applied. This will enable the Largo theme to surface related posts in that series in at the bottom of a post (if you are using the “read next” widget) and, in some cases, also on the homepage (depending on the homepage layout you have selected). Largo also adds the ability to create custom sidebars and landing pages for series archive pages, replacing the default series archive template in WordPress. For more information, see :ref:`series-tax`.
 
-**Enable Custom Landing Pages** - (requires Series to be enabled) Series landing pages allow you to summarize a series of posts or tie a project together. For one example, see http://inewsnetwork.org/series/hit-and-run: the project page begins with a summary of the series, followed by posts within the series.
-For more information on creating a series landing page, see :doc:`landingpages`
+**Enable Custom Landing Pages** - Requires Series to be enabled. Series landing pages allow you to summarize a series of posts or tie a project together. For one example, see http://inewsnetwork.org/series/hit-and-run: the project page begins with a summary of the series, followed by posts within the series. 
+For more information on creating a series landing page, see :doc:`landingpages`.
 
 **Enable Optional Leaderboard Ad Zone** - This creates a widget area above your site's header that can be used to display ads. For more about this area, see :doc:`./ads`.
 
-**Enable Post Types** - The Post Types taxonomy allows you to categorize posts by their "type." Example types can include video posts, documents, and interactive content, but this has no affect on their display. Developers of child themes may want to use this function to affect post display.
+**Enable Post Types** - :ref:`This taxonomy <post-types-tax>` allows you to organize posts by content type, such as “Article,” Photo Gallery,” “Data,” etc. When you create a new post type you can assign it an icon, which will be used in certain places in the theme. Each post type also has its own archive so that you can add links to your navigation to a page containing all of your “data” projects, for example. In the future, we plan to add custom templates specific to each content type to make them easier to manage and more optimal when displayed to users on your public-facing site.`
 
-**Sidebars for Landing Pages** - These set the default sidebars for custom landing pages, and can be overridden by the individual landing page.
+.. _landing-pages-sidebars-option:
+
+**Sidebars for Landing Pages** - These set the default sidebars for custom landing pages, and can be overridden by the individual landing page. For more information, see :doc:`landingpages`.
 
 **Disclaimer** - If checked, you can enter a default disclaimer that will be displayed on all posts.
 
