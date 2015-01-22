@@ -103,7 +103,7 @@ class Largo {
 		$this->customizer = Largo_Customizer::get_instance();
 
 	}
- 
+
 	/**
 	 * Load required files
 	 */
@@ -113,7 +113,7 @@ class Largo {
 			'/largo-apis.php',
 			'/inc/ajax-functions.php',
 			'/inc/helpers.php',
-			'/inc/largo-plugin-init.php',
+			'/inc/plugin-init.php',
 			'/inc/dashboard.php',
 			'/inc/robots.php',
 			'/inc/custom-feeds.php',
