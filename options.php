@@ -338,27 +338,22 @@ function optionsframework_options() {
 		'name' => __('Layout Options', 'largo'),
 		'type' => 'heading');
 
-	$options[] = array(
-		'name' => __('Overall Homepage Layout', 'largo'),
-		'desc' => __('<strong>Select the overall layout you would like to use for your site\'s homepage.</strong> By default, Largo has a two column layout with a main content area on the left and a configurable sidebar on the right, but you can add a skinny side rail (configurable under the appearance > widgets tab) to left of the main content area by selecting the three-column option.', 'largo'),
-		'id' => 'homepage_layout',
-		'std' => '2col',
-		'type' => 'images',
-		'options' => array(
-			'2col' => $imagepath . '2col.png',
-			'3col' => $imagepath . '3col.png'
-		)
-	);
+	if (count($home_templates)) {
+		$home_std= 'HomepageBlog';
 
-	if ( count($home_templates) ) {
+		$home_template = of_get_option('home_template');
+		if (empty($home_template)) {
+			if (of_get_option('homepage_layout') == '3col')
+				$home_std= 'LegacyThreeColumn';
+		}
+
 		$options[] = array(
-			'name' 	=> __('Home Template', 'largo'),
-			'desc' 	=> __('<strong>Select the layout to use for the top of the homepage.</strong> These are Home Templates, defined much like post/page templates.', 'largo'),
-			'id' 	=> 'home_template',
-			'std' 	=> 'homepages/blog.php',
-			'type' 	=> 'radio',
-			'options' 	=> $home_templates,
-			'class' => 'hidden'
+			'name' => __('Home Template', 'largo'),
+			'desc' => __('<strong>Select the layout to use for the top of the homepage.</strong> These are Home Templates, defined much like post/page templates.', 'largo'),
+			'id' => 'home_template',
+			'std' => $home_std,
+			'type' => 'radio',
+			'options' => $home_templates
 		);
 	}
 
@@ -679,17 +674,6 @@ jQuery(document).ready(function($) {
 
 	if ($('#series_enabled:checked').val() !== undefined) {
 		$('#section-custom_landing_enabled').show();
-	}
-
-	// show/hide homepage template option
-	$('#section-homepage_layout img').click(function() {
-		var checked = $('#section-homepage_layout').find('input:checked');
-		if (checked.val() == '2col')
-			$('#section-home_template').fadeIn(400);
-	});
-
-	if ($('#section-homepage_layout').find('input:checked').val() == '2col') {
-		$('#section-home_template').fadeIn(400);
 	}
 });
 </script>

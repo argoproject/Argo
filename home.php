@@ -16,11 +16,6 @@ get_header();
  * Collect post IDs in each loop so we can avoid duplicating posts
  * and get the theme option to determine if this is a two column or three column layout
  */
-$layout = of_get_option('homepage_layout');
-
-if ($layout == '3col')
-	return get_template_part('partials/home-3col');
-
 $shown_ids = array();
 $home_template = largo_get_active_homepage_layout();
 $layout_class = of_get_option('home_template');

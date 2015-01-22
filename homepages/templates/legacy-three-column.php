@@ -16,9 +16,7 @@ $tags = of_get_option('tag_display');
 	<div id="content-main" class="span8">
 
 	<?php
-	// get the optional homepage top section (if set)
-	if (of_get_option('homepage_top') === 'topstories')
-		get_template_part('partials/home-topstories');
+	get_template_part('partials/home-topstories');
 
 	// sticky posts box if this site uses it
 	if (of_get_option('show_sticky_posts'))
