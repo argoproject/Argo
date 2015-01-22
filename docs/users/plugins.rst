@@ -42,7 +42,7 @@ In addition to the Argo plugins, we have included a curated list of other plugin
 
  - **W3 Total Cache** is a caching plugin for WordPress that will improve the load time of your site and help your server to better deal with large traffic spikes. Caching is heavily dependent on your server setup, and while `W3 Total Cache <https://wordpress.org/plugins/w3-total-cache/>`_ is one of the most powerful (and flexible) WordPress caching solutions out there, if it does not work for you `WP Super Cache <https://wordpress.org/plugins/wp-super-cache/>`_ is another popular alternative. Note that this is not relevant for sites that we host for INN members as our hosting company, WP Engine, has their own caching system.
 
- - `**Ad Code Manager** <https://wordpress.org/plugins/ad-code-manager/>`_) is used to insert standard ad units into Largo.
+ - `Ad Code Manager <https://wordpress.org/plugins/ad-code-manager/>`_ is used to insert standard ad units into Largo.
 
 Complete List of Plugins Available
 ----------------------------------
@@ -59,54 +59,54 @@ Here is a complete list of the plugins currently installed and available.
 
 **Recommended/curated plugins:**
 
-- **Ad Code Manager** - Easy ad code management
-- **Akismet** - Spam prevention
-- **Better WordPress Google XML Sitemaps** - Create and manage sitemaps for submission to Google and Google News
-- **Breadcrumb NavXT** - Used by some sites to add breadcrumb navigation
-- **Caspio Deploy2** - Enables ShortCode placeholders for use with the Caspio cloud computing database application service.
-- **Chartbeat** - Adds Chartbeat pinging to Wordpress.
-- **Co-Authors Plus** - Allows multiple authors to be assigned to a post.
-- **Constant Contact Plugin** - Adds integration for the Constant Contact email marketing service
-- **Disqus Comment System** - The Disqus comment system replaces your WordPress comment system with your comments hosted and powered by Disqus.
-- **Edit Flow** - Adds better editorial workflow options to the WordPress admin
-- **Facebook Comments** - Replaces the default WordPress comment system with Facebook comments
-- **Liveblog** - A simple way to add live blogs to your site.
-- **Navis DocumentCloud** - Embed DocumentCloud documents that won't be eaten by the visual editor
-- **News Quizzes** - A WordPress wrapper for Mother Jones' news quiz tool
-- **Redirection** - Manage all your 301 redirects and monitor 404 errors
-- **Simple Tags** - Extended Tagging for WordPress 4.0.x : Suggested Tags, Mass edit tags, Auto-tags, Autocompletion, Related Posts etc.
-- **TablePress** - TablePress enables you to create and manage tables in your posts and pages, without having to write HTML code. Also installed are the DataTables Counter Column, DataTables Sorting plugins and Pagination Length Change "All" entry extensions.
-- **Tweetable Text** - Make your posts more shareable. Add a Tweet and Buffer button to key sentences right inside each blog post with a simple [tweetable] tag.
-- **TinyMCE Advanced** - Enables advanced features and plugins in TinyMCE, the visual editor in WordPress.
-- **WP DS NPR API** - A collection of tools for reusing content from NPR.org supplied by NPR Digital Services.
+- `Ad Code Manager <https://wordpress.org/plugins/ad-code-manager/>`_ - Easy ad code management
+- `Akismet <http://akismet.com/wordpress/>`_ - Spam prevention
+- `Better WordPress Google XML Sitemaps <https://wordpress.org/plugins/bwp-google-xml-sitemaps/>`_ - Create and manage sitemaps for submission to Google and Google News
+- `Breadcrumb NavXT <https://wordpress.org/plugins/breadcrumb-navxt/>`_ - Used by some sites to add breadcrumb navigation
+- `Caspio Deploy2 <https://wordpress.org/plugins/caspio-deploy2/>`_ - Enables ShortCode placeholders for use with the Caspio cloud computing database application service.
+- `Chartbeat <https://wordpress.org/plugins/chartbeat/>`_ - Adds Chartbeat pinging to Wordpress.
+- `Co-Authors Plus <https://wordpress.org/plugins/co-authors-plus/>`_ - Allows multiple authors to be assigned to a post.
+- `Constant Contact Plugin <https://wordpress.org/plugins/constant-contact-api/>`_ - Adds integration for the Constant Contact email marketing service
+- `Disqus Comment System <https://wordpress.org/plugins/disqus-comment-system/>`_ - The Disqus comment system replaces your WordPress comment system with your comments hosted and powered by Disqus.
+- `Edit Flow <https://wordpress.org/plugins/edit-flow/>`_ - Adds better editorial workflow options to the WordPress admin
+- `Facebook Comments <https://wordpress.org/plugins/facebook-comments-plugin/>`_ - Replaces the default WordPress comment system with Facebook comments
+- `Liveblog <https://wordpress.org/plugins/liveblog/>`_ - A simple way to add live blogs to your site.
+- `Navis DocumentCloud <https://wordpress.org/plugins/navis-documentcloud/>`_ - Embed DocumentCloud documents that won't be eaten by the visual editor
+- `News Quizzes <https://github.com/INN/news-quiz>`_ - A WordPress wrapper for Mother Jones' news quiz tool
+- `Redirection <https://wordpress.org/plugins/redirection/>`_ - Manage all your 301 redirects and monitor 404 errors
+- `Simple Tags <https://wordpress.org/plugins/simple-tags/>`_ - Extended Tagging for WordPress 4.0.x : Suggested Tags, Mass edit tags, Auto-tags, Autocompletion, Related Posts etc.
+- `TablePress <https://wordpress.org/plugins/tablepress/>`_ - TablePress enables you to create and manage tables in your posts and pages, without having to write HTML code. Also installed are the DataTables Counter Column, DataTables Sorting plugins and Pagination Length Change "All" entry extensions.
+- `Tweetable Text <https://wordpress.org/plugins/tweetable-text/>`_ - Make your posts more shareable. Add a Tweet and Buffer button to key sentences right inside each blog post with a simple [tweetable] tag.
+- `TinyMCE Advanced <https://wordpress.org/plugins/tinymce-advanced/>`_ - Enables advanced features and plugins in TinyMCE, the visual editor in WordPress.
+- `WP DS NPR API <https://github.com/npr/WP-DS-NPR-API>`_ - A collection of tools for reusing content from NPR.org supplied by NPR Digital Services.
 
-**Premium plugins** we've bought a site license for for INN member sites:
+`Premium plugins <http://premium.wpmudev.org/projects/category/plugins/>`_ we've bought a site license for for INN member sites:
 
-- **Business Directory Plugin** - Provides the ability to maintain a free or paid business directory on your WordPress powered site. We also have a license for the Paypal Gateway Module.
-- **Gravity Forms** - Easily create web forms and manage form entries within the WordPress admin. We also have a license for the Gravity Forms PayPal Add-On.
-- **The Events Calendar Pro** - The Events Calendar PRO, a premium add-on to the open source The Events Calendar plugin (required), enables recurring events, custom attributes, venue pages, new widgets and a host of other premium features.
-- **WPJobBoard** - Adds a job board to your site.
+- `Business Directory Plugin <https://wordpress.org/plugins/business-directory-plugin/>`_ - Provides the ability to maintain a free or paid business directory on your WordPress powered site. We also have a license for the Paypal Gateway Module.
+- `Gravity Forms <https://wordpress.org/plugins/gravity-forms-addons/>`_ - Easily create web forms and manage form entries within the WordPress admin. We also have a license for the Gravity Forms PayPal Add-On.
+- `The Events Calendar Pro <https://wordpress.org/plugins/the-events-calendar/>`_ - The Events Calendar PRO, a premium add-on to the open source The Events Calendar plugin (required), enables recurring events, custom attributes, venue pages, new widgets and a host of other premium features.
+- `WPJobBoard <http://wpjobboard.net/>`_ - Adds a job board to your site.
 
 **Plugins from Project Argo:**
 
-- **Argo Audio Player** - No longer updated/maintained, we recommend using an alternative service such as SoundCloud for embedding audio in posts
-- **Argo Links** - Curate links and display them in a sidebar widget or create link roundup posts
-- **Navis Jiffy Posts** - Makes it easy to quickly create a post from a URL
-- **Navis Slideshows** - Slideshows that take advantage of the Slides jQuery plugin
+- `Argo Audio Player <http://argoproject.org/audio.php>`_** - No longer updated/maintained, we recommend using an alternative service such as `SoundCloud <https://wordpress.org/plugins/soundcloud-shortcode/>`_ for embedding audio in posts
+- `Argo Links <http://argoproject.org/argo-links.php>`_ - Curate links and display them in a sidebar widget or create link roundup posts
+- `Navis Jiffy Posts <http://argoproject.org/jiffy-post.php>`_ - Makes it easy to quickly create a post from a URL
+- `Navis Slideshows <http://argoproject.org/slideshow.php>`_ - Slideshows that take advantage of the Slides jQuery plugin
 
 **Utilities:**
 
-- **Categories to Tags Converter** - Convert existing categories to tags or tags to categories, selectively.
-- **CodeStyling Localization** - a utility for generating translation files from within the WordPress dashboard.
-- **Core Control** - Core Control is a set of plugin modules which can be used to control certain aspects of the WordPress control.
-- **Empty Tags Remover** - Removes the empty tags, tags with no posts attached.
-- **Regenerate Thumbnails** - Allows you to regenerate all thumbnails after changing the thumbnail sizes.
-- **Taxonomy Converter** - Copy or convert terms between taxonomies.
-- **Term Management Tools** - Allows you to merge terms and set term parents in bulk
-- **Vice Versa** - Convert Pages to Posts and Vice Versa
-- **Theme Check** - A simple and easy way to test your theme for all the latest WordPress standards and practices.
-- **WordPress Importer** - Import posts, pages, comments, custom fields, categories, tags and more from a WordPress export file.
-- **WP Maintenance Mode** - Adds a splash page to your site that lets visitors know your site is down for maintenance.
+- `Categories to Tags Converter <https://wordpress.org/plugins/wpcat2tag-importer/>`_ - Convert existing categories to tags or tags to categories, selectively.
+- `CodeStyling Localization <https://wordpress.org/plugins/codestyling-localization/>`_ - a utility for generating translation files from within the WordPress dashboard.
+- `Core Control <https://wordpress.org/plugins/core-control/>`_ - Core Control is a set of plugin modules which can be used to control certain aspects of the WordPress control.
+- `Empty Tags Remover <https://wordpress.org/plugins/empty-tags-remover/>`_ - Removes the empty tags, tags with no posts attached.
+- `Regenerate Thumbnails <https://wordpress.org/plugins/regenerate-thumbnails/>`_ - Allows you to regenerate all thumbnails after changing the thumbnail sizes.
+- `Taxonomy Converter <https://wordpress.org/plugins/taxonomy-converter/>`_ - Copy or convert terms between taxonomies.
+- `Term Management Tools <https://wordpress.org/plugins/term-management-tools/>`_ - Allows you to merge terms and set term parents in bulk
+- `Vice Versa <https://wordpress.org/plugins/vice-versa/>`_ - Convert Pages to Posts and Vice Versa
+- `Theme Check <https://wordpress.org/plugins/theme-check/>`_ - A simple and easy way to test your theme for all the latest WordPress standards and practices.
+- `WordPress Importer <https://wordpress.org/plugins/wordpress-importer/>`_ - Import posts, pages, comments, custom fields, categories, tags and more from a WordPress export file.
+- `WP Maintenance Mode <https://wordpress.org/plugins/wp-maintenance-mode/>`_ - Adds a splash page to your site that lets visitors know your site is down for maintenance.
 
 Plugins that we have reluctantly installed for and are in-use by typically one site that **we do not necessarily endorse or recommend** using:
 
