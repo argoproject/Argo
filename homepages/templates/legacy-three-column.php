@@ -1,20 +1,9 @@
 <?php
 /**
- * The homepage template
+ * Legacy three column homepage template
  */
-get_header();
-
-/*
- * Collect post IDs in each loop so we can avoid duplicating posts
- * and get the theme option to determine if this is a two column or three column layout
- */
-$tags = of_get_option('tag_display');
 ?>
-
-<div id="content" class="stories span8 three-col" role="main">
-
-	<div id="content-main" class="span8">
-
+<div id="content-main" class="span8">
 	<?php
 	get_template_part('partials/home-topstories');
 
@@ -28,14 +17,10 @@ $tags = of_get_option('tag_display');
 	} else {
 		get_template_part('partials/home-post-list');
 	} ?>
-	</div>
+</div>
 
-	<div id="left-rail" class="span4">
-	<?php if (!dynamic_sidebar('homepage-left-rail')) { ?>
-		<p><?php _e('Please add widgets to this content area in the WordPress admin area under appearance > widgets.', 'largo'); ?></p>
-	<?php } ?>
-	</div>
-</div><!-- #content-->
-
-<?php get_sidebar(); ?>
-<?php get_footer(); ?>
+<div id="left-rail" class="span4">
+<?php if (!dynamic_sidebar('homepage-left-rail')) { ?>
+	<p><?php _e('Please add widgets to this content area in the WordPress admin area under appearance > widgets.', 'largo'); ?></p>
+<?php } ?>
+</div>
