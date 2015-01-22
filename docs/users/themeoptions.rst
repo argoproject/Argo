@@ -28,7 +28,7 @@ Basic Settings
 
 **Word to use for "Posts"** - By default, WordPress calls single article pages "posts" but you might prefer to use another name. You can specify the singular and plural forms separately.
 
-**Social Media Links** - These are links to relevant social media profiles for your site or organization. These are used in a sidebar widget to provide links to like or follow your organization on Facebook and Twitter, in bylines to attribute content to your organization and in special code in the header to make sure your content appears optimally when shared by other users on these social networks. 
+**Social Media Links** - These are links to relevant social media profiles for your site or organization. These are used in a sidebar widget to provide links to like or follow your organization on Facebook and Twitter, in bylines to attribute content to your organization and in special code in the header to make sure your content appears optimally when shared by other users on these social networks.
 
 Be careful to note the recommended format for each link type for maximum compatibility. These icons are by default used in the footer of your site's pages, but you have the option to show them in the header.
 
@@ -92,10 +92,10 @@ Layout Options
 
 **Number of posts** - The number of posts displayed on the main area of the homepage, not counting posts in the top area of the homepage or in the sticky box. The default is 10.
 
-**Categories to include or exclude** - Enter a comma-separated list of category ID numbers here to exclude them from the front-page listing. in the main loop on the homepage (comma-separated list of values, see http://codex.wordpress.org/Class_Reference/WP_Query for correct format). The general approach is: 
+**Categories to include or exclude** - Enter a comma-separated list of category ID numbers here to exclude them from the front-page listing. in the main loop on the homepage (comma-separated list of values, see http://codex.wordpress.org/Class_Reference/WP_Query for correct format). The general approach is:
 
 	``news,sports,12,13,press-releases,blog``
-	
+
 **Single Article Template** - Starting with version 0.3, Largo introduced a new single-post template that more prominently highlights article content, which is the default. For backward compatibility, the pre-0.3 version is also available, which by default includes a sidebar. The new template optionally includes a sidebar of your choice.
 
 **Sidebar Options** - These affect the presentation of the sidebar to the reader.
@@ -113,14 +113,14 @@ You can also enter a list of additional sidebar regions that should be created, 
 Advanced Options
 ----------------
 
-**Custom LESS** - Enabling this will let you change the theme's colors and fonts in **Appearance > CSS Variables**. 
+**Custom LESS** - Enabling this will let you change the theme's colors and fonts in **Appearance > CSS Variables**.
 
 **Enable Series** - Series are a way of tracking related stories over time. Enabling series allows you to display posts that aren't just in the same category, but are coverage of the same story at a different point in time, particularly useful for developing stories.
 
-**Enable Custom Landing Pages** - (requires Series to be enabled) Series landing pages allow you to summarize a series of posts or tie a project together. For one example, see http://inewsnetwork.org/series/hit-and-run: the project page begins with a summary of the series, followed by posts within the series. 
+**Enable Custom Landing Pages** - (requires Series to be enabled) Series landing pages allow you to summarize a series of posts or tie a project together. For one example, see http://inewsnetwork.org/series/hit-and-run: the project page begins with a summary of the series, followed by posts within the series.
 For more information on creating a series landing page, see :doc:`landingpages`
 
-**Enable Optional Leaderboard Ad Zone** - This creates a widget area above your site's header that can be used to display ads. For more about this area, see :doc:`./ads`. 
+**Enable Optional Leaderboard Ad Zone** - This creates a widget area above your site's header that can be used to display ads. For more about this area, see :doc:`./ads`.
 
 **Enable Post Types** - The Post Types taxonomy allows you to categorize posts by their "type." Example types can include video posts, documents, and interactive content, but this has no affect on their display. Developers of child themes may want to use this function to affect post display.
 
@@ -138,7 +138,7 @@ For more information on creating a series landing page, see :doc:`landingpages`
 - Facebook app ID meta tag: This is a numerical app ID that will allow Facebook to capture insights for any social plugins active on your site and display them in your Facebook app/page insights. For more information, see `Facebook's documentation <https://developers.facebook.com/docs/platforminsights/domains>`_
 - Bitly site verification: This is a string of numbers and letters used to verify your site with bitly analytics. For more information, `contact bitly <http://support.bitly.com/knowledgebase/articles/103260-what-is-a-tracking-domain>`_.
 
-**SEO Options* - You may choose to ask search engines to not index archive pages in addition to date archives.
+**SEO Options** - You may choose to ask search engines to not index archive pages in addition to date archives.
 
 
 Deprecated Options
