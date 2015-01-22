@@ -41,6 +41,8 @@ function largo_perform_update() {
 		largo_update_widgets();
 		largo_home_transition();
 		largo_transition_nav_menus();
+		largo_update_custom_less_variables();
+		largo_update_prominence_term_descriptions();
 		of_set_option('single_template', 'classic');
 		of_set_option('largo_version', largo_version());
 	}
@@ -48,8 +50,9 @@ function largo_perform_update() {
 	if ( is_admin() ) {
 		largo_check_deprecated_widgets();
 	}
+
+	return true;
 }
-add_action( 'widgets_init', 'largo_perform_update', 20 );
 
 /**
  * Upgrades for moving from 0.3 to 0.4
@@ -66,6 +69,7 @@ function largo_home_transition() {
 
 	// we're using the old system and the new one isn't in place, act accordingly
 	// this should ALWAYS happen when this function is called, as there's a separate version check before this is invoked
+	// however, it will not run if the new system has already been set up, so largo-dev to 0.4 will not overwrite details.
 	// the home template sidebars have same names as old regime so that *shouldn't* be an issue
 	if ($old_regime && !$new_regime) {
 		if ($old_regime == 'topstories')
@@ -304,4 +308,269 @@ function largo_transition_nav_menus() {
 	}
 
 	set_theme_mod('nav_menu_locations', $locations);
+}
+
+/**
+ * Compares an array containing an old and new prominence term description and the appropriate slug and name to an array of current term descriptions. For each term whose current description matches the old description, the function updates the current description to the new description.
+ *
+ * This function contains commented-out logic that will allow you to from description to olddescription
+ *
+ * @param array $update The new details for the prominence tax term to be updated
+ * @param array $term_descriptions Array of prominence terms, each prominence term as an associative array with keys: name, description, olddescription, slug
+ *
+ */
+function largo_update_prominence_term_description_single($update, $term_descriptions) {	
+	$logarray = array();
+
+	// Toggle comment on these two lines to revert to old descriptions.
+	if (in_array($update['olddescription'], $term_descriptions)) {
+#		if (in_array($update['description'], $term_descriptions)) {
+	    $id = get_term_by('slug', $update['slug'], 'prominence', 'ARRAY_A' );
+	    // Comment out this function to avoid all prominence term updates.
+#		    /*
+	    wp_update_term(
+	        $id['term_id'], 'prominence',
+	        array(
+	            'name' => $update['name'],
+	            // Toggle comment on these two lines to revert to old descriptions.
+	            'description' => $update['description'],
+#		            'description' => $update['olddescription'],
+	            'slug' => $update['slug']
+	        )
+	    );
+#		    */
+	    $logarray[] = 'Updated description of "' . $update['name'] . '" from "'. $update['olddescription'] . '" to "' . $update['description'] . '"';
+	    // Clean the entire prominence term cache
+	    clean_term_cache( $id['term_id'], 'prominence', true );
+	}
+	
+	// These are here so you can grep your server logs to see if the terms were updated.
+#	var_log($logarray);
+#	var_log("Done updating prominence terms");
+
+	return $update;
+}
+
+/**
+ * Updates post prominence term descriptions iff they use the old language
+ *
+ * This function can be added to the `init` action to force an update of prominence term descriptions:
+ *    add_action('init', 'largo_update_prominence_term_descriptions');
+ *
+ * This function does not touch custom prominence term descriptions, except those that are identical to the descriptions of current or 0.3 prominence term descriptions.
+ *
+ * @since 0.4
+ * @uses largo_update_prominence_term_description_single
+ * @uses wp_update_term
+ * @uses clean_term_cache
+ * @uses var_log
+ 
+ */
+function largo_update_prominence_term_descriptions() {
+	// see https://github.com/INN/Largo/issues/210
+
+	$terms = get_terms('prominence', array(
+			'hide_empty' => false,
+			'fields' => 'all'
+		));
+
+	// prevent PHP warnings in case no terms returned
+	if ( gettype($terms) != "array" )
+		return false;
+
+	$term_descriptions = array_map(function($arg) { return $arg->description; }, $terms);
+	
+	$largoOldProminenceTerms = array(
+		array(
+			'name' => __('Sidebar Featured Widget', 'largo'),
+			'description' => __('If you are using the Featured Posts widget in a sidebar, add this label to posts to determine which to display in the widget.', 'largo'),
+			'olddescription' 	=> __('If you are using the Sidebar Featured Posts widget, add this label to posts to determine which to display in the widget.', 'largo'),
+			'slug' => 'sidebar-featured'
+		),
+		array(
+			'name' => __('Footer Featured Widget', 'largo'),
+			'description' => __('If you are using the Featured Posts widget in the footer, add this label to posts to determine which to display in the widget.', 'largo'),
+			'olddescription' => __('If you are using the Footer Featured Posts widget, add this label to posts to determine which to display in the widget.', 'largo'),
+			'slug' => 'footer-featured'
+		),
+		array(
+			'name' => __('Featured in Category', 'largo'),
+			'description' => __('This will allow you to designate a story to appear more prominently on category archive pages.', 'largo'),
+			'olddescription' 	=> __('Not yet implemented, in the future this will allow you to designate a story (or stories) to appear more prominently on category archive pages.', 'largo'),
+			'slug' => 'category-featured'
+		),
+		array(
+			'name' => __('Homepage Featured', 'largo'),
+			'description' => __('Add this label to posts to display them in the featured area on the homepage.', 'largo'),
+			'olddescription' => __('If you are using the Newspaper or Carousel optional homepage layout, add this label to posts to display them in the featured area on the homepage.', 'largo'),
+			'slug' => 'homepage-featured'
+		),
+		array(
+			'name' => __('Homepage Top Story', 'largo'),
+			'description' => __('If you are using a "Big story" homepage layout, add this label to a post to make it the top story on the homepage', 'largo'),
+			'olddescription' => __('If you are using the Newspaper or Carousel optional homepage layout, add this label to label to a post to make it the top story on the homepage.', 'largo'),
+			'slug' => 'top-story'
+		),
+		array(
+			'name' => __('Featured in Series', 'largo'),
+			// 0.4 description did not change from 0.3
+			'description' => __('Select this option to allow this post to float to the top of any/all series landing pages sorting by Featured first.', 'largo'),
+			'olddescription' 	=> __('Select this option to allow this post to float to the top of any/all series landing pages sorting by Featured first.', 'largo'),
+			'slug' => 'series-featured'
+		)
+	);
+	
+	foreach ($largoOldProminenceTerms as $update ) {
+		largo_update_prominence_term_description_single($update, $term_descriptions);
+
+	}
+}
+// Uncomment this line if you would like to force prominence terms to update.
+# add_action('init', 'largo_update_prominence_term_descriptions');
+
+// WP admin dashboard update workflow
+function largo_update_admin_notice() {
+	if (largo_need_updates() && !(isset($_GET['page']) && $_GET['page'] == 'update-largo')) {
+?>
+	<div class="update-nag" style="display: block;">
+		<p>Largo has been updated! Please <a href="<? echo admin_url('index.php?page=update-largo'); ?>">visit the update page</a> to apply a required database update.</p>
+	</div>
+<?php
+	}
+}
+add_action('admin_notices', 'largo_update_admin_notice');
+
+function largo_register_update_page() {
+	$parent_slug = null;
+	$page_title = "Update Largo";
+	$menu_title = "Update Largo";
+	$capability = "edit_theme_options";
+	$menu_slug = "update-largo";
+	$function = "largo_update_page_view";
+
+	if (largo_need_updates()) {
+		add_submenu_page(
+			$parent_slug, $page_title, $menu_title,
+			$capability, $menu_slug, $function
+		);
+	}
+}
+add_action('admin_menu', 'largo_register_update_page');
+
+function largo_update_page_view() { ?>
+	<style type="text/css">
+		.update-message {
+			max-width: 700px;
+		}
+		.update-message,
+		.update-message p {
+			font-size: 16px;
+		}
+		.update-message ul li {
+			list-style-type: disc;
+			list-style-position: inside;
+		}
+		.update-message .submit-container {
+			max-width: 178px;
+		}
+		.update-message .spinner {
+			background: url(../wp-includes/images/spinner.gif) 0 0/20px 20px no-repeat;
+			-webkit-background-size: 20px 20px;
+			display: none;
+			opacity: .7;
+			filter: alpha(opacity=70);
+			width: 20px;
+			height: 20px;
+			margin: 0;
+			position: relative;
+			top: 4px;
+		}
+		.update-message .updated,
+		.update-message .error {
+			padding-top: 16px;
+			padding-bottom: 16px;
+		}
+	</style>
+	<div class="wrap">
+		<div id="icon-tools" class="icon32"></div>
+		<h2>Largo Database Update</h2>
+		<div class="update-message">
+			<p><?php _e('This version of Largo includes a variety of updates, enhancements and changes.'); ?></p>
+			<p><?php _e('These changes affect'); ?>:
+				<ul>
+					<li><?php _e('Theme options'); ?></li>
+					<li><?php _e('Configured menus'); ?></li>
+					<li><?php _e('Site navigation'); ?></li>
+					<li><?php _e('Sidebars and widgets'); ?></li>
+				</ul>
+			<p><?php _e('The database update you are about to apply will take steps to migrate existing site settings.'); ?></p>
+			<p><?php _e('In the event that a site setting can not be migrated, the update will do its best to preserve it instead.'); ?></p>
+			<p><?php _e('For example, menus that existed in previous versions of Largo have been removed. If your site has been using one of these now-deprecated menus, the update process will merge it with the nearest related menu.'); ?></p>
+			<p><?php _e('Please be sure to review your site settings after applying the update to ensure all is well.'); ?></p>
+
+			<p class="submit-container">
+				<input type="submit" class="button-primary" id="update" name="update" value="<?php _e('Update the database!'); ?>">
+				<span class="spinner"></span>
+			<p>
+		</div>
+	</div>
+<?php
+}
+
+function largo_update_page_enqueue_js() {
+	if (isset($_GET['page']) && $_GET['page'] == 'update-largo') {
+		wp_enqueue_script(
+			'largo_update_page', get_template_directory_uri() . '/js/update-page.js',
+			array('jquery'), false, 1);
+	}
+}
+add_action('admin_enqueue_scripts', 'largo_update_page_enqueue_js');
+
+function largo_ajax_update_database() {
+	if (!current_user_can('activate_plugins')) {
+		print json_encode(array(
+			"status" => __("An error occurred."),
+			"success" => false
+		));
+		wp_die();
+	}
+
+	if (!largo_need_updates()) {
+		print json_encode(array(
+			"status" => __("Finished. No update was required."),
+			"success" => false
+		));
+		wp_die();
+	}
+
+	$ret = largo_perform_update();
+	if (!empty($ret)) {
+		print json_encode(array(
+			"status" => __("Thank you -- the update is complete. Don't forget to check your site settings!"),
+			"success" => true
+		));
+		wp_die();
+	} else {
+		print json_encode(array(
+			"status" => __("There was a problem applying the update. Please try again."),
+			"success" => false
+		));
+		wp_die();
+	}
+}
+add_action('wp_ajax_largo_ajax_update_database', 'largo_ajax_update_database');
+
+/**
+ * Make sure custom CSS is regenerated if we're using custom LESS variables
+ */
+function largo_update_custom_less_variables() {
+	if (Largo::is_less_enabled()) {
+		$variables = Largo_Custom_Less_Variables::get_custom_values();
+		$escaped = array();
+
+		foreach ($variables['variables'] as $key => $var)
+			$escaped[$key] = addslashes($var);
+
+		Largo_Custom_Less_Variables::update_custom_values($escaped);
+	}
 }

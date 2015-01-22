@@ -36,6 +36,9 @@ class MockOptionsFramework {
 		}
 	}
 
+	public function reset_options() {
+		$this->options = array();
+	}
 }
 
 $GLOBALS['mock_options_framework'] = new MockOptionsFramework();
@@ -46,4 +49,8 @@ function of_set_option($name, $value) {
 
 function of_get_option($name, $default=false) {
 	return $GLOBALS['mock_options_framework']->get_option($name, $default);
+}
+
+function of_reset_options() {
+	return $GLOBALS['mock_options_framework']->reset_options();
 }
