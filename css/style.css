@@ -2899,13 +2899,13 @@ body.admin-bar .sticky-nav-holder {
   -ms-box-sizing: border-box;
   box-sizing: border-box;
 }
-.sticky-nav-holder #header-search.show .input-append {
+.sticky-nav-holder #sticky-nav-search.show .input-append {
   position: absolute;
   opacity: 1;
   visibility: visible;
 }
-.sticky-nav-holder #header-search.show .input-append,
-.sticky-nav-holder #header-search.show .toggle {
+.sticky-nav-holder #sticky-nav-search.show .input-append,
+.sticky-nav-holder #sticky-nav-search.show .toggle {
   background-color: #343434;
   color: #ffffff;
 }
