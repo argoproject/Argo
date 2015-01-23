@@ -1985,7 +1985,7 @@ table .span24 {
 .global-nav .nav-right ul#header-social li a i {
   display: block;
   height: 24px;
-  padding: 3px 4px 3px 4px;
+  padding: 3px 4px 2px 4px;
 }
 .global-nav .nav-right .donate-btn {
   float: left;
@@ -2151,6 +2151,9 @@ h2.branding .tagline {
   padding: 10px;
   color: #ffffff;
   text-decoration: none;
+}
+.navbar #header-social li > a {
+  padding-right: 0;
 }
 .navbar li.dropdown > a {
   padding-right: 0;
