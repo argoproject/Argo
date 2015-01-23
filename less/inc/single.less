@@ -7,12 +7,14 @@ body.normal.page {
       margin-left: 0;
     }
   }
-  .entry-content { clear: both; }
   .hero {
     text-align: center;
     background-color: #efefef;
     width: 151.5%;
     margin: 0 -25.75% 24px;
+    &.is-gallery {
+      background-color: transparent;
+    }
     p.wp-caption-text,
     p.wp-media-credit {
       float: none;
@@ -31,7 +33,7 @@ body.normal.page {
     &.is-video {
       margin-bottom: 24px;
       .embed-container {
-	    margin-bottom: 0;
+        margin-bottom: 0;
       }
     }
 	&.is-empty {
