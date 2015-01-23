@@ -3102,7 +3102,6 @@ article img.attachment-post-thumbnail {
 .sticky-solo a:hover {
   opacity: 0.9;
   filter: alpha(opacity=90);
-  text-decoration: none;
 }
 .sticky-related h4,
 .sticky-solo h4 {
