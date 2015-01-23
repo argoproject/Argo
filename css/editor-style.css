@@ -618,16 +618,16 @@ body.normal.page #content {
     margin-left: 0;
   }
 }
-body.normal.single-post .entry-content,
-body.normal.page .entry-content {
-  clear: both;
-}
 body.normal.single-post .hero,
 body.normal.page .hero {
   text-align: center;
   background-color: #efefef;
   width: 151.5%;
   margin: 0 -25.75% 24px;
+}
+body.normal.single-post .hero.is-gallery,
+body.normal.page .hero.is-gallery {
+  background-color: transparent;
 }
 body.normal.single-post .hero p.wp-caption-text,
 body.normal.page .hero p.wp-caption-text,

@@ -655,8 +655,10 @@ if ( ! function_exists( 'largo_hero_class' ) ) {
 
 		if (get_post_meta($post_id, 'youtube_url', true) || $type == 'video')
 			$hero_class = 'is-video';
-		else if (has_post_thumbnail($post_id) || $type == 'image' || $type == 'gallery')
+		else if (has_post_thumbnail($post_id) || $type == 'image')
 			$hero_class = 'is-image';
+		else if ($type == 'gallery')
+			$hero_class = 'is-gallery';
 		else if ($type == 'embed-code')
 			$hero_class = 'is-embed';
 

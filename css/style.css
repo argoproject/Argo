@@ -2899,13 +2899,13 @@ body.admin-bar .sticky-nav-holder {
   -ms-box-sizing: border-box;
   box-sizing: border-box;
 }
-.sticky-nav-holder #header-search.show .input-append {
+.sticky-nav-holder #sticky-nav-search.show .input-append {
   position: absolute;
   opacity: 1;
   visibility: visible;
 }
-.sticky-nav-holder #header-search.show .input-append,
-.sticky-nav-holder #header-search.show .toggle {
+.sticky-nav-holder #sticky-nav-search.show .input-append,
+.sticky-nav-holder #sticky-nav-search.show .toggle {
   background-color: #343434;
   color: #ffffff;
 }
@@ -3178,16 +3178,16 @@ body.normal.page #content {
     margin-left: 0;
   }
 }
-body.normal.single-post .entry-content,
-body.normal.page .entry-content {
-  clear: both;
-}
 body.normal.single-post .hero,
 body.normal.page .hero {
   text-align: center;
   background-color: #efefef;
   width: 151.5%;
   margin: 0 -25.75% 24px;
+}
+body.normal.single-post .hero.is-gallery,
+body.normal.page .hero.is-gallery {
+  background-color: transparent;
 }
 body.normal.single-post .hero p.wp-caption-text,
 body.normal.page .hero p.wp-caption-text,
