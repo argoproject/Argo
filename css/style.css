@@ -2948,8 +2948,12 @@ article.story {
   margin-bottom: 0;
 }
 .rss-subscribe-link {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   float: right;
   text-transform: uppercase;
+}
+.rss-subscribe-link:hover {
+  text-decoration: none;
 }
 .archive-background {
   margin-bottom: 24px;
