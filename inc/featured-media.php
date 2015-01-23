@@ -100,7 +100,7 @@ function largo_add_featured_media_button($context) {
 	$language = (!empty($has_featured_media))? 'Edit' : 'Set';
 	ob_start();
 ?>
-	<a href="#" id="set-featured-media-button" class="button set-featured-media add_media" data-editor="content" title="<?php echo $language; ?> Featured Media"><?php echo $language; ?> Featured Media</a>
+	<a href="#" id="set-featured-media-button" class="button set-featured-media add_media" data-editor="content" title="<?php echo $language; ?> Featured Media"><?php echo $language; ?> Featured Media</a> <span class="spinner"></span>
 <?php
 	$context .= ob_get_contents();
 	ob_end_clean();
@@ -247,6 +247,10 @@ function largo_featured_media_css() { ?>
 		.featured-media-modal .featured-remove-featured-confirm h1 {
 			margin: 20px 50px 0 50px;
 			line-height: 42px;
+		}
+		#wp-content-media-buttons .spinner {
+			position: relative;
+			top: 2px;
 		}
 	</style>
 <?php }

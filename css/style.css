@@ -2951,8 +2951,12 @@ article.story {
   margin-bottom: 0;
 }
 .rss-subscribe-link {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   float: right;
   text-transform: uppercase;
+}
+.rss-subscribe-link:hover {
+  text-decoration: none;
 }
 .archive-background {
   margin-bottom: 24px;
@@ -3105,7 +3109,6 @@ article img.attachment-post-thumbnail {
 .sticky-solo a:hover {
   opacity: 0.9;
   filter: alpha(opacity=90);
-  text-decoration: none;
 }
 .sticky-related h4,
 .sticky-solo h4 {
