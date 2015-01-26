@@ -269,7 +269,7 @@ function clean_contact( $atts ) {
 */
 function clean_contact_conf() {
 
-	add_theme_page( __( 'Clean Contact', 'largo' ), __( 'Clean Contact', 'largo' ), 'manage_options', 'clean-contact', 'clean_contact_conf_page' );
+	add_submenu_page( 'options-general.php', __( 'Clean Contact', 'largo' ), __( 'Clean Contact', 'largo' ), 'manage_options', 'clean-contact', 'clean_contact_conf_page' );
 
 }
 
