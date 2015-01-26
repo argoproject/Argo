@@ -10,7 +10,7 @@
  * Otherwise we get function redeclarations.
  * Since we're using include_once() this is unlikely, but possible and worth checking.
  */
-if ( isset($largo) && is_array($largo['meta']) ) return;
+if ( isset($largo) && array_key_exists('meta', $largo) ) return;
 
 $largo['meta'] = array(
 	'boxes' => array(),		// the metaboxes to generate, including callbacks for the content
@@ -76,17 +76,17 @@ function largo_add_meta_content( $callback, $box_id ) {
  *
  * TODO: Include a validation parameter so meta fields can be validated easily.
  */
-function largo_register_meta_input( $input_names ) {
+function largo_register_meta_input( $input_names, $presave_fn = NULL ) {
 	global $largo;
-	$largo_metas = get_option('largo_meta_inputs');
-	if ( is_string( $input_names ) ) $input_names = array($input_names);
 
-	foreach( $input_names as $name ) {
-		if (! in_array($name, $largo_metas))
-		$largo_metas[] = $name;
+	if ( is_string( $input_names ) ) {
+		$input_names = array( $input_names );
 	}
 
-	update_option('largo_meta_inputs', $largo_metas);
+	foreach( $input_names as $name ) {
+		$largo[ 'inputs' ][ $name ] = array( 'name' => $name, 'presave_fn' => $presave_fn );
+	}
+
 }
 
 /**
@@ -133,22 +133,36 @@ function _largo_metaboxes_content( $post, $callbacks = array() ) {
  */
  // Save our custom meta box values as custom fields
 function _largo_meta_box_save( $post_id ) {
+
 	global $post, $largo;
 
 	// Bail if we're doing an auto save
-	if( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+		return;
+	}
 
 	// if our nonce isn't there, or we can't verify it, bail
-	if( !isset( $_POST['meta_box_nonce'] ) || !wp_verify_nonce( $_POST['meta_box_nonce'], 'largo_meta_box_nonce' ) ) return;
+	if ( ! isset( $_POST['meta_box_nonce'] ) || ! wp_verify_nonce( $_POST['meta_box_nonce'], 'largo_meta_box_nonce' ) ) {
+		return;
+	}
 
 	// if our current user can't edit this post, bail
-	if( !current_user_can( 'edit_post' ) ) return;
+	if ( ! current_user_can( 'edit_post' ) ) {
+		return;
+	}
 
 	// set up our array of data
 	$mydata = array();
-	$registered_inputs = get_option('largo_meta_inputs', array());
-	foreach ( $registered_inputs as $input_name ) {
-		$mydata[ $input_name ] = $_POST[ $input_name ];
+	foreach ( $largo['inputs'] as $input_name => $handlers ) {
+
+		if ( array_key_exists( $input_name, $_POST ) ) {
+			if ( function_exists( $handlers['presave_fn'] ) ) {
+				$mydata[ $input_name ] = call_user_func( $handlers['presave_fn'], $_POST[ $input_name ] );
+			} else {
+				$mydata[ $input_name ] = $_POST[ $input_name ];
+			}
+
+		}
 	}
 
 	// process our posts
@@ -158,7 +172,9 @@ function _largo_meta_box_save( $post_id ) {
 		} else {
 			add_post_meta( $post->ID, $key, $value );//if the custom field doesn't have a value, add the data
 		}
-		if ( !$value ) delete_post_meta( $post->ID, $key ); //and delete if blank
+		if ( ! $value ) {
+			delete_post_meta( $post->ID, $key ); //and delete if blank
+		}
 	}
 
 }

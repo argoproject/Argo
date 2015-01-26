@@ -36,9 +36,35 @@
 if ( ! defined( 'INN_MEMBER' ) )
 	define( 'INN_MEMBER', FALSE );
 
+/**
+ * Image size constants, almost 100% that you won't need to change these
+ */
+if ( ! defined( 'FULL_WIDTH' ) ) {
+	define( 'FULL_WIDTH', 1170 );
+}
+if ( ! defined( 'LARGE_WIDTH' ) ) {
+	define( 'LARGE_WIDTH', 771 );
+}
+if ( ! defined( 'MEDIUM_WIDTH' ) ) {
+	define( 'MEDIUM_WIDTH', 336 );
+}
+if ( ! defined( 'FULL_HEIGHT' ) ) {
+	define( 'FULL_HEIGHT', 9999 );
+}
+if ( ! defined( 'LARGE_HEIGHT' ) ) {
+	define( 'LARGE_HEIGHT', 9999 );
+}
+if ( ! defined( 'MEDIUM_HEIGHT' ) ) {
+	define( 'MEDIUM_HEIGHT', 9999 );
+}
+
 // Set the content width based on the theme's design and stylesheet.
 if ( ! isset( $content_width ) )
 	$content_width = 771;
+
+// Set the global $largo var
+if ( ! isset( $largo ) )
+	$largo = array();
 
 // load the options framework (used for our theme options pages)
 if ( ! function_exists( 'optionsframework_init' ) ) {
@@ -46,48 +72,287 @@ if ( ! function_exists( 'optionsframework_init' ) ) {
 	require_once dirname( __FILE__ ) . '/lib/options-framework/options-framework.php';
 }
 
-// If the plugin is already active, don't cause fatals
-if ( ! class_exists( 'Navis_Media_Credit' ) ) {
-	require_once dirname( __FILE__ ) . '/lib/navis-media-credit/navis-media-credit.php';
+/**
+ * A class to represent the one true Largo theme instance
+ */
+class Largo {
+
+	private static $instance;
+
+	public static function get_instance() {
+
+		if ( ! isset( self::$instance ) ) {
+			self::$instance = new Largo;
+			self::$instance->load();
+		}
+
+		return self::$instance;
+	}
+
+	/**
+	 * Load the theme
+	 */
+	private function load() {
+
+		$this->require_files();
+
+		$this->register_nav_menus();
+		$this->register_media_sizes();
+		$this->template_constants();
+
+		$this->customizer = Largo_Customizer::get_instance();
+
+	}
+
+	/**
+	 * Load required files
+	 */
+	private function require_files() {
+
+		$includes = array(
+			'/largo-apis.php',
+			'/inc/ajax-functions.php',
+			'/inc/helpers.php',
+			'/inc/plugin-init.php',
+			'/inc/dashboard.php',
+			'/inc/robots.php',
+			'/inc/custom-feeds.php',
+			'/inc/users.php',
+			'/inc/term-meta.php',
+			'/inc/sidebars.php',
+			'/inc/customizer/customizer.php',
+			'/inc/widgets.php',
+			'/inc/nav-menus.php',
+			'/inc/taxonomies.php',
+			'/inc/term-icons.php',
+			'/inc/term-sidebars.php',
+			'/inc/images.php',
+			'/inc/editor.php',
+			'/inc/post-metaboxes.php',
+			'/inc/open-graph.php',
+			'/inc/verify.php',
+			'/inc/post-tags.php',
+			'/inc/header-footer.php',
+			'/inc/related-content.php',
+			'/inc/featured-content.php',
+			'/inc/enqueue.php',
+			'/inc/post-templates.php',
+			'/inc/home-templates.php',
+			'/inc/update.php',
+			'/inc/avatars.php',
+			'/inc/featured-media.php',
+			'/inc/deprecated.php'
+		);
+
+		if ( $this->is_less_enabled() ) {
+			$includes[] = '/inc/custom-less-variables.php';
+		}
+
+		if ( $this->is_plugin_active( 'ad-code-manager' ) ) {
+			$includes[] = '/inc/ad-codes.php';
+		}
+
+		foreach ( $includes as $include ) {
+			require_once( get_template_directory() . $include );
+		}
+
+		// If the plugin is already active, don't cause fatals
+		if ( ! class_exists( 'Navis_Media_Credit' ) ) {
+			require_once dirname( __FILE__ ) . '/lib/navis-media-credit/navis-media-credit.php';
+		}
+
+		if ( ! class_exists( 'Navis_Slideshows' ) ) {
+			require_once dirname( __FILE__ ) . '/lib/navis-slideshows/navis-slideshows.php';
+		}
+
+		if ( ! function_exists( 'clean_contact_func' ) ) {
+			require_once dirname( __FILE__ ) . '/lib/clean-contact/clean_contact.php';
+		}
+
+	}
+
+	/**
+	 * Register the nav menus for the theme
+	 */
+	private function register_nav_menus() {
+
+		$menus = array(
+			'global-nav' => __( 'Global Navigation', 'largo' ),
+			'main-nav' => __( 'Main Navigation', 'largo' ),
+			'dont-miss' => __( 'Don\'t Miss', 'largo' ),
+			'footer' => __( 'Footer Navigation', 'largo' ),
+			'footer-bottom' => __( 'Footer Bottom', 'largo' )
+		);
+		register_nav_menus( $menus );
+
+		// Avoid database writes on the frontend
+		if ( ! is_admin() ) {
+			return;
+		}
+
+		//Try to automatically link menus to each of the locations.
+		foreach ( $menus as $location => $label ) {
+			// if a location isn't wired up...
+			if ( ! has_nav_menu( $location ) ) {
+
+				// get or create the nav menu
+				$nav_menu = wp_get_nav_menu_object( $label );
+				if ( ! $nav_menu ) {
+					$new_menu_id = wp_create_nav_menu( $label );
+					$nav_menu = wp_get_nav_menu_object( $new_menu_id );
+				}
+
+				// wire it up to the location
+				$locations = get_theme_mod( 'nav_menu_locations' );
+				$locations[ $location ] = $nav_menu->term_id;
+				set_theme_mod( 'nav_menu_locations', $locations );
+			}
+		}
+
+	}
+
+	/**
+	 * Register image and media sizes associated with the theme
+	 */
+	private function register_media_sizes() {
+
+		add_theme_support( 'post-thumbnails' );
+		set_post_thumbnail_size( 140, 140, true ); // thumbnail
+		add_image_size( 'home-logo', 50, 50, true ); // small thumbnail
+		add_image_size( '60x60', 60, 60, true ); // small thumbnail
+		add_image_size( 'medium', MEDIUM_WIDTH, MEDIUM_HEIGHT ); // medium width scaling
+		add_image_size( 'large', LARGE_WIDTH, LARGE_HEIGHT ); // large width scaling
+		add_image_size( 'full', FULL_WIDTH, FULL_HEIGHT ); // full width scaling
+		add_image_size( 'third-full', FULL_WIDTH / 3, 500, true ); // large width scaling
+		add_image_size( 'two-third-full', FULL_WIDTH / 3 * 2, 500, true ); // large width scaling
+		add_image_size( 'rect_thumb', 800, 600, true ); // used for cat/tax archive pages
+
+		add_filter( 'pre_option_thumbnail_size_w', function(){
+			return 140;
+		});
+		add_filter( 'pre_option_thumbnail_size_h', function(){
+			return 140;
+		});
+		add_filter( 'pre_option_thumbnail_crop', '__return_true' );
+		add_filter( 'pre_option_medium_size_w', function(){
+			return MEDIUM_WIDTH;
+		});
+		add_filter( 'pre_option_medium_size_h', function(){
+			return 9999;
+		});
+		add_filter( 'pre_option_large_size_w', function(){
+			return LARGE_WIDTH;
+		});
+		add_filter( 'pre_option_large_size_h', function(){
+			return 9999;
+		});
+		add_filter( 'pre_option_embed_autourls', '__return_true' );
+		add_filter( 'pre_option_embed_size_w', function(){
+			return LARGE_WIDTH;
+		});
+		add_filter( 'pre_option_embed_size_h', function(){
+			return 9999;
+		});
+
+	}
+
+	/**
+	 * Template display constants, you can override these in your child theme's
+	 * functions.php by doing something like:
+	 * define( 'SHOW_GLOBAL_NAV', FALSE );
+	 */
+	private function template_constants() {
+		/* Navigation */
+		if ( ! defined( 'SHOW_GLOBAL_NAV' ) ) {
+			define( 'SHOW_GLOBAL_NAV', TRUE );
+		}
+		if ( ! defined( 'SHOW_STICKY_NAV' ) ) {
+			if ( of_get_option( 'show_sticky_nav' ) ) {
+				define( 'SHOW_STICKY_NAV', TRUE );
+			} else {
+				define( 'SHOW_STICKY_NAV', FALSE );
+			}
+		}
+		if ( ! defined( 'SHOW_MAIN_NAV' ) ) {
+			define( 'SHOW_MAIN_NAV', TRUE );
+		}
+		if ( ! defined( 'SHOW_SECONDARY_NAV' ) ) {
+			if ( of_get_option( 'show_dont_miss_menu' ) ) {
+				define( 'SHOW_SECONDARY_NAV', TRUE );
+			} else {
+				define( 'SHOW_SECONDARY_NAV', FALSE );
+			}
+		}
+
+		/* Category */
+		if ( ! defined( 'SHOW_CATEGORY_RELATED_TOPICS' ) ) {
+			define( 'SHOW_CATEGORY_RELATED_TOPICS', TRUE );
+		}
+	}
+
+	/**
+	 * Is the LESS feature enabled?
+	 */
+	public function is_less_enabled() {
+		return (bool) of_get_option( 'less_enabled' );
+	}
+
+	/**
+	 * Is a given plugin active?
+	 *
+	 * @param string $plugin_slug
+	 * @return bool
+	 */
+	public function is_plugin_active( $plugin_slug ) {
+
+		switch ( $plugin_slug ) {
+			case 'ad-code-manager':
+				return (bool) class_exists( 'Ad_Code_Manager' );
+
+			case 'co-authors-plus':
+				return (bool) class_exists( 'coauthors_plus' );
+
+			default:
+				return false;
+		}
+
+	}
+
 }
 
-// need to include this explicitly to allow us to check if certain plugins are active.
-include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+/**
+ * Load the theme
+ */
+function Largo() {
+	return Largo::get_instance();
+}
+add_action( 'after_setup_theme', 'Largo' );
+
+/**
+ * Prints an admin warning if php is out of date.
+ */
+function largo_php_warning() {
+
+	$minver = "5.3.0";
+	$curver = phpversion();
+
+	if( current_user_can('update_themes') && version_compare( $curver, $minver, "<" ) ) :
+		$warning = "Largo requires <b>PHP $minver</b>. You're running <b>$curver</b>. Please upgrade your version of php.";
+ 		echo "<div class='update-nag'>";
+    	_e( $warning, 'largo' );
+ 		echo "</div>";
+ 	endif;
+
+}
+add_action( 'admin_notices', 'largo_php_warning' );
 
 /**
  * Load up all of the other goodies from the /inc directory
  */
-$includes = array(
-	'/largo-apis.php',				// APIs for inclusion in child themes
-	'/inc/largo-plugin-init.php',	// a list of recommended plugins
-	'/inc/dashboard.php',			// custom dashboard widgets
-	'/inc/robots.php',				// default robots.txt config
-	'/inc/custom-feeds.php',		// create custom RSS feeds
-	'/inc/users.php',				// add custom fields for user profiles
-	'/inc/sidebars.php',			// register sidebars
-	'/inc/widgets.php',				// register widgets
-	'/inc/nav-menus.php',			// register nav menus
-	'/inc/taxonomies.php',			// add our custom taxonomies
-	'/inc/images.php',				// setup custom image sizes
-	'/inc/editor.php',				// add tinymce customizations and shortcodes
-	'/inc/post-meta.php',			// add post meta boxes
-	'/inc/open-graph.php',			// add open graph, twittercard and google publisher markup to the header
-	'/inc/verify.php',				// add various verification meta tags to header
-	'/inc/post-tags.php',			// add some custom template tags (mostly used in single posts)
-	'/inc/header-footer.php',		// some additional template tags used in the header and footer
-	'/inc/related-content.php',		// functions dealing with related content
-	'/inc/featured-content.php',	// functions dealing with featured content
-	'/inc/enqueue.php',				// enqueue our js and css files
-	'/inc/post-templates.php',		// single post templates
-	'/inc/post-meta.php'			// add post meta boxes
-);
+$includes = array();
 
 // This functionality is probably not for everyone so we'll make it easy to turn it on or off
-if ( is_plugin_active('ad-code-manager/ad-code-manager.php') )
-	$includes[] = '/inc/ad-codes.php'; // register ad codes
-if ( of_get_option( 'less_enabled' ) )
-	$includes[] = '/inc/custom-less-variables.php';	// add UI to alter variables.less
-if ( of_get_option( 'custom_landing_enabled' ) )
+if ( of_get_option( 'custom_landing_enabled' ) && of_get_option( 'series_enabled' ) )
 	$includes[] = '/inc/wp-taxonomy-landing/taxonomy-landing.php'; // adds taxonomy landing plugin
 
 // Perform load
@@ -121,3 +386,28 @@ if ( ! function_exists( 'largo_setup' ) ) {
 	}
 }
 add_action( 'after_setup_theme', 'largo_setup' );
+
+
+/**
+ * Helper for setting specific theme options (optionsframework)
+ * Would be nice if optionsframework included this natively
+ * See https://github.com/devinsays/options-framework-plugin/issues/167
+ */
+if ( ! function_exists( 'of_set_option' ) ) {
+	function of_set_option( $option_name, $option_value ) {
+		$config = get_option( 'optionsframework' );
+
+		if ( ! isset( $config['id'] ) ) {
+			return false;
+		}
+
+		$options = get_option( $config['id'] );
+
+		if ( $options ) {
+			$options[$option_name] = $option_value;
+			return update_option( $config['id'], $options );
+		}
+
+		return false;
+	}
+}

@@ -1,0 +1,68 @@
+.home .stories article img.attachment-medium,
+.sub-stories img.attachment-post-thumbnail {
+  max-width: 30%;
+  float: right;
+  margin: 0 0 10px 20px;
+}
+h5.top-tag {
+  font-size: @baseFontSize;
+  margin-bottom: @baseline/5;
+  text-transform: uppercase;
+  a {
+    color: @grayLight;
+  }
+}
+#homepage-bottom {
+  margin-top: 24px;
+  .widget {
+    width: 42.5%;
+    padding: 2.5%;
+    &.odd {
+      float: left;
+      clear: both;
+      margin-left: 0;
+    }
+    &.even {
+      float: right;
+      clear: none;
+    }
+  }
+  .widgettitle {
+    margin: 0 0 8px;
+    padding: 0 0 5px;
+    font-size: @baseFontSize;
+    background: none;
+    color: @grayDark;
+    border: none;
+    border-bottom: 1px solid @grayLighter;
+    a,
+    a:hover {
+	  color: @grayDark;
+    }
+  }
+  .rev .widgettitle {
+    color: @white;
+  }
+  h5 {
+    font-size: @baseFontSize + 2;
+    margin-bottom: 5px;
+  }
+  img {
+    max-width: 35%;
+    &.attachment-large {
+      max-width: 100%;
+    }
+  }
+  p {
+    font-size: @baseFontSize;
+  }
+  ul {
+    margin:0;
+    font-family: @sansFontFamily;
+    font-size: @baseFontSize;
+    font-weight: bold;
+    li {
+      list-style: none;
+    }
+  }
+}

@@ -13,21 +13,23 @@ if ( ! function_exists( 'largo_header' ) ) {
 		$header_class = of_get_option( 'no_header_image' ) ? 'branding' : 'visuallyhidden';
 		$divider = $header_class == 'branding' ? '' : ' - ';
 
-    	// print the text-only version of the site title
-    	printf('<%1$s class="%2$s"><a itemprop="url" href="%3$s"><span itemprop="name">%4$s</span>%5$s<span class="tagline" itemprop="description">%6$s</span></a></%1$s>',
-	    	$header_tag,
-	    	$header_class,
-	    	esc_url( home_url( '/' ) ),
-	    	esc_attr( get_bloginfo('name') ),
-	    	$divider,
-	    	esc_attr( get_bloginfo('description') )
-	    );
+		// print the text-only version of the site title
+		printf('<%1$s class="%2$s"><a itemprop="url" href="%3$s"><span itemprop="name">%4$s</span>%5$s<span class="tagline" itemprop="description">%6$s</span></a></%1$s>',
+			$header_tag,
+			$header_class,
+			esc_url( home_url( '/' ) ),
+			esc_attr( get_bloginfo('name') ),
+			$divider,
+			esc_attr( get_bloginfo('description') )
+		);
 
-	    // add an image placeholder, the src is added by largo_header_js() in inc/enqueue.php
-	    if ($header_class != 'branding')
-	    	echo '<a itemprop="url" href="' . esc_url( home_url( '/' ) ) . '"><img class="header_img" src="" alt="" /></a>';
+		// add an image placeholder, the src is added by largo_header_js() in inc/enqueue.php
+		if ($header_class != 'branding') {
+			if (is_home() || !of_get_option( 'show_sticky_nav' ))
+				echo '<a itemprop="url" href="' . esc_url( home_url( '/' ) ) . '"><img class="header_img" src="" alt="" /></a>';
+		}
 
-	    if ( of_get_option( 'logo_thumbnail_sq' ) )
+		if ( of_get_option( 'logo_thumbnail_sq' ) )
 			echo '<meta itemprop="logo" content="' . esc_url( of_get_option( 'logo_thumbnail_sq' ) ) . '"/>';
 	}
 }
@@ -39,10 +41,10 @@ if ( ! function_exists( 'largo_header' ) ) {
  */
 if ( ! function_exists( 'largo_copyright_message' ) ) {
 	function largo_copyright_message() {
-	    $msg = of_get_option( 'copyright_msg' );
-	    if ( ! $msg )
-	    	$msg = __( 'Copyright %s', 'largo' );
-	    printf( $msg, date( 'Y' ) );
+		$msg = of_get_option( 'copyright_msg' );
+		if ( ! $msg )
+			$msg = __( 'Copyright %s', 'largo' );
+		printf( $msg, date( 'Y' ) );
 	}
 }
 
@@ -62,14 +64,15 @@ if ( ! function_exists( 'largo_social_links' ) ) {
 			'flickr' 	=> __( 'Link to Flickr Page', 'largo' ),
 			'tumblr' 	=> __( 'Link to Tumblr', 'largo' ),
 			'gplus' 	=> __( 'Link to Google Plus Page', 'largo' ),
-			'linkedin' 	=> __( 'Link to LinkedIn Page', 'largo' )
+			'linkedin' 	=> __( 'Link to LinkedIn Page', 'largo' ),
+			'github' 	=> __( 'Link to Github Page', 'largo' )
 		);
 
 		foreach ( $fields as $field => $title ) {
 			$field_link =  $field . '_link';
 
 			if ( of_get_option( $field_link ) ) {
-				echo '<li><a href="' . esc_url( of_get_option( $field_link ) ) . '" title="' . $title . '"><i class="icon-' . $field . '"></i></a></li>';
+				echo '<li><a href="' . esc_url( of_get_option( $field_link ) ) . '" title="' . esc_attr( $title ) . '"><i class="icon-' . esc_attr( $field ) . '"></i></a></li>';
 			}
 		}
 	}
@@ -121,20 +124,20 @@ if ( ! function_exists ( 'largo_seo' ) ) {
 
 				// set the original-source meta tag
 				// see: http://googlenewsblog.blogspot.com/2010/11/credit-where-credit-is-due.html
-				echo '<meta name="original-source" content="'. $permalink .'" />';
+				echo '<meta name="original-source" content="'. esc_url( $permalink ) .'" />';
 
 				// check for the existence of a custom field 'permalink'
 				// if it doesn't exist we'll just use the current url as the syndication source
 				if ( get_post_meta( get_the_ID(), 'permalink', true ) ) {
 				 	echo '<meta name="syndication-source" content="' . get_post_meta( get_the_ID(), 'permalink', true ) . '" />';
 				} else {
-					echo '<meta name="syndication-source" content="' . $permalink . '" />';
+					echo '<meta name="syndication-source" content="' . esc_url( $permalink ) . '" />';
 				}
 
 				// add the standout metatag if this post is flagged with any of the terms in the prominence taxonomy
 				// see: https://support.google.com/news/publisher/answer/191283
 				if ( has_term( get_terms( 'prominence', array( 'fields' => 'names' ) ), 'prominence' ) ) {
-					echo '<meta name="standout" content="' . $permalink . '"/>';
+					echo '<meta name="standout" content="' . esc_url( $permalink ) . '"/>';
 				}
 
 			endif;

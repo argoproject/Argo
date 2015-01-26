@@ -2,17 +2,7 @@
 /**
  * The Template for displaying all single posts.
  */
-get_header();
-?>
-
-<div id="content" class="span8" role="main">
-	<?php
-		while ( have_posts() ) : the_post();
-			get_template_part( 'content', 'single' );
-			comments_template( '', true );
-		endwhile;
-	?>
-</div><!--#content-->
-
-<?php get_sidebar(); ?>
-<?php get_footer(); ?>
+if ( of_get_option( 'single_template' ) == 'classic' )
+	include_once __DIR__ . '/single-two-column.php';
+else
+	include_once __DIR__ . '/single-one-column.php';

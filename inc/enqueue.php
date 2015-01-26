@@ -16,31 +16,31 @@ if ( ! function_exists( 'largo_enqueue_js' ) ) {
 		wp_enqueue_script( 'largoPlugins', get_template_directory_uri() . '/js/largoPlugins.js', array( 'jquery' ), '1.0', true );
 		wp_enqueue_script( 'largoCore', get_template_directory_uri() . '/js/largoCore.js', array( 'jquery' ), '1.0', true );
 
-		//only load the carousel and top stories js and css if those homepage options are selected
-		if ( is_home() && of_get_option( 'homepage_top') == 'slider' ) {
-			wp_enqueue_script( 'bootstrap-carousel', get_template_directory_uri() . '/js/bootstrap-carousel.min.js', array( 'jquery' ), '1.0', true );
-			wp_enqueue_style( 'carousel-styles', get_template_directory_uri() . '/css/carousel.css', false, false, 'screen' );
-		}
-		if ( is_home() && of_get_option( 'homepage_top') == 'topstories' )
-			wp_enqueue_style( 'topstory-styles', get_template_directory_uri() . '/css/top-stories.css', false, false, 'screen' );
-
 		//only load sharethis on single pages and load jquery tabs for the related content box if it's active
 		if ( is_single() ) {
 			$utilities = of_get_option( 'article_utilities' );
-			if ( of_get_option( 'social_icons_display' ) != 'none' && ( $utilities['sharethis'] === '1' || $utilities['email'] === '1' ) )
+			if ( of_get_option( 'single_social_icons' ) == '1' && ( $utilities['sharethis'] === '1' || $utilities['email'] === '1' ) )
 				wp_enqueue_script( 'sharethis', get_template_directory_uri() . '/js/st_buttons.js', array( 'jquery' ), '1.0', true );
-			if ( of_get_option( 'show_related_content' ) )
-				wp_enqueue_script( 'idTabs', get_template_directory_uri() . '/js/jquery.idTabs.js', array( 'jquery' ), '1.0', true );
+			wp_enqueue_script( 'idTabs', get_template_directory_uri() . '/js/jquery.idTabs.js', array( 'jquery' ), '1.0', true );
 		}
 
 		//Load the child theme's style.css if we're actually running a child theme of Largo
 		$theme = wp_get_theme();
-		if ( is_object($theme->parent()) && $theme->parent()->Template == 'largo' ) {
+		if (is_object($theme->parent())) {
 			wp_enqueue_style( 'largo-child-styles', get_stylesheet_directory_uri() . '/style.css', array('largo-stylesheet'));
 		}
 	}
 }
 add_action( 'wp_enqueue_scripts', 'largo_enqueue_js' );
+
+/**
+ * Enqueue our admin javascript and css files
+ */
+function largo_enqueue_admin_scripts() {
+	wp_enqueue_style( 'largo-admin-widgets', get_template_directory_uri().'/css/widgets-php.css' );
+	wp_enqueue_script( 'largo-admin-widgets', get_template_directory_uri() . '/js/widgets-php.js', array( 'jquery' ), '1.0', true );
+}
+add_action( 'admin_enqueue_scripts', 'largo_enqueue_admin_scripts' );
 
 /**
  * Determine which size of the banner image to load based on the window width
@@ -110,7 +110,7 @@ add_action( 'wp_footer', 'largo_footer_js' );
  */
 if ( ! function_exists( 'largo_google_analytics' ) ) {
 	function largo_google_analytics() {
-		if ( !is_user_logged_in() ) : // don't track logged in users ?>
+		if ( !current_user_can('edit_posts') ) : // don't track editors ?>
 			<script>
 			    var _gaq = _gaq || [];
 			<?php if ( of_get_option( 'ga_id', true ) ) : // make sure the ga_id setting is defined ?>
@@ -127,7 +127,7 @@ if ( ! function_exists( 'largo_google_analytics' ) ) {
 			    _gaq.push(
 					["largo._setAccount", "UA-17578670-4"],
 					["largo._setCustomVar", 1, "SiteName", "<?php bloginfo('name') ?>"],
-					["largo._setDomainName", "<?php echo str_replace( 'http://' , '' , home_url()) ?>"],
+					["largo._setDomainName", "<?php echo parse_url( home_url(), PHP_URL_HOST ); ?>"],
 					["largo._setAllowLinker", true],
 					["largo._trackPageview"]
 				);
@@ -141,5 +141,5 @@ if ( ! function_exists( 'largo_google_analytics' ) ) {
 	<?php endif;
 	}
 }
-add_action( 'wp_enqueue_scripts', 'largo_google_analytics' );
+add_action( 'wp_head', 'largo_google_analytics' );
 

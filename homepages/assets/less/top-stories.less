@@ -1,0 +1,110 @@
+@import "../../../less/inc/variables.less";
+@import "../../../less/inc/mixins.less";
+
+#homepage-featured {
+  margin-bottom: @baseline;
+  border: 1px solid @grayLighter;
+  border-bottom: 5px solid @grayLighter;
+  .border-radius(8px);
+}
+#homepage-featured .top-story {
+  padding: 10px 10px @baseline;
+  img {
+    margin-bottom: @baseline / 2 ;
+  }
+  h2 {
+    font-size: @baseFontSize * 2;
+
+    margin-bottom: @baseline / 2;
+    line-height: 1.1;
+  }
+  p {
+    font-size: @baseFontSize * 0.815;
+    margin-bottom: @baseline / 2;
+  }
+  h4 {
+    font-size: @baseFontSize - 2;
+    margin-bottom: 0;
+  }
+}
+#homepage-featured .sub-stories {
+  padding: 10px 10px 10px 0;
+  .story {
+    border-bottom: 1px solid @grayLighter;
+    margin-bottom: @baseline / 2;
+    overflow: hidden;
+  }
+  h5.top-tag {
+    font-size: @baseFontSize * 0.667;
+    margin-bottom:0;
+    font-weight:bold;
+  }
+  h3 {
+    font-size: @baseFontSize;
+    margin-bottom: @baseline / 4;
+    line-height: 1.2;
+  }
+  p {
+    font-size: @baseFontSize * 0.667;
+    margin-bottom: @baseline / 2;
+    a {
+      display:none;
+    }
+  }
+  h4.subhead {
+    font-size: @baseFontSize * 0.815;
+    text-transform: uppercase;
+    margin-bottom: @baseline / 4;
+  }
+  h5 {
+    font-size: @baseFontSize * 0.815;
+    margin-bottom: @baseline / 4;
+    font-weight: normal;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 979px) {
+  #homepage-featured .sub-stories {
+    h4, h5 {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  #homepage-featured .top-story,
+  #homepage-featured .sub-stories {
+    clear: both;
+    width: 100%;
+    padding: 10px;
+    margin: 0;
+  }
+  #homepage-featured .sub-stories {
+    border-top: 1px solid @grayLighter;
+  }
+}
+
+.primary-featured-post {
+  padding: 20px 20px;
+  background-color: mix( @baseColor,  @pageBackground, 10% );
+  margin-bottom: 20px;
+}
+
+.secondary-featured-post {
+  padding: 20px 20px;
+  background-color: mix( @grayLighter,  @pageBackground, 50% );
+  margin-bottom: 40px;
+
+	h2 {
+		font-size: 24px;
+		margin-top: 0.6em;
+		line-height: 1.1em;
+	}
+
+  article img.attachment-post-thumbnail {
+    margin: 0;
+    display: block;
+    width: 100%;
+  }
+}
+

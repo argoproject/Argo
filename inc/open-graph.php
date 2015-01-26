@@ -1,23 +1,9 @@
 <?php
-
-/**
- * Returns a Twitter username (without the @ symbol)
- *
- * @param 	string 	$url a twitter url
- * @return 	string	the twitter username extracted from the input string
- * @since 0.3
- */
-function twitter_url_to_username ($url) {
-	$urlParts = explode("/", $url);
-	$username = $urlParts[3];
-	return $username;
-}
-
 /**
  * Adds appropriate open graph, twittercards, and google publisher tags
  * to the header based on the page type displayed
  *
- * @uses twitter_url_to_username()
+ * @uses largo_twitter_url_to_username()
  * @uses global $current_url
  * @since 0.3
  */
@@ -42,7 +28,7 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
 
 		<?php
 			if ( of_get_option( 'twitter_link' ) )
-				echo '<meta name="twitter:site" content="@' . twitter_url_to_username( of_get_option( 'twitter_link' ) ) . '">';
+				echo '<meta name="twitter:site" content="@' . largo_twitter_url_to_username( of_get_option( 'twitter_link' ) ) . '">';
 		?>
 
 		<?php // output appropriate OG tags by page type
@@ -50,12 +36,13 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
 				if ( have_posts() ) {
 					the_post(); // we need to queue up the post to get the post specific info
 					if ( get_the_author_meta( 'twitter' ) )
-						echo '<meta name="twitter:creator" content="@' . twitter_url_to_username( get_the_author_meta( 'twitter' ) ) . '">';
+						echo '<meta name="twitter:creator" content="@' . largo_twitter_url_to_username( get_the_author_meta( 'twitter' ) ) . '">';
 					?>
 					<meta property="og:title" content="<?php the_title(); ?>" />
 					<meta property="og:type" content="article" />
 					<meta property="og:url" content="<?php the_permalink(); ?>"/>
 					<meta property="og:description" content="<?php echo strip_tags( get_the_excerpt() ); ?>" />
+					<meta name="description" content="<?php echo strip_tags( get_the_excerpt() ); ?>" />
 			<?php
 				} // have_posts
 
@@ -67,7 +54,7 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
 				<meta property="og:type" content="website" />
 				<meta property="og:url" content="<?php echo home_url(); ?>"/>
 				<meta property="og:description" content="<?php bloginfo( 'description' ); ?>" />
-
+				<meta name="description" content="<?php bloginfo( 'description' ); ?>" />
 		<?php
 			} else {
 		?>
@@ -90,6 +77,7 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
 				}
 				if ( $description ) {
 					echo '<meta property="og:description" content="' . strip_tags( $description ) . '" />';
+					echo '<meta name="description" content="' . strip_tags( $description ) . '" />';
 				}
 			} // else
 

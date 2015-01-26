@@ -5,29 +5,43 @@
  * Contains the closing of the id=main div and all content after
  */
 ?>
-
 	</div> <!-- #main -->
 
 </div><!-- #page -->
 
+<?php
+	if ( is_active_sidebar( 'before-footer' ) ) {
+		get_template_part( 'partials/footer', 'before-footer-widget-area' );
+	}
+
+	do_action( 'largo_before_footer' );
+?>
+
 <div class="footer-bg clearfix">
 	<footer id="site-footer">
-		<div id="supplementary" class="row-fluid">
-			<?php get_template_part( 'footer-part', 'widget-area' ); ?>
-		</div>
-		<div id="boilerplate" class="row-fluid clearfix">
-			<p><?php largo_copyright_message(); ?></p>
-			<?php wp_nav_menu( array( 'theme_location' => 'footer-bottom', 'container' => false, 'depth' => 1  ) ); ?>
-			<div class="footer-bottom clearfix">
-				<!-- If you enjoy this theme and use it on a production site we would appreciate it if you would leave the credit in place. Thanks :) -->
-				<p class="footer-credit"><?php echo sprintf( __('This site built with <a href="%s">Project Largo</a> from the <a href="%s">Investigative News Network</a> and proudly powered by <a href="%s" rel="nofollow">WordPress</a>.', 'largo'), 'http://largoproject.org', 'http://investigativenewsnetwork.org', 'http://wordpress.org' ); ?></p>
-				<p class="back-to-top"><a href="#top"><?php _e('Back to top &uarr;', 'largo'); ?></a></p>
-			</div>
-		</div><!-- /#boilerplate -->
+
+		<?php
+			do_action( 'largo_before_footer_widgets' );
+
+			get_template_part( 'partials/footer', 'widget-area' );
+
+			do_action( 'largo_before_footer_boilerplate' );
+
+			get_template_part( 'partials/footer', 'boilerplate' );
+
+			do_action( 'largo_before_footer_close' );
+		?>
+
 	</footer>
 </div>
 
-<?php wp_footer(); ?>
+<?php
+	do_action( 'largo_after_footer' );
+
+	get_template_part( 'partials/footer', 'sticky' );
+
+	wp_footer();
+?>
 
 </body>
 </html>

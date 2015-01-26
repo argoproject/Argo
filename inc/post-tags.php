@@ -5,7 +5,7 @@
  *
  * @param $echo bool echo the string or return itv (default: echo)
  * @return string date and time as formatted html
- * @since 1.0
+ * @since 0.3
  */
 if ( ! function_exists( 'largo_time' ) ) {
 	function largo_time( $echo = true ) {
@@ -29,12 +29,13 @@ if ( ! function_exists( 'largo_time' ) ) {
  *
  * @param $echo bool echo the string or return it (default: echo)
  * @return string author name as formatted html
- * @since 1.0
+ * @since 0.3
  */
 if ( ! function_exists( 'largo_author' ) ) {
 	function largo_author( $echo = true ) {
+		global $post;
 		$values = get_post_custom( $post->ID );
-		$byline_text = isset( $values['largo_byline_text'] ) ? esc_attr( $values['largo_byline_text'][0] ) : esc_html( get_the_author() );
+		$byline_text = isset( $values['largo_byline_text'] ) ? $values['largo_byline_text'][0] : get_the_author();
 
 		if ( $echo )
 			echo $byline_text;
@@ -47,21 +48,23 @@ if ( ! function_exists( 'largo_author' ) ) {
  *
  * @param $echo bool echo the string or return it (default: echo)
  * @return string author link as formatted html
- * @since 1.0
+ * @since 0.3
  */
 if ( ! function_exists( 'largo_author_link' ) ) {
-	function largo_author_link( $echo = true ) {
-		global $post;
+	function largo_author_link( $echo = true, $post=null ) {
+		$post = get_post( $post );
 		$values = get_post_custom( $post->ID );
-		$byline_text = isset( $values['largo_byline_text'] ) ? esc_attr( $values['largo_byline_text'][0] ) : esc_html( get_the_author() );
+		$author_id = ( $post ) ? $post->post_author : get_the_author_meta( 'ID' );
+
+		$byline_text = isset( $values['largo_byline_text'] ) ? $values['largo_byline_text'][0] : get_the_author_meta('display_name', $author_id);
 
 		// if it's a custom byline but there's no link, just output the byline text
 		if ( isset( $values['largo_byline_text'] ) && !isset( $values['largo_byline_link'] ) ) {
-			$output = $byline_text;
+			$output = esc_html( $byline_text );
 		} else {
-			$byline_link = isset( $values['largo_byline_link'] ) ? esc_url( $values['largo_byline_link'][0] ) : get_author_posts_url( get_the_author_meta( 'ID' ) );
-			$byline_title_attr = esc_attr( sprintf( __( 'More from %s','largo' ), $byline_text ) );
-			$output = '<a class="url fn n" href="' . $byline_link . '" title="' . $byline_title_attr . '" rel="author">' . $byline_text . '</a>';
+			$byline_link = isset( $values['largo_byline_link'] ) ? $values['largo_byline_link'][0] : get_author_posts_url( get_the_author_meta( 'ID', $author_id ) );
+			$byline_title_attr = sprintf( __( 'More from %s','largo' ), $byline_text );
+			$output = '<a class="url fn n" href="' . esc_url( $byline_link ) . '" title="' . esc_attr( $byline_title_attr ) . '" rel="author">' . esc_html( $byline_text ) . '</a>';
 		}
 
 		if ( $echo )
@@ -73,31 +76,67 @@ if ( ! function_exists( 'largo_author_link' ) ) {
 /**
  * Outputs custom byline and link (if set), otherwise outputs author link and post date
  *
- * @param $echo bool echo the string or return it (default: echo)
- * @return string byline as formatted html
- * @since 1.0
+ * @param $echo bool Echo the string or return it (default: echo)
+ * @param $exclude_date bool Whether to exclude the date from byline (default: false)
+ * @param $post object or int The post object or ID to get the byline for. Defaults to current post.
+ * @return string Byline as formatted html
+ * @since 0.3
  */
 if ( ! function_exists( 'largo_byline' ) ) {
-	function largo_byline( $echo = true ) {
-		global $post;
-		$values = get_post_custom( $post->ID );
-		$authors = ( function_exists( 'coauthors_posts_links' ) && !isset( $values['largo_byline_text'] ) ) ? coauthors_posts_links( null, null, null, null, false ) : largo_author_link( false );
+	function largo_byline( $echo = true, $exclude_date = false, $post = null ) {
+		if (!empty($post)) {
+			if (is_object($post))
+				$post_id = $post->ID;
+			else
+				$post_id = $post;
+		} else
+			$post_id = get_the_ID();
 
-		$output = sprintf( __('<span class="by-author"><span class="by">By:</span> <span class="author vcard" itemprop="author">%1$s</span></span><span class="sep"> | </span><time class="entry-date updated dtstamp pubdate" datetime="%2$s">%3$s</time>', 'largo'),
-			$authors,
-			esc_attr( get_the_date( 'c' ) ),
-			largo_time( false )
-		);
+		$values = get_post_custom( $post_id );
 
-		if ( current_user_can( 'edit_post', $post->ID ) )
-			$output .=  sprintf( __('<span class="sep"> | </span><span class="edit-link"><a href="%1$s">Edit This Post</a></span>', 'largo'), get_edit_post_link() );
+		if ( function_exists( 'get_coauthors' ) && !isset( $values['largo_byline_text'] ) ) {
+			$coauthors = get_coauthors( $post_id );
+			foreach( $coauthors as $author ) {
+				$byline_text = $author->display_name;
+				if ( $org = $author->organization )
+					$byline_text .= ' (' . $org . ')';
 
-	 	if ( is_single() && of_get_option( 'clean_read' ) === 'byline' )
-	 		$output .=	__('<a href="#" class="clean-read">View as "Clean Read"</a>', 'largo');
+				$out[] = '<a class="url fn n" href="' . get_author_posts_url( $author->ID, $author->user_nicename ) . '" title="' . esc_attr( sprintf( __( 'Read All Posts By %s', 'largo' ), $author->display_name ) ) . '" rel="author">' . esc_html( $byline_text ) . '</a>';
 
-		if ( $echo )
+			}
+
+			if ( count($out) > 1 ) {
+				end($out);
+				$key = key($out);
+				reset($out);
+				$authors = implode( ', ', array_slice( $out, 0, -1 ) );
+				$authors .= ' <span class="and">' . __( 'and', 'largo' ) . '</span> ' . $out[$key];
+			} else {
+				$authors = $out[0];
+			}
+
+		} else {
+			$authors = largo_author_link( false );
+		}
+
+		$output = '<span class="by-author"><span class="by">' . __( 'By', 'largo' ) . '</span> <span class="author vcard" itemprop="author">' . $authors . '</span></span>';
+		if ( ! $exclude_date ) {
+			$output .= '<span class="sep"> | </span><time class="entry-date updated dtstamp pubdate" datetime="' . esc_attr( get_the_date( 'c' ) ) . '">' . largo_time( false ) . '</time>';
+		}
+
+		if ( current_user_can( 'edit_post', $post_id ) ) {
+			$output .= '<span class="sep"> | </span><span class="edit-link"><a href="' . get_edit_post_link( $post_id ) . '">' . __( 'Edit This Post', 'largo' ) . '</a></span>';
+		}
+
+		if ( is_single() && of_get_option( 'clean_read' ) === 'byline' ) {
+			$output .= '<a href="#" class="clean-read">' . __( 'View as "Clean Read"', 'largo') . '</a>';
+		}
+
+		if ( $echo ) {
 			echo $output;
-		return $output;
+		} else {
+			return $output;
+		}
 	}
 }
 
@@ -106,7 +145,7 @@ if ( ! function_exists( 'largo_byline' ) ) {
  *
  * @param $echo bool echo the string or return it (default: echo)
  * @return string social icon area markup as formatted html
- * @since 1.0
+ * @since 0.3
  * @todo maybe let people re-arrange the order of the links or have more control over how they appear
  */
 if ( ! function_exists( 'largo_post_social_links' ) ) {
@@ -116,57 +155,48 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 		$output = '<div class="post-social clearfix"><div class="left">';
 
 		if ( $utilities['twitter'] === '1' ) {
-			$twitter_link = of_get_option( 'twitter_link' ) ? 'data-via="' . twitter_url_to_username( of_get_option( 'twitter_link' ) ) . '"' : '';
-			$twitter_related = get_the_author_meta( 'twitter' ) ? get_the_author_meta( 'twitter' ) . ':Follow the author of this article' : '';
+			$twitter_link = of_get_option( 'twitter_link' ) ? 'data-via="' . esc_attr( largo_twitter_url_to_username( of_get_option( 'twitter_link' ) ) ) . '"' : '';
+			$twitter_related = get_the_author_meta( 'twitter' ) ? sprintf( '%s:' . __( 'Follow the author of this article', 'largo' ), get_the_author_meta( 'twitter' ) ) : '';
 			$twitter_count = (of_get_option( 'show_twitter_count' ) == 0) ? 'data-count="none"' : '';
 
-			$output .= sprintf(__('<span class="twitter"><a href="http://twitter.com/share" class="twitter-share-button" data-url="%1$s" data-text="%2$s" %3$s %4$s %5$s>Tweet</a></span>', 'largo'),
+			$output .= sprintf( '<span class="twitter"><a href="http://twitter.com/share" class="twitter-share-button" data-url="%1$s" data-text="%2$s" %3$s data-via="%4$s" %5$s>%6$s</a></span>',
 				get_permalink(),
 				get_the_title(),
 				$twitter_link,
 				$twitter_related,
-				$twitter_count
+				$twitter_count,
+				esc_attr( __( 'Tweet', 'largo' ) )
 			);
 		}
 
 		if ( $utilities['facebook'] === '1' )
 			$output .= sprintf( '<span class="facebook"><fb:like href="%1$s" send="false" layout="button_count" show_faces="false" action="%2$s"></fb:like></span>',
 				get_permalink(),
-				of_get_option( 'fb_verb' )
+				esc_attr( of_get_option( 'fb_verb' ) )
 			);
 
 		$output .= '</div><div class="right">';
 
-		if ( $utilities['sharethis'] === '1' )
-			$output .= __('<span class="st_sharethis" displayText="Share"></span>', 'largo');
+		if ( $utilities['sharethis'] === '1' ) {
+			$output .= '<span class="st_sharethis" displayText="' . esc_attr( __( 'Share', 'largo' ) ) . '"></span>';
+		}
 
-		if ( $utilities['email'] === '1' )
-			$output .= __('<span class="st_email" displayText="Email"></span>', 'largo');
+		if ( $utilities['email'] === '1' ) {
+			$output .= '<span class="st_email" displayText="' . esc_attr( __( 'Email', 'largo' ) ) . '"></span>';
+		}
 
-		if ( $utilities['print'] === '1' )
-			$output .= __('<span class="print"><a href="#" onclick="window.print()" title="print this article" rel="nofollow"><i class="icon-print"></i> Print</a></span>', 'largo');
+		if ( $utilities['print'] === '1' ) {
+			$output .= '<span class="print"><a href="#" onclick="window.print()" title="' . esc_attr( __( 'Print this article', 'largo' ) ) . '" rel="nofollow"><i class="icon-print"></i> ' . esc_attr( __( 'Print', 'largo' ) ) . '</a></span>';
+		}
 
 		$output .= '</div></div>';
 
-		if ( $echo )
+		if ( $echo ) {
 			echo $output;
-		return $output;
+		} else {
+			return $output;
+		}
 	}
-}
-
-/**
- * Show the author box on single posts when activated in theme options
- * Don't show it on posts with custom bylines or if a user has not filled out their profile
- *
- * @return bool true if the author box should be displayed
- * @since 1.0
- */
-function largo_show_author_box() {
-	global $post;
-	$byline_text = get_post_meta( $post->ID, 'largo_byline_text' ) ? esc_attr( get_post_meta( $post->ID, 'largo_byline_text', true ) ) : '';
-	if ( of_get_option( 'show_author_box' ) && get_the_author_meta( 'description' ) && $byline_text == '' )
-		return true;
-	return false;
 }
 
 /**
@@ -175,22 +205,50 @@ function largo_show_author_box() {
  *
  * @param $email string an author's email address
  * @return bool true if a gravatar is available for this user
- * @since 1.0
+ * @since 0.3
  */
 function largo_has_gravatar( $email ) {
 	// Craft a potential url and test its headers
-	$hash = md5(strtolower(trim($email)));
+	$hash = md5( strtolower( trim( $email ) ) );
+
+	$cache_key = 'largo_has_gravatar_' . $hash;
+	if ( false !== ( $cache_value = get_transient( $cache_key ) ) ) {
+		return (bool) $cache_value;
+	}
+
 	$uri = 'http://www.gravatar.com/avatar/' . $hash . '?d=404';
-	$headers = @get_headers($uri);
-	if (preg_match("|200|", $headers[0]))
+	$response = wp_remote_head( $uri );
+	if ( 200 == wp_remote_retrieve_response_code( $response ) ) {
+		$cache_value = '1';
+	} else {
+		$cache_value = '0';
+	}
+	set_transient( $cache_key, $cache_value );
+	return (bool) $cache_value;
+}
+/**
+ * Determine whether or not a user has an avatar. Fallback checks if user has a gravatar.
+ *
+ * @param $email string an author's email address
+ * @return bool true if an avatar is available for this user
+ * @since 0.4
+ */
+function largo_has_avatar($email) {
+	$user = get_user_by('email', $email);
+	$result = largo_get_user_avatar_id($user->ID);
+	if (!empty($result))
 		return true;
+	else {
+		if (largo_has_gravatar($email))
+			return true;
+	}
 	return false;
 }
 
 /**
  * Replaces the_content() with paginated content (if <!--nextpage--> is used in the post)
  *
- * @since 1.0
+ * @since 0.3
  */
 if ( ! function_exists( 'largo_entry_content' ) ) {
 	function my_queryvars( $qvars ) {
@@ -214,7 +272,7 @@ if ( ! function_exists( 'largo_entry_content' ) ) {
 		} else {
 		    the_content();
 		    if ( is_singular() && $numpages > 1 )
-		    	largo_custom_wp_link_pages( $args );
+		    	largo_custom_wp_link_pages('');
 		}
 	}
 }
@@ -226,7 +284,7 @@ if ( ! function_exists( 'largo_entry_content' ) ) {
  * @params $args same array of arguments as accepted by wp_link_pages
  * See: http://codex.wordpress.org/Function_Reference/wp_link_pages
  * @return formatted output in html (or echo)
- * @since 1.0
+ * @since 0.3
  */
 if ( ! function_exists( 'largo_custom_wp_link_pages' ) ) {
 	function largo_custom_wp_link_pages( $args ) {
@@ -305,33 +363,41 @@ if ( ! function_exists( 'largo_custom_wp_link_pages' ) ) {
  * @param $strip_tags|$strip_shortcodes bool
  * @uses largo_trim_sentences
  * @package largo
- * @since 1.0
+ * @since 0.3
  */
 if ( ! function_exists( 'largo_excerpt' ) ) {
-	function largo_excerpt( $post, $sentence_count = 5, $use_more = true, $more_link = '', $echo = true, $strip_tags = true, $strip_shortcodes = true ) {
+	function largo_excerpt( $the_post=null, $sentence_count = 5, $use_more = true, $more_link = '', $echo = true, $strip_tags = true, $strip_shortcodes = true ) {
+		$the_post = get_post($the_post); // Normalize it into a post object
+
+		// Save the global $post object and then push our current post object so that certain functions (get_the_content) will work
+		global $post;
+		$_post = $post;
+		$post = $the_post;
 
 		// handle annoying WP default '(more...' added to the end of excerpts
 		if ( !$use_more || !$more_link )
 			$more_link = '';
 
 		// if a post has a custom excerpt set, we'll use that
-		if ( $post->post_excerpt ) {
+		if ( $the_post->post_excerpt ) {
 			if ( !$use_more ) {
-				$content = get_the_excerpt();
+				$content = apply_filters( 'get_the_excerpt', $the_post->post_excerpt );
 			} else {
-				$content = get_the_excerpt() . ' <a href="' . get_permalink() . '">' . $more_link . '</a>';
+				$content = apply_filters( 'get_the_excerpt', $the_post->post_excerpt ) . ' <a href="' . get_permalink( $the_post->ID ) . '">' . $more_link . '</a>';
 			}
 
 		// if we're on the homepage and the post has a more tag, use that
-		} else if ( is_home() && strpos( $post->post_content, '<!--more-->' ) ) {
+		} else if ( is_home() && strpos( $the_post->post_content, '<!--more-->' ) ) {
 			$content = get_the_content( $more_link );
 
 		// otherwise we'll just do our best and make the prettiest excerpt we can muster
 		} else {
 			$content = largo_trim_sentences( get_the_content(), $sentence_count );
 			if ( $use_more )
-				$content .= '<a href="' . get_permalink() . '">' . $more_link . '</a>';
+				$content .= '<a href="' . get_permalink( $the_post->ID ) . '">' . $more_link . '</a>';
 		}
+
+		$post = $_post; // Set it back
 
 		// optionally strip shortcodes and html, wrap everything in <p> tags
 		$output = '<p>';
@@ -364,7 +430,7 @@ if ( ! function_exists( 'largo_excerpt' ) ) {
  * @param $echo echo the string or return it (default: return)
  * @return $output trimmed string
  *
- * @since 1.0
+ * @since 0.3
  */
 function largo_trim_sentences( $input, $sentences, $echo = false ) {
 	$re = '/# Split sentences on whitespace between them.
@@ -415,45 +481,61 @@ function largo_trim_sentences( $input, $sentences, $echo = false ) {
 /**
  * Display navigation to next/previous pages when applicable
  *
- * @since 1.0
+ * @since 0.3
  */
 if ( ! function_exists( 'largo_content_nav' ) ) {
-	function largo_content_nav( $nav_id ) {
+	function largo_content_nav( $nav_id, $in_same_cat = false ) {
 		global $wp_query;
 
 		if ( $nav_id === 'single-post-nav-below' ) { ?>
 
 			<nav id="nav-below" class="pager post-nav clearfix">
 				<?php
-					if ( $prev = get_previous_post() ) {
-						printf( __('<div class="previous"><a href="%1$s"><h5>Previous %2$s</h5><span class="meta-nav">%3$s</span></a></div>', 'largo'),
-							get_permalink( $prev->ID ),
-							of_get_option( 'posts_term_singular' ),
-							$prev->post_title
-						);
+					if ( $prev = get_previous_post( $in_same_cat ) ) {
+						if( get_the_post_thumbnail( $prev->ID ) ) {
+							$image = wp_get_attachment_image_src( get_post_thumbnail_id( $prev->ID ) );
+							printf( __('<div class="previous"><a href="%1$s"><img class="thumb" src="%4$s" /><h5>Previous %2$s</h5><span class="meta-nav">%3$s</span></a></div>', 'largo'),
+								get_permalink( $prev->ID ),
+								of_get_option( 'posts_term_singular' ),
+								$prev->post_title,
+								$image[0]
+							);
+						} else {
+							printf( __('<div class="previous"><a href="%1$s"><h5>Previous %2$s</h5><span class="meta-nav">%3$s</span></a></div>', 'largo'),
+								get_permalink( $prev->ID ),
+								of_get_option( 'posts_term_singular' ),
+								$prev->post_title
+							);
+						}
 					}
-					if ( $next = get_next_post() ) {
-						printf( __('<div class="next"><a href="%1$s"><h5>Next %2$s</h5><span class="meta-nav">%3$s</span></a></div>', 'largo'),
-							get_permalink( $next->ID ),
-							of_get_option( 'posts_term_singular' ),
-							$next->post_title
-						);
+					if ( $next = get_next_post( $in_same_cat ) ) {
+						if( get_the_post_thumbnail( $next->ID ) ) {
+							$image = wp_get_attachment_image_src( get_post_thumbnail_id( $next->ID ) );
+							printf( __('<div class="next"><a href="%1$s"><img class="thumb" src="%4$s" /><h5>Next %2$s</h5><span class="meta-nav">%3$s</span></a></div>', 'largo'),
+								get_permalink( $next->ID ),
+								of_get_option( 'posts_term_singular' ),
+								$next->post_title,
+								$image[0]
+							);
+						} else {
+							printf( __('<div class="next"><a href="%1$s"><h5>Next %2$s</h5><span class="meta-nav">%3$s</span></a></div>', 'largo'),
+								get_permalink( $next->ID ),
+								of_get_option( 'posts_term_singular' ),
+								$next->post_title
+							);
+						}
 					}
-				?>
+					?>
 			</nav><!-- #nav-below -->
 
 		<?php } elseif ( $wp_query->max_num_pages > 1 ) {
 			$posts_term = of_get_option( 'posts_term_plural' );
-			if ( !$posts_term ) $posts_term = 'Posts';
-			$previous_posts_term = sprintf( __( 'Newer %s &rarr;', 'largo' ), $posts_term );
-			$next_posts_term =  sprintf( __( '&larr; Older %s', 'largo' ), $posts_term );
-		?>
-
+			if ( !$posts_term ) $posts_term = 'Posts'; ?>
 			<nav id="<?php echo $nav_id; ?>" class="pager post-nav">
-				<div class="next"><?php previous_posts_link( $previous_posts_term ); ?></div>
-				<div class="previous"><?php next_posts_link( $next_posts_term ); ?></div>
-			</nav><!-- .post-nav -->
-
+				<div class="load-more">
+					<?php next_posts_link( 'Load more ' . strtolower($posts_term) ); ?>
+				</div>
+			</nav>
 		<?php }
 	}
 }
@@ -462,6 +544,7 @@ if ( ! function_exists( 'largo_content_nav' ) ) {
  * Template for comments and pingbacks.
  *
  * Used as a callback by wp_list_comments() for displaying the comments.
+ * @since 0.3
  */
 if ( ! function_exists( 'largo_comment' ) ) {
 	function largo_comment( $comment, $args, $depth ) {
@@ -471,7 +554,7 @@ if ( ! function_exists( 'largo_comment' ) ) {
 			case 'trackback' :
 		?>
 		<li class="post pingback">
-			<p>Pingback: <?php comment_author_link(); ?><?php edit_comment_link( 'Edit', '<span class="edit-link">', '</span>' ); ?></p>
+			<p><?php _e( 'Pingback', 'largo' ); ?>: <?php comment_author_link(); ?><?php edit_comment_link( __( 'Edit', 'largo' ), '<span class="edit-link">', '</span>' ); ?></p>
 		<?php
 				break;
 			default :
@@ -499,11 +582,11 @@ if ( ! function_exists( 'largo_comment' ) ) {
 							);
 						?>
 
-						<?php edit_comment_link( 'Edit', '<span class="edit-link">', '</span>' ); ?>
+						<?php edit_comment_link( __( 'Edit', 'largo' ), '<span class="edit-link">', '</span>' ); ?>
 					</div><!-- .comment-author .vcard -->
 
 					<?php if ( $comment->comment_approved == '0' ) : ?>
-						<em class="comment-awaiting-moderation">Your comment is awaiting moderation.</em>
+						<em class="comment-awaiting-moderation"><?php _e( 'Your comment is awaiting moderation.', 'largo' ); ?></em>
 						<br />
 					<?php endif; ?>
 
@@ -512,12 +595,126 @@ if ( ! function_exists( 'largo_comment' ) ) {
 				<div class="comment-content"><?php comment_text(); ?></div>
 
 				<div class="reply">
-					<?php comment_reply_link( array_merge( $args, array( 'reply_text' => 'Reply <span>&darr;</span>', 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
+					<?php comment_reply_link( array_merge( $args, array( 'reply_text' => sprintf( '%s <span>&darr;</span>', __( 'Reply', 'largo' ) ), 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
 				</div><!-- .reply -->
 			</article><!-- #comment-## -->
 
 		<?php
 				break;
 		endswitch;
+	}
+}
+
+
+/**
+ * Post format icon
+ * @since 0.4
+ */
+if ( ! function_exists( 'post_type_icon' ) ) {
+	function post_type_icon( $options = array() ) {
+
+		if ( ! taxonomy_exists('post-type') ) return false;
+
+		$defaults = array(
+			'echo' => TRUE,
+			'id' => get_the_ID()
+		);
+		$args = wp_parse_args( $options, $defaults );
+		$terms = wp_get_post_terms( $args['id'], 'post-type' );
+		if ( ! count($terms) ) return false;
+		//try to get a child term if there is one
+		$the_term = 0;
+		foreach ( $terms as $term ) {
+			if ( $term->parent ) {
+				$the_term = $term;
+				break;
+			}
+		}
+		//just grab the first one otherwise
+		if ( ! $the_term ) $the_term = $terms[0];
+
+		//get the icon value
+		if ( ! $args['echo'] ) ob_start();
+		$icons = new Largo_Term_Icons();
+		$icons->the_icon( $the_term );
+		if ( ! $args['echo'] ) return ob_get_clean();
+	}
+}
+
+/**
+ * Determines what type of hero image/video a single post should use
+ * and returns a class that gets added to its container div
+ *
+ * @since 0.4
+ */
+if ( ! function_exists( 'largo_hero_class' ) ) {
+	function largo_hero_class( $post_id, $echo = TRUE ) {
+		$hero_class = "is-empty";
+		$featured_media = (largo_has_featured_media($post_id))? largo_get_featured_media($post_id) : array();
+		$type = (isset($featured_media['type']))? $featured_media['type'] : false;
+
+		if (get_post_meta($post_id, 'youtube_url', true) || $type == 'video')
+			$hero_class = 'is-video';
+		else if (has_post_thumbnail($post_id) || $type == 'image')
+			$hero_class = 'is-image';
+		else if ($type == 'gallery')
+			$hero_class = 'is-gallery';
+		else if ($type == 'embed-code')
+			$hero_class = 'is-embed';
+
+		if ($echo)
+			echo $hero_class;
+		else
+			return $hero_class;
+	}
+}
+
+/**
+ * Returns the featured image for a post
+ * to be used as the hero image with caption and credit (if available)
+ *
+ * @since 0.4
+ */
+if ( ! function_exists( 'largo_hero_with_caption' ) ) {
+	function largo_hero_with_caption( $post_id ) {
+		echo get_the_post_thumbnail( $post_id, 'full' );
+		if ( $thumb = get_post_thumbnail_id( $post_id ) ) {
+			$thumb_content = get_post( $thumb );
+			$thumb_custom = get_post_custom( $thumb );
+			if ( isset($thumb_custom['_media_credit'][0]) ) {
+				echo '<p class="wp-media-credit">' . $thumb_custom['_media_credit'][0];
+				if ( $thumb_custom['_navis_media_credit_org'][0] ) {
+					echo '/' . $thumb_custom['_navis_media_credit_org'][0];
+				}
+				echo '</p>';
+			}
+			if ( $thumb_content->post_excerpt ) {
+				echo '<p class="wp-caption-text">' . $thumb_content->post_excerpt . '</p>';
+			}
+		}
+	}
+}
+
+/**
+ * Schema.org article metadata we include in the header of each single post
+ *
+ * @since 0.4
+ */
+if ( ! function_exists( 'largo_post_metadata' ) ) {
+	function largo_post_metadata( $post_id, $echo = TRUE ) {
+		$out = '<meta itemprop="description" content="' . strip_tags( largo_excerpt( get_post( $post_id ), 5, false, '', false ) ) . '" />' . "\n";
+	 	$out .= '<meta itemprop="datePublished" content="' . get_the_date( 'c', $post_id ) . '" />' . "\n";
+	 	$out .= '<meta itemprop="dateModified" content="' . get_the_modified_date( 'c', $post_id ) . '" />' . "\n";
+
+	 	if ( has_post_thumbnail( $post_id ) ) {
+			$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'thumbnail' );
+			$out .= '<meta itemprop="image" content="' . $image[0] . '" />';
+		}
+
+	 	if ( $echo ) {
+			echo $out;
+		} else {
+			return $out;
+		}
 	}
 }

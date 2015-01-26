@@ -317,7 +317,7 @@ function cftl_tax_landing_header($post) {
 	</label>
 	</div>
 </div>
-<div class="form-field">
+<div class="form-field_enabled">
 	<h4>Show Series Byline?</h4>
 	<div>
 	<label for="cftl_show_series_byline">
@@ -325,7 +325,7 @@ function cftl_tax_landing_header($post) {
 	</label>
 	</div>
 </div>
-<div class="form-field">
+<div class="form-field_enabled">
 	<h4>Show Social Media Sharing Links?</h4>
 	<div>
 	<label for="cftl_show_sharebar">
@@ -368,6 +368,9 @@ function cftl_tax_landing_main($post) {
 	wp_nonce_field(plugin_basename(__FILE__), 'cftl_tax_landing_main');
 	$fields = ($post->post_title) ? get_post_custom( $post->ID ) : cftl_field_defaults();
 	$fields['show'] = maybe_unserialize($fields['show'][0]);
+	foreach( array('image','excerpt','byline','tags') as $key ) {
+		if ( !array_key_exists($key, $fields['show'])) $fields['show'][$key] = 0;
+	}
 	?>
 <div class="form-field-radios">
 	<h4>Layout</h4>
@@ -386,8 +389,24 @@ function cftl_tax_landing_main($post) {
 		</div>
 		<div id="explainer" class="<?php echo $fields['cftl_layout'][0]; ?>">
 			<span class="one-column">No regions: posts take up full width </span>
-			<span class="two-column">One widget region, called "Series <?php echo cftl_title($post); ?>: Right"</span>
-			<span class="three-column">Two widget regions, called "Series <?php echo cftl_title($post); ?>: Left" and "Series <?php echo cftl_title($post); ?>: Right"</span>
+			<span class="two-column">One widget region on right</span>
+			<span class="three-column">Two widget regions, skinny on left and normal on right</span>
+		</div>
+		<div id="left-region" class="regioner">
+			<strong>Lefthand Column Widget Region</strong><br/>
+			<select name="left_region">
+			<?php
+				largo_custom_sidebars_dropdown( $fields['left_region'][0], TRUE );
+			?>
+			</select>
+		</div>
+		<div id="right-region" class="regioner">
+			<strong>Righthand Column Widget Region</strong><br/>
+			<select name="right_region">
+			<?php
+				largo_custom_sidebars_dropdown( $fields['right_region'][0], TRUE );
+			?>
+			</select>
 		</div>
 	</div>
 </div>
@@ -508,10 +527,14 @@ function cftl_field_defaults( ) {
 		'show_sharebar' => array(1),
 		'header_style' => array('standard'),
 		'cftl_layout' => array('two-column'),
+		'create-widget-region' => array(1),
+		'custom-widget-title' => array(1),
 		'per_page' => array('10'),
 		'post_order' => array('DESC'),
 		'show' => array('image' => 1, 'excerpt' => 1, 'byline' => 1, 'tags' => 0),
 		'footer_enabled' => array(1),
+		'left_region' => of_get_option('landing_left_region_default', 'sidebar-single'),
+		'right_region' => of_get_option('landing_right_region_default', 'sidebar-main'),
 	);
 }
 
@@ -522,30 +545,61 @@ function cftl_title( $post ) {
 
 
 function cftl_tax_landing_save_layout($post_id) {
-	if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
-	if (!isset($_POST['post_type']) || $_POST['post_type'] != 'cftl-tax-landing') return;
-	if (!current_user_can('edit_post', $post_id)) return;
+
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+		return;
+	}
+
+	if ( ! isset( $_POST['post_type'] )
+		|| $_POST['post_type'] != 'cftl-tax-landing') {
+		return;
+	}
+
+	if ( ! current_user_can( 'edit_post', $post_id ) ) {
+		return;
+	}
 
 	if (!isset($_POST['cftl_tax_landing_header']) || !wp_verify_nonce($_POST['cftl_tax_landing_header'], plugin_basename(__FILE__))) {
 		return;	//TO DO: verify main and footer nonces too?
 	}
 
-	//update all the post meta stuff
 	$layout_fields = array(
-		'header_enabled',
-		'show_series_byline',
-		'show_sharebar',
-		'header_style',
-		'cftl_layout', //needs to instantiate widget regions
-		'per_page',
-		'post_order',
-		'show',	//maybe serialize these four?
-		'footer_style',
-		'footerhtml'	//instantiate another widget region
+		'header_enabled'         => 'bool',
+		'show_series_byline'     => 'bool',
+		'show_sharebar'          => 'bool',
+		'header_style'           => 'sanitize_key',
+		'cftl_layout'            => 'sanitize_key',
+		'left_region'            => 'sanitize_key',
+		'right_region'           => 'sanitize_key',
+		'per_page'               => 'intval',
+		'post_order'             => 'sanitize_text_field',
+		'show'                   => 'sanitize_show',
+		'footer_style'           => 'sanitize_key',
+		'footerhtml'             => 'wp_filter_post_kses',
 	);
 
-	foreach ($layout_fields as $field_name) {
-		update_post_meta($post_id, $field_name, $_POST[$field_name]);	//do I need to sanitize this?
+	foreach ($layout_fields as $field_name => $sanitize ) {
+
+		switch ( $sanitize ) {
+			case 'bool':
+				$safe_value = ! empty( $_POST[ $field_name ] ) ? true : false;
+				break;
+
+			case 'sanitize_show':
+
+				$safe_value = array();
+				foreach( array( 'image', 'excerpt', 'byline', 'tags' ) as $key ) {
+					$safe_value[ $key ] = ! empty( $_POST[ $field_name ][ $key ] ) ? true : false;
+				}
+				break;
+
+			default:
+				$safe_value = ! empty( $_POST[ $field_name ] ) ? call_user_func( $sanitize, $_POST[ $field_name ] ) : '';
+				break;
+
+		}
+
+		update_post_meta( $post_id, $field_name, $safe_value );
 	}
 }
 add_action('save_post', 'cftl_tax_landing_save_layout');
@@ -555,53 +609,14 @@ add_action('save_post', 'cftl_tax_landing_save_layout');
  * Instantiate all our necessary widget regions
  */
 function cftl_custom_sidebars() {
-	//get all the left ones and the titles they connect to
-	$left_widgets = cftl_get_meta_values( 'cftl_layout', 'three-column' );
-	foreach ($left_widgets as $widget ) {
-		$sidebar_slug = largo_make_slug( $widget->post_title );
-		if ( $sidebar_slug ) {
-			register_sidebar( array(
-				'name' 			=> __( 'Series ' . $widget->post_title . ": Left", 'largo' ),
-				'id' 			=> $sidebar_slug . "_left",
-				'before_widget' => '<aside id="%1$s" class="%2$s clearfix">',
-				'after_widget' 	=> '</aside>',
-				'before_title' 	=> '<h3 class="widgettitle">',
-				'after_title' 	=> '</h3>'
-			) );
-			register_sidebar( array(
-				'name' 			=> __( 'Series ' . $widget->post_title . ": Right", 'largo' ),
-				'id' 			=> $sidebar_slug . "_right",
-				'before_widget' => '<aside id="%1$s" class="%2$s clearfix">',
-				'after_widget' 	=> '</aside>',
-				'before_title' 	=> '<h3 class="widgettitle">',
-				'after_title' 	=> '</h3>'
-			) );
-		}
-	}
-
-	//get all the right ones and the titles they connect to
-	$right_widgets = cftl_get_meta_values( 'cftl_layout', 'two-column' );
-	foreach ($right_widgets as $widget ) {
-		$sidebar_slug = largo_make_slug( $widget->post_title );
-		if ( $sidebar_slug ) {
-			register_sidebar( array(
-				'name' 			=> __( 'Series ' . $widget->post_title . ": Right", 'largo' ),
-				'id' 			=> $sidebar_slug . "_right",
-				'before_widget' => '<aside id="%1$s" class="%2$s clearfix">',
-				'after_widget' 	=> '</aside>',
-				'before_title' 	=> '<h3 class="widgettitle">',
-				'after_title' 	=> '</h3>'
-			) );
-		}
-	}
 
 	//get all the footer ones and the titles they connect to
 	$footer_widgets = cftl_get_meta_values( 'footer_style', 'widget' );
 	foreach ($footer_widgets as $widget ) {
-		$sidebar_slug = largo_make_slug( $widget->post_title );
+		$sidebar_slug = largo_make_slug( $widget->post_title  );
 		if ( $sidebar_slug ) {
 			register_sidebar( array(
-				'name'       	=> __( 'Series ' . $widget->post_title . ": Footer", 'largo' ),
+				'name'       	=> __( 'Series ' . $widget->post_title  . ": Footer", 'largo' ),
 				'id' 			=> $sidebar_slug . "_footer",
 				'before_widget' => '<aside id="%1$s" class="%2$s clearfix">',
 				'after_widget' 	=> '</aside>',
@@ -627,6 +642,21 @@ function cftl_get_meta_values( $key = '', $value = '', $type = 'cftl-tax-landing
       AND p.post_type = '%s'
   ", $key, $value, $status, $type ) );
   return $r;
+}
+
+function ctfl_get_meta_value_single($key = '', $type = 'cftl-tax-landing', $status = 'publish' ) {
+  global $wpdb;
+  if( empty( $key ) )
+      return;
+  $r = $wpdb->get_results( $wpdb->prepare( "
+      SELECT DISTINCT pm.meta_value
+      FROM {$wpdb->postmeta} pm
+      LEFT JOIN {$wpdb->posts} p ON p.ID = pm.post_id
+      WHERE pm.meta_key = '%s'
+      AND p.post_status = '%s'
+      AND p.post_type = '%s'
+  ", $key, $status, $type ) );
+  return $r[0]->meta_value;
 }
 
 /**
@@ -671,9 +701,15 @@ ORDER BY ISNULL(mt2.meta_value+0) ASC, mt2.meta_value+0 ASC, p.post_date DESC");
  */
 add_action('wp_ajax_series_sort', 'cftl_order_save');
 function cftl_order_save() {
-	$meta_key = "series_" . $_POST['series_id'] . "_order";
+
+	if ( ! current_user_can( 'edit_post', (int) $_POST['post_id'] ) 
+		|| ! wp_verify_nonce( $_POST['nonce'], 'update-post_' . (int) $_POST['post_id'] ) ) {
+		wp_die( __( "You don't have permission to do this.", 'largo' ) );
+	}
+
+	$meta_key = "series_" . (int) $_POST['series_id'] . "_order";
 	for ($i = 1; $i <= count($_POST['pid']); $i++ ) {
-		update_post_meta( $_POST['pid'][$i-1], $meta_key, $i);
+		update_post_meta( (int) $_POST['pid'][$i-1], $meta_key, $i);
 	}
 	echo "updated";
 }

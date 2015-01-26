@@ -28,13 +28,13 @@ function optionsframework_option_name() {
 function optionsframework_options() {
 
 	$imagepath =  get_template_directory_uri() . '/lib/options-framework/images/';
-
-	$display_options = array(
-		'top' 	=> __('Top', 'largo'),
-		'btm' 	=> __('Bottom', 'largo'),
-		'both' 	=> __('Both', 'largo'),
-		'none' 	=> __('None', 'largo')
-	);
+	$home_templates = array();
+	$home_templates_data = largo_get_home_layouts();
+	if ( count($home_templates_data) ) {
+		foreach ($home_templates_data as $name => $data) {
+			$home_templates[ $data['path'] ] = '<img src="'.$data['thumb'].'" style="float: left; margin-right: 8px; max-width: 120px; height: auto; border: 1px solid #ddd;"><strong>'.$name.'</strong> '.$data['desc'];
+		}
+	}
 
 	$tag_display_options = array(
 		'top' 	=> __('Single Tag Above', 'largo'),
@@ -63,7 +63,21 @@ function optionsframework_options() {
 		'recommend' => __('Recommend', 'largo')
 	);
 
+	$region_options = array();
+	global $wp_registered_sidebars;
+	$excluded = array(
+		'Footer 1', 'Footer 2', 'Footer 3', 'Article Bottom', 'Header Ad Zone'
+	);
+	// Let others change the list
+	$excluded = apply_filters( 'largo_excluded_sidebars', $excluded );
+	foreach( $wp_registered_sidebars as $sidebar_id => $sidebar ) {
+		//check if excluded
+		if ( in_array( $sidebar_id, $excluded ) || in_array( $sidebar['name'], $excluded ) ) continue;
+		$region_options[$sidebar_id] = $sidebar['name'];
+	}
+
 	$options = array();
+	$widget_options = array();
 
 	/**
 	 * Basic Options
@@ -88,7 +102,7 @@ function optionsframework_options() {
 
 	$options[] = array(
 		'name' 	=> __('Donate Button', 'largo'),
-		'desc' 	=> __('<strong>Show/Hide</strong> a button in the top header to link to your donation page or form.', 'largo'),
+		'desc' 	=> __('<strong>Show</strong> a button in the top header to link to your donation page or form.', 'largo'),
 		'id' 	=> 'show_donate_button',
 		'type' 	=> 'checkbox');
 
@@ -107,24 +121,36 @@ function optionsframework_options() {
 		'type' 	=> 'text');
 
 	$options[] = array(
-		'name' 	=> __('Don\'t Miss Menu', 'largo'),
-		'desc' 	=> __('<strong>Show/Hide</strong> the "Don\'t Miss" menu under the main site navigation. Add links to this menu under <strong>Appearance > Menus</strong>.', 'largo'),
+		'name' 	=> __('Menu Options', 'largo'),
+		'desc' 	=> __('<strong>Show</strong> the "Don\'t Miss" menu under the main site navigation. Add links to this menu under <strong>Appearance > Menus</strong>.', 'largo'),
 		'id' 	=> 'show_dont_miss_menu',
 		'type' 	=> 'checkbox');
 
 	$options[] = array(
-		'desc' 	=> __('Enter the <strong>label that appears in front of the menu links</strong>. You can delete this default and no label will appear.', 'largo'),
+		'desc' 	=> __('Enter the <strong>label that appears in front of the menu links in the "Don\'t Miss" menu</strong>. You can delete this default and no label will appear.', 'largo'),
 		'id' 	=> 'dont_miss_label',
 		'std' 	=> __('Don\'t Miss', 'largo'),
 		'class' => 'hidden',
 		'type' 	=> 'text');
 
 	$options[] = array(
-		'name' 	=> __('Footer Nav Menu', 'largo'),
-		'desc' 	=> __('Enter the <strong>label that appears before the menu links</strong>. You can delete this default and no label will appear.', 'largo'),
+		'desc' 	=> __('Enter the <strong>label that appears before the menu links in the Footer Nav Menu</strong>. You can delete this default and no label will appear.', 'largo'),
 		'id' 	=> 'footer_menu_label',
 		'std' 	=> get_bloginfo('name'),
 		'type' 	=> 'text');
+
+	$options[] = array(
+		'desc'  => __('Show the <strong>sticky nav</strong>? Default is to show, but in some cases you may want to hide it.'),
+		'id'    => 'show_sticky_nav',
+		'std' 	=> '1',
+		'type' 	=> 'checkbox');
+
+	$options[] = array(
+		'desc' 	=> __('Show the <strong>site name in the sticky nav</strong>? Default is to show, but in some cases you might want to hide it to save space or if your logo is clear enough to not need it.', 'largo'),
+		'id' 	=> 'show_sitename_in_sticky_nav',
+		'std' 	=> '1',
+		'class' => 'hidden',
+		'type' 	=> 'checkbox');
 
 	$options[] = array(
 		'name' 	=> __('Copyright Message', 'largo'),
@@ -142,7 +168,7 @@ function optionsframework_options() {
 
 	$options[] = array(
 		'name' 	=> __('Word to use for "Posts"', 'largo'),
-		'desc' 	=> __('WordPress calls single article pages "posts" but might prefer to use another name. <strong>Enter the singular and plural forms</strong> of the word you want to use here.', 'largo'),
+		'desc' 	=> __('WordPress calls single article pages "posts" but you might prefer to use another name. <strong>Enter the singular and plural forms</strong> of the word you want to use here.', 'largo'),
 		'type' 	=> 'info');
 
 	$options[] = array(
@@ -205,6 +231,12 @@ function optionsframework_options() {
 		'type' 	=> 'text');
 
 	$options[] = array(
+		'desc' 	=> __('<strong>Link to Github Page</strong> (http://github.com/username)', 'largo'),
+		'id' 	=> 'github_link',
+		'std' 	=> '',
+		'type' 	=> 'text');
+
+	$options[] = array(
 		'desc' 	=> __('By default, a row of social media icons is shown in the site footer. <strong>Check this box is you want to show them in the header as well</strong>. Note that they will only display on desktops and larger tablets.', 'largo'),
 		'id' 	=> 'show_header_social',
 		'type' 	=> 'checkbox');
@@ -214,43 +246,10 @@ function optionsframework_options() {
 		'type' 	=> 'info');
 
 	$options[] = array(
-		'desc' 	=> __('<strong>Show/Hide list of tags</strong> at the bottom of single posts.', 'largo'),
-		'id' 	=> 'show_tags',
-		'std' 	=> '1',
-		'type' 	=> 'checkbox');
-
-	$options[] = array(
-		'desc' 	=> __('Enter the <strong>maximum number of tags to show</strong>.', 'largo'),
-		'id' 	=> 'tag_limit',
-		'std' 	=> 20,
-		'class' => 'hidden',
-		'type' 	=> 'text');
-
-	$options[] = array(
-		'desc' 	=> __('<strong>Show/Hide the author bio</strong> at the bottom of single posts.', 'largo'),
-		'id' 	=> 'show_author_box',
-		'std' 	=> '1',
-		'type' 	=> 'checkbox');
-
-	$options[] = array(
-		'desc' 	=> __('<strong>Show/Hide related posts</strong> at the bottom of single posts.', 'largo'),
-		'id' 	=> 'show_related_content',
-		'std' 	=> '1',
-		'type' 	=> 'checkbox');
-
-	$options[] = array(
-		'desc' 	=> __('<strong>Show/Hide next/prev post navigation</strong> at the bottom of single posts.', 'largo'),
-		'id' 	=> 'show_next_prev_nav_single',
-		'std' 	=> '1',
-		'type' 	=> 'checkbox');
-
-	$options[] = array(
-		'desc' 		=> __('<strong>Where would you like to display share icons on single posts?</strong> By default social icons appear at both the top and the bottom of single posts but you can choose to show them in only one or the other or to not show them at all.', 'largo'),
-		'id' 		=> 'social_icons_display',
-		'std' 		=> 'both',
-		'type' 		=> 'select',
-		'class'		=> 'mini',
-		'options' 	=> $display_options);
+		'desc' 		=> __('<strong>Would you like to display share icons on single posts?</strong> By default social icons appear at the top of single posts but you can choose to not show them at all.', 'largo'),
+		'id' 		=> 'single_social_icons',
+		'std' 		=> '1',
+		'type' 		=> 'checkbox',);
 
 	$options[] = array(
 		'desc' 		=> __('Select the <strong>share icons</strong> to display on single posts.', 'largo'),
@@ -280,19 +279,9 @@ function optionsframework_options() {
 		));
 
 	$options[] = array(
-		'desc' 	=> __('<strong>Show/Hide share count</strong> with Twitter buttons.', 'largo'),
+		'desc' 	=> __('<strong>Show share count</strong> with Twitter buttons.', 'largo'),
 		'id' 	=> 'show_twitter_count',
 		'std' 	=> '1',
-		'type' 	=> 'checkbox');
-
-	$options[] = array(
-		'name' 	=> __('SEO Options', 'largo'),
-		'type'	=> 'info');
-
-	$options[] = array(
-		'desc' 	=> __('Use noindex for all archive pages (default is to use noindex for just date archives).', 'largo'),
-		'id' 	=> 'noindex_archives',
-		'std' 	=> '0',
 		'type' 	=> 'checkbox');
 
 	/**
@@ -346,31 +335,27 @@ function optionsframework_options() {
 	 * Layout Options
 	 */
 	$options[] = array(
-		'name' 	=> __('Layout Options', 'largo'),
-		'type' 	=> 'heading');
+		'name' => __('Layout Options', 'largo'),
+		'type' => 'heading');
 
-	$options[] = array(
-		'name' 	=> __('Overall Homepage Layout', 'largo'),
-		'desc' 	=> __('<strong>Select the overall layout you would like to use for your site\'s homepage.</strong> By default, Largo has a two column layout with a main content area on the left and a configurable sidebar on the right, but you can add a skinny side rail (configurable under the appearance > widgets tab) to left of the main content area by selecting the three-column option.', 'largo'),
-		'id' 	=> 'homepage_layout',
-		'std' 	=> '2col',
-		'type' 	=> 'images',
-		'options' 	=> array(
-			'2col' => $imagepath . '2col.png',
-			'3col' => $imagepath . '3col.png')
-	);
+	if (count($home_templates)) {
+		$home_std= 'HomepageBlog';
 
-	$options[] = array(
-		'name' 	=> __('Homepage Top', 'largo'),
-		'desc' 	=> __('<strong>Select the layout to use for the top of the homepage.</strong> Largo currently supports three homepage options: a blog-like list of posts with the ability to stick a post to the op of the homepage, a newspaper-like layout highlighting featured stories and an animated carousel of featured stories with large images.', 'largo'),
-		'id' 	=> 'homepage_top',
-		'std' 	=> 'blog',
-		'type' 	=> 'images',
-		'options' 	=> array(
-			'blog' 			=> $imagepath . 'blog.png',
-			'topstories' 	=> $imagepath . 'newsy.png',
-			'slider' 		=> $imagepath . 'slider.png')
-	);
+		$home_template = of_get_option('home_template');
+		if (empty($home_template)) {
+			if (of_get_option('homepage_layout') == '3col')
+				$home_std= 'LegacyThreeColumn';
+		}
+
+		$options[] = array(
+			'name' => __('Home Template', 'largo'),
+			'desc' => __('<strong>Select the layout to use for the top of the homepage.</strong> These are Home Templates, defined much like post/page templates.', 'largo'),
+			'id' => 'home_template',
+			'std' => $home_std,
+			'type' => 'radio',
+			'options' => $home_templates
+		);
+	}
 
 	$options[] = array(
 		'name' 	=> __('Sticky Posts', 'largo'),
@@ -384,13 +369,14 @@ function optionsframework_options() {
 
 	$options[] = array(
 		'name' 	=> __('Homepage Bottom', 'largo'),
-		'desc' 	=> __('<strong>Select the layout to use for the bottom of the homepage.</strong> Largo currently supports two options: a single column list of recent posts with photos and excerpts or a two column widget area', 'largo'),
-		'id' 	=> 'homepage_bottom',
+		'desc' 	=> __('<strong>Select the layout to use for the bottom of the homepage.</strong> Largo supports three options: a single column list of recent posts with photos and excerpts, a two column widget area, or nothing whatsoever', 'largo'),
+		'id' 		=> 'homepage_bottom',
 		'std' 	=> 'list',
 		'type' 	=> 'images',
-		'options' 	=> array(
+		'options' => array(
 			'list' 		=> $imagepath . 'list.png',
-			'widgets' 	=> $imagepath . 'widgets.png')
+			'widgets' => $imagepath . 'widgets.png',
+			'none'		=> $imagepath . 'none.png')
 	);
 
 	$options[] = array(
@@ -418,28 +404,49 @@ function optionsframework_options() {
 		'type' 	=> 'text');
 
 	$options[] = array(
-		'name' 	=> __('Sidebar Options', 'largo'),
+		'name' 	=> __('Single Article Template', 'largo'),
 		'type' 	=> 'info');
 
 	$options[] = array(
+		'desc' 	=> __('Starting with version 0.4, Largo introduced a new single-post template that more prominently highlights article content, which is the default. For backward compatibility, the pre-0.3 version is also available.', 'largo'),
+		'id' 	=> 'single_template',
+		'std' 	=> 'normal',
+		'type' 	=> 'select',
+		'options' => array(
+			'normal' => 'One Column (Standard Layout)',
+			'classic' => 'Two Column (Classic Layout)'
+			)
+		);
+
+	$widget_options[] = $options[] = array(
+		'name' 	=> __('Sidebar Options', 'largo'),
+		'type' 	=> 'info');
+
+	$widget_options[] = $options[] = array(
 		'desc' 	=> __('By default Largo has two sidebars. One is used for single pages and posts and the other is used for everything else (including the homepage). Check this box if you would like to have a third sidebar to be used in place of the main sidebar on archive pages (category, tag, author and series pages).', 'largo'),
 		'id' 	=> 'use_topic_sidebar',
 		'std' 	=> '0',
 		'type' 	=> 'checkbox');
 
-	$options[] = array(
+	$widget_options[] = $options[] = array(
+		'desc' 	=> __('Include an additional widget region ("sidebar") just above the site footer region', 'largo'),
+		'id' 	=> 'use_before_footer_sidebar',
+		'std' 	=> '0',
+		'type' 	=> 'checkbox');
+
+	$widget_options[] = $options[] = array(
 		'desc' 	=> __('Check this box if you want to fade the sidebar out on single story pages as a reader scrolls.', 'largo'),
 		'id' 	=> 'showey_hidey',
 		'std' 	=> '0',
 		'type' 	=> 'checkbox');
 
-	$options[] = array(
+	$widget_options[] = $options[] = array(
 		'desc' 	=> __('Enter names of <strong>additional sidebar regions</strong> (one per line) you\'d like post authors to be able to choose to display on their posts.', 'largo'),
 		'id' 	=> 'custom_sidebars',
 		'std' 	=> '',
 		'type' 	=> 'textarea');
 
-	$options[] = array(
+	$widget_options[] = $options[] = array(
 		'name' 	=> __('Footer Layout', 'largo'),
 		'desc' 	=> __('<strong>Select the layout to use for the footer.</strong> The default is a 3 column footer with a wide center column. Alternatively you can choose to have 3 or 4 equal columns. Each column is a widget area that can be configured under the Appearance > Widgets menu.', 'largo'),
 		'id' 	=> 'footer_layout',
@@ -450,6 +457,10 @@ function optionsframework_options() {
 			'3col-equal' 	=> $imagepath . 'footer-3col-equal.png',
 			'4col' 			=> $imagepath . 'footer-4col.png')
 	);
+
+	/*
+	 * Advanced
+	 */
 
 	$options[] = array(
 		'name' 	=> __('Advanced', 'largo'),
@@ -462,9 +473,16 @@ function optionsframework_options() {
 		'type' 	=> 'checkbox');
 
 	$options[] = array(
-		'desc' 	=> __('Enable Custom Landing Pages for Series/Project Pages.', 'largo'),
+		'desc' 	=> __('Enable "Series" taxonomy.', 'largo'),
+		'id' 	=> 'series_enabled',
+		'std' 	=> '0',
+		'type' 	=> 'checkbox');
+
+	$options[] = array(
+		'desc' 	=> __('Enable Custom Landing Pages for Series/Project Pages. Requires "Series" taxonomy to be enabled.', 'largo'),
 		'id' 	=> 'custom_landing_enabled',
 		'std' 	=> '0',
+		'class' => 'hidden',
 		'type' 	=> 'checkbox');
 
 	$options[] = array(
@@ -472,6 +490,59 @@ function optionsframework_options() {
 		'id' 	=> 'leaderboard_enabled',
 		'std' 	=> '0',
 		'type' 	=> 'checkbox');
+
+	$options[] = array(
+		'desc' 	=> __('Enable "Post Types" taxonomy.', 'largo'),
+		'id' 	=> 'post_types_enabled',
+		'std' 	=> '0',
+		'type' 	=> 'checkbox');
+
+	$options[] = array(
+		'desc' 	=> __('Default region in lefthand column of Landing Pages', 'largo'),
+		'id' 	=> 'landing_left_region_default',
+		'std' 	=> 'sidebar-main',
+		'type' 	=> 'select',
+		'options' => $region_options);
+
+	$options[] = array(
+		'desc' 	=> __('Default region in righthand column of Landing Pages', 'largo'),
+		'id' 	=> 'landing_right_region_default',
+		'std' 	=> 'sidebar-main',
+		'type' 	=> 'select',
+		'options' => $region_options);
+
+	// hidden field logs largo version to facilitate tracking which set of options are stored
+	$largo = wp_get_theme('largo');
+	$options[] = array(
+		'id' 	=> 'largo_version',
+		'std' 	=> $largo->get('Version'),
+		'type' 	=> 'text',
+		'class' => 'hidden');
+
+
+	$screen = get_current_screen();
+	if ( is_object( $screen ) && $screen->base == 'widgets' ) {
+		return $widget_options;
+	}
+
+
+	/* Disclaimer */
+
+	$options[] = array(
+		'name'	=> __('Disclaimer', 'largo'),
+		'desc' 	=> __('Enable Disclaimer Widget.', 'largo'),
+		'id' 	=> 'disclaimer_enabled',
+		'std' 	=> '0',
+		'type' 	=> 'checkbox');
+
+	$options[] = array(
+		'desc' 	=> __('Enter a default disclaimer', 'largo'),
+		'id' 	=> 'default_disclaimer',
+		'std' 	=> '',
+		'type' 	=> 'textarea');
+
+
+	/* Search Options */
 
 	$options[] = array(
 		'name' => __('Search options', 'largo'),
@@ -523,7 +594,22 @@ function optionsframework_options() {
 		'std' 	=> '',
 		'type' 	=> 'text');
 
+<<<<<<< HEAD
 	return $options;
+=======
+	$options[] = array(
+		'name' 	=> __('SEO Options', 'largo'),
+		'type'	=> 'info');
+
+	$options[] = array(
+		'desc' 	=> __('Use noindex for all archive pages (default is to use noindex for just date archives).', 'largo'),
+		'id' 	=> 'noindex_archives',
+		'std' 	=> '0',
+		'type' 	=> 'checkbox');
+
+
+	return apply_filters('largo_options', $options);
+>>>>>>> develop
 }
 
 /*
@@ -534,21 +620,30 @@ function optionsframework_options() {
 add_action('optionsframework_custom_scripts', 'optionsframework_custom_scripts');
 
 function optionsframework_custom_scripts() { ?>
-
 <script type="text/javascript">
 jQuery(document).ready(function($) {
-
+	// show/hide don't miss.
 	$('#show_dont_miss_menu').click(function() {
-  		$('#section-dont_miss_label').fadeToggle(400);
+		$('#section-dont_miss_label').fadeToggle(400);
 	});
 
 	if ($('#show_dont_miss_menu:checked').val() !== undefined) {
 		$('#section-dont_miss_label').show();
 	}
 
+	// show/hide sticky nav.
+	$('#show_sticky_nav').click(function() {
+		$('#section-show_sitename_in_sticky_nav').fadeToggle(400);
+	});
+
+	if ($('#show_sticky_nav:checked').val() !== undefined) {
+		$('#section-show_sitename_in_sticky_nav').show();
+	}
+
+	// show/hide donate button.
 	$('#show_donate_button').click(function() {
-  		$('#section-donate_link').fadeToggle(400);
-  		$('#section-donate_button_text').fadeToggle(400);
+		$('#section-donate_link').fadeToggle(400);
+		$('#section-donate_button_text').fadeToggle(400);
 	});
 
 	if ($('#show_donate_button:checked').val() !== undefined) {
@@ -556,16 +651,34 @@ jQuery(document).ready(function($) {
 		$('#section-donate_button_text').show();
 	}
 
+	// show/hide disclaimer.
+	$('#disclaimer_enabled').click(function() {
+		$('#section-default_disclaimer').fadeToggle(400);
+	});
+
+	if ($('#disclaimer_enabled:checked').val() == undefined) {
+		$('#section-default_disclaimer').hide();
+	}
+
+	// show/hide show tags.
 	$('#show_tags').click(function() {
-  		$('#section-tag_limit').fadeToggle(400);
+		$('#section-tag_limit').fadeToggle(400);
 	});
 
 	if ($('#show_tags:checked').val() !== undefined) {
 		$('#section-tag_limit').show();
 	}
 
+	// show/hide custom series landing pages.
+	$('#series_enabled').click(function() {
+		$('#section-custom_landing_enabled').fadeToggle(400);
+		$('#section-custom_landing_enabled input').removeAttr('checked');
+	});
+
+	if ($('#series_enabled:checked').val() !== undefined) {
+		$('#section-custom_landing_enabled').show();
+	}
 });
 </script>
-
 <?php
 }

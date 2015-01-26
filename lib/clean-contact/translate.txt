@@ -1,0 +1,4 @@
+Clean-contact can be translated using the provided pot file.  If you would like to contribute a translation, please e-mail at jm@onisland.ca.
+
+Cheers,
+-Jason

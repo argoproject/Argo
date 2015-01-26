@@ -1,15 +1,14 @@
 <?php
 /**
- * Template for various archive pages (category, tag, term, date, etc.
+ * Template for various non-category archive pages (tag, term, date, etc.)
  */
 get_header();
 ?>
 
-<div id="content" class="stories span8" role="main">
+<div class="clearfix">
 
-		<?php if ( have_posts() ) { ?>
-
-		<?php
+	<?php
+		if ( have_posts() || largo_have_featured_posts() ) {
 
 			// queue up the first post so we know what type of archive page we're dealing with
 			the_post();
@@ -19,107 +18,80 @@ get_header();
 			 * depending on what type of archive page we're looking at
 			 */
 
-			// if it's an author page, show the author box with their bio, social links, etc.
-
 			if ( is_author() ) {
-				get_template_part( 'largo-author-box' );
+				$rss_link = get_author_feed_link( get_the_author_meta( 'ID' ) );
+			} elseif ( is_tag() ) {
+				$title = single_tag_title( '', false );
+				$description = tag_description();
+				$rss_link =  get_tag_feed_link( get_queried_object_id() );
+			} elseif ( is_tax() ) {
+				$title = single_term_title( '', false );
+				$description = term_description();
 
-			// for categories, tags, and custom taxonomies we show the term name and description
-
-			} elseif ( is_category() || is_tag() || is_tax() ) {
-				if ( is_category() ) {
-					$title = single_cat_title( '', false );
-					$description = category_description();
-				} elseif ( is_tag() ) {
-					$title = single_tag_title( '', false );
-					$description = tag_description();
-				} elseif ( is_tax() ) {
-					$title = single_term_title( '', false );
-					$description = term_description();
-				}
-		?>
-			<header class="archive-background clearfix">
-				<?php
-					if ( $title)
-						echo '<h1 class="page-title">' . $title . '</h1>';
-					if ( $description )
-						echo '<div class="archive-description">' . $description . '</div>';
-
-					// category pages show a list of related terms
-
-					if ( is_category() && largo_get_related_topics_for_category( get_queried_object() ) != '<ul></ul>' ) { ?>
-						<div class="related-topics">
-							<h5><?php _e('Related Topics:', 'largo'); ?> </h5>
-							<?php echo largo_get_related_topics_for_category( get_queried_object() ); ?>
-						</div> <!-- /.related-topics -->
-				<?php
-					}
-				?>
-
-		<?php
-
-			// if it's a date archive we'll show the date dropdown in lieu of a description
-
+				// rss links for custom taxonomies are a little tricky
+				$queried_object = get_queried_object();
+				$term_id = intval( $queried_object->term_id );
+				$tax = $queried_object->taxonomy;
+				$rss_link = get_term_feed_link( $term_id, $tax );
 			} elseif ( is_date() ) {
+				$description = __( 'Select a different month:', 'largo' );
+				if ( is_month() ) {
+					$title = sprintf( __( 'Monthly Archives: <span>%s</span>', 'largo' ), get_the_date( 'F Y' ) );
+				} elseif ( is_year() ) {
+					$title = sprintf( __( 'Yearly Archives: <span>%s</span>', 'largo' ), get_the_date( 'Y' ) );
+				} else {
+					$title = _e( 'Blog Archives', 'largo' );
+				}
+			}
 		?>
+
+		<header class="archive-background clearfix">
+			<?php
+				if ( isset( $rss_link ) ) {
+					printf( '<a class="rss-link rss-subscribe-link" href="%1$s">%2$s <i class="icon-rss"></i></a>', $rss_link, __( 'Subscribe', 'largo' ) );
+				}
+
+				if ( isset( $title ) ) {
+					echo '<h1 class="page-title">' . $title . '</h1>';
+				}
+
+				if ( isset( $description ) ) {
+					echo '<div class="archive-description">' . $description . '</div>';
+				}
+
+				if ( is_date() ) {
+			?>
 					<nav class="archive-dropdown">
 						<select name="archive-dropdown" onchange='document.location.href=this.options[this.selectedIndex].value;'><option value=""><?php _e('Select Month', 'largo'); ?></option>
-						<?php wp_get_archives( array('type' => 'monthly', 'format' => 'option' ) ); ?>
+							<?php wp_get_archives( array('type' => 'monthly', 'format' => 'option' ) ); ?>
 						</select>
 					</nav>
-		<?php } ?>
-			</header>
+			<?php
+				} elseif ( is_author() ) {
+					the_widget( 'largo_author_widget', array( 'title' => '' ) );
+				}
+			?>
+		</header>
 
-			<h3 class="recent-posts clearfix">
-				<?php
+		<div class="row-fluid clearfix">
+			<div class="stories span8" role="main" id="content">
+			<?php
+				// and finally wind the posts back so we can go through the loop as usual
+				rewind_posts();
 
-					/*
-					 * Show a label for the list of recent posts
-					 * again, tailored to the type of page we're looking at
-					 */
-					$posts_term = of_get_option( 'posts_term_plural', 'Stories' );
+				while ( have_posts() ) : the_post();
+					get_template_part( 'partials/content', 'archive' );
+				endwhile;
 
-					if ( is_author() ) {
-						if ( function_exists( 'get_coauthors' ) && $author = get_coauthors( $post->ID ) ) {
-							printf(__('Recent %1$s<a class="rss-link" href="/author/%2$s/feed/"><i class="icon-rss"></i></a>', 'largo'), $posts_term, $author[0]->user_login );
-						} else {
-							printf(__('Recent %1$s<a class="rss-link" href="%2$s"><i class="icon-rss"></i></a>', 'largo'), $posts_term, get_author_feed_link( get_the_author_meta('ID') ) );
-						}
-					} elseif ( is_category() ) {
-						printf(__('Recent %1$s<a class="rss-link" href="%2$s"><i class="icon-rss"></i></a>', 'largo'), $posts_term, get_category_feed_link( get_queried_object_id() ) );
-					} elseif ( is_tag() ) {
-						printf(__('Recent %1$s<a class="rss-link" href="%2$s"><i class="icon-rss"></i></a>', 'largo'), $posts_term, get_tag_feed_link( get_queried_object_id() ) );
-					} elseif ( is_tax() ) {
-						$queried_object = get_queried_object();
-						$term_id = intval( $queried_object->term_id );
-						$tax = $queried_object->taxonomy;
-						printf(__('Recent %1$s<a class="rss-link" href="%2$s"><i class="icon-rss"></i></a>', 'largo'), $posts_term, get_term_feed_link( $term_id, $tax ) );
-					} elseif ( is_month() ) {
-						printf(__('Monthly Archives: <span>%s</span>', 'largo'), get_the_date('F Y') );
-					} elseif ( is_year() ) {
-						printf(__('Yearly Archives: <span>%s</span>', 'largo'), get_the_date('Y') );
-					} else {
-						_e('Archives', 'largo');
-					}
-					?>
-			</h3>
-
-	<?php
-			// and finally wind the posts back so we can go through the loop as usual
-
-			rewind_posts();
-
-			while ( have_posts() ) : the_post();
-				get_template_part( 'content', 'archive' );
-			endwhile;
-
-			largo_content_nav( 'nav-below' );
-		} else {
-			get_template_part( 'content', 'not-found' );
+				largo_content_nav( 'nav-below' );
+			?>
+			</div><!-- end content -->
+			<?php get_sidebar(); ?>
+		</div>
+		<?php } else {
+			get_template_part( 'partials/content', 'not-found' );
 		}
 	?>
+</div>
 
-</div><!--#content-->
-
-<?php get_sidebar(); ?>
-<?php get_footer(); ?>
+<?php get_footer();

@@ -49,9 +49,14 @@ class largo_recent_comments_widget extends WP_Widget {
 		$title = apply_filters('widget_title', empty( $instance['title'] ) ? __('Recent Comments', 'largo') : $instance['title'], $instance, $this->id_base);
 
 		if ( empty( $instance['number'] ) || ! $number = absint( $instance['number'] ) )
- 			$number = 5;
+			$number = 5;
 
-		$comments = get_comments( apply_filters( 'widget_comments_args', array( 'number' => $number, 'status' => 'approve', 'post_status' => 'publish' ) ) );
+		$comments = get_comments(apply_filters('widget_comments_args', array(
+			'number' => $number,
+			'status' => 'approve',
+			'post_status' => 'publish',
+			'type' => 'comment'
+		)));
 
 		$output .= $before_widget;
 		if ( $title )
@@ -61,7 +66,7 @@ class largo_recent_comments_widget extends WP_Widget {
 		if ( $comments ) {
 			foreach ( (array) $comments as $comment) {
 				$output .=  '<li class="recentcomments">';
-				$output .= '<p class="comment-excerpt">' . get_comment_excerpt() . '</p>';
+				$output .= '<p class="comment-excerpt">&ldquo;' . get_comment_excerpt() . '&rdquo;</p>';
 				$output .= '<p class="comment-meta">&mdash;&nbsp;' . get_comment_author_link() . ' on <a href="' . esc_url( get_comment_link($comment->comment_ID) ) . '">' . get_the_title($comment->comment_post_ID) . '</a></p>';
 				$output .= '</li>';
 			}
@@ -79,7 +84,7 @@ class largo_recent_comments_widget extends WP_Widget {
 	 */
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
-		$instance['title'] = strip_tags( $new_instance['title'] );
+		$instance['title'] = sanitize_text_field( $new_instance['title'] );
 		$instance['number'] = absint( $new_instance['number'] );
 		$this->flush_widget_cache();
 
@@ -107,13 +112,13 @@ class largo_recent_comments_widget extends WP_Widget {
 		?>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e('Title:', 'largo'); ?></label>
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e('Title', 'largo'); ?>:</label>
 			<input id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $instance['title'] ); ?>" style="width:90%;" />
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id('number'); ?>"><?php _e('Number of comments to show:', 'largo'); ?></label>
-		<input id="<?php echo $this->get_field_id('number'); ?>" name="<?php echo $this->get_field_name('number'); ?>" type="text" value="<?php echo $number; ?>" size="3" />
+			<label for="<?php echo $this->get_field_id('number'); ?>"><?php _e('Number of comments to show', 'largo'); ?>:</label>
+		<input id="<?php echo $this->get_field_id('number'); ?>" name="<?php echo $this->get_field_name('number'); ?>" type="text" value="<?php echo (int) $number; ?>" size="3" />
 		</p>
 
 	<?php

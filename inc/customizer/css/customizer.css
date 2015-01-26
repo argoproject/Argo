@@ -1,0 +1,24 @@
+.control-section[id^=accordion-section-largo_],
+#accordion-section-nav {
+	display:none;
+}
+
+ul.customize-control-rich-radio li {
+	display: none;
+}
+
+.customize-control-rich-radio-previous {
+	float: left;
+}
+
+.customize-control-rich-radio-next {
+	float: right;
+}
+
+.customize-control-rich-radio-text {
+	text-align: center;
+}
+
+.customize-control-rich-radio img {
+	padding-top: 5px;
+}

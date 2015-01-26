@@ -1,0 +1,253 @@
+// --------------------------------------------
+// COLOR
+// --------------------------------------------
+
+// Grays
+// -------------------------
+@black:                 #000;
+@grayDarker:            #222;
+@grayDark:              #333;
+@gray:                  #555;
+@grayLight:             #999;
+@grayLighter:           #ddd;
+@white:                 #fff;
+
+
+// Accent colors
+// -------------------------
+@blue:                  #2275bb;
+@blueDark:              #0064cd;
+@green:                 #46a546;
+@red:                   #bd261d;
+@yellow:                #ffc40d;
+@orange:                #f89406;
+@pink:                  #c3325f;
+@purple:                #7a43b6;
+
+/**
+ * @group Color
+ * @label Base Color (used for navbar, widget titles, etc.)
+ * @type color
+ * @default_value #2275bb
+ */
+@baseColor:				@blue;
+
+/**
+ * @group Color
+ * @label Header/Footer Color
+ * @type color
+ * @default_value #222
+ */
+@headerFooterColor:		@grayDarker;
+
+/**
+ * @group Color
+ * @label Pre-Footer Color
+ * @type color
+ * @default_value #ddd
+ */
+@preFooterColor:		@grayLighter;
+
+/**
+ * @group Color
+ * @label Color of links
+ * @type color
+ * @default_value #2275bb
+ */
+@linkColor:             @blue;
+
+/**
+ * @group Color
+ * @label Hover color of links
+ * @type color
+ * @default_value #2275bb
+ */
+@linkColorHover:        lighten(@linkColor, 10%);
+
+/**
+ * @group Color
+ * @label Background color of post meta boxes (author bio, related posts, etc.)
+ * @type color
+ * @default_value #fff
+ */
+@postBoxBackgroundColor:	#fff;
+
+
+// --------------------------------------------
+// LAYOUT
+// --------------------------------------------
+
+@containerMaxWidth:		1170px;
+
+/**
+ * @group Basics
+ * @label Body Background Color
+ * @type color
+ * @default_value #fff
+ */
+@bodyBackground:        @white;
+
+/**
+ * @group Basics
+ * @label Page Background Color
+ * @type color
+ * @default_value #fff
+ */
+@pageBackground:        @white;
+
+/**
+ * @group Basics
+ * @label Text Color
+ * @type color
+ * @default_value #333
+ */
+@textColor:             @grayDark;
+/**
+ * @group Basics
+ * @label Default Vertical Spacing
+ * @type pixels
+ * @default_value 24px
+ */
+@baseline:				24px;
+
+// Grid
+// -------------------------
+@gridColumns:             12;
+@fluidGridColumnWidth:    6.382978723%;
+@fluidGridGutterWidth:    2.127659574%;
+@gridRowWidth:            100%;
+
+
+// --------------------------------------------
+// TYPOGRAPHY
+// --------------------------------------------
+
+/**
+ * @group Typography
+ * @label Sans Font Family
+ * @type text
+ * @default_value "Helvetica Neue", Helvetica, Arial, sans-serif
+ */
+@sansFontFamily:        "Helvetica Neue", Helvetica, Arial, sans-serif;
+/**
+ * @group Typography
+ * @label Serif Font Family
+ * @type text
+ */
+@serifFontFamily:       Georgia, "Times New Roman", Times, serif;
+@monoFontFamily:        Menlo, Monaco, Consolas, "Courier New", monospace;
+
+/**
+ * @group Typography
+ * @label Base Font Size
+ * @type pixels
+ */
+@baseFontSize:          16px;
+
+/**
+ * @group Typography
+ * @label Sans Font Family
+ * @type dropdown
+ * @options @serifFontFamily|@sansFontFamily
+ * @default_value @serifFontFamily
+ */
+@baseFontFamily:        @serifFontFamily;
+/**
+ * @group Typography
+ * @label Base Line Height
+ * @type text
+ * @default_value 1.5
+ */
+@baseLineHeight:        1.5;
+
+@altFontFamily:         @sansFontFamily;
+@baseFontWeight:		normal;
+
+@headingsFontFamily:    @sansFontFamily; // empty to use default, @baseFontFamily
+@headingsFontWeight:    bold; // empty to use default, @baseFontWeight
+@headingsColor:         inherit; // empty to use default, @textColor
+
+
+// --------------------------------------------
+// FORMS, TABLES AND BUTTONS
+// --------------------------------------------
+
+// Tables
+// -------------------------
+@tableBackground:                   transparent; // overall background-color
+@tableBackgroundAccent:             #f9f9f9; // for striping
+@tableBackgroundHover:              #f5f5f5; // for hover
+@tableBorder:                       #ddd; // table and cell border
+
+
+// Buttons
+// -------------------------
+@btnBackground:                     @white;
+@btnBackgroundHighlight:            darken(@white, 10%);
+@btnBorder:                         #ccc;
+
+@btnPrimaryBackground:              @baseColor;
+@btnPrimaryBackgroundHighlight:     spin(@btnPrimaryBackground, 15%);
+
+
+// Forms
+// -------------------------
+@inputBackground:               @white;
+@inputBorder:                   #ccc;
+@inputBorderRadius:             3px;
+@inputDisabledBackground:       @grayLighter;
+@formActionsBackground:         #f5f5f5;
+
+@placeholderText:         @grayLight;
+
+
+// Form states and alerts
+// -------------------------
+@warningText:             #c09853;
+@warningBackground:       #fcf8e3;
+@warningBorder:           darken(spin(@warningBackground, -10), 3%);
+
+@errorText:               #b94a48;
+@errorBackground:         #f2dede;
+@errorBorder:             darken(spin(@errorBackground, -10), 3%);
+
+@successText:             #468847;
+@successBackground:       #dff0d8;
+@successBorder:           darken(spin(@successBackground, -10), 5%);
+
+@infoText:                #3a87ad;
+@infoBackground:          #d9edf7;
+@infoBorder:              darken(spin(@infoBackground, -10), 7%);
+
+// Z-index master list
+// -------------------------
+@zindexDropdown:          1000;
+@zindexPopover:           1010;
+@zindexTooltip:           1020;
+@zindexFixedNavbar:       1030;
+@zindexModalBackdrop:     1040;
+@zindexModal:             1050;
+
+// Navbar
+// -------------------------
+@navbarHeight:                    40px;
+@navbarFontSize:				  15px;
+@navbarBackground:                darken(@baseColor, 5%);
+@navbarBackgroundHighlight:       @baseColor;
+
+@navbarText:                      @white;
+@navbarLinkColor:                 @white;
+@navbarLinkColorHover:            @grayLighter;
+@navbarLinkColorActive:           @navbarLinkColorHover;
+@navbarLinkBackgroundHover:       transparent;
+@navbarLinkBackgroundActive:      @navbarBackground;
+
+// Dropdowns
+// -------------------------
+@dropdownBackground:            @white;
+@dropdownBorder:                rgba(0,0,0,.2);
+@dropdownLinkColor:             @grayDark;
+@dropdownLinkColorHover:        @white;
+@dropdownLinkBackgroundHover:   @baseColor;
+@dropdownDividerTop:            #e5e5e5;
+@dropdownDividerBottom:         @white;

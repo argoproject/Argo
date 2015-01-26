@@ -1,44 +1,6 @@
 <?php
 
 /**
- * Register our custom nav menus
- * and link menus to locations
- *
- * @since 1.0
- */
-function largo_register_custom_menus() {
-    $menus = array(
-        'global-nav'         	=> __( 'Global Navigation', 'largo' ),
-        'navbar-categories'     => __( 'Navbar Categories List', 'largo' ),
-        'navbar-supplemental'	=> __( 'Navbar Supplemental Links', 'largo' ),
-        'dont-miss'       		=> __( 'Don\'t Miss', 'largo' ),
-        'footer'          		=> __( 'Footer Navigation', 'largo' ),
-        'footer-bottom'			=> __( 'Footer Bottom', 'largo' )
-    );
-    register_nav_menus( $menus );
-
-    //Try to automatically link menus to each of the locations.
-    foreach ( $menus as $location => $label ) {
-        // if a location isn't wired up...
-        if ( ! has_nav_menu( $location ) ) {
-
-            // get or create the nav menu
-            $nav_menu = wp_get_nav_menu_object( $label );
-            if ( ! $nav_menu ) {
-                $new_menu_id = wp_create_nav_menu( $label );
-                $nav_menu = wp_get_nav_menu_object( $new_menu_id );
-            }
-
-            // wire it up to the location
-            $locations = get_theme_mod( 'nav_menu_locations' );
-            $locations[ $location ] = $nav_menu->term_id;
-            set_theme_mod( 'nav_menu_locations', $locations );
-        }
-    }
-}
-add_action( 'after_setup_theme', 'largo_register_custom_menus' );
-
-/**
  * Output a donate button from theme options
  * used by default in the global nav area
  *
@@ -46,12 +8,11 @@ add_action( 'after_setup_theme', 'largo_register_custom_menus' );
  */
 if ( ! function_exists( 'largo_donate_button' ) ) {
 	function largo_donate_button () {
-		$donate_link = esc_url( of_get_option( 'donate_link' ) );
-		if ( $donate_link )
+		if ( $donate_link = of_get_option( 'donate_link' ) )
 			printf('<div class="donate-btn"><a href="%1$s"><i class="icon-heart"></i>%2$s</a></div> ',
-		    	$donate_link,
-		    	of_get_option( 'donate_button_text' )
-		    );
+				esc_url( $donate_link ),
+				esc_html( of_get_option( 'donate_button_text' ) )
+			);
 	}
 }
 
@@ -63,14 +24,14 @@ if ( ! function_exists( 'largo_donate_button' ) ) {
  */
 if ( ! function_exists( 'largo_add_dont_miss_label' ) ) {
 	function largo_add_dont_miss_label( $items, $args ) {
-	    return '<li class="menu-label">' . of_get_option( 'dont_miss_label') . '</li>' . $items;
+	    return '<li class="menu-label">' . esc_html( of_get_option( 'dont_miss_label') ) . '</li>' . $items;
 	}
 }
 add_filter( 'wp_nav_menu_dont-miss_items', 'largo_add_dont_miss_label', 10, 2 );
 
 if ( ! function_exists( 'largo_add_footer_menu_label' ) ) {
 	function largo_add_footer_menu_label( $items, $args ) {
-	    return '<li class="menu-label">' . of_get_option( 'footer_menu_label') . '</li>' . $items;
+	    return '<li class="menu-label">' . esc_html( of_get_option( 'footer_menu_label') ) . '</li>' . $items;
 	}
 }
 add_filter( 'wp_nav_menu_footer-navigation_items', 'largo_add_footer_menu_label', 10, 2 );
@@ -132,7 +93,6 @@ class Bootstrap_Walker_Nav_Menu extends Walker_Nav_Menu {
 	}
 
 	function display_element( $element, &$children_elements, $max_depth, $depth=0, $args, &$output ) {
-
 		if ( !$element )
 			return;
 
@@ -175,4 +135,33 @@ class Bootstrap_Walker_Nav_Menu extends Walker_Nav_Menu {
 		call_user_func_array(array(&$this, 'end_el'), $cb_args);
 
 	}
+}
+
+/**
+ * Wrapper function around wp_nav_menu()
+ *
+ *  @since 0.4
+ */
+function largo_nav_menu($args = array()) {
+	$my_args = wp_parse_args($args);
+	$my_args = apply_filters('wp_nav_menu_args', $my_args);
+	$my_args = (object) $my_args;
+
+	if ((isset($my_args->echo) && true === $my_args->echo) || !isset($my_args->echo))
+		$echo = true;
+	else
+		$echo = false;
+
+	if (false === $echo)
+		$nav_menu = wp_nav_menu($my_args);
+	else {
+		ob_start();
+		wp_nav_menu($my_args);
+		$nav_menu = ob_get_clean();
+	}
+
+	if (true === $echo)
+		echo $nav_menu;
+	else
+		return $nav_menu;
 }
