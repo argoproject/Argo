@@ -2,7 +2,7 @@
 
 A responsive WordPress framework designed for news publishers and developed by the Investigative News Network.
 
-<img src="https://travis-ci.org/INN/Largo.svg?branch=develop" /> <img src="https://readthedocs.org/projects/largo/badge/?version=develop" />
+<img src="https://travis-ci.org/INN/Largo.svg?branch=master" /> <img src="https://readthedocs.org/projects/largo/badge/?version=master" />
 
 ---
 
