@@ -594,9 +594,6 @@ function optionsframework_options() {
 		'std' 	=> '',
 		'type' 	=> 'text');
 
-<<<<<<< HEAD
-	return $options;
-=======
 	$options[] = array(
 		'name' 	=> __('SEO Options', 'largo'),
 		'type'	=> 'info');
@@ -609,7 +606,6 @@ function optionsframework_options() {
 
 
 	return apply_filters('largo_options', $options);
->>>>>>> develop
 }
 
 /*
