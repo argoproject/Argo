@@ -1989,7 +1989,7 @@ table .span24 {
 }
 .global-nav .nav-right .donate-btn {
   float: left;
-  margin: 5px 10px 0;
+  margin: 5px 0 0 10px;
 }
 .global-nav .nav-right .org-logo {
   float: left;
@@ -2022,6 +2022,7 @@ table .span24 {
   margin: 1px 3px 0 0;
 }
 #header-search {
+  margin-left: 10px;
   margin-top: 5px;
   max-width: 210px;
   float: left;
