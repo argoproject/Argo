@@ -81,7 +81,7 @@ function largo_home_transition() {
 		if ($old_regime == 'blog')
 			$home_template = 'HomepageBlog';
 		of_set_option('home_template', $home_template);
-	} else {
+	} else if (!$new_regime) {
 		of_set_option('home_template', 'HomepageBlog');
 	}
 }

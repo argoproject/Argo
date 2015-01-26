@@ -18,7 +18,6 @@
   float: left;
   width: 100%;
   background-color: @baseColor;
-  padding-left: 5px;
 }
 
 // Set width to auto for default container
@@ -75,6 +74,9 @@
   padding: @navbarHeight/4;
   color: @navbarLinkColor;
   text-decoration: none;
+}
+.navbar #header-social li > a {
+  padding-right: 0;
 }
 .navbar li.dropdown > a {
   padding-right: 0;
@@ -641,9 +643,6 @@ li.home-link:hover i {
 }
 
 // Sticky nav
-.nav-right > ul > li > a {
-  padding: 10px 4px;
-}
 .sticky-nav-holder {
   position: fixed;
   top: 0;
@@ -811,7 +810,7 @@ li.home-link:hover i {
       }
     }
   }
-  #header-search.show {
+  #sticky-nav-search.show {
     .input-append {
       position: absolute;
       opacity: 1;

@@ -25,7 +25,7 @@
 								</li><?php
 								}
 							} ?>
-							<li id="header-search">
+							<li id="sticky-nav-search">
 								<a href="#" class="toggle">
 									<i class="icon-search" title="<?php esc_attr_e('Search', 'largo'); ?>" role="button"></i>
 								</a>

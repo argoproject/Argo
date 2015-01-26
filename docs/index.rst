@@ -48,7 +48,6 @@ General Documentation
     users/plugins
     users/contactforms
     users/ads
-    users/thirdpartyintegrations
 
 
 .. _dev-docs:

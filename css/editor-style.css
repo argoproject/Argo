@@ -388,8 +388,12 @@ article.story {
   margin-bottom: 0;
 }
 .rss-subscribe-link {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   float: right;
   text-transform: uppercase;
+}
+.rss-subscribe-link:hover {
+  text-decoration: none;
 }
 .archive-background {
   margin-bottom: 24px;
@@ -542,7 +546,6 @@ article img.attachment-post-thumbnail {
 .sticky-solo a:hover {
   opacity: 0.9;
   filter: alpha(opacity=90);
-  text-decoration: none;
 }
 .sticky-related h4,
 .sticky-solo h4 {
@@ -618,16 +621,16 @@ body.normal.page #content {
     margin-left: 0;
   }
 }
-body.normal.single-post .entry-content,
-body.normal.page .entry-content {
-  clear: both;
-}
 body.normal.single-post .hero,
 body.normal.page .hero {
   text-align: center;
   background-color: #efefef;
   width: 151.5%;
   margin: 0 -25.75% 24px;
+}
+body.normal.single-post .hero.is-gallery,
+body.normal.page .hero.is-gallery {
+  background-color: transparent;
 }
 body.normal.single-post .hero p.wp-caption-text,
 body.normal.page .hero p.wp-caption-text,

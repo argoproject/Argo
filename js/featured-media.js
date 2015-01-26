@@ -11,6 +11,7 @@ var LFM = _.extend(LFM || {}, {
     Models: {},
     Controller: {},
     instances: {},
+    fetching: false
 });
 
 (function() {
@@ -441,6 +442,8 @@ var LFM = _.extend(LFM || {}, {
     });
 
     LFM.Views.defaultToolbar = wp.media.view.Toolbar.extend({
+        saving: false,
+
         initialize: function() {
             _.defaults(this.options, {
                 items: {
@@ -461,6 +464,9 @@ var LFM = _.extend(LFM || {}, {
         },
 
         save: function() {
+            if (this.saving)
+                return;
+
             var self = this,
                 view = this.controller,
                 state = view.state(),
@@ -490,10 +496,12 @@ var LFM = _.extend(LFM || {}, {
                 attrs = LFM.Utils.formArrayToObj(view.$el.find('form').serializeArray());
             }
 
+            this.saving = true;
             this.showSpinner();
             view.model = new featuredMediaModel(attrs);
             view.model.save({}, {
                 success: function() {
+                    self.saving = false;
                     self.hideSpinner();
                     $('#set-featured-media-button').text('Edit Featured Media');
                     LFM.has_featured_media = true;
@@ -512,6 +520,8 @@ var LFM = _.extend(LFM || {}, {
     });
 
     LFM.Views.featuredImageToolbar = LFM.Views.defaultToolbar.extend({
+        saving: false,
+
         initialize: function() {
             _.defaults(this.options, {
                 items: {
@@ -532,6 +542,9 @@ var LFM = _.extend(LFM || {}, {
         },
 
         save: function() {
+            if (this.saving)
+                return;
+
             var self = this,
                 state = this.controller.state();
 
@@ -657,10 +670,19 @@ var LFM = _.extend(LFM || {}, {
 
     $(document).ready(function() {
         $('#set-featured-media-button').click(function() {
-            var model = new featuredMediaModel();
+            if (LFM.fetching)
+                return;
 
+            var model = new featuredMediaModel(),
+                spinner = $('#wp-content-media-buttons .spinner');
+
+            LFM.fetching = true;
+            spinner.show();
             model.fetch({
                 success: function(data) {
+                    LFM.fetching = false;
+                    spinner.hide();
+
                     var modal,
                         initialViewId = data.get('type') || 'embed-code',
                         option = _.findWhere(LFM.options, { id: initialViewId }),
