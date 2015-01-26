@@ -19,15 +19,14 @@ Here's an example of a dead simple homepage layout class:
     include_once get_template_directory() . '/homepages/homepage-class.php';
 
     class MyCustomLayout extends Homepage {
-      var $name = 'My Custom Homepage Layout';
-      var $description = 'Lorem ipsum dolor sit amet.';
-
       function __construct($options=array()) {
         $defaults = array(
+          'name' => __('My Custom Homepage Layout', 'largo'),
+          'description' => __('Lorem ipsum dolor sit amet.', 'largo'),
           'template' => get_stylesheet_directory() . '/homepages/templates/my-custom-homepage-template.php'
         );
-        $options = array_merge($defaults, $options);
-        $this->load($options);
+		$options = array_merge($defaults, $options);
+		parent::__construct($options);
       }
     }
 
