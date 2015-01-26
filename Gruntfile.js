@@ -26,6 +26,33 @@ module.exports = function(grunt) {
             }
         },
 
+        uglify: {
+            target: {
+                options: {
+                    report: 'gzip'
+                },
+                files: [{
+                    expand: true,
+                    cwd: 'js',
+                    src: [
+                        'custom-less-variables.js',
+                        'custom-sidebar.js',
+                        'custom-term-icons.js',
+                        'featured-media.js',
+                        'image-widget.js',
+                        'largoCore.js',
+                        'load-more-posts.js',
+                        'top-terms.js',
+                        'update-page.js',
+                        'widget-php.js',
+                        '!*.min.js'
+                    ],
+                    dest: 'js',
+                    ext: '.min.js'
+                }]
+            }
+        },
+
         cssmin: {
             target: {
                 options: {

@@ -9,6 +9,7 @@
     "grunt-po2mo": "~0.1.0",
     "grunt-shell": ">=0.2.1",
     "load-grunt-tasks": "~1.0.0",
-    "grunt-contrib-cssmin": "~0.11.0"
+    "grunt-contrib-cssmin": "~0.11.0",
+    "grunt-contrib-uglify": "~0.7.0"
   }
 }
