@@ -4,21 +4,40 @@ module.exports = function(grunt) {
     // Force use of Unix newlines
     grunt.util.linefeed = '\n';
 
+    var CSS_LESS_FILES = {
+        'css/style.css': 'less/style.less',
+        'css/editor-style.css': 'less/editor-style.less',
+        'homepages/assets/css/single.css': 'homepages/assets/less/single.less',
+        'homepages/assets/css/top-stories.css': 'homepages/assets/less/top-stories.less',
+        'homepages/assets/css/legacy-three-column.css': 'homepages/assets/less/legacy-three-column.less'
+    };
+
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
         less: {
             development: {
+                options: { paths: ['less'] },
+                files: CSS_LESS_FILES
+            },
+            production: {
+                options: { paths: ['less'] },
+                files: CSS_LESS_FILES
+            }
+        },
+
+        cssmin: {
+            target: {
                 options: {
-                    paths: ['less']
+                    report: 'gzip'
                 },
-                files: {
-                    'css/style.css': 'less/style.less',
-                    'css/editor-style.css': 'less/editor-style.less',
-                    'homepages/assets/css/single.css': 'homepages/assets/less/single.less',
-                    'homepages/assets/css/top-stories.css': 'homepages/assets/less/top-stories.less',
-                    'homepages/assets/css/legacy-three-column.css': 'homepages/assets/less/legacy-three-column.less'
-                }
+                files: [{
+                    expand: true,
+                    cwd: 'css',
+                    src: ['*.css', '!*.min.css'],
+                    dest: 'css',
+                    ext: '.min.css'
+                }]
             }
         },
 
@@ -40,7 +59,7 @@ module.exports = function(grunt) {
                     'less/**/*.less',
                     'homepages/assets/less/**/*.less'
                 ],
-                tasks: 'less'
+                tasks: 'less:development'
             },
             sphinx: {
                 files: ['docs/*.rst', 'docs/*/*.rst'],
