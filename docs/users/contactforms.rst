@@ -3,7 +3,7 @@ Contact Forms
 
 To allow for the addition of simple contact forms to your site, Largo incorporates a slightly customized version of the `Clean Contact <https://wordpress.org/plugins/clean-contact//>`_ plugin.
 
-The settings for this plugin can be found under Plugins > Clean Contact. By default it will send email submitted through the form to the admin email address you set under the Settings > General menu.
+The settings for this plugin can be found under Settings > Clean Contact. By default it will send email submitted through the form to the admin email address you set under the Settings > General menu.
 
 Creating a contact page is as simple as creating a new page and putting the following shortcode in the editor, on its own line where you want the contact form to appear:
 
