@@ -129,7 +129,7 @@ function largo_remove_hero($content) {
 		return $content;
 
 	if( of_get_option( 'single_template' ) == 'classic' )
-		return of_get_option( 'single_template' );
+		return $content;
 
 	$p = explode("\n",$content);
 	
