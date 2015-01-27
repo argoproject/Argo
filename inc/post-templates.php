@@ -129,7 +129,7 @@ function largo_remove_hero($content) {
 		return $content;
 
 	if( of_get_option( 'single_template' ) == 'classic' )
-		return $content;
+		return of_get_option( 'single_template' );
 
 	$p = explode("\n",$content);
 	
@@ -139,9 +139,8 @@ function largo_remove_hero($content) {
 	// 		$matches[0] = <img src="..." class="..." id="..." />
 	//		$matches[1] = value of src.
 
-	$pattern = '#<img src="([^"]+)"[^>]*>#';
+	$pattern = '/<img src="([^"]+)"[^>]*>/';
 	$hasImg = preg_match($pattern,$p[0],$matches);
-
 	$imgDom = $matches[0];
 	$src = $matches[1];
 
@@ -156,14 +155,23 @@ function largo_remove_hero($content) {
 	$featureImgId = get_post_thumbnail_id();
 	$pImgId = largo_url_to_attachmentid($matches[1]);
 
+	// Try a second way to get the attachment id
+
+	$pattern = '/class="([^"]+)"/';
+	preg_match($pattern,$imgDom,$classes);
+
+	$classes = $classes[1];
+
+	if( !$pImgId ) {
+		$pattern = '/wp-image-(\d+)/';
+		preg_match($pattern,$classes,$imgId);
+		$pImgId = $imgId[1];
+	}
+
 	if( !($pImgId == $featureImgId) ) 
 		return $content;
 	
 	// 5: Check if it's a full width image, or if the image is not large enough to be a hero.
-
-	$pattern = '#class="([^"]+)"#';
-	preg_match($pattern,$imgDom,$classes);
-	$classes = $classes[1];
 
 	if( strpos($classes,'size-small') || strpos($classes,'size-medium') ) 
 		return $content;
@@ -176,7 +184,7 @@ function largo_remove_hero($content) {
 	return $content;
 
 }
-add_filter('the_content','largo_remove_hero');
+add_filter('the_content','largo_remove_hero',1);
 
 
 /**
