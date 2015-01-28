@@ -139,7 +139,7 @@ function largo_remove_hero($content) {
 	// 		$matches[0] = <img src="..." class="..." id="..." />
 	//		$matches[1] = value of src.
 
-	$pattern = '/<img src="([^"]+)"[^>]*>/';
+	$pattern = '/<img\s+[^>]*src="([^"]*)"[^>]*>/';
 	$hasImg = preg_match($pattern,$p[0],$matches);
 	$imgDom = $matches[0];
 	$src = $matches[1];
