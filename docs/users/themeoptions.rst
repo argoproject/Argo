@@ -130,7 +130,7 @@ For more information on creating a series landing page, see :doc:`landingpages`.
 
 **Disclaimer** - If checked, you can enter a default disclaimer that will be displayed on all posts.
 
-**Search Options** - Google Custom Search generally returns better search results than WordPress' included search engine. If you would like to enable Google Custom Cearch, go to https://www.google.com/cse/create/new to set it up, then paste your search engine ID in the settings box and enable the checkbox.
+**Search Options** - Google Custom Search generally returns better search results than WordPress' included search engine. If you would like to enable Google Custom Search, go to https://www.google.com/cse/create/new to set it up, then paste your search engine ID in the settings box and enable the checkbox.
 
 **Site Verification**:
 
