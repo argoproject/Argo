@@ -83,10 +83,11 @@ function largo_dashboard_quick_links() {
      	<div class="list-widget">
      		<p>If you\'re having trouble with your site, want to request a new feature or are just interested in learning more about Project Largo, here are a few helpful links:</p>
      		<ul>
-     			<li><a href="http://largoproject.org/using-your-project-largo-site/">Largo Project Documentation</a></li>
-     			<li><a href="http://largoproject.org/setup/">Largo Setup Guide</a></li>
-     			<li><a href="http://largoproject.org/questions/">Ask A Question</a></li>
-     			<li><a href="http://largoproject.org/contact/">Contact Us</a></li>
+     			<li><a href="http://largoproject.org/">Largo Project Website</a></li>
+     			<li><a href="http://largo.readthedocs.org/">Largo Documentation</a></li>
+     			<li><a href="http://jira.investigativenewsnetwork.org/servicedesk/customer/portal/4">Help Desk</a></li>
+     			<li><a href="http://confluence.investigativenewsnetwork.org/display/LKB/Largo+Knowledge+Base">Knowledge Base</a></li>
+     			<li><a href="mailto:support@largoproject.org">Contact Us</a></li>
      		</ul>
      		<p>Developers can also log issues on <a href="https://github.com/INN/Largo">our public github repository</a> and if you would like to be included in our Largo users\' group, please e-mail: <a href="mailto:largo@investigativenewsnetwork.org">largo@investigativenewsnetwork.org</a>.</p>
      	</div>
