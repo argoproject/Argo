@@ -29,12 +29,23 @@
  */
 
 /**
- * By default we'll assume the site is not for an INN member
- * set INN_MEMBER to TRUE to show an INN logo in the header
+ * By default we'll assume the site is not hosted by INN.
+ * 
+ * There should be no reason to set this. It is defined to 
+ * modify the default value of 'INN_MEMBER' below to true for 
+ * INN hosted sites.
+ */
+if ( ! defined( 'INN_HOSTED' ) )
+	define( 'INN_HOSTED', FALSE );
+
+/**
+ * By default we'll assume the site is not for an INN member.
+ * 
+ * Set INN_MEMBER to TRUE to show an INN logo in the header
  * and a widget of INN member stories in the homepage sidebar
  */
 if ( ! defined( 'INN_MEMBER' ) )
-	define( 'INN_MEMBER', FALSE );
+	define( 'INN_MEMBER', FALSE || INN_HOSTED );
 
 /**
  * Image size constants, almost 100% that you won't need to change these
