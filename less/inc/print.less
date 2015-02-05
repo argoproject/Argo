@@ -1,4 +1,5 @@
 @media print {
+
 	// the basics (based on http://html5boilerplate.com/)
 	* {
 		background:transparent !important;
@@ -10,7 +11,16 @@
 	}
 
 	a,a:visited {
+		color:#000066; 
 		text-decoration:underline
+	}
+
+	.hero {
+		float: right;
+	}
+
+	hr {
+		margin: 12px 0;
 	}
 
 	pre,blockquote {
@@ -23,13 +33,17 @@
 	body.normal.single-post .hero, body.normal.page .hero {
 		width: 60%; /* save some paper. */
 		margin-left: 0;
+		margin-bottom: 0;
 		float:none;
 	}
 	
-	#content img, #content .wp-caption > img {
-	//  Optional: control image sizes to save paper.
-	//	max-width: 60% !important;
-	//	height: auto;
+	#content > img.size-large, #content .wp-caption img.size-large {
+		max-width: 60% !important;
+		height: auto;
+	}
+
+	aside.type-pull-quote {
+		margin-bottom: 12px;
 	}
 
 	#content.span8[role=main] {
@@ -44,9 +58,9 @@
 		page-break-inside:avoid
 	}
 
-	img {
+	img { /*
 		max-width:100% !important
-	}
+	*/}
 
 	@page {
 		margin:.5cm .5cm 1cm
@@ -59,6 +73,10 @@
 
 	h2,h3 {
 		page-break-after:avoid
+	}
+
+	.author .url {
+		text-decoration: none;
 	}
 
 	nav,
@@ -87,14 +105,39 @@
 		border-bottom: 1px solid #ccc;
 	}
 
+	.module,
 	.module.image,
-	.largo-disclaimer {
+	.wp-caption,
+	.wp-media-credit,
+	p.wp-caption-text,
+	.largo-disclaimer,
+	.hero
+	 {
 		font-size: 10px !important;
-		font-style: italic
+		font-style: italic;
+	}
+
+	.hero p.wp-media-credit,
+	.hero p.wp-caption,
+	.hero p.wp-caption-text {
+		width: 100% !important;
+		margin: 0 !important;
+	}
+
+	.edit-link {
+		display: none;
 	}
 
 	.print-header {
-		display:block
+		display:block;
+		border-bottom: 1px solid #000;
+		margin-bottom: 0;
+		strong {
+			display: inline-block;
+			border-right: 1px solid #000;
+			padding-right: 10px;
+			margin-right: 10px;
+		}
 	}
 
 	p,ul,ol,.byline {
@@ -113,7 +156,7 @@
 	.entry-content a:link:after,
 	.entry-content a:visited:after {
 		content:" (" attr(href) ") ";
-		font-size:90%
+		font-size:80%
 	}
 
   .DV-container { display: none; }
