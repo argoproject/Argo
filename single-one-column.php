@@ -16,26 +16,28 @@ get_header();
 <div id="content" class="span8" role="main">
 	<?php
 		while ( have_posts() ) : the_post();
-			$partial = (is_page())? 'page':'single';
+			$partial = ( is_page() ) ? 'page' : 'single';
 			get_template_part( 'partials/content', $partial );
 
-			if ( is_active_sidebar( 'article-bottom' ) ) {
+			if ( $partial === 'single ' ) {
+				if ( is_active_sidebar( 'article-bottom' ) ) {
 
-				do_action( 'largo_before_post_bottom_widget_area' );
+					do_action( 'largo_before_post_bottom_widget_area' );
 
-				echo '<div class="article-bottom">';
-				dynamic_sidebar( 'article-bottom' );
-				echo '</div>';
+					echo '<div class="article-bottom">';
+					dynamic_sidebar( 'article-bottom' );
+					echo '</div>';
 
-				do_action( 'largo_after_post_bottom_widget_area' );
+					do_action( 'largo_after_post_bottom_widget_area' );
 
+				}
+
+				do_action(' largo_before_comments' );
+
+				comments_template( '', true );
+
+				do_action( 'largo_after_comments' );
 			}
-
-			do_action(' largo_before_comments' );
-
-			comments_template( '', true );
-
-			do_action( 'largo_after_comments' );
 
 		endwhile;
 	?>
