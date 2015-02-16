@@ -44,4 +44,4 @@ Similarly, you can specifically include users with the `include` attribute. If y
 
 By default, the `roster` shortcode does not include users with an empty bio/description. If you want to show users with an empty bio/description anyway, add the attribute `show_users_with_empty_desc` to the `roster` shortcode like so:
 
-    [roster roles="administrator,author,editor" exclude="2" show_users_with_empty_desc]
+    [roster roles="administrator,author,editor" exclude="2" show_users_with_empty_desc=true]
