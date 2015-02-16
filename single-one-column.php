@@ -19,7 +19,7 @@ get_header();
 			$partial = ( is_page() ) ? 'page' : 'single';
 			get_template_part( 'partials/content', $partial );
 
-			if ( $partial === 'single ' ) {
+			if ( $partial === 'single' ) {
 				if ( is_active_sidebar( 'article-bottom' ) ) {
 
 					do_action( 'largo_before_post_bottom_widget_area' );
