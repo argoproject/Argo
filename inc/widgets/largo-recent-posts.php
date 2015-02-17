@@ -58,9 +58,6 @@ class largo_recent_posts_widget extends WP_Widget {
           			// wrap the items in li if we're just showing a list of headlines, otherwise use a div
           			$output .= ( $excerpt == 'none' && $thumb == 'none' ) ? '<li>' : '<div class="post-lead clearfix"><h5>';
 
-          			// the headline
-          			$output .= '<a href="' . get_permalink() . '">' . get_the_title() . '</a></h5>';
-
           			// the thumbnail image (if we're using one)
           			if ($thumb == 'small') {
 	                    $output .= '<a href="' . get_permalink() . '">' . get_the_post_thumbnail( get_the_ID(), '60x60') . '</a>';
@@ -69,6 +66,9 @@ class largo_recent_posts_widget extends WP_Widget {
 					} elseif ($thumb == 'large') {
 						$output .= '<a href="' . get_permalink() . '">' . get_the_post_thumbnail( get_the_ID(), 'large') . '</a>';
 					}
+
+					// the headline
+					$output .= '<a href="' . get_permalink() . '">' . get_the_title() . '</a></h5>';
 
 					// the excerpt
 					if ($excerpt == 'num_sentences') {
