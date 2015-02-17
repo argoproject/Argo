@@ -329,6 +329,10 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 #		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
+	function test_largo_force_settings_update() {
+		$this->markTestIncomplete('This test has not yet been implemented');
+	}
+
 	// Test functions related to the WP admin workflow views
 	function test_largo_update_admin_notice() {
 		$_GET['page'] = 'update-largo';
