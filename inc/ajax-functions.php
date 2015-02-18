@@ -46,7 +46,8 @@ if (!function_exists('largo_load_more_posts')) {
 
 		if ( $query->have_posts() ) {
 			while ( $query->have_posts() ) : $query->the_post();
-				get_template_part( 'partials/content', 'home' );
+				$partial = ( get_post_type() == 'argolinks' ) ? 'argolinks' : 'home';
+				get_template_part( 'partials/content', $partial );
 			endwhile;
 		}
 		wp_die();
