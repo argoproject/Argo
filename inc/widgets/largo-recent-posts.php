@@ -77,6 +77,12 @@ class largo_recent_posts_widget extends WP_Widget {
 	                    $output .= '<p>' . get_the_excerpt() . '</p>';
 					}
 
+					// byline on posts
+					if ( isset( $instance['show_byline'] ) && $instance['show_byline'] == true) {
+						$output .= largo_byline(false);
+						var_log(largo_byline(false));
+					}
+
 					// read more link
 					if ( isset( $instance['show_read_more'] ) && $instance['show_read_more'] === 1) {
 						$output .= '<p class="more-link"><a href="' . get_permalink() . '">' . __( 'Read More','largo') . '</a></p>';
@@ -112,6 +118,7 @@ class largo_recent_posts_widget extends WP_Widget {
 		$instance['thumbnail_display'] = sanitize_key( $new_instance['thumbnail_display'] );
 		$instance['excerpt_display'] = sanitize_key( $new_instance['excerpt_display'] );
 		$instance['num_sentences'] = intval( $new_instance['num_sentences'] );
+		$instance['show_byline'] = ! empty($new_instance['show_byline']);
 		$instance['show_read_more'] = ! empty( $new_instance['show_read_more'] ) ? 1 : 0;
 		$instance['cat'] = intval( $new_instance['cat'] );
 		$instance['tag'] = sanitize_text_field( $new_instance['tag'] );
@@ -131,6 +138,7 @@ class largo_recent_posts_widget extends WP_Widget {
 			'thumbnail_display' => 'small',
 			'excerpt_display' 	=> 'num_sentences',
 			'num_sentences' 	=> 2,
+			'show_byline'       => '',
 			'show_read_more' 	=> '',
 			'cat' 				=> 0,
 			'tag'				=> '',
@@ -142,6 +150,7 @@ class largo_recent_posts_widget extends WP_Widget {
 		);
 		$instance = wp_parse_args( (array) $instance, $defaults );
 		$duplicates = $instance['avoid_duplicates'] ? 'checked="checked"' : '';
+		$showbyline = $instance['show_byline'] ? 'checked="checked"' : '';
 		$showreadmore = $instance['show_read_more'] ? 'checked="checked"' : '';
 		?>
 
@@ -181,6 +190,10 @@ class largo_recent_posts_widget extends WP_Widget {
 		<p>
 			<label for="<?php echo $this->get_field_id( 'num_sentences' ); ?>"><?php _e('Excerpt Length (# of Sentences):', 'largo'); ?></label>
 			<input id="<?php echo $this->get_field_id( 'num_sentences' ); ?>" name="<?php echo $this->get_field_name( 'num_sentences' ); ?>" value="<?php echo (int) $instance['num_sentences']; ?>" style="width:90%;" />
+		</p>
+
+		<p>
+			<input class="checkbox" type="checkbox" <?php echo $showbyline; ?> id="<?php echo $this->get_field_id('show_byline'); ?>" name="<?php echo $this->get_field_name('show_byline'); ?>" /> <label for="<?php echo $this->get_field_id('show_byline'); ?>"><?php _e('Show byline on posts?', 'largo'); ?></label>
 		</p>
 
 		<p>
