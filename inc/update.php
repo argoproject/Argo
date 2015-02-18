@@ -40,6 +40,7 @@ function largo_perform_update() {
 	if (largo_need_updates()) {
 		largo_update_widgets();
 		largo_home_transition();
+		largo_force_settings_update();
 		largo_transition_nav_menus();
 		largo_update_custom_less_variables();
 		largo_update_prominence_term_descriptions();
@@ -430,6 +431,24 @@ function largo_update_prominence_term_descriptions() {
 }
 // Uncomment this line if you would like to force prominence terms to update.
 # add_action('init', 'largo_update_prominence_term_descriptions');
+
+/**
+ * Update miscellaneous settings
+ *
+ */
+function largo_force_settings_update() {
+	$options = array();
+	// paste in default settings from options.php after this line;
+	$options[] = array(
+		'desc'  => __('Show the <strong>sticky nav</strong>? Default is to show, but in some cases you may want to hide it.'),
+		'id'    => 'show_sticky_nav',
+		'std' 	=> '1',
+		'type' 	=> 'checkbox');
+
+	foreach ($options as $option) {
+		of_set_option($option['id'], $option['std']);
+	}
+}
 
 // WP admin dashboard update workflow
 function largo_update_admin_notice() {

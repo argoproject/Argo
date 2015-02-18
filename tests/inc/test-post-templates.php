@@ -10,18 +10,17 @@ class PostTemplatesTestFunctions extends WP_UnitTestCase {
 	function test_insert_image_no_thumb() {
 
     	$filename = ( dirname(__FILE__) .'/../mock/img/cat.jpg' );
-    	$contents = file_get_contents($filename);	
-    	
+    	$contents = file_get_contents($filename);
+
     	$upload = wp_upload_bits(basename($filename), null, $contents);
 
     	print_r($upload['error']);
     	$this->assertTrue( empty($upload['error']) );
-	
+
     	$attachment_id = $this->_make_attachment($upload);
 
     	$attachment_url = wp_get_attachment_image_src($attachment_id,"large");
 		$attachment_url = $attachment_url[0];
-		error_log($attachment_url);
 
 		$c1 = '<p><img src="'.$attachment_url.'" alt="1559758083_cef4ef63d2_o" width="771" height="475" class="alignnone size-large" /></p>
 <h2>Headings</h2>

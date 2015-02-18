@@ -4350,13 +4350,14 @@ p.comment-form-comment {
 .widget.largo-recent-comments p.comment-meta a {
   font-style: italic;
 }
-.widget.largo-series-posts {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+.widget.largo-series-posts h5.top-tag,
+.widget.largo-series-posts h5.top-tag a {
+  color: #000000;
 }
 .widget.largo-series-posts h4 {
   margin-bottom: 0.4em;
-  line-height: 1.2em;
-  font-size: 24px;
+  line-height: 1.3;
+  font-size: 16px;
 }
 .widget.largo-series-posts ul {
   margin-left: 0;
@@ -4372,17 +4373,16 @@ p.comment-form-comment {
   margin-right: -100%;
 }
 .widget.largo-series-posts li a {
-  margin-left: 1.7em;
+  margin-left: 0;
   display: inline-block;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .widget.largo-series-posts p {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 15px;
   line-height: 1.4;
 }
 .widget.largo-series-posts a.more {
   text-align: right;
-  font-weight: bold;
   float: right;
 }
 .widget.largo-series-posts a.more:after {
