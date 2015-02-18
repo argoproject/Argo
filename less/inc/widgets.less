@@ -206,11 +206,15 @@
 }
 //series posts
 .widget.largo-series-posts {
-  font-family: @sansFontFamily;
+  h5.top-tag,
+  h5.top-tag a{
+    color: @black;
+  }
   h4 {
     margin-bottom: 0.4em;
-    line-height: 1.2em;
-    font-size: @baseFontSize * 1.5;
+    // this specific h4 should the same size as the standard text
+    line-height: 1.3;
+    font-size: @baseFontSize;
   }
   ul {
     margin-left: 0;
@@ -226,17 +230,16 @@
     margin-right: -100%
   }
   li a {
-    margin-left: 1.7em;
+    margin-left: 0;
     display: inline-block;
+    font-family: @sansFontFamily;
   }
   p {
-    font-family: @sansFontFamily;
     font-size: 15px;
     line-height: 1.4;
   }
   a.more {
     text-align: right;
-    font-weight: bold;
     float: right;
     &:after {
       content: " »";
