@@ -79,7 +79,7 @@ class largo_recent_posts_widget extends WP_Widget {
 
 					// byline on posts
 					if ( isset( $instance['show_byline'] ) && $instance['show_byline'] == true) {
-						$output .= largo_byline(false);
+						$output .= '<span class="byline">' . largo_byline(false) . '</span>';
 					}
 
 					// read more link
