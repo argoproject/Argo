@@ -70,16 +70,16 @@ class largo_recent_posts_widget extends WP_Widget {
 					// the headline
 					$output .= '<h5><a href="' . get_permalink() . '">' . get_the_title() . '</a></h5>';
 
+					// byline on posts
+					if ( isset( $instance['show_byline'] ) && $instance['show_byline'] == true) {
+						$output .= '<span class="byline">' . largo_byline(false) . '</span>';
+					}
+
 					// the excerpt
 					if ($excerpt == 'num_sentences') {
 						$output .= '<p>' . largo_trim_sentences( get_the_content(), $instance['num_sentences'] ) . '</p>';
 					} elseif ($excerpt == 'custom_excerpt') {
 	                    $output .= '<p>' . get_the_excerpt() . '</p>';
-					}
-
-					// byline on posts
-					if ( isset( $instance['show_byline'] ) && $instance['show_byline'] == true) {
-						$output .= '<span class="byline">' . largo_byline(false) . '</span>';
 					}
 
 					// read more link
