@@ -211,6 +211,8 @@ Looking for something? Ctrl-F or ⌘-F
  
  - ``largo_layout_meta_box_display():`` Contents for the Layout Options metabox. Found in ``/inc/post-meta.php``
  - ``largo_load_custom_template_functions():`` Loads ``/inc/home-template-functions.php.`` Found in ``/inc/home-templates.php.``
+ - ``largo_load_more_posts_enqueue_script():`` Attaches script for the "Load More Posts" button on home, category and archive pages.
+ - ``largo_load_more_posts_data():`` Attaches a piece of JavaScript to the end of home, category, and archive pages containing information needed for the "Load More Posts" button to work.
  - ``largo_load_of_script_for_widget(): ``Loads scripts for options framework on the widgets. Found in ``/inc/sidebars.php.``
  
 **M**
