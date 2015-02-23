@@ -28,9 +28,9 @@
                 id = last_story.attr('id').replace('post-', '');
 
             ajax_opts.data.last = id;
-            ajax_opts.data.paged += 1;
             ajax_opts.data.query = LMP.query;
             $.ajax(ajax_opts);
+            ajax_opts.data.paged += 1;
             return false;
         });
     });
