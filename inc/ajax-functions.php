@@ -31,14 +31,18 @@ if (!function_exists('largo_load_more_posts')) {
 		$paged = $_POST['paged'];
 		$context = (isset($_POST['query']))? $_POST['query'] : array();
 
+		// the query is only set on not-home pages
+		$is_home = ! isset($_POST['query']);
+
 		$args = array_merge(array(
 			'paged' => $paged,
 			'post_status' => 'publish',
-			'posts_per_page' => 10,
+			'posts_per_page' => intval(get_option('posts_per_page')),
 			'ignore_sticky_posts' => true
 		), $context);
 
-		if ( of_get_option('num_posts_home') )
+		// num_posts_home is only relevant on the homepage
+		if ( of_get_option('num_posts_home') && $is_home )
 			$args['posts_per_page'] = of_get_option('num_posts_home');
 		if ( of_get_option('cats_home') )
 			$args['cat'] = of_get_option('cats_home');
