@@ -29,8 +29,8 @@
 
             ajax_opts.data.last = id;
             ajax_opts.data.query = LMP.query;
-            $.ajax(ajax_opts);
             ajax_opts.data.paged += 1;
+            $.ajax(ajax_opts);
             return false;
         });
     });

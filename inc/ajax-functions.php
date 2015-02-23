@@ -51,9 +51,9 @@ if (!function_exists('largo_load_more_posts')) {
 		$context = (isset($_POST['query']))? $_POST['query'] : array();
 
 		// Making sure that this isn't home
-		if ( isset($_POST['query']['cat']) &&
-		     isset($_POST['query']['author']) &&
-		     isset($_POST['query']['prominence']) &&
+		if ( isset($_POST['query']['cat']) ||
+		     isset($_POST['query']['author']) ||
+		     isset($_POST['query']['prominence']) ||
 		     isset($_POST['query']['series']) )
 			$is_home = false;
 		else
@@ -69,9 +69,14 @@ if (!function_exists('largo_load_more_posts')) {
 		// num_posts_home is only relevant on the homepage
 		if ( of_get_option('num_posts_home') && $is_home )
 			$args['posts_per_page'] = of_get_option('num_posts_home');
+		// The first 'page' of the homepage is in $shown_ids, so this number should actually be minus one.
+		if ( $is_home )
+			$args['paged'] = ( $args['paged'] - 1 );
 		if ( of_get_option('cats_home') )
 			$args['cat'] = of_get_option('cats_home');
 		$query = new WP_Query($args);
+		
+		var_log($args);
 
 		if ( $query->have_posts() ) {
 			while ( $query->have_posts() ) : $query->the_post();
