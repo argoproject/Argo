@@ -1,5 +1,31 @@
 <?php
 /**
+ * Setup function for dfw plugin.
+ * This defines breakpoints available for targeting.
+ * 
+ * @see https://github.com/INN/DoubleClick-for-Wordpress
+ * @since 0.5
+ */
+
+if ( ! function_exists( 'largo_dfw_setup' ) ) {
+
+	function largo_dfw_setup() {
+
+		global $DoubleClick;
+
+		/* breakpoints */
+    	$DoubleClick->register_breakpoint('phone', array('minWidth'=>0,'maxWidth'=>769));
+    	$DoubleClick->register_breakpoint('tablet', array('minWidth'=>769,'maxWidth'=>980));
+    	$DoubleClick->register_breakpoint('desktop', array('minWidth'=>980,'maxWidth'=>9999));
+    	
+	}
+
+}
+add_action( 'dfw_setup', 'largo_dfw_setup' );
+
+
+
+/**
  * Ad Codes configuration for use with Ad Code Manager plugin
  * http://wordpress.org/extend/plugins/ad-code-manager/
  */
