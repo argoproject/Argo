@@ -116,7 +116,7 @@ if ( ! function_exists( 'largo_byline' ) ) {
 			}
 
 		} else {
-			$authors = largo_author_link( false );
+			$authors = largo_author_link( false, $post_id );
 		}
 
 		$output = '<span class="by-author"><span class="by">' . __( 'By', 'largo' ) . '</span> <span class="author vcard" itemprop="author">' . $authors . '</span></span>';
