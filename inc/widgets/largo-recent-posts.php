@@ -58,6 +58,12 @@ class largo_recent_posts_widget extends WP_Widget {
           			// wrap the items in li if we're just showing a list of headlines, otherwise use a div
           			$output .= ( $excerpt == 'none' && $thumb == 'none' ) ? '<li>' : '<div class="post-lead clearfix">';
 
+					// The top term
+					$top_term_args = array('echo' => false);
+					if ( isset($instance['show_top_term']) && $instance['show_top_term'] == 1 && largo_has_categories_or_tags() ) { 
+						$output .= '<h5 class="top-tag">' . largo_top_term($top_term_args) . '</h5>' ;
+					}
+
           			// the thumbnail image (if we're using one)
           			if ($thumb == 'small') {
 	                    $output .= '<a href="' . get_permalink() . '">' . get_the_post_thumbnail( get_the_ID(), '60x60') . '</a>';
@@ -118,6 +124,7 @@ class largo_recent_posts_widget extends WP_Widget {
 		$instance['excerpt_display'] = sanitize_key( $new_instance['excerpt_display'] );
 		$instance['num_sentences'] = intval( $new_instance['num_sentences'] );
 		$instance['show_byline'] = ! empty($new_instance['show_byline']);
+		$instance['show_top_term'] = ! empty($new_instance['show_top_term']);
 		$instance['show_read_more'] = ! empty( $new_instance['show_read_more'] ) ? 1 : 0;
 		$instance['cat'] = intval( $new_instance['cat'] );
 		$instance['tag'] = sanitize_text_field( $new_instance['tag'] );
@@ -138,6 +145,7 @@ class largo_recent_posts_widget extends WP_Widget {
 			'excerpt_display' 	=> 'num_sentences',
 			'num_sentences' 	=> 2,
 			'show_byline'       => '',
+			'show_top_term'     => '',
 			'show_read_more' 	=> '',
 			'cat' 				=> 0,
 			'tag'				=> '',
@@ -150,6 +158,7 @@ class largo_recent_posts_widget extends WP_Widget {
 		$instance = wp_parse_args( (array) $instance, $defaults );
 		$duplicates = $instance['avoid_duplicates'] ? 'checked="checked"' : '';
 		$showbyline = $instance['show_byline'] ? 'checked="checked"' : '';
+		$show_top_term = $instance['show_top_term'] ? 'checked="checked"' : '';
 		$showreadmore = $instance['show_read_more'] ? 'checked="checked"' : '';
 		?>
 
@@ -193,6 +202,10 @@ class largo_recent_posts_widget extends WP_Widget {
 
 		<p>
 			<input class="checkbox" type="checkbox" <?php echo $showbyline; ?> id="<?php echo $this->get_field_id('show_byline'); ?>" name="<?php echo $this->get_field_name('show_byline'); ?>" /> <label for="<?php echo $this->get_field_id('show_byline'); ?>"><?php _e('Show byline on posts?', 'largo'); ?></label>
+		</p>
+		
+		<p>
+			<input class="checkbox" type="checkbox" <?php echo $show_top_term; ?> id="<?php echo $this->get_field_id('show_top_term'); ?>" name="<?php echo $this->get_field_name('show_top_term'); ?>" /> <label for="<?php echo $this->get_field_id('show_top_term'); ?>"><?php _e('Show the top term on posts?', 'largo'); ?></label>
 		</p>
 
 		<p>
