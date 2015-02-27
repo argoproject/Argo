@@ -74,8 +74,6 @@ class largo_image_widget extends WP_Widget {
 			// Using extracted vars now
 			extract( $instance );
 
-			$title = apply_filters('widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base);
-
 			//output the widget
 			echo $before_widget;
 
