@@ -26,7 +26,7 @@ class largo_tag_list_widget extends WP_Widget {
 	      <!-- Post tags -->
         <?php if ( largo_has_categories_or_tags() ): ?>
     		<div class="tags clearfix">
-    			<h5><?php echo esc_html( $title ); ?></h5>
+    			<h5><?php echo $title; ?></h5>
     			<ul>
     				<?php largo_categories_and_tags( $instance['tag_limit'], true, true, true, '', 'li' ); ?>
     			</ul>
