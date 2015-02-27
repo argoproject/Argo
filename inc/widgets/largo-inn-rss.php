@@ -24,6 +24,8 @@ class largo_INN_RSS_widget extends WP_Widget {
 
 		$title = "<a class='rsswidget' href='$link' title='$desc'>$title</a>";
 
+		$title = apply_filters('widget_title', empty( $instance['title'] ) ? __( 'Categories', 'largo' ) : $instance['title'], $instance, $this->id_base);
+
 		echo $before_widget;
 
 		if ( $title )
