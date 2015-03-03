@@ -5,22 +5,41 @@
  */
 if (!function_exists('largo_load_more_posts_enqueue_script')) {
 	function largo_load_more_posts_enqueue_script() {
-		global $wp_query;
-
 		wp_enqueue_script(
 			'load-more-posts',
 			get_template_directory_uri() . '/js/load-more-posts.js',
 			array('jquery'), null, true
 		);
+	}
+	add_action('wp_enqueue_scripts', 'largo_load_more_posts_enqueue_script');
+}
+
+/*
+ * Fills JavaScript variable LMP with posts rendered on page
+ *
+ * Canonically, this should be hooked on wp_enqueue_scripts, but it needs access to $shown_ids
+ */
+if (!function_exists('largo_load_more_posts_data')) {
+	function largo_load_more_posts_data() {
+		global $wp_query;
+		global $shown_ids;
+
+		$query = $wp_query->query;
+
+		// No sticky posts or featured posts
+		$query = array_merge(array(
+			'post__not_in' => $shown_ids,
+		), $query );
+
 		wp_localize_script(
 			'load-more-posts', 'LMP', array(
 				'ajax_url' => admin_url('admin-ajax.php'),
 				'paged' => (!empty($wp_query->query_vars['paged']))? $wp_query->query_vars['paged'] : 0,
-				'query' => $wp_query->query
+				'query' => $query
 			)
 		);
 	}
-	add_action('wp_enqueue_scripts', 'largo_load_more_posts_enqueue_script');
+	add_action('wp_footer', 'largo_load_more_posts_data');
 }
 
 /*
@@ -31,19 +50,28 @@ if (!function_exists('largo_load_more_posts')) {
 		$paged = $_POST['paged'];
 		$context = (isset($_POST['query']))? $_POST['query'] : array();
 
-		// the query is only set on not-home pages
-		$is_home = ! isset($_POST['query']);
+		// Making sure that this isn't home
+		if ( isset($_POST['query']['cat']) ||
+		     isset($_POST['query']['author']) ||
+		     isset($_POST['query']['prominence']) ||
+		     isset($_POST['query']['series']) )
+			$is_home = false;
+		else
+			$is_home = true;
 
 		$args = array_merge(array(
-			'paged' => $paged,
-			'post_status' => 'publish',
-			'posts_per_page' => intval(get_option('posts_per_page')),
-			'ignore_sticky_posts' => true
+			'paged'               => $paged,
+			'post_status'         => 'publish',
+			'posts_per_page'      => intval(get_option('posts_per_page')),
+			'ignore_sticky_posts' => true,
 		), $context);
 
 		// num_posts_home is only relevant on the homepage
 		if ( of_get_option('num_posts_home') && $is_home )
 			$args['posts_per_page'] = of_get_option('num_posts_home');
+		// The first 'page' of the homepage is in $shown_ids, so this number should actually be minus one.
+		if ( $is_home )
+			$args['paged'] = ( $args['paged'] - 1 );
 		if ( of_get_option('cats_home') )
 			$args['cat'] = of_get_option('cats_home');
 		$query = new WP_Query($args);
