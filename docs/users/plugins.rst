@@ -40,9 +40,9 @@ In addition to the Argo plugins, we have included a curated list of other plugin
 
 - **Edit Flow** adds advanced workflow features to WordPress including the ability to manage additional user roles, editorial comments and an editorial calendar. Documentation can be found `on the Edit Flow website <http://editflow.org/>`_.
 
- - **W3 Total Cache** is a caching plugin for WordPress that will improve the load time of your site and help your server to better deal with large traffic spikes. Caching is heavily dependent on your server setup, and while `W3 Total Cache <https://wordpress.org/plugins/w3-total-cache/>`_ is one of the most powerful (and flexible) WordPress caching solutions out there, if it does not work for you `WP Super Cache <https://wordpress.org/plugins/wp-super-cache/>`_ is another popular alternative. Note that this is not relevant for sites that we host for INN members as our hosting company, WP Engine, has their own caching system.
+- **W3 Total Cache** is a caching plugin for WordPress that will improve the load time of your site and help your server to better deal with large traffic spikes. Caching is heavily dependent on your server setup, and while `W3 Total Cache <https://wordpress.org/plugins/w3-total-cache/>`_ is one of the most powerful (and flexible) WordPress caching solutions out there, if it does not work for you `WP Super Cache <https://wordpress.org/plugins/wp-super-cache/>`_ is another popular alternative. Note that this is not relevant for sites that we host for INN members as our hosting company, WP Engine, has their own caching system.
 
- - `Ad Code Manager <https://wordpress.org/plugins/ad-code-manager/>`_ is used to insert standard ad units into Largo.
+- **`Ad Code Manager <https://wordpress.org/plugins/ad-code-manager/>`_** is used to insert standard ad units into Largo.
 
 Complete List of Plugins Available
 ----------------------------------
@@ -80,7 +80,7 @@ Here is a complete list of the plugins currently installed and available.
 - `TinyMCE Advanced <https://wordpress.org/plugins/tinymce-advanced/>`_ - Enables advanced features and plugins in TinyMCE, the visual editor in WordPress.
 - `WP DS NPR API <https://github.com/npr/WP-DS-NPR-API>`_ - A collection of tools for reusing content from NPR.org supplied by NPR Digital Services.
 
-`Premium plugins <http://premium.wpmudev.org/projects/category/plugins/>`_ we've bought a site license for INN member sites:
+Premium plugins we've bought a site license for INN member sites:
 
 - `Business Directory Plugin <https://wordpress.org/plugins/business-directory-plugin/>`_ - Provides the ability to maintain a free or paid business directory on your WordPress powered site. We also have a license for the Paypal Gateway Module.
 - `Gravity Forms <https://wordpress.org/plugins/gravity-forms-addons/>`_ - Easily create web forms and manage form entries within the WordPress admin. We also have a license for the Gravity Forms PayPal Add-On.
@@ -89,7 +89,7 @@ Here is a complete list of the plugins currently installed and available.
 
 **Plugins from Project Argo:**
 
-- `Argo Audio Player <http://argoproject.org/audio.php>`_** - No longer updated/maintained, we recommend using an alternative service such as `SoundCloud <https://wordpress.org/plugins/soundcloud-shortcode/>`_ for embedding audio in posts
+- `Argo Audio Player <http://argoproject.org/audio.php>`_ - No longer updated/maintained, we recommend using an alternative service such as `SoundCloud <https://wordpress.org/plugins/soundcloud-shortcode/>`_ for embedding audio in posts
 - `Argo Links <http://argoproject.org/argo-links.php>`_ - Curate links and display them in a sidebar widget or create link roundup posts
 - `Navis Jiffy Posts <http://argoproject.org/jiffy-post.php>`_ - Makes it easy to quickly create a post from a URL
 - `Navis Slideshows <http://argoproject.org/slideshow.php>`_ - Slideshows that take advantage of the Slides jQuery plugin
