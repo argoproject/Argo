@@ -137,7 +137,6 @@ if ( isset( $wp_query->query_vars['term'] )
 
 	largo_content_nav( 'nav-below' );
 
-	$wp_query = $old_query;
 	wp_reset_postdata();
 } ?>
 
