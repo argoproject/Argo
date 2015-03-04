@@ -1,4 +1,4 @@
-<?php if( is_single() ): ?>
+<?php if( is_singular( 'post' ) ): ?>
 <div class="sticky-footer-holder">
 	<div class="sticky-footer-container social-icons">
 
@@ -45,7 +45,7 @@
 		} else {
 			$coauthors = array( get_userdata( $post->post_author ));
 		}
-		
+
 		?>
 		<div class="follow">
 			<h4><?php _e( 'Follow', 'largo' ); ?></h4>
@@ -54,7 +54,7 @@
 				if ( $cat_feed_link ) {
 					echo $cat_feed_link;
 			} ?>
-				
+
 			<?php if ( $byline_text ): ?>
 				<a href="<?php echo $byline_link; ?>" class="icon-link"><?php echo esc_html( $byline_text ); ?></a>
 			<?php else : ?>
@@ -69,7 +69,7 @@
 					</div>
 				<?php endforeach; ?>
 			<?php endif; ?>
-			
+
 		</div>
 
 	</div>
