@@ -115,7 +115,7 @@ if ( isset( $wp_query->query_vars['term'] )
 	//these unusual WP_Query args are handled by filters defined in cftl-series-order.php
 	switch ( $opt['post_order'] ) {
 		case 'ASC':
-			$args['order'] = 'ASC';
+			$args['orderby'] = 'ASC';
 			break;
 		case 'custom':
 			$args['orderby'] = 'series_custom';
