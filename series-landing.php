@@ -126,8 +126,10 @@ if ( isset( $wp_query->query_vars['term'] )
 			break;
 	}
 
-	//build the query, using the original as a guide for pagination and whatnot
-	$all_args = array_merge( $old_query->query_vars, $args );
+#	//build the query, using the original as a guide for pagination and whatnot
+#	$all_args = array_merge( $old_query->query_vars, $args );
+	// Build the query, but don't use the original because that messes up pagination in a way that ignores posts_per_page
+	$all_args = array_merge( $args );
 	$wp_query = new WP_Query($all_args);
 
 	// and finally wind the posts back so we can go through the loop as usual

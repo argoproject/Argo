@@ -1,4 +1,12 @@
 <?php
+/*
+ * When changing the operation of these functions, be sure to test it in:
+ * - the homepage, all templates
+ * - category archive pages
+ * - series archive pages
+ * - custom series landing pages
+ * - search results pages
+ */
 
 /*
  * Enqueue script for "load more posts" functionality
@@ -53,8 +61,8 @@ if (!function_exists('largo_load_more_posts')) {
 		// Making sure that this isn't home
 		if ( isset($_POST['query']['cat']) ||
 		     isset($_POST['query']['author']) ||
-		     isset($_POST['query']['prominence']) ||
-		     isset($_POST['query']['series']) )
+		     isset($_POST['query']['term']) || # tags, taxonomies and custom taxonomies
+		     isset($_POST['query']['s'])) # searches
 			$is_home = false;
 		else
 			$is_home = true;
