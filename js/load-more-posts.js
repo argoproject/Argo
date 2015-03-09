@@ -7,7 +7,8 @@
                 url: LMP.ajax_url,
                 data: {
                     action: 'load_more_posts',
-                    paged: (LMP.paged == 0)? 1:LMP.paged
+                    paged: (LMP.paged == 0)? 1:LMP.paged,
+                    is_home: LMP.is_home
                 },
                 type: 'POST',
                 dataType: 'html',
@@ -21,6 +22,7 @@
                     throw "There was an error fetching more posts";
                 }
             };
+
 
         load_more.find('a').click(function() {
             load_more.addClass('loading');

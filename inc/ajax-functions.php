@@ -29,8 +29,7 @@ if (!function_exists('largo_load_more_posts_enqueue_script')) {
  */
 if (!function_exists('largo_load_more_posts_data')) {
 	function largo_load_more_posts_data() {
-		global $wp_query;
-		global $shown_ids;
+		global $wp_query, $shown_ids;
 
 		$query = $wp_query->query;
 
@@ -39,13 +38,18 @@ if (!function_exists('largo_load_more_posts_data')) {
 			'post__not_in' => $shown_ids,
 		), $query );
 
-		wp_localize_script(
-			'load-more-posts', 'LMP', array(
-				'ajax_url' => admin_url('admin-ajax.php'),
-				'paged' => (!empty($wp_query->query_vars['paged']))? $wp_query->query_vars['paged'] : 0,
-				'query' => $query
-			)
-		);
+		$LMP = apply_filters('largo_load_more_posts_json', array(
+			'ajax_url' => admin_url('admin-ajax.php'),
+			'paged' => (!empty($wp_query->query_vars['paged']))? $wp_query->query_vars['paged'] : 0,
+			'query' => $query,
+			'is_home' => $wp_query->is_home()
+		));
+
+		?>
+		<script type="text/javascript">
+			var LMP = <?php echo json_encode($LMP); ?>;
+		</script>
+	<?php
 	}
 	add_action('wp_footer', 'largo_load_more_posts_data');
 }
@@ -59,10 +63,12 @@ if (!function_exists('largo_load_more_posts')) {
 		$context = (isset($_POST['query']))? $_POST['query'] : array();
 
 		// Making sure that this isn't home
-		if ( isset($_POST['query']['cat']) ||
-		     isset($_POST['query']['author']) ||
-		     isset($_POST['query']['term']) || # tags, taxonomies and custom taxonomies
-		     isset($_POST['query']['s'])) # searches
+		if (isset($_POST['is_home']))
+			$is_home = ($_POST['is_home'] == 'false')? false : true;
+		else if ( isset($_POST['query']['cat']) ||
+			isset($_POST['query']['author']) ||
+			isset($_POST['query']['term']) || # tags, taxonomies and custom taxonomies
+			isset($_POST['query']['s'])) # searches
 			$is_home = false;
 		else
 			$is_home = true;

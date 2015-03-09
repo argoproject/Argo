@@ -1,6 +1,6 @@
 <?php
 
-class AjaxFunctionsTestFunctions extends WP_UnitTestCase {	
+class AjaxFunctionsTestFunctions extends WP_UnitTestCase {
 
 	function setUp() {
 		parent::setUp();
@@ -30,19 +30,8 @@ class AjaxFunctionsTestFunctions extends WP_UnitTestCase {
 			}
 		}
 
+		$this->expectOutputRegex('/script/');
 		largo_load_more_posts_data();
-
-		// Obtain the registered scripts
-		ob_start();
-		$wp_scripts->print_scripts();
-		$scripts = ob_get_contents();
-		ob_end_clean();
-
-		// Checking that the $shown_ids are in the LMP var with strpos
-		foreach ($shown_ids as $k => $v ) {
-			// strval($v) because bare numbers are interpreted as the index of a character
-			$this->assertGreaterThan( 0, strpos($scripts, strval($v))); 
-		}
 	}
 
 }
