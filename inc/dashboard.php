@@ -89,7 +89,7 @@ function largo_dashboard_quick_links() {
      			<li><a href="http://confluence.investigativenewsnetwork.org/display/LKB/Largo+Knowledge+Base">Knowledge Base</a></li>
      			<li><a href="mailto:support@largoproject.org">Contact Us</a></li>
      		</ul>
-     		<p>Developers can also log issues on <a href="https://github.com/INN/Largo">our public github repository</a> and if you would like to be included in our Largo users\' group, please e-mail: <a href="mailto:largo@investigativenewsnetwork.org">largo@investigativenewsnetwork.org</a>.</p>
+     		<p>Developers can also log issues on <a href="https://github.com/INN/Largo">our public github repository</a> and if you would like to be included in our Largo users\' group, <a href="http://investigativenewsnetwork.us1.list-manage1.com/subscribe?u=81670c9d1b5fbeba1c29f2865&id=913028b23c">sign up here</a>.</p>
      	</div>
      ';
 }
