@@ -35,7 +35,7 @@ if ( is_front_page() || is_home() || !of_get_option( 'show_sticky_nav' ) ): ?>
 
 					<?php if (INN_MEMBER === TRUE) { ?>
 					<div class="org-logo">
-						<a href="http://investigativenewsnetwork.org/" target="_blank">
+						<a href="http://inn.org/" target="_blank">
 							<img src="<?php echo get_template_directory_uri(); ?>/img/inn-logo-80-55.jpg" height="55" alt="INN logo" />
 						</a>
 					</div>
