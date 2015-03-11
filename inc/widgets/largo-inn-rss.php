@@ -19,18 +19,19 @@ class largo_INN_RSS_widget extends WP_Widget {
 		extract($args);
 		$rss = fetch_feed('http://feeds.feedburner.com/INNMemberInvestigations');
 		$title = __('Stories From Other INN Members', 'largo');
-		$desc = __('View more recent stories from members of the Investigative News Network', 'largo');
-		$link = 'http://www.investigativenewsnetwork.org/';
+		$desc = __('View more recent stories from members of INN', 'largo');
+		$link = 'http://inn.org/network-content';
 
 		$title = "<a class='rsswidget' href='$link' title='$desc'>$title</a>";
 
+		$title = apply_filters('widget_title', empty( $instance['title'] ) ? __('Stories From Other INN Members', 'largo') : $instance['title'], $instance, $this->id_base);
+
 		echo $before_widget;
 
-		if ( $title )
-			echo $before_title . $title . $after_title;
+		if ( $title ) echo $before_title . $title . $after_title;
 		largo_widget_rss_output( $rss, $instance ); ?>
 
-		<p class="morelink"><a href="<?php echo $link; ?>">More Stories From INN Members&nbsp;&raquo;</a></p>
+		<p class="morelink"><a href="<?php echo esc_url( $link ); ?>"><?php _e( 'More Stories From INN Members', 'largo' ); ?>&nbsp;&raquo;</a></p>
 
 		<?php echo $after_widget;
 
@@ -39,8 +40,8 @@ class largo_INN_RSS_widget extends WP_Widget {
 
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
-		$instance['num_posts'] = strip_tags( $new_instance['num_posts'] );
-		$instance['show_excerpt'] = $new_instance['show_excerpt'] ? 1 : 0;
+		$instance['num_posts'] = intval( $new_instance['num_posts'] );
+		$instance['show_excerpt'] = ! empty( $new_instance['show_excerpt'] ) ? 1 : 0;
 		return $instance;
 	}
 
@@ -57,8 +58,8 @@ class largo_INN_RSS_widget extends WP_Widget {
 			</p>
 
 			<p>
-				<label for="<?php echo $this->get_field_id( 'num_posts' ); ?>"><?php _e('Number of stories to show:', 'largo'); ?></label>
-				<input id="<?php echo $this->get_field_id( 'num_posts' ); ?>" name="<?php echo $this->get_field_name( 'num_posts' ); ?>" value="<?php echo $instance['num_posts']; ?>" style="width:90%;" />
+				<label for="<?php echo $this->get_field_id( 'num_posts' ); ?>"><?php _e('Number of stories to show', 'largo'); ?>:</label>
+				<input id="<?php echo $this->get_field_id( 'num_posts' ); ?>" name="<?php echo $this->get_field_name( 'num_posts' ); ?>" value="<?php echo (int) $instance['num_posts']; ?>" style="width:90%;" />
 			</p>
 		<?php
 	}
@@ -101,5 +102,3 @@ function largo_widget_rss_output( $rss, $args = array() ) {
 	$rss->__destruct();
 	unset($rss);
 }
-
-?>
