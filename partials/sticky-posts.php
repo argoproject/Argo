@@ -2,6 +2,9 @@
 global $ids, $shown_ids;
 
 $sticky = get_option( 'sticky_posts' );
+if (empty($sticky))
+	return;
+
 $args = array(
 	'posts_per_page' => 1,
 	'post__in'  => $sticky,
