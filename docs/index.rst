@@ -1,17 +1,17 @@
 Welcome to the Largo Project
 ============================
 
-`Largo <http://largoproject.org>`_ is a responsive WordPress starter/parent theme built specifically with the needs of news publishers in mind and is built and maintained by the news apps and technology team at the `Investigative News Network (INN) <http://nerds.investigativenewsnetwork.org>`_.
+`Largo <http://largoproject.org>`_ is a responsive WordPress starter/parent theme built specifically with the needs of news publishers in mind and is built and maintained by the news apps and technology team at the `Institute for Nonprofit News (INN) <http://nerds.inn.org>`_.
 
-Questions? Comments? `Get in touch with us <mailto:largo@investigativenewsnetwork.org>`_.
+Questions? Comments? `Get in touch with us <mailto:largo@inn.org>`_.
 
 Project Repository: https://github.com/INN/Largo/
 
 Technical Issues (Bugs, Feature Requests, etc.): https://github.com/INN/Largo/issues
 
-Help Desk (Support Requests): http://jira.investigativenewsnetwork.org/servicedesk/customer/portal/4
+Help Desk (Support Requests): http://jira.inn.org/servicedesk/customer/portal/4
 
-Knowledge Base: http://confluence.investigativenewsnetwork.org/display/LKB/Largo+Knowledge+Base
+Knowledge Base: http://confluence.inn.org/display/LKB/Largo+Knowledge+Base
 
 Twitter: http://twitter.com/largoproject
 
