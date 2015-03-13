@@ -6,7 +6,7 @@ Overview
 
 Project Largo is released as open source software and anyone is welcome to `download or fork the project from our github repository <https://github.com/INN/Largo>`_ and use it as they like.
 
-If use Largo for a project `we'd love to hear from you <mailto:largo@investigativenewsnetwork.org>`_ so can we add you to our list of sites using Largo and help get the word out.
+If use Largo for a project `we'd love to hear from you <mailto:largo@inn.org>`_ so can we add you to our list of sites using Largo and help get the word out.
 
 The preferred way of building a site with Largo is by creating a WordPress child theme. We have created a `sample, heavily documented, child theme <https://github.com/INN/Largo-Sample-Child-Theme/archive/master.zip>`_ to help you understand the way we structure our child themes in the hopes that it will give you a solid framework to get started. There is more information on setting up Largo and using child themes in the download and installation section of our documentation.
 
@@ -26,7 +26,7 @@ A few brief technical notes that might be helpful as you get started:
 
 - We use `TGM Plugin Activation <https://github.com/thomasgriffin/TGM-Plugin-Activation>`_ to package a couple of plugins with the Largo theme that are not currently available in the WordPress plugin directory and to recommend plugins for a number of tasks that are commonly requested for news websites.
 
-- The rest of the theme files and the folder structure should be familiar to most WordPress developers, but if you have any questions, feel free to `get in touch<mailto:largo@investigativenewsnetwork.org>`_.
+- The rest of the theme files and the folder structure should be familiar to most WordPress developers, but if you have any questions, feel free to `get in touch<mailto:largo@inn.org>`_.
 
 
 Function Reference
