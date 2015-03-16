@@ -51,7 +51,7 @@ function homepage_big_story_headline($moreLink=false) {
 function homepage_series_stories_list() {
 	global $shown_ids;
 
-	$feature = largo_get_the_main_feature();
+	$feature = largo_get_the_main_feature(largo_home_single_top());
 	$series_posts = largo_get_recent_posts_for_term($feature, 3, 2);
 
 	ob_start();
