@@ -68,6 +68,7 @@ function homepage_series_stories_list() {
 				<?php _e('Complete Coverage', 'largo'); ?></a></p>
 <?php
 	}
+	wp_reset_postdata();
 	$ret = ob_get_contents();
 	ob_end_clean();
 	return $ret;
