@@ -372,7 +372,7 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 	}
 
 	function test_largo_remove_topstory_prominence_term() {
-		// This deletes the following terms: slug: "top-story" name: "Top Story"
+		// This renames the following terms: slug: "top-story" name: "Top Story" parent: "something" -> slug: "top-story" name: "Homepage Top Story" parent: null
 		// This deletes the following terms by slug: "top-story-*"
 		// This does not delete the following term: slug: "top-story" name: "Homepage Top Story"
 
