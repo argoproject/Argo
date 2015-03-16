@@ -58,7 +58,7 @@ function homepage_series_stories_list() {
 	if (!empty($feature)) {
 ?>
 	<h5 class="top-tag"><a class="post-category-link" href="<?php echo get_term_link($feature); ?>">
-		<?php echo esc_html($feature->name) ?></a></h5>
+		<?php echo __("More in", "largo") . " " . esc_html($feature->name) ?></a></h5>
 			<?php foreach ($series_posts as $series_post) {
 				$shown_ids[] = $series_post->ID; ?>
 				<h4 class="related-story"><a href="<?php echo esc_url(get_permalink($series_post->ID)); ?>">
