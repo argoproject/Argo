@@ -115,7 +115,7 @@ if ( isset( $wp_query->query_vars['term'] )
 	//these unusual WP_Query args are handled by filters defined in cftl-series-order.php
 	switch ( $opt['post_order'] ) {
 		case 'ASC':
-			$args['order'] = 'ASC';
+			$args['orderby'] = 'ASC';
 			break;
 		case 'custom':
 			$args['orderby'] = 'series_custom';
@@ -126,9 +126,8 @@ if ( isset( $wp_query->query_vars['term'] )
 			break;
 	}
 
-	//build the query, using the original as a guide for pagination and whatnot
-	$all_args = array_merge( $old_query->query_vars, $args );
-	$wp_query = new WP_Query($all_args);
+	// Build the query, but don't use the original because that messes up pagination in a way that ignores posts_per_page
+	$wp_query = new WP_Query($args);
 
 	// and finally wind the posts back so we can go through the loop as usual
 	while ( $wp_query->have_posts() ) : $wp_query->the_post();
@@ -137,7 +136,6 @@ if ( isset( $wp_query->query_vars['term'] )
 
 	largo_content_nav( 'nav-below' );
 
-	$wp_query = $old_query;
 	wp_reset_postdata();
 } ?>
 

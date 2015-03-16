@@ -2,10 +2,36 @@
 
 class AjaxFunctionsTestFunctions extends WP_UnitTestCase {
 
+	function setUp() {
+		parent::setUp();
+
+		// Test data
+		$this->post_count = 10;
+		$this->post_ids = $this->factory->post->create_many($this->post_count);
+	}
+
 	function test_largo_load_more_posts_enqueue_script() {
 		global $wp_scripts;
 		largo_load_more_posts_enqueue_script();
 		$this->assertTrue(!empty($wp_scripts->registered['load-more-posts']));
+	}
+
+	function test_largo_load_more_posts_data() {
+		// create $shown_ids
+		global $wp_scripts, $wp_query, $shown_ids;
+		$args = array(
+			'post_type' => 'post',
+		);
+		$wp_query = new WP_Query($args);
+		if ($wp_query->have_posts()) {
+			while ($wp_query->have_posts()) {
+				$wp_query->the_post();
+				$shown_ids[] = get_the_ID();
+			}
+		}
+
+		$this->expectOutputRegex('/script/');
+		largo_load_more_posts_data();
 	}
 
 }

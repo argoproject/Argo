@@ -14,9 +14,9 @@
 
 		<!-- If you enjoy this theme and use it on a production site we would appreciate it if you would leave the credit in place. Thanks :) -->
 		<p class="footer-credit">
-		<?php printf( __('This site built with <a href="%s">Project Largo</a> from the <a href="%s">Investigative News Network</a> and proudly powered by <a href="%s" rel="nofollow">WordPress</a>.', 'largo'),
+		<?php printf( __('This site built with <a href="%s">Project Largo</a> from <a href="%s">INN</a> and proudly powered by <a href="%s" rel="nofollow">WordPress</a>.', 'largo'),
 				'http://largoproject.org',
-				'http://investigativenewsnetwork.org',
+				'http://inn.org',
 				'http://wordpress.org'
 			 );
 		?>

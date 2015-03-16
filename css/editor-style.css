@@ -639,7 +639,7 @@ body.normal.page .hero p.wp-media-credit {
   float: none;
   margin: 0 auto;
   text-align: left;
-  font-size: 16px !important;
+  font-size: 16px;
   margin-bottom: 12px;
   padding-top: 4px;
   width: 70%;
@@ -681,14 +681,6 @@ body.normal.page #sidebar {
 body.normal.single-post .top-tag,
 body.normal.page .top-tag {
   float: left;
-}
-body.normal.single-post .top-date,
-body.normal.page .top-date {
-  float: right;
-  font-size: 14px;
-  font-weight: normal;
-  margin-bottom: 0;
-  line-height: 1.5;
 }
 body.normal.single-post article.post > header,
 body.normal.page article.post > header {
@@ -853,6 +845,13 @@ h3.recent-posts a.rss-link:hover,
 .labels .series-label h5 a.rss-link:hover {
   opacity: 0.85;
   filter: alpha(opacity=85);
+}
+h5.top-date {
+  float: right;
+  font-size: 14px;
+  font-weight: normal;
+  margin-bottom: 0;
+  line-height: 1.5;
 }
 .series-label {
   margin: 5px;
@@ -1219,7 +1218,7 @@ h5.top-tag a {
   display: block;
 }
 p.wp-media-credit {
-  font-size: 13.04px !important;
+  font-size: 13.04px;
   margin: 0;
   text-align: right;
   color: #555555;

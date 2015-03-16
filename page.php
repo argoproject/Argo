@@ -2,4 +2,4 @@
 /**
  * The Template for displaying all pages.
  */
-include_once __DIR__ . '/single.php';
+locate_template( 'single.php', true );

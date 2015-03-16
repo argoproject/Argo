@@ -13,7 +13,7 @@ Install the `Ad Codes Manager`_ plugin
 3. Install the plugin.
 4. Activate the plugin
 
-Note: If you use INN's hosted version of Largo you do not have the ability to install and activate plugins and will need to ask us to do this for you. Please `submit a service request <http://jira.investigativenewsnetwork.org/servicedesk/customer/portal/4>`_ and we'll be happy to help.
+Note: If you use INN's hosted version of Largo you do not have the ability to install and activate plugins and will need to ask us to do this for you. Please `submit a service request <http://jira.inn.org/servicedesk/customer/portal/4>`_ and we'll be happy to help.
 
 Create the ad codes
 ---------------------

@@ -20,7 +20,7 @@ body.normal.page {
       float: none;
       margin: 0 auto;
       text-align: left;
-      font-size: @baseFontSize !important;
+      font-size: @baseFontSize;
       margin-bottom: 12px;
       padding-top: 4px;
       width: 70%;
@@ -54,13 +54,6 @@ body.normal.page {
   }
   .top-tag {
     float: left;
-  }
-  .top-date {
-    float: right;
-    font-size: @baseFontSize - 2;
-    font-weight: normal;
-    margin-bottom: 0;
-	line-height: 1.5;
   }
   article.post > header {
     clear: both;
@@ -230,6 +223,13 @@ h3.recent-posts,
       .opacity(85);
     }
   }
+}
+h5.top-date {
+  float: right;
+  font-size: @baseFontSize - 2;
+  font-weight: normal;
+  margin-bottom: 0;
+  line-height: 1.5;
 }
 
 // LABELS

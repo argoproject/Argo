@@ -27,7 +27,7 @@ class largo_explore_related_widget extends WP_Widget {
 
 			<div id="related-posts" class="idTabs row-fluid clearfix">
 				<ul id="related-post-nav" class="span4">
-					<li><h5><?php echo esc_html( $title ); ?></h5></li>
+					<li><h5><?php echo $title; ?></h5></li>
 					<?php
 						foreach ( $rel_topics as $count => $topic ) {
 							echo '<li><a href="#rp' . (int) $count . '">' . esc_html( $topic->name ) . '</a></li>';

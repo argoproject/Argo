@@ -1681,7 +1681,7 @@ msgid "Stories From Other INN Members"
 msgstr ""
 
 #: inc/widgets/largo-inn-rss.php:22
-msgid "View more recent stories from members of the Investigative News Network"
+msgid "View more recent stories from members of the Institute for Nonprofit News"
 msgstr ""
 
 #: inc/widgets/largo-inn-rss.php:33
@@ -3216,7 +3216,7 @@ msgstr ""
 #, php-format
 msgid ""
 "This site built with <a href=\"%s\">Project Largo</a> from the <a href=\"%s"
-"\">Investigative News Network</a> and proudly powered by <a href=\"%s\" rel="
+"\">Institute for Nonprofit News</a> and proudly powered by <a href=\"%s\" rel="
 "\"nofollow\">WordPress</a>."
 msgstr ""
 

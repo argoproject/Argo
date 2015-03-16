@@ -542,7 +542,6 @@ function optionsframework_options() {
 		'type' 	=> 'textarea');
 
 
-
 	/* Search Options */
 
 	$options[] = array(

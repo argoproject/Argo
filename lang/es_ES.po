@@ -5,7 +5,7 @@ msgstr ""
 "POT-Creation-Date: 2015-01-26 16:41-0600\n"
 "PO-Revision-Date: 2014-03-03 17:58:21+0000\n"
 "Last-Translator: Eric Flores <eric@dashway.com>\n"
-"Language-Team: Investigative News Network <largo@investigativenewsnetwork."
+"Language-Team: Institute for Nonprofit News <largo@inn."
 "org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -1973,7 +1973,7 @@ msgstr "Historias de otros Miembros de INN"
 
 # @ largo
 #: inc/widgets/largo-inn-rss.php:22
-msgid "View more recent stories from members of the Investigative News Network"
+msgid "View more recent stories from members of the Institute for Nonprofit News"
 msgstr ""
 "Ver mas historias recientes de miembros del Investigative News Network."
 
@@ -3795,11 +3795,11 @@ msgstr "Mas Sobre"
 #, fuzzy, php-format
 msgid ""
 "This site built with <a href=\"%s\">Project Largo</a> from the <a href=\"%s"
-"\">Investigative News Network</a> and proudly powered by <a href=\"%s\" rel="
+"\">Institute for Nonprofit News</a> and proudly powered by <a href=\"%s\" rel="
 "\"nofollow\">WordPress</a>."
 msgstr ""
 "Este sitio fué construido con <a href=\"http://largoproject.org\">Projecto "
-"Largo</a> de el <a href=\"http://investigativenewsnetwork.org"
+"Largo</a> de el <a href=\"http://inn.org"
 "\">Investigative News Network</a> usando <a href=\"http://wordpress.org\" "
 "rel=\"nofollow\">WordPress</a>."
 

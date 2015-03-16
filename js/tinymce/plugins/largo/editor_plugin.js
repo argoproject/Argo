@@ -66,7 +66,7 @@
 			getInfo : function() {
 				return {
 					longname : 'Largo Plugin',
-					author : 'Investigative News Network',
+					author : 'Institute for Nonprofit News',
 					authorurl : 'http://largoproject.org/',
 					infourl : 'http://largoproject.org/',
 					version : "1.0"

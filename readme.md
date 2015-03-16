@@ -1,8 +1,8 @@
 # Project Largo
 
-A responsive WordPress framework designed for news publishers and developed by the Investigative News Network.
+A responsive WordPress framework designed for news publishers and developed by the Institute for Nonprofit News.
 
-<img src="https://travis-ci.org/INN/Largo.svg?branch=develop" /> <img src="https://readthedocs.org/projects/largo/badge/?version=develop" />
+<img src="https://travis-ci.org/INN/Largo.svg?branch=master" /> <img src="https://readthedocs.org/projects/largo/badge/?version=develop" />
 
 ---
 
@@ -14,7 +14,7 @@ The `master` branch is the latest stable version and what INN is using for our s
 
 The `develop` branch contains work in progress slated for our next point release. Feel free to try it out, report issues, etc. but we DO NOT recommend using it in production. This is also typically the branch to submit pull requests to if you want to contribute to the project.
 
-Feedback, comments and questions to: [largo@investigativenewsnetwork.org](mailto:largo@investigativenewsnetwork.org)
+Feedback, comments and questions to: [largo@inn.org](mailto:largo@inn.org)
 
 ---
 
@@ -36,7 +36,7 @@ Follow the [setup instructions in the documentation](http://largo.readthedocs.or
 
 ## Credits
 
-Built and maintained by the [Investigative News Network](http://investigativenewsnetwork.org) news apps and technology team ([@INNNerds](http://twitter.com/INNNerds)):
+Built and maintained by the [Institute for Nonprofit News](http://inn.org) news apps and technology team ([@INNNerds](http://twitter.com/INNNerds)):
 
 -  **[Adam Schweigert](https://github.com/aschweigert)** ([@aschweig](http://twitter.com/aschweig)), Senior Director of Product and Technology
 -  **[Ryan Nagle](https://github.com/rnagle)** ([@ryannagle](http://twitter.com/ryannagle)), News Apps Developer

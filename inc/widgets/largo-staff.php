@@ -42,10 +42,8 @@ class largo_staff_widget extends WP_Widget {
 
 			$avatar = get_avatar($user->ID, '65');
 			$author_url = get_author_posts_url($user->ID);
-			$twitter = get_user_meta($user->ID, 'twitter', true);
 			$emeritus = get_user_meta($user->ID, 'emeritus', true);
 			$honorary = get_user_meta($user->ID, 'honorary', true);
-			$twitter = (!empty($twitter))? $twitter : $author_url;
 			$job_title = get_user_meta($user->ID, 'job_title', true);
 
 			if (!empty($honorary) && !empty($emeritus)) {
@@ -65,7 +63,7 @@ class largo_staff_widget extends WP_Widget {
 			$markup .= <<<EOD
 <li>
 	<div>
-		<a href="$twitter">
+		<a href="$author_url">
 			$avatar
 			<span class="staff-name">{$user->display_name}</span>
 		</a>

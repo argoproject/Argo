@@ -44,7 +44,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Largo Project'
-copyright = u'2014, Investigative News Network'
+copyright = u'2014, Institute for Nonprofit News'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -197,7 +197,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
   ('index', 'LargoProject.tex', u'Largo Project Documentation',
-   u'Investigative News Network', 'manual'),
+   u'Institute for Nonprofit News', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -227,7 +227,7 @@ latex_documents = [
 # (source start file, name, description, authors, manual section).
 man_pages = [
     ('index', 'largoproject', u'Largo Project Documentation',
-     [u'Investigative News Network'], 1)
+     [u'Institute for Nonprofit News'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -241,7 +241,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
   ('index', 'LargoProject', u'Largo Project Documentation',
-   u'Investigative News Network', 'LargoProject', 'One line description of project.',
+   u'Institute for Nonprofit News', 'LargoProject', 'One line description of project.',
    'Miscellaneous'),
 ]
 

@@ -19,15 +19,16 @@ class largo_INN_RSS_widget extends WP_Widget {
 		extract($args);
 		$rss = fetch_feed('http://feeds.feedburner.com/INNMemberInvestigations');
 		$title = __('Stories From Other INN Members', 'largo');
-		$desc = __('View more recent stories from members of the Investigative News Network', 'largo');
-		$link = 'http://www.investigativenewsnetwork.org/';
+		$desc = __('View more recent stories from members of INN', 'largo');
+		$link = 'http://inn.org/network-content';
 
 		$title = "<a class='rsswidget' href='$link' title='$desc'>$title</a>";
 
+		$title = apply_filters('widget_title', empty( $instance['title'] ) ? __('Stories From Other INN Members', 'largo') : $instance['title'], $instance, $this->id_base);
+
 		echo $before_widget;
 
-		if ( $title )
-			echo $before_title . $title . $after_title;
+		if ( $title ) echo $before_title . $title . $after_title;
 		largo_widget_rss_output( $rss, $instance ); ?>
 
 		<p class="morelink"><a href="<?php echo esc_url( $link ); ?>"><?php _e( 'More Stories From INN Members', 'largo' ); ?>&nbsp;&raquo;</a></p>
@@ -89,12 +90,7 @@ function largo_widget_rss_output( $rss, $args = array() ) {
 			$date = ' <span class="rss-date">' . date_i18n( get_option( 'date_format' ), $date ) . '</span>';
 		}
 
-		$author = '';
-		$author = $item->get_author();
-		if ( is_object($author) ) {
-			$author = $author->get_name();
-			$author = ' <cite>' . esc_html( strip_tags( $author ) ) . '</cite>';
-		}
+		$author = ' <cite>' . esc_html( strip_tags( $item->data['child']['']['source'][0]['data'] ) ) . '</cite>';
 
 		if ( $link == '' ) {
 			echo "<li><h5>$title</h5><p class=\"byline\">{$author} | {$date}</p>{$summary}</li>";

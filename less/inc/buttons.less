@@ -7,8 +7,7 @@
 // Core
 .btn {
   display: inline-block;
-  .ie7-inline-block();
-  padding: 4px 10px 4px;
+  padding: 4px 10px;
   margin-bottom: 0; // For input.btn
   font-size: @baseFontSize;
   line-height: @baseLineHeight;
@@ -18,11 +17,6 @@
   vertical-align: middle;
   cursor: pointer;
   background-color: @grayLighter;
-  text-shadow: 0 1px 1px rgba(255,255,255,.75);
-  border: 1px solid @btnBorder;
-  *border: 0; // Remove the border to prevent IE7's black border on input:focus
-  border-bottom-color: darken(@btnBorder, 10%);
-  .ie7-restore-left-whitespace(); // Give IE7 some love
   .border-radius(4px);
 }
 // Hover state
@@ -47,7 +41,6 @@
   background-color: darken(@white, 15%) e("\9");
   background-image: none;
   outline: 0;
-  .box-shadow(~"inset 0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05)");
 }
 .btn.disabled,
 .btn[disabled] {
@@ -110,7 +103,6 @@
 .btn-primary,
 .btn-primary:hover {
   color: @white;
-  text-shadow: 0 -1px 0 rgba(0,0,0,.25);
   background-color: @baseColor;
 }
 
@@ -122,33 +114,4 @@
   // transition is only when going to hover, otherwise the background
   // behind the gradient (there for IE<=9 fallback) gets mismatched
   .transition(background-position .1s linear);
-}
-
-// Cross-browser Jank
-// --------------------------------------------------
-
-button.btn,
-input[type="submit"].btn {
-
-  // Firefox 3.6 only I believe
-  &::-moz-focus-inner {
-    padding: 0;
-    border: 0;
-  }
-
-  // IE7 has some default padding on button controls
-  *padding-top: 2px;
-  *padding-bottom: 2px;
-  &.btn-large {
-    *padding-top: 7px;
-    *padding-bottom: 7px;
-  }
-  &.btn-small {
-    *padding-top: 3px;
-    *padding-bottom: 3px;
-  }
-  &.btn-mini {
-    *padding-top: 1px;
-    *padding-bottom: 1px;
-  }
 }

@@ -8,6 +8,8 @@
 
 	<?php do_action('largo_before_post_header'); ?>
 
+	<h5 class="top-date"><?php largo_time(); ?></h5>
+
 	<h5 class="top-tag"><?php largo_top_term(); ?></h5>
 
 	<header>

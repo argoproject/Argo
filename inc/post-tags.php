@@ -116,7 +116,7 @@ if ( ! function_exists( 'largo_byline' ) ) {
 			}
 
 		} else {
-			$authors = largo_author_link( false );
+			$authors = largo_author_link( false, $post_id );
 		}
 
 		$output = '<span class="by-author"><span class="by">' . __( 'By', 'largo' ) . '</span> <span class="author vcard" itemprop="author">' . $authors . '</span></span>';
@@ -392,7 +392,7 @@ if ( ! function_exists( 'largo_excerpt' ) ) {
 
 		// otherwise we'll just do our best and make the prettiest excerpt we can muster
 		} else {
-			$content = largo_trim_sentences( get_the_content(), $sentence_count );
+			$content = largo_trim_sentences( $the_post->post_content, $sentence_count );
 			if ( $use_more )
 				$content .= '<a href="' . get_permalink( $the_post->ID ) . '">' . $more_link . '</a>';
 		}
