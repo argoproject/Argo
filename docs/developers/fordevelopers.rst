@@ -28,6 +28,13 @@ A few brief technical notes that might be helpful as you get started:
 
 - The rest of the theme files and the folder structure should be familiar to most WordPress developers, but if you have any questions, feel free to `get in touch<mailto:largo@inn.org>`_.
 
+- To rebuild the translation files, run the following commands: ::
+
+	workon largo
+	grunt pot
+	msgmerge -o lang/es_ES.po.merged lang/es_ES.po lang/largo.pot
+	grunt po2mo
+
 
 Function Reference
 ------------------
