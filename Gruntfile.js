@@ -4,6 +4,12 @@ module.exports = function(grunt) {
     // Force use of Unix newlines
     grunt.util.linefeed = '\n';
 
+    // Find what the current theme's directory is, relative to the WordPress root
+    var path = process.cwd();
+    grunt.log.write(path + '\n');
+    path = path.replace(/^[\s\S]+\/wp-content/, "\/wp-content");
+    grunt.log.write(path);
+
     var CSS_LESS_FILES = {
         'css/style.css': 'less/style.less',
         'css/editor-style.css': 'less/editor-style.less',
@@ -17,7 +23,12 @@ module.exports = function(grunt) {
 
         less: {
             development: {
-                options: { paths: ['less'] },
+                options: {
+                    paths: ['less'],
+                    sourceMap: true,
+                    outputSourceFiles: true,
+                    sourceMapBasepath: path,
+                },
                 files: CSS_LESS_FILES
             },
             production: {
