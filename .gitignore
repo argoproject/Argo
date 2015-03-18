@@ -8,6 +8,9 @@
 ## Sublime Text
 *.sublime-*
 
+## Translation files
+lang/*.merged
+
 ## Misc
 .idea/
 node_modules
