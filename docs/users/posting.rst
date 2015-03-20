@@ -71,3 +71,6 @@ The default post layout does not include a sidebar. Here you can add a custom si
 
 **Post Prominence**
 The boxes enable you to identify where you want to feature the post.
+
+**Sticky Footer**
+The sticky footer at the bottom of the post in Largo 0.4 displays share icons for Twitter, Facebook and email on the left and follow on the the right that link to other stories in the same category or written by the same author.
