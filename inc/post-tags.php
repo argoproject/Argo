@@ -141,7 +141,7 @@ if ( ! function_exists( 'largo_byline' ) ) {
 }
 
 /**
- * Outputs facebook, twitter, email, share and print utility links on article pages
+ * Outputs facebook, twitter and print utility links on article pages
  *
  * @param $echo bool echo the string or return it (default: echo)
  * @return string social icon area markup as formatted html
@@ -176,14 +176,6 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 			);
 
 		$output .= '</div><div class="right">';
-
-		if ( $utilities['sharethis'] === '1' ) {
-			$output .= '<span class="st_sharethis" displayText="' . esc_attr( __( 'Share', 'largo' ) ) . '"></span>';
-		}
-
-		if ( $utilities['email'] === '1' ) {
-			$output .= '<span class="st_email" displayText="' . esc_attr( __( 'Email', 'largo' ) ) . '"></span>';
-		}
 
 		if ( $utilities['print'] === '1' ) {
 			$output .= '<span class="print"><a href="#" onclick="window.print()" title="' . esc_attr( __( 'Print this article', 'largo' ) ) . '" rel="nofollow"><i class="icon-print"></i> ' . esc_attr( __( 'Print', 'largo' ) ) . '</a></span>';
