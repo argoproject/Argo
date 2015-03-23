@@ -58,7 +58,6 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 		largo_perform_update();
 
 		// check that options have been set
-		$this->assertEquals('classic', of_get_option('single_template'));
 		$this->assertEquals(largo_version(), of_get_option('largo_version'));
 
 		// Cleanup
@@ -368,6 +367,33 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 	}
 
 	function test_largo_update_custom_less_variables() {
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
+
+	function test_largo_remove_topstory_prominence_term() {
+		// This renames the following terms: slug: "top-story" name: "Top Story" parent: "something" -> slug: "top-story" name: "Homepage Top Story" parent: null
+		// This deletes the following terms by slug: "top-story-*"
+		// This does not delete the following term: slug: "top-story" name: "Homepage Top Story"
+
+		largo_remove_topstory_prominence_term();
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
+
+	function test_largo_enable_if_series() {
+		// If the series taxonomy does not exist, of_get_option('series_enabled') is not set
+		// If the series taxonomy exists but has 0 series in it, of_get_option('series_enabled') is not set
+		// If the series taxonomy exists and has >0 series in it, of_get_option('series_enabled') is set to a truthy value.
+
+		largo_enable_if_series();
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
+
+	function test_largo_enable_series_if_landing_page() {
+		// If the post type 'cftl-tax-landing' does not exist, then the options are not set.
+		// If the post type 'cftl-tax-landing' exists but there are no posts, then the options are not set.
+		// If the post type 'cftl-tax-landing' exists and there are posts, then the options are set to a truthy value.
+		// options: ['series_enabled', 'custom_landing_enabled']
+		largo_enable_series_if_landing_page();
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 }

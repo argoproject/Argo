@@ -44,7 +44,9 @@ function largo_perform_update() {
 		largo_transition_nav_menus();
 		largo_update_custom_less_variables();
 		largo_update_prominence_term_descriptions();
-		of_set_option('single_template', 'classic');
+		largo_remove_topstory_prominence_term();
+		largo_enable_if_series();
+		largo_enable_series_if_landing_page();
 		of_set_option('largo_version', largo_version());
 	}
 
@@ -321,9 +323,12 @@ function largo_transition_nav_menus() {
  *
  * @param array $update The new details for the prominence tax term to be updated
  * @param array $term_descriptions Array of prominence terms, each prominence term as an associative array with keys: name, description, olddescription, slug
+ * @uses var_log
+ * @uses wp_update_term
+ * @uses clean_term_cache
  *
  */
-function largo_update_prominence_term_description_single($update, $term_descriptions) {	
+function largo_update_prominence_term_description_single($update, $term_descriptions) {
 	$logarray = array();
 
 	// Toggle comment on these two lines to revert to old descriptions.
@@ -347,7 +352,7 @@ function largo_update_prominence_term_description_single($update, $term_descript
 	    // Clean the entire prominence term cache
 	    clean_term_cache( $id['term_id'], 'prominence', true );
 	}
-	
+
 	// These are here so you can grep your server logs to see if the terms were updated.
 #	var_log($logarray);
 #	var_log("Done updating prominence terms");
@@ -365,10 +370,6 @@ function largo_update_prominence_term_description_single($update, $term_descript
  *
  * @since 0.4
  * @uses largo_update_prominence_term_description_single
- * @uses wp_update_term
- * @uses clean_term_cache
- * @uses var_log
- 
  */
 function largo_update_prominence_term_descriptions() {
 	// see https://github.com/INN/Largo/issues/210
@@ -383,7 +384,7 @@ function largo_update_prominence_term_descriptions() {
 		return false;
 
 	$term_descriptions = array_map(function($arg) { return $arg->description; }, $terms);
-	
+
 	$largoOldProminenceTerms = array(
 		array(
 			'name' => __('Sidebar Featured Widget', 'largo'),
@@ -423,7 +424,7 @@ function largo_update_prominence_term_descriptions() {
 			'slug' => 'series-featured'
 		)
 	);
-	
+
 	foreach ($largoOldProminenceTerms as $update ) {
 		largo_update_prominence_term_description_single($update, $term_descriptions);
 
@@ -594,5 +595,83 @@ function largo_update_custom_less_variables() {
 			$escaped[$key] = addslashes($var);
 
 		Largo_Custom_Less_Variables::update_custom_values($escaped);
+	}
+}
+
+/**
+ * Remove "top-story" prominence term to avoid conflicts with homepages that will register it
+ *
+ * @return array of deleted prominence terms
+ */
+function largo_remove_topstory_prominence_term() {
+	$terms = get_terms('prominence', array(
+				'hide_empty' => false,
+				'fields' => 'all'
+			));
+
+	$del_terms = array();
+	foreach ( $terms as $term ) {
+		$term = (array)$term; // $term is originally a stdClass::__set_state(array( ... ))
+
+		// get old "Top Story", which uses the same slug 'top-story' as the new "Homepage Top Story"
+		if ( $term['name'] == 'Top Story' ) {
+			wp_update_term( $term['term_taxonomy_id'], 'prominence', array(
+				'name' => __('Homepage Top Story', 'largo'),
+				'description' => __('If you are using a "Big story" homepage layout, add this label to a post to make it the top story on the homepage', 'largo'),
+				'slug' => 'top-story',
+				'parent' => null
+			));
+		} else if ( preg_match('/top-story-/', $term['slug'], $matches) ) {
+			// get 'top-story-N' but not new 'top-story'
+			wp_delete_term( $term['term_taxonomy_id'], 'prominence' );
+			$del_terms[] = $term;
+		}
+	}
+	return $del_terms;
+}
+
+/**
+ * Enable series if series have been created.
+ *
+ * @return bool If series were enabled by this function
+ */
+function largo_enable_if_series() {
+	// assuming that some posts will be in a series if series were used
+	$terms = get_terms('series', array(
+				'hide_empty' => false,
+				'fields' => 'all'
+			));
+
+	// enable series if more than 0 terms were returned
+	if (gettype($terms) == 'array' && count($terms) > 0 ) {
+		of_set_option('series_enabled', '1');
+		return true;
+	}
+	return false;
+}
+
+/**
+ * Enable the series taxonomy if the series landing pages are in use.
+ *
+ * @return bool If series landing pages (and series) were enabled by this function.
+ */
+function largo_enable_series_if_landing_page() {
+
+	// get a list of post types
+	$types=get_post_types('', 'names');
+
+	// Get a list of pages in the 'series' taxonomy if the landing page is registered
+	if ( isset($types['cftl-tax-landing']) ) {
+		$args = array(
+			'post_type' => 'cftl-tax-landing'
+		);
+		$pages = get_pages($args);
+		if ( $pages !== false ) {
+			// get_pages returns false if no pages found, so if it's not false then there are probably cftl-tax-landing pages
+			of_set_option('series_enabled', '1');
+			of_set_option('custom_landing_enabled', '1');
+			return true;
+		}
+		return false;
 	}
 }
