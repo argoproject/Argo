@@ -58,7 +58,6 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 		largo_perform_update();
 
 		// check that options have been set
-		$this->assertEquals('classic', of_get_option('single_template'));
 		$this->assertEquals(largo_version(), of_get_option('largo_version'));
 
 		// Cleanup
