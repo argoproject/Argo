@@ -12,6 +12,12 @@
 
 	<h5 class="top-tag"><?php largo_top_term(); ?></h5>
 
+	<?php
+		if ( !of_get_option( 'single_social_icons' ) == false ) {
+			largo_post_social_links();
+		}
+	?>
+
 	<header>
 
  		<h1 class="entry-title" itemprop="headline"><?php the_title(); ?></h1>
