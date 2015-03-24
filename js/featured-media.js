@@ -708,6 +708,7 @@ var LFM = _.extend(LFM || {}, {
                             modal = new LFM.Views.featuredMediaFrame(args);
                             modal.open();
                             LFM.instances.modal = modal;
+                            query.off('sync');
                         });
                         query.fetch();
                     } else {
