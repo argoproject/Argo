@@ -59,6 +59,7 @@ For Developers
     :maxdepth: 2
 
     developers/fordevelopers
+    developers/imagesizes
 
 
 
