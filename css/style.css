@@ -4963,7 +4963,7 @@ img[class*="wp-image-"] {
     display: none !important;
   }
   .hidden-desktop {
-    display: inherit !important;
+    display: none !important;
   }
   .visible-desktop {
     display: none !important ;
