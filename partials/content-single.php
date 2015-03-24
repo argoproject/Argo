@@ -13,13 +13,19 @@
 		<h5 class="top-date"><?php largo_time(); ?></h5>
 		<h5 class="top-tag"><?php largo_top_term(); ?></h5>
 
- 		<h1 class="entry-title" itemprop="headline"><?php the_title(); ?></h1>
- 		<?php if ( $subtitle = get_post_meta( $post->ID, 'subtitle', true ) )
- 			echo '<h2 class="subtitle">' . $subtitle . '</h2>';
- 		?>
- 		<h5 class="byline"><?php largo_byline(); ?></h5>
+		<h1 class="entry-title" itemprop="headline"><?php the_title(); ?></h1>
+		<?php if ( $subtitle = get_post_meta( $post->ID, 'subtitle', true ) )
+			echo '<h2 class="subtitle">' . $subtitle . '</h2>';
+		?>
+		<h5 class="byline"><?php largo_byline(); ?></h5>
 
- 		<?php largo_post_metadata( $post->ID ); ?>
+		<?php
+			if ( !of_get_option( 'single_social_icons' ) == false ) {
+				largo_post_social_links();
+			}
+		?>
+
+<?php largo_post_metadata( $post->ID ); ?>
 
 	</header><!-- / entry header -->
 
