@@ -261,7 +261,7 @@ function largo_get_series_posts( $series_id, $number = -1 ) {
 * which attempts to use the link for ANY term from ANY taxonomy.
 * Largo really only cares about the Series taxonomy.
 *
-* @since 0.4.2
+* @since 0.5
 * @return filtered $post_link, replacing a Landing Page link with its Series link as needed
 */
 function largo_series_landing_link($post_link, $post) {
