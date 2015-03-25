@@ -229,11 +229,13 @@ body.normal.page {
   span.facebook {
     top: -7px;
   }
-  span.print {
+  span.print,
+  span.email {
     font-family: Verdana, Helvetica, sans-serif;
     font-size: 11px;
     top: 1px;
-    i.icon-print {
+    margin-left: 10px;
+    i, &::before {
 	  font-size: @baseFontSize + 2;
 	  margin: 0 -3px 0 2px;
 	  position: relative;
