@@ -2,18 +2,28 @@
 <div class="sticky-footer-holder">
 	<div class="sticky-footer-container social-icons">
 
-		<?php // Share the post using the ShareThis API. The class *_custom gives us a blank slate. ?>
-		<div class="share">
-			<h4><?php _e('Share', 'largo'); ?></h4>
-			<span data-service="facebook" class="custom-share-button icon-facebook share-button"></span>
-			<span data-service="twitter" class="custom-share-button icon-twitter share-button"></span>
-			<span data-service="email" class="custom-share-button icon-mail share-button"></span>
-			<?php
+		<?php // Share the post using the ShareThis API. The class *_custom gives us a blank slate.
+
+		if ( of_get_option('single_social_icons_footer' ) == '1' ) {
+			$utilities = of_get_option('footer_utilities');
+			echo '<div class="share">';
+			echo '<h4>' . __('Share', 'largo') . '</h4>';
+				if ($utilities['ffacebook']) { ?>
+					<span data-service="facebook" class="custom-share-button icon-facebook share-button"></span>
+				<?php }
+				if ($utilities['ftwitter']) { ?>
+					<span data-service="twitter" class="custom-share-button icon-twitter share-button"></span>
+				<?php }
+				if ($utilities['femail']) { ?>
+					<span data-service="email" class="custom-share-button icon-mail share-button"></span>
+				<?php }
 			/*
 			<span data-service="googleplus" class="custom-share-button icon-gplus share-button"></span>
 			<span data-service="linkedin" class="custom-share-button icon-linkedin share-button"></span>
-			*/ ?>
-		</div>
+			*/
+			echo '</div>';
+		}
+		?>
 
 		<?php // Comment link ?>
 		<?php if ( comments_open() ): ?>
