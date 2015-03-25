@@ -47,6 +47,7 @@ class largo_sidebar_featured_widget extends WP_Widget {
     		<?php endif; // end more featured posts ?>
 
 		<?php
+		wp_reset_postdata();
 		echo $after_widget;
 	}
 

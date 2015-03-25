@@ -195,7 +195,7 @@ class Largo_Customizer {
 			'title'          => __( 'Single Post', 'largo' ),
 			'priority'       => 24,
 			) );
-		$services = array( 'facebook', 'twitter', 'sharethis', 'print', 'email' );
+		$services = array( 'facebook', 'twitter', 'print' );
 		$service_settings = array();
 		foreach( $services as $service ) {
 			$service_settings[$service] = $this->get_setting_key( '[article_utilities][' . $service . ']' );
@@ -212,8 +212,6 @@ class Largo_Customizer {
 			'choices'            => array(
 				'facebook'       => __( 'Facebook', 'largo' ),
 				'twitter'        => __( 'Twitter', 'largo' ),
-				'sharethis'      => __( 'ShareThis', 'largo' ),
-				'email'          => __( 'Email', 'largo' ),
 				'print'          => __( 'Print', 'largo' ),
 				),
 			) ) );

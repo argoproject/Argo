@@ -229,7 +229,6 @@ class Largo {
 
 		add_theme_support( 'post-thumbnails' );
 		set_post_thumbnail_size( 140, 140, true ); // thumbnail
-		add_image_size( 'home-logo', 50, 50, true ); // small thumbnail
 		add_image_size( '60x60', 60, 60, true ); // small thumbnail
 		add_image_size( 'medium', MEDIUM_WIDTH, MEDIUM_HEIGHT ); // medium width scaling
 		add_image_size( 'large', LARGE_WIDTH, LARGE_HEIGHT ); // large width scaling

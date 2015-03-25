@@ -58,7 +58,6 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 		largo_perform_update();
 
 		// check that options have been set
-		$this->assertEquals('classic', of_get_option('single_template'));
 		$this->assertEquals(largo_version(), of_get_option('largo_version'));
 
 		// Cleanup
@@ -372,7 +371,7 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 	}
 
 	function test_largo_remove_topstory_prominence_term() {
-		// This deletes the following terms: slug: "top-story" name: "Top Story"
+		// This renames the following terms: slug: "top-story" name: "Top Story" parent: "something" -> slug: "top-story" name: "Homepage Top Story" parent: null
 		// This deletes the following terms by slug: "top-story-*"
 		// This does not delete the following term: slug: "top-story" name: "Homepage Top Story"
 

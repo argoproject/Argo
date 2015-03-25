@@ -47,7 +47,6 @@ function largo_perform_update() {
 		largo_remove_topstory_prominence_term();
 		largo_enable_if_series();
 		largo_enable_series_if_landing_page();
-		of_set_option('single_template', 'classic');
 		of_set_option('largo_version', largo_version());
 	}
 
@@ -616,8 +615,12 @@ function largo_remove_topstory_prominence_term() {
 
 		// get old "Top Story", which uses the same slug 'top-story' as the new "Homepage Top Story"
 		if ( $term['name'] == 'Top Story' ) {
-			wp_delete_term( $term['term_taxonomy_id'], 'prominence' );
-			$del_terms[] = $term;
+			wp_update_term( $term['term_taxonomy_id'], 'prominence', array(
+				'name' => __('Homepage Top Story', 'largo'),
+				'description' => __('If you are using a "Big story" homepage layout, add this label to a post to make it the top story on the homepage', 'largo'),
+				'slug' => 'top-story',
+				'parent' => null
+			));
 		} else if ( preg_match('/top-story-/', $term['slug'], $matches) ) {
 			// get 'top-story-N' but not new 'top-story'
 			wp_delete_term( $term['term_taxonomy_id'], 'prominence' );

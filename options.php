@@ -45,16 +45,12 @@ function optionsframework_options() {
 	$article_utility_buttons = array(
 		'facebook' 	=> __('Facebook', 'largo'),
 		'twitter' 	=> __('Twitter', 'largo'),
-		'sharethis' => __('ShareThis', 'largo'),
-		'email' 	=> __('Email', 'largo'),
 		'print' 	=> __('Print', 'largo')
 	);
 
 	$article_utility_buttons_defaults = array(
 		'facebook' 	=> '1',
 		'twitter' 	=> '1',
-		'sharethis' => '1',
-		'email' 	=> '1',
 		'print' 	=> '1'
 	);
 
