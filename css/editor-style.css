@@ -839,25 +839,33 @@ body.normal.page .article-bottom .largo-disclaimer {
 .post-social span.facebook {
   top: -7px;
 }
-.post-social span.print {
+.post-social span.print,
+.post-social span.email {
   font-family: Verdana, Helvetica, sans-serif;
   font-size: 11px;
   top: 1px;
+  margin-left: 10px;
 }
-.post-social span.print i.icon-print {
+.post-social span.print i,
+.post-social span.email i,
+.post-social span.print::before,
+.post-social span.email::before {
   font-size: 18px;
   margin: 0 -3px 0 2px;
   position: relative;
   top: 2px;
 }
-.post-social span.print:hover {
+.post-social span.print:hover,
+.post-social span.email:hover {
   opacity: 0.85;
   filter: alpha(opacity=85);
 }
-.post-social span.print a {
+.post-social span.print a,
+.post-social span.email a {
   color: black;
 }
-.post-social span.print a:hover {
+.post-social span.print a:hover,
+.post-social span.email a:hover {
   text-decoration: none;
 }
 /* 2.3 - Post pagination */
