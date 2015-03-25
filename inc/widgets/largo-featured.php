@@ -49,7 +49,6 @@ class largo_featured_widget extends WP_Widget {
 
 		<?php
 		echo $after_widget;
-		wp_reset_postdata();
 	}
 
 	function update( $new_instance, $old_instance ) {

@@ -35,8 +35,7 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
 			if ( is_single() ) {
 				if ( have_posts() ) {
 					the_post(); // we need to queue up the post to get the post specific info
-					
-					if ( get_the_author_meta( 'twitter' ) && !get_post_meta( $post->ID, 'largo_byline_text' ) )
+					if ( get_the_author_meta( 'twitter' ) )
 						echo '<meta name="twitter:creator" content="@' . largo_twitter_url_to_username( get_the_author_meta( 'twitter' ) ) . '">';
 					?>
 					<meta property="og:title" content="<?php the_title(); ?>" />

@@ -50,16 +50,10 @@ class largo_footer_featured_widget extends WP_Widget {
 
     		<?php endif; // end more featured posts ?>
 
-
-
 		<?php
-		
 		echo $after_widget;
-		
 		// Restore global $post
-		wp_reset_postdata();
 		$post = $preserve;
-
 	}
 
 	function update( $new_instance, $old_instance ) {

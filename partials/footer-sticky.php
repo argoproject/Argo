@@ -35,10 +35,11 @@
 
 		// Set one of two author objects (leave other null).
 		// We make $coauthor a one dimensional array if author hasn't been overwritten.
+		$byline_text = null;
 		$coauthors = null;
+
 		if( get_post_meta( $post->ID, 'largo_byline_text' ) ) {
-			$byline_text = esc_attr( get_post_meta( $post->ID, 'largo_byline_text', true ) );
-			$byline_link = esc_attr( get_post_meta( $wp_query->post->ID, 'largo_byline_link', true ) );
+			$byline_text = esc_attr( get_post_meta( $wp_query->post->ID, 'largo_byline_text', true ) );
 		} else if ( function_exists('get_coauthors') ) {
 			$coauthors =  get_coauthors( $post->ID );
 		} else {
@@ -54,7 +55,7 @@
 					echo $cat_feed_link;
 			} ?>
 
-			<?php if ( $byline_text && $byline_link ): ?>
+			<?php if ( $byline_text ): ?>
 				<a href="<?php echo $byline_link; ?>" class="icon-link"><?php echo esc_html( $byline_text ); ?></a>
 			<?php else : ?>
 				<?php // $coauthor covers base case (1 dimensional) or where coauthors were defined. ?>
