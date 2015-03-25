@@ -45,13 +45,27 @@ function optionsframework_options() {
 	$article_utility_buttons = array(
 		'facebook' 	=> __('Facebook', 'largo'),
 		'twitter' 	=> __('Twitter', 'largo'),
-		'print' 	=> __('Print', 'largo')
+		'print' 	=> __('Print', 'largo'),
+		'email' 	=> __('Email', 'largo')
 	);
 
 	$article_utility_buttons_defaults = array(
-		'facebook' 	=> '1',
-		'twitter' 	=> '1',
-		'print' 	=> '1'
+		'facebook' => '1',
+		'twitter'  => '1',
+		'email'    => '1',
+		'print'    => '1'
+	);
+
+	$footer_utility_buttons = array(
+		'ffacebook' => __('Facebook', 'largo'),
+		'ftwitter'  => __('Twitter', 'largo'),
+		'femail'    => __('Email', 'largo')
+	);
+
+	$footer_utility_buttons_defaults = array(
+		'ffacebook' => '1',
+		'ftwitter'  => '1',
+		'femail'    => '1'
 	);
 
 	$fb_verbs = array(
@@ -242,17 +256,30 @@ function optionsframework_options() {
 		'type' 	=> 'info');
 
 	$options[] = array(
-		'desc' 		=> __('<strong>Would you like to display share icons on single posts?</strong> By default social icons appear at the top of single posts but you can choose to not show them at all.', 'largo'),
+		'desc' 		=> __('<strong>Would you like to display share icons at the top of single posts?</strong> By default social icons appear at the top of single posts but you can choose to not show them at all.', 'largo'),
 		'id' 		=> 'single_social_icons',
 		'std' 		=> '1',
 		'type' 		=> 'checkbox',);
 
 	$options[] = array(
-		'desc' 		=> __('Select the <strong>share icons</strong> to display on single posts.', 'largo'),
+		'desc' 		=> __('Select the <strong>share icons</strong> to display at the top of single posts.', 'largo'),
 		'id' 		=> 'article_utilities',
 		'std' 		=> $article_utility_buttons_defaults,
 		'type' 		=> 'multicheck',
 		'options' 	=> $article_utility_buttons);
+
+	$options[] = array(
+		'desc' 		=> __('<strong>Would you like to display share icons in the footer of single posts?</strong> By default social icons appear in the sticky footer of single posts but you can choose to not show them at all.', 'largo'),
+		'id' 		=> 'single_social_icons_footer',
+		'std' 		=> '1',
+		'type' 		=> 'checkbox',);
+
+	$options[] = array(
+		'desc' 		=> __('Select the <strong>share icons</strong> to display in the single post sticky footer.', 'largo'),
+		'id' 		=> 'footer_utilities',
+		'std' 		=> $footer_utility_buttons_defaults,
+		'type' 		=> 'multicheck',
+		'options' 	=> $footer_utility_buttons);
 
 	$options[] = array(
 		'desc' 		=> __('<strong>Use "like" or "recommend"</strong> for Facebook buttons?', 'largo'),

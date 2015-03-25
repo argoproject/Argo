@@ -269,27 +269,34 @@
 }
 #optionsframework #section-show_next_prev_nav_single,
 #optionsframework #section-tag_limit,
-#optionsframework #section-article_utilities {
+#optionsframework #section-article_utilities,
+#optionsframework #section-footer_utilities {
 	margin-bottom:20px;
 }
 
 #optionsframework #section-article_utilities .explain,
+#optionsframework #section-footer_utilities .explain,
 #optionsframework #section-fb_verb .explain {
 	float:left;
 	width:30%;
 }
 #optionsframework #section-article_utilities .controls,
+#optionsframework #section-footer_utilities .controls,
 #optionsframework #section-fb_verb .controls {
 	float:right;
 	width:65%;
 }
 #optionsframework #section-article_utilities input,
-#optionsframework #section-article_utilities label {
+#optionsframework #section-article_utilities label,
+#optionsframework #section-footer_utilities input,
+#optionsframework #section-footer_utilities label {
 	clear:none;
 }
-#optionsframework #section-article_utilities input {
+#optionsframework #section-article_utilities input,
+#optionsframework #section-footer_utilities input {
 	width: 22px;
 }
-#optionsframework #section-article_utilities label {
+#optionsframework #section-article_utilities label,
+#optionsframework #section-footer_utilities label {
 	margin-right:20px;
 }
