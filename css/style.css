@@ -4156,6 +4156,23 @@ p.comment-form-comment {
 .form-allowed-tags {
   display: none;
 }
+/*------------------------------------------------------------------------------
+  Widgets - Styling widgets and sidebars.
+
+  Contents:
+    1.0 - Global widget styles
+    2.0 - Follow Widget
+    3.0 - About Widget
+    4.0 - Donate Widget
+    5.0 - Featured and Recent Posts Widget
+    6.0 - Series Posts Widget
+    7.0 - Related Posts Widget
+    8.0 - Roster Widget
+------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------
+    1.0 - Global widget styles
+------------------------------------------------------------------------------*/
+/* 1.1 - Base styles */
 .widget {
   padding: 18px 0;
 }
@@ -4176,6 +4193,7 @@ p.comment-form-comment {
 .widget + .widget {
   border-top: 1px solid #dddddd;
 }
+/* 1.2 - Widget title */
 .widgettitle,
 .stories h3.widgettitle {
   margin-bottom: 8px;
@@ -4196,6 +4214,7 @@ p.comment-form-comment {
   -moz-border-radius: 0;
   border-radius: 0;
 }
+/* 1.3 - Footer widgets */
 #site-footer .widget,
 #site-footer .widgettitle {
   margin: 0;
@@ -4206,6 +4225,7 @@ p.comment-form-comment {
 #site-footer .widget {
   margin-bottom: 12px;
 }
+/* 1.4 - A few alternate styles */
 .widget.rev {
   color: #ffffff;
   background-color: #2275bb;
@@ -4229,6 +4249,19 @@ p.comment-form-comment {
 .widget.no-bg .widgettitle {
   color: #000000;
 }
+/* 1.5 - adjustments for default WP widgets */
+.widget_archive select,
+.widget_categories select,
+.largo-taxonomy-list select,
+.widget_search form {
+  margin: 4.8px 0;
+}
+#sidebar iframe {
+  max-width: 100%;
+}
+/*------------------------------------------------------------------------------
+    2.0 - Follow Widget
+------------------------------------------------------------------------------*/
 .subscribe {
   display: block;
   height: 24px;
@@ -4288,31 +4321,58 @@ p.comment-form-comment {
 .flickr-follow {
   margin-bottom: 8px;
 }
+/*------------------------------------------------------------------------------
+    3.0 - About Widget
+------------------------------------------------------------------------------*/
 .largo-about p {
   margin-bottom: 0;
 }
+/*------------------------------------------------------------------------------
+    4.0 - Donate Widget
+------------------------------------------------------------------------------*/
 .largo-donate p {
   margin-bottom: 8px;
 }
-.largo-sidebar-featured .post-lead,
-.largo-featured .post-lead,
-.largo-recent-posts .post-lead,
-.largo-INN-RSS .post-lead {
+/*------------------------------------------------------------------------------
+    5.0 - Featured and Recent Posts Widget
+------------------------------------------------------------------------------*/
+.largo-sidebar-featured ul,
+.largo-featured ul,
+.largo-recent-posts ul,
+.largo-INN-RSS ul {
+  list-style: none;
+  margin-left: 0;
+}
+.largo-sidebar-featured li,
+.largo-featured li,
+.largo-recent-posts li,
+.largo-INN-RSS li {
   overflow: hidden;
   margin-bottom: 10px;
 }
-.largo-sidebar-featured img,
-.largo-featured img,
-.largo-recent-posts img,
-.largo-INN-RSS img {
+.largo-sidebar-featured img.right-align,
+.largo-featured img.right-align,
+.largo-recent-posts img.right-align,
+.largo-INN-RSS img.right-align {
+  float: right;
+  padding: 3px 0px 6px 10px;
+}
+.largo-sidebar-featured img.left-align,
+.largo-featured img.left-align,
+.largo-recent-posts img.left-align,
+.largo-INN-RSS img.left-align {
   float: left;
-  margin: 5px 10px 0 5px;
+  padding: 3px 10px 6px 0px;
 }
 .largo-sidebar-featured img.attachment-large,
 .largo-featured img.attachment-large,
 .largo-recent-posts img.attachment-large,
-.largo-INN-RSS img.attachment-large {
-  margin: 5px 0 10px;
+.largo-INN-RSS img.attachment-large,
+.largo-sidebar-featured img.attachment-medium,
+.largo-featured img.attachment-medium,
+.largo-recent-posts img.attachment-medium,
+.largo-INN-RSS img.attachment-medium {
+  padding: 0px 0 10px;
 }
 .largo-sidebar-featured h5,
 .largo-featured h5,
@@ -4373,6 +4433,9 @@ p.comment-form-comment {
 .widget.largo-recent-comments p.comment-meta a {
   font-style: italic;
 }
+/*------------------------------------------------------------------------------
+    6.0 - Series Posts Widget
+------------------------------------------------------------------------------*/
 .widget.largo-series-posts h5.top-tag,
 .widget.largo-series-posts h5.top-tag a {
   color: #000000;
@@ -4411,70 +4474,66 @@ p.comment-form-comment {
 .widget.largo-series-posts a.more:after {
   content: " »";
 }
-.widget_archive select,
-.widget_categories select,
-.largo-taxonomy-list select,
-.widget_search form {
-  margin: 4.8px 0;
-}
-#sidebar iframe {
-  max-width: 100%;
-}
-.largo-related-posts .widgettitle {
+/*------------------------------------------------------------------------------
+    7.0 - Related Posts Widget
+------------------------------------------------------------------------------*/
+.widget.largo-related-posts .widgettitle {
   font-size: 21px;
   margin-bottom: 12px;
   text-align: center;
   color: #bd261d;
 }
-.largo-related-posts ul.related {
+.widget.largo-related-posts ul.related {
   margin: 0;
 }
-.largo-related-posts ul.related li {
+.widget.largo-related-posts ul.related li {
   list-style: none;
   display: block;
   *zoom: 1;
 }
-.largo-related-posts ul.related li:before,
-.largo-related-posts ul.related li:after {
+.widget.largo-related-posts ul.related li:before,
+.widget.largo-related-posts ul.related li:after {
   display: table;
   content: "";
 }
-.largo-related-posts ul.related li:after {
+.widget.largo-related-posts ul.related li:after {
   clear: both;
 }
-.largo-related-posts h4 {
+.widget.largo-related-posts h4 {
   font-size: 24px;
   margin-bottom: 8px;
 }
 @media only screen and (max-width: 640px) {
-  .largo-related-posts h4 {
+  .widget.largo-related-posts h4 {
     font-size: 18px;
     line-height: 1.2;
     margin-bottom: 4px;
   }
 }
-.largo-related-posts h5.byline {
+.widget.largo-related-posts h5.byline {
   font-size: 11px;
   margin-bottom: 8px;
 }
 @media only screen and (max-width: 640px) {
-  .largo-related-posts h5.byline {
+  .widget.largo-related-posts h5.byline {
     display: none;
   }
 }
-.largo-related-posts p {
+.widget.largo-related-posts p {
   margin-bottom: 1em;
 }
 @media only screen and (max-width: 640px) {
-  .largo-related-posts p {
+  .widget.largo-related-posts p {
     font-size: 14px;
   }
 }
-.largo-related-posts .wp-post-image {
+.widget.largo-related-posts .wp-post-image {
   float: left;
   margin: 5px 20px 0 0;
 }
-/* Roster Widget */
+/*------------------------------------------------------------------------------
+    8.0 - Staff Roster Widget
+------------------------------------------------------------------------------*/
 ul.staff-roster {
   float: left;
   clear: both;

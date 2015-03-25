@@ -1,22 +1,42 @@
 <?php
-/*
+
+/**
  * Largo Recent Posts
  */
 class largo_recent_posts_widget extends WP_Widget {
 
-	function largo_recent_posts_widget() {
+	/**
+	 * Register widget with WordPress.
+	 */
+	function __construct() {
+
 		$widget_ops = array(
 			'classname' => 'largo-recent-posts',
 			'description' => __('Show your most recent posts with thumbnails and excerpts', 'largo')
 		);
-		$this->WP_Widget( 'largo-recent-posts-widget', __('Largo Recent Posts', 'largo'), $widget_ops);
+		parent::__construct(
+			'largo-recent-posts-widget', // Base ID
+			__('Largo Recent Posts', 'largo'), // Name
+			$widget_ops // Args
+		);
+
 	}
 
+	/**
+	 * Outputs the content of the recent posts widget.
+	 *
+	 * @param array $args widget arguments.
+	 * @param array $instance saved values from databse.
+	 */
 	function widget( $args, $instance ) {
+
 		global $ids; // an array of post IDs already on a page so we can avoid duplicating posts
-		$posts_term = of_get_option( 'posts_term_plural', 'Posts' );
+		
 		extract( $args );
 
+		$posts_term = of_get_option( 'posts_term_plural', 'Posts' );
+
+		// Add the link to the title.
 		$title = apply_filters('widget_title', empty( $instance['title'] ) ? __('Recent ' . $posts_term, 'largo') : $instance['title'], $instance, $this->id_base);
 
 		echo $before_widget;
@@ -31,11 +51,12 @@ class largo_recent_posts_widget extends WP_Widget {
 			'showposts' 	=> $instance['num_posts'],
 			'post_status'	=> 'publish'
 		);
-		if ( isset( $instance['avoid_duplicates'] ) && $instance['avoid_duplicates'] === 1) $query_args['post__not_in'] = $ids;
-		if ($instance['cat'] != '') 	$query_args['cat'] = $instance['cat'];
-		if ($instance['tag'] != '') 	$query_args['tag'] = $instance['tag'];
-		if ($instance['author'] != '') 	$query_args['author'] = $instance['author'];
-		if ($instance['taxonomy'] != '') {
+
+		if ( isset( $instance['avoid_duplicates'] ) && $instance['avoid_duplicates'] === 1 ) $query_args['post__not_in'] = $ids;
+		if ( $instance['cat'] != '' ) $query_args['cat'] = $instance['cat'];
+		if ( $instance['tag'] != '') $query_args['tag'] = $instance['tag'];
+		if ( $instance['author'] != '') $query_args['author'] = $instance['author'];
+		if ( $instance['taxonomy'] != '') {
 			$query_args['tax_query'] = array(
 				array(
 					'taxonomy'	=> $instance['taxonomy'],
@@ -45,72 +66,81 @@ class largo_recent_posts_widget extends WP_Widget {
 			);
 		}
 
-		// if we're just showing a list of headlines, wrap the elements in a ul
-		if ($excerpt == 'none') echo '<ul>';
+		echo '<ul>';
 
 		$my_query = new WP_Query( $query_args );
-          	if ( $my_query->have_posts() ) {
 
-          		$output = '';
+        if ( $my_query->have_posts() ) {
 
-          		while ( $my_query->have_posts() ) : $my_query->the_post(); $ids[] = get_the_ID();
+        	$output = '';
 
-          			// wrap the items in li if we're just showing a list of headlines, otherwise use a div
-          			$output .= ( $excerpt == 'none' && $thumb == 'none' ) ? '<li>' : '<div class="post-lead clearfix">';
+        	while ( $my_query->have_posts() ) : $my_query->the_post(); $ids[] = get_the_ID();
 
-					// The top term
-					$top_term_args = array('echo' => false);
-					if ( isset($instance['show_top_term']) && $instance['show_top_term'] == 1 && largo_has_categories_or_tags() ) { 
-						$output .= '<h5 class="top-tag">' . largo_top_term($top_term_args) . '</h5>' ;
-					}
+        		// wrap the items in li's.
+        		$output .= '<li>';
 
-          			// the thumbnail image (if we're using one)
-          			if ($thumb == 'small') {
-	                    $output .= '<a href="' . get_permalink() . '">' . get_the_post_thumbnail( get_the_ID(), '60x60') . '</a>';
-					} elseif ($thumb == 'medium') {
-	                    $output .= '<a href="' . get_permalink() . '">' . get_the_post_thumbnail() . '</a>';
-					} elseif ($thumb == 'large') {
-						$output .= '<a href="' . get_permalink() . '">' . get_the_post_thumbnail( get_the_ID(), 'large') . '</a>';
-					}
+				// The top term
+				$top_term_args = array('echo' => false);
+				if ( isset($instance['show_top_term']) && $instance['show_top_term'] == 1 && largo_has_categories_or_tags() ) { 
+					$output .= '<h5 class="top-tag">' . largo_top_term($top_term_args) . '</h5>' ;
+				}
 
-					// the headline
-					$output .= '<h5><a href="' . get_permalink() . '">' . get_the_title() . '</a></h5>';
 
-					// byline on posts
-					if ( isset( $instance['show_byline'] ) && $instance['show_byline'] == true) {
-						$output .= '<span class="byline">' . largo_byline(false) . '</span>';
-					}
 
-					// the excerpt
-					if ($excerpt == 'num_sentences') {
-						$output .= '<p>' . largo_trim_sentences( get_the_content(), $instance['num_sentences'] ) . '</p>';
-					} elseif ($excerpt == 'custom_excerpt') {
-	                    $output .= '<p>' . get_the_excerpt() . '</p>';
-					}
+        		// the thumbnail image (if we're using one)
+        		if ($thumb == 'small') {
+        			$img_location = $instance['image_align'] != '' ? $instance['image_align'] : 'left';
+					$img_attr = array('class' => $img_location . '-align');
+        			$img_attr['class'] .= " attachment-small";
+	                $output .= '<a href="' . get_permalink() . '">' . get_the_post_thumbnail( get_the_ID(), '60x60',$img_attr) . '</a>';
+				} elseif ($thumb == 'medium') {
+					$img_attr = array();
+					$img_attr['class'] .= " attachment-medium";
+	                $output .= '<a href="' . get_permalink() . '">' . get_the_post_thumbnail( get_the_ID(),'medium',$img_attr) . '</a>';
+				} elseif ($thumb == 'large') {
+					$img_attr = array();
+					$img_attr['class'] .= " attachment-large";
+					$output .= '<a href="' . get_permalink() . '">' . get_the_post_thumbnail( get_the_ID(), 'large',$img_attr) . '</a>';
+				}
 
-					// read more link
-					if ( isset( $instance['show_read_more'] ) && $instance['show_read_more'] === 1) {
-						$output .= '<p class="more-link"><a href="' . get_permalink() . '">' . __( 'Read More','largo') . '</a></p>';
-					}
+				// the headline
+				$output .= '<h5><a href="' . get_permalink() . '">' . get_the_title() . '</a></h5>';
 
-					// close the item
-					$output .= ( $excerpt == 'none' && $thumb == 'none' ) ? '</li>' : '</div>';
+				// byline on posts
+				if ( isset( $instance['show_byline'] ) && $instance['show_byline'] == true) {
+					$output .= '<span class="byline">' . largo_byline(false) . '</span>';
+				}
 
-				endwhile;
+				// the excerpt
+				if ($excerpt == 'num_sentences') {
+					$output .= '<p>' . largo_trim_sentences( get_the_content(), $instance['num_sentences'] ) . '</p>';
+				} elseif ($excerpt == 'custom_excerpt') {
+	                $output .= '<p>' . get_the_excerpt() . '</p>';
+				}
 
-				// print all of the items
-				echo $output;
+				// read more link
+				if ( isset( $instance['show_read_more'] ) && $instance['show_read_more'] === 1) {
+					$output .= '<p class="more-link"><a href="' . get_permalink() . '">' . __( 'Read More','largo') . '</a></p>';
+				}
 
-			} else {
-	    		printf(__('<p class="error"><strong>You don\'t have any recent %s.</strong></p>', 'largo'), strtolower( $posts_term ) );
-	    	} // end more featured posts
+				// close the item
+				$output .= '</li>';
 
-	    	// close the ul if we're just showing a list of headlines
-	    	if ($excerpt == 'none') echo '</ul>';
+			endwhile;
 
-    		if($instance['linkurl'] !='') {
-				echo '<p class="morelink"><a href="' . esc_url( $instance['linkurl'] ) . '">' . esc_html( $instance['linktext'] ) . '</a></p>';
-			}
+			// print all of the items
+			echo $output;
+
+		} else {
+	    	printf(__('<p class="error"><strong>You don\'t have any recent %s.</strong></p>', 'largo'), strtolower( $posts_term ) );
+	    } // end more featured posts
+
+	    // close the ul if we're just showing a list of headlines
+	    if ($excerpt == 'none') echo '</ul>';
+
+    	if($instance['linkurl'] !='') {
+			echo '<p class="morelink"><a href="' . esc_url( $instance['linkurl'] ) . '">' . esc_html( $instance['linktext'] ) . '</a></p>';
+		}
 		echo $after_widget;
 		wp_reset_postdata();
 	}
@@ -121,6 +151,7 @@ class largo_recent_posts_widget extends WP_Widget {
 		$instance['num_posts'] = intval( $new_instance['num_posts'] );
 		$instance['avoid_duplicates'] = ! empty( $new_instance['avoid_duplicates'] ) ? 1 : 0;
 		$instance['thumbnail_display'] = sanitize_key( $new_instance['thumbnail_display'] );
+		$instance['image_align'] = sanitize_key( $new_instance['image_align'] );
 		$instance['excerpt_display'] = sanitize_key( $new_instance['excerpt_display'] );
 		$instance['num_sentences'] = intval( $new_instance['num_sentences'] );
 		$instance['show_byline'] = ! empty($new_instance['show_byline']);
@@ -142,6 +173,7 @@ class largo_recent_posts_widget extends WP_Widget {
 			'num_posts' 		=> 5,
 			'avoid_duplicates'	=> '',
 			'thumbnail_display' => 'small',
+			'image_align'		=> 'left',
 			'excerpt_display' 	=> 'num_sentences',
 			'num_sentences' 	=> 2,
 			'show_byline'       => '',
@@ -180,9 +212,18 @@ class largo_recent_posts_widget extends WP_Widget {
 			<label for="<?php echo $this->get_field_id( 'thumbnail_display' ); ?>"><?php _e('Thumbnail Image', 'largo'); ?></label>
 			<select id="<?php echo $this->get_field_id('thumbnail_display'); ?>" name="<?php echo $this->get_field_name('thumbnail_display'); ?>" class="widefat" style="width:90%;">
 			    <option <?php selected( $instance['thumbnail_display'], 'small'); ?> value="small"><?php _e('Small (60x60)', 'largo'); ?></option>
-			    <option <?php selected( $instance['thumbnail_display'], 'medium'); ?> value="medium"><?php _e('Medium (150x150)', 'largo'); ?></option>
+			    <?php /* <option <?php selected( $instance['thumbnail_display'], 'medium'); ?> value="medium"><?php _e('Medium (150x150)', 'largo'); ?></option> this size is no different from large. */ ?>
 			    <option <?php selected( $instance['thumbnail_display'], 'large'); ?> value="large"><?php _e('Large (Full width of the widget)', 'largo'); ?></option>
 			    <option <?php selected( $instance['thumbnail_display'], 'none'); ?> value="none"><?php _e('None', 'largo'); ?></option>
+			</select>
+		</p>
+
+		<!-- Image alignment --> 
+		<p>
+			<label for="<?php echo $this->get_field_id( 'image_align' ); ?>"><?php _e('Image Alignment', 'largo'); ?></label>
+			<select id="<?php echo $this->get_field_id( 'image_align' ); ?>" name="<?php echo $this->get_field_name('image_align'); ?>" class="widefat" style="width:90%;">
+			    <option <?php selected( $instance['image_align'], 'left'); ?> value="left"><?php _e('Left align', 'largo'); ?></option>
+			    <option <?php selected( $instance['image_align'], 'right'); ?> value="right"><?php _e('Right align', 'largo'); ?></option>
 			</select>
 		</p>
 
