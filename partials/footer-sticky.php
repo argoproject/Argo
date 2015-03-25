@@ -54,7 +54,7 @@
 					echo $cat_feed_link;
 			} ?>
 
-			<?php if ( $byline_text && $byline_link ): ?>
+			<?php if ( !empty($byline_text) && !empty($byline_link) ): ?>
 				<a href="<?php echo $byline_link; ?>" class="icon-link"><?php echo esc_html( $byline_text ); ?></a>
 			<?php else : ?>
 				<?php // $coauthor covers base case (1 dimensional) or where coauthors were defined. ?>
