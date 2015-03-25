@@ -4877,7 +4877,7 @@ body.clean-read > .clean-read-close {
   display: normal;
 }
 .alignnone {
-  margin: 18px;
+  margin: 18px 0;
 }
 .aligncenter,
 .align-center,
