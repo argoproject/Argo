@@ -15,9 +15,7 @@ Optionally you can elect to not use images and display a text-only header instea
 
 **Note** with Largo 0.4 header images only display on the homepage and not single posts or pages.  
 
-**Square Image** A small square image 50 X 50 or 60 X 60 px is used for navigation and sharing.  The best square images do not contain any text and avoid significant margins or padding.
-
-**Thumbnail Image** - In addition you'll need to create a square thumbnail image (200 by 200 px is ideal) that is used as a fallback when you share posts on Facebook or Twitter for which you have not set a featured image.
+**Square Image** In addition you'll need to create a square thumbnail image (200 by 200 px is ideal) that is used as a fallback when you share posts on Facebook or Twitter for which you have not set a featured image. In addition, a small version of this image is created automatically by WordPress/Largo for use in the site navigation. Since this image needs to be optimized for a small size (60x60 px is the smallest it appears) the best square images should not contain any text and you should avoid adding significant margins or padding within the image.
 
 **Site Title, Tagline and Description** - Before you launch your site you will need to write a title, tagline and a longer description to be used in various places around the site. The title will likely be just your publication or site's name, the tagline should be short (6-8 words) and a short paragraph is sufficient for the site description (you can always add additional information about your organization on your site's "About" page, the short description is just intended to give new visitors an introduction to what your site is about and normally appears as a sidebar widget).
 
