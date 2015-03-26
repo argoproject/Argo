@@ -53,6 +53,7 @@
 					</a>
 
 					<div class="nav-left">
+						<li class="<?php echo (of_get_option('sticky_header_logo') == '' ? 'home-link' : 'home-icon' ) ?>"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php largo_home_icon( 'icon-white' ); ?></a></li>
 						<?php
 							if ( of_get_option( 'show_sitename_in_sticky_nav', 1 ) )
 								echo '<li class="site-name"><a href="/">' . get_bloginfo('name') . '</a></li>';
