@@ -2139,7 +2139,7 @@ li.home-link:hover i {
   overflow: hidden;
 }
 .navbar li.home-link > a {
-  display: block;
+  padding: 0;
 }
 .navbar li.home-link > a:hover {
   background: none;
@@ -2147,7 +2147,7 @@ li.home-link:hover i {
 .navbar li.home-link > a img {
   display: block;
   height: 40px;
-  width: 40px;
+  width: auto;
 }
 .navbar .active > a,
 .navbar .active > a:hover {
@@ -2742,10 +2742,6 @@ body.admin-bar .sticky-nav-holder {
   border-radius: 0;
   min-width: 40px;
   text-align: center;
-}
-.sticky-nav-holder .navbar .nav > li.home-link a img {
-  width: 1.49em;
-  height: 1.49em;
 }
 .sticky-nav-holder .navbar .nav > li.home-link .icon-home:before {
   position: relative;

@@ -41,7 +41,7 @@ if ( ! function_exists( 'largo_home_icon' ) ) {
 				echo wp_get_attachment_image( $attachment_id, $size );
 			else {
 				if (preg_match('/^http(s)?\:\/\//', $logo))
-					echo '<img width="50" height="50" src="' . $logo . '" class="attachment-home-logo" alt="logo">';
+					echo '<img src="' . $logo . '" class="attachment-home-logo" alt="logo">';
 				else
 					echo $default;
 			}
