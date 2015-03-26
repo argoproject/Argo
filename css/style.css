@@ -2108,9 +2108,12 @@ h2.branding .tagline {
 }
 .navbar li > a {
   display: block;
-  padding: 10px;
   color: #ffffff;
   text-decoration: none;
+  line-height: 40px;
+  vertical-align: middle;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 .navbar #header-social li > a {
   padding-right: 0;
