@@ -181,6 +181,10 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 			$output .= '<span class="print"><a href="#" onclick="window.print()" title="' . esc_attr( __( 'Print this article', 'largo' ) ) . '" rel="nofollow"><i class="icon-print"></i> ' . esc_attr( __( 'Print', 'largo' ) ) . '</a></span>';
 		}
 
+		if ($utilities['email'] === '1' ) {
+			$output .= '<span data-service="email" class="email custom-share-button icon-mail share-button"> Email</span>';
+		}
+
 		$output .= '</div></div>';
 
 		if ( $echo ) {
