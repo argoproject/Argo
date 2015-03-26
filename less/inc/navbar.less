@@ -98,6 +98,19 @@ li.home-link:hover i {
 }
 
 .navbar li.home-link > a {
+  display: block;
+  &:hover {
+    background: none;
+  }
+
+  img {
+    display: block;
+    height: @navbarHeight;
+    width: @navbarHeight;
+  }
+}
+
+.navbar li.home-icon > a {
   padding: 0; 
   &:hover {
     background: none;
@@ -107,6 +120,8 @@ li.home-link:hover i {
     display: block;
     height: @navbarHeight;
     width: auto;
+    padding-left: 5px;
+    padding-right: 5px;
   }
 }
 
@@ -706,6 +721,12 @@ li.home-link:hover i {
       .border-radius(0);
       min-width: 40px;
       text-align: center;
+        a {
+          img {
+            width: 1.49em;
+            height: 1.49em;
+          }
+        }
         .icon-home:before {
           position: relative;
           top: 0px;
