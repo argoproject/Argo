@@ -329,7 +329,11 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 	}
 
 	function test_largo_force_settings_update() {
-		$this->markTestIncomplete('This test has not yet been implemented');
+		of_reset_options();
+		largo_force_settings_update();
+		$this->assertEquals('1', of_get_option('show_sticky_nav'));
+		$this->assertEquals('normal', of_get_option('single_template'));
+#		$this->markTestIncomplete('This test has not yet been implemented');
 	}
 
 	// Test functions related to the WP admin workflow views

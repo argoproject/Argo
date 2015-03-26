@@ -445,6 +445,16 @@ function largo_force_settings_update() {
 		'id'    => 'show_sticky_nav',
 		'std' 	=> '1',
 		'type' 	=> 'checkbox');
+	$options[] = array(
+		'desc' 	=> __('Starting with version 0.4, Largo introduced a new single-post template that more prominently highlights article content, which is the default. For backward compatibility, the pre-0.3 version is also available.', 'largo'),
+		'id' 	=> 'single_template',
+		'std' 	=> 'normal',
+		'type' 	=> 'select',
+		'options' => array(
+			'normal' => 'One Column (Standard Layout)',
+			'classic' => 'Two Column (Classic Layout)'
+			)
+		);
 
 	foreach ($options as $option) {
 		of_set_option($option['id'], $option['std']);
