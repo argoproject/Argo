@@ -86,6 +86,7 @@
 }
 .navbar li.dropdown .dropdown-menu li a {
   padding-right: 10px;
+  line-height: @baseLineHeight;
 }
 .navbar .open > a,
 html.no-touch .navbar li > a:hover {
@@ -467,7 +468,7 @@ li.home-link:hover i {
     right: -10px;
     visibility: hidden;
     opacity: 0;
-    .site-name {
+    .site-name, .home-icon, .home-link {
     	display: none;
     }
   }
@@ -498,8 +499,8 @@ li.home-link:hover i {
       .border-radius(4px);
       background-color: @linkColor;
       margin-right: 5px;
-      padding: 2px 7px;
-      top: -3px;
+      padding: 0px 7px;
+      //top: -3px;
       &:before {
         border-top-color: @dropdownBackground !important;
       }

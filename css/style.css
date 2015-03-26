@@ -2123,6 +2123,7 @@ h2.branding .tagline {
 }
 .navbar li.dropdown .dropdown-menu li a {
   padding-right: 10px;
+  line-height: 1.5;
 }
 .navbar .open > a,
 html.no-touch .navbar li > a:hover {
@@ -2455,7 +2456,9 @@ li.home-link:hover i {
     visibility: hidden;
     opacity: 0;
   }
-  .navbar .nav-shelf .site-name {
+  .navbar .nav-shelf .site-name,
+  .navbar .nav-shelf .home-icon,
+  .navbar .nav-shelf .home-link {
     display: none;
   }
   .navbar.open .nav-shelf {
@@ -2499,8 +2502,7 @@ li.home-link:hover i {
     border-radius: 4px;
     background-color: #2275bb;
     margin-right: 5px;
-    padding: 2px 7px;
-    top: -3px;
+    padding: 0px 7px;
   }
   .navbar .nav-shelf li .caret:before {
     border-top-color: #ffffff !important;
