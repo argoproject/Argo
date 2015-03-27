@@ -11,6 +11,10 @@ class largo_staff_widget extends WP_Widget {
 	}
 
 	public function widget( $args, $instance ) {
+		global $post;
+		// Preserve global $post
+		$preserve = $post;
+
 		$title = apply_filters('widget_title', $instance['title']);
 
 		echo $args['before_widget'];
@@ -60,6 +64,7 @@ class largo_staff_widget extends WP_Widget {
 			if (count_user_posts($user->ID) > 0)
 				$user_posts_link = "<a href=\"$author_url\">{$user->first_name}'s posts</a>";
 
+			// This is a heredoc-delimited string: https://php.net/manual/en/language.types.string.php#language.types.string.syntax.heredoc
 			$markup .= <<<EOD
 <li>
 	<div>
@@ -76,6 +81,10 @@ EOD;
 		$markup .= '</ul>';
 		echo $markup;
 		echo $args['after_widget'];
+
+		// Restore global $post
+		wp_reset_postdata();
+		$post = $preserve;
 	}
 
 	public function form( $instance ) {
@@ -106,6 +115,7 @@ EOD;
 		</p>
 
 		<?php
+		wp_reset_postdata();
 	}
 
 	public function update( $new_instance, $old_instance ) {

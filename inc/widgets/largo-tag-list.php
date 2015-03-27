@@ -14,6 +14,9 @@ class largo_tag_list_widget extends WP_Widget {
 
 	function widget( $args, $instance ) {
 		global $post;
+		// Preserve global $post
+		$preserve = $post;
+
 		extract( $args );
 
 		// only useful on post pages
@@ -34,6 +37,10 @@ class largo_tag_list_widget extends WP_Widget {
     	<?php endif;
 
 		echo $after_widget;
+
+		// Restore global $post
+		wp_reset_postdata();
+		$post = $preserve;
 	}
 
 	function update( $new_instance, $old_instance ) {

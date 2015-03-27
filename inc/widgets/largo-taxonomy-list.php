@@ -13,6 +13,10 @@ class largo_taxonomy_list_widget extends WP_Widget {
 	}
 
 	function widget( $args, $instance ) {
+		global $post;
+		// Preserve global $post
+		$preserve = $post;
+
 		extract( $args );
 
 		$title = apply_filters('widget_title', empty( $instance['title'] ) ? __( 'Categories', 'largo' ) : $instance['title'], $instance, $this->id_base);
@@ -59,6 +63,10 @@ class largo_taxonomy_list_widget extends WP_Widget {
 		}
 
 		echo $after_widget;
+
+		// Restore global $post
+		wp_reset_postdata();
+		$post = $preserve;
 	}
 
 	function update( $new_instance, $old_instance ) {
