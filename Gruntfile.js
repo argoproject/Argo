@@ -69,6 +69,15 @@ module.exports = function(grunt) {
         },
 
         shell: {
+            apidocs: {
+                command: [
+                    'cd docs',
+                    'make php',
+                ].join('&&'),
+                options: {
+                    stdout: true
+                }
+            },
             sphinx: {
                 command: [
                     'cd docs',
@@ -131,5 +140,6 @@ module.exports = function(grunt) {
 
     require('load-grunt-tasks')(grunt, { scope: 'devDependencies' });
     grunt.loadNpmTasks('grunt-shell');
-    grunt.registerTask('docs', ['shell:sphinx']);
+    grunt.registerTask('apidocs', ['shell:apidocs']);
+    grunt.registerTask('docs', ['shell:apidocs', 'shell:sphinx']);
 }
