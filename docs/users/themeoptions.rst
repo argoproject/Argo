@@ -54,7 +54,7 @@ This section allows you to upload images that are used primarily in the top head
 	- 1170px-wide Large banner image
 	- 100px-tall site logo for use in the sticky header
 
-- Drag and drop the image onto the uploader (or click "Select Files" and find the correct image on your computer). When the image has finished uploading, make sure you have selected the full size image and then click the button at the bottom of the uploader that says "Use This Image".
+- Drag and drop the image onto the uploader (or click "Select Files" and find the correct image on your computer). When the image has finished uploading, selected the full size image option, and then click the button at the bottom of the uploader that says "Use This Image".
 
 - If the image has uploaded correctly, you should see a thumbnail version of it and the link to the photo in the field next to the "upload" button.
 
