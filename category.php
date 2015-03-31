@@ -22,9 +22,8 @@ $posts_term = of_get_option('posts_term_plural', 'Stories');
 
 	<?php
 
-	if ($paged < 2) {
-		$featured_posts = largo_get_featured_posts_in_category($wp_query->query_vars['category_name']);
-
+	$featured_posts = largo_get_featured_posts_in_category($wp_query->query_vars['category_name']);
+	if ($paged < 2 && count($featured_posts) > 0) {
 		foreach ($featured_posts as $idx => $featured_post) {
 			if ($idx == 0) { ?>
 				<div class="primary-featured-post">
