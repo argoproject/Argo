@@ -152,7 +152,7 @@ class Navis_Media_Credit {
             $align = 'none';
 
         $shcode = '[caption id="' . $id . '" align="align' . $align .
-            '" width="' . $width . '" caption="' . addslashes( $caption ) . '"';
+            '" width="' . $width . '" caption="' . $caption . '"';
         global $tinymce_version;
         if ( -1 === version_compare( $tinymce_version, '4018-20140303' ) ) {
             $shcode .= ' credit="' . addslashes( $creditor->to_string() ) . '"';
