@@ -2161,10 +2161,11 @@ li.home-link:hover i {
 }
 .navbar li.home-icon > a img {
   display: block;
-  height: 40px;
+  height: 24px;
   width: auto;
-  padding-left: 5px;
   padding-right: 5px;
+  padding-bottom: 8px;
+  padding-top: 8px;
 }
 .navbar .active > a,
 .navbar .active > a:hover {
