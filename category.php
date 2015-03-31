@@ -23,18 +23,20 @@ $posts_term = of_get_option('posts_term_plural', 'Stories');
 	<?php
 
 	$featured_posts = largo_get_featured_posts_in_category($wp_query->query_vars['category_name']);
-	if ($paged < 2 && count($featured_posts) > 0) {
-		foreach ($featured_posts as $idx => $featured_post) {
-			if ($idx == 0) { ?>
-				<div class="primary-featured-post">
-					<?php largo_render_template(
-							'partials/archive', 'category-primary-feature', array('featured_post' => $featured_post)); ?>
-				</div>
-				<div class="secondary-featured-post">
-					<div class="row-fluid clearfix">
-		<?php } else {
-			largo_render_template(
-				'partials/archive', 'category-secondary-feature', array('featured_post' => $featured_post));
+	if ($paged < 2) {
+		if (count($featured_posts) > 0) {
+			foreach ($featured_posts as $idx => $featured_post) {
+				if ($idx == 0) { ?>
+					<div class="primary-featured-post">
+						<?php largo_render_template(
+								'partials/archive', 'category-primary-feature', array('featured_post' => $featured_post)); ?>
+					</div>
+					<div class="secondary-featured-post">
+						<div class="row-fluid clearfix">
+			<?php } else {
+				largo_render_template(
+					'partials/archive', 'category-secondary-feature', array('featured_post' => $featured_post));
+				}
 			}
 		}
 
@@ -46,10 +48,20 @@ $posts_term = of_get_option('posts_term_plural', 'Stories');
 
 			foreach (range(1, $needed) as $number) {
 				the_post();
-				largo_render_template(
-					'partials/archive', 'category-secondary-feature', array('featured_post' => $post));
+				if (count($featured_posts) == 0 && $number == 1) { ?>
+					<div class="primary-featured-post">
+						<?php largo_render_template(
+								'partials/archive', 'category-primary-feature', array('featured_post' => $post)); ?>
+					</div>
+					<div class="secondary-featured-post">
+						<div class="row-fluid clearfix">
+				<?php } else {
+					largo_render_template(
+						'partials/archive', 'category-secondary-feature', array('featured_post' => $post));
+				}
 			}
 		} ?>
+
 			</div>
 		</div>
 	<?php } ?>
