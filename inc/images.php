@@ -29,6 +29,7 @@ if ( ! function_exists( 'largo_home_icon' ) ) {
 		global $wpdb;
 
 		$logo = of_get_option( 'sticky_header_logo' );
+		var_log($logo);
 		$default = '<i class="icon-home ' . esc_attr( $class ) . '"></i>';
 
 		if ( ! empty( $logo ) ) {
