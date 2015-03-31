@@ -31,7 +31,7 @@ class largo_recent_posts_widget extends WP_Widget {
 	function widget( $args, $instance ) {
 
 		global $ids; // an array of post IDs already on a page so we can avoid duplicating posts
-		
+
 		extract( $args );
 
 		$posts_term = of_get_option( 'posts_term_plural', 'Posts' );
@@ -81,7 +81,7 @@ class largo_recent_posts_widget extends WP_Widget {
 
 				// The top term
 				$top_term_args = array('echo' => false);
-				if ( isset($instance['show_top_term']) && $instance['show_top_term'] == 1 && largo_has_categories_or_tags() ) { 
+				if ( isset($instance['show_top_term']) && $instance['show_top_term'] == 1 && largo_has_categories_or_tags() ) {
 					$output .= '<h5 class="top-tag">' . largo_top_term($top_term_args) . '</h5>' ;
 				}
 
@@ -212,13 +212,13 @@ class largo_recent_posts_widget extends WP_Widget {
 			<label for="<?php echo $this->get_field_id( 'thumbnail_display' ); ?>"><?php _e('Thumbnail Image', 'largo'); ?></label>
 			<select id="<?php echo $this->get_field_id('thumbnail_display'); ?>" name="<?php echo $this->get_field_name('thumbnail_display'); ?>" class="widefat" style="width:90%;">
 			    <option <?php selected( $instance['thumbnail_display'], 'small'); ?> value="small"><?php _e('Small (60x60)', 'largo'); ?></option>
-			    <?php /* <option <?php selected( $instance['thumbnail_display'], 'medium'); ?> value="medium"><?php _e('Medium (150x150)', 'largo'); ?></option> this size is no different from large. */ ?>
+			    <option <?php selected( $instance['thumbnail_display'], 'medium'); ?> value="medium"><?php _e('Medium (150x150)', 'largo'); ?></option>
 			    <option <?php selected( $instance['thumbnail_display'], 'large'); ?> value="large"><?php _e('Large (Full width of the widget)', 'largo'); ?></option>
 			    <option <?php selected( $instance['thumbnail_display'], 'none'); ?> value="none"><?php _e('None', 'largo'); ?></option>
 			</select>
 		</p>
 
-		<!-- Image alignment --> 
+		<!-- Image alignment -->
 		<p>
 			<label for="<?php echo $this->get_field_id( 'image_align' ); ?>"><?php _e('Image Alignment', 'largo'); ?></label>
 			<select id="<?php echo $this->get_field_id( 'image_align' ); ?>" name="<?php echo $this->get_field_name('image_align'); ?>" class="widefat" style="width:90%;">
@@ -244,7 +244,7 @@ class largo_recent_posts_widget extends WP_Widget {
 		<p>
 			<input class="checkbox" type="checkbox" <?php echo $showbyline; ?> id="<?php echo $this->get_field_id('show_byline'); ?>" name="<?php echo $this->get_field_name('show_byline'); ?>" /> <label for="<?php echo $this->get_field_id('show_byline'); ?>"><?php _e('Show byline on posts?', 'largo'); ?></label>
 		</p>
-		
+
 		<p>
 			<input class="checkbox" type="checkbox" <?php echo $show_top_term; ?> id="<?php echo $this->get_field_id('show_top_term'); ?>" name="<?php echo $this->get_field_name('show_top_term'); ?>" /> <label for="<?php echo $this->get_field_id('show_top_term'); ?>"><?php _e('Show the top term on posts?', 'largo'); ?></label>
 		</p>
