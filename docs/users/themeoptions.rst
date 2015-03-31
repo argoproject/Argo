@@ -45,19 +45,20 @@ Theme Images
 
 This section allows you to upload images that are used primarily in the top header of your Largo site. To add your images:
 
-- Make sure you have created all five image sizes as outlined in our :doc:`prelaunchchecklist` and then click "Upload" by the image you want to add.
+- Make sure you have created all six image sizes as outlined in our :doc:`prelaunchchecklist` and then click "Upload" by the image you want to add.
 
 	- 200x200px Square default thumbnail image
 	- 16x16px Favicon
 	- 768px-wide Small banner image
 	- 980px-wide Medium banner image
 	- 1170px-wide Large banner image
+	- 100px-tall site logo for use in the sticky header
 
-- Drag and drop the image onto the uploader (or click "Select Files" and find the correct image on your computer). When the image has finished uploading, make sure you have selected the full size image and then click the button at the bottom of the uploader that says "Use This Image".
+- Drag and drop the image onto the uploader (or click "Select Files" and find the correct image on your computer). When the image has finished uploading, selected the full size image option, and then click the button at the bottom of the uploader that says "Use This Image".
 
 - If the image has uploaded correctly, you should see a thumbnail version of it and the link to the photo in the field next to the "upload" button.
 
-- Once you have uploaded all five images, be sure to click "Save Options" to save your changes.
+- Once you have uploaded all six images, be sure to click "Save Options" to save your changes.
 
 There is one additional option in this section, a checkbox that allows you to use text in the place of the banner images. It is unlikely that you will use this option, but if you do, selecting this checkbox will use the Site Title and Description from your **Settings** > **General** menu in the place of the the header images so make sure that you have set those options before you enable this feature.
 
