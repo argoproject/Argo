@@ -141,5 +141,5 @@ module.exports = function(grunt) {
     require('load-grunt-tasks')(grunt, { scope: 'devDependencies' });
     grunt.loadNpmTasks('grunt-shell');
     grunt.registerTask('apidocs', ['shell:apidocs']);
-    grunt.registerTask('docs', ['shell:apidocs', 'shell:sphinx']);
+    grunt.registerTask('docs', ['shell:sphinx']);
 }

@@ -2108,9 +2108,12 @@ h2.branding .tagline {
 }
 .navbar li > a {
   display: block;
-  padding: 10px;
   color: #ffffff;
   text-decoration: none;
+  line-height: 40px;
+  vertical-align: middle;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 .navbar #header-social li > a {
   padding-right: 0;
@@ -2120,6 +2123,7 @@ h2.branding .tagline {
 }
 .navbar li.dropdown .dropdown-menu li a {
   padding-right: 10px;
+  line-height: 1.5;
 }
 .navbar .open > a,
 html.no-touch .navbar li > a:hover {
@@ -2148,6 +2152,19 @@ li.home-link:hover i {
   display: block;
   height: 40px;
   width: 40px;
+}
+.navbar li.home-icon > a {
+  padding: 0;
+}
+.navbar li.home-icon > a:hover {
+  background: none;
+}
+.navbar li.home-icon > a img {
+  display: block;
+  height: 40px;
+  width: auto;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 .navbar .active > a,
 .navbar .active > a:hover {
@@ -2439,7 +2456,9 @@ li.home-link:hover i {
     visibility: hidden;
     opacity: 0;
   }
-  .navbar .nav-shelf .site-name {
+  .navbar .nav-shelf .site-name,
+  .navbar .nav-shelf .home-icon,
+  .navbar .nav-shelf .home-link {
     display: none;
   }
   .navbar.open .nav-shelf {
@@ -2483,8 +2502,7 @@ li.home-link:hover i {
     border-radius: 4px;
     background-color: #2275bb;
     margin-right: 5px;
-    padding: 2px 7px;
-    top: -3px;
+    padding: 0px 7px;
   }
   .navbar .nav-shelf li .caret:before {
     border-top-color: #ffffff !important;

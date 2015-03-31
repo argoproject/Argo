@@ -354,6 +354,12 @@ function optionsframework_options() {
 		'id' 	=> 'banner_image_lg',
 		'type' 	=> 'upload');
 
+	$options[] = array(
+		'name' 	=> __('Sticky Header Logo', 'largo'),
+		'desc' 	=> __('Used in the sticky navigation. This image should be 100px tall and at least 100px wide. This logo will be hidden on mobile sites if the <b>Show Site Name in Sticky Nav</b> option is checked under <b>Basic Settings</b>', 'largo'),
+		'id' 	=> 'sticky_header_logo',
+		'type' 	=> 'upload');
+
 	/**
 	 * Layout Options
 	 */
