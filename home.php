@@ -1,6 +1,9 @@
 <?php
 /**
  * The homepage template
+ *
+ * @package Largo
+ * @since 0.1
  */
 
 /**
