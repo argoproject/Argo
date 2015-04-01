@@ -44,6 +44,7 @@ class AjaxFunctionsTestAjaxFunctions extends WP_Ajax_UnitTestCase {
 		// Test data
 		$this->post_count = 10;
 		$this->post_ids = $this->factory->post->create_many($this->post_count);
+		of_reset_options();
 	}
 
 	function test_largo_load_more_posts() {
@@ -58,6 +59,34 @@ class AjaxFunctionsTestAjaxFunctions extends WP_Ajax_UnitTestCase {
 				$this->assertTrue((bool) $pos);
 			}
 		}
+	}
+
+	/*
+	 * Make sure `largo_load_more_posts` works when `cats_home` option is set.
+	 *
+	 * Regression test for issue: http://github.com/inn/largo/issues/499
+	 */
+	function test_largo_load_more_posts_cats_home_option() {
+		global $wp_action;
+		$preserve = $wp_action;
+		$wp_action = array();
+
+		$category = $this->factory->category->create();
+		of_set_option('cats_home', (string) $category);
+
+		$_POST['paged'] = 0;
+		$_POST['query'] = array();
+
+		try {
+			$this->_handleAjax("load_more_posts");
+		} catch (WPAjaxDieStopException $e) {
+			foreach ($this->post_ids as $number) {
+				$pos = strpos($this->_last_response, 'post-' . $number);
+				$this->assertTrue((bool) $pos);
+			}
+		}
+
+		$wp_action = $preserve;
 	}
 
 	function test_largo_load_more_posts_empty_query() {
