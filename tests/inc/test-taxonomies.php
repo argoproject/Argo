@@ -52,6 +52,11 @@ class TaxonomiesTestFunctions extends WP_UnitTestCase {
 	function test_largo_categoy_archive_posts() {
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
+
+	function test_largo_get_featured_posts_in_category() {
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
+
 	function test_unregister_series_taxonomy() {
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}

@@ -19,6 +19,8 @@ Optionally you can elect to not use images and display a text-only header instea
 
 .. _favicon: https://en.wikipedia.org/wiki/Favicon
 
+**Sticky Header Logo** - This image should be 100 pixels tall and at least 100 pixels wide. It will appear in the sticky navigation bar that is seen as people scroll, and on mobile.
+
 **Site Title, Tagline and Description** - Before you launch your site you will need to write a title, tagline and a longer description to be used in various places around the site. The title will likely be just your publication or site's name, the tagline should be short (6-8 words) and a short paragraph is sufficient for the site description (you can always add additional information about your organization on your site's "About" page, the short description is just intended to give new visitors an introduction to what your site is about and normally appears as a sidebar widget).
 
 **Social Media Accounts** - The Largo theme supports social media integration at both the site and author level. You can add links to your organization's Facebook page and Twitter account under the Appearance > Theme Options menu and individual authors can add links to their social media accounts by editing their user profile.

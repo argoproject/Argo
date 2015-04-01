@@ -1,0 +1,1 @@
+.. php:attr:: $layout
