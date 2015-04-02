@@ -607,6 +607,7 @@ input[type="color"]:focus,
   outline: 0;
   outline: thin dotted \9;
   /* IE6-9 */
+
   -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
   -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
   box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
@@ -616,6 +617,7 @@ input[type="checkbox"] {
   margin: 3px 0;
   *margin-top: 0;
   /* IE7 */
+
   line-height: normal;
   cursor: pointer;
 }
@@ -634,8 +636,10 @@ select,
 input[type="file"] {
   height: 28px;
   /* In IE7, the height of the select element cannot be changed by height, only font-size */
+
   *margin-top: 4px;
   /* For IE7, add top margin to align select with labels */
+
   line-height: 28px;
 }
 select {
@@ -724,62 +728,62 @@ textarea,
 input.span12,
 textarea.span12,
 .uneditable-input.span12 {
-  width: 89.99999999%;
+  width: 89.99999998999999%;
 }
 input.span11,
 textarea.span11,
 .uneditable-input.span11 {
-  width: 81.48936169%;
+  width: 81.489361693%;
 }
 input.span10,
 textarea.span10,
 .uneditable-input.span10 {
-  width: 72.9787234%;
+  width: 72.97872339599999%;
 }
 input.span9,
 textarea.span9,
 .uneditable-input.span9 {
-  width: 64.4680851%;
+  width: 64.468085099%;
 }
 input.span8,
 textarea.span8,
 .uneditable-input.span8 {
-  width: 55.9574468%;
+  width: 55.95744680199999%;
 }
 input.span7,
 textarea.span7,
 .uneditable-input.span7 {
-  width: 47.4468085%;
+  width: 47.446808505%;
 }
 input.span6,
 textarea.span6,
 .uneditable-input.span6 {
-  width: 38.93617021%;
+  width: 38.93617020799999%;
 }
 input.span5,
 textarea.span5,
 .uneditable-input.span5 {
-  width: 30.42553191%;
+  width: 30.425531911%;
 }
 input.span4,
 textarea.span4,
 .uneditable-input.span4 {
-  width: 21.91489361%;
+  width: 21.914893614%;
 }
 input.span3,
 textarea.span3,
 .uneditable-input.span3 {
-  width: 13.40425532%;
+  width: 13.404255317%;
 }
 input.span2,
 textarea.span2,
 .uneditable-input.span2 {
-  width: 4.89361702%;
+  width: 4.893617020000001%;
 }
 input.span1,
 textarea.span1,
 .uneditable-input.span1 {
-  width: -3.61702128%;
+  width: -3.617021277%;
 }
 input[disabled],
 select[disabled],
@@ -945,6 +949,7 @@ select:focus:required:invalid:focus {
   display: inline-block;
   *display: inline;
   /* IE7 inline-block hack */
+
   *zoom: 1;
   vertical-align: middle;
   padding-left: 5px;
@@ -1062,6 +1067,7 @@ select:focus:required:invalid:focus {
   padding-left: 14px;
   padding-left: 4px \9;
   /* IE7-8 doesn't have border-radius, so don't indent the padding */
+
   margin-bottom: 0;
   -webkit-border-radius: 14px;
   -moz-border-radius: 14px;
@@ -1091,6 +1097,7 @@ select:focus:required:invalid:focus {
   display: inline-block;
   *display: inline;
   /* IE7 inline-block hack */
+
   *zoom: 1;
   margin-bottom: 0;
 }
@@ -1266,6 +1273,7 @@ legend + .control-group {
   background-color: #e6e6e6;
   *background-color: #d9d9d9;
   /* Buttons in IE7 don't get borders, so darken on hover */
+
   background-position: 0 -15px;
   -webkit-transition: background-position 0.1s linear;
   -moz-transition: background-position 0.1s linear;
@@ -1336,6 +1344,7 @@ legend + .control-group {
   background-color: #1a5a90;
   *background-color: #164c7a;
   /* Buttons in IE7 don't get borders, so darken on hover */
+
   background-position: 0 -15px;
   -webkit-transition: background-position 0.1s linear;
   -moz-transition: background-position 0.1s linear;
@@ -1406,122 +1415,122 @@ table tbody:first-child tr:first-child td {
 }
 table .span1 {
   float: none;
-  width: -9.61702128%;
+  width: -9.617021277%;
   margin-left: 0;
 }
 table .span2 {
   float: none;
-  width: -1.10638298%;
+  width: -1.1063829799999993%;
   margin-left: 0;
 }
 table .span3 {
   float: none;
-  width: 7.40425532%;
+  width: 7.4042553170000005%;
   margin-left: 0;
 }
 table .span4 {
   float: none;
-  width: 15.91489361%;
+  width: 15.914893614%;
   margin-left: 0;
 }
 table .span5 {
   float: none;
-  width: 24.42553191%;
+  width: 24.425531911%;
   margin-left: 0;
 }
 table .span6 {
   float: none;
-  width: 32.93617021%;
+  width: 32.93617020799999%;
   margin-left: 0;
 }
 table .span7 {
   float: none;
-  width: 41.4468085%;
+  width: 41.446808505%;
   margin-left: 0;
 }
 table .span8 {
   float: none;
-  width: 49.9574468%;
+  width: 49.95744680199999%;
   margin-left: 0;
 }
 table .span9 {
   float: none;
-  width: 58.4680851%;
+  width: 58.46808509900001%;
   margin-left: 0;
 }
 table .span10 {
   float: none;
-  width: 66.9787234%;
+  width: 66.97872339599999%;
   margin-left: 0;
 }
 table .span11 {
   float: none;
-  width: 75.48936169%;
+  width: 75.489361693%;
   margin-left: 0;
 }
 table .span12 {
   float: none;
-  width: 83.99999999%;
+  width: 83.99999998999999%;
   margin-left: 0;
 }
 table .span13 {
   float: none;
-  width: 92.51063829%;
+  width: 92.510638287%;
   margin-left: 0;
 }
 table .span14 {
   float: none;
-  width: 101.02127658%;
+  width: 101.02127658399999%;
   margin-left: 0;
 }
 table .span15 {
   float: none;
-  width: 109.53191488%;
+  width: 109.531914881%;
   margin-left: 0;
 }
 table .span16 {
   float: none;
-  width: 118.04255318%;
+  width: 118.04255317799999%;
   margin-left: 0;
 }
 table .span17 {
   float: none;
-  width: 126.55319148%;
+  width: 126.553191475%;
   margin-left: 0;
 }
 table .span18 {
   float: none;
-  width: 135.06382977%;
+  width: 135.063829772%;
   margin-left: 0;
 }
 table .span19 {
   float: none;
-  width: 143.57446807%;
+  width: 143.57446806899998%;
   margin-left: 0;
 }
 table .span20 {
   float: none;
-  width: 152.08510637%;
+  width: 152.085106366%;
   margin-left: 0;
 }
 table .span21 {
   float: none;
-  width: 160.59574466%;
+  width: 160.595744663%;
   margin-left: 0;
 }
 table .span22 {
   float: none;
-  width: 169.10638296%;
+  width: 169.10638296000002%;
   margin-left: 0;
 }
 table .span23 {
   float: none;
-  width: 177.61702126%;
+  width: 177.617021257%;
   margin-left: 0;
 }
 table .span24 {
   float: none;
-  width: 186.12765955%;
+  width: 186.127659554%;
   margin-left: 0;
 }
 @font-face {
@@ -1841,59 +1850,59 @@ table .span24 {
   -ms-box-sizing: border-box;
   box-sizing: border-box;
   float: left;
-  margin-left: 2.12765957%;
-  *margin-left: 1.62765957%;
+  margin-left: 2.127659574%;
+  *margin-left: 1.627659574%;
 }
 .row-fluid [class*="span"]:first-child {
   margin-left: 0;
 }
 .row-fluid .span12 {
-  width: 99.99999999%;
-  *width: 99.49999999%;
+  width: 99.99999998999999%;
+  *width: 99.49999998999999%;
 }
 .row-fluid .span11 {
-  width: 91.48936169%;
-  *width: 90.98936169%;
+  width: 91.489361693%;
+  *width: 90.989361693%;
 }
 .row-fluid .span10 {
-  width: 82.9787234%;
-  *width: 82.4787234%;
+  width: 82.97872339599999%;
+  *width: 82.47872339599999%;
 }
 .row-fluid .span9 {
-  width: 74.4680851%;
-  *width: 73.9680851%;
+  width: 74.468085099%;
+  *width: 73.968085099%;
 }
 .row-fluid .span8 {
-  width: 65.9574468%;
-  *width: 65.4574468%;
+  width: 65.95744680199999%;
+  *width: 65.45744680199999%;
 }
 .row-fluid .span7 {
-  width: 57.4468085%;
-  *width: 56.9468085%;
+  width: 57.446808505%;
+  *width: 56.946808505%;
 }
 .row-fluid .span6 {
-  width: 48.93617021%;
-  *width: 48.43617021%;
+  width: 48.93617020799999%;
+  *width: 48.43617020799999%;
 }
 .row-fluid .span5 {
-  width: 40.42553191%;
-  *width: 39.92553191%;
+  width: 40.425531911%;
+  *width: 39.925531911%;
 }
 .row-fluid .span4 {
-  width: 31.91489361%;
-  *width: 31.41489361%;
+  width: 31.914893614%;
+  *width: 31.414893614%;
 }
 .row-fluid .span3 {
-  width: 23.40425532%;
-  *width: 22.90425532%;
+  width: 23.404255317%;
+  *width: 22.904255317%;
 }
 .row-fluid .span2 {
   width: 14.89361702%;
   *width: 14.39361702%;
 }
 .row-fluid .span1 {
-  width: 6.38297872%;
-  *width: 5.88297872%;
+  width: 6.382978723%;
+  *width: 5.882978723%;
 }
 @media screen and (max-width: 480px) {
   .home #main {
@@ -3160,11 +3169,17 @@ article img.attachment-post-thumbnail {
 body.normal.single-post,
 body.normal.page {
   /* 1.1 - Header */
+
   /* 1.2 - Hero */
+
   /* 1.3 - Sidebar (left of post) */
+
   /* 1.4 - Entry Content (the main post content) */
+
   /* 1.5 - Article Bottom (after post content) */
+
   /* 1.6 - Overrides */
+
 }
 body.normal.single-post article.post > header,
 body.normal.page article.post > header {
@@ -3239,6 +3254,7 @@ body.normal.page .hero.is-empty {
 body.normal.single-post #sidebar,
 body.normal.page #sidebar {
   /* all to undo bootstrap */
+
   float: none;
   width: auto;
   min-height: 0;
@@ -3247,6 +3263,7 @@ body.normal.page #sidebar {
 body.normal.single-post #sidebar .widget,
 body.normal.page #sidebar .widget {
   /* float widgets */
+
   float: left;
   clear: left;
   padding-right: 20px;
@@ -3297,21 +3314,21 @@ body.normal.page .article-bottom .largo-disclaimer {
   }
   body.normal.single-post .article-bottom,
   body.normal.page .article-bottom {
-    margin: 0 6.38297872%;
+    margin: 0 6.382978723%;
   }
   body.normal.single-post article.post > header,
   body.normal.page article.post > header {
-    margin: 24px 6.38297872%;
+    margin: 24px 6.382978723%;
   }
   body.normal.single-post .entry-content,
   body.normal.page .entry-content {
-    padding: 0 6.38297872%;
+    padding: 0 6.382978723%;
   }
   body.normal.single-post .hero p.wp-caption-text,
   body.normal.page .hero p.wp-caption-text,
   body.normal.single-post .hero p.wp-media-credit,
   body.normal.page .hero p.wp-media-credit {
-    margin: 0 2.12765957% 12px;
+    margin: 0 2.127659574% 12px;
   }
 }
 @media only screen and (max-width: 529px) {
@@ -3344,6 +3361,7 @@ body.normal.page .article-bottom .largo-disclaimer {
 .byline .time-ago,
 .byline .edit-link a {
   /*text-transform: uppercase;*/
+
 }
 .byline .author {
   font-weight: bold;
@@ -3789,6 +3807,7 @@ h5.top-tag a {
 }
 #homepage-bottom p {
   font-size: 16px;
+  font-weight: normal;
 }
 #homepage-bottom ul {
   margin: 0;
@@ -4891,6 +4910,7 @@ ul.staff-roster p {
   display: inline-block;
   *display: inline;
   /* IE7 inline-block hack */
+
   *zoom: 1;
   padding: 0.3em 1em;
 }
@@ -4951,6 +4971,7 @@ body.clean-read > .clean-read-close {
   display: inline-block;
   text-align: center;
   /* ACM ad zones only, sorry */
+
 }
 .header-ad-zone #header-ad-zone-container .acm_ad_zones {
   display: inline-block;
@@ -4995,8 +5016,10 @@ img[class*="wp-image-"] {
   position: relative;
   padding-bottom: 56.25%;
   /* 16/9 ratio */
+
   padding-top: 30px;
   /* IE6 workaround*/
+
   height: 0;
   overflow: hidden;
   margin-bottom: 28px;
@@ -5397,6 +5420,7 @@ img[class*="wp-image-"] {
   body.normal.page .hero {
     width: 60%;
     /* save some paper. */
+  
     margin-left: 0;
     margin-bottom: 0;
     float: none;
@@ -5421,10 +5445,10 @@ img[class*="wp-image-"] {
   }
   img {
     /*
-		max-width:100% !important
-	*/
+  		max-width:100% !important
+  	*/
   }
-  @page {
+  @page  {
     margin: 0.5cm 0.5cm 1cm;
   }
   p,
