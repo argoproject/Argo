@@ -104,11 +104,12 @@ if (!function_exists('largo_load_more_posts')) {
 		if ( $query->have_posts() ) {
 			while ( $query->have_posts() ) : $query->the_post();
 				$partial = 'home';
-				if($_POST['is_series_landing']) {
+				if($_POST['is_series_landing'] === true || $_POST['is_series_landing'] === 1) {
 					$partial = 'series';
 					$opt = $_POST['opt'];
 				}
 				$partial = ( get_post_type() == 'argolinks' ) ? 'argolinks' : $partial;
+				echo $partial;
 				get_template_part( 'partials/content', $partial );
 			endwhile;
 		}

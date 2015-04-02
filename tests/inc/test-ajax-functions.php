@@ -50,6 +50,8 @@ class AjaxFunctionsTestAjaxFunctions extends WP_Ajax_UnitTestCase {
 	function test_largo_load_more_posts() {
 		$_POST['paged'] = 0;
 		$_POST['query'] = array();
+		$_POST['is_series_landing'] = true;
+		$_POST['opt'] = array();
 
 		try {
 			$this->_handleAjax("load_more_posts");
@@ -101,6 +103,9 @@ class AjaxFunctionsTestAjaxFunctions extends WP_Ajax_UnitTestCase {
 
 	function test_largo_load_more_posts_empty_query() {
 		$_POST['paged'] = 0;
+		$_POST['is_series_landing'] = true;
+		$_POST['opt'] = array();
+
 
 		try {
 			$this->_handleAjax("load_more_posts");
