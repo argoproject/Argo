@@ -84,6 +84,8 @@ endif;
 <?php
 
 global $wp_query;
+global $post;
+$save_post = $post;
 
 // Make sure we're actually a series page, and pull posts accordingly
 if ( isset( $wp_query->query_vars['term'] )
@@ -137,6 +139,7 @@ if ( isset( $wp_query->query_vars['term'] )
 	largo_content_nav( 'nav-below' );
 
 	wp_reset_postdata();
+	$post = $save_post;
 } ?>
 
 </div><!-- /.grid_8 #content -->

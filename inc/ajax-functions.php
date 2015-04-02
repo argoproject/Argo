@@ -29,7 +29,7 @@ if (!function_exists('largo_load_more_posts_enqueue_script')) {
  */
 if (!function_exists('largo_load_more_posts_data')) {
 	function largo_load_more_posts_data() {
-		global $wp_query, $shown_ids;
+		global $wp_query, $shown_ids, $post, $opt;
 
 		$query = $wp_query->query;
 
@@ -38,12 +38,19 @@ if (!function_exists('largo_load_more_posts_data')) {
 			'post__not_in' => $shown_ids,
 		), $query );
 
-		$LMP = apply_filters('largo_load_more_posts_json', array(
+		$LMP = array(
 			'ajax_url' => admin_url('admin-ajax.php'),
 			'paged' => (!empty($wp_query->query_vars['paged']))? $wp_query->query_vars['paged'] : 0,
 			'query' => $query,
-			'is_home' => $wp_query->is_home()
-		));
+			'is_home' => $wp_query->is_home(), 
+			'is_series_landing' => $post->post_type == 'cftl-tax-landing' ? true : false
+		);
+
+		if($post->post_type == 'cftl-tax-landing') {
+			$LMP['opt'] = $opt;
+		}
+
+		$LMP = apply_filters('largo_load_more_posts_json', $LMP);
 
 		?>
 		<script type="text/javascript">
@@ -59,6 +66,9 @@ if (!function_exists('largo_load_more_posts_data')) {
  */
 if (!function_exists('largo_load_more_posts')) {
 	function largo_load_more_posts() {
+		
+		global $opt;
+
 		$paged = $_POST['paged'];
 		$context = (isset($_POST['query']))? $_POST['query'] : array();
 
@@ -93,7 +103,12 @@ if (!function_exists('largo_load_more_posts')) {
 
 		if ( $query->have_posts() ) {
 			while ( $query->have_posts() ) : $query->the_post();
-				$partial = ( get_post_type() == 'argolinks' ) ? 'argolinks' : 'home';
+				$partial = 'home';
+				if($_POST['is_series_landing']) {
+					$partial = 'series';
+					$opt = $_POST['opt'];
+				}
+				$partial = ( get_post_type() == 'argolinks' ) ? 'argolinks' : $partial;
 				get_template_part( 'partials/content', $partial );
 			endwhile;
 		}
