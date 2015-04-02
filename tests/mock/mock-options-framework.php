@@ -38,6 +38,7 @@ class MockOptionsFramework {
 
 	public function reset_options() {
 		$this->options = array();
+		$this->populate_defaults();
 	}
 }
 

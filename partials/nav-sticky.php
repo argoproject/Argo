@@ -54,18 +54,26 @@
 
 					<div class="nav-left">
 						<?php
-							if  ( of_get_option( 'show_sitename_in_sticky_nav', 1 ) ) {
+							if ( of_get_option( 'show_sitename_in_sticky_nav', 1 ) ) {
 								echo '<li class="site-name"><a href="/">' . get_bloginfo('name') . '</a></li>';
-							} else if  ( of_get_option( 'sticky_header_logo' ) == '' ) { ?>
+							} else if ( of_get_option( 'sticky_header_logo' ) == '' ) { ?>
 								<li class="home-link"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php largo_home_icon( 'icon-white' ); ?></a></li>
 							<?php } else { ?>
-								<li class="home-icon"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php largo_home_icon( 'icon-white' ); ?></a></li>
+								<li class="home-icon"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php largo_home_icon( 'icon-white' , 'medium' ); ?></a></li>
 
 						<?php } ?>
 					</div>
 					<div class="nav-shelf">
 					<ul class="nav">
-						<li class="<?php echo (of_get_option('sticky_header_logo') == '' ? 'home-link' : 'home-icon' ) ?>"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php largo_home_icon( 'icon-white' ); ?></a></li>
+						<li class="<?php echo (of_get_option('sticky_header_logo') == '' ? 'home-link' : 'home-icon' ) ?>">
+							<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
+								<?php if ( of_get_option( 'sticky_header_logo' ) == '' ) { ?>
+									<li class="home-link"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php largo_home_icon( 'icon-white' ); ?></a></li>
+								<?php } else { ?>
+									<li class="home-icon"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php largo_home_icon( 'icon-white' , 'orig' ); ?></a></li>
+								<?php } ?>
+							</a>
+						</li>
 						<?php
 							if ( of_get_option( 'show_sitename_in_sticky_nav', 1 ) )
 								echo '<li class="site-name"><a href="/">' . get_bloginfo('name') . '</a></li>';

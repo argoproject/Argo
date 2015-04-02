@@ -84,10 +84,11 @@ if (!function_exists('largo_load_more_posts')) {
 		if ( of_get_option('num_posts_home') && $is_home )
 			$args['posts_per_page'] = of_get_option('num_posts_home');
 		// The first 'page' of the homepage is in $shown_ids, so this number should actually be minus one.
-		if ( $is_home )
+		if ( $is_home ) {
 			$args['paged'] = ( $args['paged'] - 1 );
-		if ( of_get_option('cats_home') )
-			$args['cat'] = of_get_option('cats_home');
+			if ( of_get_option('cats_home') )
+				$args['cat'] = of_get_option('cats_home');
+		}
 		$query = new WP_Query($args);
 
 		if ( $query->have_posts() ) {
