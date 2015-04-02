@@ -6,6 +6,9 @@
  * and the comment form. The actual display of comments is
  * handled by a callback to argo_comment() which is
  * located in the functions.php file.
+ *
+ * @package Largo
+ * @since 0.1
  */
 ?>
 	<div id="comments" class="clearfix">

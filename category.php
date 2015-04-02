@@ -1,6 +1,9 @@
 <?php
 /**
  * Template for category archive pages
+ *
+ * @package Largo
+ * @since 0.4
  */
 get_header();
 

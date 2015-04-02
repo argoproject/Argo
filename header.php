@@ -9,6 +9,15 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <?php
+	/**
+	 * The template for displaying the header
+	 *
+	 * Contains the HEAD content and opening of the id=page and id=main DIV elements.
+	 *
+	 * @package Largo
+	 * @since 0.1
+	 */
+
 	// get the current page url (used for rel canonical and open graph tags)
 	global $current_url;
 	$current_url = (!empty($_SERVER['HTTPS'])) ? "https://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'] : "http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
@@ -43,15 +52,34 @@
 
 	<div id="top"></div>
 
-	<?php do_action( 'largo_top' ); ?>
+	<?php
+
+	/**
+	 * Fires at the top of the page, just after the id=top DIV element.
+	 *
+	 * @since 0.4
+	 */
+	do_action( 'largo_top' );
+
+	?>
 
 	<?php
 		if ( SHOW_GLOBAL_NAV === TRUE ) {
 
+			/**
+			 * Fires before the Largo global navigation content.
+			 *
+			 * @since 0.4
+			 */
 			do_action( 'largo_before_global_nav' );
 
 			get_template_part( 'partials/nav', 'global' );
 
+			/**
+			 * Fires after the Largo global navigation content.
+			 *
+			 * @since 0.4
+			 */
 			do_action( 'largo_after_global_nav' );
 
 		}
@@ -68,10 +96,20 @@
 		<?php get_template_part('partials/header-ad-zone'); ?>
 
 		<?php
+			/**
+			 * Fires before the Largo header content.
+			 *
+			 * @since 0.4
+			 */
 			do_action( 'largo_before_header' );
 
 			get_template_part( 'partials/largo-header' );
 
+			/**
+			 * Fires after the Largo header content.
+			 *
+			 * @since 0.4
+			 */
 			do_action( 'largo_after_header' );
 		?>
 
@@ -86,8 +124,24 @@
 
 		<?php get_template_part('partials/homepage-alert'); ?>
 
-		<?php do_action( 'largo_after_nav' ); ?>
+		<?php
+
+		/**
+		 * Fires after the Largo navigation content.
+		 *
+		 * @since 0.4
+		 */
+		do_action( 'largo_after_nav' );
+
+		?>
 
 		<div id="main" class="row-fluid clearfix">
 
-		<?php do_action( 'largo_main_top' );
+		<?php
+
+		/**
+		 * Fires at the top of the Largo id=main DIV element.
+		 *
+		 * @since 0.4
+		 */
+		do_action( 'largo_main_top' );
