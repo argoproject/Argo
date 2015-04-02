@@ -67,11 +67,12 @@
 					<ul class="nav">
 						<li class="<?php echo (of_get_option('sticky_header_logo') == '' ? 'home-link' : 'home-icon' ) ?>">
 							<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
-								<?php if ( of_get_option( 'sticky_header_logo' ) == '' ) { ?>
-									<li class="home-link"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php largo_home_icon( 'icon-white' ); ?></a></li>
-								<?php } else { ?>
-									<li class="home-icon"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php largo_home_icon( 'icon-white' , 'orig' ); ?></a></li>
-								<?php } ?>
+								<?php
+								if ( of_get_option( 'sticky_header_logo' ) == '' )
+									largo_home_icon( 'icon-white' );
+								else
+									largo_home_icon( 'icon-white' , 'orig' );
+								?>
 							</a>
 						</li>
 						<?php
