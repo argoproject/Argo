@@ -3,7 +3,6 @@
  * Template Name: Series Landing Page Default
  * Description: The default template for a series landing page. Many display options are set via admin.
  */
-
 get_header();
 
 // Load up our meta data and whatnot
@@ -86,6 +85,7 @@ endif;
 global $wp_query;
 global $post;
 $save_post = $post;
+$save_query = $wp_query;
 
 // Make sure we're actually a series page, and pull posts accordingly
 if ( isset( $wp_query->query_vars['term'] )
@@ -140,6 +140,8 @@ if ( isset( $wp_query->query_vars['term'] )
 
 	wp_reset_postdata();
 	$post = $save_post;
+	$wp_query = $save_query;
+
 } ?>
 
 </div><!-- /.grid_8 #content -->

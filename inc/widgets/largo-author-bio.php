@@ -17,11 +17,9 @@ class largo_author_widget extends WP_Widget {
 		$authors = array();
 		$bios = '';
 
-		echo $before_widget;
+		if( is_singular() || is_author() || is_series_landing() ):
 
-		if( is_singular() || is_author() ):
-
-				if ( is_singular() ) {
+				if ( is_singular() || is_series_landing() ) {
 					if ( function_exists( 'get_coauthors' ) ) {
 						$authors = get_coauthors( get_queried_object_id() );
 					} else {
