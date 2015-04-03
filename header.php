@@ -17,11 +17,7 @@
 	 * @package Largo
 	 * @since 0.1
 	 */
-
-	// get the current page url (used for rel canonical and open graph tags)
-	global $current_url;
-	$current_url = (!empty($_SERVER['HTTPS'])) ? "https://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'] : "http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
-?>
+	?>
 	<title>
 		<?php
 			global $page, $paged;
