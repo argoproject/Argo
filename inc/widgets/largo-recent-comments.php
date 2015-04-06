@@ -28,9 +28,7 @@ class largo_recent_comments_widget extends WP_Widget {
 	}
 
 	function widget( $args, $instance ) {
-		global $comments, $comment, $post;
-		// Preserve global $post
-		$preserve = $post;
+		global $comments, $comment;
 
 		$cache = wp_cache_get('widget_recent_comments', 'widget');
 
@@ -79,10 +77,6 @@ class largo_recent_comments_widget extends WP_Widget {
 		echo $output;
 		$cache[$args['widget_id']] = $output;
 		wp_cache_set('widget_recent_comments', $cache, 'widget');
-
-		// Restore global $post
-		wp_reset_postdata();
-		$post = $preserve;
 	}
 
 	/**

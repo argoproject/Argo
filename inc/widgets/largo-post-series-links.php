@@ -14,9 +14,6 @@ class largo_post_series_links_widget extends WP_Widget {
 
 	function widget( $args, $instance ) {
 		global $post;
-		// Preserve global $post
-		$preserve = $post;
-
 		extract( $args );
 
 		// only useful on post pages
@@ -29,6 +26,7 @@ class largo_post_series_links_widget extends WP_Widget {
 		/* Display the widget title if one was input */
 		if ( $title ) echo $before_title . $title . $after_title;
 
+		global $post;
 		$post_terms = largo_custom_taxonomy_terms( $post->ID );		//this is the only invocation of this function anywhere in Largo
 		foreach ( $post_terms as $term ) {
 			if ( strtolower( $term->name ) == 'series' )
@@ -37,10 +35,6 @@ class largo_post_series_links_widget extends WP_Widget {
 		}
 
 		echo $after_widget;
-
-		// Restore global $post
-		wp_reset_postdata();
-		$post = $preserve;
 	}
 
 	/**

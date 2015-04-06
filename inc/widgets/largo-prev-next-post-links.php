@@ -14,9 +14,6 @@ class largo_prev_next_post_links_widget extends WP_Widget {
 
 	function widget( $args, $instance ) {
 		global $post;
-		// Preserve global $post
-		$preserve = $post;
-
 		extract( $args );
 
 		// only useful on post pages
@@ -27,10 +24,6 @@ class largo_prev_next_post_links_widget extends WP_Widget {
 		largo_content_nav( 'single-post-nav-below', $instance['in_same_cat'] );
 
 		echo $after_widget;
-
-		// Restore global $post
-		wp_reset_postdata();
-		$post = $preserve;
 	}
 
 	function update( $new_instance, $old_instance ) {

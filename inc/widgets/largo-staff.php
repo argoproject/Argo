@@ -11,10 +11,6 @@ class largo_staff_widget extends WP_Widget {
 	}
 
 	public function widget( $args, $instance ) {
-		global $post;
-		// Preserve global $post
-		$preserve = $post;
-
 		$title = apply_filters('widget_title', $instance['title']);
 
 		echo $args['before_widget'];
@@ -81,10 +77,6 @@ EOD;
 		$markup .= '</ul>';
 		echo $markup;
 		echo $args['after_widget'];
-
-		// Restore global $post
-		wp_reset_postdata();
-		$post = $preserve;
 	}
 
 	public function form( $instance ) {
@@ -115,7 +107,6 @@ EOD;
 		</p>
 
 		<?php
-		wp_reset_postdata();
 	}
 
 	public function update( $new_instance, $old_instance ) {
