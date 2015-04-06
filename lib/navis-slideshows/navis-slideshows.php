@@ -68,7 +68,7 @@ class Navis_Slideshows {
 
 		// our custom js
 		$show_src = get_template_directory_uri() . '/lib/navis-slideshows/js/navis-slideshows.js';
-		wp_enqueue_script('navis-slideshows', $show_src, array( 'jquery-slick' ), '0.1', true);
+		wp_enqueue_script('navis-slideshows', $show_src, array('jquery-slick'), '0.1', true);
 
 		$attr = shortcode_atts( array(
 			'order' => 'ASC',
@@ -90,12 +90,7 @@ class Navis_Slideshows {
 			if ( ! $attr['orderby'] )
 				unset( $attr['orderby'] );
 		}
-		$itemtag = sanitize_key( $attr['itemtag'] );
-		$icontag = sanitize_key( $attr['icontag'] );
-		$captiontag = sanitize_key( $attr['captiontag'] );
-		$columns = intval( $attr['columns'] );
 		$size = sanitize_key( $attr['size'] );
-		$link = sanitize_key( $attr['link'] );
 		$ids = array_map( 'intval', explode(',', $attr['ids'] ) );
 
 		// XXX: this could be factored out to a common function for getting
@@ -155,7 +150,6 @@ class Navis_Slideshows {
 		$total = count( $attachments );
 		foreach ( $attachments as $id => $attachment ) {
 			$count++;
-			$image = wp_get_attachment_image_src( $id, "large" );
 
 			// Credit functionality provided by navis-media-credit plugin
 			$credit = '';
@@ -164,9 +158,7 @@ class Navis_Slideshows {
 				$credit = $creditor->to_string();
 			}
 
-			$themeta = $attachment->post_title;
 			$caption = $attachment->post_excerpt;
-			$permalink = $attachment->ID;
 			$slidediv = $post_html_id . '-slide' . $count;
 			$img_url = wp_get_attachment_url( $id );
 
@@ -176,18 +168,14 @@ class Navis_Slideshows {
 			if (!empty($credit))
 				$output .= '<h6 class="credit">' . wp_kses_post( $credit ) . '</h6>';
 
-			$output .= '<h6 class="permalink"><a href="#" class="slide-permalink"><i class="icon-link"></i> ' . esc_attr( __( 'permalink', 'largo' ) ) . '</a></h6>';
-			if ( ! empty( $caption ) ) {
+			$slide_link = get_permalink($post) . '#' . $post_html_id . '/' . $count;
+			$output .= '<h6 class="permalink"><a href="' . $slide_link . '" class="slide-permalink"><i class="icon-link"></i> ' . esc_attr( __( 'permalink', 'largo' ) ) . '</a></h6>';
+			if (!empty($caption))
 				$output .= '<p class="wp-caption-text">' . wp_kses_post( $caption ) . '</p>';
-			}
 
 			$output .= '</div>';
 		}
 		$output .= '</div>';
-
-		$this->postid = $post_html_id;
-		$this->permalink = $plink;
-		$this->slide_count = $count;
 
 		return $output;
 	}
