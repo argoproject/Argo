@@ -70,11 +70,11 @@
 				<?php // $coauthor covers base case (1 dimensional) or where coauthors were defined. ?>
 				<?php foreach( $coauthors as $author ) : ?>
 					<div class="follow-author">
-					<a href="<?php echo get_author_feed_link($author->ID); ?>" class="icon-rss"></a>
+					<a href="<?php echo get_author_feed_link($author->ID, $author->user_nicename); ?>" class="icon-rss"></a>
 					<?php if ( $twitter = get_the_author_meta( 'twitter', $author->ID ) ) : ?>
 						<a href="https://twitter.com/<?php echo largo_twitter_url_to_username( esc_url( $twitter ) ); ?>" class="icon-twitter"></a>
 					<?php endif; ?>
-					<a href="<?php echo get_author_posts_url( $author->ID ); ?>"><?php echo esc_html( $author->display_name ); ?></a>
+					<a href="<?php echo get_author_posts_url( $author->ID, $author->user_nicename ); ?>"><?php echo esc_html( $author->display_name ); ?></a>
 					</div>
 				<?php endforeach; ?>
 			<?php endif; ?>
