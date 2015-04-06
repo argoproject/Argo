@@ -40,3 +40,18 @@ if (!defined('LARGO_TEMPLATE_LANDING_VERSION')) {
 
 } // End CF_TEMPLATE_LANDING_VERSION check
 
+/**
+ * Is this a series landing page?
+ * 
+ * @since 0.5
+ * 
+ * @param int|WP_Post $post Optional. Post ID or post object. Default is global $post.
+ * @return bool Whether the post is a series landing page.
+ */
+function is_series_landing( $post ) {
+
+	$post = get_post( $post );
+
+	return ( $post->post_type == 'cftl-tax-landing' );
+
+}

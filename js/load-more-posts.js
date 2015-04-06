@@ -8,7 +8,10 @@
                 data: {
                     action: 'load_more_posts',
                     paged: (LMP.paged == 0)? 1:LMP.paged,
-                    is_home: LMP.is_home
+                    is_home: LMP.is_home,
+                    is_series_landing: LMP.is_series_landing,
+                    // opt is used by partials/content-series.php to return the same type of post.
+                    opt: LMP.opt
                 },
                 type: 'POST',
                 dataType: 'html',
