@@ -13,15 +13,19 @@ class largo_author_widget extends WP_Widget {
 	}
 
 	function widget( $args, $instance ) {
+
+		global $post;
+		
 		extract( $args );
 		$authors = array();
 		$bios = '';
 
-		echo $before_widget;
+		if( get_post_meta( $post->ID, 'largo_byline_text' ) ) 
+			$byline_text = esc_attr( get_post_meta( $post->ID, 'largo_byline_text', true ) );
 
-		if( is_singular() || is_author() ):
+		if( (is_singular() || is_author() || is_series_landing()) && empty($byline_text) ):
 
-				if ( is_singular() ) {
+				if ( is_singular() || is_series_landing() ) {
 					if ( function_exists( 'get_coauthors' ) ) {
 						$authors = get_coauthors( get_queried_object_id() );
 					} else {
@@ -53,7 +57,7 @@ class largo_author_widget extends WP_Widget {
 				</div>
 
 				<?php }  // foreach
-		else:
+		elseif ( empty($byline_text) ):
 			_e( 'Not a valid author context' );
 		endif;
 

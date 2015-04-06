@@ -269,7 +269,7 @@ function largo_category_archive_posts( $query ) {
 }
 add_action('pre_get_posts', 'largo_category_archive_posts', 15);
 
-/*
+/**
  * Get posts marked as "Featured in category" for a given category name.
  *
  * @param string $category_name the category to retrieve featured posts for.
@@ -300,10 +300,11 @@ function largo_get_featured_posts_in_category($category_name) {
  */
 function unregister_series_taxonomy() {
 	if ( !largo_is_series_enabled() ) {
-		register_taxonomy( 'series', array() );
+		register_taxonomy( 'series', array(), array('show_in_nav_menus' => false) );
 	}
 }
 add_action( 'init', 'unregister_series_taxonomy', 999 );
+
 /**
  * If the option in Advanced Options is unchecked, unregister the "Post Types" taxonomy
  *
@@ -312,7 +313,7 @@ add_action( 'init', 'unregister_series_taxonomy', 999 );
  */
 function unregister_post_types_taxonomy() {
 	if ( of_get_option('post_types_enabled') == 0 ) {
-		register_taxonomy( 'post-type', array() );
+		register_taxonomy( 'post-type', array(), array('show_in_nav_menus' => false) );
 	}
 }
 add_action( 'init', 'unregister_post_types_taxonomy', 999 );

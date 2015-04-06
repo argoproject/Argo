@@ -29,7 +29,12 @@ class PostTagsTestFunctions extends WP_UnitTestCase {
 		$this->go_to('/?p=' . $id);
 
 		// Test the output of this when no options are set
-		$this->assertFalse(of_get_option('article_utilities'));
+		of_set_option('article_utilities', array(
+			'facebook' => false,
+			'twitter' => false,
+			'print' => false,
+			'email' => false
+		));
 
 		ob_start();
 		largo_post_social_links();

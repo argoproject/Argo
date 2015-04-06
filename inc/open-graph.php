@@ -4,13 +4,12 @@
  * to the header based on the page type displayed
  *
  * @uses largo_twitter_url_to_username()
- * @uses global $current_url
  * @since 0.3
  */
 if ( ! function_exists( 'largo_opengraph' ) ) {
 	function largo_opengraph() {
 
-		global $current_url, $post;
+		global $post;
 
 		// set a default thumbnail, if a post has a featured image use that instead
 		if ( is_single() && has_post_thumbnail( $post->ID ) ) {
@@ -61,7 +60,7 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
 		?>
 				<meta property="og:title" content="<?php bloginfo( 'name' ); wp_title(); ?>" />
 				<meta property="og:type" content="article" />
-				<meta property="og:url" content="<?php echo esc_url( $current_url ); ?>"/>
+				<meta property="og:url" content="<?php echo esc_url( largo_get_current_url() ); ?>"/>
 			<?php
 				//let's try to get a better description when available
 				if ( is_category() && category_description() ) {
