@@ -73,6 +73,7 @@ Here is a complete list of the plugins currently installed and available.
 - `Liveblog <https://wordpress.org/plugins/liveblog/>`_ - A simple way to add live blogs to your site.
 - `Navis DocumentCloud <https://wordpress.org/plugins/navis-documentcloud/>`_ - Embed DocumentCloud documents that won't be eaten by the visual editor
 - `News Quizzes <https://github.com/INN/news-quiz>`_ - A WordPress wrapper for Mother Jones' news quiz tool
+- `Slack <https://wordpress.org/plugins/slack/>`_ - A plugin that sends notifications to Slack when WordPress events occur, such as publishling a post and pending comments.
 - `Redirection <https://wordpress.org/plugins/redirection/>`_ - Manage all your 301 redirects and monitor 404 errors
 - `Simple Tags <https://wordpress.org/plugins/simple-tags/>`_ - Extended Tagging for WordPress 4.0.x : Suggested Tags, Mass edit tags, Auto-tags, Autocompletion, Related Posts etc.
 - `TablePress <https://wordpress.org/plugins/tablepress/>`_ - TablePress enables you to create and manage tables in your posts and pages, without having to write HTML code. Also installed are the DataTables Counter Column, DataTables Sorting plugins and Pagination Length Change "All" entry extensions.
