@@ -13,11 +13,9 @@ If your image is on a white or transparent background we recommend putting the c
 
 Optionally you can elect to not use images and display a text-only header instead. It will use the site title and tagline from your WordPress settings. (In the WordPress admin left sidebar, click on Settings and then General Settings to change these).
 
-**Thumbnail Image** - In addition you'll need to create a square thumbnail image (200 by 200 px is ideal) that is used as a fallback when you share posts on Facebook or Twitter for which you have not set a featured image.
+**Note** with Largo 0.4 header images only display on the homepage and not single posts or pages.  
 
-**Favicon** - You will also need a favicon_ for your site. Favicons are always square, and usually 16x16 or 32x32 pixels. This should be your logo.
-
-.. _favicon: https://en.wikipedia.org/wiki/Favicon
+**Square Image** In addition you'll need to create a square thumbnail image (200 by 200 px is ideal) that is used as a fallback when you share posts on Facebook or Twitter for which you have not set a featured image. In addition, a small version of this image is created automatically by WordPress/Largo for use in the site navigation. Since this image needs to be optimized for a small size (60x60 px is the smallest it appears) the best square images should not contain any text and you should avoid adding significant margins or padding within the image.
 
 **Sticky Header Logo** - This image should be 100 pixels tall and at least 100 pixels wide. It will appear in the sticky navigation bar that is seen as people scroll, and on mobile.
 
