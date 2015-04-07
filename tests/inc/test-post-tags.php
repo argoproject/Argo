@@ -4,11 +4,30 @@ class PostTagsTestFunctions extends WP_UnitTestCase {
 
 	function setUp() {
 		parent::setUp();
-
 	}
 
 	function test_largo_time() {
-		$this->markTestIncomplete("This test has not yet been implemented.");
+		$id = $this->factory->post->create();
+
+		// Test with $echo = false
+		$result = largo_time(false, $id);
+		$this->assertTrue(!empty($result));
+
+		// Test with $echo = true
+		$this->expectOutputRegex('/<span class\="time\-ago">.*ago<\/span>/');
+		largo_time(true, $id);
+
+		// Make sure `largo_time` can determine the post id properly
+		global $post;
+		$save = $post;
+		$post = get_post($id);
+		setup_postdata($post);
+
+		$another_result = largo_time(false);
+		$this->assertEquals($result, $another_result);
+
+		wp_reset_postdata();
+		$post = $save;
 	}
 
 	function test_largo_author() {
