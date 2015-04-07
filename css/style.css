@@ -1951,15 +1951,6 @@ table .span24 {
   float: left;
   margin: 5px 0 0 10px;
 }
-.global-nav .nav-right .org-logo {
-  float: left;
-  -webkit-box-shadow: 0 3px 4px -2px #000000;
-  -moz-box-shadow: 0 3px 4px -2px #000000;
-  box-shadow: 0 3px 4px -2px #000000;
-  height: 32px;
-  overflow: visible;
-  margin: 0 5px 0 10px;
-}
 .donate-btn {
   font-size: 14px;
   line-height: 2;
@@ -5273,9 +5264,6 @@ img[class*="wp-image-"] {
     float: left;
     margin-left: 0;
   }
-  .global-nav .nav-right .org-logo {
-    float: right;
-  }
   h1.branding,
   h2.branding {
     font-size: 54px;
@@ -5399,7 +5387,6 @@ img[class*="wp-image-"] {
   }
 }
 @media (max-width: 480px) {
-  .global-nav .org-logo,
   .post-social .print {
     display: none;
   }
