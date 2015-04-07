@@ -250,10 +250,9 @@ function largo_get_series_posts( $series_id, $number = -1 ) {
 }
 
 /**
- * Helper for getting posts in a category archive, sorted by featured first
+ * Helper for getting posts in a category archive, excluding featured posts.
  */
 function largo_category_archive_posts( $query ) {
-
 	//don't muck with admin, non-categories, etc
 	if ( !$query->is_category() || !$query->is_main_query() || is_admin() ) return;
 
