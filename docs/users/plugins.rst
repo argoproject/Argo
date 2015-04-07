@@ -75,6 +75,7 @@ Here is a complete list of the plugins currently installed and available.
 - `News Quizzes <https://github.com/INN/news-quiz>`_ - A WordPress wrapper for Mother Jones' news quiz tool
 - `Redirection <https://wordpress.org/plugins/redirection/>`_ - Manage all your 301 redirects and monitor 404 errors
 - `Simple Tags <https://wordpress.org/plugins/simple-tags/>`_ - Extended Tagging for WordPress 4.0.x : Suggested Tags, Mass edit tags, Auto-tags, Autocompletion, Related Posts etc.
+- `Slack <https://wordpress.org/plugins/slack/>`_ - Adds Slack notifications when you publish posts, receive new comments, etc.
 - `TablePress <https://wordpress.org/plugins/tablepress/>`_ - TablePress enables you to create and manage tables in your posts and pages, without having to write HTML code. Also installed are the DataTables Counter Column, DataTables Sorting plugins and Pagination Length Change "All" entry extensions.
 - `Tweetable Text <https://wordpress.org/plugins/tweetable-text/>`_ - Make your posts more shareable. Add a Tweet and Buffer button to key sentences right inside each blog post with a simple [tweetable] tag.
 - `TinyMCE Advanced <https://wordpress.org/plugins/tinymce-advanced/>`_ - Enables advanced features and plugins in TinyMCE, the visual editor in WordPress.
