@@ -6,9 +6,7 @@ module.exports = function(grunt) {
 
     // Find what the current theme's directory is, relative to the WordPress root
     var path = process.cwd();
-    grunt.log.write(path + '\n');
     path = path.replace(/^[\s\S]+\/wp-content/, "\/wp-content");
-    grunt.log.write(path);
 
     var CSS_LESS_FILES = {
         'css/style.css': 'less/style.less',
@@ -97,7 +95,10 @@ module.exports = function(grunt) {
                     'less/**/*.less',
                     'homepages/assets/less/**/*.less'
                 ],
-                tasks: 'less:development'
+                tasks: [
+                    'less:development',
+                    'cssmin'
+                ]
             },
             sphinx: {
                 files: ['docs/*.rst', 'docs/*/*.rst'],
