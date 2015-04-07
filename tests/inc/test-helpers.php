@@ -196,7 +196,6 @@ class HelpersTestFunctions extends WP_UnitTestCase {
 		$_SERVER['REQUEST_URI'] = '/path/to/something';
 
 		$current_url = largo_get_current_url();
-		var_log('/^http:\/\/' . preg_quote($_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']) . '/');
 		$this->assertTrue((bool) preg_match('/^http:\/\//', $current_url));
 
 		$_SERVER['HTTPS'] = 'on';
