@@ -45,10 +45,14 @@ function cftl_find_override_page(&$query_obj) {
 }
 
 function cftl_intercept_get_posts(&$query_obj) {
+	if (is_admin())
+		return false;
+
 	global $cftl_previous, $wp_rewrite;
-	if (!$query_obj->is_main_query()) {
-		return;
-	}
+
+	if (!$query_obj->is_main_query())
+		return false;
+
 	remove_action('pre_get_posts', 'cftl_intercept_get_posts');
 
 	/**
@@ -68,17 +72,6 @@ function cftl_intercept_get_posts(&$query_obj) {
 		}
 
 		$cftl_previous['pageholder'] = $qv['paged'];
-		/*
-		if (!isset($qv['paged']) || (int) $qv['paged'] >= 1) {
-			// Only handle the landing page, not an explicit call to page 1
-			if ($landing) {
-				unset($query_obj->query_vars['paged']);
-				add_filter('redirect_canonical', 'cftl_maintain_paged');
-			}
-			return;
-		}
-		*/
-
 
 		if (!$landing && isset($query_obj->tax_query->queries) ) {
 			$landing = cftl_find_override_page($query_obj);
@@ -94,7 +87,7 @@ function cftl_intercept_get_posts(&$query_obj) {
 		$query = 'post_type=cftl-tax-landing&p=' . absint($landing->ID);
 		$query_obj->parse_query($query);
 
-		add_filter('redirect_canonical', 'cftl_abort_redirect_canonical');
+		add_filter('redirect_canonical', '__return_false');
 
 		$page_template = get_post_meta($landing->ID, '_wp_page_template', true);
 		if (!empty($page_template)) {
@@ -102,14 +95,7 @@ function cftl_intercept_get_posts(&$query_obj) {
 		}
 	}
 }
-
-function cftl_abort_redirect_canonical($redirect_url) {
-	return false;
-}
-
-if (!is_admin()) {
-	add_action('pre_get_posts', 'cftl_intercept_get_posts');
-}
+add_action('pre_get_posts', 'cftl_intercept_get_posts', 20);
 
 function cftl_unparse_url($parsed_url) {
 	$scheme = isset($parsed_url['scheme']) ? $parsed_url['scheme'] . '://' : '';
@@ -124,7 +110,6 @@ function cftl_unparse_url($parsed_url) {
 	return sprintf('%s%s%s%s%s%s%s%s', $scheme, $user, $pass, $host, $port,
 		$path, $query, $fragment);
 }
-
 
 function cftl_maintain_paged($redirect_url) {
 	global $wp_rewrite;
@@ -187,6 +172,4 @@ function cftl_intercept_template_loader($template) {
 	}
 	return $template;
 }
-
 add_filter('template_include', 'cftl_intercept_template_loader');
-

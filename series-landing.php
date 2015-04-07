@@ -91,7 +91,6 @@ if ( isset( $wp_query->query_vars['term'] )
 			&& 'series' == $wp_query->query_vars['taxonomy'] ) {
 
 	$series = $wp_query->query_vars['term'];
-	$old_query = $wp_query;
 
 	//default query args: by date, descending
 	$args = array(
@@ -127,10 +126,10 @@ if ( isset( $wp_query->query_vars['term'] )
 	}
 
 	// Build the query, but don't use the original because that messes up pagination in a way that ignores posts_per_page
-	$wp_query = new WP_Query($args);
+	$series_query = new WP_Query($args);
 
 	// and finally wind the posts back so we can go through the loop as usual
-	while ( $wp_query->have_posts() ) : $wp_query->the_post();
+	while ( $series_query->have_posts() ) : $series_query->the_post();
 		get_template_part( 'partials/content', 'series' );
 	endwhile;
 
