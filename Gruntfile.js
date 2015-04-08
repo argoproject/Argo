@@ -53,7 +53,7 @@ module.exports = function(grunt) {
                         'load-more-posts.js',
                         'top-terms.js',
                         'update-page.js',
-                        'widget-php.js',
+                        'widgets-php.js',
                         '!*.min.js'
                     ],
                     dest: 'js',

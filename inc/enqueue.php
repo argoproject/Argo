@@ -4,6 +4,7 @@
  * Enqueue all of our javascript and css files
  *
  * @since 1.0
+ * @global LARGO_DEBUG
  */
 if ( ! function_exists( 'largo_enqueue_js' ) ) {
 	function largo_enqueue_js() {
@@ -11,20 +12,27 @@ if ( ! function_exists( 'largo_enqueue_js' ) ) {
 		/**
 		 * Use minified assets if LARGO_DEBUG isn't true.
 		 */
+
 		if ( LARGO_DEBUG ) {
-			//Modernizr and our primary stylesheet
+			// Our primary stylesheet
 			wp_enqueue_style( 'largo-stylesheet', get_template_directory_uri().'/css/style.css' );	//often overridden by custom-less-variables version
+			wp_enqueue_script( 'largoCore', get_template_directory_uri() . '/js/largoCore.js', array( 'jquery' ), '1.0', true );
 
 		} else {
-			//Modernizr and our primary stylesheet
+			// Our primary stylesheet
 			wp_enqueue_style( 'largo-stylesheet', get_template_directory_uri().'/css/style.min.css' );	//often overridden by custom-less-variables version
+			wp_enqueue_script( 'largoCore', get_template_directory_uri() . '/js/largoCore.min.js', array( 'jquery' ), '1.0', true );
 
 		}
-		wp_enqueue_script( 'largo-modernizr', get_template_directory_uri() . '/js/modernizr.custom.js' );
 
+		/**
+		 * These files are already minified
+		 */
+
+		// Modernizr
+		wp_enqueue_script( 'largo-modernizr', get_template_directory_uri() . '/js/modernizr.custom.js' );
 		//the jquery plugins and our main js file
 		wp_enqueue_script( 'largoPlugins', get_template_directory_uri() . '/js/largoPlugins.js', array( 'jquery' ), '1.0', true );
-		wp_enqueue_script( 'largoCore', get_template_directory_uri() . '/js/largoCore.js', array( 'jquery' ), '1.0', true );
 
 		//only load sharethis on single pages and load jquery tabs for the related content box if it's active
 		if ( is_single() ) {
@@ -37,7 +45,13 @@ if ( ! function_exists( 'largo_enqueue_js' ) ) {
 		//Load the child theme's style.css if we're actually running a child theme of Largo
 		$theme = wp_get_theme();
 		if (is_object($theme->parent())) {
-			wp_enqueue_style( 'largo-child-styles', get_stylesheet_directory_uri() . '/style.css', array('largo-stylesheet'));
+			if ( LARGO_DEBUG && file_exists( get_stylesheet_directory_uri() . '/style.min.css' ) ) {
+				// load minified version
+				wp_enqueue_style( 'largo-child-styles', get_stylesheet_directory_uri() . '/style.min.css', array('largo-stylesheet'));
+			} else {
+				// load standard version
+				wp_enqueue_style( 'largo-child-styles', get_stylesheet_directory_uri() . '/style.css', array('largo-stylesheet'));
+			}
 		}
 	}
 }
@@ -45,10 +59,20 @@ add_action( 'wp_enqueue_scripts', 'largo_enqueue_js' );
 
 /**
  * Enqueue our admin javascript and css files
+ *
+ * @global LARGO_DEBUG
  */
 function largo_enqueue_admin_scripts() {
-	wp_enqueue_style( 'largo-admin-widgets', get_template_directory_uri().'/css/widgets-php.css' );
-	wp_enqueue_script( 'largo-admin-widgets', get_template_directory_uri() . '/js/widgets-php.js', array( 'jquery' ), '1.0', true );
+
+	// Use minified assets if LARGO_DEBUG isn't true.
+	if ( LARGO_DEBUG ) {
+		wp_enqueue_style( 'largo-admin-widgets', get_template_directory_uri().'/css/widgets-php.css' );
+		wp_enqueue_script( 'largo-admin-widgets', get_template_directory_uri() . '/js/widgets-php.js', array( 'jquery' ), '1.0', true );
+	} else {
+		wp_enqueue_style( 'largo-admin-widgets', get_template_directory_uri().'/css/widgets-php.min.css' );
+		wp_enqueue_script( 'largo-admin-widgets', get_template_directory_uri() . '/js/widgets-php.min.js', array( 'jquery' ), '1.0', true );
+	
+	}
 }
 add_action( 'admin_enqueue_scripts', 'largo_enqueue_admin_scripts' );
 
