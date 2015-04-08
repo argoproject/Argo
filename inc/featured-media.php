@@ -59,6 +59,13 @@ function largo_get_featured_media($id) {
 	return get_post_meta($id, 'featured_media', true);
 }
 
+/**
+ * Helper function to tell if a post has featured media or not
+ *
+ * @param string $id A post ID
+ * @return bool If a post ID has featured media or not.
+ */
+
 function largo_has_featured_media($id) {
 	$featured_media = largo_get_featured_media($id);
 	return !empty($featured_media);
@@ -70,6 +77,10 @@ function largo_has_featured_media($id) {
 
 /**
  * Enqueue the featured media javascript
+ *
+ * @global $post
+ * @global LARGO_DEBUG
+ * @param array $hook The page that this function is being run on.
  */
 function largo_enqueue_featured_media_js($hook) {
 	if (!in_array($hook, array('edit.php', 'post-new.php', 'post.php')))
