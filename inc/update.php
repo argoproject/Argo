@@ -520,11 +520,23 @@ function largo_update_page_view() { ?>
 <?php
 }
 
+/**
+ * Enqueues javascript used on the Largo Update page
+ *
+ * @global LARGO_DEBUG
+ * @global $_GET
+ */
 function largo_update_page_enqueue_js() {
 	if (isset($_GET['page']) && $_GET['page'] == 'update-largo') {
-		wp_enqueue_script(
-			'largo_update_page', get_template_directory_uri() . '/js/update-page.js',
-			array('jquery'), false, 1);
+		if ( LARGO_DEBUG ) {
+			wp_enqueue_script(
+				'largo_update_page', get_template_directory_uri() . '/js/update-page.js',
+				array('jquery'), false, 1);
+		} else {
+			wp_enqueue_script(
+				'largo_update_page', get_template_directory_uri() . '/js/update-page.min.js',
+				array('jquery'), false, 1);
+		}
 	}
 }
 add_action('admin_enqueue_scripts', 'largo_update_page_enqueue_js');
