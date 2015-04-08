@@ -189,8 +189,13 @@ function largo_custom_sidebar_js() {
 	global $typenow, $wp_registered_sidebars;
 
 	if ($typenow == 'post') {
-		wp_enqueue_script(
-			'custom-sidebar', get_template_directory_uri() . '/js/custom-sidebar.js', array('jquery'));
+		if ( LARGO_DEBUG ) {
+			wp_enqueue_script(
+				'custom-sidebar', get_template_directory_uri() . '/js/custom-sidebar.js', array('jquery'));
+		} else {
+			wp_enqueue_script(
+				'custom-sidebar', get_template_directory_uri() . '/js/custom-sidebar.min.js', array('jquery'));
+		}
 
 		$post_templates = get_post_templates();
 		$default_sidebar_labels = array();
@@ -265,12 +270,19 @@ largo_register_meta_input( 'top_term', 'intval' );
 
 /**
  * Load JS for our top-terms select
+ *
+ * @global LARGO_DEBUG
+ * @global $typenow
  */
 function largo_top_terms_js() {
 	global $typenow;
-  if( $typenow == 'post' ) {
-  	wp_enqueue_script( 'top-terms', get_template_directory_uri() . '/js/top-terms.js', array( 'jquery' ) );
-  }
+	if( $typenow == 'post' ) {
+		if ( LARGO_DEBUG ) {
+			wp_enqueue_script( 'top-terms', get_template_directory_uri() . '/js/top-terms.js', array( 'jquery' ) );
+		} else {
+			wp_enqueue_script( 'top-terms', get_template_directory_uri() . '/js/top-terms.min.js', array( 'jquery' ) );
+		}
+	}
 }
 add_action( 'admin_enqueue_scripts', 'largo_top_terms_js' );
 
