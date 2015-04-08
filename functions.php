@@ -37,6 +37,14 @@ if ( ! defined( 'INN_MEMBER' ) )
 	define( 'INN_MEMBER', FALSE );
 
 /**
+ * Largo by default uses minified CSS and JavaScript files.
+ * set LARGO_DEBUG to TRUE to use unminified JavaScript files
+ * and unminified CSS files with sourcemaps to our LESS files.
+ */
+if ( ! defined( 'LARGO_DEBUG' ) )
+	define( 'LARGO_DEBUG', FALSE );
+
+/**
  * Image size constants, almost 100% that you won't need to change these
  */
 if ( ! defined( 'FULL_WIDTH' ) ) {
