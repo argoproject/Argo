@@ -250,19 +250,36 @@ function largo_get_series_posts( $series_id, $number = -1 ) {
 }
 
 /**
- * Helper for getting posts in a category archive, sorted by featured first
+ * Helper for getting posts in a category archive, excluding featured posts.
  */
 function largo_category_archive_posts( $query ) {
-
 	//don't muck with admin, non-categories, etc
 	if ( !$query->is_category() || !$query->is_main_query() || is_admin() ) return;
 
-	$category_post_ids = array();
+	// get the featured posts
+	$featured_posts = largo_get_featured_posts_in_category($query->get('category_name'));
 
+	// get the IDs from the featured posts
+	$featured_post_ids = array();
+	foreach ( $featured_posts as $fpost )
+		$featured_post_ids[] = $fpost->ID;
+
+	$query->set('post__not_in', $featured_post_ids);
+}
+add_action('pre_get_posts', 'largo_category_archive_posts', 15);
+
+/**
+ * Get posts marked as "Featured in category" for a given category name.
+ *
+ * @param string $category_name the category to retrieve featured posts for.
+ * @since 0.5
+ */
+function largo_get_featured_posts_in_category($category_name) {
 	// get the featured posts
 	$featured_posts = get_posts( array(
-		'category_name' => $query->get('category_name'),
+		'category_name' => $category_name,
 		'numberposts' => 5,
+		'post_status' => 'publish',
 		'tax_query' => array(
 			array(
 				'taxonomy' => 'prominence',
@@ -271,31 +288,8 @@ function largo_category_archive_posts( $query ) {
 			)
 		)
 	));
-
-	// get the IDs from the featured posts
-	foreach ( $featured_posts as $fpost )
-		$category_post_ids[] = $fpost->ID;
-
-	// get the rest of the posts
-	$plain_posts = get_posts( array(
-		'category_name' => $query->get('category_name'),
-		'nopaging' => true,
-		'post__not_in' => $category_post_ids,
-		)
-	);
-
-	// get the IDs from the plain posts
-	foreach( $plain_posts as $ppost )
-		$category_post_ids[] = $ppost->ID;
-
-	//rewrite our main query to fetch these IDs
-	//$query->set( 'category_name', NULL );
-	$query->set( 'post__in', $category_post_ids );
-	$query->set( 'orderby', 'post__in');
-	$query->set( 'tax_query', NULL );
-	$query->tax_query = NULL;	//unsetting it twice because WP is weird like that
+	return $featured_posts;
 }
-add_action( 'pre_get_posts', 'largo_category_archive_posts', 15 );
 
 /**
  * If the option in Advanced Options is unchecked, unregister the "Series" taxonomy
@@ -305,10 +299,11 @@ add_action( 'pre_get_posts', 'largo_category_archive_posts', 15 );
  */
 function unregister_series_taxonomy() {
 	if ( !largo_is_series_enabled() ) {
-		register_taxonomy( 'series', array() );
+		register_taxonomy( 'series', array(), array('show_in_nav_menus' => false) );
 	}
 }
 add_action( 'init', 'unregister_series_taxonomy', 999 );
+
 /**
  * If the option in Advanced Options is unchecked, unregister the "Post Types" taxonomy
  *
@@ -317,7 +312,7 @@ add_action( 'init', 'unregister_series_taxonomy', 999 );
  */
 function unregister_post_types_taxonomy() {
 	if ( of_get_option('post_types_enabled') == 0 ) {
-		register_taxonomy( 'post-type', array() );
+		register_taxonomy( 'post-type', array(), array('show_in_nav_menus' => false) );
 	}
 }
 add_action( 'init', 'unregister_post_types_taxonomy', 999 );

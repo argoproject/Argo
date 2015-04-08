@@ -51,14 +51,14 @@ function homepage_big_story_headline($moreLink=false) {
 function homepage_series_stories_list() {
 	global $shown_ids;
 
-	$feature = largo_get_the_main_feature();
+	$feature = largo_get_the_main_feature(largo_home_single_top());
 	$series_posts = largo_get_recent_posts_for_term($feature, 3, 2);
 
 	ob_start();
 	if (!empty($feature)) {
 ?>
 	<h5 class="top-tag"><a class="post-category-link" href="<?php echo get_term_link($feature); ?>">
-		<?php echo esc_html($feature->name) ?></a></h5>
+		<?php echo __("More in", "largo") . " " . esc_html($feature->name) ?></a></h5>
 			<?php foreach ($series_posts as $series_post) {
 				$shown_ids[] = $series_post->ID; ?>
 				<h4 class="related-story"><a href="<?php echo esc_url(get_permalink($series_post->ID)); ?>">
@@ -68,6 +68,7 @@ function homepage_series_stories_list() {
 				<?php _e('Complete Coverage', 'largo'); ?></a></p>
 <?php
 	}
+	wp_reset_postdata();
 	$ret = ob_get_contents();
 	ob_end_clean();
 	return $ret;

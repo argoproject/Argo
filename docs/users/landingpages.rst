@@ -46,4 +46,27 @@ Landing pages are created through the **Landing Pages > Add New** entry in the D
 	- None: The series page does not have a custom footer.
 	- Use widget: Creates a new "Series Name: Bottom" :doc:`widget area <sidebarswidgets>`, editable in **Appearance > Widgets**
 	- Custom HTML: Checking this option reveals a TinyMCE editor that allows you to write additional content using the standard editor or paste in HTML through the text editor.
+	
+Common ways of customizing your landing page
+--------------------------------------------
+
+Inserting a photo gallery:
+
+1. Choose the "alternate" layout style.
+2. Check "Custom HTML".
+3. In the editor that appears, choose to insert media, then choose your photos and insert them.
+
+Inserting embeds, custom content, series descriptions, a featured video, etc: 
+
+1. Choose the "alternate" layout style.
+2. Check "Custom HTML".
+3. In the editor that appears, insert your media into the text box.
+
+Customizing the landing page's sidebar:
+
+1. In **Appearance > Theme Options > Layout Options > Sidebar Options**, enter the name of your series into the text box on its own line, and then save the options.
+2. In **Appearance > Widgets**, find the new sidebar you created, and add widgets to it. Save.
+3. Return to your series landing page. Choose the custom sidebar from the dropdown.
+4. Make sure your series landing page has the same slug as your series, and that that series is chosen in the "Series" post.
+
 

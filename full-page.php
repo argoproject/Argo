@@ -3,6 +3,9 @@
  * Template Name: Full Width Page
  * Single Post Template: Full-width (no sidebar)
  * Description: Shows the post but does not load any sidebars, allowing content to span full container width.
+ *
+ * @package Largo
+ * @since 0.1
  */
 get_header();
 ?>

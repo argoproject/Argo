@@ -7,7 +7,11 @@
                 url: LMP.ajax_url,
                 data: {
                     action: 'load_more_posts',
-                    paged: (LMP.paged == 0)? 1:LMP.paged
+                    paged: (LMP.paged == 0)? 1:LMP.paged,
+                    is_home: LMP.is_home,
+                    is_series_landing: LMP.is_series_landing,
+                    // opt is used by partials/content-series.php to return the same type of post.
+                    opt: LMP.opt
                 },
                 type: 'POST',
                 dataType: 'html',
@@ -21,6 +25,7 @@
                     throw "There was an error fetching more posts";
                 }
             };
+
 
         load_more.find('a').click(function() {
             load_more.addClass('loading');

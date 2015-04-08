@@ -25,14 +25,14 @@ add_filter( 'the_content', 'largo_attachment_image_link_remove_filter' );
 //require_once(get_template_directory() . '/inc/picturefill/picturefill-wp.php');
 
 if ( ! function_exists( 'largo_home_icon' ) ) {
-	function largo_home_icon( $class='', $size = 'home-logo' ) {
+	function largo_home_icon( $class='', $size = '60x60' ) {
 		global $wpdb;
 
-		$logo = of_get_option( 'logo_thumbnail_sq' );
+		$logo = of_get_option( 'sticky_header_logo' );
 		$default = '<i class="icon-home ' . esc_attr( $class ) . '"></i>';
 
 		if ( ! empty( $logo ) ) {
-			$cache_key = 'largo_logo_thumbnail_sq_attachment_id';
+			$cache_key = 'largo_sticky_header_logo_attachment_id';
 			if ( false === ( $attachment_id = get_transient( $cache_key ) ) ) {
 				$attachment_id = $wpdb->get_var( $wpdb->prepare("SELECT ID FROM {$wpdb->posts} WHERE guid = %s", $logo) );
 				set_transient( $cache_key, $attachment_id );
@@ -41,7 +41,7 @@ if ( ! function_exists( 'largo_home_icon' ) ) {
 				echo wp_get_attachment_image( $attachment_id, $size );
 			else {
 				if (preg_match('/^http(s)?\:\/\//', $logo))
-					echo '<img width="50" height="50" src="' . $logo . '" class="attachment-home-logo" alt="logo">';
+					echo '<img src="' . $logo . '" class="attachment-home-logo" alt="logo">';
 				else
 					echo $default;
 			}

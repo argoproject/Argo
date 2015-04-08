@@ -1,7 +1,10 @@
 <?php
 /**
  * The template for displaying 404 pages.
-**/
+ *
+ * @package Largo
+ * @since 0.1
+ */
 get_header(); ?>
 
 <div id="content" class="span8" role="main">

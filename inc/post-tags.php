@@ -8,15 +8,23 @@
  * @since 0.3
  */
 if ( ! function_exists( 'largo_time' ) ) {
-	function largo_time( $echo = true ) {
-		$time_difference = current_time('timestamp') - get_the_time('U');
+	function largo_time($echo=true, $post=null) {
+		if (!empty($post)) {
+			if (is_object($post))
+				$post_id = $post->ID;
+			else if (is_numeric($post))
+				$post_id = $post;
+		} else
+			$post_id = get_the_ID();
+
+		$time_difference = current_time('timestamp') - get_the_time('U', $post_id);
 
 		if ( $time_difference < 86400 )
 			$output = sprintf( __('<span class="time-ago">%s ago</span>', 'largo' ),
-				human_time_diff( get_the_time( 'U' ), current_time( 'timestamp' ) )
+				human_time_diff( get_the_time('U', $post_id), current_time( 'timestamp' ) )
 			);
 		else
-			$output = get_the_date();
+			$output = get_the_date(null, $post_id);
 
 		if ( $echo )
 			echo $output;
@@ -87,7 +95,7 @@ if ( ! function_exists( 'largo_byline' ) ) {
 		if (!empty($post)) {
 			if (is_object($post))
 				$post_id = $post->ID;
-			else
+			else if (is_numeric($post))
 				$post_id = $post;
 		} else
 			$post_id = get_the_ID();
@@ -116,12 +124,12 @@ if ( ! function_exists( 'largo_byline' ) ) {
 			}
 
 		} else {
-			$authors = largo_author_link( false );
+			$authors = largo_author_link( false, $post_id );
 		}
 
 		$output = '<span class="by-author"><span class="by">' . __( 'By', 'largo' ) . '</span> <span class="author vcard" itemprop="author">' . $authors . '</span></span>';
 		if ( ! $exclude_date ) {
-			$output .= '<span class="sep"> | </span><time class="entry-date updated dtstamp pubdate" datetime="' . esc_attr( get_the_date( 'c' ) ) . '">' . largo_time( false ) . '</time>';
+			$output .= '<span class="sep"> | </span><time class="entry-date updated dtstamp pubdate" datetime="' . esc_attr( get_the_date( 'c', $post_id ) ) . '">' . largo_time(false, $post_id) . '</time>';
 		}
 
 		if ( current_user_can( 'edit_post', $post_id ) ) {
@@ -141,7 +149,7 @@ if ( ! function_exists( 'largo_byline' ) ) {
 }
 
 /**
- * Outputs facebook, twitter, email, share and print utility links on article pages
+ * Outputs facebook, twitter and print utility links on article pages
  *
  * @param $echo bool echo the string or return it (default: echo)
  * @return string social icon area markup as formatted html
@@ -177,16 +185,12 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 
 		$output .= '</div><div class="right">';
 
-		if ( $utilities['sharethis'] === '1' ) {
-			$output .= '<span class="st_sharethis" displayText="' . esc_attr( __( 'Share', 'largo' ) ) . '"></span>';
-		}
-
-		if ( $utilities['email'] === '1' ) {
-			$output .= '<span class="st_email" displayText="' . esc_attr( __( 'Email', 'largo' ) ) . '"></span>';
-		}
-
 		if ( $utilities['print'] === '1' ) {
 			$output .= '<span class="print"><a href="#" onclick="window.print()" title="' . esc_attr( __( 'Print this article', 'largo' ) ) . '" rel="nofollow"><i class="icon-print"></i> ' . esc_attr( __( 'Print', 'largo' ) ) . '</a></span>';
+		}
+
+		if ($utilities['email'] === '1' ) {
+			$output .= '<span data-service="email" class="email custom-share-button icon-mail share-button"> Email</span>';
 		}
 
 		$output .= '</div></div>';
@@ -392,7 +396,7 @@ if ( ! function_exists( 'largo_excerpt' ) ) {
 
 		// otherwise we'll just do our best and make the prettiest excerpt we can muster
 		} else {
-			$content = largo_trim_sentences( get_the_content(), $sentence_count );
+			$content = largo_trim_sentences( $the_post->post_content, $sentence_count );
 			if ( $use_more )
 				$content .= '<a href="' . get_permalink( $the_post->ID ) . '">' . $more_link . '</a>';
 		}

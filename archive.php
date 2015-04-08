@@ -1,6 +1,9 @@
 <?php
 /**
  * Template for various non-category archive pages (tag, term, date, etc.)
+ *
+ * @package Largo
+ * @since 0.1
  */
 get_header();
 ?>

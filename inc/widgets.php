@@ -41,9 +41,9 @@ function largo_widgets() {
 		'largo_prev_next_post_links_widget' => '/inc/widgets/largo-prev-next-post-links.php',
 		'largo_staff_widget' => '/inc/widgets/largo-staff.php'
 	);
-	
+
 	// If series are enabled
-	if ( of_get_option('series_enabled') !==false ) {
+	if ( of_get_option('series_enabled') !== false ) {
 		$register['largo_series_posts_widget'] = '/inc/widgets/largo-series-posts.php';
 		$register['largo_post_series_links_widget'] = '/inc/widgets/largo-post-series-links.php';
 	}
@@ -120,6 +120,7 @@ function largo_add_widget_classes( $params ) {
 }
 add_filter('dynamic_sidebar_params', 'largo_add_widget_classes');
 
+
 /**
  * Resets the counter for each subsequent sidebar
  *
@@ -131,6 +132,7 @@ function largo_widget_counter_reset() {
 }
 add_action('dynamic_sidebar_after', 'largo_widget_counter_reset', 99);
 add_action('get_sidebar', 'largo_widget_counter_reset', 99);
+
 
 /**
  * Add custom fields to widget forms
@@ -166,6 +168,7 @@ function largo_widget_custom_fields_form( $widget, $args, $instance ) {
 }
 add_action('in_widget_form', 'largo_widget_custom_fields_form', 1, 3);
 
+
 /**
  * Register widget custom fields
  *
@@ -187,6 +190,7 @@ function largo_register_widget_custom_fields ( $instance, $widget ) {
 }
 add_filter('widget_form_callback', 'largo_register_widget_custom_fields', 10, 2);
 
+
 /**
  * Add additional fields to widget update callback
  *
@@ -203,6 +207,7 @@ function largo_widget_update_extend ( $instance, $new_instance ) {
 }
 add_filter( 'widget_update_callback', 'largo_widget_update_extend', 10, 2 );
 
+
 /**
  * Make it possible for widget titles to be links
  *
@@ -211,7 +216,7 @@ add_filter( 'widget_update_callback', 'largo_widget_update_extend', 10, 2 );
  */
 function largo_add_link_to_widget_title( $title, $instance = null ) {
   if (!empty($title) && !empty($instance['title_link'])) {
-    $title = '<a href="' . esc_url( $instance['title_link'] ) . '">' . esc_html( $title ) . '</a>';
+    $title = '<a href="' . esc_url( $instance['title_link'] ) . '">' . $title . '</a>';
   }
   return $title;
 }

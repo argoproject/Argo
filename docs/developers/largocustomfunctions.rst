@@ -29,7 +29,7 @@ Looking for something? Ctrl-F or ⌘-F
     - default/rev/no-bg classes
     - Bootstrap's responsive classes
     
- - ``largo_admin_footer_text( $default_text ):`` A `filter <http://codex.wordpress.org/Function_Reference/add_filter>`_ that replaces the admin page footer text with "This website powered by `Project Largo <http://largoproject.org/>`_ from the `Investigative News Network <http://investigativenewsnetwork.org/>`_ and `WordPress <http://wordpress.org/<`_." Found in ``/inc/dashboard.php.``
+ - ``largo_admin_footer_text( $default_text ):`` A `filter <http://codex.wordpress.org/Function_Reference/add_filter>`_ that replaces the admin page footer text with "This website powered by `Project Largo <http://largoproject.org/>`_ from the `Institute for Nonprofit News <http://inn.org/>`_ and `WordPress <http://wordpress.org/<`_." Found in ``/inc/dashboard.php.``
  - ``largo_admin_menu():`` Removes the Link Manager menu item that `was deprecated in WordPress 3.5 <http://codex.wordpress.org/Links_Manager>`_. Found in ``/inc/dashboard.php.``
  - ``largo_admin_users_caps( $caps, $cap, $user_id, $args ):`` In a multisite network, allow site admins to edit user profiles. H/t http://thereforei.am/2011/03/15/how-to-allow-administrators-to-edit-users-in-a-wordpress-network/. Found in */inc/users.php.*
  - ``largo_attachment_image_link_remove_filter( $content ):`` Filters ``'the_content'`` and removes links to attachments. Found in ``/inc/images.php.``
@@ -211,6 +211,8 @@ Looking for something? Ctrl-F or ⌘-F
  
  - ``largo_layout_meta_box_display():`` Contents for the Layout Options metabox. Found in ``/inc/post-meta.php``
  - ``largo_load_custom_template_functions():`` Loads ``/inc/home-template-functions.php.`` Found in ``/inc/home-templates.php.``
+ - ``largo_load_more_posts_enqueue_script():`` Attaches script for the "Load More Posts" button on home, category and archive pages.
+ - ``largo_load_more_posts_data():`` Attaches a piece of JavaScript to the end of home, category, and archive pages containing information needed for the "Load More Posts" button to work.
  - ``largo_load_of_script_for_widget(): ``Loads scripts for options framework on the widgets. Found in ``/inc/sidebars.php.``
  
 **M**

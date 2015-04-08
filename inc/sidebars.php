@@ -86,11 +86,11 @@ function largo_register_sidebars() {
 
 	if ( of_get_option( 'leaderboard_enabled' ) ) {
 		$sidebars[] = array(
-	 		'name' 	=> __( 'Header Ad Zone', 'largo'),
-	 		'desc' 	=> __( 'An optional leaderboard (728x90) ad zone above the main site header', 'largo' ),
-	 		'id' 	=> 'header-ads'
-	 	);
-	 }
+			'name' 	=> __( 'Header Ad Zone', 'largo'),
+			'desc' 	=> __( 'An optional leaderboard (728x90) ad zone above the main site header', 'largo' ),
+			'id' 	=> 'header-ads'
+		);
+	}
 
 	// user-defined custom widget areas
 	$custom_sidebars = preg_split( '/$\R?^/m', of_get_option( 'custom_sidebars' ) );
@@ -267,16 +267,19 @@ function largo_sidebar_span_class() {
 
 	if (is_single() || is_singular()) {
 		$default_template = of_get_option( 'single_template' );
-		$custom_template = get_post_meta( $post->ID, '_wp_post_template', true );
+
+		$meta_field = ( is_single() ) ? '_wp_post_template' : '_wp_page_template';
+
+		$custom_template = get_post_meta( $post->ID, $meta_field, true );
 
 		if (!empty($custom_template)) {
-			if ($custom_template == 'single-one-column.php')
+			if ( $custom_template == 'single-one-column.php' )
 				return 'span2';
-			else if ($custom_template !== 'single-one-column.php')
+			else if ( $custom_template !== 'single-one-column.php' )
 				return 'span4';
 		}
 
-		if ($default_template == 'normal')
+		if ( $default_template == 'normal' )
 			return 'span2';
 		else
 			return 'span4';

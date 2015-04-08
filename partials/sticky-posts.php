@@ -1,7 +1,10 @@
 <?php
-global $ids;
+global $ids, $shown_ids;
 
 $sticky = get_option( 'sticky_posts' );
+if (empty($sticky))
+	return;
+
 $args = array(
 	'posts_per_page' => 1,
 	'post__in'  => $sticky,
@@ -12,6 +15,7 @@ $query = new WP_Query( $args );
 if ( $query->have_posts() ) {
 	while ( $query->have_posts() ) {
 	   	$query->the_post();
+	   	$shown_ids[] = get_the_ID();
 
 		if ( $sticky && $sticky[0] && ! is_paged() ) { ?>
 

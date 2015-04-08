@@ -1,40 +1,19 @@
 .navis-slideshow {
     background-color: #efefef;
     font-family: Arial;
-    margin-bottom: 20px;
-    padding: 10px 2.5%;
     font-size: 11px;
     color: #666;
-    -webkit-box-shadow: 3px 4px 4px #ccc;
-    -moz-box-shadow: 3px 6px 4px #999;
     position: relative;
     border: 1px solid #ddd;
-}
-
-.navis-slideshow a {
-    outline: none;
-}
-
-.navis-slideshow .slidesjs-pagination li {
-  list-style-type:none !important;
-}
-
-/* Set the width of your slides container */
-.navis-slideshow {
     width: 100%;
     margin-top: 20px;
+    margin-bottom: 20px;
     display: none;
-    padding:5px 0;
+    padding: 36px 0 5px 0;
 }
 
 .ie6 .navis-slideshow {
     display: block;
-}
-
-#content .navis-slideshow img {
-    display: block;
-    margin: 0 auto;
-    width:100%;
 }
 
 .navis-slideshow p {
@@ -44,7 +23,7 @@
     font-size: 12px;
 }
 
-#content .navis-slideshow h6 {
+.navis-slideshow h6 {
     margin: 6px;
     font-weight: normal;
     font-size: 11px;
@@ -52,46 +31,32 @@
     color: #666;
 }
 
-#content .navis-slideshow h6.credit {
+.navis-slideshow h6.credit {
     text-align: right;
     float: right;
 }
 
-#content .navis-slideshow h6.permalink {
+.navis-slideshow h6.permalink {
     float: left;
     text-align: left;
 }
 
-#content .slide-permalink {
+.slide-permalink {
     font-weight: normal;
     font-style: normal;
     outline: none;
 }
 
-#content .navis-slideshow .wp-caption-text {
+.navis-slideshow .wp-caption-text {
     clear: both;
 }
 
-#content .slide-permalink:hover {
+.slide-permalink:hover {
     text-decoration: none;
     color: #666;
 }
 
-
-/* Set the width of your slides */
-.slidesjs-slide div {
-    width: 100%;
-    display: block;
-}
-div.slidesjs-control {
-	width: 100% !important;
-}
-
-.navis-slideshow .slidesjs-container {
-    padding-top: 25px;
-}
-
-.navis-slideshow .slidesjs-pagination {
+.navis-slideshow .slick-dots {
     margin: 0 !important;
     width: 95%;
     padding: 0;
@@ -100,7 +65,7 @@ div.slidesjs-control {
     left: 10px
 }
 
-.navis-slideshow .slidesjs-pagination li {
+.navis-slideshow .slick-dots li {
     float: left;
     margin: 0 1px !important;
     list-style: none;
@@ -108,22 +73,24 @@ div.slidesjs-control {
     padding: 0 !important;
 }
 
-.navis-slideshow .slidesjs-pagination li a {
+.navis-slideshow .slick-dots li button {
+    border: none;
     display: block;
     width: 12px;
-    height: 0;
-    padding-top: 12px;
+    height: 12px;
+    background-color: transparent;
     background-image: url(../img/pagination.png);
     background-position: 0 0;
     float: left;
-    overflow: hidden
+    overflow: hidden;
+    text-indent: -99999px;
 }
 
-.navis-slideshow .slidesjs-pagination li a.active {
+.navis-slideshow .slick-dots li.slick-active button {
     background-position: 0 -12px
 }
 
-.navis-slideshow a.slidesjs-navigation {
+.navis-slideshow a.slick-navigation {
     background: url(../img/slide-nav.png) no-repeat top left;
     text-indent: -10000px;
     display: block;
@@ -131,7 +98,7 @@ div.slidesjs-control {
     outline: none;
 }
 
-.navis-slideshow a.slidesjs-previous {
+.navis-slideshow a.slick-previous {
     position: absolute;
     top: 5px;
     right: 32px;
@@ -142,13 +109,13 @@ div.slidesjs-control {
     outline: none;
 }
 
-.navis-slideshow a.slidesjs-previous:hover {
+.navis-slideshow a.slick-previous:hover {
     background-position: 0 -142px;
     width: 21px;
     height: 21px;
 }
 
-.navis-slideshow a.slidesjs-next {
+.navis-slideshow a.slick-next {
     position: absolute;
     top: 5px;
     right: 7px;
@@ -159,9 +126,7 @@ div.slidesjs-control {
     outline: none;
 }
 
-
-
-.navis-slideshow a.slidesjs-next:hover {
+.navis-slideshow a.slick-next:hover {
     background-position: 0 0;
     width: 21px;
     height: 21px
