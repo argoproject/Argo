@@ -109,7 +109,6 @@ if (!function_exists('largo_load_more_posts')) {
 					$opt = $_POST['opt'];
 				}
 				$partial = ( get_post_type() == 'argolinks' ) ? 'argolinks' : $partial;
-				echo $partial;
 				get_template_part( 'partials/content', $partial );
 			endwhile;
 		}
