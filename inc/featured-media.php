@@ -90,15 +90,10 @@ function largo_enqueue_featured_media_js($hook) {
 
 	$featured_image_display = get_post_meta($post->ID, 'featured-image-display', true);
 
-	if ( LARGO_DEBUG ) {
-		wp_enqueue_script(
-			'largo_featured_media', get_template_directory_uri() . '/js/featured-media.js',
-			array('media-models', 'media-views'), false, 1);
-	} else {
-		wp_enqueue_script(
-			'largo_featured_media', get_template_directory_uri() . '/js/featured-media.min.js',
-			array('media-models', 'media-views'), false, 1);
-	}
+	$suffix = (LARGO_DEBUG)? '' : '.min';
+	wp_enqueue_script(
+		'largo_featured_media', get_template_directory_uri() . '/js/featured-media' . $suffix . '.js',
+		array('media-models', 'media-views'), false, 1);
 
 	wp_localize_script('largo_featured_media', 'LFM', array(
 		'options' => largo_default_featured_media_types(),

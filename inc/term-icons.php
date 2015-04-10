@@ -173,11 +173,9 @@ class Largo_Term_Icons {
 				wp_enqueue_script( 'select2-locale-'. $locale[0], $dir . '/js/select2/select2_locale_' . $locale[0] . '.js' );
 			}
 
-			if ( LARGO_DEBUG ) {
-				wp_enqueue_script( 'custom-term-icons', $dir.'/js/custom-term-icons.js' );
-			} else {
-				wp_enqueue_script( 'custom-term-icons', $dir.'/js/custom-term-icons.min.js' );
-			}
+			$suffix = (LARGO_DEBUG)? '' : '.min';
+			wp_enqueue_script( 'custom-term-icons', $dir.'/js/custom-term-icons' . $suffix . '.js' );
+
 		}
 	}
 
