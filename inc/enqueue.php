@@ -15,10 +15,8 @@ if ( ! function_exists( 'largo_enqueue_js' ) ) {
 
 		$suffix = (LARGO_DEBUG)? '' : '.min';
 		// Our primary stylesheet
-		wp_enqueue_style( 'largo-stylesheet', get_template_directory_uri().'/css/style.css' );	//often overridden by custom-less-variables version
-		wp_enqueue_script( 'largoCore', get_template_directory_uri() . '/js/largoCore.js', array( 'jquery' ), '1.0', true );
-
-		}
+		wp_enqueue_style( 'largo-stylesheet', get_template_directory_uri().'/css/style' . $suffix . '.css' );	//often overridden by custom-less-variables version
+		wp_enqueue_script( 'largoCore', get_template_directory_uri() . '/js/largoCore' . $suffix . '.js', array( 'jquery' ), '1.0', true );
 
 		/**
 		 * These files are already minified
@@ -38,9 +36,7 @@ if ( ! function_exists( 'largo_enqueue_js' ) ) {
 		$theme = wp_get_theme();
 
 		if (is_object($theme->parent())) {
-			$suffix = (LARGO_DEBUG)? '' : '.min';
 			wp_enqueue_style( 'largo-child-styles', get_stylesheet_directory_uri() . '/style'. $suffix . '.css', array('largo-stylesheet'));
-			}
 		}
 	}
 }
