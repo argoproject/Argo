@@ -114,7 +114,6 @@ if( of_get_option('disclaimer_enabled') ) {
  * @see largo_custom_taxonomies
  */
 function largo_add_custom_prominence_meta_box($largoProminenceTerms) {
-	var_log($largoProminenceTerms);
 	add_action('add_meta_boxes', function() use ($largoProminenceTerms) {
 		add_meta_box(
 			'largo_prominence_meta',
