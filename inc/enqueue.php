@@ -36,7 +36,7 @@ if ( ! function_exists( 'largo_enqueue_js' ) ) {
 		$theme = wp_get_theme();
 
 		if (is_object($theme->parent())) {
-			wp_enqueue_style( 'largo-child-styles', get_stylesheet_directory_uri() . '/style'. $suffix . '.css', array('largo-stylesheet'));
+			wp_enqueue_style( 'largo-child-styles', get_stylesheet_directory_uri() . '/style.css', array('largo-stylesheet'));
 		}
 	}
 }
