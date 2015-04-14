@@ -13,6 +13,10 @@ class largo_series_posts_widget extends WP_Widget {
 	}
 
 	function widget( $args, $instance ) {
+		global $post;
+		// Preserve global $post
+		$preserve = $post;
+
 		// instance: num, series (id), title, heading
 		extract( $args );
 
@@ -55,8 +59,11 @@ class largo_series_posts_widget extends WP_Widget {
 
  		echo '<a class="more" href="' . get_term_link( (int) $instance['series'], 'series' ) . '">' . __('Complete Coverage', 'largo') . "</a>";
 
- 		wp_reset_postdata();
 		echo $after_widget;
+
+		// Restore global $post
+		wp_reset_postdata();
+		$post = $preserve;
 	}
 
 	function update( $new_instance, $old_instance ) {
