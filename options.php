@@ -633,6 +633,17 @@ function optionsframework_options() {
 		'std' 	=> '0',
 		'type' 	=> 'checkbox');
 
+	if ( INN_MEMBER ) { // only relevant in this case, options affecting the logo display
+		$options[] = array(
+			'name' 	=> __('INN Membership Options', 'largo'),
+			'type'	=> 'info');
+
+		$options[] = array(
+			'desc' 	=> __('<b>When did your organization join INN?</b> Leave this field blank if you do not want to display a membership year on your site.', 'largo'),
+			'id' 	=> 'inn_member_since',
+			'std' 	=> '',
+			'type' 	=> 'text');
+	}
 
 	return apply_filters('largo_options', $options);
 }

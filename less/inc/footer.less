@@ -143,9 +143,6 @@
   .border-radius(3px);
 }
 #ft-social li {
-  float: right;
-  display: inline;
-  margin-right: 8px;
   i {
     font-size: @baseFontSize + 2;
     .darkLight(@headerFooterColor);
@@ -155,12 +152,57 @@
     }
   }
 }
+ul#ft-social {
+  display: block;
+  margin: 0 auto;
+  width: intrinsic;
+  margin-bottom: 1em;
+  margin-top: 1.5em;
+  text-align: center;
+  li {
+    float: none;
+    display: inline-block;
+    i {
+      color: #fff;
+      padding: 14px;
+      border-radius: 30px;
+      &:hover {
+        background-color: #fff;
+      }
+      &.icon-github:hover {
+        color: @black;
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    float: none;
+    li { min-height: 56px; }
+    li i {
+      font-size: 24px;
+    }
+  }
+}
+#footer-social {
+  padding-top: 16px;
+  li {
+    display: inline-block;
+    font-size: 18px;
+    a {
+      padding-right: 10px;
+      color: @grayLight;
+    }
+    i {
+      border-radius: 50%;
+      position: relative;
+      top: 0;
+      padding: 4px;
+    }
+  }
+}
 #supplementary {
   padding: @baseline 0 @baseline / 2;
-  border-bottom: 1px solid @gray;
 }
 #boilerplate {
-  border-top: 1px solid @grayLight;
   padding-top: @baseline / 2;
   width: 100%;
   font-family: @sansFontFamily;
@@ -168,7 +210,7 @@
     margin-bottom: 0;
     color: @grayLight;
     &.footer-credit {
-      float: left;
+      float: none;
     }
     &.back-to-top {
       float: right;
@@ -182,6 +224,42 @@
       display: inline;
       padding-right: 10px;
     }
+  }
+  .row-fluid {
+    margin-top: 1.5em;
+  }
+  .span3 {
+    position: relative;
+  }
+  .span9 {
+    position: relative;
+    text-align: right;
+  }
+  .menu {
+    clear: none;
+  }
+}
+#inn-since-mobile {
+  margin-top: 28px;
+}
+
+@media (max-width: 768px) {
+  #boilerplate .row-fluid {
+    .span3,
+    .span9 {
+      width: 100%;
+      clear: both;
+      margin-left: 0;
+      text-align: center;
+    }
+    img {
+      max-width: 300px;
+    }
+  }
+}
+@media (max-width: 979px) {
+  .footer-credit span {
+    display: block;
   }
 }
 

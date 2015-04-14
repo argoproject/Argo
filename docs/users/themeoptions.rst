@@ -143,6 +143,8 @@ For more information on creating a series landing page, see :doc:`landingpages`.
 
 **SEO Options** - You may choose to ask search engines to not index archive pages in addition to date archives.
 
+**INN Options** - If `INN_MEMBER` is defined as `true` in your site's `wp-config.php` or in your child theme, then you will have the option to add the year that your organization joined INN. This will be displayed in the footer next to the INN logo.
+
 
 Deprecated Options
 ------------------
