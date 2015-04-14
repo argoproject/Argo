@@ -4,6 +4,7 @@
  * Move the author dropdown to the publish metabox so it's easier to find
  *
  * @since 0.3
+ * @global $post
  */
 //
 if ( ! Largo()->is_plugin_active( 'co-authors-plus' ) ) {
@@ -108,6 +109,9 @@ if( of_get_option('disclaimer_enabled') ) {
 
 /**
  * Add our prominence taxonomy meta box with custom behavior.
+ *
+ * @param array $largoProminenceTerms list of prominence terms
+ * @see largo_custom_taxonomies
  */
 function largo_add_custom_prominence_meta_box($largoProminenceTerms) {
 	add_action('add_meta_boxes', function() use ($largoProminenceTerms) {
@@ -127,6 +131,10 @@ add_action('largo_after_create_prominence_taxonomy', 'largo_add_custom_prominenc
 
 /**
  * Contents for the 'byline' metabox
+ *
+ * Allows user to set a custom byline text and link.
+ *
+ * @global $post
  */
 function largo_byline_meta_box_display() {
 	global $post;
@@ -150,6 +158,12 @@ largo_register_meta_input( array('largo_byline_text', 'largo_byline_link'), 'san
 
 /**
  * Contents for the Layout Options metabox
+ *
+ * Allows user to choose:
+ * - the post template used by the post, if the current post is not a page
+ * - the sidebar used by this post
+ *
+ * @global $post
  */
 function largo_layout_meta_box_display () {
 	global $post;
@@ -183,14 +197,19 @@ largo_register_meta_input( '_wp_post_template', 'sanitize_text_field' );
 largo_register_meta_input( 'custom_sidebar', 'sanitize_key' );
 
 /**
- * Load JS for custom sidebar dropdown
+ * Load JS for custom sidebar choice dropdown
+ *
+ * @global $typenow
+ * @global $wp_registered_sidebars
+ * @global LARGO_DEBUG
  */
 function largo_custom_sidebar_js() {
 	global $typenow, $wp_registered_sidebars;
 
 	if ($typenow == 'post') {
+		$suffix = (LARGO_DEBUG)? '' : '.min';
 		wp_enqueue_script(
-			'custom-sidebar', get_template_directory_uri() . '/js/custom-sidebar.js', array('jquery'));
+			'custom-sidebar', get_template_directory_uri() . '/js/custom-sidebar' . $suffix . '.js', array('jquery'));
 
 		$post_templates = get_post_templates();
 		$default_sidebar_labels = array();
@@ -209,7 +228,11 @@ function largo_custom_sidebar_js() {
 add_action('admin_enqueue_scripts', 'largo_custom_sidebar_js');
 
 /**
- * Content for the Additional Options metabox
+ * Custom related meta box option
+ *
+ * Allows the user to set custom related posts for a post.
+ *
+ * @global $post
  */
 function largo_custom_related_meta_box_display() {
 	global $post;
@@ -223,7 +246,12 @@ function largo_custom_related_meta_box_display() {
 largo_register_meta_input( 'largo_custom_related_posts', 'sanitize_text_field' );
 
 /**
- * Content for the Additional Options metabox
+ * Disclaimer text area for the Additional Options metabox
+ *
+ * If the post's disclaimer field is empty, then the default disclaimer 
+ * is the option set in the theme options.
+ *
+ * @global $post
  */
 function largo_custom_disclaimer_meta_box_display() {
 	global $post;
@@ -241,7 +269,9 @@ function largo_custom_disclaimer_meta_box_display() {
 largo_register_meta_input( 'disclaimer', 'wp_filter_post_kses' );
 
 /**
- * Additional content for the Additional Options metabox
+ * Metabox option to choose the top tag for the post
+ *
+ * @global $post
  */
 function largo_top_tag_display() {
 	global $post;
@@ -265,17 +295,22 @@ largo_register_meta_input( 'top_term', 'intval' );
 
 /**
  * Load JS for our top-terms select
+ *
+ * @global LARGO_DEBUG
+ * @global $typenow
  */
 function largo_top_terms_js() {
 	global $typenow;
-  if( $typenow == 'post' ) {
-  	wp_enqueue_script( 'top-terms', get_template_directory_uri() . '/js/top-terms.js', array( 'jquery' ) );
-  }
+	if( $typenow == 'post' ) {
+		$suffix = (LARGO_DEBUG)? '' : '.min';
+		wp_enqueue_script( 'top-terms', get_template_directory_uri() . '/js/top-terms' . $suffix . '.js', array( 'jquery' ) );
+	}
 }
 add_action( 'admin_enqueue_scripts', 'largo_top_terms_js' );
 
 /**
  * Callback function to draw our custom meta box for the prominence taxonomy
+ *
  */
 function largo_prominence_meta_box($post, $args) {
 	$largoProminenceTerms = $args['args'];
