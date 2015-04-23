@@ -137,7 +137,6 @@ class Largo {
 			'/inc/helpers.php',
 			'/inc/plugin-init.php',
 			'/inc/dashboard.php',
-			'/inc/robots.php',
 			'/inc/custom-feeds.php',
 			'/inc/users.php',
 			'/inc/term-meta.php',
