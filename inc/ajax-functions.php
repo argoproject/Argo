@@ -70,9 +70,7 @@ if (!function_exists('largo_load_more_posts')) {
 		global $opt;
 
 		$paged = $_POST['paged'];
-		var_log($_POST['query']);
 		$context = (isset($_POST['query']))? json_decode(stripslashes($_POST['query']), true) : array();
-		var_log($context);
 
 		// Making sure that this isn't home
 		if (isset($_POST['is_home']))
