@@ -91,6 +91,12 @@ add_action( 'wp_enqueue_scripts', 'largo_header_js' );
  */
 if ( ! function_exists( 'largo_footer_js' ) ) {
 	function largo_footer_js() { ?>
+
+
+		<?php 
+		// Are the widgets that contain facebook social buttons loaded (or are we on single/author?)
+		if( largo_facebook_widget::is_rendered() || largo_follow_widget::is_rendered() || is_single() || is_author() ) : ?>
+
 		<!--Facebook-->
 		<div id="fb-root"></div>
 		<script>(function(d, s, id) {
@@ -101,17 +107,17 @@ if ( ! function_exists( 'largo_footer_js' ) ) {
 		  fjs.parentNode.insertBefore(js, fjs);
 		}(document, 'script', 'facebook-jssdk'));</script>
 
+		<?php endif; ?>
+
+		<?php 
+		// Are the widgets that contain twitter social buttons loaded (or are we on single/author?)
+		if( largo_twitter_widget::is_rendered() || largo_follow_widget::is_rendered() || is_single() || is_author() ) : ?>
+
 		<!--Twitter-->
 		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
-		<!--Google Plus-->
-		<script type="text/javascript">
-		  (function() {
-		    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-			po.src = 'https://apis.google.com/js/plusone.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-		  })();
-		</script>
+		<?php endif; ?>
+
 	<?php
 	}
 }
