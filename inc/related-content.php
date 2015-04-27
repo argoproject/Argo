@@ -472,7 +472,7 @@ class Largo_Related {
 				// get the posts in this series, ordered by rank or (if missing?) date
 				$args = array(
 					'post_type'           => 'post',
-					'posts_per_page'      => -1,	//should usually be enough
+					'posts_per_page'      => $this->number,
 					'taxonomy' 			      => 'series',
 					'term'                => $term->slug,
 					'orderby'             => 'date',
@@ -534,7 +534,7 @@ class Largo_Related {
 			foreach ( $taxonomies as $term ) {
 				$args = array(
 					'post_type'           => 'post',
-					'posts_per_page'      => -1,
+					'posts_per_page'      => $this->number,
 					'taxonomy' 		 	      => $term->taxonomy,
 					'term'                => $term->slug,
 					'orderby'             => 'date',
