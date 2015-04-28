@@ -67,13 +67,22 @@ module.exports = function(grunt) {
                 options: {
                     report: 'gzip'
                 },
-                files: [{
-                    expand: true,
-                    cwd: 'css',
-                    src: ['*.css', '!*.min.css'],
-                    dest: 'css',
-                    ext: '.min.css'
-                }]
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'css',
+                        src: ['*.css', '!*.min.css'],
+                        dest: 'css',
+                        ext: '.min.css'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'homepages/assets/css',
+                        src: ['*.css', '!*.min.css'],
+                        dest: 'homepages/assets/css',
+						ext: '.min.css'
+                    }
+                ]
             }
         },
 
