@@ -491,27 +491,28 @@ class Largo_Related {
 						'posts_per_page' => 1
 					));
 
-					if ( $$series_query_name->have_posts() ) {
-						$$series_query_name->next_post();
-						$has_order = get_post_meta( $$series_query_name->post->ID, 'post_order', TRUE );
-						if ( !empty($has_order) ) {
-							switch ( $has_order ) {
-								case 'ASC':
-									$args['order'] = 'ASC';
-									break;
-								case 'custom':
-									$args['orderby'] = 'series_custom';
-									break;
-								case 'featured, DESC':
-								case 'featured, ASC':
-									$args['orderby'] = $opt['post_order'];
-									break;
-							}
-						}
-					}
 
 					set_transient( $series_query_results, $$series_query_results, 60*60 );
 					unset($series_query_results);
+				}
+
+				if ( $$series_query_name->have_posts() ) {
+					$$series_query_name->next_post();
+					$has_order = get_post_meta( $$series_query_name->post->ID, 'post_order', TRUE );
+					if ( !empty($has_order) ) {
+						switch ( $has_order ) {
+							case 'ASC':
+								$args['order'] = 'ASC';
+								break;
+							case 'custom':
+								$args['orderby'] = 'series_custom';
+								break;
+							case 'featured, DESC':
+							case 'featured, ASC':
+								$args['orderby'] = $opt['post_order'];
+								break;
+						}
+					}
 				}
 
 				// build the query with the sort defined
