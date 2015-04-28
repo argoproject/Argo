@@ -60,6 +60,7 @@ class largo_staff_widget extends WP_Widget {
 			if (count_user_posts($user->ID) > 0)
 				$user_posts_link = "<a href=\"$author_url\">{$user->first_name}'s posts</a>";
 
+			// This is a heredoc-delimited string: https://php.net/manual/en/language.types.string.php#language.types.string.syntax.heredoc
 			$markup .= <<<EOD
 <li>
 	<div>

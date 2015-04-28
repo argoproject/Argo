@@ -13,6 +13,10 @@ class largo_sidebar_featured_widget extends WP_Widget {
 	}
 
 	function widget( $args, $instance ) {
+		global $post;
+		// Preserve global $post
+		$preserve = $post;
+
 		extract( $args );
 
 		$title = apply_filters('widget_title', empty( $instance['title'] ) ? __( 'We Recommend', 'largo' ) : $instance['title'], $instance, $this->id_base);
@@ -47,8 +51,11 @@ class largo_sidebar_featured_widget extends WP_Widget {
     		<?php endif; // end more featured posts ?>
 
 		<?php
-		wp_reset_postdata();
 		echo $after_widget;
+
+		// Restore global $post
+		wp_reset_postdata();
+		$post = $preserve;
 	}
 
 	function update( $new_instance, $old_instance ) {

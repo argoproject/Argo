@@ -30,7 +30,10 @@ class largo_recent_posts_widget extends WP_Widget {
 	 */
 	function widget( $args, $instance ) {
 
-		global $shown_ids; // an array of post IDs already on a page so we can avoid duplicating posts
+		global $post, $shown_ids; // an array of post IDs already on a page so we can avoid duplicating posts;
+		
+		// Preserve global $post
+		$preserve = $post;
 
 		extract( $args );
 
@@ -74,7 +77,7 @@ class largo_recent_posts_widget extends WP_Widget {
 
         	$output = '';
 
-        	while ( $my_query->have_posts() ) : $my_query->the_post(); $shown_ids[] = get_the_ID();
+			while ( $my_query->have_posts() ) : $my_query->the_post(); $shown_ids[] = get_the_ID();
 
         		// wrap the items in li's.
         		$output .= '<li>';
@@ -141,7 +144,10 @@ class largo_recent_posts_widget extends WP_Widget {
 			echo '<p class="morelink"><a href="' . esc_url( $instance['linkurl'] ) . '">' . esc_html( $instance['linktext'] ) . '</a></p>';
 		}
 		echo $after_widget;
+
+		// Restore global $post
 		wp_reset_postdata();
+		$post = $preserve;
 	}
 
 	function update( $new_instance, $old_instance ) {

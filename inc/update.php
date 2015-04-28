@@ -550,10 +550,17 @@ function largo_update_page_view() { ?>
 <?php
 }
 
+/**
+ * Enqueues javascript used on the Largo Update page
+ *
+ * @global LARGO_DEBUG
+ * @global $_GET
+ */
 function largo_update_page_enqueue_js() {
 	if (isset($_GET['page']) && $_GET['page'] == 'update-largo') {
+		$suffix = (LARGO_DEBUG)? '' : '.min';
 		wp_enqueue_script(
-			'largo_update_page', get_template_directory_uri() . '/js/update-page.js',
+			'largo_update_page', get_template_directory_uri() . '/js/update-page' . $suffix . '.js',
 			array('jquery'), false, 1);
 	}
 }

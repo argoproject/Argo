@@ -1,4 +1,9 @@
 <?php
+/**
+ * Creates $largo['term-icons'] using the Largo_Term_Icons class defined herein
+ *
+ * @global $largo
+ */
 
 /**
  * Display the fields for selecting icons for terms in the "post-type" taxonomy
@@ -47,6 +52,8 @@ class Largo_Term_Icons {
 
 	/**
 	 * Retrieves the Fontello config.json information about the glyphs
+	 *
+	 * @global $wp_filesystem
 	 */
 	function get_icons_config() {
 		global $wp_filesystem;
@@ -82,6 +89,8 @@ class Largo_Term_Icons {
 
 	/**
 	 * Renders the form fields on the term edit page
+	 *
+	 * @param object $term A taxonomy term
 	 */
 	function display_fields( $term ) {
 		if ( !in_array( $term->taxonomy, $this->get_icon_taxonomies() ) ) {
@@ -132,6 +141,10 @@ class Largo_Term_Icons {
 
 	/**
 	 * Attach the Javascript and Stylesheets to the term edit page
+	 *
+	 * @param string $hook_suffix
+	 * @global LARGO_DEBUG
+	 * @global $_REQUEST
 	 */
 	function admin_enqueue_scripts( $hook_suffix ) {
 
@@ -160,12 +173,17 @@ class Largo_Term_Icons {
 				wp_enqueue_script( 'select2-locale-'. $locale[0], $dir . '/js/select2/select2_locale_' . $locale[0] . '.js' );
 			}
 
-			wp_enqueue_script( 'custom-term-icons', $dir.'/js/custom-term-icons.js' );
+			$suffix = (LARGO_DEBUG)? '' : '.min';
+			wp_enqueue_script( 'custom-term-icons', $dir.'/js/custom-term-icons' . $suffix . '.js' );
+
 		}
 	}
 
 	/**
 	 * Save the results from the term edit page
+	 *
+	 * @global $post
+	 * @param string $term_id
 	 */
 	function edit_terms( $term_id ) {
 		if (isset($_POST['action']) && $_POST['action'] == 'add-tag')
@@ -206,6 +224,10 @@ class Largo_Term_Icons {
 
 	/**
 	 * Output the icon for a term
+	 *
+	 * @param term|string $taxonomy_or_term - the term object of the taxonomy name
+	 * @param int $term_id - the term id when the first parameter is the taxonomy name
+	 * @param string $tag - the HTML element that shall be used for the icon
 	 */
 	function the_icon( $taxonomy_or_term, $term_id='i', $tag='i' ) {
 		if ( is_object( $taxonomy_or_term ) ) {

@@ -1,5 +1,5 @@
 <?php
-global $ids, $shown_ids;
+global $shown_ids;
 
 $sticky = get_option( 'sticky_posts' );
 if (empty($sticky))
@@ -55,7 +55,7 @@ if ( $query->have_posts() ) {
 						<div class="entry-content">
 						<?php
 							largo_excerpt( $post, 2, false );
-							$ids[] = get_the_ID();
+							$shown_ids[] = get_the_ID();
 
 						if ( $feature_posts ) { //if the sticky post is in a series, show up to 3 other posts in that series ?>
 							<div class="sticky-features-list">
