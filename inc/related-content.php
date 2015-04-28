@@ -480,30 +480,38 @@ class Largo_Related {
           'ignore_sticky_posts' => 1,
 				);
 
-				// see if there's a post that has the sort order info for this series
-				$pq = new WP_Query( array(
-					'post_type' => 'cftl-tax-landing',
-					'series' => $term->slug,
-					'posts_per_page' => 1
-				));
+				// This seems like it would be a good case for a transient
+				// Based on this, but using variable varriables: http://www.wpbeginner.com/wp-tutorials/speed-up-your-wordpress-by-caching-custom-queries-using-transients-api/
+				$series_query_name = $this->slug . $this->number . "-cftl-tax-landing";
+				if ( false === ( $$series_query_name = get_transient( $series_query_name ) ) ) {
+					// see if there's a post that has the sort order info for this series
+					$$series_query_name = new WP_Query( array(
+						'post_type' => 'cftl-tax-landing',
+						'series' => $term->slug,
+						'posts_per_page' => 1
+					));
 
-				if ( $pq->have_posts() ) {
-					$pq->next_post();
-					$has_order = get_post_meta( $pq->post->ID, 'post_order', TRUE );
-					if ( !empty($has_order) ) {
-						switch ( $has_order ) {
-							case 'ASC':
-								$args['order'] = 'ASC';
-								break;
-							case 'custom':
-								$args['orderby'] = 'series_custom';
-								break;
-							case 'featured, DESC':
-							case 'featured, ASC':
-								$args['orderby'] = $opt['post_order'];
-								break;
+					if ( $$series_query_name->have_posts() ) {
+						$$series_query_name->next_post();
+						$has_order = get_post_meta( $$series_query_name->post->ID, 'post_order', TRUE );
+						if ( !empty($has_order) ) {
+							switch ( $has_order ) {
+								case 'ASC':
+									$args['order'] = 'ASC';
+									break;
+								case 'custom':
+									$args['orderby'] = 'series_custom';
+									break;
+								case 'featured, DESC':
+								case 'featured, ASC':
+									$args['orderby'] = $opt['post_order'];
+									break;
+							}
 						}
 					}
+
+					set_transient( $series_query_results, $$series_query_results, 60*60 );
+					unset($series_query_results);
 				}
 
 				// build the query with the sort defined
