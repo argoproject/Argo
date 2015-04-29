@@ -40,7 +40,3 @@
 	</div>
 	<?php } ?>
 </div>
-
-<ul id="ft-social" class="social-icons">
-	<?php largo_social_links(); ?>
-</ul>

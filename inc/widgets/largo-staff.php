@@ -60,21 +60,26 @@ class largo_staff_widget extends WP_Widget {
 			if (count_user_posts($user->ID) > 0)
 				$user_posts_link = "<a href=\"$author_url\">{$user->first_name}'s posts</a>";
 
-			// This is a heredoc-delimited string: https://php.net/manual/en/language.types.string.php#language.types.string.syntax.heredoc
-			$markup .= <<<EOD
-<li>
-	<div>
-		<a href="$author_url">
-			$avatar
-			<span class="staff-name">{$user->display_name}</span>
-		</a>
-		<p>$job_title<p>
-		$user_posts_link
-	</div>
-</li>
-EOD;
+			$markup .= "<li>";
+			$markup .= "<div>";
+
+			if (count_user_posts($user->ID) > 0)
+				$markup .= "<a href='$author_url'>";
+
+			$markup .= "		$avatar";
+			$markup .= "		<span class='staff-name'>{$user->display_name}</span>";
+			
+			if (count_user_posts($user->ID) > 0)
+				$markup .= "</a>";
+			
+			$markup .= "	<p>$job_title<p>";
+			$markup .= "	$user_posts_link";
+			$markup .= "</div>";
+			$markup .= "</li>";
+
 		}
 		$markup .= '</ul>';
+
 		echo $markup;
 		echo $args['after_widget'];
 	}
