@@ -399,6 +399,7 @@ class Largo_Related {
 	var $number;
 	var $post_id;
 	var $post_ids = array();
+	var $post;
 
 	/**
 	 * Constructor.
@@ -421,6 +422,8 @@ class Largo_Related {
 		} else {
 			$this->post_id = get_the_ID();
 		}
+
+		$this->post = get_post($this->post_id);
 	}
 
 	/**
@@ -467,29 +470,31 @@ class Largo_Related {
 
 			//loop thru all the series this post belongs to
 			foreach ( $series as $term ) {
-
 				//start to build our query of posts in this series
 				// get the posts in this series, ordered by rank or (if missing?) date
 				$args = array(
-					'post_type'           => 'post',
-					'posts_per_page'      => -1,	//should usually be enough
-					'taxonomy' 			      => 'series',
-					'term'                => $term->slug,
-					'orderby'             => 'date',
-					'order'               => 'ASC',
-          'ignore_sticky_posts' => 1,
+					'post_type' => 'post',
+					'posts_per_page' => $this->number,
+					'taxonomy' => 'series',
+					'term' => $term->slug,
+					'orderby' => 'date',
+					'order' => 'ASC',
+					'ignore_sticky_posts' => 1,
+					'date_query' => array(
+						'after' => $this->post->post_date,
+					),
 				);
 
 				// see if there's a post that has the sort order info for this series
-				$pq = new WP_Query( array(
+				$cftl_query = new WP_Query( array(
 					'post_type' => 'cftl-tax-landing',
 					'series' => $term->slug,
 					'posts_per_page' => 1
 				));
 
-				if ( $pq->have_posts() ) {
-					$pq->next_post();
-					$has_order = get_post_meta( $pq->post->ID, 'post_order', TRUE );
+				if ( $cftl_query->have_posts() ) {
+					$cftl_query->next_post();
+					$has_order = get_post_meta( $cftl_query->post->ID, 'post_order', TRUE );
 					if ( !empty($has_order) ) {
 						switch ( $has_order ) {
 							case 'ASC':
@@ -511,6 +516,9 @@ class Largo_Related {
 
 				if ( $series_query->have_posts() ) {
 					$this->add_from_query( $series_query );
+					if ( $this->have_enough_posts() ) {
+						break;
+					}
 				}
 			}
 		}
@@ -533,20 +541,27 @@ class Largo_Related {
 
 			foreach ( $taxonomies as $term ) {
 				$args = array(
-					'post_type'           => 'post',
-					'posts_per_page'      => -1,
-					'taxonomy' 		 	      => $term->taxonomy,
-					'term'                => $term->slug,
-					'orderby'             => 'date',
-					'order'               => 'ASC',
-          'ignore_sticky_posts' => 1,
+					'post_type' => 'post',
+					'posts_per_page' => $this->number,
+					'taxonomy' => $term->taxonomy,
+					'term' => $term->slug,
+					'orderby' => 'date',
+					'order' => 'ASC',
+					'ignore_sticky_posts' => 1,
+					'date_query' => array(
+						'after' => $this->post->post_date,
+					),
 				);
-			}
-			// run the query
-			$term_query = new WP_Query( $args );
 
-			if ( $term_query->have_posts() ) {
-				$this->add_from_query( $term_query );
+				// run the query
+				$term_query = new WP_Query( $args );
+
+				if ( $term_query->have_posts() ) {
+					$this->add_from_query( $term_query );
+					if ( $this->have_enough_posts() ) {
+						break;
+					}
+				}
 			}
 		}
 	}
@@ -560,17 +575,14 @@ class Largo_Related {
 
 		$args = array(
 			'post_type' => 'post',
-			'posts_per_page' => $this->number + 1,
+			'posts_per_page' => $this->number,
 			'post__not_in' => array( $this->post_id ),
 		);
 
 		$posts_query = new WP_Query( $args );
 
 		if ( $posts_query->have_posts() ) {
-			while ( $posts_query->have_posts() ) {
-				$posts_query->the_post();
-				if ( !in_array($posts_query->post->ID, $this->post_ids) ) $this->post_ids[] = $posts_query->post->ID;
-			}
+			$this->add_from_query($posts_query);
 		}
 	}
 
@@ -586,19 +598,19 @@ class Largo_Related {
 		//see if this post has manually set related posts
 		$post_ids = get_post_meta( $this->post_id, 'largo_custom_related_posts', true );
 		if ( ! empty( $post_ids ) ) {
-			$this->post_ids = explode( ",", $post_ids );
-			if ( count( $this->post_ids ) >= $this->number ) {
+			$this->post_ids = explode( ",", str_replace(' ', '', $post_ids) );
+			if ( $this->have_enough_posts() ) {
 				return $this->cleanup_ids();
 			}
 		}
 
 		$this->get_series_posts();
 		//are we done yet?
-		if ( count($this->post_ids) >= $this->number ) return $this->cleanup_ids();
+		if ( $this->have_enough_posts() ) return $this->cleanup_ids();
 
 		$this->get_term_posts();
 		//are we done yet?
-		if ( count($this->post_ids) >= $this->number ) return $this->cleanup_ids();
+		if ( $this->have_enough_posts() ) return $this->cleanup_ids();
 
 		$this->get_recent_posts();
 		return $this->cleanup_ids();
@@ -618,26 +630,30 @@ class Largo_Related {
 
 		while ( $q->have_posts() ) {
 			$q->the_post();
-			//don't show our post, but record that we've found it
-			if ( $q->post->ID == $this->post_id ) {
-				$found_ours = TRUE;
-				continue;
-			// don't add any posts until we're adding posts newer than the one being displayed
-			} else if ( ! $found_ours ) {
-				continue;
 			// add this post if it's new
-			} else if ( ! in_array( $q->post->ID, $this->post_ids ) ) {	// only add it if it wasn't already there
-				$this->post_ids[] = $q->post->ID;
+			if ( ! in_array( $q->post->ID, $this->post_ids ) ) {	// only add it if it wasn't already there
+				$this->post_ids[] = (int) trim($q->post->ID);
 				// stop if we have enough
-				if ( count( $this->post_ids ) >= $this->number ) return;
+				if ( $this->have_enough_posts() ) return;
 			}
 		}
 
-		//still here? reverse and try again
+		// still here? reverse and try again
+		// NOTE: we have no idea what this is used for (4/29/2015)
 		if ( ! $reversed ) {
 			$q->posts = array_reverse($q->posts);
 			$q->rewind_posts();
 			$this->add_from_query( $q, TRUE );
 		}
+	}
+
+	/**
+	 * Counts to see if enough posts have been found
+	 */
+	protected function have_enough_posts() {
+		if ( count( $this->post_ids ) >= $this->number )
+			return true;
+
+		return false;
 	}
 }
