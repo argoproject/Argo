@@ -536,13 +536,13 @@ class Largo_Related {
 
 			foreach ( $taxonomies as $term ) {
 				$args = array(
-					'post_type'           => 'post',
-					'posts_per_page'      => $this->number,
-					'taxonomy' 		 	      => $term->taxonomy,
-					'term'                => $term->slug,
-					'orderby'             => 'date',
-					'order'               => 'ASC',
-          'ignore_sticky_posts' => 1,
+					'post_type' => 'post',
+					'posts_per_page' => $this->number,
+					'taxonomy' => $term->taxonomy,
+					'term' => $term->slug,
+					'orderby' => 'date',
+					'order' => 'ASC',
+					'ignore_sticky_posts' => 1,
 				);
 			}
 			// run the query
@@ -550,6 +550,9 @@ class Largo_Related {
 
 			if ( $term_query->have_posts() ) {
 				$this->add_from_query( $term_query );
+					if ( $this->have_enough_posts() ) {
+						break;
+					}
 			}
 		}
 	}
@@ -563,7 +566,7 @@ class Largo_Related {
 
 		$args = array(
 			'post_type' => 'post',
-			'posts_per_page' => $this->number + 1,
+			'posts_per_page' => $this->number,
 			'post__not_in' => array( $this->post_id ),
 		);
 
@@ -643,7 +646,6 @@ class Largo_Related {
 			$this->add_from_query( $q, TRUE );
 		}
 	}
-
 
 	/**
 	 * Counts to see if enough posts have been found
