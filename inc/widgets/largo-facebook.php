@@ -4,6 +4,12 @@
  */
 class largo_facebook_widget extends WP_Widget {
 
+	/**
+	 * Used to tell largo_footer_js whether it needs
+	 * to load facebook scripts.
+	 */
+	private static $rendered = false;
+
 	function largo_facebook_widget() {
 		$widget_ops = array(
 			'classname' 	=> 'largo-facebook',
@@ -27,6 +33,8 @@ class largo_facebook_widget extends WP_Widget {
 		echo $output;
 
 		echo $after_widget;
+
+		self::$rendered = true;
 	}
 
 	function update( $new_instance, $old_instance ) {
@@ -72,5 +80,14 @@ class largo_facebook_widget extends WP_Widget {
 		</p>
 
 	<?php
+	}
+
+	/**
+	 * Returns true if this widget has been rendered one or more times.
+	 * 
+	 * @since 0.5
+	 */
+	function is_rendered() {
+		return self::$rendered;
 	}
 }

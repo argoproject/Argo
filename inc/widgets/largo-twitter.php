@@ -4,6 +4,12 @@
  */
 class largo_twitter_widget extends WP_Widget {
 
+	/**
+	 * Used to tell largo_footer_js whether it needs
+	 * to load twitter scripts.
+	 */
+	private static $rendered = false;
+
 	function largo_twitter_widget() {
 		$widget_ops = array(
 			'classname' 	=> 'largo-twitter',
@@ -43,6 +49,9 @@ class largo_twitter_widget extends WP_Widget {
 		echo $widget_embed;
 
 		echo $after_widget;
+		
+		self::$rendered = true;
+
 	}
 
 	function update( $new_instance, $old_instance ) {
@@ -108,4 +117,14 @@ class largo_twitter_widget extends WP_Widget {
 
 	<?php
 	}
+
+	/**
+	 * Returns true if this widget has been rendered one or more times.
+	 * 
+	 * @since 0.5
+	 */
+	function is_rendered() {
+		return self::$rendered;
+	}
+
 }

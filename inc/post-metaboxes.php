@@ -25,7 +25,6 @@ if ( ! Largo()->is_plugin_active( 'co-authors-plus' ) ) {
  */
 function largo_remove_default_post_screen_metaboxes() {
 	remove_meta_box( 'trackbacksdiv','post','normal' ); // trackbacks
-	remove_meta_box( 'slugdiv','post','normal' ); // slug
 	remove_meta_box( 'revisionsdiv','post','normal' ); // revisions
 	remove_meta_box( 'authordiv', 'post', 'normal' ); // author
 	remove_meta_box( 'commentsdiv','post','normal' ); // comments
