@@ -15,17 +15,19 @@ class largo_author_widget extends WP_Widget {
 	function widget( $args, $instance ) {
 
 		global $post;
-		
+
 		extract( $args );
 		$authors = array();
 		$bios = '';
 
-		if( get_post_meta( $post->ID, 'largo_byline_text' ) ) 
+		if( get_post_meta( $post->ID, 'largo_byline_text' ) )
 			$byline_text = esc_attr( get_post_meta( $post->ID, 'largo_byline_text', true ) );
 
-		if( (is_singular() || is_author() || is_series_landing()) && empty($byline_text) ):
+		$is_series_landing = (function_exists('is_series_landing'))? is_series_landing() : false;
 
-				if ( is_singular() || is_series_landing() ) {
+		if( (is_singular() || is_author() || $is_series_landing) && empty($byline_text) ):
+
+				if ( is_singular() || $is_series_landing ) {
 					if ( function_exists( 'get_coauthors' ) ) {
 						$authors = get_coauthors( get_queried_object_id() );
 					} else {
