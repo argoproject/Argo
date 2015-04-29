@@ -399,6 +399,7 @@ class Largo_Related {
 	var $number;
 	var $post_id;
 	var $post_ids = array();
+	var $post;
 
 	/**
 	 * Constructor.
@@ -421,6 +422,8 @@ class Largo_Related {
 		} else {
 			$this->post_id = get_the_ID();
 		}
+
+		$this->post = get_post($this->post_id);
 	}
 
 	/**
@@ -478,6 +481,9 @@ class Largo_Related {
 					'orderby' => 'date',
 					'order' => 'ASC',
 					'ignore_sticky_posts' => 1,
+					'date_query' => array(
+						'after' => $this->post->post_date,
+					),
 				);
 
 				// see if there's a post that has the sort order info for this series
@@ -543,16 +549,20 @@ class Largo_Related {
 					'orderby' => 'date',
 					'order' => 'ASC',
 					'ignore_sticky_posts' => 1,
+					'date_query' => array(
+						'after' => $this->post->post_date,
+					),
 				);
-			}
-			// run the query
-			$term_query = new WP_Query( $args );
 
-			if ( $term_query->have_posts() ) {
-				$this->add_from_query( $term_query );
-					if ( $this->have_enough_posts() ) {
-						break;
-					}
+				// run the query
+				$term_query = new WP_Query( $args );
+
+				if ( $term_query->have_posts() ) {
+					$this->add_from_query( $term_query );
+						if ( $this->have_enough_posts() ) {
+							break;
+						}
+				}
 			}
 		}
 	}
@@ -624,15 +634,8 @@ class Largo_Related {
 
 		while ( $q->have_posts() ) {
 			$q->the_post();
-			//don't show our post, but record that we've found it
-			if ( $q->post->ID == $this->post_id ) {
-				$found_ours = TRUE;
-				continue;
-			// don't add any posts until we're adding posts newer than the one being displayed
-			} else if ( ! $found_ours ) {
-				continue;
 			// add this post if it's new
-			} else if ( ! in_array( $q->post->ID, $this->post_ids ) ) {	// only add it if it wasn't already there
+			if ( ! in_array( $q->post->ID, $this->post_ids ) ) {	// only add it if it wasn't already there
 				$this->post_ids[] = $q->post->ID;
 				// stop if we have enough
 				if ( $this->have_enough_posts() ) return;
