@@ -471,34 +471,25 @@ class Largo_Related {
 				//start to build our query of posts in this series
 				// get the posts in this series, ordered by rank or (if missing?) date
 				$args = array(
-					'post_type'           => 'post',
-					'posts_per_page'      => $this->number,
-					'taxonomy' 			      => 'series',
-					'term'                => $term->slug,
-					'orderby'             => 'date',
-					'order'               => 'ASC',
-          'ignore_sticky_posts' => 1,
+					'post_type' => 'post',
+					'posts_per_page' => $this->number,
+					'taxonomy' => 'series',
+					'term' => $term->slug,
+					'orderby' => 'date',
+					'order' => 'ASC',
+					'ignore_sticky_posts' => 1,
 				);
 
-				// This seems like it would be a good case for a transient
-				// Based on this, but using variable varriables: http://www.wpbeginner.com/wp-tutorials/speed-up-your-wordpress-by-caching-custom-queries-using-transients-api/
-				$series_query_name = $this->slug . $this->number . "-cftl-tax-landing";
-				if ( false === ( $$series_query_name = get_transient( $series_query_name ) ) ) {
-					// see if there's a post that has the sort order info for this series
-					$$series_query_name = new WP_Query( array(
-						'post_type' => 'cftl-tax-landing',
-						'series' => $term->slug,
-						'posts_per_page' => 1
-					));
+				// see if there's a post that has the sort order info for this series
+				$cftl_query = new WP_Query( array(
+					'post_type' => 'cftl-tax-landing',
+					'series' => $term->slug,
+					'posts_per_page' => 1
+				));
 
-
-					set_transient( $series_query_results, $$series_query_results, 60*60 );
-					unset($series_query_results);
-				}
-
-				if ( $$series_query_name->have_posts() ) {
-					$$series_query_name->next_post();
-					$has_order = get_post_meta( $$series_query_name->post->ID, 'post_order', TRUE );
+				if ( $cftl_query->have_posts() ) {
+					$cftl_query->next_post();
+					$has_order = get_post_meta( $cftl_query->post->ID, 'post_order', TRUE );
 					if ( !empty($has_order) ) {
 						switch ( $has_order ) {
 							case 'ASC':
@@ -520,6 +511,9 @@ class Largo_Related {
 
 				if ( $series_query->have_posts() ) {
 					$this->add_from_query( $series_query );
+					if ( $this->have_enough_posts() ) {
+						break;
+					}
 				}
 			}
 		}
@@ -596,18 +590,18 @@ class Largo_Related {
 		$post_ids = get_post_meta( $this->post_id, 'largo_custom_related_posts', true );
 		if ( ! empty( $post_ids ) ) {
 			$this->post_ids = explode( ",", $post_ids );
-			if ( count( $this->post_ids ) >= $this->number ) {
+			if ( $this->have_enough_posts() ) {
 				return $this->cleanup_ids();
 			}
 		}
 
 		$this->get_series_posts();
 		//are we done yet?
-		if ( count($this->post_ids) >= $this->number ) return $this->cleanup_ids();
+		if ( $this->have_enough_posts() ) return $this->cleanup_ids();
 
 		$this->get_term_posts();
 		//are we done yet?
-		if ( count($this->post_ids) >= $this->number ) return $this->cleanup_ids();
+		if ( $this->have_enough_posts() ) return $this->cleanup_ids();
 
 		$this->get_recent_posts();
 		return $this->cleanup_ids();
@@ -638,7 +632,7 @@ class Largo_Related {
 			} else if ( ! in_array( $q->post->ID, $this->post_ids ) ) {	// only add it if it wasn't already there
 				$this->post_ids[] = $q->post->ID;
 				// stop if we have enough
-				if ( count( $this->post_ids ) >= $this->number ) return;
+				if ( $this->have_enough_posts() ) return;
 			}
 		}
 
@@ -648,5 +642,16 @@ class Largo_Related {
 			$q->rewind_posts();
 			$this->add_from_query( $q, TRUE );
 		}
+	}
+
+
+	/**
+	 * Counts to see if enough posts have been found
+	 */
+	protected function have_enough_posts() {
+		if ( count( $this->post_ids ) >= $this->number )
+			return true;
+
+		return false;
 	}
 }
