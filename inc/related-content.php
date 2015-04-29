@@ -470,7 +470,6 @@ class Largo_Related {
 
 			//loop thru all the series this post belongs to
 			foreach ( $series as $term ) {
-
 				//start to build our query of posts in this series
 				// get the posts in this series, ordered by rank or (if missing?) date
 				$args = array(
@@ -559,9 +558,9 @@ class Largo_Related {
 
 				if ( $term_query->have_posts() ) {
 					$this->add_from_query( $term_query );
-						if ( $this->have_enough_posts() ) {
-							break;
-						}
+					if ( $this->have_enough_posts() ) {
+						break;
+					}
 				}
 			}
 		}
@@ -583,10 +582,7 @@ class Largo_Related {
 		$posts_query = new WP_Query( $args );
 
 		if ( $posts_query->have_posts() ) {
-			while ( $posts_query->have_posts() ) {
-				$posts_query->the_post();
-				if ( !in_array($posts_query->post->ID, $this->post_ids) ) $this->post_ids[] = $posts_query->post->ID;
-			}
+			$this->add_from_query($posts_query);
 		}
 	}
 
@@ -602,7 +598,7 @@ class Largo_Related {
 		//see if this post has manually set related posts
 		$post_ids = get_post_meta( $this->post_id, 'largo_custom_related_posts', true );
 		if ( ! empty( $post_ids ) ) {
-			$this->post_ids = explode( ",", $post_ids );
+			$this->post_ids = explode( ",", str_replace(' ', '', $post_ids) );
 			if ( $this->have_enough_posts() ) {
 				return $this->cleanup_ids();
 			}
@@ -636,13 +632,14 @@ class Largo_Related {
 			$q->the_post();
 			// add this post if it's new
 			if ( ! in_array( $q->post->ID, $this->post_ids ) ) {	// only add it if it wasn't already there
-				$this->post_ids[] = $q->post->ID;
+				$this->post_ids[] = (int) trim($q->post->ID);
 				// stop if we have enough
 				if ( $this->have_enough_posts() ) return;
 			}
 		}
 
-		//still here? reverse and try again
+		// still here? reverse and try again
+		// NOTE: we have no idea what this is used for (4/29/2015)
 		if ( ! $reversed ) {
 			$q->posts = array_reverse($q->posts);
 			$q->rewind_posts();
