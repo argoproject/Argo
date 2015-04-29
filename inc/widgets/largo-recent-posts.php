@@ -29,7 +29,9 @@ class largo_recent_posts_widget extends WP_Widget {
 	 * @param array $instance saved values from databse.
 	 */
 	function widget( $args, $instance ) {
+
 		global $post, $shown_ids; // an array of post IDs already on a page so we can avoid duplicating posts;
+		
 		// Preserve global $post
 		$preserve = $post;
 
