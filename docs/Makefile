@@ -240,7 +240,6 @@ php:
 	doxphp < ../inc/post-tags.php | doxphp2sphinx > api/inc/post-tags.rst
 	doxphp < ../inc/post-templates.php | doxphp2sphinx > api/inc/post-templates.rst
 	doxphp < ../inc/related-content.php | doxphp2sphinx > api/inc/related-content.rst
-	doxphp < ../inc/robots.php | doxphp2sphinx > api/inc/robots.rst
 	doxphp < ../inc/sidebars.php | doxphp2sphinx > api/inc/sidebars.rst
 	doxphp < ../inc/taxonomies.php | doxphp2sphinx > api/inc/taxonomies.rst
 	doxphp < ../inc/term-icons.php | doxphp2sphinx > api/inc/term-icons.rst
