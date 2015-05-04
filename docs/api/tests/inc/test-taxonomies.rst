@@ -16,6 +16,8 @@
 
    .. php:method:: TaxonomiesTestFunctions::test_largo_categoy_archive_posts()
 
+   .. php:method:: TaxonomiesTestFunctions::test_largo_get_featured_posts_in_category()
+
    .. php:method:: TaxonomiesTestFunctions::test_unregister_series_taxonomy()
 
    .. php:method:: TaxonomiesTestFunctions::test_unregister_post_types_taxonomy()

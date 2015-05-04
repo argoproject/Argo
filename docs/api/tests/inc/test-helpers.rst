@@ -19,3 +19,5 @@
    .. php:method:: HelpersTestFunctions::test_var_log()
 
    .. php:method:: HelpersTestFunctions::test_render_template()
+
+   .. php:method:: HelpersTestFunctions::test_largo_get_current_url()

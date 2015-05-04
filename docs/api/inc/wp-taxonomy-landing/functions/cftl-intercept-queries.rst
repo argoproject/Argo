@@ -4,8 +4,6 @@
 
 .. php:function:: cftl_intercept_get_posts()
 
-.. php:function:: cftl_abort_redirect_canonical()
-
 .. php:function:: cftl_unparse_url()
 
 .. php:function:: cftl_maintain_paged()

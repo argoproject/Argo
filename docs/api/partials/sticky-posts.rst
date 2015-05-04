@@ -20,7 +20,7 @@
 
    .. php:attr:: $post
 
-   .. php:attr:: $ids
+   .. php:attr:: $shown_ids
 
    .. php:attr:: $feature_posts
 

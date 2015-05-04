@@ -12,4 +12,6 @@
 
    .. php:method:: AjaxFunctionsTestAjaxFunctions::test_largo_load_more_posts()
 
+   .. php:method:: AjaxFunctionsTestAjaxFunctions::test_largo_load_more_posts_cats_home_option()
+
    .. php:method:: AjaxFunctionsTestAjaxFunctions::test_largo_load_more_posts_empty_query()

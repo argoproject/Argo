@@ -68,6 +68,8 @@
 
       :param array $files: - the LESS files to compile into CSS
 
+      :global: bool $ARGO_DEBUG - if false, minified CSS assets will be used by Largo, and these should be replaced with the custom-comiled assets.
+
    .. php:method:: Largo_Custom_Less_Variables::register_directory_paths()
 
       Set the file path for the directory with the LESS files and

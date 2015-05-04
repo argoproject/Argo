@@ -15,3 +15,9 @@
    .. php:method:: largo_follow_widget::form()
 
       Displays the widget settings controls on the widget panel.
+
+   .. php:method:: largo_follow_widget::is_rendered()
+
+      Returns true if this widget has been rendered one or more times.
+
+      :since: 0.5
