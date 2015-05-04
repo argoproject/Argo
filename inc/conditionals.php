@@ -15,7 +15,7 @@
  * @param int|WP_Post $post Optional. Post ID or post object. Default is global $post.
  * @return bool Whether the post is a series landing page.
  */
-function is_series_landing( $post ) {
+function largo_is_series_landing( $post ) {
 
 	$post = get_post( $post );
 
