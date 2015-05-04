@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: largo-project 0.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-17 13:20-0400\n"
+"POT-Creation-Date: 2015-05-04 10:09-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,82 +18,73 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: archive.php:37
+#: archive.php:40
 msgid "Select a different month:"
 msgstr ""
 
-#: archive.php:39
+#: archive.php:42
 #, php-format
 msgid "Monthly Archives: <span>%s</span>"
 msgstr ""
 
-#: archive.php:41
+#: archive.php:44
 #, php-format
 msgid "Yearly Archives: <span>%s</span>"
 msgstr ""
 
-#: archive.php:43
+#: archive.php:46
 msgid "Blog Archives"
 msgstr ""
 
-#: archive.php:51 category.php:28
+#: archive.php:54 category.php:20
 msgid "Subscribe"
 msgstr ""
 
-#: archive.php:65
+#: archive.php:68
 msgid "Select Month"
 msgstr ""
 
-#: category.php:37
-msgid "Related Topics:"
-msgstr ""
-
-#: category.php:67 category.php:91 partials/content-series.php:19
-#: partials/content.php:45
-msgid "Permalink to"
-msgstr ""
-
-#: comments.php:13
+#: comments.php:16
 msgid ""
 "This post is password protected. Enter the password to view any comments."
 msgstr ""
 
-#: comments.php:29
+#: comments.php:32
 #, php-format
 msgid "One thought on &ldquo;%2$s&rdquo;"
 msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
 msgstr[0] ""
 msgstr[1] ""
 
-#: comments.php:36
+#: comments.php:39
 msgid "&larr; Older Comments"
 msgstr ""
 
-#: comments.php:37
+#: comments.php:40
 msgid "Newer Comments &rarr;"
 msgstr ""
 
-#: comments.php:66
+#: comments.php:69
 msgid "Comments are closed."
 msgstr ""
 
-#: functions.php:191
+#: functions.php:201
 msgid "Global Navigation"
 msgstr ""
 
-#: functions.php:192
+#: functions.php:202
 msgid "Main Navigation"
 msgstr ""
 
-#: functions.php:193 options.php:132
+#: functions.php:203 options.php:142
 msgid "Don't Miss"
 msgstr ""
 
-#: functions.php:194
+#: functions.php:204
 msgid "Footer Navigation"
 msgstr ""
 
-#: functions.php:195
+#: functions.php:205
 msgid "Footer Bottom"
 msgstr ""
 
@@ -107,11 +98,11 @@ msgstr ""
 
 #: homepages/homepage.php:97 homepages/homepage.php:152
 #: homepages/layouts/TopStories.php:27 inc/taxonomies.php:65
-#: inc/update.php:409
+#: inc/update.php:408
 msgid "Homepage Featured"
 msgstr ""
 
-#: homepages/homepage.php:98 homepages/layouts/TopStories.php:22
+#: homepages/homepage.php:98
 msgid "Top Story"
 msgstr ""
 
@@ -160,16 +151,16 @@ msgstr ""
 #: homepages/layouts/HomepageSingle.php:22
 #: homepages/layouts/HomepageSingleWithFeatured.php:17
 #: homepages/layouts/HomepageSingleWithSeriesStories.php:35
-#: homepages/layouts/LegacyThreeColumn.php:18 inc/update.php:415
-#: inc/update.php:620
+#: homepages/layouts/LegacyThreeColumn.php:18
+#: homepages/layouts/TopStories.php:22 inc/update.php:414 inc/update.php:636
 msgid "Homepage Top Story"
 msgstr ""
 
 #: homepages/layouts/HomepageSingle.php:23
 #: homepages/layouts/HomepageSingleWithFeatured.php:18
 #: homepages/layouts/HomepageSingleWithSeriesStories.php:36
-#: homepages/layouts/LegacyThreeColumn.php:19 inc/update.php:416
-#: inc/update.php:621
+#: homepages/layouts/LegacyThreeColumn.php:19 inc/update.php:415
+#: inc/update.php:637
 msgid ""
 "If you are using a \"Big story\" homepage layout, add this label to a post "
 "to make it the top story on the homepage"
@@ -232,7 +223,7 @@ msgid ""
 "this label to a post to make it the top story on the homepage"
 msgstr ""
 
-#: homepages/layouts/TopStories.php:28 inc/update.php:411
+#: homepages/layouts/TopStories.php:28 inc/update.php:410
 msgid ""
 "If you are using the Newspaper or Carousel optional homepage layout, add "
 "this label to posts to display them in the featured area on the homepage."
@@ -243,7 +234,7 @@ msgid "Latest Stories"
 msgstr ""
 
 #: homepages/templates/legacy-three-column.php:24
-#: partials/footer-widget-area.php:43 partials/home-bottom-widget-area.php:4
+#: partials/footer-widget-area.php:38 partials/home-bottom-widget-area.php:4
 msgid ""
 "Please add widgets to this content area in the WordPress admin area under "
 "appearance > widgets."
@@ -269,12 +260,12 @@ msgstr ""
 msgid "More in"
 msgstr ""
 
-#: homepages/zones/zones.php:68 inc/widgets/largo-series-posts.php:56
+#: homepages/zones/zones.php:68 inc/widgets/largo-series-posts.php:60
 msgid "Complete Coverage"
 msgstr ""
 
-#: image.php:30 inc/avatars/admin.php:32 inc/post-tags.php:557
-#: inc/post-tags.php:585
+#: image.php:30 inc/avatars/admin.php:32 inc/post-tags.php:561
+#: inc/post-tags.php:589
 msgid "Edit"
 msgstr ""
 
@@ -299,45 +290,45 @@ msgstr ""
 #. // $safecss_post = Jetpack_Custom_CSS::get_current_revision();
 #. <?php do_action( 'largo_custom_less_variables_submitbox_misc_actions' ); ?>
 #. <input type="button" class="button" id="preview" name="preview" value="<?php esc_attr_e( 'Preview', 'jetpack' ) " />
-#: inc/custom-less-variables.php:110 inc/custom-less-variables.php:559
+#: inc/custom-less-variables.php:110 inc/custom-less-variables.php:561
 msgid "Reset All"
 msgstr ""
 
-#: inc/custom-less-variables.php:399
+#: inc/custom-less-variables.php:401
 msgid "CSS custom variables saved."
 msgstr ""
 
-#: inc/custom-less-variables.php:406
+#: inc/custom-less-variables.php:408
 msgid "Values reset to defaults."
 msgstr ""
 
-#: inc/custom-less-variables.php:414 inc/custom-less-variables.php:438
+#: inc/custom-less-variables.php:416 inc/custom-less-variables.php:440
 msgid "CSS Variables"
 msgstr ""
 
-#: inc/custom-less-variables.php:428
+#: inc/custom-less-variables.php:430
 msgid "Publishing Options"
 msgstr ""
 
-#: inc/custom-less-variables.php:433
+#: inc/custom-less-variables.php:435
 msgid "CSS Variables Revisions"
 msgstr ""
 
-#: inc/custom-less-variables.php:445
+#: inc/custom-less-variables.php:447
 msgid ""
 "Customize the appearance of this theme by changing key LESS used for "
 "generating CSS."
 msgstr ""
 
-#: inc/custom-less-variables.php:527
+#: inc/custom-less-variables.php:529
 msgid "[Live]"
 msgstr ""
 
-#: inc/custom-less-variables.php:560
+#: inc/custom-less-variables.php:562
 msgid "Save Variables"
 msgstr ""
 
-#: inc/customizer/customizer.php:128 options.php:90
+#: inc/customizer/customizer.php:128 options.php:100
 msgid "Site Description"
 msgstr ""
 
@@ -357,7 +348,7 @@ msgstr ""
 msgid "Bottom"
 msgstr ""
 
-#: inc/customizer/customizer.php:177 inc/widgets/largo-twitter.php:76
+#: inc/customizer/customizer.php:177 inc/widgets/largo-twitter.php:85
 msgid "List"
 msgstr ""
 
@@ -365,8 +356,8 @@ msgstr ""
 msgid "Widgets"
 msgstr ""
 
-#: inc/customizer/customizer.php:185 inc/widgets/largo-recent-posts.php:185
-#: inc/widgets/largo-recent-posts.php:194 options.php:42
+#: inc/customizer/customizer.php:185 inc/widgets/largo-recent-posts.php:222
+#: inc/widgets/largo-recent-posts.php:240 options.php:42
 msgid "None"
 msgstr ""
 
@@ -378,55 +369,47 @@ msgstr ""
 msgid "Social Icons to Display"
 msgstr ""
 
-#: inc/customizer/customizer.php:213 options.php:46
+#: inc/customizer/customizer.php:213 options.php:46 options.php:60
 msgid "Facebook"
 msgstr ""
 
-#: inc/customizer/customizer.php:214 options.php:47
+#: inc/customizer/customizer.php:214 options.php:47 options.php:61
 msgid "Twitter"
 msgstr ""
 
-#: inc/customizer/customizer.php:215 options.php:48
-msgid "ShareThis"
-msgstr ""
-
-#: inc/customizer/customizer.php:216 inc/post-tags.php:185 options.php:49
-msgid "Email"
-msgstr ""
-
-#: inc/customizer/customizer.php:217 inc/post-tags.php:189 options.php:50
+#: inc/customizer/customizer.php:215 inc/post-tags.php:189 options.php:48
 msgid "Print"
 msgstr ""
 
-#: inc/customizer/customizer.php:221
+#: inc/customizer/customizer.php:219
 msgid "Display Social Icons"
 msgstr ""
 
-#: inc/customizer/customizer.php:227
+#: inc/customizer/customizer.php:225
 msgid "Facebook Button Text"
 msgstr ""
 
-#: inc/customizer/customizer.php:238
+#: inc/customizer/customizer.php:236
 msgid "Show Twitter Share Count"
 msgstr ""
 
-#: inc/customizer/customizer.php:248 options.php:450
+#: inc/customizer/customizer.php:246 options.php:479
 msgid "Footer Layout"
 msgstr ""
 
-#: inc/customizer/customizer.php:259
+#: inc/customizer/customizer.php:257
 msgid "3 column large center"
 msgstr ""
 
-#: inc/customizer/customizer.php:263
+#: inc/customizer/customizer.php:261
 msgid "3 column equal"
 msgstr ""
 
-#: inc/customizer/customizer.php:267
+#: inc/customizer/customizer.php:265
 msgid "4 column"
 msgstr ""
 
-#: inc/customizer/customizer.php:279
+#: inc/customizer/customizer.php:277
 msgid "Colors"
 msgstr ""
 
@@ -604,7 +587,7 @@ msgstr ""
 msgid "All plugins installed and activated successfully. %s"
 msgstr ""
 
-#: inc/post-metaboxes.php:13 inc/update.php:130
+#: inc/post-metaboxes.php:14 inc/update.php:129
 msgid "Author"
 msgstr ""
 
@@ -616,180 +599,176 @@ msgstr ""
 msgid "Custom Byline Options"
 msgstr ""
 
-#: inc/post-metaboxes.php:88 options.php:338
+#: inc/post-metaboxes.php:88 options.php:367
 msgid "Layout Options"
 msgstr ""
 
-#: inc/post-metaboxes.php:100 inc/post-metaboxes.php:237 options.php:532
+#: inc/post-metaboxes.php:100 inc/post-metaboxes.php:264 options.php:561
 msgid "Disclaimer"
 msgstr ""
 
-#: inc/post-metaboxes.php:116 inc/taxonomies.php:40
+#: inc/post-metaboxes.php:119 inc/taxonomies.php:40
 msgid "Post Prominence"
 msgstr ""
 
-#: inc/post-metaboxes.php:139
+#: inc/post-metaboxes.php:146
 msgid "Byline Text"
 msgstr ""
 
-#: inc/post-metaboxes.php:144
+#: inc/post-metaboxes.php:151
 msgid "Byline Link"
 msgstr ""
 
-#: inc/post-metaboxes.php:159
+#: inc/post-metaboxes.php:172
 msgid "One Column (Standard)"
 msgstr ""
 
-#: inc/post-metaboxes.php:159
+#: inc/post-metaboxes.php:172
 msgid "Two Column (Classic)"
 msgstr ""
 
-#: inc/post-metaboxes.php:162
+#: inc/post-metaboxes.php:175
 msgid "Template"
 msgstr ""
 
-#: inc/post-metaboxes.php:163
+#: inc/post-metaboxes.php:176
 msgid "Select the post template you wish this post to use."
 msgstr ""
 
-#: inc/post-metaboxes.php:164
+#: inc/post-metaboxes.php:177
 msgid "Post Template"
 msgstr ""
 
-#: inc/post-metaboxes.php:166
+#: inc/post-metaboxes.php:179
 #, php-format
 msgid "Default: %s"
 msgstr ""
 
-#: inc/post-metaboxes.php:170
+#: inc/post-metaboxes.php:183
 #, php-format
 msgid "<a href=\"%s\">Click here</a> to change the default post template."
 msgstr ""
 
-#: inc/post-metaboxes.php:175 inc/post-metaboxes.php:177
+#: inc/post-metaboxes.php:188 inc/post-metaboxes.php:190
 msgid "Custom Sidebar"
 msgstr ""
 
-#: inc/post-metaboxes.php:176
+#: inc/post-metaboxes.php:189
 msgid "Select a custom sidebar to display."
 msgstr ""
 
-#: inc/post-metaboxes.php:203 inc/sidebars.php:171 inc/sidebars.php:181
+#: inc/post-metaboxes.php:221 inc/sidebars.php:171 inc/sidebars.php:181
 #: inc/sidebars.php:183
 #, php-format
 msgid "Default (%s)"
 msgstr ""
 
-#: inc/post-metaboxes.php:219
+#: inc/post-metaboxes.php:241
 msgid "Related Posts"
 msgstr ""
 
-#: inc/post-metaboxes.php:220
+#: inc/post-metaboxes.php:242
 msgid ""
 "To override the default related posts functionality enter specific related "
 "post IDs separated by commas."
 msgstr ""
 
-#: inc/post-metaboxes.php:252
+#: inc/post-metaboxes.php:281
 msgid "Top Term"
 msgstr ""
 
-#: inc/post-metaboxes.php:253
+#: inc/post-metaboxes.php:282
 msgid "Identify which of this posts's terms is primary."
 msgstr ""
 
-#: inc/post-tags.php:15
+#: inc/post-tags.php:23
 #, php-format
 msgid "<span class=\"time-ago\">%s ago</span>"
 msgstr ""
 
-#: inc/post-tags.php:66
+#: inc/post-tags.php:74
 #, php-format
 msgid "More from %s"
 msgstr ""
 
-#: inc/post-tags.php:104
+#: inc/post-tags.php:112
 #, php-format
 msgid "Read All Posts By %s"
 msgstr ""
 
-#: inc/post-tags.php:113
+#: inc/post-tags.php:121
 msgid "and"
 msgstr ""
 
-#: inc/post-tags.php:122
+#: inc/post-tags.php:130
 msgid "By"
 msgstr ""
 
-#: inc/post-tags.php:128
+#: inc/post-tags.php:136
 msgid "Edit This Post"
 msgstr ""
 
-#: inc/post-tags.php:132
+#: inc/post-tags.php:140
 msgid "View as \"Clean Read\""
 msgstr ""
 
-#: inc/post-tags.php:159
+#: inc/post-tags.php:167
 msgid "Follow the author of this article"
 msgstr ""
 
-#: inc/post-tags.php:168
+#: inc/post-tags.php:176 tests/inc/test-post-tags.php:78
 msgid "Tweet"
-msgstr ""
-
-#: inc/post-tags.php:181 partials/footer-sticky.php:7
-msgid "Share"
 msgstr ""
 
 #: inc/post-tags.php:189
 msgid "Print this article"
 msgstr ""
 
-#: inc/post-tags.php:296
+#: inc/post-tags.php:300
 msgid "Next Page"
 msgstr ""
 
-#: inc/post-tags.php:297
+#: inc/post-tags.php:301
 msgid "Previous Page"
 msgstr ""
 
-#: inc/post-tags.php:497
+#: inc/post-tags.php:501
 #, php-format
 msgid ""
 "<div class=\"previous\"><a href=\"%1$s\"><img class=\"thumb\" src=\"%4$s\" /"
 "><h5>Previous %2$s</h5><span class=\"meta-nav\">%3$s</span></a></div>"
 msgstr ""
 
-#: inc/post-tags.php:504
+#: inc/post-tags.php:508
 #, php-format
 msgid ""
 "<div class=\"previous\"><a href=\"%1$s\"><h5>Previous %2$s</h5><span class="
 "\"meta-nav\">%3$s</span></a></div>"
 msgstr ""
 
-#: inc/post-tags.php:514
+#: inc/post-tags.php:518
 #, php-format
 msgid ""
 "<div class=\"next\"><a href=\"%1$s\"><img class=\"thumb\" src=\"%4$s\" /"
 "><h5>Next %2$s</h5><span class=\"meta-nav\">%3$s</span></a></div>"
 msgstr ""
 
-#: inc/post-tags.php:521
+#: inc/post-tags.php:525
 #, php-format
 msgid ""
 "<div class=\"next\"><a href=\"%1$s\"><h5>Next %2$s</h5><span class=\"meta-nav"
 "\">%3$s</span></a></div>"
 msgstr ""
 
-#: inc/post-tags.php:557
+#: inc/post-tags.php:561
 msgid "Pingback"
 msgstr ""
 
-#: inc/post-tags.php:589
+#: inc/post-tags.php:593
 msgid "Your comment is awaiting moderation."
 msgstr ""
 
-#: inc/post-tags.php:598
+#: inc/post-tags.php:602
 msgid "Reply"
 msgstr ""
 
@@ -899,7 +878,7 @@ msgid ""
 "content area on the homepage."
 msgstr ""
 
-#: inc/sidebars.php:81 options.php:371
+#: inc/sidebars.php:81 options.php:400
 msgid "Homepage Bottom"
 msgstr ""
 
@@ -965,46 +944,46 @@ msgstr ""
 msgid "New Post Prominence Name"
 msgstr ""
 
-#: inc/taxonomies.php:50 inc/update.php:391
+#: inc/taxonomies.php:50 inc/update.php:390
 msgid "Sidebar Featured Widget"
 msgstr ""
 
-#: inc/taxonomies.php:51 inc/update.php:392
+#: inc/taxonomies.php:51 inc/update.php:391
 msgid ""
 "If you are using the Featured Posts widget in a sidebar, add this label to "
 "posts to determine which to display in the widget."
 msgstr ""
 
-#: inc/taxonomies.php:55 inc/update.php:397
+#: inc/taxonomies.php:55 inc/update.php:396
 msgid "Footer Featured Widget"
 msgstr ""
 
-#: inc/taxonomies.php:56 inc/update.php:398
+#: inc/taxonomies.php:56 inc/update.php:397
 msgid ""
 "If you are using the Featured Posts widget in the footer, add this label to "
 "posts to determine which to display in the widget."
 msgstr ""
 
-#: inc/taxonomies.php:60 inc/update.php:403
+#: inc/taxonomies.php:60 inc/update.php:402
 msgid "Featured in Category"
 msgstr ""
 
-#: inc/taxonomies.php:61 inc/update.php:404
+#: inc/taxonomies.php:61 inc/update.php:403
 msgid ""
 "This will allow you to designate a story to appear more prominently on "
 "category archive pages."
 msgstr ""
 
-#: inc/taxonomies.php:66 inc/update.php:410
+#: inc/taxonomies.php:66 inc/update.php:409
 msgid ""
 "Add this label to posts to display them in the featured area on the homepage."
 msgstr ""
 
-#: inc/taxonomies.php:73 inc/update.php:421
+#: inc/taxonomies.php:73 inc/update.php:420
 msgid "Featured in Series"
 msgstr ""
 
-#: inc/taxonomies.php:74 inc/update.php:423 inc/update.php:424
+#: inc/taxonomies.php:74 inc/update.php:422 inc/update.php:423
 msgid ""
 "Select this option to allow this post to float to the top of any/all series "
 "landing pages sorting by Featured first."
@@ -1056,55 +1035,55 @@ msgstr ""
 msgid "New Series Name"
 msgstr ""
 
-#: inc/taxonomies.php:125 inc/widgets/largo-series-posts.php:90
+#: inc/taxonomies.php:125 inc/widgets/largo-series-posts.php:97
 msgid "Series"
 msgstr ""
 
-#: inc/term-icons.php:30 inc/term-icons.php:32
+#: inc/term-icons.php:35 inc/term-icons.php:37
 msgid "Post Types"
 msgstr ""
 
-#: inc/term-icons.php:33
+#: inc/term-icons.php:38
 msgid "Post Type"
 msgstr ""
 
-#: inc/term-icons.php:34
+#: inc/term-icons.php:39
 msgid "All Post Types"
 msgstr ""
 
-#: inc/term-icons.php:35
+#: inc/term-icons.php:40
 msgid "Edit Post Type"
 msgstr ""
 
-#: inc/term-icons.php:36
+#: inc/term-icons.php:41
 msgid "Update Post Type"
 msgstr ""
 
-#: inc/term-icons.php:37
+#: inc/term-icons.php:42
 msgid "View Post Type"
 msgstr ""
 
-#: inc/term-icons.php:38
+#: inc/term-icons.php:43
 msgid "Add New Post Type"
 msgstr ""
 
-#: inc/term-icons.php:39
+#: inc/term-icons.php:44
 msgid "New Post Type Name"
 msgstr ""
 
-#: inc/term-icons.php:40
+#: inc/term-icons.php:45
 msgid "Search Post Type"
 msgstr ""
 
-#: inc/term-icons.php:96 inc/term-icons.php:119
+#: inc/term-icons.php:105 inc/term-icons.php:128
 msgid "Term Icon"
 msgstr ""
 
-#: inc/term-icons.php:99 inc/term-icons.php:121
+#: inc/term-icons.php:108 inc/term-icons.php:130
 msgid "No Icon"
 msgstr ""
 
-#: inc/term-icons.php:106 inc/term-icons.php:127
+#: inc/term-icons.php:115 inc/term-icons.php:136
 msgid "The icon the theme may use with the term."
 msgstr ""
 
@@ -1120,26 +1099,26 @@ msgstr ""
 msgid "The sidebar to show on this term's archive."
 msgstr ""
 
-#: inc/update.php:118 inc/widgets/largo-post-series-links.php:22
+#: inc/update.php:117 inc/widgets/largo-post-series-links.php:22
 #: inc/widgets/largo-post-series-links.php:55
 msgid "Related Series"
 msgstr ""
 
-#: inc/update.php:124 inc/widgets/largo-tag-list.php:22
+#: inc/update.php:123 inc/widgets/largo-tag-list.php:22
 #: inc/widgets/largo-tag-list.php:48
 msgid "Filed Under:"
 msgstr ""
 
-#: inc/update.php:136 inc/widgets/largo-explore-related.php:22
-#: inc/widgets/largo-explore-related.php:94
+#: inc/update.php:135 inc/widgets/largo-explore-related.php:24
+#: inc/widgets/largo-explore-related.php:99
 msgid "More About"
 msgstr ""
 
-#: inc/update.php:166
+#: inc/update.php:165
 msgid "Invalid region specified."
 msgstr ""
 
-#: inc/update.php:257
+#: inc/update.php:256
 #, php-format
 msgid ""
 "You are using the <strong>Largo Footer Featured Posts</strong> widget, which "
@@ -1148,7 +1127,7 @@ msgid ""
 "<strong>Largo Featured Posts</strong>."
 msgstr ""
 
-#: inc/update.php:264
+#: inc/update.php:263
 #, php-format
 msgid ""
 "You are using the <strong>Largo Sidebar Featured Posts</strong> widget, "
@@ -1157,106 +1136,113 @@ msgid ""
 "replacement, <strong>Largo Featured Posts</strong>."
 msgstr ""
 
-#: inc/update.php:393
+#: inc/update.php:392
 msgid ""
 "If you are using the Sidebar Featured Posts widget, add this label to posts "
 "to determine which to display in the widget."
 msgstr ""
 
-#: inc/update.php:399
+#: inc/update.php:398
 msgid ""
 "If you are using the Footer Featured Posts widget, add this label to posts "
 "to determine which to display in the widget."
 msgstr ""
 
-#: inc/update.php:405
+#: inc/update.php:404
 msgid ""
 "Not yet implemented, in the future this will allow you to designate a story "
 "(or stories) to appear more prominently on category archive pages."
 msgstr ""
 
-#: inc/update.php:417
+#: inc/update.php:416
 msgid ""
 "If you are using the Newspaper or Carousel optional homepage layout, add "
 "this label to label to a post to make it the top story on the homepage."
 msgstr ""
 
-#: inc/update.php:445 options.php:143
+#: inc/update.php:444 options.php:153
 msgid ""
 "Show the <strong>sticky nav</strong>? Default is to show, but in some cases "
 "you may want to hide it."
 msgstr ""
 
-#: inc/update.php:522
+#: inc/update.php:449 options.php:440
+msgid ""
+"Starting with version 0.4, Largo introduced a new single-post template that "
+"more prominently highlights article content, which is the default. For "
+"backward compatibility, the pre-0.3 version is also available."
+msgstr ""
+
+#: inc/update.php:531
 msgid ""
 "This version of Largo includes a variety of updates, enhancements and "
 "changes."
 msgstr ""
 
-#: inc/update.php:523
+#: inc/update.php:532
 msgid "These changes affect"
 msgstr ""
 
-#: inc/update.php:525
+#: inc/update.php:534
 msgid "Theme options"
 msgstr ""
 
-#: inc/update.php:526
+#: inc/update.php:535
 msgid "Configured menus"
 msgstr ""
 
-#: inc/update.php:527
+#: inc/update.php:536
 msgid "Site navigation"
 msgstr ""
 
-#: inc/update.php:528
+#: inc/update.php:537
 msgid "Sidebars and widgets"
 msgstr ""
 
-#: inc/update.php:530
+#: inc/update.php:539
 msgid ""
 "The database update you are about to apply will take steps to migrate "
 "existing site settings."
 msgstr ""
 
-#: inc/update.php:531
+#: inc/update.php:540
 msgid ""
 "In the event that a site setting can not be migrated, the update will do its "
 "best to preserve it instead."
 msgstr ""
 
-#: inc/update.php:532
+#: inc/update.php:541
 msgid ""
 "For example, menus that existed in previous versions of Largo have been "
 "removed. If your site has been using one of these now-deprecated menus, the "
 "update process will merge it with the nearest related menu."
 msgstr ""
 
-#: inc/update.php:533
+#: inc/update.php:542
 msgid ""
 "Please be sure to review your site settings after applying the update to "
 "ensure all is well."
 msgstr ""
 
-#: inc/update.php:536
+#: inc/update.php:545
 msgid "Update the database!"
 msgstr ""
 
-#: inc/update.php:556 inc/users.php:165 inc/users.php:226
+#: inc/update.php:572 inc/users.php:165 inc/users.php:226
 msgid "An error occurred."
 msgstr ""
 
-#: inc/update.php:564
+#: inc/update.php:580
 msgid "Finished. No update was required."
 msgstr ""
 
-#: inc/update.php:573
+#: inc/update.php:589
 msgid ""
 "Thank you -- the update is complete. Don't forget to check your site "
 "settings!"
 msgstr ""
 
-#: inc/update.php:579
+#: inc/update.php:595
 msgid "There was a problem applying the update. Please try again."
 msgstr ""
 
@@ -1306,35 +1292,35 @@ msgstr ""
 msgid "Honorary?"
 msgstr ""
 
-#: inc/widgets.php:146
+#: inc/widgets.php:148
 msgid "Widget Background"
 msgstr ""
 
-#: inc/widgets.php:148 lib/options-framework/options-framework.php:197
+#: inc/widgets.php:150 lib/options-framework/options-framework.php:197
 msgid "Default"
 msgstr ""
 
-#: inc/widgets.php:149
+#: inc/widgets.php:151
 msgid "Reverse"
 msgstr ""
 
-#: inc/widgets.php:150
+#: inc/widgets.php:152
 msgid "No Background"
 msgstr ""
 
-#: inc/widgets.php:154
+#: inc/widgets.php:156
 msgid "Hidden on Desktops?"
 msgstr ""
 
-#: inc/widgets.php:156
+#: inc/widgets.php:158
 msgid "Hidden on Tablets?"
 msgstr ""
 
-#: inc/widgets.php:158
+#: inc/widgets.php:160
 msgid "Hidden on Phones?"
 msgstr ""
 
-#: inc/widgets.php:162
+#: inc/widgets.php:164
 msgid ""
 "Widget Title Link <small class=\"description\">(Example: http://google.com)</"
 "small>"
@@ -1359,9 +1345,9 @@ msgid ""
 "description by visiting the Largo Theme Options page."
 msgstr ""
 
-#: inc/widgets/largo-about.php:45 inc/widgets/largo-explore-related.php:99
-#: inc/widgets/largo-featured.php:75 inc/widgets/largo-follow.php:112
-#: inc/widgets/largo-footer-featured.php:76
+#: inc/widgets/largo-about.php:45 inc/widgets/largo-explore-related.php:104
+#: inc/widgets/largo-featured.php:83 inc/widgets/largo-follow.php:120
+#: inc/widgets/largo-footer-featured.php:82
 #: inc/widgets/largo-image-widget.php:153
 #: inc/widgets/largo-recent-comments.php:115
 #: inc/widgets/largo-related-posts.php:82
@@ -1376,7 +1362,7 @@ msgstr ""
 msgid "Largo Author Bio"
 msgstr ""
 
-#: inc/widgets/largo-author-bio.php:57
+#: inc/widgets/largo-author-bio.php:63
 msgid "Not a valid author context"
 msgstr ""
 
@@ -1411,7 +1397,7 @@ msgstr ""
 msgid "Support "
 msgstr ""
 
-#: inc/widgets/largo-donate.php:42 options.php:119
+#: inc/widgets/largo-donate.php:42 options.php:129
 #: partials/sidebar-fallback.php:19
 msgid "Donate Now"
 msgstr ""
@@ -1423,8 +1409,8 @@ msgid ""
 msgstr ""
 
 #: inc/widgets/largo-donate.php:55 inc/widgets/largo-post-series-links.php:60
-#: inc/widgets/largo-recent-posts.php:166
-#: inc/widgets/largo-sidebar-featured.php:71 inc/widgets/largo-staff.php:94
+#: inc/widgets/largo-recent-posts.php:203
+#: inc/widgets/largo-sidebar-featured.php:79 inc/widgets/largo-staff.php:100
 #: inc/widgets/largo-tag-list.php:52 inc/widgets/largo-taxonomy-list.php:80
 msgid "Title:"
 msgstr ""
@@ -1451,57 +1437,57 @@ msgstr ""
 msgid "Largo Explore Related"
 msgstr ""
 
-#: inc/widgets/largo-explore-related.php:53
+#: inc/widgets/largo-explore-related.php:55
 #, php-format
 msgid "Read %s"
 msgstr ""
 
-#: inc/widgets/largo-explore-related.php:71
+#: inc/widgets/largo-explore-related.php:73
 #, php-format
 msgid "View all %1$s %2$s &rarr;"
 msgstr ""
 
-#: inc/widgets/largo-explore-related.php:103
+#: inc/widgets/largo-explore-related.php:108
 msgid "Max # of terms to include"
 msgstr ""
 
-#: inc/widgets/largo-explore-related.php:110
+#: inc/widgets/largo-explore-related.php:115
 msgid "Previous versions of Largo set this at 6."
 msgstr ""
 
-#: inc/widgets/largo-explore-related.php:114
+#: inc/widgets/largo-explore-related.php:119
 msgid "Max # of posts per term"
 msgstr ""
 
-#: inc/widgets/largo-explore-related.php:121
+#: inc/widgets/largo-explore-related.php:126
 msgid "Previous versions of Largo set this at 3."
 msgstr ""
 
-#: inc/widgets/largo-facebook.php:10
+#: inc/widgets/largo-facebook.php:16
 msgid "Show a Facebook Like Box for your page"
 msgstr ""
 
-#: inc/widgets/largo-facebook.php:12
+#: inc/widgets/largo-facebook.php:18
 msgid "Largo Facebook Widget"
 msgstr ""
 
-#: inc/widgets/largo-facebook.php:57
+#: inc/widgets/largo-facebook.php:65
 msgid "Facebook Page URL:"
 msgstr ""
 
-#: inc/widgets/largo-facebook.php:62
+#: inc/widgets/largo-facebook.php:70
 msgid "Widget Height:"
 msgstr ""
 
-#: inc/widgets/largo-facebook.php:67
+#: inc/widgets/largo-facebook.php:75
 msgid "Show Faces?"
 msgstr ""
 
-#: inc/widgets/largo-facebook.php:69
+#: inc/widgets/largo-facebook.php:77
 msgid "Show Stream?"
 msgstr ""
 
-#: inc/widgets/largo-facebook.php:71
+#: inc/widgets/largo-facebook.php:79
 msgid "Show Header?"
 msgstr ""
 
@@ -1509,61 +1495,61 @@ msgstr ""
 msgid "Largo Featured Posts"
 msgstr ""
 
-#: inc/widgets/largo-featured.php:17 inc/widgets/largo-featured.php:66
+#: inc/widgets/largo-featured.php:21 inc/widgets/largo-featured.php:74
 #: inc/widgets/largo-footer-featured.php:22
-#: inc/widgets/largo-footer-featured.php:69 partials/footer-widget-area.php:24
+#: inc/widgets/largo-footer-featured.php:75 partials/footer-widget-area.php:24
 msgid "In Case You Missed It"
 msgstr ""
 
-#: inc/widgets/largo-featured.php:17 inc/widgets/largo-sidebar-featured.php:18
-#: inc/widgets/largo-sidebar-featured.php:63 partials/sidebar-fallback.php:27
+#: inc/widgets/largo-featured.php:21 inc/widgets/largo-sidebar-featured.php:22
+#: inc/widgets/largo-sidebar-featured.php:71 partials/sidebar-fallback.php:27
 msgid "We Recommend"
 msgstr ""
 
-#: inc/widgets/largo-featured.php:46
+#: inc/widgets/largo-featured.php:50
 msgid ""
 "You don't presently have any posts in the chosen category.</strong> Mark "
 "more posts as featured on the add/edit post screen to populate this region."
 msgstr ""
 
-#: inc/widgets/largo-featured.php:80
+#: inc/widgets/largo-featured.php:88
 msgid "Display posts from"
 msgstr ""
 
-#: inc/widgets/largo-featured.php:94 inc/widgets/largo-recent-posts.php:171
-#: inc/widgets/largo-sidebar-featured.php:76
+#: inc/widgets/largo-featured.php:102 inc/widgets/largo-recent-posts.php:208
+#: inc/widgets/largo-sidebar-featured.php:84
 msgid "Number of posts to show:"
 msgstr ""
 
-#: inc/widgets/largo-featured.php:99
+#: inc/widgets/largo-featured.php:107
 msgid "Excerpt length (# of sentences):"
 msgstr ""
 
-#: inc/widgets/largo-featured.php:104
+#: inc/widgets/largo-featured.php:112
 msgid "Thumbnail location"
 msgstr ""
 
-#: inc/widgets/largo-follow.php:15
+#: inc/widgets/largo-follow.php:21
 msgid "Display links to social media sites set in Largo theme options"
 msgstr ""
 
-#: inc/widgets/largo-follow.php:19
+#: inc/widgets/largo-follow.php:25
 msgid "Largo Follow"
 msgstr ""
 
-#: inc/widgets/largo-follow.php:46
+#: inc/widgets/largo-follow.php:54
 #, php-format
 msgid ""
 "<a class=\"subscribe\" href=\"%1$s\"><i class=\"icon-rss\"></i>Subscribe via "
 "RSS</a>"
 msgstr ""
 
-#: inc/widgets/largo-follow.php:49 partials/author-bio-social-links.php:10
+#: inc/widgets/largo-follow.php:57 partials/author-bio-social-links.php:10
 #, php-format
 msgid "Follow @%1$s"
 msgstr ""
 
-#: inc/widgets/largo-follow.php:107
+#: inc/widgets/largo-follow.php:115
 #, php-format
 msgid "Follow %s"
 msgstr ""
@@ -1579,11 +1565,11 @@ msgid ""
 "region."
 msgstr ""
 
-#: inc/widgets/largo-footer-featured.php:81
+#: inc/widgets/largo-footer-featured.php:87
 msgid "Number of posts to show"
 msgstr ""
 
-#: inc/widgets/largo-footer-featured.php:86
+#: inc/widgets/largo-footer-featured.php:92
 msgid "Excerpt Length (# of Sentences)"
 msgstr ""
 
@@ -1747,141 +1733,153 @@ msgstr ""
 msgid "Number of comments to show"
 msgstr ""
 
-#: inc/widgets/largo-recent-posts.php:10
+#: inc/widgets/largo-recent-posts.php:15
 msgid "Show your most recent posts with thumbnails and excerpts"
 msgstr ""
 
-#: inc/widgets/largo-recent-posts.php:12
+#: inc/widgets/largo-recent-posts.php:19
 msgid "Largo Recent Posts"
 msgstr ""
 
-#: inc/widgets/largo-recent-posts.php:20
-#: inc/widgets/largo-recent-posts.php:141
+#: inc/widgets/largo-recent-posts.php:43
+#: inc/widgets/largo-recent-posts.php:177
 msgid "Recent "
 msgstr ""
 
-#: inc/widgets/largo-recent-posts.php:93
+#: inc/widgets/largo-recent-posts.php:125
 msgid "Read More"
 msgstr ""
 
-#: inc/widgets/largo-recent-posts.php:105
+#: inc/widgets/largo-recent-posts.php:137
 #, php-format
 msgid "<p class=\"error\"><strong>You don't have any recent %s.</strong></p>"
 msgstr ""
 
-#: inc/widgets/largo-recent-posts.php:176
+#: inc/widgets/largo-recent-posts.php:213
 msgid "Avoid Duplicate Posts?"
 msgstr ""
 
-#: inc/widgets/largo-recent-posts.php:180
+#: inc/widgets/largo-recent-posts.php:217
 msgid "Thumbnail Image"
 msgstr ""
 
-#: inc/widgets/largo-recent-posts.php:182
+#: inc/widgets/largo-recent-posts.php:219
 msgid "Small (60x60)"
 msgstr ""
 
-#: inc/widgets/largo-recent-posts.php:183
-msgid "Medium (150x150)"
+#: inc/widgets/largo-recent-posts.php:220
+msgid "Medium (140x140)"
 msgstr ""
 
-#: inc/widgets/largo-recent-posts.php:184
+#: inc/widgets/largo-recent-posts.php:221
 msgid "Large (Full width of the widget)"
 msgstr ""
 
-#: inc/widgets/largo-recent-posts.php:190
+#: inc/widgets/largo-recent-posts.php:228
+msgid "Image Alignment"
+msgstr ""
+
+#: inc/widgets/largo-recent-posts.php:230
+msgid "Left align"
+msgstr ""
+
+#: inc/widgets/largo-recent-posts.php:231
+msgid "Right align"
+msgstr ""
+
+#: inc/widgets/largo-recent-posts.php:236
 msgid "Excerpt Display"
 msgstr ""
 
-#: inc/widgets/largo-recent-posts.php:192
+#: inc/widgets/largo-recent-posts.php:238
 msgid "Use # of Sentences"
 msgstr ""
 
-#: inc/widgets/largo-recent-posts.php:193
+#: inc/widgets/largo-recent-posts.php:239
 msgid "Use Custom Post Excerpt"
 msgstr ""
 
-#: inc/widgets/largo-recent-posts.php:199
-#: inc/widgets/largo-sidebar-featured.php:81
+#: inc/widgets/largo-recent-posts.php:245
+#: inc/widgets/largo-sidebar-featured.php:89
 msgid "Excerpt Length (# of Sentences):"
 msgstr ""
 
-#: inc/widgets/largo-recent-posts.php:204
+#: inc/widgets/largo-recent-posts.php:250
 msgid "Show byline on posts?"
 msgstr ""
 
-#: inc/widgets/largo-recent-posts.php:208
+#: inc/widgets/largo-recent-posts.php:254
 msgid "Show the top term on posts?"
 msgstr ""
 
-#: inc/widgets/largo-recent-posts.php:212
+#: inc/widgets/largo-recent-posts.php:258
 msgid "Show read more link?"
 msgstr ""
 
-#: inc/widgets/largo-recent-posts.php:215
+#: inc/widgets/largo-recent-posts.php:261
 msgid "Limit by Author, Categories or Tags"
 msgstr ""
 
-#: inc/widgets/largo-recent-posts.php:215
+#: inc/widgets/largo-recent-posts.php:261
 msgid ""
 "Select an author or category from the dropdown menus or enter post tags "
 "separated by commas ('cat,dog')"
 msgstr ""
 
-#: inc/widgets/largo-recent-posts.php:217
+#: inc/widgets/largo-recent-posts.php:263
 msgid "Limit to author: "
 msgstr ""
 
-#: inc/widgets/largo-recent-posts.php:218
+#: inc/widgets/largo-recent-posts.php:264
 msgid "None (all authors)"
 msgstr ""
 
-#: inc/widgets/largo-recent-posts.php:222
+#: inc/widgets/largo-recent-posts.php:268
 msgid "Limit to category: "
 msgstr ""
 
-#: inc/widgets/largo-recent-posts.php:223
+#: inc/widgets/largo-recent-posts.php:269
 msgid "None (all categories)"
 msgstr ""
 
-#: inc/widgets/largo-recent-posts.php:226
+#: inc/widgets/largo-recent-posts.php:272
 msgid "Limit to tags:"
 msgstr ""
 
-#: inc/widgets/largo-recent-posts.php:230
+#: inc/widgets/largo-recent-posts.php:276
 msgid "Limit by Custom Taxonomy"
 msgstr ""
 
-#: inc/widgets/largo-recent-posts.php:230
+#: inc/widgets/largo-recent-posts.php:276
 msgid ""
 "Enter the slug for the custom taxonomy you want to query and the term within "
 "that taxonomy to display"
 msgstr ""
 
-#: inc/widgets/largo-recent-posts.php:232
+#: inc/widgets/largo-recent-posts.php:278
 #: inc/widgets/largo-taxonomy-list.php:84
 msgid "Taxonomy:"
 msgstr ""
 
-#: inc/widgets/largo-recent-posts.php:236
+#: inc/widgets/largo-recent-posts.php:282
 msgid "Term:"
 msgstr ""
 
-#: inc/widgets/largo-recent-posts.php:240
+#: inc/widgets/largo-recent-posts.php:286
 msgid "More Link"
 msgstr ""
 
-#: inc/widgets/largo-recent-posts.php:240
+#: inc/widgets/largo-recent-posts.php:286
 msgid ""
 "If you would like to add a more link at the bottom of the widget, add the "
 "link text and url here."
 msgstr ""
 
-#: inc/widgets/largo-recent-posts.php:242
+#: inc/widgets/largo-recent-posts.php:288
 msgid "Link text:"
 msgstr ""
 
-#: inc/widgets/largo-recent-posts.php:247
+#: inc/widgets/largo-recent-posts.php:293
 msgid "URL:"
 msgstr ""
 
@@ -1893,12 +1891,12 @@ msgstr ""
 msgid "Largo Related Posts"
 msgstr ""
 
-#: inc/widgets/largo-related-posts.php:22
+#: inc/widgets/largo-related-posts.php:24
 msgid "Read Next"
 msgstr ""
 
 #: inc/widgets/largo-related-posts.php:86
-#: inc/widgets/largo-series-posts.php:101
+#: inc/widgets/largo-series-posts.php:108
 msgid "Number of Posts to Display"
 msgstr ""
 
@@ -1915,12 +1913,12 @@ msgid "Thumbnail position"
 msgstr ""
 
 #: inc/widgets/largo-related-posts.php:104
-#: inc/widgets/largo-series-posts.php:118
+#: inc/widgets/largo-series-posts.php:125
 msgid "Before Headline"
 msgstr ""
 
 #: inc/widgets/largo-related-posts.php:104
-#: inc/widgets/largo-series-posts.php:118
+#: inc/widgets/largo-series-posts.php:125
 msgid "After Headline"
 msgstr ""
 
@@ -1932,15 +1930,15 @@ msgstr ""
 msgid "Largo Series Posts"
 msgstr ""
 
-#: inc/widgets/largo-series-posts.php:111
+#: inc/widgets/largo-series-posts.php:118
 msgid "Show date on first post"
 msgstr ""
 
-#: inc/widgets/largo-series-posts.php:115
+#: inc/widgets/largo-series-posts.php:122
 msgid "Thumbnail position on first post"
 msgstr ""
 
-#: inc/widgets/largo-series-posts.php:125
+#: inc/widgets/largo-series-posts.php:132
 msgid "Divider heading"
 msgstr ""
 
@@ -1952,7 +1950,7 @@ msgstr ""
 msgid "Largo Sidebar Featured Posts"
 msgstr ""
 
-#: inc/widgets/largo-staff.php:99
+#: inc/widgets/largo-staff.php:105
 msgid "Include:"
 msgstr ""
 
@@ -1989,60 +1987,60 @@ msgstr ""
 msgid "Display as dropdown"
 msgstr ""
 
-#: inc/widgets/largo-twitter.php:10
+#: inc/widgets/largo-twitter.php:16
 msgid "Show a Twitter profile, list or search widget"
 msgstr ""
 
-#: inc/widgets/largo-twitter.php:12
+#: inc/widgets/largo-twitter.php:18
 msgid "Largo Twitter Widget"
 msgstr ""
 
-#: inc/widgets/largo-twitter.php:64
+#: inc/widgets/largo-twitter.php:73
 msgid "your search"
 msgstr ""
 
-#: inc/widgets/largo-twitter.php:72
+#: inc/widgets/largo-twitter.php:81
 msgid "Widget Type"
 msgstr ""
 
-#: inc/widgets/largo-twitter.php:74
+#: inc/widgets/largo-twitter.php:83
 msgid "Timeline"
 msgstr ""
 
-#: inc/widgets/largo-twitter.php:75
+#: inc/widgets/largo-twitter.php:84
 msgid "Favorites"
 msgstr ""
 
-#: inc/widgets/largo-twitter.php:77 partials/nav-global.php:31
+#: inc/widgets/largo-twitter.php:86 partials/nav-global.php:31
 #: partials/nav-sticky.php:30 partials/nav-sticky.php:35 searchform.php:29
 msgid "Search"
 msgstr ""
 
-#: inc/widgets/largo-twitter.php:82
+#: inc/widgets/largo-twitter.php:91
 msgid "Widget Theme"
 msgstr ""
 
-#: inc/widgets/largo-twitter.php:84
+#: inc/widgets/largo-twitter.php:93
 msgid "Light"
 msgstr ""
 
-#: inc/widgets/largo-twitter.php:85
+#: inc/widgets/largo-twitter.php:94
 msgid "Dark"
 msgstr ""
 
-#: inc/widgets/largo-twitter.php:90
+#: inc/widgets/largo-twitter.php:99
 msgid "Twitter Widget ID (from https://twitter.com/settings/widgets):"
 msgstr ""
 
-#: inc/widgets/largo-twitter.php:95
+#: inc/widgets/largo-twitter.php:104
 msgid "Twitter Username (for timeline, favorites and list widgets):"
 msgstr ""
 
-#: inc/widgets/largo-twitter.php:100
+#: inc/widgets/largo-twitter.php:109
 msgid "Twitter List Slug (for list widget):"
 msgstr ""
 
-#: inc/widgets/largo-twitter.php:105
+#: inc/widgets/largo-twitter.php:114
 msgid "Twitter Search Query (for search widget):"
 msgstr ""
 
@@ -2148,6 +2146,7 @@ msgstr ""
 msgid "Landing Page scheduled for: <strong>%1$s</strong>."
 msgstr ""
 
+#. //php.net/date
 #: inc/wp-taxonomy-landing/functions/cftl-admin.php:159
 msgid "M j, Y @ G:i"
 msgstr ""
@@ -2523,7 +2522,7 @@ msgstr ""
 msgid "Greetings"
 msgstr ""
 
-#: lib/navis-slideshows/navis-slideshows.php:226
+#: lib/navis-slideshows/navis-slideshows.php:172
 msgid "permalink"
 msgstr ""
 
@@ -2684,325 +2683,355 @@ msgstr ""
 msgid "List Below"
 msgstr ""
 
-#: options.php:62
+#: options.php:49 options.php:62
+msgid "Email"
+msgstr ""
+
+#: options.php:72
 msgid "Like"
 msgstr ""
 
-#: options.php:63
+#: options.php:73
 msgid "Recommend"
 msgstr ""
 
-#: options.php:86
+#: options.php:96
 msgid "Basic Settings"
 msgstr ""
 
-#: options.php:91
+#: options.php:101
 msgid ""
 "Enter a <strong>short blurb about your site</strong>. This is used in a "
 "sidebar widget"
 msgstr ""
 
-#: options.php:97
+#: options.php:107
 msgid "Feed URL"
 msgstr ""
 
-#: options.php:98
+#: options.php:108
 msgid ""
 "Enter the <strong>URL for your primary RSS feed.</strong> You can override "
 "the default if you use Feedburner or some other service to generate or track "
 "your RSS feed"
 msgstr ""
 
-#: options.php:104
+#: options.php:114
 msgid "Donate Button"
 msgstr ""
 
-#: options.php:105
+#: options.php:115
 msgid ""
 "<strong>Show</strong> a button in the top header to link to your donation "
 "page or form."
 msgstr ""
 
-#: options.php:110
+#: options.php:120
 msgid ""
 "Enter the <strong>link to your donation page</strong> or form (include "
 "http://)."
 msgstr ""
 
-#: options.php:117
+#: options.php:127
 msgid ""
 "Enter the <strong>text for the donate button</strong> (e.g. - Support Us)."
 msgstr ""
 
-#: options.php:124
+#: options.php:134
 msgid "Menu Options"
 msgstr ""
 
-#: options.php:125
+#: options.php:135
 msgid ""
 "<strong>Show</strong> the \"Don't Miss\" menu under the main site "
 "navigation. Add links to this menu under <strong>Appearance > Menus</strong>."
 msgstr ""
 
-#: options.php:130
+#: options.php:140
 msgid ""
 "Enter the <strong>label that appears in front of the menu links in the "
 "\"Don't Miss\" menu</strong>. You can delete this default and no label will "
 "appear."
 msgstr ""
 
-#: options.php:137
+#: options.php:147
 msgid ""
 "Enter the <strong>label that appears before the menu links in the Footer Nav "
 "Menu</strong>. You can delete this default and no label will appear."
 msgstr ""
 
-#: options.php:149
+#: options.php:159
 msgid ""
 "Show the <strong>site name in the sticky nav</strong>? Default is to show, "
 "but in some cases you might want to hide it to save space or if your logo is "
 "clear enough to not need it."
 msgstr ""
 
-#: options.php:156
+#: options.php:166
 msgid "Copyright Message"
 msgstr ""
 
-#: options.php:157
+#: options.php:167
 #, php-format
 msgid ""
 "Enter the <strong>copyright and credit information</strong> to display in "
 "the footer. You can use <code>%d</code> to output the current year."
 msgstr ""
 
-#: options.php:159
+#: options.php:169
 #, php-format
 msgid "&copy; Copyright %d, "
 msgstr ""
 
-#: options.php:163
+#: options.php:173
 msgid "Google Analytics"
 msgstr ""
 
-#: options.php:164
+#: options.php:174
 msgid ""
 "Enter your <strong>Google Analytics ID (UA-XXXXXXXX-X)</strong> and the code "
 "will be included in the footer."
 msgstr ""
 
-#: options.php:170
+#: options.php:180
 msgid "Word to use for \"Posts\""
 msgstr ""
 
-#: options.php:171
+#: options.php:181
 msgid ""
 "WordPress calls single article pages \"posts\" but you might prefer to use "
 "another name. <strong>Enter the singular and plural forms</strong> of the "
 "word you want to use here."
 msgstr ""
 
-#: options.php:175
+#: options.php:185
 msgid "<strong>Singular Form</strong> (e.g. - post, story, article)"
 msgstr ""
 
-#: options.php:181
+#: options.php:191
 msgid "<strong>Plural form</strong> (e.g. - posts, stories, articles)"
 msgstr ""
 
-#: options.php:187
+#: options.php:197
 msgid "Social Media Links"
 msgstr ""
 
-#: options.php:188
+#: options.php:198
 msgid ""
 "Enter the links for your organization's primary social media accounts. To "
 "change social media settings for a user, view their <strong>edit profile</"
 "strong> screen."
 msgstr ""
 
-#: options.php:192
+#: options.php:202
 msgid ""
 "<strong>Link to Facebook Page</strong> (https://www.facebook.com/username)"
 msgstr ""
 
-#: options.php:198
+#: options.php:208
 msgid "<strong>Link to Twitter Profile</strong> (https://twitter.com/username)"
 msgstr ""
 
-#: options.php:204
+#: options.php:214
 msgid "<strong>Link to Google+ Page</strong> (https://plus.google.com/userID/)"
 msgstr ""
 
-#: options.php:210
+#: options.php:220
 msgid ""
 "<strong>Link to YouTube Channel</strong> (http://www.youtube.com/user/"
 "username)"
 msgstr ""
 
-#: options.php:216
+#: options.php:226
 msgid ""
 "<strong>Link to Flickr Photostream</strong> (http://www.flickr.com/photos/"
 "username/)"
 msgstr ""
 
-#: options.php:222
+#: options.php:232
 msgid "<strong>Link to Tumblr</strong> (http://yoursite.tumblr.com)"
 msgstr ""
 
-#: options.php:228
+#: options.php:238
 msgid ""
 "<strong>Link to LinkedIn Group or Profile</strong> (http://www.linkedin.com/"
 "in/username/)"
 msgstr ""
 
-#: options.php:234
+#: options.php:244
 msgid "<strong>Link to Github Page</strong> (http://github.com/username)"
 msgstr ""
 
-#: options.php:240
+#: options.php:250
 msgid ""
 "By default, a row of social media icons is shown in the site footer. "
 "<strong>Check this box is you want to show them in the header as well</"
 "strong>. Note that they will only display on desktops and larger tablets."
 msgstr ""
 
-#: options.php:245
+#: options.php:255
 msgid "Single Post Options"
 msgstr ""
 
-#: options.php:249
+#: options.php:259
 msgid ""
-"<strong>Would you like to display share icons on single posts?</strong> By "
-"default social icons appear at the top of single posts but you can choose to "
-"not show them at all."
+"<strong>Would you like to display share icons at the top of single posts?</"
+"strong> By default social icons appear at the top of single posts but you "
+"can choose to not show them at all."
 msgstr ""
 
-#: options.php:255
-msgid "Select the <strong>share icons</strong> to display on single posts."
+#: options.php:265
+msgid ""
+"Select the <strong>share icons</strong> to display at the top of single "
+"posts."
 msgstr ""
 
-#: options.php:262
-msgid "<strong>Use \"like\" or \"recommend\"</strong> for Facebook buttons?"
-msgstr ""
-
-#: options.php:270
-msgid "Location of <strong>\"Clean Read\"</strong> link"
-msgstr ""
-
-#: options.php:276
-msgid "Nowhere (disabled)"
-msgstr ""
-
-#: options.php:277
-msgid "In Byline"
+#: options.php:272
+msgid ""
+"<strong>Would you like to display share icons in the footer of single posts?"
+"</strong> By default social icons appear in the sticky footer of single "
+"posts but you can choose to not show them at all."
 msgstr ""
 
 #: options.php:278
+msgid ""
+"Select the <strong>share icons</strong> to display in the single post sticky "
+"footer."
+msgstr ""
+
+#: options.php:285
+msgid "<strong>Use \"like\" or \"recommend\"</strong> for Facebook buttons?"
+msgstr ""
+
+#: options.php:293
+msgid "Location of <strong>\"Clean Read\"</strong> link"
+msgstr ""
+
+#: options.php:299
+msgid "Nowhere (disabled)"
+msgstr ""
+
+#: options.php:300
+msgid "In Byline"
+msgstr ""
+
+#: options.php:301
 msgid "Below Tags"
 msgstr ""
 
-#: options.php:282
+#: options.php:305
 msgid "<strong>Show share count</strong> with Twitter buttons."
 msgstr ""
 
-#: options.php:291
+#: options.php:314
 msgid "Theme Images"
 msgstr ""
 
-#: options.php:295
+#: options.php:318
 msgid "Upload a Square Thumbnail Image (200x200px minimum)"
 msgstr ""
 
-#: options.php:296
+#: options.php:319
 msgid ""
 "This is a default image used for Facebook posts when you do not set a "
 "featured image for your posts. We also use it as a bookmark icon for Apple "
 "devices."
 msgstr ""
 
-#: options.php:301
+#: options.php:324
 msgid "Upload a Favicon"
 msgstr ""
 
-#: options.php:302
+#: options.php:325
 msgid ""
 "This is the small icon that appears in browser tabs and in some feed readers "
 "and other applications. Favicons must be an .ico file and are typically "
 "16x16px square."
 msgstr ""
 
-#: options.php:307
+#: options.php:330
 msgid "Header Image"
 msgstr ""
 
-#: options.php:311
+#: options.php:334
 msgid ""
 "<strong>Use only text</strong> in the place of a banner image (uses site "
 "title and description)."
 msgstr ""
 
-#: options.php:317
+#: options.php:340
 msgid "Small Banner Image (768px wide)"
 msgstr ""
 
-#: options.php:318
+#: options.php:341
 msgid ""
 "Used for viewports below 768px wide (mostly phones and some tablets). "
 "Recommended height: 240px."
 msgstr ""
 
-#: options.php:323
+#: options.php:346
 msgid "Medium Banner Image (980px wide)"
 msgstr ""
 
-#: options.php:324
+#: options.php:347
 msgid ""
 "Used for viewports between 768px and 980 px (mostly tablets). Recommended "
 "height: 180px."
 msgstr ""
 
-#: options.php:329
+#: options.php:352
 msgid "Large Banner Image (1170px wide)"
 msgstr ""
 
-#: options.php:330
+#: options.php:353
 msgid ""
 "Used for viewports above 980 px (landscape tablets and desktops). "
 "Recommended height: 150px."
 msgstr ""
 
-#: options.php:351
+#: options.php:358
+msgid "Sticky Header Logo"
+msgstr ""
+
+#: options.php:359
+msgid ""
+"Used in the sticky navigation. This image should be 100px tall and at least "
+"100px wide. This logo will be hidden on mobile sites if the <b>Show Site "
+"Name in Sticky Nav</b> option is checked under <b>Basic Settings</b>"
+msgstr ""
+
+#: options.php:380
 msgid "Home Template"
 msgstr ""
 
-#: options.php:352
+#: options.php:381
 msgid ""
 "<strong>Select the layout to use for the top of the homepage.</strong> These "
 "are Home Templates, defined much like post/page templates."
 msgstr ""
 
-#: options.php:361
+#: options.php:390
 msgid "Sticky Posts"
 msgstr ""
 
-#: options.php:365
+#: options.php:394
 msgid ""
 "Show sticky posts box on homepage? If checked, you will need to set at least "
 "one post as sticky for this box to appear."
 msgstr ""
 
-#: options.php:372
+#: options.php:401
 msgid ""
 "<strong>Select the layout to use for the bottom of the homepage.</strong> "
 "Largo supports three options: a single column list of recent posts with "
 "photos and excerpts, a two column widget area, or nothing whatsoever"
 msgstr ""
 
-#: options.php:383
+#: options.php:412
 msgid "Other Homepage Display Options"
 msgstr ""
 
-#: options.php:387
+#: options.php:416
 msgid ""
 "<strong>How would you like to display categories and tags for posts on the "
 "homepage?</strong> Largo can display a single category or tag above the "
@@ -3010,34 +3039,27 @@ msgid ""
 "at all."
 msgstr ""
 
-#: options.php:395
+#: options.php:424
 msgid ""
 "<strong>Number of posts</strong> to display in the main loop on the homepage"
 msgstr ""
 
-#: options.php:401
+#: options.php:430
 msgid ""
 "<strong>Categories to include or exclude</strong> in the main loop on the "
 "homepage (comma-separated list of values, see: http://bit.ly/XmDGgd for "
 "correct format)."
 msgstr ""
 
-#: options.php:407
+#: options.php:436
 msgid "Single Article Template"
 msgstr ""
 
-#: options.php:411
-msgid ""
-"Starting with version 0.4, Largo introduced a new single-post template that "
-"more prominently highlights article content, which is the default. For "
-"backward compatibility, the pre-0.3 version is also available."
-msgstr ""
-
-#: options.php:422
+#: options.php:451
 msgid "Sidebar Options"
 msgstr ""
 
-#: options.php:426
+#: options.php:455
 msgid ""
 "By default Largo has two sidebars. One is used for single pages and posts "
 "and the other is used for everything else (including the homepage). Check "
@@ -3045,25 +3067,25 @@ msgid ""
 "the main sidebar on archive pages (category, tag, author and series pages)."
 msgstr ""
 
-#: options.php:432
+#: options.php:461
 msgid ""
 "Include an additional widget region (\"sidebar\") just above the site footer "
 "region"
 msgstr ""
 
-#: options.php:438
+#: options.php:467
 msgid ""
 "Check this box if you want to fade the sidebar out on single story pages as "
 "a reader scrolls."
 msgstr ""
 
-#: options.php:444
+#: options.php:473
 msgid ""
 "Enter names of <strong>additional sidebar regions</strong> (one per line) "
 "you'd like post authors to be able to choose to display on their posts."
 msgstr ""
 
-#: options.php:451
+#: options.php:480
 msgid ""
 "<strong>Select the layout to use for the footer.</strong> The default is a 3 "
 "column footer with a wide center column. Alternatively you can choose to "
@@ -3071,61 +3093,61 @@ msgid ""
 "configured under the Appearance > Widgets menu."
 msgstr ""
 
-#: options.php:466
+#: options.php:495
 msgid "Advanced"
 msgstr ""
 
-#: options.php:470
+#: options.php:499
 msgid "Enable Custom LESS to CSS For Theme Customization."
 msgstr ""
 
-#: options.php:476
+#: options.php:505
 msgid "Enable \"Series\" taxonomy."
 msgstr ""
 
-#: options.php:482
+#: options.php:511
 msgid ""
 "Enable Custom Landing Pages for Series/Project Pages. Requires \"Series\" "
 "taxonomy to be enabled."
 msgstr ""
 
-#: options.php:489
+#: options.php:518
 msgid "Enable Optional Leaderboard Ad Zone."
 msgstr ""
 
-#: options.php:495
+#: options.php:524
 msgid "Enable \"Post Types\" taxonomy."
 msgstr ""
 
-#: options.php:501
+#: options.php:530
 msgid "Default region in lefthand column of Landing Pages"
 msgstr ""
 
-#: options.php:508
+#: options.php:537
 msgid "Default region in righthand column of Landing Pages"
 msgstr ""
 
-#: options.php:533
+#: options.php:562
 msgid "Enable Disclaimer Widget."
 msgstr ""
 
-#: options.php:539
+#: options.php:568
 msgid "Enter a default disclaimer"
 msgstr ""
 
-#: options.php:548
+#: options.php:577
 msgid "Search options"
 msgstr ""
 
-#: options.php:549
+#: options.php:578
 msgid "Replace WordPress search with Google Custom Search"
 msgstr ""
 
-#: options.php:555
+#: options.php:584
 msgid "Search engine ID (something like 012174647732932797336:f2lixuynrs0) "
 msgstr ""
 
-#: options.php:561
+#: options.php:590
 msgid ""
 "Google Custom Search typically returns better results than the search engine "
 "built into WordPress. You can get your ID and configure it at <a href="
@@ -3133,51 +3155,72 @@ msgid ""
 "new</a>."
 msgstr ""
 
-#: options.php:567
+#: options.php:596
 msgid "Site verification"
 msgstr ""
 
-#: options.php:568
+#: options.php:597
 msgid ""
 "<strong>Twitter Account ID.</strong> This is used for verifying your site "
 "for Twitter Analytics. This is NOT your username, it will be a 9 digit "
 "number."
 msgstr ""
 
-#: options.php:574
+#: options.php:603
 msgid ""
 "<strong>Google site verification meta tag.</strong> Used to verify a site in "
 "Google Webmaster Tools. This will be a long string of numbers and letters."
 msgstr ""
 
-#: options.php:580
+#: options.php:609
 msgid ""
 "<strong>Facebook admins meta tag.</strong> This is a comma-separated list of "
 "numerical FB user IDs you want to allow to access Facebook insights for your "
 "site."
 msgstr ""
 
-#: options.php:586
+#: options.php:615
 msgid ""
 "<strong>Facebook app ID meta tag.</strong> This is a numerical app ID that "
 "will allow Facebook to capture insights for any social plugins active on "
 "your site and display them in your Facebook app/page insights."
 msgstr ""
 
-#: options.php:592
+#: options.php:621
 msgid ""
 "<strong>Bitly site verification.</strong> This is a string of numbers and "
 "letters used to verify your site with bitly analytics."
 msgstr ""
 
-#: options.php:598
+#: options.php:627
 msgid "SEO Options"
 msgstr ""
 
-#: options.php:602
+#: options.php:631
 msgid ""
 "Use noindex for all archive pages (default is to use noindex for just date "
 "archives)."
+msgstr ""
+
+#: options.php:638
+msgid "INN Membership Options"
+msgstr ""
+
+#: options.php:642
+msgid ""
+"<b>When did your organization join INN?</b> Leave this field blank if you do "
+"not want to display a membership year on your site."
+msgstr ""
+
+#: partials/archive-category-primary-feature.php:14
+#: partials/archive-category-secondary-feature.php:10
+#: partials/content-series.php:19 partials/content.php:24
+#: partials/content.php:47
+msgid "Permalink to"
+msgstr ""
+
+#: partials/archive-category-related.php:6
+msgid "Related Topics:"
 msgstr ""
 
 #: partials/author-bio-description.php:7
@@ -3218,15 +3261,25 @@ msgstr ""
 msgid "View as 'Clean Read'"
 msgstr ""
 
-#: partials/content.php:50
+#: partials/content.php:52
 msgid "Continue&nbsp;Reading"
 msgstr ""
 
-#: partials/content.php:53
+#: partials/content.php:55
 msgid "More about:"
 msgstr ""
 
-#: partials/footer-boilerplate.php:17
+#: partials/footer-boilerplate.php:12
+#, php-format
+msgid "%s is a member of the Institute for Nonprofit News"
+msgstr ""
+
+#: partials/footer-boilerplate.php:15 partials/footer-boilerplate.php:37
+#, php-format
+msgid "Proud member since %s"
+msgstr ""
+
+#: partials/footer-boilerplate.php:27
 #, php-format
 msgid ""
 "This site built with <a href=\"%s\">Project Largo</a> from <a href=\"%s"
@@ -3234,15 +3287,19 @@ msgid ""
 "a>."
 msgstr ""
 
-#: partials/footer-boilerplate.php:25
+#: partials/footer-boilerplate.php:44
 msgid "Back to top"
 msgstr ""
 
-#: partials/footer-sticky.php:21
+#: partials/footer-sticky.php:10
+msgid "Share"
+msgstr ""
+
+#: partials/footer-sticky.php:31
 msgid "Comment"
 msgstr ""
 
-#: partials/footer-sticky.php:51
+#: partials/footer-sticky.php:60
 msgid "Follow"
 msgstr ""
 
@@ -3270,7 +3327,7 @@ msgstr ""
 msgid "More"
 msgstr ""
 
-#: partials/nav-main.php:38 partials/nav-sticky.php:94
+#: partials/nav-main.php:38 partials/nav-sticky.php:108
 msgid "About"
 msgstr ""
 
