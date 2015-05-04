@@ -32,26 +32,31 @@ function largo_need_updates() {
 }
 
 /**
- * Performs various database updates upon Largo version change. Fairly primitive as of 0.3
+ * Performs various database updates upon Largo version change.
  *
  * @since 0.3
  */
 function largo_perform_update() {
 	if (largo_need_updates()) {
-		largo_update_widgets();
-		largo_home_transition();
-		largo_force_settings_update();
-		largo_transition_nav_menus();
-		largo_update_custom_less_variables();
-		largo_update_prominence_term_descriptions();
-		largo_remove_topstory_prominence_term();
-		largo_enable_if_series();
-		largo_enable_series_if_landing_page();
-		of_set_option('largo_version', largo_version());
-	}
+		// Run when updating from pre-0.4
+		if (version_compare(of_get_option('largo_version'), '0.4') < 0) {
+			largo_home_transition();
+			largo_update_widgets();
+			largo_transition_nav_menus();
+			largo_update_prominence_term_descriptions();
+			largo_force_settings_update();
+			largo_enable_if_series();
+			largo_enable_series_if_landing_page();
+		}
 
-	if ( is_admin() ) {
+		// Repeatable, should be run when updating to 0.4+
+		largo_remove_topstory_prominence_term();
+
+		// Always run
+		largo_update_custom_less_variables();
 		largo_check_deprecated_widgets();
+
+		of_set_option('largo_version', largo_version());
 	}
 
 	return true;
@@ -83,6 +88,7 @@ function largo_home_transition() {
 			$home_template = 'HomepageBlog';
 		if ($old_regime == 'blog')
 			$home_template = 'HomepageBlog';
+
 		of_set_option('home_template', $home_template);
 	} else if (!$new_regime) {
 		of_set_option('home_template', 'HomepageBlog');
@@ -529,17 +535,21 @@ function largo_update_page_view() { ?>
 		<h2>Largo Database Update</h2>
 		<div class="update-message">
 			<p><?php _e('This version of Largo includes a variety of updates, enhancements and changes.'); ?></p>
-			<p><?php _e('These changes affect'); ?>:
-				<ul>
-					<li><?php _e('Theme options'); ?></li>
-					<li><?php _e('Configured menus'); ?></li>
-					<li><?php _e('Site navigation'); ?></li>
-					<li><?php _e('Sidebars and widgets'); ?></li>
-				</ul>
-			<p><?php _e('The database update you are about to apply will take steps to migrate existing site settings.'); ?></p>
-			<p><?php _e('In the event that a site setting can not be migrated, the update will do its best to preserve it instead.'); ?></p>
-			<p><?php _e('For example, menus that existed in previous versions of Largo have been removed. If your site has been using one of these now-deprecated menus, the update process will merge it with the nearest related menu.'); ?></p>
-			<p><?php _e('Please be sure to review your site settings after applying the update to ensure all is well.'); ?></p>
+			<?php if (version_compare(of_get_option('largo_version'), '0.4') < 0) { ?>
+				<p><?php _e('These changes affect'); ?>:
+					<ul>
+						<li><?php _e('Theme options'); ?></li>
+						<li><?php _e('Configured menus'); ?></li>
+						<li><?php _e('Site navigation'); ?></li>
+						<li><?php _e('Sidebars and widgets'); ?></li>
+					</ul>
+				<p><?php _e('The database update you are about to apply will take steps to migrate existing site settings.'); ?></p>
+				<p><?php _e('In the event that a site setting can not be migrated, the update will do its best to preserve it instead.'); ?></p>
+				<p><?php _e('For example, menus that existed in previous versions of Largo have been removed. If your site has been using one of these now-deprecated menus, the update process will merge it with the nearest related menu.'); ?></p>
+				<p><?php _e('Please be sure to review your site settings after applying the update to ensure all is well.'); ?></p>
+			<?php } else { ?>
+				<p><?php _e('Click the button below to apply a required database update.'); ?></p>
+			<?php } ?>
 
 			<p class="submit-container">
 				<input type="submit" class="button-primary" id="update" name="update" value="<?php _e('Update the database!'); ?>">
