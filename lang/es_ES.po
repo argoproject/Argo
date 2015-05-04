@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Project Largo - Base Theme v0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-04 10:09-0500\n"
+"POT-Creation-Date: 2015-05-04 12:21-0500\n"
 "PO-Revision-Date: 2014-03-03 17:58:21+0000\n"
 "Last-Translator: Eric Flores <eric@dashway.com>\n"
 "Language-Team: Institute for Nonprofit News <largo@inn.org>\n"
@@ -119,7 +119,7 @@ msgstr ""
 # @ largo
 #: homepages/homepage.php:97 homepages/homepage.php:152
 #: homepages/layouts/TopStories.php:27 inc/taxonomies.php:65
-#: inc/update.php:408
+#: inc/update.php:414
 msgid "Homepage Featured"
 msgstr ""
 
@@ -177,7 +177,7 @@ msgstr ""
 #: homepages/layouts/HomepageSingleWithFeatured.php:17
 #: homepages/layouts/HomepageSingleWithSeriesStories.php:35
 #: homepages/layouts/LegacyThreeColumn.php:18
-#: homepages/layouts/TopStories.php:22 inc/update.php:414 inc/update.php:636
+#: homepages/layouts/TopStories.php:22 inc/update.php:420 inc/update.php:651
 #, fuzzy
 msgid "Homepage Top Story"
 msgstr "Historia principal"
@@ -185,8 +185,8 @@ msgstr "Historia principal"
 #: homepages/layouts/HomepageSingle.php:23
 #: homepages/layouts/HomepageSingleWithFeatured.php:18
 #: homepages/layouts/HomepageSingleWithSeriesStories.php:36
-#: homepages/layouts/LegacyThreeColumn.php:19 inc/update.php:415
-#: inc/update.php:637
+#: homepages/layouts/LegacyThreeColumn.php:19 inc/update.php:421
+#: inc/update.php:652
 msgid ""
 "If you are using a \"Big story\" homepage layout, add this label to a post "
 "to make it the top story on the homepage"
@@ -254,7 +254,7 @@ msgid ""
 msgstr ""
 
 # @ largo
-#: homepages/layouts/TopStories.php:28 inc/update.php:410
+#: homepages/layouts/TopStories.php:28 inc/update.php:416
 msgid ""
 "If you are using the Newspaper or Carousel optional homepage layout, add "
 "this label to posts to display them in the featured area on the homepage."
@@ -685,7 +685,7 @@ msgstr ""
 msgid "All plugins installed and activated successfully. %s"
 msgstr ""
 
-#: inc/post-metaboxes.php:14 inc/update.php:129
+#: inc/post-metaboxes.php:14 inc/update.php:135
 msgid "Author"
 msgstr ""
 
@@ -1094,50 +1094,50 @@ msgid "New Post Prominence Name"
 msgstr ""
 
 # @ largo
-#: inc/taxonomies.php:50 inc/update.php:390
+#: inc/taxonomies.php:50 inc/update.php:396
 msgid "Sidebar Featured Widget"
 msgstr ""
 
-#: inc/taxonomies.php:51 inc/update.php:391
+#: inc/taxonomies.php:51 inc/update.php:397
 msgid ""
 "If you are using the Featured Posts widget in a sidebar, add this label to "
 "posts to determine which to display in the widget."
 msgstr ""
 
 # @ largo
-#: inc/taxonomies.php:55 inc/update.php:396
+#: inc/taxonomies.php:55 inc/update.php:402
 msgid "Footer Featured Widget"
 msgstr ""
 
-#: inc/taxonomies.php:56 inc/update.php:397
+#: inc/taxonomies.php:56 inc/update.php:403
 msgid ""
 "If you are using the Featured Posts widget in the footer, add this label to "
 "posts to determine which to display in the widget."
 msgstr ""
 
 # @ largo
-#: inc/taxonomies.php:60 inc/update.php:402
+#: inc/taxonomies.php:60 inc/update.php:408
 msgid "Featured in Category"
 msgstr ""
 
-#: inc/taxonomies.php:61 inc/update.php:403
+#: inc/taxonomies.php:61 inc/update.php:409
 msgid ""
 "This will allow you to designate a story to appear more prominently on "
 "category archive pages."
 msgstr ""
 
-#: inc/taxonomies.php:66 inc/update.php:409
+#: inc/taxonomies.php:66 inc/update.php:415
 msgid ""
 "Add this label to posts to display them in the featured area on the homepage."
 msgstr ""
 
 # @ largo
-#: inc/taxonomies.php:73 inc/update.php:420
+#: inc/taxonomies.php:73 inc/update.php:426
 msgid "Featured in Series"
 msgstr ""
 
 # @ largo
-#: inc/taxonomies.php:74 inc/update.php:422 inc/update.php:423
+#: inc/taxonomies.php:74 inc/update.php:428 inc/update.php:429
 msgid ""
 "Select this option to allow this post to float to the top of any/all series "
 "landing pages sorting by Featured first."
@@ -1281,29 +1281,29 @@ msgid "The sidebar to show on this term's archive."
 msgstr ""
 
 # @ largo
-#: inc/update.php:117 inc/widgets/largo-post-series-links.php:22
+#: inc/update.php:123 inc/widgets/largo-post-series-links.php:22
 #: inc/widgets/largo-post-series-links.php:55
 #, fuzzy
 msgid "Related Series"
 msgstr "Temas Relacionados:"
 
 # @ largo
-#: inc/update.php:123 inc/widgets/largo-tag-list.php:22
+#: inc/update.php:129 inc/widgets/largo-tag-list.php:22
 #: inc/widgets/largo-tag-list.php:48
 msgid "Filed Under:"
 msgstr "Archivado como:"
 
 # @ largo
-#: inc/update.php:135 inc/widgets/largo-explore-related.php:24
+#: inc/update.php:141 inc/widgets/largo-explore-related.php:24
 #: inc/widgets/largo-explore-related.php:99
 msgid "More About"
 msgstr "Mas Sobre"
 
-#: inc/update.php:165
+#: inc/update.php:171
 msgid "Invalid region specified."
 msgstr ""
 
-#: inc/update.php:256
+#: inc/update.php:262
 #, php-format
 msgid ""
 "You are using the <strong>Largo Footer Featured Posts</strong> widget, which "
@@ -1312,7 +1312,7 @@ msgid ""
 "<strong>Largo Featured Posts</strong>."
 msgstr ""
 
-#: inc/update.php:263
+#: inc/update.php:269
 #, php-format
 msgid ""
 "You are using the <strong>Largo Sidebar Featured Posts</strong> widget, "
@@ -1322,116 +1322,124 @@ msgid ""
 msgstr ""
 
 # @ largo
-#: inc/update.php:392
+#: inc/update.php:398
 msgid ""
 "If you are using the Sidebar Featured Posts widget, add this label to posts "
 "to determine which to display in the widget."
 msgstr ""
 
 # @ largo
-#: inc/update.php:398
+#: inc/update.php:404
 msgid ""
 "If you are using the Footer Featured Posts widget, add this label to posts "
 "to determine which to display in the widget."
 msgstr ""
 
-#: inc/update.php:404
+#: inc/update.php:410
 msgid ""
 "Not yet implemented, in the future this will allow you to designate a story "
 "(or stories) to appear more prominently on category archive pages."
 msgstr ""
 
-#: inc/update.php:416
+#: inc/update.php:422
 msgid ""
 "If you are using the Newspaper or Carousel optional homepage layout, add "
 "this label to label to a post to make it the top story on the homepage."
 msgstr ""
 
-#: inc/update.php:444 options.php:153
+#: inc/update.php:450 options.php:153
 msgid ""
 "Show the <strong>sticky nav</strong>? Default is to show, but in some cases "
 "you may want to hide it."
 msgstr ""
 
-#: inc/update.php:449 options.php:440
+#: inc/update.php:455 options.php:440
 msgid ""
 "Starting with version 0.4, Largo introduced a new single-post template that "
 "more prominently highlights article content, which is the default. For "
 "backward compatibility, the pre-0.3 version is also available."
 msgstr ""
 
-#: inc/update.php:531
+#: inc/update.php:537
 msgid ""
 "This version of Largo includes a variety of updates, enhancements and "
 "changes."
 msgstr ""
 
-#: inc/update.php:532
+#: inc/update.php:539
 msgid "These changes affect"
 msgstr ""
 
-#: inc/update.php:534
+#: inc/update.php:541
 msgid "Theme options"
 msgstr ""
 
-#: inc/update.php:535
+#: inc/update.php:542
 msgid "Configured menus"
 msgstr ""
 
 # @ largo
-#: inc/update.php:536
+#: inc/update.php:543
 #, fuzzy
 msgid "Site navigation"
 msgstr "Descripción del sitio"
 
-#: inc/update.php:537
+#: inc/update.php:544
 msgid "Sidebars and widgets"
 msgstr ""
 
-#: inc/update.php:539
+#: inc/update.php:546
 msgid ""
 "The database update you are about to apply will take steps to migrate "
 "existing site settings."
 msgstr ""
 
-#: inc/update.php:540
+#: inc/update.php:547
 msgid ""
 "In the event that a site setting can not be migrated, the update will do its "
 "best to preserve it instead."
 msgstr ""
 
-#: inc/update.php:541
+#: inc/update.php:548
 msgid ""
 "For example, menus that existed in previous versions of Largo have been "
 "removed. If your site has been using one of these now-deprecated menus, the "
 "update process will merge it with the nearest related menu."
 msgstr ""
 
-#: inc/update.php:542
+#: inc/update.php:549
 msgid ""
 "Please be sure to review your site settings after applying the update to "
 "ensure all is well."
 msgstr ""
 
-#: inc/update.php:545
+#: inc/update.php:551
+msgid "Click the button below to apply a required database update."
+msgstr ""
+
+#: inc/update.php:555
 msgid "Update the database!"
 msgstr ""
 
-#: inc/update.php:572 inc/users.php:165 inc/users.php:226
+#: inc/update.php:582 inc/users.php:165 inc/users.php:226
 msgid "An error occurred."
 msgstr ""
 
-#: inc/update.php:580
+#: inc/update.php:590
 msgid "Finished. No update was required."
 msgstr ""
 
-#: inc/update.php:589
+#: inc/update.php:599
 msgid ""
 "Thank you -- the update is complete. Don't forget to check your site "
 "settings!"
 msgstr ""
 
-#: inc/update.php:595
+#: inc/update.php:601
+msgid "Thank you -- the update is complete."
+msgstr ""
+
+#: inc/update.php:610
 msgid "There was a problem applying the update. Please try again."
 msgstr ""
 
