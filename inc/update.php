@@ -595,8 +595,13 @@ function largo_ajax_update_database() {
 
 	$ret = largo_perform_update();
 	if (!empty($ret)) {
+		if (version_compare(of_get_option('largo_version'), '0.4') < 0)
+			$message = __("Thank you -- the update is complete. Don't forget to check your site settings!");
+		else
+			$message = __("Thank you -- the update is complete.");
+
 		print json_encode(array(
-			"status" => __("Thank you -- the update is complete. Don't forget to check your site settings!"),
+			"status" => $message,
 			"success" => true
 		));
 		wp_die();
