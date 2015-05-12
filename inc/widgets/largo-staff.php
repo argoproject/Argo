@@ -35,6 +35,8 @@ class largo_staff_widget extends WP_Widget {
 			}
 		}
 
+		$users = apply_filters('largo_staff_widget_users', $users);
+
 		$markup = '<ul class="staff-roster">';
 		foreach ($users as $user) {
 			if (get_user_meta($user->ID, 'hide', true))
@@ -68,10 +70,10 @@ class largo_staff_widget extends WP_Widget {
 
 			$markup .= "		$avatar";
 			$markup .= "		<span class='staff-name'>{$user->display_name}</span>";
-			
+
 			if (count_user_posts($user->ID) > 0)
 				$markup .= "</a>";
-			
+
 			$markup .= "	<p>$job_title<p>";
 			$markup .= "	$user_posts_link";
 			$markup .= "</div>";
