@@ -93,3 +93,9 @@
    :param array $context: an array with the variables that should be made available in the template being loaded.
 
    :since: 0.4*
+
+.. php:function:: largo_get_current_url()
+
+   Get the current URL, including the protocol and host
+
+   :since: 0.5

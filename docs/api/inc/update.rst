@@ -6,7 +6,7 @@
 
 .. php:function:: largo_perform_update()
 
-   Performs various database updates upon Largo version change. Fairly primitive as of 0.3
+   Performs various database updates upon Largo version change.
 
    :since: 0.3
 
@@ -77,6 +77,12 @@
 .. php:function:: largo_update_page_view()
 
 .. php:function:: largo_update_page_enqueue_js()
+
+   Enqueues javascript used on the Largo Update page
+
+   :global: LARGO_DEBUG
+
+   :global: $_GET
 
 .. php:function:: largo_ajax_update_database()
 

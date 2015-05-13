@@ -15,5 +15,3 @@
    .. php:attr:: $layout_spans
 
    .. php:attr:: $layout
-
-   .. php:attr:: $layout
