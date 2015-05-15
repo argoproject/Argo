@@ -1,3 +1,6 @@
+options.php
+===========
+
 .. php:function:: optionsframework_option_name()
 
    A unique identifier is defined to store the options in the database and reference them from the theme.
@@ -12,5 +15,3 @@
    If you are making your theme translatable, you should replace 'options_framework_theme'
    with the actual text domain for your theme.  Read more:
    http://codex.wordpress.org/Function_Reference/load_theme_textdomain
-
-.. php:function:: optionsframework_custom_scripts()

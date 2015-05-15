@@ -1,3 +1,6 @@
+feed-mailchimp.php
+==================
+
 .. php:attr:: $numposts
 
       Template Name: MailChimp Feed
@@ -7,27 +10,3 @@
       :package: Largo
 
       :since: 0.2
-
-.. php:function:: rss_date()
-
-   .. php:attr:: $numposts
-
-   .. php:attr:: $numposts
-
-   .. php:attr:: $lastpost
-
-   .. php:attr:: $lastpost
-
-   .. php:attr:: $post
-
-   .. php:attr:: $post
-
-   .. php:attr:: $post
-
-   .. php:attr:: $post
-
-   .. php:attr:: $curuser
-
-   .. php:attr:: $post
-
-   .. php:attr:: $image
