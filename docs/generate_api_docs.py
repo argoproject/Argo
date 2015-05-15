@@ -51,7 +51,7 @@ class ApiDocGenerator(object):
         tmpl = "%s\n%s\n\n" % (heading, len(heading) * '=')
 
         for filepath in self.index_page_data:
-            tmpl += "* `%s </api/%s>`_\n" % (filepath, filepath.replace('php', 'html'))
+            tmpl += "* `%s <%s>`_\n" % (filepath, filepath.replace('php', 'html'))
 
         with open('api/index.rst', 'w+') as f:
             f.write(tmpl)
