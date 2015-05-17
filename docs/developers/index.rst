@@ -15,7 +15,7 @@ Setting up a development environment
 
 We use a set of tools to make setting up a Largo development environment as easy and consistent as possible.
 
-We encourage all member organizations looking to add features to or otherwise modify their theme to use this same setup, since doing so will make support and collaboration between members and INN easier.
+We encourage all INN member organizations looking to add features to or otherwise modify their theme to use this same setup, since doing so will make support and collaboration between members and INN easier.
 
 **Read**:
 
