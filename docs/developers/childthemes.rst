@@ -1,6 +1,8 @@
 Using Child Themes
 ==================
 
+Child themes are `a feature of WordPress <https://largo.readthedocs.org/en/write-the-docs/developers/childthemes.html>`_ that allow you to extend and override the parent theme that the child theme is based upon. We encourage you to create a child theme for your project.
+
 Changing Basic Styling
 ----------------------
 
