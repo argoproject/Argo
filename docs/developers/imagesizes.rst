@@ -45,4 +45,3 @@ Largo does not impose any height limits on crop sizes. Thus the defaults are set
   - ``FULL_HEIGHT`` (default: 9999): full image crop height
   - ``LARGE_HEIGHT`` (default: 9999): medium image crop height
   - ``MEDIUM_HEIGHT`` (default: 9999): small image crop height
-

@@ -19,6 +19,11 @@ Largo uses the `Options Framework <https://wordpress.org/plugins/options-framewo
 
 If you need to access a Theme Options value, use ``of_get_option()`` instead of the usual ``get_option()``. The theme options pages themselves can be customized from ``options.php`` in the main theme folder.
 
+Homepage Templates
+------------------
+
+See `Homepage layouts <https://github.com/INN/Largo-Sample-Child-Theme/tree/master/homepages>`_ from our `Largo-Sample-Child-Theme repository <https://github.com/INN/Largo-Sample-Child-Theme>`_.
+
 LESS and CSS
 ------------
 
