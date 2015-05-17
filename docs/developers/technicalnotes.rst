@@ -46,7 +46,12 @@ To rebuild the translation files, run the following commands: ::
 Images
 ------
 
+See the `Pre-Launch Checklist <users/prelaunchchecklist.html>`_ to see the list of image types and sizes you'll need to get your site up and running.
+
+**More on image sizes:**
+
 .. toctree::
     :maxdepth: 2
 
     imagesizes
+
