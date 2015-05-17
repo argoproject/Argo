@@ -42,3 +42,11 @@ To rebuild the translation files, run the following commands: ::
 	msgmerge -o lang/es_ES.po.merged lang/es_ES.po lang/largo.pot
 	mv lang/es_ES.po.merged lang/es_ES.po
 	grunt po2mo
+
+Images
+------
+
+.. toctree::
+    :maxdepth: 2
+
+    imagesizes
