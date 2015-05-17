@@ -58,7 +58,7 @@ For Developers
 .. toctree::
     :maxdepth: 2
 
-    developers/fordevelopers
+    developers/index
     developers/imagesizes
 
 

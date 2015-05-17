@@ -1,6 +1,7 @@
 For Developers
 ==============
 
+
 Overview
 --------
 
@@ -34,6 +35,15 @@ A few brief technical notes that might be helpful as you get started:
 	msgmerge -o lang/es_ES.po.merged lang/es_ES.po lang/largo.pot
 	mv lang/es_ES.po.merged lang/es_ES.po
 	grunt po2mo
+
+Child Themes
+------------
+
+From the `WordPress Codex <http://codex.wordpress.org/Child_Themes>`_:
+
+  A child theme is a theme that inherits the functionality and styling of another theme, called the parent theme. Child themes are the recommended way of modifying an existing theme.
+
+`Read more about building or modifying a child theme that extends Largo here <childthemes.html>`_.
 
 
 Function Reference
