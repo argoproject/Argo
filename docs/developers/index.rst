@@ -27,7 +27,7 @@ A few brief technical notes that might be helpful as you get started:
 
 - We use `TGM Plugin Activation <https://github.com/thomasgriffin/TGM-Plugin-Activation>`_ to package a couple of plugins with the Largo theme that are not currently available in the WordPress plugin directory and to recommend plugins for a number of tasks that are commonly requested for news websites.
 
-- The rest of the theme files and the folder structure should be familiar to most WordPress developers, but if you have any questions, feel free to `get in touch<mailto:largo@inn.org>`_.
+- The rest of the theme files and the folder structure should be familiar to most WordPress developers, but if you have any questions, feel free to `get in touch <mailto:largo@inn.org>`_.
 
 - To rebuild the translation files, run the following commands: ::
 
@@ -36,6 +36,9 @@ A few brief technical notes that might be helpful as you get started:
 	mv lang/es_ES.po.merged lang/es_ES.po
 	grunt po2mo
 
+
+.. _child-theme-docs:
+
 Child Themes
 ------------
 
@@ -43,7 +46,13 @@ From the `WordPress Codex <http://codex.wordpress.org/Child_Themes>`_:
 
   A child theme is a theme that inherits the functionality and styling of another theme, called the parent theme. Child themes are the recommended way of modifying an existing theme.
 
-`Read more about building or modifying a child theme that extends Largo here <childthemes.html>`_.
+About working with Largo child themes:
+
+.. toctree::
+    :maxdepth: 2
+
+    childthemes
+
 
 
 Function Reference
