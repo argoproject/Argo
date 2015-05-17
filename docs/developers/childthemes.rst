@@ -25,6 +25,6 @@ Visit the repository page to learn more about the following as the pertain to La
 
 - `Unit Tests and Continuous Integration <https://github.com/INN/Largo-Sample-Child-Theme/blob/master/tests/readme.md>`_
 - `Stylesheets (LESS and CSS) <https://github.com/INN/Largo-Sample-Child-Theme/blob/master/less/readme.md>`_
-- `Theme Directory Layout <https://github.com/INN/Largo-Sample-Child-Theme#theme-directory-layout>`_
-- `Custom Theme Javascript and CSS <https://github.com/INN/Largo-Sample-Child-Theme#custom-theme-javascript-and-css>`_
+- `Theme Directory Layout <https://github.com/INN/Largo-Sample-Child-Theme#theme-directory-structure>`_
+- `Custom Theme Javascript or CSS <https://github.com/INN/Largo-Sample-Child-Theme#removing-or-replacing-largo-javascript-or-css>`_
 - `Removing or replacing Largo Javascript or CSS <https://github.com/INN/Largo-Sample-Child-Theme#removing-or-replacing-largo-javascript-or-css>`_
