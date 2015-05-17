@@ -10,20 +10,50 @@ If you use Largo for a project `we'd love to hear from you <mailto:largo@inn.org
 
 The preferred way of building a site with Largo is by creating a WordPress child theme. We have created a `sample, heavily documented, child theme <childthemes.html#advanced-theme-development-and-modification>`_ to help you understand the way we structure our child themes in the hopes that it will give you a solid framework to get started. There is more information on setting up Largo and `using child themes <../users/download.html#creating-child-themes>`_ in the download and installation section of our documentation.
 
+Setting up a development environment
+------------------------------------
+
+We use a set of tools to make setting up a Largo development environment as easy and consistent as possible.
+
+We encourage all member organizations looking to add features to or otherwise modify their theme to use this same setup, since doing so will make support and collaboration between members and INN easier.
+
+**Read**:
+
+.. toctree::
+    :maxdepth: 2
+
+    setup
+    setup-documentation
+
 Child Themes
 ------------
 
 What *is* a child theme?
-`````````````````````
+````````````````````````
 
 From the `WordPress Codex <http://codex.wordpress.org/Child_Themes>`_:
 
   A child theme is a theme that inherits the functionality and styling of another theme, called the parent theme. Child themes are the recommended way of modifying an existing theme.
 
+Why should you use a child theme?
+`````````````````````````````````
+
+
+
 .. toctree::
     :maxdepth: 2
 
     childthemes
+
+Technical Notes
+---------------
+
+A few brief technical notes that might be helpful as you get started:
+
+.. toctree::
+    :maxdepth: 2
+
+    technicalnotes
 
 Function Reference
 ------------------
@@ -36,16 +66,6 @@ You can always `read Largo's source on Github <https://github.com/INN/Largo>`_.
     :maxdepth: 2
 
     /api/index
-
-Technical Notes
----------------
-
-A few brief technical notes that might be helpful as you get started:
-
-.. toctree::
-    :maxdepth: 2
-
-    technicalnotes
 
 Bug Reports and Feature Requests
 --------------------------------

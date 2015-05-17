@@ -1,4 +1,4 @@
-Setting up Largo just to write documentation
+Setting up Largo to contribute documentation
 ============================================
 
 If you just want to help us write documentation, you don't have to go through `the complete setup process. <setup.html>`_
@@ -72,8 +72,8 @@ But if you don't want to have to manually recreate the documentation every time 
 		python -m SimpleHTTPServer 8081
 
 
-The (ideal) procedure for contributing
---------------------------------------
+The (ideal) procedure for contributing documentation
+----------------------------------------------------
 
 1. `Choose an issue <https://github.com/INN/Largo/milestones/Write%20The%20Docs>`_
 2. Comment on the issue that you're taking it.
