@@ -21,7 +21,7 @@ Advanced Theme Development and Modification
 
 We've created a `Largo-Sample-Child-Theme repository <https://github.com/INN/Largo-Sample-Child-Theme>`_ to illustrate how we organize child themes that extend Largo.
 
-Visit the repository page to learn more about the following as the pertain to Largo-based child themes:
+Visit the repository page to learn more about the following as they pertain to Largo-based child themes:
 
 - `Unit Tests and Continuous Integration <https://github.com/INN/Largo-Sample-Child-Theme/blob/master/tests/readme.md>`_
 - `Stylesheets (LESS and CSS) <https://github.com/INN/Largo-Sample-Child-Theme/blob/master/less/readme.md>`_
