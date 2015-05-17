@@ -28,6 +28,10 @@ From the `WordPress Codex <http://codex.wordpress.org/Child_Themes>`_:
 Function Reference
 ------------------
 
+NOTE: the function reference is a work-in-progress and may not be very useful at the moment.
+
+You can always `read Largo's source on Github <https://github.com/INN/Largo>`_.
+
 .. toctree::
     :maxdepth: 2
 
