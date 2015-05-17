@@ -47,7 +47,7 @@ class ApiDocGenerator(object):
             print "Skipping: %s" % src
 
     def create_index_page(self):
-        heading = "Function reference"
+        heading = "Function reference by file"
         tmpl = "%s\n%s\n\n" % (heading, len(heading) * '=')
 
         for filepath in self.index_page_data:

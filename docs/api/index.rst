@@ -1,5 +1,5 @@
-Function reference
-==================
+Function reference by file
+==========================
 
 * `feed-mailchimp.php <feed-mailchimp.html>`_
 * `functions.php <functions.html>`_
