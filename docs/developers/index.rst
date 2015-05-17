@@ -37,8 +37,9 @@ From the `WordPress Codex <http://codex.wordpress.org/Child_Themes>`_:
 
 Why should you use a child theme?
 `````````````````````````````````
+In order to make it easier to upgrade to future versions of the Largo parent theme, you will want to add any customizations that are unique to your site by creating a child theme. WordPress has a tutorial you can follow that explains how to create and configure a child theme.
 
-
+**More**: `Creating Child Themes <../users/download.html#creating-child-themes>`_
 
 .. toctree::
     :maxdepth: 2
@@ -83,3 +84,5 @@ To begin, `please review our contribution guidelines <https://github.com/INN/doc
 We have many ways you can contribute and not all are technical. Wherever possible we will flag issues that we believe are `good for beginners <https://github.com/INN/Largo/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+for+beginners%22>`_ or for less/non-technical contributors (`writing/improving documentation <https://github.com/INN/Largo/issues?q=is%3Aopen+is%3Aissue+label%3A%22status%3A+needs+docs%22>`_, etc.).
 
 Our roadmap, open issues, suggested features and discussion can always be found in the issues section of the `Largo github repository <https://github.com/INN/Largo/issues>`_.
+
+We also have documentation on the `Anatomy of a Pull Request and Submission Protocol <https://github.com/INN/docs/blob/master/how-to-work-with-us/pull-requests.md>`_ and `Contributing to the INN Nerds docs repo using Github.com <https://github.com/INN/docs/blob/master/how-to-work-with-us/via-github.md>`_ which explain, at a high level, the process of contributing to Github projects, generally.
