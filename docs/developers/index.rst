@@ -1,7 +1,6 @@
 For Developers
 ==============
 
-
 Overview
 --------
 
@@ -37,16 +36,15 @@ A few brief technical notes that might be helpful as you get started:
 	grunt po2mo
 
 
-.. _child-theme-docs:
-
 Child Themes
 ------------
+
+What's a child theme?
+`````````````````````
 
 From the `WordPress Codex <http://codex.wordpress.org/Child_Themes>`_:
 
   A child theme is a theme that inherits the functionality and styling of another theme, called the parent theme. Child themes are the recommended way of modifying an existing theme.
-
-About working with Largo child themes:
 
 .. toctree::
     :maxdepth: 2
