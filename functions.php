@@ -42,7 +42,7 @@ if ( ! defined( 'INN_HOSTED' ) )
 /**
  * By default we'll assume the site is not for an INN member.
  *
- * Set INN_MEMBER to TRUE to show an INN logo in the header
+ * Set INN_MEMBER to TRUE to show an INN logo in the footer
  * and a widget of INN member stories in the homepage sidebar
  */
 if ( ! defined( 'INN_MEMBER' ) )
