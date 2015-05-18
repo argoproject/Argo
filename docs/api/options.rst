@@ -15,3 +15,12 @@ options.php
    If you are making your theme translatable, you should replace 'options_framework_theme'
    with the actual text domain for your theme.  Read more:
    http://codex.wordpress.org/Function_Reference/load_theme_textdomain
+
+.. php:function:: optionsframework_custom_scripts()
+
+   This function prints Javascript on the Theme Options admin page to control the behavior
+   of certain options that depend or require other options.
+
+   For example, you can not use Custom Landing Pages unless Series taxonomy is enabled. So,
+   this script will hide the Custom Landing Pages option until the Series taxonomy checkbox
+   is enabled.

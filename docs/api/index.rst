@@ -3,8 +3,6 @@ Function reference by file
 
 * `feed-mailchimp.php <feed-mailchimp.html>`_
 * `functions.php <functions.html>`_
-* `image.php <image.html>`_
-* `largo-apis.php <largo-apis.html>`_
 * `options.php <options.html>`_
 * `homepages/homepage.php <homepages/homepage.html>`_
 * `homepages/layouts/HomepageSingleWithSeriesStories.php <homepages/layouts/HomepageSingleWithSeriesStories.html>`_

@@ -1,12 +1,8 @@
 feed-mailchimp.php
 ==================
 
-.. php:attr:: $numposts
+.. php:function:: rss_date()
 
-      Template Name: MailChimp Feed
-      A feed with thumbnail images for MailChimp import
-      Feed address to use for MailChimp import will be http://myurl.com/?feed=mailchimp
+   A template tag for printing the date in a format suitable for an RSS feed
 
-      :package: Largo
-
-      :since: 0.2
+   :param mixed $timestamp: (optional) the unix timestamp for which to print the formatted date
