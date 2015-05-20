@@ -17,7 +17,7 @@ Setting up
 
 This presumes that you're familiar with the command line, and are using OSX or another UNIX-like system.
 
-1. `Fork INN/Largo <https://github.com/INN/Largo#fork-destination-box>`_ into your own WordPress account.
+1. `Fork INN/Largo <https://github.com/INN/Largo#fork-destination-box>`_ into your own GitHub account.
 2. Clone your branch: ::
 
 	git clone git@github.com:you/Largo.git
