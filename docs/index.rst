@@ -49,6 +49,10 @@ General Documentation
     users/contactforms
     users/ads
 
+.. toctree::
+    :maxdepth: 1
+
+    feedback
 
 .. _dev-docs:
 
@@ -60,3 +64,8 @@ For Developers
 
     developers/index
     developers/constants
+
+.. toctree::
+    :maxdepth: 1
+
+    feedback

@@ -73,6 +73,11 @@ Bug Reports and Feature Requests
 
 Our preferred way for you to submit bug reports, request for new features or even questions about how things work in Largo is by `opening a new issue on the Largo github repository <https://github.com/INN/Largo/issues>`_.
 
+If you would like to help with the documentation, here are some resources:
+
+- `Sphinx' PHP domain-specific markup <http://mark-story.com/posts/view/sphinx-phpdomain-released>`_
+- `Sphinx reStructuredText primer and quickstart guide <http://sphinx-doc.org/rest.html>`_
+
 
 Contributing to Largo
 ---------------------

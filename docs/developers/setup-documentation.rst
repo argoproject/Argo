@@ -91,3 +91,8 @@ The (ideal) procedure for contributing documentation
     - How to make a `PR on GitHub <https://help.github.com/articles/creating-a-pull-request/>`_
     - If it's a big PR, please `make sure it's well-documented </how-to-work-with-us/pull-requests.md>`_. Thanks!
 
+Resources for writing documentation
+-----------------------------------
+
+- `Sphinx' PHP domain-specific markup <http://mark-story.com/posts/view/sphinx-phpdomain-released>`_
+- `Sphinx reStructuredText primer and quickstart guide <http://sphinx-doc.org/rest.html>`_
