@@ -32,7 +32,7 @@
 	<?php
 		do_action('largo_after_post_header');
 
-		get_template_part( 'partials/single', 'hero' );
+		largo_hero(null,'span12');
 
 		do_action('largo_after_hero');
 	?>

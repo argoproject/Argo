@@ -141,13 +141,14 @@ function largo_remove_hero($content) {
 
 	$pattern = '/<img\s+[^>]*src="([^"]*)"[^>]*>/';
 	$hasImg = preg_match($pattern,$p[0],$matches);
-	$imgDom = $matches[0];
-	$src = $matches[1];
 
 	// 3: if there's no image, there's nothing to worry about.
 
 	if( !$hasImg )
 		return $content;
+
+	$imgDom = $matches[0];
+	$src = $matches[1];
 
 	// 4: Compare the src url to the feature image url.
 	// If they're the same, remove the top image.

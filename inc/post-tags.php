@@ -674,6 +674,8 @@ if ( ! function_exists( 'largo_hero_class' ) ) {
 }
 
 /**
+ * Depricated 0.5.1.
+ * 
  * Returns the featured image for a post
  * to be used as the hero image with caption and credit (if available)
  *
@@ -681,21 +683,9 @@ if ( ! function_exists( 'largo_hero_class' ) ) {
  */
 if ( ! function_exists( 'largo_hero_with_caption' ) ) {
 	function largo_hero_with_caption( $post_id ) {
-		echo get_the_post_thumbnail( $post_id, 'full' );
-		if ( $thumb = get_post_thumbnail_id( $post_id ) ) {
-			$thumb_content = get_post( $thumb );
-			$thumb_custom = get_post_custom( $thumb );
-			if ( isset($thumb_custom['_media_credit'][0]) ) {
-				echo '<p class="wp-media-credit">' . $thumb_custom['_media_credit'][0];
-				if ( $thumb_custom['_navis_media_credit_org'][0] ) {
-					echo '/' . $thumb_custom['_navis_media_credit_org'][0];
-				}
-				echo '</p>';
-			}
-			if ( $thumb_content->post_excerpt ) {
-				echo '<p class="wp-caption-text">' . $thumb_content->post_excerpt . '</p>';
-			}
-		}
+		
+		largo_featured_image_hero($post_id);
+
 	}
 }
 
