@@ -56,7 +56,7 @@ Setting up Largo and WordPress
 
 7. First, install the Python dependencies.
 
-	We use a few Python libraries for this project, including `Fabric <http://www.fabfile.org>`_ which powers the INN deploy-tools to elegantly run common but complex tasks. In the `OS X setup guide <https://github.com/inn/docs/staffing/onboarding/os-x-setup.md>`_, you should have installed Python virtualenv and virtualenvwrapper.
+	We use a few Python libraries for this project, including `Fabric <http://www.fabfile.org>`_ which powers the INN deploy-tools to elegantly run `many common but complex tasks <https://github.com/INN/deploy-tools/blob/master/COMMANDS.md>`_. In the `OS X setup guide <https://github.com/inn/docs/staffing/onboarding/os-x-setup.md>`_, you should have installed Python virtualenv and virtualenvwrapper.
 
 	Make sure you tell virtualenvwrapper where the umbrella is. ::
 
@@ -189,3 +189,22 @@ When you want to shut down Vagrant, run ``vagrant halt``.
 If you want to poke around in the Vagrant box, run ``vagrant ssh``. You don't have to enter any passwords or unlock any ssh keys - Vagrant controls those itself.
 
 If you're unable to log in, try powering the Vagrant machine off through the Virtualbox graphical user interface, or by finding the VM name in ``VBoxManage list runningvms`` and using it in ``VBoxManage controlvm <name|uuid> acpipowerbutton``
+
+Some notes about deploy-tools and Fabric
+----------------------------------------
+
+The full list of supported commands can be found in `the deploy-tools documentation <https://github.com/INN/deploy-tools/blob/master/COMMANDS.md>`_.
+
+Most fabric commands take the form of ::
+
+	fab <environment> <branch> <action>
+	fab <action that defines its own environment>:arguments
+
+Every command in `the list of commands <https://github.com/INN/deploy-tools/blob/master/COMMANDS.md>`_ is prefixed with ``fab``.
+
+If you recieve an error when running your command, make sure that you have run ``workon largo-umbrella``, or the name of the Python virtualenv you are using. When run, ``workon`` will prefix your prompt: ::
+
+	blk@oyster:~$ workon largo
+	(largo)blk@oyster:~$
+
+To exit the virtualenv, you can use the command ``deactivate``.
