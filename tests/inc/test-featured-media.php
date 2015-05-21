@@ -145,7 +145,7 @@ class FeaturedMediaTestAjaxFunctions extends WP_Ajax_UnitTestCase {
 			$this->_handleAjax("largo_featured_media_read");
 		} catch (WPAjaxDieContinueException $e) {
 			// The response should be equal to the $_POST data we sent
-			$this->assertEquals($_POST['data'], $this->_last_response);
+			$this->assertEquals(json_encode($this->media_types['image']), $this->_last_response);
 		}
 	}
 
