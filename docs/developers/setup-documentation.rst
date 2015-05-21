@@ -7,7 +7,7 @@ Once you've completed this recipe, you'll be able to:
 
 - rebuild the documentation
 - preview your edits in a browser
-- rebulid the translation files.
+- rebuild the translation files.
 - push your edits to GitHub and request that we incorporate them in Largo
 
 This presumes that you're familiar with the command line, and are using OSX or another UNIX-like system.

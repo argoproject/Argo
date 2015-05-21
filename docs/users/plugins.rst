@@ -42,7 +42,7 @@ In addition to the Argo plugins, we have included a curated list of other plugin
 
 - `W3 Total Cache <https://wordpress.org/plugins/w3-total-cache/>`_ is a caching plugin for WordPress that will improve the load time of your site and help your server to better deal with large traffic spikes. Caching is heavily dependent on your server setup, and while `W3 Total Cache <https://wordpress.org/plugins/w3-total-cache/>`_ is one of the most powerful (and flexible) WordPress caching solutions out there, if it does not work for you `WP Super Cache <https://wordpress.org/plugins/wp-super-cache/>`_ is another popular alternative. Note that this is not relevant for sites that we host for INN members as our hosting company, WP Engine, has their own caching system.
 
-- `Ad Code Manager <https://wordpress.org/plugins/ad-code-manager/>`_ is used to insert standard ad units into Largo.
+- `DoubleClick for WordPress <https://github.com/INN/DoubleClick-for-WordPress/>`_ is used to insert standard ad units into Largo. Read its `documentation for more details <dfw.readthedocs.org/en/latest/>`_.
 
 Complete List of Plugins Available
 ----------------------------------

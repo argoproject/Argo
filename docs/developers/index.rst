@@ -67,17 +67,12 @@ You can always `read Largo's source on Github <https://github.com/INN/Largo>`_.
     :maxdepth: 2
 
     /api/index
+    constants
 
 Bug Reports and Feature Requests
 --------------------------------
 
-Our preferred way for you to submit bug reports, request for new features or even questions about how things work in Largo is by `opening a new issue on the Largo github repository <https://github.com/INN/Largo/issues>`_.
-
-If you would like to help with the documentation, here are some resources:
-
-- `Sphinx' PHP domain-specific markup <http://mark-story.com/posts/view/sphinx-phpdomain-released>`_
-- `Sphinx reStructuredText primer and quickstart guide <http://sphinx-doc.org/rest.html>`_
-
+Our preferred way for you to submit bug reports, requests for new features or even questions about how things work in Largo is by `opening a new issue on the Largo github repository <https://github.com/INN/Largo/issues>`_.
 
 Contributing to Largo
 ---------------------
@@ -91,3 +86,11 @@ We have many ways you can contribute and not all are technical. Wherever possibl
 Our roadmap, open issues, suggested features and discussion can always be found in the issues section of the `Largo github repository <https://github.com/INN/Largo/issues>`_.
 
 We also have documentation on the `Anatomy of a Pull Request and Submission Protocol <https://github.com/INN/docs/blob/master/how-to-work-with-us/pull-requests.md>`_ and `Contributing to the INN Nerds docs repo using Github.com <https://github.com/INN/docs/blob/master/how-to-work-with-us/via-github.md>`_ which explain, at a high level, the process of contributing to Github projects, generally.
+
+If you would like to help with the documentation, here are some resources:
+
+- `Sphinx' PHP domain-specific markup <http://mark-story.com/posts/view/sphinx-phpdomain-released>`_
+- `Sphinx reStructuredText primer and quickstart guide <http://sphinx-doc.org/rest.html>`_
+
+
+If you have feedback on this collection of documentation, please `get in touch <../feedback.html>`_.
