@@ -129,27 +129,26 @@ function largo_get_featured_image_hero($post = null, $classes = '') {
 	$hero_class = largo_hero_class($post->ID, false);
 	$classes = "hero $hero_class $classes";
 
-	$ret = '';
+	$thumb_meta = null;
+	if ($thumb_id = get_post_thumbnail_id($post->ID)) {
+		$thumb_content = get_post($thumb_id);
+		$thumb_custom = get_post_custom($thumb_id);
 
-	$ret .= "<div class='$classes'>";
-
-	$ret .= get_the_post_thumbnail( $post->ID, 'full' );
-	if ( $thumb = get_post_thumbnail_id( $post->ID ) ) {
-		$thumb_content = get_post( $thumb );
-		$thumb_custom = get_post_custom( $thumb );
-		if ( isset($thumb_custom['_media_credit'][0]) ) {
-			$ret .= '<p class="wp-media-credit">' . $thumb_custom['_media_credit'][0];
-			if ( $thumb_custom['_navis_media_credit_org'][0] ) {
-				$ret .= '/' . $thumb_custom['_navis_media_credit_org'][0];
-			}
-			$ret .= '</p>';
-		}
-		if ( $thumb_content->post_excerpt ) {
-			$ret .= '<p class="wp-caption-text">' . $thumb_content->post_excerpt . '</p>';
-		}
+		$thumb_meta = array(
+			'caption' => (!empty($thumb_content->post_excerpt))? $thumb_content->post_excerpt : null,
+			'credit' => (!empty($thumb_custom['_media_credit'][0]))? $thumb_custom['_media_credit'][0] : null,
+			'organization' => (!empty($thumb_custom['_navis_media_credit_org'][0]))? $thumb_custom['_navis_media_credit_org'][0] : null
+		);
 	}
 
-	$ret .= "</div>";
+	$context = array(
+		'classes' => $classes,
+		'thumb_meta' => $thumb_meta
+	);
+
+	ob_start();
+	largo_render_template('partials/hero', 'featured-image', $context);
+	$ret = ob_get_clean();
 
 	return $ret;
 }
@@ -190,25 +189,16 @@ function largo_get_featured_embed_hero($post = null, $classes = '') {
 	$hero_class = largo_hero_class($post->ID, false);
 	$classes = "hero $hero_class $classes";
 
-	$ret = '';
-	$ret .= "<div class='$classes'>";
+	$context = array(
+		'classes' => $classes,
+		'featured_media' => $featured_media
+	);
 
-	$ret .= "<div class='embed-container'>";
-		$ret .= $featured_media['embed'];
-	$ret .= "</div>";
-	$ret .= "<div class='embed-details wp-caption'>";
-	if (!empty($featured_media['credit'])) {
-		$ret .= "<p class='wp-media-credit featured-credit'>{$featured_media['credit']}</p>";
-	}
-	if (!empty($featured_media['caption'])) {
-		$ret .= "<p class='wp-caption-text featured-caption'>{$featured_media['caption']}</p>";
-	}
-	$ret .= "</div>";
-
-	$ret .= "</div>";
+	ob_start();
+	largo_render_template('partials/hero', 'featured-embed', $context);
+	$ret = ob_get_clean();
 
 	return $ret;
-
 }
 
 /**
@@ -246,16 +236,14 @@ function largo_get_featured_gallery_hero( $post = null, $classes = '' ) {
 	$hero_class = largo_hero_class($post->ID, false);
 	$classes = "hero $hero_class $classes";
 
-	$ret = '';
-	$ret .= "<div class='$classes'>";
+	$context = array(
+		'classes' => $classes,
+		'gallery_ids' => implode(',', $featured_media['gallery'])
+	);
 
-	$ids = implode(',', $featured_media['gallery']);
-
-	$ret .= "<div class='featured-gallery'>";
-	$ret .= gallery_shortcode(array('ids' => $ids));
-	$ret .= "</div>";
-
-	$ret .= "</div>";
+	ob_start();
+	largo_render_template('partials/hero', 'featured-gallery', $context);
+	$ret = ob_get_clean();
 
 	return $ret;
 
