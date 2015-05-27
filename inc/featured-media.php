@@ -30,10 +30,10 @@ function largo_default_featured_media_types() {
 
 /**
  * Prints DOM for hero image.
- * 
+ *
  * Determines the type of featured media attached to a post,
  * and generates the DOM for that type of media.
- * 
+ *
  * @param int|WP_Post $post Optional. Post ID or WP_Post object. Default is global $post.
  * @param String $classes Optional. Class string to apply to outer div.hero
  */
@@ -45,10 +45,10 @@ function largo_hero( $post = null, $classes = '' ) {
 
 /**
  * Return DOM for hero image.
- * 
+ *
  * Determines the type of featured media attached to a post,
  * and generates the DOM for that type of media.
- * 
+ *
  * @param int|WP_Post $post Optional. Post ID or WP_Post object. Default is global $post.
  * @param String $classes Optional. Class string to apply to outer div.hero
  */
@@ -62,7 +62,7 @@ function largo_get_hero($post = null,$classes = '') {
 	if (largo_has_featured_media($post->ID) && $hero_class !== 'is-empty') {
 
 		$featured_media = largo_get_featured_media($post->ID);
-		
+
 		if (in_array($featured_media['type'], array('embed-code', 'video'))) {
 
 			$ret = largo_get_featured_embed_hero($post->ID,$classes);
@@ -95,10 +95,10 @@ function largo_get_hero($post = null,$classes = '') {
 
 /**
  * Prints DOM for a featured image hero.
- * 
+ *
  * @since 0.5.1
  * @see largo_get_featured_image_hero()
- * 
+ *
  * @param int|WP_Post $post Optional. Post ID or WP_Post object. Default is global $post.
  * @param String $classes Optional. Class string to apply to outer div.hero
  */
@@ -110,10 +110,10 @@ function largo_featured_image_hero($post = null, $classes = '') {
 
 /**
  * Returns DOM for a featured image hero.
- * 
+ *
  * @since 0.5.1
  * @see largo_get_featured_image_hero()
- * 
+ *
  * @param int|WP_Post $post Optional. Post ID or WP_Post object. Default is global $post.
  * @param String $classes Optional. Class string to apply to outer div.hero
  */
@@ -130,7 +130,7 @@ function largo_get_featured_image_hero($post = null, $classes = '') {
 	$classes = "hero $hero_class $classes";
 
 	$ret = '';
-	
+
 	$ret .= "<div class='$classes'>";
 
 	$ret .= get_the_post_thumbnail( $post->ID, 'full' );
@@ -157,10 +157,10 @@ function largo_get_featured_image_hero($post = null, $classes = '') {
 
 /**
  * Prints DOM for an embed code hero.
- * 
+ *
  * @since 0.5.1
  * @see largo_get_featured_embed_hero()
- * 
+ *
  * @param int|WP_Post $post Optional. Post ID or WP_Post object. Default is global $post.
  * @param String $classes Optional. Class string to apply to outer div.hero
  */
@@ -172,9 +172,9 @@ function largo_featured_embed_hero($post = null, $classes = '') {
 
 /**
  * Returns DOM for an embed code hero.
- * 
+ *
  * @since 0.5.1
- * 
+ *
  * @param int|WP_Post $post Optional. Post ID or WP_Post object. Default is global $post.
  * @param String $classes Optional. Class string to apply to outer div.hero
  */
@@ -197,10 +197,10 @@ function largo_get_featured_embed_hero($post = null, $classes = '') {
 		$ret .= $featured_media['embed'];
 	$ret .= "</div>";
 	$ret .= "<div class='embed-details wp-caption'>";
-	if (!empty($featured_media['credit'])) { 
-		$ret .= "<p class='wp-media-credit featured-credit'>{$featured_media['credit']}</p>"; 
+	if (!empty($featured_media['credit'])) {
+		$ret .= "<p class='wp-media-credit featured-credit'>{$featured_media['credit']}</p>";
 	}
-	if (!empty($featured_media['caption'])) { 
+	if (!empty($featured_media['caption'])) {
 		$ret .= "<p class='wp-caption-text featured-caption'>{$featured_media['caption']}</p>";
 	}
 	$ret .= "</div>";
@@ -213,10 +213,10 @@ function largo_get_featured_embed_hero($post = null, $classes = '') {
 
 /**
  * Prints DOM for a featured gallery hero.
- * 
+ *
  * @since 0.5.1
  * @see largo_get_featured_gallery_hero()
- * 
+ *
  * @param int|WP_Post $post Optional. Post ID or WP_Post object. Default is global $post.
  * @param String $classes Optional. Class string to apply to outer div.hero
  */
@@ -228,9 +228,9 @@ function largo_featured_gallery_hero($post = null, $classes = '') {
 
 /**
  * Returns DOM for a featured gallery hero.
- * 
+ *
  * @since 0.5.1
- * 
+ *
  * @param int|WP_Post $post Optional. Post ID or WP_Post object. Default is global $post.
  * @param String $classes Optional. Class string to apply to outer div.hero
  */
@@ -245,12 +245,12 @@ function largo_get_featured_gallery_hero( $post = null, $classes = '' ) {
 
 	$hero_class = largo_hero_class($post->ID, false);
 	$classes = "hero $hero_class $classes";
-	
+
 	$ret = '';
 	$ret .= "<div class='$classes'>";
 
 	$ids = implode(',', $featured_media['gallery']);
-	
+
 	$ret .= "<div class='featured-gallery'>";
 	$ret .= gallery_shortcode(array('ids' => $ids));
 	$ret .= "</div>";
@@ -263,17 +263,17 @@ function largo_get_featured_gallery_hero( $post = null, $classes = '' ) {
 
 /**
  * Returns information about the featured media.
- * 
+ *
  * @since 0.4
- * 
+ *
  * @param int|WP_Post $post Optional. Post ID or WP_Post object. Default is global $post.
  * @return array $post_type {
- * 
+ *
  * 			'id' => int, 		// post id.
  * 			'type' => string, 	// the type of featured_media
- * 
+ *
  * 			// ... other variables, dependent on what the type is.
- * 
+ *
  * 		}
  */
 function largo_get_featured_media( $post = null ) {
@@ -317,7 +317,7 @@ function largo_has_featured_media( $post = null ) {
 
 	$post = get_post($post);
 	$id = isset( $post->ID ) ? $post->ID : 0;
-	
+
 	$featured_media = largo_get_featured_media($id);
 
 	return !empty($featured_media);
