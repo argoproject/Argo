@@ -87,7 +87,7 @@ function largo_get_hero($post = null,$classes = '') {
 	 * @param String $var    DOM for hero.
 	 * @param WP_Post $post  post object.
 	 */
-	$ret = apply_filters('largo_get_hero',$ret,$post);
+	$ret = apply_filters('largo_get_hero',$ret,$post,$classes);
 
 	return $ret;
 
