@@ -123,7 +123,7 @@ class largo_twitter_widget extends WP_Widget {
 	 * 
 	 * @since 0.5
 	 */
-	function is_rendered() {
+	static function is_rendered() {
 		return self::$rendered;
 	}
 
