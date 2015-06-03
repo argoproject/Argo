@@ -59,7 +59,6 @@ Here is a complete list of the plugins currently installed and available.
 
 **Recommended/curated plugins:**
 
-- `Ad Code Manager <https://wordpress.org/plugins/ad-code-manager/>`_ - Easy ad code management
 - `Akismet <http://akismet.com/wordpress/>`_ - Spam prevention
 - `Better WordPress Google XML Sitemaps <https://wordpress.org/plugins/bwp-google-xml-sitemaps/>`_ - Create and manage sitemaps for submission to Google and Google News
 - `Breadcrumb NavXT <https://wordpress.org/plugins/breadcrumb-navxt/>`_ - Used by some sites to add breadcrumb navigation
@@ -68,6 +67,7 @@ Here is a complete list of the plugins currently installed and available.
 - `Co-Authors Plus <https://wordpress.org/plugins/co-authors-plus/>`_ - Allows multiple authors to be assigned to a post.
 - `Constant Contact Plugin <https://wordpress.org/plugins/constant-contact-api/>`_ - Adds integration for the Constant Contact email marketing service
 - `Disqus Comment System <https://wordpress.org/plugins/disqus-comment-system/>`_ - The Disqus comment system replaces your WordPress comment system with your comments hosted and powered by Disqus.
+- `DoubleClick for WordPress <https://github.com/INN/DoubleClick-for-WordPress>`_ - DoubleClick ad integration, maintained by INN.
 - `Edit Flow <https://wordpress.org/plugins/edit-flow/>`_ - Adds better editorial workflow options to the WordPress admin
 - `Facebook Comments <https://wordpress.org/plugins/facebook-comments-plugin/>`_ - Replaces the default WordPress comment system with Facebook comments
 - `Liveblog <https://wordpress.org/plugins/liveblog/>`_ - A simple way to add live blogs to your site.

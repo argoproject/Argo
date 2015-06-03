@@ -23,4 +23,3 @@ If your ads are not showing up, check that your ad widgets are set to be visible
 
 .. _DoubleClick for Publishers: https://www.google.com/doubleclick/publishers/welcome/
 .. _Google AdSense: https://www.google.com/adsense/start/
-.. _Ad Codes Manager: https://wordpress.org/plugins/ad-code-manager/
