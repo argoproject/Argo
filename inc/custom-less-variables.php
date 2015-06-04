@@ -159,14 +159,16 @@ class Largo_Custom_Less_Variables {
 	 * Register the Less files to compile into CSS files
 	 *
 	 * @param array $files - the LESS files to compile into CSS
+	 * @global bool LARGO_DEBUG - if false, minified CSS assets will be used by Largo, and these should be replaced with the custom-comiled assets.
 	 */
 	static function register_files( $files ) {
 		self::$less_files = (array) $files;
+		$suffix = (LARGO_DEBUG)? '.css' : '.min.css';
 
 		// Keep a copy list with the '.css' extension
 		$css_files = array();
 		foreach ($files as $key => $file ) {
-			$css_files[$key] = preg_replace( '#\.less$#', '.css', $file );
+			$css_files[$key] = preg_replace( '#\.less$#', $suffix, $file );
 		}
 		self::$css_files = $css_files;
 	}

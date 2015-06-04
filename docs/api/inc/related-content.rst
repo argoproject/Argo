@@ -64,6 +64,8 @@
 
    .. php:attr:: $post_ids
 
+   .. php:attr:: $post
+
    .. php:method:: Largo_Related::__construct()
 
       Constructor.
@@ -125,3 +127,7 @@
       :access: protected
       :param object $: WP_Query object
       :param boolean $ptional: whether the query post order has been reversed yet. If not, this will loop through in both directions.
+
+   .. php:method:: Largo_Related::have_enough_posts()
+
+      Counts to see if enough posts have been found

@@ -2,7 +2,7 @@
 
 A responsive WordPress framework designed for news publishers and developed by the Institute for Nonprofit News.
 
-<img src="https://travis-ci.org/INN/Largo.svg?branch=master" /> <img src="https://readthedocs.org/projects/largo/badge/?version=develop" />
+<img src="https://travis-ci.org/INN/Largo.svg?branch=master" /> <img src="https://readthedocs.org/projects/largo/badge/?version=master" />
 
 ---
 
@@ -28,7 +28,7 @@ The project extends work done by [NPR's Project Argo](http://argoproject.org/).
 
 Documentation and more information at: [largoproject.org](http://largoproject.org)
 
-**Current version:** v0.4
+**Current version:** v0.5
 
 ## Setup
 

@@ -27,6 +27,16 @@ body.normal.page {
       right: 0;
     }
 
+    // top tag
+    h5.top-tag {
+      position: absolute;
+      left: 0;
+    }
+
+    h1 {
+      padding-top: 26px;
+    }
+
     // subtitle
     h2.subtitle {
       font-size: @baseFontSize * 1.222;
@@ -137,13 +147,20 @@ body.normal.page {
     }
   }
 
+  #comments,
+  #disqus_thread {
+    margin: 0 17.021276594%;
+  }
+
   /* 1.6 - Overrides */
 
   @media @tabletDown {
     #sidebar {
       display: none;
     }
-    .article-bottom {
+    .article-bottom,
+    #comments,
+    #disqus_thread {
       margin: 0 @fluidGridColumnWidth;
     }
     article.post > header {
@@ -161,14 +178,16 @@ body.normal.page {
   }
 
   @media @mobile {
-    .article-bottom {
-      margin: 0 0;
+    .article-bottom,
+    #comments,
+    #disqus_thread {
+      margin: 0;
     }
     article.post > header {
       margin: 24px 0;
     }
     .entry-content {
-      padding: 0 0;
+      padding: 0;
     }
   }
 

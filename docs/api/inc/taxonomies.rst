@@ -48,7 +48,15 @@
 
 .. php:function:: largo_category_archive_posts()
 
-   Helper for getting posts in a category archive, sorted by featured first
+   Helper for getting posts in a category archive, excluding featured posts.
+
+.. php:function:: largo_get_featured_posts_in_category()
+
+   Get posts marked as "Featured in category" for a given category name.
+
+   :param string $category_name: the category to retrieve featured posts for.
+
+   :since: 0.5
 
 .. php:function:: unregister_series_taxonomy()
 

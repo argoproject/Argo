@@ -30,9 +30,9 @@
 
 /**
  * By default we'll assume the site is not hosted by INN.
- * 
- * There should be no reason to set this. It is defined to 
- * modify the default value of 'INN_MEMBER' below to true for 
+ *
+ * There should be no reason to set this. It is defined to
+ * modify the default value of 'INN_MEMBER' below to true for
  * INN hosted sites.
  */
 if ( ! defined( 'INN_HOSTED' ) )
@@ -40,7 +40,7 @@ if ( ! defined( 'INN_HOSTED' ) )
 
 /**
  * By default we'll assume the site is not for an INN member.
- * 
+ *
  * Set INN_MEMBER to TRUE to show an INN logo in the header
  * and a widget of INN member stories in the homepage sidebar
  */
@@ -137,7 +137,6 @@ class Largo {
 			'/inc/helpers.php',
 			'/inc/plugin-init.php',
 			'/inc/dashboard.php',
-			'/inc/robots.php',
 			'/inc/custom-feeds.php',
 			'/inc/users.php',
 			'/inc/term-meta.php',

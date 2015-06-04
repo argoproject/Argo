@@ -47,6 +47,38 @@ class FeaturedMedaiTestFunctions extends WP_UnitTestCase {
 		$this->assertEquals($featured_media, $this->media_types['image']);
 	}
 
+	function test_largo_hero() {
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
+
+	function test_largo_get_hero() {
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
+
+	function test_largo_featured_image_hero() {
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
+
+	function test_largo_get_featured_image_hero() {
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
+
+	function test_largo_featured_embed_hero() {
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
+
+	function test_largo_get_featured_embed_hero() {
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
+
+	function test_largo_featured_gallery_hero() {
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
+
+	function test_largo_get_featured_gallery_hero() {
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
+
 	function test_largo_has_featured_media() {
 		// If the post doesn't have featured media set, `largo_has_featured_media` should return false
 		$has_featured_media = largo_has_featured_media($this->post);
@@ -145,7 +177,7 @@ class FeaturedMediaTestAjaxFunctions extends WP_Ajax_UnitTestCase {
 			$this->_handleAjax("largo_featured_media_read");
 		} catch (WPAjaxDieContinueException $e) {
 			// The response should be equal to the $_POST data we sent
-			$this->assertEquals($_POST['data'], $this->_last_response);
+			$this->assertEquals(json_encode($this->media_types['image']), $this->_last_response);
 		}
 	}
 
@@ -172,7 +204,6 @@ class FeaturedMediaTestAjaxFunctions extends WP_Ajax_UnitTestCase {
 			// The response should be equal to the $_POST data we sent
 			$this->assertEquals($_POST['data'], $this->_last_response);
 		}
-		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
 	function test_largo_fetch_video_oembed() {

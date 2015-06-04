@@ -24,6 +24,10 @@
 
    .. php:attr:: $wp_query
 
+   .. php:attr:: $post
+
+   .. php:attr:: $post
+
    .. php:attr:: $wp_query
 
    .. php:attr:: $wp_query
@@ -46,7 +50,11 @@
 
    .. php:attr:: $args
 
-   .. php:attr:: $wp_query
+   .. php:attr:: $series_query
+
+   .. php:attr:: $save_post
+
+   .. php:attr:: $save_query
 
    .. php:attr:: $opt
 

@@ -8,6 +8,12 @@
 
 .. php:function:: largo_has_featured_media()
 
+   Helper function to tell if a post has featured media or not
+
+   :param string $id: A post ID
+
+   :returns: bool $f a post ID has featured media or not.
+
 .. php:function:: largo_enqueue_featured_media_js()
 
 .. php:function:: largo_add_featured_media_button()

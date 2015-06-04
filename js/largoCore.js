@@ -126,7 +126,7 @@ jQuery(document).ready(function($) {
 
 		if (mainEl.length) {
 			mainEl.waypoint(function(direction) {
-				if ($(window).width() < 768)
+				if ($(window).width() <= 768)
 					return false;
 
 				stickyNavEl.toggleClass('show', direction == 'down');
@@ -135,13 +135,13 @@ jQuery(document).ready(function($) {
 				offset: $('#wpadminbar').height() + parseInt(mainEl.css('marginTop'))
 			});
 
-			if ($(window).width() < 768) {
+			if ($(window).width() <= 768) {
 				stickyNavEl.addClass('show');
 				stickyNavEl.data('hideAtTop', false);
 			}
 
 			$(window).on('resize', function() {
-				if ($(window).width() < 768) {
+				if ($(window).width() <= 768) {
 					stickyNavEl.addClass('show');
 					stickyNavEl.data('hideAtTop', false);
 				} else {

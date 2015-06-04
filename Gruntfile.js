@@ -20,17 +20,13 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
 
         less: {
-            development: {
+            compile: {
                 options: {
                     paths: ['less'],
                     sourceMap: true,
                     outputSourceFiles: true,
                     sourceMapBasepath: path,
                 },
-                files: CSS_LESS_FILES
-            },
-            production: {
-                options: { paths: ['less'] },
                 files: CSS_LESS_FILES
             }
         },
@@ -67,13 +63,22 @@ module.exports = function(grunt) {
                 options: {
                     report: 'gzip'
                 },
-                files: [{
-                    expand: true,
-                    cwd: 'css',
-                    src: ['*.css', '!*.min.css'],
-                    dest: 'css',
-                    ext: '.min.css'
-                }]
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'css',
+                        src: ['*.css', '!*.min.css'],
+                        dest: 'css',
+                        ext: '.min.css'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'homepages/assets/css',
+                        src: ['*.css', '!*.min.css'],
+                        dest: 'homepages/assets/css',
+                        ext: '.min.css'
+                    }
+                ]
             }
         },
 
@@ -105,7 +110,7 @@ module.exports = function(grunt) {
                     'homepages/assets/less/**/*.less'
                 ],
                 tasks: [
-                    'less:development',
+                    'less:compile',
                     'cssmin'
                 ]
             },

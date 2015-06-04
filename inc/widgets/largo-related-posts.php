@@ -52,11 +52,7 @@ class largo_related_posts_widget extends WP_Widget {
 					<time class="entry-date updated dtstamp pubdate" datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>"><?php largo_time(); ?></time>
 				</h5>
 				<?php // post excerpt/summary
-				if ($post->post_excerpt) {
-					echo '<p>' . $post->post_excerpt . '</p>';
-				} else {
-					echo '<p>' . largo_trim_sentences($post->post_content, 2) . '</p>';
-				}
+				largo_excerpt(get_the_ID(), 2, false, '', true);
 		 		echo '</li>';
 	 		}
 
