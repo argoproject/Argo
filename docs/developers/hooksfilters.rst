@@ -1,6 +1,43 @@
 Hooks and filters
 =================
 
+Homepage template filters
+-------------------------
+
+**filter: largo_homepage_feature_stories_list_maximum**
+
+Filter the number of posts to display in the list of feature stories in 'HomepageSingleWithFeatured' templates.
+
+*args: $max*
+
+------------
+
+filter: **largo_homepage_series_stories_list_minimum**
+
+*args: $min*
+
+Filter the minimum number of posts to show in a series list in the
+HomepageSingleWithSeriesStories homepage list.
+
+This is used in the query for the series list of posts in the same series
+as the main feature. If fewer than this number of posts exist, the list
+is hidden and the headline dominates the full box.
+
+------------
+
+filter: **largo_homepage_series_stories_list_maximum**
+
+*args: $max*
+
+Filter the maximum number of posts to show in a series list in the
+HomepageSingleWithSeriesStories homepage list.
+
+This is used in the query for the series list of posts in the same series
+as the main feature. This is the maximum number of posts that will display
+in the list.
+
+Other filters and actions
+-------------------------
 
 **filter: largo_registration_extra_fields**
 
