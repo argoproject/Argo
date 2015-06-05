@@ -268,12 +268,27 @@ function optionsframework_options() {
 		'type' 		=> 'multicheck',
 		'options' 	=> $article_utility_buttons);
 
+	/**
+	 * Whether social icons should be shown in the sticky footer.
+	 * 
+	 *  1 - show social icons in sticky footer.
+	 *  0 - do not show social icons in the sticky footer.
+	 * 
+	 * @since 0.5
+	 */
 	$options[] = array(
 		'desc' 		=> __('<strong>Would you like to display share icons in the footer of single posts?</strong> By default social icons appear in the sticky footer of single posts but you can choose to not show them at all.', 'largo'),
 		'id' 		=> 'single_social_icons_footer',
 		'std' 		=> '1',
 		'type' 		=> 'checkbox',);
 
+	/**
+	 * Which social icons should be shown in the sticky footer.
+	 * 
+	 *  defaults: $footer_utility_buttons_defaults - facebook, twitter and email.
+	 * 
+	 * @since 0.5
+	 */
 	$options[] = array(
 		'desc' 		=> __('Select the <strong>share icons</strong> to display in the single post sticky footer.', 'largo'),
 		'id' 		=> 'footer_utilities',

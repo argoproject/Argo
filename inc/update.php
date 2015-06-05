@@ -20,6 +20,9 @@
 function largo_perform_update() {
 	if (largo_need_updates()) {
 
+		// this must run before any other function that makes use of of_set_option()
+		largo_set_new_option_defaults();
+
 		// Run when updating from pre-0.4
 		if (version_compare(of_get_option('largo_version'), '0.4') < 0) {
 			largo_home_transition();
@@ -88,6 +91,7 @@ function largo_need_updates() {
 /** --------------------------------------------------------
  * Upgrades for moving from 0.3 -> 0.4
  * 
+>>>>>>> develop
  * In which many theme options became widgets
  * And homepage templates are implemented
  * ------------------------------------------------------ */
@@ -497,6 +501,27 @@ function largo_remove_topstory_prominence_term() {
  * Functions that should run any time the largo version
  * number bumps.
  * ------------------------------------------------------ */
+
+/**
+ * Save default values for any newly introduced options to the database.
+ * 
+ * Note: this must be called before any other update function calls `of_set_option`, 
+ *       as `of_set_uption` defaults all values to null.
+ * 
+ * @since 0.5.1
+ */
+function largo_set_new_option_defaults() {
+
+	// Gets the unique id, returning a default if it isn't defined
+	$config = get_option( 'optionsframework' );
+	if ( isset( $config['id'] ) ) {
+		$options = get_option( $config['id'] );			// a list of saved options
+		$defaults = of_get_default_values();			// the list of default values.
+		$options = wp_parse_args($options,$defaults);	// merge 'em.
+		update_option($config['id'], $options);
+	}
+
+}
 
 /**
  * Make sure custom CSS is regenerated if we're using custom LESS variables
