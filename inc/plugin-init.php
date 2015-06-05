@@ -148,4 +148,13 @@ function largo_register_required_plugins() {
 
 	tgmpa( $plugins, $config );
 
+
+	// Hide notices from users that can't do anything about them.
+	// A future update to TGMPA intends to fix this issue on multisites.
+	// @see: https://github.com/TGMPA/TGM-Plugin-Activation/pull/247
+	//
+	// This should be removed after TGMPA is updated to version 3.0
+	if( !current_user_can('activate_plugins') )
+		TGM_Plugin_Activation::$instance->has_notices = false;
+
 }
