@@ -146,8 +146,10 @@ function largo_home_single_top() {
 
 /**
  * Returns featured stories for the homepage.
+ * 
+ * @param int $max. The maximum number of posts to return.
  */
-function largo_home_featured_stories() {
+function largo_home_featured_stories($max = 3) {
 	$big_story = largo_home_single_top();
 	$homepage_feature_term = get_term_by( 'name', __('Homepage Featured', 'largo'), 'prominence' );
 	$uncategorized_term = get_term_by( 'name', __('Uncategorized'), 'category' );
@@ -161,7 +163,7 @@ function largo_home_featured_stories() {
 				'terms' => $homepage_feature_term->term_id
 			)
 		),
-		'posts_per_page' => 3,
+		'posts_per_page' => $max,
 		'post__not_in' => array( $big_story->ID )
 	));
 

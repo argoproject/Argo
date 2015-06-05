@@ -59,6 +59,14 @@ function largo_get_hero($post = null,$classes = '') {
 
 	$ret = '';
 
+	$values = get_post_custom($post->ID);
+	
+	// If the box is checked to override the featured image display, obey it.
+	// EXCEPT if a youtube_url is added in the old way for the post. This is to respect
+	// behavior before v0.4,
+	if (isset($values['featured-image-display'][0]) && !isset($values['youtube_url']))
+		return $ret;
+
 	if (largo_has_featured_media($post->ID) && $hero_class !== 'is-empty') {
 
 		$featured_media = largo_get_featured_media($post->ID);
@@ -87,7 +95,7 @@ function largo_get_hero($post = null,$classes = '') {
 	 * @param String $var    DOM for hero.
 	 * @param WP_Post $post  post object.
 	 */
-	$ret = apply_filters('largo_get_hero',$ret,$post);
+	$ret = apply_filters('largo_get_hero',$ret,$post,$classes);
 
 	return $ret;
 

@@ -52,7 +52,44 @@ function homepage_series_stories_list() {
 	global $shown_ids;
 
 	$feature = largo_get_the_main_feature(largo_home_single_top());
-	$series_posts = largo_get_recent_posts_for_term($feature, 3, 2);
+
+	$min = 2;
+	$max = 3;
+
+	/**
+	 * Filter the minimum number of posts to show in a series list in the
+	 * HomepageSingleWithSeriesStories homepage list.
+	 *
+	 * This is used in the query for the series list of posts in the same series
+	 * as the main feature. If fewer than this number of posts exist, the list
+	 * is hidden and the headline dominates the full box.
+	 * 
+	 * Default value is 2.
+	 *
+	 * @since 0.5.1
+	 *
+	 * @param int  $var minimum number of posts that can show.
+	 */
+	$min = apply_filters('largo_homepage_series_stories_list_minimum',$min);
+
+
+	/**
+	 * Filter the maximum number of posts to show in a series list in the
+	 * HomepageSingleWithSeriesStories homepage list.
+	 *
+	 * This is used in the query for the series list of posts in the same series
+	 * as the main feature. This is the maximum number of posts that will display
+	 * in the list.
+	 * 
+	 * Default value is 3.
+	 *
+	 * @since 0.5.1
+	 *
+	 * @param int  $var minimum number of posts that can show.
+	 */
+	$max = apply_filters('largo_homepage_series_stories_list_maximum',$max);
+
+	$series_posts = largo_get_recent_posts_for_term($feature, $max, $min);
 
 	ob_start();
 	if (!empty($feature)) {
@@ -77,8 +114,26 @@ function homepage_series_stories_list() {
 function homepage_feature_stories_list() {
 	global $shown_ids;
 
+	$max = 3;
+
+	/**
+	 * Filter the maximum number of posts to show in the featured stories list
+	 * on the HomepageSingleWithFeatured homepage template.
+	 *
+	 * This is used in the query for the series list of posts in the same series
+	 * as the main feature. This is the maximum number of posts that will display
+	 * in the list.
+	 * 
+	 * Default value is 3.
+	 *
+	 * @since 0.5.1
+	 *
+	 * @param int  $var minimum number of posts that can show.
+	 */
+	$max = apply_filters('largo_homepage_feature_stories_list_maximum',$max);
+
 	ob_start();
-	$featured_stories = largo_home_featured_stories();
+	$featured_stories = largo_home_featured_stories($max);
 	foreach ($featured_stories as $featured) {
 		$shown_ids[] = $featured->ID;
 ?>
