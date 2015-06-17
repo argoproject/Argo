@@ -369,6 +369,7 @@ function more_profile_info($user) {
 	$hide = get_user_meta( $user->ID, "hide", true );
 	$emeritus = get_user_meta( $user->ID, "emeritus", true );
 	$honorary = get_user_meta( $user->ID, "honorary", true );
+
 	?>
 	<h3>More profile information</h3>
 	<table class="form-table">
@@ -413,13 +414,18 @@ function save_more_profile_info($user_id) {
 	if (!current_user_can('edit_user', $user_id ))
 		return false;
 
-	update_user_meta($user_id, 'job_title', $_POST['job_title']);
-	if (isset($_POST['hide']))
-		update_user_meta($user_id, 'hide', $_POST['hide']);
-	if (isset($_POST['emeritus']))
-		update_user_meta($user_id, 'emeritus', $_POST['emeritus']);
-	if (isset($_POST['honorary']))
-		update_user_meta($user_id, 'honorary', $_POST['honorary']);
+	$values = wp_parse_args($_POST, array(
+		'hide' => 'off',
+		'emeritus' => 'off',
+		'honorary' => 'off'
+	));
+
+	extract($values);
+
+	update_user_meta($user_id, 'job_title', $job_title);
+	update_user_meta($user_id, 'hide', $hide);
+	update_user_meta($user_id, 'emeritus', $emeritus);
+	update_user_meta($user_id, 'honorary', $honorary);
 }
 add_action('personal_options_update', 'save_more_profile_info');
 add_action('edit_user_profile_update', 'save_more_profile_info');
