@@ -39,7 +39,8 @@ class largo_staff_widget extends WP_Widget {
 
 		$markup = '<ul class="staff-roster">';
 		foreach ($users as $user) {
-			if (get_user_meta($user->ID, 'hide', true))
+			$hide = get_user_meta($user->ID, 'hide', true);
+			if ($hide == 'on')
 				continue;
 
 			$avatar = get_avatar($user->ID, '65');
@@ -48,13 +49,13 @@ class largo_staff_widget extends WP_Widget {
 			$honorary = get_user_meta($user->ID, 'honorary', true);
 			$job_title = get_user_meta($user->ID, 'job_title', true);
 
-			if (!empty($honorary) && !empty($emeritus)) {
+			if ($honorary == 'on' && $emeritus == 'on') {
 				$job_title = $job_title . ' (Honorary, emeritus)';
 			} else {
-				if (!empty($honorary))
+				if ($honorary == 'on')
 					$job_title = $job_title . ' (Honorary)';
 
-				if (!empty($emeritus))
+				if ($emeritus =='on')
 					$job_title = $job_title . ' (Emeritus)';
 			}
 
