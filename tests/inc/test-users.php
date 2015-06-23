@@ -105,6 +105,11 @@ class UsersTestFunctions extends WP_UnitTestCase {
 		unset($ids);
 	}
 
+	/**
+	 * Test the function largo_render_user_list
+	 *
+	 * Be aware: This may fail if partials/author-bio-description.php changes.
+	 */
 	function test_largo_render_user_list() {
 		/*
 		 * Test that a user without a description gets no output
