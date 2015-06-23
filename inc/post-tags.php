@@ -537,7 +537,7 @@ if ( ! function_exists( 'largo_content_nav' ) ) {
 			if ( !$posts_term ) $posts_term = 'Posts'; ?>
 			<nav id="<?php echo $nav_id; ?>" class="pager post-nav">
 				<div class="load-more">
-					<?php next_posts_link( 'Load more ' . strtolower($posts_term) ); ?>
+					<?php next_posts_link( apply_filters('largo_next_posts_link', __('Load more ', 'largo') . strtolower($posts_term)) ); ?>
 				</div>
 			</nav>
 		<?php }
