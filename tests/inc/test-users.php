@@ -106,7 +106,9 @@ class UsersTestFunctions extends WP_UnitTestCase {
 	}
 
 	function test_largo_render_user_list() {
-		// Test that a user without a description gets no output
+		/*
+		 * Test that a user without a description gets no output
+		 */
 		$user1 = $this->factory->user->create();
 		$arg1[] = get_user_by('id', $user1);
 
@@ -115,7 +117,9 @@ class UsersTestFunctions extends WP_UnitTestCase {
 		$out1 = ob_get_clean();
 		$this->assertEquals('<div class="user-list"></div>', $out1);
 
-		// Test that a user with a description get output
+		/*
+		 * Test that a user with a description gets output
+		 */
 		$user2 = $this->factory->user->create();
 		update_user_meta($user2, 'description', 'foobar');
 		$arg2[] = get_user_by('id', $user2);
@@ -126,7 +130,9 @@ class UsersTestFunctions extends WP_UnitTestCase {
 		$this->assertRegExp('/author-box/', $out2);
 		$this->assertRegExp('/foobar/', $out2);
 
-		// Test it with a user with an avatar
+		/*
+		 * Test that a user with an avatar has output including the avatar
+		 */
 		$user3 = $this->factory->user->create();
 		$attachment = $this->factory->post->create(array('post_type' => 'attachment'));
 		update_user_meta($user3, 'description', 'foobar');
@@ -140,7 +146,9 @@ class UsersTestFunctions extends WP_UnitTestCase {
 		$this->assertRegExp('/foobar/', $out3);
 		$this->assertRegExp('/src/', $out3);
 
-		// Test it with all the users
+		/*
+		 * Test it with all the users
+		 */
 		$arg4[] = get_user_by('id', $user1);
 		$arg4[] = get_user_by('id', $user2);
 		$arg4[] = get_user_by('id', $user3);
@@ -148,13 +156,27 @@ class UsersTestFunctions extends WP_UnitTestCase {
 		ob_start();
 		largo_render_user_list($arg4);
 		$out4 = ob_get_clean();
-		var_log($out4);
 
 		$this->assertEquals( 2, preg_match_all('/author-box/', $out4, $matches), "There were not 2 authors with descriptions rendered.");
 		$this->assertEquals( 1, preg_match_all('/src=/', $out4, $matches), "There was not 1 author with an avatar image rendered.");
 
+		/*
+		 * Test it with a user that is set to hide.
+		 */
+		$user4 = $this->factory->user->create();
+		$att4 = $this->factory->post->create(array('post_type' => 'attachment'));
+		update_user_meta($user4, 'description', 'foobar');
+		update_user_meta($user4, 'hide', 'on');
+		update_user_meta($user4, 'largo_avatar', $att4);
+		$arg4[] = get_user_by('id', $user4);
 
+		ob_start();
+		largo_render_user_list($arg4);
+		$out5 = ob_get_clean();
 
+		// Using same numbers here because the hidden user should not change these numbers.
+		$this->assertEquals( 2, preg_match_all('/author-box/', $out5, $matches), "There were not 2 authors with descriptions rendered.");
+		$this->assertEquals( 1, preg_match_all('/src=/', $out5, $matches), "There was not 1 author with an avatar image rendered.");
 
 	}
 
