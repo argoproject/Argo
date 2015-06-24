@@ -378,40 +378,30 @@ if ( ! function_exists( 'largo_excerpt' ) ) {
 
 		$the_post = get_post($the_post); // Normalize it into a post object
 
-		// Save the global $post object and then push our current post object so that certain functions (get_the_content) will work
-		global $post;
-		$_post = $post;
-		$post = $the_post;
-
-		// if a post has a custom excerpt set, we'll use that
-		if ( $the_post->post_excerpt ) {
-				$content = apply_filters( 'get_the_excerpt', $the_post->post_excerpt );
-
-		// if we're on the homepage and the post has a more tag, use that
-		} else if ( is_home() && strpos( $the_post->post_content, '<!--more-->' ) ) {
-			$content = get_the_content( '' );
-
-		// otherwise we'll just do our best and make the prettiest excerpt we can muster
+		if (!empty($the_post->post_excerpt)) {
+			// if a post has a custom excerpt set, we'll use that
+			$content = apply_filters('get_the_excerpt', $the_post->post_excerpt);
+		} else if (is_home() && preg_match('/<!--more(.*?)?-->/', $the_post->post_content, $matches) > 0) {
+			// if we're on the homepage and the post has a more tag, use that
+			$parts = explode($matches[0], $the_post->post_content, 2);
+			$content = $parts[0];
 		} else {
-			$content = largo_trim_sentences( $the_post->post_content, $sentence_count );
+			// otherwise we'll just do our best and make the prettiest excerpt we can muster
+			$content = largo_trim_sentences($the_post->post_content, $sentence_count);
 		}
 
-		$post = $_post; // Set it back
-
-		// optionally strip shortcodes and html, wrap everything in <p> tags
-		$output = '<p>';
-		if ( $strip_tags && $strip_shortcodes ) {
+		// optionally strip shortcodes and html
+		$output = '';
+		if ( $strip_tags && $strip_shortcodes )
 			$output .= strip_tags( strip_shortcodes ( $content ) );
-		} else if ( $strip_tags ) {
+		else if ( $strip_tags )
 			$output .= strip_tags( $content );
-		} else if ( $strip_shortcodes ) {
+		else if ( $strip_shortcodes )
 			$output .= strip_shortcodes( $content );
-		} else {
+		else
 			$output .= $content;
-		}
-		$output .= '</p>';
 
-		$output = apply_filters( 'the_content', $output );
+		$output = apply_filters('the_content', $output);
 
 		if ( $echo )
 			echo $output;
