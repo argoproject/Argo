@@ -403,7 +403,6 @@ if ( ! function_exists( 'largo_excerpt' ) ) {
 		if ( $strip_tags && $strip_shortcodes ) {
 			$output .= strip_tags( strip_shortcodes ( $content ) );
 		} else if ( $strip_tags ) {
-			echo 'foo';
 			$output .= strip_tags( $content );
 		} else if ( $strip_shortcodes ) {
 			$output .= strip_shortcodes( $content );

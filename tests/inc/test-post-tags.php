@@ -4,6 +4,14 @@ class PostTagsTestFunctions extends WP_UnitTestCase {
 
 	function setUp() {
 		parent::setUp();
+
+		$this->post_excerpt = <<<EOT
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque cursus purus id pharetra dapibus.
+EOT;
+
+		$this->post_id = $this->factory->post->create(array(
+			'post_excerpt' => $this->post_excerpt,
+		));
 	}
 
 	function test_largo_time() {
@@ -122,7 +130,8 @@ class PostTagsTestFunctions extends WP_UnitTestCase {
 	}
 
 	function test_largo_excerpt() {
-		$this->markTestIncomplete("This test has not yet been implemented.");
+		$result = largo_excerpt($this->post_id, 5, false, false, false);
+		$this->assertTrue(strpos($result, $this->post_excerpt) >= 0);
 	}
 
 	function test_largo_trim_sentences() {
