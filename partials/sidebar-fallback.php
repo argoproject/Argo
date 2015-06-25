@@ -23,8 +23,8 @@ if (of_get_option('donate_link')) {
 	);
 }
 
-the_widget( 'largo_sidebar_featured_widget', array(
-		'title' => __('We Recommend', 'largo'),
+the_widget( 'largo_recent_posts_widget', array(
+		'title' => __('Recent Posts', 'largo'),
 		'num_posts' => 5,
 		'num_sentences' => 2,
 		'widget_class' => 'default'

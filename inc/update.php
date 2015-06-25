@@ -91,7 +91,6 @@ function largo_need_updates() {
 /** --------------------------------------------------------
  * Upgrades for moving from 0.3 -> 0.4
  * 
->>>>>>> develop
  * In which many theme options became widgets
  * And homepage templates are implemented
  * ------------------------------------------------------ */
