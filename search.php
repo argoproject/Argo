@@ -10,6 +10,8 @@ get_header();
 		<div class="gcs_container">
 			<script>
 				(function() {
+
+
 					var cx = '<?php echo of_get_option('gcs_id'); ?>';
 					var gcse = document.createElement('script');
 					gcse.type = 'text/javascript';
@@ -21,9 +23,15 @@ get_header();
 				})();
 			</script>
 
-			<gcse:searchbox gname="largoGCSE" queryParameterName="s"></gcse:searchbox>
+			<gcse:searchbox
+				gname="largoGCSE"
+				overlayResults="false"
+				queryParameterName="s"></gcse:searchbox>
 			<?php if (is_search()) { ?>
-			<gcse:searchresults gname="largoGCSE" queryParameterName="s"></gcse:searchresults>
+			<gcse:searchresults
+				gname="largoGCSE"
+				overlayResults="false"
+				queryParameterName="s"></gcse:searchresults>
 			<?php } ?>
 
 			<?php if (is_search() && !isset($_GET['s'])) { ?>
