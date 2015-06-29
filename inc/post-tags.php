@@ -370,54 +370,38 @@ if ( ! function_exists( 'largo_custom_wp_link_pages' ) ) {
  * @since 0.3
  */
 if ( ! function_exists( 'largo_excerpt' ) ) {
-	function largo_excerpt( $the_post=null, $sentence_count = 5, $use_more = true, $more_link = '', $echo = true, $strip_tags = true, $strip_shortcodes = true ) {
+	function largo_excerpt( $the_post=null, $sentence_count = 5, $use_more, $more_link, $echo = true, $strip_tags = true, $strip_shortcodes = true ) {
+		if (!empty($use_more))
+			_deprecated_argument(__FUNCTION__, '0.5.1', 'Parameter $use_more is deprecated.');
+		if (!empty($more_link))
+			_deprecated_argument(__FUNCTION__, '0.5.1', 'Parameter $more_link is deprecated.');
+
 		$the_post = get_post($the_post); // Normalize it into a post object
 
-		// Save the global $post object and then push our current post object so that certain functions (get_the_content) will work
-		global $post;
-		$_post = $post;
-		$post = $the_post;
-
-		// handle annoying WP default '(more...' added to the end of excerpts
-		if ( !$use_more || !$more_link )
-			$more_link = '';
-
-		// if a post has a custom excerpt set, we'll use that
-		if ( $the_post->post_excerpt ) {
-			if ( !$use_more ) {
-				$content = apply_filters( 'get_the_excerpt', $the_post->post_excerpt );
-			} else {
-				$content = apply_filters( 'get_the_excerpt', $the_post->post_excerpt ) . ' <a href="' . get_permalink( $the_post->ID ) . '">' . $more_link . '</a>';
-			}
-
-		// if we're on the homepage and the post has a more tag, use that
-		} else if ( is_home() && strpos( $the_post->post_content, '<!--more-->' ) ) {
-			$content = get_the_content( $more_link );
-
-		// otherwise we'll just do our best and make the prettiest excerpt we can muster
+		if (!empty($the_post->post_excerpt)) {
+			// if a post has a custom excerpt set, we'll use that
+			$content = apply_filters('get_the_excerpt', $the_post->post_excerpt);
+		} else if (is_home() && preg_match('/<!--more(.*?)?-->/', $the_post->post_content, $matches) > 0) {
+			// if we're on the homepage and the post has a more tag, use that
+			$parts = explode($matches[0], $the_post->post_content, 2);
+			$content = $parts[0];
 		} else {
-			$content = largo_trim_sentences( $the_post->post_content, $sentence_count );
-			if ( $use_more )
-				$content .= '<a href="' . get_permalink( $the_post->ID ) . '">' . $more_link . '</a>';
+			// otherwise we'll just do our best and make the prettiest excerpt we can muster
+			$content = largo_trim_sentences($the_post->post_content, $sentence_count);
 		}
 
-		$post = $_post; // Set it back
-
-		// optionally strip shortcodes and html, wrap everything in <p> tags
-		$output = '<p>';
-		if ( $strip_tags && $strip_shortcodes ) {
+		// optionally strip shortcodes and html
+		$output = '';
+		if ( $strip_tags && $strip_shortcodes )
 			$output .= strip_tags( strip_shortcodes ( $content ) );
-		} else if ( $strip_tags ) {
-			echo 'foo';
+		else if ( $strip_tags )
 			$output .= strip_tags( $content );
-		} else if ( $strip_shortcodes ) {
+		else if ( $strip_shortcodes )
 			$output .= strip_shortcodes( $content );
-		} else {
+		else
 			$output .= $content;
-		}
-		$output .= '</p>';
 
-		$output = apply_filters( 'the_content', $output );
+		$output = apply_filters('the_content', $output);
 
 		if ( $echo )
 			echo $output;
