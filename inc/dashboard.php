@@ -177,53 +177,37 @@ function largo_dash_admin_menu( $wp_admin_bar ) {
 		$args = array('id' => 'largo_docs_devs', 'title' => 'For Developers', 'href' => 'http://largo.readthedocs.org/developers/fordevelopers.html', 'parent' => 'largo_docs'); 
 		$wp_admin_bar->add_node($args);
 		
-		// Images Sizes
-		$args = array('id' => 'largo_docs_imgs', 'title' => 'Images Sizes', 'href' => 'http://largo.readthedocs.org/developers/imagesizes.html', 'parent' => 'largo_docs'); 
+		// Image Sizes
+		$args = array('id' => 'largo_docs_imgs', 'title' => 'Image Sizes', 'href' => 'http://largo.readthedocs.org/developers/imagesizes.html', 'parent' => 'largo_docs'); 
 		$wp_admin_bar->add_node($args);
 		
 	// Knowledge Base
-	$args = array('id' => 'knowlege_base', 'title' => 'Knowledge Base', 'href' => 'http://confluence.inn.org/display/LKB/Largo+Knowledge+Base', 'parent' => 'largo_admin_mega'); 
+	$args = array('id' => 'knowledge_base', 'title' => 'Knowledge Base', 'href' => 'http://confluence.inn.org/display/LKB/Largo+Knowledge+Base', 'parent' => 'largo_admin_mega'); 
 	$wp_admin_bar->add_node($args);
 	
 	// Member Help Desk
-	$args = array('id' => 'support', 'title' => 'Member Help Desk', 'href' => 'https://github.com/inn/largo', 'parent' => 'largo_admin_mega'); 
+	$args = array('id' => 'support', 'title' => 'Help Desk', 'href' => 'http://jira.inn.org/servicedesk/customer/portal/4', 'parent' => 'largo_admin_mega'); 
 	$wp_admin_bar->add_node($args);
 	
 	// Largo on GitHub
-	$args = array('id' => 'github', 'title' => 'Project GitHub', 'href' => 'https://github.com/inn/largo', 'parent' => 'largo_admin_mega'); 
+	$args = array('id' => 'github', 'title' => 'Largo on GitHub', 'href' => 'https://github.com/inn/largo', 'parent' => 'largo_admin_mega'); 
 	$wp_admin_bar->add_node($args);
 	
 	// Largo on Twitter
-	$args = array('id' => 'twitter', 'title' => 'Project Twitter', 'href' => 'https://twitter.com/largoproject', 'parent' => 'largo_admin_mega'); 
+	$args = array('id' => 'twitter', 'title' => '@LargoProject on Twitter', 'href' => 'https://twitter.com/largoproject', 'parent' => 'largo_admin_mega'); 
 	$wp_admin_bar->add_node($args);
 	
 	
 	// INN Nerds
 	$args = array('id' => 'inn_nerds', 'title' => 'INN Nerds', 'href' => 'http://nerds.inn.org', 'parent' => 'largo_admin_mega'); 
 	$wp_admin_bar->add_node($args);
-		
-		// Friday Email Newsletter
-		$args = array('id' => 'inn_nerds_newsletter', 'title' => 'Friday Email Newsletter', 'href' => 'http://investigativenewsnetwork.us1.list-manage.com/subscribe/post?u=81670c9d1b5fbeba1c29f2865&id=1476113985', 'parent' => 'inn_nerds'); 
-		$wp_admin_bar->add_node($args);
-		
-		// Friday Office Hours
-		$args = array('id' => 'inn_nerds_office_hours', 'title' => 'Friday Office Hours', 'href' => 'https://docs.google.com/spreadsheets/d/1p-twn2D8oow7vXBfkcdYcZnVA4z8Q42OMs77KlHwf-g', 'parent' => 'inn_nerds'); 
-		$wp_admin_bar->add_node($args);
-		
-		// Monthly Book Club
-		$args = array('id' => 'inn_nerds_book_club', 'title' => 'Monthly Book Club', 'href' => 'http://newsnerdbookclub.com', 'parent' => 'inn_nerds'); 
-		$wp_admin_bar->add_node($args);
-		
+
 		// Blog
-		$args = array('id' => 'inn_nerds_blog', 'title' => 'Blog', 'href' => 'http://nerds.inn.org', 'parent' => 'inn_nerds'); 
-		$wp_admin_bar->add_node($args);
-		
-		// Team Docs
-		$args = array('id' => 'inn_nerds_docs', 'title' => 'Team Docs', 'href' => 'https://github.com/inn/docs', 'parent' => 'inn_nerds'); 
-		$wp_admin_bar->add_node($args);
+		$args = array('id' => 'inn_nerds_blog', 'title' => 'Our Blog', 'href' => 'http://nerds.inn.org', 'parent' => 'inn_nerds'); 
+		$wp_admin_bar->add_node($args);		
 		
 		// GitHub
-		$args = array('id' => 'inn_nerds_github', 'title' => 'GitHub', 'href' => 'https://github.com/inn', 'parent' => 'inn_nerds'); 
+		$args = array('id' => 'inn_nerds_github', 'title' => 'Our Projects on GitHub', 'href' => 'https://github.com/inn', 'parent' => 'inn_nerds'); 
 		$wp_admin_bar->add_node($args);
 		
 		// Twitter
@@ -233,13 +217,25 @@ function largo_dash_admin_menu( $wp_admin_bar ) {
 		// Contact
 		$args = array('id' => 'contact_nerds', 'title' => 'Contact', 'href' => 'http://nerds.inn.org/contact/', 'parent' => 'inn_nerds'); 
 		$wp_admin_bar->add_node($args);
+		
+		// Friday Email Newsletter
+		$args = array('id' => 'inn_nerds_newsletter', 'title' => 'Email Newsletter', 'href' => 'http://investigativenewsnetwork.us1.list-manage.com/subscribe/post?u=81670c9d1b5fbeba1c29f2865&id=1476113985', 'parent' => 'inn_nerds'); 
+		$wp_admin_bar->add_node($args);
+		
+		// Friday Office Hours
+		$args = array('id' => 'inn_nerds_office_hours', 'title' => 'Open Office Hours', 'href' => 'https://docs.google.com/spreadsheets/d/1p-twn2D8oow7vXBfkcdYcZnVA4z8Q42OMs77KlHwf-g', 'parent' => 'inn_nerds'); 
+		$wp_admin_bar->add_node($args);
+		
+		// Monthly Book Club
+		$args = array('id' => 'inn_nerds_book_club', 'title' => 'Monthly Book Club', 'href' => 'http://newsnerdbookclub.com', 'parent' => 'inn_nerds'); 
+		$wp_admin_bar->add_node($args);
 	
 	// About INN	
 	$args = array('id' => 'about_inn', 'title' => 'About INN', 'href' => 'http://inn.org/about', 'parent' => 'largo_admin_mega'); 
 	$wp_admin_bar->add_node($args);
 	
 	// Donate
-	$args = array('id' => 'donate_inn', 'title' => 'Donate', 'href' => 'https://www.paypal.com/us/cgi-bin/webscr?cmd=_flow&SESSION=NC6_vJyx_2ZhhlYYXSofxBF-myNm5pUVUgznfX2jaoSqcTKhviKaaoYX9qS&dispatch=5885d80a13c0db1f8e263663d3faee8de6030e9239419d79c3f52f70a3ed57ec', 'parent' => 'largo_admin_mega'); 
+	$args = array('id' => 'donate_inn', 'title' => 'Donate', 'href' => 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=M7T6234BREMG2', 'parent' => 'largo_admin_mega'); 
 	$wp_admin_bar->add_node($args);
 
 }
