@@ -133,6 +133,8 @@ For more information on creating a series landing page, see :doc:`landingpages`.
 
 **Search Options** - Google Custom Search generally returns better search results than WordPress' included search engine. If you would like to enable Google Custom Search, go to https://www.google.com/cse/create/new to set it up, then paste your search engine ID in the settings box and enable the checkbox.
 
+Be sure and use the "Results only" layout listed in the `Google Custom Search dashboard under "Look and feel." <https://developers.google.com/custom-search/docs/ui#setting-the-search-element-layout>`_
+
 **Site Verification**:
 
 - Twitter Account ID: This is a 9-digit ID number used for verifying your site to Twitter Analytics
