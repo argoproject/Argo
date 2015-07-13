@@ -66,7 +66,7 @@ if (!function_exists('largo_load_more_posts_data')) {
  */
 if (!function_exists('largo_load_more_posts')) {
 	function largo_load_more_posts() {
-		
+
 		global $opt;
 
 		$paged = (isset($_POST['paged'])) ? $_POST['paged'] : 0;
