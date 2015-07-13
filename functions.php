@@ -162,7 +162,8 @@ class Largo {
 			'/inc/update.php',
 			'/inc/avatars.php',
 			'/inc/featured-media.php',
-			'/inc/deprecated.php'
+			'/inc/deprecated.php',
+			'/inc/conditionals.php'
 		);
 
 		if ( $this->is_less_enabled() ) {
