@@ -53,7 +53,7 @@
             this.$el.html("<span>" + this.config.no_more_posts + "</span>");
         } else {
             var markup = $(html);
-            $(html).insertBefore('#nav-below');
+            $(html).insertBefore(this.$el);
         }
         this.$el.removeClass('loading');
     };
