@@ -42,8 +42,9 @@ if (!function_exists('largo_load_more_posts_data')) {
 			'ajax_url' => admin_url('admin-ajax.php'),
 			'paged' => (!empty($wp_query->query_vars['paged']))? $wp_query->query_vars['paged'] : 0,
 			'query' => $query,
-			'is_home' => $wp_query->is_home(), 
-			'is_series_landing' => $post->post_type == 'cftl-tax-landing' ? true : false
+			'is_home' => $wp_query->is_home(),
+			'is_series_landing' => $post->post_type == 'cftl-tax-landing' ? true : false,
+			'no_more_posts' => apply_filters('largo_no_more_posts_text', "You've reached the end!")
 		);
 
 		if($post->post_type == 'cftl-tax-landing') {

@@ -16,8 +16,12 @@
                 type: 'POST',
                 dataType: 'html',
                 success: function(html) {
-                    var markup = $(html);
-                    $(html).insertBefore('#nav-below');
+                    if (html.trim() == '') {
+                        $('#nav-below .load-more').html("<span>" + LMP.no_more_posts + "</span>");
+                    } else {
+                        var markup = $(html);
+                        $(html).insertBefore('#nav-below');
+                    }
                     load_more.removeClass('loading');
                 },
                 error: function() {
