@@ -82,10 +82,7 @@ endif;
 <div id="content" class="span<?php echo $content_span[ $opt['cftl_layout'] ]; ?> stories" role="main">
 <?php
 
-global $wp_query;
-global $post;
-$save_post = $post;
-$save_query = $wp_query;
+global $wp_query, $post;
 
 // Make sure we're actually a series page, and pull posts accordingly
 if ( isset( $wp_query->query_vars['term'] )
@@ -127,19 +124,14 @@ if ( isset( $wp_query->query_vars['term'] )
 			break;
 	}
 
-	// Build the query, but don't use the original because that messes up pagination in a way that ignores posts_per_page
-	$series_query = new WP_Query($args);
+	$wp_query = new WP_Query($args);
 
 	// and finally wind the posts back so we can go through the loop as usual
-	while ( $series_query->have_posts() ) : $series_query->the_post();
+	while ( $wp_query->have_posts() ) : $wp_query->the_post();
 		get_template_part( 'partials/content', 'series' );
 	endwhile;
 
 	largo_content_nav( 'nav-below' );
-
-	wp_reset_postdata();
-	$post = $save_post;
-	$wp_query = $save_query;
 
 } ?>
 
