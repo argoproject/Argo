@@ -536,6 +536,22 @@ function optionsframework_options() {
 		'type' 	=> 'checkbox');
 
 	$options[] = array(
+		'desc' 	=> __('Default region in lefthand column of Landing Pages', 'largo'),
+		'id' 	=> 'landing_left_region_default',
+		'std' 	=> 'sidebar-main',
+		'type' 	=> 'select',
+		'class' => 'hidden',
+		'options' => $region_options);
+
+	$options[] = array(
+		'desc' 	=> __('Default region in righthand column of Landing Pages', 'largo'),
+		'id' 	=> 'landing_right_region_default',
+		'std' 	=> 'sidebar-main',
+		'type' 	=> 'select',
+		'class' => 'hidden',
+		'options' => $region_options);
+
+	$options[] = array(
 		'desc' 	=> __('Enable Optional Leaderboard Ad Zone.', 'largo'),
 		'id' 	=> 'leaderboard_enabled',
 		'std' 	=> '0',
@@ -547,19 +563,6 @@ function optionsframework_options() {
 		'std' 	=> '0',
 		'type' 	=> 'checkbox');
 
-	$options[] = array(
-		'desc' 	=> __('Default region in lefthand column of Landing Pages', 'largo'),
-		'id' 	=> 'landing_left_region_default',
-		'std' 	=> 'sidebar-main',
-		'type' 	=> 'select',
-		'options' => $region_options);
-
-	$options[] = array(
-		'desc' 	=> __('Default region in righthand column of Landing Pages', 'largo'),
-		'id' 	=> 'landing_right_region_default',
-		'std' 	=> 'sidebar-main',
-		'type' 	=> 'select',
-		'options' => $region_options);
 
 	// hidden field logs largo version to facilitate tracking which set of options are stored
 	$largo = wp_get_theme('largo');
@@ -736,11 +739,15 @@ jQuery(document).ready(function($) {
 	// show/hide custom series landing pages.
 	$('#series_enabled').click(function() {
 		$('#section-custom_landing_enabled').fadeToggle(400);
+		$('#section-landing_left_region_default').fadeToggle(400);
+		$('#section-landing_right_region_default').fadeToggle(400);
 		$('#section-custom_landing_enabled input').removeAttr('checked');
 	});
 
 	if ($('#series_enabled:checked').val() !== undefined) {
 		$('#section-custom_landing_enabled').show();
+		$('#section-landing_left_region_default').show();
+		$('#section-landing_right_region_default').show();
 	}
 });
 </script>

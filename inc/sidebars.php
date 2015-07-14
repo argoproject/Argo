@@ -122,14 +122,14 @@ function largo_register_sidebars() {
 }
 add_action( 'widgets_init', 'largo_register_sidebars' );
 
-/**
- * Builds a dropdown menu of the custom sidebars
- * Used in the meta box on post/page edit screen and landing page edit screen
- * $skip_default was deprecated in Largo 0.4
- *
- * @since 0.3
- */
 if( !function_exists( 'largo_custom_sidebars_dropdown' ) ) {
+	/**
+	 * Builds a dropdown menu of the custom sidebars
+	 * Used in the meta box on post/page edit screen
+	 * $skip_default was deprecated in Largo 0.4
+	 *
+	 * @since 0.3
+	 */
 	function largo_custom_sidebars_dropdown( $selected='', $skip_default=false, $post_id=NULL ) {
 		global $wp_registered_sidebars, $post;
 
@@ -192,6 +192,67 @@ if( !function_exists( 'largo_custom_sidebars_dropdown' ) ) {
 
 		// Fill the select element with all registered sidebars that are custom
 		foreach ( $wp_registered_sidebars as $sidebar_id => $sidebar ) {
+			if ( in_array( $sidebar_id, $excluded ) || in_array( $sidebar['name'], $excluded ) )
+				continue;
+
+			$output .= '<option value="' . $sidebar_id . '" ' . selected( $sidebar_id, $val, false ) . '>' . $sidebar['name'] . '</option>';
+		}
+
+		echo $output;
+	}
+}
+
+if( !function_exists( 'largo_landing_page_custom_sidebars_dropdown' ) ) {
+	/**
+	 * Builds a dropdown menu of the custom sidebars for use on custom landing pages
+	 * Used in the meta box on post/page edit screen
+	 * $skip_default was deprecated in Largo 0.4
+	 *
+	 * @param $left_or_right string one of 'left' or 'right' to signal which landing page region to build a dropdown for
+	 * @param $selected string the id of the sidebar that should be marked as selected when the dropdown is generated
+	 * @param $post_id integer optionally specify which custom landing page post ID you want to generate a dropdown for
+	 * @since 0.4
+	 */
+	function largo_landing_page_custom_sidebars_dropdown($left_or_right, $selected, $post_id=null) {
+		global $wp_registered_sidebars, $post;
+
+		$the_id = ($post_id)? $post_id : $post->ID;
+		$custom = ($selected)? $selected : get_post_meta($the_id, 'custom_sidebar', true);
+
+		// for the ultimate in backwards compatibility, if nothing's set or using deprecated 'default'
+		$default = ( of_get_option( 'single_template' ) == 'classic' ) ? 'sidebar-single' : 'none';
+		$val = $default;
+
+		// for new posts
+		if ($admin_page->action == 'add')
+			$val = 'none';
+
+		// for posts and taxonomies with values set
+		if ( $custom && $custom !== 'default' )
+			$val = $custom;
+
+		$admin_page = get_current_screen();
+		$output = '';
+		if ( isset($admin_page->post_type) and $admin_page->post_type == 'cftl-tax-landing' ) {
+			$default = of_get_option(
+				'landing_' . $left_or_right . '_region_default',
+				($left_or_right == 'right')? 'sidebar-main' : 'sidebar-single');
+
+			$default_label = sprintf( __('Default (%s)', 'largo'), $wp_registered_sidebars[$default]['name']);
+
+			$output .= '<option value="' . $default . '" ';
+			$output .= selected('none', $val, false);
+			$output .= '>' . $default_label . '</option>';
+		}
+
+		// Filter list of sidebars to exclude those we don't want users to choose
+		$excluded = largo_get_excluded_sidebars();
+
+		// Fill the select element with all registered sidebars that are custom
+		foreach ( $wp_registered_sidebars as $sidebar_id => $sidebar ) {
+			if ($sidebar_id == $default)
+				continue;
+
 			if ( in_array( $sidebar_id, $excluded ) || in_array( $sidebar['name'], $excluded ) )
 				continue;
 
