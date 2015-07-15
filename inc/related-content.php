@@ -481,7 +481,7 @@ class Largo_Related {
 					'order' => 'ASC',
 					'ignore_sticky_posts' => 1,
 					'date_query' => array(
-						'after' => $this->post->post_date,
+						'before' => $this->post->post_date,
 					),
 				);
 
@@ -549,7 +549,7 @@ class Largo_Related {
 					'order' => 'ASC',
 					'ignore_sticky_posts' => 1,
 					'date_query' => array(
-						'after' => $this->post->post_date,
+						'before' => $this->post->post_date,
 					),
 				);
 
