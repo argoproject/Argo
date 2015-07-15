@@ -110,9 +110,9 @@ function largo_register_sidebars() {
 	// register the active widget areas
 	foreach ( $sidebars as $sidebar ) {
 		register_sidebar( array(
-			'name' 			=> $sidebar['name'],
+			'name' 		=> $sidebar['name'],
 			'description' 	=> $sidebar['desc'],
-			'id' 			=> $sidebar['id'],
+			'id' 		=> $sidebar['id'],
 			'before_widget' => '<aside id="%1$s" class="%2$s clearfix">',
 			'after_widget' 	=> "</aside>",
 			'before_title' 	=> '<h3 class="widgettitle">',
@@ -141,7 +141,7 @@ if( !function_exists( 'largo_custom_sidebars_dropdown' ) ) {
 		$val = $default;
 
 		// for new posts
-		if ($admin_page->action == 'add')
+		if ( $admin_page->action == 'add' )
 			$val = 'none';
 
 		// for posts and taxonomies with values set
@@ -172,7 +172,7 @@ if( !function_exists( 'largo_custom_sidebars_dropdown' ) ) {
 			}
 
 			$output .= '<option value="none" ';
-			$output .= selected('none', $val, false);
+			$output .= selected( 'none', $val, false );
 			$output .= '>' . $default_label . '</option>';
 		}
 
@@ -183,7 +183,7 @@ if( !function_exists( 'largo_custom_sidebars_dropdown' ) ) {
 				$default_label = sprintf( __( 'Default (%s)', 'largo' ), $wp_registered_sidebars['sidebar-main']['name'] );
 			}
 			$output .= '<option value="none" ';
-			$output .= selected('none', $val, false);
+			$output .= selected( 'none', $val, false );
 			$output .= '>' . $default_label . '</option>';
 		}
 
@@ -213,18 +213,18 @@ if( !function_exists( 'largo_landing_page_custom_sidebars_dropdown' ) ) {
 	 * @param $post_id integer optionally specify which custom landing page post ID you want to generate a dropdown for
 	 * @since 0.4
 	 */
-	function largo_landing_page_custom_sidebars_dropdown($left_or_right, $selected, $post_id=null) {
+	function largo_landing_page_custom_sidebars_dropdown( $left_or_right, $selected, $post_id=null ) {
 		global $wp_registered_sidebars, $post;
 
-		$the_id = ($post_id)? $post_id : $post->ID;
-		$custom = ($selected)? $selected : get_post_meta($the_id, 'custom_sidebar', true);
+		$the_id = ( $post_id )? $post_id : $post->ID;
+		$custom = ( $selected )? $selected : get_post_meta( $the_id, 'custom_sidebar', true );
 
 		// for the ultimate in backwards compatibility, if nothing's set or using deprecated 'default'
 		$default = ( of_get_option( 'single_template' ) == 'classic' ) ? 'sidebar-single' : 'none';
 		$val = $default;
 
 		// for new posts
-		if ($admin_page->action == 'add')
+		if ( $admin_page->action == 'add' )
 			$val = 'none';
 
 		// for posts and taxonomies with values set
@@ -233,12 +233,12 @@ if( !function_exists( 'largo_landing_page_custom_sidebars_dropdown' ) ) {
 
 		$admin_page = get_current_screen();
 		$output = '';
-		if ( isset($admin_page->post_type) and $admin_page->post_type == 'cftl-tax-landing' ) {
+		if ( isset( $admin_page->post_type ) and $admin_page->post_type == 'cftl-tax-landing' ) {
 			$default = of_get_option(
 				'landing_' . $left_or_right . '_region_default',
-				($left_or_right == 'right')? 'sidebar-main' : 'sidebar-single');
+				( $left_or_right == 'right') ? 'sidebar-main' : 'sidebar-single' );
 
-			$default_label = sprintf( __('Default (%s)', 'largo'), $wp_registered_sidebars[$default]['name']);
+			$default_label = sprintf( __( 'Default (%s)', 'largo' ), $wp_registered_sidebars[$default]['name']);
 
 			$output .= '<option value="' . $default . '" ';
 			$output .= selected('none', $val, false);
@@ -250,7 +250,7 @@ if( !function_exists( 'largo_landing_page_custom_sidebars_dropdown' ) ) {
 
 		// Fill the select element with all registered sidebars that are custom
 		foreach ( $wp_registered_sidebars as $sidebar_id => $sidebar ) {
-			if ($sidebar_id == $default)
+			if ( $sidebar_id == $default )
 				continue;
 
 			if ( in_array( $sidebar_id, $excluded ) || in_array( $sidebar['name'], $excluded ) )
@@ -333,7 +333,7 @@ function largo_sidebar_span_class() {
 
 		$custom_template = get_post_meta( $post->ID, $meta_field, true );
 
-		if (!empty($custom_template)) {
+		if ( !empty( $custom_template ) ) {
 			if ( $custom_template == 'single-one-column.php' )
 				return 'span2';
 			else if ( $custom_template !== 'single-one-column.php' )
