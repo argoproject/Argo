@@ -93,8 +93,8 @@ $save_query = $wp_query;
 
 // Make sure we're actually a series page, and pull posts accordingly
 if ( isset( $wp_query->query_vars['term'] )
-			&& isset( $wp_query->query_vars['taxonomy'] )
-			&& 'series' == $wp_query->query_vars['taxonomy'] ) {
+		&& isset( $wp_query->query_vars['taxonomy'] )
+		&& 'series' == $wp_query->query_vars['taxonomy'] ) {
 
 	$series = $wp_query->query_vars['term'];
 
@@ -151,10 +151,11 @@ if ( isset( $wp_query->query_vars['term'] )
 
 <?php // display left rail
 if ($opt['cftl_layout'] != 'one-column') :
-	if (!empty($opt['right_region']) && $opt['right_region'] !== 'none')
+	if (!empty($opt['right_region']) && $opt['right_region'] !== 'none') {
 		$right_rail = $opt['right_region'];
-	else
+	} else {
 		$right_rail = 'single';
+	}
 ?>
 <aside id="sidebar" class="span4">
 	<?php do_action('largo_before_sidebar_content'); ?>
