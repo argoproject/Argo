@@ -31,7 +31,7 @@ class AjaxFunctionsTestFunctions extends WP_UnitTestCase {
 		}
 
 		$this->expectOutputRegex('/script/');
-		largo_load_more_posts_data();
+		largo_load_more_posts_data('test_nav', $wp_query);
 	}
 
 }
@@ -105,7 +105,6 @@ class AjaxFunctionsTestAjaxFunctions extends WP_Ajax_UnitTestCase {
 		$_POST['paged'] = 0;
 		$_POST['is_series_landing'] = true;
 		$_POST['opt'] = array();
-
 
 		try {
 			$this->_handleAjax("load_more_posts");
