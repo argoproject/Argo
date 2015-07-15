@@ -124,15 +124,18 @@ if ( isset( $wp_query->query_vars['term'] )
 			break;
 	}
 
-	$wp_query = new WP_Query($args);
-
-	// and finally wind the posts back so we can go through the loop as usual
-	while ( $wp_query->have_posts() ) : $wp_query->the_post();
+	$series_query = new WP_Query($args);
+	while ( $series_query->have_posts() ) : $series_query->the_post();
 		get_template_part( 'partials/content', 'series' );
 	endwhile;
+	wp_reset_postdata();
 
-	largo_content_nav( 'nav-below' );
-
+	$posts_term = of_get_option('posts_term_plural');
+	largo_render_template('partials/load-more-posts', array(
+		'nav_id' => 'nav-below',
+		'the_query' => $series_query,
+		'posts_term' => ($posts_term)? $posts_term : 'Posts'
+	));
 } ?>
 
 </div><!-- /.grid_8 #content -->
