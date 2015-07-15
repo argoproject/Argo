@@ -79,9 +79,17 @@ article img.attachment-post-thumbnail {
   h2 {
     margin-bottom: 12px;
     line-height: 1.3;
-    font-size: @baseFontSize * 1.5;
+    font-size: @baseFontSize * 1.25;
   }
 }
+@media (min-width:960px){
+  .secondary-featured-post {
+    h2 {
+      font-size: @baseFontSize * 1.5;
+    }
+  }
+}
+
 
 // posts on archive pages
 .archive,
