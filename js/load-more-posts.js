@@ -31,7 +31,6 @@
     LoadMorePosts.prototype.request = function() {
         this.$el.addClass('loading');
 
-        this.ajax_opts.data.last = this.get_last_post_id();
         this.ajax_opts.data.paged += 1;
         this.ajax_opts.data.query = JSON.stringify(this.config.query);
         $.ajax(this.ajax_opts);
@@ -40,12 +39,6 @@
 
     LoadMorePosts.prototype.bind_events = function() {
         this.$el.find('a').click(this.request.bind(this));
-    };
-
-    LoadMorePosts.prototype.get_last_post_id = function() {
-        var last_story = $('.stories article').last();
-            id = last_story.attr('id').replace('post-', '');
-        return id;
     };
 
     LoadMorePosts.prototype._success = function(html) {
