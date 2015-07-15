@@ -69,13 +69,6 @@ function largo_register_sidebars() {
 		);
 	}
 
-	if ( of_get_option('homepage_layout') == '3col' ) {
-		$sidebars[] = array(
-			'name' 	=> __( 'Homepage Left Rail', 'largo' ),
-			'desc' 	=> __( 'An optional widget area that, when enabled, appears to the left of the main content area on the homepage.', 'largo' ),
-			'id' 	=> 'homepage-left-rail'
-		);
-	}
 	if ( of_get_option('homepage_bottom') == 'widgets' ) {
 		$sidebars[] = array(
 			'name' 	=> __( 'Homepage Bottom', 'largo' ),
