@@ -69,10 +69,14 @@ $content_span = array( 'one-column' => 12, 'two-column' => 8, 'three-column' => 
 
 
 <?php // display left rail
-if ( 'three-column' == $opt['cftl_layout'] ) : ?>
+if ( 'three-column' == $opt['cftl_layout'] ) :
+		$left_rail = $opt['left_region'];
+?>
 	<aside id="sidebar-left" class="span3">
 		<div class="widget-area" role="complementary">
-			<?php dynamic_sidebar( $opt['left_region'] ); ?>
+			<?php
+				dynamic_sidebar($left_rail);
+			?>
 		</div>
 	</aside>
 <?php
@@ -86,8 +90,8 @@ global $wp_query, $post;
 
 // Make sure we're actually a series page, and pull posts accordingly
 if ( isset( $wp_query->query_vars['term'] )
-			&& isset( $wp_query->query_vars['taxonomy'] )
-			&& 'series' == $wp_query->query_vars['taxonomy'] ) {
+		&& isset( $wp_query->query_vars['taxonomy'] )
+		&& 'series' == $wp_query->query_vars['taxonomy'] ) {
 
 	$series = $wp_query->query_vars['term'];
 
@@ -141,13 +145,19 @@ if ( isset( $wp_query->query_vars['term'] )
 </div><!-- /.grid_8 #content -->
 
 <?php // display left rail
-if ($opt['cftl_layout'] != 'one-column') : ?>
+if ($opt['cftl_layout'] != 'one-column') :
+	if (!empty($opt['right_region']) && $opt['right_region'] !== 'none') {
+		$right_rail = $opt['right_region'];
+	} else {
+		$right_rail = 'single';
+	}
+?>
 <aside id="sidebar" class="span4">
 	<?php do_action('largo_before_sidebar_content'); ?>
 	<div class="widget-area" role="complementary">
 		<?php
 			do_action('largo_before_sidebar_widgets');
-			dynamic_sidebar( $opt['right_region'] );
+			dynamic_sidebar($right_rail);
 			do_action('largo_after_sidebar_widgets');
 		?>
 	</div><!-- .widget-area -->
