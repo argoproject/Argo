@@ -417,7 +417,7 @@ class LargoUpdateTestAjaxFunctions extends WP_Ajax_UnitTestCase {
 
 	function test_largo_ajax_update_database_false() {
 		// If the install doesn't need to be updated, this should return json with success == false
-		of_set_option('largo_version', '0.5');
+		of_set_option('largo_version', largo_version());
 		try {
 			$this->_handleAjax("largo_ajax_update_database");
 		} catch (WPAjaxDieContinueException $e) {
