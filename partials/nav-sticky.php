@@ -89,6 +89,15 @@
 							);
 							largo_nav_menu($args);
 
+							if ( of_get_option( 'show_donate_button') ) {
+								if ($donate_link = of_get_option('donate_link')) { ?>
+								<li class="donate">
+									<a class="donate-link" href="<?php echo esc_url($donate_link); ?>">
+										<span><?php echo esc_html(of_get_option('donate_button_text')); ?></span>
+									</a>
+								</li><?php
+								}
+							}
 							if (has_nav_menu('global-nav')) {
 								$args = array(
 									'theme_location' => 'global-nav',
@@ -111,17 +120,7 @@
 										<?php echo $global_nav; ?>
 									</li>
 								<?php } ?>
-							<?php }
-
-							if ( of_get_option( 'show_donate_button') ) {
-								if ($donate_link = of_get_option('donate_link')) { ?>
-								<li class="donate">
-									<a class="donate-link" href="<?php echo esc_url($donate_link); ?>">
-										<span><?php echo esc_html(of_get_option('donate_button_text')); ?></span>
-									</a>
-								</li><?php
-								}
-							} ?>
+							<?php } ?>
 						</ul>
 					</div>
 				</div>
