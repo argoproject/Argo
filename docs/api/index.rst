@@ -40,7 +40,6 @@ Function reference by file
 * `inc/widgets/largo-recent-comments.php <inc/widgets/largo-recent-comments.html>`_
 * `inc/widgets/largo-recent-posts.php <inc/widgets/largo-recent-posts.html>`_
 * `inc/widgets/largo-twitter.php <inc/widgets/largo-twitter.html>`_
-* `inc/wp-taxonomy-landing/taxonomy-landing.php <inc/wp-taxonomy-landing/taxonomy-landing.html>`_
 * `inc/wp-taxonomy-landing/functions/cftl-admin.php <inc/wp-taxonomy-landing/functions/cftl-admin.html>`_
 * `inc/wp-taxonomy-landing/functions/cftl-series-order.php <inc/wp-taxonomy-landing/functions/cftl-series-order.html>`_
 * `partials/content-argolinks.php <partials/content-argolinks.html>`_

@@ -81,14 +81,6 @@ inc/helpers.php
 
    :since: 0.4
 
-.. php:function:: var_log()
-
-   Send anything to the error log in a human-readable format
-
-   :param mixed $stuff: the stuff to be sent to the error log.
-
-   :since: 0.4
-
 .. php:function:: largo_get_current_url()
 
    Get the current URL, including the protocol and host

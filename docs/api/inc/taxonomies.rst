@@ -47,6 +47,23 @@ inc/taxonomies.php
    :param integer $eries: term id
    :param integer $umber: of posts to fetch, defaults to all
 
+.. php:function:: largo_series_landing_link()
+
+   Filter: post_type_link
+
+   Filter post permalinks for the Landing Page custom post type.
+   Replace direct post link with the link for the associated
+   Series taxonomy term, using the most recently created term
+   if multiple are set.
+
+   This filter overrides the wp-taxonomy-landing filter,
+   which attempts to use the link for ANY term from ANY taxonomy.
+   Largo really only cares about the Series taxonomy.
+
+   :since: 0.5
+
+   :returns: filtered $post_link, replacing a Landing Page link with its Series link as needed
+
 .. php:function:: largo_category_archive_posts()
 
    Helper for getting posts in a category archive, excluding featured posts.

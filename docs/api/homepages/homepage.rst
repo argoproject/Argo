@@ -34,6 +34,8 @@ homepages/homepage.php
 
    Returns featured stories for the homepage.
 
+   :param int $max.: The maximum number of posts to return.
+
 .. php:function:: largo_home_series_stories_data()
 
    1. Gets 3 stories from the same series as the homepage's Big Story.
