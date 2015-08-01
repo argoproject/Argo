@@ -5,7 +5,6 @@ class LESSTestFunctions extends WP_UnitTestCase {
 
 	function setUp() {
 		parent::setUp();
-
 	}
 
 	function test_largo_custom_less_cariables_init() {
@@ -26,7 +25,7 @@ class LESSTestFunctions extends WP_UnitTestCase {
 
 }
 
-class Largo_Custom_Less_VariablesTest extends WP_UnitTestCaase {
+class Largo_Custom_Less_VariablesTest extends WP_UnitTestCase {
 
 	function test_init() {
 		$this->markTestIncomplete('This test has not been implemented yet.');
@@ -48,10 +47,9 @@ class Largo_Custom_Less_VariablesTest extends WP_UnitTestCaase {
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
-	function test_register_variables_less_file) {
+	function test_register_variables_less_file() {
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-
 
 	function test_get_css() {
 		$this->markTestIncomplete('This test has not been implemented yet.');
