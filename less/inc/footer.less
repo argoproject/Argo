@@ -149,17 +149,18 @@
  * By cropping the image to the outer boundary of the lower-left square in inn_logo_reversetype.png, we get a square height of 184px.
  * 184/1669 = x/300
  */
-@inn-logo-square: (300px*184/1699);
-@inn-logo-height: (300px*385/1699); // the height of the logo image
+@inn-logo-width: 200px;
+@inn-logo-square: (@inn-logo-width*184/1699);
+@inn-logo-height: (@inn-logo-width*385/1699); // the height of the logo image
 @footer-social-logo-font-size: @baseFontSize + 2;
 #inn-logo {
   margin-top: @inn-logo-square;
-  margin-bottom: @inn-logo-square;
-  max-width: 300px;
+  margin-bottom: @inn-logo-square*0.75;
+  max-width: @inn-logo-width;
 }
 ul#footer-social {
   padding-top: @inn-logo-square;
-  padding-bottom: @inn-logo-square;
+  padding-bottom: @inn-logo-square*0.75;
   margin: 0 auto;
   width: 100%;
   @media (max-width: 768px) {
@@ -176,7 +177,7 @@ ul#footer-social {
     }
     a {
       padding-right: 10px;
-      padding-top: ((@inn-logo-height - @footer-social-logo-font-size)/2);
+      padding-top: ((@inn-logo-height - @footer-social-logo-font-size)/1.75);
     }
     i {
       position: relative;
@@ -185,7 +186,7 @@ ul#footer-social {
       padding: 5px;
       border-radius: 50%;
       background-color: #777;
-      margin-top: @inn-logo-square;
+      margin-top: 1.25*@inn-logo-square;
       &:hover {
         background-color: #fff;
       }
@@ -238,7 +239,7 @@ ul#footer-social {
 @media (min-width: 979px) {
   // If the INN logo is not displayed, the footer credit gets some padding up top
   .footer-credit-padding-inn-logo-missing {
-    margin-top: @inn-logo-height + 2*@inn-logo-square;
+    margin-top: @inn-logo-height + 1.75*@inn-logo-square;
   }
 }
 @media (max-width: 979px) {
