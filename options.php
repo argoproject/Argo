@@ -503,9 +503,14 @@ function optionsframework_options() {
 		'std' 	=> '3col-default',
 		'type' 	=> 'images',
 		'options' 	=> array(
-			'3col-default'	=> $imagepath . 'footer-3col-lg-center.png',
-			'3col-equal' 	=> $imagepath . 'footer-3col-equal.png',
-			'4col' 			=> $imagepath . 'footer-4col.png')
+			'3col-default' => $imagepath . 'footer-3col-lg-center.png',
+			'3col-equal' => $imagepath . 'footer-3col-equal.png',
+			'4col' => $imagepath . 'footer-4col.png',
+			'4col-asymm' => $imagepath . 'footer-4col-asymm.png',
+			'1col' => $imagepath . 'footer-1col.png'
+			// Want to add something to this list in a child theme? Use the largo_options filter!
+		)
+	
 	);
 
 	/*
