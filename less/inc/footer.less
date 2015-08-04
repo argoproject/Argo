@@ -235,7 +235,12 @@ ul#footer-social {
   }
 }
 
-@media (max-width: 768px) {
+@media (min-width: 979px) {
+  .inn-logo-missing-padding {
+    margin-top: @inn-logo-height + 2*@inn-logo-square;
+  }
+}
+@media (max-width: 979px) {
   #boilerplate .row-fluid {
     .span6 {
       width: 100%;
@@ -244,8 +249,6 @@ ul#footer-social {
       text-align: left;
     }
   }
-}
-@media (max-width: 979px) {
   .footer-credit span {
     display: block;
   }

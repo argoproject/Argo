@@ -22,7 +22,7 @@
 			<?php if (INN_MEMBER) { ?>
 				<?php inn_logo(); ?>
 			<?php } ?>
-			<p class="footer-credit"><?php printf( __('Built with the <a href="%s">Largo WordPress Theme</a> from the <a href="%s">Institute for Nonprofit News</a>.', 'largo'),
+			<p class="footer-credit <?php echo ( !INN_MEMBER ? 'inn-logo-missing-padding' : ''); ?>"><?php printf( __('Built with the <a href="%s">Largo WordPress Theme</a> from the <a href="%s">Institute for Nonprofit News</a>.', 'largo'),
 					'http://largoproject.org',
 					'http://inn.org'
 				 );
