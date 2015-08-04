@@ -56,6 +56,14 @@
       line-height: 1.2;
       margin-bottom: @baseline / 2;
       list-style: none;
+      @media (min-width: 1170px) {
+        height: 63.15625px; // This is the height of the #inn-logo image when its containing .span3 is at max width
+      }
+      @media (min-width: 979px) and (max-width: 1169px) {
+        height: ((100vw - (2*18px))*0.23404)*(385/1669);
+      }
+      @media (min-width: 769px) and (max-width: 979px) {
+      }
     }
   }
   .widgettitle,
@@ -146,11 +154,17 @@
   width: 100%;
   margin-bottom: 1em;
   margin-top: 1.5em;
-  text-align: right;
+  @media (max-width: 768px) {
+    text-align: left;
+  }
+
   li {
     margin-top: (300px*184/1699); // see #inn-logo
     display: inline-block;
     font-size: 18px;
+    @media (max-width: 768px) {
+      margin-top: 0;
+    }
     a {
       padding-right: 10px;
     }
@@ -173,17 +187,11 @@
         .opacity(100);
       }
     }
-    @media (max-width: 768px) {
-      margin-top: 0;
-    }
-  }
-  @media (max-width: 768px) {
-    text-align: left;
   }
 }
 #inn-logo {
   // image is max 300px wide, but is 1699x385 px
-  // We'll use math to get the padding top and bottom correct
+  // We'll use math to get the padding top and bottom correct, according to the brand guidelines
   // margin top and margin bottom should be equal to the height of one of the squares.
   // By cropping the image to the outer boundary of the lower-left square in inn_logo_reversetype.png, we get a square height of 184px.
   // 184/1669 = x/300
@@ -201,16 +209,17 @@
     color: @grayLight;
     &.footer-credit {
       float: none;
+      display: inline;
     }
     &.back-to-top {
       float: right;
     }
-    &#mobile-member-since {
-      margin-bottom: (300px*184/1699);
+    &#member-since {
+      margin-bottom: (300px*184/1699); // to get appropriate padding, matching the image's height
     }
   }
   .menu {
-    clear: both;
+    display: inline;
     margin: 0;
     font-size: @baseFontSize * 0.667;
     li {
@@ -221,21 +230,11 @@
   .row-fluid {
   //  margin-top: 1.5em;
   }
-  .span3 {
-    position: relative;
-    float: left;
-    margin-left: 0;
-  }
-  .span9 {
-    float: right;
-    position: relative;
-    text-align: right;
-  }
   .menu {
     clear: none;
   }
 }
-#inn-since-mobile {
+#member-since {
   margin-top: 28px;
 }
 
