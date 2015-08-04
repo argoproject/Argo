@@ -149,9 +149,11 @@
  * By cropping the image to the outer boundary of the lower-left square in inn_logo_reversetype.png, we get a square height of 184px.
  * 184/1669 = x/300
  */
+@inn-logo-physical-width: 1669px;
+@inn-logo-physical-height: 385px;
 @inn-logo-width: 200px;
-@inn-logo-square: (@inn-logo-width*184/1699);
-@inn-logo-height: (@inn-logo-width*385/1699); // the height of the logo image
+@inn-logo-square: (@inn-logo-width*184/@inn-logo-physical-width); // 184 comes form the width of one square in INN's 2015 logo
+@inn-logo-height: (@inn-logo-width*@inn-logo-physical-height/@inn-logo-physical-width); // the rendered height of the logo image
 @footer-social-logo-font-size: @baseFontSize + 2;
 #inn-logo {
   margin-top: @inn-logo-square;
