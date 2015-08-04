@@ -56,14 +56,6 @@
       line-height: 1.2;
       margin-bottom: @baseline / 2;
       list-style: none;
-      @media (min-width: 1170px) {
-        height: 63.15625px; // This is the height of the #inn-logo image when its containing .span3 is at max width
-      }
-      @media (min-width: 979px) and (max-width: 1169px) {
-        height: ((100vw - (2*18px))*0.23404)*(385/1669);
-      }
-      @media (min-width: 769px) and (max-width: 979px) {
-      }
     }
   }
   .widgettitle,
@@ -149,24 +141,42 @@
   max-width: 25%;
   padding: 1px 8px;
 }
-#footer-social {
+
+/*
+ * image is max 300px wide, but is 1699x385 px
+ * We'll use math to get the padding top and bottom correct, according to the brand guidelines
+ * margin top and margin bottom should be equal to the height of one of the squares.
+ * By cropping the image to the outer boundary of the lower-left square in inn_logo_reversetype.png, we get a square height of 184px.
+ * 184/1669 = x/300
+ */
+@inn-logo-square: (300px*184/1699);
+@inn-logo-height: (300px*385/1699); // the height of the logo image
+@footer-social-logo-font-size: @baseFontSize + 2;
+#inn-logo {
+  margin-top: @inn-logo-square;
+  margin-bottom: @inn-logo-square;
+  max-width: 300px;
+}
+ul#footer-social {
+  padding-top: @inn-logo-square;
+  padding-bottom: @inn-logo-square;
   margin: 0 auto;
   width: 100%;
-  margin-bottom: 1em;
-  margin-top: 1.5em;
   @media (max-width: 768px) {
     text-align: left;
   }
 
   li {
-    margin-top: (300px*184/1699); // see #inn-logo
-    display: inline-block;
+    height: @inn-logo-height;
+    display: table-cell;
+    vertical-align: middle;
     font-size: 18px;
     @media (max-width: 768px) {
       margin-top: 0;
     }
     a {
       padding-right: 10px;
+      padding-top: ((@inn-logo-height - @footer-social-logo-font-size)/2);
     }
     i {
       position: relative;
@@ -174,13 +184,14 @@
       color: #fff;
       padding: 10px;
       border-radius: 50%;
+      margin-top: @inn-logo-square;
       &:hover {
         background-color: #fff;
       }
       &.icon-github:hover {
         color: @black;
       }
-      font-size: @baseFontSize + 2;
+      font-size: @footer-social-logo-font-size;
       .darkLight(@headerFooterColor);
       .opacity(75);
       &:hover {
@@ -188,15 +199,6 @@
       }
     }
   }
-}
-#inn-logo {
-  // image is max 300px wide, but is 1699x385 px
-  // We'll use math to get the padding top and bottom correct, according to the brand guidelines
-  // margin top and margin bottom should be equal to the height of one of the squares.
-  // By cropping the image to the outer boundary of the lower-left square in inn_logo_reversetype.png, we get a square height of 184px.
-  // 184/1669 = x/300
-  margin-top: (300px*184/1699);
-  margin-bottom: (300px*184/1699);
 }
 #supplementary {
   padding: @baseline 0 0 0;
@@ -207,16 +209,6 @@
   p {
     margin-bottom: 0;
     color: @grayLight;
-    &.footer-credit {
-      float: none;
-      display: inline;
-    }
-    &.back-to-top {
-      float: right;
-    }
-    &#member-since {
-      margin-bottom: (300px*184/1699); // to get appropriate padding, matching the image's height
-    }
   }
   .menu {
     display: inline;
@@ -234,21 +226,22 @@
     clear: none;
   }
 }
-#member-since {
-  margin-top: 28px;
+
+@media (min-width: 769px) {
+  #boilerplate .span6.right {
+    text-align: right;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 }
 
 @media (max-width: 768px) {
   #boilerplate .row-fluid {
-    .span3,
-    .span9 {
+    .span6 {
       width: 100%;
       clear: both;
       margin-left: 0;
       text-align: left;
-    }
-    img {
-      max-width: 300px;
     }
   }
 }
@@ -362,4 +355,8 @@
   .sticky-footer-container {
     padding-right: 40px;
   }
+}
+
+.back-to-top {
+  .visuallyhidden
 }

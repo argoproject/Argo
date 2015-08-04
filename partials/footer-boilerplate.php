@@ -18,14 +18,13 @@
 			</div>
 		</div>
 
-		<div class="span6">
+		<div class="span6 right">
 			<?php if (INN_MEMBER) { ?>
 				<?php inn_logo(); ?>
 			<?php } ?>
-			<p class="footer-credit"><?php printf( __('This site built with <a href="%s">Project Largo</a> from <a href="%s">INN</a> and proudly powered by <a href="%s" rel="nofollow">WordPress</a>.', 'largo'),
+			<p class="footer-credit"><?php printf( __('Built with the <a href="%s">Largo WordPress Theme</a> from the <a href="%s">Institute for Nonprofit News</a>.', 'largo'),
 					'http://largoproject.org',
-					'http://inn.org',
-					'http://wordpress.org'
+					'http://inn.org'
 				 );
 			?></p>
 		</div>
