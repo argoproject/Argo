@@ -1,6 +1,6 @@
 <div id="boilerplate">
 	<div class="row-fluid clearfix">
-		<div class="span9">
+		<div class="span6">
 			<ul id="footer-social" class="social-icons">
 				<?php largo_social_links(); ?>
 			</ul>
@@ -18,12 +18,9 @@
 			</div>
 		</div>
 
-		<div class="span3">
+		<div class="span6">
 			<?php if (INN_MEMBER) { ?>
 				<?php inn_logo(); ?>
-				<?php if ( of_get_option('inn_member_since') ) { ?>
-				<p id="member-since" class="visible-phone"><?php printf(__("Proud member since %s", "largo"), of_get_option('inn_member_since') ); ?></p>
-				<?php } ?>
 			<?php } ?>
 			<p class="footer-credit"><?php printf( __('This site built with <a href="%s">Project Largo</a> from <a href="%s">INN</a> and proudly powered by <a href="%s" rel="nofollow">WordPress</a>.', 'largo'),
 					'http://largoproject.org',
@@ -34,9 +31,5 @@
 		</div>
 	</div>
 
-	<div class="row-fluid clearfix">
-		<div class="span12">
-			<p class="back-to-top"><a href="#top"><?php _e('Back to top', 'largo'); ?> &uarr;</a></p>
-		</div>
-	</div>
+	<p class="back-to-top visuallyhidden"><a href="#top"><?php _e('Back to top', 'largo'); ?> &uarr;</a></p>
 </div>
