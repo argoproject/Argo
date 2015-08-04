@@ -143,7 +143,7 @@
 }
 
 /*
- * image is max 300px wide, but is 1699x385 px
+ * image displays 300px wide, but is physically 1699x385 px^2
  * We'll use math to get the padding top and bottom correct, according to the brand guidelines
  * margin top and margin bottom should be equal to the height of one of the squares.
  * By cropping the image to the outer boundary of the lower-left square in inn_logo_reversetype.png, we get a square height of 184px.
@@ -182,8 +182,9 @@ ul#footer-social {
       position: relative;
       top: 0;
       color: #fff;
-      padding: 10px;
+      padding: 5px;
       border-radius: 50%;
+      background-color: #777;
       margin-top: @inn-logo-square;
       &:hover {
         background-color: #fff;
@@ -193,11 +194,10 @@ ul#footer-social {
       }
       font-size: @footer-social-logo-font-size;
       .darkLight(@headerFooterColor);
-      .opacity(75);
-      &:hover {
-        .opacity(100);
-      }
     }
+  }
+  li:last-child a {
+    padding-right: 0;
   }
 }
 #supplementary {
@@ -236,7 +236,8 @@ ul#footer-social {
 }
 
 @media (min-width: 979px) {
-  .inn-logo-missing-padding {
+  // If the INN logo is not displayed, the footer credit gets some padding up top
+  .footer-credit-padding-inn-logo-missing {
     margin-top: @inn-logo-height + 2*@inn-logo-square;
   }
 }
@@ -246,13 +247,22 @@ ul#footer-social {
       width: 100%;
       clear: both;
       margin-left: 0;
-      text-align: left;
+      text-align: center;
     }
+  }
+  ul#footer-social {
+    display: inline-block;
+    width: auto;
+    margin: 0 auto;
   }
   .footer-credit span {
     display: block;
   }
 }
+
+/*
+ * Sticky Footer
+ */
 
 .sticky-footer-holder {
   position: fixed;
