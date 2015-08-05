@@ -61,7 +61,7 @@ function largo_register_sidebars() {
 			'id' 	=> 'before-footer'
 		);
 	}
-	if ( of_get_option('footer_layout') == '4col' ) {
+	if ( of_get_option('footer_layout') == '4col' || of_get_option('footer_layout') == '4col-asymm' ) {
 		$sidebars[] = array(
 			'name' 	=> __( 'Footer 4', 'largo' ),
 			'desc' 	=> __( 'The fourth footer widget area.', 'largo' ),
