@@ -27,6 +27,6 @@ if ( locate_template( 'partials/footer-widget-' . $layout . '.php' ) == '' ) {
 
 ?>
 
-<div id="supplementary" class="row-fluid <?php echo $layout ?>">
+<div id="supplementary" class="row-fluid _<?php echo $layout ?>">
 	<?php get_template_part( 'partials/footer-widget', $layout); ?>
 </div>
