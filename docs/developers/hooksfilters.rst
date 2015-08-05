@@ -125,6 +125,7 @@ Here is the current list of hooks available in Largo (available as of v.0.4):
  - **largo_before_footer** - after the closing div tag for #page but before the .footer-bg (this also comes after the optional "before footer" widget area that can be activated from the layout tab of the theme options
  - **largo_before_footer_widgets** - before the main footer widget areas
  - **largo_before_footer_boilerplate** - after the main footer widget areas and before the boilerplate (copyright message, credits, etc.)
+ - **largo_after_footer_copyright** - after the copyright message paragraph, but before the end of the boilerplate; useful if you want to insert addresses or other information about your site
  - **largo_before_footer_close** - after the boilerplate but still inside the footer container
  - **largo_after_footer** - after the closing <div> tag for .footer-bg but before the sticky footer
  - **(wp_footer)** - if you need to insert anything just before the closing <body> tag use the wp_footer hook

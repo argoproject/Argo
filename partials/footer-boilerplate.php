@@ -8,6 +8,7 @@
 
 				<!-- If you enjoy this theme and use it on a production site we would appreciate it if you would leave the credit in place. Thanks :) -->
 				<p class="footer-credit"><?php largo_copyright_message(); ?></p>
+				<?php do_action('largo_after_footer_copyright'); ?>
 				<?php largo_nav_menu(
 					array(
 						'theme_location' => 'footer-bottom',
