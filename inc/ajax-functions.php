@@ -101,6 +101,9 @@ if (!function_exists('largo_load_more_posts')) {
 			if ( of_get_option('cats_home') )
 				$args['cat'] = of_get_option('cats_home');
 		}
+
+		$args = apply_filters('largo_lmp_args', $args);
+
 		$query = new WP_Query($args);
 
 		if ( $query->have_posts() ) {

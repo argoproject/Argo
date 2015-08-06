@@ -79,7 +79,12 @@ Also passed in is an array that contains only the extra fields that were present
 ``function filter_function_name($result,$extras) {``
 ``# ... }``
 ``add_action('largo_validate_user_signup_extra_fields'``, ``'filter_function_name');``
- 
+
+**filter: largo_lmp_args**
+
+Passed in this are the arguments for the Load More Posts WP_Query. An example usage would be to check if ``is_home()`` and then restrict the posts returned by the query to those in the homepage featured prominence term.
+
+
 Template Hooks
 --------------
 
