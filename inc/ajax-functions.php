@@ -92,6 +92,8 @@ if (!function_exists('largo_load_more_posts')) {
 			'ignore_sticky_posts' => true,
 		), $context);
 
+		$args = apply_filters('largo_lmp_args', $args);
+
 		// num_posts_home is only relevant on the homepage
 		if ( of_get_option('num_posts_home') && $is_home )
 			$args['posts_per_page'] = of_get_option('num_posts_home');
