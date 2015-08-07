@@ -62,11 +62,38 @@ class RelatedContentTestFunctions extends wp_UnitTestCase{
 class LargoRelatedTestFunctions extends WP_UnitTestCase {
 	function setUp() {
 		parent::setUp();
+
+		$cat_id = $this->factory->category->create();
+		$series_id = $this->factory->term->create(array(
+			'taxonomy' => 'series'
+		));
+		global $considered;
+		$considered = $this->factory->post->create(array(
+			'post_category' => array($cat_id),
+			'tax_input' => array(
+				'series' => $series_id
+			)
+		));
 	}
 
 	function test___construct() {
 		// check that Largo_Related->number equals 1 if number is not set
+		$lr = new Largo_Related();
+		/*
+		 *
+		 * State of this on Friday evening: I can't create a new Largo_Related in a way that actually triggers it as an object and not as an associative array. 
+		 *
+		 *
+		$this->assertEquals(1, $lr->number);
+
+		$lr = new Largo_Related(4);
+		$this->assertEquals(4, $lr->number);
 		// check that Largo_Related->post_id is the value of the set post, or the value of the global post
+		global $post;
+		$this->assertEquals($post->id, $lr->post_id);
+
+		$lr = new Largo_Related(4, $considered);
+		$this->assertEquals($considered, $lr->post_id);
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
@@ -95,30 +122,37 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 	 */
 
 	function test_unorganized_series() {
+		of_set_option('series_enabled', 1);
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
 	function test_series_asc() {
+		of_set_option('series_enabled', 1);
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
 	function test_series_series_custom() {
+		of_set_option('series_enabled', 1);
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
 	function test_series_desc() {
+		of_set_option('series_enabled', 1);
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
 	function test_series_featured_desc() {
+		of_set_option('series_enabled', 1);
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
 	function test_series_featured_asc() {
+		of_set_option('series_enabled', 1);
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
 	function test_category() {
+		of_set_option('series_enabled', false);
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
