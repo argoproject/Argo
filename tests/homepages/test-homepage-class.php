@@ -85,13 +85,31 @@ class HomepageClassTest extends WP_UnitTestCase {
 		// appropriate global -- $wp_styles or $wp_scripts.
 		global $wp_styles, $wp_scripts;
 
+		$this->go_to('/'); // Run this on the homepage
 		$this->layout->enqueueAssets();
 
 		$expected_css_handle = $this->layoutOptions['assets'][0][0];
-		$this->assertTrue(!empty($wp_styles->registered[$expected_css_handle]));
+		$this->assertTrue(!empty($wp_styles->registered[$expected_css_handle]), "Homepage styles were not enqueued on the homepage");
 
 		$expected_js_handle = $this->layoutOptions['assets'][1][0];
-		$this->assertTrue(!empty($wp_scripts->registered[$expected_js_handle]));
+		$this->assertTrue(!empty($wp_scripts->registered[$expected_js_handle]), "Homepage scripts were not enqueued on the homepage");
+
+		/*
+		 * Regression test for #791
+		 *
+		 * @since 0.5.2
+		 */
+		$wp_styles->reset();
+		$wp_scripts->reset();
+		$this->go_to('/?p=1'); // a page that is not the homepage
+
+		$this->layout->enqueueAssets();
+		$expected_css_handle = $this->layoutOptions['assets'][0][0];
+		$this->assertTrue(!empty($wp_styles->registered[$expected_css_handle]), "Homepage styles were not enqueued on the homepage");
+
+		$expected_js_handle = $this->layoutOptions['assets'][1][0];
+		$this->assertTrue(!empty($wp_scripts->registered[$expected_js_handle]), "Homepage scripts were not enqueued on the homepage");
+		var_log($wp_styles);
 	}
 
 	function testRegisterSidebars() {
