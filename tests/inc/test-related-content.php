@@ -72,13 +72,14 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 
 	function test_popularity_sort() {
 		$this->markTestIncomplete('This test has not been implemented yet.');
-
 	}
 
 	/**
 	 * Test the function with a lot of different conditions
 	 *
 	 * - Series without organization
+	 *		- one post published after the current post
+	 *		- one post published before the current post
 	 * - Series with CFTL post with organization information
 	 *		- ASC
 	 *		- series_custom
@@ -86,6 +87,8 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 	 *		- featured, DESC
 	 *		- featured, ASC
 	 * - No series, but category
+	 *		- one post published after the current post
+	 *		- one post published before the current post
 	 * - No series, but tag
 	 * - Tags and Categories
 	 * - No series or category or tag
