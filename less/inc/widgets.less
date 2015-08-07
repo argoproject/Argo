@@ -22,7 +22,8 @@
 /* 1.1 - Base styles */
 
 .widget {
-  padding: @baseline * 0.75 0;
+  padding: 0 @baseline;
+  margin-bottom: @baseline * 1.5;
   p, ul {
     font-size: @baseFontSize;
   }
@@ -30,14 +31,12 @@
     margin: @baseline/5 0 0 16px;
     line-height: 1.2;
     ul {
-      margin-bottom:@baseline/5;
+      margin-bottom: @baseline/5;
+      margin-top: @baseline * 0.5;
     }
   }
   p.morelink {
     margin: -@baseline/4 0 0;
-  }
-  + .widget {
-    border-top: 1px solid @grayLighter;
   }
 }
 
@@ -304,10 +303,11 @@
     display: block;
     float: left;
     font-size: 110%;
-    margin-right: -100%
+    margin-right: -100%;
   }
   li a {
     margin-left: 0;
+    padding-left: 24px;
     display: inline-block;
     font-family: @sansFontFamily;
   }
