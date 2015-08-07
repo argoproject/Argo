@@ -66,9 +66,7 @@
 
 			<?php if ( !empty( $byline_text ) && !empty( $byline_link ) ) { ?>
 				<a href="<?php echo $byline_link; ?>" class="icon-link"><?php echo esc_html( $byline_text ); ?></a>
-			<?php } else if ( !empty( $byline_text )) { ?>
-				<?php // do nothing - the $coauthors array is unfilled and meaningless, and there's nothing to link to ?>
-			<?php } else { ?>
+			<?php } else if ( !empty( $coauthors )) { ?>
 				<?php // $coauthor covers base case (1 dimensional) or where coauthors were defined. ?>
 				<?php foreach( $coauthors as $author ) : ?>
 					<div class="follow-author">
