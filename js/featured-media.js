@@ -374,6 +374,19 @@ var LFM = _.extend(LFM || {}, {
         template: wp.media.template('featured-embed-code')
     });
 
+    LFM.Views.featuredThumbnail = LFM.Views.featuredBaseView.extend({
+        events: {
+            'click a.remove-thumb': 'removeThumb'
+        },
+
+        template: wp.media.template('featured-thumb'),
+
+        removeThumb: function() {
+            this.$el.html('');
+            this.trigger('remove');
+        }
+    });
+
     LFM.Views.featuredVideoView = LFM.Views.featuredBaseView.extend({
         events: {
             'paste input.url': 'fetchVideo',
@@ -381,6 +394,53 @@ var LFM = _.extend(LFM || {}, {
         },
 
         template: wp.media.template('featured-video'),
+
+        initialize: function() {
+            this.createUploader();
+            return LFM.Views.featuredBaseView.prototype.initialize.apply(this, arguments);
+        },
+
+        createUploader: function() {
+            console.log('createUploader');
+            this.attachments = new wp.media.model.Attachments();
+            this.attachments.observe(wp.Uploader.queue);
+            this.attachments.on('add remove reset change:uploading', this.uploadProgress.bind(this));
+
+            this.inlineUploader = new wp.media.view.UploaderInline({
+                controller: this.controller,
+                status: true,
+                postId: null
+            });
+            this.views.add('#video-thumb', this.inlineUploader);
+
+            this.on('attachmentUploaded', this.updateThumbnail.bind(this));
+        },
+
+        updateThumbnail: function() {
+            var attachment = this.attachments.first(),
+                self = this;
+
+            if (!!attachment) {
+                this.thumbnail = new LFM.Views.featuredThumbnail({
+                    el: '#video-thumb',
+                    model: attachment
+                }).render();
+
+                this.thumbnail.on('remove', function() {
+                    self.createUploader.apply(self);
+                    self.thumbnail.off();
+                });
+
+                this.off('attachmentUploaded');
+            }
+        },
+
+        uploadProgress: function() {
+            if (this.attachments.first().get('uploading') == false) {
+                this.trigger('attachmentUploaded');
+                this.attachments.off();
+            }
+        },
 
         fetchVideo: function(event) {
             var self = this;

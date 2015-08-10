@@ -427,6 +427,11 @@ function largo_featured_media_templates() { ?>
 			</div>
 
 			<div>
+				<label><span>Video thumbnail</span></span></label>
+				<div id="video-thumb"></div>
+			</div>
+
+			<div>
 				<label for="title"><span>Title</span></span></label>
 				<input type="text" name="title" <# if (model.get('type') == 'video') { #>value="{{ model.get('title') }}"<# } #> />
 			</div>
@@ -442,6 +447,14 @@ function largo_featured_media_templates() { ?>
 			</div>
 
 		</form>
+	</script>
+
+	<script type="text/template" id="tmpl-featured-thumb">
+		<div class="thumb-container">
+			<img src="{{ data.model.get('sizes').medium.url }}" title="Thumbnail for '{{ data.model.get('uploadedToTitle') }}'" />
+			<input type="hidden" name="thumbnail_id" value="<# data.model.get('id') #>" />
+		</div>
+		<a href="#" class="remove-thumb">Remove thumbnail</a>
 	</script>
 
 	<script type="text/template" id="tmpl-featured-image-override">
