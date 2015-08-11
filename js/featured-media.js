@@ -599,7 +599,8 @@ var LFM = _.extend(LFM || {}, {
                 success: function() {
                     self.saving = false;
                     self.hideSpinner();
-                    $('#set-featured-media-button').text('Edit Featured Media');
+                    $('#set-featured-media-button').html(
+                        '<span class="dashicons dashicons-admin-generic"></span> Edit Featured Media');
                     LFM.has_featured_media = true;
                     LFM.instances.modal.close();
                 }
@@ -814,6 +815,8 @@ var LFM = _.extend(LFM || {}, {
                     }
                 }
             });
+
+            return false;
         });
     });
 }());

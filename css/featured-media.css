@@ -1,3 +1,8 @@
+#set-featured-media-button .dashicons {
+  position: relative;
+  top: 2px;
+  color: #888;
+}
 .featured-media-modal .featured-media-view form {
   margin: 20px;
 }

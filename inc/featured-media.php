@@ -368,7 +368,7 @@ function largo_add_featured_media_button($context) {
 	$language = (!empty($has_featured_media))? 'Edit' : 'Set';
 	ob_start();
 ?>
-	<a href="#" id="set-featured-media-button" class="button set-featured-media add_media" data-editor="content" title="<?php echo $language; ?> Featured Media"><?php echo $language; ?> Featured Media</a> <span class="spinner" style="display: none;"></span>
+	<a href="#" id="set-featured-media-button" class="button set-featured-media add_media" data-editor="content" title="<?php echo $language; ?> Featured Media"><span class="dashicons dashicons-admin-generic"></span> <?php echo $language; ?> Featured Media</a> <span class="spinner" style="display: none;"></span>
 <?php
 	$context .= ob_get_contents();
 	ob_end_clean();
