@@ -62,17 +62,27 @@ class RelatedContentTestFunctions extends wp_UnitTestCase{
 class LargoRelatedTestFunctions extends WP_UnitTestCase {
 
 	public $cat_id;
+	public $cat;
 	public $series_id;
+	public $series;
 	public $considered;
 
 	function setUp() {
 		parent::setUp();
 
+		// The category
 		$this->cat_id = $this->factory->category->create();
+		$this->cat = get_term($this->cat_id, 'category');
+
+		// The series
 		$this->series_id = $this->factory->term->create(array(
 			'taxonomy' => 'series'
 		));
+		$this->series = get_term($this->series_id, 'series');
+
+		// The post
 		$this->considered = $this->factory->post->create(array(
+			'post_date' => '2014-01-11 00:00:00',
 			'post_category' => array($this->cat_id),
 			'tax_input' => array(
 				'series' => $this->series_id
@@ -136,38 +146,248 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 	 * - No series or category or tag
 	 */
 
-	function test_unorganized_series() {
+	/**
+	 * Test that an unorganized series returns a post published before the considered post, but no others.
+	 */
+	function test_unorganized_series_before() {
 		of_set_option('series_enabled', 1);
-		$this->factory->post->create_many(10,array(
+
+		// Some randos before and after
+		$this->factory->post->create(array(
+			'post_date' => '2013-01-01 00:00:00',
+		));
+		$this->factory->post->create(array(
+			'post_date' => '2015-01-01 00:00:00',
+		));
+
+		// Post published before the current post in its series
+		$before_id = $this->factory->post->create(array(
+			'post_date' => '2013-01-01 00:00:00',
 			'tax_input' => array(
 				'series' => $this->series_id
 			)
 		));
-		$this->markTestIncomplete('This test has not been implemented yet.');
+		$lr = new Largo_Related(1, $this->considered);
+		$ids = $lr->ids();
+		$this->assertEquals(1, count($ids), "Largo_Related returned more than one post");
+		$this->assertEquals($before_id, $ids[0], "Largo_Related did not return the post it was expected to ");
+	}
+
+	/**
+	 * Test that an unorganized series returns a post published after the considered post, but no others.
+	 */
+	function test_unorganized_series_after() {
+		of_set_option('series_enabled', 1);
+
+		// Some randos before and after
+		$this->factory->post->create(array(
+			'post_date' => '2013-01-01 00:00:00',
+		));
+		$this->factory->post->create(array(
+			'post_date' => '2015-01-01 00:00:00',
+		));
+
+		// Post published after the current post in its series
+		$before_id = $this->factory->post->create(array(
+			'post_date' => '2015-01-01 00:00:00',
+			'tax_input' => array(
+				'series' => $this->series_id
+			)
+		));
+		$lr = new Largo_Related(1, $this->considered);
+		$ids = $lr->ids();
+		$this->assertEquals(1, count($ids), "Largo_Related returned more than one post");
+		$this->assertEquals($before_id, $ids[0], "Largo_Related did not return the post it was expected to ");
 	}
 
 	function test_series_asc() {
 		of_set_option('series_enabled', 1);
-		$this->markTestIncomplete('This test has not been implemented yet.');
-	}
 
-	function test_series_series_custom() {
-		of_set_option('series_enabled', 1);
-		$this->markTestIncomplete('This test has not been implemented yet.');
+		// Some randos before and after
+		$this->factory->post->create(array(
+			'post_date' => '2013-01-01 00:00:00',
+		));
+		$this->factory->post->create(array(
+			'post_date' => '2015-01-01 00:00:00',
+		));
+		// Post published before the current post in its series
+		$before_id = $this->factory->post->create(array(
+			'post_date' => '2015-01-01 00:00:00',
+			'tax_input' => array(
+				'series' => $this->series_id
+			)
+		));
+		// Post published after the current post in its series
+		$after_id = $this->factory->post->create(array(
+			'post_date' => '2013-01-01 00:00:00',
+			'tax_input' => array(
+				'series' => $this->series_id
+			)
+		));
+
+		// Create a landing page that sets the order to ASC
+		$this->factory->post->create(array(
+			'post_type' => 'cftl-tax-landing',
+			'series' => $this->series->slug,
+			'has_order' => 'ASC'
+		));
+
+		$lr = new Largo_Related(2, $this->considered);
+		$ids = $lr->ids();
+		$this->assertEquals(2, count($ids), "Largo_Related returned other than 2 posts");
+		$this->assertGreaterThan($ids[0], $ids[1], "The second post should be higher in post ID than the first");
 	}
 
 	function test_series_desc() {
 		of_set_option('series_enabled', 1);
+
+		// Some randos before and after
+		$this->factory->post->create(array(
+			'post_date' => '2013-01-01 00:00:00',
+		));
+		$this->factory->post->create(array(
+			'post_date' => '2015-01-01 00:00:00',
+		));
+		// Post published before the current post in its series
+		$before_id = $this->factory->post->create(array(
+			'post_date' => '2015-01-01 00:00:00',
+			'tax_input' => array(
+				'series' => $this->series_id
+			)
+		));
+		// Post published after the current post in its series
+		$after_id = $this->factory->post->create(array(
+			'post_date' => '2013-01-01 00:00:00',
+			'tax_input' => array(
+				'series' => $this->series_id
+			)
+		));
+
+		// Create a landing page that sets the order to DESC
+		$this->factory->post->create(array(
+			'post_type' => 'cftl-tax-landing',
+			'series' => $this->series->slug,
+			'has_order' => 'DESC'
+		));
+
+		$lr = new Largo_Related(2, $this->considered);
+		$ids = $lr->ids();
+		$this->assertEquals(2, count($ids), "Largo_Related returned other than 2 posts");
+		$this->assertGreaterThan($ids[0], $ids[1], "The second post should be lower in post ID than the first");
+	}
+
+	function test_series_series_custom() {
+		of_set_option('series_enabled', 1);
+
+		// Some randos before and after
+		$this->factory->post->create(array(
+			'post_date' => '2013-01-01 00:00:00',
+		));
+		$this->factory->post->create(array(
+			'post_date' => '2015-01-01 00:00:00',
+		));
+		// Post published before the current post in its series
+		$before_id = $this->factory->post->create(array(
+			'post_date' => '2015-01-01 00:00:00',
+			'tax_input' => array(
+				'series' => $this->series_id
+			)
+		));
+		// Post published after the current post in its series
+		$after_id = $this->factory->post->create(array(
+			'post_date' => '2013-01-01 00:00:00',
+			'tax_input' => array(
+				'series' => $this->series_id
+			)
+		));
+		// Post published waaaay in the past
+		$past_id = $this->factory->post->create(array(
+			'post_date' => '1013-01-01 00:00:00',
+			'tax_input' => array(
+				'series' => $this->series_id
+			)
+		));
+
+		// Create a landing page that sets the order to 'series_custom'
+		$this->factory->post->create(array(
+			'post_type' => 'cftl-tax-landing',
+			'series' => $this->series->slug,
+			'has_order' => 'custom',
+			'series_'.$this->series_id.'_order' => array($after_id, $this->considered, $past_id, $before_id),
+		));
+
+		$lr = new Largo_Related(3, $this->considered);
+		$ids = $lr->ids();
+		$this->assertEquals(3, count($ids), "Largo_Related returned other than 2 posts");
+		$this->assertEquals(array($after_id, $past_id, $before_id), $ids, "The posts were not returned in the custom order");
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
 	function test_series_featured_desc() {
 		of_set_option('series_enabled', 1);
+		// Create a landing page that sets the order to 'series_custom'
+		$this->factory->post->create(array(
+			'post_type' => 'cftl-tax-landing',
+			'series' => $this->series->slug,
+			'has_order' => 'featured, DESC'
+		));
+		// Post published before the current post in its series
+		$before_id = $this->factory->post->create(array(
+			'post_date' => '2015-01-01 00:00:00',
+			'tax_input' => array(
+				'series' => $this->series_id
+			)
+		));
+		// Post published after the current post in its series
+		$after_id = $this->factory->post->create(array(
+			'post_date' => '2013-01-01 00:00:00',
+			'tax_input' => array(
+				'series' => $this->series_id
+			)
+		));
+		// create a post that is featured in this taxonomy. It shall be the first.
+		$feat = $this->factory->post->create(array(
+			'series' => $this->series->slug,
+			'featured' => true
+		));
+		$lr = new Largo_Related(3, $this->considered);
+		$ids = $lr->ids();
+		$this->assertEquals(3, count($ids), "Largo_Related returned other than 2 posts");
+		$this->assertEquals($feat, $ids[0], "The featured post is not the first post in the return.");
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
 	function test_series_featured_asc() {
 		of_set_option('series_enabled', 1);
+		// Create a landing page that sets the order to 'series_custom'
+		$this->factory->post->create(array(
+			'post_type' => 'cftl-tax-landing',
+			'series' => $this->series->slug,
+			'has_order' => 'featured, ASC'
+		));
+		// Post published before the current post in its series
+		$before_id = $this->factory->post->create(array(
+			'post_date' => '2015-01-01 00:00:00',
+			'tax_input' => array(
+				'series' => $this->series_id
+			)
+		));
+		// Post published after the current post in its series
+		$after_id = $this->factory->post->create(array(
+			'post_date' => '2013-01-01 00:00:00',
+			'tax_input' => array(
+				'series' => $this->series_id
+			)
+		));
+		// create a post that is featured in this taxonomy. It shall be the first.
+		$feat = $this->factory->post->create(array(
+			'series' => $this->series->slug,
+			'featured' => true
+		));
+		$lr = new Largo_Related(3, $this->considered);
+		$ids = $lr->ids();
+		$this->assertEquals(3, count($ids), "Largo_Related returned other than 2 posts");
+		$this->assertEquals($feat, $ids[0], "The featured post is not the first post in the return.");
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
