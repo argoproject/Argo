@@ -606,3 +606,23 @@ function largo_fetch_video_oembed() {
 	}
 }
 add_action('wp_ajax_largo_fetch_video_oembed', 'largo_fetch_video_oembed');
+
+/**
+ * Add post classes to indicate whether a post has featured media and what type it is
+ *
+ * @since 0.5.2
+ */
+function largo_featured_media_post_classes($classes) {
+	global $post;
+
+	$featured = largo_get_featured_media($post->ID);
+	if (!empty($featured)) {
+		$classes = array_merge($classes, array(
+			'featured-media',
+			'featured-media-' . $featured['type']
+		));
+	}
+
+	return $classes;
+}
+add_filter('post_class', 'largo_featured_media_post_classes');

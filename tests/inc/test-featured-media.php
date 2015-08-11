@@ -146,6 +146,17 @@ class FeaturedMedaiTestFunctions extends WP_UnitTestCase {
 				$this->assertTrue($wp_meta_boxes[$page][$context][$priority][$id] == false);
 		}
 	}
+
+	function test_largo_featured_media_post_classes() {
+		global $post;
+		$tmp_post = $post;
+		$post = get_post($this->post);
+		update_post_meta($this->post, 'featured_media', $this->media_types['image']);
+		$ret = largo_featured_media_post_classes(array());
+		$this->assertTrue(in_array('featured-media', $ret));
+		$this->assertTrue(in_array('featured-media-image', $ret));
+		$post = $tmp_post;
+	}
 }
 
 class FeaturedMediaTestAjaxFunctions extends WP_Ajax_UnitTestCase {
