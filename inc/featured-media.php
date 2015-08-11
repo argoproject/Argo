@@ -459,16 +459,16 @@ function largo_featured_media_templates() { ?>
 
 	<script type="text/template" id="tmpl-featured-thumb">
 		<div class="thumb-container">
-		<# if (typeof data.model.get('sizes') !== 'undefined') { #>
-			<img src="{{ data.model.get('sizes').medium.url }}" title="Thumbnail: '{{ data.model.get('title') }}'" />
-			<input type="hidden" name="attachment" value="{{ data.model.get('id') }}" />
-		<# } else if (data.model.get('thumbnail_url')) { #>
-			<img src="{{ data.model.get('thumbnail_url') }}" title="Thumbnail for '{{ data.model.get('title') }}'" />
-			<input type="hidden" name="thumbnail_url" value="{{ data.model.get('thumbnail_url') }}" />
-			<input type="hidden" name="thumbnail_type" value="oembed" />
-		<# } #>
+			<# if (typeof data.model.get('sizes') !== 'undefined') { #>
+				<img src="{{ data.model.get('sizes').medium.url }}" title="Thumbnail: '{{ data.model.get('title') }}'" />
+				<input type="hidden" name="attachment" value="{{ data.model.get('id') }}" />
+			<# } else if (data.model.get('thumbnail_url')) { #>
+				<img src="{{ data.model.get('thumbnail_url') }}" title="Thumbnail for '{{ data.model.get('title') }}'" />
+				<input type="hidden" name="thumbnail_url" value="{{ data.model.get('thumbnail_url') }}" />
+				<input type="hidden" name="thumbnail_type" value="oembed" />
+			<# } #>
+			<a href="#" class="remove-thumb">Remove thumbnail</a>
 		</div>
-		<a href="#" class="remove-thumb">Remove thumbnail</a>
 	</script>
 
 	<script type="text/template" id="tmpl-featured-image-override">

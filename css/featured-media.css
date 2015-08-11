@@ -53,6 +53,14 @@
 .featured-media-modal #embed-thumb .media-uploader-status.uploading {
   margin: 20px auto;
 }
+.featured-media-modal #embed-thumb .remove-thumb {
+  display: block;
+  float: none;
+  clear: both;
+}
+.featured-media-modal #embed-thumb .thumb-container img {
+  max-width: 336px;
+}
 .featured-media-modal .media-toolbar-secondary form {
   margin-top: 20px;
 }

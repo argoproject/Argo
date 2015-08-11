@@ -423,10 +423,11 @@ var LFM = _.extend(LFM || {}, {
             }).render();
 
             this.thumbnail.on('remove', function() {
-                self.createUploader.apply(self);
+                self.createUploader();
                 self.thumbnail.off();
-                self.attachments.reset([]);
             });
+
+            this.attachments.unobserve(wp.Uploader.queue);
         },
 
         uploadProgress: function() {
@@ -447,8 +448,9 @@ var LFM = _.extend(LFM || {}, {
 
         template: wp.media.template('featured-thumb'),
 
-        removeThumb: function() {
-            this.$el.html('');
+        removeThumb: function(event) {
+            var target = $(event.currentTarget);
+            target.parent().remove();
             this.trigger('remove');
         }
     });
