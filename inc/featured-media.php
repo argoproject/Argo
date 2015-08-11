@@ -288,7 +288,7 @@ function largo_get_featured_media( $post = null ) {
 			'attachment' => $post_thumbnail,
 			'type' => 'image'
 		);
-	} else if (in_array($ret['type'], array('embed', 'video')) && !empty($post_thumbnail)) {
+	} else if (!empty($ret) && in_array($ret['type'], array('embed', 'video')) && !empty($post_thumbnail)) {
 		$attachment = wp_prepare_attachment_for_js($post_thumbnail);
 		$ret = array_merge($ret, array('attachment_data' => $attachment));
 	}
@@ -547,7 +547,7 @@ function largo_featured_media_save() {
 
 		if (isset($thumbnail_id)) {
 			update_post_meta($data['id'], '_thumbnail_id', $thumbnail_id);
-			$data['attachment_data'] = wp_prepare_attachment_for_js($post_thumbnail);
+			$data['attachment_data'] = wp_prepare_attachment_for_js($thumbnail_id);
 		}
 
 		// Don't save the post ID in post meta
