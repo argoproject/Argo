@@ -319,11 +319,17 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 		$lr = new Largo_Related(3, $this->considered);
 		$ids = $lr->ids();
 		$this->assertEquals(3, count($ids), "Largo_Related returned other than 2 posts");
+		$this->assertFalse(array($past_id, $before_id, $after_id) == $ids, "The posts were returned in increasing order of newness");
+		$this->assertFalse(array($after_id, $before_id, $past_id) == $ids, "The posts were returned in decreasing order of newness");
+		$this->assertFalse(array($before_id, $after_id, $past_id) == $ids, "The posts were returned in increasing order of post ID");
+		$this->assertFalse(array($past_id, $after_id, $before_id) == $ids, "The posts were returned in decreasing order of post ID");
+		$this->assertFalse(array($before_id, $past_id, $after_id) == $ids, "The posts were returned in the opposite of the custom order.");
 		$this->assertEquals(array($after_id, $past_id, $before_id), $ids, "The posts were not returned in the custom order");
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
 	function test_series_featured_desc() {
+		$this->markTestIncomplete('This test has not been implemented yet.');
 		of_set_option('series_enabled', 1);
 		// Create a landing page that sets the order to 'series_custom'
 		$this->factory->post->create(array(
@@ -354,10 +360,10 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 		$ids = $lr->ids();
 		$this->assertEquals(3, count($ids), "Largo_Related returned other than 2 posts");
 		$this->assertEquals($feat, $ids[0], "The featured post is not the first post in the return.");
-		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
 	function test_series_featured_asc() {
+		$this->markTestIncomplete('This test has not been implemented yet.');
 		of_set_option('series_enabled', 1);
 		// Create a landing page that sets the order to 'series_custom'
 		$this->factory->post->create(array(
@@ -388,7 +394,6 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 		$ids = $lr->ids();
 		$this->assertEquals(3, count($ids), "Largo_Related returned other than 2 posts");
 		$this->assertEquals($feat, $ids[0], "The featured post is not the first post in the return.");
-		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
 	function test_category() {
