@@ -288,6 +288,9 @@ function largo_get_featured_media( $post = null ) {
 			'attachment' => $post_thumbnail,
 			'type' => 'image'
 		);
+	} else if (in_array($ret['type'], array('embed', 'video')) && !empty($post_thumbnail)) {
+		$attachment = wp_prepare_attachment_for_js($post_thumbnail);
+		$ret = array_merge($ret, array('attachment_data' => $attachment));
 	}
 
 	// Backwards compatibility with posts that have a youtube_url set
@@ -365,7 +368,7 @@ function largo_add_featured_media_button($context) {
 	$language = (!empty($has_featured_media))? 'Edit' : 'Set';
 	ob_start();
 ?>
-	<a href="#" id="set-featured-media-button" class="button set-featured-media add_media" data-editor="content" title="<?php echo $language; ?> Featured Media"><?php echo $language; ?> Featured Media</a> <span class="spinner"></span>
+	<a href="#" id="set-featured-media-button" class="button set-featured-media add_media" data-editor="content" title="<?php echo $language; ?> Featured Media"><?php echo $language; ?> Featured Media</a> <span class="spinner" style="display: none;"></span>
 <?php
 	$context .= ob_get_contents();
 	ob_end_clean();
@@ -406,6 +409,11 @@ function largo_featured_media_templates() { ?>
 				<label for="embed"><span>Embed code</span></label>
 				<textarea name="embed"><# if (model.get('type') == 'embed-code') { #>{{ model.get('embed') }}<# } #></textarea>
 			</div>
+
+			<div>
+				<label><span>Embed thumbnail</span></span></label>
+				<div id="embed-thumb"></div>
+			</div>
 		</form>
 	</script>
 
@@ -428,7 +436,7 @@ function largo_featured_media_templates() { ?>
 
 			<div>
 				<label><span>Video thumbnail</span></span></label>
-				<div id="video-thumb"></div>
+				<div id="embed-thumb"></div>
 			</div>
 
 			<div>
@@ -451,8 +459,14 @@ function largo_featured_media_templates() { ?>
 
 	<script type="text/template" id="tmpl-featured-thumb">
 		<div class="thumb-container">
-			<img src="{{ data.model.get('sizes').medium.url }}" title="Thumbnail for '{{ data.model.get('uploadedToTitle') }}'" />
-			<input type="hidden" name="thumbnail_id" value="<# data.model.get('id') #>" />
+		<# if (typeof data.model.get('sizes') !== 'undefined') { #>
+			<img src="{{ data.model.get('sizes').medium.url }}" title="Thumbnail: '{{ data.model.get('title') }}'" />
+			<input type="hidden" name="attachment" value="{{ data.model.get('id') }}" />
+		<# } else if (data.model.get('thumbnail_url')) { #>
+			<img src="{{ data.model.get('thumbnail_url') }}" title="Thumbnail for '{{ data.model.get('title') }}'" />
+			<input type="hidden" name="thumbnail_url" value="{{ data.model.get('thumbnail_url') }}" />
+			<input type="hidden" name="thumbnail_type" value="oembed" />
+		<# } #>
 		</div>
 		<a href="#" class="remove-thumb">Remove thumbnail</a>
 	</script>
@@ -525,6 +539,17 @@ function largo_featured_media_save() {
 		if (!empty($youtube_url))
 			delete_post_meta($data['id'], 'youtube_url');
 
+		// Set the featured image for embed or oembed types
+		if (isset($data['thumbnail_url']) && isset($data['thumbnail_type']) && $data['thumbnail_type'] == 'oembed')
+			$thumbnail_id = largo_media_sideload_image($data['thumbnail_url'], null);
+		else if (isset($data['attachment']))
+			$thumbnail_id = $data['attachment'];
+
+		if (isset($thumbnail_id)) {
+			update_post_meta($data['id'], '_thumbnail_id', $thumbnail_id);
+			$data['attachment_data'] = wp_prepare_attachment_for_js($post_thumbnail);
+		}
+
 		// Don't save the post ID in post meta
 		$save = $data;
 		unset($save['id']);
@@ -568,8 +593,15 @@ add_action('wp_ajax_largo_save_featured_image_display', 'largo_save_featured_ima
 function largo_fetch_video_oembed() {
 	if (!empty($_POST['data'])) {
 		$data = json_decode(stripslashes($_POST['data']), true);
-		$ret = wp_oembed_get($data['url']);
-		print json_encode(array('embed' => $ret));
+
+		require_once( ABSPATH . WPINC . '/class-oembed.php' );
+		$oembed = _wp_oembed_get_object();
+		$url = $data['url'];
+		$provider = $oembed->get_provider($url);
+		$data = $oembed->fetch($provider, $url);
+		$embed = $oembed->data2html($data, $url);
+		$ret = array_merge(array('embed' => $embed), (array) $data);
+		print json_encode($ret);
 		wp_die();
 	}
 }
