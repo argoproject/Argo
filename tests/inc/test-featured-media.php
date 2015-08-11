@@ -1,6 +1,6 @@
 <?php
 
-class FeaturedMedaiTestFunctions extends WP_UnitTestCase {
+class FeaturedMediaTestFunctions extends WP_UnitTestCase {
 
 	function setUp() {
 		parent::setUp();
