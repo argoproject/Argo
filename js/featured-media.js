@@ -512,7 +512,8 @@ var LFM = _.extend(LFM || {}, {
                     if (data.author_name)
                         self.$el.find('[name="credit"]').val(data.author_name);
 
-                    self.updateThumbnail(new Backbone.Model(data));
+                    if (self.$el.find('[name="attachment"]').length < 1)
+                        self.updateThumbnail(new Backbone.Model(data));
 
                     self.hideSpinner();
                 },
