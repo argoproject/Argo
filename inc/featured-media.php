@@ -545,6 +545,10 @@ function largo_featured_media_save() {
 		else if (isset($data['attachment']))
 			$thumbnail_id = $data['attachment'];
 
+		// If featured media is a gallery, use the first image as the representative thumbnail
+		if ($data['type'] == 'gallery')
+			$thumbnail_id = $data['gallery'][0];
+
 		if (isset($thumbnail_id)) {
 			update_post_meta($data['id'], '_thumbnail_id', $thumbnail_id);
 			$data['attachment_data'] = wp_prepare_attachment_for_js($thumbnail_id);
