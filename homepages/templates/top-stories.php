@@ -6,12 +6,12 @@
  */
 
 global $largo, $shown_ids, $tags;
-$topstory_classes = is_active_sidebar( 'homepage-left-rail' ) ? 'top-story span12' : 'top-story span8';
+$topstory_classes = (largo_get_active_homepage_layout() == 'LegacyThreeColumn') ? 'top-story span12' : 'top-story span8';
 ?>
 <div id="homepage-featured" class="row-fluid clearfix">
-	
+
 	<div <?php post_class( $topstory_classes ); ?>>
-	
+
 	<?php
 		$topstory = largo_get_featured_posts( array(
 			'tax_query' => array(
@@ -44,7 +44,7 @@ $topstory_classes = is_active_sidebar( 'homepage-left-rail' ) ? 'top-story span1
 		endif; // end top story ?>
 	</div>
 
-	<?php if ( !is_active_sidebar( 'homepage-left-rail' ) ) { ?>
+	<?php if ( !largo_get_active_homepage_layout() == 'LegacyThreeColumn' ) { ?>
 		<div class="sub-stories span4">
 			<?php
 			$showposts = 6;
