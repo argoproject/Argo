@@ -5,7 +5,7 @@
 ?>
 <div id="content-main" class="span8">
 	<?php
-	get_template_part('partials/home-topstories');
+	get_template_part('homepages/templates/top-stories');
 
 	// sticky posts box if this site uses it
 	if (of_get_option('show_sticky_posts'))
