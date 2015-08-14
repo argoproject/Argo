@@ -226,13 +226,13 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 		));
 
 		// Create a landing page that sets the order to ASC
-		$this->factory->post->create(array(
+		$landing = $this->factory->post->create(array(
 			'post_type' => 'cftl-tax-landing',
 			'tax_input' => array(
 				'series' => $this->series->slug,
 			),
-			'has_order' => 'ASC'
 		));
+		update_post_meta($landing, 'has_order', 'ASC');
 
 		$lr = new Largo_Related(2, $this->considered);
 		$ids = $lr->ids();
@@ -252,32 +252,33 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 		));
 		// Post published before the current post in its series
 		$before_id = $this->factory->post->create(array(
-			'post_date' => '2015-01-01 00:00:00',
+			'post_date' => '2013-01-01 00:00:00',
 			'tax_input' => array(
 				'series' => $this->series_id
 			)
 		));
 		// Post published after the current post in its series
 		$after_id = $this->factory->post->create(array(
-			'post_date' => '2013-01-01 00:00:00',
+			'post_date' => '2015-01-01 00:00:00',
 			'tax_input' => array(
 				'series' => $this->series_id
 			)
 		));
 
 		// Create a landing page that sets the order to DESC
-		$this->factory->post->create(array(
+		$landing = $this->factory->post->create(array(
 			'post_type' => 'cftl-tax-landing',
 			'tax_input' => array(
 				'series' => $this->series->slug,
 			),
-			'has_order' => 'DESC'
 		));
+		update_post_meta($landing, 'has_order', 'DESC');
 
 		$lr = new Largo_Related(2, $this->considered);
 		$ids = $lr->ids();
 		$this->assertEquals(2, count($ids), "Largo_Related returned other than 2 posts");
-		$this->assertGreaterThan($ids[0], $ids[1], "The second post should be lower in post ID than the first");
+		$this->assertEquals($before_id, $ids[1], "The first post should be the younger post");
+		$this->assertEquals($after_id, $ids[0], "The first post should be the older post");
 	}
 
 	function test_series_series_custom() {
@@ -292,14 +293,14 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 		));
 		// Post published before the current post in its series
 		$before_id = $this->factory->post->create(array(
-			'post_date' => '2015-01-01 00:00:00',
+			'post_date' => '2013-01-01 00:00:00',
 			'tax_input' => array(
 				'series' => $this->series_id
 			)
 		));
 		// Post published after the current post in its series
 		$after_id = $this->factory->post->create(array(
-			'post_date' => '2013-01-01 00:00:00',
+			'post_date' => '2015-01-01 00:00:00',
 			'tax_input' => array(
 				'series' => $this->series_id
 			)
@@ -312,14 +313,14 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 			)
 		));
 
-		// Create a landing page that sets the order to 'series_custom'
-		$this->factory->post->create(array(
+		// Create a landing page that sets the order to 'custom', setting the sort order to 'series_custom'
+		$landing = $this->factory->post->create(array(
 			'post_type' => 'cftl-tax-landing',
 			'tax_input' => array(
 				'series' => $this->series->slug,
 			),
-			'has_order' => 'custom',
 		));
+		update_post_meta($landing, 'has_order', 'custom');
 
 		/*
 		 * The order of posts within a series, if set customly, is done with each post's series_order post meta.
@@ -336,30 +337,30 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 		$this->assertFalse(array($after_id, $before_id, $past_id) == $ids, "The posts were returned in decreasing order of newness");
 		$this->assertFalse(array($before_id, $after_id, $past_id) == $ids, "The posts were returned in increasing order of post ID");
 		$this->assertFalse(array($past_id, $after_id, $before_id) == $ids, "The posts were returned in decreasing order of post ID");
-		$this->assertFalse(array($before_id, $past_id, $after_id) == $ids, "The posts were returned in the custom order.");
-		$this->assertTrue(array($after_id, $past_id, $before_id) == $ids, "The posts were returned in the opposite of the custom order.");
+		$this->assertFalse(array($before_id, $past_id, $after_id) == $ids, "The posts were returned in the opposite of the custom order.");
+		$this->assertTrue(array($after_id, $past_id, $before_id) == $ids, "The posts were returned in the custom order.");
 	}
 
 	function test_series_featured_desc() {
 		of_set_option('series_enabled', 1);
-		// Create a landing page that sets the order to 'series_custom'
-		$this->factory->post->create(array(
+		// Create a landing page that sets the order to 'featured, DESC'
+		$landing = $this->factory->post->create(array(
 			'post_type' => 'cftl-tax-landing',
 			'tax_input' => array(
 				'series' => $this->series->slug,
 			),
-			'has_order' => 'featured, DESC'
 		));
+		update_post_meta($landing, 'has_order', 'featured, DESC');
 		// Post published before the current post in its series
 		$before_id = $this->factory->post->create(array(
-			'post_date' => '2015-01-01 00:00:00',
+			'post_date' => '2013-01-01 00:00:00',
 			'tax_input' => array(
 				'series' => $this->series_id
 			)
 		));
 		// Post published after the current post in its series
 		$after_id = $this->factory->post->create(array(
-			'post_date' => '2013-01-01 00:00:00',
+			'post_date' => '2015-01-01 00:00:00',
 			'tax_input' => array(
 				'series' => $this->series_id
 			)
@@ -374,30 +375,32 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 		$lr = new Largo_Related(3, $this->considered);
 		$ids = $lr->ids();
 		$this->assertEquals(3, count($ids), "Largo_Related returned other than 2 posts");
+		var_log($feat);
+		var_log($ids);
 		$this->assertEquals($feat, $ids[0], "The featured post is not the first post in the return.");
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
 	function test_series_featured_asc() {
 		of_set_option('series_enabled', 1);
-		// Create a landing page that sets the order to 'series_custom'
+		// Create a landing page that sets the order to 'featured, ASC'
 		$landing = $this->factory->post->create(array(
 			'post_type' => 'cftl-tax-landing',
 			'tax_input' => array(
 				'series' => $this->series->slug,
 			),
-			'has_order' => 'featured, ASC'
 		));
+		update_post_meta($landing, 'has_order', 'featured, ASC');
 		// Post published before the current post in its series
 		$before_id = $this->factory->post->create(array(
-			'post_date' => '2015-01-01 00:00:00',
+			'post_date' => '2013-01-01 00:00:00',
 			'tax_input' => array(
 				'series' => $this->series_id
 			)
 		));
 		// Post published after the current post in its series
 		$after_id = $this->factory->post->create(array(
-			'post_date' => '2013-01-01 00:00:00',
+			'post_date' => '2015-01-01 00:00:00',
 			'tax_input' => array(
 				'series' => $this->series_id
 			)
@@ -411,6 +414,8 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 		));
 		$lr = new Largo_Related(3, $this->considered);
 		$ids = $lr->ids();
+		var_log($feat);
+		var_log($ids);
 		$this->assertEquals(3, count($ids), "Largo_Related returned other than 2 posts");
 		$this->assertEquals($feat, $ids[0], "The featured post is not the first post in the return.");
 		$this->markTestIncomplete('This test has not been implemented yet.');
