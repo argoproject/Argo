@@ -28,9 +28,9 @@ $topstory_classes = (largo_get_active_homepage_layout() == 'LegacyThreeColumn') 
 		?>
 				<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'large' ); ?></a>
 				<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-			    <h5 class="byline"><?php largo_byline(); ?></h5>
-			    <?php largo_excerpt( $post, 4, false ); ?>
-			    <?php if ( largo_post_in_series() ):
+				<h5 class="byline"><?php largo_byline(); ?></h5>
+				<?php largo_excerpt( $post, 4, false ); ?>
+				<?php if ( largo_post_in_series() ):
 					$feature = largo_get_the_main_feature();
 					$feature_posts = largo_get_recent_posts_for_term( $feature, 1, 1 );
 					if ( $feature_posts ):
@@ -65,19 +65,19 @@ $topstory_classes = (largo_get_active_homepage_layout() == 'LegacyThreeColumn') 
 				while ( $substories->have_posts() ) : $substories->the_post(); $shown_ids[] = get_the_ID();
 					if ( $count <= 3 ) : ?>
 						<div <?php post_class( 'story' ); ?>
-				        	<?php if ( largo_has_categories_or_tags() && $tags === 'top' ) : ?>
-				        		<h5 class="top-tag"><?php largo_top_term(); ?></h5>
-				        	<?php endif; ?>
-				        	<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-				        	<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
-				            <?php largo_excerpt( $post, 3, false ); ?>
-				        </div>
-				    <?php elseif ( $count == 4 ) : ?>
-				        <h4 class="subhead"><?php _e('More Headlines', 'largo'); ?></h4>
-				        <h5><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
-				    <?php else : ?>
-				        <h5><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
-				    <?php endif;
+							<?php if ( largo_has_categories_or_tags() && $tags === 'top' ) : ?>
+								<h5 class="top-tag"><?php largo_top_term(); ?></h5>
+							<?php endif; ?>
+							<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+							<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
+							<?php largo_excerpt( $post, 3, false ); ?>
+						</div>
+					<?php elseif ( $count == 4 ) : ?>
+						<h4 class="subhead"><?php _e('More Headlines', 'largo'); ?></h4>
+						<h5><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
+					<?php else : ?>
+						<h5><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
+					<?php endif;
 					$count++;
 				endwhile;
 			endif; // end more featured posts ?>
