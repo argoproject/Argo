@@ -488,7 +488,9 @@ class Largo_Related {
 				// see if there's a post that has the sort order info for this series
 				$cftl_query = new WP_Query( array(
 					'post_type' => 'cftl-tax-landing',
-					'series' => $term->slug,
+					'tax_query' => array (
+						'series' => $term->slug,
+					),
 					'posts_per_page' => 1
 				));
 
@@ -505,11 +507,12 @@ class Largo_Related {
 								break;
 							case 'featured, DESC':
 							case 'featured, ASC':
+								var_log(isset($opt['post_order']));
 								$args['orderby'] = $opt['post_order'];
 								break;
 						}
 					}
-				}
+				} else { echo "Nope, no posts" ;}
 
 				// build the query with the sort defined
 				$series_query = new WP_Query( $args );
