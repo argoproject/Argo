@@ -228,7 +228,9 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 		// Create a landing page that sets the order to ASC
 		$this->factory->post->create(array(
 			'post_type' => 'cftl-tax-landing',
-			'series' => $this->series->slug,
+			'tax_input' => array(
+				'series' => $this->series->slug,
+			),
 			'has_order' => 'ASC'
 		));
 
@@ -266,7 +268,9 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 		// Create a landing page that sets the order to DESC
 		$this->factory->post->create(array(
 			'post_type' => 'cftl-tax-landing',
-			'series' => $this->series->slug,
+			'tax_input' => array(
+				'series' => $this->series->slug,
+			),
 			'has_order' => 'DESC'
 		));
 
@@ -311,7 +315,9 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 		// Create a landing page that sets the order to 'series_custom'
 		$this->factory->post->create(array(
 			'post_type' => 'cftl-tax-landing',
-			'series' => $this->series->slug,
+			'tax_input' => array(
+				'series' => $this->series->slug,
+			),
 			'has_order' => 'custom',
 		));
 
@@ -330,13 +336,8 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 		$this->assertFalse(array($after_id, $before_id, $past_id) == $ids, "The posts were returned in decreasing order of newness");
 		$this->assertFalse(array($before_id, $after_id, $past_id) == $ids, "The posts were returned in increasing order of post ID");
 		$this->assertFalse(array($past_id, $after_id, $before_id) == $ids, "The posts were returned in decreasing order of post ID");
-		// Sigh
-		// These next two assertions are actually inverted.
-		// The posts are returned by this function in the order opposite how they're described, but it displays correctly, and so I'm at a loss for words at what is going on here.
-		// 2015-08-14 Ben Keith
-		$this->assertTrue(array($before_id, $past_id, $after_id) == $ids, "The posts were returned in the custom order.");
-		$this->assertFalse(array($after_id, $past_id, $before_id) == $ids, "The posts were returned in the opposite of the custom order.");
-		$this->markTestIncomplete('This test has not been implemented yet.');
+		$this->assertFalse(array($before_id, $past_id, $after_id) == $ids, "The posts were returned in the custom order.");
+		$this->assertTrue(array($after_id, $past_id, $before_id) == $ids, "The posts were returned in the opposite of the custom order.");
 	}
 
 	function test_series_featured_desc() {
@@ -344,7 +345,9 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 		// Create a landing page that sets the order to 'series_custom'
 		$this->factory->post->create(array(
 			'post_type' => 'cftl-tax-landing',
-			'series' => $this->series->slug,
+			'tax_input' => array(
+				'series' => $this->series->slug,
+			),
 			'has_order' => 'featured, DESC'
 		));
 		// Post published before the current post in its series

@@ -507,12 +507,11 @@ class Largo_Related {
 								break;
 							case 'featured, DESC':
 							case 'featured, ASC':
-								var_log(isset($opt['post_order']));
 								$args['orderby'] = $opt['post_order'];
 								break;
 						}
 					}
-				} else { echo "Nope, no posts" ;}
+				}
 
 				// build the query with the sort defined
 				$series_query = new WP_Query( $args );
