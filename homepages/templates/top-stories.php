@@ -44,7 +44,7 @@ $topstory_classes = (largo_get_active_homepage_layout() == 'LegacyThreeColumn') 
 		endif; // end top story ?>
 	</div>
 
-	<?php if ( !largo_get_active_homepage_layout() == 'LegacyThreeColumn' ) { ?>
+	<?php if ( largo_get_active_homepage_layout() !== 'LegacyThreeColumn' ) { ?>
 		<div class="sub-stories span4">
 			<?php
 			$showposts = 6;
