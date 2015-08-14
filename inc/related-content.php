@@ -503,7 +503,7 @@ class Largo_Related {
 								$args['order'] = 'ASC';
 								break;
 							case 'custom':
-								$args['orderby'] = 'series_custom';
+								$args['orderby'] = 'series_custom, ASC';
 								break;
 							case 'featured, DESC':
 							case 'featured, ASC':
