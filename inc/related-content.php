@@ -460,6 +460,7 @@ class Largo_Related {
 	 * Fetches posts contained within the series(es) this post resides in. Feeds them into $this->post_ids array
 	 *
 	 * @access protected
+	 * @see largo_series_custom_order
 	 */
 	protected function get_series_posts() {
 
@@ -502,12 +503,13 @@ class Largo_Related {
 							case 'ASC':
 								$args['order'] = 'ASC';
 								break;
+							// 'series_custom' and 'featured' are custom ones, caught with largo_series_custom_order in inc/wp-taxonomy-landing/functions/cftl-series-order.php
 							case 'custom':
-								$args['orderby'] = 'series_custom, ASC';
+								$args['orderby'] = 'series_custom';
 								break;
 							case 'featured, DESC':
 							case 'featured, ASC':
-								$args['orderby'] = $opt['post_order'];
+								$args['orderby'] = $has_order;
 								break;
 						}
 					}
