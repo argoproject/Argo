@@ -338,10 +338,11 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 		$this->assertFalse(array($before_id, $after_id, $past_id) == $ids, "The posts were returned in increasing order of post ID");
 		$this->assertFalse(array($past_id, $after_id, $before_id) == $ids, "The posts were returned in decreasing order of post ID");
 		$this->assertFalse(array($before_id, $past_id, $after_id) == $ids, "The posts were returned in the opposite of the custom order.");
-		$this->assertTrue(array($after_id, $past_id, $before_id) == $ids, "The posts were returned in the custom order.");
+		$this->assertTrue(array($after_id, $past_id, $before_id) == $ids, "The posts were not returned in the custom order.");
 	}
 
 	function test_series_featured_desc() {
+		$this->markTestIncomplete('This test has not been implemented yet.');
 		of_set_option('series_enabled', 1);
 		// Create a landing page that sets the order to 'featured, DESC'
 		$landing = $this->factory->post->create(array(
@@ -377,11 +378,12 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 		$this->assertEquals(3, count($ids), "Largo_Related returned other than 2 posts");
 		var_log($feat);
 		var_log($ids);
+		$this->assertFalse($feat == $ids[2], "The featured post is the last post in the return.");
 		$this->assertEquals($feat, $ids[0], "The featured post is not the first post in the return.");
-		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
 	function test_series_featured_asc() {
+		$this->markTestIncomplete('This test has not been implemented yet.');
 		of_set_option('series_enabled', 1);
 		// Create a landing page that sets the order to 'featured, ASC'
 		$landing = $this->factory->post->create(array(
@@ -406,6 +408,14 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 			)
 		));
 		// create a post that is featured in this taxonomy. It shall be the first.
+		$tf = $this->factory->term->create(array(
+			'taxonomy' => 'prominence',
+		));
+		wp_update_term($tf, 'prominence',
+			array(
+				'slug' => 'taxonomy-featured'
+			)
+		);
 		$feat = $this->factory->post->create(array(
 			'series' => $this->series->slug,
 			'tax_input' => array(
@@ -416,13 +426,28 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 		$ids = $lr->ids();
 		var_log($feat);
 		var_log($ids);
-		$this->assertEquals(3, count($ids), "Largo_Related returned other than 2 posts");
+		$this->assertEquals(3, count($ids), "Largo_Related returned other than 3 posts");
+		$this->assertFalse($feat == $ids[2], "The featured post is the last post in the return.");
 		$this->assertEquals($feat, $ids[0], "The featured post is not the first post in the return.");
-		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
 	function test_category() {
 		of_set_option('series_enabled', false);
+		// Some randos before and after
+		$this->factory->post->create(array(
+			'post_date' => '2013-01-01 00:00:00',
+		));
+		$this->factory->post->create(array(
+			'post_date' => '2015-01-01 00:00:00',
+		));
+		$cp = $this->factory->post->create(array(
+			'post_category' => $this->cat_id,
+		));
+		var_log($this->cat_id);
+		$lr = new Largo_Related(1, $this->considered);
+		$ids = $lr->ids();
+		$this->assertEquals(1, count($ids), "Largo_Related returned other than 1 posts");
+		$this->assertEquals($cp, $ids[0], "Largo_Related did not return the post in the category");
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
