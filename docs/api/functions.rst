@@ -17,12 +17,6 @@ functions.php
 
       :returns: bool
 
-.. php:function:: Largo()
-
-   Load the theme
-
-   :ignore:
-
 .. php:function:: largo_php_warning()
 
    Prints an admin warning if php is out of date.
