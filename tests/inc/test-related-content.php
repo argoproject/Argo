@@ -441,14 +441,12 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 			'post_date' => '2015-01-01 00:00:00',
 		));
 		$cp = $this->factory->post->create(array(
-			'post_category' => $this->cat_id,
+			'post_category' => array($this->cat_id),
 		));
-		var_log($this->cat_id);
 		$lr = new Largo_Related(1, $this->considered);
 		$ids = $lr->ids();
 		$this->assertEquals(1, count($ids), "Largo_Related returned other than 1 posts");
 		$this->assertEquals($cp, $ids[0], "Largo_Related did not return the post in the category");
-		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
 	function test_tags() {
