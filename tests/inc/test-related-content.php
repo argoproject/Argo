@@ -119,7 +119,7 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 		$b_term = (object) array('count' => 4);
 		$c_term = (object) array('count' => 3);
 
-		$lr = new Largo_Related;
+		$lr = new Largo_Related(1, $this->considered);
 
 		$this->assertEquals(0, $lr->popularity_sort($a_term, $b_term), 'Comparing two terms with equal numbers of posts did not return 0, which would indicate they were of the same length');
 		$this->assertEquals(-1, $lr->popularity_sort($c_term, $b_term), 'Comparing a term with 3 posts to a term with 4 posts did not return -1, which would indicate that 3 had fewer posts than 4 did. If the difference were greater than 1 post, -1 would still be returned.');
