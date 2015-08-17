@@ -431,6 +431,9 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 		$this->assertEquals($feat, $ids[0], "The featured post is not the first post in the return.");
 	}
 
+	/**
+	 * @todo This test checks for a post before and a post after the considered post
+	 */
 	function test_category() {
 		of_set_option('series_enabled', false);
 		// Some randos before and after
@@ -453,10 +456,16 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
+	/**
+	 * @todo This test should ask for 2 posts, and return one post each from a category and a tag
+	 */
 	function test_category_and_tag() {
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
+	/**
+	 * @todo This test should check that recent posts are returned when there are no posts in the considered post's series, category, or tags
+	 */
 	function test_recent_posts() {
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
