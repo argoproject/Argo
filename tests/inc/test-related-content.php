@@ -94,11 +94,6 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 		$this->go_to("/?p=$this->considered");
 		// check that Largo_Related->number equals 1 if number is not set
 		$lr = new Largo_Related();
-		/*
-		 *
-		 * State of this on Friday evening: I can't create a new Largo_Related in a way that actually triggers it as an object and not as an associative array. 
-		 *
-		 */
 		$this->assertInstanceOf('Largo_Related', $lr, 'The constructor failed to make $lr an instance of Largo_Related');
 		$this->assertEquals(1, $lr->number, "The number of posts to be returned, when not explicitly set, did not match the programmed number of 1 posts");
 
@@ -210,14 +205,14 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 		$this->factory->post->create(array(
 			'post_date' => '2015-01-01 00:00:00',
 		));
-		// Post published before the current post in its series
+		// Post published after the current post in its series
 		$before_id = $this->factory->post->create(array(
 			'post_date' => '2015-01-01 00:00:00',
 			'tax_input' => array(
 				'series' => $this->series_id
 			)
 		));
-		// Post published after the current post in its series
+		// Post published before the current post in its series
 		$after_id = $this->factory->post->create(array(
 			'post_date' => '2013-01-01 00:00:00',
 			'tax_input' => array(
