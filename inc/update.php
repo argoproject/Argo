@@ -650,7 +650,7 @@ function largo_instantiate_widget( $kind, $instance_settings, $region ) {
  * @since 0.3
  */
 function largo_update_admin_notice() {
-	if (!current_user_can('manage_network'))
+	if (!current_user_can('edit_theme_options'))
 		return;
 
 	if (largo_need_updates() && !(isset($_GET['page']) && $_GET['page'] == 'update-largo')) {
@@ -781,7 +781,7 @@ add_action('admin_enqueue_scripts', 'largo_update_page_enqueue_js');
  * @global $_GET
  */
 function largo_ajax_update_database() {
-	if (!current_user_can('activate_plugins')) {
+	if (!current_user_can('edit_theme_options')) {
 		print json_encode(array(
 			"status" => __("An error occurred."),
 			"success" => false
