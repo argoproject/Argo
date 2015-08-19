@@ -34,20 +34,22 @@ function largo_register_sidebars() {
 			'name' 	=> __( 'Footer 1', 'largo' ),
 			'desc' 	=> __( 'The first footer widget area.', 'largo' ),
 			'id' 	=> 'footer-1'
-		),
-		array (
+		)
+	);
+
+	if ( of_get_option('footer_layout') !== '1col') {
+		$sidebars[] = array (
 			'name' 	=> __( 'Footer 2', 'largo' ),
 			'desc' 	=> __( 'The second footer widget area.', 'largo' ),
 			'id' 	=> 'footer-2'
-		),
-		array(
+		);
+		$sidebars[] = array(
 			'name' 	=> __( 'Footer 3', 'largo' ),
 			'desc' 	=> __( 'The third footer widget area.', 'largo' ),
 			'id' 	=> 'footer-3'
-		),
-	);
+		);
+	}
 
-	// optional widget areas
 	if ( of_get_option('footer_layout') == '4col' || of_get_option('footer_layout') == '4col-asymm' ) {
 		$sidebars[] = array(
 			'name' 	=> __( 'Footer 4', 'largo' ),
@@ -55,6 +57,7 @@ function largo_register_sidebars() {
 			'id' 	=> 'footer-4'
 		);
 	}
+
 	if ( of_get_option( 'use_topic_sidebar' ) ) {
 		$sidebars[] = array(
 			'name' 	=> __( 'Archive/Topic Sidebar', 'largo' ),
@@ -62,6 +65,7 @@ function largo_register_sidebars() {
 			'id' 	=> 'topic-sidebar'
 		);
 	}
+
 	if ( of_get_option( 'use_before_footer_sidebar' ) ) {
 		$sidebars[] = array(
 			'name' 	=> __( 'Before Footer', 'largo' ),
