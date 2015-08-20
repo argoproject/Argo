@@ -59,7 +59,7 @@ $posts_term = of_get_option('posts_term_plural', 'Stories');
 		<?php if ( have_posts() ) {
 			while ( have_posts() ) {
 				the_post();
-				$shown_ids[] = get_the_ID();
+				//$shown_ids[] = get_the_ID();
 				get_template_part( 'partials/content', 'archive' );
 			}
 			largo_content_nav( 'nav-below' );

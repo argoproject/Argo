@@ -30,8 +30,6 @@
 
     LoadMorePosts.prototype.request = function() {
         this.$el.addClass('loading');
-
-
         this.ajax_opts.data.paged += 1;
         this.ajax_opts.data.query = JSON.stringify(this.config.query);
         $.ajax(this.ajax_opts);
