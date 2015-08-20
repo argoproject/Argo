@@ -95,9 +95,7 @@ if (!function_exists('largo_load_more_posts')) {
 		// num_posts_home is only relevant on the homepage
 		if ( of_get_option('num_posts_home') && $is_home )
 			$args['posts_per_page'] = of_get_option('num_posts_home');
-		// The first 'page' of the homepage is in $shown_ids, so this number should actually be minus one.
 		if ( $is_home ) {
-			$args['paged'] = ( $args['paged'] - 1 );
 			if ( of_get_option('cats_home') )
 				$args['cat'] = of_get_option('cats_home');
 		}
