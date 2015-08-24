@@ -177,7 +177,7 @@ li.home-link:hover i {
   display: block;
   width: 18px;
   height: 3px;
-  background-color: @navbarText;
+  background-color: @linkColor;
 }
 .btn-navbar .icon-bar + .icon-bar {
   margin-top: 3px;
@@ -645,13 +645,18 @@ li.home-link:hover i {
   .navbar {
     position: relative;
     z-index: 9;
+    li.dropdown .dropdown-menu li a {
+      line-height: @navbarHeight;
+      padding-top: 0;
+      padding-bottom: 0;
+      padding-left: @navbarHeight;
+    }
   }
   .navbar .container {
     width: auto;
     padding: 0;
   }
   .navbar .toggle-nav-bar {
-    background-color: @linkColor;
     display: block;
   }
   .navbar .nav-shelf {
@@ -684,14 +689,14 @@ li.home-link:hover i {
       font-size: 112%;
     }
     li.open > a .caret {
-      //.rotate( 90deg );
+      .rotate( 90deg );
     }
     li.open > ul.dropdown-menu {
       display: block;
       position: relative;
       .box-shadow( none );
       border: none;
-      padding: 5px 0;
+      padding: 0;
       &:before, &:after {
         display: none;
       }
@@ -726,6 +731,7 @@ li.home-link:hover i {
   // ------------------
   // Nav collapse clears brand
   // This area removes a lot of the Twitter Bootstrap styles that Largo was bulit on.
+  // This area currently affects _nothing_ in Largo, because we don't use .nav-middle anywhere.
   .sticky-nav-holder .nav-middle {
     clear: both;
     overflow: hidden;
