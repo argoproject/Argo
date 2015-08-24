@@ -159,11 +159,8 @@ li.home-link:hover i {
   margin: 4px 0;
   margin-right: 10px;
   padding: @navbarHeight/5 10px;
-  background-color: @navbarBackgroundHighlight;
+  background-color: transparent;
   border: none;
-}
-.navbar .btn-navbar:hover {
-  background-color: darken(@navbarBackgroundHighlight, 10%);
 }
 .navbar .btn-navbar .label {
   float: right;
@@ -458,9 +455,11 @@ li.home-link:hover i {
     padding: 0;
   }
   .navbar .toggle-nav-bar {
+    background-color: @linkColor;
     display: block;
   }
   .navbar .nav-shelf {
+    background: @dropdownBackground;
     position: absolute;
     top: 100%;
     left: -10px;
@@ -470,25 +469,6 @@ li.home-link:hover i {
     .site-name, .home-icon, .home-link {
     	display: none;
     }
-  }
-  .navbar.open .nav-shelf {
-    visibility: visible;
-    opacity: 1;
-    border-bottom: solid 1px @dropdownBorder;
-    &:after {
-      position: absolute;
-      content: " ";
-      display: block;
-      bottom: -5px;
-      left: 0;
-      right: 0;
-      height: 5px;
-      #gradient > .vertical( rgba(0,0,0,0.5), rgba(0,0,0,0) );
-      background-color: transparent;
-    }
-  }
-  .navbar .nav-shelf {
-    background: @dropdownBackground;
     ul, li {
       float: none;
     }
@@ -524,6 +504,22 @@ li.home-link:hover i {
       &:before, &:after {
         display: none;
       }
+    }
+  }
+  .navbar.open .nav-shelf {
+    visibility: visible;
+    opacity: 1;
+    border-bottom: solid 1px @dropdownBorder;
+    &:after {
+      position: absolute;
+      content: " ";
+      display: block;
+      bottom: -5px;
+      left: 0;
+      right: 0;
+      height: 5px;
+      #gradient > .vertical( rgba(0,0,0,0.5), rgba(0,0,0,0) );
+      background-color: transparent;
     }
   }
 
