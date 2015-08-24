@@ -434,6 +434,204 @@ li.home-link:hover i {
   left: -8px;
 }
 
+// The "Don't Miss" Secondary Nav
+// ---------------
+
+#topics-bar {
+  border-bottom: 1px solid @grayLighter;
+  padding: 3px 0;
+  ul {
+    margin: 0;
+    font-family: @sansFontFamily;
+    li {
+      display: inline;
+      margin-right: 10px;
+      white-space: nowrap;
+      font-size: 14px;
+      &.menu-label {
+        font-size: 15px;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+// Sticky nav
+.sticky-nav-holder {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 99998;
+  visibility: hidden;
+  opacity: 0;
+  .transition( opacity 0.3s );
+  background-color: @white;
+  .box-shadow(0 0 16px @gray);
+  &.show {
+    visibility: visible;
+    opacity: 1;
+  }
+  body.admin-bar & {
+    top: 32px;
+  }
+  .home & {
+    visibility: hidden;
+    opacity: 0;
+    &.show {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+  .sticky-nav-container {
+    margin: 0 auto;
+    position: relative;
+  }
+  .navbar {
+    margin-bottom: 0;
+    li {
+      > a {
+        color: @linkColor;
+        background-color: transparent;
+      }
+      .caret {
+        float: right;
+        margin-right: 5px;
+        padding: 0px 7px;
+      }
+      .caret:before {
+        border-top-color: @linkColor;
+        border-left-color: transparent;
+      }
+    }
+    .social-icons {
+      margin: 0;
+      float: left;
+      li > a {
+        color: #fff;
+        &:hover {
+          background-color: transparent;
+        }
+      }
+    }
+    &.home-link {
+      min-width: 40px;
+      text-align: center;
+      .nav > li {
+        a {
+          img {
+            width: 1.49em;
+            height: 1.49em;
+          }
+        }
+        .icon-home:before {
+          position: relative;
+          top: 0px;
+        }
+      }
+    }
+  }
+  .navbar li.dropdown.open > .dropdown-toggle,
+  .navbar li.dropdown.active > .dropdown-toggle,
+  .navbar li.dropdown.open.active > .dropdown-toggle {
+    color: @grayLighter;
+    background: @linkColor;
+    .caret:before {
+      border-top-color: @white;
+    }
+  }
+  .site-name {
+    display: block;
+    color: #343434;
+    a {
+      color: #343434;
+      &:hover {
+        background-color: #fff;
+        color: #666;
+        text-decoration: none;
+      }
+    }
+    @media only screen and (max-width: 320px) {
+      display: none;
+    }
+  }
+  .nav-right {
+    float: right;
+    #header-extras {
+      float: left;
+      margin: 0;
+      a.donate-link:hover {
+        background: transparent;
+      }
+      a span {
+        padding: 4px 8px;
+        color: @white;
+        background-color: @red;
+        &:hover {
+          background-color: lighten(@red, 5%);
+        }
+        i {
+          display: none;
+        }
+
+      }
+    }
+  }
+  .nav-right .form-search {
+    position: relative;
+    .toggle {
+      display: inline-block;
+      color: @baseColor;
+      display: inline-block;
+      text-align: center;
+      cursor: pointer;
+      position: relative;
+      z-index: 91;
+      .transition( 0.3s );
+    }
+    .input-append {
+      position: absolute;
+      right: 44px;
+      top: 0;
+      right: 0;
+      opacity: 0;
+      visibility: hidden;
+      .transition( 0.3s );
+      padding: 10px;
+      z-index: 90;
+      width: 280px;
+      .text-input-wrapper {
+        display: block;
+        float: left;
+        width: 230px;
+      }
+      input {
+        width: 100%;
+        .box-sizing( border-box );
+        height: 36px !important;
+      }
+      button {
+        width: 50px !important;
+        height: 36px !important;
+        float: left;
+        .box-sizing( border-box );
+      }
+    }
+  }
+  #sticky-nav-search.show {
+    .input-append {
+      position: absolute;
+      opacity: 1;
+      visibility: visible;
+    }
+    .input-append,
+    .toggle {
+      background-color: #343434;
+      color: @bodyBackground;
+    }
+  }
+}
+
 // TABLETS AND BELOW
 // -----------------
 @media (max-width: 979px) {
@@ -625,206 +823,5 @@ li.home-link:hover i {
   .nav-collapse.collapse {
     height: auto !important;
     overflow: visible !important;
-  }
-}
-
-// The "Don't Miss" Secondary Nav
-// ---------------
-
-#topics-bar {
-  border-bottom: 1px solid @grayLighter;
-  padding: 3px 0;
-  ul {
-    margin: 0;
-    font-family: @sansFontFamily;
-    li {
-      display: inline;
-      margin-right: 10px;
-      white-space: nowrap;
-      font-size: 14px;
-      &.menu-label {
-        font-size: 15px;
-        font-weight: bold;
-      }
-    }
-  }
-}
-
-// Sticky nav
-.sticky-nav-holder {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 99998;
-  visibility: hidden;
-  opacity: 0;
-  .transition( opacity 0.3s );
-  background-color: @white;
-  .box-shadow(0 0 16px @gray);
-  &.show {
-    visibility: visible;
-    opacity: 1;
-  }
-  body.admin-bar & {
-    top: 32px;
-  }
-  .home & {
-    visibility: hidden;
-    opacity: 0;
-    &.show {
-      opacity: 1;
-      visibility: visible;
-    }
-  }
-  .sticky-nav-container {
-    margin: 0 auto;
-    position: relative;
-  }
-  .navbar {
-    margin-bottom: 0;
-    li {
-      > a {
-        color: @linkColor;
-        background-color: transparent;
-      }
-      .caret {
-        float: right;
-        margin-right: 5px;
-        padding: 0px 7px;
-      }
-      .caret:before {
-        border-top-color: @linkColor;
-        border-left-color: transparent;
-      }
-    }
-    .social-icons {
-      margin: 0;
-      float: left;
-      li > a {
-        color: #fff;
-        &:hover {
-          background-color: transparent;
-        }
-      }
-    }
-    &.home-link {
-      min-width: 40px;
-      text-align: center;
-      .nav > li {
-        a {
-          img {
-            width: 1.49em;
-            height: 1.49em;
-          }
-        }
-        .icon-home:before {
-          position: relative;
-          top: 0px;
-        }
-      }
-    }
-  }
-  .navbar li.dropdown.open > .dropdown-toggle,
-  .navbar li.dropdown.active > .dropdown-toggle,
-  .navbar li.dropdown.open.active > .dropdown-toggle {
-    color: @grayLighter;
-    background: @linkColor;
-    .caret:before {
-      border-top-color: @white;
-    }
-    &:hover {
-      color: @white;
-    }
-  }
-  .site-name {
-    display: block;
-    color: #343434;
-    a {
-      color: #343434;
-      &:hover {
-        background-color: #fff;
-        color: #666;
-        text-decoration: none;
-      }
-    }
-    @media only screen and (max-width: 320px) {
-      display: none;
-    }
-  }
-  .nav-right {
-    float: right;
-    #header-extras {
-      float: left;
-      margin: 0;
-      a.donate-link:hover {
-        background: transparent;
-      }
-      a span {
-        padding: 4px 8px;
-        color: @white;
-        background-color: @red;
-        &:hover {
-          background-color: lighten(@red, 5%);
-        }
-        i {
-          display: none;
-        }
-
-      }
-    }
-  }
-  .nav-right .form-search {
-    position: relative;
-    .toggle {
-      display: inline-block;
-      color: @baseColor;
-      display: inline-block;
-      text-align: center;
-      cursor: pointer;
-      position: relative;
-      z-index: 91;
-      .transition( 0.3s );
-    }
-    .input-append {
-      position: absolute;
-      right: 44px;
-      top: 0;
-      right: 0;
-      opacity: 0;
-      visibility: hidden;
-      .transition( 0.3s );
-      padding: 10px;
-      z-index: 90;
-      width: 280px;
-      .text-input-wrapper {
-        display: block;
-        float: left;
-        width: 230px;
-      }
-      input {
-        width: 100%;
-        .box-sizing( border-box );
-        height: 36px !important;
-      }
-      button {
-        width: 50px !important;
-        height: 36px !important;
-        float: left;
-        .box-sizing( border-box );
-      }
-    }
-  }
-  #sticky-nav-search.show {
-    .input-append {
-      position: absolute;
-      opacity: 1;
-      visibility: visible;
-    }
-    .input-append,
-    .toggle {
-      background-color: #343434;
-      color: @bodyBackground;
-    }
   }
 }
