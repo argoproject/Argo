@@ -152,13 +152,15 @@ li.home-link:hover i {
 }
 
 // Navbar button for toggling navbar items in responsive layouts
+// First, let's define how tall these bars are:
+@iconbarHeight: 3px;
+
 // These definitions need to come after '.navbar .btn'
 .navbar .btn-navbar {
   display: none;
   float: left;
-  margin: 4px 0;
   margin-right: 10px;
-  padding: @navbarHeight/5 10px;
+  padding: (floor(@navbarHeight - (5 * @iconbarHeight) ))/2 10px; // @iconbarHeight is used 5x: 3x for the bars, 2x for the margin between them.
   background-color: transparent;
   border: none;
 }
@@ -176,11 +178,11 @@ li.home-link:hover i {
 .navbar .btn-navbar .icon-bar {
   display: block;
   width: 18px;
-  height: 3px;
+  height: @iconbarHeight;
   background-color: @linkColor;
 }
 .btn-navbar .icon-bar + .icon-bar {
-  margin-top: 3px;
+  margin-top: @iconbarHeight;
 }
 
 // DROPDOWN MENUS
