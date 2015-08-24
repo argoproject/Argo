@@ -74,7 +74,6 @@
   color: @navbarLinkColor;
   text-decoration: none;
   line-height: @navbarHeight;
-  vertical-align: middle;
   padding-left: @navbarHeight/4;
   padding-right: @navbarHeight/4;
 }
@@ -688,7 +687,6 @@ li.home-link:hover i {
     }
     a {
       color: @linkColor;
-      font-size: 112%;
     }
     li.open > a .caret {
       .rotate( 90deg );
@@ -702,6 +700,18 @@ li.home-link:hover i {
       &:before, &:after {
         display: none;
       }
+    }
+    .nav > li {
+      border-bottom: 1px solid @grayLight;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      &:last-child {
+        border-bottom: none;
+        padding-bottom: none;
+      }
+    }
+    .sub-menu {
+      display: none;
     }
   }
   .navbar.open .nav-shelf {
@@ -726,6 +736,26 @@ li.home-link:hover i {
         color: @linkColor;
         background: transparent;
       }
+    }
+  }
+  /*
+   * Dealing with active and open sections
+   */
+  .navbar .dropdown-menu .active > a,
+  .navbar .dropdown-menu .active > a:hover {
+    font-weight: normal;
+  }
+  .navbar .nav li.dropdown.active > .dropdown-toggle:hover {
+    color: @linkColor;
+  }
+  // I really wish this did not have to be as specific as it is.
+  .sticky-nav-holder .navbar li.dropdown.open > .dropdown-toggle,
+  .sticky-nav-holder .navbar li.dropdown.active > .dropdown-toggle,
+  .sticky-nav-holder .navbar li.dropdown.open.active > .dropdown-toggle {
+    color: @linkColor;
+    background: transparent;
+    .caret:before {
+      border-top-color: transparent;
     }
   }
 }
