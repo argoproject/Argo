@@ -26,11 +26,6 @@
   width: auto;
 }
 
-// Override the default collapsed state
-.nav-collapse.collapse {
-  height: auto;
-}
-
 // Brand, links, text, and buttons
 .navbar {
   color: @navbarText;
@@ -771,12 +766,5 @@ li.home-link:hover i {
 @media (min-width: 769px) {
   .navbar .nav-left {
     display: none;
-  }
-}
-// Required to make the collapsing navbar work on regular desktops
-@media (min-width: 980px) {
-  .nav-collapse.collapse {
-    height: auto !important;
-    overflow: visible !important;
   }
 }
