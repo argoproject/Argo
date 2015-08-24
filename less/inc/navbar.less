@@ -710,7 +710,12 @@ li.home-link:hover i {
         padding-bottom: none;
       }
     }
-    .sub-menu {
+  }
+  .dropdown-menu li:hover .sub-sub-menu,
+  .dropdown-menu li:hover .sub-menu {
+    display: none;
+    visibility: hidden;
+    &:before {
       display: none;
     }
   }
