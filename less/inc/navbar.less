@@ -302,9 +302,6 @@ li.home-link:hover i {
 // -----------
 
 .dropdown-menu li a:hover {
-  background: none;
-}
-.dropdown-menu li a:hover {
   color: @dropdownLinkColorHover;
   text-decoration: none;
   background-color: @dropdownLinkBackgroundHover;
@@ -468,29 +465,35 @@ li.home-link:hover i {
     visibility: hidden;
     opacity: 0;
     .site-name, .home-icon, .home-link {
-    	display: none;
+      display: none;
     }
     ul, li {
       float: none;
     }
     li.home-link { display: none; }
+    li b.caret {
+      float: right;
+      margin-right: 5px;
+      padding: 0px 7px;
+      //top: -3px;
+      &:before {
+        border-top-color: transparent;
+        border-left-color: @linkColor;
+      }
+    }
     a {
       color: @linkColor;
       font-size: 112%;
     }
-    li.dropdown.open > a.dropdown-toggle {
-      color: @dropdownBackground;
-      .caret:before {
-        border-top-color: @linkColor;
-      }
-    }
     li.open > a .caret {
-      .rotate( 180deg );
+      //.rotate( 90deg );
     }
     li.open > ul.dropdown-menu {
       display: block;
       position: relative;
       .box-shadow( none );
+      border: none;
+      padding: 5px 0;
       &:before, &:after {
         display: none;
       }
@@ -512,12 +515,19 @@ li.home-link:hover i {
       background-color: transparent;
     }
   }
+  .sticky-nav-holder .navbar {
+    li.dropdown.open {
+      & > .dropdown-toggle {
+        color: @linkColor;
+        background: transparent;
+      }
+    }
+  }
 
   // COLLAPSIBLE NAVBAR
   // ------------------
   // Nav collapse clears brand
   // This area removes a lot of the Twitter Bootstrap styles that Largo was bulit on.
-  .sticky-nav-holder .nav-collapse,
   .sticky-nav-holder .nav-middle {
     clear: both;
     overflow: hidden;
@@ -538,6 +548,11 @@ li.home-link:hover i {
           &:hover {
             background:none !important;
             color: @navbarLinkColorHover;
+          }
+          .caret:before{
+            float:right;
+            border-top-color: @navbarLinkColor;
+            border-left-color: transparent;
           }
         }
         &:hover > a {
@@ -572,12 +587,8 @@ li.home-link:hover i {
       padding: 4px 10px 4px;
       font-weight: normal;
     }
-      .dropdown-menu li + li a {
+    .dropdown-menu li + li a {
       margin-bottom: 2px;
-    }
-    .nav-collapse .nav > li > a:hover,
-    .nav-collapse .dropdown-menu a:hover {
-      background-color: @navbarBackground;
     }
     // Dropdowns in the navbar
     .dropdown-menu {
@@ -592,11 +603,11 @@ li.home-link:hover i {
       background-color: transparent;
       border: none;
       .box-shadow(none);
-   &:before,
-    &:after,
-    .divider {
+      &:before,
+      &:after,
+      .divider {
         display: none;
-    }
+      }
     }
   }
 }
@@ -683,8 +694,8 @@ li.home-link:hover i {
         padding: 0px 7px;
       }
       .caret:before {
-        border-left-color: @linkColor;
-        border-left-color: rgba( red(@linkColor), green(@linkColor), blue(@linkColor), 0.8);
+        border-top-color: @linkColor;
+        border-left-color: transparent;
       }
     }
     .social-icons {
@@ -714,9 +725,9 @@ li.home-link:hover i {
       }
     }
   }
-  .navbar .nav li.dropdown.open > .dropdown-toggle,
-  .navbar .nav li.dropdown.active > .dropdown-toggle,
-  .navbar .nav li.dropdown.open.active > .dropdown-toggle {
+  .navbar li.dropdown.open > .dropdown-toggle,
+  .navbar li.dropdown.active > .dropdown-toggle,
+  .navbar li.dropdown.open.active > .dropdown-toggle {
     color: @grayLighter;
     background: @linkColor;
     .caret:before {
