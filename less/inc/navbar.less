@@ -222,6 +222,7 @@ li.home-link:hover i {
     border-top:   6px solid @white;
     border-right: 5px solid transparent;
     border-left:  5px solid transparent;
+    border-bottom:  5px solid transparent;
     content: "";
   }
 
@@ -473,25 +474,14 @@ li.home-link:hover i {
       float: none;
     }
     li.home-link { display: none; }
-    li .caret {
-      float: right;
-      background-color: @linkColor;
-      margin-right: 5px;
-      padding: 0px 7px;
-      //top: -3px;
-      &:before {
-        border-top-color: @dropdownBackground !important;
-      }
-    }
     a {
       color: @linkColor;
       font-size: 112%;
     }
     li.dropdown.open > a.dropdown-toggle {
-      background-color: @linkColor;
       color: @dropdownBackground;
       .caret:before {
-        border-top-color: @dropdownBackground !important;
+        border-top-color: @linkColor;
       }
     }
     li.open > a .caret {
@@ -526,6 +516,7 @@ li.home-link:hover i {
   // COLLAPSIBLE NAVBAR
   // ------------------
   // Nav collapse clears brand
+  // This area removes a lot of the Twitter Bootstrap styles that Largo was bulit on.
   .sticky-nav-holder .nav-collapse,
   .sticky-nav-holder .nav-middle {
     clear: both;
@@ -547,10 +538,6 @@ li.home-link:hover i {
           &:hover {
             background:none !important;
             color: @navbarLinkColorHover;
-          }
-          .caret {
-            float: right;
-            border-top-color: @navbarLinkColor !important;
           }
         }
         &:hover > a {
@@ -688,13 +675,16 @@ li.home-link:hover i {
     li {
       > a {
         color: @linkColor;
+        background-color: transparent;
+      }
+      .caret {
+        float: right;
+        margin-right: 5px;
+        padding: 0px 7px;
       }
       .caret:before {
-        border-top-color: @linkColor;
-        border-top-color: rgba( red(@linkColor), green(@linkColor), blue(@linkColor), 0.8);
-      }
-      > a:hover .caret:before {
-        border-top-color: @bodyBackground;
+        border-left-color: @linkColor;
+        border-left-color: rgba( red(@linkColor), green(@linkColor), blue(@linkColor), 0.8);
       }
     }
     .social-icons {
@@ -707,14 +697,10 @@ li.home-link:hover i {
         }
       }
     }
-    .nav > li {
-      &.active > a,
-      &.active > a:hover {
-        color: #fff;
-      }
     &.home-link {
       min-width: 40px;
       text-align: center;
+      .nav > li {
         a {
           img {
             width: 1.49em;
