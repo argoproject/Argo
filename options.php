@@ -468,6 +468,16 @@ function optionsframework_options() {
 			)
 		);
 
+	$options[] = array(
+		'name' => __('Category Options', 'largo'),
+		'type' => 'info');
+
+	$options[] = array(
+		'desc' => __('Hide the featured posts area on category pages?'),
+		'id' => 'hide_category_featured',
+		'std' => '0',
+		'type' => 'checkbox');
+
 	$widget_options[] = $options[] = array(
 		'name' 	=> __('Sidebar Options', 'largo'),
 		'type' 	=> 'info');
