@@ -25,8 +25,8 @@ $posts_term = of_get_option('posts_term_plural', 'Stories');
 
 	<?php
 
-	$featured_posts = largo_get_featured_posts_in_category( $wp_query->query_vars['category_name'] );
-	if ( $paged < 2 ) {
+	if ( $paged < 2 && of_get_option('hide_category_featured') == '0' ) {
+		$featured_posts = largo_get_featured_posts_in_category( $wp_query->query_vars['category_name'] );
 		if ( count( $featured_posts ) > 0 ) {
 			foreach ( $featured_posts as $idx => $featured_post ) {
 				$shown_ids[] = $featured_post->ID;
