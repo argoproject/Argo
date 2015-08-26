@@ -345,8 +345,8 @@ function largo_get_featured_posts_in_category($category_name, $number=5) {
 	$featured_posts = get_posts(array_merge($args, $tax_query));
 
 	// Backfill with regular posts if necessary
-	if (count( $featured_posts ) < 5) {
-		$needed = 5 - count( $featured_posts );
+	if (count( $featured_posts ) < (int) $number) {
+		$needed = (int) $number - count( $featured_posts );
 		$regular_posts = get_posts(array_merge($args, array(
 			'numberposts' => $needed,
 			'post__not_in' => array_map(function($x) { return $x->ID; }, $featured_posts)
