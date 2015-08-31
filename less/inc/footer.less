@@ -218,7 +218,7 @@ ul#footer-social {
   font-family: @sansFontFamily;
   p {
     margin-bottom: 0;
-    color: @grayLight;
+    color:#9F9FA3;
   }
   .menu {
     display: inline;
@@ -234,6 +234,20 @@ ul#footer-social {
   }
   .menu {
     clear: none;
+  }
+}
+
+/* highly descriptive to prevent accidental override */
+/* boilerplate text color to match gray logo*/
+footer #boilerplate {
+  p {
+    color:#9F9FA3;
+  }
+  a {
+    color:#848487;
+    &:hover {
+      color:#09C9FF;
+    }
   }
 }
 
