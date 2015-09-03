@@ -73,10 +73,6 @@ class largo_author_widget extends WP_Widget {
 	}
 
 	function form( $instance ) {
-		
-		$defaults = array( 'title' => sprintf( __( 'About %s', 'largo' ), get_bloginfo('name') ) );
-		$instance = wp_parse_args( (array) $instance, $defaults );
-		?>
-		<?php
+		return true;
 	}
 }
