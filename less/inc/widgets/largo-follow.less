@@ -1,0 +1,58 @@
+/**
+ * Styles for the Largo Follow widget
+ *
+ * @since 0.5.3
+ */
+.subscribe {
+  display: block;
+  height: 24px;
+  line-height: 1.5;
+  font-size: @baseFontSize - 2;
+  font-family: @sansFontFamily;
+  margin-bottom: 5px;
+  color: @gray;
+  &:hover {
+  text-decoration: none;
+  color: @grayDarker;
+  }
+  i {
+    color: @white;
+    padding: 3px 2px 3px 3px;
+    font-size: @baseFontSize - 3;
+    margin-right: 5px;
+    &.icon-rss {
+    background-color: darken(@orange, 5%);
+    &:hover {
+      background-color: @orange;
+    }
+    }
+    &.icon-linkedin {
+    background-color: darken(#238cc3, 5%);
+    &:hover {
+      background-color: #238cc3;
+    }
+    }
+  }
+}
+.article-bottom .largo-follow {
+  padding: 0;
+}
+.twitter-follow-button {
+  display: block;
+  margin: 0 0 10px;
+}
+.widget .fb-like {
+  margin: 0 0 5px;
+}
+.fb-like, .fb-like span, .fb-like.fb_iframe_widget span iframe,
+.fb-like-box, .fb-like-box span, .fb-like-box span iframe[style] {
+  width: 100% !important;
+}
+.fb-like-box {
+  background: white !important;
+  background-color: white !important;
+}
+.flickr-follow {
+  margin-bottom: 8px;
+}
+
