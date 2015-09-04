@@ -618,6 +618,16 @@ function largo_replace_deprecated_widgets() {
 						$widget_option = array_merge($widget_option[1], $update['defaults']);
 						var_log($widget_option);
 						
+						/*
+						 * From here: 
+						 * Get the array_merge up there to work
+						 * Create $newslug based on $update['class'] . '-' . $counting["$update['class']"]
+						 * Add the enw widget with $widget_instance["$newslug"] = $widget_option
+						 * Unset $widget_instance[$index]
+						 * Unhook this from admin_init and make part of the update functions
+						 * Write tests
+						 * Pass the tests
+						 */
 						
 					}
 				}
