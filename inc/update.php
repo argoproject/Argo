@@ -545,6 +545,108 @@ function largo_check_deprecated_widgets() {
 }
 
 /**
+ * Replace deprecated widgets with new widgets
+ *
+ * To add widgets to this list of widgets to be upgraded:
+ *   - Add the deprecated widget class and its replacement to $upgrades
+ *   - Add the replacement widget to $replacements
+ *
+ * @todo: Build $replacements from $upgrades, for simplicity
+ * @since 0.5.3
+ */
+function largo_replace_deprecated_widgets() {
+
+	// This defines the classes of widget that will be updated, the class that they will be replaced with, and the default args on the replacement widget that must be set.
+	$upgrades = array(
+		'largo-footer-featured' => array(
+			'class' => 'largo-featured',
+			'defaults' => array(
+				'term' => 'footer-featured',
+				'title' => __('In Case You Missed It', 'largo')
+			)
+		),
+		'largo-sidebar-featured' => array(
+			'class' => 'largo-featured',
+			'defaults' => array(
+				'term' => 'sidebar-featured',
+				'title' => __('We Recommend', 'largo')
+			)
+		)
+	//	'deprecated-widget-class' => array(
+	//		'class' => 'replacement-widget-class',
+	//		'defaults' => array(
+    //			// default arguments for the replacement widget
+	//		)
+	//	)
+	);
+	// A simple list of replacement widgets
+	$replacements = array(
+		'largo-featured'
+	);
+	$counting = array();
+
+	// Populate $counting with the widgets in $replacements;
+	foreach ( $replacements as $replacement ) {
+		$counting["$replacement"] = 0;
+	}
+	$all_widgets = get_option( 'sidebars_widgets ');
+
+	// Check the existing widgets
+	foreach ( $all_widgets as $region => $widgets ) {
+		if ( $region != 'array_version' && is_array($widgets) ) { // unlike largo_check_deprecated_widgets, this does not care if the widget is inactive. This replaces *all* widgets.
+			foreach ( $widgets as $widget_instance ) {
+				// count the number of existing widgets that already match one of the replacements
+				foreach ( $replacements as $replacement) {
+					if (strpos($widget_instance, $replacement) === 0) {
+						$counting["$replacement"] ++;
+					}
+				}
+				// Create the replacement widget and swap it in for the deprecated widget
+				foreach ( $upgrades as $widget_name => $update ) {
+					if (strpos($widget_instance, $widget_name) === 0) {
+						// find the index of the widget in $widgets
+						$index = array_search($widget_instance, $widgets);
+						
+						// Let's steal some logic from INN/wp-scripts/inc/class-cmd-sidebars.php's dump()
+						$basename = largo_get_widget_basename($widget_instance);
+						$number = largo_get_widget_number($widget_instance);
+						if (!empty($basename)) {
+							// get all the widgets of this basename
+							$widget_option = get_option('widget_' . $basename, false);
+							// get this specific widget
+						}
+						$widget_option = array_merge($widget_option[1], $update['defaults']);
+						var_log($widget_option);
+						
+						
+					}
+				}
+			}
+		}
+	}
+	//var_log($counting);
+}
+add_action('admin_init', 'largo_replace_deprecated_widgets');
+
+/**
+ * Utility function to get the basename of a widget from the widget's slug
+ */
+function largo_get_widget_basename($slug) {
+	if (preg_match('/^(.*)\-\d+$/', $slug, $matches)) {
+		return $matches[1];
+	}
+	return false;
+}
+/**
+ * Utility function to get the number of a widget from the widget's slug
+ */
+function largo_get_widget_number($slug) {
+	if (preg_match('/^.*\-(\d+)$/', $slug, $matches)) {
+		return $matches[1];
+	}
+	return false;
+}
+/**
  * Admin notices of older widgets
  */
 function largo_deprecated_footer_widget() { ?>
