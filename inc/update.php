@@ -583,6 +583,7 @@ function largo_replace_deprecated_widgets() {
 	$replacements = array(
 		'largo-featured'
 	);
+	// We'll use $counting later to keep track of how many we have of widgets.
 	$counting = array();
 
 	// Populate $counting with the widgets in $replacements;
@@ -629,17 +630,18 @@ function largo_replace_deprecated_widgets() {
 							$widget_option = get_option('widget_' . $basename, false);
 							// get this specific widget
 						}
-						$widget_option[2] = array_merge($widget_option[2], $update['defaults']);
+						$widget_option[$number] = array_merge($widget_option[$number], $update['defaults']);
 
 						$temp = $update['class'];
 						$counting["$temp"]++;
 						$newslug = $update['class'] . '-' . $counting["$temp"];
+
+						update_option('widget_' . $basename, $widget_options);
+						$widget_instance[$index] = $widget_option;
+						
 						
 						/*
 						 * From here: 
-						 * Add the enw widget with $widget_instance["$newslug"] = $widget_option
-						 * Unset $widget_instance[$index]
-						 * Unhook this from admin_init and make part of the update functions
 						 * Write tests
 						 * Pass the tests
 						 */
@@ -649,9 +651,7 @@ function largo_replace_deprecated_widgets() {
 			}
 		}
 	}
-	//var_log($counting);
 }
-add_action('admin_init', 'largo_replace_deprecated_widgets');
 
 /**
  * Utility function to get the basename of a widget from the widget's slug
