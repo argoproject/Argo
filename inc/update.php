@@ -591,17 +591,31 @@ function largo_replace_deprecated_widgets() {
 	}
 	$all_widgets = get_option( 'sidebars_widgets ');
 
-	// Check the existing widgets
+	/*
+	 * count the number of existing widgets that already match one of the replacements
+	 * This is a separate foreach loop to be sure that $counting is fully filled before the updating occurs.
+	 */
 	foreach ( $all_widgets as $region => $widgets ) {
 		if ( $region != 'array_version' && is_array($widgets) ) { // unlike largo_check_deprecated_widgets, this does not care if the widget is inactive. This replaces *all* widgets.
 			foreach ( $widgets as $widget_instance ) {
-				// count the number of existing widgets that already match one of the replacements
 				foreach ( $replacements as $replacement) {
 					if (strpos($widget_instance, $replacement) === 0) {
-						$counting["$replacement"] ++;
+						$counting["$replacement"] = 1 + (int) $counting["$replacement"];
 					}
 				}
-				// Create the replacement widget and swap it in for the deprecated widget
+			}
+		}
+	}
+
+	/*
+	 * Find the widgets that need to be replaced,
+	 * Move their arguments to new widgets,
+	 * Name the new widgets appropriately
+	 * Place the new widgets into the widgets list and into the sidebars list
+	 */
+	foreach ( $all_widgets as $region => $widgets ) {
+		if ( $region != 'array_version' && is_array($widgets) ) { // unlike largo_check_deprecated_widgets, this does not care if the widget is inactive. This replaces *all* widgets.
+			foreach ( $widgets as $widget_instance ) {
 				foreach ( $upgrades as $widget_name => $update ) {
 					if (strpos($widget_instance, $widget_name) === 0) {
 						// find the index of the widget in $widgets
@@ -615,13 +629,14 @@ function largo_replace_deprecated_widgets() {
 							$widget_option = get_option('widget_' . $basename, false);
 							// get this specific widget
 						}
-						$widget_option = array_merge($widget_option[1], $update['defaults']);
-						var_log($widget_option);
+						$widget_option[2] = array_merge($widget_option[2], $update['defaults']);
+
+						$temp = $update['class'];
+						$counting["$temp"]++;
+						$newslug = $update['class'] . '-' . $counting["$temp"];
 						
 						/*
 						 * From here: 
-						 * Get the array_merge up there to work
-						 * Create $newslug based on $update['class'] . '-' . $counting["$update['class']"]
 						 * Add the enw widget with $widget_instance["$newslug"] = $widget_option
 						 * Unset $widget_instance[$index]
 						 * Unhook this from admin_init and make part of the update functions
