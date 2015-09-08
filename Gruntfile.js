@@ -86,6 +86,7 @@ module.exports = function(grunt) {
             apidocs: {
                 command: [
                     'cd docs',
+                    'rm -Rf api _build/html/api _build/doctrees/api',
                     'make php',
                 ].join('&&'),
                 options: {
