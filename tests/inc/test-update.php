@@ -406,6 +406,28 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 		largo_enable_series_if_landing_page();
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
+
+	function test_largo_replace_deprecated_widgets() {
+		// First, create some deprecated widgets
+		largo_instantiate_widget('largo-sidebar-featured', array('title'=>'Foo'), 'sidebar-single');
+		largo_instantiate_widget('largo-footer-featured', array('title'=>'Bar'), 'footer-1');
+		largo_instantiate_widget('largo-featured', array('title'=>'Baz'), 'header-ads');
+
+		largo_replace_deprecated_widgets();
+
+		$updates = array(
+			'largo-sidebar-featured' => array(
+				'name' => 'largo-featured',
+				'count' => 0,
+			),
+			'largo-sidebar-featured' => array(
+				'name' => 'largo-featured',
+				'count' => 0,
+			)
+		);
+		$all_widgets = get_option( 'sidebars_widgets ');
+		// You will want to check this later;
+	}
 }
 
 class LargoUpdateTestAjaxFunctions extends WP_Ajax_UnitTestCase {
