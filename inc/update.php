@@ -568,6 +568,8 @@ function largo_deprecated_sidebar_widget() { ?>
  *   - Add the deprecated widget class and its replacement to $upgrades
  *   - Add the replacement widget to $replacements
  *
+ * This does *not* use largo_instantiate_widget because that only appends the widget, instead of replacing it.
+ *
  * @todo: Build $replacements from $upgrades, for simplicity
  * @since 0.5.3
  */
@@ -607,7 +609,7 @@ function largo_replace_deprecated_widgets() {
 	foreach ( $replacements as $replacement ) {
 		$counting["$replacement"] = 0;
 	}
-	$all_widgets = get_option( 'sidebars_widgets ');
+	$all_widgets = get_option( 'sidebars_widgets' );
 
 	/*
 	 * count the number of existing widgets that already match one of the replacements
@@ -653,10 +655,11 @@ function largo_replace_deprecated_widgets() {
 						$counting["$temp"]++;
 						$newslug = $update['class'] . '-' . $counting["$temp"];
 
-						update_option('widget_' . $basename, $widget_options);
-						$widget_instance[$index] = $widget_option;
-						
-						
+						update_option('widget_' . $basename, $widget_option);
+						$widgets[$index] = $newslug;
+						$allwidgets[$region] = $widgets;
+						update_option( 'sidebars_widgets', $allwidgets);
+
 						/*
 						 * From here: 
 						 * Write tests
@@ -676,6 +679,9 @@ function largo_replace_deprecated_widgets() {
 
 /**
  * Checks to see if a given widget is in a given region already
+ *
+ * @since 0.5.2
+ * @return bool Whether or not the widget was found.
  */
 function largo_widget_in_region( $widget_name, $region = 'article-bottom' ) {
 

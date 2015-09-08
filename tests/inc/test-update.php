@@ -411,9 +411,11 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 		// First, create some deprecated widgets
 		largo_instantiate_widget('largo-sidebar-featured', array('title'=>'Foo'), 'sidebar-single');
 		largo_instantiate_widget('largo-footer-featured', array('title'=>'Bar'), 'footer-1');
-		largo_instantiate_widget('largo-featured', array('title'=>'Baz'), 'header-ads');
+		largo_instantiate_widget('largo-featured', array('title'=>'Baz'), 'sidebar-main');
 
 		largo_replace_deprecated_widgets();
+		global $wp_registered_sidebars;
+		var_log($wp_registered_sidebars);
 
 		$updates = array(
 			'largo-sidebar-featured' => array(
@@ -425,8 +427,12 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 				'count' => 0,
 			)
 		);
-		$all_widgets = get_option( 'sidebars_widgets ');
 		// You will want to check this later;
+		$this->assertFalse(largo_widget_in_region('widget_largo-sidebar-featured', 'sidebar-single'), "The Largo Sidebar Featured widget was left in the Sidebar Single widget area.");
+		$this->assertFalse(largo_widget_in_region('widget_largo-footer-featured', 'footer-1'), "The Largo Footer Featured widget was left in the Footer 1 widget area.");
+		$this->assertTrue(largo_widget_in_region('widget_largo-featured', 'sidebar-single'), "The new Largo Featured widget was not found in the Sidebar Single widget area.");
+		$this->assertTrue(largo_widget_in_region('widget_largo-featured', 'footer-1'), "The new Largo Featured widget was not found in the Footer 1 widget area.");
+		$this->assertTrue(largo_widget_in_region('widget_largo-featured', 'sidebar-main'), "The old Largo Featured widget was not found in the Sidebar Main widget area.");
 	}
 }
 
