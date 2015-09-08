@@ -3,8 +3,8 @@
   clear: both;
   margin: 0;
   img.avatar {
-	float: left;
-	margin: 5px 15px 10px 0;
+    float: left;
+    margin: 5px 15px 10px 0;
     padding: 4px;
     border: 1px solid @grayLighter;
   }
@@ -17,89 +17,41 @@
     margin: 0;
     float: left;
     li {
-	  display: inline-block;
-	  float: left;
-	  margin-right: 0.5em;
-	  &.facebook,
-	  &.twitter {
-	    width: 36px;
-	  }
-	  &.gplus,
-	  &.linkedin,
-	  &.email {
-	    width: 36px;
-	    i {
-          color: @white;
-	      padding: 4px;
-	      font-size: 10px;
-	      background-color: @red;
-	      &:hover {
-		    background-color: darken(@red, 10%);
-	      }
-	    }
-	    i.icon-mail {
-          background-color: @grayDark;
-          padding-right:5px;
-          color:@white;
+      display: inline-block;
+      float: left;
+      margin-right: 0.5em;
+      &.facebook,
+      &.twitter,
+      &.gplus,
+      &.linkedin,
+      &.email {
+        width: 36px;
+        i {
+          padding: 4px;
+          font-size: 10px;
           &::before {
             font-size:14px;
           }
+        }
+      }
+      &.author-posts-link {
+        font-size: @baseFontSize - 3;
+        background-color: @grayDark;
+        padding: 3px 10px;
+        font-weight: bold;
+        a {
+          color: @white;
           &:hover {
-            background-color:darken(@grayDark, 15%)
+            text-decoration: none;
           }
-	    }
-	    i.icon-gplus {
-		  background-color:@gplus;
-		  color:@white;
-		  margin-left:-6px;
-		  &:hover {
-		    background-color:darken(@gplus,15%)
-		  }
-	    }
-	    i.icon-facebook {
-	      background:@facebook;
-	      color:#fff;
-	      &:hover {
-	        background-color:darken(@facebook,15%)
-	      }
-	    }
-	    i.icon-twitter {
-	      background-color:@twitter;
-	      color:#fff;
-	      &:hover {
-	        background-color:darken(@twitter, 15%)
-	      }
-	    }
-	    i.icon-linkedin {
-		  background-color: @linkedin;
-		  margin-left: -10px;
-		  &:hover {
-		    background-color: darken(@linkedin, 10%);
-	      }
-	    }
-	  }
-	  &.author-posts-link {
-	    font-size: @baseFontSize - 3;
-	    background-color: @grayDark;
-	    padding: 3px 10px;
-	    font-weight: bold;
-	    a {
-		  color: @white;
-		  &:hover {
-		    text-decoration: none;
-		  }
-	    }
-	    &:hover {
-		  background-color: lighten(@grayDark, 25%);
-	    }
-	  }
+        }
+        &:hover {
+          background-color: lighten(@grayDark, 25%);
+        }
+      }
     }
   }
   iframe {
     margin: 0;
   }
-}
-.widget .author-box ul {
-  padding: 0;
-  margin: 0;
 }
