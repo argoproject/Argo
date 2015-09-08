@@ -428,11 +428,11 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 			)
 		);
 		// You will want to check this later;
-		$this->assertFalse(largo_widget_in_region('widget_largo-sidebar-featured', 'sidebar-single'), "The Largo Sidebar Featured widget was left in the Sidebar Single widget area.");
-		$this->assertFalse(largo_widget_in_region('widget_largo-footer-featured', 'footer-1'), "The Largo Footer Featured widget was left in the Footer 1 widget area.");
-		$this->assertTrue(largo_widget_in_region('widget_largo-featured', 'sidebar-single'), "The new Largo Featured widget was not found in the Sidebar Single widget area.");
-		$this->assertTrue(largo_widget_in_region('widget_largo-featured', 'footer-1'), "The new Largo Featured widget was not found in the Footer 1 widget area.");
-		$this->assertTrue(largo_widget_in_region('widget_largo-featured', 'sidebar-main'), "The old Largo Featured widget was not found in the Sidebar Main widget area.");
+		$this->assertFalse(largo_widget_in_region('largo-sidebar-featured', 'sidebar-single'), "The Largo Sidebar Featured widget was left in the Sidebar Single widget area.");
+		$this->assertFalse(largo_widget_in_region('largo-footer-featured', 'footer-1'), "The Largo Footer Featured widget was left in the Footer 1 widget area.");
+		$this->assertTrue(largo_widget_in_region('largo-featured', 'sidebar-single'), "The new Largo Featured widget was not found in the Sidebar Single widget area.");
+		$this->assertTrue(largo_widget_in_region('largo-featured', 'footer-1'), "The new Largo Featured widget was not found in the Footer 1 widget area.");
+		$this->assertTrue(largo_widget_in_region('largo-featured', 'sidebar-main'), "The old Largo Featured widget was not found in the Sidebar Main widget area.");
 	}
 }
 
