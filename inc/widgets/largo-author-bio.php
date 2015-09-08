@@ -17,6 +17,9 @@ class largo_author_widget extends WP_Widget {
 		global $post;
 
 		extract( $args );
+
+		echo $before_widget;
+
 		$authors = array();
 		$bios = '';
 
