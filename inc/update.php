@@ -545,6 +545,23 @@ function largo_check_deprecated_widgets() {
 }
 
 /**
+ * Admin notices of older widgets
+ */
+function largo_deprecated_footer_widget() { ?>
+	<div class="update-nag"><p>
+	<?php printf( __('You are using the <strong>Largo Footer Featured Posts</strong> widget, which is deprecated and will be removed from future versions of Largo. Please <a href="%s">change your widget settings</a> to use its replacement, <strong>Largo Featured Posts</strong>.', 'largo' ), admin_url( 'widgets.php' ) ); ?>
+	</p></div>
+	<?php
+}
+
+function largo_deprecated_sidebar_widget() { ?>
+	<div class="update-nag"><p>
+	<?php printf( __( 'You are using the <strong>Largo Sidebar Featured Posts</strong> widget, which is deprecated and will be removed from future versions of Largo. Please <a href="%s">change your widget settings</a> to use its replacement, <strong>Largo Featured Posts</strong>.', 'largo' ), admin_url( 'widgets.php' ) ); ?>
+	</p></div>
+	<?php
+}
+
+/**
  * Replace deprecated widgets with new widgets
  *
  * To add widgets to this list of widgets to be upgraded:
@@ -653,41 +670,6 @@ function largo_replace_deprecated_widgets() {
 	}
 }
 
-/**
- * Utility function to get the basename of a widget from the widget's slug
- */
-function largo_get_widget_basename($slug) {
-	if (preg_match('/^(.*)\-\d+$/', $slug, $matches)) {
-		return $matches[1];
-	}
-	return false;
-}
-/**
- * Utility function to get the number of a widget from the widget's slug
- */
-function largo_get_widget_number($slug) {
-	if (preg_match('/^.*\-(\d+)$/', $slug, $matches)) {
-		return $matches[1];
-	}
-	return false;
-}
-/**
- * Admin notices of older widgets
- */
-function largo_deprecated_footer_widget() { ?>
-	<div class="update-nag"><p>
-	<?php printf( __('You are using the <strong>Largo Footer Featured Posts</strong> widget, which is deprecated and will be removed from future versions of Largo. Please <a href="%s">change your widget settings</a> to use its replacement, <strong>Largo Featured Posts</strong>.', 'largo' ), admin_url( 'widgets.php' ) ); ?>
-	</p></div>
-	<?php
-}
-
-function largo_deprecated_sidebar_widget() { ?>
-	<div class="update-nag"><p>
-	<?php printf( __( 'You are using the <strong>Largo Sidebar Featured Posts</strong> widget, which is deprecated and will be removed from future versions of Largo. Please <a href="%s">change your widget settings</a> to use its replacement, <strong>Largo Featured Posts</strong>.', 'largo' ), admin_url( 'widgets.php' ) ); ?>
-	</p></div>
-	<?php
-}
-
 /* --------------------------------------------------------
  * Update helper functions
  * ------------------------------------------------------ */
@@ -707,7 +689,6 @@ function largo_widget_in_region( $widget_name, $region = 'article-bottom' ) {
 		if ( stripos( $widget, $widget_name ) === 0 ) return true;	//we found a copy of this widget! Note this may return a false positive if the widget we're checking is the same name (but shorter) as another kind of widget
 	}
 	return false;	// the widget wasn't there
-
 }
 
 /**
@@ -765,6 +746,29 @@ function largo_instantiate_widget( $kind, $instance_settings, $region ) {
 	$region_widgets[ $region ][] = $kind . '-widget-' . $instance_id;
 	update_option( 'sidebars_widgets', $region_widgets );
 
+}
+
+/**
+ * Utility function to get the basename of a widget from the widget's slug
+ *
+ * @since 0.5.3
+ */
+function largo_get_widget_basename($slug) {
+	if (preg_match('/^(.*)\-\d+$/', $slug, $matches)) {
+		return $matches[1];
+	}
+	return false;
+}
+/**
+ * Utility function to get the number of a widget from the widget's slug
+ *
+ * @since 0.5.3
+ */
+function largo_get_widget_number($slug) {
+	if (preg_match('/^.*\-(\d+)$/', $slug, $matches)) {
+		return $matches[1];
+	}
+	return false;
 }
 
 /* --------------------------------------------------------
