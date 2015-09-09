@@ -657,15 +657,8 @@ function largo_replace_deprecated_widgets() {
 
 						update_option('widget_' . $basename, $widget_option);
 						$widgets[$index] = $newslug;
-						$allwidgets[$region] = $widgets;
-						update_option( 'sidebars_widgets', $allwidgets);
-
-						/*
-						 * From here: 
-						 * Write tests
-						 * Pass the tests
-						 */
-						
+						$all_widgets[$region] = $widgets;
+						update_option( 'sidebars_widgets', $all_widgets);
 					}
 				}
 			}

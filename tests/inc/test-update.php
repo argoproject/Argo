@@ -412,10 +412,17 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 		largo_instantiate_widget('largo-sidebar-featured', array('title'=>'Foo'), 'sidebar-single');
 		largo_instantiate_widget('largo-footer-featured', array('title'=>'Bar'), 'footer-1');
 		largo_instantiate_widget('largo-featured', array('title'=>'Baz'), 'sidebar-main');
+		largo_instantiate_widget('largo-follow', array('title'=>'Baz'), 'homepage-alert');
+
+		// chek that things were set up correctly
+		$this->assertTrue(largo_widget_in_region('largo-sidebar-featured', 'sidebar-single'), "The Largo Sidebar Featured widget was left in the Sidebar Single widget area.");
+		$this->assertTrue(largo_widget_in_region('largo-footer-featured', 'footer-1'), "The Largo Footer Featured widget was left in the Footer 1 widget area.");
+		$this->assertTrue(largo_widget_in_region('largo-featured', 'sidebar-main'), "Setup: The old Largo Featured widget was not created in the Sidebar Main widget area.");
+		$this->assertTrue(largo_widget_in_region('largo-follow', 'homepage-alert'), "Setup: The Largo Follow widget was not created in the Homepage Alert widget area.");
 
 		largo_replace_deprecated_widgets();
-		global $wp_registered_sidebars;
-		var_log($wp_registered_sidebars);
+		//global $wp_registered_sidebars;
+		//var_log($wp_registered_sidebars);
 
 		// Currently unused.
 		$updates = array(
@@ -434,6 +441,7 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 		$this->assertTrue(largo_widget_in_region('largo-featured', 'sidebar-single'), "The new Largo Featured widget was not found in the Sidebar Single widget area.");
 		$this->assertTrue(largo_widget_in_region('largo-featured', 'footer-1'), "The new Largo Featured widget was not found in the Footer 1 widget area.");
 		$this->assertTrue(largo_widget_in_region('largo-featured', 'sidebar-main'), "The old Largo Featured widget was not found in the Sidebar Main widget area.");
+		$this->assertTrue(largo_widget_in_region('largo-follow', 'homepage-alert'), "The Largo Follow widget was not found in the Homepage Alert widget area.");
 	}
 }
 
