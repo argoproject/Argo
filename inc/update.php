@@ -595,7 +595,7 @@ function largo_replace_deprecated_widgets() {
 	//	'deprecated-widget-class' => array(
 	//		'class' => 'replacement-widget-class',
 	//		'defaults' => array(
-    //			// default arguments for the replacement widget
+	//			// default arguments for the replacement widget
 	//		)
 	//	)
 	);
