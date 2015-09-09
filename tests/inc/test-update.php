@@ -218,6 +218,11 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 		$this->assertEquals('largo-about-widget-2', $ret['id'], "Second widget: largo_instantiate_widget did not return an array whose index 'id' matched the created widget");
 		$this->assertEquals(1, $ret['place'], "Second widget: largo_instantiate_widget did not return an array whose index 'place' matched the created widget's position in its sidebar.");
 
+		// Regression test: If you create a bunch of widgets, they should not all have the same number
+		$ret3 = largo_instantiate_widget( 'largo-about', array( 'title' => '' ), 'article-bottom');
+		$ret4 = largo_instantiate_widget( 'largo-about', array( 'title' => '' ), 'article-bottom');
+		$this->assertFalse(($ret3['place'] == $ret4['place']), "Third and Fourth widgets: largo_instantiate_widget is not detecting the presence of existing widgets, and is assigning the same widget id to all new widgets.");
+
 		delete_option('sidebars_widgets');
 		update_option('sidebars_widgets', $widgets_backup);
 		unset($widgets_backup);
