@@ -417,6 +417,7 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 		global $wp_registered_sidebars;
 		var_log($wp_registered_sidebars);
 
+		// Currently unused.
 		$updates = array(
 			'largo-sidebar-featured' => array(
 				'name' => 'largo-featured',
