@@ -37,7 +37,6 @@ function largo_perform_update() {
 
 		// Always run
 		largo_update_custom_less_variables();
-		largo_replace_deprecated_widgets();
 		largo_check_deprecated_widgets();
 
 		// Set version.
@@ -572,6 +571,8 @@ function largo_deprecated_sidebar_widget() { ?>
  * This does *not* use largo_instantiate_widget because that only appends the widget, instead of replacing it.
  *
  * @todo: Build $replacements from $upgrades, for simplicity
+ * @uses largo_get_widget_basename
+ * @uses largo_get_widget_number
  * @since 0.5.3
  */
 function largo_replace_deprecated_widgets() {
@@ -621,7 +622,7 @@ function largo_replace_deprecated_widgets() {
 			foreach ( $widgets as $widget_instance ) {
 				foreach ( $replacements as $replacement) {
 					if (strpos($widget_instance, $replacement) === 0) {
-						$counting["$replacement"] = 1 + (int) $counting["$replacement"];
+						$counting[$replacement] = 1 + (int) $counting[$replacement];
 					}
 				}
 			}
@@ -634,32 +635,59 @@ function largo_replace_deprecated_widgets() {
 	 * Name the new widgets appropriately
 	 * Place the new widgets into the widgets list and into the sidebars list
 	 */
-	foreach ( $all_widgets as $region => $widgets ) {
-		if ( $region != 'array_version' && is_array($widgets) ) { // unlike largo_check_deprecated_widgets, this does not care if the widget is inactive. This replaces *all* widgets.
-			foreach ( $widgets as $widget_instance ) {
-				foreach ( $upgrades as $widget_name => $update ) {
-					if (strpos($widget_instance, $widget_name) === 0) {
-						// find the index of the widget in $widgets
-						$index = array_search($widget_instance, $widgets);
+	foreach ( $all_widgets as $region => $current_widgets ) {
+		if ( $region != 'array_version' && is_array($current_widgets) ) { // unlike largo_check_deprecated_widgets, this does not care if the widget is inactive. This replaces *all* widgets.
+			foreach ( $current_widgets as $current_widget_slug ) {
+				foreach ( $upgrades as $old_widget_name => $upgrade ) {
+					if (strpos($current_widget_slug, $old_widget_name) === 0) {
+						// find the index of the widget in $current_widgets
+						$index = array_search($current_widget_slug, $current_widgets);
+						
+						/*
+						 * So many variables ...
+						 *
+						 * $all_widgets: Associative array of $region a sidebar or widget area => $current_widgets array of widget slugs in regione
+						 * $current_widgets: Array of the widgets in the current sidebar/widget area/$region
+						 * $current_widget_slug: the old widget's ID: slug-widget-2
+						 * $old_widget_name: The slug of the widget that needs to be updated, from $upgrades: slug
+						 * $region: the id of the current sidebar/widget area
+						 * $index: Where @current_widget_slug is located in $current_widgets
+						 * $basename: the slug of the widget $current_widget_slug, when you remove the prefix widget_ and postfix -number
+						 * $all_instances_of_widget: All instance of $current_widget_slug in all sidebars.
+						 * $upgrade['class'] : The class of the replacement widget, which needs -widget appended to it.
+						 * $upgrade['defaults'] : Default instance arguments for the replacement widget.
+						 * $all_instances_of_upgrade: All instances of $$upgrade['class'] in all sidebars.
+						 * $upgrade_instance_args: The merged old args of the widget with the args from $upgrade['defaults']
+						 * 
+						 */
 						
 						// Let's steal some logic from INN/wp-scripts/inc/class-cmd-sidebars.php's dump()
-						$basename = largo_get_widget_basename($widget_instance);
-						$number = largo_get_widget_number($widget_instance);
+						$basename = largo_get_widget_basename($current_widget_slug);
+						$number = largo_get_widget_number($current_widget_slug);
 						if (!empty($basename)) {
 							// get all the widgets of this basename
-							$widget_option = get_option('widget_' . $basename, false);
+							$all_instances_of_widget = get_option('widget_' . $basename, false);
 							// get this specific widget
 						}
-						$widget_option[$number] = array_merge($widget_option[$number], $update['defaults']);
+						$all_instances_of_upgrade = get_option('widget_' . $upgrade['class'] . '-widget', false);
 
-						$temp = $update['class'];
-						$counting["$temp"]++;
-						$newslug = $update['class'] . '-' . $counting["$temp"];
+						$upgrade_instance_args  = array_replace($all_instances_of_widget[$number], $upgrade['defaults']);
+						// create the new widget.
+						$liw_return = largo_instantiate_widget($upgrade['class'], $upgrade_instance_args, $region);
 
-						update_option('widget_' . $basename, $widget_option);
-						$widgets[$index] = $newslug;
-						$all_widgets[$region] = $widgets;
-						update_option( 'sidebars_widgets', $all_widgets);
+						// remove the old widget
+						unset($all_instances_of_widget[$number]);
+						update_option('widget_' . $basename, $all_instances_of_widget);
+
+						// update $current_widgets
+						$all_widgets = get_option( 'sidebars_widgets' );
+						$current_widgets = $all_widgets[$region];
+
+						// Shuffle the new widget around
+						$current_widgets[$index] = $liw_return['id']; // replace the old widget slug with the new widget slug
+						unset($current_widgets[$liw_return['place']]); // remove the now-duplicate instance of the old widget added by largo_instantiate_widget
+						$all_widgets[$region] = $current_widgets;
+						update_option('sidebars_widgets', $all_widgets);
 					}
 				}
 			}
@@ -701,6 +729,7 @@ function largo_widget_in_region( $widget_name, $region = 'article-bottom' ) {
  * @param String $kind. Kind of widget to instantiate.
  * @param Array $instance_settings. Settings for that array.
  * @param String $region. Sidebar region to add to.
+ * @return Array ('id' => the id with number of the new widget , 'place' => the index of the id in its region )
  */
 function largo_instantiate_widget( $kind, $instance_settings, $region ) {
 
@@ -745,6 +774,12 @@ function largo_instantiate_widget( $kind, $instance_settings, $region ) {
 	$region_widgets = get_option( 'sidebars_widgets' );
 	$region_widgets[ $region ][] = $kind . '-widget-' . $instance_id;
 	update_option( 'sidebars_widgets', $region_widgets );
+	$place = array_search($kind . '-widget-' . $instance_id, $region_widgets[$region]);
+
+	return array(
+		'id' => $kind . '-widget-' . $instance_id,
+		'place' => $place
+	);
 
 }
 

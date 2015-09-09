@@ -200,11 +200,23 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 		) );
 
 		// instantiate the widget
-		largo_instantiate_widget( 'largo-follow', array( 'title' => '' ), 'article-bottom');
+		$ret = largo_instantiate_widget( 'largo-follow', array( 'title' => '' ), 'article-bottom');
 
 		// Check
 		$widgets = get_option('sidebars_widgets');
-		$this->assertEquals('largo-follow-widget-2', $widgets['article-bottom'][0]);
+		$this->assertEquals('largo-follow-widget-2', $widgets['article-bottom'][0], "First widget: largo_instantiate_widget did not create the expected Largo Follow widget in the first position of the Article Bottom sidebar.");
+		$this->assertInternalType('array', $ret, "First widget: largo_instantiate_widget did not return an array");
+		$this->assertEquals('largo-follow-widget-2', $ret['id'], "First widget: largo_instantiate_widget did not return an array whose index 'id' matched the created widget");
+		$this->assertEquals(0, $ret['place'], "First widget: largo_instantiate_widget did not return an array whose index 'place' matched the created widget's position in its sidebar.");
+
+		// Add another widget
+		$ret = largo_instantiate_widget( 'largo-about', array( 'title' => '' ), 'article-bottom');
+
+		$widgets = get_option('sidebars_widgets');
+		$this->assertEquals('largo-about-widget-2', $widgets['article-bottom'][1], "Second widget: largo_instantiate_widget did not create the expected Largo About widget in the second position of the Article Bottom sidebar.");
+		$this->assertInternalType('array', $ret, "Second widget: largo_instantiate_widget did not return an array");
+		$this->assertEquals('largo-about-widget-2', $ret['id'], "Second widget: largo_instantiate_widget did not return an array whose index 'id' matched the created widget");
+		$this->assertEquals(1, $ret['place'], "Second widget: largo_instantiate_widget did not return an array whose index 'place' matched the created widget's position in its sidebar.");
 
 		delete_option('sidebars_widgets');
 		update_option('sidebars_widgets', $widgets_backup);
