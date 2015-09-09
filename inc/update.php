@@ -37,6 +37,7 @@ function largo_perform_update() {
 
 		// Always run
 		largo_update_custom_less_variables();
+		largo_replace_deprecated_widgets();
 		largo_check_deprecated_widgets();
 
 		// Set version.
