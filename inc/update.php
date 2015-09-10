@@ -567,16 +567,15 @@ function largo_deprecated_sidebar_widget() { ?>
  *
  * To add widgets to this list of widgets to be upgraded:
  *   - Add the deprecated widget class and its replacement to $upgrades
- *   - Add the replacement widget to $replacements
  *
- * @todo: Build $replacements from $upgrades, for simplicity
  * @uses largo_get_widget_basename
  * @uses largo_get_widget_number
  * @since 0.5.3
  */
 function largo_replace_deprecated_widgets() {
 
-	// This defines the classes of widget that will be updated, the class that they will be replaced with, and the default args on the replacement widget that must be set.
+	// This defines the classes of widget that will be updated, the class that they will be
+	// replaced with, and the default args on the replacement widget that must be set.
 	$upgrades = array(
 		'largo-footer-featured' => array(
 			'class' => 'largo-featured',
@@ -592,12 +591,6 @@ function largo_replace_deprecated_widgets() {
 				'title' => __('We Recommend', 'largo')
 			)
 		)
-	//	'deprecated-widget-class' => array(
-	//		'class' => 'replacement-widget-class',
-	//		'defaults' => array(
-	//			// default arguments for the replacement widget
-	//		)
-	//	)
 	);
 	$all_widgets = get_option( 'sidebars_widgets' );
 
@@ -608,17 +601,18 @@ function largo_replace_deprecated_widgets() {
 	 * Place the new widgets into the widgets list and into the sidebars list
 	 */
 	foreach ( $all_widgets as $region => $current_sidebar ) {
-		if ( $region != 'array_version' && is_array($current_sidebar) ) { // unlike largo_check_deprecated_widgets, this does not care if the widget is inactive. This replaces *all* widgets.
+		// Unlike largo_check_deprecated_widgets, this does not care if the
+		// widget is inactive. This replaces *all* widgets.
+		if ( $region != 'array_version' && is_array($current_sidebar) ) {
 			foreach ( $current_sidebar as $current_widget_slug ) {
 				foreach ( $upgrades as $old_widget_name => $upgrade ) {
-					// Check if the current widget matches a widget in $updates that needs to be replaced.
+					// Check if the current widget matches a widget in
+					// $updates that needs to be replaced.
 					if (strpos($current_widget_slug, $old_widget_name) === 0) {
-						// find the index of the widget in $current_sidebar
-
-						// Update all this here and now, in case the indexes are off because this has been meddled with in a previous loop
+						// Update all this here and now, in case the indexes are off because this
+						// has been meddled with in a previous loop.
 						$local_all_widgets = get_option( 'sidebars_widgets' );
 						$local_current_sidebar = $local_all_widgets[$region];
-
 						$index = array_search($current_widget_slug, $local_current_sidebar);
 
 						/*
@@ -660,8 +654,12 @@ function largo_replace_deprecated_widgets() {
 							$local_current_sidebar = $local_all_widgets[$region];
 
 							// Shuffle the new widget around
-							$local_current_sidebar[$index] = $liw_return['id']; // replace the old widget slug with the new widget slug
-							unset($local_current_sidebar[$liw_return['place']]); // remove the now-duplicate instance of the old widget added by largo_instantiate_widget
+							// replace the old widget slug with the new widget slug
+							$local_current_sidebar[$index] = $liw_return['id'];
+
+							// remove the now-duplicate instance of the old widget
+							// added by largo_instantiate_widget
+							unset($local_current_sidebar[$liw_return['place']]);
 							$local_all_widgets[$region] = $local_current_sidebar;
 							update_option('sidebars_widgets', $local_all_widgets);
 						}
