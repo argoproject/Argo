@@ -200,11 +200,28 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 		) );
 
 		// instantiate the widget
-		largo_instantiate_widget( 'largo-follow', array( 'title' => '' ), 'article-bottom');
+		$ret = largo_instantiate_widget( 'largo-follow', array( 'title' => '' ), 'article-bottom');
 
 		// Check
 		$widgets = get_option('sidebars_widgets');
-		$this->assertEquals('largo-follow-widget-2', $widgets['article-bottom'][0]);
+		$this->assertEquals('largo-follow-widget-2', $widgets['article-bottom'][0], "First widget: largo_instantiate_widget did not create the expected Largo Follow widget in the first position of the Article Bottom sidebar.");
+		$this->assertInternalType('array', $ret, "First widget: largo_instantiate_widget did not return an array");
+		$this->assertEquals('largo-follow-widget-2', $ret['id'], "First widget: largo_instantiate_widget did not return an array whose index 'id' matched the created widget");
+		$this->assertEquals(0, $ret['place'], "First widget: largo_instantiate_widget did not return an array whose index 'place' matched the created widget's position in its sidebar.");
+
+		// Add another widget
+		$ret = largo_instantiate_widget( 'largo-about', array( 'title' => '' ), 'article-bottom');
+
+		$widgets = get_option('sidebars_widgets');
+		$this->assertEquals('largo-about-widget-2', $widgets['article-bottom'][1], "Second widget: largo_instantiate_widget did not create the expected Largo About widget in the second position of the Article Bottom sidebar.");
+		$this->assertInternalType('array', $ret, "Second widget: largo_instantiate_widget did not return an array");
+		$this->assertEquals('largo-about-widget-2', $ret['id'], "Second widget: largo_instantiate_widget did not return an array whose index 'id' matched the created widget");
+		$this->assertEquals(1, $ret['place'], "Second widget: largo_instantiate_widget did not return an array whose index 'place' matched the created widget's position in its sidebar.");
+
+		// Regression test: If you create a bunch of widgets, they should not all have the same number
+		$ret3 = largo_instantiate_widget( 'largo-about', array( 'title' => '' ), 'article-bottom');
+		$ret4 = largo_instantiate_widget( 'largo-about', array( 'title' => '' ), 'article-bottom');
+		$this->assertFalse(($ret3['place'] == $ret4['place']), "Third and Fourth widgets: largo_instantiate_widget is not detecting the presence of existing widgets, and is assigning the same widget id to all new widgets.");
 
 		delete_option('sidebars_widgets');
 		update_option('sidebars_widgets', $widgets_backup);
@@ -405,6 +422,43 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 		// options: ['series_enabled', 'custom_landing_enabled']
 		largo_enable_series_if_landing_page();
 		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
+
+	function test_largo_replace_deprecated_widgets() {
+		// First, create some deprecated widgets
+		largo_instantiate_widget('largo-sidebar-featured', array('title'=>'Foo'), 'sidebar-single');
+		largo_instantiate_widget('largo-footer-featured', array('title'=>'Bar'), 'footer-1');
+		largo_instantiate_widget('largo-featured', array('title'=>'Baz'), 'sidebar-main');
+		largo_instantiate_widget('largo-follow', array('title'=>'Baz'), 'homepage-alert');
+
+		// chek that things were set up correctly
+		$this->assertTrue(largo_widget_in_region('largo-sidebar-featured', 'sidebar-single'), "The Largo Sidebar Featured widget was left in the Sidebar Single widget area.");
+		$this->assertTrue(largo_widget_in_region('largo-footer-featured', 'footer-1'), "The Largo Footer Featured widget was left in the Footer 1 widget area.");
+		$this->assertTrue(largo_widget_in_region('largo-featured', 'sidebar-main'), "Setup: The old Largo Featured widget was not created in the Sidebar Main widget area.");
+		$this->assertTrue(largo_widget_in_region('largo-follow', 'homepage-alert'), "Setup: The Largo Follow widget was not created in the Homepage Alert widget area.");
+
+		largo_replace_deprecated_widgets();
+		//global $wp_registered_sidebars;
+		//var_log($wp_registered_sidebars);
+
+		// Currently unused.
+		$updates = array(
+			'largo-sidebar-featured' => array(
+				'name' => 'largo-featured',
+				'count' => 0,
+			),
+			'largo-sidebar-featured' => array(
+				'name' => 'largo-featured',
+				'count' => 0,
+			)
+		);
+		// You will want to check this later;
+		$this->assertFalse(largo_widget_in_region('largo-sidebar-featured', 'sidebar-single'), "The Largo Sidebar Featured widget was left in the Sidebar Single widget area.");
+		$this->assertFalse(largo_widget_in_region('largo-footer-featured', 'footer-1'), "The Largo Footer Featured widget was left in the Footer 1 widget area.");
+		$this->assertTrue(largo_widget_in_region('largo-featured', 'sidebar-single'), "The new Largo Featured widget was not found in the Sidebar Single widget area.");
+		$this->assertTrue(largo_widget_in_region('largo-featured', 'footer-1'), "The new Largo Featured widget was not found in the Footer 1 widget area.");
+		$this->assertTrue(largo_widget_in_region('largo-featured', 'sidebar-main'), "The old Largo Featured widget was not found in the Sidebar Main widget area.");
+		$this->assertTrue(largo_widget_in_region('largo-follow', 'homepage-alert'), "The Largo Follow widget was not found in the Homepage Alert widget area.");
 	}
 }
 

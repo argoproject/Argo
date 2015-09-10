@@ -37,6 +37,7 @@ function largo_perform_update() {
 
 		// Always run
 		largo_update_custom_less_variables();
+		largo_replace_deprecated_widgets();
 		largo_check_deprecated_widgets();
 
 		// Set version.
@@ -561,12 +562,123 @@ function largo_deprecated_sidebar_widget() { ?>
 	<?php
 }
 
+/**
+ * Replace deprecated widgets with new widgets
+ *
+ * To add widgets to this list of widgets to be upgraded:
+ *   - Add the deprecated widget class and its replacement to $upgrades
+ *
+ * @uses largo_get_widget_basename
+ * @uses largo_get_widget_number
+ * @since 0.5.3
+ */
+function largo_replace_deprecated_widgets() {
+
+	// This defines the classes of widget that will be updated, the class that they will be
+	// replaced with, and the default args on the replacement widget that must be set.
+	$upgrades = array(
+		'largo-footer-featured' => array(
+			'class' => 'largo-featured',
+			'defaults' => array(
+				'term' => 'footer-featured',
+				'title' => __('In Case You Missed It', 'largo')
+			)
+		),
+		'largo-sidebar-featured' => array(
+			'class' => 'largo-featured',
+			'defaults' => array(
+				'term' => 'sidebar-featured',
+				'title' => __('We Recommend', 'largo')
+			)
+		)
+	);
+	$all_widgets = get_option( 'sidebars_widgets' );
+
+	/*
+	 * Find the widgets that need to be replaced,
+	 * Move their arguments to new widgets,
+	 * Name the new widgets appropriately
+	 * Place the new widgets into the widgets list and into the sidebars list
+	 */
+	foreach ( $all_widgets as $region => $current_sidebar ) {
+		// Unlike largo_check_deprecated_widgets, this does not care if the
+		// widget is inactive. This replaces *all* widgets.
+		if ( $region != 'array_version' && is_array($current_sidebar) ) {
+			foreach ( $current_sidebar as $current_widget_slug ) {
+				foreach ( $upgrades as $old_widget_name => $upgrade ) {
+					// Check if the current widget matches a widget in
+					// $updates that needs to be replaced.
+					if (strpos($current_widget_slug, $old_widget_name) === 0) {
+						// Update all this here and now, in case the indexes are off because this
+						// has been meddled with in a previous loop.
+						$local_all_widgets = get_option( 'sidebars_widgets' );
+						$local_current_sidebar = $local_all_widgets[$region];
+						$index = array_search($current_widget_slug, $local_current_sidebar);
+
+						/*
+						 * So many variables ...
+						 *
+						 * $local_all_widgets: Associative array of $region a sidebar or widget area => $local_current_sidebar array of widget slugs in regione
+						 * $local_current_sidebar: Array of the widgets in the current sidebar/widget area/$region
+						 * $current_widget_slug: the old widget's ID: slug-widget-2
+						 * $old_widget_name: The slug of the widget that needs to be updated, from $upgrades: slug
+						 * $region: the id of the current sidebar/widget area
+						 * $index: Where @current_widget_slug is located in $local_current_sidebar
+						 * $basename: the slug of the widget $current_widget_slug, when you remove the prefix widget_ and postfix -number
+						 * $all_instances_of_widget: All instance of $current_widget_slug in all sidebars.
+						 * $upgrade['class'] : The class of the replacement widget, which needs -widget appended to it.
+						 * $upgrade['defaults'] : Default instance arguments for the replacement widget.
+						 * $all_instances_of_upgrade: All instances of $$upgrade['class'] in all sidebars.
+						 * $upgrade_instance_args: The merged old args of the widget with the args from $upgrade['defaults']
+						 * $liw_return: array returned by largo_instantiate_widget with the widget's slug info and place in the sidebar.
+						 */
+
+						// Let's steal some logic from INN/wp-scripts/inc/class-cmd-sidebars.php's dump()
+						$basename = largo_get_widget_basename($current_widget_slug);
+						$number = largo_get_widget_number($current_widget_slug);
+						if (!empty($basename)) {
+							// get all the widgets of this basename
+							$all_instances_of_widget = get_option('widget_' . $basename, false);
+
+							$upgrade_instance_args = array_replace($all_instances_of_widget[$number], $upgrade['defaults']);
+							// create the new widget.
+							$liw_return = largo_instantiate_widget($upgrade['class'], $upgrade_instance_args, $region);
+
+							// remove the old widget
+							unset($all_instances_of_widget[$number]);
+							update_option('widget_' . $basename, $all_instances_of_widget);
+							// @todo: if there are no widgets left in the array, why not just remove the option?
+
+							// update $local_current_sidebar
+							$local_all_widgets = get_option( 'sidebars_widgets' );
+							$local_current_sidebar = $local_all_widgets[$region];
+
+							// Shuffle the new widget around
+							// replace the old widget slug with the new widget slug
+							$local_current_sidebar[$index] = $liw_return['id'];
+
+							// remove the now-duplicate instance of the old widget
+							// added by largo_instantiate_widget
+							unset($local_current_sidebar[$liw_return['place']]);
+							$local_all_widgets[$region] = $local_current_sidebar;
+							update_option('sidebars_widgets', $local_all_widgets);
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
 /* --------------------------------------------------------
  * Update helper functions
  * ------------------------------------------------------ */
 
 /**
  * Checks to see if a given widget is in a given region already
+ *
+ * @since 0.5.2
+ * @return bool Whether or not the widget was found.
  */
 function largo_widget_in_region( $widget_name, $region = 'article-bottom' ) {
 
@@ -580,7 +692,6 @@ function largo_widget_in_region( $widget_name, $region = 'article-bottom' ) {
 		if ( stripos( $widget, $widget_name ) === 0 ) return true;	//we found a copy of this widget! Note this may return a false positive if the widget we're checking is the same name (but shorter) as another kind of widget
 	}
 	return false;	// the widget wasn't there
-
 }
 
 /**
@@ -593,6 +704,7 @@ function largo_widget_in_region( $widget_name, $region = 'article-bottom' ) {
  * @param String $kind. Kind of widget to instantiate.
  * @param Array $instance_settings. Settings for that array.
  * @param String $region. Sidebar region to add to.
+ * @return Array ('id' => the id with number of the new widget , 'place' => the index of the id in its region )
  */
 function largo_instantiate_widget( $kind, $instance_settings, $region ) {
 
@@ -608,7 +720,7 @@ function largo_instantiate_widget( $kind, $instance_settings, $region ) {
 	$full_kind = 'widget_' . str_replace("_", "-", $kind) . '-widget';
 
 	// step 1: add the widget instance to the database and get the ID
-	$widget_instances = get_option( $kind );
+	$widget_instances = get_option( $full_kind );
 
 	// no instances of this exist, yay
 	if ( !$widget_instances ) {
@@ -620,6 +732,7 @@ function largo_instantiate_widget( $kind, $instance_settings, $region ) {
 		);
 
 	} else {
+
 		//figure out what ID we're creating. Don't just use count() as things might get deleted or something...
 		//there's probably a smarter way to do this...
 		while ( array_key_exists( $instance_id, $widget_instances) ) {
@@ -628,16 +741,45 @@ function largo_instantiate_widget( $kind, $instance_settings, $region ) {
 
 		//pop off _multiwidget, add our element to the end, then add _multiwidget back
 		$new_instances = array_pop( $widget_instances );
-		$new_instances[ $instance_id ] = wp_parse_args( $instance_settings, $defaults );
-		$new_instances[ '_multiwidget' ] = 1;
-		update_option( $full_kind, $new_instances );
+		$widget_instances[ $instance_id ] = wp_parse_args( $instance_settings, $defaults );
+		$widget_instances[ '_multiwidget' ] = 1;
+		update_option( $full_kind, $widget_instances );
 	}
 
 	// step 2: add the widget instance we just created to the region; this isn't so bad
 	$region_widgets = get_option( 'sidebars_widgets' );
 	$region_widgets[ $region ][] = $kind . '-widget-' . $instance_id;
 	update_option( 'sidebars_widgets', $region_widgets );
+	$place = array_search($kind . '-widget-' . $instance_id, $region_widgets[$region]);
 
+	return array(
+		'id' => $kind . '-widget-' . $instance_id,
+		'place' => $place
+	);
+
+}
+
+/**
+ * Utility function to get the basename of a widget from the widget's slug
+ *
+ * @since 0.5.3
+ */
+function largo_get_widget_basename($slug) {
+	if (preg_match('/^(.*)\-\d+$/', $slug, $matches)) {
+		return $matches[1];
+	}
+	return false;
+}
+/**
+ * Utility function to get the number of a widget from the widget's slug
+ *
+ * @since 0.5.3
+ */
+function largo_get_widget_number($slug) {
+	if (preg_match('/^.*\-(\d+)$/', $slug, $matches)) {
+		return $matches[1];
+	}
+	return false;
 }
 
 /* --------------------------------------------------------
