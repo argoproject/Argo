@@ -18,11 +18,14 @@
 function largo_perform_update() {
 	if (largo_need_updates()) {
 
+		// Stash the options from the previous version of the theme for later use
+		$previous_options = largo_preserve_previous_options();
+
 		// this must run before any other function that makes use of of_set_option()
 		largo_set_new_option_defaults();
 
 		// Run when updating from pre-0.4
-		if (version_compare(of_get_option('largo_version'), '0.4') < 0) {
+		if (version_compare($previous_options['largo_version'], '0.4') < 0) {
 			largo_home_transition();
 			largo_update_widgets();
 			largo_transition_nav_menus();
@@ -148,14 +151,14 @@ function largo_update_widgets() {
 	);
 
 	$checks['show_tags'] = array(
-		'values' => array(1),
+		'values' => array('1'),
 		'widget' => 'largo-tag-list',
 		'settings' => array('title' => __( 'Tags ', 'largo' ), 'tag_limit' => 20),
 	);
 
 	$checks['show_author_box'] = array(
 		'values' => array('1'),
-		'widget' => 'largo-author-bio',
+		'widget' => 'largo-author',
 		'settings' => array('title' => __( 'Author', 'largo' ) ),
 	);
 
@@ -172,8 +175,9 @@ function largo_update_widgets() {
 	);
 
 	//loop thru, see if value is present, then see if widget exists, if not, create one
+	$previous_options = largo_retrieve_previous_options();
 	foreach( $checks as $option => $i ) {
-		$opt = of_get_option( $option );
+		$opt = $previous_options[$option];
 		if ( $i['values'] === NULL || in_array($opt, $i['values']) ) {
 			//we found an option that suggests we need to add a widget.
 			//if there's not aleady one present, add it
@@ -308,11 +312,8 @@ function largo_update_prominence_term_descriptions() {
 
 	foreach ($largoOldProminenceTerms as $update ) {
 		largo_update_prominence_term_description_single($update, $term_descriptions);
-
 	}
 }
-// Uncomment this line if you would like to force prominence terms to update.
-# add_action('init', 'largo_update_prominence_term_descriptions');
 
 /**
  * Compares an array containing an old and new prominence term description and the appropriate slug and name to an array of current term descriptions. For each term whose current description matches the old description, the function updates the current description to the new description.
@@ -323,7 +324,6 @@ function largo_update_prominence_term_descriptions() {
  *
  * @param array $update The new details for the prominence tax term to be updated
  * @param array $term_descriptions Array of prominence terms, each prominence term as an associative array with keys: name, description, olddescription, slug
- * @uses var_log
  * @uses wp_update_term
  * @uses clean_term_cache
  *
@@ -352,10 +352,6 @@ function largo_update_prominence_term_description_single($update, $term_descript
 	    // Clean the entire prominence term cache
 	    clean_term_cache( $id['term_id'], 'prominence', true );
 	}
-
-	// These are here so you can grep your server logs to see if the terms were updated.
-	# var_log($logarray);
-	# var_log("Done updating prominence terms");
 
 	return $update;
 }
@@ -493,16 +489,12 @@ function largo_remove_topstory_prominence_term() {
  * @since 0.5.1
  */
 function largo_set_new_option_defaults() {
-
 	// Gets the unique id, returning a default if it isn't defined
 	$config = get_option( 'optionsframework' );
 	if ( isset( $config['id'] ) ) {
-		$options = get_option( $config['id'] );			// a list of saved options
-		$defaults = of_get_default_values();			// the list of default values.
-		$options = wp_parse_args($options,$defaults);	// merge 'em.
+		$options = of_get_default_values(); // the list of default values.
 		update_option($config['id'], $options);
 	}
-
 }
 
 /**
@@ -684,9 +676,8 @@ function largo_widget_in_region( $widget_name, $region = 'article-bottom' ) {
 
 	$widgets = get_option( 'sidebars_widgets ');
 
-	if ( !isset( $widgets[$region] ) ) {
-		return new WP_Error( 'region-missing', __('Invalid region specified.', 'largo' ) );
-	}
+	if ( !isset( $widgets[$region] ) )
+		return false;
 
 	foreach( $widgets[$region] as $key => $widget ) {
 		if ( stripos( $widget, $widget_name ) === 0 ) return true;	//we found a copy of this widget! Note this may return a false positive if the widget we're checking is the same name (but shorter) as another kind of widget
@@ -960,3 +951,117 @@ function largo_ajax_update_database() {
 	}
 }
 add_action('wp_ajax_largo_ajax_update_database', 'largo_ajax_update_database');
+
+/**
+ * A singleton utility class for preserving and retrieving previous Largo options
+ *
+ * @since 0.5.3
+ */
+class LargoPreviousOptions {
+
+	protected static $version;
+
+	protected static function _setVersion($version) {
+		self::$version = $version;
+	}
+
+	protected static function _getSuffix() {
+		$version = (!empty(self::$version))? self::$version : of_get_option('largo_version');
+		if (!empty($version)) {
+			self::_setVersion($version);
+			return '_' . self::$version;
+		} else
+			return '_pre_0.4';
+	}
+
+	/**
+	 * Call this method before saving theme options for the first time after updating Largo
+	 * to preserve the state of theme options for the previous version.
+	 */
+	public static function preserve() {
+		$config = get_option('optionsframework');
+
+		if (isset($config['id'])) {
+			$options = get_option($config['id']);
+			update_option($config['id'] . self::_getSuffix(), $options);
+			return $options;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Retrieve the theme options for the version of Largo that immediately preceeded the
+	 * currently-deployed version.
+	 *
+	 * Optionally, retrieve a previous set of theme options by passing a version string to the
+	 * method.
+	 *
+	 * @param string $largo_version for example '0.5.2'
+	 */
+	public static function retrieve($largo_version=false) {
+		$config = get_option('optionsframework');
+
+		if (isset($config['id'])) {
+			$options = get_option($config['id']);
+
+			if (!empty($largo_version))
+				self::_setVersion($largo_version);
+
+			return get_option($config['id'] . self::_getSuffix());
+		}
+		return false;
+	}
+
+}
+
+/**
+ * Convenience function for storing the theme options for the version of the theme that immediately
+ * preceeded the currently-deployed version.
+ *
+ * @since 0.5.3
+ */
+function largo_preserve_previous_options() {
+	return LargoPreviousOptions::preserve();
+}
+
+/**
+ * Convenience function for retrieving the theme options for the version of the theme that immediately
+ * preceeded the currently-deployed version.
+ */
+function largo_retrieve_previous_options($largo_version=false) {
+	return LargoPreviousOptions::retrieve($largo_version);
+}
+
+/**
+ * If Largo needs to be updated, prevent the user from access the Theme Options edit page.
+ *
+ * @since 0.5.3
+ */
+function largo_block_theme_options_for_update() {
+	if (largo_need_updates()) {
+		add_action('admin_init', function() {
+			remove_submenu_page('themes.php', 'options-framework');
+		});
+
+		add_theme_page(
+			__('Theme Options', 'options_framework_theme'),
+			__('Theme Options', 'options_framework_theme'),
+			'edit_theme_options',
+			'largo-block-theme-options',
+			'largo_block_theme_options'
+		);
+	}
+}
+add_action('admin_menu', 'largo_block_theme_options_for_update', 10);
+
+/**
+ * Displays a message indicating the user should update their Largo install before
+ * attempting to edit Theme Options
+ *
+ * @since 0.5.3
+ */
+function largo_block_theme_options() { ?>
+	<h3>Please <a href="<? echo admin_url('index.php?page=update-largo'); ?>">visit the update page</a> to apply required Largo updates before editing Theme Options.</h3>
+<?php
+}
