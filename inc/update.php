@@ -987,7 +987,7 @@ class LargoPreviousOptions {
 			return $options;
 		}
 
-		return false;
+		return array();
 	}
 
 	/**
@@ -1010,7 +1010,8 @@ class LargoPreviousOptions {
 
 			return get_option($config['id'] . self::_getSuffix());
 		}
-		return false;
+
+		return array();
 	}
 
 }
