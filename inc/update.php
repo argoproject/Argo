@@ -21,6 +21,9 @@ function largo_perform_update() {
 		// Stash the options from the previous version of the theme for later use
 		$previous_options = largo_preserve_previous_options();
 
+		if (!isset($previous_options['largo_version']))
+			$previous_options['largo_version'] = null;
+
 		// this must run before any other function that makes use of of_set_option()
 		largo_set_new_option_defaults();
 
@@ -97,6 +100,7 @@ function largo_need_updates() {
  * @since 0.4
  */
 function largo_home_transition() {
+	// TODO: this should use largo_retrieve_previous_options to check old values
 	$old_regime = of_get_option('homepage_top', 0);
 	$new_regime = of_get_option('home_template', 0);
 
