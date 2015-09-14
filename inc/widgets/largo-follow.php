@@ -1,19 +1,20 @@
 <?php
+
 /*
  * Largo Follow Widget
+ *
+ * @package Largo
  */
-
 class largo_follow_widget extends WP_Widget {
 
-	/**
+	/*
 	 * Used to tell largo_footer_js whether it needs
 	 * to load twitter scripts.
+	 *
+	 * @ignore
 	 */
 	private static $rendered = false;
 
-	/**
-	 * Widget setup.
-	 */
 	function largo_follow_widget() {
 		/* Widget settings. */
 		$widget_ops = array(
@@ -23,13 +24,10 @@ class largo_follow_widget extends WP_Widget {
 
 		/* Create the widget. */
 		$this->WP_Widget( 'largo-follow-widget', __('Largo Follow', 'largo'), $widget_ops );
-	
+
 		self::$rendered = true;
 	}
 
-	/**
-	 * How to display the widget on the screen.
-	 */
 	function widget( $args, $instance ) {
 		extract( $args );
 
@@ -93,18 +91,12 @@ class largo_follow_widget extends WP_Widget {
 		echo $after_widget;
 	}
 
-	/**
-	 * Update the widget settings.
-	 */
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
 		$instance['title'] = sanitize_text_field( $new_instance['title'] );
 		return $instance;
 	}
 
-	/**
-	 * Displays the widget settings controls on the widget panel.
-	 */
 	function form( $instance ) {
 
 		/* Set up some default widget settings. */
@@ -120,13 +112,7 @@ class largo_follow_widget extends WP_Widget {
 	<?php
 	}
 
-	/**
-	 * Returns true if this widget has been rendered one or more times.
-	 * 
-	 * @since 0.5
-	 */
 	function is_rendered() {
 		return self::$rendered;
 	}
-	
 }
