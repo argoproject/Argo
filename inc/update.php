@@ -100,17 +100,17 @@ function largo_need_updates() {
  * @since 0.4
  */
 function largo_home_transition() {
-	// TODO: this should use largo_retrieve_previous_options to check old values
-	$old_regime = of_get_option('homepage_top', 0);
+	$previous_options = largo_retrieve_previous_options('pre_0.4');
+	$old_regime = (isset($previous_options['homepage_top']))? $previous_options['homepage_top'] : 0;
 	$new_regime = of_get_option('home_template', 0);
 
 	// we're using the old system and the new one isn't in place, act accordingly
 	// this should ALWAYS happen when this function is called, as there's a separate version check before this is invoked
 	// however, it will not run if the new system has already been set up, so largo-dev to 0.4 will not overwrite details.
 	// the home template sidebars have same names as old regime so that *shouldn't* be an issue
-	if (of_get_option('homepage_layout') == '3col') {
+	if (isset($previous_options['homepage_layout']) && $previous_options['homepage_layout']== '3col') {
 		of_set_option('home_template', 'LegacyThreeColumn');
-	} else if ($old_regime && !$new_regime) {
+	} else if ($old_regime) {
 		if ($old_regime == 'topstories')
 			$home_template = 'TopStories';
 		if ($old_regime == 'slider')
@@ -119,8 +119,6 @@ function largo_home_transition() {
 			$home_template = 'HomepageBlog';
 
 		of_set_option('home_template', $home_template);
-	} else if (!$new_regime) {
-		of_set_option('home_template', 'HomepageBlog');
 	}
 }
 
@@ -179,7 +177,7 @@ function largo_update_widgets() {
 	);
 
 	//loop thru, see if value is present, then see if widget exists, if not, create one
-	$previous_options = largo_retrieve_previous_options();
+	$previous_options = largo_retrieve_previous_options('pre_0.4');
 	foreach( $checks as $option => $i ) {
 		$opt = $previous_options[$option];
 		if ( $i['values'] === NULL || in_array($opt, $i['values']) ) {

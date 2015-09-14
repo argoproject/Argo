@@ -81,34 +81,39 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 	}
 
 	function test_largo_home_transition() {
-		// TODO: this should use the $this->previous_options and call largo_preserve_previous_options
-		// since it is meant to migrate pre-0.4 settings.
-
 		// old topstories
+		update_option(
+			get_option('stylesheet'),
+			array_merge($this->previous_options, array('homepage_top' => 'topstories'))
+		);
+		largo_preserve_previous_options();
 		of_reset_options();
-		of_set_option('homepage_top', 'topstories');
 		largo_home_transition();
 		$this->assertEquals('TopStories', of_get_option('home_template', 0));
 
 		// old slider
+		update_option(
+			get_option('stylesheet'),
+			array_merge($this->previous_options, array('homepage_top' => 'slider'))
+		);
+		largo_preserve_previous_options();
 		of_reset_options();
-		of_set_option('homepage_top', 'slider');
 		largo_home_transition();
 		$this->assertEquals('HomepageBlog', of_get_option('home_template', 0));
 
 		// old blog
+		update_option(
+			get_option('stylesheet'),
+			array_merge($this->previous_options, array('homepage_top' => 'blog'))
+		);
+		largo_preserve_previous_options();
 		of_reset_options();
-		of_set_option('homepage_top', 'blog');
-		largo_home_transition();
-		$this->assertEquals('HomepageBlog', of_get_option('home_template', 0));
-
-		// Anything else
-		of_reset_options();
-		of_set_option('', 'slider');
 		largo_home_transition();
 		$this->assertEquals('HomepageBlog', of_get_option('home_template', 0));
 
 		// Not actually set
+		update_option(get_option('stylesheet'), $this->previous_options);
+		largo_preserve_previous_options();
 		of_reset_options();
 		largo_home_transition();
 		$this->assertEquals('HomepageBlog', of_get_option('home_template', 0));
