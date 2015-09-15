@@ -496,7 +496,9 @@ function largo_set_new_option_defaults() {
 	// Gets the unique id, returning a default if it isn't defined
 	$config = get_option( 'optionsframework' );
 	if ( isset( $config['id'] ) ) {
-		$options = of_get_default_values(); // the list of default values.
+		$defaults = of_get_default_values(); // the list of default values.
+		$previous_options = largo_retrieve_previous_options();
+		$options = wp_parse_args($previous_options, $defaults);
 		update_option($config['id'], $options);
 	}
 }
