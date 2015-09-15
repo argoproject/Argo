@@ -302,6 +302,9 @@ function largo_category_archive_posts( $query ) {
 	//don't muck with admin, non-categories, etc
 	if ( !$query->is_category() || !$query->is_main_query() || is_admin() ) return;
 
+	// If this has been disabled by an option, do nothing
+	if ( of_get_option('hide_category_featured') == true ) return;
+
 	// get the featured posts
 	$featured_posts = largo_get_featured_posts_in_category($query->get('category_name'));
 
@@ -342,8 +345,8 @@ function largo_get_featured_posts_in_category($category_name, $number=5) {
 	$featured_posts = get_posts(array_merge($args, $tax_query));
 
 	// Backfill with regular posts if necessary
-	if (count( $featured_posts ) < 5) {
-		$needed = 5 - count( $featured_posts );
+	if (count( $featured_posts ) < (int) $number) {
+		$needed = (int) $number - count( $featured_posts );
 		$regular_posts = get_posts(array_merge($args, array(
 			'numberposts' => $needed,
 			'post__not_in' => array_map(function($x) { return $x->ID; }, $featured_posts)
