@@ -100,7 +100,7 @@ function largo_need_updates() {
  * @since 0.4
  */
 function largo_home_transition() {
-	$previous_options = largo_retrieve_previous_options('pre_0.4');
+	$previous_options = largo_retrieve_previous_options();
 	$old_regime = (isset($previous_options['homepage_top']))? $previous_options['homepage_top'] : 0;
 	$new_regime = of_get_option('home_template', 0);
 
@@ -179,7 +179,7 @@ function largo_update_widgets() {
 	);
 
 	//loop thru, see if value is present, then see if widget exists, if not, create one
-	$previous_options = largo_retrieve_previous_options('pre_0.4');
+	$previous_options = largo_retrieve_previous_options();
 	foreach( $checks as $option => $i ) {
 		$opt = $previous_options[$option];
 		if ( $i['values'] === NULL || in_array($opt, $i['values']) ) {
@@ -987,6 +987,12 @@ class LargoPreviousOptions {
 
 		if (isset($config['id'])) {
 			$options = get_option($config['id']);
+
+			if (!empty($options['largo_version']))
+				self::_setVersion($options['largo_version']);
+			else
+				self::_setVersion('pre_0.4');
+
 			update_option($config['id'] . self::_getSuffix(), $options);
 			return $options;
 		}
@@ -1033,6 +1039,8 @@ function largo_preserve_previous_options() {
 /**
  * Convenience function for retrieving the theme options for the version of the theme that immediately
  * preceeded the currently-deployed version.
+ *
+ * @since 0.5.3
  */
 function largo_retrieve_previous_options($largo_version=false) {
 	return LargoPreviousOptions::retrieve($largo_version);
