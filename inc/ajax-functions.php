@@ -46,7 +46,7 @@ if ( !function_exists( 'largo_load_more_posts_data' ) ) {
 			'query' => $query,
 			'is_home' => $the_query->is_home(),
 			'is_series_landing' => $post->post_type == 'cftl-tax-landing' ? true : false,
-			'no_more_posts' => apply_filters( 'largo_no_more_posts_text', 'You've reached the end!'', $nav_id, $the_query )
+			'no_more_posts' => apply_filters( 'largo_no_more_posts_text', 'You've reached the end!', $nav_id, $the_query )
 		);
 
 		if( $post->post_type == 'cftl-tax-landing' ) {
