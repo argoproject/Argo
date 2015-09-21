@@ -109,7 +109,7 @@ if ( ! function_exists( 'largo_footer_js' ) ) {
 
 		<?php endif;
 
-		/**
+		/*
 		 * Load Facebook Tracking Pixel if defined in Theme Options
 		 *
 		 * Function loads Facebook's JavaScript (circa September 2015) for
@@ -118,7 +118,8 @@ if ( ! function_exists( 'largo_footer_js' ) ) {
 		 * @link https://developers.facebook.com/docs/ads-for-websites/drive-conversions
 		 * @since 0.5.4
 		 */
-		 if( of_get_option( 'fb_tracking_pixel', true ) ) : ?>
+		 $fb_pixel_id = of_get_option( 'fb_tracking_pixel', true );
+		 if( !empty($fb_pixel_id) ) : ?>
 
 		 <script>(function() {
 		 var _fbq = window._fbq || (window._fbq = []);
@@ -130,7 +131,7 @@ if ( ! function_exists( 'largo_footer_js' ) ) {
 		 	s.parentNode.insertBefore(fbds, s);
 		 	_fbq.loaded = true;
 		 }
-		 _fbq.push(['addPixelId', '<?php echo of_get_option( 'fb_tracking_pixel'); ?>']);
+		 _fbq.push(['addPixelId', '<?php echo $fb_pixel_id; ?>']);
 
 		 })();
 		 window._fbq = window._fbq || [];
@@ -138,7 +139,7 @@ if ( ! function_exists( 'largo_footer_js' ) ) {
 		 </script>
 	 <!-- Fallback for environments not friendly to script -->
 		 <noscript>
-		 	<img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?id=<?php echo of_get_option( 'fb_tracking_pixel' ); ?>&amp;ev=PixelInitialized" />
+		 	<img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?id=<?php echo $fb_pixel_id; ?>&amp;ev=PixelInitialized" />
 		 </noscript>
 		 <?php endif;
 		 /* END tracking pixel code */
