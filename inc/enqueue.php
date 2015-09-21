@@ -93,7 +93,7 @@ if ( ! function_exists( 'largo_footer_js' ) ) {
 	function largo_footer_js() { ?>
 
 
-		<?php 
+		<?php
 		// Are the widgets that contain facebook social buttons loaded (or are we on single/author?)
 		if( largo_facebook_widget::is_rendered() || largo_follow_widget::is_rendered() || is_single() || is_author() ) : ?>
 
@@ -107,9 +107,42 @@ if ( ! function_exists( 'largo_footer_js' ) ) {
 		  fjs.parentNode.insertBefore(js, fjs);
 		}(document, 'script', 'facebook-jssdk'));</script>
 
-		<?php endif; ?>
+		<?php endif;
 
-		<?php 
+		/**
+		 * Load Facebook Tracking Pixel if defined in Theme Options
+		 *
+		 * Function loads Facebook's JavaScript (circa September 2015) for
+		 * conversion tracking and send the default event.
+		 *
+		 * @link https://developers.facebook.com/docs/ads-for-websites/drive-conversions
+		 * @since 0.5.4
+		 */
+		 if( of_get_option( 'fb_tracking_pixel', true ) ) : ?>
+
+		 <script>(function() {
+		 var _fbq = window._fbq || (window._fbq = []);
+		 if (!_fbq.loaded) {
+		 	var fbds = document.createElement('script');
+		 	fbds.async = true;
+		 	fbds.src = '//connect.facebook.net/<?php echo get_locale() ?>/fbds.js';
+		 	var s = document.getElementsByTagName('script')[0];
+		 	s.parentNode.insertBefore(fbds, s);
+		 	_fbq.loaded = true;
+		 }
+		 _fbq.push(['addPixelId', '<?php echo of_get_option( 'fb_tracking_pixel'); ?>']);
+
+		 })();
+		 window._fbq = window._fbq || [];
+		 window._fbq.push(['track', 'PixelInitialized', {}]);
+		 </script>
+	 <!-- Fallback for environments not friendly to script -->
+		 <noscript>
+		 	<img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?id=<?php echo of_get_option( 'fb_tracking_pixel'); ?>&amp;ev=PixelInitialized" />
+		 </noscript>
+		 <?php endif;
+		 /* END tracking pixel code */
+
 		// Are the widgets that contain twitter social buttons loaded (or are we on single/author?)
 		if( largo_twitter_widget::is_rendered() || largo_follow_widget::is_rendered() || is_single() || is_author() ) : ?>
 
@@ -162,4 +195,3 @@ if ( ! function_exists( 'largo_google_analytics' ) ) {
 	}
 }
 add_action( 'wp_head', 'largo_google_analytics' );
-

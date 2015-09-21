@@ -279,7 +279,7 @@ function optionsframework_options() {
 	 * 
 	 *  1 - show social icons in sticky footer.
 	 *  0 - do not show social icons in the sticky footer.
-	 * 
+	 *
 	 * @since 0.5
 	 */
 	$options[] = array(
@@ -290,9 +290,8 @@ function optionsframework_options() {
 
 	/**
 	 * Which social icons should be shown in the sticky footer.
-	 * 
+	 *
 	 *  defaults: $footer_utility_buttons_defaults - facebook, twitter and email.
-	 * 
 	 * @since 0.5
 	 */
 	$options[] = array(
@@ -520,7 +519,7 @@ function optionsframework_options() {
 			'1col' => $imagepath . 'footer-1col.png'
 			// Want to add something to this list in a child theme? Use the largo_options filter!
 		)
-	
+
 	);
 
 	/*
@@ -655,6 +654,12 @@ function optionsframework_options() {
 		'id' 	=> 'fb_app_id',
 		'std' 	=> '',
 		'type' 	=> 'text');
+
+	$options[] = array(
+			'desc' 	=> __('<strong>Facebook Tracking Pixel ID.</strong> Unique numerical ID (one per Facebook Ads account) to enable tracking of site visitors and targeting of specific Facebook ads at your audience.', 'largo'),
+			'id' 	=> 'fb_tracking_pixel',
+			'std' 	=> '',
+			'type' 	=> 'text');
 
 	$options[] = array(
 		'desc' 	=> __('<strong>Bitly site verification.</strong> This is a string of numbers and letters used to verify your site with bitly analytics.', 'largo'),
