@@ -226,14 +226,6 @@ li.home-link:hover i {
   &:after {
     content: "\0000a0";
   }
-
-  .opacity(90);
-}
-
-// Place the caret
-.dropdown:hover .caret,
-.open .caret {
-  .opacity(100);
 }
 
 // The dropdown menu (ul)
@@ -493,8 +485,12 @@ li.home-link:hover i {
       }
       .caret {
         float: right;
-        margin-right: 5px;
-        padding: 0px 7px;
+        width: @navbarHeight + 10px;
+        height: @navbarHeight + 10px;
+        // Following are to make sure it stays centered in the containing li, since the .caret is now 10px wider and taller to be large enough a touch target, and thus overlaps the li's 5px top and bottom padding
+        margin-top: -5px;
+        margin-left: -5px;
+        padding: 0;
       }
       .caret:before {
         border-top-color: @linkColor;
