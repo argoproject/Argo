@@ -138,7 +138,7 @@ if ( ! function_exists( 'largo_footer_js' ) ) {
 		 </script>
 	 <!-- Fallback for environments not friendly to script -->
 		 <noscript>
-		 	<img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?id=<?php echo of_get_option( 'fb_tracking_pixel'); ?>&amp;ev=PixelInitialized" />
+		 	<img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?id=<?php echo of_get_option( 'fb_tracking_pixel' ); ?>&amp;ev=PixelInitialized" />
 		 </noscript>
 		 <?php endif;
 		 /* END tracking pixel code */
