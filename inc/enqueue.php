@@ -118,7 +118,7 @@ if ( ! function_exists( 'largo_footer_js' ) ) {
 		 * @link https://developers.facebook.com/docs/ads-for-websites/drive-conversions
 		 * @since 0.5.4
 		 */
-		 $fb_pixel_id = of_get_option( 'fb_tracking_pixel', true );
+		 $fb_pixel_id = of_get_option( 'fb_tracking_pixel' );
 		 if( !empty($fb_pixel_id) ) : ?>
 
 		 <script>(function() {
