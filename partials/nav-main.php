@@ -13,13 +13,13 @@ if ( is_front_page() || is_home() || !of_get_option( 'show_sticky_nav' ) ): ?>
 		<div class="container">
 			<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
 			<a class="btn btn-navbar toggle-nav-bar"  title="<?php esc_attr_e('More', 'largo'); ?>">
-        			<!-- BEGIN Mobile Off-Canvas Menu Button -->
+        			<!-- BEGIN Mobile off-canvas menu button -->
         			<div class="bars">
         				<span class="icon-bar"></span>
         				<span class="icon-bar"></span>
         				<span class="icon-bar"></span>
         			</div>
-        			<!-- END Mobile Off-Canvas Menu Button -->
+        			<!-- END Mobile off-canvas menu button -->
       			</a>
 
       			<div class="nav-shelf">
