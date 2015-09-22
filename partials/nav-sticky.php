@@ -10,8 +10,8 @@
 	<div class="sticky-nav-holder <?php echo (is_front_page() || is_home()) ? '' : 'show'; ?>"
 		data-hide-at-top="<?php echo (is_front_page() || is_home()) ? 'true' : 'false'; ?>">
 
-		<?php
-    /**
+	<?php
+    /*
      * Before Sticky Nav Container
      *
      * Use add_action( 'largo_before_sticky_nav_container', 'function_to_add');
@@ -25,20 +25,23 @@
 				<div class="container">
 					<div class="nav-right">
 					<?php
-          /* Display social icons. Enabled by default, toggle in Theme Options
+					/*
+					 * Display social icons. Enabled by default, toggle in Theme Options
 					 * under the Basic Settings tab under Menu Options.
 					 *
 					 * @link https://largo.readthedocs.org/users/themeoptions.html
 					 */
-           if ( of_get_option( 'show_header_social') ) { ?>
+					if ( of_get_option( 'show_header_social') ) { ?>
 						<ul id="header-social" class="social-icons visible-desktop">
 							<?php largo_social_links(); ?>
 						</ul>
 					<?php } ?>
 
 						<ul id="header-extras">
-              <?php
-              /* Display Donate button. Change button text and URL in Theme
+							<?php
+							/*
+							 * Display Donate button. Change button text and URL in Theme
+							 *
 							 * Options under the Basic Settings tab under Donate Button.
 							 *
 							 * @link https://largo.readthedocs.org/users/themeoptions.html
@@ -70,7 +73,7 @@
 
 					</div>
 
-			    <!-- "hamburger" button (3 bars) to trigger off-canvas navigation -->
+					<!-- "hamburger" button (3 bars) to trigger off-canvas navigation -->
 					<a class="btn btn-navbar toggle-nav-bar" title="<?php esc_attr_e('More', 'largo'); ?>">
 						<div class="bars">
 							<span class="icon-bar"></span>
@@ -78,7 +81,8 @@
 							<span class="icon-bar"></span>
 						</div>
 					</a>
-          <!-- BEGIN MOBILE MENU (hidden on desktop) -->
+
+					<!-- BEGIN MOBILE MENU (hidden on desktop) -->
 					<div class="nav-left">
 						<?php
 							if ( of_get_option( 'show_sitename_in_sticky_nav', 1 ) ) {
@@ -90,8 +94,9 @@
 
 						<?php } ?>
 					</div>
-          <!-- END MOBILE MENU -->
-          <!-- BEGIN DESKTOP MENU -->
+					<!-- END MOBILE MENU -->
+
+					<!-- BEGIN DESKTOP MENU -->
 					<div class="nav-shelf">
 					<ul class="nav">
 						<li class="<?php echo (of_get_option('sticky_header_logo') == '' ? 'home-link' : 'home-icon' ) ?>">
@@ -105,21 +110,23 @@
 							</a>
 						</li>
 						<?php
-            /* Build the mobile off-canvas menu
-             *
-             * Checks if sitename is shown in sticky nav
-             */
+							/*
+							 * Build the mobile off-canvas menu
+							 *
+							 * Checks if sitename is shown in sticky nav
+							 *
+							 */
 							if ( of_get_option( 'show_sitename_in_sticky_nav', 1 ) )
 								echo '<li class="site-name"><a href="/">' . get_bloginfo('name') . '</a></li>';
 
-              /* Build Main Navigation using Boostrap_Walker_Nav_Menu() */
+							/* Build Main Navigation using Boostrap_Walker_Nav_Menu() */
 							$args = array(
-							'theme_location' => 'main-nav',
-							'depth'		 => 0,
-							'container'	 => false,
-							'items_wrap' => '%3$s',
-							'menu_class' => 'nav',
-							'walker'	 => new Bootstrap_Walker_Nav_Menu()
+								'theme_location' => 'main-nav',
+								'depth'		 => 0,
+								'container'	 => false,
+								'items_wrap' => '%3$s',
+								'menu_class' => 'nav',
+								'walker'	 => new Bootstrap_Walker_Nav_Menu()
 							);
 							largo_nav_menu($args);
 
