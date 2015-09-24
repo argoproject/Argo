@@ -107,7 +107,42 @@ if ( ! function_exists( 'largo_footer_js' ) ) {
 		  fjs.parentNode.insertBefore(js, fjs);
 		}(document, 'script', 'facebook-jssdk'));</script>
 
-		<?php endif; ?>
+		<?php endif; 
+		/*
+		 * Load Facebook Tracking Pixel if defined in Theme Options
+		 *
+		 * Function loads Facebook's JavaScript (circa September 2015) for
+		 * conversion tracking and send the default event.
+		 *
+		 * @link https://developers.facebook.com/docs/ads-for-websites/drive-conversions
+		 * @since 0.5.4
+		 */
+		 $fb_pixel_id = of_get_option( 'fb_tracking_pixel' );
+		 if( !empty($fb_pixel_id) ) : ?>
+
+		 <script>(function() {
+		 var _fbq = window._fbq || (window._fbq = []);
+		 if (!_fbq.loaded) {
+		 	var fbds = document.createElement('script');
+		 	fbds.async = true;
+		 	fbds.src = '//connect.facebook.net/<?php echo get_locale() ?>/fbds.js';
+		 	var s = document.getElementsByTagName('script')[0];
+		 	s.parentNode.insertBefore(fbds, s);
+		 	_fbq.loaded = true;
+		 }
+		 _fbq.push(['addPixelId', '<?php echo $fb_pixel_id; ?>']);
+		 })();
+		 window._fbq = window._fbq || [];
+		 window._fbq.push(['track', 'PixelInitialized', {}]);
+		 </script>
+	 <!-- Fallback for environments not friendly to script -->
+		 <noscript>
+		 	<img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?id=<?php echo $fb_pixel_id; ?>&amp;ev=PixelInitialized" />
+		 </noscript>
+		 <?php 
+		 /* END tracking pixel code */ 
+		 endif; ?>
+		
 
 		<?php 
 		// Are the widgets that contain twitter social buttons loaded (or are we on single/author?)
