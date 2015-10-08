@@ -11,7 +11,7 @@ $shown_ids[] = $bigStoryPost->ID; //don't repeat the current post
 		<?php echo $viewToggle; // View toggle zone ?>
 		<div class="home-top">
 
-			<div <?php post_class( 'full-hero' ); ?>>
+			<div <?php post_class( array('full-hero', largo_hero_class( $bigStoryPost->ID, false ) ) ); ?>>
 				<a href="<?php echo esc_attr(get_permalink($bigStoryPost->ID)); ?>">
 					<?php echo get_the_post_thumbnail($bigStoryPost->ID, 'full'); ?>
 				</a>
