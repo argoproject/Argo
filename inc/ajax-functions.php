@@ -140,7 +140,12 @@ if (!function_exists('largo_load_more_posts_choose_partial')) {
 		$partial = 'home';
 
 		// This might be a category, tag, search, date, author, non-landing-page series, or other other archive
-		$post_query = (array) json_decode(stripslashes($_POST['query']));
+		
+		if ( isset($_POST['query']) ) {
+			$post_query = (array) json_decode(stripslashes($_POST['query']));
+		} else {
+			$post_query = array();
+		}
 
 		// check if this query is for a category
 		if ( isset($post_query['category_name']) && $post_query['category_name'] != '' ) {
