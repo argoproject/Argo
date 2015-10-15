@@ -66,6 +66,7 @@ if (!function_exists('largo_load_more_posts_data')) {
  * Renders markup for a page of posts and sends it back over the wire.
  * @global $opt
  * @global $_POST
+ * @see largo_load_more_posts_choose_partial
  */
 if (!function_exists('largo_load_more_posts')) {
 	function largo_load_more_posts() {
