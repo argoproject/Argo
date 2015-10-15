@@ -64,6 +64,8 @@ if (!function_exists('largo_load_more_posts_data')) {
 
 /*
  * Renders markup for a page of posts and sends it back over the wire.
+ * @global $opt
+ * @global $_POST
  */
 if (!function_exists('largo_load_more_posts')) {
 	function largo_load_more_posts() {
@@ -105,13 +107,11 @@ if (!function_exists('largo_load_more_posts')) {
 		$query = new WP_Query($args);
 
 		if ( $query->have_posts() ) {
+			// Choose the correct partial to load here
+			$partial = largo_load_more_posts_choose_partial();
+
+			// Render all the posts
 			while ( $query->have_posts() ) : $query->the_post();
-				$partial = 'home';
-				if($_POST['is_series_landing'] === true || $_POST['is_series_landing'] === 1) {
-					$partial = 'series';
-					$opt = $_POST['opt'];
-				}
-				$partial = ( get_post_type() == 'argolinks' ) ? 'argolinks' : $partial;
 				get_template_part( 'partials/content', $partial );
 			endwhile;
 		}
@@ -119,4 +119,41 @@ if (!function_exists('largo_load_more_posts')) {
 	}
 	add_action('wp_ajax_nopriv_load_more_posts', 'largo_load_more_posts');
 	add_action('wp_ajax_load_more_posts', 'largo_load_more_posts');
+}
+
+/**
+ * Function to determine which partial slug should be used by LMP to render posts.
+ *
+ * @see largo_load_more_posts
+ * @return string The slug of partial that should be loaded.
+ * @global $opt
+ * @global $_POST
+ */
+if (!function_exists('largo_load_more_posts_choose_partial')) {
+	function largo_load_more_posts_choose_partial() {
+		global $opt;
+
+		// Default is to use partials/content-home.php
+		$partial = 'home';
+
+		// This might be a category, tag, search, date, author, non-landing-page series, or other other archive
+		$post_query = (array) json_decode(stripslashes($_POST['query']));
+		// check if this query is for a category
+		if ( isset($post_query['category_name']) && $post_query['category_name'] != '' ) {
+			$partial = 'category';
+		}
+
+		// Series landing pages
+		if($_POST['is_series_landing'] === true || $_POST['is_series_landing'] === 1) {
+			$partial = 'series';
+			$opt = $_POST['opt'];
+		}
+
+		// argolinks post type
+		$partial = ( get_post_type() == 'argolinks' ) ? 'argolinks' : $partial;
+
+		var_log($post_query);
+		var_log($partial);
+		return $partial;
+	}
 }
