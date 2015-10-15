@@ -180,8 +180,6 @@ if (!function_exists('largo_load_more_posts_choose_partial')) {
 		// argolinks post type
 		$partial = ( get_post_type() == 'argolinks' ) ? 'argolinks' : $partial;
 
-		var_log($post_query);
-		var_log($partial);
 		return $partial;
 	}
 }
