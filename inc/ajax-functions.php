@@ -124,6 +124,8 @@ if (!function_exists('largo_load_more_posts')) {
 /**
  * Function to determine which partial slug should be used by LMP to render posts.
  *
+ * Possibly unnecessarily verbose, but there are a lot of options here and I wanted to be sure that I got them all.
+ *
  * @see largo_load_more_posts
  * @return string The slug of partial that should be loaded.
  * @global $opt
@@ -138,15 +140,41 @@ if (!function_exists('largo_load_more_posts_choose_partial')) {
 
 		// This might be a category, tag, search, date, author, non-landing-page series, or other other archive
 		$post_query = (array) json_decode(stripslashes($_POST['query']));
+
 		// check if this query is for a category
 		if ( isset($post_query['category_name']) && $post_query['category_name'] != '' ) {
-			$partial = 'category';
+			$partial = 'archive';
+		}
+
+		// check if this query is for an author page
+		if ( isset($post_query['author_name']) && $post_query['author_name'] != '' ) {
+			$partial = 'archive';
+		}
+
+		// check if this query is for a tag
+		if ( isset($post_query['tag']) && $post_query['tag'] != '' ) {
+			$partial = 'archive';
+		}
+
+		// check if this query is for a search
+		if ( isset($post_query['s']) && $post_query['s'] != '' ) {
+			$partial = 'archive';
+		}
+
+		// check if this query is for a date, assuming that all date queries have a year.
+		if ( isset($post_query['year']) && $post_query['year'] != '' ) {
+			$partial = 'archive';
 		}
 
 		// Series landing pages
 		if($_POST['is_series_landing'] === true || $_POST['is_series_landing'] === 1) {
 			$partial = 'series';
 			$opt = $_POST['opt'];
+		}
+
+		// Non-series-landing series archives
+		if ( isset($post_query['series']) && $post_query['series'] != '' ) {
+			$partial = 'series';
 		}
 
 		// argolinks post type
