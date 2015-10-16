@@ -12,6 +12,16 @@ function largo_is_series_enabled() {
 }
 
 /**
+ * Check if Series landing pages are enabled
+ *
+ * @since 0.5.2
+ * @return bool Whether or not the Series Landing Page  option is enabled in the Theme Options > Advanced
+ */
+function largo_is_series_landing_enabled() {
+	$series_landing_enabled = of_get_option('custom_landing_enabled');
+	return !empty($series_landing_enabled);
+}
+/**
  * Register the prominence and series custom taxonomies
  * Insert the default terms
  *
