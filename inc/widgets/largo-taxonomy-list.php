@@ -62,7 +62,7 @@ class largo_taxonomy_list_widget extends WP_Widget {
 			$tax_items = get_categories($cat_args);
 
 			foreach ($tax_items as $item) {
-				if ($instance['thumbnails'] == '1' && largo_is_series_enabled() ) {
+				if ($instance['thumbnails'] == '1' && largo_is_series_landing_enabled() ) {
 					$landing_array = largo_get_series_landing_page_by_series($item);
 					
 					// Thumbnail shall be the one for the landing page post
@@ -137,11 +137,10 @@ class largo_taxonomy_list_widget extends WP_Widget {
 			<label for="<?php echo $this->get_field_id('dropdown'); ?>"><?php _e( 'Display as dropdown', 'largo' ); ?></label>
 		</p>
 
-		<p><input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('thumbnails'); ?>" name="<?php echo $this->get_field_name('thumbnails'); ?>"<?php checked( $thumbnails ); ?> />
-			<label for="<?php echo $this->get_field_id('thumbnails'); ?>"><?php _e( 'Display thumbnails? (only useful for series)', 'largo' ); ?></label>
+		<p><input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('thumbnails'); ?>" name="<?php echo $this->get_field_name('thumbnails'); ?>"<?php checked( $thumbnails ); ?> <?php echo (largo_is_series_landing_enabled()) ? '' : 'disabled' ; ?> />
+			<label for="<?php echo $this->get_field_id('thumbnails'); ?>"><?php _e( 'Display thumbnails?', 'largo' ); ?> <?php echo (largo_is_series_landing_enabled()) ? '' : __('To use this function, enable Series and Series Landing Pages in Appearance > Theme Options > Advanced.', 'largo') ; ?> </label>
 		</p>
 
 	<?php
 	}
-
 }
