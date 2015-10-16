@@ -296,7 +296,41 @@ function largo_series_landing_link($post_link, $post) {
 add_filter('post_type_link', 'largo_series_landing_link', 22, 2);
 
 /**
+ * Helper to get the Series Landing Page for a given series.
+ *
+ * @param Object|id|string $series
+ * @return array An array of all WP_Post objects answering the description of this series. May be 0, 1 or conceivably many.
+ */
+function largo_get_series_landing_page_by_series($series) {
+	if ( !is_object($series) ) {
+		if ( is_int( $series ) ) {
+			$series = get_term( $series, $taxonomy );
+		} else {
+			$series = get_term_by( 'slug', $series, $taxonomy );
+		}
+	}
+
+	// get the cftl-tax-landing
+	$args = array(
+		'post_type' => 'cftl-tax-landing',
+		'posts_per_page' => 1,
+		'tax_query' => array( array(
+			'taxonomy' => 'series',
+			'field' => 'id',
+			'terms' => $series->term_id
+		)),
+	);
+
+	$landing = new WP_Query( $args );
+
+	return $landing->posts;
+}
+
+/**
  * Helper for getting posts in a category archive, excluding featured posts.
+ * 
+ * @param WP_Query $query
+ * @uses largo_get_featured_posts_in_category
  */
 function largo_category_archive_posts( $query ) {
 	//don't muck with admin, non-categories, etc
