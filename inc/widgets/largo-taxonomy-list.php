@@ -54,49 +54,108 @@ class largo_taxonomy_list_widget extends WP_Widget {
 		<?php } else { 
 			echo '<ul>';
 
-			// current structure of list as poutoput by the wp_list_categories,
-			// <li class="cat-item cat-item-number" which is incorrect, is not cat
-			// get list using get_categories,
-			// then depending on whether or not we're doing the dropdown, 
 			$cat_args['title_li'] = '';
 			$tax_items = get_categories($cat_args);
 
-			foreach ($tax_items as $item) {
-				if ($instance['thumbnails'] == '1' && largo_is_series_landing_enabled() ) {
-					$landing_array = largo_get_series_landing_page_by_series($item);
-					
-					// Thumbnail shall be the one for the landing page post
-					$thumbnail = '';
-					foreach ($landing_array as $post) {
-						$thumbnail = get_the_post_thumbnail($post->ID);
-					}
-					
-					// add note to the widget setting saying whether or not series landing pages are enabled, and a link to where to do so. 
-
-					// Now we do the thumbnailed list. It's safe to assume that there are no bullets on these li.
-					echo sprintf(
-						'<li class="%s-%s"><a href="%s">%s %s</a></li>',
-						$item->taxonomy,
-						$item->term_id,
-						get_term_link($item),
-						$thumbnail, // the image for the series
-						$item->cat_name
-					);
-				} else { 
-					echo sprintf(
-						'<li class="%s-%s"><a href="%s">%s</a></li>',
-						$item->taxonomy,
-						$item->term_id,
-						get_term_link($item),
-						$item->cat_name
-					);
-				}
+			switch ($instance['taxonomy']) {
+				case 'series':
+					$this->render_series_list($tax_items, $instance);
+					break;
+				case 'category':
+					$this->render_cat_list($tax_items, $instance);
+					break;
+				case 'post_tag':
+					$this->render_tag_list($tax_items, $instance);
+					break;
+				default:
+					$this->render_term_list($tax_items, $instance);
 			}
 
 			echo '</ul>';
 		}
 
 		echo $after_widget;
+	}
+
+	/**
+	 * Helper to render an li
+	 */
+	private function render_li($item, $thumbnail) {
+		echo sprintf(
+			'<li class="%s-%s"><a href="%s">%s %s</a></li>',
+			$item->taxonomy,
+			$item->term_id,
+			get_term_link($item),
+			$thumbnail, // the image for the series
+			$item->cat_name
+		);
+	}
+
+	private function render_series_list($tax_items, $instance) {
+		foreach ($tax_items as $item) {
+			$thumbnail = '';
+			if ($instance['thumbnails'] == '1' && largo_is_series_landing_enabled() ) {
+				$landing_array = largo_get_series_landing_page_by_series($item);
+				
+				// Thumbnail shall be the one for the landing page post
+				foreach ($landing_array as $post) {
+					$thumbnail = get_the_post_thumbnail($post->ID);
+				}
+			}
+
+			$this->render_li($item, $thumbnail);
+		}
+	}
+
+	private function render_cat_list($tax_items, $instance) {
+		foreach ($tax_items as $item) {
+			$thumbnail = '';
+			if ($instance['thumbnails'] == '1') {
+				$posts = get_posts(array(
+					'category_name' => $item->name,
+				));
+				var_log(count($posts));
+				
+				$thumbnail = largo_featured_thumbnail_in_post_array($posts);
+			}
+			$this->render_li($item, $thumbnail);
+		}
+	}
+
+	private function render_tag_list($tax_items, $instance) {
+		foreach ($tax_items as $item) {
+			$thumbnail = '';
+			if ($instance['thumbnails'] == '1') {
+				$posts = get_posts(array(
+					'tag' => $item->slug,
+				));
+				var_log(count($posts));
+				
+				$thumbnail = largo_featured_thumbnail_in_post_array($posts);
+			}
+			$this->render_li($item, $thumbnail);
+		}
+	}
+
+	private function render_term_list($tax_items, $instance) {
+		foreach ($tax_items as $item) {
+			$thumbnail = '';
+			if ($instance['thumbnails'] == '1') {
+				$query_args = array(
+					'tax_query' => array(
+						array(
+							'taxonomy' => $instance->taxonomy,
+							'field' => 'term_id',
+							'terms' => $item->term_taxonomy_id,
+						),
+					),
+				);
+				
+				$posts = get_posts($query_args);
+				$thumbnail = largo_featured_thumbnail_in_post_array($posts);
+			}
+			$this->render_li($item, $thumbnail);
+		}
 	}
 
 	function update( $new_instance, $old_instance ) {

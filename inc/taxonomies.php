@@ -21,6 +21,7 @@ function largo_is_series_landing_enabled() {
 	$series_landing_enabled = of_get_option('custom_landing_enabled');
 	return !empty($series_landing_enabled);
 }
+
 /**
  * Register the prominence and series custom taxonomies
  * Insert the default terms
@@ -399,6 +400,26 @@ function largo_get_featured_posts_in_category($category_name, $number=5) {
 	}
 
 	return $featured_posts;
+}
+
+/**
+ * Return the first featured imagethumbnail found in a given WP_Query
+ *
+ * Useful if you wint to create a thumbnail for a given taxonomy
+ *
+ * @param array An array of posts to iterate over
+ * @return str|false The HTML for the image, or false if no images were found.
+ * @since 0.5.3
+ * @uses largo_has_featured_media
+ */
+function largo_featured_thumbnail_in_post_array($array) {
+	$thumb = '';
+	foreach ($array as $post) {
+		$thumb = get_the_post_thumbnail($post->ID);
+		if ($thumb != '') return $thumb;
+	}
+
+	return $thumb;
 }
 
 /**
