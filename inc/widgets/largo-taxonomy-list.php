@@ -29,8 +29,9 @@ class largo_taxonomy_list_widget extends WP_Widget {
 		 * The widget
 		 */
 		$cat_args = array(
-			'orderby' 	=> 'name',
-			'taxonomy' 	=> $instance['taxonomy'],
+			'orderby' => 'name',
+			'taxonomy' => $instance['taxonomy'],
+			'number' => $instance['count'],
 		);
 
 		if ( $is_dropdown ) {
