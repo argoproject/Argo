@@ -80,6 +80,12 @@ class largo_taxonomy_list_widget extends WP_Widget {
 
 	/**
 	 * Helper to render an li
+	 *
+	 * If $thumbnail is empty, then there is simply no image output.
+	 *
+	 * @param Object $item a wordpress taxonomy object
+	 * @private
+	 * @since 0.5.3
 	 */
 	private function render_li($item, $thumbnail) {
 		echo sprintf(
@@ -92,6 +98,12 @@ class largo_taxonomy_list_widget extends WP_Widget {
 		);
 	}
 
+	/**
+	 * For a series, find a thumbnail in the landing pages or the posts, and create an <li>
+	 *
+	 * @private
+	 * @uses largo_taxonomy_list_widget::render_li
+	 */
 	private function render_series_list($tax_items, $instance) {
 		foreach ($tax_items as $item) {
 			$thumbnail = '';
@@ -108,6 +120,12 @@ class largo_taxonomy_list_widget extends WP_Widget {
 		}
 	}
 
+	/**
+	 * Find the first thumbnailed post in the category and create an <li>
+	 *
+	 * @private
+	 * @uses largo_taxonomy_list_widget::render_li
+	 */
 	private function render_cat_list($tax_items, $instance) {
 		foreach ($tax_items as $item) {
 			$thumbnail = '';
@@ -115,14 +133,19 @@ class largo_taxonomy_list_widget extends WP_Widget {
 				$posts = get_posts(array(
 					'category_name' => $item->name,
 				));
-				var_log(count($posts));
-				
+
 				$thumbnail = largo_featured_thumbnail_in_post_array($posts);
 			}
 			$this->render_li($item, $thumbnail);
 		}
 	}
 
+	/**
+	 * For a tag, find the first thumbnailed post and create an <li>
+	 *
+	 * @private
+	 * @uses largo_taxonomy_list_widget::render_li
+	 */
 	private function render_tag_list($tax_items, $instance) {
 		foreach ($tax_items as $item) {
 			$thumbnail = '';
@@ -130,14 +153,19 @@ class largo_taxonomy_list_widget extends WP_Widget {
 				$posts = get_posts(array(
 					'tag' => $item->slug,
 				));
-				var_log(count($posts));
-				
+
 				$thumbnail = largo_featured_thumbnail_in_post_array($posts);
 			}
 			$this->render_li($item, $thumbnail);
 		}
 	}
 
+	/**
+	 * For a generic term in a taxonomy, find the first thumbnailed post in the term and create an <li>
+	 *
+	 * @private
+	 * @uses largo_taxonomy_list_widget::render_li
+	 */
 	private function render_term_list($tax_items, $instance) {
 		foreach ($tax_items as $item) {
 			$thumbnail = '';
