@@ -215,12 +215,12 @@ class largo_taxonomy_list_widget extends WP_Widget {
 		<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" /></p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id('include'); ?>"><?php _e('Explicitly include these term IDs:', 'largo'); ?></label>
+			<label for="<?php echo $this->get_field_id('include'); ?>"><?php _e('Comma-separated list of term IDs that should be included:', 'largo'); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id('include'); ?>" name="<?php echo $this->get_field_name('include'); ?>" type="text" value="<?php echo $include; ?>" />
 		</p>
 
 		<p>
-			<label for"<?php echo $this->get_field_id('count'); ?>"><?php _e('Count:', 'largo'); ?></label>
+			<label for"<?php echo $this->get_field_id('count'); ?>"><?php _e('Count: (leave blank to receive all items)', 'largo'); ?></label>
 			<input id="<?php echo $this->get_field_id('count'); ?>" name="<?php echo $this->get_field_name('count')?>" type="number" value="<?php echo $count; ?>" />
 		</p>
 
