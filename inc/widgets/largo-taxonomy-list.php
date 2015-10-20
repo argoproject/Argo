@@ -32,6 +32,7 @@ class largo_taxonomy_list_widget extends WP_Widget {
 			'orderby' => 'name',
 			'taxonomy' => $instance['taxonomy'],
 			'number' => $instance['count'],
+			'include' => $instance['include'],
 		);
 
 		if ( $is_dropdown ) {
@@ -193,6 +194,7 @@ class largo_taxonomy_list_widget extends WP_Widget {
 		$instance['taxonomy'] = strtolower(strip_tags($new_instance['taxonomy']));
 		$instance['count'] = sanitize_text_field($new_instance['count']);
 		if ($instance['count'] < 1) { $instance['count'] = 1; }
+		$instance['include'] = sanitize_text_field($new_instance['include']);
 		$instance['dropdown'] = !empty($new_instance['dropdown']) ? 1 : 0;
 		$instance['thumbnails'] = !empty($new_instance['thumbnails']) ? 1 : 0;
 		return $instance;
@@ -204,6 +206,7 @@ class largo_taxonomy_list_widget extends WP_Widget {
 		$title = esc_attr( $instance['title'] );
 		$taxonomy = esc_attr( $instance['taxonomy'] );
 		$count = $instance['count'];
+		$include = $instance['include'];
 		$dropdown = isset( $instance['dropdown'] ) ? (bool) $instance['dropdown'] : false;
 		$thumbnails = isset( $instance['thumbnails'] ) ? (bool) $instance['thumbnails'] : false;
 
@@ -212,13 +215,18 @@ class largo_taxonomy_list_widget extends WP_Widget {
 		<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" /></p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id('taxonomy'); ?>"><?php _e('Taxonomy:', 'largo'); ?></label>
-			<input class="widefat" id="<?php echo $this->get_field_id('taxonomy'); ?>" name="<?php echo $this->get_field_name('taxonomy'); ?>" type="text" value="<?php echo $taxonomy; ?>" />
+			<label for="<?php echo $this->get_field_id('include'); ?>"><?php _e('Explicitly include these term IDs:', 'largo'); ?></label>
+			<input class="widefat" id="<?php echo $this->get_field_id('include'); ?>" name="<?php echo $this->get_field_name('include'); ?>" type="text" value="<?php echo $include; ?>" />
 		</p>
-		
+
 		<p>
 			<label for"<?php echo $this->get_field_id('count'); ?>"><?php _e('Count:', 'largo'); ?></label>
 			<input id="<?php echo $this->get_field_id('count'); ?>" name="<?php echo $this->get_field_name('count')?>" type="number" value="<?php echo $count; ?>" />
+		</p>
+
+		<p>
+			<label for="<?php echo $this->get_field_id('taxonomy'); ?>"><?php _e('Taxonomy:', 'largo'); ?></label>
+			<input class="widefat" id="<?php echo $this->get_field_id('taxonomy'); ?>" name="<?php echo $this->get_field_name('taxonomy'); ?>" type="text" value="<?php echo $taxonomy; ?>" />
 		</p>
 
 		<p><input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('dropdown'); ?>" name="<?php echo $this->get_field_name('dropdown'); ?>"<?php checked( $dropdown ); ?> />
