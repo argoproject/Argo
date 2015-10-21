@@ -27,9 +27,27 @@ class TaxonomiesTestFunctions extends WP_UnitTestCase {
 		$result = largo_is_series_enabled();
 		$this->assertTrue($result);
 	}
+
+	function test_largo_is_series_landing_enabled() {
+		// Series option has not been touched yet (a new install)
+		$result = largo_is_series_landing_enabled();
+		$this->assertFalse($result);
+
+		// Series option is to not enable series
+		of_set_option('custom_landing_enabled', false);
+		$result = largo_is_series_landing_enabled();
+		$this->assertFalse($result);
+
+		// Series option is to enable series
+		of_set_option('custom_landing_enabled', 1);
+		$result = largo_is_series_landing_enabled();
+		$this->assertTrue($result);
+	}
+
 	function test_largo_custom_taxonomies(){
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
+
 	function test_largo_post_in_series() {
 		// If series are disabled:
 		of_set_option('series_enabled', false);
@@ -40,16 +58,36 @@ class TaxonomiesTestFunctions extends WP_UnitTestCase {
 		of_set_option('series_enabled', 1);
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
+
 	function test_largo_custom_taxonomy_terms() {
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
+
 	function test_largo_term_to_label() {
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
+
 	function test_largo_get_series_posts() {
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-	function test_largo_categoy_archive_posts() {
+
+	function test_largo_series_landing_link() {
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
+
+	function test_largo_get_series_landing_page_by_series() {
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
+
+	function test_largo_category_archive_posts() {
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
+
+	function test_largo_featured_thumbnail_in_post_array() {
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
+
+	function test_largo_first_headline_in_post_array() {
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
@@ -60,6 +98,7 @@ class TaxonomiesTestFunctions extends WP_UnitTestCase {
 	function test_unregister_series_taxonomy() {
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
+
 	function test_unregister_post_types_taxonomy() {
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}

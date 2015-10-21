@@ -85,6 +85,8 @@ class largo_taxonomy_list_widget extends WP_Widget {
 	 * If $thumbnail is empty, then there is simply no image output.
 	 *
 	 * @param Object $item a wordpress taxonomy object
+	 * @param str $thumbnail the HTML for the thumbnail image
+	 * @param str $headline the HTML for the headline
 	 * @private
 	 * @since 0.5.3
 	 */
