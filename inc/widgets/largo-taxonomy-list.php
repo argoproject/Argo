@@ -250,7 +250,12 @@ class largo_taxonomy_list_widget extends WP_Widget {
 		$instance['title'] = sanitize_text_field($new_instance['title']);
 		$instance['taxonomy'] = strtolower(strip_tags($new_instance['taxonomy']));
 		$instance['count'] = sanitize_text_field($new_instance['count']);
-		if ($instance['count'] < 1) { $instance['count'] = 1; }
+		if ($instance['count'] == '' ) {
+			$instance['count'] = '';
+		} else if ($instance['count'] < 1) {
+			$instance['count'] = 1;
+		}
+
 		$instance['include'] = sanitize_text_field($new_instance['include']);
 		$instance['dropdown'] = !empty($new_instance['dropdown']) ? 1 : 0;
 		$instance['thumbnails'] = !empty($new_instance['thumbnails']) ? 1 : 0;
