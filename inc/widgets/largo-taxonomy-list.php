@@ -88,14 +88,15 @@ class largo_taxonomy_list_widget extends WP_Widget {
 	 * @private
 	 * @since 0.5.3
 	 */
-	private function render_li($item, $thumbnail) {
+	private function render_li($item, $thumbnail = '', $headline = '') {
 		echo sprintf(
-			'<li class="%s-%s"><a href="%s">%s %s</a></li>',
+			'<li class="%s-%s"><a href="%s">%s <h5>%s</h5></a> %s</li>',
 			$item->taxonomy,
 			$item->term_id,
 			get_term_link($item),
 			$thumbnail, // the image for the series
-			$item->cat_name
+			$item->cat_name,
+			$headline
 		);
 	}
 
@@ -104,10 +105,28 @@ class largo_taxonomy_list_widget extends WP_Widget {
 	 *
 	 * @private
 	 * @uses largo_taxonomy_list_widget::render_li
+	 * @uses largo_featured_thumbnail_in_post_array
+	 * @uses largo_first_headline_in_post_array
 	 */
 	private function render_series_list($tax_items, $instance) {
 		foreach ($tax_items as $item) {
 			$thumbnail = '';
+			$headline = '';
+			$posts = array();
+
+			if ($instance['thumbnails'] == '1' || $instance['use_headline'] == '1') {
+				$query_args = array(
+					'tax_query' => array(
+						array(
+							'taxonomy' => $instance['taxonomy'],
+							'field' => 'term_id',
+							'terms' => $item->term_id,
+						),
+					),
+				);
+				$posts = get_posts($query_args);
+			}
+
 			if ($instance['thumbnails'] == '1' && largo_is_series_landing_enabled() ) {
 				$landing_array = largo_get_series_landing_page_by_series($item);
 				
@@ -117,7 +136,15 @@ class largo_taxonomy_list_widget extends WP_Widget {
 				}
 			}
 
-			$this->render_li($item, $thumbnail);
+			if ($thumbnail == '') {
+				$thumbnail = largo_featured_thumbnail_in_post_array($posts);
+			}
+
+			if ($instance['use_headline'] == '1') {
+				$headline = largo_first_headline_in_post_array($posts);
+			}
+
+			$this->render_li($item, $thumbnail, $headline);
 		}
 	}
 
@@ -126,18 +153,28 @@ class largo_taxonomy_list_widget extends WP_Widget {
 	 *
 	 * @private
 	 * @uses largo_taxonomy_list_widget::render_li
+	 * @uses largo_featured_thumbnail_in_post_array
+	 * @uses largo_first_headline_in_post_array
 	 */
 	private function render_cat_list($tax_items, $instance) {
 		foreach ($tax_items as $item) {
+			$headline = '';
 			$thumbnail = '';
-			if ($instance['thumbnails'] == '1') {
+			$posts = array();
+
+			// Only get posts if we're going to use them.
+			if ($instance['thumbnails'] == '1' || $instance['use_headline'] == '1') {
 				$posts = get_posts(array(
 					'category_name' => $item->name,
 				));
-
+			}
+			if ($instance['thumbnails'] == '1') {
 				$thumbnail = largo_featured_thumbnail_in_post_array($posts);
 			}
-			$this->render_li($item, $thumbnail);
+			if ($instance['use_headline'] == '1') {
+				$headline = largo_first_headline_in_post_array($posts);
+			}
+			$this->render_li($item, $thumbnaili, $headline);
 		}
 	}
 
@@ -146,18 +183,28 @@ class largo_taxonomy_list_widget extends WP_Widget {
 	 *
 	 * @private
 	 * @uses largo_taxonomy_list_widget::render_li
+	 * @uses largo_featured_thumbnail_in_post_array
+	 * @uses largo_first_headline_in_post_array
 	 */
 	private function render_tag_list($tax_items, $instance) {
 		foreach ($tax_items as $item) {
+			$headline = '';
 			$thumbnail = '';
-			if ($instance['thumbnails'] == '1') {
+			$posts = array();
+
+			// Only get posts if we're going to use them.
+			if ($instance['thumbnails'] == '1' || $instance['use_headline'] == '1') {
 				$posts = get_posts(array(
 					'tag' => $item->slug,
 				));
-
+			}
+			if ($instance['thumbnails'] == '1') {
 				$thumbnail = largo_featured_thumbnail_in_post_array($posts);
 			}
-			$this->render_li($item, $thumbnail);
+			if ($instance['use_headline'] == '1') {
+				$headline = largo_first_headline_in_post_array($posts);
+			}
+			$this->render_li($item, $thumbnaili, $headline);
 		}
 	}
 
@@ -166,25 +213,35 @@ class largo_taxonomy_list_widget extends WP_Widget {
 	 *
 	 * @private
 	 * @uses largo_taxonomy_list_widget::render_li
+	 * @uses largo_featured_thumbnail_in_post_array
+	 * @uses largo_first_headline_in_post_array
 	 */
 	private function render_term_list($tax_items, $instance) {
 		foreach ($tax_items as $item) {
 			$thumbnail = '';
-			if ($instance['thumbnails'] == '1') {
+			$headline = '';
+			$posts = array();
+
+			// Only get posts if we're going to use them.
+			if ($instance['thumbnails'] == '1' || $instance['use_headline'] == '1') {
 				$query_args = array(
 					'tax_query' => array(
 						array(
-							'taxonomy' => $instance->taxonomy,
+							'taxonomy' => $instance['taxonomy'],
 							'field' => 'term_id',
-							'terms' => $item->term_taxonomy_id,
+							'terms' => $item->term_id,
 						),
 					),
 				);
-				
 				$posts = get_posts($query_args);
+			}
+			if ($instance['thumbnails'] == '1') {
 				$thumbnail = largo_featured_thumbnail_in_post_array($posts);
 			}
-			$this->render_li($item, $thumbnail);
+			if ($instance['use_headline'] == '1') {
+				$headline = largo_first_headline_in_post_array($posts);
+			}
+			$this->render_li($item, $thumbnaili, $headline);
 		}
 	}
 
@@ -197,6 +254,8 @@ class largo_taxonomy_list_widget extends WP_Widget {
 		$instance['include'] = sanitize_text_field($new_instance['include']);
 		$instance['dropdown'] = !empty($new_instance['dropdown']) ? 1 : 0;
 		$instance['thumbnails'] = !empty($new_instance['thumbnails']) ? 1 : 0;
+		$instance['use_headline'] = !empty($new_instance['use_headline']) ? 1 : 0;
+
 		return $instance;
 	}
 
@@ -209,6 +268,7 @@ class largo_taxonomy_list_widget extends WP_Widget {
 		$include = $instance['include'];
 		$dropdown = isset( $instance['dropdown'] ) ? (bool) $instance['dropdown'] : false;
 		$thumbnails = isset( $instance['thumbnails'] ) ? (bool) $instance['thumbnails'] : false;
+		$use_headline = isset( $instance['use_headline'] ) ? (bool) $instance['use_headline'] : false;
 
 		?>
 		<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e( 'Title:', 'largo' ); ?></label>
@@ -235,6 +295,10 @@ class largo_taxonomy_list_widget extends WP_Widget {
 
 		<p><input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('thumbnails'); ?>" name="<?php echo $this->get_field_name('thumbnails'); ?>"<?php checked( $thumbnails ); ?> <?php echo (largo_is_series_landing_enabled()) ? '' : 'disabled' ; ?> />
 			<label for="<?php echo $this->get_field_id('thumbnails'); ?>"><?php _e( 'Display thumbnails?', 'largo' ); ?> <?php echo (largo_is_series_landing_enabled()) ? '' : __('To use this function, enable Series and Series Landing Pages in Appearance > Theme Options > Advanced.', 'largo') ; ?> </label>
+		</p>
+
+		<p><input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('use_headline'); ?>" name="<?php echo $this->get_field_name('use_headline'); ?>"<?php checked( $use_headline ); ?> />
+			<label for="<?php echo $this->get_field_id('use_headline'); ?>"><?php _e( 'Display headline of most-recent post in taxonomy?', 'largo' ); ?></label>
 		</p>
 
 	<?php

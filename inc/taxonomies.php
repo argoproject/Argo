@@ -403,11 +403,11 @@ function largo_get_featured_posts_in_category($category_name, $number=5) {
 }
 
 /**
- * Return the first featured imagethumbnail found in a given WP_Query
+ * Return the first featured image thumbnail found in a given array of WP_Posts
  *
  * Useful if you wint to create a thumbnail for a given taxonomy
  *
- * @param array An array of posts to iterate over
+ * @param array An array of WP_Post objects to iterate over
  * @return str|false The HTML for the image, or false if no images were found.
  * @since 0.5.3
  * @uses largo_has_featured_media
@@ -420,6 +420,28 @@ function largo_featured_thumbnail_in_post_array($array) {
 	}
 
 	return $thumb;
+}
+
+/**
+ * Return the first headline link for an array of WP_Posts
+ *
+ * Useful if you want to link to an example post in a series.
+ *
+ * @param array An array of WP_Post objects to iterate over
+ * @return str The HTML for the link
+ * @since 0.5.3
+ */
+function largo_first_headline_in_post_array($array) {
+	$headline = '';
+	foreach ($array as $post) {
+		$headline = sprintf('<a href="%s">%s</a>',
+			get_permalink($post->ID),
+			get_the_title($post->ID)
+		);
+		if ($headline != '') return $headline;
+	}
+
+	return $headline;
 }
 
 /**
