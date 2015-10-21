@@ -7,33 +7,33 @@
 ul.staff-roster {
   float: left;
   clear: both;
-  margin: 12px 0 0;
+  margin: (@baseline - 4) 0 0;
   list-style-type: none;
   width: 100%;
   li {
     display: block;
     float: left;
     clear: both;
-    margin: 0 0 16px 0;
+    margin: 0 0 @baseline 0;
     width: 100%;
     img {
       float: left;
       width: 65px;
       height: auto;
-      margin: 0 14px 7px 0;
-      box-shadow: 0 1px 8px #bbbbbb;
-      padding: 4px;
+      margin: 0 1em 0.5em 0;
+      border:1px solid @grayLighter;
+      padding: @baseline / 5;
     }
   }
   .staff-name {
-    font-family: "museo-sans", helvetica, arial, sans-serif;
-    font-size: 18px;
+    font-family: @sansFontFamily;
+    font-size: 1.1em;
   }
   p {
-    margin: 5px 0 0;
-    font-size: 14px;
-    line-height: 17px;
-    color: #bbbbbb;
+    margin: 0.4em 0 0;
+    font-size: 0.9em;
+    line-height: 1.1em;
+    color: @gray;
   }
 }
 

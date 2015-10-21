@@ -8,8 +8,8 @@
 
 .widget.largo-related-posts {
   .widgettitle {
-    font-size: 21px;
-    margin-bottom: 12px;
+    font-size: 1.75em;
+    margin-bottom: @baseline - 4;
     text-align: center;
     color: @red;
   }
@@ -23,16 +23,16 @@
   }
   h4 {
     font-size: @baseFontSize * 1.5;
-    margin-bottom: 8px;
+    margin-bottom: @baseline / 2;
     @media only screen and (max-width: 640px) {
-      font-size: 18px;
-      line-height: 1.2;
-      margin-bottom: 4px;
+      font-size: @baseFontSize * 1.25;
+      line-height: 1.1;
+      margin-bottom: @baseline / 5;
     }
   }
   h5.byline {
-    font-size: 11px;
-    margin-bottom: 8px;
+    font-size: @baseFontSize * 0.9;
+    margin-bottom: @baseline / 2;
     @media only screen and (max-width: 640px) {
       display: none;
     }
@@ -40,11 +40,11 @@
   p {
     margin-bottom: 1em;
     @media only screen and (max-width: 640px) {
-      font-size: 14px;
+      font-size: @baseFontSize * 0.9;
     }
   }
   .wp-post-image {
     float: left;
-    margin: 5px 20px 0 0;
+    margin: 0.5em 1.2em 0 0;
   }
 }
