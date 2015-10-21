@@ -15,9 +15,6 @@
     list-style-type: none;
     margin-bottom: 0;
     font-size: @baseFontSize - 1;
-    &:last-child a {
-      border-bottom: 1px solid @grayLight;
-    }
   }
   h5 {
     margin: 0 0 0.25em 0;
@@ -57,7 +54,6 @@
       &.top-related {
         list-style: none;
         margin-left: 0;
-        border-bottom: 1px solid @grayLighter;
         margin-bottom: @baseline / 2;
         font-size: @baseFontSize;
         h3 {
@@ -88,7 +84,7 @@
     width: 100%;
   }
   #related-post-nav a {
-    padding: @baseline - 3;
+    padding: @baseline / 2;
   }
   #related-posts .related-items ul li.top-related {
     margin-bottom: @baseline / 2;
