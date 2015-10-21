@@ -275,8 +275,9 @@ class largo_taxonomy_list_widget extends WP_Widget {
 		<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" /></p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id('include'); ?>"><?php _e('Comma-separated list of term IDs that should be included:', 'largo'); ?></label>
+			<label for="<?php echo $this->get_field_id('include'); ?>"><?php _e('Only display the terms in this comma-separated list of term IDs:', 'largo'); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id('include'); ?>" name="<?php echo $this->get_field_name('include'); ?>" type="text" value="<?php echo $include; ?>" />
+			<small>Find term IDs by examining the URL of the taxonomy when you click the "edit" button in the list.</small>
 		</p>
 
 		<p>
