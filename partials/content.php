@@ -13,6 +13,7 @@ $featured = has_term( 'homepage-featured', 'prominence' );
 <article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?>>
 
 	<?php
+		// Special treatment for posts that are in the Homepage Featured prominence taxonomy term
 		if ( $featured && ( has_post_thumbnail() || $values['youtube_url'] ) ) {
 	?>
 		<header>
@@ -31,7 +32,7 @@ $featured = has_term( 'homepage-featured', 'prominence' );
 			</div>
 		</header>
 	<?php
-		}
+		} // end Homepage Featured thumbnail block
 		$entry_classes = 'entry-content';
 		if ( $featured ) $entry_classes .= ' span10 with-hero';
 		echo '<div class="' . $entry_classes . '">';
@@ -41,7 +42,7 @@ $featured = has_term( 'homepage-featured', 'prominence' );
 		}
 
 		if ( !$featured ) {
-			echo '<a href="' . get_permalink() . '">' . get_the_post_thumbnail() . '</a>';
+			echo '<div class="has-thumbnail '.$hero_class.'"><a href="' . get_permalink() . '">' . get_the_post_thumbnail() . '</a></div>';
 		}
 	?>
 
