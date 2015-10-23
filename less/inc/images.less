@@ -5,16 +5,11 @@
   opacity: 0.5;
   position: relative;
   background: none;
+  width: 100%;
 }
 .is-video {
   background-color: black;
-  // this should be a triangle
-  // path goes from top left to bottom left to right middle to top left and fills with white
-  //    <svg xmlns='http://www.w3.org/2000/svg' width='5' height='4'><path id='play-triangle' d='M 0 0 L 0 4 L 5 2 L 0 0' fill='white' stroke='white' stroke-width='0'/></svg>
-  //    base64 encode the <svg> ... </svg> of that with Javascript's btoa('<svg />');
-  //    Then put it after: data:image/svg+xml;base64,
-  //    It must be base64 encoded for IE9
-  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1JyBoZWlnaHQ9JzQgICAgJz48cGF0aCBpZD0ncGxheS10cmlhbmdsZScgZD0nTSAwIDAgTCAwIDQgTCA1IDIgTCAwIDAnIGZpbGw9J3doaXRlJyBzdHJva2U9J3doaXRlJyBzdHJva2Utd2lkdGg9JzAnLz48L3N2Zz4=");
+  background-image: url("../img/is-video-play-icon.svg");
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-size: 20%;
