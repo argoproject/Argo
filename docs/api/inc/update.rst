@@ -229,6 +229,8 @@ inc/update.php
    Convenience function for retrieving the theme options for the version of the theme that immediately
    preceeded the currently-deployed version.
 
+   :since: 0.5.3
+
 .. php:function:: largo_block_theme_options_for_update()
 
    If Largo needs to be updated, prevent the user from access the Theme Options edit page.
