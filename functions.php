@@ -60,7 +60,6 @@ if ( ! defined( 'INN_MEMBER' ) )
 if ( ! defined( 'LARGO_DEBUG' ) )
 	define( 'LARGO_DEBUG', FALSE );
 	
-	define( 'LARGO_DEBUG', TRUE);
 /**
  * Image size constants, almost 100% that you won't need to change these
  */
