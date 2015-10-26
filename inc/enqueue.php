@@ -90,25 +90,7 @@ add_action( 'wp_enqueue_scripts', 'largo_header_js' );
  * @since 1.0
  */
 if ( ! function_exists( 'largo_footer_js' ) ) {
-	function largo_footer_js() { ?>
-
-
-		<?php
-		// Are the widgets that contain facebook social buttons loaded (or are we on single/author?)
-		if( largo_facebook_widget::is_rendered() || largo_follow_widget::is_rendered() || is_single() || is_author() ) : ?>
-
-		<!--Facebook-->
-		<div id="fb-root"></div>
-		<script>(function(d, s, id) {
-		  var js, fjs = d.getElementsByTagName(s)[0];
-		  if (d.getElementById(id)) return;
-		  js = d.createElement(s); js.id = id;
-		  js.src = "//connect.facebook.net/<?php echo get_locale() ?>/all.js#xfbml=1";
-		  fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));</script>
-
-		<?php endif;
-
+	function largo_footer_js() {
 		/*
 		 * Load Facebook Tracking Pixel if defined in Theme Options
 		 *
@@ -118,41 +100,30 @@ if ( ! function_exists( 'largo_footer_js' ) ) {
 		 * @link https://developers.facebook.com/docs/ads-for-websites/drive-conversions
 		 * @since 0.5.4
 		 */
-		 $fb_pixel_id = of_get_option( 'fb_tracking_pixel' );
-		 if( !empty($fb_pixel_id) ) : ?>
-
-		 <script>(function() {
-		 var _fbq = window._fbq || (window._fbq = []);
-		 if (!_fbq.loaded) {
-		 	var fbds = document.createElement('script');
-		 	fbds.async = true;
-		 	fbds.src = '//connect.facebook.net/<?php echo get_locale() ?>/fbds.js';
-		 	var s = document.getElementsByTagName('script')[0];
-		 	s.parentNode.insertBefore(fbds, s);
-		 	_fbq.loaded = true;
-		 }
-		 _fbq.push(['addPixelId', '<?php echo $fb_pixel_id; ?>']);
-
-		 })();
-		 window._fbq = window._fbq || [];
-		 window._fbq.push(['track', 'PixelInitialized', {}]);
-		 </script>
-	 <!-- Fallback for environments not friendly to script -->
-		 <noscript>
-		 	<img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?id=<?php echo $fb_pixel_id; ?>&amp;ev=PixelInitialized" />
-		 </noscript>
-		 <?php endif;
-		 /* END tracking pixel code */
-
-		// Are the widgets that contain twitter social buttons loaded (or are we on single/author?)
-		if( largo_twitter_widget::is_rendered() || largo_follow_widget::is_rendered() || is_single() || is_author() ) : ?>
-
-		<!--Twitter-->
-		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-
-		<?php endif; ?>
-
-	<?php
+		$fb_pixel_id = of_get_option( 'fb_tracking_pixel' );
+		if( !empty($fb_pixel_id) ) : ?>
+			<script>
+				(function() {
+					var _fbq = window._fbq || (window._fbq = []);
+					if (!_fbq.loaded) {
+						var fbds = document.createElement('script');
+						fbds.async = true;
+						fbds.src = '//connect.facebook.net/<?php echo get_locale() ?>/fbds.js';
+						var s = document.getElementsByTagName('script')[0];
+						s.parentNode.insertBefore(fbds, s);
+						_fbq.loaded = true;
+					}
+					_fbq.push(['addPixelId', '<?php echo $fb_pixel_id; ?>']);
+				})();
+				window._fbq = window._fbq || [];
+				window._fbq.push(['track', 'PixelInitialized', {}]);
+			</script>
+			<!-- Fallback for environments not friendly to script -->
+			<noscript>
+				<img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?id=<?php echo $fb_pixel_id; ?>&amp;ev=PixelInitialized" />
+			</noscript>
+		<?php endif;
+		/* END tracking pixel code */
 	}
 }
 add_action( 'wp_footer', 'largo_footer_js' );
