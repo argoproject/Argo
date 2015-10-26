@@ -159,7 +159,7 @@ class Largo_Custom_Less_Variables {
 	 * Register the Less files to compile into CSS files
 	 *
 	 * @param array $files - the LESS files to compile into CSS
-	 * @global bool LARGO_DEBUG - if false, minified CSS assets will be used by Largo, and these should be replaced with the custom-comiled assets.
+	 * @global bool LARGO_DEBUG - if false, minified CSS assets will be used by Largo, and these should be replaced with the custom-compiled assets.
 	 */
 	static function register_files( $files ) {
 		self::$less_files = (array) $files;
@@ -253,6 +253,18 @@ class Largo_Custom_Less_Variables {
 
 			$css = $compiler->compile( $less );
 			$css = self::fix_urls( $css );
+
+			/*
+			 * Make all URLs protocol-relative by replacing https:// and http:// with //
+			 */
+			$css = str_replace(
+				array(
+					'http:',
+					'https:'
+				),
+				'',
+				$css
+			);
 			return $css;
 		} catch ( Exception $e ) {
 			return $less;

@@ -99,6 +99,8 @@ Layout Options
 
 **Single Article Template** - Starting with version 0.3, Largo introduced a new single-post template that more prominently highlights article content, which is the default. For backward compatibility, the pre-0.3 version is also available, which by default includes a sidebar. The new template optionally includes a sidebar of your choice.
 
+**Category Options** - Starting with version 0.5.3, Largo allows you to disable the standard featured posts area on top of category archive pages. The five posts that are normally displayed on top of the page become part of the main column of posts.
+
 **Sidebar Options** - These affect the presentation of the sidebar to the reader.
 
 - Add a third sidebar used only on archive pages (category, tag, author and series pages), configurable in Appearance > Widgets
@@ -132,6 +134,8 @@ For more information on creating a series landing page, see :doc:`landingpages`.
 **Disclaimer** - If checked, you can enter a default disclaimer that will be displayed on all posts.
 
 **Search Options** - Google Custom Search generally returns better search results than WordPress' included search engine. If you would like to enable Google Custom Search, go to https://www.google.com/cse/create/new to set it up, then paste your search engine ID in the settings box and enable the checkbox.
+
+Be sure and use the "Results only" layout listed in the `Google Custom Search dashboard under "Look and feel." <https://developers.google.com/custom-search/docs/ui#setting-the-search-element-layout>`_
 
 **Site Verification**:
 

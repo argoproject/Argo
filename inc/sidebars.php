@@ -20,21 +20,6 @@ function largo_register_sidebars() {
 			'desc' 	=> __( 'The sidebar for posts and pages', 'largo' ),
 			'id' 	=> 'sidebar-single'
 		),
-		array (
-			'name' 	=> __( 'Footer 1', 'largo' ),
-			'desc' 	=> __( 'The first footer widget area.', 'largo' ),
-			'id' 	=> 'footer-1'
-		),
-		array (
-			'name' 	=> __( 'Footer 2', 'largo' ),
-			'desc' 	=> __( 'The second footer widget area.', 'largo' ),
-			'id' 	=> 'footer-2'
-		),
-		array(
-			'name' 	=> __( 'Footer 3', 'largo' ),
-			'desc' 	=> __( 'The third footer widget area.', 'largo' ),
-			'id' 	=> 'footer-3'
-		),
 		array(
 			'name' 	=> __( 'Article Bottom', 'largo' ),
 			'desc' 	=> __( 'Footer widget area for posts', 'largo' ),
@@ -44,24 +29,28 @@ function largo_register_sidebars() {
 			'name' 	=> __( 'Homepage Alert', 'largo' ),
 			'desc' 	=> __( 'Region atop homepage reserved for breaking news and announcements', 'largo' ),
 			'id' 	=> 'homepage-alert'
-		),	);
+		),
+		array (
+			'name' 	=> __( 'Footer 1', 'largo' ),
+			'desc' 	=> __( 'The first footer widget area.', 'largo' ),
+			'id' 	=> 'footer-1'
+		)
+	);
 
-	// optional widget areas
-	if ( of_get_option( 'use_topic_sidebar' ) ) {
+	if ( of_get_option('footer_layout') !== '1col') {
+		$sidebars[] = array (
+			'name' 	=> __( 'Footer 2', 'largo' ),
+			'desc' 	=> __( 'The second footer widget area.', 'largo' ),
+			'id' 	=> 'footer-2'
+		);
 		$sidebars[] = array(
-			'name' 	=> __( 'Archive/Topic Sidebar', 'largo' ),
-			'desc' 	=> __( 'The sidebar for category, tag and other archive pages', 'largo' ),
-			'id' 	=> 'topic-sidebar'
+			'name' 	=> __( 'Footer 3', 'largo' ),
+			'desc' 	=> __( 'The third footer widget area.', 'largo' ),
+			'id' 	=> 'footer-3'
 		);
 	}
-	if ( of_get_option( 'use_before_footer_sidebar' ) ) {
-		$sidebars[] = array(
-			'name' 	=> __( 'Before Footer', 'largo' ),
-			'desc' 	=> __( 'Full-width area immediately above footer', 'largo' ),
-			'id' 	=> 'before-footer'
-		);
-	}
-	if ( of_get_option('footer_layout') == '4col' ) {
+
+	if ( of_get_option('footer_layout') == '4col' || of_get_option('footer_layout') == '4col-asymm' ) {
 		$sidebars[] = array(
 			'name' 	=> __( 'Footer 4', 'largo' ),
 			'desc' 	=> __( 'The fourth footer widget area.', 'largo' ),
@@ -69,13 +58,22 @@ function largo_register_sidebars() {
 		);
 	}
 
-	if ( of_get_option('homepage_layout') == '3col' ) {
+	if ( of_get_option( 'use_topic_sidebar' ) ) {
 		$sidebars[] = array(
-			'name' 	=> __( 'Homepage Left Rail', 'largo' ),
-			'desc' 	=> __( 'An optional widget area that, when enabled, appears to the left of the main content area on the homepage.', 'largo' ),
-			'id' 	=> 'homepage-left-rail'
+			'name' 	=> __( 'Archive/Topic Sidebar', 'largo' ),
+			'desc' 	=> __( 'The sidebar for category, tag and other archive pages', 'largo' ),
+			'id' 	=> 'topic-sidebar'
 		);
 	}
+
+	if ( of_get_option( 'use_before_footer_sidebar' ) ) {
+		$sidebars[] = array(
+			'name' 	=> __( 'Before Footer', 'largo' ),
+			'desc' 	=> __( 'Full-width area immediately above footer', 'largo' ),
+			'id' 	=> 'before-footer'
+		);
+	}
+
 	if ( of_get_option('homepage_bottom') == 'widgets' ) {
 		$sidebars[] = array(
 			'name' 	=> __( 'Homepage Bottom', 'largo' ),
@@ -110,9 +108,9 @@ function largo_register_sidebars() {
 	// register the active widget areas
 	foreach ( $sidebars as $sidebar ) {
 		register_sidebar( array(
-			'name' 			=> $sidebar['name'],
+			'name' 		=> $sidebar['name'],
 			'description' 	=> $sidebar['desc'],
-			'id' 			=> $sidebar['id'],
+			'id' 		=> $sidebar['id'],
 			'before_widget' => '<aside id="%1$s" class="%2$s clearfix">',
 			'after_widget' 	=> "</aside>",
 			'before_title' 	=> '<h3 class="widgettitle">',
@@ -122,14 +120,14 @@ function largo_register_sidebars() {
 }
 add_action( 'widgets_init', 'largo_register_sidebars' );
 
-/**
- * Builds a dropdown menu of the custom sidebars
- * Used in the meta box on post/page edit screen and landing page edit screen
- * $skip_default was deprecated in Largo 0.4
- *
- * @since 0.3
- */
 if( !function_exists( 'largo_custom_sidebars_dropdown' ) ) {
+	/**
+	 * Builds a dropdown menu of the custom sidebars
+	 * Used in the meta box on post/page edit screen
+	 * $skip_default was deprecated in Largo 0.4
+	 *
+	 * @since 0.3
+	 */
 	function largo_custom_sidebars_dropdown( $selected='', $skip_default=false, $post_id=NULL ) {
 		global $wp_registered_sidebars, $post;
 
@@ -141,7 +139,7 @@ if( !function_exists( 'largo_custom_sidebars_dropdown' ) ) {
 		$val = $default;
 
 		// for new posts
-		if ($admin_page->action == 'add')
+		if ( $admin_page->action == 'add' )
 			$val = 'none';
 
 		// for posts and taxonomies with values set
@@ -172,7 +170,7 @@ if( !function_exists( 'largo_custom_sidebars_dropdown' ) ) {
 			}
 
 			$output .= '<option value="none" ';
-			$output .= selected('none', $val, false);
+			$output .= selected( 'none', $val, false );
 			$output .= '>' . $default_label . '</option>';
 		}
 
@@ -183,6 +181,64 @@ if( !function_exists( 'largo_custom_sidebars_dropdown' ) ) {
 				$default_label = sprintf( __( 'Default (%s)', 'largo' ), $wp_registered_sidebars['sidebar-main']['name'] );
 			}
 			$output .= '<option value="none" ';
+			$output .= selected( 'none', $val, false );
+			$output .= '>' . $default_label . '</option>';
+		}
+
+		// Filter list of sidebars to exclude those we don't want users to choose
+		$excluded = largo_get_excluded_sidebars();
+
+		// Fill the select element with all registered sidebars that are custom
+		foreach ( $wp_registered_sidebars as $sidebar_id => $sidebar ) {
+			if ( in_array( $sidebar_id, $excluded ) || in_array( $sidebar['name'], $excluded ) )
+				continue;
+
+			$output .= '<option value="' . $sidebar_id . '" ' . selected( $sidebar_id, $val, false ) . '>' . $sidebar['name'] . '</option>';
+		}
+
+		echo $output;
+	}
+}
+
+if( !function_exists( 'largo_landing_page_custom_sidebars_dropdown' ) ) {
+	/**
+	 * Builds a dropdown menu of the custom sidebars for use on custom landing pages
+	 * Used in the meta box on post/page edit screen
+	 * $skip_default was deprecated in Largo 0.4
+	 *
+	 * @param $left_or_right string one of 'left' or 'right' to signal which landing page region to build a dropdown for
+	 * @param $selected string the id of the sidebar that should be marked as selected when the dropdown is generated
+	 * @param $post_id integer optionally specify which custom landing page post ID you want to generate a dropdown for
+	 * @since 0.4
+	 */
+	function largo_landing_page_custom_sidebars_dropdown( $left_or_right, $selected, $post_id=null ) {
+		global $wp_registered_sidebars, $post;
+
+		$the_id = ( $post_id )? $post_id : $post->ID;
+		$custom = ( $selected )? $selected : get_post_meta( $the_id, 'custom_sidebar', true );
+
+		// for the ultimate in backwards compatibility, if nothing's set or using deprecated 'default'
+		$default = ( of_get_option( 'single_template' ) == 'classic' ) ? 'sidebar-single' : 'none';
+		$val = $default;
+
+		// for new posts
+		if ( $admin_page->action == 'add' )
+			$val = 'none';
+
+		// for posts and taxonomies with values set
+		if ( $custom && $custom !== 'default' )
+			$val = $custom;
+
+		$admin_page = get_current_screen();
+		$output = '';
+		if ( isset( $admin_page->post_type ) and $admin_page->post_type == 'cftl-tax-landing' ) {
+			$default = of_get_option(
+				'landing_' . $left_or_right . '_region_default',
+				( $left_or_right == 'right') ? 'sidebar-main' : 'sidebar-single' );
+
+			$default_label = sprintf( __( 'Default (%s)', 'largo' ), $wp_registered_sidebars[$default]['name']);
+
+			$output .= '<option value="' . $default . '" ';
 			$output .= selected('none', $val, false);
 			$output .= '>' . $default_label . '</option>';
 		}
@@ -192,6 +248,9 @@ if( !function_exists( 'largo_custom_sidebars_dropdown' ) ) {
 
 		// Fill the select element with all registered sidebars that are custom
 		foreach ( $wp_registered_sidebars as $sidebar_id => $sidebar ) {
+			if ( $sidebar_id == $default )
+				continue;
+
 			if ( in_array( $sidebar_id, $excluded ) || in_array( $sidebar['name'], $excluded ) )
 				continue;
 
@@ -272,7 +331,7 @@ function largo_sidebar_span_class() {
 
 		$custom_template = get_post_meta( $post->ID, $meta_field, true );
 
-		if (!empty($custom_template)) {
+		if ( !empty( $custom_template ) ) {
 			if ( $custom_template == 'single-one-column.php' )
 				return 'span2';
 			else if ( $custom_template !== 'single-one-column.php' )

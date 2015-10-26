@@ -3,7 +3,7 @@ Welcome to the Largo Project
 
 `Largo <http://largoproject.org>`_ is a responsive WordPress starter/parent theme built specifically with the needs of news publishers in mind and is built and maintained by the news apps and technology team at the `Institute for Nonprofit News (INN) <http://nerds.inn.org>`_.
 
-Questions? Comments? `Get in touch with us <mailto:largo@inn.org>`_.
+Questions? Comments? Send us an email at largo@inn.org
 
 Project Repository: https://github.com/INN/Largo/
 
@@ -49,20 +49,14 @@ General Documentation
     users/contactforms
     users/ads
 
-
 .. _dev-docs:
 
 For Developers
 --------------
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 3
 
-    developers/fordevelopers
-    developers/imagesizes
-
-
-
-
-
-
+    developers/index
+    developers/constants
+    feedback

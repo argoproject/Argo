@@ -221,3 +221,51 @@ function largo_add_link_to_widget_title( $title, $instance = null ) {
   return $title;
 }
 add_filter( 'widget_title', 'largo_add_link_to_widget_title', 99, 2 );
+
+/**
+ * Check to see if a widget area is registered and has widgets assigned
+ *
+ * @since 0.5.2
+ */
+function largo_is_sidebar_registered_and_active($sidebar) {
+	$sidebars_widgets = get_option('sidebars_widgets', array());
+
+	if (in_array($sidebar, array_keys($sidebars_widgets))) {
+		if (count($sidebars_widgets[$sidebar]) > 0)
+			return true;
+	}
+
+	return false;
+}
+
+/**
+ * When activating the theme, make sure the article bottom widget area has widgets assigned
+ *
+ * @since 0.5.3
+ */
+function largo_populate_article_bottom_widget_area($theme) {
+	// If the old article bottom settings are present, we'll skip populating the article bottom
+	// area as those are handled during the migration/update.
+	$old_largo_article_bottom_settings = array(
+		'show_tags', 'show_author_box', 'show_related_content', 'show_next_prev_nav_single');
+
+	$old_largo_article_bottom_settings_check = false;
+	foreach ($old_largo_article_bottom_settings as $option_name) {
+		$option = of_get_option($option_name);
+		if (!empty($option)) {
+			$old_largo_article_bottom_settings_check = true;
+			break;
+		}
+	}
+
+	if ($old_largo_article_bottom_settings_check)
+		return;
+
+	// Otherwise, if there's no largo_version or the 'article-bottom' area is empty,
+	// we're on a clean install and should set the default widgets
+	if (!of_get_option('largo_version') || !is_active_sidebar('article-bottom')) {
+		largo_instantiate_widget('largo-author', array(), 'article-bottom');
+		largo_instantiate_widget('largo-related-posts', array(), 'article-bottom');
+	}
+}
+add_action('after_switch_theme', 'largo_populate_article_bottom_widget_area');

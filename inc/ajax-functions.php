@@ -16,49 +16,50 @@ if (!function_exists('largo_load_more_posts_enqueue_script')) {
 		wp_enqueue_script(
 			'load-more-posts',
 			get_template_directory_uri() . '/js/load-more-posts.js',
-			array('jquery'), null, true
+			array('jquery'), null, false
 		);
 	}
 	add_action('wp_enqueue_scripts', 'largo_load_more_posts_enqueue_script');
 }
 
 /*
- * Fills JavaScript variable LMP with posts rendered on page
+ * Print an HTML script tag for a post navigation element and corresponding query
  *
- * Canonically, this should be hooked on wp_enqueue_scripts, but it needs access to $shown_ids
+ * @param $nav_id string the unique id of the navigation element used as the trigger to load more posts
+ * @param $the_query object the WP_Query object upon which calls to load more posts will be based
  */
 if (!function_exists('largo_load_more_posts_data')) {
-	function largo_load_more_posts_data() {
-		global $wp_query, $shown_ids, $post, $opt;
+	function largo_load_more_posts_data($nav_id, $the_query) {
+		global $shown_ids, $post, $opt;
 
-		$query = $wp_query->query;
+		$query = $the_query->query;
 
 		// No sticky posts or featured posts
 		$query = array_merge(array(
 			'post__not_in' => $shown_ids,
 		), $query );
 
-		$LMP = array(
+		$config = array(
+			'nav_id' => $nav_id,
 			'ajax_url' => admin_url('admin-ajax.php'),
-			'paged' => (!empty($wp_query->query_vars['paged']))? $wp_query->query_vars['paged'] : 0,
+			'paged' => (!empty($the_query->query_vars['paged']))? $the_query->query_vars['paged'] : 1,
 			'query' => $query,
-			'is_home' => $wp_query->is_home(), 
-			'is_series_landing' => $post->post_type == 'cftl-tax-landing' ? true : false
+			'is_home' => $the_query->is_home(),
+			'is_series_landing' => $post->post_type == 'cftl-tax-landing' ? true : false,
+			'no_more_posts' => apply_filters('largo_no_more_posts_text', "You've reached the end!", $nav_id, $the_query)
 		);
 
 		if($post->post_type == 'cftl-tax-landing') {
-			$LMP['opt'] = $opt;
+			$config['opt'] = $opt;
 		}
 
-		$LMP = apply_filters('largo_load_more_posts_json', $LMP);
-
+		$config = apply_filters('largo_load_more_posts_json', $config);
 		?>
 		<script type="text/javascript">
-			var LMP = <?php echo json_encode($LMP); ?>;
+			new LoadMorePosts(<?php echo json_encode($config); ?>);
 		</script>
 	<?php
 	}
-	add_action('wp_footer', 'largo_load_more_posts_data');
 }
 
 /*
@@ -66,11 +67,11 @@ if (!function_exists('largo_load_more_posts_data')) {
  */
 if (!function_exists('largo_load_more_posts')) {
 	function largo_load_more_posts() {
-		
+
 		global $opt;
 
-		$paged = $_POST['paged'];
-		$context = (isset($_POST['query']))? $_POST['query'] : array();
+		$paged = (isset($_POST['paged'])) ? $_POST['paged'] : 1;
+		$context = (isset($_POST['query']))? json_decode(stripslashes($_POST['query']), true) : array();
 
 		// Making sure that this isn't home
 		if (isset($_POST['is_home']))
@@ -84,21 +85,23 @@ if (!function_exists('largo_load_more_posts')) {
 			$is_home = true;
 
 		$args = array_merge(array(
-			'paged'               => $paged,
-			'post_status'         => 'publish',
-			'posts_per_page'      => intval(get_option('posts_per_page')),
+			'paged' => (int) $paged,
+			'post_status' => 'publish',
+			'posts_per_page' => intval(get_option('posts_per_page')),
 			'ignore_sticky_posts' => true,
 		), $context);
 
 		// num_posts_home is only relevant on the homepage
 		if ( of_get_option('num_posts_home') && $is_home )
 			$args['posts_per_page'] = of_get_option('num_posts_home');
-		// The first 'page' of the homepage is in $shown_ids, so this number should actually be minus one.
+
 		if ( $is_home ) {
 			$args['paged'] = ( $args['paged'] - 1 );
 			if ( of_get_option('cats_home') )
 				$args['cat'] = of_get_option('cats_home');
 		}
+
+		$args = apply_filters('largo_lmp_args', $args);
 		$query = new WP_Query($args);
 
 		if ( $query->have_posts() ) {

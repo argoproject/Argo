@@ -1,4 +1,17 @@
 <?php
+/*
+ * Global Navigation Menu
+ *
+ * Shown at the very top of a Largo site on a (default) thin dark bar.
+ * Not shown when sticky navigation is displayed, so typically only the home page.
+ * This menu is appended to the offcanvas nav menu (see partial/nav-sticky.php).
+ *
+ * @link http://largo.readthedocs.org/users/menus.html#available-menu-areas
+ *
+ * @package Largo
+ */
+
+ /* check is homepage and sticky nav is NOT enabled */
 if ( is_front_page() || is_home() || !of_get_option( 'show_sticky_nav' ) ): ?>
 	<div class="global-nav-bg">
 		<div class="global-nav">
@@ -7,6 +20,7 @@ if ( is_front_page() || is_home() || !of_get_option( 'show_sticky_nav' ) ): ?>
 					<a href="#main" title="<?php esc_attr_e( 'Skip to content', 'largo' ); ?>"><?php _e( 'Skip to content', 'largo' ); ?></a>
 				</span>
 				<?php
+					/* Global Navigation Menu Query */
 					$top_args = array(
 						'theme_location' => 'global-nav',
 						'depth'		 => 1,
@@ -15,47 +29,26 @@ if ( is_front_page() || is_home() || !of_get_option( 'show_sticky_nav' ) ): ?>
 					largo_nav_menu($top_args);
 				?>
 				<div class="nav-right">
-					<?php if ( of_get_option( 'show_header_social') ) { ?>
+					<?php
+					/* Check to display Social Media Icons */
+					if ( of_get_option( 'show_header_social') ) { ?>
 						<ul id="header-social" class="social-icons visible-desktop">
 							<?php largo_social_links(); ?>
 						</ul>
 					<?php }
-
+					/* Check to display Donate Button */
 					if ( of_get_option( 'show_donate_button') )
 						largo_donate_button();
 					?>
-
+					<!-- BEGIN Header Search -->
 					<div id="header-search">
-
-						<?php if ( of_get_option('use_gcs') && of_get_option('gcs_id') ) : ?>
-	
-							<div class="gcs_container">
-								<script>
-								  (function() {
-								    var cx = '<?php echo of_get_option('gcs_id'); ?>';
-								    var gcse = document.createElement('script');
-								    gcse.type = 'text/javascript';
-								    gcse.async = true;
-								    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
-								        '//www.google.com/cse/cse.js?cx=' + cx;
-								    var s = document.getElementsByTagName('script')[0];
-								    s.parentNode.insertBefore(gcse, s);
-								  })();
-								</script>
-								<gcse:search></gcse:search>
-							</div>
-	
-						<?php else: ?>
-	
 						<form class="form-search" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 							<div class="input-append">
 								<input type="text" placeholder="<?php _e('Search', 'largo'); ?>" class="input-medium appendedInputButton search-query" value="" name="s" /><button type="submit" class="search-submit btn"><?php _e('GO', 'largo'); ?></button>
 							</div>
 						</form>
-	
-						<?php endif; ?>
 					</div>
-
+				<!-- END Header Search -->
 				</div>
 			</nav>
 		</div> <!-- /.global-nav -->

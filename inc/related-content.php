@@ -460,6 +460,7 @@ class Largo_Related {
 	 * Fetches posts contained within the series(es) this post resides in. Feeds them into $this->post_ids array
 	 *
 	 * @access protected
+	 * @see largo_series_custom_order
 	 */
 	protected function get_series_posts() {
 
@@ -488,7 +489,9 @@ class Largo_Related {
 				// see if there's a post that has the sort order info for this series
 				$cftl_query = new WP_Query( array(
 					'post_type' => 'cftl-tax-landing',
-					'series' => $term->slug,
+					'tax_query' => array (
+						'series' => $term->slug,
+					),
 					'posts_per_page' => 1
 				));
 
@@ -500,12 +503,13 @@ class Largo_Related {
 							case 'ASC':
 								$args['order'] = 'ASC';
 								break;
+							// 'series_custom' and 'featured' are custom ones, caught with largo_series_custom_order in inc/wp-taxonomy-landing/functions/cftl-series-order.php
 							case 'custom':
 								$args['orderby'] = 'series_custom';
 								break;
 							case 'featured, DESC':
 							case 'featured, ASC':
-								$args['orderby'] = $opt['post_order'];
+								$args['orderby'] = $has_order;
 								break;
 						}
 					}
@@ -514,6 +518,22 @@ class Largo_Related {
 				// build the query with the sort defined
 				$series_query = new WP_Query( $args );
 
+				// If not enough posts were added from after this post, look before this post
+				if ( count($series_query->posts) < $this->number ) {
+
+					// Store the returned posts from the after query
+					$this->add_from_query( $series_query );
+
+					// Change it to look backwards
+					$args['date_query'] = array(
+						'before' => $this->post->post_date,
+					);
+
+					// rerun the query
+					$series_query = new WP_Query( $args );
+				}
+
+				// Store the posts
 				if ( $series_query->have_posts() ) {
 					$this->add_from_query( $series_query );
 					if ( $this->have_enough_posts() ) {
@@ -556,6 +576,22 @@ class Largo_Related {
 				// run the query
 				$term_query = new WP_Query( $args );
 
+				// If not enough posts were added from after this post, look before this post
+				if ( count($term_query->posts) < $this->number ) {
+
+					// Store the returned posts from the after query
+					$this->add_from_query( $term_query );
+
+					// Change it to look backwards
+					$args['date_query'] = array(
+						'before' => $this->post->post_date,
+					);
+
+					// rerun the query
+					$term_query = new WP_Query( $args );
+				}
+
+				// Store the returned posts
 				if ( $term_query->have_posts() ) {
 					$this->add_from_query( $term_query );
 					if ( $this->have_enough_posts() ) {

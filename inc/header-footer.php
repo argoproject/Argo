@@ -1,6 +1,18 @@
 <?php
 
 /**
+ * Is sticky nav enabled?
+ * @since 0.5.2
+ */
+ 
+function largo_sticky_nav_active() {
+  if ( SHOW_STICKY_NAV == true && of_get_option( ' show_sticky_nav' )) {
+    return true;
+  }
+  return false;
+}
+
+/**
  * Output the site header
  *
  * @since 1.0
@@ -12,20 +24,22 @@ if ( ! function_exists( 'largo_header' ) ) {
 		// if we're using the text only header, display the output, otherwise this is just replacement text for the banner image
 		$header_class = of_get_option( 'no_header_image' ) ? 'branding' : 'visuallyhidden';
 		$divider = $header_class == 'branding' ? '' : ' - ';
-
+		
 		// print the text-only version of the site title
-		printf('<%1$s class="%2$s"><a itemprop="url" href="%3$s"><span itemprop="name">%4$s</span>%5$s<span class="tagline" itemprop="description">%6$s</span></a></%1$s>',
-			$header_tag,
-			$header_class,
-			esc_url( home_url( '/' ) ),
-			esc_attr( get_bloginfo('name') ),
-			$divider,
-			esc_attr( get_bloginfo('description') )
-		);
+		if( is_home() || is_front_page() && !largo_sticky_nav_active() ) {
+		  printf('<%1$s class="%2$s"><a itemprop="url" href="%3$s"><span itemprop="name">%4$s</span>%5$s<span class="tagline" itemprop="description">%6$s</span></a></%1$s>',
+			  $header_tag,
+			  $header_class,
+			  esc_url( home_url( '/' ) ),
+			  esc_attr( get_bloginfo('name') ),
+			  $divider,
+			  esc_attr( get_bloginfo('description') )
+		  );
+		}
 
 		// add an image placeholder, the src is added by largo_header_js() in inc/enqueue.php
 		if ($header_class != 'branding') {
-			if (is_home() || !of_get_option( 'show_sticky_nav' ))
+			if ( is_home() || !largo_sticky_nav_active() )
 				echo '<a itemprop="url" href="' . esc_url( home_url( '/' ) ) . '"><img class="header_img" src="" alt="" /></a>';
 		}
 
@@ -45,6 +59,23 @@ if ( ! function_exists( 'largo_copyright_message' ) ) {
 		if ( ! $msg )
 			$msg = __( 'Copyright %s', 'largo' );
 		printf( $msg, date( 'Y' ) );
+	}
+}
+
+/**
+ * Output the INN logo, used in the footer
+ *
+ * If you want to use a light background with a dark image, simply replace this function in the child theme with one that references get_template_directory_uri() . "/img/inn_logo_blue_fimal.png"
+ *
+ * @since 0.5.2
+ */
+if ( ! function_exists( 'INN_logo' ) ) {
+	function inn_logo() {
+		?>
+			<a href="//inn.org/" id="inn-logo-container">
+				<img id="inn-logo" src="<?php echo(get_template_directory_uri() . "/img/inn_logo_gray.png"); ?>" alt="<?php printf(__("%s is a member of the Institute for Nonprofit News", "largo"), get_bloginfo('name')); ?>" />
+			</a>
+		<?php
 	}
 }
 

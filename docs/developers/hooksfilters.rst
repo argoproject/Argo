@@ -36,6 +36,19 @@ This is used in the query for the series list of posts in the same series
 as the main feature. This is the maximum number of posts that will display
 in the list.
 
+------------
+
+filter: **largo_homepage_topstories_post_count**
+
+*args: $showposts*
+
+Filter the number of posts that are displayed in the right-hand side of the
+Top Stories homepage template.
+
+This is used in the query for the list of posts in the "Homepage Featured"
+taxonomy. If more than 3 posts are found, they will display under a
+"More Headlines" heading, just as headline links.
+
 Other filters and actions
 -------------------------
 
@@ -66,7 +79,12 @@ Also passed in is an array that contains only the extra fields that were present
 ``function filter_function_name($result,$extras) {``
 ``# ... }``
 ``add_action('largo_validate_user_signup_extra_fields'``, ``'filter_function_name');``
- 
+
+**filter: largo_lmp_args**
+
+Passed in this are the arguments for the Load More Posts WP_Query. An example usage would be to check if ``is_home()`` and then restrict the posts returned by the query to those in the homepage featured prominence term.
+
+
 Template Hooks
 --------------
 
@@ -112,6 +130,7 @@ Here is the current list of hooks available in Largo (available as of v.0.4):
  - **largo_before_footer** - after the closing div tag for #page but before the .footer-bg (this also comes after the optional "before footer" widget area that can be activated from the layout tab of the theme options
  - **largo_before_footer_widgets** - before the main footer widget areas
  - **largo_before_footer_boilerplate** - after the main footer widget areas and before the boilerplate (copyright message, credits, etc.)
+ - **largo_after_footer_copyright** - after the copyright message paragraph, but before the end of the boilerplate; useful if you want to insert addresses or other information about your site
  - **largo_before_footer_close** - after the boilerplate but still inside the footer container
  - **largo_after_footer** - after the closing <div> tag for .footer-bg but before the sticky footer
  - **(wp_footer)** - if you need to insert anything just before the closing <body> tag use the wp_footer hook
