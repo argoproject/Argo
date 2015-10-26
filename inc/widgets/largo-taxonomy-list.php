@@ -308,20 +308,20 @@ class largo_taxonomy_list_widget extends WP_Widget {
 		<p><input type="checkbox" class="checkbox ltlw-headline" id="<?php echo $this->get_field_id('use_headline'); ?>" name="<?php echo $this->get_field_name('use_headline'); ?>"<?php checked( $use_headline ); ?> />
 			<label for="<?php echo $this->get_field_id('use_headline'); ?>"><?php _e( 'Display headline of most-recent post in taxonomy?', 'largo' ); ?></label>
 		</p>
-		<script>
-jQuery(document).ready(function($) {
-	$('.ltlw-dropdown').click(function() {
-		$(this).parent().parent().find('.ltlw-thumbnails').removeAttr('checked');
-		$(this).parent().parent().find('.ltlw-headline').removeAttr('checked');
-	});
-	$('.ltlw-thumbnails').click(function() {
-		$(this).parent().parent().find('.ltlw-dropdown').removeAttr('checked');
-	});
-	$('.ltlw-headline').click(function() {
-		$(this).parent().parent().find('.ltlw-dropdown').removeAttr('checked');
-	});
-});
 
+		<script>
+			jQuery(document).ready(function($) {
+				$('.ltlw-dropdown').click(function() {
+					$(this).parent().parent().find('.ltlw-thumbnails').removeAttr('checked');
+					$(this).parent().parent().find('.ltlw-headline').removeAttr('checked');
+				});
+				$('.ltlw-thumbnails').click(function() {
+					$(this).parent().parent().find('.ltlw-dropdown').removeAttr('checked');
+				});
+				$('.ltlw-headline').click(function() {
+					$(this).parent().parent().find('.ltlw-dropdown').removeAttr('checked');
+				});
+			});
 		</script>
 
 	<?php
