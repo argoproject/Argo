@@ -29,7 +29,7 @@ the_widget( 'largo_featured_widget', array(
 		'title' => __('We Recommend', 'largo'),
 		'widget_class' => 'default',
 		'num_posts' => 5,
-		'num_sentences' => 2,
+		'num_sentences' => 2
 	)
 );
 
