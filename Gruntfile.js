@@ -208,4 +208,9 @@ module.exports = function(grunt) {
     'pot',
     'shell:msmerge'
   ]);
+
+  // Increment version numbers and run a full build
+  grunt.registerTask('release', [
+    'version::patch', 'build'
+  ]);
 }
