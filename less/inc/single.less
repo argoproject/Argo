@@ -241,10 +241,16 @@ body.normal.page {
       color: black;
       &:hover {
         text-decoration: none;
+        i {
+          .opacity(85);
+        }
       }
     }
     i, &::before {
       position: relative;
+    }
+    &.email:hover {
+      cursor: pointer;
     }
   }
 }
