@@ -218,8 +218,6 @@ body.normal.page {
 /* 2.2 - Social media links */
 
 .post-social {
-  min-height: 28px;
-  height: auto;
   margin-bottom: @baseline;
   border-top: 1px solid @grayLighter;
   border-bottom: 1px solid @grayLighter;
@@ -228,41 +226,31 @@ body.normal.page {
     margin: 0;
     height: auto;
   }
-  .left {
-    padding: 6px 0 0;
-  }
-  .right {
-    padding: 1px 0 0;
-  }
   span {
-    position: relative;
-  }
-  span.twitter {
-    margin-right: 8px;
-  }
-  span.facebook {
-    top: -7px;
-  }
-  span.print,
-  span.email {
     font-family: Verdana, Helvetica, sans-serif;
-    font-size: 11px;
-    top: 1px;
-    margin-left: 10px;
-    i, &::before {
-	  font-size: @baseFontSize + 2;
-	  margin: 0 -3px 0 2px;
-	  position: relative;
-	  top: 2px;
-    }
+    position: relative;
+    margin-right: @baseFontSize;
+    font-size: @baseFontSize - 2;
     &:hover {
       .opacity(85);
+    }
+    &:last-child {
+      margin-right: 0;
     }
     a {
       color: black;
       &:hover {
         text-decoration: none;
-	  }
+        i {
+          .opacity(85);
+        }
+      }
+    }
+    i, &::before {
+      position: relative;
+    }
+    &.email:hover {
+      cursor: pointer;
     }
   }
 }
