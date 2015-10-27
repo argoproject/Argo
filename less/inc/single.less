@@ -136,10 +136,6 @@ body.normal.page {
         padding-right: 0;
       }
     }
-    .post-social {
-      border-top: none;
-      border-bottom: none;
-    }
   }
 
   #comments,
@@ -219,18 +215,18 @@ body.normal.page {
 
 .post-social {
   margin-bottom: @baseline;
-  border-top: 1px solid @grayLighter;
-  border-bottom: 1px solid @grayLighter;
-  .right,
-  .left {
-    margin: 0;
-    height: auto;
-  }
   span {
-    font-family: Verdana, Helvetica, sans-serif;
+    // copied from widgets/largo-follow.less
+    line-height: 1.5em;
+    max-width: 250px;
+    margin: 0.5em 0;
+    padding: 0.5em;
+
+    // existing styles
+    font-family: @sansFontFamily;
     position: relative;
-    margin-right: @baseFontSize;
-    font-size: @baseFontSize - 2;
+    font-size: @baseFontSize;
+    color: white;
     &:hover {
       .opacity(85);
     }
@@ -238,7 +234,7 @@ body.normal.page {
       margin-right: 0;
     }
     a {
-      color: black;
+      color: white;
       &:hover {
         text-decoration: none;
         i {

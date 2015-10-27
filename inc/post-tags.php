@@ -160,7 +160,16 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 	function largo_post_social_links( $echo = true ) {
 		$utilities = of_get_option( 'article_utilities' );
 
-		$output = '<div class="post-social clearfix">';
+		$output = '<div class="largo-follow post-social clearfix">';
+
+		if ( $utilities['facebook'] === '1' ) {
+			$fb_share = '<span class="facebook"><a target="_blank" href="http://www.facebook.com/sharer/sharer.php?u=%1$s"><i class="icon-facebook"></i> %2$s</a></span>';
+			$output .= sprintf(
+				$fb_share,
+				esc_attr( get_permalink() ),
+				esc_attr( ucfirst( of_get_option( 'fb_verb' ) ) )
+			);
+		}
 
 		if ( $utilities['twitter'] === '1' ) {
 			$twitter_share = '<span class="twitter"><a target="_blank" href="https://twitter.com/intent/tweet?text=%1$s&url=%2$s&via=%3$s"><i class="icon-twitter"></i> %4$s</a></span>';
@@ -170,15 +179,6 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 				esc_attr( get_permalink() ),
 				esc_attr( get_the_author_meta( 'twitter' ) ),
 				esc_attr( __( 'Tweet', 'largo' ) )
-			);
-		}
-
-		if ( $utilities['facebook'] === '1' ) {
-			$fb_share = '<span class="facebook"><a target="_blank" href="http://www.facebook.com/sharer/sharer.php?u=%1$s"><i class="icon-facebook"></i> %2$s</a></span>';
-			$output .= sprintf(
-				$fb_share,
-				esc_attr( get_permalink() ),
-				esc_attr( ucfirst( of_get_option( 'fb_verb' ) ) )
 			);
 		}
 
