@@ -12,7 +12,7 @@ module.exports = function(grunt) {
   // Find what the current theme's directory is, relative to the WordPress root
   var path = process.cwd().replace(/^[\s\S]+\/wp-content/, "\/wp-content");
 
-  var CSS_LESS_FILES = {
+  var cssLessFiles = {
     'css/style.css': 'less/style.less',
     'css/editor-style.css': 'less/editor-style.less',
     'homepages/assets/css/single.css': 'homepages/assets/less/single.less',
@@ -31,7 +31,7 @@ module.exports = function(grunt) {
           outputSourceFiles: true,
           sourceMapBasepath: path,
         },
-        files: CSS_LESS_FILES
+        files: cssLessFiles
       }
     },
 
@@ -163,6 +163,31 @@ module.exports = function(grunt) {
       files: {
         src: 'lang/*.po',
         expand: true
+      }
+    },
+
+    version: {
+      project: {
+        src: [
+          'package.json',
+          'docs/conf.py'
+        ]
+      },
+      css: {
+        options: {
+          prefix: 'Version: '
+        },
+        src: [
+          'style.css',
+        ]
+      },
+      readme: {
+        options: {
+          prefix: '\\*\\*Current version:\\*\\* v'
+        },
+        src: [
+          'readme.md'
+        ]
       }
     }
   });

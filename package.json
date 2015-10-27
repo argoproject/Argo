@@ -10,6 +10,7 @@
     "grunt-po2mo": "~0.1.0",
     "grunt-pot": "~0.2.0",
     "grunt-shell": ">=0.2.1",
+    "grunt-version": "^1.0.0",
     "load-grunt-tasks": "~1.0.0",
     "time-grunt": "^1.2.2"
   }
