@@ -160,7 +160,7 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 	function largo_post_social_links( $echo = true ) {
 		$utilities = of_get_option( 'article_utilities' );
 
-		$output = '<div class="post-social clearfix"><div class="left">';
+		$output = '<div class="post-social clearfix">';
 
 		if ( $utilities['twitter'] === '1' ) {
 			$twitter_share = '<span class="twitter"><a target="_blank" href="https://twitter.com/intent/tweet?text=%1$s&url=%2$s&via=%3$s"><i class="icon-twitter"></i> %4$s</a></span>';
@@ -182,8 +182,6 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 			);
 		}
 
-		$output .= '</div><div class="right">';
-
 		if ( $utilities['print'] === '1' ) {
 			$output .= '<span class="print"><a href="#" onclick="window.print()" title="' . esc_attr( __( 'Print this article', 'largo' ) ) . '" rel="nofollow"><i class="icon-print"></i> ' . esc_attr( __( 'Print', 'largo' ) ) . '</a></span>';
 		}
@@ -192,7 +190,7 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 			$output .= '<span data-service="email" class="email custom-share-button icon-mail share-button"> Email</span>';
 		}
 
-		$output .= '</div></div>';
+		$output .= '</div>';
 
 		if ( $echo ) {
 			echo $output;
