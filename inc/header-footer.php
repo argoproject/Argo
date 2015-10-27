@@ -7,13 +7,12 @@
  *
  * @since 0.5.2
  */
- 
- function largo_sticky_nav_active() {
-   if ( SHOW_STICKY_NAV == true && of_get_option( ' show_sticky_nav' )) {
-    return true;
-   }
-   return false;
- }
+function largo_sticky_nav_active() {
+    if ( SHOW_STICKY_NAV == true && of_get_option( 'show_sticky_nav' ) ) {
+        return true;
+    }
+    return false;
+}
 
 /**
  * Output the site header
@@ -28,7 +27,7 @@ if ( ! function_exists( 'largo_header' ) ) {
 		$header_class = of_get_option( 'no_header_image' ) ? 'branding' : 'visuallyhidden';
 		$divider = $header_class == 'branding' ? '' : ' - ';
 
-		if( is_home() || is_front_page() && !largo_sticky_nav_active() ) {
+		if ( is_home() || is_front_page() && !largo_sticky_nav_active() ) {
 			// print the text-only version of the site title
 			printf('<%1$s class="%2$s"><a itemprop="url" href="%3$s"><span itemprop="name">%4$s</span>%5$s<span class="tagline" itemprop="description">%6$s</span></a></%1$s>',
 				$header_tag,
