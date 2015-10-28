@@ -213,14 +213,27 @@ body.normal.page {
 
 /* 2.2 - Social media links */
 
+@media (max-width: 768px) {
+  .post-social span {
+    min-width: 50px;
+    text-align: center;
+  }
+}
+
+@media (min-width: 769px) {
+  .post-social span {
+    min-width: 120px;
+  }
+}
 .post-social {
   margin-bottom: @baseline;
-  span {
+  &> span {
     // copied from widgets/largo-follow.less
     line-height: 1.5em;
     max-width: 250px;
     margin: 0.5em 0;
     padding: 0.5em;
+    text-transform: uppercase;
 
     // existing styles
     font-family: @sansFontFamily;
