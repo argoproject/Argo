@@ -214,15 +214,17 @@ body.normal.page {
 /* 2.2 - Social media links */
 
 @media (max-width: 768px) {
-  .post-social span {
+  .post-social > span {
     min-width: 50px;
     text-align: center;
+    display: inline-block;
   }
 }
 
 @media (min-width: 769px) {
-  .post-social span {
-    min-width: 120px;
+  .post-social > span {
+    min-width: 100px;
+    display: inline-block;
   }
 }
 .post-social {
@@ -233,9 +235,9 @@ body.normal.page {
     max-width: 250px;
     margin: 0.5em 0;
     padding: 0.5em;
-    text-transform: uppercase;
 
-    // existing styles
+    text-transform: uppercase;
+    font-weight: 300;
     font-family: @sansFontFamily;
     position: relative;
     font-size: @baseFontSize;
@@ -246,21 +248,26 @@ body.normal.page {
     &:last-child {
       margin-right: 0;
     }
-    a {
-      color: white;
-      &:hover {
-        text-decoration: none;
-        i {
-          .opacity(85);
-        }
+  }
+  a {
+    color: white;
+    &:hover {
+      text-decoration: none;
+      i {
+        .opacity(85);
       }
     }
-    i, &::before {
-      position: relative;
-    }
-    &.email:hover {
-      cursor: pointer;
-    }
+  }
+  i, &::before {
+    position: relative;
+  }
+  // Fudging to prevent overlap between the icon and the text
+  i {
+    margin-right: 0.5em;
+    margin-left: 0.2em;
+  }
+  &.email:hover {
+    cursor: pointer;
   }
 }
 
@@ -273,7 +280,7 @@ body.normal.page {
     text-transform: uppercase;
     font-size: @baseFontSize * 0.815;
     &:first-child {
-	  padding-left: 0;
+      padding-left: 0;
     }
   }
 }
