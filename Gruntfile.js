@@ -167,9 +167,11 @@ module.exports = function(grunt) {
     },
 
     version: {
-      project: {
+      src: [
+        'package.json'
+      ],
+      docs: {
         src: [
-          'package.json',
           'docs/conf.py'
         ]
       },
@@ -211,6 +213,6 @@ module.exports = function(grunt) {
 
   // Increment version numbers and run a full build
   grunt.registerTask('release', [
-    'version::patch', 'build'
+    'version', 'build'
   ]);
 }
