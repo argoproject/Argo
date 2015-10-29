@@ -3,6 +3,7 @@
   "version": "0.5.2",
   "devDependencies": {
     "grunt": "~0.4.5",
+    "grunt-confirm": "^1.0.4",
     "grunt-contrib-cssmin": "~0.11.0",
     "grunt-contrib-less": "~0.12.0",
     "grunt-contrib-uglify": "~0.7.0",

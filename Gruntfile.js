@@ -226,6 +226,15 @@ module.exports = function(grunt) {
           branch: 'master'
         }
       }
+    },
+
+    confirm: {
+      release: {
+        options: {
+          question: 'Are you sure you want to publish a release?',
+          input: 'yes,YES,y,Y'
+        }
+      }
     }
   });
 
@@ -253,6 +262,7 @@ module.exports = function(grunt) {
 
   // Checkout master, merge develop to master, tag and push to remote
   grunt.registerTask('publish', 'Checkout master, merge develop to master, tag and push to remote', [
+    'confirm:release',
     'gitcheckout:release',
     'gitmerge:release',
     'gittag:release',
