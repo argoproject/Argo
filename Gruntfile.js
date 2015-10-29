@@ -191,6 +191,41 @@ module.exports = function(grunt) {
           'readme.md'
         ]
       }
+    },
+
+    gittag: {
+      release: {
+        options: {
+          tag: 'v<%= pkg.version %>',
+          message: 'tagging v<%= pkg.version %>'
+        }
+      }
+    },
+
+    gitpush: {
+      release: {
+        options: {
+          tags: true,
+          branch: 'master'
+        }
+      }
+    },
+
+    gitmerge: {
+      release: {
+        options: {
+          branch: 'develop',
+          message: 'Merge branch develop to master'
+        }
+      }
+    },
+
+    gitcheckout: {
+      release: {
+        options: {
+          branch: 'master'
+        }
+      }
     }
   });
 
@@ -200,8 +235,8 @@ module.exports = function(grunt) {
   // Build ALL docs
   grunt.registerTask('docs', ['shell:sphinx']);
 
-  // Build for a release
-  grunt.registerTask('build', [
+  // Build assets, docs and language files
+  grunt.registerTask('build', 'Build assets, docs and language files', [
     'less',
     'cssmin',
     'uglify',
@@ -212,7 +247,15 @@ module.exports = function(grunt) {
   ]);
 
   // Increment version numbers and run a full build
-  grunt.registerTask('release', [
+  grunt.registerTask('build-release', 'Increment version numbers (based on package.json) and run a full build', [
     'version', 'build'
+  ]);
+
+  // Checkout master, merge develop to master, tag and push to remote
+  grunt.registerTask('publish', 'Checkout master, merge develop to master, tag and push to remote', [
+    'gitcheckout:release',
+    'gitmerge:release',
+    'gittag:release',
+    'gitpush:release'
   ]);
 }
