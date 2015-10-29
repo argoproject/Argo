@@ -1,6 +1,11 @@
 {
   "name": "largo-project",
   "version": "0.5.2",
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/INN/Largo.git"
+  },
+  "license": "GPL-2.0",
   "devDependencies": {
     "grunt": "~0.4.5",
     "grunt-confirm": "^1.0.4",
