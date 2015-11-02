@@ -226,6 +226,11 @@ body.normal.page {
     min-width: 100px;
     display: inline-block;
   }
+  // Fudging to prevent overlap between the icon and the text
+  .post-social i {
+    margin-right: 0.5em;
+    margin-left: 0.2em;
+  }
 }
 .post-social {
   margin-bottom: @baseline;
@@ -260,11 +265,6 @@ body.normal.page {
   }
   i, &::before {
     position: relative;
-  }
-  // Fudging to prevent overlap between the icon and the text
-  i {
-    margin-right: 0.5em;
-    margin-left: 0.2em;
   }
   &.email:hover {
     cursor: pointer;
