@@ -1,9 +1,14 @@
 <?php
 /*
  * Author Bio Widget
+ *
+ * archive.php uses this widget to create the header of the Author Archive page
  */
 class largo_author_widget extends WP_Widget {
 
+	/**
+	 * Set up the widget
+	 */
 	function largo_author_widget() {
 		$widget_ops = array(
 			'classname' 	=> 'largo-author',
@@ -12,6 +17,9 @@ class largo_author_widget extends WP_Widget {
 		$this->WP_Widget( 'largo-author-widget', __('Largo Author Bio', 'largo'), $widget_ops);
 	}
 
+	/**
+	 * Render the widget output
+	 */
 	function widget( $args, $instance ) {
 
 		global $post;
@@ -69,12 +77,18 @@ class largo_author_widget extends WP_Widget {
 		echo $after_widget;
 	}
 
+	/**
+	 * Widget update function: sanitizes title.
+	 */
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
 		$instance['title'] = sanitize_text_field( $new_instance['title'] );
 		return $instance;
 	}
 
+	/**
+	 * This widget has no configuration
+	 */
 	function form( $instance ) {
 		return true;
 	}
