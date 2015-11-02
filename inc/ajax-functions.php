@@ -113,7 +113,7 @@ if ( !function_exists( 'largo_load_more_posts' ) ) {
 				}
 				get_template_part(
 					'partials/content',
-					apply_filters( 'largo_lmp_template_partial', $partial, $query, $post )
+					apply_filters( 'largo_lmp_template_partial', $partial, $query )
 				);
 			endwhile;
 		}
