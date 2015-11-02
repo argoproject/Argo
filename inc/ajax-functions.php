@@ -11,7 +11,7 @@
 /*
  * Enqueue script for "load more posts" functionality
  */
-if (!function_exists('largo_load_more_posts_enqueue_script')) {
+if ( !function_exists( 'largo_load_more_posts_enqueue_script' ) ) {
 	function largo_load_more_posts_enqueue_script() {
 		wp_enqueue_script(
 			'load-more-posts',
@@ -19,7 +19,7 @@ if (!function_exists('largo_load_more_posts_enqueue_script')) {
 			array('jquery'), null, false
 		);
 	}
-	add_action('wp_enqueue_scripts', 'largo_load_more_posts_enqueue_script');
+	add_action( 'wp_enqueue_scripts', 'largo_load_more_posts_enqueue_script' );
 }
 
 /*
@@ -28,8 +28,8 @@ if (!function_exists('largo_load_more_posts_enqueue_script')) {
  * @param $nav_id string the unique id of the navigation element used as the trigger to load more posts
  * @param $the_query object the WP_Query object upon which calls to load more posts will be based
  */
-if (!function_exists('largo_load_more_posts_data')) {
-	function largo_load_more_posts_data($nav_id, $the_query) {
+if ( !function_exists( 'largo_load_more_posts_data' ) ) {
+	function largo_load_more_posts_data( $nav_id, $the_query ) {
 		global $shown_ids, $post, $opt;
 
 		$query = $the_query->query;
@@ -41,22 +41,22 @@ if (!function_exists('largo_load_more_posts_data')) {
 
 		$config = array(
 			'nav_id' => $nav_id,
-			'ajax_url' => admin_url('admin-ajax.php'),
-			'paged' => (!empty($the_query->query_vars['paged']))? $the_query->query_vars['paged'] : 1,
+			'ajax_url' => admin_url( 'admin-ajax.php' ),
+			'paged' => ( !empty( $the_query->query_vars['paged'] ) )? $the_query->query_vars['paged'] : 1,
 			'query' => $query,
 			'is_home' => $the_query->is_home(),
 			'is_series_landing' => $post->post_type == 'cftl-tax-landing' ? true : false,
-			'no_more_posts' => apply_filters('largo_no_more_posts_text', "You've reached the end!", $nav_id, $the_query)
+			'no_more_posts' => apply_filters( 'largo_no_more_posts_text', "You've reached the end!", $nav_id, $the_query )
 		);
 
-		if($post->post_type == 'cftl-tax-landing') {
+		if( $post->post_type == 'cftl-tax-landing' ) {
 			$config['opt'] = $opt;
 		}
 
-		$config = apply_filters('largo_load_more_posts_json', $config);
+		$config = apply_filters( 'largo_load_more_posts_json', $config );
 		?>
 		<script type="text/javascript">
-			new LoadMorePosts(<?php echo json_encode($config); ?>);
+			new LoadMorePosts(<?php echo json_encode( $config ); ?>);
 		</script>
 	<?php
 	}
@@ -68,7 +68,7 @@ if (!function_exists('largo_load_more_posts_data')) {
  * @global $_POST
  * @see largo_load_more_posts_choose_partial
  */
-if (!function_exists('largo_load_more_posts')) {
+if ( !function_exists( 'largo_load_more_posts' ) ) {
 	function largo_load_more_posts() {
 
 		global $opt;
@@ -90,26 +90,26 @@ if (!function_exists('largo_load_more_posts')) {
 		$args = array_merge(array(
 			'paged' => (int) $paged,
 			'post_status' => 'publish',
-			'posts_per_page' => intval(get_option('posts_per_page')),
+			'posts_per_page' => intval( get_option( 'posts_per_page' ) ),
 			'ignore_sticky_posts' => true,
 		), $context);
 
 		// num_posts_home is only relevant on the homepage
-		if ( of_get_option('num_posts_home') && $is_home )
-			$args['posts_per_page'] = of_get_option('num_posts_home');
+		if ( of_get_option( 'num_posts_home' ) && $is_home )
+			$args['posts_per_page'] = of_get_option( 'num_posts_home' );
 
 		if ( $is_home ) {
 			$args['paged'] = ( $args['paged'] - 1 );
 			if ( of_get_option('cats_home') )
-				$args['cat'] = of_get_option('cats_home');
+				$args['cat'] = of_get_option( 'cats_home' );
 		}
 
-		$args = apply_filters('largo_lmp_args', $args);
-		$query = new WP_Query($args);
+		$args = apply_filters( 'largo_lmp_args', $args );
+		$query = new WP_Query( $args );
 
 		if ( $query->have_posts() ) {
 			// Choose the correct partial to load here
-			$partial = largo_load_more_posts_choose_partial();
+			$partial = largo_load_more_posts_choose_partial($query);
 
 			// Render all the posts
 			while ( $query->have_posts() ) : $query->the_post();
@@ -118,8 +118,8 @@ if (!function_exists('largo_load_more_posts')) {
 		}
 		wp_die();
 	}
-	add_action('wp_ajax_nopriv_load_more_posts', 'largo_load_more_posts');
-	add_action('wp_ajax_load_more_posts', 'largo_load_more_posts');
+	add_action( 'wp_ajax_nopriv_load_more_posts', 'largo_load_more_posts' );
+	add_action( 'wp_ajax_load_more_posts', 'largo_load_more_posts' );
 }
 
 /**
@@ -128,64 +128,59 @@ if (!function_exists('largo_load_more_posts')) {
  * Possibly unnecessarily verbose, but there are a lot of options here and I wanted to be sure that I got them all.
  *
  * @see largo_load_more_posts
+ * @param object $post_query The query object being used to generate LMP markup
  * @return string The slug of partial that should be loaded.
  * @global $opt
  * @global $_POST
  */
 if (!function_exists('largo_load_more_posts_choose_partial')) {
-	function largo_load_more_posts_choose_partial() {
+	function largo_load_more_posts_choose_partial($post_query) {
 		global $opt;
 
 		// Default is to use partials/content-home.php
 		$partial = 'home';
 
 		// This might be a category, tag, search, date, author, non-landing-page series, or other other archive
-		
-		if ( isset($_POST['query']) ) {
-			$post_query = (array) json_decode(stripslashes($_POST['query']));
-		} else {
-			$post_query = array();
-		}
 
 		// check if this query is for a category
-		if ( isset($post_query['category_name']) && $post_query['category_name'] != '' ) {
+		if ( isset($post_query->category_name) && $post_query->category_name != '' ) {
 			$partial = 'archive';
 		}
 
 		// check if this query is for an author page
-		if ( isset($post_query['author_name']) && $post_query['author_name'] != '' ) {
+		if ( isset($post_query->author_name) && $post_query->author_name != '' ) {
 			$partial = 'archive';
 		}
 
 		// check if this query is for a tag
-		if ( isset($post_query['tag']) && $post_query['tag'] != '' ) {
+		if ( isset($post_query->tag) && $post_query->tag != '' ) {
 			$partial = 'archive';
 		}
 
 		// check if this query is for a search
-		if ( isset($post_query['s']) && $post_query['s'] != '' ) {
+		if ( isset($post_query->s) && $post_query->s != '' ) {
 			$partial = 'archive';
 		}
 
 		// check if this query is for a date, assuming that all date queries have a year.
-		if ( isset($post_query['year']) && $post_query['year'] != '' ) {
+		if ( isset($post_query->year) && $post_query->year != 0 ) {
 			$partial = 'archive';
 		}
 
 		// Series landing pages
-		if($_POST['is_series_landing'] === true || $_POST['is_series_landing'] === 1) {
+		if ($_POST['is_series_landing'] == 'true') {
 			$partial = 'series';
 			$opt = $_POST['opt'];
 		}
 
 		// Non-series-landing series archives
-		if ( isset($post_query['series']) && $post_query['series'] != '' ) {
+		if ( isset($post_query->query_vars['series']) && $post_query->query_vars['series'] != '' ) {
 			$partial = 'series';
 		}
 
 		// argolinks post type
 		$partial = ( get_post_type() == 'argolinks' ) ? 'argolinks' : $partial;
 
-		return $partial;
+		return apply_filters( 'largo_lmp_template_partial', $partial, $post_query );
 	}
 }

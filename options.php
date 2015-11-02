@@ -321,12 +321,6 @@ function optionsframework_options() {
 			'footer' => __('Below Tags', 'largo')
 		));
 
-	$options[] = array(
-		'desc' 	=> __('<strong>Show share count</strong> with Twitter buttons.', 'largo'),
-		'id' 	=> 'show_twitter_count',
-		'std' 	=> '1',
-		'type' 	=> 'checkbox');
-
 	/**
 	 * Images Options
 	 */

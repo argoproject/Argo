@@ -109,10 +109,6 @@ class Largo_Customizer {
 				'type'                  => 'option',
 				'sanitize_callback'     => 'sanitize_key',
 				),
-			'[show_twitter_count]' => array(
-				'type'                  => 'option',
-				'sanitize_callback'     => 'sanitize_key',
-				),
 			// Footer
 			'[footer_layout]'      => array(
 				'type'                  => 'option',
@@ -231,12 +227,6 @@ class Largo_Customizer {
 				'like'           => 'Like',
 				'recommend'      => 'Recommend',
 				),
-			) ) );
-		$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'largo_show_twitter_count', array(
-			'label'              => __( 'Show Twitter Share Count', 'largo' ),
-			'section'            => 'largo_single_post',
-			'settings'           => $this->get_setting_key( '[show_twitter_count]' ),
-			'type'               => 'checkbox',
 			) ) );
 
 		/**
