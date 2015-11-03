@@ -76,23 +76,18 @@ if ( !function_exists( 'largo_load_more_posts' ) ) {
 		$paged = (isset($_POST['paged'])) ? $_POST['paged'] : 1;
 		$context = (isset($_POST['query']))? json_decode(stripslashes($_POST['query']), true) : array();
 
-		// Making sure that this isn't home
-		if (isset($_POST['is_home']))
-			$is_home = ($_POST['is_home'] == 'false')? false : true;
-		else if ( isset($_POST['query']['cat']) ||
-			isset($_POST['query']['author']) ||
-			isset($_POST['query']['term']) || # tags, taxonomies and custom taxonomies
-			isset($_POST['query']['s'])) # searches
-			$is_home = false;
-		else
-			$is_home = true;
-
 		$args = array_merge(array(
 			'paged' => (int) $paged,
 			'post_status' => 'publish',
 			'posts_per_page' => intval( get_option( 'posts_per_page' ) ),
 			'ignore_sticky_posts' => true,
 		), $context);
+
+		// Making sure that this query isn't for the homepage
+		if (isset($_POST['is_home']))
+			$is_home = ($_POST['is_home'] == 'false')? false : true;
+		else
+			$is_home = true;
 
 		// num_posts_home is only relevant on the homepage
 		if ( of_get_option( 'num_posts_home' ) && $is_home )
