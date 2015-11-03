@@ -1,17 +1,21 @@
 <?php
-/*
+/**
+ * Largo AJAX functions
+ *
  * When changing the operation of these functions, be sure to test it in:
  * - the homepage, all templates
  * - category archive pages
  * - series archive pages
  * - custom series landing pages
  * - search results pages
+ *
+ * @package Largo
  */
 
-/*
- * Enqueue script for "load more posts" functionality
- */
 if ( !function_exists( 'largo_load_more_posts_enqueue_script' ) ) {
+	/**
+	 * Enqueue script for "load more posts" functionality
+	 */
 	function largo_load_more_posts_enqueue_script() {
 		wp_enqueue_script(
 			'load-more-posts',
@@ -22,13 +26,15 @@ if ( !function_exists( 'largo_load_more_posts_enqueue_script' ) ) {
 	add_action( 'wp_enqueue_scripts', 'largo_load_more_posts_enqueue_script' );
 }
 
-/*
- * Print an HTML script tag for a post navigation element and corresponding query
- *
- * @param $nav_id string the unique id of the navigation element used as the trigger to load more posts
- * @param $the_query object the WP_Query object upon which calls to load more posts will be based
- */
 if ( !function_exists( 'largo_load_more_posts_data' ) ) {
+	/**
+	 * Print an HTML script tag for a post navigation element and corresponding query
+	 *
+	 * If you plan on plugging this function, make sure the data structure it returns includes and "is_home" key.
+	 *
+	 * @param string  $nav_id The unique id of the navigation element used as the trigger to load more posts
+	 * @param object $the_query The WP_Query object upon which calls to load more posts will be based
+	 */
 	function largo_load_more_posts_data( $nav_id, $the_query ) {
 		global $shown_ids, $post, $opt;
 
@@ -62,13 +68,13 @@ if ( !function_exists( 'largo_load_more_posts_data' ) ) {
 	}
 }
 
-/*
- * Renders markup for a page of posts and sends it back over the wire.
- * @global $opt
- * @global $_POST
- * @see largo_load_more_posts_choose_partial
- */
 if ( !function_exists( 'largo_load_more_posts' ) ) {
+	/**
+	 * Renders markup for a page of posts and sends it back over the wire.
+	 * @global $opt
+	 * @global $_POST
+	 * @see largo_load_more_posts_choose_partial
+	 */
 	function largo_load_more_posts() {
 
 		global $opt;
@@ -117,18 +123,18 @@ if ( !function_exists( 'largo_load_more_posts' ) ) {
 	add_action( 'wp_ajax_load_more_posts', 'largo_load_more_posts' );
 }
 
-/**
- * Function to determine which partial slug should be used by LMP to render posts.
- *
- * Possibly unnecessarily verbose, but there are a lot of options here and I wanted to be sure that I got them all.
- *
- * @see largo_load_more_posts
- * @param object $post_query The query object being used to generate LMP markup
- * @return string The slug of partial that should be loaded.
- * @global $opt
- * @global $_POST
- */
 if (!function_exists('largo_load_more_posts_choose_partial')) {
+	/**
+	 * Function to determine which partial slug should be used by LMP to render posts.
+	 *
+	 * Includes a "largo_lmp_template_partial" filter to allow for modifying the value $partial.
+	 *
+	 * @param object $post_query The query object being used to generate LMP markup
+	 * @return string $partial The slug of partial that should be loaded.
+	 * @global $opt
+	 * @global $_POST
+	 * @see largo_load_more_posts
+	 */
 	function largo_load_more_posts_choose_partial($post_query) {
 		global $opt;
 
@@ -176,6 +182,15 @@ if (!function_exists('largo_load_more_posts_choose_partial')) {
 		// argolinks post type
 		$partial = ( get_post_type() == 'argolinks' ) ? 'argolinks' : $partial;
 
-		return apply_filters( 'largo_lmp_template_partial', $partial, $post_query );
+		/**
+		 * Filter to modify the Load More Posts template partial.
+		 *
+		 * @since 0.5.3
+		 * @param string $partial The string represeting the template partial to use for the current context
+		 * @param object $post_query The query object used to produce the LMP markup
+		 */
+		$partial = apply_filters( 'largo_lmp_template_partial', $partial, $post_query );
+
+		return $partial;
 	}
 }
