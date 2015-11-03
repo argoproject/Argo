@@ -223,7 +223,6 @@ body.normal.page {
 
 @media (min-width: 769px) {
   .post-social > span {
-    min-width: 100px;
     display: inline-block;
   }
   // Fudging to prevent overlap between the icon and the text
@@ -239,7 +238,8 @@ body.normal.page {
     line-height: 1.5em;
     max-width: 250px;
     margin: 0.5em 0;
-    padding: 0.5em;
+    padding: 0.3em 0.5em;
+    text-align: center;
 
     text-transform: uppercase;
     font-weight: 300;
@@ -267,7 +267,7 @@ body.normal.page {
   i, &::before {
     position: relative;
   }
-  &.email:hover {
+  .email:hover {
     cursor: pointer;
   }
 }
