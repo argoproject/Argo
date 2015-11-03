@@ -67,8 +67,6 @@ EOT;
 		largo_post_social_links();
 		$ret = ob_get_clean();
 		$this->assertRegExp('/post-social/', $ret, "The .post-social class was not in the output");
-		$this->assertRegExp('/left/', $ret, "The .left class was not in the output");
-		$this->assertRegExp('/right/', $ret, "The .right class was not in the output");
 		unset($ret);
 
 		// Test that this outputs the expected data for each of the button types
