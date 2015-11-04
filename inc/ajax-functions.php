@@ -176,7 +176,7 @@ if (!function_exists('largo_load_more_posts_choose_partial')) {
 
 		// Non-series-landing series archives
 		if ( isset($post_query->query_vars['series']) && $post_query->query_vars['series'] != '' ) {
-			$partial = 'series';
+			$partial = 'archive';
 		}
 
 		// argolinks post type
