@@ -1,3 +1,17 @@
+<?php
+/*
+ * Social links for the author described in $author_object
+ *
+ * @param WP_User $author_object the author
+ * @since 0.5.3
+ */
+
+	/**
+	 * Figure out whether to hide the author's email address
+	 */
+	$user_meta = get_user_meta($author_obj->ID);
+	$show_email = $user_meta['show_email'][0];
+?>
 <ul class="social-links">
 	<?php if ( $fb = $author_obj->fb ) { ?>
 		<li class="facebook">
@@ -11,7 +25,7 @@
 		</li>
 	<?php } ?>
 
-	<?php if ( $email = $author_obj->user_email ) { ?>
+	<?php if ( $email = $author_obj->user_email && $show_email !== 'off' ) { ?>
 		<li class="email">
 			<a class="email" href="mailto:<?php echo esc_attr( $email ); ?>" title="e-mail <?php echo esc_attr( $author_obj->display_name ); ?>"><i class="icon-mail"></i></a>
 		</li>
