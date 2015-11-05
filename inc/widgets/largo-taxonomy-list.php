@@ -54,7 +54,7 @@ class largo_taxonomy_list_widget extends WP_Widget {
 			</script>
 
 		<?php } else { 
-			echo '<ul>';
+			echo '<ul class="' . $instance['taxonomy'] . '">';
 
 			$cat_args['title_li'] = '';
 			$tax_items = get_categories($cat_args);
@@ -83,6 +83,8 @@ class largo_taxonomy_list_widget extends WP_Widget {
 	 * Helper to render an li
 	 *
 	 * If $thumbnail is empty, then there is simply no image output.
+	 * If there is no thumbnail, class .no-thumbnail is added to the <li>.
+	 * If there is a thumbnail, class .has-thumbnail is added to the <li>.
 	 *
 	 * @param Object $item a wordpress taxonomy object
 	 * @param str $thumbnail the HTML for the thumbnail image
@@ -92,9 +94,10 @@ class largo_taxonomy_list_widget extends WP_Widget {
 	 */
 	private function render_li($item, $thumbnail = '', $headline = '') {
 		echo sprintf(
-			'<li class="%s-%s"><a href="%s">%s <h5>%s</h5></a> %s</li>',
+			'<li class="%s-%s %s"><a href="%s">%s <h5>%s</h5></a> %s</li>',
 			$item->taxonomy,
 			$item->term_id,
+			( $thumbnail != '' ) ? "has-thumbnail" : "no-thumbnail" ,
 			get_term_link($item),
 			$thumbnail, // the image for the series
 			$item->cat_name,
