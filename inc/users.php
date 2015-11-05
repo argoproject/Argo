@@ -425,6 +425,10 @@ add_action( 'edit_user_profile', 'more_profile_info' );
 function save_more_profile_info($user_id) {
 	if (!current_user_can('edit_user', $user_id ))
 		return false;
+	
+	if ( ! isset($_POST['show_email']) ) {
+		$_POST['show_email'] = 'off';
+	}
 
 	$values = wp_parse_args($_POST, array(
 		'show_email' => 'on',
