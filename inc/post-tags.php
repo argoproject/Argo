@@ -693,3 +693,48 @@ if ( ! function_exists( 'largo_post_metadata' ) ) {
 		}
 	}
 }
+
+/**
+ * New floating social buttons
+ *
+ * Only displayed if the floating share icons option is checked.
+ * @since 0.5.4
+ * @link https://github.com/INN/Largo/issues/961
+ * @see largo_floating_social_button_width_json
+ */
+if ( ! function_exists( 'largo_floating_social_buttons' ) ) {
+	function largo_floating_social_buttons() {
+		if ( is_single() && of_get_option('single_floating_social_icons') == '1' && of_get_option('single_template') == 'normal' ) {
+			// of_get_option('single_template') is filtered to return not the global option but this post's custom option if that is set.
+			echo '<script type="text/template" id="tmpl-floating-social-buttons">';
+			largo_post_social_links();
+			echo '</script>';
+
+			var_log('yupyup');
+		}
+	}
+}
+add_action('wp_footer', 'largo_floating_social_buttons');
+/**
+ * Responsive viewport information for the floating social buttons, in the form of JSON in a script tag.
+ *
+ * @since 0.5.4
+ * @see largo_floating_social_buttons
+ */
+if ( ! function_exists('largo_floating_social_button_width_json') ) {
+	function largo_floating_social_button_width_json() {
+		if ( is_single() && of_get_option('single_floating_social_icons') == '1' && of_get_option('single_template') == 'normal' ) {
+			$config = array(
+				'min' => '769px',
+				'max' => '9999px',
+			);
+			$config = apply_filters( 'largo_floating_social_bitton_width_json', $config );
+			?>
+			<script type="text/javascript" id="floating-social-uttons-width-json">
+				window.floating_post_social_width = <?php echo json_encode( $config ); ?>
+			</script>
+			<?php
+		}
+	}
+}
+add_action('wp_footer', 'largo_floating_social_button_width_json');
