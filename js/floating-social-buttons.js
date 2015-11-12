@@ -9,17 +9,27 @@
 
   var maybeShowSocialPalette = function() {
     if ( checkPosition() && checkViewPort() ) {
-      console.log('TKTK show the social palette');
+      if ( ! $('#floating-social-buttons').length ) {
+        $('#page').append('<div id="floating-social-buttons" class=""></div>');
+        $('#floating-social-buttons').html($("#tmpl-floating-social-buttons").html());
+        console.log('Creating the new social buttons');
+      } else {
+        $('#floating-social-buttons').removeClass('visuallyhidden');
+        console.log('Showing the new social buttons');
+      }
+    } else {
+      console.log('TKTK hide the social palette');
+        $('#floating-social-buttons').addClass('visuallyhidden');
     }
-    console.log('TKTK hide the social palette');
   };
 
   var checkPosition = function() {
-    var scrollTop = $(window).scrollTop();
+    var scrollTop = $(window).scrollTop(),
+        scrollBottom = scrollTop + $(window).height();
 
     offsets = getOffsets();
 
-    if (scrollTop > offsets[0] && scrollTop < offsets[1])
+    if (scrollTop > offsets[0] && scrollBottom < offsets[1])
       return true;
 
     return false;
