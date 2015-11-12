@@ -733,7 +733,7 @@ if ( ! function_exists('largo_floating_social_button_width_json') ) {
 			$config = apply_filters( 'largo_floating_social_button_width_json', $config );
 			?>
 			<script type="text/javascript" id="floating-social-buttons-width-json">
-				window.floating_post_social_width = <?php echo json_encode( $config ); ?>
+				window.floating_social_buttons_width = <?php echo json_encode( $config ); ?>
 			</script>
 			<script type="text/javascript" src="<?php
 				$suffix = (LARGO_DEBUG)? '' : '.min';

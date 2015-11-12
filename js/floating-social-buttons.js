@@ -17,6 +17,8 @@
   var checkPosition = function() {
     var scrollTop = $(window).scrollTop();
 
+    offsets = getOffsets();
+
     if (scrollTop > offsets[0] && scrollTop < offsets[1])
       return true;
 
@@ -24,8 +26,7 @@
   };
 
   var checkViewPort = function() {
-    // Replace CONFIGJSON with whatever is providing the appropriate width from the backend
-    if ( $(window).width() > window.floating_post_social_width.min )
+    if ( $(window).width() > window.floating_social_buttons_width.min )
       return true;
     return false;
   };
@@ -45,16 +46,56 @@
     };
   };
 
-  var getOffsets = function() {
-    var socialLinks = $('.post-social'),
-        offsets = [];
+  /**
+   * Get the offset of the bottom of the top element bounding the article
+   */
+  var getOffsetTop = function() {
+    // Determine whether or not there is a hero element, and save that element
+    if ( typeof window.floating_social_buttons_top_element == 'undefined' ) {
+      if ( $('#content .hero').length ) {
+        window.floating_social_buttons_top_element = $('#content .hero');
+      } else {
+        window.floating_social_buttons_top_element = $('#content header');
+      }
+    }
 
-    $.each(socialLinks, function(idx, el) {
-      if (idx == 0)
-        offsets.push($(el).offset().top + $(el).outerHeight());
-      else
-        offsets.push($(el).offset().top);
-    });
+    return window.floating_social_buttons_top_element.offset().top + window.floating_social_buttons_top_element.outerHeight();
+  }
+
+  /**
+   * Get the offset of the top of the bottom element bounding the article
+   */
+  var getOffsetBottom = function() {
+    // Article bottom widget area if that exits, else the comments area or the site footer.
+    if ( typeof window.floating_social_buttons_bottom_element == 'undefined' ) {
+      if ( $('.article-bottom').length ) {
+        window.floating_social_buttons_bottom_element = $('.article-bottom .largo-follow');
+      } else if ( $('#comments').length ) {
+        window.floating_social_buttons_bottom_element = $('#comments');
+      } else {
+        window.floating_social_buttons_bottom_element = $('#site-footer');
+      }
+    }
+
+    return window.floating_social_buttons_bottom_element.offset().top;
+  }
+
+  /**
+   * Gets the offset range where the floating social button is allowed.
+   *
+   * Returns an array with the 0th index the offset from top and the 1st index the offset from bottom.
+   *
+   * Things to consider:
+   *   if there's a hero unit, we need to use the bottom of that
+   *   if there isn't a hero image, then we can use the bottom of `#content > article > header`
+   *   afaik, we don't add hero units after the page loads, so this should be good for now
+   */
+  var getOffsets = function() {
+
+    var offsets = [];
+
+    offsets.push( getOffsetTop() );
+    offsets.push( getOffsetBottom() );
 
     return offsets;
   };
