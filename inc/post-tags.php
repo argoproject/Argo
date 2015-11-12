@@ -715,11 +715,13 @@ if ( ! function_exists( 'largo_floating_social_buttons' ) ) {
 	}
 }
 add_action('wp_footer', 'largo_floating_social_buttons');
+
 /**
- * Responsive viewport information for the floating social buttons, in the form of JSON in a script tag.
+ * Responsive viewport information for the floating social buttons, in the form of JSON in a script tag, and the relevant javascript.
  *
  * @since 0.5.4
  * @see largo_floating_social_buttons
+ * @global LARGO_DEBUG
  */
 if ( ! function_exists('largo_floating_social_button_width_json') ) {
 	function largo_floating_social_button_width_json() {
@@ -728,11 +730,15 @@ if ( ! function_exists('largo_floating_social_button_width_json') ) {
 				'min' => '769px',
 				'max' => '9999px',
 			);
-			$config = apply_filters( 'largo_floating_social_bitton_width_json', $config );
+			$config = apply_filters( 'largo_floating_social_button_width_json', $config );
 			?>
-			<script type="text/javascript" id="floating-social-uttons-width-json">
+			<script type="text/javascript" id="floating-social-buttons-width-json">
 				window.floating_post_social_width = <?php echo json_encode( $config ); ?>
 			</script>
+			<script type="text/javascript" src="<?php
+				$suffix = (LARGO_DEBUG)? '' : '.min';
+				echo get_template_directory_uri() . '/js/floating-social-buttons' . $suffix . '.js'
+			?>" async></script>
 			<?php
 		}
 	}

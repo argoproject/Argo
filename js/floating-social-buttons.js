@@ -25,7 +25,7 @@
 
   var checkViewPort = function() {
     // Replace CONFIGJSON with whatever is providing the appropriate width from the backend
-    if ( $(window).width() > CONFIGJSON.width )
+    if ( $(window).width() > window.floating_post_social_width.min )
       return true;
     return false;
   };

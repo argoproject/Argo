@@ -48,6 +48,7 @@ module.exports = function(grunt) {
             'custom-sidebar.js',
             'custom-term-icons.js',
             'featured-media.js',
+            'floating-social-buttons.js',
             'image-widget.js',
             'largoCore.js',
             'load-more-posts.js',
