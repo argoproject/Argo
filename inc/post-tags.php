@@ -735,6 +735,19 @@ if ( ! function_exists('largo_floating_social_button_width_json') ) {
 			<script type="text/javascript" id="floating-social-buttons-width-json">
 				window.floating_social_buttons_width = <?php echo json_encode( $config ); ?>
 			</script>
+			<?php
+		}
+	}
+}
+add_action('wp_footer', 'largo_floating_social_button_width_json');
+
+/**
+ * Enqueue floating social button javascript
+ */
+if ( ! function_exists('largo_floating_social_button_js') ) {
+	function largo_floating_social_button_js() {
+		if ( is_single() && of_get_option('single_floating_social_icons') == '1' && of_get_option('single_template') == 'normal' ) {
+			?>
 			<script type="text/javascript" src="<?php
 				$suffix = (LARGO_DEBUG)? '' : '.min';
 				echo get_template_directory_uri() . '/js/floating-social-buttons' . $suffix . '.js'
@@ -743,4 +756,4 @@ if ( ! function_exists('largo_floating_social_button_width_json') ) {
 		}
 	}
 }
-add_action('wp_footer', 'largo_floating_social_button_width_json');
+add_action('wp_footer', 'largo_floating_social_button_js');
