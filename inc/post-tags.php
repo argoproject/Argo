@@ -721,7 +721,6 @@ add_action('wp_footer', 'largo_floating_social_buttons');
  *
  * @since 0.5.4
  * @see largo_floating_social_buttons
- * @global LARGO_DEBUG
  */
 if ( ! function_exists('largo_floating_social_button_width_json') ) {
 	function largo_floating_social_button_width_json() {
@@ -743,6 +742,10 @@ add_action('wp_footer', 'largo_floating_social_button_width_json');
 
 /**
  * Enqueue floating social button javascript
+ *
+ * @since 0.5.4
+ * @see largo_floating_social_buttons
+ * @global LARGO_DEBUG
  */
 if ( ! function_exists('largo_floating_social_button_js') ) {
 	function largo_floating_social_button_js() {
