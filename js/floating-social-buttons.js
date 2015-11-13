@@ -11,17 +11,26 @@
     if ( checkPosition() && checkViewPort() ) {
       if ( ! $('#floating-social-buttons').length ) {
         $('#page').append('<div id="floating-social-buttons" class=""></div>');
-        $('#floating-social-buttons').html($("#tmpl-floating-social-buttons").html());
-        console.log('Creating the new social buttons');
+        $('#floating-social-buttons')
+          .html($("#tmpl-floating-social-buttons").html())
+          .css('position', 'fixed')
+          .css('top', '50%')
+          .css('left', offsetLeft());
       } else {
-        $('#floating-social-buttons').removeClass('visuallyhidden');
-        console.log('Showing the new social buttons');
+        $('#floating-social-buttons')
+          .removeClass('visuallyhidden')
+          .css('top', '50%')
+          .css('left', offsetLeft());
       }
+
     } else {
-      console.log('TKTK hide the social palette');
-        $('#floating-social-buttons').addClass('visuallyhidden');
+      $('#floating-social-buttons').addClass('visuallyhidden');
     }
   };
+
+  var offsetLeft = function() {
+    return $('#content').offset().left;
+  }
 
   var checkPosition = function() {
     var scrollTop = $(window).scrollTop(),
