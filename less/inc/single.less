@@ -273,15 +273,102 @@ body.normal.page {
 }
 #floating-social-buttons {
   transition: opacity 0.1s;
+  border: 1px solid @grayLighter;
   .hidden-phone {
     display: none;
   }
+
+  a {
+    color: @grayLighter;
+  }
+  .email:hover,
+  span:hover a {
+    color: @white;
+  }
+
   .post-social > span {
-    margin-left: -100%;
+    padding-left: -100%;
     display: block;
     margin: 0;
   }
-
+  .rss {
+    background-color: @white;
+    color: @grayLighter;
+    &:hover {
+      background-color: darken(@rss, 5%);
+    }
+  }
+  .twitter {
+    background-color: @white;
+    color: @grayLighter;
+    &:hover {
+      background-color: darken(@twitter, 5%);
+    }
+  }
+  .facebook {
+    background-color: @white;
+    color: @grayLighter;
+    &:hover {
+      background-color: darken(@facebook, 5%);
+    }
+  }
+  .linkedin {
+    background-color: @white;
+    color: @grayLighter;
+    &:hover {
+      background-color: darken(@linkedin, 5%);
+    }
+  }
+  .gplus {
+    background-color: @white;
+    color: @grayLighter;
+    &:hover {
+      background-color: darken(@gplus, 5%);
+    }
+  }
+  .flickr {
+    background-color: @white;
+    color: @grayLighter;
+    &:hover {
+      background-color: darken(@flickr, 5%);
+    }
+  }
+  .youtube {
+    background-color: @white;
+    color: @grayLighter;
+    &:hover {
+      background-color: darken(@youtube, 5%);
+    }
+  }
+  .print {
+    background-color: @white;
+    color: @grayLighter;
+    &:hover {
+      background-color: darken(#85898F, 5%);
+    }
+  }
+  .email {
+    background-color: @white;
+    color: @grayLighter;
+    &:hover {
+      background-color: darken(#62656F, 5%);
+    }
+  }
+  .social-btn {
+    line-height: 1.5em;
+    max-width: 250px;
+    margin: 0.5em 0;
+    padding: 0.5em;
+  }
+  .post-social {
+    a:hover i {
+      opacity: 1;
+    }
+    margin-bottom: 0;
+    i {
+      margin: 0;
+    }
+  }
 }
 
 /* 2.3 - Post pagination */
