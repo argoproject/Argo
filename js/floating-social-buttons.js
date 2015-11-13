@@ -13,18 +13,19 @@
         $('#page').append('<div id="floating-social-buttons" class=""></div>');
         $('#floating-social-buttons')
           .html($("#tmpl-floating-social-buttons").html())
+          .fadeIn('100')
           .css('position', 'fixed')
           .css('top', '50%')
           .css('left', offsetLeft());
       } else {
         $('#floating-social-buttons')
-          .removeClass('visuallyhidden')
+          .css('opacity', '1')
           .css('top', '50%')
           .css('left', offsetLeft());
       }
 
     } else {
-      $('#floating-social-buttons').addClass('visuallyhidden');
+      $('#floating-social-buttons').css('opacity', '0');
     }
   };
 
@@ -78,7 +79,10 @@
       }
     }
 
-    return window.floating_social_buttons_top_element.offset().top + window.floating_social_buttons_top_element.outerHeight();
+    return window.floating_social_buttons_top_element.offset().top
+      + window.floating_social_buttons_top_element.outerHeight()
+      - $('.sticky-nav-holder').outerHeight();
+        // We want it to appear when the top area is no longer visible, not when the top area is no longer inside the viewport.
   }
 
   /**
