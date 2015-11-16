@@ -709,8 +709,6 @@ if ( ! function_exists( 'largo_floating_social_buttons' ) ) {
 			echo '<script type="text/template" id="tmpl-floating-social-buttons">';
 			largo_post_social_links();
 			echo '</script>';
-
-			var_log('yupyup');
 		}
 	}
 }
