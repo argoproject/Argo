@@ -212,7 +212,7 @@ EOT;
 		$this->markTestIncomplete("This test has not yet been implemented.");
 	}
 
-	function test_largo_hero_class() {
+	test_largo_hero_class() {
 		$this->markTestIncomplete("This test has not yet been implemented.");
 	}
 
@@ -222,6 +222,32 @@ EOT;
 
 	function test_largo_post_metadata() {
 		$this->markTestIncomplete("This test has not yet been implemented.");
+	}
+
+	function test_largo_floating_social_buttons() {
+		ob_start();
+		largo_floating_social_buttons();
+		$ret = ob_get_clean();
+		$this->assertRegExp('/post-social/', $ret, "The .post-social class was not in the output");
+		$this->assertRegExp('/id="floating-social-buttons"/', $ret, "The .post-social class was not in the output");
+		unset($ret);
+	}
+
+	function test_largo_floating_social_button_width_json() {
+		ob_start();
+		largo_floating_social_button_width_json();
+		$ret = ob_get_clean();
+		$this->assertRegExp('/post-social/', $ret, "The .post-social class was not in the output");
+		$this->assertRegExp('/id="floating-social-buttons-width-json/', $ret, "The .post-social class was not in the output");
+		unset($ret);
+	}
+
+	function test_largo_floating_social_button_js() {
+		ob_start();
+		largo_floating_social_button_js();
+		$ret = ob_get_clean();
+		$this->assertRegExp('', $ret, "The .post-social class was not in the output");
+		unset($ret);
 	}
 
 }
