@@ -20,12 +20,15 @@
       } else {
         $('#floating-social-buttons')
           .css('opacity', '1')
+          .css('width', '')
           .css('top', '50%')
           .css('left', offsetLeft());
       }
 
     } else {
-      $('#floating-social-buttons').css('opacity', '0');
+      $('#floating-social-buttons')
+      .css('width', '0')
+      .css('opacity', '0');
     }
   };
 
