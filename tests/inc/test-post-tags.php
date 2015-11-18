@@ -212,7 +212,7 @@ EOT;
 		$this->markTestIncomplete("This test has not yet been implemented.");
 	}
 
-	test_largo_hero_class() {
+	function test_largo_hero_class() {
 		$this->markTestIncomplete("This test has not yet been implemented.");
 	}
 
@@ -225,29 +225,31 @@ EOT;
 	}
 
 	function test_largo_floating_social_buttons() {
-		ob_start();
+		$id = $this->factory->post->create();
+		$this->go_to('/?p=' . $id);
+		of_set_option('single_floating_social_icons', 1);
+		of_set_option('single_template', 'normal');
+		$this->expectOutputRegex('/post-social/', "The .post-social class was not in the output.");
+		$this->expectOutputRegex('/id="tmpl-floating-social-buttons"/', "The #floating-social-buttons id was not in the output.");
 		largo_floating_social_buttons();
-		$ret = ob_get_clean();
-		$this->assertRegExp('/post-social/', $ret, "The .post-social class was not in the output");
-		$this->assertRegExp('/id="floating-social-buttons"/', $ret, "The .post-social class was not in the output");
-		unset($ret);
 	}
 
 	function test_largo_floating_social_button_width_json() {
-		ob_start();
+		$id = $this->factory->post->create();
+		$this->go_to('/?p=' . $id);
+		of_set_option('single_floating_social_icons', 1);
+		of_set_option('single_template', 'normal');
+		$this->expectOutputRegex('/id="floating-social-buttons-width-json"/', "The #floating-social-buttons-width-json id was not in the output.");
 		largo_floating_social_button_width_json();
-		$ret = ob_get_clean();
-		$this->assertRegExp('/post-social/', $ret, "The .post-social class was not in the output");
-		$this->assertRegExp('/id="floating-social-buttons-width-json/', $ret, "The .post-social class was not in the output");
-		unset($ret);
 	}
 
 	function test_largo_floating_social_button_js() {
-		ob_start();
+		$id = $this->factory->post->create();
+		$this->go_to('/?p=' . $id);
+		of_set_option('single_floating_social_icons', 1);
+		of_set_option('single_template', 'normal');
+		$this->expectOutputRegex('/\/js\/floating-social-buttons/', "The Floating social buttons js was not output to the page.");
 		largo_floating_social_button_js();
-		$ret = ob_get_clean();
-		$this->assertRegExp('', $ret, "The .post-social class was not in the output");
-		unset($ret);
 	}
 
 }
