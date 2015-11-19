@@ -15,13 +15,13 @@
           .html($("#tmpl-floating-social-buttons").html())
           .fadeIn('100')
           .css('position', 'fixed')
-          .css('top', '50%')
+          .css('top', $('.sticky-nav-holder').outerHeight() + (1.5 * 1.22 * 16)) // The line height of a standard p tag in largo is 1.5 * 1.22 * @baseFontSize
           .css('left', offsetLeft());
       } else {
         $('#floating-social-buttons')
           .css('opacity', '1')
           .css('width', '')
-          .css('top', '50%')
+          .css('top', $('.sticky-nav-holder').outerHeight() + (1.5 * 1.22 * 16)) // The line height of a standard p tag in largo is 1.5 * 1.22 * @baseFontSize
           .css('left', offsetLeft());
       }
 
