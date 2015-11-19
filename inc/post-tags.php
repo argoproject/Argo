@@ -198,7 +198,7 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 		 * @since 0.5.3
 		 * @param string $output A div containing a number of spans containing social links and other utilities.
 		 */
-		apply_filter('largo_post_social_links', $output);
+		apply_filters('largo_post_social_links', $output);
 
 		if ( $echo ) {
 			echo $output;
