@@ -724,7 +724,7 @@ if ( ! function_exists('largo_floating_social_button_width_json') ) {
 	function largo_floating_social_button_width_json() {
 		if ( is_single() && of_get_option('single_floating_social_icons') == '1' && of_get_option('single_template') == 'normal' ) {
 			$config = array(
-				'min' => '769',
+				'min' => '980',
 				'max' => '9999',
 			);
 			$config = apply_filters( 'largo_floating_social_button_width_json', $config );
