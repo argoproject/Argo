@@ -67,8 +67,6 @@ EOT;
 		largo_post_social_links();
 		$ret = ob_get_clean();
 		$this->assertRegExp('/post-social/', $ret, "The .post-social class was not in the output");
-		$this->assertRegExp('/left/', $ret, "The .left class was not in the output");
-		$this->assertRegExp('/right/', $ret, "The .right class was not in the output");
 		unset($ret);
 
 		// Test that this outputs the expected data for each of the button types
@@ -76,13 +74,11 @@ EOT;
 		// Twitter
 		of_set_option('article_utilities', array('twitter' => '1', 'facebook' => false, 'print' => false, 'email' => false));
 		of_set_option('twitter_link', 'foo');
-		of_set_option('show_twitter_count', false);
 		ob_start();
 		largo_post_social_links();
 		$ret = ob_get_clean();
-		$this->assertRegExp('/' . preg_quote(of_get_option('twitter_link'), '/') . '/' , $ret, "The Twitter link did not appear in the output");
+		$this->assertRegExp('/class="twitter"/' , $ret, "The 'twitter' class did not appear in the output");
 		// @TODO: insert a test for the get_the_author_meta test here
-		// This is just a test for make sure that it outputs the data-count when show_twitter_count == 0,; needs another go-round for '1'
 		$this->assertRegExp('/' . __('Tweet', 'largo') . '/', $ret, "The translation of 'Tweet' was not in the Twitter output");
 		unset($ret);
 		of_reset_options();
@@ -92,7 +88,7 @@ EOT;
 		ob_start();
 		largo_post_social_links();
 		$ret = ob_get_clean();
-		$this->assertRegExp('/' . preg_quote(esc_attr( of_get_option( 'fb_verb' ) ), '/' ) . '/', $ret, "The Facebook Verb was not in the Facebook output");
+		$this->assertRegExp('/' . preg_quote(esc_attr( of_get_option( 'fb_verb' ) ), '/' ) . '/i', $ret, "The Facebook Verb was not in the Facebook output");
 		$this->assertRegExp('/' . preg_quote(get_permalink(), '/') . '/', $ret, "The permalink was not in the Facebook output");
 		unset($ret);
 		of_reset_options();

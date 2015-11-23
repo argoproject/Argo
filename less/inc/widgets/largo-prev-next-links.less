@@ -4,15 +4,33 @@
  * @since 0.5.3
  */
 
-// This widget is an instance of largo_content_nav('single-post-nav-below'), which uses the ID #nav-below and is only output on single pages.
-// This widget has no specific styles. #nav-below and .largo-prev-next-post-links are not used.
+// This widget is an instance of largo_content_nav('single-post-nav-below'),
+// which uses the ID #nav-below and is only output on single pages.
+
+/* Next-prev navigation 
+ * ----------------------
+ * These styles were moved from single.less */
+.pager {
+  line-height: 1.2;
+  a {
+    display: inline-block;
+    padding: 10px 15px;
+    color: @textColor;
+    background-color: darken(@postBoxBackgroundColor, 10%);
+    &:hover {
+  	  background-color: darken(@postBoxBackgroundColor, 35%);
+  	  color: @white;
+  	  text-decoration: none;
+    }
+  }
+}
 .next {
   width: 48%;
   float: right;
   text-align: right;
   img {
     float: right;
-    padding-left: 12px;
+    padding-left: @baseline - 4;
   }
 }
 .previous {
@@ -21,6 +39,6 @@
   text-align: left;
   img {
     float: left;
-    padding-right: 12px;
+    padding-right: @baseline - 4;
   }
 }

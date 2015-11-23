@@ -8,14 +8,27 @@
 global $post;
 
 // post thumbnail, possibly before headline
-if ( get_the_post_thumbnail() && ( !isset($instance) || !isset($instance['thumbnail_location']) || $instance['thumbnail_location'] != 'after' )) {
-	echo '<a href="' . get_permalink() . '"/>' . get_the_post_thumbnail( get_the_ID(), 'thumbnail', array('class'=>'alignleft') ) . '</a>';
+if (
+	get_the_post_thumbnail() && (
+		!isset($instance) ||
+		!isset($instance['thumbnail_location']) ||
+		$instance['thumbnail_location'] != 'after'
+	)
+) {
+	echo '<div class="' . largo_hero_class(get_the_ID() , false) . ' alignleft"><a href="' . get_permalink() . '"/>' . get_the_post_thumbnail( get_the_ID(), 'thumbnail') . '</a></div>';
 } ?>
+
 <h4><a href="<?php the_permalink(); ?>" title="Read: <?php esc_attr( the_title('','', FALSE) ); ?>"><?php the_title(); ?></a></h4>
+
 <?php
 // post thumbnail, by default after headline
-if ( get_the_post_thumbnail() && isset($instance) && isset($instance['thumbnail_location']) && $instance['thumbnail_location'] == 'after' ) {
-	echo '<a href="' . get_permalink() . '"/>' . get_the_post_thumbnail( get_the_ID(), 'thumbnail', array('class'=>'alignleft') ) . '</a>';
+if (
+	get_the_post_thumbnail() &&
+	isset($instance) &&
+	isset($instance['thumbnail_location']) &&
+	$instance['thumbnail_location'] == 'after'
+) {
+	echo '<div class="' . largo_hero_class(get_the_id() , false) . '"><a href="' . get_permalink() . '"/>' . get_the_post_thumbnail( get_the_ID(), 'thumbnail', array('class'=>'alignleft') ) . '</a></div>';
 }
 
 // post byline, if indicated

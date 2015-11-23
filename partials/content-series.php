@@ -26,7 +26,11 @@ $tags = of_get_option ('tag_display');
 
 	<div class="entry-content">
  		<?php if ( isset($opt['show']['image']) && $opt['show']['image'] ) : ?>
-		<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
+			<div class="has-thumbnail <?php largo_hero_class(get_the_ID()); ?>">
+				<a href="<?php the_permalink(); ?>">
+					<?php the_post_thumbnail(); ?>
+				</a>
+			</div>
 		<?php endif; ?>
 
  		<?php if ( isset($opt['show']['excerpt']) && $opt['show']['excerpt'] ) :

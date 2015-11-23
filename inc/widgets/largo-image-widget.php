@@ -25,7 +25,7 @@ class largo_image_widget extends WP_Widget {
 	function Largo_Image_Widget() {
 		$widget_ops = array( 'classname' => 'widget_sp_image', 'description' => __( 'Showcase a single image with a Title, URL, and a Description', 'largo' ) );
 		$control_ops = array( 'id_base' => 'widget_sp_image' );
-		$this->WP_Widget('widget_sp_image', __('Image Widget', 'largo'), $widget_ops, $control_ops);
+		$this->WP_Widget('widget_sp_image', __('Largo Image Widget', 'largo'), $widget_ops, $control_ops);
 		add_action( 'sidebar_admin_setup', array( $this, 'admin_setup' ) );
 		add_action( 'admin_head-widgets.php', array( $this, 'admin_head' ) );
 	}
@@ -329,12 +329,6 @@ class largo_image_widget extends WP_Widget {
 			$attr['class'] = 'attachment-'.$size;
 		}
 		$attr['style'] = '';
-		if (!empty($instance['width'])) {
-			$attr['style'] .= "max-width: {$instance['width']}px;";
-		}
-		if (!empty($instance['height'])) {
-			$attr['style'] .= "max-height: {$instance['height']}px;";
-		}
 		if (!empty($instance['align']) && $instance['align'] != 'none') {
 			$attr['class'] .= " align{$instance['align']}";
 		}

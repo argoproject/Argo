@@ -160,40 +160,37 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 	function largo_post_social_links( $echo = true ) {
 		$utilities = of_get_option( 'article_utilities' );
 
-		$output = '<div class="post-social clearfix"><div class="left">';
+		$output = '<div class="largo-follow post-social clearfix">';
+
+		if ( $utilities['facebook'] === '1' ) {
+			$fb_share = '<span class="facebook"><a target="_blank" href="http://www.facebook.com/sharer/sharer.php?u=%1$s"><i class="icon-facebook"></i><span class="hidden-phone">%2$s</span></a></span>';
+			$output .= sprintf(
+				$fb_share,
+				esc_attr( get_permalink() ),
+				esc_attr( ucfirst( of_get_option( 'fb_verb' ) ) )
+			);
+		}
 
 		if ( $utilities['twitter'] === '1' ) {
-			$twitter_link = of_get_option( 'twitter_link' ) ? 'data-via="' . esc_attr( largo_twitter_url_to_username( of_get_option( 'twitter_link' ) ) ) . '"' : '';
-			$twitter_related = get_the_author_meta( 'twitter' ) ? sprintf( '%s:' . __( 'Follow the author of this article', 'largo' ), get_the_author_meta( 'twitter' ) ) : '';
-			$twitter_count = (of_get_option( 'show_twitter_count' ) == 0) ? 'data-count="none"' : '';
-
-			$output .= sprintf( '<span class="twitter"><a href="http://twitter.com/share" class="twitter-share-button" data-url="%1$s" data-text="%2$s" %3$s data-via="%4$s" %5$s>%6$s</a></span>',
-				get_permalink(),
-				get_the_title(),
-				$twitter_link,
-				$twitter_related,
-				$twitter_count,
+			$twitter_share = '<span class="twitter"><a target="_blank" href="https://twitter.com/intent/tweet?text=%1$s&url=%2$s&via=%3$s"><i class="icon-twitter"></i><span class="hidden-phone">%4$s</span></a></span>';
+			$output .= sprintf(
+				$twitter_share,
+				esc_attr( get_the_title() ),
+				esc_attr( get_permalink() ),
+				esc_attr( get_the_author_meta( 'twitter' ) ),
 				esc_attr( __( 'Tweet', 'largo' ) )
 			);
 		}
 
-		if ( $utilities['facebook'] === '1' )
-			$output .= sprintf( '<span class="facebook"><fb:like href="%1$s" send="false" layout="button_count" show_faces="false" action="%2$s"></fb:like></span>',
-				get_permalink(),
-				esc_attr( of_get_option( 'fb_verb' ) )
-			);
-
-		$output .= '</div><div class="right">';
-
 		if ( $utilities['print'] === '1' ) {
-			$output .= '<span class="print"><a href="#" onclick="window.print()" title="' . esc_attr( __( 'Print this article', 'largo' ) ) . '" rel="nofollow"><i class="icon-print"></i> ' . esc_attr( __( 'Print', 'largo' ) ) . '</a></span>';
+			$output .= '<span class="print"><a href="#" onclick="window.print()" title="' . esc_attr( __( 'Print this article', 'largo' ) ) . '" rel="nofollow"><i class="icon-print"></i><span class="hidden-phone">' . esc_attr( __( 'Print', 'largo' ) ) . '</span></a></span>';
 		}
 
 		if ($utilities['email'] === '1' ) {
-			$output .= '<span data-service="email" class="email custom-share-button icon-mail share-button"> Email</span>';
+			$output .= '<span data-service="email" class="email custom-share-button share-button"><i class="icon-mail"></i> <span class="hidden-phone">Email</span></span>';
 		}
 
-		$output .= '</div></div>';
+		$output .= '</div>';
 
 		if ( $echo ) {
 			echo $output;

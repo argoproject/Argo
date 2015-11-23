@@ -1,4 +1,4 @@
-/**
+/** LARGO RECENT POSTS
  * Styles for Largo Featured and Largo Recent Posts widgets
  *
  * Also included are some styles for Largo INN RSS and the deprecated Largo Sidebar Featured widget.
@@ -16,44 +16,44 @@
   }
   li {
     overflow: hidden;
-    margin-bottom: 15px;
+    margin-bottom: 1em;
   }
   img {
     // Small thumbnails are either right or left aligned.
     &.right-align {
       float: right;
-      padding: 3px 0px 6px 10px;
+      padding: .2em 0 .4em .66em;
     }
     &.left-align {
       float: left;
-      padding: 3px 10px 6px 0px;
+      padding: .2em .66em .4em 0;
     }
     // Large thumbnails get different padding.
     &.attachment-large,&.attachment-medium {
-      padding: 0px 0 10px;
+      padding: 0 0 .66em;
     }
   }
   h5 {
-    margin-bottom: 2px;
-    font-size: 1.15*@baseFontSize;
+    margin-bottom: 0.1em;
+    font-size: 1.15 * @baseFontSize;
   }
   p {
-    font-size: 0.9*@baseFontSize;
+    font-size: 0.9 * @baseFontSize;
     margin-bottom: 0;
   }
 }
 #sidebar .largo-INN-RSS {
   ul {
-    margin: @baseline/2 0;
+    margin: @baseline / 2 0;
     padding: 0;
   }
   li {
-    margin-bottom: @baseline/2;
+    margin-bottom: @baseline / 2;
     list-style: none;
     h5,
     h6,
     p {
-    margin-bottom: @baseline/5;
+      margin-bottom: @baseline / 5;
     }
   }
 }
@@ -71,21 +71,21 @@
 #site-footer .largo-footer-featured {
   margin-bottom: @baseline / 2;
   .post-lead {
-    min-height: 60px;
+    min-height: 5em;
     margin-bottom: @baseline / 3;
   }
   img {
     float:left;
-    margin: 0 10px 10px 0;
-    padding-top: 4px;
+    margin: 0 (@baseline * 0.5) (@baseline * 0.25) 0;
+    padding-top: 0.25em;
   }
   h5 {
-    font-size: @baseFontSize;
-    line-height: 1;
-    margin-bottom: 4px;
+    font-size: @baseFontSize * 1.33;
+    line-height: 1.1;
+    margin-bottom: 0.33em;
   }
   p {
-    font-size: @baseFontSize * 0.667;
+    font-size: @baseFontSize * 0.9;
     margin-bottom: 0;
   }
 }
