@@ -80,7 +80,6 @@ jQuery(document).ready(function($) {
       // Handle the tap for the drop down
       $('ul.nav').on(mobileEvent + '.largo', 'li', function(event) {
         var li = $(event.currentTarget);
-		console.log(li);
 
         if (!li.hasClass('dropdown')) {
           window.location.href = li.find('a').attr('href');
@@ -358,7 +357,6 @@ jQuery(document).ready(function($) {
 				navbar.off('click.toggleNav', '.nav-shelf .dropdown-toggle');
 
 			var li = $( event.target ).closest('li');
-			console.log(li);
 
 			// Close the others if we are opening
 			if (!li.hasClass('open'))
