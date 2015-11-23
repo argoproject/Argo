@@ -83,10 +83,20 @@
   padding-right: 10px;
   line-height: @baseLineHeight;
 }
-.navbar .open > a {
+.navbar .open > a ,
+html.no-touch .navbar li > a:hover {
   .transition(background-color 300ms ease-out);
   background-color: @navbarLinkBackgroundActive;
   color: #eee;
+}
+html.no-touch .navbar {
+  li.home-icon,
+  li.home-link {
+    a:hover {
+      background-color: transparent;
+      color: @linkColor;
+    }
+  }
 }
 .home-icon:hover img,
 li.home-link:hover i {
