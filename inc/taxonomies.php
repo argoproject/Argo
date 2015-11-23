@@ -12,6 +12,17 @@ function largo_is_series_enabled() {
 }
 
 /**
+ * Check if Series landing pages are enabled
+ *
+ * @since 0.5.2
+ * @return bool Whether or not the Series Landing Page  option is enabled in the Theme Options > Advanced
+ */
+function largo_is_series_landing_enabled() {
+	$series_landing_enabled = of_get_option('custom_landing_enabled');
+	return !empty($series_landing_enabled);
+}
+
+/**
  * Register the prominence and series custom taxonomies
  * Insert the default terms
  *
@@ -296,7 +307,41 @@ function largo_series_landing_link($post_link, $post) {
 add_filter('post_type_link', 'largo_series_landing_link', 22, 2);
 
 /**
+ * Helper to get the Series Landing Page for a given series.
+ *
+ * @param Object|id|string $series
+ * @return array An array of all WP_Post objects answering the description of this series. May be 0, 1 or conceivably many.
+ */
+function largo_get_series_landing_page_by_series($series) {
+	if ( !is_object($series) ) {
+		if ( is_int( $series ) ) {
+			$series = get_term( $series, $taxonomy );
+		} else {
+			$series = get_term_by( 'slug', $series, $taxonomy );
+		}
+	}
+
+	// get the cftl-tax-landing
+	$args = array(
+		'post_type' => 'cftl-tax-landing',
+		'posts_per_page' => 1,
+		'tax_query' => array( array(
+			'taxonomy' => 'series',
+			'field' => 'id',
+			'terms' => $series->term_id
+		)),
+	);
+
+	$landing = new WP_Query( $args );
+
+	return $landing->posts;
+}
+
+/**
  * Helper for getting posts in a category archive, excluding featured posts.
+ * 
+ * @param WP_Query $query
+ * @uses largo_get_featured_posts_in_category
  */
 function largo_category_archive_posts( $query ) {
 	//don't muck with admin, non-categories, etc
@@ -355,6 +400,48 @@ function largo_get_featured_posts_in_category($category_name, $number=5) {
 	}
 
 	return $featured_posts;
+}
+
+/**
+ * Return the first featured image thumbnail found in a given array of WP_Posts
+ *
+ * Useful if you wint to create a thumbnail for a given taxonomy
+ *
+ * @param array An array of WP_Post objects to iterate over
+ * @return str|false The HTML for the image, or false if no images were found.
+ * @since 0.5.3
+ * @uses largo_has_featured_media
+ */
+function largo_featured_thumbnail_in_post_array($array) {
+	$thumb = '';
+	foreach ($array as $post) {
+		$thumb = get_the_post_thumbnail($post->ID);
+		if ($thumb != '') return $thumb;
+	}
+
+	return $thumb;
+}
+
+/**
+ * Return the first headline link for an array of WP_Posts
+ *
+ * Useful if you want to link to an example post in a series.
+ *
+ * @param array An array of WP_Post objects to iterate over
+ * @return str The HTML for the link
+ * @since 0.5.3
+ */
+function largo_first_headline_in_post_array($array) {
+	$headline = '';
+	foreach ($array as $post) {
+		$headline = sprintf('<a href="%s">%s</a>',
+			get_permalink($post->ID),
+			get_the_title($post->ID)
+		);
+		if ($headline != '') return $headline;
+	}
+
+	return $headline;
 }
 
 /**

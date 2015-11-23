@@ -210,53 +210,62 @@ body.normal.page {
 
 /* 2.2 - Social media links */
 
+@media (max-width: 768px) {
+  .post-social > span {
+    min-width: 50px;
+    text-align: center;
+    display: inline-block;
+  }
+}
+
+@media (min-width: 769px) {
+  .post-social > span {
+    display: inline-block;
+  }
+  // Fudging to prevent overlap between the icon and the text
+  .post-social i {
+    margin-right: 0.5em;
+    margin-left: 0.2em;
+  }
+}
 .post-social {
-  min-height: 28px;
-  height: auto;
   margin-bottom: @baseline;
-  border-top: 1px solid @grayLighter;
-  border-bottom: 1px solid @grayLighter;
-  .right,
-  .left {
-    margin: 0;
-    height: auto;
-  }
-  .left {
-    padding: 6px 0 0;
-  }
-  .right {
-    padding: 1px 0 0;
-  }
-  span {
+  &> span {
+    // copied from widgets/largo-follow.less
+    line-height: 1.5em;
+    max-width: 250px;
+    margin: 0.5em 0;
+    padding: 0.3em 0.6em;
+    text-align: center;
+
+    text-transform: uppercase;
+    font-weight: 300;
+    font-family: @sansFontFamily;
     position: relative;
-  }
-  span.twitter {
-    margin-right: 8px;
-  }
-  span.facebook {
-    top: -7px;
-  }
-  span.print,
-  span.email {
-    font-family: Verdana, Helvetica, sans-serif;
-    font-size: 11px;
-    top: 1px;
-    margin-left: 10px;
-    i, &::before {
-	  font-size: @baseFontSize + 2;
-	  margin: 0 -3px 0 2px;
-	  position: relative;
-	  top: 2px;
-    }
+    font-size: @baseFontSize;
+    color: white;
     &:hover {
       .opacity(85);
     }
-    a {
-      color: black;
-      &:hover {
-        text-decoration: none;
-	  }
+    &:last-child {
+      margin-right: 0;
     }
+  }
+  a {
+    color: white;
+    &:hover {
+      color: white;
+      text-decoration: none;
+      i {
+        .opacity(85);
+      }
+    }
+  }
+  i, &::before {
+    position: relative;
+  }
+  .email:hover {
+    cursor: pointer;
   }
 }
 
@@ -273,7 +282,7 @@ body.normal.page {
     text-transform: uppercase;
     font-size: @baseFontSize * 0.815;
     &:first-child {
-	  padding-left: 0;
+      padding-left: 0;
     }
   }
 }
