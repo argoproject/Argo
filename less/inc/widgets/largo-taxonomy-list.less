@@ -1,8 +1,9 @@
+@tax-list-img-size: 60px;
 .largo-taxonomy-list img {
-  max-width: 60px;
-  max-height: 60px;
+  max-width: @tax-list-img-size;
+  max-height: @tax-list-img-size;
   float: left;
-  margin-right: 0.5em;
+  margin-right: 8px;;
 }
 .largo-taxonomy-list ul {
   margin: 0;
@@ -13,4 +14,12 @@
 .largo-taxonomy-list h5 {
   margin-bottom: 0.5em;
   font-size: 1em;
+}
+
+// Fix for edge case where long series name and long headline name combine with thumbnail to wrap below the image.
+.largo-taxonomy-list {
+  li.has-thumbnail a:nth-child(2) {
+    padding-left: @tax-list-img-size + 8px;
+    display: block;
+  }
 }
