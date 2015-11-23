@@ -9,6 +9,14 @@ inc/taxonomies.php
 
    :returns: bool $hether or not the Series taxonomy option is enabled in the Theme Options > Advanced
 
+.. php:function:: largo_is_series_landing_enabled()
+
+   Check if Series landing pages are enabled
+
+   :since: 0.5.2
+
+   :returns: bool $hether or not the Series Landing Page option is enabled in the Theme Options > Advanced
+
 .. php:function:: largo_custom_taxonomies()
 
    Register the prominence and series custom taxonomies
@@ -64,17 +72,56 @@ inc/taxonomies.php
 
    :returns: filtered $post_link, replacing a Landing Page link with its Series link as needed
 
+.. php:function:: largo_get_series_landing_page_by_series()
+
+   Helper to get the Series Landing Page for a given series.
+
+   :param Object|id|string $series:
+
+   :returns: array $n array of all WP_Post objects answering the description of this series. May be 0, 1 or conceivably many.
+
 .. php:function:: largo_category_archive_posts()
 
    Helper for getting posts in a category archive, excluding featured posts.
+
+   :param WP_Query $query:
+
+   :uses: largo_get_featured_posts_in_category
 
 .. php:function:: largo_get_featured_posts_in_category()
 
    Get posts marked as "Featured in category" for a given category name.
 
    :param string $category_name: the category to retrieve featured posts for.
+   :param integer $number: total number of posts to return, backfilling with regular posts as necessary.
 
    :since: 0.5
+
+.. php:function:: largo_featured_thumbnail_in_post_array()
+
+   Return the first featured image thumbnail found in a given array of WP_Posts
+
+   Useful if you wint to create a thumbnail for a given taxonomy
+
+   :param array $n: array of WP_Post objects to iterate over
+
+   :returns: str|false $he HTML for the image, or false if no images were found.
+
+   :since: 0.5.3
+
+   :uses: largo_has_featured_media
+
+.. php:function:: largo_first_headline_in_post_array()
+
+   Return the first headline link for an array of WP_Posts
+
+   Useful if you want to link to an example post in a series.
+
+   :param array $n: array of WP_Post objects to iterate over
+
+   :returns: str $he HTML for the link
+
+   :since: 0.5.3
 
 .. php:function:: unregister_series_taxonomy()
 

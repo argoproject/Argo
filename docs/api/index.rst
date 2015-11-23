@@ -7,6 +7,7 @@ Function reference by file
 * `homepages/homepage.php <homepages/homepage.html>`_
 * `homepages/layouts/HomepageSingleWithSeriesStories.php <homepages/layouts/HomepageSingleWithSeriesStories.html>`_
 * `homepages/zones/zones.php <homepages/zones/zones.html>`_
+* `inc/ajax-functions.php <inc/ajax-functions.html>`_
 * `inc/custom-feeds.php <inc/custom-feeds.html>`_
 * `inc/custom-less-variables.php <inc/custom-less-variables.html>`_
 * `inc/deprecated.php <inc/deprecated.html>`_
@@ -14,6 +15,7 @@ Function reference by file
 * `inc/enqueue.php <inc/enqueue.html>`_
 * `inc/featured-content.php <inc/featured-content.html>`_
 * `inc/featured-media.php <inc/featured-media.html>`_
+* `inc/header-footer.php <inc/header-footer.html>`_
 * `inc/helpers.php <inc/helpers.html>`_
 * `inc/images.php <inc/images.html>`_
 * `inc/metabox-api.php <inc/metabox-api.html>`_
@@ -34,7 +36,6 @@ Function reference by file
 * `inc/widgets.php <inc/widgets.html>`_
 * `inc/customizer/customizer.php <inc/customizer/customizer.html>`_
 * `inc/widgets/largo-facebook.php <inc/widgets/largo-facebook.html>`_
-* `inc/widgets/largo-follow.php <inc/widgets/largo-follow.html>`_
 * `inc/widgets/largo-image-widget.php <inc/widgets/largo-image-widget.html>`_
 * `inc/widgets/largo-post-series-links.php <inc/widgets/largo-post-series-links.html>`_
 * `inc/widgets/largo-recent-comments.php <inc/widgets/largo-recent-comments.html>`_
@@ -42,7 +43,3 @@ Function reference by file
 * `inc/widgets/largo-twitter.php <inc/widgets/largo-twitter.html>`_
 * `inc/wp-taxonomy-landing/functions/cftl-admin.php <inc/wp-taxonomy-landing/functions/cftl-admin.html>`_
 * `inc/wp-taxonomy-landing/functions/cftl-series-order.php <inc/wp-taxonomy-landing/functions/cftl-series-order.html>`_
-* `partials/content.php <partials/content.html>`_
-* `partials/sidebar-archive.php <partials/sidebar-archive.html>`_
-* `partials/sidebar-single.php <partials/sidebar-single.html>`_
-* `partials/sidebar.php <partials/sidebar.html>`_

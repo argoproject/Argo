@@ -36,7 +36,7 @@ if ( $query->have_posts() ) {
 
 					<?php // if we have a thumbnail image, show it
 					if ( has_post_thumbnail() ) { ?>
-						<div class="image-wrap span3 hidden-phone">
+						<div class="image-wrap span3 hidden-phone <?php largo_hero_class(get_the_ID()); ?>">
 							<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
 						</div>
 					<?php } // end thumbnail ?>
@@ -44,7 +44,7 @@ if ( $query->have_posts() ) {
 					<div class="<?php echo (has_post_thumbnail())? "span9" : "span12"; ?>">
 
 						<?php if ( has_post_thumbnail() ) { ?>
-							<div class="image-wrap visible-phone">
+							<div class="image-wrap visible-phone <?php largo_hero_class(get_the_ID()); ?>">
 								<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
 							</div>
 						<?php } ?>

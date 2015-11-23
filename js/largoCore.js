@@ -348,7 +348,7 @@ jQuery(document).ready(function($) {
 		});
 
 		// Secondary nav
-		navbar.on('touchstart.toggleNav click.toggleNav', '.nav-shelf .dropdown-toggle', function(event) {
+		navbar.on('touchstart.toggleNav click.toggleNav', '.nav-shelf .caret', function(event) {
 			// Only handle when
 			if (toggleButton.css('display') == 'none')
 				return;
