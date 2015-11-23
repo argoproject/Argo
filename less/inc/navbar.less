@@ -89,11 +89,13 @@
   padding-right: 10px;
   line-height: @baseLineHeight;
 }
-.navbar .open > a,
-html.no-touch .navbar li > a:hover {
+.navbar .open > a {
   .transition(background-color 300ms ease-out);
   background-color: @navbarLinkBackgroundActive;
   color: #eee;
+}
+.home-icon:hover img {
+  opacity: 0.75;
 }
 li.home-link:hover i {
   .opacity(85);
