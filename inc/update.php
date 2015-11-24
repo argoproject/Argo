@@ -575,18 +575,40 @@ function largo_replace_deprecated_widgets() {
 	// This defines the classes of widget that will be updated, the class that they will be
 	// replaced with, and the default args on the replacement widget that must be set.
 	$upgrades = array(
-		'largo-footer-featured' => array(
-			'class' => 'largo-featured',
+		/*
+		 * Get the class name from the 'classname' variable in the $widget_ops array used to parent::__construct() the widget:
+		 * https://github.com/INN/Largo/blob/master/inc/widgets/largo-recent-posts.php#L14
+		 *
+		 * Example widget description
+		'old-widget-class' => array(
+			'class' => 'new-widget-class',
 			'defaults' => array(
+				// The $instance arguments for the widget go here.
+				'ignore_global_shown_ids' => true,
+				'show_thumbnails' => '1',
+				'display_chicken' => false
+			)
+		*/
+		'largo-footer-featured' => array(
+			'class' => 'largo-recent-posts',
+			'defaults' => array(
+				'taxonomy' => 'prominence',
 				'term' => 'footer-featured',
 				'title' => __('In Case You Missed It', 'largo')
 			)
 		),
 		'largo-sidebar-featured' => array(
-			'class' => 'largo-featured',
+			'class' => 'largo-recent-posts',
 			'defaults' => array(
+				'taxonomy' => 'prominence',
 				'term' => 'sidebar-featured',
 				'title' => __('We Recommend', 'largo')
+			)
+		),
+		'largo-featured' => array(
+			'class' => 'largo-recent-posts',
+			'defaults' => array(
+				'title' => __('Largo Featured Posts', 'largo')
 			)
 		)
 	);
@@ -604,9 +626,11 @@ function largo_replace_deprecated_widgets() {
 		if ( $region != 'array_version' && is_array($current_sidebar) ) {
 			foreach ( $current_sidebar as $current_widget_slug ) {
 				foreach ( $upgrades as $old_widget_name => $upgrade ) {
+
 					// Check if the current widget matches a widget in
 					// $updates that needs to be replaced.
 					if (strpos($current_widget_slug, $old_widget_name) === 0) {
+
 						// Update all this here and now, in case the indexes are off because this
 						// has been meddled with in a previous loop.
 						$local_all_widgets = get_option( 'sidebars_widgets' );
