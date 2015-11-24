@@ -26,16 +26,41 @@
     font-size: @baseFontSize;
   }
   ul {
-    margin: @baseline/5 0 0 @baseline;
+    list-style: none;
+    margin: @baseline/5 0 0 0;
     line-height: 1.2;
     ul {
       margin-bottom: @baseline / 5;
       margin-top: @baseline * 0.5;
     }
   }
+  li {
+    overflow: hidden;
+    margin-bottom: 1em;
+  }
   p.morelink {
    margin: -(@baseline / 4) 0 0;
    font-size: @baseFontSize; // to avoid overrides
+  }
+
+  img {
+    // Small thumbnails are either right or left aligned.
+    &.right-align {
+      float: right;
+      padding: .2em 0 .4em .66em;
+    }
+    &.left-align {
+      float: left;
+      padding: .2em .66em .4em 0;
+    }
+    // Large thumbnails get different padding.
+    &.attachment-large,&.attachment-medium {
+      padding: 0 0 .66em;
+    }
+  }
+  h5 {
+    margin-bottom: 0.2em;
+    font-size: 1.25 * @baseFontSize;
   }
 }
 
@@ -203,14 +228,6 @@
 @import "widgets/largo-disclaimer.less";
 @import "widgets/largo-donate-widget.less";
 @import "widgets/largo-explore-related.less";
-  // largo-featured-posts.less (below) includes styles for:
-  //   Largo Sidebar Featured (deprecated)
-  //   Largo Footer Featured (deprecated)
-  //   Largo Featured
-  //   Largo Recent Posts
-  //   Largo INN RSS
-  //   Largo Taxonomy List
-@import "widgets/largo-featured-posts.less";
 @import "widgets/largo-follow.less";
 @import "widgets/largo-image-widget.less";
 @import "widgets/largo-prev-next-links.less";
@@ -220,3 +237,4 @@
 @import "widgets/largo-staff-roster.less";
 @import "widgets/largo-tag-list.less";
 @import "widgets/largo-taxonomy-list.less";
+@import "widgets/largo-inn-rss.less";
