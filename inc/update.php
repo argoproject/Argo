@@ -579,9 +579,15 @@ function largo_replace_deprecated_widgets() {
 		 * Get the class name from the 'classname' variable in the $widget_ops array used to parent::__construct() the widget:
 		 * https://github.com/INN/Largo/blob/master/inc/widgets/largo-recent-posts.php#L14
 		 *
+		 * The callback function, if it is set (and it does not have to be), will receive two arguments.
+		 * The first one is the deprecated widget's $instance options.
+		 * The second argument is the replacement widget's $instance options.
+		 * Your callback function should return the replacement widget's $instance options.
+		 *
 		 * Example widget description
 		'old-widget-class' => array(
 			'class' => 'new-widget-class',
+			'callback' => 'name_of_callback_function',
 			'defaults' => array(
 				// The $instance arguments for the widget go here.
 				'ignore_global_shown_ids' => true,
@@ -607,6 +613,7 @@ function largo_replace_deprecated_widgets() {
 		),
 		'largo-featured' => array(
 			'class' => 'largo-recent-posts',
+			'callback' => 'largo_deprecated_callback_largo_featured',
 			'defaults' => array(
 				'title' => __('Largo Featured Posts', 'largo')
 			)
@@ -649,6 +656,7 @@ function largo_replace_deprecated_widgets() {
 						 * $basename: the slug of the widget $current_widget_slug, when you remove the prefix widget_ and postfix -number
 						 * $all_instances_of_widget: All instance of $current_widget_slug in all sidebars.
 						 * $upgrade['class'] : The class of the replacement widget, which needs -widget appended to it.
+						 * $upgrade['callback'] : name of the callback function that should be run
 						 * $upgrade['defaults'] : Default instance arguments for the replacement widget.
 						 * $all_instances_of_upgrade: All instances of $$upgrade['class'] in all sidebars.
 						 * $upgrade_instance_args: The merged old args of the widget with the args from $upgrade['defaults']
@@ -663,6 +671,18 @@ function largo_replace_deprecated_widgets() {
 							$all_instances_of_widget = get_option('widget_' . $basename, false);
 
 							$upgrade_instance_args = array_replace($all_instances_of_widget[$number], $upgrade['defaults']);
+
+							/**
+							 * Call a callback specified in the widget upgrade options in largo_replace_deprecated_widgets() 
+							 *
+							 * @param array The deprecated widget's $instance variables
+							 * @param array The replacement widget's default $instance variables
+							 * @return array The replacement widget's $instance variables
+							 */
+							if ( isset($upgrade['callback']) ) {
+								$upgrade_instance_args = call_user_func( $upgrade['callback'], $all_instances_of_widget[$number], $upgrade['defaults'] ) ;
+							}
+
 							// create the new widget.
 							$liw_return = largo_instantiate_widget($upgrade['class'], $upgrade_instance_args, $region);
 
@@ -690,6 +710,21 @@ function largo_replace_deprecated_widgets() {
 			}
 		}
 	}
+}
+
+/**
+ * Callback for updating the Largo Featured widget in largo_replace_deprecated_widgets()
+ *
+ * @since 0.5.3
+ * @see largo_replace_deprecated_widgets
+ * @param array $deprecated the deprecated widget's $instance variables
+ * @param array $replacement the replacement widget's $instance variables
+ * @return array the replacement widget's $instance variables
+ */
+function largo_deprecated_callback_largo_featured($deprecated, $replacement) {
+	var_log($deprecated);
+	$replacement['thumbnail_display'] = $deprecated['thumb'];
+	return $replacement;
 }
 
 /* --------------------------------------------------------

@@ -490,6 +490,18 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 			"The old Largo Featured widget was not found in the Homepage Alert widget area.");
 
 	}
+
+	function test_largo_deprecated_callback_largo_featured() {
+		$replacement = array(
+			'foo' => 'bar',
+		);
+		$deprecated = array(
+			'thumb' => 'there was an old farmer',
+		);
+		$return = largo_deprecated_callback_largo_featured($deprecated, $replacement);
+		$this->assertEquals($return['thumbnail_display'], $deprecated['thumb']);
+		$this->assertEquals($return['foo'], $deprecated['foo']);
+	}
 }
 
 class LargoUpdateTestAjaxFunctions extends WP_Ajax_UnitTestCase {
