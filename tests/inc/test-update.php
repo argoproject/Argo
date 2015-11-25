@@ -500,7 +500,7 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 		);
 		$return = largo_deprecated_callback_largo_featured($deprecated, $replacement);
 		$this->assertEquals($return['thumbnail_display'], $deprecated['thumb']);
-		$this->assertEquals($return['foo'], $deprecated['foo']);
+		$this->assertEquals($return['foo'], $replacement['foo']);
 	}
 }
 

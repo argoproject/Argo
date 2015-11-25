@@ -722,8 +722,9 @@ function largo_replace_deprecated_widgets() {
  * @return array the replacement widget's $instance variables
  */
 function largo_deprecated_callback_largo_featured($deprecated, $replacement) {
-	var_log($deprecated);
-	$replacement['thumbnail_display'] = $deprecated['thumb'];
+	if ( isset($deprecated['thumb'] ) ) {
+		$replacement['thumbnail_display'] = $deprecated['thumb'];
+	}
 	return $replacement;
 }
 
