@@ -69,12 +69,18 @@
       & > * > .widget,
       & > .widget {
         padding-right: @baseline;
+        @media (max-width: 768px) {
+          padding-right: 0;
+        }
       }
     }
     &:last-child {
       & > * > .widget,
       & > .widget {
         padding-left: @baseline;
+        @media (max-width: 768px) {
+          padding-left: 0;
+        }
       }
     }
   }
@@ -195,6 +201,10 @@
 /* 1.6 - sidebar styles */
 #sidebar .widget {
   padding: 0 0 0 @baseline;
+
+  @media (max-width: 768px) {
+    padding: 0;
+  }
 }
 .single.normal #sidebar .widget {
   padding: 0 @baseline 0 0;
