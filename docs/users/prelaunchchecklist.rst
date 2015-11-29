@@ -17,7 +17,7 @@ Optionally you can elect to not use images and display a text-only header instea
 
 **Square Image** In addition you'll need to create a square thumbnail image (200 by 200 px is ideal) that is used as a fallback when you share posts on Facebook or Twitter for which you have not set a featured image. In addition, a small version of this image is created automatically by WordPress/Largo for use in the site navigation. Since this image needs to be optimized for a small size (60x60 px is the smallest it appears) the best square images should not contain any text and you should avoid adding significant margins or padding within the image.
 
-**Sticky Header Logo** - This image should be 100 pixels tall and at least 100 pixels wide. It will appear in the sticky navigation bar that is seen as people scroll, and on mobile.
+**Sticky Header Logo** - This image should be 100 pixels tall and at least 100 pixels wide. It will appear in the sticky navigation bar that is seen as people scroll, and on mobile. Please use a .png file with transparent background, and no clear space around the logo.
 
 **Site Title, Tagline and Description** - Before you launch your site you will need to write a title, tagline and a longer description to be used in various places around the site. The title will likely be just your publication or site's name, the tagline should be short (6-8 words) and a short paragraph is sufficient for the site description (you can always add additional information about your organization on your site's "About" page, the short description is just intended to give new visitors an introduction to what your site is about and normally appears as a sidebar widget).
 
