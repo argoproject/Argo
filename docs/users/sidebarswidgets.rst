@@ -10,6 +10,8 @@ Access and edit any of the following widget areas from the Appearance > Widgets 
 
 To add widgets to any of these areas, simply drag and drop a widget from the area on left to the widget area you want it to appear in. Note that as soon as you add any widgets to a widget area, the default will no longer display so you will need to completely populate the widget area with the widgets you want to display. Many widgets will have additional settings you can use to configure how they appear on your site.
 
+Note that some widgets are small and can easily fit in narrow columns. Other widgets might contain lots of content that doesn’t fit well within in a small space. It’s important to see how a widget affects the page layout and adjust as needed.
+
 For more about widgets and how WordPress handles them, see `the WordPress Codex article on widgets <http://codex.wordpress.org/WordPress_Widgets>`_.
 
 Widget Areas

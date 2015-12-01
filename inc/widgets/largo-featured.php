@@ -4,12 +4,12 @@
  */
 class largo_featured_widget extends WP_Widget {
 
-	function largo_featured_widget() {
+	function __construct() {
 		$widget_ops = array(
 			'classname' 	=> 'largo-featured',
 			'description' 	=> 'Show recent featured posts with thumbnails and excerpts', 'largo-featured'
 		);
-		$this->WP_Widget( 'largo-featured-widget', __('Largo Featured Posts', 'largo'), $widget_ops);
+		parent::__construct( 'largo-featured-widget', __('Largo Featured Posts', 'largo'), $widget_ops);
 	}
 
 	function widget( $args, $instance ) {
@@ -40,9 +40,9 @@ class largo_featured_widget extends WP_Widget {
 
 		if ( $missedit->have_posts() ) : while ( $missedit->have_posts() ) : $missedit->the_post(); ?>
 			<div class="post-lead clearfix">
-			<?php if ( $instance['thumb'] == 'before' ) the_post_thumbnail( '60x60' ); ?>
+			<?php if ( $instance['thumb'] == 'before' ) the_post_thumbnail( 'thumb', array('class' => 'align-left') ); ?>
 			<h5><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
-			<?php if ( $instance['thumb'] == 'after' ) the_post_thumbnail( '60x60' ); ?>
+			<?php if ( $instance['thumb'] == 'after' ) the_post_thumbnail( 'thumb', array('class' => 'align-right') ); ?>
 			<?php echo '<p>' . largo_trim_sentences( get_the_content(), $instance['num_sentences'] ) . '</p>'; ?>
 				</div> <!-- /.post-lead -->
 		<?php endwhile; ?>

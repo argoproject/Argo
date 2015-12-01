@@ -4,12 +4,12 @@
  */
 class largo_series_posts_widget extends WP_Widget {
 
-	function largo_series_posts_widget() {
+	function __construct() {
 		$widget_ops = array(
 			'classname' 	=> 'largo-series-posts',
 			'description' 	=> __('Lists posts in the given series', 'largo')
 		);
-		$this->WP_Widget( 'largo-series-posts-widget', __('Largo Series Posts', 'largo'), $widget_ops);
+		parent::__construct( 'largo-series-posts-widget', __('Largo Series Posts', 'largo'), $widget_ops);
 	}
 
 	function widget( $args, $instance ) {
@@ -25,37 +25,42 @@ class largo_series_posts_widget extends WP_Widget {
 
  		if ( ! $series_posts ) return; //output nothing if no posts found
 
-		//$title = apply_filters('widget_title', $instance['title'], $instance, $this->id_base);
+
+		$instance['title_link'] = get_term_link( (int) $instance['series'], 'series' );
+		$term = get_term( $instance['series'], 'series' );
+		$title = apply_filters( 'widget_title', $term->name, $instance, $this->id_base );
 
 		echo $before_widget;
 
-		//if ( $title ) echo $before_title . $title . $after_title;
-
-		//term link
-		$term = get_term( $instance['series'], 'series' );
-		echo '<h5 class="top-tag"><a href="' . get_term_link( (int) $instance['series'], 'series' ) . '">' . $term->name . '</a></h5>';
+		if ( $title ) echo $before_title . $title . $after_title;
 
 	 	//first post
 	 	$series_posts->the_post();
-	 	$instance['test'] = 'banana';
 
-		include(locate_template('partials/content-tiny.php'));
+		$context = array(
+			'instance' => $instance,
+			'thumb' => 'medium',
+			'excerpt' => 'custom_excerpt'
+		);
+		largo_render_template('partials/widget', 'content', $context);
 
- 		//divider
- 		echo '<h5 class="series-split top-tag">' . esc_html( $instance['heading'] ) .'</h5><ul>';
+		//divider
+		if ( $series_posts->have_posts() ) {
+			echo '<h5 class="series-split top-tag">' . esc_html( $instance['heading'] ) .'</h5><ul>';
 
- 		while ( $series_posts->have_posts() ) {
-	 		$series_posts->the_post();
-	 		echo '<li>';
-	 		post_type_icon();
-	 		echo '<a href="';
-	 		the_permalink();
-	 		echo '">';
-	 		the_title();
-	 		echo '</a></li>';
- 		}
+			while ( $series_posts->have_posts() ) {
+				$series_posts->the_post();
+				echo '<li>';
+				post_type_icon();
+				echo '<a href="';
+				the_permalink();
+				echo '">';
+				the_title();
+				echo '</a></li>';
+			}
 
- 		echo '</ul>';
+			echo '</ul>';
+		}
 
  		echo '<a class="more" href="' . get_term_link( (int) $instance['series'], 'series' ) . '">' . __('Complete Coverage', 'largo') . "</a>";
 
