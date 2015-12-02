@@ -268,6 +268,12 @@ function optionsframework_options() {
 		'type' 		=> 'checkbox',);
 
 	$options[] = array(
+		'desc' 		=> __('<strong>Would you like to display share icons in a floating bar beside posts using the single-column post template?</strong>', 'largo'),
+		'id' 		=> 'single_floating_social_icons',
+		'std' 		=> '1',
+		'type' 		=> 'checkbox',);
+
+	$options[] = array(
 		'desc' 		=> __('Select the <strong>share icons</strong> to display at the top of single posts.', 'largo'),
 		'id' 		=> 'article_utilities',
 		'std' 		=> $article_utility_buttons_defaults,
