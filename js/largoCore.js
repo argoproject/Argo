@@ -178,7 +178,7 @@ jQuery(document).ready(function($) {
 
 	// Custom share buttons
 	(function() {
-		window.sharer = {
+		window.largo_sharer = {
 			// Initialize the singleton object
 			init: function() {
 				this.buttons = $('.custom-share-button');
@@ -314,7 +314,7 @@ jQuery(document).ready(function($) {
 			}
 		};
 
-		window.sharer.init();
+		window.largo_sharer.init();
 	})();
 
 	// Search slide out for mobile

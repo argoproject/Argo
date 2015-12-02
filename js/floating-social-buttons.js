@@ -16,11 +16,11 @@
         $('#floating-social-buttons')
           .css('opacity', '0')
           .html($("#tmpl-floating-social-buttons").html());
-        if ( window.sharer ) {
+        if ( window.largo_sharer ) {
           var thisbutton = $('#floating-social-buttons .custom-share-button');
-          thisbutton.on( 'click', $.proxy( window.sharer, 'onClick' ) );
+          thisbutton.on( 'click', $.proxy( window.largo_sharer, 'onClick' ) );
         } else {
-          console.warn("Developers: The social buttons code in js/largoCore.js did not run to completion, and window.sharer was not set.");
+          console.warn("Developers: The social buttons code in js/largoCore.js did not run to completion, and window.largo_sharer was not set.");
         }
       }
 
