@@ -2,38 +2,39 @@
   var $ = jQuery;
 
   var bindEvents = function() {
-    var debouncedMaybeShowPalette = debounce(maybeShowSocialPalette, 250);
-    $(window).on('scroll', debouncedMaybeShowPalette);
-    $(window).on('resize', debouncedMaybeShowPalette);
+    $(window).on('scroll', maybeShowSocialPalette);
+    $(window).on('resize', maybeShowSocialPalette);
   };
 
   var maybeShowSocialPalette = function() {
+    var stickyNavHeight = (!!$('.sticky-nav-holder').length)? $('.sticky-nav-holder').outerHeight() : 0,
+        adminBar = (!!$('#wpadminbar').length)? $('#wpadminbar').outerHeight(): 0;
+
     if ( checkPosition() && checkViewPort() ) {
       if ( ! $('#floating-social-buttons').length ) {
-        $('#page').append('<div id="floating-social-buttons" class=""></div>');
+        $('#page').append('<div id="floating-social-buttons"></div>');
         $('#floating-social-buttons')
-          .html($("#tmpl-floating-social-buttons").html())
-          .fadeIn('100')
-          .css('position', 'fixed')
-          .css('top', $('.sticky-nav-holder').outerHeight() + (1.5 * 1.22 * 16)) // The line height of a standard p tag in largo is 1.5 * 1.22 * @baseFontSize
-          .css('left', offsetLeft());
-      } else {
-        $('#floating-social-buttons')
-          .css('opacity', '1')
-          .css('width', '')
-          .css('top', $('.sticky-nav-holder').outerHeight() + (1.5 * 1.22 * 16)) // The line height of a standard p tag in largo is 1.5 * 1.22 * @baseFontSize
-          .css('left', offsetLeft());
+          .css('opacity', '0')
+          .html($("#tmpl-floating-social-buttons").html());
       }
 
+      if ( $('#floating-social-buttons').css('opacity') == "1" )
+        return;
+
+      $('#floating-social-buttons')
+          .css('opacity', '1')
+          .css('position', 'fixed')
+          .css('top', adminBar + stickyNavHeight + (1.5 * 1.22 * 16)) // The line height of a standard p tag in largo is 1.5 * 1.22 * @baseFontSize
+          .css('left', offsetLeft());
     } else {
       $('#floating-social-buttons')
-      .css('width', '0')
-      .css('opacity', '0');
+        .css('opacity', '0');
     }
   };
 
   var offsetLeft = function() {
-    return $('#content').offset().left;
+    var origin = (!!$('header .post-social').length)? $('header .post-social') : $('header .entry-title');
+    return origin.offset().left - ($('#floating-social-buttons').outerWidth() * 2);
   }
 
   var checkPosition = function() {
@@ -54,25 +55,12 @@
     return false;
   };
 
-  var debounce = function(func, wait, immediate) {
-    var timeout;
-    return function() {
-      var context = this, args = arguments;
-      var later = function() {
-        timeout = null;
-        if (!immediate) func.apply(context, args);
-      };
-      var callNow = immediate && !timeout;
-      clearTimeout(timeout);
-      timeout = setTimeout(later, wait);
-      if (callNow) func.apply(context, args);
-    };
-  };
-
   /**
    * Get the offset of the bottom of the top element bounding the article
    */
   var getOffsetTop = function() {
+    var stickyNavHeight = ($('.sticky-nav-holder').length)? $('.sticky-nav-holder').outerHeight() : 0;
+
     // Determine whether or not there is a hero element, and save that element
     if ( typeof window.floating_social_buttons_top_element == 'undefined' ) {
       if ( $('#content .hero').length ) {
@@ -84,7 +72,7 @@
 
     return window.floating_social_buttons_top_element.offset().top
       + window.floating_social_buttons_top_element.outerHeight()
-      - $('.sticky-nav-holder').outerHeight();
+      - stickyNavHeight;
         // We want it to appear when the top area is no longer visible, not when the top area is no longer inside the viewport.
   }
 
@@ -94,7 +82,7 @@
   var getOffsetBottom = function() {
     // Article bottom widget area if that exits, else the comments area or the site footer.
     if ( typeof window.floating_social_buttons_bottom_element == 'undefined' ) {
-      if ( $('.article-bottom').length ) {
+      if ( $('.article-bottom .largo-follow').length ) {
         window.floating_social_buttons_bottom_element = $('.article-bottom .largo-follow');
       } else if ( $('#comments').length ) {
         window.floating_social_buttons_bottom_element = $('#comments');

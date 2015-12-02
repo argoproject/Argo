@@ -712,7 +712,7 @@ if ( ! function_exists( 'largo_post_metadata' ) ) {
  */
 if ( ! function_exists( 'largo_floating_social_buttons' ) ) {
 	function largo_floating_social_buttons() {
-		if ( is_single() && of_get_option('single_floating_social_icons') == '1' && of_get_option('single_template') == 'normal' ) {
+		if ( is_single() && of_get_option('single_floating_social_icons', '1') == '1' && of_get_option('single_template') == 'normal' ) {
 			// of_get_option('single_template') is filtered to return not the global option but this post's custom option if that is set.
 			echo '<script type="text/template" id="tmpl-floating-social-buttons">';
 			largo_post_social_links();
@@ -730,7 +730,7 @@ add_action('wp_footer', 'largo_floating_social_buttons');
  */
 if ( ! function_exists('largo_floating_social_button_width_json') ) {
 	function largo_floating_social_button_width_json() {
-		if ( is_single() && of_get_option('single_floating_social_icons') == '1' && of_get_option('single_template') == 'normal' ) {
+		if ( is_single() && of_get_option('single_floating_social_icons', '1') == '1' && of_get_option('single_template') == 'normal' ) {
 			$config = array(
 				'min' => '980',
 				'max' => '9999',
@@ -755,7 +755,7 @@ add_action('wp_footer', 'largo_floating_social_button_width_json');
  */
 if ( ! function_exists('largo_floating_social_button_js') ) {
 	function largo_floating_social_button_js() {
-		if ( is_single() && of_get_option('single_floating_social_icons') == '1' && of_get_option('single_template') == 'normal' ) {
+		if ( is_single() && of_get_option('single_floating_social_icons', '1') == '1' && of_get_option('single_template') == 'normal' ) {
 			?>
 			<script type="text/javascript" src="<?php
 				$suffix = (LARGO_DEBUG)? '' : '.min';
