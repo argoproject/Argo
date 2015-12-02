@@ -18,9 +18,6 @@
           .html($("#tmpl-floating-social-buttons").html());
       }
 
-      if ( $('#floating-social-buttons').css('opacity') == "1" )
-        return;
-
       $('#floating-social-buttons')
           .css('opacity', '1')
           .css('position', 'fixed')
