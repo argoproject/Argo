@@ -74,6 +74,16 @@ h5,
 .entry-content h4 {
   font-size: @baseFontSize * 1.5;
 }
+h5.top-tag,
+.widget h5.top-tag,
+.entry-content h5.top-tag {
+  font-size: @baseFontSize;
+  margin-bottom: @baseline/5;
+  text-transform: uppercase;
+  a {
+    color: @grayLight;
+  }
+}
 h6,
 .entry-content h5 {
   font-size: @baseFontSize * 1.222;
@@ -117,9 +127,6 @@ p {
     color: @gray;
     font-style: italic;
   }
-}
-.widget p {
-  font-size: @baseFontSize;
 }
 
 ul, ol {

@@ -52,7 +52,7 @@ This section allows you to upload images that are used primarily in the top head
 	- 768px-wide Small banner image
 	- 980px-wide Medium banner image
 	- 1170px-wide Large banner image
-	- 100px-tall site logo for use in the sticky header
+	- 100px-tall site logo for use in the sticky header. Use a .png file with transparent background, and no clear space around the logo.
 
 - Drag and drop the image onto the uploader (or click "Select Files" and find the correct image on your computer). When the image has finished uploading, selected the full size image option, and then click the button at the bottom of the uploader that says "Use This Image".
 

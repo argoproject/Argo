@@ -57,7 +57,7 @@ $shown_ids[] = $bigStoryPost->ID; //don't repeat the current post
 <?php // The "river" content view ?>
 <div id="home-river" class="row-fluid">
 	<div class="span10 offset1">
-		<h1><?php _e('Latest Stories', 'largo'); ?></h1>
+		<h1><?php _e( 'Recent Stories', 'largo' ); ?></h1>
 		<?php
 			//start at the beginning of the list
 			rewind_posts();
