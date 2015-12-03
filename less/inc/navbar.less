@@ -87,14 +87,14 @@
 html.no-touch .navbar li > a:hover {
   .transition(background-color 300ms ease-out);
   background-color: @navbarLinkBackgroundActive;
-  color: #eee;
+  color: @navbarLinkColorHover;
 }
 html.no-touch .navbar {
   li.home-icon,
   li.home-link {
     a:hover {
       background-color: transparent;
-      color: @linkColor;
+      color: @navbarLinkColorHover;
     }
   }
 }
@@ -184,7 +184,7 @@ li.home-link:hover i {
   display: block;
   width: 18px;
   height: @iconbarHeight;
-  background-color: @linkColor;
+  background-color: @navbarLinkColor;
 }
 .btn-navbar .icon-bar + .icon-bar {
   margin-top: @iconbarHeight;
@@ -226,7 +226,7 @@ li.home-link:hover i {
 
     width: 0;
     height: 0;
-    border-top:   6px solid @white;
+    border-top:   6px solid @dropdownCaretColor;
     border-right: 5px solid transparent;
     border-left:  5px solid transparent;
     border-bottom:  5px solid transparent;
@@ -292,7 +292,7 @@ li.home-link:hover i {
 
 .navbar .dropdown-menu .active > a,
 .navbar .dropdown-menu .active > a:hover {
-  color: @linkColor;
+  color: @navbarLinkColor;
   font-weight: bold;
   background-color: @dropdownBackground;
 }
@@ -490,7 +490,7 @@ li.home-link:hover i {
     margin-bottom: 0;
     li {
       > a {
-        color: @linkColor;
+        color: @navbarLinkColor;
         background-color: transparent;
       }
       .caret {
@@ -504,7 +504,7 @@ li.home-link:hover i {
         padding: 0;
       }
       .caret:before {
-        border-top-color: @linkColor;
+        border-top-color: @navbarLinkColor;
         border-left-color: transparent;
       }
     }
@@ -533,7 +533,7 @@ li.home-link:hover i {
   .navbar li.dropdown.active > .dropdown-toggle,
   .navbar li.dropdown.open.active > .dropdown-toggle {
     color: @grayLighter;
-    background: @linkColor;
+    background: @navbarLinkColor;
     .caret:before {
       border-top-color: @white;
     }
@@ -679,11 +679,11 @@ li.home-link:hover i {
       //top: -3px;
       &:before {
         border-top-color: transparent;
-        border-left-color: @linkColor;
+        border-left-color: @navbarLinkColor;
       }
     }
     a {
-      color: @linkColor;
+      color: @navbarLinkColor;
     }
     li.open > a .caret {
       .rotate( 90deg );
@@ -735,7 +735,7 @@ li.home-link:hover i {
   .sticky-nav-holder .navbar {
     li.dropdown.open {
       & > .dropdown-toggle {
-        color: @linkColor;
+        color: @navbarLinkColor;
         background: transparent;
       }
     }
@@ -748,13 +748,13 @@ li.home-link:hover i {
     font-weight: normal;
   }
   .navbar .nav li.dropdown.active > .dropdown-toggle:hover {
-    color: @linkColor;
+    color: @navbarLinkColor;
   }
   // I really wish this did not have to be as specific as it is.
   .sticky-nav-holder .navbar li.dropdown.open > .dropdown-toggle,
   .sticky-nav-holder .navbar li.dropdown.active > .dropdown-toggle,
   .sticky-nav-holder .navbar li.dropdown.open.active > .dropdown-toggle {
-    color: @linkColor;
+    color: @navbarLinkColor;
     background: transparent;
     .caret:before {
       border-top-color: transparent;
