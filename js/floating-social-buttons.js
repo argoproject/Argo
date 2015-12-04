@@ -20,7 +20,7 @@
           var thisbutton = $('#floating-social-buttons .custom-share-button');
           thisbutton.on( 'click', $.proxy( window.largo_sharer, 'onClick' ) );
         } else {
-          console.warn("Developers: The social buttons code in js/largoCore.js did not run to completion, and window.largo_sharer was not set.");
+          console.log("Developers: The social buttons code in js/largoCore.js did not run to completion, and window.largo_sharer was not set.");
         }
       }
 
