@@ -82,7 +82,6 @@ add_action( $_REQUEST['taxonomy'].'_add_form_fields', 'largo_add_term_featured_m
  * @see largo_term_featured_media_button
  */
 function largo_term_featured_media_enqueue_post_editor($hook) {
-	var_log('running that thing');
 	if (!in_array($hook, array('edit.php', 'edit-tags.php')))
 		return;
 
