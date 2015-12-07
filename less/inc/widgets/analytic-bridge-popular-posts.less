@@ -1,3 +1,59 @@
+#sidebar .widget_analytic-bridge-popular-posts {
+  li {
+    margin-bottom: @baseFontSize;
+    div { // In Largo, the image gets wrapped by a div by ABP to support the largo .is-video styles
+      margin-bottom: 1.8 * @baseFontSize;
+    }
+    div.is-empty {
+      margin: 0;
+      display: none;
+    }
+  }
+  li + li {
+    margin-top: 1.8 * @baseFontSize;
+    border-top: 1px @grayLighter solid;
+    padding-top: 1.8 * @baseFontSize;
+  }
+  ol {
+    // For an explanation of what is going on here, see http://red-team-design.com/css3-ordered-list-styles/
+    counter-reset: li;
+    list-style: none;
+    *list-style: decimal;
+    padding: 0;
+    margin-left: 0;
+    li + li::before {
+      top: 1.8 * @baseFontSize;
+    }
+    li {
+      @numbersize: 48px;
+      margin-left: 1.5*@numbersize + 10px;
+      overflow: visible;
+      font-size: @numbersize;
+      h5 a {
+        display: inline-block;
+        min-height: @numbersize;
+      }
+      img {
+        font-size: @baseFontSize;
+        padding-bottom: 0;
+      }
+      font-family: @sansFontFamily;
+      position: relative;
+      &::before {
+        content: counter(li) + ".";
+        counter-increment: li;
+        display: block;
+        width: 1.5*@numbersize;
+        height: 1em;
+        position: absolute;
+        top: 0;
+        left: -1.5*@numbersize - 10px;
+        line-height: 1;
+        text-align: left;
+      }
+    }
+  }
+}
 .article-bottom .widget_analytic-bridge-popular-posts {
 
   // three-column layout
