@@ -52,6 +52,23 @@ function largo_get_term_meta_post( $taxonomy, $term_id ) {
 }
 
 /**
+ * Get the featured media thumbnail for a term
+ * @param int|WP_Post $post Required. Post ID or the term's class.
+ * @param string $taxonomy Required, the taxonomy that the term is in.
+ * @return string The HTML for the featured media, if it exists.
+ *
+ * @since 0.5.4
+ * @uses largo-get_term_meta_post
+ */
+function largo_get_term_featured_media($term = null, $taxonomy = null) {
+	$term = get_term($term, $taxonomy);
+	$post_id = largo_get_term_meta_post( $taxonomy, $term->ID );
+	$ret = largo_get_featured_media($post_id);
+
+	return $ret;
+}
+
+/**
  * Add the "Set Featured Media" button in the term edit page
  *
  * @since 0.5.4
@@ -66,6 +83,7 @@ function largo_add_term_featured_media_button( $context = '' ) {
 		<td>
 			<p><a href="#" id="set-featured-media-button" class="button set-featured-media add_media" data-editor="content" title="<?php echo $language; ?> Featured Media"><span class="dashicons dashicons-admin-generic"></span> <?php echo $language; ?> Featured Media</a> <span class="spinner" style="display: none;"></span></p>
 			<p class="description">This should have a default text</p>
+			<?php echo largo_get_term_featured_media($context->term_id, $context->taxonomy); ?>
 		</td>
 	</tr>
 	<?php
