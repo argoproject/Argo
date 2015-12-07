@@ -81,8 +81,6 @@ function largo_add_term_featured_media_button( $context = '' ) {
 	$has_featured_media = largo_has_featured_media($post_id);
 	$language = (!empty($has_featured_media))? 'Edit' : 'Set';
 
-	$attachment = largo_get_term_featured_media($context->term_id, $context->taxonomy);
-
 	?>
 	<tr class="form-field">
 		<th scope="row" valign="top"><?php _e('Term banner image', 'largo'); ?></th>
@@ -90,7 +88,7 @@ function largo_add_term_featured_media_button( $context = '' ) {
 			<p><a href="#" id="set-featured-media-button" class="button set-featured-media add_media" data-editor="content" title="<?php echo $language; ?> Featured Media"><span class="dashicons dashicons-admin-generic"></span> <?php echo $language; ?> Featured Media</a> <span class="spinner" style="display: none;"></span></p>
 			<p class="description">This should have a default text</p>
 			<input style="display:none;" id="post_ID" value="<?php echo $post_id ?>" />
-			<?php echo wp_get_attachment_image($attachment['attachment']); ?>
+			<?php echo get_the_post_thumbnail($post_id); ?>
 		</td>
 	</tr>
 	<?php
