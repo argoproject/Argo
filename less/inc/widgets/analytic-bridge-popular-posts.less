@@ -25,21 +25,22 @@
       top: 1.8 * @baseFontSize;
     }
     li {
+      // This sets the size of the number and some padding and positioning values that depend upon it
       @numbersize: 48px;
+
       margin-left: 1.5*@numbersize + 10px;
       overflow: visible;
-      font-size: @numbersize;
       h5 a {
         display: inline-block;
         min-height: @numbersize;
       }
       img {
-        font-size: @baseFontSize;
         padding-bottom: 0;
       }
       font-family: @sansFontFamily;
       position: relative;
       &::before {
+        font-size: @numbersize;
         content: counter(li) + ".";
         counter-increment: li;
         display: block;
