@@ -51,6 +51,44 @@ function largo_get_term_meta_post( $taxonomy, $term_id ) {
 	}
 }
 
+/**
+ * Add the "Set Featured Media" button in the term edit page
+ *
+ * @since 0.5.4
+ * @see largo_term_featured_media_enqueue_post_editor
+ */
+function largo_add_term_featured_media_button( $context = '' ) {
+	$has_featured_media = largo_has_featured_media($context->term_id);
+	$language = (!empty($has_featured_media))? 'Edit' : 'Set';
+	?>
+	<tr class="form-field">
+		<th scope="row" valign="top"><?php _e('Term banner image', 'largo'); ?></th>
+		<td>
+			<p><a href="#" id="set-featured-media-button" class="button set-featured-media add_media" data-editor="content" title="<?php echo $language; ?> Featured Media"><span class="dashicons dashicons-admin-generic"></span> <?php echo $language; ?> Featured Media</a> <span class="spinner" style="display: none;"></span></p>
+			<p class="description">This should have a default text</p>
+		</td>
+	</tr>
+	<?php
+}
+add_action( 'edit_category_form_fields', 'largo_add_term_featured_media_button');
+add_action( 'edit_tag_form_fields', 'largo_add_term_featured_media_button');
+add_action( $_REQUEST['taxonomy'].'_add_form_fields', 'largo_add_term_featured_media_button');
+
+/**
+ * Enqueue wordpress post editor on term edit page
+ *
+ * @param string $hook the page this is being called upon.
+ * @since 0.5.4
+ * @see largo_term_featured_media_button
+ */
+function largo_term_featured_media_enqueue_post_editor($hook) {
+	var_log('running that thing');
+	if (!in_array($hook, array('edit.php', 'edit-tags.php')))
+		return;
+
+	wp_enqueue_media();
+}
+add_action('admin_enqueue_scripts', 'largo_term_featured_media_enqueue_post_editor', 1);
 
 /**
  * Add meta data to a term
