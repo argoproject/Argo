@@ -245,17 +245,32 @@
 
 // Navbar
 // -------------------------
+
+/* General navbar vars */
 @navbarHeight:                    40px;
-@navbarFontSize:				  15px;
+@navbarFontSize:                  15px;
 @navbarBackground:                darken(@baseColor, 5%);
 @navbarBackgroundHighlight:       @baseColor;
 
-@navbarText:                      @white;
+// Navbar button (burger) for toggling navbar items in responsive layouts
+@iconbarHeight: 3px;
+
+/* Main navbar vars */
+@navbarText:                      @textColor;
 @navbarLinkColor:                 @white;
-@navbarLinkColorHover:            @grayLighter;
+@navbarLinkColorHover:            darken(@white, 5%);
 @navbarLinkColorActive:           @navbarLinkColorHover;
 @navbarLinkBackgroundHover:       transparent;
 @navbarLinkBackgroundActive:      @navbarBackground;
+
+/* Sticky nav bar vars */
+@stickyNavbarText:                 @textColor;
+@stickyNavbarLinkColor:            @linkColor;
+@stickyNavbarLinkColorHover:       @grayLighter;
+@stickyNavbarLinkColorActive:      @navbarLinkColorHover;
+@stickyNavbarLinkBackgroundHover:  transparent;
+@stickyNavbarLinkBackgroundActive: @navbarBackground;
+@stickyNavbarBackgroundColor:      @white;
 
 // Dropdowns
 // -------------------------
@@ -268,14 +283,13 @@
 @dropdownDividerBottom:         @white;
 @dropdownCaretColor:            @white;
 
-
 // Social Brands
 // -------------------------
-@rss:  #f89406;
-@facebook:  #3a5795;
-@twitter:  #55acee;
-@youtube:  #e52d27;
-@gplus:  #dd4b39;
-@flickr:  #ff0084;
-@linkedin:  #007bb6;
-@tumblr:  #35465c;
+@rss: #f89406;
+@facebook: #3a5795;
+@twitter: #55acee;
+@youtube: #e52d27;
+@gplus: #dd4b39;
+@flickr: #ff0084;
+@linkedin: #007bb6;
+@tumblr: #35465c;
