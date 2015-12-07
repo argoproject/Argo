@@ -58,11 +58,11 @@ function largo_get_term_meta_post( $taxonomy, $term_id ) {
  * @return string The HTML for the featured media, if it exists.
  *
  * @since 0.5.4
- * @uses largo-get_term_meta_post
+ * @uses largo_get_term_meta_post
  */
 function largo_get_term_featured_media($term = null, $taxonomy = null) {
 	$term = get_term($term, $taxonomy);
-	$post_id = largo_get_term_meta_post( $taxonomy, $term->ID );
+	$post_id = largo_get_term_meta_post( $taxonomy, $term->term_id );
 	$ret = largo_get_featured_media($post_id);
 
 	return $ret;
@@ -75,15 +75,22 @@ function largo_get_term_featured_media($term = null, $taxonomy = null) {
  * @see largo_term_featured_media_enqueue_post_editor
  */
 function largo_add_term_featured_media_button( $context = '' ) {
-	$has_featured_media = largo_has_featured_media($context->term_id);
+	// Post ID here is the id of the post that Largo uses to keep track of the term's metadata. See largo_get_term_meta_post.
+	$post_id = largo_get_term_meta_post( $context->taxonomy, $context->term_id );
+
+	$has_featured_media = largo_has_featured_media($post_id);
 	$language = (!empty($has_featured_media))? 'Edit' : 'Set';
+
+	$attachment = largo_get_term_featured_media($context->term_id, $context->taxonomy);
+
 	?>
 	<tr class="form-field">
 		<th scope="row" valign="top"><?php _e('Term banner image', 'largo'); ?></th>
 		<td>
 			<p><a href="#" id="set-featured-media-button" class="button set-featured-media add_media" data-editor="content" title="<?php echo $language; ?> Featured Media"><span class="dashicons dashicons-admin-generic"></span> <?php echo $language; ?> Featured Media</a> <span class="spinner" style="display: none;"></span></p>
 			<p class="description">This should have a default text</p>
-			<?php echo largo_get_term_featured_media($context->term_id, $context->taxonomy); ?>
+			<input style="display:none;" id="post_ID" value="<?php echo $post_id ?>" />
+			<?php echo wp_get_attachment_image($attachment['attachment']); ?>
 		</td>
 	</tr>
 	<?php
