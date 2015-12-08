@@ -33,7 +33,6 @@ $queried_object = get_queried_object();
 				$description = term_description();
 
 				// rss links for custom taxonomies are a little tricky
-				$queried_object = get_queried_object();
 				$term_id = intval( $queried_object->term_id );
 				$tax = $queried_object->taxonomy;
 				$rss_link = get_term_feed_link( $term_id, $tax );
