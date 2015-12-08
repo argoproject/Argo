@@ -81,7 +81,6 @@ function largo_add_term_featured_media_button( $context = '' ) {
 }
 add_action( 'edit_category_form_fields', 'largo_add_term_featured_media_button');
 add_action( 'edit_tag_form_fields', 'largo_add_term_featured_media_button');
-#add_action( $_REQUEST['taxonomy'].'_add_form_fields', 'largo_add_term_featured_media_button'); // The "New Term" area on the taxonomy page.
 
 /**
  * Enqueue wordpress post editor on term edit page
@@ -97,6 +96,20 @@ function largo_term_featured_media_enqueue_post_editor($hook) {
 	wp_enqueue_media();
 }
 add_action('admin_enqueue_scripts', 'largo_term_featured_media_enqueue_post_editor', 1);
+
+/**
+ * Removes the embed-code, video and gallery media types from the term featured media editor
+ *
+ * @param array $types array of media types that can be used with the featured media editor
+ * @since 0.5.4
+ */
+function largo_term_featured_media_types($types) {
+	if ( isset( $types['image'] ) ) {
+		return array($types['image']);
+	}
+	return $types;
+}
+add_filter('largo_default_featured_media_types', 'largo_term_featured_media_types', 10, 1);
 
 /**
  * Add meta data to a term
