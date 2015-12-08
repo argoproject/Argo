@@ -80,6 +80,7 @@ function largo_add_term_featured_media_button( $context = '' ) {
 
 	$has_featured_media = largo_has_featured_media($post_id);
 	$language = (!empty($has_featured_media))? 'Edit' : 'Set';
+	$featured = largo_get_featured_media($post_id);
 
 	?>
 	<tr class="form-field">
@@ -87,7 +88,9 @@ function largo_add_term_featured_media_button( $context = '' ) {
 		<td>
 			<p><a href="#" id="set-featured-media-button" class="button set-featured-media add_media" data-editor="content" title="<?php echo $language; ?> Featured Media"><span class="dashicons dashicons-admin-generic"></span> <?php echo $language; ?> Featured Media</a> <span class="spinner" style="display: none;"></span></p>
 			<p class="description">This will be displayed on the top of the term's archive page.</p>
-			<input style="display:none;" id="post_ID" value="<?php echo $post_id ?>" />
+			<input type="hidden" id="post_ID" value="<?php echo $post_id ?>" />
+			<input type="hidden" id="featured_image_id" value="<?php echo $featured['attachment'] ;?>" />
+
 			<?php echo get_the_post_thumbnail($post_id); ?>
 		</td>
 	</tr>

@@ -98,7 +98,7 @@ var LFM = _.extend(LFM || {}, {
                     id: 'image',
                 }),
 
-				new wp.media.controller.EditImage({ model: options.editImage }),
+                new wp.media.controller.EditImage({ model: options.editImage }),
 
                 // Featured gallery
                 new wp.media.controller.Library({
@@ -779,6 +779,13 @@ var LFM = _.extend(LFM || {}, {
                 success: function(data) {
                     LFM.fetching = false;
                     spinner.hide();
+
+                    var post = wp.media.view.settings.post;
+
+
+                    if (data.get('type') == 'image' && post.id == 0) {
+                        post.featuredImageId = $('#featured_image_id').val();
+                    }
 
                     var modal,
                         initialViewId = data.get('type') || 'embed-code',

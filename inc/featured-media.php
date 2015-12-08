@@ -342,7 +342,11 @@ function largo_enqueue_featured_media_js($hook) {
 	if (!in_array($hook, array('edit.php', 'edit-tags.php', 'post-new.php', 'post.php')))
 		return;
 
-	global $post;
+	global $post, $wp_query;
+
+	if ( in_array($hook, array('edit-tags.php')) && isset($_GET['action']) ) {
+		$post = get_post( largo_get_term_meta_post( $_GET['taxonomy'], $_GET['tag_ID'] ) );
+	}
 
 	$featured_image_display = get_post_meta($post->ID, 'featured-image-display', true);
 
