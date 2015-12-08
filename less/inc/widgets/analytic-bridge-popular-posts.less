@@ -2,7 +2,7 @@
   li {
     margin-bottom: @baseFontSize;
     div { // In Largo, the image gets wrapped by a div by ABP to support the largo .is-video styles
-      margin-bottom: 1.8 * @baseFontSize;
+      margin-bottom: @baseFontSize / 2;
     }
     div.is-empty {
       margin: 0;
@@ -26,7 +26,7 @@
     }
     li {
       // This sets the size of the number and some padding and positioning values that depend upon it
-      @numbersize: 48px;
+      @numbersize: 30px;
 
       margin-left: 1.5*@numbersize + 10px;
       overflow: visible;
@@ -48,9 +48,9 @@
         height: 1em;
         position: absolute;
         top: 0;
-        left: -1.5*@numbersize - 10px;
+        left: -1.5*@numbersize - 16px;
         line-height: 1;
-        text-align: left;
+        text-align: right;
       }
     }
   }
