@@ -95,7 +95,7 @@ function largo_add_term_featured_media_button( $context = '' ) {
 }
 add_action( 'edit_category_form_fields', 'largo_add_term_featured_media_button');
 add_action( 'edit_tag_form_fields', 'largo_add_term_featured_media_button');
-add_action( $_REQUEST['taxonomy'].'_add_form_fields', 'largo_add_term_featured_media_button');
+#add_action( $_REQUEST['taxonomy'].'_add_form_fields', 'largo_add_term_featured_media_button'); // The "New Term" area on the taxonomy page.
 
 /**
  * Enqueue wordpress post editor on term edit page
