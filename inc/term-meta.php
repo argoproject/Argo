@@ -52,23 +52,6 @@ function largo_get_term_meta_post( $taxonomy, $term_id ) {
 }
 
 /**
- * Get the featured media thumbnail for a term
- * @param int|WP_Post $post Required. Post ID or the term's class.
- * @param string $taxonomy Required, the taxonomy that the term is in.
- * @return string The HTML for the featured media, if it exists.
- *
- * @since 0.5.4
- * @uses largo_get_term_meta_post
- */
-function largo_get_term_featured_media($term = null, $taxonomy = null) {
-	$term = get_term($term, $taxonomy);
-	$post_id = largo_get_term_meta_post( $taxonomy, $term->term_id );
-	$ret = largo_get_featured_media($post_id);
-
-	return $ret;
-}
-
-/**
  * Add the "Set Featured Media" button in the term edit page
  *
  * @since 0.5.4
