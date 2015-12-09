@@ -11,6 +11,9 @@ class AjaxFunctionsTestFunctions extends WP_UnitTestCase {
 	}
 
 	function test_largo_load_more_posts_enqueue_script() {
+		/**
+		 * This test does not, cannot test whether the global LARGO_DEBUG affects enqueueing.
+		 */
 		global $wp_scripts;
 		largo_load_more_posts_enqueue_script();
 		$this->assertTrue(!empty($wp_scripts->registered['load-more-posts']));

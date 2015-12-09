@@ -15,11 +15,15 @@
 if ( !function_exists( 'largo_load_more_posts_enqueue_script' ) ) {
 	/**
 	 * Enqueue script for "load more posts" functionality
+	 *
+	 * @since 0.5.3
+	 * @global LARGO_DEBUG
 	 */
 	function largo_load_more_posts_enqueue_script() {
+		$suffix = (LARGO_DEBUG)? '' : '.min';
 		wp_enqueue_script(
 			'load-more-posts',
-			get_template_directory_uri() . '/js/load-more-posts.js',
+			get_template_directory_uri() . '/js/load-more-posts'. $suffix . '.js',
 			array('jquery'), null, false
 		);
 	}
