@@ -68,9 +68,13 @@
     padding-right: 0;
   }
   li.dropdown .dropdown-menu li a {
-    color: @navbarLinkColor;
+    color: @navbarBackground;
     padding-right: 10px;
     line-height: @baseLineHeight;
+
+    &:hover {
+      color: @navbarLinkColor;
+    }
   }
 
   li > a:hover {

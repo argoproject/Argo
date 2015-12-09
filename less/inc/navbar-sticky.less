@@ -46,6 +46,10 @@
     a {
       color: @stickyNavbarLinkColor;
 
+      &:hover {
+        color: @stickyNavbarLinkColorHover;
+      }
+
       .caret:before {
         border-top-color: @stickyNavbarDropdownCaretColor;
       }
@@ -54,11 +58,19 @@
         border-top-color: @stickyNavbarDropdownCaretColorHover;
       }
     }
+
+    &.home-link > a:hover {
+      color: lighten(@stickyNavbarLinkColor, 5%);
+    }
   }
 
   // Dropdowns within nav
   li.dropdown .dropdown-menu li a {
     color: @stickyNavbarLinkColor;
+
+    &:hover {
+      color: @stickyNavbarLinkColorHover;
+    }
   }
 
   .social-icons {
@@ -75,7 +87,6 @@
   &.home-link {
     // TODO: should be based on a variable
     min-width: 40px;
-
     text-align: center;
 
     .nav > li {
