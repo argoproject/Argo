@@ -353,4 +353,20 @@ jQuery(document).ready(function($) {
 			event.preventDefault();
 		});
 	});
+
+  // Popovers
+  $('body').on('click', '.popover-toggle',
+    function() {
+      var popover = $(this).siblings('.popover');
+
+      if ( popover.css('display') == 'none') {
+        $(this).addClass('popped');
+        popover.show();
+      } else {
+        $(this).removeClass('popped');
+        popover.hide();
+      }
+
+      return false;
+    });
 });
