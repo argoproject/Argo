@@ -356,10 +356,12 @@ jQuery(document).ready(function($) {
 
   // Popovers
   $('body').on('click', '.popover-toggle',
-    function() {
+    function(event) {
+      event.stopPropagation();
+
       var popover = $(this).siblings('.popover');
 
-      if ( popover.css('display') == 'none') {
+      if (popover.css('display') == 'none') {
         $(this).addClass('popped');
         popover.show();
       } else {
@@ -368,5 +370,14 @@ jQuery(document).ready(function($) {
       }
 
       return false;
+    });
+
+    $('html').click(function() {
+      $('.popover').each(function() {
+        if ($(this).css('display') != 'none') {
+          $(this).hide();
+        }
+      });
+      $('.popped').removeClass('popped');
     });
 });

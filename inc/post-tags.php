@@ -211,17 +211,17 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 
 		if ( ! empty( $top_term_id ) ) {
 			$top_term_link = get_term_link( $top_term_id, $top_term_taxonomy );
-			$more_social_links[] = '<li><a href="' . $top_term_link . '">More on this topic</a></li>';
+			$more_social_links[] = '<li><a href="' . $top_term_link . '"><i class="icon-link"></i> More on this topic</a></li>';
 
 			$top_term_feed_link = get_term_feed_link( $top_term_id, $top_term_taxonomy );
-			$more_social_links[] = '<li><a href="' . $top_term_feed_link . '">Subscribe to this topic</a></li>';
+			$more_social_links[] = '<li><a href="' . $top_term_feed_link . '"><i class="icon-rss"></i> Subscribe to this topic</a></li>';
 		}
 
 		// Try to get the author's Twitter link
 		$twitter_username = get_user_meta( $post->post_author, 'twitter', true );
 		if ( ! empty( $twitter_username ) ) {
 			$twitter_link = 'https://twitter.com/' . $twitter_username;
-			$more_social_links[] = '<li><a href="' . $twitter_link . '">Follow this author</a></li>';
+			$more_social_links[] = '<li><a href="' . $twitter_link . '"><i class="icon-twitter"></i> Follow this author</a></li>';
 		}
 
 		if ( count( $more_social_links ) ) {
