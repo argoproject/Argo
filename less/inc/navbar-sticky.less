@@ -38,16 +38,27 @@
 .navbar.sticky-navbar {
   margin-bottom: 0;
 
+  .nav {
+    color: @stickyNavbarText;
+  }
+
   li {
     a {
+      color: @stickyNavbarLinkColor;
+
       .caret:before {
-        border-top-color: @stickyNavbarLinkColor;
+        border-top-color: @stickyNavbarDropdownCaretColor;
       }
 
       &:hover .caret:before {
-        border-top-color: @stickyNavbarBackgroundColor;
+        border-top-color: @stickyNavbarDropdownCaretColorHover;
       }
     }
+  }
+
+  // Dropdowns within nav
+  li.dropdown .dropdown-menu li a {
+    color: @stickyNavbarLinkColor;
   }
 
   .social-icons {
@@ -174,7 +185,7 @@
           color: @stickyNavbarLinkColor;
           background: transparent;
           .caret:before {
-            border-top-color: @stickyNavbarLinkColor;
+            border-top-color: @stickyNavbarDropdownCaretColor;
           }
         }
       }
