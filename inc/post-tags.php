@@ -226,9 +226,8 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 
 		if ( count( $more_social_links ) ) {
 			$more_social_links_str = implode( $more_social_links, "\n" );
-		}
 
-		$output .= <<<EOD
+			$output .= <<<EOD
 <span class="more-social-links">
 	<a class="popover-toggle" href="#"><i class="icon-plus"></i><span class="hidden-phone">More</span></a>
 	<span class="popover">
@@ -238,6 +237,7 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 	</span>
 </span>
 EOD;
+		}
 
 		$output .= '</div>';
 
