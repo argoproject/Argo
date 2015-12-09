@@ -27,6 +27,10 @@
 
   body.admin-bar & {
     top: 32px;
+
+    @media (max-width: 782px) {
+      top: 46px;
+    }
   }
 }
 
@@ -35,8 +39,14 @@
   margin-bottom: 0;
 
   li {
-    .caret:before {
-      border-top-color: @stickyNavbarLinkColor;
+    a {
+      .caret:before {
+        border-top-color: @stickyNavbarLinkColor;
+      }
+
+      &:hover .caret:before {
+        border-top-color: @stickyNavbarBackgroundColor;
+      }
     }
   }
 
@@ -45,6 +55,11 @@
     float: left;
   }
 
+  .btn-navbar {
+    .icon-bar {
+      background-color: @stickyNavbarLinkColor;
+    }
+  }
 
   &.home-link {
     // TODO: should be based on a variable
@@ -117,6 +132,52 @@
   @media (min-width: 769px) {
     .nav-left {
       display: none;
+    }
+  }
+
+  // Site name
+  .site-name {
+    display: block;
+    color: #343434;
+    a {
+      color: #343434;
+      &:hover {
+        background-color: @white;
+        color: @gray;
+        text-decoration: none;
+      }
+    }
+    @media only screen and (max-width: 320px) {
+      display: none;
+    }
+  }
+
+  // Right side of nav, search, donate, social icons
+  .nav-right {
+    float: right;
+    #header-extras {
+      float: left;
+      margin: 0;
+      a.donate-link:hover {
+        background: transparent;
+      }
+    }
+  }
+
+  // Sticky nav dropdown mods
+  @media (max-width: 768px) {
+    li.dropdown {
+      &.open,
+      &.active,
+      &.open.active {
+        & > .dropdown-toggle {
+          color: @stickyNavbarLinkColor;
+          background: transparent;
+          .caret:before {
+            border-top-color: @stickyNavbarLinkColor;
+          }
+        }
+      }
     }
   }
 }

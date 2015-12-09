@@ -54,13 +54,6 @@
     }
   }
 
-  // Active nav items
-  // TODO: Do we actually need this given the rules define just above?
-  //.active > a,
-  //.active > a:hover {
-  //  text-decoration: none;
-  //}
-
   // Dropdowns within nav
   li.dropdown > a {
     padding-right: 0;
@@ -70,11 +63,34 @@
     line-height: @baseLineHeight;
   }
 
-  .open > a,
   li > a:hover {
     .transition(background-color 300ms ease-out);
     background-color: @navbarLinkBackgroundActive;
     color: @navbarLinkColorHover;
+
+    .caret:before {
+      border-top-color: @navbarLinkColorHover;
+    }
+  }
+
+  // Sub menus
+  .sub-menu:before,
+  .sub-sub-menu:before {
+    border-bottom: 9px solid transparent;
+    border-left: none;
+    border-right: 9px solid rgba(0, 0, 0, 0.2);
+    border-top: 9px solid transparent;
+    left: -9px;
+    top: 30%;
+  }
+  .sub-menu:after,
+  .sub-sub-menu:after {
+    border-top: 8px solid transparent;
+    border-left: none;
+    border-right: 8px solid @white;
+    border-bottom: 8px solid transparent;
+    top: 31%;
+    left: -8px;
   }
 
   // Home link and home icon
@@ -152,11 +168,110 @@
       display: block;
       width: 18px;
       height: @iconbarHeight;
-      /*background-color: @navbarLinkColor;*/
     }
 
     .icon-bar + .icon-bar {
       margin-top: @iconbarHeight;
+    }
+  }
+
+  @media (min-width: 769px) {
+    .nav-left {
+      display: none;
+    }
+  }
+
+  // Responsive styles for .navbar
+  @media (max-width: 768px) {
+    position: relative;
+    z-index: 9;
+
+    li.dropdown {
+      .dropdown-menu li a {
+        line-height: @navbarHeight;
+        padding-top: 0;
+        padding-bottom: 0;
+        padding-left: @navbarHeight;
+      }
+    }
+
+    .container {
+      width: auto;
+      padding: 0;
+    }
+
+    .toggle-nav-bar {
+      display: block;
+    }
+
+    .nav-shelf {
+      background: @dropdownBackground;
+      position: absolute;
+      top: 100%;
+      left: -10px;
+      right: -10px;
+      visibility: hidden;
+      opacity: 0;
+
+      .site-name, .home-icon, .home-link {
+        display: none;
+      }
+
+      ul, li {
+        float: none;
+      }
+
+      li.home-link {
+        display: none;
+      }
+
+      li b.caret {
+        float: right;
+      }
+
+      li.open > a .caret {
+        .rotate( 90deg );
+      }
+
+      li.open > ul.dropdown-menu {
+        display: block;
+        position: relative;
+        .box-shadow( none );
+        border: none;
+        padding: 0;
+        &:before, &:after {
+          display: none;
+        }
+      }
+
+      .nav > li {
+        /*border-bottom: 1px solid @grayLight;*/
+        padding-top: 5px;
+        padding-bottom: 5px;
+        &:last-child {
+          border-bottom: none;
+          padding-bottom: none;
+        }
+      }
+
+    }
+
+    &.open .nav-shelf {
+      visibility: visible;
+      opacity: 1;
+      /*border-bottom: solid 1px @dropdownBorder;*/
+
+      &:after {
+        position: absolute;
+        content: " ";
+        display: block;
+        bottom: -5px;
+        left: 0;
+        right: 0;
+        height: 5px;
+        #gradient > .vertical( rgba(0,0,0,0.5), rgba(0,0,0,0) );
+        background-color: transparent;
+      }
     }
   }
 }
@@ -166,7 +281,6 @@
 .navbar-inner {
   float: left;
   width: 100%;
-  /*background-color: @baseColor;*/
 }
 
 // Dropdown arrow/caret
@@ -175,7 +289,6 @@
   position: relative;
   width: @baseFontSize;
   padding: 0 (@baseFontSize / 2);
-  /*font-size: 0.99em;*/
 
   &:before {
     display: block;
@@ -204,18 +317,8 @@
   &.active .caret {
     .opacity(100);
   }
-
-  // Remove background color from open dropdown
-  &.open > .dropdown-toggle,
-  &.active > .dropdown-toggle,
-  &.open.active > .dropdown-toggle {
-    background-color: transparent;
-  }
-
-  &.active > .dropdown-toggle:hover {
-    color: @white;
-  }
 }
+
 .dropdown-toggle {
   // The caret makes the toggle a bit too tall in IE7
   *margin-bottom: -3px;
@@ -250,6 +353,8 @@
 
   // Links within the dropdown menu
   li {
+    margin-bottom: 0;
+
     & > a {
       display: block;
       width: auto;
@@ -262,8 +367,8 @@
 
       &:hover {
         /*color: @dropdownLinkColorHover;*/
-        text-decoration: none;
         /*background-color: @dropdownLinkBackgroundHover;*/
+        text-decoration: none;
       }
     }
   }
@@ -318,6 +423,25 @@
     visibility: visible;
     display: block;
   }
+
+  @media (max-width: 768px) {
+    li:hover .sub-sub-menu,
+    li:hover .sub-menu {
+      display: none;
+      visibility: hidden;
+      &:before {
+        display: none;
+      }
+    }
+
+    /*
+     * Dealing with active and open sections
+     */
+    .active > a,
+    .active > a:hover {
+      font-weight: normal;
+    }
+  }
 }
 
 @media (min-width: 769px) {
@@ -336,6 +460,10 @@
 
   & > .dropdown-menu {
     display: block;
+
+    @media (min-width: 769px) {
+      display: none;
+    }
   }
 }
 
@@ -356,30 +484,6 @@
   }
 }
 
-
-/*.dropdown-menu li {*/
-  /*margin-bottom: 0;*/
-/*}*/
-
-/*.navbar .sub-menu:before,*/
-/*.navbar .sub-sub-menu:before {*/
-  /*border-bottom: 9px solid transparent;*/
-  /*border-left: none;*/
-  /*border-right: 9px solid rgba(0, 0, 0, 0.2);*/
-  /*border-top: 9px solid transparent;*/
-  /*left: -9px;*/
-  /*top: 30%;*/
-/*}*/
-/*.navbar .sub-menu:after,*/
-/*.navbar .sub-sub-menu:after {*/
-  /*border-top: 8px solid transparent;*/
-  /*border-left: none;*/
-  /*border-right: 8px solid @white;*/
-  /*border-bottom: 8px solid transparent;*/
-  /*top: 31%;*/
-  /*left: -8px;*/
-/*}*/
-
 // "Don't miss"/topics bar
 #topics-bar {
   /*border-bottom: 1px solid @grayLighter;*/
@@ -399,7 +503,6 @@
     }
   }
 }
-
 
 // Navbar search form
 .form-search {
