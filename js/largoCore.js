@@ -45,7 +45,8 @@ jQuery(document).ready(function($) {
 
 	//enable "clean read" functionality
 	$('a.clean-read').on('click', function() {
-		$('body').addClass('clean-read').find(".sticky-footer-container").append('<a class="clean-read-close" href="#">Exit "Clean Read" mode</a>');
+    // TODO: Since we've removed sticky footer, we'll need to put this someplace else
+		//$('body').addClass('clean-read').find(".sticky-footer-container").append('<a class="clean-read-close" href="#">Exit "Clean Read" mode</a>');
 		$('.clean-read-container').append('<a class="clean-read-close" href="#">Exit "Clean Read" mode</a>');
 		$('a.clean-read').hide();
 		return false;
@@ -119,7 +120,7 @@ jQuery(document).ready(function($) {
     }
   })();
 
-	// Sticky header and footer
+	// Sticky header
 	(function(){
 		var stickyNavEl = $('.sticky-nav-holder');
 		var mainEl = $('.home #main');
@@ -158,21 +159,6 @@ jQuery(document).ready(function($) {
 		if (stickyNavWrapper.length && !$('body').hasClass('home'))
 			stickyNavWrapper.height(stickyNavEl.outerHeight());
 
-		// Check if there is a sticky footer
-		var stickyFooterEl = $( '.sticky-footer-holder' );
-		if ( stickyFooterEl.length ) {
-			// Show the sticky footer by default
-			stickyFooterEl.addClass( 'show' );
-
-			$('#site-footer').waypoint( function( direction ) {
-				stickyFooterEl.toggleClass( 'show', direction == 'up' );
-			}, { offset: '100%' } );
-
-			$('.dismiss a').on( 'click', function() {
-				stickyFooterEl.remove();	//so it never comes back
-				return false;
-			});
-		}
 	})();
 
 
