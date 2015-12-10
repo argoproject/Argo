@@ -106,7 +106,7 @@ add_action('admin_enqueue_scripts', 'largo_term_featured_media_enqueue_post_edit
  */
 function largo_term_featured_media_types($types) {
 	global $post;
-	if ( isset( $types['image'] ) && is_object($post) && $post->post_type !== 'post' ) {
+	if ( isset( $types['image'] ) && is_object($post) && $post->post_type == '_term_meta' ) {
 		$ret =  array('image' => $types['image']);
 		return $ret;
 	}

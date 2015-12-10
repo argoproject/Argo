@@ -52,20 +52,25 @@ class TermMetaTestFunctions extends WP_UnitTestCase {
 		$this->assertFalse(array_key_exists('test', $ret), "_term_meta: The function failed to remove the 'test' key from the array. This shouldn't happen when the post type is '_term_meta'.");
 		unset($ret);
 
+		// Test this against the cftl tax landing page
+		$post->post_type = 'cftl-tax-landing';
+		$ret = largo_term_featured_media_types($testarray);
+		$this->assertTrue(array_key_exists('image', $ret), "flarp: The function removed the 'image' key from the array. This should never happen.");
+		$this->assertTrue(array_key_exists('test', $ret), "flarp: The function removed the 'test' key from the array. This shouldn't happen when the post type is other than 'cftl-tax-landing'.");
+		unset($ret);
+
 		// Test this against a strange post type.
 		$post->post_type = 'flarp';
 		$ret = largo_term_featured_media_types($testarray);
 		$this->assertTrue(array_key_exists('image', $ret), "flarp: The function removed the 'image' key from the array. This should never happen.");
-		$this->assertFalse(array_key_exists('test', $ret), "flarp: The function failed to remove the 'test' key from the array. This shouldn't happen when the post type is other than 'post'.");
+		$this->assertTrue(array_key_exists('test', $ret), "flarp: The function removed the 'test' key from the array. This shouldn't happen when the post type is other than '_term_meta'.");
 		unset($ret);
 
 		// Test this when the global post is strange.
 		$post = null;
-		var_log(is_object(null));
 		$ret = largo_term_featured_media_types($testarray);
-		var_log($ret);
 		$this->assertTrue(array_key_exists('image', $ret), "null: The function removed the 'image' key from the array. This should never happen.");
-		$this->assertFalse(array_key_exists('test', $ret), "null: The function failed to remove the 'test' key from the array. This shouldn't happen when the global post isn't an object (for whatever reason.)");
+		$this->assertTrue(array_key_exists('test', $ret), "null: The function removed the 'test' key from the array. This shouldn't happen when the global post isn't an object (for whatever reason.)");
 		unset($ret);
 
 		// reset;
