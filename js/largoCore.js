@@ -142,7 +142,7 @@ jQuery(document).ready(function($) {
 
 	// Custom share buttons
 	(function() {
-		var sharer = {
+		window.largo_sharer = {
 			// Initialize the singleton object
 			init: function() {
 				this.buttons = $('.custom-share-button');
@@ -173,7 +173,7 @@ jQuery(document).ready(function($) {
 
 			// Event handler for the share buttons
 			onClick: function( event ) {
-				var button = $(event.target);
+				var button = $(event.currentTarget);
 				var service = button.data('service');
 
 				if ( this['do_'+service] ) {
@@ -278,7 +278,7 @@ jQuery(document).ready(function($) {
 			}
 		};
 
-		sharer.init();
+		window.largo_sharer.init();
 	})();
 
 	// Search slide out for mobile
