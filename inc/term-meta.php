@@ -102,10 +102,13 @@ add_action('admin_enqueue_scripts', 'largo_term_featured_media_enqueue_post_edit
  *
  * @param array $types array of media types that can be used with the featured media editor
  * @since 0.5.4
+ * @global $post Used to determine whether or not this button is being called on a post or on something else.
  */
 function largo_term_featured_media_types($types) {
-	if ( isset( $types['image'] ) ) {
-		return array($types['image']);
+	global $post;
+	if ( isset( $types['image'] ) && is_object($post) && $post->post_type !== 'post' ) {
+		$ret =  array('image' => $types['image']);
+		return $ret;
 	}
 	return $types;
 }
