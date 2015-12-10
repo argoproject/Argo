@@ -5,7 +5,7 @@ inc/widgets/largo-image-widget.php
 
       Largo_Image_Widget class
 
-   .. php:method:: largo_image_widget::Largo_Image_Widget()
+   .. php:method:: largo_image_widget::__construct()
 
       Largo Image Widget constructor
 
