@@ -70,11 +70,11 @@ function largo_add_term_featured_media_button( $context = '' ) {
 		<th scope="row" valign="top"><?php _e('Term banner image', 'largo'); ?></th>
 		<td>
 			<p><a href="#" id="set-featured-media-button" class="button set-featured-media add_media" data-editor="content" title="<?php echo $language; ?> Featured Media"><span class="dashicons dashicons-admin-generic"></span> <?php echo $language; ?> Featured Media</a> <span class="spinner" style="display: none;"></span></p>
-			<p class="description">This will be displayed on the top of the term's archive page.</p>
+			<p class="description">This image will be displayed on the top of the term's archive page.</p>
 			<input type="hidden" id="post_ID" value="<?php echo $post_id ?>" />
 			<input type="hidden" id="featured_image_id" value="<?php echo $featured['attachment'] ;?>" />
 
-			<?php echo get_the_post_thumbnail($post_id); ?>
+			<?php # echo get_the_post_thumbnail($post_id); ?>
 		</td>
 	</tr>
 	<?php
