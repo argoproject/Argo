@@ -17,7 +17,6 @@ Twitter: http://twitter.com/largoproject
 
 Mailing List: http://eepurl.com/yu0bT
 
-How to Access INN Support for Largo: /users/support
 
 .. _setup-docs:
 
