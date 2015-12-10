@@ -268,6 +268,12 @@ function optionsframework_options() {
 		'type' 		=> 'checkbox',);
 
 	$options[] = array(
+		'desc' 		=> __('<strong>Would you like to display share icons in a floating bar beside posts using the single-column post template?</strong>', 'largo'),
+		'id' 		=> 'single_floating_social_icons',
+		'std' 		=> '1',
+		'type' 		=> 'checkbox',);
+
+	$options[] = array(
 		'desc' 		=> __('Select the <strong>share icons</strong> to display at the top of single posts.', 'largo'),
 		'id' 		=> 'article_utilities',
 		'std' 		=> $article_utility_buttons_defaults,
@@ -308,18 +314,6 @@ function optionsframework_options() {
 		'type'		=> 'select',
 		'class'		=> 'mini',
 		'options' 	=> $fb_verbs);
-
-	$options[] = array(
-		'desc' 		=> __('Location of <strong>"Clean Read"</strong> link', 'largo'),
-		'id' 		=> 'clean_read',
-		'std' 		=> 'none',
-		'type'		=> 'select',
-		'class'		=> 'mini',
-		'options' 	=> 	array(
-			'none' 		=> __('Nowhere (disabled)', 'largo'),
-			'byline' => __('In Byline', 'largo'),
-			'footer' => __('Below Tags', 'largo')
-		));
 
 	/**
 	 * Images Options

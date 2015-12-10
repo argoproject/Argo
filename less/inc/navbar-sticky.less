@@ -1,0 +1,209 @@
+.sticky-nav-container {
+  margin: 0 auto;
+  position: relative;
+}
+
+.home .sticky-nav-wrapper {
+  height: 0;
+}
+
+.sticky-nav-holder {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 99998;
+
+  visibility: hidden;
+  opacity: 0;
+  background-color: @stickyNavbarBackgroundColor;
+  .transition(opacity 0.3s);
+  .box-shadow(0 0 16px @gray);
+
+  &.show {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  body.admin-bar & {
+    top: 32px;
+
+    @media (max-width: 782px) {
+      top: 46px;
+    }
+  }
+}
+
+// Extend the common navbar styles
+.navbar.sticky-navbar {
+  margin-bottom: 0;
+
+  .nav {
+    color: @stickyNavbarText;
+  }
+
+  li {
+    a {
+      color: @stickyNavbarLinkColor;
+
+      &:hover {
+        color: @stickyNavbarLinkColorHover;
+      }
+
+      .caret:before {
+        border-top-color: @stickyNavbarDropdownCaretColor;
+      }
+
+      &:hover .caret:before {
+        border-top-color: @stickyNavbarDropdownCaretColorHover;
+      }
+    }
+
+    &.home-link > a:hover {
+      color: lighten(@stickyNavbarLinkColor, 5%);
+    }
+  }
+
+  // Dropdowns within nav
+  li.dropdown .dropdown-menu li a {
+    color: @stickyNavbarLinkColor;
+
+    &:hover {
+      color: @stickyNavbarLinkColorHover;
+    }
+  }
+
+  .social-icons {
+    margin: 0;
+    float: left;
+  }
+
+  .btn-navbar {
+    .icon-bar {
+      background-color: @stickyNavbarLinkColor;
+    }
+  }
+
+  &.home-link {
+    // TODO: should be based on a variable
+    min-width: 40px;
+    text-align: center;
+
+    .nav > li {
+      a {
+        img {
+          // TODO: should be based on variable
+          width: 1.49em;
+          height: 1.49em;
+        }
+      }
+
+      .icon-home:before {
+        position: relative;
+        top: 0;
+      }
+    }
+  }
+
+  // Contains social icons, search, donate link
+  .nav-right {
+    float: right;
+
+    #header-extras {
+      float: left;
+      margin: 0;
+      a.donate-link:hover {
+        background: transparent;
+      }
+
+      a span {
+        // TODO: should be based on vars
+        padding: 4px 8px;
+
+        color: @white;
+
+        // TODO: isn't this specific to the donate link?
+        background-color: @red;
+        &:hover {
+          background-color: lighten(@red, 5%);
+        }
+
+        // TODO: what is this for?
+        i {
+          display: none;
+        }
+      }
+    }
+
+    #sticky-nav-search.show {
+      .input-append {
+        position: absolute;
+        opacity: 1;
+        visibility: visible;
+      }
+      .input-append,
+      .toggle {
+        background-color: #343434;
+        color: @bodyBackground;
+      }
+    }
+  }
+
+  // Hides the second site name in the sticky header
+  // when .nav-shelf is visible
+  @media (min-width: 769px) {
+    .nav-left {
+      display: none;
+    }
+  }
+
+  // Site name
+  .site-name {
+    display: block;
+    color: #343434;
+    a {
+      color: #343434;
+      &:hover {
+        background-color: @white;
+        color: @gray;
+        text-decoration: none;
+      }
+    }
+    @media only screen and (max-width: 320px) {
+      display: none;
+    }
+  }
+
+  // Right side of nav, search, donate, social icons
+  .nav-right {
+    float: right;
+    #header-extras {
+      float: left;
+      margin: 0;
+      a.donate-link:hover {
+        background: transparent;
+      }
+    }
+  }
+
+  // Sticky nav dropdown mods
+  @media (max-width: 768px) {
+    li.dropdown {
+      &.open,
+      &.active,
+      &.open.active {
+        & > .dropdown-toggle {
+          color: @stickyNavbarLinkColor;
+          background: transparent;
+          .caret:before {
+            border-top-color: @stickyNavbarDropdownCaretColor;
+          }
+        }
+      }
+    }
+
+    .nav-shelf b.caret {
+      top: 1em;
+    }
+  }
+}
