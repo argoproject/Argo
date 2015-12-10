@@ -43,28 +43,6 @@ jQuery(document).ready(function($) {
 		});
 	}
 
-	//enable "clean read" functionality
-	$('a.clean-read').on('click', function() {
-    $('body')
-      .addClass('clean-read')
-      .append('<a class="clean-read-close" href="#"><i class="icon-cancel"></i> Exit clean read</a>');
-		$('a.clean-read').hide();
-		return false;
-	});
-
-	//close "clean read"
-	$(document).on('click', '.clean-read-close', function() {
-		$('body').removeClass('clean-read');
-		$('a.clean-read').show();
-		$('.clean-read-close').remove();
-		return false;
-	});
-
-	//ESC triggers "clean read" close
-	$(document).keyup(function(e) {
-    if (e.keyCode == 27 && $('body').hasClass('clean-read')) $('.clean-read-close').trigger('click');
-  });
-
   //GA event tracking for image-widget items
   $('a.image-click-track').on('click', function() {
 	  if (typeof _gaq == 'object') _gaq.push(['_trackEvent', 'Click', 'Image Widget', this.getAttribute('title')]);

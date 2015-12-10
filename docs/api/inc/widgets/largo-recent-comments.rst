@@ -5,7 +5,7 @@ inc/widgets/largo-recent-comments.php
 
       Largo recent-comments Widget
 
-   .. php:method:: largo_recent_comments_widget::largo_recent_comments_widget()
+   .. php:method:: largo_recent_comments_widget::__construct()
 
       Widget setup.
 
