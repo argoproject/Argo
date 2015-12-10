@@ -14,18 +14,28 @@
       if ( ! $('#floating-social-buttons').length ) {
         $('#page').append('<div id="floating-social-buttons"></div>');
         $('#floating-social-buttons')
-          .css('opacity', '0')
+          .css({
+            opacity: '0',
+            display: 'none',
+          })
           .html($("#tmpl-floating-social-buttons").html());
       }
 
       $('#floating-social-buttons')
-          .css('opacity', '1')
-          .css('position', 'fixed')
-          .css('top', adminBar + stickyNavHeight + (1.5 * 1.22 * 16)) // The line height of a standard p tag in largo is 1.5 * 1.22 * @baseFontSize
-          .css('left', offsetLeft());
+          .css({
+              opacity: '1',
+              display: 'block',
+              position: 'fixed',
+              // The line height of a standard p tag in largo is 1.5 * 1.22 * @baseFontSize
+              top: adminBar + stickyNavHeight + (1.5 * 1.22 * 16),
+              left: offsetLeft()
+          });
     } else {
       $('#floating-social-buttons')
-        .css('opacity', '0');
+        .css({
+          opacity: '0',
+          display: 'none'
+        });
     }
   };
 
