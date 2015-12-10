@@ -228,6 +228,7 @@ body.normal.page {
     margin-left: 0.2em;
   }
 }
+
 .post-social {
   margin-bottom: @baseline;
   &> span {
@@ -235,30 +236,34 @@ body.normal.page {
     line-height: 1.5em;
     max-width: 250px;
     margin: 0.5em 0;
-    padding: 0.3em 0.8em 0.3em 0.6em; // Irregular padding is to counter 0.2em margin-left on the icon.
+    padding: 0.3em 1em 0.3em 0.5em; // Irregular padding is to counter 0.2em margin-left on the icon.
     text-align: center;
-
     text-transform: uppercase;
     font-weight: 300;
     font-family: @sansFontFamily;
     position: relative;
     font-size: @baseFontSize;
-    color: white;
+    color: @white;
+
+    @media (max-width: 768px) {
+      padding: 0.3em 0.6em;
+    }
+    @media (max-width: 480px) {
+      padding: 0.3em 0.2em;
+    }
+
     &:hover {
-      .opacity(85);
+      cursor: pointer;
     }
     &:last-child {
       margin-right: 0;
     }
   }
   a {
-    color: white;
+    color: @white;
     &:hover {
-      color: white;
+      color: @white;
       text-decoration: none;
-      i {
-        .opacity(85);
-      }
     }
   }
   i, &::before {
@@ -267,7 +272,56 @@ body.normal.page {
   .email:hover {
     cursor: pointer;
   }
+  .more-social-links {
+    background-color: @orange;
+    color: @white;
+    &:hover {
+      background-color: lighten(@orange, 5%);
+    }
+
+    .popover {
+      top: 40px;
+
+      a {
+        color: @gray;
+        &:hover {
+          color: @grayDark;
+          text-decoration: underline;
+        }
+      }
+
+      i {
+        color: @grayLight;
+        margin-right: 0.25em;
+      }
+
+      ul, li {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        font-size: 14px;
+        line-height: 24px;
+      }
+
+      @media (max-width: 480px) {
+        left: auto;
+        right: 0;
+
+        &:before,
+        &:after {
+          left: auto;
+        }
+        &:before {
+          right: 19px;
+        }
+        &:after {
+          right: 20px;
+        }
+      }
+    }
+  }
 }
+
 #floating-social-buttons {
   transition: opacity 0.2s;
   border: 1px solid @grayLighter;
@@ -275,26 +329,28 @@ body.normal.page {
     display: none;
   }
 
-  a {
-    color: @grayLighter;
-  }
-  .email:hover,
-  span:hover a {
-    color: @white;
-  }
-  span {
-    min-width: 28px;
-    min-height: 28px;
-    padding: 18px;
-    font-size: 20px;
+  .post-social {
+    & > span {
+      padding-left: -100%;
+      display: block;
+      margin: 0;
+      padding: 0;
+      font-size: 20px;
 
-    &:hover { cursor: pointer; }
-  }
+      &:hover { cursor: pointer; }
 
-  .post-social > span {
-    padding-left: -100%;
-    display: block;
-    margin: 0;
+      & > a {
+        color: @grayLighter;
+        display: block;
+        padding: 18px;
+        min-width: 28px;
+        min-height: 28px;
+      }
+    }
+    & > .email:hover,
+    & > span:hover > a {
+      color: @white;
+    }
   }
   .rss {
     background-color: @white;
@@ -357,6 +413,31 @@ body.normal.page {
     color: @grayLighter;
     &:hover {
       background-color: darken(#62656F, 5%);
+    }
+  }
+  .more-social-links {
+    background-color: @white;
+    color: @grayLighter;
+    a.popped,
+    &:hover {
+      background-color: @orange;
+      color: @white;
+    }
+
+    .popover {
+      top: 68px;
+      font-size: 14px;
+
+      i {
+        margin-right: 0.25em;
+      }
+      a {
+        color: @gray;
+        &:hover {
+          color: @grayDark;
+          text-decoration: underline;
+        }
+      }
     }
   }
   .social-btn {

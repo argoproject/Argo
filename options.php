@@ -315,18 +315,6 @@ function optionsframework_options() {
 		'class'		=> 'mini',
 		'options' 	=> $fb_verbs);
 
-	$options[] = array(
-		'desc' 		=> __('Location of <strong>"Clean Read"</strong> link', 'largo'),
-		'id' 		=> 'clean_read',
-		'std' 		=> 'none',
-		'type'		=> 'select',
-		'class'		=> 'mini',
-		'options' 	=> 	array(
-			'none' 		=> __('Nowhere (disabled)', 'largo'),
-			'byline' => __('In Byline', 'largo'),
-			'footer' => __('Below Tags', 'largo')
-		));
-
 	/**
 	 * Images Options
 	 */
