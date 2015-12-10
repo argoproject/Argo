@@ -32,7 +32,6 @@ body.clean-read {
     display: none
   }
   #site-header {
-    border-bottom: 10px solid @baseColor;
     text-align: center;
     max-width: 800px;
     margin: 0 auto 3em;
@@ -63,8 +62,14 @@ body.clean-read {
     font-size: 110%;
   }
   .clean-read-close {
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 8px;
+    font-family: @sansFontFamily;
     line-height: 32px;
     vertical-align: middle;
+    background: @white;
     a {
       color: @linkColorHover;
     }

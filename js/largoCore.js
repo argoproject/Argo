@@ -45,9 +45,9 @@ jQuery(document).ready(function($) {
 
 	//enable "clean read" functionality
 	$('a.clean-read').on('click', function() {
-    // TODO: Since we've removed sticky footer, we'll need to put this someplace else
-		//$('body').addClass('clean-read').find(".sticky-footer-container").append('<a class="clean-read-close" href="#">Exit "Clean Read" mode</a>');
-		$('.clean-read-container').append('<a class="clean-read-close" href="#">Exit "Clean Read" mode</a>');
+    $('body')
+      .addClass('clean-read')
+      .append('<a class="clean-read-close" href="#"><i class="icon-cancel"></i> Exit clean read</a>');
 		$('a.clean-read').hide();
 		return false;
 	});
