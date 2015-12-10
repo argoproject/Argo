@@ -228,6 +228,7 @@ body.normal.page {
     margin-left: 0.2em;
   }
 }
+
 .post-social {
   margin-bottom: @baseline;
   &> span {
@@ -253,7 +254,6 @@ body.normal.page {
 
     &:hover {
       cursor: pointer;
-      /*.opacity(85);*/
     }
     &:last-child {
       margin-right: 0;
@@ -264,9 +264,6 @@ body.normal.page {
     &:hover {
       color: @white;
       text-decoration: none;
-      i {
-        /*.opacity(85);*/
-      }
     }
   }
   i, &::before {
@@ -284,7 +281,6 @@ body.normal.page {
 
     .popover {
       top: 40px;
-      font-size: 14px;
 
       a {
         color: @gray;
@@ -303,6 +299,24 @@ body.normal.page {
         list-style-type: none;
         margin: 0;
         padding: 0;
+        font-size: 14px;
+        line-height: 24px;
+      }
+
+      @media (max-width: 480px) {
+        left: auto;
+        right: 0;
+
+        &:before,
+        &:after {
+          left: auto;
+        }
+        &:before {
+          right: 19px;
+        }
+        &:after {
+          right: 20px;
+        }
       }
     }
   }
