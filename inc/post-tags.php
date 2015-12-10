@@ -192,7 +192,7 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 		$more_social_links = array();
 
 		// Try to get the top term permalink and RSS feed
-		$top_term_id = get_post_meta( $post, 'top_term', TRUE );
+		$top_term_id = get_post_meta( $post->ID, 'top_term', TRUE );
 		$top_term_taxonomy = $wpdb->get_var(
 			$wpdb->prepare( "SELECT taxonomy FROM $wpdb->term_taxonomy WHERE term_id = %d LIMIT 1", $top_term_id)
 		);
