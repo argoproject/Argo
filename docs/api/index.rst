@@ -7,6 +7,7 @@ Function reference by file
 * `homepages/homepage.php <homepages/homepage.html>`_
 * `homepages/layouts/HomepageSingleWithSeriesStories.php <homepages/layouts/HomepageSingleWithSeriesStories.html>`_
 * `homepages/zones/zones.php <homepages/zones/zones.html>`_
+* `inc/ajax-functions.php <inc/ajax-functions.html>`_
 * `inc/custom-feeds.php <inc/custom-feeds.html>`_
 * `inc/custom-less-variables.php <inc/custom-less-variables.html>`_
 * `inc/deprecated.php <inc/deprecated.html>`_
@@ -14,6 +15,7 @@ Function reference by file
 * `inc/enqueue.php <inc/enqueue.html>`_
 * `inc/featured-content.php <inc/featured-content.html>`_
 * `inc/featured-media.php <inc/featured-media.html>`_
+* `inc/header-footer.php <inc/header-footer.html>`_
 * `inc/helpers.php <inc/helpers.html>`_
 * `inc/images.php <inc/images.html>`_
 * `inc/metabox-api.php <inc/metabox-api.html>`_

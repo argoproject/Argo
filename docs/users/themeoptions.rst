@@ -34,7 +34,7 @@ Be careful to note the recommended format for each link type for maximum compati
 
 Note that authors can add links to their own social media profiles by editing their user profile.
 
-**Single Post Social Icons** - By default a box showing social media links will be shown at the top of single article pages. You can choose to hide this if you prefer. You can also choose which share icons should be displayed here, the verb used on Facebook buttons, whether or not your Twitter share count is displayed, and where the "Clean Read" link should be displayed on the page.
+**Single Post Social Icons** - By default a box showing social media links will be shown at the top of single article pages. You can choose to hide this if you prefer. You can also choose which share icons should be displayed here and the verb used on Facebook buttons.
 
 In previous versions of Largo, the option to have the author's bio and social media links occupied this slot, and also governed the visibility of share icons and the author bio at the end of the article. The article-bottom author bio and social links are now available as widgets.
 
@@ -52,7 +52,7 @@ This section allows you to upload images that are used primarily in the top head
 	- 768px-wide Small banner image
 	- 980px-wide Medium banner image
 	- 1170px-wide Large banner image
-	- 100px-tall site logo for use in the sticky header
+	- 100px-tall site logo for use in the sticky header. Use a .png file with transparent background, and no clear space around the logo.
 
 - Drag and drop the image onto the uploader (or click "Select Files" and find the correct image on your computer). When the image has finished uploading, selected the full size image option, and then click the button at the bottom of the uploader that says "Use This Image".
 

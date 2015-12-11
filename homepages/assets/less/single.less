@@ -9,7 +9,10 @@
   position: relative;
 }
 
-.home-top { float: left; }
+.home-top {
+  float: left;
+  width: 100%;
+}
 
 #view-format {
   position: absolute;
@@ -66,13 +69,14 @@
     width: 100%;
     margin: 0 auto;
     display: block;
-    float: left;
   }
   &.one-third-width img {
     width: 34.1%;
+    float: left;
   }
   &.two-third-width img {
     width: 34.1% * 2;
+    float: left;
   }
 }
 
@@ -212,8 +216,8 @@
   position: relative;
   > div {
     background-color: white;
-    padding: 20px;
     padding-bottom: 0;
+    margin-top: 20px;
   }
   .row-fluid>[class*='span'] {
     .widget {

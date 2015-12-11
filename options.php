@@ -268,6 +268,12 @@ function optionsframework_options() {
 		'type' 		=> 'checkbox',);
 
 	$options[] = array(
+		'desc' 		=> __('<strong>Would you like to display share icons in a floating bar beside posts using the single-column post template?</strong>', 'largo'),
+		'id' 		=> 'single_floating_social_icons',
+		'std' 		=> '1',
+		'type' 		=> 'checkbox',);
+
+	$options[] = array(
 		'desc' 		=> __('Select the <strong>share icons</strong> to display at the top of single posts.', 'largo'),
 		'id' 		=> 'article_utilities',
 		'std' 		=> $article_utility_buttons_defaults,
@@ -308,18 +314,6 @@ function optionsframework_options() {
 		'type'		=> 'select',
 		'class'		=> 'mini',
 		'options' 	=> $fb_verbs);
-
-	$options[] = array(
-		'desc' 		=> __('Location of <strong>"Clean Read"</strong> link', 'largo'),
-		'id' 		=> 'clean_read',
-		'std' 		=> 'none',
-		'type'		=> 'select',
-		'class'		=> 'mini',
-		'options' 	=> 	array(
-			'none' 		=> __('Nowhere (disabled)', 'largo'),
-			'byline' => __('In Byline', 'largo'),
-			'footer' => __('Below Tags', 'largo')
-		));
 
 	/**
 	 * Images Options
@@ -646,6 +640,12 @@ function optionsframework_options() {
 	$options[] = array(
 		'desc' 	=> __('<strong>Facebook app ID meta tag.</strong> This is a numerical app ID that will allow Facebook to capture insights for any social plugins active on your site and display them in your Facebook app/page insights.', 'largo'),
 		'id' 	=> 'fb_app_id',
+		'std' 	=> '',
+		'type' 	=> 'text');
+	
+	$options[] = array(
+		'desc' 	=> __('<strong>Facebook Tracking Pixel ID.</strong> Unique numerical ID (one per Facebook Ads account) to enable tracking of site visitors and targeting of specific Facebook ads at your audience.', 'largo'),
+		'id' 	=> 'fb_tracking_pixel',
 		'std' 	=> '',
 		'type' 	=> 'text');
 

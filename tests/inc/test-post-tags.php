@@ -67,8 +67,6 @@ EOT;
 		largo_post_social_links();
 		$ret = ob_get_clean();
 		$this->assertRegExp('/post-social/', $ret, "The .post-social class was not in the output");
-		$this->assertRegExp('/left/', $ret, "The .left class was not in the output");
-		$this->assertRegExp('/right/', $ret, "The .right class was not in the output");
 		unset($ret);
 
 		// Test that this outputs the expected data for each of the button types
@@ -224,6 +222,58 @@ EOT;
 
 	function test_largo_post_metadata() {
 		$this->markTestIncomplete("This test has not yet been implemented.");
+	}
+
+	function test_largo_floating_social_buttons() {
+		$id = $this->factory->post->create();
+		of_set_option('single_floating_social_icons', 1);
+		of_set_option('single_template', 'normal');
+		$this->go_to('/?p=' . $id);
+		$this->expectOutputRegex('/post-social/', "The .post-social class was not in the output.");
+		$this->expectOutputRegex('/id="tmpl-floating-social-buttons"/', "The #floating-social-buttons id was not in the output.");
+		largo_floating_social_buttons();
+	}
+
+	function test_largo_floating_social_button_width_json() {
+		$id = $this->factory->post->create();
+		of_set_option('single_floating_social_icons', 1);
+		of_set_option('single_template', 'normal');
+		$this->go_to('/?p=' . $id);
+		$this->expectOutputRegex('/id="floating-social-buttons-width-json"/', "The #floating-social-buttons-width-json id was not in the output.");
+		largo_floating_social_button_width_json();
+	}
+
+	function test_largo_floating_social_button_js() {
+		$id = $this->factory->post->create();
+		of_set_option('single_floating_social_icons', 1);
+		of_set_option('single_template', 'normal');
+		$this->go_to('/?p=' . $id);
+		$this->expectOutputRegex('/\/js\/floating-social-buttons/', "The Floating social buttons js was not output to the page.");
+		largo_floating_social_button_js();
+	}
+
+	function test_not_largo_floating_social_buttons() {
+		of_set_option('single_floating_social_icons', false);
+		of_set_option('single_template', 'normal');
+		$this->go_to('/');
+		$this->expectOutputString('', "The .post-social class was not in the output.");
+		largo_floating_social_buttons();
+	}
+
+	function test_not_largo_floating_social_button_width_json() {
+		of_set_option('single_floating_social_icons', false);
+		of_set_option('single_template', 'normal');
+		$this->go_to('/');
+		$this->expectOutputString('', "The #floating-social-buttons-width-json id was in the output, when nothing should have been output.");
+		largo_floating_social_button_width_json();
+	}
+
+	function test_not_largo_floating_social_button_js() {
+		of_set_option('single_floating_social_icons', false);
+		of_set_option('single_template', 'normal');
+		$this->go_to('/');
+		$this->expectOutputString('', "The Floating social buttons js was output to the page when it should not have been.");
+		largo_floating_social_button_js();
 	}
 
 }

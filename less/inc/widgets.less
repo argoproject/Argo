@@ -1,45 +1,98 @@
-
 /*------------------------------------------------------------------------------
   Widgets - Styling widgets and sidebars.
 
-  Contents:
-    1 - Global widget styles
-    2 - Wordpress desfualt widget styles
-    3 - Largo widget styles
+  1.0 - Global Widget Styles
+    1.1 - Base Styles
+    1.2 - Title Styles
+    1.3 - Footer Styles
+    1.4 - Background Styles
+    1.5 - Resets and Fixes
+  -----------------------------
+  2.0 - Widget File Imports
+    2.1 - Default WordPress Widgets (file imports)
+    2.2 - Largo Widgets (file imports)
+    2.3 - INN-supported widgets (file imports)
 ------------------------------------------------------------------------------*/
 
 
 /*------------------------------------------------------------------------------
-    1.0 - Global widget styles
+    1.0 - Global Widget Styles
 ------------------------------------------------------------------------------*/
 
-/* 1.1 - Base styles */
-
+/* 1.1 - Base Styles */
 .widget {
-  padding: 0 @baseline;
-  margin-bottom: @baseline * 1.5;
+  margin-bottom: @baseline;
   p, ul {
     font-size: @baseFontSize;
   }
   ul {
-    margin: @baseline/5 0 0 16px;
+    list-style: none;
+    margin: @baseline/5 0 0 0;
     line-height: 1.2;
     ul {
-      margin-bottom: @baseline/5;
+      margin-bottom: @baseline / 5;
       margin-top: @baseline * 0.5;
     }
   }
+  li {
+    overflow: hidden;
+    margin-bottom: 1em;
+  }
   p.morelink {
-    margin: -@baseline/4 0 0;
+   margin: -(@baseline / 4) 0 0;
+   font-size: @baseFontSize; // to avoid overrides
+  }
+
+  img {
+    // Small thumbnails are either right or left aligned.
+    &.right-align {
+      float: right;
+      padding: .2em 0 .4em .66em;
+    }
+    &.left-align {
+      float: left;
+      padding: .2em .66em .4em 0;
+    }
+    // Large thumbnails get different padding.
+    &.attachment-large,&.attachment-medium {
+      padding: 0 0 .66em;
+    }
+  }
+  h5 {
+    margin-bottom: 0.2em;
+    font-size: 1.25 * @baseFontSize;
   }
 }
 
-/* 1.2 - Widget title */
+.row-fluid {
+  & > [class*='span'] {
+    &:first-child {
+      & > * > .widget,
+      & > .widget {
+        padding-right: @baseline;
+        @media (max-width: 768px) {
+          padding-right: 0;
+        }
+      }
+    }
+    &:last-child {
+      & > * > .widget,
+      & > .widget {
+        padding-left: @baseline;
+        @media (max-width: 768px) {
+          padding-left: 0;
+        }
+      }
+    }
+  }
+}
+
+/* 1.2 - Title Styles */
 
 .widgettitle,
 .stories h3.widgettitle {
-  margin-bottom: @baseline/3;
-  font-size: @baseFontSize;
+  margin-bottom: @baseline / 3;
+  font-size: @baseFontSize * 1.25;
   text-transform: uppercase;
   font-weight: bold;
   color: @black;
@@ -48,21 +101,67 @@
   }
 }
 
-/* 1.3 - Footer widgets */
+/* 1.3 - Footer Styles */
 
-#site-footer .widget,
-#site-footer .widgettitle {
-  margin: 0;
-  padding: 0;
-  background: none;
-  border: none;
+#site-footer {
+  .darkLight(@headerFooterColor);
+  a:hover {
+    color: lighten(@linkColor, 20%);
+  }
+  .widgettitle,
+  li.menu-label {
+    .darkLight(@headerFooterColor);
+    font-size: @baseFontSize;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: @baseline / 3;
+    padding-bottom: @baseline / 5;
+  }
+  .widget {
+    margin: 0 0 (@baseline / 2) 0;
+  }
+  .widgettitle,
+  .widget {
+    background: none;
+    border: none;
+  }
+  p, li {
+    font-size: @baseFontSize * 0.9;
+  }
+  ul {
+    margin:0;
+    font-family: @sansFontFamily;
+    li {
+      line-height:1.25;
+      margin-bottom: @baseline / 2;
+      list-style: none;
+    }
+  }
+  /* FOOTER FORM / SEARCH STYLES */
+  input,
+  select {
+    font-family: @sansFontFamily;
+  }
+  select {
+    width: 90%;
+  }
+  input.search-query {
+    width: 67%;
+    margin-right: 0.5em;
+    height: 19px; // leave this alone, forms be challenging
+  }
+  input.search-submit {
+    max-width: 25%;
+    padding: 0.1em 0.5em;
+  }
 }
 
-#site-footer .widget {
-  margin-bottom: @baseline/2;
+#supplementary .menu-dont-miss-container h4,
+#site-footer aside li.menu-label {
+  display: none;
 }
 
-/* 1.4 - A few alternate styles */
+/* 1.4 - Background Styles (Reverse and None) */
 
 .widget.rev {
   color: @white;
@@ -70,6 +169,10 @@
   .widgettitle {
     background-color: @white;
     color: @baseColor;
+    padding: 5px;
+    a {
+      color: @baseColor;
+    }
   }
   a {
     color: @white;
@@ -90,30 +193,42 @@
   }
 }
 
-/* 1.5 - adjustments for default WP widgets */
+/* 1.5 - Resets and Fixes */
 
 #sidebar iframe {
   max-width: 100%;
 }
 
-/*------------------------------------------------------------------------------
-    2 - Wordpress default widget styles
+/* 1.6 - sidebar styles */
+#sidebar .widget {
+  padding: 0 0 0 @baseline;
 
-    This section does not have one file per widget, but if you are creating a
-    new rule for a default widget, please create a new file for the widget
-    or document here the file you are adding the rule to.
+  @media (max-width: 768px) {
+    padding: 0;
+  }
+}
+.single.normal #sidebar .widget {
+  padding: 0 @baseline 0 0;
+}
+/*------------------------------------------------------------------------------
+    2.1 - WordPress Default Widgets
+
+    Either:
+    - CREATE a new file for significant changes to a default widget's output.
+    - ADD a section to the wp-general.less file and document here.
+
+    wp-general.less
+    ---------------------------------------------------------------
+    .widget_archives - Archives dropdown
+    .widget_categories - Categories dropdown
+    .widget_search - Search form
 ------------------------------------------------------------------------------*/
 
 @import "widgets/wp-general.less";
-  // The above file includes styles for:
-  //   .widget_archives Archives dropdown
-  //   .widget_categories Categories dropdown
-  //   .widget_search Search form
-  //   .largo-taxonomy-list Largo Taxonomy List dropdown
 
 
 /*------------------------------------------------------------------------------
-    3 - Largo widget styles
+    2.2 - Largo widget styles
 
     This section aims to have one file for every widget included in Largo, and
     select third-party widgets that Largo supports. If you add a rule for a
@@ -130,14 +245,6 @@
 @import "widgets/largo-disclaimer.less";
 @import "widgets/largo-donate-widget.less";
 @import "widgets/largo-explore-related.less";
-@import "widgets/largo-featured-posts.less";
-  // The above file includes styles for:
-  //   Largo Sidebar Featured (deprecated)
-  //   Largo Footer Featured (deprecated)
-  //   Largo Featured
-  //   Largo Recent Posts
-  //   Largo INN RSS
-  //   Largo Taxonomy List
 @import "widgets/largo-follow.less";
 @import "widgets/largo-image-widget.less";
 @import "widgets/largo-prev-next-links.less";
@@ -147,3 +254,16 @@
 @import "widgets/largo-staff-roster.less";
 @import "widgets/largo-tag-list.less";
 @import "widgets/largo-taxonomy-list.less";
+@import "widgets/largo-inn-rss.less";
+
+/*------------------------------------------------------------------------------
+    2.3 - Styles for INN-supported non-Largo widgets
+
+    This section aims to have one file apiece for third-party widgets that
+    Largo supports.
+    If you add a rule for a widget in a file that does not belong to that widget,
+    please document here the file you are adding the rule to.
+------------------------------------------------------------------------------*/
+
+// Filenames are based on the name of the widget as it appears in the WP Admin.
+@import "widgets/analytic-bridge-popular-posts.less";

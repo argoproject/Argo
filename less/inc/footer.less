@@ -1,20 +1,68 @@
+/**
+ * Before Footer, Site Footer
+ *
+ * #before-footer - a dynamic widget area prior to #site-footer
+ * #site-footer
+ *   #supplementary - primary widget zones for site footer
+ *   #boilerplate - social icons, copyright, INN logo and footer links
+ *
+ * @since 0.5.3
+ */
+ 
 .before-footer-wrapper {
   background-color: @preFooterColor;
 }
+
 #before-footer {
   .widget:last-child {
     margin-bottom: 0;
   }
 }
+
 .footer-bg {
   background-color: @headerFooterColor;
   padding: 0 0 18px;
   margin-bottom: 0;
 }
+
+#supplementary {
+  padding: @baseline 0 0 0;
+  &._1col aside {
+    text-align: center;
+  }
+}
+
+/* specific to the one column footer layout */
+._1col .widget_nav_menu li {
+  display: inline;
+  margin-right: 1em;
+}
+
+/*
+ * image displays 300px wide, but is physically 1699x385 px^2
+ * We'll use math to get the padding top and bottom correct, according to the brand guidelines
+ * margin top and margin bottom should be equal to the height of one of the squares.
+ * By cropping the image to the outer boundary of the lower-left square in inn_logo_reversetype.png, we get a square height of 184px.
+ * 184/1669 = x/300
+ */
+@inn-logo-physical-width: 1669px;
+@inn-logo-physical-height: 385px;
+@inn-logo-width: 200px;
+@inn-logo-square: (@inn-logo-width*184/@inn-logo-physical-width); // 184 comes form the width of one square in INN's 2015 logo
+@inn-logo-height: (@inn-logo-width*@inn-logo-physical-height/@inn-logo-physical-width); // the rendered height of the logo image
+@footer-social-logo-font-size: @baseFontSize + 2;
+
+#inn-logo {
+  margin-top: @inn-logo-square;
+  margin-bottom: @inn-logo-square*0.75;
+  max-width: @inn-logo-width;
+}
+
 #footer-logos-bg {
   background-color: @white;
   padding: 10px 0;
 }
+
 #footer-logos {
   overflow:hidden;
   a {
@@ -42,100 +90,7 @@
     }
   }
 }
-#site-footer {
-  .darkLight(@headerFooterColor);
-  a:hover {
-    color: lighten(@linkColor, 20%);
-  }
-  p, li {
-    font-size: @baseFontSize * 0.815;
-  }
-  ul {
-    margin: 0;
-    li {
-      line-height: 1.2;
-      margin-bottom: @baseline / 2;
-      list-style: none;
-    }
-  }
-  .widgettitle,
-  li.menu-label {
-    .darkLight(@headerFooterColor);
-    font-size: @baseFontSize;
-    text-transform: uppercase;
-    font-weight: bold;
-    margin-bottom: @baseline / 3;
-    padding-bottom: 3px;
-    border-bottom: 1px solid @gray;
-  }
-}
-#menu-footer-navigation,
-#supplementary ul.menu {
-  font-family: @sansFontFamily;
-  list-style: none;
-  margin: 0 0 @baseline / 2;
-  padding: 0;
-  li {
-    margin-bottom: 0;
-    padding: 5px 0;
-    border-bottom: 1px solid @gray;
-    font-size: @baseFontSize;
-    h4 {
-	  margin-bottom: 0;
-    }
-  }
-}
-#supplementary .menu-dont-miss-container h4,
-#site-footer aside li.menu-label {
-  display: none;
-}
-#menu-footer-navigation li:first-child {
-  border-top: none !important;
-}
-#site-footer .widget_nav_menu .widgettitle {
-  margin-bottom: 0;
-}
-#site-footer li.menu-label {
-  padding-top: 0 !important;
-}
-#site-footer input,
-#site-footer select {
-  font-family: @sansFontFamily;
-}
-#site-footer select {
-  width: 90%;
-}
-#site-footer input {
-  margin-top: 5px;
-}
-#site-footer input.search-query {
-  width: 67%;
-  margin-right: 1%;
-  height: 19px;
-}
-#site-footer input.search-submit {
-  max-width: 25%;
-  padding: 1px 8px;
-}
 
-/*
- * image displays 300px wide, but is physically 1699x385 px^2
- * We'll use math to get the padding top and bottom correct, according to the brand guidelines
- * margin top and margin bottom should be equal to the height of one of the squares.
- * By cropping the image to the outer boundary of the lower-left square in inn_logo_reversetype.png, we get a square height of 184px.
- * 184/1669 = x/300
- */
-@inn-logo-physical-width: 1669px;
-@inn-logo-physical-height: 385px;
-@inn-logo-width: 200px;
-@inn-logo-square: (@inn-logo-width*184/@inn-logo-physical-width); // 184 comes form the width of one square in INN's 2015 logo
-@inn-logo-height: (@inn-logo-width*@inn-logo-physical-height/@inn-logo-physical-width); // the rendered height of the logo image
-@footer-social-logo-font-size: @baseFontSize + 2;
-#inn-logo {
-  margin-top: @inn-logo-square;
-  margin-bottom: @inn-logo-square*0.75;
-  max-width: @inn-logo-width;
-}
 ul#footer-social {
   padding-top: @inn-logo-square;
   padding-bottom: @inn-logo-square*0.75;
@@ -144,7 +99,6 @@ ul#footer-social {
   @media (max-width: 768px) {
     text-align: left;
   }
-
   li {
     height: @inn-logo-height;
     display: table-cell;
@@ -174,16 +128,7 @@ ul#footer-social {
     padding-right: 0;
   }
 }
-#supplementary {
-  padding: @baseline 0 0 0;
-  &._1col aside {
-    text-align: center;
-  }
-}
-._1col .widget_nav_menu li {
-  display: inline;
-  margin-right: 1em;
-}
+
 #boilerplate {
   width: 100%;
   font-family: @sansFontFamily;
@@ -200,24 +145,19 @@ ul#footer-social {
       padding-right: 10px;
     }
   }
-  .row-fluid {
-  //  margin-top: 1.5em;
-  }
   .menu {
     clear: none;
   }
 }
 
-/* highly descriptive to prevent accidental override */
-/* boilerplate text color to match gray logo*/
 footer #boilerplate {
   p {
     color:#9F9FA3;
   }
   a {
-    color:#848487;
+    color:@grayLighter;
     &:hover {
-      color:#09C9FF;
+      color:#09C9FF; // This blue is INN's Primary Brand color!
     }
   }
 }
@@ -236,6 +176,7 @@ footer #boilerplate {
     margin-top: @inn-logo-height + 1.75*@inn-logo-square;
   }
 }
+
 @media (max-width: 979px) {
   #boilerplate .row-fluid {
     .span6 {
@@ -252,116 +193,6 @@ footer #boilerplate {
   }
   .footer-credit span {
     display: block;
-  }
-}
-
-/*
- * Sticky Footer
- */
-
-.sticky-footer-holder {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 99998;
-  visibility: hidden;
-  opacity: 0;
-  height: 36px;
-  background-color: @white;
-  font-family: @sansFontFamily;
-  padding: 7px 0;
-  .box-shadow(0 2px 12px @gray);
-
-  .transition( opacity 0.3s );
-
-  &.show {
-    visibility: visible;
-    opacity: 1;
-  }
-
-  .sticky-footer-container {
-    margin: 0 auto;
-  }
-
-  .share {
-    float: left;
-    margin-right: 40px;
-  }
-
-  .share-button {
-    display: inline-block;
-    width: 2em;
-    height: 2em;
-    cursor: pointer;
-    text-align: center;
-    color: @textColor;
-
-    &:hover {
-      color: @baseColor;
-    }
-
-    &:before {
-      margin: 0;
-    }
-  }
-
-  a {
-    color: @textColor;
-
-    &:hover {
-      text-decoration: none;
-      color: @baseColor;
-    }
-  }
-
-  .comments {
-    float: left;
-    margin-right: 40px;
-  }
-
-  .follow {
-    float: right;
-  }
-
-  .follow-author {
-    display: inline-block;
-  }
-
-  .follow-author,
-  .post-category-link {
-    padding-left: 1em;
-  }
-
-  h4 {
-    display: inline-block;
-    text-transform: uppercase;
-    font-size: 1em;
-    font-weight: normal;
-    margin: 0;
-    color: @baseColor;
-  }
-
-  [class^="icon-"]:before,
-  [class*=" icon-"]:before {
-    font-size: 130%;
-    width: auto;
-  }
-
-  .dismiss {
-	  position: absolute;
-    top: 7px;
-    right: 7px;
-
-	  a {
-    	.opacity(50);
-	  }
-  }
-}
-
-@media ( max-width: @containerMaxWidth ) {
-  .sticky-footer-container {
-    padding-right: 40px;
   }
 }
 

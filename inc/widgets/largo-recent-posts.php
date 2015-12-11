@@ -80,45 +80,17 @@ class largo_recent_posts_widget extends WP_Widget {
 			while ( $my_query->have_posts() ) : $my_query->the_post(); $shown_ids[] = get_the_ID();
 
         		// wrap the items in li's.
-        		$output .= '<li>';
+				$output .= '<li>';
 
-				// The top term
-				$top_term_args = array('echo' => false);
-				if ( isset($instance['show_top_term']) && $instance['show_top_term'] == 1 && largo_has_categories_or_tags() ) {
-					$output .= '<h5 class="top-tag">' . largo_top_term($top_term_args) . '</h5>' ;
-				}
+				$context = array(
+					'instance' => $instance,
+					'thumb' => $thumb,
+					'excerpt' => $excerpt
+				);
 
-        		// the thumbnail image (if we're using one)
-        		if ($thumb == 'small') {
-        			$img_location = $instance['image_align'] != '' ? $instance['image_align'] : 'left';
-					$img_attr = array('class' => $img_location . '-align');
-        			$img_attr['class'] .= " attachment-small";
-	                $output .= '<a href="' . get_permalink() . '">' . get_the_post_thumbnail( get_the_ID(), '60x60', $img_attr) . '</a>';
-				} elseif ($thumb == 'medium') {
-					$img_location = $instance['image_align'] != '' ? $instance['image_align'] : 'left';
-					$img_attr = array('class' => $img_location . '-align');
-					$img_attr['class'] .= " attachment-thumbnail";
-	                $output .= '<a href="' . get_permalink() . '">' . get_the_post_thumbnail( get_the_ID(), 'post-thumbnail', $img_attr) . '</a>';
-				} elseif ($thumb == 'large') {
-					$img_attr = array();
-					$img_attr['class'] .= " attachment-large";
-					$output .= '<a href="' . get_permalink() . '">' . get_the_post_thumbnail( get_the_ID(), 'large', $img_attr) . '</a>';
-				}
-
-				// the headline
-				$output .= '<h5><a href="' . get_permalink() . '">' . get_the_title() . '</a></h5>';
-
-				// byline on posts
-				if ( isset( $instance['show_byline'] ) && $instance['show_byline'] == true) {
-					$output .= '<span class="byline">' . largo_byline(false) . '</span>';
-				}
-
-				// the excerpt
-				if ($excerpt == 'num_sentences') {
-					$output .= '<p>' . largo_trim_sentences( get_the_content(), $instance['num_sentences'] ) . '</p>';
-				} elseif ($excerpt == 'custom_excerpt') {
-	                $output .= '<p>' . get_the_excerpt() . '</p>';
-				}
+				ob_start();
+				largo_render_template('partials/widget', 'content', $context);
+				$output .= ob_get_clean();
 
 				// close the item
 				$output .= '</li>';

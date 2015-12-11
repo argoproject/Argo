@@ -10,16 +10,16 @@
 
 	<header>
 
- 		<h1 class="entry-title" itemprop="headline"><?php the_title(); ?></h1>
- 		<h5 class="byline"><?php largo_byline(); ?></h5>
+		<h1 class="entry-title" itemprop="headline"><?php the_title(); ?></h1>
+		<h5 class="byline"><?php largo_byline(); ?></h5>
 
- 		<?php
- 			if ( !of_get_option( 'single_social_icons' ) == false ) {
- 				largo_post_social_links();
- 			}
- 		?>
+		<?php
+			if ( !of_get_option( 'single_social_icons' ) == false ) {
+				largo_post_social_links();
+			}
+		?>
 
- 		<?php largo_post_metadata( $post->ID ); ?>
+		<?php largo_post_metadata( $post->ID ); ?>
 
 	</header><!-- / entry header -->
 
@@ -32,12 +32,6 @@
 	<?php do_action('largo_after_post_content'); ?>
 
 	<footer class="post-meta bottom-meta">
-
-    <?php if ( of_get_option( 'clean_read' ) === 'footer' ) : ?>
-    	<div class="clean-read-container clearfix">
- 			<a href="#" class="clean-read"><?php _e("View as 'Clean Read'", 'largo') ?></a>
- 		</div>
- 	<?php endif; ?>
 
 	</footer><!-- /.post-meta -->
 

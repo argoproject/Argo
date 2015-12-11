@@ -84,6 +84,38 @@ Also passed in is an array that contains only the extra fields that were present
 
 Passed in this are the arguments for the Load More Posts WP_Query. An example usage would be to check if ``is_home()`` and then restrict the posts returned by the query to those in the homepage featured prominence term.
 
+**filter: largo_post_social_links**
+
+*args: $output*
+
+Called before ``largo_post_social_links()`` returns or echos the social icons. The argument ``$output`` is HTML, usually containing HTML looking like this: (Whitespace has been added for readability)
+
+.. code::
+
+    <div class="largo-follow post-social clearfix">
+        <span class="facebook">
+            <a target="_blank" href="http://www.facebook.com/sharer/sharer.php?u=  ...">
+                <i class="icon-facebook"></i>
+                <span class="hidden-phone">Like</span>
+            </a>
+        </span>
+        <span class="twitter">
+            <a target="_blank" href="https://twitter.com/intent/tweet?text= ...">
+                <i class="icon-twitter"></i>
+                <span class="hidden-phone">Tweet</span>
+            </a>
+        </span>
+        <span class="print">
+            <a href="#" onclick="window.print()" title="Print this article" rel="nofollow">
+                <i class="icon-print"></i>
+                <span class="hidden-phone">Print</span>
+            </a>
+        </span>
+        <span data-service="email" class="email custom-share-button share-button">
+            <i class="icon-mail"></i>
+            <span class="hidden-phone">Email</span>
+        </span>
+    </div>
 
 Template Hooks
 --------------
@@ -117,6 +149,14 @@ Here is the current list of hooks available in Largo (available as of v.0.4):
  - **largo_after_header** - after the main <header> element
  - **largo_after_nav** - after the nav, before #main opening div tag
  - **largo_main_top** - directly after the opening #main div tag
+ 
+**home.php**
+
+These actions are run on all homepage templates, including the Legacy Three Column layout.
+
+ - **largo_before_sticky_posts** - Runs in the main column, before the sticky post would be rendered
+ - **largo_after_sticky_posts** - Runs in the main column, after where the sticky post would be rendered, before the homepage bottom area.
+ - **largo_after_homepage_hottom** - Runs after the homepage bottom area, before the termination of the main column.
  
 **sidebar.php**
 

@@ -43,27 +43,6 @@ jQuery(document).ready(function($) {
 		});
 	}
 
-	//enable "clean read" functionality
-	$('a.clean-read').on('click', function() {
-		$('body').addClass('clean-read').find(".sticky-footer-container").append('<a class="clean-read-close" href="#">Exit "Clean Read" mode</a>');
-		$('.clean-read-container').append('<a class="clean-read-close" href="#">Exit "Clean Read" mode</a>');
-		$('a.clean-read').hide();
-		return false;
-	});
-
-	//close "clean read"
-	$(document).on('click', '.clean-read-close', function() {
-		$('body').removeClass('clean-read');
-		$('a.clean-read').show();
-		$('.clean-read-close').remove();
-		return false;
-	});
-
-	//ESC triggers "clean read" close
-	$(document).keyup(function(e) {
-    if (e.keyCode == 27 && $('body').hasClass('clean-read')) $('.clean-read-close').trigger('click');
-  });
-
   //GA event tracking for image-widget items
   $('a.image-click-track').on('click', function() {
 	  if (typeof _gaq == 'object') _gaq.push(['_trackEvent', 'Click', 'Image Widget', this.getAttribute('title')]);
@@ -119,7 +98,7 @@ jQuery(document).ready(function($) {
     }
   })();
 
-	// Sticky header and footer
+	// Sticky header
 	(function(){
 		var stickyNavEl = $('.sticky-nav-holder');
 		var mainEl = $('.home #main');
@@ -158,27 +137,12 @@ jQuery(document).ready(function($) {
 		if (stickyNavWrapper.length && !$('body').hasClass('home'))
 			stickyNavWrapper.height(stickyNavEl.outerHeight());
 
-		// Check if there is a sticky footer
-		var stickyFooterEl = $( '.sticky-footer-holder' );
-		if ( stickyFooterEl.length ) {
-			// Show the sticky footer by default
-			stickyFooterEl.addClass( 'show' );
-
-			$('#site-footer').waypoint( function( direction ) {
-				stickyFooterEl.toggleClass( 'show', direction == 'up' );
-			}, { offset: '100%' } );
-
-			$('.dismiss a').on( 'click', function() {
-				stickyFooterEl.remove();	//so it never comes back
-				return false;
-			});
-		}
 	})();
 
 
 	// Custom share buttons
 	(function() {
-		var sharer = {
+		window.largo_sharer = {
 			// Initialize the singleton object
 			init: function() {
 				this.buttons = $('.custom-share-button');
@@ -209,7 +173,7 @@ jQuery(document).ready(function($) {
 
 			// Event handler for the share buttons
 			onClick: function( event ) {
-				var button = $(event.target);
+				var button = $(event.currentTarget);
 				var service = button.data('service');
 
 				if ( this['do_'+service] ) {
@@ -314,7 +278,7 @@ jQuery(document).ready(function($) {
 			}
 		};
 
-		sharer.init();
+		window.largo_sharer.init();
 	})();
 
 	// Search slide out for mobile
@@ -348,7 +312,7 @@ jQuery(document).ready(function($) {
 		});
 
 		// Secondary nav
-		navbar.on('touchstart.toggleNav click.toggleNav', '.nav-shelf .dropdown-toggle', function(event) {
+		navbar.on('touchstart.toggleNav click.toggleNav', '.nav-shelf .caret', function(event) {
 			// Only handle when
 			if (toggleButton.css('display') == 'none')
 				return;
@@ -367,4 +331,31 @@ jQuery(document).ready(function($) {
 			event.preventDefault();
 		});
 	});
+
+  // Popovers
+  $('body').on('click', '.popover-toggle',
+    function(event) {
+      event.stopPropagation();
+
+      var popover = $(this).siblings('.popover');
+
+      if (popover.css('display') == 'none') {
+        $(this).addClass('popped');
+        popover.show();
+      } else {
+        $(this).removeClass('popped');
+        popover.hide();
+      }
+
+      return false;
+    });
+
+    $('html').click(function() {
+      $('.popover').each(function() {
+        if ($(this).css('display') != 'none') {
+          $(this).hide();
+        }
+      });
+      $('.popped').removeClass('popped');
+    });
 });
