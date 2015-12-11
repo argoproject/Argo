@@ -137,38 +137,6 @@ function optionsframework_options() {
 		'type' 	=> 'text');
 
 	$options[] = array(
-		'name' 	=> __('Menu Options', 'largo'),
-		'desc' 	=> __('<strong>Show</strong> the "Don\'t Miss" menu under the main site navigation. Add links to this menu under <strong>Appearance > Menus</strong>.', 'largo'),
-		'id' 	=> 'show_dont_miss_menu',
-		'type' 	=> 'checkbox');
-
-	$options[] = array(
-		'desc' 	=> __('Enter the <strong>label that appears in front of the menu links in the "Don\'t Miss" menu</strong>. You can delete this default and no label will appear.', 'largo'),
-		'id' 	=> 'dont_miss_label',
-		'std' 	=> __('Don\'t Miss', 'largo'),
-		'class' => 'hidden',
-		'type' 	=> 'text');
-
-	$options[] = array(
-		'desc' 	=> __('Enter the <strong>label that appears before the menu links in the Footer Nav Menu</strong>. You can delete this default and no label will appear.', 'largo'),
-		'id' 	=> 'footer_menu_label',
-		'std' 	=> get_bloginfo('name'),
-		'type' 	=> 'text');
-
-	$options[] = array(
-		'desc'  => __('Show the <strong>sticky nav</strong>? Default is to show, but in some cases you may want to hide it.'),
-		'id'    => 'show_sticky_nav',
-		'std' 	=> '1',
-		'type' 	=> 'checkbox');
-
-	$options[] = array(
-		'desc' 	=> __('Show the <strong>site name in the sticky nav</strong>? Default is to show, but in some cases you might want to hide it to save space or if your logo is clear enough to not need it.', 'largo'),
-		'id' 	=> 'show_sitename_in_sticky_nav',
-		'std' 	=> '1',
-		'class' => 'hidden',
-		'type' 	=> 'checkbox');
-
-	$options[] = array(
 		'name' 	=> __('Copyright Message', 'largo'),
 		'desc' 	=> __('Enter the <strong>copyright and credit information</strong> to display in the footer. You can use <code>%d</code> to output the current year.', 'largo'),
 		'id' 	=> 'copyright_msg',
@@ -262,14 +230,8 @@ function optionsframework_options() {
 		'type' 	=> 'info');
 
 	$options[] = array(
-		'desc' 		=> __('<strong>Would you like to display share icons at the top of single posts?</strong> By default social icons appear at the top of single posts but you can choose to not show them at all.', 'largo'),
+		'desc' 		=> __('<p><strong>Would you like to display share icons at the top of single posts?</strong></p> <p>By default social icons appear at the top of single posts but you can choose to not show them at all.</p>', 'largo'),
 		'id' 		=> 'single_social_icons',
-		'std' 		=> '1',
-		'type' 		=> 'checkbox',);
-
-	$options[] = array(
-		'desc' 		=> __('<strong>Would you like to display share icons in a floating bar beside posts using the single-column post template?</strong>', 'largo'),
-		'id' 		=> 'single_floating_social_icons',
 		'std' 		=> '1',
 		'type' 		=> 'checkbox',);
 
@@ -280,32 +242,11 @@ function optionsframework_options() {
 		'type' 		=> 'multicheck',
 		'options' 	=> $article_utility_buttons);
 
-	/**
-	 * Whether social icons should be shown in the sticky footer.
-	 * 
-	 *  1 - show social icons in sticky footer.
-	 *  0 - do not show social icons in the sticky footer.
-	 *
-	 * @since 0.5
-	 */
 	$options[] = array(
-		'desc' 		=> __('<strong>Would you like to display share icons in the footer of single posts?</strong> By default social icons appear in the sticky footer of single posts but you can choose to not show them at all.', 'largo'),
-		'id' 		=> 'single_social_icons_footer',
+		'desc' 		=> __('<strong>Would you like to display share icons in a floating bar beside posts using the single-column post template?</strong>', 'largo'),
+		'id' 		=> 'single_floating_social_icons',
 		'std' 		=> '1',
 		'type' 		=> 'checkbox',);
-
-	/**
-	 * Which social icons should be shown in the sticky footer.
-	 *
-	 *  defaults: $footer_utility_buttons_defaults - facebook, twitter and email.
-	 * @since 0.5
-	 */
-	$options[] = array(
-		'desc' 		=> __('Select the <strong>share icons</strong> to display in the single post sticky footer.', 'largo'),
-		'id' 		=> 'footer_utilities',
-		'std' 		=> $footer_utility_buttons_defaults,
-		'type' 		=> 'multicheck',
-		'options' 	=> $footer_utility_buttons);
 
 	$options[] = array(
 		'desc' 		=> __('<strong>Use "like" or "recommend"</strong> for Facebook buttons?', 'largo'),
@@ -372,7 +313,7 @@ function optionsframework_options() {
 	 * Layout Options
 	 */
 	$options[] = array(
-		'name' => __('Layout Options', 'largo'),
+		'name' => __('Layout', 'largo'),
 		'type' => 'heading');
 
 	if (count($home_templates)) {
@@ -482,12 +423,6 @@ function optionsframework_options() {
 		'type' 	=> 'checkbox');
 
 	$widget_options[] = $options[] = array(
-		'desc' 	=> __('Check this box if you want to fade the sidebar out on single story pages as a reader scrolls.', 'largo'),
-		'id' 	=> 'showey_hidey',
-		'std' 	=> '0',
-		'type' 	=> 'checkbox');
-
-	$widget_options[] = $options[] = array(
 		'desc' 	=> __('Enter names of <strong>additional sidebar regions</strong> (one per line) you\'d like post authors to be able to choose to display on their posts.', 'largo'),
 		'id' 	=> 'custom_sidebars',
 		'std' 	=> '',
@@ -509,6 +444,46 @@ function optionsframework_options() {
 		)
 
 	);
+
+	/*
+	 * Navigation
+	 */
+
+	$options[] = array(
+		'name' 	=> __('Navigation', 'largo'),
+		'type' 	=> 'heading');
+
+	$options[] = array(
+		'name' 	=> __('Menu Options', 'largo'),
+		'desc' 	=> __('<strong>Show</strong> the "Don\'t Miss" menu under the main site navigation. Add links to this menu under <strong>Appearance > Menus</strong>.', 'largo'),
+		'id' 	=> 'show_dont_miss_menu',
+		'type' 	=> 'checkbox');
+
+	$options[] = array(
+		'desc' 	=> __('Enter the <strong>label that appears in front of the menu links in the "Don\'t Miss" menu</strong>. You can delete this default and no label will appear.', 'largo'),
+		'id' 	=> 'dont_miss_label',
+		'std' 	=> __('Don\'t Miss', 'largo'),
+		'class' => 'hidden',
+		'type' 	=> 'text');
+
+	$options[] = array(
+		'desc' 	=> __('Enter the <strong>label that appears before the menu links in the Footer Nav Menu</strong>. You can delete this default and no label will appear.', 'largo'),
+		'id' 	=> 'footer_menu_label',
+		'std' 	=> get_bloginfo('name'),
+		'type' 	=> 'text');
+
+	$options[] = array(
+		'desc'  => __('Show the <strong>sticky nav</strong>? Default is to show, but in some cases you may want to hide it.'),
+		'id'    => 'show_sticky_nav',
+		'std' 	=> '1',
+		'type' 	=> 'checkbox');
+
+	$options[] = array(
+		'desc' 	=> __('Show the <strong>site name in the sticky nav</strong>? Default is to show, but in some cases you might want to hide it to save space or if your logo is clear enough to not need it.', 'largo'),
+		'id' 	=> 'show_sitename_in_sticky_nav',
+		'std' 	=> '1',
+		'class' => 'hidden',
+		'type' 	=> 'checkbox');
 
 	/*
 	 * Advanced

@@ -1,12 +1,12 @@
 <?php
 
-/**
- * Enqueue all of our javascript and css files
- *
- * @since 1.0
- * @global LARGO_DEBUG
- */
 if ( ! function_exists( 'largo_enqueue_js' ) ) {
+	/**
+	 * Enqueue our core javascript and css files
+	 *
+	 * @since 1.0
+	 * @global LARGO_DEBUG
+	 */
 	function largo_enqueue_js() {
 
 		/**
@@ -31,7 +31,17 @@ if ( ! function_exists( 'largo_enqueue_js' ) ) {
 		if ( is_single() ) {
 			wp_enqueue_script( 'idTabs', get_template_directory_uri() . '/js/jquery.idTabs.js', array( 'jquery' ), '1.0', true );
 		}
+	}
+}
+add_action( 'wp_enqueue_scripts', 'largo_enqueue_js' );
 
+if ( ! function_exists( 'largo_enqueue_child_theme_css' ) ) {
+	/**
+	 * Enqueue Largo child theme CSS
+	 *
+	 * @since 0.5.4
+	 */
+	function largo_enqueue_child_theme_css() {
 		//Load the child theme's style.css if we're actually running a child theme of Largo
 		$theme = wp_get_theme();
 
@@ -39,8 +49,8 @@ if ( ! function_exists( 'largo_enqueue_js' ) ) {
 			wp_enqueue_style( 'largo-child-styles', get_stylesheet_directory_uri() . '/style.css', array('largo-stylesheet'));
 		}
 	}
+	add_action( 'wp_enqueue_script', 'largo_enqueue_child_theme_css' );
 }
-add_action( 'wp_enqueue_scripts', 'largo_enqueue_js' );
 
 /**
  * Enqueue our admin javascript and css files
@@ -56,13 +66,13 @@ function largo_enqueue_admin_scripts() {
 }
 add_action( 'admin_enqueue_scripts', 'largo_enqueue_admin_scripts' );
 
-/**
- * Determine which size of the banner image to load based on the window width
- *
- * @since 1.0
- * @todo: should probably use picturefill for this instead
- */
 if ( ! function_exists( 'largo_header_js' ) ) {
+	/**
+	 * Determine which size of the banner image to load based on the window width
+	 *
+	 * @since 1.0
+	 * @todo: should probably use picturefill for this instead
+	 */
 	function largo_header_js() { ?>
 		<script>
 			function whichHeader() {
@@ -84,12 +94,12 @@ if ( ! function_exists( 'largo_header_js' ) ) {
 }
 add_action( 'wp_enqueue_scripts', 'largo_header_js' );
 
-/**
- * Additional scripts to load in the footer (mostly for various social widgets)
- *
- * @since 1.0
- */
 if ( ! function_exists( 'largo_footer_js' ) ) {
+	/**
+	 * Additional scripts to load in the footer (mostly for various social widgets)
+	 *
+	 * @since 1.0
+	 */
 	function largo_footer_js() {
 
 		if ( largo_facebook_widget::is_rendered() || largo_follow_widget::is_rendered() ) { ?>
@@ -177,12 +187,12 @@ if ( ! function_exists( 'largo_footer_js' ) ) {
 }
 add_action( 'wp_footer', 'largo_footer_js' );
 
-/**
- * Add Google Analytics code to the footer, you need to add your GA ID to the theme settings for this to work
- *
- * @since 1.0
- */
 if ( ! function_exists( 'largo_google_analytics' ) ) {
+	/**
+	 * Add Google Analytics code to the footer, you need to add your GA ID to the theme settings for this to work
+	 *
+	 * @since 1.0
+	 */
 	function largo_google_analytics() {
 		if ( !current_user_can('edit_posts') ) : // don't track editors ?>
 			<script>
