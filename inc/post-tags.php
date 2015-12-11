@@ -206,14 +206,15 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 		}
 
 		if ( ! empty( $top_term_id ) ) {
-			$top_term_link = get_term_link( $top_term_id, $top_term_taxonomy );
+			$top_term = get_term( (int) $top_term_id, $top_term_taxonomy );
+			$top_term_link = get_term_link( (int) $top_term_id, $top_term_taxonomy );
 			if ( ! is_wp_error( $top_term_link ) ) {
-				$more_social_links[] = '<li><a href="' . $top_term_link . '"><i class="icon-link"></i> More on this topic</a></li>';
+				$more_social_links[] = '<li><a href="' . $top_term_link . '"><i class="icon-link"></i> <span>More on ' . $top_term->name . '</span></a></li>';
 			}
 
 			$top_term_feed_link = get_term_feed_link( $top_term_id, $top_term_taxonomy );
 			if ( ! is_wp_error( $top_term_feed_link ) ) {
-				$more_social_links[] = '<li><a href="' . $top_term_feed_link . '"><i class="icon-rss"></i> Subscribe to this topic</a></li>';
+				$more_social_links[] = '<li><a href="' . $top_term_feed_link . '"><i class="icon-rss"></i> <span>Subscribe to ' . $top_term->name . '</span></a></li>';
 			}
 		}
 
@@ -221,7 +222,7 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 		$twitter_username = get_user_meta( $post->post_author, 'twitter', true );
 		if ( ! empty( $twitter_username ) ) {
 			$twitter_link = 'https://twitter.com/' . $twitter_username;
-			$more_social_links[] = '<li><a href="' . $twitter_link . '"><i class="icon-twitter"></i> Follow this author</a></li>';
+			$more_social_links[] = '<li><a href="' . $twitter_link . '"><i class="icon-twitter"></i> <span>Follow this author</span></a></li>';
 		}
 
 		if ( count( $more_social_links ) ) {
