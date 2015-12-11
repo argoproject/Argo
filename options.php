@@ -450,8 +450,50 @@ function optionsframework_options() {
 	 */
 
 	$options[] = array(
-		'name' 	=> __('Navigation', 'largo'),
-		'type' 	=> 'heading');
+		'name' => __('Navigation', 'largo'),
+		'type' => 'heading'
+	);
+
+	$options[] = array(
+		'name' => __('Main navigation', 'largo'),
+		'type' => 'info'
+	);
+
+	$options[] = array(
+		'desc' => __('Hide the standard/full header on article pages and display only the sticky navigation ', 'largo'),
+		'id' => 'main_nav_display',
+		'std' => 0,
+		'type' => 'checkbox'
+	);
+
+	$options[] = array(
+		'desc' => __('<strong>NOTE:</strong> If the main navigation is hidden, <strong>readers will only see a small logo in the left-hand corner when entering the site and you will not be able to run a banner ad above the navigation.</strong>', 'largo'),
+		'type' => 'info'
+	);
+
+	$options[] = array(
+		'name' => __('Sticky navigation', 'largo'),
+		'desc' => __('Show the sticky navigation on:'),
+		'type' => 'info'
+	);
+
+	$options[] = array(
+		'desc' => __('This navigation bar will minimize when a user scrolls down and reappear on an up scroll. When the main navigation is visible, the sticky navigation will disappear.', 'largo'),
+		'id' => 'sticky_nav_display',
+		'std' => 'article',
+		'type' => 'radio',
+		'options' => array(
+			'article' => 'On article pages',
+			'mobile' => 'Only on mobile screen sizes'
+		)
+	);
+
+	$options[] = array(
+		'desc' 	=> __('Show the <strong>site name in the sticky nav</strong>? Default is to show, but in some cases you might want to hide it to save space or if your logo is clear enough to not need it.', 'largo'),
+		'id' 	=> 'show_sitename_in_sticky_nav',
+		'std' 	=> '1',
+		'class' => 'hidden',
+		'type' 	=> 'checkbox');
 
 	$options[] = array(
 		'name' 	=> __('Menu Options', 'largo'),
@@ -471,19 +513,6 @@ function optionsframework_options() {
 		'id' 	=> 'footer_menu_label',
 		'std' 	=> get_bloginfo('name'),
 		'type' 	=> 'text');
-
-	$options[] = array(
-		'desc'  => __('Show the <strong>sticky nav</strong>? Default is to show, but in some cases you may want to hide it.'),
-		'id'    => 'show_sticky_nav',
-		'std' 	=> '1',
-		'type' 	=> 'checkbox');
-
-	$options[] = array(
-		'desc' 	=> __('Show the <strong>site name in the sticky nav</strong>? Default is to show, but in some cases you might want to hide it to save space or if your logo is clear enough to not need it.', 'largo'),
-		'id' 	=> 'show_sitename_in_sticky_nav',
-		'std' 	=> '1',
-		'class' => 'hidden',
-		'type' 	=> 'checkbox');
 
 	/*
 	 * Advanced
