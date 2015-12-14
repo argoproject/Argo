@@ -37,6 +37,83 @@ class AjaxFunctionsTestFunctions extends WP_UnitTestCase {
 		largo_load_more_posts_data('test_nav', $wp_query);
 	}
 
+	// @todo: Test this! Can we actually test something that calls wp_die() ?
+	function test_largo_load_more_posts() {
+		$this->markTestIncomplete(
+		' This test calls wp_die(), which we may not be able to tests. Try it and see, sometime later.'
+		);
+	}
+
+	function test_largo_load_more_posts_choose_partial() {
+		global $opt;
+		$qv = array();
+
+		// Note: These options are arrayed in the order that they are tested for in largo_load_more_posts_choose_partial($qv)
+		// That is to say, later options *should* override earlier options. This is why $qv is not being unset($qv).
+
+		$ret = largo_load_more_posts_choose_partial($qv);
+		$this->assertEquals('home', $ret, 'empty query vars did not result in a determination that the partial type is home');
+
+		// Test it with everything that shouldn't affect the determination that this is home.
+		$qv['category_name'] = '';
+		$qv['author_name'] = '';
+		$qv['tag'] = '';
+		$qv['s'] = '';
+		$qv['year'] = '';
+		$_POST['is_series_landing'] = false;
+		$qv['series'] = '';
+		// @todo find way to test get_post_type() returning argolinks.
+		$ret = largo_load_more_posts_choose_partial($qv);
+		$this->assertEquals('home', $ret, 'empty query vars did not result in a determination that the partial type is home');
+
+		// category
+		$qv['category_name'] = 'foo';
+		$ret = largo_load_more_posts_choose_partial($qv);
+		$this->assertEquals('archive', $ret, 'Testing category');
+		$this->assertFalse('home', $ret, 'set query query vars did result in a determination that the partial type is home');
+
+		// Author archive page
+		$qv['author_name'] = 'admin';
+		$ret = largo_load_more_posts_choose_partial($qv);
+		$this->assertEquals('archive', $ret, 'Testing author archive');
+		$this->assertFalse('home', $ret, 'set query query vars did result in a determination that the partial type is home');
+
+		// tag
+		$qv['tag'] = 'tag';
+		$ret = largo_load_more_posts_choose_partial($qv);
+		$this->assertEquals('archive', $ret, 'Testing tag');
+		$this->assertFalse('home', $ret, 'set query query vars did result in a determination that the partial type is home');
+
+		// Search
+		$qv['s'] = 'search';
+		$ret = largo_load_more_posts_choose_partial($qv);
+		$this->assertEquals('archive', $ret, 'Testing search');
+		$this->assertFalse('home', $ret, 'set query query vars did result in a determination that the partial type is home');
+
+		// Date archive
+		$qv['year'] = '2015';
+		$ret = largo_load_more_posts_choose_partial($qv);
+		$this->assertEquals('archive', $ret, 'Testing date query with "year" => "2015"');
+		$this->assertFalse('home', $ret, 'set query query vars did result in a determination that the partial type is home');
+
+		// series landing pages
+		$_POST['is_series_landing'] = 'true';
+		$ret = largo_load_more_posts_choose_partial($qv);
+		$this->assertEquals('series', $ret, '');
+		$this->assertFalse('home', $ret, 'set query query vars did result in a determination that the partial type is home');
+
+		// non-series-landing series archives
+		$qv['series'] = 'series';
+		$ret = largo_load_more_posts_choose_partial($qv);
+		$this->assertEquals('archive', $ret, '');
+		$this->assertFalse('home', $ret, 'set query query vars did result in a determination that the partial type is home');
+
+		// @todo find way to test get_post_type() returning argolinks.
+		$this->assertFalse('home', $ret, 'set query query vars did result in a determination that the partial type is home');
+
+		// Test the filter.
+	}
+
 }
 
 class AjaxFunctionsTestAjaxFunctions extends WP_Ajax_UnitTestCase {

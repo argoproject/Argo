@@ -133,7 +133,7 @@ if (!function_exists('largo_load_more_posts_choose_partial')) {
 	 *
 	 * Includes a "largo_lmp_template_partial" filter to allow for modifying the value $partial.
 	 *
-	 * @param object $post_query The query object being used to generate LMP markup
+	 * @param Array $post_query The WP_Query->query_vars array being used to generate LMP markup
 	 * @return string $partial The slug of partial that should be loaded.
 	 * @global $opt
 	 * @global $_POST
@@ -141,6 +141,7 @@ if (!function_exists('largo_load_more_posts_choose_partial')) {
 	 */
 	function largo_load_more_posts_choose_partial($post_query) {
 		global $opt;
+		var_log($post_query);
 
 		// Default is to use partials/content-home.php
 		$partial = 'home';
@@ -150,6 +151,7 @@ if (!function_exists('largo_load_more_posts_choose_partial')) {
 		// check if this query is for a category
 		if ( isset($post_query['category_name']) && $post_query['category_name'] != '' ) {
 			$partial = 'archive';
+		} else {
 		}
 
 		// check if this query is for an author page
@@ -173,7 +175,7 @@ if (!function_exists('largo_load_more_posts_choose_partial')) {
 		}
 
 		// Series landing pages
-		if ($_POST['is_series_landing'] == 'true') {
+		if ( isset($_POST['is_series_landing']) && $_POST['is_series_landing'] == 'true') {
 			$partial = 'series';
 			$opt = $_POST['opt'];
 		}
