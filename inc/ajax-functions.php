@@ -141,7 +141,6 @@ if (!function_exists('largo_load_more_posts_choose_partial')) {
 	 */
 	function largo_load_more_posts_choose_partial($post_query) {
 		global $opt;
-		var_log($post_query);
 
 		// Default is to use partials/content-home.php
 		$partial = 'home';
