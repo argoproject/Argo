@@ -150,7 +150,6 @@ if (!function_exists('largo_load_more_posts_choose_partial')) {
 		// check if this query is for a category
 		if ( isset($post_query['category_name']) && $post_query['category_name'] != '' ) {
 			$partial = 'archive';
-		} else {
 		}
 
 		// check if this query is for an author page
