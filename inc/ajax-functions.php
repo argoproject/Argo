@@ -114,7 +114,7 @@ if ( !function_exists( 'largo_load_more_posts' ) ) {
 
 		if ( $query->have_posts() ) {
 			// Choose the correct partial to load here
-			$partial = largo_load_more_posts_choose_partial($query);
+			$partial = largo_load_more_posts_choose_partial($query->query_vars);
 
 			// Render all the posts
 			while ( $query->have_posts() ) : $query->the_post();
@@ -148,27 +148,27 @@ if (!function_exists('largo_load_more_posts_choose_partial')) {
 		// This might be a category, tag, search, date, author, non-landing-page series, or other other archive
 
 		// check if this query is for a category
-		if ( isset($post_query->category_name) && $post_query->category_name != '' ) {
+		if ( isset($post_query['category_name']) && $post_query['category_name'] != '' ) {
 			$partial = 'archive';
 		}
 
 		// check if this query is for an author page
-		if ( isset($post_query->author_name) && $post_query->author_name != '' ) {
+		if ( isset($post_query['author_name']) && $post_query['author_name'] != '' ) {
 			$partial = 'archive';
 		}
 
 		// check if this query is for a tag
-		if ( isset($post_query->tag) && $post_query->tag != '' ) {
+		if ( isset($post_query['tag']) && $post_query['tag'] != '' ) {
 			$partial = 'archive';
 		}
 
 		// check if this query is for a search
-		if ( isset($post_query->s) && $post_query->s != '' ) {
+		if ( isset($post_query['s']) && $post_query['s'] != '' ) {
 			$partial = 'archive';
 		}
 
 		// check if this query is for a date, assuming that all date queries have a year.
-		if ( isset($post_query->year) && $post_query->year != 0 ) {
+		if ( isset($post_query['year']) && $post_query['year'] != 0 ) {
 			$partial = 'archive';
 		}
 
@@ -179,7 +179,7 @@ if (!function_exists('largo_load_more_posts_choose_partial')) {
 		}
 
 		// Non-series-landing series archives
-		if ( isset($post_query->query_vars['series']) && $post_query->query_vars['series'] != '' ) {
+		if ( isset($post_query['series']) && $post_query['series'] != '' ) {
 			$partial = 'archive';
 		}
 
