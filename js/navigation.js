@@ -2,6 +2,8 @@
   var $ = jQuery;
 
   var LargoNavigation = function() {
+    this.scrollTop = $(window).scrollTop();
+    this.previousScroll = null;
     return this.init();
   };
 
@@ -11,7 +13,7 @@
 
     // Stick navigation
     this.stickyNavEl = $('.sticky-nav-holder');
-    this.mainEl = $('.home #main');
+    this.mainEl = $('#main');
     this.stickyNavWaypointOpts = {
       offset: $('#wpadminbar').height() + parseInt(this.mainEl.css('marginTop'))
     };
@@ -76,41 +78,75 @@
   LargoNavigation.prototype.bindStickyNavEvents = function() {
     if (this.mainEl.length) {
       this.stickyNavInit();
-      this.mainEl.waypoint(this.stickyNavWaypointCallback, this.stickyNavWaypointOpts);
-      $(window).on('resize', this.stickyNavResizeCallback);
+      $(window).on('resize', this.stickyNavResizeCallback.bind(this));
+      $(window).on('scroll', this.stickyNavScrollCallback.bind(this));
     }
-  };
-
-  LargoNavigation.prototype.stickyNavWaypointCallback = function(direction) {
-    if ($(window).width() <= 768)
-      return false;
-
-    this.stickyNavEl.toggleClass('show', direction == 'down');
-    this.stickyNavEl.data('hideAtTop', true);
   };
 
   LargoNavigation.prototype.stickyNavInit = function() {
     if ($(window).width() <= 768) {
       this.stickyNavEl.addClass('show');
-      this.stickyNavEl.data('hideAtTop', false);
     }
 
     // Account for sticky nav with fixed position at top of page
     var stickyNavWrapper = $('.sticky-nav-wrapper');
-    if (stickyNavWrapper.length && !$('body').hasClass('home'))
+    if (stickyNavWrapper.length)
       stickyNavWrapper.height(this.stickyNavEl.outerHeight());
   };
 
   LargoNavigation.prototype.stickyNavResizeCallback = function() {
     if ($(window).width() <= 768) {
       this.stickyNavEl.addClass('show');
-      this.stickyNavEl.data('hideAtTop', false);
     } else {
       if ($(window).scrollTop() <= this.mainEl.offset().top)
         this.stickyNavEl.removeClass('show');
-
-      this.stickyNavEl.data('hideAtTop', true);
     }
+  };
+
+  LargoNavigation.prototype.stickyNavScrollCallback = function(event) {
+    var self = this,
+        direction = this.scrollDirection(),
+        callback, wait;
+
+    if ($(window).width() <= 768) {
+      return false;
+    }
+
+    if ($(window).scrollTop() <= this.mainEl.offset().top) {
+      this.stickyNavEl.removeClass('show');
+      clearTimeout(this.scrollTimeout);
+      return;
+    }
+
+    if (this.previousScroll == direction) {
+      return;
+    }
+
+    clearTimeout(this.scrollTimeout);
+
+    if (direction == 'up') {
+      callback = this.stickyNavEl.addClass.bind(this.stickyNavEl, 'show'),
+      wait = 250;
+    } else if (direction == 'down') {
+      callback = this.stickyNavEl.removeClass.bind(this.stickyNavEl, 'show');
+      wait = 500;
+    }
+
+    this.scrollTimeout = setTimeout(callback, wait);
+    this.previousScroll = direction;
+  };
+
+  LargoNavigation.prototype.scrollDirection = function() {
+    var scrollTop = $(window).scrollTop(),
+        direction;
+
+    if (scrollTop > this.scrollTop)
+      direction = 'down';
+    else
+      direction = 'up';
+
+    this.scrollTop = scrollTop;
+    return direction;
   };
 
   LargoNavigation.prototype.responsiveNavigation = function() {

@@ -194,12 +194,31 @@ jQuery(document).ready(function($) {
     return false;
   });
 
-   $('html').click(function() {
-     $('.popover').each(function() {
-       if ($(this).css('display') != 'none') {
-         $(this).hide();
-       }
-     });
-     $('.popped').removeClass('popped');
-   });
+  $('html').click(function() {
+    $('.popover').each(function() {
+      if ($(this).css('display') != 'none') {
+        $(this).hide();
+      }
+    });
+    $('.popped').removeClass('popped');
+  });
+
+  // Utilities
+  var debounce = function(func, wait, immediate) {
+    var timeout;
+    return function() {
+      var context = this, args = arguments;
+      var later = function() {
+        timeout = null;
+        if (!immediate) func.apply(context, args);
+      };
+      var callNow = immediate && !timeout;
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+      if (callNow) func.apply(context, args);
+    };
+  };
+
+  if (typeof window.debounce == 'undefined')
+    window.debounce = debounce;
 });

@@ -7,7 +7,7 @@
  *
  * @package Largo
  */
-if ( is_front_page() || is_home() || !of_get_option( 'show_sticky_nav' ) ): ?>
+?>
 <nav id="main-nav" class="navbar clearfix">
 	<div class="navbar-inner">
 		<div class="container">
@@ -74,4 +74,3 @@ if ( is_front_page() || is_home() || !of_get_option( 'show_sticky_nav' ) ): ?>
 		</div>
 	</div>
 </nav>
-<?php endif;
