@@ -86,7 +86,7 @@ class AjaxFunctionsTestFunctions extends WP_UnitTestCase {
 		// Search
 		$qv['s'] = 'search';
 		$ret = largo_load_more_posts_choose_partial($qv);
-		$this->assertEquals('archive', $ret, 'Testing search');
+		$this->assertEquals('search', $ret, 'Testing search');
 		$this->assertFalse(('home' == $ret), 'set query query vars did result in a determination that the partial type is home');
 
 		// Date archive
