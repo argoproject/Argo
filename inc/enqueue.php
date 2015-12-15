@@ -8,30 +8,77 @@ if ( ! function_exists( 'largo_enqueue_js' ) ) {
 	 * @global LARGO_DEBUG
 	 */
 	function largo_enqueue_js() {
-
-		/**
-		 * Use minified assets if LARGO_DEBUG isn't true.
+		/*
+		 * Use minified assets if LARGO_DEBUG is false.
 		 */
-
 		$suffix = (LARGO_DEBUG)? '' : '.min';
-		// Our primary stylesheet
-		// Often overridden by custom-less-variables version
-		wp_enqueue_style( 'largo-stylesheet', get_template_directory_uri().'/css/style' . $suffix . '.css' );
-		wp_enqueue_script( 'largoCore', get_template_directory_uri() . '/js/largoCore' . $suffix . '.js', array( 'jquery' ), '1.0', true );
-		wp_enqueue_script( 'largo-navigation', get_template_directory_uri() . '/js/navigation' . $suffix . '.js', array( 'largoCore' ), '1.0', true );
+		$version = largo_version();
 
-		/**
-		 * These files are already minified
+		// Our primary stylesheet. Often overridden by custom-less-variables version.
+		wp_enqueue_style(
+			'largo-stylesheet',
+			get_template_directory_uri() . '/css/style' . $suffix . '.css',
+			null,
+			$version
+		);
+
+		// Core JS includes some utilities, initializes carousels, search form behavior,
+		// popovers, responsive header image, etc.
+		wp_enqueue_script(
+			'largoCore',
+			get_template_directory_uri() . '/js/largoCore' . $suffix . '.js',
+			array( 'jquery' ),
+			$version,
+			true
+		);
+
+		// Navigation-related JS
+		wp_enqueue_script(
+			'largo-navigation',
+			get_template_directory_uri() . '/js/navigation' . $suffix . '.js',
+			array( 'largoCore' ),
+			$version,
+			true
+		);
+
+		// Largo configuration object for use in frontend JS
+		wp_localize_script(
+			'largoCore', 'Largo', array(
+			'is_home' => is_home(),
+			'is_single' => is_single() || is_singular(),
+			'sticky_nav_display' => of_get_option( 'sticky_nav_display', 'article' )
+		));
+
+		/*
+		 * The following files are already minified:
+		 *
+		 * - modernizr.custom.js
+		 * - largoPlugins.js
+		 * - jquery.idTabs.js
 		 */
+		wp_enqueue_script(
+			'largo-modernizr',
+			get_template_directory_uri() . '/js/modernizr.custom.js',
+			null,
+			$version
+		);
+		wp_enqueue_script(
+			'largoPlugins',
+			get_template_directory_uri() . '/js/largoPlugins.js',
+			array( 'jquery' ),
+			$version,
+			true
+		);
 
-		// Modernizr
-		wp_enqueue_script( 'largo-modernizr', get_template_directory_uri() . '/js/modernizr.custom.js' );
-		//the jquery plugins and our main js file
-		wp_enqueue_script( 'largoPlugins', get_template_directory_uri() . '/js/largoPlugins.js', array( 'jquery' ), '1.0', true );
-
-		//only load jquery tabs for the related content box if it's active
+		// Only load jquery tabs for the related content box if it's active
 		if ( is_single() ) {
-			wp_enqueue_script( 'idTabs', get_template_directory_uri() . '/js/jquery.idTabs.js', array( 'jquery' ), '1.0', true );
+			wp_enqueue_script(
+				'idTabs',
+				get_template_directory_uri() . '/js/jquery.idTabs.js',
+				array( 'jquery' ),
+				$version,
+				true
+			);
 		}
 	}
 }

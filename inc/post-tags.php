@@ -809,7 +809,8 @@ if ( ! function_exists('largo_floating_social_button_js') ) {
 			?>
 			<script type="text/javascript" src="<?php
 				$suffix = (LARGO_DEBUG)? '' : '.min';
-				echo get_template_directory_uri() . '/js/floating-social-buttons' . $suffix . '.js'
+				$version = largo_version();
+				echo get_template_directory_uri() . '/js/floating-social-buttons' . $suffix . '.js?ver=' . $version;
 			?>" async></script>
 			<?php
 		}

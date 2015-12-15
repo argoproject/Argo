@@ -1,22 +1,19 @@
 (function() {
   var $ = jQuery;
 
-  var LargoNavigation = function() {
+  var Navigation = function() {
     this.scrollTop = $(window).scrollTop();
     this.previousScroll = null;
     return this.init();
   };
 
-  LargoNavigation.prototype.init = function() {
+  Navigation.prototype.init = function() {
     // Dropdowns on touch screens
     this.enableMobileDropdowns();
 
     // Stick navigation
     this.stickyNavEl = $('.sticky-nav-holder');
     this.mainEl = $('#main');
-    this.stickyNavWaypointOpts = {
-      offset: $('#wpadminbar').height() + parseInt(this.mainEl.css('marginTop'))
-    };
     this.bindStickyNavEvents();
 
     // Sticky nav on small viewports
@@ -25,7 +22,7 @@
     return this;
   };
 
-  LargoNavigation.prototype.enableMobileDropdowns = function () {
+  Navigation.prototype.enableMobileDropdowns = function () {
     // Touch enable the drop-down menus
     if (Modernizr.touch) {
       // iOS Safari works with touchstart, the rest work with click
@@ -75,26 +72,29 @@
     }
   };
 
-  LargoNavigation.prototype.bindStickyNavEvents = function() {
+  Navigation.prototype.bindStickyNavEvents = function() {
     if (this.mainEl.length) {
       this.stickyNavInit();
       $(window).on('resize', this.stickyNavResizeCallback.bind(this));
-      $(window).on('scroll', this.stickyNavScrollCallback.bind(this));
+
+      if (Largo.sticky_nav_display == 'article' && Largo.is_single) {
+        $(window).on('scroll', this.stickyNavScrollCallback.bind(this));
+      }
     }
   };
 
-  LargoNavigation.prototype.stickyNavInit = function() {
+  Navigation.prototype.stickyNavInit = function() {
     if ($(window).width() <= 768) {
       this.stickyNavEl.addClass('show');
     }
 
     // Account for sticky nav with fixed position at top of page
-    var stickyNavWrapper = $('.sticky-nav-wrapper');
-    if (stickyNavWrapper.length)
-      stickyNavWrapper.height(this.stickyNavEl.outerHeight());
+    //var stickyNavWrapper = $('.sticky-nav-wrapper');
+    //if (stickyNavWrapper.length)
+      //stickyNavWrapper.height(this.stickyNavEl.outerHeight());
   };
 
-  LargoNavigation.prototype.stickyNavResizeCallback = function() {
+  Navigation.prototype.stickyNavResizeCallback = function() {
     if ($(window).width() <= 768) {
       this.stickyNavEl.addClass('show');
     } else {
@@ -103,7 +103,7 @@
     }
   };
 
-  LargoNavigation.prototype.stickyNavScrollCallback = function(event) {
+  Navigation.prototype.stickyNavScrollCallback = function(event) {
     var self = this,
         direction = this.scrollDirection(),
         callback, wait;
@@ -136,7 +136,7 @@
     this.previousScroll = direction;
   };
 
-  LargoNavigation.prototype.scrollDirection = function() {
+  Navigation.prototype.scrollDirection = function() {
     var scrollTop = $(window).scrollTop(),
         direction;
 
@@ -149,7 +149,7 @@
     return direction;
   };
 
-  LargoNavigation.prototype.responsiveNavigation = function() {
+  Navigation.prototype.responsiveNavigation = function() {
     // Responsive navigation
     $('.navbar .toggle-nav-bar').each(function() {
       var toggleButton = $(this);
@@ -192,11 +192,11 @@
     });
   };
 
-  if (typeof window.LargoNavigation == 'undefined')
-    window.LargoNavigation = LargoNavigation;
+  if (typeof window.Navigation == 'undefined')
+    window.Navigation = Navigation;
 
   $(document).ready(function() {
-    new LargoNavigation();
+    new Navigation();
   });
 
 })();
