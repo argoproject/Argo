@@ -190,8 +190,8 @@ if (!function_exists('largo_load_more_posts_choose_partial')) {
 		 * Filter to modify the Load More Posts template partial.
 		 *
 		 * @since 0.5.3
-		 * @param string $partial The string represeting the template partial to use for the current context
-		 * @param object $post_query The query object used to produce the LMP markup
+		 * @param Atring $partial The string represeting the template partial to use for the current context
+		 * @param Array $post_query The query_vars property of the WP_Query used to produce the LMP markup. It's an array.
 		 */
 		$partial = apply_filters( 'largo_lmp_template_partial', $partial, $post_query );
 
