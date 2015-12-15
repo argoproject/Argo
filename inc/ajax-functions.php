@@ -170,7 +170,7 @@ if (!function_exists('largo_load_more_posts_choose_partial')) {
 
 		// check if this query is for a search
 		if ( isset($post_query['s']) && $post_query['s'] != '' ) {
-			$partial = 'archive';
+			$partial = 'search';
 		}
 
 		// check if this query is for a date, assuming that all date queries have a year.
