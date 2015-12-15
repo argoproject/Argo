@@ -8,13 +8,24 @@ $tags = of_get_option( 'tag_display' );
 $hero_class = largo_hero_class( $post->ID, FALSE );
 $values = get_post_custom( $post->ID );
 $featured = has_term( 'homepage-featured', 'prominence' );
+
+// Is this a search page?
+if (
+	is_search() ||
+	isset($wp_query->query_vars['s']) ||
+	property_exists(json_decode(stripslashes($_POST['query'])), 's') // the LMP query is JSON.
+) {
+	$search = true;
+} else {
+	$search = false;
+}
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?>>
 
 	<?php
-		// Special treatment for posts that are in the Homepage Featured prominence taxonomy term
-		if ( $featured && ( has_post_thumbnail() || $values['youtube_url'] ) ) {
+		// Special treatment for posts that are in the Homepage Featured prominence taxonomy term and have thumbnails or videos, but not on the search page.
+		if ( $featured && !$search && ( has_post_thumbnail() || $values['youtube_url'] ) ) {
 	?>
 		<header>
 			<div class="hero span12 <?php echo $hero_class; ?>">
