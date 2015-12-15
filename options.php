@@ -455,23 +455,6 @@ function optionsframework_options() {
 	);
 
 	$options[] = array(
-		'name' => __('Main navigation', 'largo'),
-		'type' => 'info'
-	);
-
-	$options[] = array(
-		'desc' => __('Hide the standard/full header on article pages and display only the sticky navigation ', 'largo'),
-		'id' => 'main_nav_display',
-		'std' => 0,
-		'type' => 'checkbox'
-	);
-
-	$options[] = array(
-		'desc' => __('<strong>NOTE:</strong> If the main navigation is hidden, <strong>readers will only see a small logo in the left-hand corner when entering the site and you will not be able to run a banner ad above the navigation.</strong>', 'largo'),
-		'type' => 'info'
-	);
-
-	$options[] = array(
 		'name' => __('Sticky navigation', 'largo'),
 		'desc' => __('Show the sticky navigation on:'),
 		'type' => 'info'
@@ -494,6 +477,23 @@ function optionsframework_options() {
 		'std' 	=> '1',
 		'class' => 'hidden',
 		'type' 	=> 'checkbox');
+
+	$options[] = array(
+		'name' => __('Main navigation', 'largo'),
+		'type' => 'info'
+	);
+
+	$options[] = array(
+		'desc' => __('Hide the standard/full header on article pages and display only the sticky navigation ', 'largo'),
+		'id' => 'main_nav_display',
+		'std' => 0,
+		'type' => 'checkbox'
+	);
+
+	$options[] = array(
+		'desc' => __('<strong>NOTE:</strong> If the main navigation is hidden, <strong>readers will only see a small logo in the left-hand corner when entering the site and you will not be able to run a banner ad above the navigation.</strong>', 'largo'),
+		'type' => 'info'
+	);
 
 	$options[] = array(
 		'name' 	=> __('Menu Options', 'largo'),

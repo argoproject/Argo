@@ -15,8 +15,10 @@ if ( ! function_exists( 'largo_enqueue_js' ) ) {
 
 		$suffix = (LARGO_DEBUG)? '' : '.min';
 		// Our primary stylesheet
-		wp_enqueue_style( 'largo-stylesheet', get_template_directory_uri().'/css/style' . $suffix . '.css' );	//often overridden by custom-less-variables version
+		// Often overridden by custom-less-variables version
+		wp_enqueue_style( 'largo-stylesheet', get_template_directory_uri().'/css/style' . $suffix . '.css' );
 		wp_enqueue_script( 'largoCore', get_template_directory_uri() . '/js/largoCore' . $suffix . '.js', array( 'jquery' ), '1.0', true );
+		wp_enqueue_script( 'largo-navigation', get_template_directory_uri() . '/js/navigation' . $suffix . '.js', array( 'jquery' ), '1.0', true );
 
 		/**
 		 * These files are already minified
