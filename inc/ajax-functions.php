@@ -75,9 +75,11 @@ if ( !function_exists( 'largo_load_more_posts_data' ) ) {
 if ( !function_exists( 'largo_load_more_posts' ) ) {
 	/**
 	 * Renders markup for a page of posts and sends it back over the wire.
+	 *
 	 * @global $opt
 	 * @global $_POST
-	 * @see largo_load_more_posts_choose_partial
+	 * @uses largo_load_more_posts_choose_partial
+	 * @uses largo_get_partial_by_post_type
 	 */
 	function largo_load_more_posts() {
 
@@ -118,6 +120,9 @@ if ( !function_exists( 'largo_load_more_posts' ) ) {
 
 			// Render all the posts
 			while ( $query->have_posts() ) : $query->the_post();
+				// Use largo_get_partial_by_post_type here as well as in the search archive,
+				// to ensure that LMP posts will be using the partial set by the child theme for that post type.
+				$partial = largo_get_partial_by_post_type($partial, get_post_type(), $partial);
 				get_template_part( 'partials/content', $partial );
 			endwhile;
 		}
@@ -138,6 +143,7 @@ if (!function_exists('largo_load_more_posts_choose_partial')) {
 	 * @global $opt
 	 * @global $_POST
 	 * @see largo_load_more_posts
+	 * @since 0.5.3
 	 */
 	function largo_load_more_posts_choose_partial($post_query) {
 		global $opt;
