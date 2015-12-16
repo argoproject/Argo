@@ -122,8 +122,8 @@ if ( !function_exists( 'largo_load_more_posts' ) ) {
 			while ( $query->have_posts() ) : $query->the_post();
 				// Use largo_get_partial_by_post_type here as well as in the search archive,
 				// to ensure that LMP posts will be using the partial set by the child theme for that post type.
-				$partial = largo_get_partial_by_post_type($partial, get_post_type(), $partial);
-				get_template_part( 'partials/content', $partial );
+				$post_type_partial = largo_get_partial_by_post_type($partial, get_post_type(), $partial);
+				get_template_part( 'partials/content', $post_type_partial );
 			endwhile;
 		}
 		wp_die();
