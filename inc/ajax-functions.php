@@ -116,7 +116,7 @@ if ( !function_exists( 'largo_load_more_posts' ) ) {
 
 		if ( $query->have_posts() ) {
 			// Choose the correct partial to load here
-			$partial = largo_load_more_posts_choose_partial($query->query_vars);
+			$partial = largo_load_more_posts_choose_partial($query);
 
 			// Render all the posts
 			while ( $query->have_posts() ) : $query->the_post();
@@ -138,7 +138,7 @@ if (!function_exists('largo_load_more_posts_choose_partial')) {
 	 *
 	 * Includes a "largo_lmp_template_partial" filter to allow for modifying the value $partial.
 	 *
-	 * @param Array $post_query The WP_Query->query_vars array being used to generate LMP markup
+	 * @param WP_Query $post_query The WP_Query being used to generate LMP markup
 	 * @return string $partial The slug of partial that should be loaded.
 	 * @global $opt
 	 * @global $_POST
@@ -147,6 +147,7 @@ if (!function_exists('largo_load_more_posts_choose_partial')) {
 	 */
 	function largo_load_more_posts_choose_partial($post_query) {
 		global $opt;
+		$query_vars = $post_query->query_vars;
 
 		// Default is to use partials/content-home.php
 		$partial = 'home';
@@ -154,27 +155,27 @@ if (!function_exists('largo_load_more_posts_choose_partial')) {
 		// This might be a category, tag, search, date, author, non-landing-page series, or other other archive
 
 		// check if this query is for a category
-		if ( isset($post_query['category_name']) && $post_query['category_name'] != '' ) {
+		if ( isset($query_vars['category_name']) && $query_vars['category_name'] != '' ) {
 			$partial = 'archive';
 		}
 
 		// check if this query is for an author page
-		if ( isset($post_query['author_name']) && $post_query['author_name'] != '' ) {
+		if ( isset($query_vars['author_name']) && $query_vars['author_name'] != '' ) {
 			$partial = 'archive';
 		}
 
 		// check if this query is for a tag
-		if ( isset($post_query['tag']) && $post_query['tag'] != '' ) {
+		if ( isset($query_vars['tag']) && $query_vars['tag'] != '' ) {
 			$partial = 'archive';
 		}
 
 		// check if this query is for a search
-		if ( isset($post_query['s']) && $post_query['s'] != '' ) {
+		if ( isset($query_vars['s']) && $query_vars['s'] != '' ) {
 			$partial = 'search';
 		}
 
 		// check if this query is for a date, assuming that all date queries have a year.
-		if ( isset($post_query['year']) && $post_query['year'] != 0 ) {
+		if ( isset($query_vars['year']) && $query_vars['year'] != 0 ) {
 			$partial = 'archive';
 		}
 
@@ -185,7 +186,7 @@ if (!function_exists('largo_load_more_posts_choose_partial')) {
 		}
 
 		// Non-series-landing series archives
-		if ( isset($post_query['series']) && $post_query['series'] != '' ) {
+		if ( isset($query_vars['series']) && $query_vars['series'] != '' ) {
 			$partial = 'archive';
 		}
 
@@ -195,9 +196,20 @@ if (!function_exists('largo_load_more_posts_choose_partial')) {
 		/**
 		 * Filter to modify the Load More Posts template partial.
 		 *
+		 * When building your own filter, you must set the fourth parameter of add_filter to 2:
+		 *
+		 *     function your_filter_name($partial, $post_type, $context) {
+		 *         // things
+		 *         return $partials;
+		 *     }
+		 *     add_filter( 'largo_lmp_template_partial', 'your_filter_name', 10, 2);
+		 *                                                                       ^
+		 * Without setting '2', your filter will not be passed the $post_type or $context arguments.
+		 * In order to set '2', you must set the third parameter of add_filter, which defaults to 10. it is safe to leave that at 10.
+		 *
 		 * @since 0.5.3
-		 * @param Atring $partial The string represeting the template partial to use for the current context
-		 * @param Array $post_query The query_vars property of the WP_Query used to produce the LMP markup. It's an array.
+		 * @param String $partial The string represeting the template partial to use for the current context
+		 * @param WP_Query $post_query The WP_Query object used to produce the LMP markup.
 		 */
 		$partial = apply_filters( 'largo_lmp_template_partial', $partial, $post_query );
 

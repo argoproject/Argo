@@ -45,7 +45,9 @@ class AjaxFunctionsTestFunctions extends WP_UnitTestCase {
 	}
 
 	function test_largo_load_more_posts_choose_partial() {
-		$qv = array();
+		$qv = (object) array(
+			'query_vars' => array()
+		);
 
 		// Note: These options are arrayed in the order that they are tested for in largo_load_more_posts_choose_partial($qv)
 		// That is to say, later options *should* override earlier options. This is why $qv is not being unset($qv).
@@ -54,43 +56,43 @@ class AjaxFunctionsTestFunctions extends WP_UnitTestCase {
 		$this->assertEquals('home', $ret, 'empty query vars did not result in a determination that the partial type is home');
 
 		// Test it with everything that shouldn't affect the determination that this is home.
-		$qv['category_name'] = '';
-		$qv['author_name'] = '';
-		$qv['tag'] = '';
-		$qv['s'] = '';
-		$qv['year'] = '';
+		$qv->query_vars['category_name'] = '';
+		$qv->query_vars['author_name'] = '';
+		$qv->query_vars['tag'] = '';
+		$qv->query_vars['s'] = '';
+		$qv->query_vars['year'] = '';
 		$_POST['is_series_landing'] = false;
-		$qv['series'] = '';
+		$qv->query_vars['series'] = '';
 		// @todo find way to test get_post_type() returning argolinks.
 		$ret = largo_load_more_posts_choose_partial($qv);
 		$this->assertEquals('home', $ret, 'empty query vars did not result in a determination that the partial type is home');
 
 		// category
-		$qv['category_name'] = 'foo';
+		$qv->query_vars['category_name'] = 'foo';
 		$ret = largo_load_more_posts_choose_partial($qv);
 		$this->assertEquals('archive', $ret, 'Testing category');
 		$this->assertFalse(('home' == $ret), 'set query query vars did result in a determination that the partial type is home');
 
 		// Author archive page
-		$qv['author_name'] = 'admin';
+		$qv->query_vars['author_name'] = 'admin';
 		$ret = largo_load_more_posts_choose_partial($qv);
 		$this->assertEquals('archive', $ret, 'Testing author archive');
 		$this->assertFalse(('home' == $ret), 'set query query vars did result in a determination that the partial type is home');
 
 		// tag
-		$qv['tag'] = 'tag';
+		$qv->query_vars['tag'] = 'tag';
 		$ret = largo_load_more_posts_choose_partial($qv);
 		$this->assertEquals('archive', $ret, 'Testing tag');
 		$this->assertFalse(('home' == $ret), 'set query query vars did result in a determination that the partial type is home');
 
 		// Search
-		$qv['s'] = 'search';
+		$qv->query_vars['s'] = 'search';
 		$ret = largo_load_more_posts_choose_partial($qv);
 		$this->assertEquals('search', $ret, 'Testing search');
 		$this->assertFalse(('home' == $ret), 'set query query vars did result in a determination that the partial type is home');
 
 		// Date archive
-		$qv['year'] = '2015';
+		$qv->query_vars['year'] = '2015';
 		$ret = largo_load_more_posts_choose_partial($qv);
 		$this->assertEquals('archive', $ret, 'Testing date query with "year" => "2015"');
 		$this->assertFalse(('home' == $ret), 'set query query vars did result in a determination that the partial type is home');
@@ -105,7 +107,7 @@ class AjaxFunctionsTestFunctions extends WP_UnitTestCase {
 		$this->assertFalse(('home' == $ret), 'set query query vars did result in a determination that the partial type is home');
 
 		// non-series-landing series archives
-		$qv['series'] = 'series';
+		$qv->query_vars['series'] = 'series';
 		$ret = largo_load_more_posts_choose_partial($qv);
 		$this->assertEquals('archive', $ret, '');
 		$this->assertFalse(('home' == $ret), 'set query query vars did result in a determination that the partial type is home');
