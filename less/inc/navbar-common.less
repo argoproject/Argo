@@ -78,7 +78,6 @@
   }
 
   li > a:hover {
-    .transition(background-color 300ms ease-out);
     background-color: @navbarLinkBackgroundActive;
     color: @navbarLinkColorHover;
 
@@ -259,8 +258,6 @@
       }
 
       .nav > li {
-        padding-top: 5px;
-        padding-bottom: 5px;
         &:last-child {
           border-bottom: none;
           padding-bottom: none;
@@ -272,18 +269,7 @@
     &.open .nav-shelf {
       visibility: visible;
       opacity: 1;
-
-      &:after {
-        position: absolute;
-        content: " ";
-        display: block;
-        bottom: -5px;
-        left: 0;
-        right: 0;
-        height: 5px;
-        #gradient > .vertical( rgba(0,0,0,0.5), rgba(0,0,0,0) );
-        background-color: transparent;
-      }
+      border-bottom: 1px solid @grayLighter;
     }
   }
 }

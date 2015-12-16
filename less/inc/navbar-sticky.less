@@ -1,3 +1,5 @@
+@stickyNavLineHeight: 56px;
+
 .sticky-nav-container {
   margin: 0 auto;
   position: relative;
@@ -13,8 +15,8 @@
   visibility: hidden;
   opacity: 0;
   background-color: @stickyNavbarBackgroundColor;
+  border-bottom: 1px solid @grayLighter;
   .transition(opacity 0.3s);
-  .box-shadow(0 0 16px @gray);
 
   &.show {
     visibility: visible;
@@ -51,6 +53,7 @@
 
   li {
     a {
+      line-height: @stickyNavLineHeight;
       color: @stickyNavbarLinkColor;
 
       &:hover {
@@ -86,6 +89,12 @@
   }
 
   .btn-navbar {
+    padding: 0;
+    line-height: @stickyNavLineHeight;
+
+    .bars {
+      display: inline-block;
+    }
     .icon-bar {
       background-color: @stickyNavbarLinkColor;
     }
@@ -196,21 +205,13 @@
   // Sticky nav dropdown mods
   @media (max-width: 768px) {
     li.dropdown {
-      &.open,
-      &.active,
-      &.open.active {
-        & > .dropdown-toggle {
-          color: @stickyNavbarLinkColor;
-          background: transparent;
-          .caret:before {
-            border-top-color: @stickyNavbarDropdownCaretColor;
-          }
-        }
+      .dropdown-menu li a {
+        line-height: @stickyNavLineHeight;
       }
     }
 
     .nav-shelf b.caret {
-      top: 1em;
+      padding: 22px;
     }
   }
 }

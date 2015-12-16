@@ -85,6 +85,7 @@
     $(window).on('resize', this.stickyNavResizeCallback.bind(this));
 
     this.stickyNavResizeCallback();
+    this.stickyNavSetOffset();
   };
 
   Navigation.prototype.stickyNavResizeCallback = function() {
@@ -92,6 +93,7 @@
         this.stickyNavEl.addClass('show');
         this.stickyNavEl.parent().css('height', this.stickyNavEl.outerHeight());
     }
+    this.stickyNavSetOffset();
   };
 
   Navigation.prototype.stickyNavScrollCallback = function(event) {
@@ -104,6 +106,8 @@
       clearTimeout(this.scrollTimeout);
       return;
     }
+
+    this.stickyNavSetOffset();
 
     if (this.previousScroll == direction) {
       return;
@@ -134,6 +138,18 @@
 
     this.scrollTop = scrollTop;
     return direction;
+  };
+
+  Navigation.prototype.stickyNavSetOffset = function() {
+    if ($('body').hasClass('admin-bar')) {
+      if ($(window).width() <= 600){
+        if ($(window).scrollTop() <= $('#wpadminbar').outerHeight()) {
+          this.stickyNavEl.css('top', $('#wpadminbar').outerHeight());
+        } else {
+          this.stickyNavEl.css('top', 0);
+        }
+      }
+    }
   };
 
   Navigation.prototype.responsiveNavigation = function() {
