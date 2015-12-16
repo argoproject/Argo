@@ -637,7 +637,6 @@ if ( ! function_exists( 'largo_hero_class' ) ) {
 		$hero_class = "is-empty";
 		$featured_media = (largo_has_featured_media($post_id))? largo_get_featured_media($post_id) : array();
 		$type = (isset($featured_media['type']))? $featured_media['type'] : false;
-		var_log($type);
 
 		if (get_post_meta($post_id, 'youtube_url', true) || $type == 'video')
 			$hero_class = 'is-video';
