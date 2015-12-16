@@ -3,10 +3,6 @@
   position: relative;
 }
 
-/*.home .sticky-nav-wrapper {*/
-  /*height: 0;*/
-/*}*/
-
 .sticky-nav-holder {
   position: fixed;
   top: 0;
@@ -38,7 +34,8 @@
 
   @media (min-width: 769px) {
     display: none;
-    body.single &.article {
+    body.single &.sticky_nav_display_article,
+    body.single &.main_nav_hide_article {
       display: block;
     }
   }

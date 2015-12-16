@@ -74,7 +74,12 @@
   };
 
   Navigation.prototype.bindStickyNavEvents = function() {
-    this.stickyNavEl.addClass(Largo.sticky_nav_display);
+    var self = this;
+
+    $.each(Largo.sticky_nav_options, function(idx, opt) {
+      if (opt)
+        self.stickyNavEl.addClass(idx);
+    });
 
     $(window).on('scroll', this.stickyNavScrollCallback.bind(this));
     $(window).on('resize', this.stickyNavResizeCallback.bind(this));
@@ -83,7 +88,7 @@
   };
 
   Navigation.prototype.stickyNavResizeCallback = function() {
-    if ($(window).width() <= 768) {
+    if ($(window).width() <= 768 || Largo.sticky_nav_options.main_nav_hide_article) {
         this.stickyNavEl.addClass('show');
         this.stickyNavEl.parent().css('height', this.stickyNavEl.outerHeight());
     }

@@ -7,6 +7,8 @@
  *
  * @package Largo
  */
+
+if ( ! is_single() && ! is_singular() || ! of_get_option( 'main_nav_hide_article', false ) ) {
 ?>
 <nav id="main-nav" class="navbar clearfix">
 	<div class="navbar-inner">
@@ -74,3 +76,4 @@
 		</div>
 	</div>
 </nav>
+<?php }

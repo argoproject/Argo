@@ -46,7 +46,10 @@ if ( ! function_exists( 'largo_enqueue_js' ) ) {
 			'largoCore', 'Largo', array(
 			'is_home' => is_home(),
 			'is_single' => is_single() || is_singular(),
-			'sticky_nav_display' => of_get_option( 'sticky_nav_display', 'article' )
+			'sticky_nav_options' => array(
+				'sticky_nav_display_article' => (bool) of_get_option( 'sticky_nav_display_article', 0 ),
+				'main_nav_hide_article' => (bool) of_get_option( 'main_nav_hide_article', 0 )
+			)
 		));
 
 		/*

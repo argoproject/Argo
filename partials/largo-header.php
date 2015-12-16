@@ -6,7 +6,9 @@
  *
  * @package Largo
  * @see inc/header-footer.php
- */ ?>
+ */
+if ( ! is_single() && ! is_singular() || ! of_get_option( 'main_nav_hide_article', false ) ) {
+?>
 <header id="site-header" class="clearfix nocontent" itemscope itemtype="http://schema.org/Organization">
 	<?php /* docs in inc/header-footer.php */
 	largo_header(); ?>
@@ -18,3 +20,4 @@
 			echo esc_url( largo_get_current_url() ); ?>)
 	</p>
 </header>
+<?php }
