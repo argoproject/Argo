@@ -115,8 +115,9 @@
 							 * Checks if sitename is shown in sticky nav
 							 *
 							 */
-							if ( of_get_option( 'show_sitename_in_sticky_nav', 1 ) )
+							if ( of_get_option( 'show_sitename_in_sticky_nav', 1 ) ) {
 								echo '<li class="site-name"><a href="/">' . get_bloginfo('name') . '</a></li>';
+							}
 
 							/* Build Main Navigation using Boostrap_Walker_Nav_Menu() */
 							$args = array(

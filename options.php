@@ -483,7 +483,6 @@ function optionsframework_options() {
 		'desc' 	=> __('Show the <strong>site name in the sticky nav</strong>? Default is to show, but in some cases you might want to hide it to save space or if your logo is clear enough to not need it.', 'largo'),
 		'id' 	=> 'show_sitename_in_sticky_nav',
 		'std' 	=> '1',
-		'class' => 'hidden',
 		'type' 	=> 'checkbox');
 
 	$options[] = array(
@@ -496,7 +495,6 @@ function optionsframework_options() {
 		'desc' 	=> __('Enter the <strong>label that appears in front of the menu links in the "Don\'t Miss" menu</strong>. You can delete this default and no label will appear.', 'largo'),
 		'id' 	=> 'dont_miss_label',
 		'std' 	=> __('Don\'t Miss', 'largo'),
-		'class' => 'hidden',
 		'type' 	=> 'text');
 
 	$options[] = array(
