@@ -14,6 +14,7 @@
     // Stick navigation
     this.stickyNavEl = $('.sticky-nav-holder');
     this.mainEl = $('#main');
+    this.mainNavEl = $('#main-nav');
     this.bindStickyNavEvents();
 
     // Sticky nav on small viewports
@@ -73,33 +74,18 @@
   };
 
   Navigation.prototype.bindStickyNavEvents = function() {
-    if (this.mainEl.length) {
-      this.stickyNavInit();
-      $(window).on('resize', this.stickyNavResizeCallback.bind(this));
+    this.stickyNavEl.addClass(Largo.sticky_nav_display);
 
-      if (Largo.sticky_nav_display == 'article' && Largo.is_single) {
-        $(window).on('scroll', this.stickyNavScrollCallback.bind(this));
-      }
-    }
-  };
+    $(window).on('scroll', this.stickyNavScrollCallback.bind(this));
+    $(window).on('resize', this.stickyNavResizeCallback.bind(this));
 
-  Navigation.prototype.stickyNavInit = function() {
-    if ($(window).width() <= 768) {
-      this.stickyNavEl.addClass('show');
-    }
-
-    // Account for sticky nav with fixed position at top of page
-    //var stickyNavWrapper = $('.sticky-nav-wrapper');
-    //if (stickyNavWrapper.length)
-      //stickyNavWrapper.height(this.stickyNavEl.outerHeight());
+    this.stickyNavResizeCallback();
   };
 
   Navigation.prototype.stickyNavResizeCallback = function() {
     if ($(window).width() <= 768) {
-      this.stickyNavEl.addClass('show');
-    } else {
-      if ($(window).scrollTop() <= this.mainEl.offset().top)
-        this.stickyNavEl.removeClass('show');
+        this.stickyNavEl.addClass('show');
+        this.stickyNavEl.parent().css('height', this.stickyNavEl.outerHeight());
     }
   };
 
@@ -108,11 +94,7 @@
         direction = this.scrollDirection(),
         callback, wait;
 
-    if ($(window).width() <= 768) {
-      return false;
-    }
-
-    if ($(window).scrollTop() <= this.mainEl.offset().top) {
+    if ($(window).scrollTop() <= this.mainEl.offset().top && this.mainNavEl.is(':visible')) {
       this.stickyNavEl.removeClass('show');
       clearTimeout(this.scrollTimeout);
       return;

@@ -7,7 +7,7 @@
  */
  ?>
  <div class="sticky-nav-wrapper nocontent">
-	<div class="sticky-nav-holder" data-hide-at-top="true">
+	<div class="sticky-nav-holder">
 
 	<?php
     /*
