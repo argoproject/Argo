@@ -480,10 +480,18 @@ function optionsframework_options() {
 	);
 
 	$options[] = array(
-		'desc' 	=> __('Show the <strong>site name in the sticky nav</strong>? Default is to show, but in some cases you might want to hide it to save space or if your logo is clear enough to not need it.', 'largo'),
-		'id' 	=> 'show_sitename_in_sticky_nav',
-		'std' 	=> '1',
-		'type' 	=> 'checkbox');
+		'desc' => __('Show the <strong>site name in the sticky nav</strong>? Default is to show, but in some cases you might want to hide it to save space or if your logo is clear enough to not need it.', 'largo'),
+		'id' => 'show_sitename_in_sticky_nav',
+		'std' => '1',
+		'type' => 'checkbox');
+
+	$options[] = array(
+		'name' => __('Sticky navigation overflow'),
+		'desc' => __('Enter the label used for the navigation menu that houses any navigation links that would otherwise cause the navigation to wrap onto multiple lines.', 'largo'),
+		'id' => 'nav_overflow_label',
+		'std' => __('More', 'largo'),
+		'type' => 'text'
+	);
 
 	$options[] = array(
 		'name' 	=> __('Menu Options', 'largo'),

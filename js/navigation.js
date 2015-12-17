@@ -221,9 +221,6 @@
     if (!nav.is(':visible'))
       return;
 
-    if (typeof this.navOverflowTimeout !== 'undefined')
-      clearTimeout(this.navOverflowTimeout);
-
     // Prevent the nav height from changing rapidly during window resize
     if (!nav.parent().css('overflow') == 'hidden') {
       nav.parent().css({
@@ -258,12 +255,10 @@
          * If there is no "overflow" menu item, create one
          *
          * This is where you change the word from "More" to something else.
-         *
-         * TODO: make the text of this menu configurable
          */
         if (overflow.length == 0) {
           var overflowmenu ='<li id="menu-overflow" class="menu-item-has-children dropdown">' +
-            '<a class="dropdown-toggle">More<b class="caret"></b></a>' +
+            '<a class="dropdown-toggle">' + Largo.sticky_nav_options.nav_overflow_label + '<b class="caret"></b></a>' +
             '<ul id="menu-more-1" class="dropdown-menu"></ul></li>';
           overflow = $(overflowmenu);
           shelf.find('ul.nav > li.menu-item').last().after(overflow);
@@ -295,7 +290,7 @@
 
     // If the nav is still wrapping, call navOverflow again until it is not
     if (nav.outerHeight() !== shelf.find('.nav').outerHeight()) {
-      this.navOverflowTimeout = setTimeout(this.navOverflow.bind(this), 0);
+      this.navOverflow();
       return;
     }
 
