@@ -4,6 +4,7 @@
   var Navigation = function() {
     this.scrollTop = $(window).scrollTop();
     this.previousScroll = null;
+    this.initialLoad = true;
     return this.init();
   };
 
@@ -15,7 +16,12 @@
     this.stickyNavEl = $('.sticky-nav-holder');
     this.mainEl = $('#main');
     this.mainNavEl = $('#main-nav');
-    this.bindStickyNavEvents();
+
+    // Bind events
+    this.bindEvents();
+
+    // Deal with long/wrapping navs
+    setTimeout(this.navOverflow.bind(this), 0);
 
     // Sticky nav on small viewports
     this.responsiveNavigation();
@@ -71,6 +77,11 @@
       // Close the open menu when the user taps elsewhere
       $('body').on(mobileEvent, closeOpenMenu);
     }
+  };
+
+  Navigation.prototype.bindEvents = function() {
+    $(window).resize(this.navOverflow.bind(this));
+    this.bindStickyNavEvents();
   };
 
   Navigation.prototype.bindStickyNavEvents = function() {
@@ -195,11 +206,108 @@
     });
   };
 
+  /**
+   * On window resize, make sure nav doesn't overflow.
+   * Put stuff in the overflow nav if it does.
+   *
+   * Event should fire enough that we can do one at a time
+   * and be ok.
+   *
+   * @since Largo 0.5.1
+   */
+  Navigation.prototype.navOverflow = function() {
+    var nav = $('#sticky-nav');
+
+    if (!nav.is(':visible'))
+      return;
+
+    if (typeof this.navOverflowTimeout !== 'undefined')
+      clearTimeout(this.navOverflowTimeout);
+
+    // Prevent the nav height from changing rapidly during window resize
+    if (!nav.parent().css('overflow') == 'hidden') {
+      nav.parent().css({
+        height: nav.outerHeight(),
+        overflow: 'hidden'
+      });
+    }
+
+    var shelf = nav.find('.nav-shelf'),
+        button = nav.find('.toggle-nav-bar'),
+        right = nav.find('.nav-right'),
+        shelfWidth = shelf.outerWidth(),
+        rightWidth = right.outerWidth(),
+        caretWidth = nav.find('.caret').first().outerWidth(),
+        windowWidth = $(window).width(),
+        isMobile = button.is(':visible');
+
+    if (!isMobile) {
+      /*
+       * Calculate the width of the nav
+       */
+      var navWidth = 0;
+      shelf.find('ul.nav > li').each( function() {
+        if ($(this).is(':visible'))
+          navWidth += $(this).outerWidth();
+      });
+
+      var overflow = shelf.find('ul.nav > li#menu-overflow.menu-item-has-children').last();
+
+      if (navWidth > shelfWidth - rightWidth - caretWidth) {
+        /*
+         * If there is no "overflow" menu item, create one
+         *
+         * This is where you change the word from "More" to something else.
+         *
+         * TODO: make the text of this menu configurable
+         */
+        if (overflow.length == 0) {
+          var overflowmenu ='<li id="menu-overflow" class="menu-item-has-children dropdown">' +
+            '<a class="dropdown-toggle">More<b class="caret"></b></a>' +
+            '<ul id="menu-more-1" class="dropdown-menu"></ul></li>';
+          overflow = $(overflowmenu);
+          shelf.find('ul.nav > li.menu-item').last().after(overflow);
+        }
+
+        var li = shelf.find('ul.nav > li.menu-item').last();
+
+        overflow.find('ul#menu-more-1').prepend(li);
+        li.addClass('overflowed');
+        li.data('shelfwidth', shelfWidth);
+      } else if (overflow.length) {
+        /*
+         * Put items back on the main sticky menu and empty out the overflow nav menu if necessary.
+         */
+        var li = overflow.find('li').first();
+
+        if (li.hasClass('overflowed')) {
+          if (li.data('shelfwidth') < shelfWidth) {
+            shelf.find('ul.nav > li.menu-item').last().after(li);
+
+            // Remove the "More" menu if there are no items in it.
+            if (overflow.find('ul li').length == 0) {
+              overflow.remove();
+            }
+          }
+        }
+      }
+    }
+
+    // If the nav is still wrapping, call navOverflow again until it is not
+    if (nav.outerHeight() !== shelf.find('.nav').outerHeight()) {
+      this.navOverflowTimeout = setTimeout(this.navOverflow.bind(this), 0);
+      return;
+    }
+
+    // Set the sticky nav container back to defaults
+    nav.parent().css({ height: '', overflow: '' });
+  };
+
   if (typeof window.Navigation == 'undefined')
     window.Navigation = Navigation;
 
   $(document).ready(function() {
-    new Navigation();
+    window.test = new Navigation();
   });
 
 })();
