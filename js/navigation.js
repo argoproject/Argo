@@ -157,7 +157,7 @@
         if ($(window).scrollTop() <= $('#wpadminbar').outerHeight()) {
           this.stickyNavEl.css('top', $('#wpadminbar').outerHeight());
         } else {
-          this.stickyNavEl.css('top', 0);
+          this.stickyNavEl.css('top', '');
         }
       }
     }
