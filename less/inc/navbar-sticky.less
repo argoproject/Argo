@@ -89,7 +89,8 @@
   }
 
   .btn-navbar {
-    padding: 0;
+    padding: 0 10px 0 10px;
+    margin-right: 0;
     line-height: @stickyNavLineHeight;
 
     .bars {
@@ -132,21 +133,23 @@
         background: transparent;
       }
 
-      a span {
-        // TODO: should be based on vars
-        padding: 4px 8px;
+      .donate {
+        a span {
+          // TODO: should be based on vars
+          padding: 4px 8px;
 
-        color: @white;
+          color: @white;
 
-        // TODO: isn't this specific to the donate link?
-        background-color: @red;
-        &:hover {
-          background-color: lighten(@red, 5%);
-        }
+          // TODO: isn't this specific to the donate link?
+          background-color: @red;
+          &:hover {
+            background-color: lighten(@red, 5%);
+          }
 
-        // TODO: what is this for?
-        i {
-          display: none;
+          // TODO: what is this for?
+          i {
+            display: none;
+          }
         }
       }
     }
@@ -212,6 +215,31 @@
 
     .nav-shelf b.caret {
       padding: 22px;
+    }
+  }
+}
+
+// Format the sticky nav overflow menu
+#menu-overflow > ul {
+  overflow-y: scroll;
+  max-height: 80vh;
+  .caret::before, .caret::after {
+    display:none;
+  }
+  ul.dropdown-menu {
+    position: relative;
+    border: none;
+    float: none;
+    box-shadow: none;
+    li a {
+      padding-left: 1.5em;
+    }
+    &::before, &::after {
+      display: none;
+    }
+    .sub-menu,
+    .sub-sub-menu {
+      display: none;
     }
   }
 }

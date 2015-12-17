@@ -68,18 +68,19 @@
 									</div>
 								</form>
 							</li>
+							<li>
+								<!-- "hamburger" button (3 bars) to trigger off-canvas navigation -->
+								<a class="btn btn-navbar toggle-nav-bar" title="<?php esc_attr_e('More', 'largo'); ?>">
+									<div class="bars">
+										<span class="icon-bar"></span>
+										<span class="icon-bar"></span>
+										<span class="icon-bar"></span>
+									</div>
+								</a>
+							</li>
 						</ul>
 
 					</div>
-
-					<!-- "hamburger" button (3 bars) to trigger off-canvas navigation -->
-					<a class="btn btn-navbar toggle-nav-bar" title="<?php esc_attr_e('More', 'largo'); ?>">
-						<div class="bars">
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</div>
-					</a>
 
 					<!-- BEGIN MOBILE MENU (hidden on desktop) -->
 					<div class="nav-left">

@@ -218,7 +218,7 @@
   Navigation.prototype.navOverflow = function() {
     var nav = $('#sticky-nav');
 
-    if (!nav.is(':visible'))
+    if (!nav.is(':visible') || $(window).width() <= 768)
       return;
 
     // Prevent the nav height from changing rapidly during window resize
@@ -258,9 +258,10 @@
          */
         if (overflow.length == 0) {
           var overflowmenu ='<li id="menu-overflow" class="menu-item-has-children dropdown">' +
-            '<a class="dropdown-toggle">' + Largo.sticky_nav_options.nav_overflow_label + '<b class="caret"></b></a>' +
+            '<a href="#" class="dropdown-toggle">' + Largo.sticky_nav_options.nav_overflow_label + '<b class="caret"></b></a>' +
             '<ul id="menu-more-1" class="dropdown-menu"></ul></li>';
           overflow = $(overflowmenu);
+          overflow.find('a').click(function() { return false; });
           shelf.find('ul.nav > li.menu-item').last().after(overflow);
         }
 
