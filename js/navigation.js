@@ -112,6 +112,7 @@
       this.stickyNavEl.parent().css('height', '');
     }
     this.stickyNavSetOffset();
+    this.stickyNavTransitionDone();
   };
 
   Navigation.prototype.stickyNavScrollCallback = function(event) {
