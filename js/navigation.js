@@ -291,7 +291,7 @@
 
     // If the nav is still wrapping, call navOverflow again until it is not
     if (nav.outerHeight() !== shelf.find('.nav').outerHeight()) {
-      this.navOverflow();
+      $(window).trigger('resize');
       return;
     }
 
