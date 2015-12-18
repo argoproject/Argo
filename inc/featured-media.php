@@ -60,7 +60,7 @@ function largo_get_hero($post = null,$classes = '') {
 	$ret = '';
 
 	$values = get_post_custom($post->ID);
-	
+
 	// If the box is checked to override the featured image display, obey it.
 	// EXCEPT if a youtube_url is added in the old way for the post. This is to respect
 	// behavior before v0.4,

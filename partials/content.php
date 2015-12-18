@@ -8,7 +8,7 @@ $tags = of_get_option( 'tag_display' );
 $hero_class = largo_hero_class( $post->ID, FALSE );
 $values = get_post_custom( $post->ID );
 $featured = has_term( 'homepage-featured', 'prominence' );
-
+?>
 <article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?>>
 
 	<?php
