@@ -239,9 +239,8 @@
         isMobile = button.is(':visible');
 
     if (!isMobile) {
-      // Prevent the nav height from changing rapidly during window resize
-      if (nav.parent().css('overflow') !== 'hidden') {
-          this.stickyNavTransition();
+      if (!this.stickyNavEl.hasClass('transitioning')) {
+        this.stickyNavTransition();
       }
 
       /*
@@ -341,7 +340,7 @@
     window.Navigation = Navigation;
 
   $(document).ready(function() {
-    window.test = new Navigation();
+    new Navigation();
   });
 
 })();
