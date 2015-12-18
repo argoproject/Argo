@@ -14,8 +14,13 @@
 
     // Stick navigation
     this.stickyNavEl = $('.sticky-nav-holder');
+    this.stickyNavWrapper = $('.sticky-nav-wrapper');
     this.mainEl = $('#main');
     this.mainNavEl = $('#main-nav');
+
+    if ($(window).width() > 768) {
+      this.stickyNavTransition();
+    }
 
     // Bind events
     this.bindEvents();
@@ -100,9 +105,11 @@
   };
 
   Navigation.prototype.stickyNavResizeCallback = function() {
-    if ($(window).width() <= 768 || Largo.sticky_nav_options.main_nav_hide_article) {
-        this.stickyNavEl.addClass('show');
-        this.stickyNavEl.parent().css('height', this.stickyNavEl.outerHeight());
+    if ($(window).width() <= 768 || (Largo.sticky_nav_options.main_nav_hide_article && $('body').hasClass('single'))) {
+      this.stickyNavEl.addClass('show');
+      this.stickyNavEl.parent().css('height', this.stickyNavEl.outerHeight());
+    } else {
+      this.stickyNavEl.parent().css('height', '');
     }
     this.stickyNavSetOffset();
   };
@@ -153,12 +160,10 @@
 
   Navigation.prototype.stickyNavSetOffset = function() {
     if ($('body').hasClass('admin-bar')) {
-      if ($(window).width() <= 600){
-        if ($(window).scrollTop() <= $('#wpadminbar').outerHeight()) {
-          this.stickyNavEl.css('top', $('#wpadminbar').outerHeight());
-        } else {
-          this.stickyNavEl.css('top', '');
-        }
+      if ($(window).scrollTop() <= $('#wpadminbar').outerHeight()) {
+        this.stickyNavEl.css('top', $('#wpadminbar').outerHeight());
+      } else {
+        this.stickyNavEl.css('top', '');
       }
     }
   };
@@ -218,15 +223,9 @@
   Navigation.prototype.navOverflow = function() {
     var nav = $('#sticky-nav');
 
-    if (!nav.is(':visible') || $(window).width() <= 768)
+    if (!nav.is(':visible') || $(window).width() <= 768) {
+      this.revertOverflow();
       return;
-
-    // Prevent the nav height from changing rapidly during window resize
-    if (!nav.parent().css('overflow') == 'hidden') {
-      nav.parent().css({
-        height: nav.outerHeight(),
-        overflow: 'hidden'
-      });
     }
 
     var shelf = nav.find('.nav-shelf'),
@@ -239,6 +238,11 @@
         isMobile = button.is(':visible');
 
     if (!isMobile) {
+      // Prevent the nav height from changing rapidly during window resize
+      if (nav.parent().css('overflow') !== 'hidden') {
+          this.stickyNavTransition();
+      }
+
       /*
        * Calculate the width of the nav
        */
@@ -250,7 +254,7 @@
 
       var overflow = shelf.find('ul.nav > li#menu-overflow.menu-item-has-children').last();
 
-      if (navWidth > shelfWidth - rightWidth - caretWidth) {
+      if (!isMobile && navWidth > shelfWidth - rightWidth - caretWidth) {
         /*
          * If there is no "overflow" menu item, create one
          *
@@ -287,16 +291,49 @@
           }
         }
       }
+
+      // If the nav is still wrapping, call navOverflow again until it is not
+      if (nav.outerHeight() !== shelf.find('.nav').outerHeight()) {
+        if (typeof this.navOverflowTimeout !== 'undefined')
+          clearTimeout(this.navOverflowTimeout);
+        this.navOverflowTimeout = setTimeout($(window).trigger.bind($(window)), 0, 'resize');
+        return;
+      }
     }
 
-    // If the nav is still wrapping, call navOverflow again until it is not
-    if (nav.outerHeight() !== shelf.find('.nav').outerHeight()) {
-      $(window).trigger('resize');
-      return;
-    }
+    this.stickyNavTransitionDone();
+  };
 
-    // Set the sticky nav container back to defaults
-    nav.parent().css({ height: '', overflow: '' });
+  Navigation.prototype.stickyNavTransition = function() {
+    if (!this.stickyNavEl.hasClass('transitioning')) {
+      this.stickyNavEl.addClass('transitioning');
+    }
+  };
+
+  Navigation.prototype.stickyNavTransitionDone = function() {
+    var self = this;
+
+    if (typeof this.stickyNavTransitionTimeout !== 'undefined')
+      clearTimeout(this.stickyNavTransitionTimeout);
+
+    this.stickyNavTransitionTimeout = setTimeout(function() {
+      if (self.stickyNavEl.hasClass('transitioning'))
+        self.stickyNavEl.removeClass('transitioning');
+    }, 500);
+  };
+
+  Navigation.prototype.revertOverflow = function() {
+    var nav = $('#sticky-nav'),
+        self = shelf = nav.find('.nav-shelf'),
+        overflow = shelf.find('ul.nav > li#menu-overflow.menu-item-has-children').last();
+
+    overflow.find('li.overflowed').each(function(idx, li) {
+      shelf.find('ul.nav > li.menu-item').last().after(li);
+    });
+
+    if (overflow.find('ul li').length == 0 ) {
+      overflow.remove();
+    }
   };
 
   if (typeof window.Navigation == 'undefined')

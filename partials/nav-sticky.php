@@ -96,16 +96,18 @@
 					<div class="nav-shelf">
 					<ul class="nav">
 						<?php if ( of_get_option('sticky_header_logo') !== '') { ?>
-						<li class="home-icon">
-							<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
-								<?php
-								if ( of_get_option( 'sticky_header_logo' ) !== '' )
-									largo_home_icon( 'icon-white' , 'orig' );
-								?>
-							</a>
-						</li>
-						<?php } ?>
-						<?php
+							<li class="home-icon">
+								<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
+									<?php
+									if ( of_get_option( 'sticky_header_logo' ) !== '' )
+										largo_home_icon( 'icon-white' , 'orig' );
+									?>
+								</a>
+							</li>
+						<?php } else { ?>
+							<li class="site-name"><a href="/"><?php echo get_bloginfo('name'); ?></a></li>
+						<?php }
+
 							/* Build Main Navigation using Boostrap_Walker_Nav_Menu() */
 							$args = array(
 								'theme_location' => 'main-nav',
