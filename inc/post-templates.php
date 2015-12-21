@@ -55,18 +55,24 @@ if( !function_exists( 'post_templates_dropdown' ) ) {
 	}
 }
 
-//	Filter the single template value, and replace it with
-//	the template chosen by the user, if they chose one.
-add_filter( 'single_template', 'get_post_template' );
+/**
+ * Filter the single template value, and replace it with
+ * the template chosen by the user, if they chose one.
+ */
 if( !function_exists( 'get_post_template' ) ) {
 	function get_post_template( $template ) {
 		global $post;
 		$custom_field = get_post_meta( $post->ID, '_wp_post_template', true );
-		//TO DO: This needs to be smarter about parent/child theme stuff with get_template_directory() and get_stylesheet_directory()
-		if( !empty( $custom_field ) && file_exists( get_template_directory() . "/{$custom_field}") ) {
-			$template = get_template_directory() . "/{$custom_field}"; }
+		if ( !empty( $custom_field ) ) {
+			if ( file_exists( get_stylesheet_directory() . "/{$custom_field}") ) {
+				$template = get_stylesheet_directory() . "/{$custom_field}";
+			} else if ( file_exists( get_template_directory() . "/{$custom_field}") ) {
+				$template = get_template_directory() . "/{$custom_field}";
+			}
+		}
 		return $template;
 	}
+	add_filter( 'single_template', 'get_post_template' );
 }
 
 /**

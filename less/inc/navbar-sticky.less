@@ -1,10 +1,8 @@
+@stickyNavLineHeight: 56px;
+
 .sticky-nav-container {
   margin: 0 auto;
   position: relative;
-}
-
-.home .sticky-nav-wrapper {
-  height: 0;
 }
 
 .sticky-nav-holder {
@@ -17,8 +15,17 @@
   visibility: hidden;
   opacity: 0;
   background-color: @stickyNavbarBackgroundColor;
+  border-bottom: 1px solid @grayLighter;
   .transition(opacity 0.3s);
-  .box-shadow(0 0 16px @gray);
+
+  &.transitioning {
+    overflow: hidden;
+    height: @stickyNavLineHeight;
+
+    .navbar {
+      opacity: 0;
+    }
+  }
 
   &.show {
     visibility: visible;
@@ -31,12 +38,24 @@
     @media (max-width: 782px) {
       top: 46px;
     }
+    @media (max-width: 600px) {
+      top: 0;
+    }
+  }
+
+  @media (min-width: 769px) {
+    display: none;
+    body.single &.sticky_nav_display_article,
+    body.single &.main_nav_hide_article {
+      display: block;
+    }
   }
 }
 
 // Extend the common navbar styles
 .navbar.sticky-navbar {
   margin-bottom: 0;
+  .transition(opacity 0.3s);
 
   .nav {
     color: @stickyNavbarText;
@@ -44,6 +63,7 @@
 
   li {
     a {
+      line-height: @stickyNavLineHeight;
       color: @stickyNavbarLinkColor;
 
       &:hover {
@@ -79,8 +99,21 @@
   }
 
   .btn-navbar {
+    padding: 0 10px 0 10px;
+    margin-right: 0;
+    line-height: @stickyNavLineHeight;
+
+    .bars {
+      display: inline-block;
+    }
     .icon-bar {
       background-color: @stickyNavbarLinkColor;
+    }
+
+    &:hover {
+      .icon-bar {
+        background-color: @stickyNavbarLinkColorHover;
+      }
     }
   }
 
@@ -116,21 +149,23 @@
         background: transparent;
       }
 
-      a span {
-        // TODO: should be based on vars
-        padding: 4px 8px;
+      .donate {
+        a span {
+          // TODO: should be based on vars
+          padding: 4px 8px;
 
-        color: @white;
+          color: @white;
 
-        // TODO: isn't this specific to the donate link?
-        background-color: @red;
-        &:hover {
-          background-color: lighten(@red, 5%);
-        }
+          // TODO: isn't this specific to the donate link?
+          background-color: @red;
+          &:hover {
+            background-color: lighten(@red, 5%);
+          }
 
-        // TODO: what is this for?
-        i {
-          display: none;
+          // TODO: what is this for?
+          i {
+            display: none;
+          }
         }
       }
     }
@@ -149,6 +184,13 @@
     }
   }
 
+  .nav-left {
+    & > ul {
+      margin: 0;
+      padding: 0;
+    }
+  }
+
   // Hides the second site name in the sticky header
   // when .nav-shelf is visible
   @media (min-width: 769px) {
@@ -162,15 +204,13 @@
     display: block;
     color: #343434;
     a {
+      padding: 0;
       color: #343434;
       &:hover {
         background-color: @white;
         color: @gray;
         text-decoration: none;
       }
-    }
-    @media only screen and (max-width: 320px) {
-      display: none;
     }
   }
 
@@ -189,21 +229,38 @@
   // Sticky nav dropdown mods
   @media (max-width: 768px) {
     li.dropdown {
-      &.open,
-      &.active,
-      &.open.active {
-        & > .dropdown-toggle {
-          color: @stickyNavbarLinkColor;
-          background: transparent;
-          .caret:before {
-            border-top-color: @stickyNavbarDropdownCaretColor;
-          }
-        }
+      .dropdown-menu li a {
+        line-height: @stickyNavLineHeight;
       }
     }
 
     .nav-shelf b.caret {
-      top: 1em;
+      padding: 22px;
+    }
+  }
+}
+
+// Format the sticky nav overflow menu
+#menu-overflow > ul {
+  overflow-y: scroll;
+  max-height: 80vh;
+  .caret::before, .caret::after {
+    display:none;
+  }
+  ul.dropdown-menu {
+    position: relative;
+    border: none;
+    float: none;
+    box-shadow: none;
+    li a {
+      padding-left: 1.5em;
+    }
+    &::before, &::after {
+      display: none;
+    }
+    .sub-menu,
+    .sub-sub-menu {
+      display: none;
     }
   }
 }
