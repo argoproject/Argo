@@ -6,7 +6,7 @@
  * @since 0.5.3
  */
 
-	$email = $author_obj->user_email
+	$email = $author_obj->user_email;
 
 	/**
 	 * Figure out whether to hide the author's email address
