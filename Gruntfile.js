@@ -52,6 +52,7 @@ module.exports = function(grunt) {
             'image-widget.js',
             'largoCore.js',
             'load-more-posts.js',
+            'navigation.js',
             'top-terms.js',
             'update-page.js',
             'widgets-php.js',

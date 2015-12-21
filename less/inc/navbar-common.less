@@ -78,7 +78,6 @@
   }
 
   li > a:hover {
-    .transition(background-color 300ms ease-out);
     background-color: @navbarLinkBackgroundActive;
     color: @navbarLinkColorHover;
 
@@ -145,12 +144,10 @@
     }
 
     img {
-      display: block;
+      display: inline-block;
       height: (@navbarHeight - 16px);
       width: auto;
-      padding-right: 5px;
-      padding-bottom: 8px;
-      padding-top: 8px;
+      margin-right: 1em;
     }
   }
 
@@ -259,8 +256,6 @@
       }
 
       .nav > li {
-        padding-top: 5px;
-        padding-bottom: 5px;
         &:last-child {
           border-bottom: none;
           padding-bottom: none;
@@ -272,17 +267,13 @@
     &.open .nav-shelf {
       visibility: visible;
       opacity: 1;
+      border-bottom: 1px solid @grayLighter;
+    }
 
-      &:after {
-        position: absolute;
-        content: " ";
-        display: block;
-        bottom: -5px;
-        left: 0;
-        right: 0;
-        height: 5px;
-        #gradient > .vertical( rgba(0,0,0,0.5), rgba(0,0,0,0) );
-        background-color: transparent;
+    .nav li {
+      &.home-link,
+      &.site-name {
+        display: none;
       }
     }
   }
@@ -526,11 +517,11 @@
     .transition( 0.3s );
     padding: 10px;
     z-index: 90;
-    width: 280px;
+    width: 246px;
     .text-input-wrapper {
       display: block;
       float: left;
-      width: 230px;
+      width: 196px;
     }
     input {
       width: 100%;
