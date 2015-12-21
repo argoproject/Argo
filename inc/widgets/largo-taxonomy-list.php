@@ -304,8 +304,8 @@ class largo_taxonomy_list_widget extends WP_Widget {
 			<label for="<?php echo $this->get_field_id('dropdown'); ?>"><?php _e( 'Display as dropdown', 'largo' ); ?></label>
 		</p>
 
-		<p><input type="checkbox" class="checkbox ltlw-thumbnails" id="<?php echo $this->get_field_id('thumbnails'); ?>" name="<?php echo $this->get_field_name('thumbnails'); ?>"<?php checked( $thumbnails ); ?> <?php echo (largo_is_series_landing_enabled()) ? '' : 'disabled' ; ?> />
-			<label for="<?php echo $this->get_field_id('thumbnails'); ?>"><?php _e( 'Display thumbnails?', 'largo' ); ?> <?php echo (largo_is_series_landing_enabled()) ? '' : __('To use this function, enable Series and Series Landing Pages in Appearance > Theme Options > Advanced.', 'largo') ; ?> </label>
+		<p><input type="checkbox" class="checkbox ltlw-thumbnails" id="<?php echo $this->get_field_id('thumbnails'); ?>" name="<?php echo $this->get_field_name('thumbnails'); ?>"<?php checked( $thumbnails ); ?> />
+			<label for="<?php echo $this->get_field_id('thumbnails'); ?>"><?php _e( 'Display thumbnails?', 'largo' ); ?></label>
 		</p>
 
 		<p><input type="checkbox" class="checkbox ltlw-headline" id="<?php echo $this->get_field_id('use_headline'); ?>" name="<?php echo $this->get_field_name('use_headline'); ?>"<?php checked( $use_headline ); ?> />
