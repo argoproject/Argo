@@ -292,11 +292,23 @@
         }
       }
 
-      // If the nav is still wrapping, call navOverflow again until it is not
-      if (nav.outerHeight() !== shelf.find('.nav').outerHeight()) {
+      /*
+       * Re-calculate the width of the nav after adding/removing overflow items.
+       *
+       * If the nav is still wrapping, call navOverflow again.
+       */
+      var navWidth = 0;
+      shelf.find('ul.nav > li').each( function() {
+        if ($(this).is(':visible'))
+          navWidth += $(this).outerWidth();
+      });
+      shelfWidth = shelf.outerWidth(),
+      rightWidth = right.outerWidth();
+
+      if (!isMobile && navWidth > shelfWidth - rightWidth - caretWidth) {
         if (typeof this.navOverflowTimeout !== 'undefined')
           clearTimeout(this.navOverflowTimeout);
-        this.navOverflowTimeout = setTimeout($(window).trigger.bind($(window)), 0, 'resize');
+        this.navOverflowTimeout = setTimeout(this.navOverflow.bind(this), 0);
         return;
       }
     }
