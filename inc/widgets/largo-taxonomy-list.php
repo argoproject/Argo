@@ -179,7 +179,7 @@ class largo_taxonomy_list_widget extends WP_Widget {
 			if ($instance['use_headline'] == '1') {
 				$headline = largo_first_headline_in_post_array($posts);
 			}
-			$this->render_li($item, $thumbnaili, $headline);
+			$this->render_li($item, $thumbnail, $headline);
 		}
 	}
 
@@ -209,7 +209,7 @@ class largo_taxonomy_list_widget extends WP_Widget {
 			if ($instance['use_headline'] == '1') {
 				$headline = largo_first_headline_in_post_array($posts);
 			}
-			$this->render_li($item, $thumbnaili, $headline);
+			$this->render_li($item, $thumbnail, $headline);
 		}
 	}
 
@@ -246,7 +246,7 @@ class largo_taxonomy_list_widget extends WP_Widget {
 			if ($instance['use_headline'] == '1') {
 				$headline = largo_first_headline_in_post_array($posts);
 			}
-			$this->render_li($item, $thumbnaili, $headline);
+			$this->render_li($item, $thumbnail, $headline);
 		}
 	}
 
