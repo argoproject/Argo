@@ -85,9 +85,13 @@
 					<!-- BEGIN MOBILE MENU (hidden on desktop) -->
 					<div class="nav-left">
 						<?php if ( of_get_option( 'sticky_header_logo' ) !== '' ) { ?>
-							<li class="home-icon"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php largo_home_icon( 'icon-white', 'orig' ); ?></a></li>
+							<ul>
+								<li class="home-icon"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php largo_home_icon( 'icon-white', 'orig' ); ?></a></li>
+							</ul>
 						<?php } else { ?>
-							<li class="site-name"><a href="/"><?php echo get_bloginfo('name'); ?></a></li>
+							<ul>
+								<li class="site-name"><a href="/"><?php echo get_bloginfo('name'); ?></a></li>
+							</ul>
 						<?php } ?>
 					</div>
 					<!-- END MOBILE MENU -->
