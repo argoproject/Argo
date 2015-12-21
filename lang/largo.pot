@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: largo-project 0.5.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-10 11:53-0600\n"
+"POT-Creation-Date: 2015-12-16 17:35-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,11 +36,11 @@ msgstr ""
 msgid "Blog Archives"
 msgstr ""
 
-#: archive.php:54 category.php:20
+#: archive.php:54 category.php:21
 msgid "Subscribe"
 msgstr ""
 
-#: archive.php:68
+#: archive.php:71
 msgid "Select Month"
 msgstr ""
 
@@ -260,8 +260,8 @@ msgstr ""
 msgid "Complete Coverage"
 msgstr ""
 
-#: image.php:32 inc/avatars/admin.php:32 inc/post-tags.php:595
-#: inc/post-tags.php:623
+#: image.php:32 inc/avatars/admin.php:32 inc/post-tags.php:600
+#: inc/post-tags.php:628
 msgid "Edit"
 msgstr ""
 
@@ -713,51 +713,51 @@ msgstr ""
 msgid "Print this article"
 msgstr ""
 
-#: inc/post-tags.php:350
+#: inc/post-tags.php:355
 msgid "Next Page"
 msgstr ""
 
-#: inc/post-tags.php:351
+#: inc/post-tags.php:356
 msgid "Previous Page"
 msgstr ""
 
-#: inc/post-tags.php:535
+#: inc/post-tags.php:540
 #, php-format
 msgid ""
 "<div class=\"previous\"><a href=\"%1$s\"><img class=\"thumb\" src=\"%4$s\" /"
 "><h5>Previous %2$s</h5><span class=\"meta-nav\">%3$s</span></a></div>"
 msgstr ""
 
-#: inc/post-tags.php:542
+#: inc/post-tags.php:547
 #, php-format
 msgid ""
 "<div class=\"previous\"><a href=\"%1$s\"><h5>Previous %2$s</h5><span class="
 "\"meta-nav\">%3$s</span></a></div>"
 msgstr ""
 
-#: inc/post-tags.php:552
+#: inc/post-tags.php:557
 #, php-format
 msgid ""
 "<div class=\"next\"><a href=\"%1$s\"><img class=\"thumb\" src=\"%4$s\" /"
 "><h5>Next %2$s</h5><span class=\"meta-nav\">%3$s</span></a></div>"
 msgstr ""
 
-#: inc/post-tags.php:559
+#: inc/post-tags.php:564
 #, php-format
 msgid ""
 "<div class=\"next\"><a href=\"%1$s\"><h5>Next %2$s</h5><span class=\"meta-nav"
 "\">%3$s</span></a></div>"
 msgstr ""
 
-#: inc/post-tags.php:595
+#: inc/post-tags.php:600
 msgid "Pingback"
 msgstr ""
 
-#: inc/post-tags.php:627
+#: inc/post-tags.php:632
 msgid "Your comment is awaiting moderation."
 msgstr ""
 
-#: inc/post-tags.php:636
+#: inc/post-tags.php:641
 msgid "Reply"
 msgstr ""
 
@@ -1070,7 +1070,11 @@ msgstr ""
 msgid "The icon the theme may use with the term."
 msgstr ""
 
-#: inc/term-sidebars.php:40 inc/term-sidebars.php:58
+#: inc/term-meta.php:70
+msgid "Term banner image"
+msgstr ""
+
+#: inc/term-sidebars.php:40 inc/term-sidebars.php:61
 msgid "Archive Sidebar"
 msgstr ""
 
@@ -1078,7 +1082,7 @@ msgstr ""
 msgid "The sidebar to display on this term's archive page."
 msgstr ""
 
-#: inc/term-sidebars.php:62
+#: inc/term-sidebars.php:65
 msgid "The sidebar to show on this term's archive."
 msgstr ""
 
@@ -3438,8 +3442,8 @@ msgstr ""
 
 #: partials/archive-category-primary-feature.php:14
 #: partials/archive-category-secondary-feature.php:12
-#: partials/content-series.php:19 partials/content.php:27
-#: partials/content.php:50
+#: partials/content-search.php:25 partials/content-series.php:19
+#: partials/content.php:26 partials/content.php:49
 msgid "Permalink to"
 msgstr ""
 
@@ -3473,16 +3477,16 @@ msgstr ""
 msgid "Edit This Page"
 msgstr ""
 
-#: partials/content-series.php:41
-msgid "Filed under:"
-msgstr ""
-
-#: partials/content.php:55
+#: partials/content-search.php:30 partials/content.php:54
 msgid "Continue&nbsp;Reading"
 msgstr ""
 
-#: partials/content.php:58
+#: partials/content-search.php:33 partials/content.php:57
 msgid "More about:"
+msgstr ""
+
+#: partials/content-series.php:41
+msgid "Filed under:"
 msgstr ""
 
 #: partials/footer-boilerplate.php:26

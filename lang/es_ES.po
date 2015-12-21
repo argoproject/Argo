@@ -3986,19 +3986,19 @@ msgid ""
 "specific Facebook ads at your audience."
 msgstr ""
 
-#: options.php:659
+#: options.php:665
 msgid ""
 "<strong>Bitly site verification.</strong> This is a string of numbers and "
 "letters used to verify your site with bitly analytics."
 msgstr ""
 
 # @ largo
-#: options.php:665
+#: options.php:671
 msgid "SEO Options"
 msgstr ""
 
 # @ largo
-#: options.php:669
+#: options.php:675
 msgid ""
 "Use noindex for all archive pages (default is to use noindex for just date "
 "archives)."

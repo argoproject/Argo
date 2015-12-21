@@ -231,12 +231,11 @@ body.normal.page {
 
 .post-social {
   margin-bottom: @baseline;
-  &> span {
+  & > span {
     // copied from widgets/largo-follow.less
     line-height: 1.5em;
     max-width: 250px;
     margin: 0.5em 0;
-    padding: 0.3em 1em 0.3em 0.5em; // Irregular padding is to counter 0.2em margin-left on the icon.
     text-align: center;
     text-transform: uppercase;
     font-weight: 300;
@@ -245,18 +244,23 @@ body.normal.page {
     font-size: @baseFontSize;
     color: @white;
 
-    @media (max-width: 768px) {
-      padding: 0.3em 0.6em;
-    }
-    @media (max-width: 480px) {
-      padding: 0.3em 0.2em;
-    }
-
     &:hover {
       cursor: pointer;
     }
     &:last-child {
       margin-right: 0;
+    }
+
+    & > a {
+      display: block;
+      padding: 0.3em 1em 0.3em 0.5em; // Irregular padding is to counter 0.2em margin-left on the icon.
+
+      @media (max-width: 768px) {
+        padding: 0.3em 0.6em;
+      }
+      @media (max-width: 480px) {
+        padding: 0.3em 0.2em;
+      }
     }
   }
   a {
@@ -284,6 +288,8 @@ body.normal.page {
 
       a {
         color: @gray;
+        position: relative;
+        float: left;
         &:hover {
           color: @grayDark;
           text-decoration: underline;
@@ -293,6 +299,9 @@ body.normal.page {
       i {
         color: @grayLight;
         margin-right: 0.25em;
+        position: absolute;
+        top: 0;
+        left: 0;
       }
 
       ul, li {
@@ -300,7 +309,21 @@ body.normal.page {
         margin: 0;
         padding: 0;
         font-size: 14px;
-        line-height: 24px;
+        line-height: 20px;
+      }
+
+      li {
+        margin-bottom: 0.5em;
+        float: left;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        span {
+          display: block;
+          margin-left: 28px;
+        }
       }
 
       @media (max-width: 480px) {
