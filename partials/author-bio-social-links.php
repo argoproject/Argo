@@ -6,6 +6,8 @@
  * @since 0.5.3
  */
 
+	$email = $author_obj->user_email
+
 	/**
 	 * Figure out whether to hide the author's email address
 	 */
@@ -25,7 +27,7 @@
 		</li>
 	<?php } ?>
 
-	<?php if ( $email = $author_obj->user_email && $show_email !== 'off' ) { ?>
+	<?php if ( $email && $show_email !== 'off' ) { ?>
 		<li class="email">
 			<a class="email" href="mailto:<?php echo esc_attr( $email ); ?>" title="e-mail <?php echo esc_attr( $author_obj->display_name ); ?>"><i class="icon-mail"></i></a>
 		</li>
