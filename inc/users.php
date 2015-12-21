@@ -387,7 +387,7 @@ function more_profile_info($user) {
 			<th><label for="show_email">Show Email Address</label></th>
 			<td>
 				<input type="checkbox" name="show_email" id="show_email"
-					<?php if (esc_attr($show_email) == "on") { ?>checked<?php } ?> />
+					<?php if (esc_attr($show_email) == "on" || empty($show_email)) { ?>checked<?php } ?> />
 				<label for="show_email"><?php _e("Show email address publicly?"); ?></label><br />
 			</td>
 		</tr>
