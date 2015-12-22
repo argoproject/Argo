@@ -5,6 +5,20 @@
   float: left;
   margin-right: 8px;;
 }
+article .largo-taxonomy-list .has-thumbnail a {
+  text-align: 0;
+  padding: 0;
+}
+article .largo-taxonomy-list img.attachment-post-thumbnail {
+  float: none;
+  margin: 0;
+  display: block;
+  text-align: center;
+  width: @tax-list-img-size;
+  margin-left: auto;
+  margin-right: auto;
+  clear: both;
+}
 .largo-taxonomy-list ul {
   margin: 0;
 }
@@ -17,9 +31,11 @@
 }
 
 // Fix for edge case where long series name and long headline name combine with thumbnail to wrap below the image.
-.largo-taxonomy-list {
-  li.has-thumbnail a:nth-child(2) {
-    padding-left: @tax-list-img-size + 8px;
-    display: block;
-  }
+.largo-taxonomy-list li.has-thumbnail a:nth-child(2) {
+  padding-left: @tax-list-img-size + 8px;
+  display: block;
+}
+// And a fix for it on article pages, where it should not do that. :(
+article .largo-taxonomy-list li.has-thumbnail a:nth-child(2) {
+  padding: 0;
 }
