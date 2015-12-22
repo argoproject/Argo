@@ -282,7 +282,7 @@ function optionsframework_options() {
 	$options[] = array(
 		'desc' 	=> __('<strong>Use only text</strong> in the place of a banner image (uses site title and description).', 'largo'),
 		'id' 	=> 'no_header_image',
-		'std' 	=> '0',
+		'std' 	=> '1',
 		'type' 	=> 'checkbox');
 
 	$options[] = array(
