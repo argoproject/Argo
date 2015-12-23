@@ -68,12 +68,12 @@
     padding-right: 0;
   }
   li.dropdown .dropdown-menu li a {
-    color: @navbarBackground;
+    color: @navbarLinkColor;
     padding-right: 10px;
     line-height: @baseLineHeight;
 
     &:hover {
-      color: @navbarLinkColor;
+      color: @navbarLinkColorHover;
     }
   }
 
@@ -535,4 +535,9 @@
       .box-sizing( border-box );
     }
   }
+}
+
+#main-nav.navbar {
+  border-top: 1px solid @navbarRuleColor;
+  border-bottom: 1px solid @navbarRuleColor;
 }
