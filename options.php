@@ -260,8 +260,14 @@ function optionsframework_options() {
 	 * Images Options
 	 */
 	$options[] = array(
-		'name' 	=> __('Theme Images', 'largo'),
-		'type' 	=> 'heading');
+		'name' => __('Theme Images', 'largo'),
+		'type' => 'heading',
+	);
+
+	$options[] = array(
+		'type' => 'info',
+		'desc' => __('Information about these options can be found in <a href="https://largo.readthedocs.org/users/prelaunchchecklist.html">the pre-launch checklist</a> and <a href="https://largo.readthedocs.org/users/themeoptions.html#theme-images">the theme images options</a>.', 'largo'),
+	);
 
 	$options[] = array(
 		'name' 	=> __('Upload a Square Thumbnail Image (200x200px minimum)', 'largo'),
@@ -282,7 +288,7 @@ function optionsframework_options() {
 	$options[] = array(
 		'desc' 	=> __('<strong>Use only text</strong> in the place of a banner image (uses site title and description).', 'largo'),
 		'id' 	=> 'no_header_image',
-		'std' 	=> '0',
+		'std' 	=> '1',
 		'type' 	=> 'checkbox');
 
 	$options[] = array(
