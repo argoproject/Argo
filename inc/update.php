@@ -615,6 +615,7 @@ function largo_replace_deprecated_widgets() {
 			'class' => 'largo-recent-posts',
 			'callback' => 'largo_deprecated_callback_largo_featured',
 			'defaults' => array(
+				'taxonomy' => 'prominence',
 				'title' => __('Largo Featured Posts', 'largo')
 			)
 		)
@@ -652,7 +653,7 @@ function largo_replace_deprecated_widgets() {
 						 * $current_widget_slug: the old widget's ID: slug-widget-2
 						 * $old_widget_name: The slug of the widget that needs to be updated, from $upgrades: slug
 						 * $region: the id of the current sidebar/widget area
-						 * $index: Where @current_widget_slug is located in $local_current_sidebar
+						 * $index: Where $current_widget_slug is located in $local_current_sidebar
 						 * $basename: the slug of the widget $current_widget_slug, when you remove the prefix widget_ and postfix -number
 						 * $all_instances_of_widget: All instance of $current_widget_slug in all sidebars.
 						 * $upgrade['class'] : The class of the replacement widget, which needs -widget appended to it.
@@ -670,7 +671,7 @@ function largo_replace_deprecated_widgets() {
 							// get all the widgets of this basename
 							$all_instances_of_widget = get_option('widget_' . $basename, false);
 
-							$upgrade_instance_args = array_replace($all_instances_of_widget[$number], $upgrade['defaults']);
+							$upgrade_instance_args = array_replace($upgrade['defaults'], $all_instances_of_widget[$number]);
 
 							/**
 							 * Call a callback specified in the widget upgrade options in largo_replace_deprecated_widgets() 
@@ -680,7 +681,7 @@ function largo_replace_deprecated_widgets() {
 							 * @return array The replacement widget's $instance variables
 							 */
 							if ( isset($upgrade['callback']) ) {
-								$upgrade_instance_args = call_user_func( $upgrade['callback'], $all_instances_of_widget[$number], $upgrade['defaults'] ) ;
+								$upgrade_instance_args = call_user_func( $upgrade['callback'], $all_instances_of_widget[$number], $upgrade_instance_args ) ;
 							}
 
 							// create the new widget.
