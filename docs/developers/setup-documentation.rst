@@ -18,13 +18,17 @@ Setting up
 This presumes that you're familiar with the command line, and are using OSX or another UNIX-like system.
 
 1. `Fork INN/Largo <https://github.com/INN/Largo#fork-destination-box>`_ into your own GitHub account.
-2. Clone your branch: ::
+2. Clone your branch:
 
-	git clone git@github.com:you/Largo.git
+	::
 
-3. Check out the `write-the-docs` branch ::
+		git clone git@github.com:you/Largo.git
 
-	git checkout write-the-docs
+3. Check out the `write-the-docs` branch:
+
+	::
+
+		git checkout write-the-docs
 
 4. Install the required dependencies
 
@@ -54,15 +58,16 @@ This presumes that you're familiar with the command line, and are using OSX or a
 		cd doxphp/bin
 		mv doxph* /path/to/bin/
 
-6. With all dependencies installed, running the generator is as simple as: ::
+6. With all dependencies installed, running the generator is as simple as:
+
+	::
 
 		cd docs
 		make php && make html
 
+	But if you don't want to have to manually recreate the documentation every time you save a file, you can run ``grunt watch`` from the Largo directory. This command only rebuilds documentation, though, and doesn't recompile the API docs.
 
-But if you don't want to have to manually recreate the documentation every time you save a file, you can run ``grunt watch`` from the Largo directory. This command only rebuilds documentation, though, and doesn't recompile the API docs.
-
-7. You can view the generated docs in the `docs/_build/html` directory
+7. You can view the generated docs in the `docs/_build/html` directory:
 
 	There are two main ways of doing this. First, you can view the files with a browser as files. It won't be the best experience. 
 
