@@ -58,7 +58,7 @@ This presumes that you're familiar with the command line, and are using OSX or a
 		cd doxphp/bin
 		mv doxph* /path/to/bin/
 
-6. With all dependencies installed, running the generator is as simple as:
+6. With all dependencies installed, you can run the generator:
 
 	::
 
