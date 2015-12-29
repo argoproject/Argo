@@ -131,11 +131,18 @@ h2.branding {
       text-decoration: none;
     }
   }
+  span {
+    display: block;
+    clear: both;
+    text-align: center;
+  }
+  .sitename {
+    margin-bottom: 0.25em;  
+  }
   .tagline {
     font-size: @baseFontSize * 1.5;
-    font-weight: normal;
+    font-weight: 300;
     color: @gray;
-    padding-left: 10px;
   }
 }
 .print-header {
@@ -163,5 +170,8 @@ h2.branding {
 }
 
 @media (max-width: 768px) {
-  #main-nav, #site-header { display: none; }
+  #main-nav,
+  #site-header {
+    display: none;
+  }
 }

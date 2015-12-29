@@ -17,7 +17,7 @@ function largo_sticky_nav_active() {
 /**
  * Output the site header
  *
- * @since 1.0
+ * @since 0.1
  */
 if ( ! function_exists( 'largo_header' ) ) {
 	function largo_header() {
@@ -28,7 +28,14 @@ if ( ! function_exists( 'largo_header' ) ) {
 		$divider = $header_class == 'branding' ? '' : ' - ';
 
 		// print the text-only version of the site title
-		printf('<%1$s class="%2$s"><a itemprop="url" href="%3$s"><span itemprop="name">%4$s</span>%5$s<span class="tagline" itemprop="description">%6$s</span></a></%1$s>',
+		printf( '
+				<%1$s class="%2$s">
+					<a itemprop="url" href="%3$s">
+						<span class="sitename" itemprop="name">%4$s</span>
+						<span class="tagline" itemprop="description">%5$s%6$s</span>
+					</a>
+				</%1$s>
+			',
 			$header_tag,
 			$header_class,
 			esc_url( home_url( '/' ) ),
@@ -50,7 +57,7 @@ if ( ! function_exists( 'largo_header' ) ) {
 /**
  * Print the copyright message in the footer
  *
- * @since 1.0
+ * @since 0.3
  */
 if ( ! function_exists( 'largo_copyright_message' ) ) {
 	function largo_copyright_message() {
@@ -81,7 +88,7 @@ if ( ! function_exists( 'INN_logo' ) ) {
 /**
  * Outputs a list of social media links (as icons) from theme options
  *
- * @since 1.0
+ * @since 0.3
  */
 if ( ! function_exists( 'largo_social_links' ) ) {
 	function largo_social_links() {
@@ -111,7 +118,7 @@ if ( ! function_exists( 'largo_social_links' ) ) {
 /**
  * Adds shortcut icons to the header
  *
- * @since 1.0
+ * @since 0.3
  */
 if ( ! function_exists( 'largo_shortcut_icons' ) ) {
 	function largo_shortcut_icons() {
@@ -126,7 +133,7 @@ add_action( 'wp_head', 'largo_shortcut_icons' );
 /**
  * Various meta tags to help Google crawl our sites more easily
  *
- * @since 1.0
+ * @since 0.3
  */
 if ( ! function_exists ( 'largo_seo' ) ) {
 	function largo_seo() {
@@ -180,7 +187,7 @@ add_action( 'wp_head', 'largo_seo' );
 /**
  * Remove extraneous <head> elements
  *
- * @since 1.0
+ * @since 0.3
  */
 remove_action( 'wp_head', 'rsd_link' );
 remove_action( 'wp_head', 'wlwmanifest_link' );
