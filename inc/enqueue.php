@@ -102,7 +102,7 @@ if ( ! function_exists( 'largo_enqueue_child_theme_css' ) ) {
 			wp_enqueue_style( 'largo-child-styles', get_stylesheet_directory_uri() . '/style.css', array('largo-stylesheet'));
 		}
 	}
-	add_action( 'wp_enqueue_script', 'largo_enqueue_child_theme_css' );
+	add_action( 'wp_enqueue_scripts', 'largo_enqueue_child_theme_css' );
 }
 
 /**
