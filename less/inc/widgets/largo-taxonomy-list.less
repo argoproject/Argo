@@ -5,20 +5,6 @@
   float: left;
   margin-right: 8px;;
 }
-article .largo-taxonomy-list .has-thumbnail a {
-  text-align: 0;
-  padding: 0;
-}
-article .largo-taxonomy-list img.attachment-post-thumbnail {
-  float: none;
-  margin: 0;
-  display: block;
-  text-align: center;
-  width: @tax-list-img-size;
-  margin-left: auto;
-  margin-right: auto;
-  clear: both;
-}
 .largo-taxonomy-list ul {
   margin: 0;
 }
@@ -30,12 +16,31 @@ article .largo-taxonomy-list img.attachment-post-thumbnail {
   font-size: 1em;
 }
 
-// Fix for edge case where long series name and long headline name combine with thumbnail to wrap below the image.
+// Styles for this widget in the left-hand sidebar (which should not be used, but just in case)
+article .largo-taxonomy-list {
+  .has-thumbnail a {
+    text-align: 0;
+    padding: 0;
+  }
+  img.attachment-post-thumbnail {
+    // full width of widget
+    float: none;
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+    max-height: none;
+    margin-left: auto;
+    margin-right: auto;
+    clear: both;
+  }
+}
+
+// Fix for right sidebar edge case where long series name and long headline name combine with thumbnail to wrap below the image.
 .largo-taxonomy-list li.has-thumbnail a:nth-child(2) {
   padding-left: @tax-list-img-size + 8px;
   display: block;
 }
-// And a fix for it on article pages, where it should not do that. :(
+// And a further fix for the above issue on article pages, where it should not do that. :(
 article .largo-taxonomy-list li.has-thumbnail a:nth-child(2) {
   padding: 0;
 }
