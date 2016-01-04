@@ -88,13 +88,14 @@
   .nav-shelf li.donate { display: none; }
 }
 
+// #header-search styles apply only to the search in the global nav.
 #header-search {
   margin-left: 10px;
   margin-top: 5px;
   max-width: 210px;
   float:left;
   form {
-    margin: 0;
+    margin: 0; // in case of user-agent stylesheet.
   }
   input, button {
     font-family: @sansFontFamily;
@@ -110,11 +111,8 @@
     text-transform: uppercase;
   }
 }
-.home #site-header {
-  min-height: 25px;
-}
 #site-header {
-  margin: 0;
+  margin: @baseline 0;
   width: auto;
   img {
     clear: none;
@@ -133,11 +131,18 @@ h2.branding {
       text-decoration: none;
     }
   }
+  span {
+    display: block;
+    clear: both;
+    text-align: center;
+  }
+  .sitename {
+    margin-bottom: 0.25em;  
+  }
   .tagline {
     font-size: @baseFontSize * 1.5;
-    font-weight: normal;
+    font-weight: 300;
     color: @gray;
-    padding-left: 10px;
   }
 }
 .print-header {
@@ -165,5 +170,8 @@ h2.branding {
 }
 
 @media (max-width: 768px) {
-  #main-nav, #site-header { display: none; }
+  #main-nav,
+  #site-header {
+    display: none;
+  }
 }

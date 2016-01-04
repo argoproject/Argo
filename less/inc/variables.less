@@ -6,9 +6,9 @@
 // -------------------------
 @black:                 #000;
 @grayDarker:            #222;
-@grayDark:              #333;
-@gray:                  #555;
-@grayLight:             #999;
+@grayDark:              #484848;
+@gray:                  #7D8185;
+@grayLight:             #aaa;
 @grayLighter:           #ddd;
 @white:                 #fff;
 
@@ -247,7 +247,7 @@
 // -------------------------
 @navbarHeight:                    40px;
 @navbarFontSize:                  15px;
-@navbarBackground:                darken(@baseColor, 5%);
+@navbarBackground:                @bodyBackground;
 // Navbar button (burger) for toggling navbar items in responsive layouts
 @iconbarHeight: 3px;
 
@@ -259,16 +259,17 @@
 
     // Main navbar
     @navbarText: @textColor;
-    @navbarLinkColor: @white;
-    @navbarLinkColorHover: darken(@white, 5%);
+    @navbarLinkColor: @navbarText;
+    @navbarLinkColorHover: darken(@navbarLinkColor, 5%);
     @navbarLinkBackgroundActive: darken(@navbarBackground, 5%);
     @navbarDropdownCaretColor: @navbarLinkColor;
     @navbarDropdownCaretColorHover: @navbarLinkColorHover;
+    @navbarRuleColor: @grayLight;
 
     // Sticky navbar
     @stickyNavbarText: @textColor;
-    @stickyNavbarLinkColor: @linkColor;
-    @stickyNavbarLinkColorHover: @white;
+    @stickyNavbarLinkColor: @stickyNavbarText;
+    @stickyNavbarLinkColorHover: darken(@stickyNavbarLinkColor, 5%);
     @stickyNavbarBackgroundColor: @white;
     @stickyNavbarDropdownCaretColor: @stickyNavbarLinkColor;
     @stickyNavbarDropdownCaretColorHover: @stickyNavbarLinkColorHover;
