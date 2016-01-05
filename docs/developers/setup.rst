@@ -54,6 +54,7 @@ Setting up Largo and WordPress
 
 6. You're going to have to install some things first.
 
+
 7. First, install the Python dependencies.
 
 	We use a few Python libraries for this project, including `Fabric <http://www.fabfile.org>`_ which powers the INN deploy-tools to elegantly run `many common but complex tasks <https://github.com/INN/deploy-tools/blob/master/COMMANDS.md>`_. In the `OS X setup guide <https://github.com/inn/docs/staffing/onboarding/os-x-setup.md>`_, you should have installed Python virtualenv and virtualenvwrapper.
@@ -73,7 +74,14 @@ Setting up Largo and WordPress
 		workon largo-umbrella
 		pip install -r requirements.txt
 
-8. Our API docs/function reference uses doxphp to generate documentation based on the comments embedded in Largo's source code. You'll need to install doxphp to generate API docs.
+8. Now, the NodeJS dependencies.
+
+	If this command fails, make sure you're in the ``largo-dev`` directory. ::
+
+		npm install
+
+
+9. Our API docs/function reference uses doxphp to generate documentation based on the comments embedded in Largo's source code. You'll need to install doxphp to generate API docs.
 
 	- Installation process with PEAR: ::
 
@@ -90,7 +98,7 @@ Setting up Largo and WordPress
 
 	The last step may require you to use sudo.
 
-9. Make sure that you have the necessary prerequisites for these next steps.
+10. Make sure that you have the necessary prerequisites for these next steps.
 
 	From the top level of the project, run the setup routine `as described in the deploy-tools documentation <https://github.com/INN/deploy-tools#setup>`_ ::
 
@@ -101,7 +109,7 @@ Setting up Largo and WordPress
 
 	If the above command fails to run, make sure you have run the ``workon`` and ``pip install`` commands listed above in step 7.
 
-10. Time to install WordPress.
+11. Time to install WordPress.
 
 	INN's deploy tools have a handy utility that will install any tagged release of WordPress for you.
 
@@ -132,22 +140,22 @@ Setting up Largo and WordPress
 
 	This tells your system that whenever you use the address ``http://vagrant.dev``, you really mean the IP address of the virtual machine. If you're working on a multisite instance of WordPress, you can add the subdomains such as ``another.blog.at.vagrant.dev`` at the end of the line, separated by a space from ``vagrant.dev``. 
 
-11. Now that the vagrant box is up and running, you can create a database for it to use: ::
+12. Now that the vagrant box is up and running, you can create a database for it to use:
 
-			fab vagrant.create_db
+	Without any arguments, this command will read the defaults from the ``Fabfile.py`` in the root of your project directory. ::
 
-
-Without any arguments, this command will read the defaults from the ``Fabfile.py`` in the root of your project directory.
-
-12. Now, let's take a snapshot of the virtual machine in its new, provisioned, freshly-deployed state. ::
-
-			vagrant plugin install vagrant-vbox-snapshot
-			vagrant snapshot take default snapshot_name_goes_here
+		fab vagrant.create_db
 
 
-You can name the snapshot anything you want, and I would recommend describing it in a short way that describes what that state would give you if you were to revert.
+13. Now, let's take a snapshot of the virtual machine in its new, provisioned, freshly-deployed state.
 
-13. Now you're going to set up WordPress on Vagrant. Open a browser and point it at http://vagrant.dev/. You should automatically be redirected to http://vagrant.dev/wp-admin/setup-config.php. Choose your language, then enter the details below as they are entered in your ``Fabfile.py``: ::
+	You can name the snapshot anything you want, and I would recommend describing it in a short way that describes what that state would give you if you were to revert. ::
+
+		vagrant plugin install vagrant-vbox-snapshot
+		vagrant snapshot take default snapshot_name_goes_here
+
+
+14. Now you're going to set up WordPress on Vagrant. Open a browser and point it at http://vagrant.dev/. You should automatically be redirected to http://vagrant.dev/wp-admin/setup-config.php. Choose your language, then enter the details below as they are entered in your ``Fabfile.py``: ::
 
     * Database Name: `largoproject`
     * User Name: `root`
@@ -155,7 +163,9 @@ You can name the snapshot anything you want, and I would recommend describing it
     * Database Host: `localhost`
     * Table Prefix: `wp_`
 
-14. If you are working on a multisite install, you will want to add these settings to ``wp-config.php`` at the bottom, before "Do not edit below this line." ::
+15. If you are working on a multisite install, you will want to add these settings to ``wp-config.php`` at the bottom, before "Do not edit below this line."
+
+	::
 
 
 		/* Make this a multisite install. */
@@ -166,7 +176,7 @@ You can name the snapshot anything you want, and I would recommend describing it
 		define('SITE_ID_CURRENT_SITE', 1);
 		define('BLOG_ID_CURRENT_SITE', 1);
 
-All done? Log into WordPress and start poking around. Remember to take Vagrant snapshots when you get things working how you like the. You'll probably want to take one after you add some posts and configure your menus for testing purposes. If you want to log into the vagrant box, it's as easy as ``vagrant ssh``.
+	All done? Log into WordPress and start poking around. Remember to take Vagrant snapshots when you get things working how you like the. You'll probably want to take one after you add some posts and configure your menus for testing purposes. If you want to log into the vagrant box, it's as easy as ``vagrant ssh``.
 
 You have installed:
 
@@ -204,7 +214,7 @@ Every command in `the list of commands <https://github.com/INN/deploy-tools/blob
 
 If you recieve an error when running your command, make sure that you have run ``workon largo-umbrella``, or the name of the Python virtualenv you are using. When run, ``workon`` will prefix your prompt: ::
 
-	blk@oyster:~$ workon largo
-	(largo)blk@oyster:~$
+	you@computer:~$ workon largo
+	(largo-umbrella)you@computer:~$
 
 To exit the virtualenv, you can use the command ``deactivate``.

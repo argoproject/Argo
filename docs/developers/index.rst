@@ -24,6 +24,7 @@ We encourage all INN member organizations looking to add features to or otherwis
 
     setup
     setup-documentation
+    intro-command-line
 
 Child Themes
 ------------
@@ -55,6 +56,7 @@ A few brief technical notes that might be helpful as you get started:
     :maxdepth: 2
 
     technicalnotes
+    grunt-commands
 
 Function Reference
 ------------------
