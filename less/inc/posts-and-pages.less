@@ -134,12 +134,21 @@ p.wp-caption-text {
 }
 .pull-quote,
 .type-pull-quote {
-  border-left: 4px solid @grayDark;
-  padding-left: 20px;
   font: @serifFontFamily;
   font-style: italic;
   font-size: @baseFontSize * 1.5;
   line-height: 1.3;
+
+  &::before,
+  &::after {
+    content: "";
+    display: block;
+    height: 1px;
+    width: 100%;
+    margin: 20px auto;
+    background: @grayLighter;
+  }
+
   h6 {
     font-size: @baseFontSize;
     margin: 0;
