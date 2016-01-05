@@ -13,7 +13,7 @@ Once you've completed this recipe, you'll be able to:
 Setting up
 ----------
 
-This presumes that you're familiar with the command line, and are using OSX or another UNIX-like system.
+This presumes that you're familiar with the command line, and are using OSX or another UNIX-like system. If you're not familiar with the command line, check out `our collection of command-line resources <intro-command-line.html>`_.
 
 1. `Fork INN/Largo <https://github.com/INN/Largo#fork-destination-box>`_ into your own GitHub account.
 2. Clone your branch:
@@ -63,7 +63,7 @@ This presumes that you're familiar with the command line, and are using OSX or a
 		cd docs
 		make php && make html
 
-	But if you don't want to have to manually recreate the documentation every time you save a file, you can run ``grunt watch`` from the Largo directory. This command only rebuilds documentation, though, and doesn't recompile the API docs.
+	But if you don't want to have to manually recreate the documentation every time you save a file, you can run ``grunt watch`` from the Largo directory. This command only rebuilds documentation, though, and doesn't recompile the API docs. (For a full list of ``grunt`` commands, see `the Largo grunt docs <grunt-commands.html>`_.
 
 7. You can view the generated docs in the `docs/_build/html` directory:
 
