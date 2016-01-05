@@ -1,6 +1,10 @@
 Grunt commands
 ==============
 
+These commands are run on the command line, prefixed with ``grunt``. For example, to rebuild the CSS after editing the LESS files, you would run ``grunt less``.
+
+Some commands require you to have external applications installed. Instructions for installing dependencies `are included in the developer documentation <index.html#setting-up-a-development-environment>`_.
+
 ``less``
     Recompiles all LESS files into their corresponding CSS files, including sourcemaps, and then runs ``cssmin``.
     The list of files that will be compiled is defined in ``Gruntfile.js`` in the variable ``cssLessFiles``.
@@ -13,6 +17,8 @@ Grunt commands
 
 ``shell``
     Runs commands directly on the command line, instead of running Grunt modules.
+
+    These commands require you to have set up Largo according to the `complete dev environment <setup.html>`_ or `documentation contribution environment <setup-documentation.html>`_ instructions, because they require several Python libraries that were installed by following those instructions. Besure to have activated your python virtualenv with ``workon``, as described in those instructions.
 
     ``shell:apidocs``
         Recompiles the `Largo API Docs </api/>`_ from structured comments in Largo's PHP code using `/docs/generate_api_docs.py <https://github.com/INN/Largo/blob/master/docs/generate_api_docs.py>`_ into reStructuredText files.
@@ -30,8 +36,12 @@ Grunt commands
 ``pot``
     Scans the Largo code for the WordPress localization functions and generates ``.po`` files for working with localization software.
 
+    Running this command requires your computer to have ``xgettext`` installed. Installation instructions vary based on operating system; your best bet is Google.
+
 ``po2mo``
     Converts the ``.po`` files to ``.mo`` files. For more information about ``.po`` and ``.mo`` files, see the `Wikipedia articles on gettext <https://en.wikipedia.org/wiki/Gettext>`_.
+
+    Running this command requires your computer to have ``xgettext`` installed. Installation instructions vary based on operating system; your best bet is Google.
 
 ``apidocs``
     Runs ``shell:apidocs``, rebuilding only the API docs.
@@ -65,5 +75,3 @@ Grunt commands
 
     ``gitpush``
         Pushes the ``master`` branch back to GitHub.
-
-
