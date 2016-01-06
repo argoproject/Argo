@@ -762,8 +762,10 @@ if ( ! function_exists( 'largo_post_metadata' ) ) {
  */
 if ( ! function_exists( 'largo_floating_social_buttons' ) ) {
 	function largo_floating_social_buttons() {
-		if ( is_single() && of_get_option('single_floating_social_icons', '1') == '1' && of_get_option('single_template') == 'normal' ) {
-			// of_get_option('single_template') is filtered to return not the global option but this post's custom option if that is set.
+		$template = get_post_template(null);
+		$is_single_column = (bool) strstr( $template, 'single-one-column' ) || is_null( $template );
+
+		if ( is_single() && of_get_option('single_floating_social_icons', '1') == '1' && $is_single_column ) {
 			echo '<script type="text/template" id="tmpl-floating-social-buttons">';
 			largo_post_social_links();
 			echo '</script>';
@@ -780,7 +782,10 @@ add_action('wp_footer', 'largo_floating_social_buttons');
  */
 if ( ! function_exists('largo_floating_social_button_width_json') ) {
 	function largo_floating_social_button_width_json() {
-		if ( is_single() && of_get_option('single_floating_social_icons', '1') == '1' && of_get_option('single_template') == 'normal' ) {
+		$template = get_post_template(null);
+		$is_single_column = (bool) strstr( $template, 'single-one-column' ) || is_null( $template );
+
+		if ( is_single() && of_get_option('single_floating_social_icons', '1') == '1' && $is_single_column ) {
 			$config = array(
 				'min' => '980',
 				'max' => '9999',
@@ -805,7 +810,10 @@ add_action('wp_footer', 'largo_floating_social_button_width_json');
  */
 if ( ! function_exists('largo_floating_social_button_js') ) {
 	function largo_floating_social_button_js() {
-		if ( is_single() && of_get_option('single_floating_social_icons', '1') == '1' && of_get_option('single_template') == 'normal' ) {
+		$template = get_post_template(null);
+		$is_single_column = (bool) strstr( $template, 'single-one-column' ) || is_null( $template );
+
+		if ( is_single() && of_get_option('single_floating_social_icons', '1') == '1' && $is_single_column ) {
 			?>
 			<script type="text/javascript" src="<?php
 				$suffix = (LARGO_DEBUG)? '' : '.min';
