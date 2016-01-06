@@ -34,6 +34,12 @@ Additionally you can add a description for each category, tag or series and also
 
 Note that in some cases you may need to click on the "Screen Options" tab at the very top right corner of the post edit screen to ensure that all of the taxonomies are visible.
 
+**Featured Media in Taxonomies**
+
+You can add a Featured Image for each term created in any of the taxonomies. This will appear as a banner image at the top of the term's archive page. While this is optional, an apppropriate image can add visual appeal and impact to a topic landing page. At this time only images can be added as Featured Media in taxonomies.
+
+You can add a Featured Image for a term in Posts > Categories (or Tags, Post Prominence, Series, and Post Types) by editing the term, and using the Set Featured Media button to upload an image or select an existing image in the Media Library. For best results use a landscape-shaped image with a width of 1170px, so it spans the top of landing page for the term.  Adding, editing, and removing Featured Media images for a taxonomy term works the same way as for Featured Media in posts and pages.
+
 .. _categories-tax:
 
 Categories
