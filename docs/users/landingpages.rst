@@ -4,10 +4,11 @@ Series Landing Pages
 Custom landing pages allow you to summarize a :ref:`series of posts <series-tax>` or tie a project together. For one example, see http://inewsnetwork.org/series/hit-and-run: the project page begins with a summary of the series, followed by posts within the series.
 Creating a custom landing page is a simple process.
 
-1. Make sure "Custom Landing Pages for Series/Project Pages" is enabled in *Appearance* > *Theme 	Options* > *Advanced*.
-2. Create a series
-3. Add the series to posts
-4. Create the landing page
+1. Go to *Appearance* > *Theme Options* > *Advanced* and check the box to Enable "Series" Taxonomy
+2. Check the box that appears underneath to Enable Custom Landing Pages for Series/Project Pages
+3. Create a series
+4. Add the series to posts
+5. Create the landing page
 
 Creating a series
 -----------------
