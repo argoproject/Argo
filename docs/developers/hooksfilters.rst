@@ -66,6 +66,8 @@ Also passed in is a WP_Error object that stores all the generated errors for the
 ``# ... }``
 ``add_filter('largo_registration_extra_fields'``, ``'filter_function_name');``
 
+------------
+
 **action: largo_validate_user_signup_extra_fields**
 
 Called directly before form values from the `[largo_registration_form]`. Hook to this in order to validate any of the extra form data added with the largo_registration_extra_fields filter. For example, you could validate a captcha that was added to the form's fields.
@@ -80,9 +82,13 @@ Also passed in is an array that contains only the extra fields that were present
 ``# ... }``
 ``add_action('largo_validate_user_signup_extra_fields'``, ``'filter_function_name');``
 
+------------
+
 **filter: largo_lmp_args**
 
 Passed in this are the arguments for the Load More Posts WP_Query. An example usage would be to check if ``is_home()`` and then restrict the posts returned by the query to those in the homepage featured prominence term.
+
+------------
 
 **filter: largo_post_social_links**
 
