@@ -57,19 +57,21 @@ A few brief technical notes that might be helpful as you get started:
 
     technicalnotes
     grunt-commands
+    hooksfilters
 
 Function Reference
 ------------------
 
 NOTE: the function reference is a work-in-progress and may not be very useful at the moment.
 
-You can always `read Largo's source on Github <https://github.com/INN/Largo>`_.
+It may be helpful to  `read Largo's source on Github <https://github.com/INN/Largo>`_. If you discover insight there that is not included in these docs, please `let us know <#contributing-to-largo>`_.
 
 .. toctree::
     :maxdepth: 2
 
     /api/index
     constants
+    hooksfilters
 
 Bug Reports and Feature Requests
 --------------------------------
