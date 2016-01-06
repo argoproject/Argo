@@ -134,12 +134,13 @@ Note that if you hide the non-sticky main navigation on article pages, any conte
 
 If the menu assigned to the sticky navigation has so many top-level links that it would have to wrap onto multiple lines, a dropdown menu will be added containing the links that would wrap. Enter a label here for the dropdown menu, which defaults to "More."
 
+**Also of note:** If you have assigned a menu to the Global Navigation theme location, the sticky navigation will include that as a dropdown menu to the right of the sticky nav menu links.
+
 **Menu Options**
 
 You can choose to display the optional Don't Miss menu under the Main Navigation. You can change the default label from "Don't Miss" to something else, or delete the label for this menu.
 
 You can also enter a label before the links in the Footer Navigation Menu, or delete the default and no label will appear.
-
 
 .. _advanced-options:
 
