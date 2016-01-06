@@ -111,6 +111,37 @@ You can also enter a list of additional sidebar regions that should be created, 
 
 **Footer Layout** - The default footer is a 3 column footer with a wide center column. Alternatively you can choose to have 3 or 4 equal columns. Each column is a widget area that can be configured under the **Appearance > Widgets** menu, where they will be labeled "Footer 1" through "Footer 3" or "Footer 4."
 
+
+.. _navigation:
+
+Navigation
+----------------
+
+**Sticky navigation**
+
+Largo 0.5.4 introduces a new sticky navigation bar. This improves the user experience especially on mobile screen sizes by reducing the screen space occupied by navigation links, while still providing a highly usable menu. The sticky navigation disappears when the user scrolls down, and reappears when scrolling back up. 
+
+The sticky navigation bar has the theme location of Main Navigation. By default the Main Navigation menu is assigned to the Main Navigation theme location, and in most cases this would be the best practice. But in Appearance > Menus > Manage Locations you can reassign any menu to the Main Navigation theme location and place it in the sticky navigation bar. 
+
+By default, the sticky navigation bar is active only for mobile screen sizes. You can choose two additional options:
+
+- Enable the sticky navigation for all screen sizes on article pages
+- Hide the "non-sticky" main navigation on article pages and display only the sticky navigation
+
+Note that if you hide the non-sticky main navigation on article pages, any content above the navigation such as a banner ad will not be displayed. Users entering the site will see only the sticky nav bar at the top with a small site logo and the navigation links. 
+
+**Sticky navigation overflow**
+
+If the menu assigned to the sticky navigation has so many top-level links that it would have to wrap onto multiple lines, a dropdown menu will be added containing the links that would wrap. Enter a label here for the dropdown menu, which defaults to "More."
+
+**Also of note:** If you have assigned a menu to the Global Navigation theme location, the sticky navigation will include that as a dropdown menu to the right of the sticky nav menu links.
+
+**Menu Options**
+
+You can choose to display the optional Don't Miss menu under the Main Navigation. You can change the default label from "Don't Miss" to something else, or delete the label for this menu.
+
+You can also enter a label before the links in the Footer Navigation Menu, or delete the default and no label will appear.
+
 .. _advanced-options:
 
 Advanced Options
