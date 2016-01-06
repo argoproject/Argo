@@ -6,122 +6,101 @@ Homepage template filters
 
 **filter: largo_homepage_feature_stories_list_maximum**
 
-Filter the number of posts to display in the list of feature stories in 'HomepageSingleWithFeatured' templates.
+    Filter the number of posts to display in the list of feature stories in 'HomepageSingleWithFeatured' templates.
 
-*args: $max*
-
-------------
+    *args: $max*
 
 filter: **largo_homepage_series_stories_list_minimum**
 
-*args: $min*
+    *args: $min*
 
-Filter the minimum number of posts to show in a series list in the
-HomepageSingleWithSeriesStories homepage list.
+    Filter the minimum number of posts to show in a series list in the HomepageSingleWithSeriesStories homepage list.
 
-This is used in the query for the series list of posts in the same series
-as the main feature. If fewer than this number of posts exist, the list
-is hidden and the headline dominates the full box.
-
-------------
+    This is used in the query for the series list of posts in the same series as the main feature. If fewer than this number of posts exist, the list is hidden and the headline dominates the full box.
 
 filter: **largo_homepage_series_stories_list_maximum**
 
-*args: $max*
+    *args: $max*
 
-Filter the maximum number of posts to show in a series list in the
-HomepageSingleWithSeriesStories homepage list.
+    Filter the maximum number of posts to show in a series list in the HomepageSingleWithSeriesStories homepage list.
 
-This is used in the query for the series list of posts in the same series
-as the main feature. This is the maximum number of posts that will display
-in the list.
-
-------------
+    This is used in the query for the series list of posts in the same series as the main feature. This is the maximum number of posts that will display in the list.
 
 filter: **largo_homepage_topstories_post_count**
 
-*args: $showposts*
+    *args: $showposts*
 
-Filter the number of posts that are displayed in the right-hand side of the
-Top Stories homepage template.
+    Filter the number of posts that are displayed in the right-hand side of the Top Stories homepage template.
 
-This is used in the query for the list of posts in the "Homepage Featured"
-taxonomy. If more than 3 posts are found, they will display under a
-"More Headlines" heading, just as headline links.
+    This is used in the query for the list of posts in the "Homepage Featured" taxonomy. If more than 3 posts are found, they will display under a "More Headlines" heading, just as headline links.
 
 Other filters and actions
 -------------------------
 
-**filter: largo_registration_extra_fields**
+filter: **largo_registration_extra_fields**
 
-Called directly before the `[largo_registration_form]` shortcode has finished executing. You can append to this any addition form fields that you want to process.
+    Called directly before the `[largo_registration_form]` shortcode has finished executing. You can append to this any addition form fields that you want to process.
 
-**Usage:**
+    **Usage:**
 
-Passed in is an array of values of post variables generated if a user is trying the form for a second time. You can use these to pre fill your extra field inputs.
+    Passed in is an array of values of post variables generated if a user is trying the form for a second time. You can use these to pre fill your extra field inputs.
 
-Also passed in is a WP_Error object that stores all the generated errors for the page. Use this if you'd like to display an error message on the erroneous field.
+    Also passed in is a WP_Error object that stores all the generated errors for the page. Use this if you'd like to display an error message on the erroneous field. ::
 
-``function filter_function_name($values, $errors) {``
-``# ... }``
-``add_filter('largo_registration_extra_fields'``, ``'filter_function_name');``
+        function filter_function_name($values, $errors) {
+        # ... }
+        add_filter('largo_registration_extra_fields', 'filter_function_name');
 
-------------
+action: **largo_validate_user_signup_extra_fields**
 
-**action: largo_validate_user_signup_extra_fields**
+    Called directly before form values from the `[largo_registration_form]`. Hook to this in order to validate any of the extra form data added with the largo_registration_extra_fields filter. For example, you could validate a captcha that was added to the form's fields.
 
-Called directly before form values from the `[largo_registration_form]`. Hook to this in order to validate any of the extra form data added with the largo_registration_extra_fields filter. For example, you could validate a captcha that was added to the form's fields.
+    **Usage:**
 
-**Usage:**
+    Passed in is an array $result which contains all post data for the form. Contained in this array at $result["errors"] is a WP_Error object. Adding errors to this object will cancel form submission.
 
-Passed in is an array $result which contains all post data for the form. Contained in this array at $result["errors"] is a WP_Error object. Adding errors to this object will cancel form submission.
+    Also passed in is an array that contains only the extra fields that were present. This is an easy way to check only the extra data.::
 
-Also passed in is an array that contains only the extra fields that were present. This is an easy way to check only the extra data.
-
-``function filter_function_name($result,$extras) {``
-``# ... }``
-``add_action('largo_validate_user_signup_extra_fields'``, ``'filter_function_name');``
-
-------------
+        function action_function_name($result,$extras) {
+        # ... }
+        add_action('largo_validate_user_signup_extra_fields', 'action_function_name');
 
 **filter: largo_lmp_args**
 
-Passed in this are the arguments for the Load More Posts WP_Query. An example usage would be to check if ``is_home()`` and then restrict the posts returned by the query to those in the homepage featured prominence term.
-
-------------
+    Passed in this are the arguments for the Load More Posts WP_Query. An example usage would be to check if ``is_home()`` and then restrict the posts returned by the query to those in the homepage featured prominence term.
 
 **filter: largo_post_social_links**
 
-*args: $output*
+    *args: $output*
 
-Called before ``largo_post_social_links()`` returns or echos the social icons. The argument ``$output`` is HTML, usually containing HTML looking like this: (Whitespace has been added for readability)
+    Called before ``largo_post_social_links()`` returns or echos the social icons. The argument ``$output`` is HTML, usually containing HTML looking like this: (Whitespace has been added for readability)
 
-.. code::
+    .. code::
 
-    <div class="largo-follow post-social clearfix">
-        <span class="facebook">
-            <a target="_blank" href="http://www.facebook.com/sharer/sharer.php?u=  ...">
-                <i class="icon-facebook"></i>
-                <span class="hidden-phone">Like</span>
-            </a>
-        </span>
-        <span class="twitter">
-            <a target="_blank" href="https://twitter.com/intent/tweet?text= ...">
-                <i class="icon-twitter"></i>
-                <span class="hidden-phone">Tweet</span>
-            </a>
-        </span>
-        <span class="print">
-            <a href="#" onclick="window.print()" title="Print this article" rel="nofollow">
-                <i class="icon-print"></i>
-                <span class="hidden-phone">Print</span>
-            </a>
-        </span>
-        <span data-service="email" class="email custom-share-button share-button">
-            <i class="icon-mail"></i>
-            <span class="hidden-phone">Email</span>
-        </span>
-    </div>
+        <div class="largo-follow post-social clearfix">
+            <span class="facebook">
+                <a target="_blank" href="http://www.facebook.com/sharer/sharer.php?u=  ...">
+                    <i class="icon-facebook"></i>
+                    <span class="hidden-phone">Like</span>
+                </a>
+            </span>
+            <span class="twitter">
+                <a target="_blank" href="https://twitter.com/intent/tweet?text= ...">
+                    <i class="icon-twitter"></i>
+                    <span class="hidden-phone">Tweet</span>
+                </a>
+            </span>
+            <span class="print">
+                <a href="#" onclick="window.print()" title="Print this article" rel="nofollow">
+                    <i class="icon-print"></i>
+                    <span class="hidden-phone">Print</span>
+                </a>
+            </span>
+            <span data-service="email" class="email custom-share-button share-button">
+                <i class="icon-mail"></i>
+                <span class="hidden-phone">Email</span>
+            </span>
+        </div>
 
 Template Hooks
 --------------
