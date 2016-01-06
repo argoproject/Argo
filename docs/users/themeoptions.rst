@@ -117,9 +117,9 @@ You can also enter a list of additional sidebar regions that should be created, 
 Navigation
 ----------------
 
-**Stick navigation**
+**Sticky navigation**
 
-Largo 0.5.4 introduces a new sticky navigation bar. This improves the user experience on mobile screen sizes by reducing the screen space occupied by navigation links, while still providing a highly usable menu. The sticky navigation disappears when the user scrolls down, and reappears when scrolling back up. 
+Largo 0.5.4 introduces a new sticky navigation bar. This improves the user experience especially on mobile screen sizes by reducing the screen space occupied by navigation links, while still providing a highly usable menu. The sticky navigation disappears when the user scrolls down, and reappears when scrolling back up. 
 
 The sticky navigation bar has the theme location of Main Navigation. By default the Main Navigation menu is assigned to the Main Navigation theme location, and in most cases this would be the best practice. But in Appearance > Menus > Manage Locations you can reassign any menu to the Main Navigation theme location and place it in the sticky navigation bar. 
 
