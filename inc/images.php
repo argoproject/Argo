@@ -5,7 +5,7 @@
  *
  * @param object the post content
  * @return object post content with image links stripped out
- * @since 1.0
+ * @since 0.1
  */
 function largo_attachment_image_link_remove_filter( $content ) {
 	$content =
@@ -20,23 +20,27 @@ function largo_attachment_image_link_remove_filter( $content ) {
 add_filter( 'the_content', 'largo_attachment_image_link_remove_filter' );
 
 /**
- * Load the picturefill.wp plugin
+ * Get the home icon for the sticky nav
+ *
+ * @param (string) $class any additional classes you would like to add to icon when returned
+ * @param (string) $size the size of the logo to return
+ * @return (string) markup for the sticky nav home icon (logo if available, otherwise just an icon)
+ *
+ * @since 0.4
  */
-//require_once(get_template_directory() . '/inc/picturefill/picturefill-wp.php');
-
 if ( ! function_exists( 'largo_home_icon' ) ) {
-	function largo_home_icon( $class='', $size = '60x60' ) {
+	function largo_home_icon( $class = '', $size = '60x60' ) {
 		global $wpdb;
 
 		$logo = of_get_option( 'sticky_header_logo' );
 		$default = '<i class="icon-home ' . esc_attr( $class ) . '"></i>';
 
 		if ( ! empty( $logo ) ) {
-			$attachment_id = $wpdb->get_var( $wpdb->prepare("SELECT ID FROM {$wpdb->posts} WHERE guid = %s", $logo) );
-			if (!empty($attachment_id))
+			$attachment_id = $wpdb->get_var( $wpdb->prepare( 'SELECT ID FROM {$wpdb->posts} WHERE guid = %s', $logo ) );
+			if ( !empty( $attachment_id ) )
 				echo wp_get_attachment_image( $attachment_id, $size );
 			else {
-				if (preg_match('/^http(s)?\:\/\//', $logo))
+				if ( preg_match( '/^http(s)?\:\/\//', $logo ) )
 					echo '<img src="' . $logo . '" class="attachment-home-logo" alt="logo">';
 				else
 					echo $default;
