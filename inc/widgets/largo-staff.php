@@ -45,19 +45,7 @@ class largo_staff_widget extends WP_Widget {
 
 			$avatar = get_avatar($user->ID, '65');
 			$author_url = get_author_posts_url($user->ID);
-			$emeritus = get_user_meta($user->ID, 'emeritus', true);
-			$honorary = get_user_meta($user->ID, 'honorary', true);
 			$job_title = get_user_meta($user->ID, 'job_title', true);
-
-			if ($honorary == 'on' && $emeritus == 'on') {
-				$job_title = $job_title . ' (Honorary, emeritus)';
-			} else {
-				if ($honorary == 'on')
-					$job_title = $job_title . ' (Honorary)';
-
-				if ($emeritus =='on')
-					$job_title = $job_title . ' (Emeritus)';
-			}
 
 			$user_posts_link = '';
 			if (count_user_posts($user->ID) > 0)

@@ -94,6 +94,14 @@ class HelpersTestFunctions extends WP_UnitTestCase {
 		$this->assertFalse($result, "Either https://www.facebook.com/%22Aardvarks+lurk%2C+OK%3F%22 is user that exists and allows follows (not at all likely), or the Facebook follow button iframe HTML structure has changed and largo_fb_url_to_username no longer operates predictably.");
 		unset($result);
 	}
+	
+	function test_clean_user_fb_username() {
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
+
+	function test_validate_fb_username() {
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
 
 	function test_largo_twitter_url_to_username() {
 		/**
@@ -165,6 +173,15 @@ class HelpersTestFunctions extends WP_UnitTestCase {
 		$this->assertEquals("", $result);
 		unset($result);
 	}
+	
+	function test_clean_user_twitter_username() {
+		$this->markTestIncomplete('This test has not been implemented yet.');;
+	}
+
+	function test_validate_twitter_username() {
+		$this->markTestIncomplete('This test has not been implemented yet.');
+	}
+	
 	function test_largo_youtube_url_to_ID() {
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}

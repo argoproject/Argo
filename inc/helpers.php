@@ -27,6 +27,7 @@ function largo_fb_url_to_username( $url )  {
 	
 	return $username;
 }
+
 /**
  * Checks to see if a given Facebook username or ID has following enabled by 
  * checking the iframe of that user's "Follow" button for <table>.
@@ -54,6 +55,65 @@ function largo_fb_user_is_followable( $username ) {
 }
 
 /**
+ * Cleans a Facebook url to the bare username or id when the user is edited
+ *
+ * Edits $_POST directly because there's no other way to save the corrected username
+ * from this callback. The action hooks this is used for run before edit_user in 
+ * wp-admin/user-edit.php, which overwrites the user's contact methods. edit_user 
+ * reads from $_POST. 
+ *
+ * @param  object  $user_id the WP_User object being edited
+ * @param  array   $_POST
+ * @since  0.4
+ * @uses   largo_fb_url_to_username
+ * @link   http://codex.wordpress.org/Plugin_API/Action_Reference/edit_user_profile_update
+ * @link   http://codex.wordpress.org/Plugin_API/Action_Reference/personal_options_update
+ */
+function clean_user_fb_username($user_id) {
+
+	if ( current_user_can('edit_user', $user_id) ) {
+		$fb = largo_fb_url_to_username( $_POST['fb'] );
+		if ( preg_match( '/[^a-zA-Z0-9\.\-]/', $fb ) ) {
+			// it's not a valid Facebook username, because it uses an invalid character
+			$fb = "";
+		}
+		update_user_meta($user_id, 'fb', $fb);
+		if ( get_user_meta($user_id, 'fb', true) != $fb ) {
+			wp_die(__('An error occurred.'));
+		}
+		$_POST['fb'] = $fb;
+	}
+}
+
+/**
+ * Checks that the Facebook URL submitted is valid and the user is followable and causes an error if not
+ *
+ * @uses  largo_fb_url_to_username
+ * @uses  largo_fb_user_is_followable
+ * @param   $errors the error object
+ * @param   bool    $update whether this is a user update
+ * @param   object  $user a WP_User object
+ * @link    http://codex.wordpress.org/Plugin_API/Action_Reference/user_profile_update_errors
+ * @since   0.4
+ */
+function validate_fb_username( $errors, $update, $user ) {
+
+	if ( isset( $_POST["fb"] ) ) {
+		$fb_suspect = trim( $_POST["fb"] );
+		if( ! empty( $fb_suspect ) ) {
+			$fb_user = largo_fb_url_to_username( $fb_suspect );
+			if ( preg_match( '/[^a-zA-Z0-9\.\-]/', $fb_user ) ) {
+				// it's not a valid Facebook username, because it uses an invalid character
+				$errors->add('fb_username', '<b>' . $fb_suspect . '</b> ' . __('is an invalid Facebook username.') . '</p>' . '<p>' . __('Facebook usernames only use the uppercase and lowercase alphabet letters (a-z A-Z), the Arabic numbers (0-9), periods (.) and dashes (-)') );
+			}
+			if ( ! largo_fb_user_is_followable( $fb_user ) ) {
+				$errors->add('fb_username',' <b>' . $fb_suspect . '</b> ' . __('does not allow followers on Facebook.') . '</p>' . '<p>' . __('<a href="https://www.facebook.com/help/201148673283205#How-can-I-let-people-follow-me?">Follow these instructions</a> to allow others to follow you.') );
+			}
+		}
+	}
+}
+
+/**
  * Returns a Twitter username (without the @ symbol)
  *
  * @param 	string 	$url a twitter url
@@ -74,6 +134,61 @@ function largo_twitter_url_to_username( $url ) {
 		$username = $matches[0];
 	}
 	return $username;
+}
+
+/**
+ * Cleans a Twitter url or an @username to the bare username when the user is edited
+ *
+ * Edits $_POST directly because there's no other way to save the corrected username
+ * from this callback. The action hooks this is used for run before edit_user in 
+ * wp-admin/user-edit.php, which overwrites the user's contact methods. edit_user 
+ * reads from $_POST. 
+ *
+ * @param  object  $user_id the WP_User object being edited
+ * @param  array   $_POST
+ * @since  0.4
+ * @uses   largo_twitter_url_to_username
+ * @link   http://codex.wordpress.org/Plugin_API/Action_Reference/edit_user_profile_update
+ * @link   http://codex.wordpress.org/Plugin_API/Action_Reference/personal_options_update
+ */
+function clean_user_twitter_username($user_id) {
+
+	if ( current_user_can('edit_user', $user_id) ) {
+		$twitter = largo_twitter_url_to_username( $_POST['twitter'] );
+		if ( preg_match( '/[^a-zA-Z0-9_]/', $twitter ) ) {
+			// it's not a valid twitter username, because it uses an invalid character
+			$twitter = "";
+		}
+		update_user_meta($user_id, 'twitter_link', $twitter);
+		if ( get_user_meta($user_id, 'twitter_link', true) != $twitter ) {
+			wp_die(__('An error occurred.'));
+		}
+		$_POST['twitter'] = $twitter;
+	}
+}
+
+/**
+ * Checks that the Twitter URL is composed of valid characters [a-zA-Z0-9_] and 
+ * causes an error if there is not.
+ *
+ * @param   $errors the error object
+ * @param   bool    $update whether this is a user update
+ * @param   object  $user a WP_User object
+ * @uses    largo_twitter_url_to_username
+ * @link    http://codex.wordpress.org/Plugin_API/Action_Reference/user_profile_update_errors
+ * @since   0.4
+ */
+function validate_twitter_username( $errors, $update, $user ) {
+
+	if ( isset( $_POST["twitter"] ) ) {
+		$tw_suspect = trim( $_POST["twitter"] );
+		if( ! empty( $tw_suspect ) ) {
+			if ( preg_match( '/[^a-zA-Z0-9_]/', largo_twitter_url_to_username( $tw_suspect ) ) ) {
+				// it's not a valid twitter username, because it uses an invalid character
+				$errors->add('twitter_username', '<b>' . $tw_suspect . '</b>' . __('is an invalid Twitter username.') . '</p>' . '<p>' . __('Twitter usernames only use the uppercase and lowercase alphabet letters (a-z A-Z), the Arabic numbers (0-9), and underscores (_).') );
+			}
+		}
+	}
 }
 
 /**
