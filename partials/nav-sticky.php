@@ -4,6 +4,9 @@
  *
  * Applied on all pages after a user scrolls past the Main Navigation or affixed
  * to the top of most pages that aren't the home page.
+ *
+ * @package Largo
+ * @link http://largo.readthedocs.org/users/themeoptions.html#navigation
  */
  ?>
  <div class="sticky-nav-wrapper nocontent">

@@ -71,7 +71,7 @@ function largo_version() {
  *
  * @since 0.3
  *
- * @return boolean if updates need to be run
+ * @return boolean $result True if updates need to be run
  */
 function largo_need_updates() {
 	// try to figure out which versions of the options are stored. Implemented in 0.3
@@ -394,7 +394,7 @@ function largo_force_settings_update() {
  *
  * @since 0.4
  *
- * @return bool If series were enabled by this function
+ * @return boolean $result True if series were enabled by this function
  */
 function largo_enable_if_series() {
 	// assuming that some posts will be in a series if series were used
@@ -416,7 +416,7 @@ function largo_enable_if_series() {
  *
  * @since 0.4
  *
- * @return bool If series landing pages (and series) were enabled by this function.
+ * @return boolean $result If series landing pages (and series) were enabled by this function.
  */
 function largo_enable_series_if_landing_page() {
 
@@ -448,7 +448,7 @@ function largo_enable_series_if_landing_page() {
 /**
  * Remove "top-story" prominence term to avoid conflicts with homepages that will register it
  *
- * @return array of deleted prominence terms
+ * @return array $results Deleted prominence terms
  */
 function largo_remove_topstory_prominence_term() {
 	$terms = get_terms('prominence', array(
@@ -720,7 +720,7 @@ function largo_replace_deprecated_widgets() {
  * @see largo_replace_deprecated_widgets
  * @param array $deprecated the deprecated widget's $instance variables
  * @param array $replacement the replacement widget's $instance variables
- * @return array the replacement widget's $instance variables
+ * @return array $result the replacement widget's $instance variables
  */
 function largo_deprecated_callback_largo_featured($deprecated, $replacement) {
 	if ( isset($deprecated['thumb'] ) ) {
@@ -737,7 +737,7 @@ function largo_deprecated_callback_largo_featured($deprecated, $replacement) {
  * Checks to see if a given widget is in a given region already
  *
  * @since 0.5.2
- * @return bool Whether or not the widget was found.
+ * @return boolean $result Whether or not the widget was found.
  */
 function largo_widget_in_region( $widget_name, $region = 'article-bottom' ) {
 
@@ -759,10 +759,10 @@ function largo_widget_in_region( $widget_name, $region = 'article-bottom' ) {
  *
  * @since 0.5
  *
- * @param String $kind. Kind of widget to instantiate.
- * @param Array $instance_settings. Settings for that array.
- * @param String $region. Sidebar region to add to.
- * @return Array ('id' => the id with number of the new widget , 'place' => the index of the id in its region )
+ * @param string $kind. Kind of widget to instantiate.
+ * @param array $instance_settings. Settings for that array.
+ * @param string $region. Sidebar region to add to.
+ * @return array $result array('id' => the id with number of the new widget , 'place' => the index of the id in its region )
  */
 function largo_instantiate_widget( $kind, $instance_settings, $region ) {
 

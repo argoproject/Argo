@@ -113,10 +113,6 @@ EOT;
 
 	}
 
-	function test_largo_has_avatar() {
-		$this->markTestIncomplete("This test has not yet been implemented.");
-	}
-
 	function test_my_queryvars() {
 		$this->markTestIncomplete("This test has not yet been implemented.");
 	}

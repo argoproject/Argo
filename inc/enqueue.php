@@ -123,8 +123,9 @@ if ( ! function_exists( 'largo_header_js' ) ) {
 	/**
 	 * Determine which size of the banner image to load based on the window width
 	 *
+	 * TODO: this should probably use picturefill for this instead
+	 *
 	 * @since 1.0
-	 * @todo: should probably use picturefill for this instead
 	 */
 	function largo_header_js() { ?>
 		<script>

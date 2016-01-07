@@ -90,6 +90,10 @@ class AvatarsTestFunctions extends WP_UnitTestCase {
 	function test_largo_get_avatar_src() {
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
+	
+	function test_largo_has_avatar() {
+		$this->markTestIncomplete("This test has not yet been implemented.");
+	}
 
 }
 
