@@ -26,7 +26,9 @@ inc/ajax-functions.php
 
    :global: $_POST
 
-   :see: largo_load_more_posts_choose_partial
+   :uses: largo_load_more_posts_choose_partial
+
+   :uses: largo_get_partial_by_post_type
 
 .. php:function:: largo_load_more_posts_choose_partial()
 
@@ -34,7 +36,7 @@ inc/ajax-functions.php
 
    Includes a "largo_lmp_template_partial" filter to allow for modifying the value $partial.
 
-   :param object $post_query: The query object being used to generate LMP markup
+   :param WP_Query $post_query: The WP_Query being used to generate LMP markup
 
    :returns: string $partial The slug of partial that should be loaded.
 
@@ -43,3 +45,5 @@ inc/ajax-functions.php
    :global: $_POST
 
    :see: largo_load_more_posts
+
+   :since: 0.5.3

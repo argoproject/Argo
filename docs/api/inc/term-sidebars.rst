@@ -7,7 +7,11 @@ inc/term-sidebars.php
 
    .. php:method:: Largo_Term_Sidebars::display_fields()
 
-      Renders the form fields on the term edit page
+      Renders the form fields on the term's edit page
+
+   .. php:method:: Largo_Term_Sidebars::display_add_new_field()
+
+      Renders the form fields for the new form creation on the term listing paga
 
    .. php:method:: Largo_Term_Sidebars::admin_enqueue_scripts()
 

@@ -22,7 +22,7 @@ inc/update.php
 
    :since: 0.3
 
-   :returns: boolean $f updates need to be run
+   :returns: boolean $result True if updates need to be run
 
 .. php:function:: largo_home_transition()
 
@@ -75,7 +75,7 @@ inc/update.php
 
    :since: 0.4
 
-   :returns: bool $f series were enabled by this function
+   :returns: boolean $result True if series were enabled by this function
 
 .. php:function:: largo_enable_series_if_landing_page()
 
@@ -83,13 +83,13 @@ inc/update.php
 
    :since: 0.4
 
-   :returns: bool $f series landing pages (and series) were enabled by this function.
+   :returns: boolean $result If series landing pages (and series) were enabled by this function.
 
 .. php:function:: largo_remove_topstory_prominence_term()
 
    Remove "top-story" prominence term to avoid conflicts with homepages that will register it
 
-   :returns: array $f deleted prominence terms
+   :returns: array $results Deleted prominence terms
 
 .. php:function:: largo_set_new_option_defaults()
 
@@ -125,13 +125,25 @@ inc/update.php
 
    :since: 0.5.3
 
+.. php:function:: largo_deprecated_callback_largo_featured()
+
+   Callback for updating the Largo Featured widget in largo_replace_deprecated_widgets()
+
+   :since: 0.5.3
+
+   :see: largo_replace_deprecated_widgets
+   :param array $deprecated: the deprecated widget's $instance variables
+   :param array $replacement: the replacement widget's $instance variables
+
+   :returns: array $result the replacement widget's $instance variables
+
 .. php:function:: largo_widget_in_region()
 
    Checks to see if a given widget is in a given region already
 
    :since: 0.5.2
 
-   :returns: bool $hether or not the widget was found.
+   :returns: boolean $result Whether or not the widget was found.
 
 .. php:function:: largo_instantiate_widget()
 
@@ -140,11 +152,11 @@ inc/update.php
    if $instance_settings are wrong, bad things might happen
 
    :since: 0.5
-   :param String $kind.: Kind of widget to instantiate.
-   :param Array $instance_settings.: Settings for that array.
-   :param String $region.: Sidebar region to add to.
+   :param string $kind.: Kind of widget to instantiate.
+   :param array $instance_settings.: Settings for that array.
+   :param string $region.: Sidebar region to add to.
 
-   :returns: Array $'id' => the id with number of the new widget , 'place' => the index of the id in its region )
+   :returns: array $result array('id' => the id with number of the new widget , 'place' => the index of the id in its region )
 
 .. php:function:: largo_get_widget_basename()
 
