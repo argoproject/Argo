@@ -6,9 +6,8 @@
  * Not shown when sticky navigation is displayed, so typically only the home page.
  * This menu is appended to the offcanvas nav menu (see partial/nav-sticky.php).
  *
- * @link http://largo.readthedocs.org/users/menus.html#available-menu-areas
- *
  * @package Largo
+ * @link http://largo.readthedocs.org/users/menus.html#available-menu-areas
  */
 
 if ( ! is_single() && ! is_singular() || ! of_get_option( 'main_nav_hide_article', false ) ) {

@@ -5,14 +5,13 @@
  * @param WP_User $author_object the author
  * @since 0.5.3
  */
+$email = $author_obj->user_email;
 
-	$email = $author_obj->user_email;
-
-	/**
-	 * Figure out whether to hide the author's email address
-	 */
-	$user_meta = get_user_meta($author_obj->ID);
-	$show_email = $user_meta['show_email'][0];
+/*
+ * Figure out whether to hide the author's email address
+ */
+$user_meta = get_user_meta($author_obj->ID);
+$show_email = $user_meta['show_email'][0];
 ?>
 <ul class="social-links">
 	<?php if ( $fb = $author_obj->fb ) { ?>

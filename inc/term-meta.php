@@ -21,10 +21,9 @@ add_action( 'init', 'largo_register_term_meta_post_type' );
 /**
  * Get the proxy post for a term
  *
- * @param string $taxnomy
- * @param int $term_id
- *
- * @return int $post_id
+ * @param string $taxnomy The taxonomy of the term for which you want to retrieve a term meta post
+ * @param int $term_id The ID of the term
+ * @return int $post_id The ID of the term meta post
  */
 function largo_get_term_meta_post( $taxonomy, $term_id ) {
 	$query = new WP_Query( array(

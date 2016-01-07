@@ -111,7 +111,7 @@ function is_post_template( $template = '' ) {
  * The changes to the content in this function should eventually be made
  * perminant in the database. (@see https://github.com/INN/Largo/issues/354)
  * 
- * @since v0.4
+ * @since 0.4
  * 
  * @param String $content the post content passed in by WordPress filter
  * @return String filtered post content.
@@ -198,7 +198,7 @@ add_filter('the_content','largo_remove_hero',1);
  * Retrieves the attachment ID from the file URL
  * (or that of any thumbnail image)
  * 
- * @since v0.4
+ * @since 0.4
  * @see https://pippinsplugins.com/retrieve-attachment-id-from-image-url/
  * 
  * @return Int ID of post attachment (or false if not found)

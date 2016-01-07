@@ -21,7 +21,7 @@ inc/post-templates.php
    The changes to the content in this function should eventually be made
    perminant in the database. (@see https://github.com/INN/Largo/issues/354)
 
-   :since: v0.4
+   :since: 0.4
    :param String $content: the post content passed in by WordPress filter
 
    :returns: String $iltered post content.
@@ -31,8 +31,26 @@ inc/post-templates.php
    Retrieves the attachment ID from the file URL
    (or that of any thumbnail image)
 
-   :since: v0.4
+   :since: 0.4
 
    :see: https://pippinsplugins.com/retrieve-attachment-id-from-image-url/
 
    :returns: Int $D of post attachment (or false if not found)
+
+.. php:function:: largo_get_partial_by_post_type()
+
+   Given a post type and an optional context, return the partial that should be loaded for that sort of post.
+
+   The default context is search, and the context isn't actually used by this function,
+   but it is passed to the filter this function runs, largo_partial_by_post_type.
+
+   :link: https://github.com/INN/Largo/issues/1023
+   :param string $partial: Required, the default partial in this context.
+   :param string $post_type: Required, the given post's post type
+   :param string $context: Required, the context of this partial.
+
+   :returns: string $he partial that should be loaded. This defaults to 'search'.
+
+   :filter: largo_partial_by_post_type
+
+   :since: 0.5.4

@@ -35,6 +35,7 @@ Function reference by file
 * `inc/verify.php <inc/verify.html>`_
 * `inc/widgets.php <inc/widgets.html>`_
 * `inc/customizer/customizer.php <inc/customizer/customizer.html>`_
+* `inc/widgets/largo-author-bio.php <inc/widgets/largo-author-bio.html>`_
 * `inc/widgets/largo-facebook.php <inc/widgets/largo-facebook.html>`_
 * `inc/widgets/largo-image-widget.php <inc/widgets/largo-image-widget.html>`_
 * `inc/widgets/largo-post-series-links.php <inc/widgets/largo-post-series-links.html>`_
