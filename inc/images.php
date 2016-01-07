@@ -19,16 +19,16 @@ function largo_attachment_image_link_remove_filter( $content ) {
 }
 add_filter( 'the_content', 'largo_attachment_image_link_remove_filter' );
 
-/**
- * Get the home icon for the sticky nav
- *
- * @param (string) $class any additional classes you would like to add to icon when returned
- * @param (string) $size the size of the logo to return
- * @return (string) markup for the sticky nav home icon (logo if available, otherwise just an icon)
- *
- * @since 0.4
- */
 if ( ! function_exists( 'largo_home_icon' ) ) {
+	/**
+	 * Get the home icon for the sticky nav
+	 *
+	 * @param (string) $class any additional classes you would like to add to icon when returned
+	 * @param (string) $size the size of the logo to return
+	 * @return (string) $result markup for the sticky nav home icon (logo if available, otherwise just an icon)
+	 *
+	 * @since 0.4
+	 */
 	function largo_home_icon( $class = '', $size = '60x60' ) {
 		global $wpdb;
 
