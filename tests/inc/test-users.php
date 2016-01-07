@@ -27,22 +27,6 @@ class UsersTestFunctions extends WP_UnitTestCase {
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
-	function test_clean_user_twitter_username() {
-		$this->markTestIncomplete('This test has not been implemented yet.');;
-	}
-
-	function test_validate_twitter_username() {
-		$this->markTestIncomplete('This test has not been implemented yet.');
-	}
-
-	function test_clean_user_fb_username() {
-		$this->markTestIncomplete('This test has not been implemented yet.');
-	}
-
-	function test_validate_fb_username() {
-		$this->markTestIncomplete('This test has not been implemented yet.');
-	}
-
 	function test_largo_get_user_list() {
 		/**
 		 * With no arguments, `largo_get_user_list` should get a list of all authors for the current blog;
@@ -203,7 +187,7 @@ class UsersTestFunctions extends WP_UnitTestCase {
 
 		// Four inputs should be present and four should be checked or "on" after running
 		// `save_more_profile_info`, because $this->_more_profile_info sets show_email to true.
-		$this->assertEquals(4, substr_count($output, 'checked'), "Not all inputs that should have been checked were.");
+		$this->assertEquals(2, substr_count($output, 'checked'), "Not all inputs that should have been checked were.");
 
 		// There should be one job_title input and it should be populated with the value set by
 		// `save_more_profile_info`.
@@ -218,8 +202,6 @@ class UsersTestFunctions extends WP_UnitTestCase {
 		save_more_profile_info($user_id);
 
 		$this->assertEquals($hide, get_user_meta($user_id, "hide", true));
-		$this->assertEquals($emeritus, get_user_meta($user_id, "emeritus", true));
-		$this->assertEquals($honorary, get_user_meta($user_id, "honorary", true));
 		$this->assertEquals($job_title, get_user_meta($user_id, "job_title", true));
 	}
 
@@ -230,8 +212,6 @@ class UsersTestFunctions extends WP_UnitTestCase {
 		$args = array(
 			'job_title' => 'Test Job Title',
 			'hide' => 'on',
-			'emeritus' => 'on',
-			'honorary' => 'on',
 			'show_email' => 'on'
 		);
 
@@ -239,8 +219,6 @@ class UsersTestFunctions extends WP_UnitTestCase {
 
 		$_POST = array_merge($_POST, array(
 			'hide' => $hide,
-			'emeritus' => $emeritus,
-			'honorary' => $honorary,
 			'job_title' => $job_title,
 			'show_email' => $show_email
 		));

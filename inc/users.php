@@ -5,7 +5,7 @@
  * Remove old contact methods (yahoo, aol and jabber)
  * Add new ones (twitter, facebook, linkedin)
  *
- * @since 1.0
+ * @since 0.1
  */
 function largo_contactmethods( $contactmethods ) {
 
@@ -32,12 +32,20 @@ function largo_contactmethods( $contactmethods ) {
 }
 add_filter( 'user_contactmethods', 'largo_contactmethods' );
 
+// clean and validate fb and twitter usernames when user profiles are updated
+add_action('edit_user_profile_update', 'clean_user_twitter_username');
+add_action('personal_options_update', 'clean_user_twitter_username');
+add_action( 'user_profile_update_errors', 'validate_twitter_username', 10, 3);
+
+add_action( 'edit_user_profile_update', 'clean_user_fb_username' );
+add_action( 'personal_options_update', 'clean_user_fb_username' );
+add_action( 'user_profile_update_errors', 'validate_fb_username', 10, 3);
 
 /**
  * Same deal, but for guest authors in the Co-Authors Plus plugin
  * @TODO: figure out if there's a way to remove fields as we do for regular users above
  *
- * @since 1.0
+ * @since 0.1
  */
 function largo_filter_guest_author_fields( $fields_to_return, $groups ) {
 
@@ -78,9 +86,9 @@ add_filter( 'coauthors_guest_author_fields', 'largo_filter_guest_author_fields',
 
 /**
  * In a multisite network, allow site admins to edit user profiles
- * props: http://thereforei.am/2011/03/15/how-to-allow-administrators-to-edit-users-in-a-wordpress-network/
+ * @link http://thereforei.am/2011/03/15/how-to-allow-administrators-to-edit-users-in-a-wordpress-network/
  *
- * @since 1.0
+ * @since 0.3
  */
 function largo_admin_users_caps( $caps, $cap, $user_id, $args ){
 
@@ -113,6 +121,8 @@ add_filter( 'enable_edit_any_user_configuration', '__return_true');
 /**
  * Checks that both the editing user and the user being edited are
  * members of the blog and prevents the super admin being edited.
+ *
+ * @since 0.3
  */
 function largo_edit_permission_check() {
     global $current_user, $profileuser;
@@ -132,131 +142,6 @@ function largo_edit_permission_check() {
 }
 add_filter( 'admin_head', 'largo_edit_permission_check', 1, 4 );
 
-
-/**
- * Cleans a Twitter url or an @username to the bare username when the user is edited
- *
- * Edits $_POST directly because there's no other way to save the corrected username
- * from this callback. The action hooks this is used for run before edit_user in 
- * wp-admin/user-edit.php, which overwrites the user's contact methods. edit_user 
- * reads from $_POST. 
- *
- * @param  object  $user_id the WP_User object being edited
- * @param  array   $_POST
- * @since  0.4
- * @uses   largo_twitter_url_to_username
- * @link   http://codex.wordpress.org/Plugin_API/Action_Reference/edit_user_profile_update
- * @link   http://codex.wordpress.org/Plugin_API/Action_Reference/personal_options_update
- */
-
-add_action('edit_user_profile_update', 'clean_user_twitter_username');
-add_action('personal_options_update', 'clean_user_twitter_username');
-
-function clean_user_twitter_username($user_id) {
-
-	if ( current_user_can('edit_user', $user_id) ) {
-		$twitter = largo_twitter_url_to_username( $_POST['twitter'] );
-		if ( preg_match( '/[^a-zA-Z0-9_]/', $twitter ) ) {
-			// it's not a valid twitter username, because it uses an invalid character
-			$twitter = "";
-		}
-		update_user_meta($user_id, 'twitter_link', $twitter);
-		if ( get_user_meta($user_id, 'twitter_link', true) != $twitter ) {
-			wp_die(__('An error occurred.'));
-		}
-		$_POST['twitter'] = $twitter;
-	}
-}
-
-/**
- * Checks that the Twitter URL is composed of valid characters [a-zA-Z0-9_] and 
- * causes an error if there is not.
- *
- * @param   $errors the error object
- * @param   bool    $update whether this is a user update
- * @param   object  $user a WP_User object
- * @uses    largo_twitter_url_to_username
- * @link    http://codex.wordpress.org/Plugin_API/Action_Reference/user_profile_update_errors
- * @since   0.4
- */
-
-add_action( 'user_profile_update_errors', 'validate_twitter_username', 10, 3);
-
-function validate_twitter_username( $errors, $update, $user ) {
-
-	if ( isset( $_POST["twitter"] ) ) {
-		$tw_suspect = trim( $_POST["twitter"] );
-		if( ! empty( $tw_suspect ) ) {
-			if ( preg_match( '/[^a-zA-Z0-9_]/', largo_twitter_url_to_username( $tw_suspect ) ) ) {
-				// it's not a valid twitter username, because it uses an invalid character
-				$errors->add('twitter_username', '<b>' . $tw_suspect . '</b>' . __('is an invalid Twitter username.') . '</p>' . '<p>' . __('Twitter usernames only use the uppercase and lowercase alphabet letters (a-z A-Z), the Arabic numbers (0-9), and underscores (_).') );
-			}
-		}
-	}
-}
-
-/**
- * Cleans a Facebook url to the bare username or id when the user is edited
- *
- * Edits $_POST directly because there's no other way to save the corrected username
- * from this callback. The action hooks this is used for run before edit_user in 
- * wp-admin/user-edit.php, which overwrites the user's contact methods. edit_user 
- * reads from $_POST. 
- *
- * @param  object  $user_id the WP_User object being edited
- * @param  array   $_POST
- * @since  0.4
- * @uses   largo_fb_url_to_username
- * @link   http://codex.wordpress.org/Plugin_API/Action_Reference/edit_user_profile_update
- * @link   http://codex.wordpress.org/Plugin_API/Action_Reference/personal_options_update
- */
-add_action('edit_user_profile_update', 'clean_user_fb_username');
-add_action('personal_options_update', 'clean_user_fb_username');
-
-function clean_user_fb_username($user_id) {
-
-	if ( current_user_can('edit_user', $user_id) ) {
-		$fb = largo_fb_url_to_username( $_POST['fb'] );
-		if ( preg_match( '/[^a-zA-Z0-9\.\-]/', $fb ) ) {
-			// it's not a valid Facebook username, because it uses an invalid character
-			$fb = "";
-		}
-		update_user_meta($user_id, 'fb', $fb);
-		if ( get_user_meta($user_id, 'fb', true) != $fb ) {
-			wp_die(__('An error occurred.'));
-		}
-		$_POST['fb'] = $fb;
-	}
-}
-/**
- * Checks that the Facebook URL submitted is valid and the user is followable and causes an error if not
- *
- * @uses  largo_fb_url_to_username
- * @uses  largo_fb_user_is_followable
- * @param   $errors the error object
- * @param   bool    $update whether this is a user update
- * @param   object  $user a WP_User object
- * @link    http://codex.wordpress.org/Plugin_API/Action_Reference/user_profile_update_errors
- * @since   0.4
- */
-add_action( 'user_profile_update_errors', 'validate_fb_username', 10, 3);
-
-function validate_fb_username( $errors, $update, $user ) {
-
-	if ( isset( $_POST["fb"] ) ) {
-		$fb_suspect = trim( $_POST["fb"] );
-		if( ! empty( $fb_suspect ) ) {
-			$fb_user = largo_fb_url_to_username( $fb_suspect );
-			if ( preg_match( '/[^a-zA-Z0-9\.\-]/', $fb_user ) ) {
-				// it's not a valid Facebook username, because it uses an invalid character
-				$errors->add('fb_username', '<b>' . $fb_suspect . '</b> ' . __('is an invalid Facebook username.') . '</p>' . '<p>' . __('Facebook usernames only use the uppercase and lowercase alphabet letters (a-z A-Z), the Arabic numbers (0-9), periods (.) and dashes (-)') );
-			}
-			if ( ! largo_fb_user_is_followable( $fb_user ) ) {
-				$errors->add('fb_username',' <b>' . $fb_suspect . '</b> ' . __('does not allow followers on Facebook.') . '</p>' . '<p>' . __('<a href="https://www.facebook.com/help/201148673283205#How-can-I-let-people-follow-me?">Follow these instructions</a> to allow others to follow you.') );
-			}
-		}
-	}
-}
 /**
  * Get users based on a role. Defaults to fetching all authors for the current blog.
  *
@@ -369,44 +254,33 @@ add_shortcode('roster', 'largo_render_staff_list_shortcode');
 function more_profile_info($user) {
 	$show_email = get_user_meta( $user->ID, "show_email", true );
 	$hide = get_user_meta( $user->ID, "hide", true );
-	$emeritus = get_user_meta( $user->ID, "emeritus", true );
-	$honorary = get_user_meta( $user->ID, "honorary", true );
-
 	?>
-	<h3>More profile information</h3>
+	<h3><?php _e( 'More profile information', 'largo' ); ?></h3>
 	<table class="form-table">
 		<tr>
-			<th><label for="job_title">Job title</label></th>
+			<th><label for="job_title"><?php _e( 'Job title', 'largo' ); ?></label></th>
 			<td>
 				<input type="text" name="job_title" id="job_title" value="<?php echo esc_attr( get_the_author_meta( 'job_title', $user->ID ) ); ?>" class="regular-text" /><br />
-				<span class="description">Please enter your job title.</span>
+				<span class="description"><?php _e( 'Please enter your job title.', 'largo' ); ?></span>
 			</td>
 		</tr>
 
 		<tr>
-			<th><label for="show_email">Show Email Address</label></th>
+			<th><label for="show_email"><?php _e( 'Show Email Address', 'largo' ); ?></label></th>
 			<td>
 				<input type="checkbox" name="show_email" id="show_email"
 					<?php if (esc_attr($show_email) == "on" || empty($show_email)) { ?>checked<?php } ?> />
-				<label for="show_email"><?php _e("Show email address publicly?"); ?></label><br />
+				<label for="show_email"><?php _e( 'Show email address publicly?', 'largo' ); ?></label><br />
 			</td>
 		</tr>
 
 		<?php if (current_user_can('edit_users')) { ?>
 		<tr>
-			<th><label for="staff_widget">Staff status</label></th>
+			<th><label for="staff_widget"><?php _e( 'Staff status', 'largo' ); ?></label></th>
 			<td>
 				<input type="checkbox" name="hide" id="hide"
 					<?php if (esc_attr($hide) == "on") { ?>checked<?php }?> />
-				<label for="hide"><?php _e("Hide in roster"); ?></label><br />
-
-				<input type="checkbox" name="emeritus" id="emeritus"
-					<?php if (esc_attr($emeritus) == "on") { ?>checked<?php } ?> />
-				<label for="emeritus"><?php _e("Emeritus?"); ?></label><br />
-
-				<input type="checkbox" name="honorary" id="honorary"
-				<?php if (esc_attr($honorary) == "on") { ?>checked<?php } ?> />
-				<label for="honorary"><?php _e("Honorary?"); ?></label>
+				<label for="hide"><?php _e( 'Hide in roster', 'largo' ); ?></label><br />
 			</td>
 		</tr>
 		<?php } ?>
@@ -432,9 +306,7 @@ function save_more_profile_info($user_id) {
 
 	$values = wp_parse_args($_POST, array(
 		'show_email' => 'on',
-		'hide' => 'off',
-		'emeritus' => 'off',
-		'honorary' => 'off'
+		'hide' => 'off'
 	));
 
 	extract($values);
@@ -442,8 +314,6 @@ function save_more_profile_info($user_id) {
 	update_user_meta($user_id, 'job_title', $job_title);
 	update_user_meta($user_id, 'show_email', $show_email);
 	update_user_meta($user_id, 'hide', $hide);
-	update_user_meta($user_id, 'emeritus', $emeritus);
-	update_user_meta($user_id, 'honorary', $honorary);
 }
 add_action('personal_options_update', 'save_more_profile_info');
 add_action('edit_user_profile_update', 'save_more_profile_info');
