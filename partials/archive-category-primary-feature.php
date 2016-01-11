@@ -1,4 +1,4 @@
-<article id="post-<?php echo $featured_post->ID ?>" <?php post_class('clearfix row-fluid'); ?>>
+<article id="post-<?php echo $featured_post->ID ?>" <?php post_class('clearfix row-fluid', $featured_post->ID); ?>>
 <?php if ( has_post_thumbnail($featured_post->ID) ) { ?>
 	<div class="span4 <?php largo_hero_class($featured_post->ID); ?>">
 		<a href="<?php echo post_permalink($featured_post->ID); ?>"><?php echo get_the_post_thumbnail($featured_post->ID, 'rect_thumb'); ?></a>
