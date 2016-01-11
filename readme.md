@@ -1,4 +1,4 @@
-# Project Largo
+# Largo
 
 A responsive WordPress framework designed for news publishers and developed by the Institute for Nonprofit News.
 
@@ -18,17 +18,19 @@ Feedback, comments and questions to: [largo@inn.org](mailto:largo@inn.org)
 
 ---
 
-## About Project Largo
+## About Largo
 
 <img align="right" src="http://i.imgur.com/nXAl3bC.png" />
 
-Project Largo is a responsive WordPress starter/parent theme designed with the needs of news publisers in mind.
+**Largo** is a responsive WordPress starter/parent theme designed with the needs of news publisers in mind.
 
 The project extends work done by [NPR's Project Argo](http://argoproject.org/).
 
-Documentation and more information at: [largoproject.org](http://largoproject.org)
+**Documentation** and more information at: [largoproject.org](http://largoproject.org)
 
-**Current version:** v0.5.3
+**Support** is available [via our helpdesk system](http://jira.inn.org/servicedesk/customer/portal/4) or by emailing [support@largoproject.org](mailto:support@largoproject.org).
+
+**Current version:** v0.5.4
 
 ## Setup
 
@@ -42,13 +44,10 @@ Built and maintained by the [Institute for Nonprofit News](http://inn.org) news 
 -  **[Ryan Nagle](https://github.com/rnagle)** ([@ryannagle](http://twitter.com/ryannagle)), News Apps Developer
 -  **[Kaeti Hinck](https://github.com/kaeti)** ([@kaeti](http://twitter.com/kaeti)), Design Director
 -  **[Denise Malan](https://github.com/dnmalan)** ([@denisemalan](http://twitter.com/denisemalan)), Director of Data Services
--  **[Meredith Melragon](https://github.com/meredithinn)** ([@meredithm](http://twitter.com/meredithm)), Support Specialist
+-  **[Jack Brighton](http://github.com/jackbrighton)** ([@jackbrighton](http://twitter.com/jackbrighton)), Manager of Support, Training and Documentation
 -  **[Ben Keith](https://github.com/benlk)** ([@benlkeith](http://twitter.com/benlkeith)), News Apps Developer
--  **[Will Haynes](https://github.com/willhaynes)** ([@willhaynes](http://twitter.com/willhaynes)), Apprentice News Apps Developer
 
-Additional assistance from:
-
-- Ben Byrne and Seamus Leahy of [Cornershop Creative](http://cornershopcreative.com).
+Additional contributions from [danielbachhuber](http://github.com/danielbachhuber), [willhaynes](http://github.com/willhaynes), [drywall](http://github.com/drywall), [nacin](http://github.com/nacin), [meredithinn](http://github.com/meredithinn), [tothebeat](http://github.com/tothebeat), [lindamood](http://github.com/lindamood), [mospaw](http://github.com/mospaw), [DrewAPicture](http://github.com/drewapicture), [nipoez](http://github.com/nipoez), [palewire](http://github.com/palewire), [GaryJones](http://github.com/garyjones), [seamusleahy](http://github.com/seamusleahy) and [joshuarrrr](http://github.com/joshuarrrr).
 
 This project builds on a number of great open source projects, including:
 
