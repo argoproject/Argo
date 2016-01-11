@@ -20,7 +20,7 @@ Feedback, comments and questions to: [largo@inn.org](mailto:largo@inn.org)
 
 ## About Largo
 
-<img align="right" src="http://i.imgur.com/nXAl3bC.png" />
+<img align="right" src="/img/largo-login-logo.png" />
 
 **Largo** is a responsive WordPress starter/parent theme designed with the needs of news publisers in mind.
 

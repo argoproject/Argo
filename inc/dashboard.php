@@ -100,8 +100,8 @@ function largo_custom_login_logo() {
 		<style type="text/css">
 			.login h1 a {
 			  background-image: url(' . get_template_directory_uri() . '/img/largo-login-logo.png) !important;
-			  background-size:  164px 195px;
-			  height: 195px;
+			  background-size:  164px 169px;
+			  height: 169px;
 			  width: 164px;
 			}
 		</style>
