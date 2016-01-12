@@ -75,7 +75,7 @@ if ( ! function_exists( 'largo_copyright_message' ) ) {
  *
  * @since 0.5.2
  */
-if ( ! function_exists( 'INN_logo' ) ) {
+if ( ! function_exists( 'inn_logo' ) ) {
 	function inn_logo() {
 		?>
 			<a href="//inn.org/" id="inn-logo-container">
