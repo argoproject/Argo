@@ -36,61 +36,39 @@
 
   Navigation.prototype.enableMobileDropdowns = function () {
     // Touch enable the drop-down menus
-    //if (Modernizr.touch) {
-      //console.log('Modernizr');
-      //// iOS Safari works with touchstart, the rest work with click
-      //var mobileEvent = /Mobile\/.+Safari/.test(navigator.userAgent) ? 'touchstart' : 'click',
-      //// Open the drop down
-      //openMenu = false;
+    if (Modernizr.touch) {
+      // iOS Safari works with touchstart, the rest work with click
+      var mobileEvent = /Mobile\/.+Safari/.test(navigator.userAgent) ? 'touchstart' : 'click',
+      // Open the drop down
+      openMenu = false;
 
-      //$('')
+      // Handle the tap for the drop down
+      $('ul.nav').on(mobileEvent + '.largo', 'li', function(event) {
+        var li = $(event.currentTarget);
 
-      //// Handle the tap for the drop down
-      //$('ul.nav').on(mobileEvent + '.largo', 'li', function(event) {
-        //console.log(mobileEvent);
-        //var li = $(event.currentTarget);
+        if (!li.is('.open')) {
+          // The link when the menu is closed
+          closeOpenMenu();
+          li.addClass('open');
+          openMenu = li;
+        } else if ($(event.target).is('b.caret')) {
+          // The caret when the menu is open
+          li.removeClass('open');
+          openMenu = false;
+        }
+      });
 
-        //if (!li.hasClass('dropdown')) {
-          //console.log('here');
-          ////window.location.href = li.find('a').attr('href');
-          ////event.preventDefault();
-          ////event.stopPropagation();
-          ////return false;
-        //}
+      // Call this to close the open menu
+      var closeOpenMenu = function() {
+        if (openMenu) {
+          openMenu.removeClass('open');
+          openMenu = false;
+        }
+      }
 
-        //if (!li.is('.open')) {
-          //console.log('not open');
-          //// The link when the menu is closed
-          //closeOpenMenu();
-          //li.addClass('open');
-          //openMenu = li;
-
-          ////event.preventDefault();
-          ////event.stopPropagation();
-          ////return false;
-        //} else if ($(event.target).is('b.caret')) {
-          //console.log('caret');
-          //// The caret when the menu is open
-          //li.removeClass('open');
-          //openMenu = false;
-
-          ////event.preventDefault();
-          ////event.stopPropagation();
-          ////return false;
-        //}
-      //});
-
-      //// Call this to close the open menu
-      //var closeOpenMenu = function() {
-        //if (openMenu) {
-          //openMenu.removeClass('open');
-          //openMenu = false;
-        //}
-      //}
-
-      //// Close the open menu when the user taps elsewhere
-      //$('body').on(mobileEvent, closeOpenMenu);
-    //}
+      // Close the open menu when the user taps elsewhere
+      $('body').on(mobileEvent, closeOpenMenu);
+    }
   };
 
   Navigation.prototype.bindEvents = function() {
