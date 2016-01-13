@@ -128,7 +128,7 @@
   };
 
   Navigation.prototype.stickyNavScrollCallback = function(event) {
-    if ($(window).scrollTop() < 0) {
+    if ($(window).scrollTop() < 0 || ($(window).scrollTop() + $(window).outerHeight()) >= $(document).outerHeight()) {
       return;
     }
 

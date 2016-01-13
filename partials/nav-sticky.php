@@ -8,7 +8,8 @@
  * @package Largo
  * @link http://largo.readthedocs.org/users/themeoptions.html#navigation
  */
- ?>
+
+$site_name = ( of_get_option( 'nav_alt_site_name', false ) ) ? of_get_option( 'nav_alt_site_name' ) : get_bloginfo('name'); ?>
  <div class="sticky-nav-wrapper nocontent">
 	<div class="sticky-nav-holder">
 
@@ -93,7 +94,7 @@
 							</ul>
 						<?php } else { ?>
 							<ul>
-								<li class="site-name"><a href="/"><?php echo get_bloginfo('name'); ?></a></li>
+								<li class="site-name"><a href="/"><?php echo $site_name; ?></a></li>
 							</ul>
 						<?php } ?>
 					</div>
@@ -112,7 +113,7 @@
 								</a>
 							</li>
 						<?php } else { ?>
-							<li class="site-name"><a href="/"><?php echo get_bloginfo('name'); ?></a></li>
+							<li class="site-name"><a href="/"><?php echo $site_name; ?></a></li>
 						<?php }
 
 							/* Build Main Navigation using Boostrap_Walker_Nav_Menu() */
