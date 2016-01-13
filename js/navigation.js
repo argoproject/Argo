@@ -202,6 +202,7 @@
 
         navbar.toggleClass('open');
         $('html').addClass('nav-open');
+        self.stickyNavSetOffset();
         navbar.find('.nav-shelf').css({
           top: self.stickyNavEl.position().top + self.stickyNavEl.outerHeight()
         });
@@ -210,6 +211,7 @@
           navbar.find('.nav-shelf li.open').removeClass('open');
           $('html').removeClass('nav-open');
         }
+
         return false;
       });
 
