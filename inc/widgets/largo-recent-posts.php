@@ -73,13 +73,13 @@ class largo_recent_posts_widget extends WP_Widget {
 
 		$my_query = new WP_Query( $query_args );
 
-        if ( $my_query->have_posts() ) {
+		if ( $my_query->have_posts() ) {
 
-        	$output = '';
+			$output = '';
 
 			while ( $my_query->have_posts() ) : $my_query->the_post(); $shown_ids[] = get_the_ID();
 
-        		// wrap the items in li's.
+				// wrap the items in li's.
 				$output .= '<li>';
 
 				$context = array(
@@ -101,13 +101,13 @@ class largo_recent_posts_widget extends WP_Widget {
 			echo $output;
 
 		} else {
-	    	printf(__('<p class="error"><strong>You don\'t have any recent %s.</strong></p>', 'largo'), strtolower( $posts_term ) );
-	    } // end more featured posts
+			printf(__('<p class="error"><strong>You don\'t have any recent %s.</strong></p>', 'largo'), strtolower( $posts_term ) );
+		} // end more featured posts
 
-	    // close the ul if we're just showing a list of headlines
-	    if ($excerpt == 'none') echo '</ul>';
+		// close the ul if we're just showing a list of headlines
+		if ($excerpt == 'none') echo '</ul>';
 
-    	if($instance['linkurl'] !='') {
+		if($instance['linkurl'] !='') {
 			echo '<p class="morelink"><a href="' . esc_url( $instance['linkurl'] ) . '">' . esc_html( $instance['linktext'] ) . '</a></p>';
 		}
 		echo $after_widget;
@@ -128,6 +128,7 @@ class largo_recent_posts_widget extends WP_Widget {
 		$instance['num_sentences'] = intval( $new_instance['num_sentences'] );
 		$instance['show_byline'] = ! empty($new_instance['show_byline']);
 		$instance['show_top_term'] = ! empty($new_instance['show_top_term']);
+		$instance['show_icon'] = ! empty($new_instance['show_icon']);
 		$instance['cat'] = intval( $new_instance['cat'] );
 		$instance['tag'] = sanitize_text_field( $new_instance['tag'] );
 		$instance['taxonomy'] = sanitize_text_field( $new_instance['taxonomy'] );
@@ -147,8 +148,9 @@ class largo_recent_posts_widget extends WP_Widget {
 			'image_align'		=> 'left',
 			'excerpt_display' 	=> 'num_sentences',
 			'num_sentences' 	=> 2,
-			'show_byline'       => '',
-			'show_top_term'     => '',
+			'show_byline'	   => '',
+			'show_top_term'	 => '',
+			'show_icon'	 => '',
 			'cat' 				=> 0,
 			'tag'				=> '',
 			'taxonomy'			=> '',
@@ -161,6 +163,7 @@ class largo_recent_posts_widget extends WP_Widget {
 		$duplicates = $instance['avoid_duplicates'] ? 'checked="checked"' : '';
 		$showbyline = $instance['show_byline'] ? 'checked="checked"' : '';
 		$show_top_term = $instance['show_top_term'] ? 'checked="checked"' : '';
+		$show_icon = $instance['show_icon'] ? 'checked="checked"' : '';
 		?>
 
 		<p>
@@ -180,10 +183,10 @@ class largo_recent_posts_widget extends WP_Widget {
 		<p>
 			<label for="<?php echo $this->get_field_id( 'thumbnail_display' ); ?>"><?php _e('Thumbnail Image', 'largo'); ?></label>
 			<select id="<?php echo $this->get_field_id('thumbnail_display'); ?>" name="<?php echo $this->get_field_name('thumbnail_display'); ?>" class="widefat" style="width:90%;">
-			    <option <?php selected( $instance['thumbnail_display'], 'small'); ?> value="small"><?php _e('Small (60x60)', 'largo'); ?></option>
-			    <option <?php selected( $instance['thumbnail_display'], 'medium'); ?> value="medium"><?php _e('Medium (140x140)', 'largo'); ?></option>
-			    <option <?php selected( $instance['thumbnail_display'], 'large'); ?> value="large"><?php _e('Large (Full width of the widget)', 'largo'); ?></option>
-			    <option <?php selected( $instance['thumbnail_display'], 'none'); ?> value="none"><?php _e('None', 'largo'); ?></option>
+				<option <?php selected( $instance['thumbnail_display'], 'small'); ?> value="small"><?php _e('Small (60x60)', 'largo'); ?></option>
+				<option <?php selected( $instance['thumbnail_display'], 'medium'); ?> value="medium"><?php _e('Medium (140x140)', 'largo'); ?></option>
+				<option <?php selected( $instance['thumbnail_display'], 'large'); ?> value="large"><?php _e('Large (Full width of the widget)', 'largo'); ?></option>
+				<option <?php selected( $instance['thumbnail_display'], 'none'); ?> value="none"><?php _e('None', 'largo'); ?></option>
 			</select>
 		</p>
 
@@ -191,17 +194,17 @@ class largo_recent_posts_widget extends WP_Widget {
 		<p>
 			<label for="<?php echo $this->get_field_id( 'image_align' ); ?>"><?php _e('Image Alignment', 'largo'); ?></label>
 			<select id="<?php echo $this->get_field_id( 'image_align' ); ?>" name="<?php echo $this->get_field_name('image_align'); ?>" class="widefat" style="width:90%;">
-			    <option <?php selected( $instance['image_align'], 'left'); ?> value="left"><?php _e('Left align', 'largo'); ?></option>
-			    <option <?php selected( $instance['image_align'], 'right'); ?> value="right"><?php _e('Right align', 'largo'); ?></option>
+				<option <?php selected( $instance['image_align'], 'left'); ?> value="left"><?php _e('Left align', 'largo'); ?></option>
+				<option <?php selected( $instance['image_align'], 'right'); ?> value="right"><?php _e('Right align', 'largo'); ?></option>
 			</select>
 		</p>
 
 		<p>
 			<label for="<?php echo $this->get_field_id( 'excerpt_display' ); ?>"><?php _e('Excerpt Display', 'largo'); ?></label>
 			<select id="<?php echo $this->get_field_id('excerpt_display'); ?>" name="<?php echo $this->get_field_name('excerpt_display'); ?>" class="widefat" style="width:90%;">
-			    <option <?php selected( $instance['excerpt_display'], 'num_sentences'); ?> value="num_sentences"><?php _e('Use # of Sentences', 'largo'); ?></option>
-			    <option <?php selected( $instance['excerpt_display'], 'custom_excerpt'); ?> value="custom_excerpt"><?php _e('Use Custom Post Excerpt', 'largo'); ?></option>
-			    <option <?php selected( $instance['excerpt_display'], 'none'); ?> value="none"><?php _e('None', 'largo'); ?></option>
+				<option <?php selected( $instance['excerpt_display'], 'num_sentences'); ?> value="num_sentences"><?php _e('Use # of Sentences', 'largo'); ?></option>
+				<option <?php selected( $instance['excerpt_display'], 'custom_excerpt'); ?> value="custom_excerpt"><?php _e('Use Custom Post Excerpt', 'largo'); ?></option>
+				<option <?php selected( $instance['excerpt_display'], 'none'); ?> value="none"><?php _e('None', 'largo'); ?></option>
 			</select>
 		</p>
 
@@ -217,6 +220,17 @@ class largo_recent_posts_widget extends WP_Widget {
 		<p>
 			<input class="checkbox" type="checkbox" <?php echo $show_top_term; ?> id="<?php echo $this->get_field_id('show_top_term'); ?>" name="<?php echo $this->get_field_name('show_top_term'); ?>" /> <label for="<?php echo $this->get_field_id('show_top_term'); ?>"><?php _e('Show the top term on posts?', 'largo'); ?></label>
 		</p>
+
+		<?php 
+			// only show this admin if the "Post Types" taxonomy is enabled.
+			if ( taxonomy_exists('post-type') && of_get_option('post_types_enabled') ) {
+		?>
+		<p>
+			<input class="checkbox" type="checkbox" <?php echo $show_icon; ?> id="<?php echo $this->get_field_id('show_icon'); ?>" name="<?php echo $this->get_field_name('show_icon'); ?>" /> <label for="<?php echo $this->get_field_id('show_icon'); ?>"><?php _e('Show the post type icon?', 'largo'); ?></label>
+		</p>
+		<?php
+			}
+		?>
 
 		<p><strong><?php _e('Limit by Author, Categories or Tags', 'largo'); ?></strong><br /><small><?php _e('Select an author or category from the dropdown menus or enter post tags separated by commas (\'cat,dog\')', 'largo'); ?></small></p>
 		<p>
