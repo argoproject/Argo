@@ -494,6 +494,14 @@ function optionsframework_options() {
 	);
 
 	$options[] = array(
+		'name' => __('Alternate site name for sticky navigation'),
+		'desc' => __('If your site name is especially long, use this field to set an abbreviation or shorter version for use in the sticky nav on small screens.', 'largo'),
+		'id' => 'nav_alt_site_name',
+		'std' => '',
+		'type' => 'text'
+	);
+
+	$options[] = array(
 		'name' 	=> __('Menu Options', 'largo'),
 		'desc' 	=> __('<strong>Show</strong> the "Don\'t Miss" menu under the main site navigation. Add links to this menu under <strong>Appearance > Menus</strong>.', 'largo'),
 		'id' 	=> 'show_dont_miss_menu',
