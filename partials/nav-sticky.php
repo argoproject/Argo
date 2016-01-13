@@ -146,7 +146,7 @@
 								$global_nav = largo_nav_menu($args);
 
 								if (!empty($global_nav)) { ?>
-									<li class="menu-item-has-childen dropdown">
+									<li class="menu-item menu-item-has-childen dropdown">
 										<a href="javascript:void(0);" class="dropdown-toggle"><?php
 											//try to get the menu name from global-nav
 											$menus = get_nav_menu_locations();
