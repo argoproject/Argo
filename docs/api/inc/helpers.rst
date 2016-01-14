@@ -25,6 +25,41 @@ inc/helpers.php
 
    :returns: bool $he user specified by the username or ID can be followed
 
+.. php:function:: clean_user_fb_username()
+
+   Cleans a Facebook url to the bare username or id when the user is edited
+
+   Edits $_POST directly because there's no other way to save the corrected username
+   from this callback. The action hooks this is used for run before edit_user in
+   wp-admin/user-edit.php, which overwrites the user's contact methods. edit_user
+   reads from $_POST.
+
+   :param object $user_id: the WP_User object being edited
+   :param array $_POST:
+
+   :since: 0.4
+
+   :uses: largo_fb_url_to_username
+
+   :link: http://codex.wordpress.org/Plugin_API/Action_Reference/edit_user_profile_update
+
+   :link: http://codex.wordpress.org/Plugin_API/Action_Reference/personal_options_update
+
+.. php:function:: validate_fb_username()
+
+   Checks that the Facebook URL submitted is valid and the user is followable and causes an error if not
+
+   :uses: largo_fb_url_to_username
+
+   :uses: largo_fb_user_is_followable
+   :param $errors $he: error object
+   :param bool $update: whether this is a user update
+   :param object $user: a WP_User object
+
+   :link: http://codex.wordpress.org/Plugin_API/Action_Reference/user_profile_update_errors
+
+   :since: 0.4
+
 .. php:function:: largo_twitter_url_to_username()
 
    Returns a Twitter username (without the @ symbol)
@@ -34,6 +69,41 @@ inc/helpers.php
    :returns: string $he twitter username extracted from the input string
 
    :since: 0.3
+
+.. php:function:: clean_user_twitter_username()
+
+   Cleans a Twitter url or an @username to the bare username when the user is edited
+
+   Edits $_POST directly because there's no other way to save the corrected username
+   from this callback. The action hooks this is used for run before edit_user in
+   wp-admin/user-edit.php, which overwrites the user's contact methods. edit_user
+   reads from $_POST.
+
+   :param object $user_id: the WP_User object being edited
+   :param array $_POST:
+
+   :since: 0.4
+
+   :uses: largo_twitter_url_to_username
+
+   :link: http://codex.wordpress.org/Plugin_API/Action_Reference/edit_user_profile_update
+
+   :link: http://codex.wordpress.org/Plugin_API/Action_Reference/personal_options_update
+
+.. php:function:: validate_twitter_username()
+
+   Checks that the Twitter URL is composed of valid characters [a-zA-Z0-9_] and
+   causes an error if there is not.
+
+   :param $errors $he: error object
+   :param bool $update: whether this is a user update
+   :param object $user: a WP_User object
+
+   :uses: largo_twitter_url_to_username
+
+   :link: http://codex.wordpress.org/Plugin_API/Action_Reference/user_profile_update_errors
+
+   :since: 0.4
 
 .. php:function:: largo_youtube_url_to_ID()
 

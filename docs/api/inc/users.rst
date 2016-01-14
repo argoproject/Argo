@@ -7,7 +7,7 @@ inc/users.php
    Remove old contact methods (yahoo, aol and jabber)
    Add new ones (twitter, facebook, linkedin)
 
-   :since: 1.0
+   :since: 0.1
 
 .. php:function:: largo_filter_guest_author_fields()
 
@@ -15,19 +15,22 @@ inc/users.php
 
    :TODO:: figure $ut if there's a way to remove fields as we do for regular users above
 
-   :since: 1.0
+   :since: 0.1
 
 .. php:function:: largo_admin_users_caps()
 
    In a multisite network, allow site admins to edit user profiles
-   props: http://thereforei.am/2011/03/15/how-to-allow-administrators-to-edit-users-in-a-wordpress-network/
 
-   :since: 1.0
+   :link: http://thereforei.am/2011/03/15/how-to-allow-administrators-to-edit-users-in-a-wordpress-network/
+
+   :since: 0.3
 
 .. php:function:: largo_edit_permission_check()
 
    Checks that both the editing user and the user being edited are
    members of the blog and prevents the super admin being edited.
+
+   :since: 0.3
 
 .. php:function:: largo_get_user_list()
 

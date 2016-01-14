@@ -8,6 +8,7 @@ Function reference by file
 * `homepages/layouts/HomepageSingleWithSeriesStories.php <homepages/layouts/HomepageSingleWithSeriesStories.html>`_
 * `homepages/zones/zones.php <homepages/zones/zones.html>`_
 * `inc/ajax-functions.php <inc/ajax-functions.html>`_
+* `inc/avatars.php <inc/avatars.html>`_
 * `inc/custom-feeds.php <inc/custom-feeds.html>`_
 * `inc/custom-less-variables.php <inc/custom-less-variables.html>`_
 * `inc/deprecated.php <inc/deprecated.html>`_
