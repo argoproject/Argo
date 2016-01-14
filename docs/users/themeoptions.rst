@@ -52,7 +52,7 @@ This section allows you to upload images that are used primarily in the top head
 	- 768px-wide Small banner image
 	- 980px-wide Medium banner image
 	- 1170px-wide Large banner image
-	- 100px-tall site logo for use in the sticky header. Use a .png file with transparent background, and no clear space around the logo.
+	- 100px-tall site logo for use in the sticky header. Use a .png file with transparent background, and no clear space around the logo. If you prefer to simply use your Site Title in the sticky header, don't upload an image here.
 
 - Drag and drop the image onto the uploader (or click "Select Files" and find the correct image on your computer). When the image has finished uploading, selected the full size image option, and then click the button at the bottom of the uploader that says "Use This Image".
 
@@ -60,7 +60,7 @@ This section allows you to upload images that are used primarily in the top head
 
 - Once you have uploaded all six images, be sure to click "Save Options" to save your changes.
 
-There is one additional option in this section, a checkbox that allows you to use text in the place of the banner images. It is unlikely that you will use this option, but if you do, selecting this checkbox will use the Site Title and Description from your **Settings** > **General** menu in the place of the the header images so make sure that you have set those options before you enable this feature.
+There is one additional option in this section, a checkbox that allows you to use text in the place of the banner images. It is unlikely that you will use this option, but if you do, selecting this checkbox will use the Site Title and Description from your **Settings** > **General** menu in the place of the the header images so make sure that you have set those options before you enable this feature. Note that you can use this option to display text instead of the banner and still display a 100px-tall site logo for the sticky header.
 
 .. _pre-launch checklist: :doc:`./prelaunchchecklist.rst`
 
@@ -134,7 +134,9 @@ Note that if you hide the non-sticky main navigation on article pages, any conte
 
 If the menu assigned to the sticky navigation has so many top-level links that it would have to wrap onto multiple lines, a dropdown menu will be added containing the links that would wrap. Enter a label here for the dropdown menu, which defaults to "More."
 
-**Also of note:** If you have assigned a menu to the Global Navigation theme location, the sticky navigation will include that as a dropdown menu to the right of the sticky nav menu links.
+**Also of note** - If you have assigned a menu to the Global Navigation theme location, the sticky navigation will include that as a dropdown menu to the right of the sticky nav menu links.
+
+**Alternate site name for sticky navigation** - If your Site Title is too long to display the entire title in the sticky header, the title will be truncated and appended with ellipses, e.g. "Midwestern Institute for News..." You can add an abbreviation or shorter Alternative site name here to take the place of the full Site Title. Also note that if you upload a 100px-tall Sticky Header Logo in Appearance > Theme Options > Theme Images, the logo will display in the sticky header instead of the Site Title.
 
 **Menu Options**
 
