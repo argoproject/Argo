@@ -311,7 +311,7 @@ function optionsframework_options() {
 
 	$options[] = array(
 		'name' 	=> __('Sticky Header Logo', 'largo'),
-		'desc' 	=> __('Used in the sticky navigation. This image should be 100px tall and at least 100px wide. This logo will be hidden on mobile sites if the <b>Show Site Name in Sticky Nav</b> option is checked under <b>Basic Settings</b>', 'largo'),
+		'desc' 	=> __('Used in the sticky navigation. This image should be 100px tall and at least 100px wide. If no logo is provided, the site name will be displayed. To display an abbreviated site name in the sticky navigation see the "Navigation" options tab above.', 'largo'),
 		'id' 	=> 'sticky_header_logo',
 		'type' 	=> 'upload');
 
