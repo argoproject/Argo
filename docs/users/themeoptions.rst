@@ -16,12 +16,6 @@ Basic Settings
 
 **Donate Button** - The Largo theme includes an optional donate button in the top header. To enable the donate button, make sure the checkbox to show the donate button is checked and then add the link to your donation page, form or external payment processor here. Optionally, you can change the text of the button. The Largo theme also includes a sidebar widget that you can use to link to a donation page in addition to or instead of the link in the top header.
 
-**Don't Miss Menu** - Under the main navbar on your Largo site is an optional secondary navigation menu that, by default, is called "Don't Miss". To enable this menu make sure the checkbox to show the Don't Miss Menu is checked. Optionally, you can customize the label that appears at the beginning of the menu or remove it entirely. To add or remove links from this menu visit **Appearance > Menus** from the left sidebar in the WordPress administration interface.
-
-**Footer Nav Menu** - On the left side of the site footer is a configurable menu area. By default the label for this menu will be your site name, but you can change it here. As with the Don't Miss menu area, to add or remove links from this menu visit **Appearance > Menus** from the left sidebar in the WordPress administration interface.
-
-**Sticky Nav** - The sticky navigation bar remains at the top of the reader's window as they scroll. The default is to show the sticky navbar, but you may want to hide it. You also have the option to show your site name in the sticky navbar, which is useful on smaller screens.
-
 **Copyright Message** - By default this will display "Copyright [YEAR], Your Site Name" but you can enter your own message here if you would like. You can include HTML in this area to link to external sites and use &copy; to display a copyright symbol or ``%d`` to display the current year.
 
 **Google Analytics** - The Largo theme has built in support for Google Analytics. Enter your Google Analytics ID here and the relevant Google Analytics code will be automatically added to all of the pages on your site. Note that it is configured to not track logged in users to ensure accurate reporting.
@@ -34,9 +28,10 @@ Be careful to note the recommended format for each link type for maximum compati
 
 Note that authors can add links to their own social media profiles by editing their user profile.
 
-**Single Post Social Icons** - By default a box showing social media links will be shown at the top of single article pages. You can choose to hide this if you prefer. You can also choose which share icons should be displayed here, the verb used on Facebook buttons, whether or not your Twitter share count is displayed, and where the "Clean Read" link should be displayed on the page.
+**Single Post Social Icons** - By default a box showing social media links will be shown at the top of single article pages. You can choose to hide this if you prefer. You can also choose which share icons should be displayed here, display share icons in a floating bar beside posts using the single-column template, and select the verb used on Facebook buttons.
 
 In previous versions of Largo, the option to have the author's bio and social media links occupied this slot, and also governed the visibility of share icons and the author bio at the end of the article. The article-bottom author bio and social links are now available as widgets.
+
 
 .. _theme-images:
 
@@ -82,7 +77,7 @@ Layout Options
 **Homepage bottom templates** - Largo supports three options for the bottom of the homepage:
 
 - A single-column list of recent posts with photos and excerpts
-- A two-column widget area: This creates a new widget area in **Appearance > Widgets** that can be filled with widgets. It appears empty until widgets have been added to this area.
+- A two-column widget area: This creates a new widget area in **Appearance** > **Widgets** that can be filled with widgets. It appears empty until widgets have been added to this area.
 - Nothing whatsoever
 
 **Category and Tag Display** - Largo can display:
@@ -103,13 +98,13 @@ Layout Options
 
 **Sidebar Options** - These affect the presentation of the sidebar to the reader.
 
-- Add a third sidebar used only on archive pages (category, tag, author and series pages), configurable in Appearance > Widgets
-- An additional widget region just above the site footer region, configurable in Appearance > Widgets
+- Add a third sidebar used only on archive pages (category, tag, author and series pages), configurable in **Appearance** > **Widgets**
+- An additional widget region just above the site footer region, configurable in **Appearance** > **Widgets**
 - Fade the sidebar out on single story pages as the reader scrolls
 
 You can also enter a list of additional sidebar regions that should be created, one on each line of the text box.
 
-**Footer Layout** - The default footer is a 3 column footer with a wide center column. Alternatively you can choose to have 3 or 4 equal columns. Each column is a widget area that can be configured under the **Appearance > Widgets** menu, where they will be labeled "Footer 1" through "Footer 3" or "Footer 4."
+**Footer Layout** - The default footer is a 3 column footer with a wide center column. Alternatively you can choose to have 3 or 4 equal columns. Each column is a widget area that can be configured under the **Appearance** > **Widgets** menu, where they will be labeled "Footer 1" through "Footer 3" or "Footer 4."
 
 
 .. _navigation:
@@ -121,7 +116,7 @@ Navigation
 
 Largo 0.5.4 introduces a new sticky navigation bar. This improves the user experience especially on mobile screen sizes by reducing the screen space occupied by navigation links, while still providing a highly usable menu. The sticky navigation disappears when the user scrolls down, and reappears when scrolling back up. 
 
-The sticky navigation bar has the theme location of Main Navigation. By default the Main Navigation menu is assigned to the Main Navigation theme location, and in most cases this would be the best practice. But in Appearance > Menus > Manage Locations you can reassign any menu to the Main Navigation theme location and place it in the sticky navigation bar. 
+The sticky navigation bar has the theme location of Main Navigation. By default the Main Navigation menu is assigned to the Main Navigation theme location, and in most cases this would be the best practice. But in **Appearance** > **Menus** > **Manage Locations** you can reassign any menu to the Main Navigation theme location and place it in the sticky navigation bar. 
 
 By default, the sticky navigation bar is active only for mobile screen sizes. You can choose two additional options:
 
@@ -138,16 +133,17 @@ If the menu assigned to the sticky navigation has so many top-level links that i
 
 **Menu Options**
 
-You can choose to display the optional Don't Miss menu under the Main Navigation. You can change the default label from "Don't Miss" to something else, or delete the label for this menu.
+**Don't Miss Menu** - Under the main navbar on your Largo site is an optional secondary navigation menu that, by default, is called "Don't Miss". To enable this menu make sure the checkbox to show the Don't Miss Menu is checked. Optionally, you can customize the label that appears at the beginning of the menu or remove it entirely. To add or remove links from this menu visit **Appearance** > **Menus** from the left sidebar in the WordPress administration interface.
 
-You can also enter a label before the links in the Footer Navigation Menu, or delete the default and no label will appear.
+**Footer Nav Menu** - On the left side of the site footer is a configurable menu area. By default the label for this menu will be your site name, but you can change it here. As with the Don't Miss menu area, to add or remove links from this menu visit **Appearance** > **Menus** from the left sidebar in the WordPress administration interface.
+
 
 .. _advanced-options:
 
 Advanced Options
 ----------------
 
-**Custom LESS** - Enabling this will let you change the theme's colors and fonts in **Appearance > CSS Variables**.
+**Custom LESS** - Enabling this will let you change the theme's colors and fonts in **Appearance** > **CSS Variables**.
 
 **Enable Series** - Some sites may create a multi-part series or project that is only published for a set amount of time and then should fall into the archive or appear on a “projects” archive page. To support this and also to allow for the creation of custom landing pages, Largo adds an optional “series” taxonomy. When you create a new series, you can add a term to this taxonomy and then make sure all of the posts in that series have this label applied. This will enable the Largo theme to surface related posts in that series in at the bottom of a post (if you are using the “read next” widget) and, in some cases, also on the homepage (depending on the homepage layout you have selected). Largo also adds the ability to create custom sidebars and landing pages for series archive pages, replacing the default series archive template in WordPress. For more information, see :ref:`series-tax`.
 
