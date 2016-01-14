@@ -113,6 +113,12 @@ filter: **largo_partial_by_post_type**
     Without setting '3', your filter will not be passed the $post_type or $context arguments.
     In order to set '3', you must set the third parameter of add_filter, which defaults to 10. It is safe to leave that at 10.
 
+
+filter: **largo_byline**
+    *args: $output*
+    
+    Called in ``largo_byline()`` before the admin-user edit link is added. This can be used to append or prepend HTML, or to change the output of the byline function entirely. The passed string is HTML.
+
 filter: **largo_post_social_links**
 
     *args: $output*
