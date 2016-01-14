@@ -23,8 +23,16 @@ if ($thumb == 'small') {
 	<a href="<?php echo get_permalink(); ?>"><?php echo get_the_post_thumbnail( get_the_ID(), 'large', $img_attr); ?></a>
 <?php }
 
-// the headline
-?><h5><a href="<?php echo get_permalink(); ?>"><?php echo get_the_title(); ?></a></h5>
+// the headline and optionally the post-type icon
+?><h5>
+	<a href="<?php echo get_permalink(); ?>"><?php echo get_the_title(); ?>
+	<?php
+		if ( isset( $instance['show_icon'] ) && $instance['show_icon'] == true ) { 
+			post_type_icon();
+		}
+	?>
+	</a>
+</h5>
 
 <?php // byline on posts
 if ( isset( $instance['show_byline'] ) && $instance['show_byline'] == true) { ?>
