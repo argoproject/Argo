@@ -28,7 +28,7 @@ Be careful to note the recommended format for each link type for maximum compati
 
 Note that authors can add links to their own social media profiles by editing their user profile.
 
-**Single Post Social Icons** - By default a box showing social media links will be shown at the top of single article pages. You can choose to hide this if you prefer. You can also choose which share icons should be displayed here, and the verb used on Facebook buttons.
+**Single Post Social Icons** - By default a box showing social media links will be shown at the top of single article pages. You can choose to hide this if you prefer. You can also choose which share icons should be displayed here, display share icons in a floating bar beside posts using the single-column template, and select the verb used on Facebook buttons.
 
 In previous versions of Largo, the option to have the author's bio and social media links occupied this slot, and also governed the visibility of share icons and the author bio at the end of the article. The article-bottom author bio and social links are now available as widgets.
 
