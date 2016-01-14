@@ -214,3 +214,9 @@ These actions are run on all homepage templates, including the Legacy Three Colu
  - **largo_before_comments** - before the comments section
  - **largo_after_comments** - after the comments section
  - **largo_after_content** - after the close of the #content div
+ 
+ **page.php**
+ - **largo_before_page_header** - inside <article> but before the post <header> element
+ - **largo_after_page_header** - just after the closing post <header> element
+ - **largo_before_page_content** - directly inside the .entry-content <div> tag
+ - **largo_after_page_content** - directly before the .entry-content closing <div> tag
