@@ -46,32 +46,19 @@
       $('ul.nav').on(mobileEvent + '.largo', 'li', function(event) {
         var li = $(event.currentTarget);
 
-        if (!li.hasClass('dropdown')) {
-          window.location.href = li.find('a').attr('href');
-          event.preventDefault();
-          event.stopPropagation();
-          return false;
-        }
-
         if (!li.is('.open')) {
           // The link when the menu is closed
           closeOpenMenu();
           li.addClass('open');
           openMenu = li;
-
-          event.preventDefault();
-          event.stopPropagation();
         } else if ($(event.target).is('b.caret')) {
           // The caret when the menu is open
           li.removeClass('open');
           openMenu = false;
-
-          event.preventDefault();
-          event.stopPropagation();
         }
       });
 
-      // Call this to call the open menu
+      // Call this to close the open menu
       var closeOpenMenu = function() {
         if (openMenu) {
           openMenu.removeClass('open');
@@ -177,44 +164,52 @@
   };
 
   Navigation.prototype.responsiveNavigation = function() {
+    var self = this;
+
     // Responsive navigation
     $('.navbar .toggle-nav-bar').each(function() {
-      var toggleButton = $(this);
-      var navbar = toggleButton.closest('.navbar');
+      var toggleButton = $(this),
+          navbar = toggleButton.closest('.navbar');
 
       // Support both touch and click events
-      toggleButton.on('touchstart.toggleNav', function() {
+      toggleButton.on('touchstart.toggleNav click.toggleNav', function(event) {
         // If it is a touch event, get rid of the click events.
-        toggleButton.off('click.toggleNav');
-        navbar.toggleClass('open');
+        if (event.type == 'touchstart') {
+          toggleButton.off('click.toggleNav');
+        }
 
-        // Close all the open sub navigation upon closing the menu
-        if (!navbar.hasClass('open'))
+        navbar.toggleClass('open');
+        $('html').addClass('nav-open');
+        self.stickyNavSetOffset();
+        navbar.find('.nav-shelf').css({
+          top: self.stickyNavEl.position().top + self.stickyNavEl.outerHeight()
+        });
+
+        if (!navbar.hasClass('open')) {
           navbar.find('.nav-shelf li.open').removeClass('open');
-      });
+          $('html').removeClass('nav-open');
+        }
 
-      toggleButton.on('click.toggleNav', function() {
-        navbar.toggleClass('open');
+        return false;
       });
 
       // Secondary nav
       navbar.on('touchstart.toggleNav click.toggleNav', '.nav-shelf .caret', function(event) {
-        // Only handle when
         if (toggleButton.css('display') == 'none')
-          return;
+          return false;
 
-        if (event.type == 'touchstart')
+        if (event.type == 'touchstart') {
           navbar.off('click.toggleNav', '.nav-shelf .dropdown-toggle');
+        }
 
         var li = $( event.target ).closest('li');
 
-        // Close the others if we are opening
-        if (!li.hasClass('open'))
+        if (!li.hasClass('open')) {
           navbar.find('.nav-shelf li.open').removeClass('open');
+        }
 
-        // Open ours
         li.toggleClass('open');
-        event.preventDefault();
+        return false;
       });
     });
   };

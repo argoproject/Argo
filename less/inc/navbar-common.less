@@ -1,3 +1,13 @@
+html.nav-open,
+html.nav-open body {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+}
+
 .navbar {
   // Fix for IE7's bad z-indexing so dropdowns don't
   // appear below content that follows the navbar
@@ -217,12 +227,15 @@
 
     .nav-shelf {
       background: @dropdownBackground;
-      position: absolute;
-      top: 100%;
-      left: -10px;
-      right: -10px;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
       visibility: hidden;
       opacity: 0;
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
 
       .site-name, .home-icon, .home-link {
         display: none;
@@ -238,10 +251,11 @@
 
       li b.caret {
         float: right;
+        .rotate( -90deg );
       }
 
       li.open > a .caret {
-        .rotate( 90deg );
+        .rotate( 0deg );
       }
 
       li.open > ul.dropdown-menu {
