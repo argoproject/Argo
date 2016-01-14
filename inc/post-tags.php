@@ -132,6 +132,16 @@ if ( ! function_exists( 'largo_byline' ) ) {
 			$output .= '<span class="sep"> | </span><time class="entry-date updated dtstamp pubdate" datetime="' . esc_attr( get_the_date( 'c', $post_id ) ) . '">' . largo_time(false, $post_id) . '</time>';
 		}
 
+		/**
+		 * Filter the largo_byline output text to allow adding items at the beginning or the end of the text.
+		 *
+		 * @since 0.5.4
+		 * @param string $partial The HTML of the output of largo_byline(), before the edit link is added.
+		 * @link https://github.com/INN/Largo/issues/1070
+		 */
+		$output = apply_filters( 'largo_byline', $output );
+
+
 		if ( current_user_can( 'edit_post', $post_id ) ) {
 			$output .= '<span class="sep"> | </span><span class="edit-link"><a href="' . get_edit_post_link( $post_id ) . '">' . __( 'Edit This Post', 'largo' ) . '</a></span>';
 		}
