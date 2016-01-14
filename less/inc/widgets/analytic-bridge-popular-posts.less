@@ -40,7 +40,7 @@
       }
       &::before {
         font-size: @numbersize;
-        content: counter(li) + ".";
+        content: ~"counter(li) '.'";
         counter-increment: li;
         display: block;
         width: 1.5*@numbersize;
