@@ -189,15 +189,17 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 				esc_attr( __( 'Tweet', 'largo' ) )
 			);
 		}
-
-		if ( $utilities['print'] === '1' ) {
-			$output .= '<span class="print"><a href="#" onclick="window.print()" title="' . esc_attr( __( 'Print this article', 'largo' ) ) . '" rel="nofollow"><i class="icon-print"></i><span class="hidden-phone">' . esc_attr( __( 'Print', 'largo' ) ) . '</span></a></span>';
-		}
-
+		
 		if ($utilities['email'] === '1' ) {
 			$output .= '<span data-service="email" class="email custom-share-button share-button"><a><i class="icon-mail"></i> <span class="hidden-phone">Email</span></a></span>';
 		}
 
+		
+		if ( $utilities['print'] === '1' ) {
+			$output .= '<span class="print"><a href="#" onclick="window.print()" title="' . esc_attr( __( 'Print this article', 'largo' ) ) . '" rel="nofollow"><i class="icon-print"></i><span class="hidden-phone">' . esc_attr( __( 'Print', 'largo' ) ) . '</span></a></span>';
+		}
+
+		
 		// More social links
 		$more_social_links = array();
 
