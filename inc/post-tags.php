@@ -174,7 +174,7 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 			$fb_share = '<span class="facebook"><a target="_blank" href="http://www.facebook.com/sharer/sharer.php?u=%1$s"><i class="icon-facebook"></i><span class="hidden-phone">%2$s</span></a></span>';
 			$output .= sprintf(
 				$fb_share,
-				esc_attr( get_permalink() ),
+				esc_url( get_permalink() ),
 				esc_attr( ucfirst( of_get_option( 'fb_verb' ) ) )
 			);
 		}
@@ -183,8 +183,8 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 			$twitter_share = '<span class="twitter"><a target="_blank" href="https://twitter.com/intent/tweet?text=%1$s&url=%2$s&via=%3$s"><i class="icon-twitter"></i><span class="hidden-phone">%4$s</span></a></span>';
 			$output .= sprintf(
 				$twitter_share,
-				esc_attr( get_the_title() ),
-				esc_attr( get_permalink() ),
+				urlencode( get_the_title() ),
+				esc_url( get_permalink() ),
 				esc_attr( get_the_author_meta( 'twitter' ) ),
 				esc_attr( __( 'Tweet', 'largo' ) )
 			);
