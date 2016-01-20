@@ -51,8 +51,8 @@ function optionsframework_options() {
 	$article_utility_buttons = array(
 		'facebook' 	=> __('Facebook', 'largo'),
 		'twitter' 	=> __('Twitter', 'largo'),
-		'print' 	=> __('Print', 'largo'),
-		'email' 	=> __('Email', 'largo')
+		'email' 	=> __('Email', 'largo'),
+		'print' 	=> __('Print', 'largo')
 	);
 
 	$article_utility_buttons_defaults = array(
@@ -76,7 +76,8 @@ function optionsframework_options() {
 
 	$fb_verbs = array(
 		'like' 		=> __('Like', 'largo'),
-		'recommend' => __('Recommend', 'largo')
+		'recommend' => __('Recommend', 'largo'),
+		'share'		=> __('Share', 'largo')
 	);
 
 	$region_options = array();
@@ -249,7 +250,7 @@ function optionsframework_options() {
 		'type' 		=> 'checkbox',);
 
 	$options[] = array(
-		'desc' 		=> __('<strong>Use "like" or "recommend"</strong> for Facebook buttons?', 'largo'),
+		'desc' 		=> __('<strong>Verb to use</strong> for Facebook buttons?', 'largo'),
 		'id' 		=> 'fb_verb',
 		'std' 		=> 'like',
 		'type'		=> 'select',

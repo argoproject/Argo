@@ -189,15 +189,17 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 				esc_attr( __( 'Tweet', 'largo' ) )
 			);
 		}
-
-		if ( $utilities['print'] === '1' ) {
-			$output .= '<span class="print"><a href="#" onclick="window.print()" title="' . esc_attr( __( 'Print this article', 'largo' ) ) . '" rel="nofollow"><i class="icon-print"></i><span class="hidden-phone">' . esc_attr( __( 'Print', 'largo' ) ) . '</span></a></span>';
-		}
-
+		
 		if ($utilities['email'] === '1' ) {
 			$output .= '<span data-service="email" class="email custom-share-button share-button"><a><i class="icon-mail"></i> <span class="hidden-phone">Email</span></a></span>';
 		}
 
+		
+		if ( $utilities['print'] === '1' ) {
+			$output .= '<span class="print"><a href="#" onclick="window.print()" title="' . esc_attr( __( 'Print this article', 'largo' ) ) . '" rel="nofollow"><i class="icon-print"></i><span class="hidden-phone">' . esc_attr( __( 'Print', 'largo' ) ) . '</span></a></span>';
+		}
+
+		
 		// More social links
 		$more_social_links = array();
 
@@ -727,7 +729,11 @@ if ( ! function_exists( 'largo_post_metadata' ) ) {
 if ( ! function_exists( 'largo_floating_social_buttons' ) ) {
 	function largo_floating_social_buttons() {
 		$template = get_post_template(null);
-		$is_single_column = (bool) strstr( $template, 'single-one-column' ) || is_null( $template );
+
+		if ( is_null( $template ) )
+			$template = of_get_option( 'single_template' );
+
+		$is_single_column = (bool) strstr( $template, 'single-one-column' ) || $template == 'normal' || is_null( $template );
 
 		if ( is_single() && of_get_option('single_floating_social_icons', '1') == '1' && $is_single_column ) {
 			echo '<script type="text/template" id="tmpl-floating-social-buttons">';
@@ -747,7 +753,11 @@ add_action('wp_footer', 'largo_floating_social_buttons');
 if ( ! function_exists('largo_floating_social_button_width_json') ) {
 	function largo_floating_social_button_width_json() {
 		$template = get_post_template(null);
-		$is_single_column = (bool) strstr( $template, 'single-one-column' ) || is_null( $template );
+
+		if ( is_null( $template ) )
+			$template = of_get_option( 'single_template' );
+
+		$is_single_column = (bool) strstr( $template, 'single-one-column' ) || $template == 'normal' || is_null( $template );
 
 		if ( is_single() && of_get_option('single_floating_social_icons', '1') == '1' && $is_single_column ) {
 			$config = array(
@@ -775,7 +785,11 @@ add_action('wp_footer', 'largo_floating_social_button_width_json');
 if ( ! function_exists('largo_floating_social_button_js') ) {
 	function largo_floating_social_button_js() {
 		$template = get_post_template(null);
-		$is_single_column = (bool) strstr( $template, 'single-one-column' ) || is_null( $template );
+
+		if ( is_null( $template ) )
+			$template = of_get_option( 'single_template' );
+
+		$is_single_column = (bool) strstr( $template, 'single-one-column' ) || $template == 'normal' || is_null( $template );
 
 		if ( is_single() && of_get_option('single_floating_social_icons', '1') == '1' && $is_single_column ) {
 			?>

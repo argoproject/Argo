@@ -38,7 +38,7 @@ get_header();
 
 				}
 
-				do_action(' largo_before_comments' );
+				do_action( 'largo_before_comments' );
 
 				comments_template( '', true );
 
