@@ -62,7 +62,9 @@ if( !function_exists( 'post_templates_dropdown' ) ) {
 if( !function_exists( 'get_post_template' ) ) {
 	function get_post_template( $template ) {
 		global $post;
-		$custom_field = get_post_meta( $post->ID, '_wp_post_template', true );
+		if ( is_object($post) ) {
+			$custom_field = get_post_meta( $post->ID, '_wp_post_template', true );
+		}
 		if ( !empty( $custom_field ) ) {
 			if ( file_exists( get_stylesheet_directory() . "/{$custom_field}") ) {
 				$template = get_stylesheet_directory() . "/{$custom_field}";
