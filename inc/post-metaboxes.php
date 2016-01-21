@@ -268,9 +268,13 @@ function largo_custom_disclaimer_meta_box_display() {
 largo_register_meta_input( 'disclaimer', 'wp_filter_post_kses' );
 
 /**
- * Metabox option to choose the top tag for the post
+ * Metabox option to choose the top tag for the posto
+ *
+ * Includes the option for "None", which is not the default option, but is an option.
  *
  * @global $post
+ * @since 0.5.4
+ * @link https://github.com/INN/Largo/issues/1082
  */
 function largo_top_tag_display() {
 	global $post;
@@ -287,10 +291,11 @@ function largo_top_tag_display() {
 	foreach ($terms as $term)
 		echo '<option value="' . (int) $term->term_id . '"' . selected( $term->term_id, $top_term, FALSE ) . ">" . $term->name . '</option>';
 
+	echo '<option value="null"' . selected( 'null' , $top_term, FALSE ) . ">None</option>";
 	echo '</select>';
 }
 largo_add_meta_content('largo_top_tag_display', 'largo_additional_options');
-largo_register_meta_input( 'top_term', 'intval' );
+largo_register_meta_input( 'top_term', 'sanitize_key' );
 
 /**
  * Load JS for our top-terms select
