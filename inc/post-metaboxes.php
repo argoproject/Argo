@@ -276,7 +276,7 @@ function largo_top_tag_display() {
 	global $post;
 
 	$top_term = get_post_meta( $post->ID, 'top_term', TRUE );
-	$terms = wp_get_object_terms($post->ID, array( 'series', 'category', 'post_tag', 'prominence' ) );
+	$terms = wp_get_object_terms($post->ID, array( 'series', 'category', 'post_tag', 'prominence', 'post-type' ) );
 
 	echo '<p><strong>' . __('Top Term', 'largo') . '</strong><br />';
 	echo __('Identify which of this posts\'s terms is primary.') . '</p>';
