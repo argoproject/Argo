@@ -176,6 +176,5 @@ function _largo_meta_box_save( $post_id ) {
 			delete_post_meta( $post->ID, $key ); //and delete if blank
 		}
 	}
-
 }
 add_action( 'save_post', '_largo_meta_box_save' );
