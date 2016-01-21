@@ -273,7 +273,7 @@ largo_register_meta_input( 'disclaimer', 'wp_filter_post_kses' );
  * Includes the option for "None", which is not the default option, but is an option.
  *
  * @global $post
- * @since 0.5.4
+ * @since 0.5.5
  * @link https://github.com/INN/Largo/issues/1082
  */
 function largo_top_tag_display() {

@@ -318,7 +318,7 @@ function largo_top_term( $options = array() ) {
 
 	$term_id = get_post_meta( $args['post'], 'top_term', TRUE );
 
-	if ( ! $term_id == 'null' ) { // if term id is '' or '0' or 0 for the "None" option, don't bother doing this.
+	if ( ! $term_id == 'null' ) { // if term id is 'null' for the "None" option, don't bother doing this.
 		//get the taxonomy slug
 		$taxonomy = $wpdb->get_var( $wpdb->prepare( "SELECT taxonomy FROM $wpdb->term_taxonomy WHERE term_id = %d LIMIT 1", $term_id) );
 	}
