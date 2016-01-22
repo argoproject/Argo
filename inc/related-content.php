@@ -367,6 +367,7 @@ function largo_top_term( $options = array() ) {
 	$output .= $cheese;
 
 	if ( $args['echo'] ) echo $output;
+	echo $output;
 	return $output;
 }
 
