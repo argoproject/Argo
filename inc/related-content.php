@@ -352,9 +352,9 @@ function largo_top_term( $options = array() ) {
 	 * for https://github.com/INN/Largo/issues/1082, support not outputting anything
 	 * @since 0.5.5
 	 */
-	if ( $term_id == 'none' ) {
-		$output = '';
-	}
+//	if ( $term_id == 'none' ) {
+//		$output = '';
+//	}
 
 	if ( $args['echo'] ) echo $output;
 	return $output;
