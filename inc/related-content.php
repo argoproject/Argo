@@ -318,23 +318,28 @@ function largo_top_term( $options = array() ) {
 
 	$term_id = get_post_meta( $args['post'], 'top_term', TRUE );
 
-	$cheese = '';
-
 	if ( $term_id !== 'none' ) { // if term id is 'none' for the "None" option, don't bother doing this.
-		$cheese .= "one, ";
 		//get the taxonomy slug
 		$taxonomy = $wpdb->get_var( $wpdb->prepare( "SELECT taxonomy FROM $wpdb->term_taxonomy WHERE term_id = %d LIMIT 1", $term_id) );
 	}
 
-	if ( empty( $term_id ) || ( empty($taxonomy) && $term_id !== 'none' ) ) {	// if no top_term specified, fall back to the first category
-		$cheese .= "two, ";
+	// if no top_term specified, fall back to the first category
+	if ( empty( $term_id ) || ( empty($taxonomy) && $term_id !== 'none' ) ) {
 		$term_id = get_the_category( $args['post'] );
-		if ( !is_array( $term_id ) || !count($term_id) ) return;	//no categories OR top term? Do nothing
-		$term_id = $term_id[0]->term_id;
+		if ( is_array( $term_id ) &&  count($term_id) ) {
+			$term_id = $term_id[0]->term_id;
+		}
+		// The post isn't in a category? Try post-types if that's enabled.
+		if ( empty($term_id) && taxonomy_exists('post-type') ) {
+			$term_id = get_the_terms( $args['post'], 'post-type' );
+			if ( is_array( $term_id ) &&  count($term_id) ) {
+				$term_id = $term_id[0]->term_id;
+			}
+		}
 	}
 
-	if ( $term_id && $term_id != 'none' ) {
-		$cheese .= "three, ";
+
+	if ( $term_id && $term_id !== 'none' ) {
 		$icon = ( $args['use_icon'] ) ?  '<i class="icon-white icon-tag"></i>' : '' ;	//this will probably change to a callback largo_term_icon() someday
 		$link = ( $args['link'] ) ? array('<a href="%2$s" title="Read %3$s in the %4$s category">','</a>') : array('', '') ;
 		// get the term object
@@ -349,11 +354,9 @@ function largo_top_term( $options = array() ) {
 			$icon
 		);
 	} else {
-		$cheese .= "four, ";
 		$output = largo_categories_and_tags( 1, false, $args['link'], $args['use_icon'], '', $args['wrapper'], $args['exclude']);
 		$output = ( is_array($output) ) ? $output[0] : '';
 	}
-		$cheese .= "five, ";
 
 	/*
 	 * for https://github.com/INN/Largo/issues/1082, support not outputting anything
@@ -361,13 +364,9 @@ function largo_top_term( $options = array() ) {
 	 */
 	if ( $term_id == 'none' ) {
 		$output = '';
-		$cheese .= "six, ";
 	}
 
-	$output .= $cheese;
-
 	if ( $args['echo'] ) echo $output;
-	echo "Cheese: " . $cheese;
 	return $output;
 }
 
