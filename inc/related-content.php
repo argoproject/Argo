@@ -320,13 +320,13 @@ function largo_top_term( $options = array() ) {
 
 	$cheese = '';
 
-	if ( ! $term_id == 'none' ) { // if term id is 'none' for the "None" option, don't bother doing this.
+	if ( $term_id !== 'none' ) { // if term id is 'none' for the "None" option, don't bother doing this.
 		$cheese .= "one, ";
 		//get the taxonomy slug
 		$taxonomy = $wpdb->get_var( $wpdb->prepare( "SELECT taxonomy FROM $wpdb->term_taxonomy WHERE term_id = %d LIMIT 1", $term_id) );
 	}
 
-	if ( empty( $term_id ) || ( empty($taxonomy) && $term_id != 'none' ) ) {	// if no top_term specified, fall back to the first category
+	if ( empty( $term_id ) || ( empty($taxonomy) && $term_id !== 'none' ) ) {	// if no top_term specified, fall back to the first category
 		$cheese .= "two, ";
 		$term_id = get_the_category( $args['post'] );
 		if ( !is_array( $term_id ) || !count($term_id) ) return;	//no categories OR top term? Do nothing
@@ -367,7 +367,7 @@ function largo_top_term( $options = array() ) {
 	$output .= $cheese;
 
 	if ( $args['echo'] ) echo $output;
-	echo $output;
+	echo "Cheese: " . $cheese;
 	return $output;
 }
 
