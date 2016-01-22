@@ -318,18 +318,18 @@ function largo_top_term( $options = array() ) {
 
 	$term_id = get_post_meta( $args['post'], 'top_term', TRUE );
 
-	if ( ! $term_id == 'null' ) { // if term id is 'null' for the "None" option, don't bother doing this.
+	if ( ! $term_id == 'none' ) { // if term id is 'none' for the "None" option, don't bother doing this.
 		//get the taxonomy slug
 		$taxonomy = $wpdb->get_var( $wpdb->prepare( "SELECT taxonomy FROM $wpdb->term_taxonomy WHERE term_id = %d LIMIT 1", $term_id) );
 	}
 
-	if ( empty( $term_id ) || ( empty($taxonomy) && $term_id != 'null' ) ) {	// if no top_term specified, fall back to the first category
+	if ( empty( $term_id ) || ( empty($taxonomy) && $term_id != 'none' ) ) {	// if no top_term specified, fall back to the first category
 		$term_id = get_the_category( $args['post'] );
 		if ( !is_array( $term_id ) || !count($term_id) ) return;	//no categories OR top term? Do nothing
 		$term_id = $term_id[0]->term_id;
 	}
 
-	if ( $term_id && $term_id != 'null' ) {
+	if ( $term_id && $term_id != 'none' ) {
 		$icon = ( $args['use_icon'] ) ?  '<i class="icon-white icon-tag"></i>' : '' ;	//this will probably change to a callback largo_term_icon() someday
 		$link = ( $args['link'] ) ? array('<a href="%2$s" title="Read %3$s in the %4$s category">','</a>') : array('', '') ;
 		// get the term object
@@ -352,7 +352,7 @@ function largo_top_term( $options = array() ) {
 	 * for https://github.com/INN/Largo/issues/1082, support not outputting anything
 	 * @since 0.5.5
 	 */
-	if ( $term_id == 'null' ) {
+	if ( $term_id == 'none' ) {
 		$output = '';
 	}
 

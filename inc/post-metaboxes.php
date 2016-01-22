@@ -291,7 +291,7 @@ function largo_top_tag_display() {
 	foreach ($terms as $term)
 		echo '<option value="' . (int) $term->term_id . '"' . selected( $term->term_id, $top_term, FALSE ) . ">" . $term->name . '</option>';
 
-	echo '<option value="null"' . selected( 'null' , $top_term, FALSE ) . ">None</option>";
+	echo '<option value="none"' . selected( 'none' , $top_term, FALSE ) . ">None</option>";
 	echo '</select>';
 }
 largo_add_meta_content('largo_top_tag_display', 'largo_additional_options');
