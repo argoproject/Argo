@@ -73,6 +73,11 @@ function largo_filter_guest_author_fields( $fields_to_return, $groups ) {
 	}
 	if ( in_array( 'all', $groups ) || in_array( 'name', $groups ) ) {
 		$fields_to_return[] = array(
+			'key'      => 'job_title',
+			'label'    => 'Job Title',
+			'group'    => 'name',
+		);
+		$fields_to_return[] = array(
 			'key'      => 'organization',
 			'label'    => 'Organization',
 			'group'    => 'name',
