@@ -106,6 +106,8 @@ if ( ! function_exists( 'largo_byline' ) ) {
 			$coauthors = get_coauthors( $post_id );
 			foreach( $coauthors as $author ) {
 				$byline_text = $author->display_name;
+				if ( $job = $author->job_title )
+					$byline_text .= ', ' . $job;
 				if ( $org = $author->organization )
 					$byline_text .= ' (' . $org . ')';
 
