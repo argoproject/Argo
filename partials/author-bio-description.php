@@ -20,6 +20,12 @@ if ( largo_has_avatar( $author_obj->user_email ) ) {
 }
 
 // Description
+var_log($author_obj);
+if ( $author_obj->job_title && $author_obj->show_job_title ) {
+	if ( $author_obj->show_job_title === 'on' || $author_obj->show_job_title == '1' ) {
+		echo '<p class="job-title">' . esc_attr( $author_obj->job_title ) . '</p>';
+	}
+}
 if ( $author_obj->description ) {
 	echo '<p>' . esc_attr( $author_obj->description ) . '</p>';
 }
