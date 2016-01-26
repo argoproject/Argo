@@ -11,7 +11,14 @@ $email = $author_obj->user_email;
  * Figure out whether to hide the author's email address
  */
 $user_meta = get_user_meta($author_obj->ID);
-$show_email = $user_meta['show_email'][0];
+
+$show_email = 'off';
+if (isset($user_meta['show_email'][0])) {
+	$show_email = $user_meta['show_email'][0];
+} else if ( !empty($author_obj->show_email) ) {
+	$show_email = $author_obj->show_email;
+}
+
 ?>
 <ul class="social-links">
 	<?php if ( $fb = $author_obj->fb ) { ?>
