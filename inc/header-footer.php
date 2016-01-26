@@ -94,15 +94,18 @@ if ( ! function_exists( 'largo_social_links' ) ) {
 	function largo_social_links() {
 
 		$fields = array(
-			'rss' 		=> __( 'Link to RSS Feed', 'largo' ),
+			
 			'facebook' 	=> __( 'Link to Facebook Profile', 'largo' ),
 			'twitter' 	=> __( 'Link to Twitter Page', 'largo' ),
-			'youtube' 	=> __( 'Link to YouTube Page', 'largo' ),
-			'flickr' 	=> __( 'Link to Flickr Page', 'largo' ),
-			'tumblr' 	=> __( 'Link to Tumblr', 'largo' ),
 			'gplus' 	=> __( 'Link to Google Plus Page', 'largo' ),
+			'youtube' 	=> __( 'Link to YouTube Page', 'largo' ),
+			'instagram' => __( 'Link to Instagram Page', 'largo' ),
+			'tumblr' 	=> __( 'Link to Tumblr', 'largo' ),
 			'linkedin' 	=> __( 'Link to LinkedIn Page', 'largo' ),
-			'github' 	=> __( 'Link to Github Page', 'largo' )
+			'pinterest' => __( 'Link to Pinterest Page', 'largo' ),
+			'github' 	=> __( 'Link to Github Page', 'largo' ),
+			'flickr' 	=> __( 'Link to Flickr Page', 'largo' ),
+			'rss' 		=> __( 'Link to RSS Feed', 'largo' )
 		);
 
 		foreach ( $fields as $field => $title ) {
