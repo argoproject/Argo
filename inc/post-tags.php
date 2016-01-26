@@ -106,7 +106,8 @@ if ( ! function_exists( 'largo_byline' ) ) {
 			$coauthors = get_coauthors( $post_id );
 			foreach( $coauthors as $author ) {
 				$byline_text = $author->display_name;
-				if ( $job = $author->job_title )
+				$show_job_titles = of_get_option('show_job_titles');
+				if ( $job = $author->job_title && $show_job_titles )
 					$byline_text .= ', ' . $job;
 				if ( $org = $author->organization )
 					$byline_text .= ' (' . $org . ')';
@@ -128,7 +129,8 @@ if ( ! function_exists( 'largo_byline' ) ) {
 		} else {
 			$authors = largo_author_link( false, $post_id );
 			$author_id = get_post_meta( $post_id, 'post_author', true );
-			if ( $job = get_the_author_meta( 'job_title' , $author_id )) {
+			$show_job_titles = of_get_option('show_job_titles');
+			if ( $show_job_titles && $job = get_the_author_meta( 'job_title' , $author_id ) ) {
 				$authors  .= ', ' . $job;
 			}
 
