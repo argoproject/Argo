@@ -196,10 +196,16 @@ function optionsframework_options() {
 		'id' 	=> 'youtube_link',
 		'std' 	=> '',
 		'type' 	=> 'text');
-
+	
 	$options[] = array(
-		'desc' 	=> __('<strong>Link to Flickr Photostream</strong> (http://www.flickr.com/photos/username/)', 'largo'),
-		'id' 	=> 'flickr_link',
+		'desc' 	=> __('<strong>Link to Instagram Page</strong> (http://instagram.com/username)', 'largo'),
+		'id' 	=> 'instagram_link',
+		'std' 	=> '',
+		'type' 	=> 'text');
+	
+	$options[] = array(
+		'desc' 	=> __('<strong>Link to LinkedIn Group or Profile</strong> (http://www.linkedin.com/in/username/)', 'largo'),
+		'id' 	=> 'linkedin_link',
 		'std' 	=> '',
 		'type' 	=> 'text');
 
@@ -210,17 +216,23 @@ function optionsframework_options() {
 		'type' 	=> 'text');
 
 	$options[] = array(
-		'desc' 	=> __('<strong>Link to LinkedIn Group or Profile</strong> (http://www.linkedin.com/in/username/)', 'largo'),
-		'id' 	=> 'linkedin_link',
+		'desc' 	=> __('<strong>Link to Pinterest Page</strong> (http://pinterest.com/username)', 'largo'),
+		'id' 	=> 'pinterest_link',
 		'std' 	=> '',
 		'type' 	=> 'text');
-
+		
 	$options[] = array(
 		'desc' 	=> __('<strong>Link to Github Page</strong> (http://github.com/username)', 'largo'),
 		'id' 	=> 'github_link',
 		'std' 	=> '',
 		'type' 	=> 'text');
-
+	
+	$options[] = array(
+		'desc' 	=> __('<strong>Link to Flickr Photostream</strong> (http://www.flickr.com/photos/username/)', 'largo'),
+		'id' 	=> 'flickr_link',
+		'std' 	=> '',
+		'type' 	=> 'text');
+		
 	$options[] = array(
 		'desc' 	=> __('By default, a row of social media icons is shown in the site footer. <strong>Check this box if you want to show them in the header as well</strong>. Note that they will only display on desktops and larger tablets.', 'largo'),
 		'id' 	=> 'show_header_social',
