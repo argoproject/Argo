@@ -102,17 +102,22 @@ if ( ! function_exists( 'largo_byline' ) ) {
 
 		$values = get_post_custom( $post_id );
 
+		// If Co-Authors Plus is enabled
 		if ( function_exists( 'get_coauthors' ) && !isset( $values['largo_byline_text'] ) ) {
 			$coauthors = get_coauthors( $post_id );
 			foreach( $coauthors as $author ) {
 				$byline_text = $author->display_name;
 				$show_job_titles = of_get_option('show_job_titles');
-				if ( $job = $author->job_title && $show_job_titles )
-					$byline_text .= ', ' . $job;
 				if ( $org = $author->organization )
 					$byline_text .= ' (' . $org . ')';
 
-				$out[] = '<a class="url fn n" href="' . get_author_posts_url( $author->ID, $author->user_nicename ) . '" title="' . esc_attr( sprintf( __( 'Read All Posts By %s', 'largo' ), $author->display_name ) ) . '" rel="author">' . esc_html( $byline_text ) . '</a>';
+				$byline_temp = '<a class="url fn n" href="' . get_author_posts_url( $author->ID, $author->user_nicename ) . '" title="' . esc_attr( sprintf( __( 'Read All Posts By %s', 'largo' ), $author->display_name ) ) . '" rel="author">' . esc_html( $byline_text ) . '</a>';
+				if ( $show_job_titles && $job = $author->job_title ) {
+					// Use parentheses in case of multiple guest authorss. Comma separators would be nonsensical: Firstname lastname, Job Title, Secondname Thirdname, and Fourthname Middle Fifthname
+					$byline_temp .= ' (' . $job . ')';
+				}
+
+				$out[] = $byline_temp;
 
 			}
 
@@ -126,6 +131,7 @@ if ( ! function_exists( 'largo_byline' ) ) {
 				$authors = $out[0];
 			}
 
+		// If Co-Authors Plus is not enabled
 		} else {
 			$authors = largo_author_link( false, $post_id );
 			$author_id = get_post_meta( $post_id, 'post_author', true );
@@ -133,7 +139,6 @@ if ( ! function_exists( 'largo_byline' ) ) {
 			if ( $show_job_titles && $job = get_the_author_meta( 'job_title' , $author_id ) ) {
 				$authors  .= ', ' . $job;
 			}
-
 		}
 
 		$output = '<span class="by-author"><span class="by">' . __( 'By', 'largo' ) . '</span> <span class="author vcard" itemprop="author">' . $authors . '</span></span>';
