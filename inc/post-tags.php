@@ -66,6 +66,10 @@ if ( ! function_exists( 'largo_author_link' ) ) {
 
 		$byline_text = isset( $values['largo_byline_text'] ) ? $values['largo_byline_text'][0] : get_the_author_meta('display_name', $author_id);
 
+		if ( $job = get_the_author_meta( 'job_title' )) {
+			$byline_text .= ', ' . $job;
+		}
+
 		// if it's a custom byline but there's no link, just output the byline text
 		if ( isset( $values['largo_byline_text'] ) && !isset( $values['largo_byline_link'] ) ) {
 			$output = esc_html( $byline_text );
