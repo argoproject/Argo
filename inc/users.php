@@ -85,13 +85,6 @@ function largo_filter_guest_author_fields( $fields_to_return, $groups ) {
 			'group'    => 'name',
 		);
 		$fields_to_return[] = array(
-			'key'      => 'show_job_title',
-			'label'    => 'Show Job Title',
-			'group'    => 'contact-info',
-			'input'    => 'checkbox',
-			'type'     => 'checkbox',
-		);
-		$fields_to_return[] = array(
 			'key'      => 'organization',
 			'label'    => 'Organization',
 			'group'    => 'name',
@@ -272,7 +265,6 @@ add_shortcode('roster', 'largo_render_staff_list_shortcode');
  */
 function more_profile_info($user) {
 	$show_email = get_user_meta( $user->ID, "show_email", true );
-	$show_job_title = get_user_meta( $user->ID, "show_job_title", true );
 	$hide = get_user_meta( $user->ID, "hide", true );
 	?>
 	<h3><?php _e( 'More profile information', 'largo' ); ?></h3>
@@ -282,15 +274,6 @@ function more_profile_info($user) {
 			<td>
 				<input type="text" name="job_title" id="job_title" value="<?php echo esc_attr( get_the_author_meta( 'job_title', $user->ID ) ); ?>" class="regular-text" /><br />
 				<span class="description"><?php _e( 'Please enter your job title.', 'largo' ); ?></span>
-			</td>
-		</tr>
-
-		<tr>
-			<th><label for="show_job_title"><?php _e( 'Show Job Title', 'largo' ); ?></label></th>
-			<td>
-				<input type="checkbox" name="show_job_title" id="show_job_title"
-					<?php if ( esc_attr($show_job_title) === "on" ) { ?>checked<?php } ?> />
-				<label for="show_job_title"><?php _e( 'Show job title publicly?', 'largo' ); ?></label><br />
 			</td>
 		</tr>
 
@@ -329,10 +312,6 @@ function save_more_profile_info($user_id) {
 	if (!current_user_can('edit_user', $user_id ))
 		return false;
 	
-	if ( ! isset($_POST['show_job_title']) ) {
-		$_POST['show_job_title'] = 'off';
-	}
-
 	if ( ! isset($_POST['show_email']) ) {
 		$_POST['show_email'] = 'off';
 	}
@@ -346,7 +325,6 @@ function save_more_profile_info($user_id) {
 
 	update_user_meta($user_id, 'job_title', $job_title);
 	update_user_meta($user_id, 'show_email', $show_email);
-	update_user_meta($user_id, 'show_job_title', $show_job_title);
 	update_user_meta($user_id, 'hide', $hide);
 }
 add_action('personal_options_update', 'save_more_profile_info');
