@@ -70,6 +70,13 @@ function largo_filter_guest_author_fields( $fields_to_return, $groups ) {
 			'label'    => 'Google+<br><em>https://plus.google.com/userID/</em>',
 			'group'    => 'contact-info',
 		);
+		$fields_to_return[] = array(
+			'key'      => 'show_email',
+			'label'    => 'Show Email Address',
+			'group'    => 'contact-info',
+			'input'    => 'checkbox',
+			'type'     => 'checkbox',
+		);
 	}
 	if ( in_array( 'all', $groups ) || in_array( 'name', $groups ) ) {
 		$fields_to_return[] = array(
