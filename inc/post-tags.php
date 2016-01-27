@@ -764,10 +764,25 @@ add_action('wp_footer', 'largo_floating_social_buttons');
 if ( ! function_exists('largo_floating_social_button_width_json') ) {
 	function largo_floating_social_button_width_json() {
 		if ( is_single() && of_get_option('single_floating_social_icons', '1') == '1' ) {
-			$config = array(
-				'min' => '980',
-				'max' => '9999',
-			);
+			$template = get_post_template(null);
+
+			if ( is_null( $template ) )
+				$template = of_get_option( 'single_template' );
+
+			$is_single_column = (bool) strstr( $template, 'single-one-column' ) || $template == 'normal' || is_null( $template );
+
+			if ( $is_single_column ) {
+				$config = array(
+					'min' => '980',
+					'max' => '9999',
+				);
+			} else {
+				$config = array(
+					'min' => '1400',
+					'max' => '9999',
+				);
+			}
+
 			$config = apply_filters( 'largo_floating_social_button_width_json', $config );
 			?>
 			<script type="text/javascript" id="floating-social-buttons-width-json">
