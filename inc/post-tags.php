@@ -736,20 +736,16 @@ if ( ! function_exists( 'largo_post_metadata' ) ) {
  * New floating social buttons
  *
  * Only displayed if the floating share icons option is checked.
+ * Formerly only displayed if the post template was the single-column template.
+ *
  * @since 0.5.4
  * @link https://github.com/INN/Largo/issues/961
+ * @link http://jira.inn.org/browse/VO-10
  * @see largo_floating_social_button_width_json
  */
 if ( ! function_exists( 'largo_floating_social_buttons' ) ) {
 	function largo_floating_social_buttons() {
-		$template = get_post_template(null);
-
-		if ( is_null( $template ) )
-			$template = of_get_option( 'single_template' );
-
-		$is_single_column = (bool) strstr( $template, 'single-one-column' ) || $template == 'normal' || is_null( $template );
-
-		if ( is_single() && of_get_option('single_floating_social_icons', '1') == '1' && $is_single_column ) {
+		if ( is_single() && of_get_option('single_floating_social_icons', '1') == '1' ) {
 			echo '<script type="text/template" id="tmpl-floating-social-buttons">';
 			largo_post_social_links();
 			echo '</script>';
@@ -763,21 +759,30 @@ add_action('wp_footer', 'largo_floating_social_buttons');
  *
  * @since 0.5.4
  * @see largo_floating_social_buttons
+ * @see largo_floating_social_button_js
  */
 if ( ! function_exists('largo_floating_social_button_width_json') ) {
 	function largo_floating_social_button_width_json() {
-		$template = get_post_template(null);
+		if ( is_single() && of_get_option('single_floating_social_icons', '1') == '1' ) {
+			$template = get_post_template(null);
 
-		if ( is_null( $template ) )
-			$template = of_get_option( 'single_template' );
+			if ( is_null( $template ) )
+				$template = of_get_option( 'single_template' );
 
-		$is_single_column = (bool) strstr( $template, 'single-one-column' ) || $template == 'normal' || is_null( $template );
+			$is_single_column = (bool) strstr( $template, 'single-one-column' ) || $template == 'normal' || is_null( $template );
 
-		if ( is_single() && of_get_option('single_floating_social_icons', '1') == '1' && $is_single_column ) {
-			$config = array(
-				'min' => '980',
-				'max' => '9999',
-			);
+			if ( $is_single_column ) {
+				$config = array(
+					'min' => '980',
+					'max' => '9999',
+				);
+			} else {
+				$config = array(
+					'min' => '1400',
+					'max' => '9999',
+				);
+			}
+
 			$config = apply_filters( 'largo_floating_social_button_width_json', $config );
 			?>
 			<script type="text/javascript" id="floating-social-buttons-width-json">
@@ -794,18 +799,12 @@ add_action('wp_footer', 'largo_floating_social_button_width_json');
  *
  * @since 0.5.4
  * @see largo_floating_social_buttons
+ * @see largo_floating_social_button_width_json
  * @global LARGO_DEBUG
  */
 if ( ! function_exists('largo_floating_social_button_js') ) {
 	function largo_floating_social_button_js() {
-		$template = get_post_template(null);
-
-		if ( is_null( $template ) )
-			$template = of_get_option( 'single_template' );
-
-		$is_single_column = (bool) strstr( $template, 'single-one-column' ) || $template == 'normal' || is_null( $template );
-
-		if ( is_single() && of_get_option('single_floating_social_icons', '1') == '1' && $is_single_column ) {
+		if ( is_single() && of_get_option('single_floating_social_icons', '1') == '1' ) {
 			?>
 			<script type="text/javascript" src="<?php
 				$suffix = (LARGO_DEBUG)? '' : '.min';

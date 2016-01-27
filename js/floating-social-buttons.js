@@ -47,7 +47,7 @@
 
   var offsetLeft = function() {
     var origin = (!!$('header .post-social').length)? $('header .post-social') : $('header .entry-title');
-    return origin.offset().left - ($('#floating-social-buttons').outerWidth() * 2);
+    return origin.offset().left - ($('#floating-social-buttons').outerWidth() * 1.7);
   }
 
   var checkPosition = function() {
