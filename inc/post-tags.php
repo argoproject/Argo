@@ -171,10 +171,19 @@ if ( ! function_exists( 'largo_byline' ) ) {
 /**
  * Outputs facebook, twitter and print utility links on article pages
  *
+ * The Twitter 'via' attribute output is set in the following order
+ *
+ * - The single coauthor's twitter handle, if it is set
+ * - The site's twitter handle, if there are multiple coauthors and a site twitter handle
+ * - The single user's twitter handle, if it is set
+ * - The site's twitter handle, if it is set
+ * - No 'via' attribute if no twitter handles are set or if there are multiple coauthors but no site twitter handle
+ *
  * @param $echo bool echo the string or return it (default: echo)
  * @return string social icon area markup as formatted html
  * @since 0.3
  * @todo maybe let people re-arrange the order of the links or have more control over how they appear
+ * @link https://github.com/INN/Largo/issues/1088
  */
 if ( ! function_exists( 'largo_post_social_links' ) ) {
 	function largo_post_social_links( $echo = true ) {
@@ -194,12 +203,46 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 		}
 
 		if ( $utilities['twitter'] === '1' ) {
-			$twitter_share = '<span class="twitter"><a target="_blank" href="https://twitter.com/intent/tweet?text=%1$s&url=%2$s&via=%3$s"><i class="icon-twitter"></i><span class="hidden-phone">%4$s</span></a></span>';
+			$twitter_share = '<span class="twitter"><a target="_blank" href="https://twitter.com/intent/tweet?text=%1$s&url=%2$s%3$s"><i class="icon-twitter"></i><span class="hidden-phone">%4$s</span></a></span>';
+
+			// By default, don't set a via.
+			$via = '';
+
+			// If there are coauthors, use a coauthor twitter handle, otherwise use the normal author twitter handle
+			$values = get_post_custom( $post->ID );
+			if ( function_exists( 'coauthors_posts_links' ) && !isset( $values['largo_byline_text'] ) ) {
+				$coauthors = get_coauthors( $post->ID);
+				$author_twitters = array();
+				foreach ( $coauthors as $author ) {
+					if ( isset( $author->twitter ) ) {
+						$author_twitters[] = $author->twitter;
+					}
+				}
+				if ( count($author_twitters) == 1 ) {
+					$via = '&via=' . esc_attr( largo_twitter_url_to_username( $author_twitters[0] ) );
+				}
+				// in the event that there are more than one author twitter accounts, we fall back to the org account
+				// @link https://github.com/INN/Largo/issues/1088
+			} else if ( !isset( $values['largo_byline_text'] ) ) {
+				$user =  get_the_author_meta( 'twitter' );
+				if ( !empty( $temp ) ) {
+					$via = '&via=' . esc_attr( largo_twitter_url_to_username( $user ) );
+				}
+			}
+
+			// Use the site Twitter handle if that exists and there isn't yet a via
+			if ( empty($via) ) {
+				$site = of_get_option( 'twitter_link' );
+				if ( !empty($site) ) {
+					$via = '&via=' . esc_attr( largo_twitter_url_to_username( $site ) ) ;
+				}
+			}
+
 			$output .= sprintf(
 				$twitter_share,
 				esc_attr( get_the_title() ),
 				esc_attr( get_permalink() ),
-				esc_attr( get_the_author_meta( 'twitter' ) ),
+				$via,
 				esc_attr( __( 'Tweet', 'largo' ) )
 			);
 		}
