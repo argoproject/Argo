@@ -227,7 +227,7 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 				// @link https://github.com/INN/Largo/issues/1088
 			} else if ( !isset( $values['largo_byline_text'] ) ) {
 				$user =  get_the_author_meta( 'twitter' );
-				if ( !empty( $temp ) ) {
+				if ( !empty( $user ) ) {
 					$via = '&via=' . esc_attr( largo_twitter_url_to_username( $user ) );
 				}
 			}
