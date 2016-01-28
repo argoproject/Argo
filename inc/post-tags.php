@@ -102,7 +102,7 @@ if ( ! function_exists( 'largo_byline' ) ) {
 
 		$values = get_post_custom( $post_id );
 
-		// If Co-Authors Plus is enabled
+		// If Co-Authors Plus is enabled and there is not a custom byline
 		if ( function_exists( 'get_coauthors' ) && !isset( $values['largo_byline_text'] ) ) {
 			$coauthors = get_coauthors( $post_id );
 			foreach( $coauthors as $author ) {
@@ -131,13 +131,13 @@ if ( ! function_exists( 'largo_byline' ) ) {
 				$authors = $out[0];
 			}
 
-		// If Co-Authors Plus is not enabled
+		// If Co-Authors Plus is not enabled or if there is a custom byline
 		} else {
 			$authors = largo_author_link( false, $post_id );
 			$author_id = get_post_meta( $post_id, 'post_author', true );
 			$show_job_titles = of_get_option('show_job_titles');
-			if ( $show_job_titles && $job = get_the_author_meta( 'job_title' , $author_id ) ) {
-				$authors  .= '<span class="job-title"><span class="comma">,</span>' . $job . '</span>';
+			if ( !isset( $values['largo_byline_text'] ) && $show_job_titles && $job = get_the_author_meta( 'job_title' , $author_id ) ) {
+				$authors  .= '<span class="job-title"><span class="comma">,</span> ' . $job . '</span>';
 			}
 		}
 
