@@ -176,6 +176,7 @@ if ( ! function_exists( 'largo_byline' ) ) {
  * - The single coauthor's twitter handle, if it is set
  * - The site's twitter handle, if there are multiple coauthors and a site twitter handle
  * - The single user's twitter handle, if it is set
+ * - The site's twitter handle, if it is set and if there is a custom byline
  * - The site's twitter handle, if it is set
  * - No 'via' attribute if no twitter handles are set or if there are multiple coauthors but no site twitter handle
  *
@@ -209,6 +210,7 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 			$via = '';
 
 			// If there are coauthors, use a coauthor twitter handle, otherwise use the normal author twitter handle
+			// If there is a custom byline, don't try to use the author byline.
 			$values = get_post_custom( $post->ID );
 			if ( function_exists( 'coauthors_posts_links' ) && !isset( $values['largo_byline_text'] ) ) {
 				$coauthors = get_coauthors( $post->ID);
