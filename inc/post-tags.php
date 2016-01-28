@@ -102,7 +102,7 @@ if ( ! function_exists( 'largo_byline' ) ) {
 
 		$values = get_post_custom( $post_id );
 
-		// If Co-Authors Plus is enabled
+		// If Co-Authors Plus is enabled and there is not a custom byline
 		if ( function_exists( 'get_coauthors' ) && !isset( $values['largo_byline_text'] ) ) {
 			$coauthors = get_coauthors( $post_id );
 			foreach( $coauthors as $author ) {
@@ -131,7 +131,7 @@ if ( ! function_exists( 'largo_byline' ) ) {
 				$authors = $out[0];
 			}
 
-		// If Co-Authors Plus is not enabled
+		// If Co-Authors Plus is not enabled or if there is a custom byline
 		} else {
 			$authors = largo_author_link( false, $post_id );
 			$author_id = get_post_meta( $post_id, 'post_author', true );
