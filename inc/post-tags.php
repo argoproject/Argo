@@ -102,14 +102,22 @@ if ( ! function_exists( 'largo_byline' ) ) {
 
 		$values = get_post_custom( $post_id );
 
+		// If Co-Authors Plus is enabled and there is not a custom byline
 		if ( function_exists( 'get_coauthors' ) && !isset( $values['largo_byline_text'] ) ) {
 			$coauthors = get_coauthors( $post_id );
 			foreach( $coauthors as $author ) {
 				$byline_text = $author->display_name;
+				$show_job_titles = of_get_option('show_job_titles');
 				if ( $org = $author->organization )
 					$byline_text .= ' (' . $org . ')';
 
-				$out[] = '<a class="url fn n" href="' . get_author_posts_url( $author->ID, $author->user_nicename ) . '" title="' . esc_attr( sprintf( __( 'Read All Posts By %s', 'largo' ), $author->display_name ) ) . '" rel="author">' . esc_html( $byline_text ) . '</a>';
+				$byline_temp = '<a class="url fn n" href="' . get_author_posts_url( $author->ID, $author->user_nicename ) . '" title="' . esc_attr( sprintf( __( 'Read All Posts By %s', 'largo' ), $author->display_name ) ) . '" rel="author">' . esc_html( $byline_text ) . '</a>';
+				if ( $show_job_titles && $job = $author->job_title ) {
+					// Use parentheses in case of multiple guest authorss. Comma separators would be nonsensical: Firstname lastname, Job Title, Secondname Thirdname, and Fourthname Middle Fifthname
+					$byline_temp .= ' <span class="job-title"><span class="paren-open">(</span>' . $job . '<span class="paren-close">)</span></span>';
+				}
+
+				$out[] = $byline_temp;
 
 			}
 
@@ -123,8 +131,14 @@ if ( ! function_exists( 'largo_byline' ) ) {
 				$authors = $out[0];
 			}
 
+		// If Co-Authors Plus is not enabled or if there is a custom byline
 		} else {
 			$authors = largo_author_link( false, $post_id );
+			$author_id = get_post_meta( $post_id, 'post_author', true );
+			$show_job_titles = of_get_option('show_job_titles');
+			if ( !isset( $values['largo_byline_text'] ) && $show_job_titles && $job = get_the_author_meta( 'job_title' , $author_id ) ) {
+				$authors  .= '<span class="job-title"><span class="comma">,</span> ' . $job . '</span>';
+			}
 		}
 
 		$output = '<span class="by-author"><span class="by">' . __( 'By', 'largo' ) . '</span> <span class="author vcard" itemprop="author">' . $authors . '</span></span>';
@@ -157,10 +171,20 @@ if ( ! function_exists( 'largo_byline' ) ) {
 /**
  * Outputs facebook, twitter and print utility links on article pages
  *
+ * The Twitter 'via' attribute output is set in the following order
+ *
+ * - The single coauthor's twitter handle, if it is set
+ * - The site's twitter handle, if there are multiple coauthors and a site twitter handle
+ * - The single user's twitter handle, if it is set
+ * - The site's twitter handle, if it is set and if there is a custom byline
+ * - The site's twitter handle, if it is set
+ * - No 'via' attribute if no twitter handles are set or if there are multiple coauthors but no site twitter handle
+ *
  * @param $echo bool echo the string or return it (default: echo)
  * @return string social icon area markup as formatted html
  * @since 0.3
  * @todo maybe let people re-arrange the order of the links or have more control over how they appear
+ * @link https://github.com/INN/Largo/issues/1088
  */
 if ( ! function_exists( 'largo_post_social_links' ) ) {
 	function largo_post_social_links( $echo = true ) {
@@ -180,17 +204,52 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 		}
 
 		if ( $utilities['twitter'] === '1' ) {
-			$twitter_share = '<span class="twitter"><a target="_blank" href="https://twitter.com/intent/tweet?text=%1$s&url=%2$s&via=%3$s"><i class="icon-twitter"></i><span class="hidden-phone">%4$s</span></a></span>';
+			$twitter_share = '<span class="twitter"><a target="_blank" href="https://twitter.com/intent/tweet?text=%1$s&url=%2$s%3$s"><i class="icon-twitter"></i><span class="hidden-phone">%4$s</span></a></span>';
+
+			// By default, don't set a via.
+			$via = '';
+
+			// If there are coauthors, use a coauthor twitter handle, otherwise use the normal author twitter handle
+			// If there is a custom byline, don't try to use the author byline.
+			$values = get_post_custom( $post->ID );
+			if ( function_exists( 'coauthors_posts_links' ) && !isset( $values['largo_byline_text'] ) ) {
+				$coauthors = get_coauthors( $post->ID );
+				$author_twitters = array();
+				foreach ( $coauthors as $author ) {
+					if ( isset( $author->twitter ) ) {
+						$author_twitters[] = $author->twitter;
+					}
+				}
+				if ( count( $author_twitters ) == 1 ) {
+					$via = '&via=' . esc_attr( largo_twitter_url_to_username( $author_twitters[0] ) );
+				}
+				// in the event that there are more than one author twitter accounts, we fall back to the org account
+				// @link https://github.com/INN/Largo/issues/1088
+			} else if ( !isset( $values['largo_byline_text'] ) ) {
+				$user =  get_the_author_meta( 'twitter' );
+				if ( !empty( $user ) ) {
+					$via = '&via=' . esc_attr( largo_twitter_url_to_username( $user ) );
+				}
+			}
+
+			// Use the site Twitter handle if that exists and there isn't yet a via
+			if ( empty( $via ) ) {
+				$site = of_get_option( 'twitter_link' );
+				if ( !empty( $site ) ) {
+					$via = '&via=' . esc_attr( largo_twitter_url_to_username( $site ) ) ;
+				}
+			}
+
 			$output .= sprintf(
 				$twitter_share,
 				urlencode( get_the_title() ),
 				esc_url( get_permalink() ),
-				esc_attr( get_the_author_meta( 'twitter' ) ),
+				$via,
 				esc_attr( __( 'Tweet', 'largo' ) )
 			);
 		}
 		
-		if ($utilities['email'] === '1' ) {
+		if ( $utilities['email'] === '1' ) {
 			$output .= '<span data-service="email" class="email custom-share-button share-button"><a><i class="icon-mail"></i> <span class="hidden-phone">Email</span></a></span>';
 		}
 
@@ -206,7 +265,7 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 		// Try to get the top term permalink and RSS feed
 		$top_term_id = get_post_meta( $post->ID, 'top_term', TRUE );
 		$top_term_taxonomy = $wpdb->get_var(
-			$wpdb->prepare( "SELECT taxonomy FROM $wpdb->term_taxonomy WHERE term_id = %d LIMIT 1", $top_term_id)
+			$wpdb->prepare( "SELECT taxonomy FROM $wpdb->term_taxonomy WHERE term_id = %d LIMIT 1", $top_term_id )
 		);
 
 		if ( empty( $top_term_id ) || empty( $top_term_taxonomy ) ) {
@@ -260,7 +319,7 @@ EOD;
 		 * @since 0.5.3
 		 * @param string $output A div containing a number of spans containing social links and other utilities.
 		 */
-		apply_filters('largo_post_social_links', $output);
+		apply_filters( 'largo_post_social_links', $output );
 
 		if ( $echo ) {
 			echo $output;
@@ -722,20 +781,16 @@ if ( ! function_exists( 'largo_post_metadata' ) ) {
  * New floating social buttons
  *
  * Only displayed if the floating share icons option is checked.
+ * Formerly only displayed if the post template was the single-column template.
+ *
  * @since 0.5.4
  * @link https://github.com/INN/Largo/issues/961
+ * @link http://jira.inn.org/browse/VO-10
  * @see largo_floating_social_button_width_json
  */
 if ( ! function_exists( 'largo_floating_social_buttons' ) ) {
 	function largo_floating_social_buttons() {
-		$template = get_post_template(null);
-
-		if ( is_null( $template ) )
-			$template = of_get_option( 'single_template' );
-
-		$is_single_column = (bool) strstr( $template, 'single-one-column' ) || $template == 'normal' || is_null( $template );
-
-		if ( is_single() && of_get_option('single_floating_social_icons', '1') == '1' && $is_single_column ) {
+		if ( is_single() && of_get_option('single_floating_social_icons', '1') == '1' ) {
 			echo '<script type="text/template" id="tmpl-floating-social-buttons">';
 			largo_post_social_links();
 			echo '</script>';
@@ -749,21 +804,30 @@ add_action('wp_footer', 'largo_floating_social_buttons');
  *
  * @since 0.5.4
  * @see largo_floating_social_buttons
+ * @see largo_floating_social_button_js
  */
 if ( ! function_exists('largo_floating_social_button_width_json') ) {
 	function largo_floating_social_button_width_json() {
-		$template = get_post_template(null);
+		if ( is_single() && of_get_option('single_floating_social_icons', '1') == '1' ) {
+			$template = get_post_template(null);
 
-		if ( is_null( $template ) )
-			$template = of_get_option( 'single_template' );
+			if ( is_null( $template ) )
+				$template = of_get_option( 'single_template' );
 
-		$is_single_column = (bool) strstr( $template, 'single-one-column' ) || $template == 'normal' || is_null( $template );
+			$is_single_column = (bool) strstr( $template, 'single-one-column' ) || $template == 'normal' || is_null( $template );
 
-		if ( is_single() && of_get_option('single_floating_social_icons', '1') == '1' && $is_single_column ) {
-			$config = array(
-				'min' => '980',
-				'max' => '9999',
-			);
+			if ( $is_single_column ) {
+				$config = array(
+					'min' => '980',
+					'max' => '9999',
+				);
+			} else {
+				$config = array(
+					'min' => '1400',
+					'max' => '9999',
+				);
+			}
+
 			$config = apply_filters( 'largo_floating_social_button_width_json', $config );
 			?>
 			<script type="text/javascript" id="floating-social-buttons-width-json">
@@ -780,18 +844,12 @@ add_action('wp_footer', 'largo_floating_social_button_width_json');
  *
  * @since 0.5.4
  * @see largo_floating_social_buttons
+ * @see largo_floating_social_button_width_json
  * @global LARGO_DEBUG
  */
 if ( ! function_exists('largo_floating_social_button_js') ) {
 	function largo_floating_social_button_js() {
-		$template = get_post_template(null);
-
-		if ( is_null( $template ) )
-			$template = of_get_option( 'single_template' );
-
-		$is_single_column = (bool) strstr( $template, 'single-one-column' ) || $template == 'normal' || is_null( $template );
-
-		if ( is_single() && of_get_option('single_floating_social_icons', '1') == '1' && $is_single_column ) {
+		if ( is_single() && of_get_option('single_floating_social_icons', '1') == '1' ) {
 			?>
 			<script type="text/javascript" src="<?php
 				$suffix = (LARGO_DEBUG)? '' : '.min';

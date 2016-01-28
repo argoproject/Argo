@@ -693,6 +693,17 @@ function optionsframework_options() {
 		'std' 	=> '0',
 		'type' 	=> 'checkbox');
 
+	$options[] = array(
+		'name' 	=> __('Byline Options', 'largo'),
+		'type'	=> 'info');
+
+	$options[] = array(
+		'desc' => __('Enable display of job titles in bylines and author biographies?', 'largo'),
+		'id'   => 'show_job_titles',
+		'std'  => '0',
+		'type' => 'checkbox');
+
+
 /*
  * Removing inn_member_since in 0.5.2
 	if ( INN_MEMBER ) { // only relevant in this case, options affecting the logo display
