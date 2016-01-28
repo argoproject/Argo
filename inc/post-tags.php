@@ -213,14 +213,14 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 			// If there is a custom byline, don't try to use the author byline.
 			$values = get_post_custom( $post->ID );
 			if ( function_exists( 'coauthors_posts_links' ) && !isset( $values['largo_byline_text'] ) ) {
-				$coauthors = get_coauthors( $post->ID);
+				$coauthors = get_coauthors( $post->ID );
 				$author_twitters = array();
 				foreach ( $coauthors as $author ) {
 					if ( isset( $author->twitter ) ) {
 						$author_twitters[] = $author->twitter;
 					}
 				}
-				if ( count($author_twitters) == 1 ) {
+				if ( count( $author_twitters ) == 1 ) {
 					$via = '&via=' . esc_attr( largo_twitter_url_to_username( $author_twitters[0] ) );
 				}
 				// in the event that there are more than one author twitter accounts, we fall back to the org account
@@ -233,9 +233,9 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 			}
 
 			// Use the site Twitter handle if that exists and there isn't yet a via
-			if ( empty($via) ) {
+			if ( empty( $via ) ) {
 				$site = of_get_option( 'twitter_link' );
-				if ( !empty($site) ) {
+				if ( !empty( $site ) ) {
 					$via = '&via=' . esc_attr( largo_twitter_url_to_username( $site ) ) ;
 				}
 			}
@@ -249,7 +249,7 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 			);
 		}
 		
-		if ($utilities['email'] === '1' ) {
+		if ( $utilities['email'] === '1' ) {
 			$output .= '<span data-service="email" class="email custom-share-button share-button"><a><i class="icon-mail"></i> <span class="hidden-phone">Email</span></a></span>';
 		}
 
@@ -265,7 +265,7 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 		// Try to get the top term permalink and RSS feed
 		$top_term_id = get_post_meta( $post->ID, 'top_term', TRUE );
 		$top_term_taxonomy = $wpdb->get_var(
-			$wpdb->prepare( "SELECT taxonomy FROM $wpdb->term_taxonomy WHERE term_id = %d LIMIT 1", $top_term_id)
+			$wpdb->prepare( "SELECT taxonomy FROM $wpdb->term_taxonomy WHERE term_id = %d LIMIT 1", $top_term_id )
 		);
 
 		if ( empty( $top_term_id ) || empty( $top_term_taxonomy ) ) {
@@ -319,7 +319,7 @@ EOD;
 		 * @since 0.5.3
 		 * @param string $output A div containing a number of spans containing social links and other utilities.
 		 */
-		apply_filters('largo_post_social_links', $output);
+		apply_filters( 'largo_post_social_links', $output );
 
 		if ( $echo ) {
 			echo $output;
