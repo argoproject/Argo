@@ -136,8 +136,8 @@ if ( ! function_exists( 'largo_byline' ) ) {
 			$authors = largo_author_link( false, $post_id );
 			$author_id = get_post_meta( $post_id, 'post_author', true );
 			$show_job_titles = of_get_option('show_job_titles');
-			if ( $show_job_titles && $job = get_the_author_meta( 'job_title' , $author_id ) ) {
-				$authors  .= '<span class="job-title"><span class="comma">,</span>' . $job . '</span>';
+			if ( !isset( $values['largo_byline_text'] ) && $show_job_titles && $job = get_the_author_meta( 'job_title' , $author_id ) ) {
+				$authors  .= '<span class="job-title"><span class="comma">,</span> ' . $job . '</span>';
 			}
 		}
 
