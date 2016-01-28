@@ -555,7 +555,7 @@ class Largo_Related {
 		$taxonomies = get_the_terms( $this->post_id, array('category', 'post_tag') );
 
 		//loop thru taxonomies, much like series, and get posts
-		if ( count($taxonomies) ) {
+		if ( is_array($taxonomies) ) {
 			//sort by popularity
 			usort( $taxonomies, array(__CLASS__, 'popularity_sort' ) );
 
