@@ -187,7 +187,7 @@ Here is the current list of hooks available in Largo (available as of v.0.4):
 **partials/largo-header.php**
 
  - **largo_header_before_largo_header** - immediately before ``largo_header()`` is output
- - **largo_header_after_largo_header** - immediately after ``largo_header()`` is output
+ - **largo_header_after_largo_header** - immediately after ``largo_header()`` is output. By default, ``largo_header_widget_sidebar`` is hooked here.
 
 **home.php**
 
