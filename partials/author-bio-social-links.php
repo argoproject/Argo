@@ -53,8 +53,9 @@ if (isset($user_meta['show_email'][0])) {
 
 	<?php
 		if ( !is_author() ) {
-			printf( __( '<li class="author-posts-link"><a class="url" href="%1$s" rel="author" title="See all posts by this author">More by this author</a></li>', 'largo' ),
-				get_author_posts_url( $author_obj->ID, $author_obj->user_nicename )
+			printf( __( '<li class="author-posts-link"><a class="url" href="%1$s" rel="author" title="See all posts by %2$s">More by %2$s</a></li>', 'largo' ),
+				get_author_posts_url( $author_obj->ID, $author_obj->user_nicename ),
+				!empty($author_obj->first_name) ? esc_attr( $author_obj->first_name ) : __("this author", 'largo')
 			);
 		}
 	?>
