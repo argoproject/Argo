@@ -15,7 +15,7 @@ function largo_sticky_nav_active() {
 }
 
 /**
- * Output the site header
+ * Output the site header image or the text-only header
  *
  * @since 0.1
  */
