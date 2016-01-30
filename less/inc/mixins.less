@@ -595,3 +595,9 @@
 .darkLight (@a) when (lightness(@a) < 50%) {
   color: @white;
 }
+.socialButton (@network) {
+  background-color: @network;
+  &:hover {
+    background-color: darken(@network, 5%);  
+  }
+}
