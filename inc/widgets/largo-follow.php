@@ -45,6 +45,7 @@ class largo_follow_widget extends WP_Widget {
 				'flickr' => 'Follow Us on Flickr',
 				'rss' => 'Subscribe via RSS'
 			);
+			$networks = apply_filters( 'largo_additional_networks', $networks );
 			
 			foreach ( $networks as $network => $btn_text ) {
 				if ( $network == 'rss' ) {
