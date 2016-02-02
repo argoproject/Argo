@@ -570,7 +570,7 @@ function optionsframework_options() {
 		'type' 	=> 'checkbox');
 
 	$options[] = array(
-		'desc' 	=> __('Enable Optional Header Widget', 'largo'),
+		'desc' 	=> __('Enable Optional Header Widget Area.', 'largo'),
 		'id' 	=> 'header_widget_enabled',
 		'std' 	=> '0',
 		'type' 	=> 'checkbox');

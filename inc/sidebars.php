@@ -93,7 +93,7 @@ function largo_register_sidebars() {
 	if ( of_get_option( 'header_widget_enabled' ) ) {
 		$sidebars[] = array(
 			'name' 	=> __( 'Header Widget', 'largo'),
-			'desc' 	=> __( 'An optional area to place one widget in the header next to the site logo', 'largo' ),
+			'desc' 	=> __( 'An optional area to place one widget in the header next to the site logo.', 'largo' ),
 			'id' 	=> 'header-widget'
 		);
 	}
