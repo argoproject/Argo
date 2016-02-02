@@ -570,6 +570,12 @@ function optionsframework_options() {
 		'type' 	=> 'checkbox');
 
 	$options[] = array(
+		'desc' 	=> __('Enable Optional Header Widget', 'largo'),
+		'id' 	=> 'header_widget_enabled',
+		'std' 	=> '0',
+		'type' 	=> 'checkbox');
+
+	$options[] = array(
 		'desc' 	=> __('Enable "Post Types" taxonomy.', 'largo'),
 		'id' 	=> 'post_types_enabled',
 		'std' 	=> '0',

@@ -174,6 +174,7 @@ This has the advantage of making your code much easier to maintain (because you'
 Here is the current list of hooks available in Largo (available as of v.0.4):
 
 **header.php**
+
  - **(wp_head)** - if you need to insert anything in the <head> element use the built-in wp_head hook
  - **largo_top** - directly after the opening <body> tag and "return to top" target div
  - **largo_before_global_nav** - only fires if the global nav is shown, directly before the global nav partial
@@ -182,6 +183,11 @@ Here is the current list of hooks available in Largo (available as of v.0.4):
  - **largo_after_header** - after the main <header> element
  - **largo_after_nav** - after the nav, before #main opening div tag
  - **largo_main_top** - directly after the opening #main div tag
+
+**partials/largo-header.php**
+
+ - **largo_header_before_largo_header** - immediately before ``largo_header()`` is output
+ - **largo_header_after_largo_header** - immediately after ``largo_header()`` is output. By default, ``largo_header_widget_sidebar`` is hooked here.
 
 **home.php**
 
@@ -220,8 +226,9 @@ These actions are run on all homepage templates, including the Legacy Three Colu
  - **largo_before_comments** - before the comments section
  - **largo_after_comments** - after the comments section
  - **largo_after_content** - after the close of the #content div
- 
- **page.php**
+
+**page.php**
+
  - **largo_before_page_header** - inside <article> but before the post <header> element
  - **largo_after_page_header** - just after the closing post <header> element
  - **largo_before_page_content** - directly inside the .entry-content <div> tag
