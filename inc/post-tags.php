@@ -194,6 +194,8 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 
 		$output = '<div class="largo-follow post-social clearfix">';
 
+		$values = get_post_custom( $post->ID );
+
 		if ( $utilities['facebook'] === '1' ) {
 			$fb_share = '<span class="facebook"><a target="_blank" href="http://www.facebook.com/sharer/sharer.php?u=%1$s"><i class="icon-facebook"></i><span class="hidden-phone">%2$s</span></a></span>';
 			$output .= sprintf(
@@ -211,7 +213,6 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 
 			// If there are coauthors, use a coauthor twitter handle, otherwise use the normal author twitter handle
 			// If there is a custom byline, don't try to use the author byline.
-			$values = get_post_custom( $post->ID );
 			if ( function_exists( 'coauthors_posts_links' ) && !isset( $values['largo_byline_text'] ) ) {
 				$coauthors = get_coauthors( $post->ID );
 				$author_twitters = array();
@@ -290,10 +291,14 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 		}
 
 		// Try to get the author's Twitter link
-		$twitter_username = get_user_meta( $post->post_author, 'twitter', true );
-		if ( ! empty( $twitter_username ) ) {
-			$twitter_link = 'https://twitter.com/' . $twitter_username;
-			$more_social_links[] = '<li><a href="' . $twitter_link . '"><i class="icon-twitter"></i> <span>Follow this author</span></a></li>';
+		// Commented out until we get a better grasp of coauthors
+		// Don't do this if we have a custom byline text
+		if ( ! function_exists('get_coauthors') || !isset( $values['largo_byline_text'] ) ) {
+			$twitter_username = get_user_meta( $post->post_author, 'twitter', true );
+			if ( ! empty( $twitter_username ) ) {
+				$twitter_link = 'https://twitter.com/' . $twitter_username;
+				$more_social_links[] = '<li><a href="' . $twitter_link . '"><i class="icon-twitter"></i> <span>Follow this author</span></a></li>';
+			}
 		}
 
 		if ( count( $more_social_links ) ) {
