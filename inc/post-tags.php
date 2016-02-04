@@ -293,7 +293,7 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 		// Try to get the author's Twitter link
 		// Commented out until we get a better grasp of coauthors
 		// Don't do this if we have a custom byline text
-		if ( ! function_exists('get_coauthors') || !isset( $values['largo_byline_text'] ) ) {
+		if ( ! function_exists('get_coauthors') && !isset( $values['largo_byline_text'] ) ) {
 			$twitter_username = get_user_meta( $post->post_author, 'twitter', true );
 			if ( ! empty( $twitter_username ) ) {
 				$twitter_link = 'https://twitter.com/' . $twitter_username;
