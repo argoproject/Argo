@@ -221,7 +221,7 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 						$author_twitters[] = $author->twitter;
 					}
 				}
-				if ( count( $author_twitters ) == 1 ) {
+				if ( count( $author_twitters ) == 1 && !empty($author_twitters[0]) ) {
 					$via = '&via=' . rawurlencode( largo_twitter_url_to_username( $author_twitters[0] ) );
 				}
 				// in the event that there are more than one author twitter accounts, we fall back to the org account
