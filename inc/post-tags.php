@@ -198,8 +198,9 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 			$fb_share = '<span class="facebook"><a target="_blank" href="http://www.facebook.com/sharer/sharer.php?u=%1$s"><i class="icon-facebook"></i><span class="hidden-phone">%2$s</span></a></span>';
 			$output .= sprintf(
 				$fb_share,
-				esc_attr( get_permalink() ),
-				esc_attr( ucfirst( of_get_option( 'fb_verb' ) ) )
+				// Yes, rawurlencode. Otherwise, the link will break.
+				rawurlencode( get_permalink() ),
+				rawurlencode( ucfirst( of_get_option( 'fb_verb' ) ) )
 			);
 		}
 
@@ -221,14 +222,14 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 					}
 				}
 				if ( count( $author_twitters ) == 1 ) {
-					$via = '&via=' . esc_attr( largo_twitter_url_to_username( $author_twitters[0] ) );
+					$via = '&via=' . rawurlencode( largo_twitter_url_to_username( $author_twitters[0] ) );
 				}
 				// in the event that there are more than one author twitter accounts, we fall back to the org account
 				// @link https://github.com/INN/Largo/issues/1088
 			} else if ( !isset( $values['largo_byline_text'] ) ) {
 				$user =  get_the_author_meta( 'twitter' );
 				if ( !empty( $user ) ) {
-					$via = '&via=' . esc_attr( largo_twitter_url_to_username( $user ) );
+					$via = '&via=' . rawurlencode( largo_twitter_url_to_username( $user ) );
 				}
 			}
 
@@ -236,16 +237,17 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 			if ( empty( $via ) ) {
 				$site = of_get_option( 'twitter_link' );
 				if ( !empty( $site ) ) {
-					$via = '&via=' . esc_attr( largo_twitter_url_to_username( $site ) ) ;
+					$via = '&via=' . rawurlencode( largo_twitter_url_to_username( $site ) ) ;
 				}
 			}
 
 			$output .= sprintf(
 				$twitter_share,
-				esc_attr( get_the_title() ),
-				esc_attr( get_permalink() ),
+				// Yes, rawurlencode. Otherwise, the link will break.
+				rawurlencode( get_the_title() ),
+				rawurlencode( get_permalink() ),
 				$via,
-				esc_attr( __( 'Tweet', 'largo' ) )
+				rawurlencode( __( 'Tweet', 'largo' ) )
 			);
 		}
 		
