@@ -1,4 +1,15 @@
-<?php $custom = get_post_custom($post->ID); ?>
+<?php
+/*
+ * The template for displaying posts from the Roundup Link post type from INN/link-roundups
+ *
+ * @package Largo
+ * @since 0.5.4
+ * @link https://github.com/INN/link-roundups
+ * @link https://wordpress.org/plugins/link-roundups/
+ */
+
+$custom = get_post_custom($post->ID);
+?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?>>
 	<header>
