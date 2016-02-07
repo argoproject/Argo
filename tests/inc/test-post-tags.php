@@ -80,6 +80,8 @@ EOT;
 		$this->assertRegExp('/class="twitter"/' , $ret, "The 'twitter' class did not appear in the output");
 		// @TODO: insert a test for the get_the_author_meta test here
 		$this->assertRegExp('/' . __('Tweet', 'largo') . '/', $ret, "The translation of 'Tweet' was not in the Twitter output");
+		$this->assertRegExp('/' . preg_quote(rawurlencode(get_permalink()), '/') . '/', $ret, "The permalink was not in the Twitter output");
+		$this->assertRegExp('/' . preg_quote(rawurlencode(get_the_title()), '/') . '/', $ret, "The title was not in the Twitter output");
 		unset($ret);
 		of_reset_options();
 
@@ -89,7 +91,7 @@ EOT;
 		largo_post_social_links();
 		$ret = ob_get_clean();
 		$this->assertRegExp('/' . preg_quote(esc_attr( of_get_option( 'fb_verb' ) ), '/' ) . '/i', $ret, "The Facebook Verb was not in the Facebook output");
-		$this->assertRegExp('/' . preg_quote(get_permalink(), '/') . '/', $ret, "The permalink was not in the Facebook output");
+		$this->assertRegExp('/' . preg_quote(rawurlencode(get_permalink()), '/') . '/', $ret, "The permalink was not in the Facebook output");
 		unset($ret);
 		of_reset_options();
 

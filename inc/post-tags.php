@@ -194,12 +194,14 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 
 		$output = '<div class="largo-follow post-social clearfix">';
 
+		$values = get_post_custom( $post->ID );
+
 		if ( $utilities['facebook'] === '1' ) {
 			$fb_share = '<span class="facebook"><a target="_blank" href="http://www.facebook.com/sharer/sharer.php?u=%1$s"><i class="icon-facebook"></i><span class="hidden-phone">%2$s</span></a></span>';
 			$output .= sprintf(
 				$fb_share,
-				esc_url( get_permalink() ),
-				esc_attr( ucfirst( of_get_option( 'fb_verb' ) ) )
+				rawurlencode( get_permalink() ),
+				rawurlencode( ucfirst( of_get_option( 'fb_verb' ) ) )
 			);
 		}
 
@@ -211,7 +213,6 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 
 			// If there are coauthors, use a coauthor twitter handle, otherwise use the normal author twitter handle
 			// If there is a custom byline, don't try to use the author byline.
-			$values = get_post_custom( $post->ID );
 			if ( function_exists( 'coauthors_posts_links' ) && !isset( $values['largo_byline_text'] ) ) {
 				$coauthors = get_coauthors( $post->ID );
 				$author_twitters = array();
@@ -220,15 +221,15 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 						$author_twitters[] = $author->twitter;
 					}
 				}
-				if ( count( $author_twitters ) == 1 ) {
-					$via = '&via=' . esc_attr( largo_twitter_url_to_username( $author_twitters[0] ) );
+				if ( count( $author_twitters ) == 1 && !empty($author_twitters[0]) ) {
+					$via = '&via=' . rawurlencode( largo_twitter_url_to_username( $author_twitters[0] ) );
 				}
 				// in the event that there are more than one author twitter accounts, we fall back to the org account
 				// @link https://github.com/INN/Largo/issues/1088
-			} else if ( !isset( $values['largo_byline_text'] ) ) {
+			} else if ( empty($via) && !isset( $values['largo_byline_text'] ) ) {
 				$user =  get_the_author_meta( 'twitter' );
 				if ( !empty( $user ) ) {
-					$via = '&via=' . esc_attr( largo_twitter_url_to_username( $user ) );
+					$via = '&via=' . rawurlencode( largo_twitter_url_to_username( $user ) );
 				}
 			}
 
@@ -236,16 +237,16 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 			if ( empty( $via ) ) {
 				$site = of_get_option( 'twitter_link' );
 				if ( !empty( $site ) ) {
-					$via = '&via=' . esc_attr( largo_twitter_url_to_username( $site ) ) ;
+					$via = '&via=' . rawurlencode( largo_twitter_url_to_username( $site ) ) ;
 				}
 			}
 
 			$output .= sprintf(
 				$twitter_share,
-				urlencode( get_the_title() ),
-				esc_url( get_permalink() ),
+				rawurlencode( get_the_title() ),
+				rawurlencode( get_permalink() ),
 				$via,
-				esc_attr( __( 'Tweet', 'largo' ) )
+				rawurlencode( __( 'Tweet', 'largo' ) )
 			);
 		}
 		
@@ -290,10 +291,14 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 		}
 
 		// Try to get the author's Twitter link
-		$twitter_username = get_user_meta( $post->post_author, 'twitter', true );
-		if ( ! empty( $twitter_username ) ) {
-			$twitter_link = 'https://twitter.com/' . $twitter_username;
-			$more_social_links[] = '<li><a href="' . $twitter_link . '"><i class="icon-twitter"></i> <span>Follow this author</span></a></li>';
+		// Commented out until we get a better grasp of coauthors
+		// Don't do this if we have a custom byline text
+		if ( ! function_exists('get_coauthors') && !isset( $values['largo_byline_text'] ) ) {
+			$twitter_username = get_user_meta( $post->post_author, 'twitter', true );
+			if ( ! empty( $twitter_username ) ) {
+				$twitter_link = 'https://twitter.com/' . $twitter_username;
+				$more_social_links[] = '<li><a href="' . $twitter_link . '"><i class="icon-twitter"></i> <span>Follow this author</span></a></li>';
+			}
 		}
 
 		if ( count( $more_social_links ) ) {

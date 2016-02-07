@@ -4,6 +4,7 @@
  *
  * @package Largo
  * @since 0.1
+ * @filter largo_partial_by_post_type
  */
 get_header();
 $queried_object = get_queried_object();
@@ -45,6 +46,9 @@ $queried_object = get_queried_object();
 				} else {
 					$title = _e( 'Blog Archives', 'largo' );
 				}
+			} elseif ( is_post_type_archive( 'rounduplink' ) ) {
+				$title = __( 'Saved Links' , 'largo' );
+				$rss_link = '/rounduplink/feed';
 			}
 		?>
 
@@ -86,7 +90,9 @@ $queried_object = get_queried_object();
 				rewind_posts();
 
 				while ( have_posts() ) : the_post();
-					get_template_part( 'partials/content', 'archive' );
+					$post_type = get_post_type();
+					$partial = largo_get_partial_by_post_type('archive', $post_type, 'archive');
+					get_template_part( 'partials/content', $partial );
 				endwhile;
 
 				largo_content_nav( 'nav-below' );
