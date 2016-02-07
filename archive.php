@@ -46,6 +46,9 @@ $queried_object = get_queried_object();
 				} else {
 					$title = _e( 'Blog Archives', 'largo' );
 				}
+			} elseif ( is_post_type_archive( 'rounduplink' ) ) {
+				$title = __( 'Saved Links' , 'largo' );
+				$rss_link = '/rounduplink/feed';
 			}
 		?>
 
