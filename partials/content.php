@@ -24,7 +24,7 @@ $featured = has_term( 'homepage-featured', 'prominence' );
 					echo '</div>';
 				} elseif( has_post_thumbnail() ){
 					echo('<a href="' . get_permalink() . '" title="' . the_title_attribute( array( 'before' => __( 'Permalink to', 'largo' ) . ' ', 'echo' => false )) . '" rel="bookmark">');
-					the_post_thumbnail( 'full' );
+					the_post_thumbnail( 'rect_thumb' );
 					echo('</a>');
 				}
 			?>
