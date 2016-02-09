@@ -1,6 +1,8 @@
 // Category, Tag and Taxonomy Pages
 .archive-background {
   margin-bottom: @baseline;
+  padding-bottom: @baseline;
+  border-bottom: 1px solid @grayLighter;
   h1 {
     font-size: @baseFontSize * 2.75;
     margin-bottom: 3px;
@@ -11,32 +13,46 @@
   }
   .related-topics {
     font-family: @sansFontFamily;
-	h5 {
-	  display: inline;
-	  float: left;
-	  font-size: @baseFontSize;
-	  margin: 0 4px 0 0;
-	  line-height: 1.3;
-    }
 	ul {
-	  font-size: @baseFontSize - 1;
 	  float: left;
+	  width: 100%;
 	  list-style: none;
 	  margin: 0;
+	  font-size: @baseFontSize;
 	  line-height: 1.3;
 	  li {
 	    display: inline;
 	    margin: 0;
 	    padding: 0;
+	    &:first-child {
+		  margin-right: 5px;
+	    }
 	    &:after {
 	      content: ", ";
 	    }
+	    &:first-child:after,
 	    &:last-child:after {
 	      content: "";
 	    }
 	  }
     }
   }
+  .rss-subscribe-link {
+    float: right;
+    margin-top: 10px;
+    font-family: @sansFontFamily;
+    text-transform: uppercase;
+    color: @rss;
+    i {
+	  padding-left: 3px;
+	  position: relative;
+	  top: -2px;
+    }
+    &:hover {
+      text-decoration: none;
+      color: darken(@rss, 15%);
+    }
+}
 }
 .archive .hero {
   clear: both;
@@ -45,12 +61,6 @@
   .wp-media-credit {
     display: none;
   }
-}
-h3.recent-posts {
-  padding: 2px 0;
-  margin-bottom: @baseline * 0.815;
-  border-bottom: 1px solid @grayLight;
-  border-top: 3px solid @grayLight;
 }
 article div.has-thumbnail {
   float: right;
@@ -65,7 +75,7 @@ article img.attachment-post-thumbnail {
 .primary-featured-post,
 .secondary-featured-post {
   padding: 0 0 24px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid @grayLighter;
   margin-bottom: 24px;
 }
 .primary-featured-post {
@@ -100,7 +110,6 @@ article img.attachment-post-thumbnail {
     }
   }
 }
-
 
 // posts on archive pages
 .archive,
