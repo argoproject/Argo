@@ -37,6 +37,17 @@ filter: **largo_homepage_topstories_post_count**
 Other filters and actions
 -------------------------
 
+filter: **largo_archive_rounduplink_title**
+
+    Called in `archive.php` to filter the page title for posts in the `rounduplink` post type.
+
+    **Usage:** ::
+
+    function filter_rounduplink_title($title) {
+        return "Custom title here";
+    }
+    add_action('largo_archive_rounduplink_title', 'filter_rounduplink_title');
+
 filter: **largo_registration_extra_fields**
 
     Called directly before the `[largo_registration_form]` shortcode has finished executing. You can append to this any addition form fields that you want to process.
@@ -95,7 +106,7 @@ filter: **largo_lmp_template_partial**
 
 filter: **largo_partial_by_post_type**
 
-    *args: $partial, $post_type, $context*
+    *args: String $partial, String $post_type, String $context*
 
     Modifies the partial returned by ``largo_get_partial_by_post_type`` to whatever you want.
 
@@ -115,15 +126,15 @@ filter: **largo_partial_by_post_type**
 
 
 filter: **largo_byline**
-    *args: $output*
+    *args: String $output*
     
     Called in ``largo_byline()`` before the admin-user edit link is added. This can be used to append or prepend HTML, or to change the output of the byline function entirely. The passed string is HTML.
 
 filter: **largo_post_social_links**
 
-    *args: $output*
+    *args: String $output*
 
-    Called before ``largo_post_social_links()`` returns or echos the social icons. The argument ``$output`` is HTML, usually containing HTML looking like this: (Whitespace has been added for readability) ::
+    Called before ``largo_post_social_links()`` returns or echos the social icons. The argument ``$output`` is HTML, usually containing HTML looking something like this: (Whitespace has been added for readability) ::
 
         <div class="largo-follow post-social clearfix">
             <span class="facebook">
@@ -144,16 +155,44 @@ filter: **largo_post_social_links**
                     <span class="hidden-phone">Print</span>
                 </a>
             </span>
-            <span data-service="email" class="email custom-share-button share-button">
+          <span data-service="email" class="email custom-share-button share-button">
                 <i class="icon-mail"></i>
                 <span class="hidden-phone">Email</span>
             </span>
+            <span class="more-social-links">
+                <a class="popover-toggle" href="#"><i class="icon-plus"></i><span class="hidden-phone">More</span></a>
+                <span class="popover">
+                <ul>
+                    ${more_social_links_str}
+                </ul>
+                </span>
+            </span>
         </div>
+
+filter: **largo_post_social_more_social_links**
+    *args: Array $more_social_links*
+
+    Called in `largo_post_social_links` to filter the array of social links in the "More" drop-down menu displayed in the social links on single posts: the article-top social links, the floating social buttons, and the Largo Follow widget in the article-bottom widget area.
+
+    Passed is an array, where each item in the array is an HTML `li` element containing a link and an icon `i` element to some form of additional, relevant material. The default array in Largo is:
+
+    - Top term link
+    - Subscribe to RSS feed for top term
+    - Author Twitter link, if the post doesn't have a custom byline and if Co-Authors Plus isn't active
+
+    Adding new social media networks is as simple as adding a new item to the array: ::
+
+        function add_linkedin($more) {
+            $more[] = '<li><a href=""><i class="icon-linkedin"></i> <span>Your text here!</span></a></li>';
+        }
+        add_filter('largo_post_social_more_social_links', 'add_linkedin');
+
+
 
 Template Hooks
 --------------
 
-**What are these and why would I want to use them?**
+**at are these and why would I want to use them?**
 
 Sometimes you may want to fire certain functions or include additional blocks of markup on a page without having to modify or override an entire template file.
 
