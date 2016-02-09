@@ -54,7 +54,7 @@ $queried_object = get_queried_object();
 				 * @param string $title The title of the archive page
 				 * @since 0.5.4
 				 */
-				$title = apply_filters('largo_archive_rounduplink_title', __( 'Saved Links' , 'largo' ) );
+				$title = apply_filters( 'largo_archive_rounduplink_title', __( 'Saved Links' , 'largo' ) );
 				$rss_link = '/rounduplink/feed';
 			}
 		?>
