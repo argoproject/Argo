@@ -24,7 +24,10 @@ function largo_get_related_topics_for_category( $obj ) {
     }
 
     $out = "<ul>";
-
+	
+	$title_ul = apply_filters( 'largo_related_topics_title_ul', __( 'Related Topics:' , 'largo' ) );
+	$out .= '<li><strong>' . $title_ul . '</strong></li>';
+         
     // spit out the subcategories
     $cats = _subcategories_for_category( $cat_id );
 
