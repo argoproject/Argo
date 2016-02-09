@@ -37,6 +37,17 @@ filter: **largo_homepage_topstories_post_count**
 Other filters and actions
 -------------------------
 
+filter: **largo_archive_rounduplink_title**
+
+    Called in `archive.php` to filter the page title for posts in the `rounduplink` post type.
+
+    **Usage:** ::
+
+    function filter_rounduplink_title($title) {
+        return "Custom title here";
+    }
+    add_action('largo_archive_rounduplink_title', 'filter_rounduplink_title');
+
 filter: **largo_registration_extra_fields**
 
     Called directly before the `[largo_registration_form]` shortcode has finished executing. You can append to this any addition form fields that you want to process.
