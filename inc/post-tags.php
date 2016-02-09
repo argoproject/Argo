@@ -303,6 +303,16 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 			}
 		}
 
+		/**
+		 * Filter the array of More Social Links, which are added to the "More" menu output by largo_post_social_links
+		 *
+		 * @filter
+		 * @param Array $more_social_links
+		 * @since 0.5.5
+		 * @link https://github.com/INN/Largo/issues/219
+		 */
+		$more_social_links = apply_filters('largo_post_social_more_social_links', $more_social_links);
+
 		if ( count( $more_social_links ) ) {
 			$more_social_links_str = implode( $more_social_links, "\n" );
 
