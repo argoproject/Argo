@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Project Largo - Base Theme v0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-10 14:00-0500\n"
+"POT-Creation-Date: 2016-02-10 14:57-0500\n"
 "PO-Revision-Date: 2014-03-03 17:58:21+0000\n"
 "Last-Translator: Eric Flores <eric@dashway.com>\n"
 "Language-Team: Institute for Nonprofit News <largo@inn.org>\n"
@@ -102,7 +102,7 @@ msgid "Main Navigation"
 msgstr "Navegación Global"
 
 # @ largo
-#: functions.php:213 options.php:514
+#: functions.php:213 options.php:526
 msgid "Don't Miss"
 msgstr "No se pierda"
 
@@ -311,8 +311,8 @@ msgstr "Más"
 msgid "Complete Coverage"
 msgstr ""
 
-#: image.php:32 inc/avatars/admin.php:32 inc/post-tags.php:642
-#: inc/post-tags.php:670
+#: image.php:32 inc/avatars/admin.php:32 inc/post-tags.php:640
+#: inc/post-tags.php:668
 msgid "Edit"
 msgstr ""
 
@@ -442,7 +442,7 @@ msgid "Twitter"
 msgstr ""
 
 # @ largo
-#: inc/customizer/customizer.php:211 inc/post-tags.php:261 options.php:55
+#: inc/customizer/customizer.php:211 inc/post-tags.php:259 options.php:55
 msgid "Print"
 msgstr "Imprimir"
 
@@ -455,7 +455,7 @@ msgid "Facebook Button Text"
 msgstr ""
 
 # @ largo
-#: inc/customizer/customizer.php:236 options.php:439
+#: inc/customizer/customizer.php:236 options.php:451
 msgid "Footer Layout"
 msgstr ""
 
@@ -503,11 +503,6 @@ msgstr ""
 "Ver mas historias recientes de miembros del Investigative News Network."
 
 # @ largo
-#: inc/header-footer.php:97
-msgid "Link to RSS Feed"
-msgstr "Enlace a la fuente RSS"
-
-# @ largo
 #: inc/header-footer.php:98
 msgid "Link to Facebook Profile"
 msgstr "Encuéntranos en Facebook"
@@ -519,22 +514,23 @@ msgstr "Síguenos en Twitter"
 
 # @ largo
 #: inc/header-footer.php:100
-msgid "Link to YouTube Page"
+msgid "Link to Google Plus Page"
 msgstr ""
 
 # @ largo
 #: inc/header-footer.php:101
-msgid "Link to Flickr Page"
+msgid "Link to YouTube Page"
 msgstr ""
 
 # @ largo
 #: inc/header-footer.php:102
-msgid "Link to Tumblr"
-msgstr ""
+#, fuzzy
+msgid "Link to Instagram Page"
+msgstr "Síguenos en Twitter"
 
 # @ largo
 #: inc/header-footer.php:103
-msgid "Link to Google Plus Page"
+msgid "Link to Tumblr"
 msgstr ""
 
 # @ largo
@@ -545,8 +541,24 @@ msgstr ""
 # @ largo
 #: inc/header-footer.php:105
 #, fuzzy
+msgid "Link to Pinterest Page"
+msgstr "Síguenos en Twitter"
+
+# @ largo
+#: inc/header-footer.php:106
+#, fuzzy
 msgid "Link to Github Page"
 msgstr "Síguenos en Twitter"
+
+# @ largo
+#: inc/header-footer.php:107
+msgid "Link to Flickr Page"
+msgstr ""
+
+# @ largo
+#: inc/header-footer.php:108
+msgid "Link to RSS Feed"
+msgstr "Enlace a la fuente RSS"
 
 #: inc/helpers.php:82 inc/helpers.php:164 inc/update.php:986
 msgid "An error occurred."
@@ -743,7 +755,7 @@ msgstr ""
 msgid "Layout Options"
 msgstr ""
 
-#: inc/post-metaboxes.php:100 inc/post-metaboxes.php:264 options.php:603
+#: inc/post-metaboxes.php:100 inc/post-metaboxes.php:264 options.php:615
 msgid "Disclaimer"
 msgstr ""
 
@@ -822,11 +834,11 @@ msgid ""
 "post IDs separated by commas."
 msgstr ""
 
-#: inc/post-metaboxes.php:281
+#: inc/post-metaboxes.php:285
 msgid "Top Term"
 msgstr ""
 
-#: inc/post-metaboxes.php:282
+#: inc/post-metaboxes.php:286
 msgid "Identify which of this posts's terms is primary."
 msgstr ""
 
@@ -861,26 +873,26 @@ msgstr ""
 msgid "Edit This Post"
 msgstr "Edite esta página"
 
-#: inc/post-tags.php:251 tests/inc/test-post-tags.php:82
+#: inc/post-tags.php:249 tests/inc/test-post-tags.php:82
 msgid "Tweet"
 msgstr ""
 
-#: inc/post-tags.php:261
+#: inc/post-tags.php:259
 msgid "Print this article"
 msgstr ""
 
 # @ largo
-#: inc/post-tags.php:397
+#: inc/post-tags.php:395
 msgid "Next Page"
 msgstr "Próxima Página"
 
 # @ largo
-#: inc/post-tags.php:398
+#: inc/post-tags.php:396
 msgid "Previous Page"
 msgstr "Página Anterior"
 
 # @ largo
-#: inc/post-tags.php:582
+#: inc/post-tags.php:580
 #, fuzzy, php-format
 msgid ""
 "<div class=\"previous\"><a href=\"%1$s\"><img class=\"thumb\" src=\"%4$s\" /"
@@ -890,7 +902,7 @@ msgstr ""
 "class=\"meta-nav\">%3$s</span></a></div>"
 
 # @ largo
-#: inc/post-tags.php:589
+#: inc/post-tags.php:587
 #, php-format
 msgid ""
 "<div class=\"previous\"><a href=\"%1$s\"><h5>Previous %2$s</h5><span class="
@@ -900,7 +912,7 @@ msgstr ""
 "class=\"meta-nav\">%3$s</span></a></div>"
 
 # @ largo
-#: inc/post-tags.php:599
+#: inc/post-tags.php:597
 #, fuzzy, php-format
 msgid ""
 "<div class=\"next\"><a href=\"%1$s\"><img class=\"thumb\" src=\"%4$s\" /"
@@ -910,7 +922,7 @@ msgstr ""
 "\"meta-nav\">%3$s</span></a></div>"
 
 # @ largo
-#: inc/post-tags.php:606
+#: inc/post-tags.php:604
 #, php-format
 msgid ""
 "<div class=\"next\"><a href=\"%1$s\"><h5>Next %2$s</h5><span class=\"meta-nav"
@@ -919,15 +931,15 @@ msgstr ""
 "<div class=\"next\"><a href=\"%1$s\"><h5>Próximas historias</h5><span class="
 "\"meta-nav\">%3$s</span></a></div>"
 
-#: inc/post-tags.php:642
+#: inc/post-tags.php:640
 msgid "Pingback"
 msgstr ""
 
-#: inc/post-tags.php:674
+#: inc/post-tags.php:672
 msgid "Your comment is awaiting moderation."
 msgstr ""
 
-#: inc/post-tags.php:683
+#: inc/post-tags.php:681
 msgid "Reply"
 msgstr ""
 
@@ -952,7 +964,7 @@ msgid ""
 "with: %4$s\">%5$s%4$s</a></%1$s>"
 msgstr ""
 
-#: inc/related-content.php:365
+#: inc/related-content.php:402
 msgid "Top Posts"
 msgstr ""
 
@@ -1055,7 +1067,7 @@ msgid "Full-width area immediately above footer"
 msgstr ""
 
 # @ largo
-#: inc/sidebars.php:79 options.php:356
+#: inc/sidebars.php:79 options.php:368
 msgid "Homepage Bottom"
 msgstr ""
 
@@ -1374,7 +1386,7 @@ msgid ""
 "you may want to hide it."
 msgstr ""
 
-#: inc/update.php:377 options.php:396
+#: inc/update.php:377 options.php:408
 msgid ""
 "Starting with version 0.4, Largo introduced a new single-post template that "
 "more prominently highlights article content, which is the default. For "
@@ -3622,30 +3634,38 @@ msgid ""
 "username)"
 msgstr ""
 
-# @ largo
 #: options.php:201
-msgid ""
-"<strong>Link to Flickr Photostream</strong> (http://www.flickr.com/photos/"
-"username/)"
+msgid "<strong>Link to Instagram Page</strong> (http://instagram.com/username)"
 msgstr ""
 
 # @ largo
 #: options.php:207
-msgid "<strong>Link to Tumblr</strong> (http://yoursite.tumblr.com)"
-msgstr ""
-
-# @ largo
-#: options.php:213
 msgid ""
 "<strong>Link to LinkedIn Group or Profile</strong> (http://www.linkedin.com/"
 "in/username/)"
 msgstr ""
 
+# @ largo
+#: options.php:213
+msgid "<strong>Link to Tumblr</strong> (http://yoursite.tumblr.com)"
+msgstr ""
+
 #: options.php:219
-msgid "<strong>Link to Github Page</strong> (http://github.com/username)"
+msgid "<strong>Link to Pinterest Page</strong> (http://pinterest.com/username)"
 msgstr ""
 
 #: options.php:225
+msgid "<strong>Link to Github Page</strong> (http://github.com/username)"
+msgstr ""
+
+# @ largo
+#: options.php:231
+msgid ""
+"<strong>Link to Flickr Photostream</strong> (http://www.flickr.com/photos/"
+"username/)"
+msgstr ""
+
+#: options.php:237
 msgid ""
 "By default, a row of social media icons is shown in the site footer. "
 "<strong>Check this box if you want to show them in the header as well</"
@@ -3653,31 +3673,31 @@ msgid ""
 msgstr ""
 
 # @ largo
-#: options.php:230
+#: options.php:242
 msgid "Single Post Options"
 msgstr "Opciones de entrada única"
 
-#: options.php:234
+#: options.php:246
 msgid ""
 "<p><strong>Would you like to display share icons at the top of single posts?"
 "</strong></p> <p>By default social icons appear at the top of single posts "
 "but you can choose to not show them at all.</p>"
 msgstr ""
 
-#: options.php:240
+#: options.php:252
 msgid ""
 "Select the <strong>share icons</strong> to display at the top of single "
 "posts."
 msgstr ""
 
-#: options.php:247
+#: options.php:259
 msgid ""
 "<strong>Would you like to display share icons in a floating bar beside posts "
 "using the single-column post template?</strong>"
 msgstr ""
 
 # @ largo
-#: options.php:253
+#: options.php:265
 #, fuzzy
 msgid "<strong>Verb to use</strong> for Facebook buttons?"
 msgstr ""
@@ -3685,11 +3705,11 @@ msgstr ""
 "unicas."
 
 # @ largo
-#: options.php:264
+#: options.php:276
 msgid "Theme Images"
 msgstr "Imagenes de la plantilla"
 
-#: options.php:270
+#: options.php:282
 msgid ""
 "Information about these options can be found in <a href=\"https://largo."
 "readthedocs.org/users/prelaunchchecklist.html\">the pre-launch checklist</a> "
@@ -3698,12 +3718,12 @@ msgid ""
 msgstr ""
 
 # @ largo
-#: options.php:274
+#: options.php:286
 msgid "Upload a Square Thumbnail Image (200x200px minimum)"
 msgstr ""
 
 # @ largo
-#: options.php:275
+#: options.php:287
 msgid ""
 "This is a default image used for Facebook posts when you do not set a "
 "featured image for your posts. We also use it as a bookmark icon for Apple "
@@ -3711,12 +3731,12 @@ msgid ""
 msgstr ""
 
 # @ largo
-#: options.php:280
+#: options.php:292
 msgid "Upload a Favicon"
 msgstr ""
 
 # @ largo
-#: options.php:281
+#: options.php:293
 msgid ""
 "This is the small icon that appears in browser tabs and in some feed readers "
 "and other applications. Favicons must be an .ico file and are typically "
@@ -3724,58 +3744,58 @@ msgid ""
 msgstr ""
 
 # @ largo
-#: options.php:286
+#: options.php:298
 msgid "Header Image"
 msgstr ""
 
 # @ largo
-#: options.php:290
+#: options.php:302
 msgid ""
 "<strong>Use only text</strong> in the place of a banner image (uses site "
 "title and description)."
 msgstr ""
 
 # @ largo
-#: options.php:296
+#: options.php:308
 msgid "Small Banner Image (768px wide)"
 msgstr ""
 
 # @ largo
-#: options.php:297
+#: options.php:309
 msgid ""
 "Used for viewports below 768px wide (mostly phones and some tablets). "
 "Recommended height: 240px."
 msgstr ""
 
 # @ largo
-#: options.php:302
+#: options.php:314
 msgid "Medium Banner Image (980px wide)"
 msgstr ""
 
 # @ largo
-#: options.php:303
+#: options.php:315
 msgid ""
 "Used for viewports between 768px and 980 px (mostly tablets). Recommended "
 "height: 180px."
 msgstr ""
 
 # @ largo
-#: options.php:308
+#: options.php:320
 msgid "Large Banner Image (1170px wide)"
 msgstr ""
 
 # @ largo
-#: options.php:309
+#: options.php:321
 msgid ""
 "Used for viewports above 980 px (landscape tablets and desktops). "
 "Recommended height: 150px."
 msgstr ""
 
-#: options.php:314
+#: options.php:326
 msgid "Sticky Header Logo"
 msgstr ""
 
-#: options.php:315
+#: options.php:327
 msgid ""
 "Used in the sticky navigation. This image should be 100px tall and at least "
 "100px wide. If no logo is provided, the site name will be displayed. To "
@@ -3783,33 +3803,33 @@ msgid ""
 "\"Navigation\" options tab above."
 msgstr ""
 
-#: options.php:323
+#: options.php:335
 msgid "Layout"
 msgstr ""
 
-#: options.php:336
+#: options.php:348
 msgid "Home Template"
 msgstr ""
 
-#: options.php:337
+#: options.php:349
 msgid ""
 "<strong>Select the layout to use for the top of the homepage.</strong> These "
 "are Home Templates, defined much like post/page templates."
 msgstr ""
 
 # @ largo
-#: options.php:346
+#: options.php:358
 msgid "Sticky Posts"
 msgstr "Entradas Permanentes"
 
 # @ largo
-#: options.php:350
+#: options.php:362
 msgid ""
 "Show sticky posts box on homepage? If checked, you will need to set at least "
 "one post as sticky for this box to appear."
 msgstr ""
 
-#: options.php:357
+#: options.php:369
 msgid ""
 "<strong>Select the layout to use for the bottom of the homepage.</strong> "
 "Largo supports three options: a single column list of recent posts with "
@@ -3817,12 +3837,12 @@ msgid ""
 msgstr ""
 
 # @ largo
-#: options.php:368
+#: options.php:380
 msgid "Other Homepage Display Options"
 msgstr ""
 
 # @ largo
-#: options.php:372
+#: options.php:384
 msgid ""
 "<strong>How would you like to display categories and tags for posts on the "
 "homepage?</strong> Largo can display a single category or tag above the "
@@ -3831,40 +3851,40 @@ msgid ""
 msgstr ""
 
 # @ largo
-#: options.php:380
+#: options.php:392
 msgid ""
 "<strong>Number of posts</strong> to display in the main loop on the homepage"
 msgstr ""
 
 # @ largo
-#: options.php:386
+#: options.php:398
 msgid ""
 "<strong>Categories to include or exclude</strong> in the main loop on the "
 "homepage (comma-separated list of values, see: http://bit.ly/XmDGgd for "
 "correct format)."
 msgstr ""
 
-#: options.php:392
+#: options.php:404
 msgid "Single Article Template"
 msgstr ""
 
 # @ largo
-#: options.php:407
+#: options.php:419
 #, fuzzy
 msgid "Category Options"
 msgstr "Categorías"
 
-#: options.php:411
+#: options.php:423
 msgid "Hide the featured posts area on category pages?"
 msgstr ""
 
 # @ largo
-#: options.php:417
+#: options.php:429
 msgid "Sidebar Options"
 msgstr ""
 
 # @ largo
-#: options.php:421
+#: options.php:433
 msgid ""
 "By default Largo has two sidebars. One is used for single pages and posts "
 "and the other is used for everything else (including the homepage). Check "
@@ -3872,21 +3892,21 @@ msgid ""
 "the main sidebar on archive pages (category, tag, author and series pages)."
 msgstr ""
 
-#: options.php:427
+#: options.php:439
 msgid ""
 "Include an additional widget region (\"sidebar\") just above the site footer "
 "region"
 msgstr ""
 
 # @ largo
-#: options.php:433
+#: options.php:445
 msgid ""
 "Enter names of <strong>additional sidebar regions</strong> (one per line) "
 "you'd like post authors to be able to choose to display on their posts."
 msgstr ""
 
 # @ largo
-#: options.php:440
+#: options.php:452
 msgid ""
 "<strong>Select the layout to use for the footer.</strong> The default is a 3 "
 "column footer with a wide center column. Alternatively you can choose to "
@@ -3895,18 +3915,18 @@ msgid ""
 msgstr ""
 
 # @ largo
-#: options.php:460
+#: options.php:472
 #, fuzzy
 msgid "Navigation"
 msgstr "Navegación Global"
 
 # @ largo
-#: options.php:465
+#: options.php:477
 #, fuzzy
 msgid "Sticky navigation"
 msgstr "Descripción del sitio"
 
-#: options.php:466
+#: options.php:478
 msgid ""
 "By default, the sticky navigation bar is visible on all pages for mobile "
 "screen sizes. The sticky navigation bar will disappear when a user scrolls "
@@ -3914,17 +3934,17 @@ msgid ""
 "sticky navigation will disappear."
 msgstr ""
 
-#: options.php:471
+#: options.php:483
 msgid "Enable the sticky navigation for all screen sizes on article pages"
 msgstr ""
 
-#: options.php:478
+#: options.php:490
 msgid ""
 "Hide the main navigation on article pages and display only the sticky "
 "navigation on article pages"
 msgstr ""
 
-#: options.php:485
+#: options.php:497
 msgid ""
 "<strong>NOTE:</strong> If the main navigation is hidden on article pages, "
 "<strong>readers will only see a small logo in the left-hand corner when "
@@ -3933,122 +3953,122 @@ msgid ""
 msgstr ""
 
 # @ largo
-#: options.php:490
+#: options.php:502
 #, fuzzy
 msgid "Sticky navigation overflow"
 msgstr "Descripción del sitio"
 
-#: options.php:491
+#: options.php:503
 msgid ""
 "Enter the label used for the navigation menu that houses any navigation "
 "links that would otherwise cause the navigation to wrap onto multiple lines."
 msgstr ""
 
 # @ largo
-#: options.php:493 partials/nav-main.php:18 partials/nav-sticky.php:77
+#: options.php:505 partials/nav-sticky.php:77
 msgid "More"
 msgstr "Más"
 
-#: options.php:498
+#: options.php:510
 msgid "Alternate site name for sticky navigation"
 msgstr ""
 
-#: options.php:499
+#: options.php:511
 msgid ""
 "If your site name is especially long, use this field to set an abbreviation "
 "or shorter version for use in the sticky nav on small screens."
 msgstr ""
 
-#: options.php:506
+#: options.php:518
 msgid "Menu Options"
 msgstr ""
 
-#: options.php:507
+#: options.php:519
 msgid ""
 "<strong>Show</strong> the \"Don't Miss\" menu under the main site "
 "navigation. Add links to this menu under <strong>Appearance > Menus</strong>."
 msgstr ""
 
-#: options.php:512
+#: options.php:524
 msgid ""
 "Enter the <strong>label that appears in front of the menu links in the "
 "\"Don't Miss\" menu</strong>. You can delete this default and no label will "
 "appear."
 msgstr ""
 
-#: options.php:518
+#: options.php:530
 msgid ""
 "Enter the <strong>label that appears before the menu links in the Footer Nav "
 "Menu</strong>. You can delete this default and no label will appear."
 msgstr ""
 
 # @ largo
-#: options.php:528
+#: options.php:540
 msgid "Advanced"
 msgstr ""
 
 # @ largo
-#: options.php:532
+#: options.php:544
 msgid "Enable Custom LESS to CSS For Theme Customization."
 msgstr ""
 
-#: options.php:538
+#: options.php:550
 msgid "Enable \"Series\" taxonomy."
 msgstr ""
 
-#: options.php:544
+#: options.php:556
 msgid ""
 "Enable Custom Landing Pages for Series/Project Pages. Requires \"Series\" "
 "taxonomy to be enabled."
 msgstr ""
 
-#: options.php:551
+#: options.php:563
 msgid "Default region in lefthand column of Landing Pages"
 msgstr ""
 
-#: options.php:559
+#: options.php:571
 msgid "Default region in righthand column of Landing Pages"
 msgstr ""
 
-#: options.php:567
+#: options.php:579
 msgid "Enable Optional Leaderboard Ad Zone."
 msgstr ""
 
 # @ largo
-#: options.php:573
+#: options.php:585
 #, fuzzy
 msgid "Enable Optional Header Widget Area."
 msgstr "Widget de donación de Largo"
 
-#: options.php:579
+#: options.php:591
 msgid "Enable \"Post Types\" taxonomy."
 msgstr ""
 
 # @ largo
-#: options.php:604
+#: options.php:616
 #, fuzzy
 msgid "Enable Disclaimer Widget."
 msgstr "Widget de donación de Largo"
 
-#: options.php:610
+#: options.php:622
 msgid "Enter a default disclaimer"
 msgstr ""
 
 # @ largo
-#: options.php:619
+#: options.php:631
 msgid "Search options"
 msgstr ""
 
-#: options.php:620
+#: options.php:632
 msgid "Replace WordPress search with Google Custom Search"
 msgstr ""
 
 # @ largo
-#: options.php:626
+#: options.php:638
 msgid "Search engine ID (something like 012174647732932797336:f2lixuynrs0) "
 msgstr ""
 
-#: options.php:632
+#: options.php:644
 msgid ""
 "Google Custom Search typically returns better results than the search engine "
 "built into WordPress. You can get your ID and configure it at <a href="
@@ -4057,70 +4077,70 @@ msgid ""
 msgstr ""
 
 # @ largo
-#: options.php:638
+#: options.php:650
 #, fuzzy
 msgid "Site verification"
 msgstr "Descripción del sitio"
 
-#: options.php:639
+#: options.php:651
 msgid ""
 "<strong>Twitter Account ID.</strong> This is used for verifying your site "
 "for Twitter Analytics. This is NOT your username, it will be a 9 digit "
 "number."
 msgstr ""
 
-#: options.php:645
+#: options.php:657
 msgid ""
 "<strong>Google site verification meta tag.</strong> Used to verify a site in "
 "Google Webmaster Tools. This will be a long string of numbers and letters."
 msgstr ""
 
-#: options.php:651
+#: options.php:663
 msgid ""
 "<strong>Facebook admins meta tag.</strong> This is a comma-separated list of "
 "numerical FB user IDs you want to allow to access Facebook insights for your "
 "site."
 msgstr ""
 
-#: options.php:657
+#: options.php:669
 msgid ""
 "<strong>Facebook app ID meta tag.</strong> This is a numerical app ID that "
 "will allow Facebook to capture insights for any social plugins active on "
 "your site and display them in your Facebook app/page insights."
 msgstr ""
 
-#: options.php:663 options.php:669
+#: options.php:675 options.php:681
 msgid ""
 "<strong>Facebook Tracking Pixel ID.</strong> Unique numerical ID (one per "
 "Facebook Ads account) to enable tracking of site visitors and targeting of "
 "specific Facebook ads at your audience."
 msgstr ""
 
-#: options.php:675
+#: options.php:687
 msgid ""
 "<strong>Bitly site verification.</strong> This is a string of numbers and "
 "letters used to verify your site with bitly analytics."
 msgstr ""
 
 # @ largo
-#: options.php:681
+#: options.php:693
 msgid "SEO Options"
 msgstr ""
 
 # @ largo
-#: options.php:685
+#: options.php:697
 msgid ""
 "Use noindex for all archive pages (default is to use noindex for just date "
 "archives)."
 msgstr ""
 
 # @ largo
-#: options.php:691
+#: options.php:703
 #, fuzzy
 msgid "Byline Options"
 msgstr "Opciones de entrada única"
 
-#: options.php:695
+#: options.php:707
 msgid "Enable display of job titles in bylines and author biographies?"
 msgstr ""
 
@@ -4240,15 +4260,15 @@ msgstr "Saltar al contenido"
 msgid "GO"
 msgstr "IR"
 
-# @ largo
-#: partials/nav-main.php:59 partials/nav-sticky.php:155
-#, fuzzy
-msgid "About"
-msgstr "Mas Sobre"
-
 #: partials/nav-sticky.php:71 searchform.php:9
 msgid "Go"
 msgstr ""
+
+# @ largo
+#: partials/nav-sticky.php:155
+#, fuzzy
+msgid "About"
+msgstr "Mas Sobre"
 
 # @ largo
 #: partials/sidebar-fallback.php:9

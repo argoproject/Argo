@@ -75,9 +75,15 @@ inc/post-metaboxes.php
 
 .. php:function:: largo_top_tag_display()
 
-   Metabox option to choose the top tag for the post
+   Metabox option to choose the top tag for the posto
+
+   Includes the option for "None", which is not the default option, but is an option.
 
    :global: $post
+
+   :since: 0.5.5
+
+   :link: https://github.com/INN/Largo/issues/1082
 
 .. php:function:: largo_top_terms_js()
 
