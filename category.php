@@ -64,7 +64,10 @@ $queried_object = get_queried_object();
 
 <div class="row-fluid clearfix">
 	<div class="stories span8" role="main" id="content">
-		<?php if ( have_posts() ) {
+		
+	<?php 
+		do_action( 'largo_before_category_river' );
+		if ( have_posts() ) {
 			while ( have_posts() ) {
 				the_post();
 				//$shown_ids[] = get_the_ID();
