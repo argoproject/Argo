@@ -354,9 +354,30 @@ function largo_sidebar_span_class() {
 		return 'span4';
 }
 
+/**
+ * Output the "Header Widget" sidebar
+ *
+ * @action largo_header_after_largo_header
+ * @since 0.5.5
+ */
 function largo_header_widget_sidebar() {
 	if ( of_get_option('header_widget_enabled') ) {
 		dynamic_sidebar('header-widget');
 	}
 }
 add_action('largo_header_after_largo_header', 'largo_header_widget_sidebar');
+
+/**
+ * Output the "Article Bottom" sidebar
+ *
+ * @action largo_header_after_largo_header
+ * @since 0.5.5
+ */
+function largo_post_bottom_widget_area() {
+	if ( is_active_sidebar( 'article-bottom' ) ) {
+		echo '<div class="article-bottom nocontent">';
+		dynamic_sidebar( 'article-bottom' );
+		echo '</div>';
+	}
+}
+add_action('largo_post_bottom_widget_area', 'largo_post_bottom_widget_area');

@@ -26,17 +26,12 @@ get_header();
 			get_template_part( 'partials/content', $partial );
 
 			if ( $partial === 'single' ) {
-				if ( is_active_sidebar( 'article-bottom' ) ) {
 
-					do_action( 'largo_before_post_bottom_widget_area' );
+				do_action( 'largo_before_post_bottom_widget_area' );
 
-					echo '<div class="article-bottom nocontent">';
-					dynamic_sidebar( 'article-bottom' );
-					echo '</div>';
+				do_action( 'largo_post_bottom_widget_area' );
 
-					do_action( 'largo_after_post_bottom_widget_area' );
-
-				}
+				do_action( 'largo_after_post_bottom_widget_area' );
 
 				do_action( 'largo_before_comments' );
 
