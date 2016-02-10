@@ -1,6 +1,7 @@
 Function reference by file
 ==========================
 
+* `archive.php <archive.html>`_
 * `feed-mailchimp.php <feed-mailchimp.html>`_
 * `functions.php <functions.html>`_
 * `options.php <options.html>`_

@@ -272,3 +272,7 @@ These actions are run on all homepage templates, including the Legacy Three Colu
  - **largo_after_page_header** - just after the closing post <header> element
  - **largo_before_page_content** - directly inside the .entry-content <div> tag
  - **largo_after_page_content** - directly before the .entry-content closing <div> tag
+ 
+ **category.php**
+ 
+ - **largo_before_category_river** - just before the river of stories at the bottom of the category archive page (for adding a header to this column, for example)
