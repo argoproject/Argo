@@ -399,13 +399,13 @@ function largo_top_term( $options = array() ) {
  */
 function largo_post_class_top_term($classes) {
 	global $post;
-	if ( ! is_singular() && ! is_home() ) {
-		return $classes;
-	}
 	$top_term = get_post_meta( $post->ID, 'top_term', TRUE );
 	$term = get_term_by('id', $top_term, 'post_tag');
 
-	$classes[] = 'top-term-' . $term->taxonomy . '-' . $term->slug;
+	// Don't output the class .top-term-- if there isn't a top term saved
+	if ( !empty($term) ) {
+		$classes[] = 'top-term-' . $term->taxonomy . '-' . $term->slug;
+	}
 
 	return $classes;
 }
