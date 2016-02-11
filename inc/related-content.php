@@ -389,6 +389,29 @@ function largo_top_term( $options = array() ) {
 }
 
 /**
+ * Add the post's top term to the post's post_class array
+ *
+ * @link https://github.com/INN/Largo/issues/1119
+ * @since 0.5.5
+ * @filter post_class
+ * @param array $classes An array of classes on the post
+ * @return array
+ */
+function largo_post_class_top_term($classes) {
+	global $post;
+	if ( ! is_singular() && ! is_home() ) {
+		return $classes;
+	}
+	$top_term = get_post_meta( $post->ID, 'top_term', TRUE );
+	$term = get_term_by('id', $top_term, 'post_tag');
+
+	$classes[] = 'top-term-' . $term->taxonomy . '-' . $term->slug;
+
+	return $classes;
+}
+add_filter('post_class', 'largo_post_class_top_term');
+
+/**
  *
  */
 function largo_filter_get_post_related_topics( $topics, $max ) {
