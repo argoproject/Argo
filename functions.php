@@ -301,11 +301,7 @@ class Largo {
 		 * @link https://github.com/INN/Largo/issues/1135
 		 */
 		if ( ! defined( 'SHOW_STICKY_NAV' ) ) {
-			if ( of_get_option( 'sticky_nav_display_article' ) ) {
-				define( 'SHOW_STICKY_NAV', TRUE );
-			} else {
-				define( 'SHOW_STICKY_NAV', FALSE );
-			}
+			define( 'SHOW_STICKY_NAV', FALSE );
 		}
 		if ( ! defined( 'SHOW_MAIN_NAV' ) ) {
 			define( 'SHOW_MAIN_NAV', TRUE );

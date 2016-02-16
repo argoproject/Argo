@@ -73,7 +73,7 @@ The other constants
 
 .. php:const:: SHOW_STICKY_NAV
 
-	**DEPRECATED** in Largo version 0.5.4. Conditional logic based on this constant should remove the conditional logic, and make sure that the HTML stucture is similar to that of `partials/nav_sticky.php <https://github.com/INN/Largo/blob/master/partials/nav-sticky.php>`_. The element ``#sticky-nav-holder`` will be shown or hidden by `navigation.js <https://github.com/INN/Largo/blob/master/js/navigation.js>`_.
+	**DEPRECATED** in Largo version 0.5.5. Conditional logic based on this constant should remove the conditional logic, and make sure that the HTML stucture is similar to that of `partials/nav_sticky.php <https://github.com/INN/Largo/blob/master/partials/nav-sticky.php>`_. The element ``#sticky-nav-holder`` will be shown or hidden by `navigation.js <https://github.com/INN/Largo/blob/master/js/navigation.js>`_.
 
 	The sticky nav used to appear on the homepage and all internal pages, and on mobile devices, governed by ``SHOW_STICKY_NAV``. ``SHOW_STICKY_NAV`` may be defined to be true or false.
 
