@@ -10,7 +10,7 @@
  * @since 0.5.2
  */
 function largo_sticky_nav_active() {
-    if ( SHOW_STICKY_NAV ) ) {
+    if ( SHOW_STICKY_NAV ) {
         return true;
     }
     return false;
