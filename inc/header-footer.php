@@ -1,14 +1,16 @@
 <?php
 
 /**
- * Check for active Sticky Nav
+ * DEPRECATED: Check the constant SHOW_STICKY_NAV.
  *
- * Checks both the option and the constant to see if the sticky nav is currently showing.
+ * Whether or not the sticky nav is displayed is determined by the javascript in js/navigation.js, since Largo 0.5.4.
  *
+ * @deprecated the constant SHOW_STICKY_NAV is deprecated
+ * @link https://github.com/INN/Largo/issues/1135
  * @since 0.5.2
  */
 function largo_sticky_nav_active() {
-    if ( SHOW_STICKY_NAV == true && of_get_option( 'show_sticky_nav' ) ) {
+    if ( SHOW_STICKY_NAV ) ) {
         return true;
     }
     return false;
