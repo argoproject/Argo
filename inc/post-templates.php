@@ -136,8 +136,12 @@ function largo_remove_hero($content) {
 	if( isset($options['featured-image-display'][0]) )
 		return $content;
 
-	if( of_get_option( 'single_template' ) == 'classic' )
+	if( 
+		of_get_option( 'single_template' ) != 'normal' ||
+		of_get_option( 'single_template' ) != 'classic'
+	) {
 		return $content;
+	}
 
 	$p = explode("\n",$content);
 	
