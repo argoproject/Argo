@@ -23,7 +23,13 @@
 
 	</header><!-- / entry header -->
 
-	<?php do_action('largo_after_post_header'); ?>
+	<?php
+		do_action('largo_after_post_header');
+
+		largo_hero(null,'');
+
+		do_action('largo_after_hero');
+	?>
 
 	<div class="entry-content clearfix" itemprop="articleBody">
 		<?php largo_entry_content( $post ); ?>
