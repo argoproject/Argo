@@ -336,7 +336,7 @@ EOD;
 		 * @since 0.5.3
 		 * @param string $output A div containing a number of spans containing social links and other utilities.
 		 */
-		apply_filters( 'largo_post_social_links', $output );
+		$output = apply_filters( 'largo_post_social_links', $output );
 
 		if ( $echo ) {
 			echo $output;
