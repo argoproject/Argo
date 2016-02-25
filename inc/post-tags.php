@@ -244,8 +244,8 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 
 			$output .= sprintf(
 				$twitter_share,
-				// Yes, rawurlencode. Otherwise, the link will break.
-				rawurlencode( get_the_title() ),
+				// Yes, rawurlencode. Otherwise, the link will break. Use html_entity_decode to handle wordpress saving smart quotes as &#1234; entities.
+				rawurlencode( html_entity_decode( get_the_title(), ENT_QUOTES, "UTF-8" ) ),
 				rawurlencode( get_permalink() ),
 				$via,
 				rawurlencode( __( 'Tweet', 'largo' ) )
