@@ -47,7 +47,7 @@ class largo_staff_widget extends WP_Widget {
 			if ( $job_title = get_user_meta( $user->ID, 'job_title', true ) ) {
 				$avatar_alt .= ' (' . $job_title . ')';
 			}
-			$avatar = get_avatar($user->ID, '65', null, $avatar_alt);
+			$avatar = get_avatar($user->ID, '65', null, esc_attr($avatar_alt));
 			$author_url = get_author_posts_url($user->ID);
 
 			$user_posts_link = '';
