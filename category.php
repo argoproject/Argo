@@ -71,7 +71,7 @@ $queried_object = get_queried_object();
 			while ( have_posts() ) {
 				the_post();
 				// Do not add posts in the main river to $shown_ids; doing so will mess up Load More Posts
-				// See 
+				// See https://github.com/INN/Largo/pull/1150
 				// See https://github.com/INN/Largo/blob/master/inc/ajax-functions.php#L49-L52
 				// $shown_ids[] = get_the_ID();
 				$post_type = get_post_type();
