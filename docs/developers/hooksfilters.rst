@@ -261,6 +261,7 @@ These actions are run on all homepage templates, including the Legacy Three Colu
  - **largo_after_post_content** - directly after the .entry-content closing <div> tag
  - **largo_after_post_footer** (deprecated in 0.4) - before the closing </article> tag, replaced in the new layouts by largo_after_post_content
  - **largo_before_post_bottom_widget_area** - after the closing </article> tag but before the post bottom widget area
+ - **largo_post_bottom_widget_area** - by default, the "Article Bottom" widget area is output here through `largo_post_bottom_widget_area`
  - **largo_after_post_bottom_widget_area** - directly after the post bottom widget area (but before the comments section)
  - **largo_before_comments** - before the comments section
  - **largo_after_comments** - after the comments section
@@ -272,3 +273,7 @@ These actions are run on all homepage templates, including the Legacy Three Colu
  - **largo_after_page_header** - just after the closing post <header> element
  - **largo_before_page_content** - directly inside the .entry-content <div> tag
  - **largo_after_page_content** - directly before the .entry-content closing <div> tag
+ 
+ **category.php**
+ 
+ - **largo_before_category_river** - just before the river of stories at the bottom of the category archive page (for adding a header to this column, for example)
