@@ -30,15 +30,18 @@ class largo_twitter_widget extends WP_Widget {
 		switch($instance['widget_type']) {
 			case 'search':
 				$widget_href = 'https://twitter.com/search?q=' . $instance['twitter_search'];
-				$widget_text = 'Tweets about ' . $instance['twitter_search'];
+				/* translators: Tweets about [search query] */
+				$widget_text = __( 'Tweets about ' . $instance['twitter_search'], 'largo' );
 				break;
 			case 'likes':
 				$widget_href = 'https://twitter.com/' . $instance['twitter_username'] . '/likes';
-				$widget_text = $instance['twitter_username'] . '\'s Likes on Twitter';
+				/* translators: @username's Likes on Twitter */
+				$widget_text = __( $instance['twitter_username'] . '\'s Likes on Twitter', 'largo' );
 				break;
 			case 'list':
 				$widget_href = 'https://twitter.com/' . $instance['twitter_username'] . '/lists/' . $instance['twitter_list_slug'];
-				$widget_text = 'Tweets from ' . $widget_href;
+				/* translators: Tweets from [list URL] */
+				$widget_text = __( 'Tweets from ' . $widget_href, 'largo' );
 				break;
 			case 'collection':
 				$widget_href = 'https://twitter.com/' . $instance['twitter_username'] . '/timelines/' . $instance['twitter_collection_id'];
@@ -46,7 +49,8 @@ class largo_twitter_widget extends WP_Widget {
 				break;
 			default: //timeline, probably
 				$widget_href = 'https://twitter.com/' . $instance['twitter_username'];
-				$widget_text = 'Tweets by @' . $instance['twitter_username'];
+				/* translators: Tweets by @username */
+				$widget_text = __( 'Tweets by @' . $instance['twitter_username'], 'largo' );
 		}
 			
 		$widget_embed = sprintf( '<a class="twitter-timeline" href="%1$s" data-widget-id="%2$s">%3$s</a>',
@@ -85,7 +89,7 @@ class largo_twitter_widget extends WP_Widget {
 
 		<p>
 			<label for="<?php echo $this->get_field_id( 'widget_type' ); ?>"><?php _e('Widget Type', 'largo'); ?></label>
-			<select id="<?php echo $this->get_field_id('widget_type'); ?>" name="<?php echo $this->get_field_name('widget_type'); ?>" class="widefat" style="width:90%;">
+			<select id="<?php echo $this->get_field_id( 'widget_type' ); ?>" name="<?php echo $this->get_field_name( 'widget_type' ); ?>" class="widefat" style="width:90%;">
 			    <option <?php selected( $instance['widget_type'], 'timeline'); ?> value="timeline"><?php _e( 'Timeline', 'largo' ); ?></option>
 			    <option <?php selected( $instance['widget_type'], 'likes'); ?> value="likes"><?php _e( 'Likes', 'largo' ); ?></option>
 			    <option <?php selected( $instance['widget_type'], 'list'); ?> value="list"><?php _e( 'List', 'largo' ); ?></option>

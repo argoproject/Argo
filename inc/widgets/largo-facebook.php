@@ -64,19 +64,19 @@ class largo_facebook_widget extends WP_Widget {
 		?>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'fb_page_url' ); ?>"><?php _e('Facebook Page URL:', 'largo'); ?></label>
+			<label for="<?php echo $this->get_field_id( 'fb_page_url' ); ?>"><?php _e( 'Facebook Page URL:', 'largo' ); ?></label>
 			<input id="<?php echo $this->get_field_id( 'fb_page_url' ); ?>" name="<?php echo $this->get_field_name( 'fb_page_url' ); ?>" value="<?php echo esc_attr( $instance['fb_page_url'] ); ?>" style="width:90%;" />
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'widget_height' ); ?>"><?php _e('Widget Height:', 'largo'); ?></label>
+			<label for="<?php echo $this->get_field_id( 'widget_height' ); ?>"><?php _e( 'Widget Height:', 'largo' ); ?></label>
 			<input id="<?php echo $this->get_field_id( 'widget_height' ); ?>" name="<?php echo $this->get_field_name( 'widget_height' ); ?>" value="<?php echo (int) $instance['widget_height']; ?>" style="width:90%;" />
 		</p>
 
 		<p style="margin:15px 0 10px 5px">
-			<input class="checkbox" type="checkbox" <?php echo $show_faces; ?> id="<?php echo $this->get_field_id('show_faces'); ?>" name="<?php echo $this->get_field_name('show_faces'); ?>" /> <label for="<?php echo $this->get_field_id('show_faces'); ?>"><?php _e('Show Faces?', 'largo'); ?></label>
+			<input class="checkbox" type="checkbox" <?php echo $show_faces; ?> id="<?php echo $this->get_field_id( 'show_faces' ); ?>" name="<?php echo $this->get_field_name( 'show_faces' ); ?>" /> <label for="<?php echo $this->get_field_id( 'show_faces' ); ?>"><?php _e( 'Show Faces?', 'largo'); ?></label>
 			<br />
-			<input class="checkbox" type="checkbox" <?php echo $show_stream; ?> id="<?php echo $this->get_field_id('show_stream'); ?>" name="<?php echo $this->get_field_name('show_stream'); ?>" /> <label for="<?php echo $this->get_field_id('show_stream'); ?>"><?php _e('Show Stream?', 'largo'); ?></label>
+			<input class="checkbox" type="checkbox" <?php echo $show_stream; ?> id="<?php echo $this->get_field_id( 'show_stream' ); ?>" name="<?php echo $this->get_field_name( 'show_stream' ); ?>" /> <label for="<?php echo $this->get_field_id( 'show_stream' ); ?>"><?php _e( 'Show Stream?', 'largo' ); ?></label>
 		</p>
 
 	<?php
