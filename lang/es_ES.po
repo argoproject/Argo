@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Project Largo - Base Theme v0.5.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-02-10 14:00-0500\n"
-"PO-Revision-Date: 2016-02-29 04:31:59+0000\n"
+"PO-Revision-Date: 2016-02-29 04:53:14+0000\n"
 "Last-Translator: Eric Flores <eric@dashway.com>\n"
 "Language-Team: Institute for Nonprofit News <largo@inn.org>\n"
 "MIME-Version: 1.0\n"
@@ -3556,7 +3556,7 @@ msgstr "Lista Debajo"
 #: options.php:68
 #@ largo
 msgid "Email"
-msgstr "Correo electrónico"
+msgstr "Correo"
 
 #: options.php:78
 #@ largo
