@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Project Largo - Base Theme v0.5.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-02-10 14:00-0500\n"
-"PO-Revision-Date: 2016-02-29 01:35:15+0000\n"
+"PO-Revision-Date: 2016-02-29 04:31:59+0000\n"
 "Last-Translator: Eric Flores <eric@dashway.com>\n"
 "Language-Team: Institute for Nonprofit News <largo@inn.org>\n"
 "MIME-Version: 1.0\n"
@@ -531,7 +531,7 @@ msgid "Copyright %s"
 msgstr "Derechos de autor"
 
 #: inc/header-footer.php:82
-#, fuzzy, php-format, php-format
+#, fuzzy, php-format, php-format, php-format
 #@ largo
 msgid "%s is a member of the Institute for Nonprofit News"
 msgstr "Ver mas historias recientes de miembros del Investigative News Network."
@@ -933,7 +933,7 @@ msgid "Previous Page"
 msgstr "Página Anterior"
 
 #: inc/post-tags.php:582
-#, fuzzy, php-format, php-format
+#, fuzzy, php-format, php-format, php-format
 #@ largo
 msgid "<div class=\"previous\"><a href=\"%1$s\"><img class=\"thumb\" src=\"%4$s\" /><h5>Previous %2$s</h5><span class=\"meta-nav\">%3$s</span></a></div>"
 msgstr "<div class=\"previous\"><a href=\"%1$s\"><h5>Historias anteriores</h5><span class=\"meta-nav\">%3$s</span></a></div>"
@@ -945,7 +945,7 @@ msgid "<div class=\"previous\"><a href=\"%1$s\"><h5>Previous %2$s</h5><span clas
 msgstr "<div class=\"previous\"><a href=\"%1$s\"><h5>Historias anteriores</h5><span class=\"meta-nav\">%3$s</span></a></div>"
 
 #: inc/post-tags.php:599
-#, fuzzy, php-format, php-format
+#, fuzzy, php-format, php-format, php-format
 #@ largo
 msgid "<div class=\"next\"><a href=\"%1$s\"><img class=\"thumb\" src=\"%4$s\" /><h5>Next %2$s</h5><span class=\"meta-nav\">%3$s</span></a></div>"
 msgstr "<div class=\"next\"><a href=\"%1$s\"><h5>Próximas historias</h5><span class=\"meta-nav\">%3$s</span></a></div>"
@@ -1683,7 +1683,7 @@ msgstr "Sobre el sitio Largo"
 
 #: inc/widgets/largo-about.php:18
 #: inc/widgets/largo-about.php:41
-#, fuzzy, php-format, php-format
+#, fuzzy, php-format, php-format, php-format
 #@ largo
 msgid "About %s"
 msgstr "Sobre este sitio"
@@ -1760,7 +1760,7 @@ msgstr "Dependemos de su apoyo. Su generosa colaboración de cualquier cantidad 
 #: inc/widgets/largo-post-series-links.php:61
 #: inc/widgets/largo-recent-posts.php:170
 #: inc/widgets/largo-sidebar-featured.php:79
-#: inc/widgets/largo-staff.php:91
+#: inc/widgets/largo-staff.php:94
 #: inc/widgets/largo-tag-list.php:52
 #: inc/widgets/largo-taxonomy-list.php:284
 #@ largo
@@ -1901,7 +1901,7 @@ msgid "Largo Follow"
 msgstr ""
 
 #: inc/widgets/largo-follow.php:52
-#, fuzzy, php-format, php-format
+#, fuzzy, php-format, php-format, php-format
 #@ largo
 msgid "<a class=\"rss subscribe btn social-btn\" href=\"%1$s\"><i class=\"icon-rss\"></i>Subscribe via RSS</a>"
 msgstr "%1$s Recientes<a class=\"rss-link\" href=\"%2$s\"><i class=\"icon-rss\"></i></a>"
@@ -1940,7 +1940,7 @@ msgid "Follow on YouTube"
 msgstr ""
 
 #: inc/widgets/largo-follow.php:103
-#, fuzzy, php-format, php-format
+#, fuzzy, php-format, php-format, php-format
 #@ largo
 msgid "Follow %s"
 msgstr "Síganos"
@@ -2435,7 +2435,7 @@ msgstr ""
 msgid "Largo Sidebar Featured Posts"
 msgstr "Entradas destacadas de la barra lateral Largo"
 
-#: inc/widgets/largo-staff.php:96
+#: inc/widgets/largo-staff.php:99
 #@ default
 msgid "Include:"
 msgstr ""
@@ -3004,7 +3004,7 @@ msgid "%1$s, %2$s"
 msgstr ""
 
 #: lib/class-tgm-plugin-activation.php:2280
-#, fuzzy, php-format, php-format
+#, fuzzy, php-format, php-format, php-format
 #@ tgmpa
 msgctxt "plugins"
 msgid "All <span class=\"count\">(%s)</span>"
@@ -3013,7 +3013,7 @@ msgstr[0] "<span class=\"time-ago\">hace %s</span>"
 msgstr[1] "<span class=\"time-ago\">hace %s</span>"
 
 #: lib/class-tgm-plugin-activation.php:2283
-#, fuzzy, php-format, php-format
+#, fuzzy, php-format, php-format, php-format
 #@ tgmpa
 msgid "To Install <span class=\"count\">(%s)</span>"
 msgid_plural "To Install <span class=\"count\">(%s)</span>"
@@ -3029,7 +3029,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: lib/class-tgm-plugin-activation.php:2289
-#, fuzzy, php-format, php-format
+#, fuzzy, php-format, php-format, php-format
 #@ tgmpa
 msgid "To Activate <span class=\"count\">(%s)</span>"
 msgid_plural "To Activate <span class=\"count\">(%s)</span>"
@@ -3096,7 +3096,7 @@ msgid "Install %2$s"
 msgstr ""
 
 #: lib/class-tgm-plugin-activation.php:2495
-#, fuzzy, php-format, php-format
+#, fuzzy, php-format, php-format, php-format
 #@ tgmpa
 msgctxt "%2$s = plugin name in screen reader markup"
 msgid "Update %2$s"
@@ -3551,6 +3551,7 @@ msgstr "Única etiqueda arriba"
 msgid "List Below"
 msgstr "Lista Debajo"
 
+#: inc/post-tags.php:256
 #: options.php:54
 #: options.php:68
 #@ largo
@@ -4275,7 +4276,7 @@ msgid "Full Coverage"
 msgstr "Cobertura completa"
 
 #: search.php:12
-#, fuzzy, php-format, php-format
+#, fuzzy, php-format, php-format, php-format
 #@ largo
 msgid "Search results for <span class=\"search-term\">%s</span>"
 msgstr "Su búsqueda de <span class=\"search-term\">%s</span> resultó en "

@@ -253,7 +253,7 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 		}
 		
 		if ( $utilities['email'] === '1' ) {
-			$output .= '<span data-service="email" class="email custom-share-button share-button"><a><i class="icon-mail"></i> <span class="hidden-phone">Email</span></a></span>';
+			$output .= '<span data-service="email" class="email custom-share-button share-button"><a><i class="icon-mail"></i> <span class="hidden-phone">' . esc_attr( __( 'Email', 'largo' ) ) . '</span></a></span>';
 		}
 
 		
