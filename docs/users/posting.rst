@@ -43,22 +43,24 @@ Featured media can more deeply engage your audience by getting their attention t
 
 The standard WordPress site allows you to add a featured image to display at the top of each story page, as a thumbnail for each post on the homepage, etc. Largo extends this by allowing you to feature not just static images, but many kinds of media content (video, slideshows, and other embedded media).
 
-Featured media will display at the top of the post page between the byline and the main text. For best visual results use a landscape-shaped image (or other media) with a width of 1170px.  Featured images will also displayas cropped thumbnails on the home page or section page associated with the post. Note that featured videos, embed codes, and galleries will not display a home/section page thumbnail.
+Featured media will display at the top of the post page between the byline and the main text. For best visual results use a landscape-shaped image (or other media) with a width of 1170px.  Featured images will also display as cropped thumbnails on the home page or section page associated with the post. Note that featured videos, embed codes, and galleries will not display a home/section page thumbnail.
 
 To add featured media, in the edit screen of your post click the Set Featured Media button. This opens a modal window where you have some options:
 
-- You can enter embed code from YouTube, Vimeo, and other embeddable video sources, or from slideshows and other embeddable content. If you add a Title, Caption, and Credit, they’ll appear along with the embedded media.
+- You can enter embed code from any type of embeddable content. If you add a Title, Caption, and Credit, they’ll appear along with the embedded media.
 - Featured video allows you to enter a Video URL from YouTube, Vimeo, or another video hosting service. If the embed code is not pulled in automatically you can enter it in the Video embed code field. You can add a custom thumbnail image for display on the home/section page, but note that the custom thumbnail won't display on the post page in place of the video itself.
 - Featured image is typically used to include a "hero" image at the top of the post. For best results use a landscape image with a width of 1170px. 
 - Featured gallery enables you to build a carousel of images. Select multiple images from the Media Library, or upload new images to use in the gallery. 
 
-When uploading images you can click the Select Files button in the Upload Files tab, or just drag and drop images into the modal window. When using images for any purpose, make sure to add Alt Text to meet accessibility requirements for visually impaired website users.
+When uploading images you can click the Select Files button in the Upload Files tab, or just drag and drop images into the modal window. When using images for any purpose, make sure to add Alt Text to meet accessibility requirements for visually impaired website users. 
+
+With all featured media you can add a title, caption, and other descriptive information for display with the media on the post page.
 
 
 Taxonomies
 ------------------
 
-Taxonomies are a way to label and organize the posts on your site. Taxonomies activated by default in Largo include Categories, Tags, and Post Prominence. There are two optional taxonomies, Series and Post Types, that can be enabled through the Appearance > Theme Options > Advanced menu. 
+Taxonomies are a way to label and organize the posts on your site. Taxonomies activated by default in Largo include Categories, Tags, and Post Prominence. Two optional taxonomies, Series and Post Types, can be enabled through the Appearance > Theme Options > Advanced menu. 
 
 Taxonomies do two important things:
 
@@ -69,33 +71,29 @@ The way Largo handles taxonomies is explained in detail on the Largo `Taxonomy d
 
 **Categories, Tags, and Series**
 
-After creating the body of the post, you should assign some Categories and Tags to it. If you are using the Series or Post Tyoe taxonomy assign the post to the relevant series and/or post type.
+After creating the body of the post, you should assign some Categories and Tags to it. If you are using the Series or Post Type taxonomy, assign the post to the relevant series and/or post type.
 
 **Related Posts**
 
-If you have enabled the Largo Related Posts Widget, you can add selected related posts by entering one or more post IDs separated by commas. To find the ID of a post, open it as if you were editing the post. In the browser address bar you'll see a number in the URL similar to `http://yoursite.org/wp-admin/post.php?post=31400&action=edit`. In this case 31400 is the post ID. 
+If you are using the Largo Related Posts Widget, you can add selected related posts by entering one or more post IDs separated by commas. To find the ID of a post, open it as if you were editing the post. In the browser address bar you'll see a number in the URL similar to _http://yoursite.org/wp-admin/post.php?post=31400&action=edit_. In this case 31400 is the post ID. 
 
-Note: If you are using the Largo Related Posts Widget and don't add related posts to any given post, the widget will display related posts based on series, category, or tag.
-
-Show related posts that are either editorially determined (by adding related post IDs in the Additional Options box of the post edit screen) or using a default related algorithm that tries to surface the most closely-related post(s) to a given post by series, category or tag.
+_Note: If you are using the Largo Related Posts Widget and don't add related posts to any given post, the widget will display related posts based on series, category, or tag._
 
 **Top Term**
 
-From a pulldown menu (populated by categories and tags) Identify which of the post's terms is primary. This is used a navigational aid in many homepage layouts and appears directly above the headline on the post page, providing a link to the landing page for all posts assigned that top term.
+From the Top Term pulldown menu (populated by categories and tags) select which term is primary for the post. This term appears directly above the headline on the post page, and links to the landing page for all posts assigned that top term.
 
 **Custom Byline Options**
 
-If you are posting for an author who doesn't have a WordPress user account in your website, you can enter their byline and a link to a relevant webpage for that author. 
+If you are posting for an author who doesn't have a WordPress user account for your website, you can enter their byline and optionally a link to a relevant webpage for that author. 
 
-We recommend creating a WordPress account for each author, which allows WordPress to create an author archive page with all the author's posts. If you need to include co-authors, you  should activate the `Coauthors Plus plugin <plugins.html>`_. 
+We recommend creating a WordPress account for each author, which allows WordPress to create an author archive page with all posts for each author. If you find that you need to include co-authors, you should activate the `Coauthors Plus plugin <plugins.html>`_. 
 
-Using the Custom Byline Option will override display of the user entering the post, and will not add the post to an authos archive page.
+Using the Custom Byline Option will override display of the user entering the post, and will not add the post to an author archive page.
 
 **Layout Options**
 
-The default post template since Largo 0.4 is the One Column (Standard) layout. In this box you are able to modify the template on a per-post basis by selecting another option.
-
-Read more here about the `Single Article Template <themeoptions.html#layout-options>`_.
+The default post template since Largo 0.4 is the One Column (Standard) layout. In this box you can choose a different layout for the post. Read more here about the alternative `post layout options <themeoptions.html#layout-options>`_.
 
 **Custom Sidebar**
 
