@@ -7,7 +7,7 @@ Overview
 
 Largo adds a number of widget areas and custom widgets to allow for easy, drag and drop management of content blocks on your site. You can access and edit any of these widget areas from the **Appearance > Widgets** menu in the WordPress Dashboard.
 
-To add a content block to a widget area, simply drag and drop a widget from the available widgets on left to the widget area on the right where you want it to appear. Note that as soon as you add any widgets to a widget area, any default content will no longer display so you will need to completely populate the widget area with the content you want to display. Most widgets have additional settings to configure how they display  on the site.
+To add a content block to a widget area, simply drag and drop a widget from the available widgets on left to the widget area on the right where you want it to appear. Note that as soon as you add any widgets to a widget area, any default content in that widget area will no longer display so you'll need to completely populate that area with the content you want. Most widgets have additional settings to configure how they display on the site.
 
 Note that some widgets are small and can easily fit in narrow columns. Other widgets can contain lots of content that doesn’t fit well in a small space. It’s important to see how a widget affects the page layout and adjust as needed.
 
@@ -43,7 +43,7 @@ Less Common Widget Areas
 
 - **Homepage Alert** - For sites that cover breaking news, this is an optional widget area where you can place a text widget to add a "breaking" banner to the top of the homepage. The styling for this widget area is very basic, so if you plan to use it you might want to create either some custom CSS for a text widget and/or create and register your own "breaking news" widget for this area.
 - **Header Ad Zone** -  If you have enabled the optional header leaderboard ad zone from the **Appearance > Theme Options > Advanced** tab, drop an ad widget to appear in this area.
-- **Homepage Left Rail** - If you are using a three column homepage layout (set in **Appearance > Theme Options >Layout**) this is the widget area for the contents of the left-side column.
+- **Homepage Left Rail** - If you are using a three column homepage layout (set in **Appearance > Theme Options > Layout**) this is the widget area for the contents of the left-side column.
 
 Custom Widget Areas
 -------------------
@@ -135,7 +135,7 @@ This widget simply shows recent comments, with links to the posts they appear on
 Largo Recent Posts
 ------------------
 
-This is a powerful widget to show recent posts in various formats with the option to limit by category, tag, custom taxonomy term and/or author. This widget has many options that enable display of a filtered set of articles or excerpts based on criteria of your choosing. You can limit by author and/or category, and then further limit by tag. You can limit by custom taxonomy (Post Prominence, Series, or Post Types (the latter two need to be enabled in **Appearance > Theme Options > Advanced**), and you can combine these filters as needed. 
+This is a powerful widget to show recent posts in various formats with the option to limit by category, tag, custom taxonomy term and/or author. This widget has many options that enable display of a filtered set of articles or excerpts based on criteria of your choosing. You can limit by author and/or category, and then further limit by tag. You can limit by a custom taxonomy like Post Prominence, Series, or Post Types (the latter two need to be enabled in **Appearance > Theme Options > Advanced**), and you can combine these filters as needed. 
 
 Limiting by taxonomies and their terms requires using the "slug" for each. To start with, here are the available taxonomies with their names and slugs:
 
