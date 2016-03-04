@@ -16,9 +16,10 @@ Note that some widgets are small and can easily fit in narrow columns. Other wid
 For more about widgets and how WordPress handles them, see `the WordPress Codex article on widgets <http://codex.wordpress.org/WordPress_Widgets>`_.
 
 Widget Areas
-------------
+============
 
-**Sidebar Widget Areas**
+Sidebar Widget Areas
+--------------------
 
 Note that the way some of these widget area appear on your site will depend on the layout options you set in the Appearance > Theme Options > Layout Options menu.
 
