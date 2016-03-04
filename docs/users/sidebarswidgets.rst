@@ -5,52 +5,50 @@ Sidebars and Widgets
 Overview
 ========
 
-Largo adds a number of widget areas and custom widgets to allow for easy, drag and drop management of content blocks on your site.
+Largo adds a number of widget areas and custom widgets to allow for easy, drag and drop management of content blocks on your site. You can access and edit any of these widget areas from the **Appearance > Widgets** menu in the WordPress Dashboard.
 
-Access and edit any of the following widget areas from the Appearance > Widgets menu in the WordPress Dashboard.
+To add a content block to a widget area, simply drag and drop a widget from the available widgets on left to the widget area on the right where you want it to appear. Note that as soon as you add any widgets to a widget area, any default content will no longer display so you will need to completely populate the widget area with the content you want to display. Most widgets have additional settings to configure how they display  on the site.
 
-To add widgets to any of these areas, simply drag and drop a widget from the area on left to the widget area you want it to appear in. Note that as soon as you add any widgets to a widget area, the default will no longer display so you will need to completely populate the widget area with the widgets you want to display. Many widgets will have additional settings you can use to configure how they appear on your site.
+Note that some widgets are small and can easily fit in narrow columns. Other widgets can contain lots of content that doesn’t fit well in a small space. It’s important to see how a widget affects the page layout and adjust as needed.
 
-Note that some widgets are small and can easily fit in narrow columns. Other widgets might contain lots of content that doesn’t fit well within in a small space. It’s important to see how a widget affects the page layout and adjust as needed.
-
-For more about widgets and how WordPress handles them, see `the WordPress Codex article on widgets <http://codex.wordpress.org/WordPress_Widgets>`_.
+*For more about widgets and how WordPress handles them, see `the WordPress Codex article on widgets <http://codex.wordpress.org/WordPress_Widgets>`_*.
 
 Widget Areas
 ============
 
+The way some of these widget areas appear on your site will depend on the layout options you set in the **Appearance > Theme Options > Layout** menu.
+
 Sidebar Widget Areas
 --------------------
 
-Note that the way some of these widget area appear on your site will depend on the layout options you set in the **Appearance > Theme Options > Layout** menu.
-
 - **Main Sidebar** - By default this is the sidebar used for all non-single pages (homepage, category pages, date archive pages, etc.)
 
-- **Single Sidebar** - Used on single posts and pages. Note that if you do not populate this widget area, Largo will fallback to using the Main Sidebar instead. Additionally, as of Largo version 0.4, the recommended default layout for single posts and pages is a single column layout that does **not** include a sidebar unless you explicitly set one from the **Layout Options > Custom Sidebar** dropdown menu when editing an individual post. If you select a sidebar from this dropdown menu, it typically appear as a skinny column floated to the left of your content.
-- **Topic Sidebar** - An optional widget area enabled from the **Appearance > Theme Options > Layout** menu. When enabled, this widget area will be used in the place of the main sidebar on all category, tag, and custom taxonomy (e.g. - series) pages.
+- **Single Sidebar** - Used for single posts and pages, if you select a two-column template for single-post pages. As of Largo version 0.4, the recommended default layout for single posts and pages is a single column layout that does **not** include a sidebar unless you explicitly set one from the **Layout Options > Custom Sidebar** dropdown menu when editing an individual post. Note that if you do not populate this widget area, Largo will fall back to using the Main Sidebar. 
+- **Topic Sidebar** - An optional widget area enabled from the **Appearance > Theme Options > Layout** menu. When enabled, this widget area will be used in the place of the main sidebar on all category, tag, and custom taxonomy pages.
 
 Footer Widget Areas
 -------------------
 
-Depending on which layout you select in the **Appearance > Theme Options > Layout** menu for the Footer Layout option, you will see either three or four numbered footer widget areas (which are numbered left to right). These areas will typically be populated by some default widgets that you can modify or change by adding widgets of your choice in the **Appearance > Widgets** menu.
+Depending on which layout you select in the **Appearance > Theme Options > Layout** menu for the **Footer Layout** option, you will see either three or four numbered footer widget areas in **Appearance > Widgets**. The footer widget numbers reflect their order in the foot from left to right. These areas will typically be populated by some default widgets, but  you can change this by adding the widgets of your choice.
 
 The Article Bottom Widget Area
 ------------------------------
 
-Prior to version 0.4, Largo controlled the appearance of elements at the bottom of article pages using various settings from the **Appearance > Theme Options > Basic Settings** menu. In version 0.4 we have made this a widget area instead to allow for more flexibility in the type and order of elements that appear here.
+Prior to Largo 0.4, appearance of elements at the bottom of article pages was set from the **Appearance > Theme Options > Basic Settings** menu. With version 0.4 we made this a widget area instead to allow for more flexibility.
 
-By default, the only thing displayed at the bottom of an article is the comments section (when comments are enabled). Some of the elements you might consider adding to this area are the author bio, related posts and prev/next links widgets but many of the widgets in WordPress or those added by Largo are designed to be contextual and display well in this area so you can experiment and see what best suits your needs.
+By default, the only content displayed at the bottom of an article is the comments section (when comments are enabled). You can easily add other elements like the author bio, related posts, and prev/next links widgets. Many widgets are designed to be contextual based on the article's taxonomy, author, etc. With many different widgets and options, it's a good idea to experiment and see what works best.
 
 Less Common Widget Areas
 ------------------------
 
-- **Homepage Alert** - For sites that cover breaking news, this is an optional widget area where you can add a text widget to add a "breaking" banner to the top of the homepage. The styling for this widget area is very basic so if you plan to use it you'll likely want to create either some custom CSS for a text widget and/or create and register your own "breaking news" widget to be used in this widget area.
-- **Header Ad Zone** -  If you have enabled the optional header leaderboard ad zone from the **Appearance > Theme Options > Advanced** tab then this would be the widget are you'll use to add an ad widget to appear in that position.
-- **Homepage Left Rail** - If you are using a three column homepage layout this will be a widget area to manage the contents of the skinny column to the far left.
+- **Homepage Alert** - For sites that cover breaking news, this is an optional widget area where you can place a text widget to add a "breaking" banner to the top of the homepage. The styling for this widget area is very basic, so if you plan to use it you might want to create either some custom CSS for a text widget and/or create and register your own "breaking news" widget for this area.
+- **Header Ad Zone** -  If you have enabled the optional header leaderboard ad zone from the **Appearance > Theme Options > Advanced** tab, drop an ad widget to appear in this area.
+- **Homepage Left Rail** - If you are using a three column homepage layout (set in **Appearance > Theme Options >Layout**)this is the widget area for the contents of the left-side column.
 
 Custom Widget Areas
 -------------------
 
-Largo also enables you to add any number of **custom widget areas** you might need for display on certain pages of your site. For example, you might want to create a sidebar for a category or series that is only displayed on the archive page for that category/series and/or on the posts that appear in that category/series. Custom sidebars can be added from the **Appearance > Theme Options > Layout** tab under the "Sidebar Options" header. Instructions for settings these options can be found below.
+Largo also allows you to add any number of **custom widget areas** or display on certain pages of the site. For example, you could create a sidebar for a category or series that is only displayed on the archive page for that taxonomy, and/or on posts that appear in that taxonomy. Custom sidebars can be added from the **Appearance > Theme Options > Layout** tab under the **Sidebar Options** header. Instructions for setting these options are in `Sidebar Options <#sidebar-options>`_ below.
 
 Custom Widgets
 ==============
