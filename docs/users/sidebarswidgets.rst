@@ -3,7 +3,7 @@ Sidebars and Widgets
 ====================
 
 Overview
---------
+========
 
 Largo adds a number of widget areas and custom widgets to allow for easy, drag and drop management of content blocks on your site.
 
