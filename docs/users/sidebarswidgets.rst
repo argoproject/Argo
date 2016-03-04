@@ -23,7 +23,7 @@ Note that the way some of these widget area appear on your site will depend on t
 
 - **Main Sidebar** - By default this is the sidebar used for all non-single pages (homepage, category pages, date archive pages, etc.)
 - **Single Sidebar** - Used on single posts and pages. Note that if you do not populate this widget area, Largo will fallback to using the Main Sidebar instead. Additionally, as of Largo version 0.4, the recommended default layout for single posts and pages is a single column layout that does **not** include a sidebar unless you explicitly set one from the Layout Options > Custom Sidebar dropdown menu when editing an individual post. If you select a sidebar from this dropdown menu, it typically appear as a skinny column floated to the left of your content.
-- **Topic Sidebar** - An optional widget area enabled from the Appearance > Theme Options > Layout Options menu. When enabled, this widget area will be used in the place of the main sidebar on all category, tag and custom taxonomy (e.g. - series) pages.
+- **Topic Sidebar** - An optional widget area enabled from the Appearance > Theme Options > Layout Options menu. When enabled, this widget area will be used in the place of the main sidebar on all category, tag, and custom taxonomy (e.g. - series) pages.
 
 **Footer Widget Areas**
 
@@ -58,20 +58,37 @@ All of our widgets have:
 
 The widgets added by Largo include:
 
-- **INN Member Stories** - Shows a list of curated stories from other member of INN.
-- **Largo Author Bio** - Shows a bio of the author(s) for a given post including their photo and social media links (when filled out in their user profile).
-- **Largo Explore Related** - A tabbed widget to show related stories by category/tag. We recommend using the Largo Related posts widget instead but this widget is retained in Largo version 0.4 for backwards compatibility.
-- **Largo Featured Posts** - Show recent featured posts with thumbnails and excerpts.
-- **Largo Recent Comments** - Show recent comments with links to the posts they appear on.
-- **Largo Related Posts** - Show related posts that are either editorially determined (by adding related post IDs in the Additional Options box of the post edit screen) or using a default related algorithm that tries to surface the most closely-related post(s) to a given post by series, category or tag.
-- **Largo Staff Roster** - Display a list of the users on your site with options to limit by user role or exclude particular users by setting an option in their user profile.
-- **Largo Taxonomy List** - List all of the terms in a given taxonomy with links to their archive pages. This is mostly commonly used to generate a list of series/projects with links to the project pages.
+- **INN Member Stories** - Shows a list of curated stories from other members of INN. By default this widget will display headlines, source, and date of the three recent stories from INN members. Options include showing excerpts and adjusting the number of stories to show.
+- **Largo Author Bio** - Shows a bio of the author(s) for a given post including their photo and social media links (when filled out in their user profile). Also includes a "More by author" link to the landing page for all posts by the author. This widget only works on single-post pages.
+- **Largo Explore Related** - A tabbed widget to show related stories by category/tag. This widget works only on single-post pages, and fits best in the Article Bottom widget area. We recommend using the Largo Related posts widget instead but this widget is retained in Largo version 0.5 for backwards compatibility.
+- **Largo Featured Posts** - Show posts assigned a Post Prominence, with titles, thumbnails and excerpts. By default Largo has five Post Prominence terms: Featured in Category, Featured in Series, Footer Featured Widget, Homepage Featured, and Sidebar Featured Widget. (You can add new Post Prominence terms in Posts > Post Prominence.) Use these to display posts you want to feature on different pages. For example you can place this widget in the Main Sidebar, and set it to display posts assigned to Homepage Featured. Posts assigned the Prominence Term of Homepage Featured will then display in this widget. You could then place another Largo Featured Posts widget in the Topic Sidebar (after enabling it from the Appearance > Theme Options > Layout Options menu), and set it to display posts assigned the Prominence Term of Featured in Category. In short, you can use the Featured Posts widget to feature different posts in various types of pages. Other options for this widget include changing the title (defaults to "In Case You Missed It"), changing the number of posts to show and the excerpt length, and Thumbnail location.
+- **Largo Recent Comments** - Shows recent comments with links to the posts they appear on.
+- **Largo Related Posts** - This widget works on single-post and Series pages. It shows the title, thumbnail image, related posts that are either set manually (by adding related post IDs in the Additional Options/Related Posts box of the post edit screen) or by falling back to a default algorithm that selects the most closely-related post(s) based on series, category or tag. Widget options include changing its title (defaults to "Read Next"), the number of related posts to display, and the related post Thumbnail position.
+- **Largo Staff Roster** - Displays a list of users on your site, with the thumbnail image, name, and a link to a page containing each user's posts. Widget options include selecting to include specific user groups, and changing the title displayed with the widget (which defaults to "Staff Members").  Note that you can exclude specific users from being displayed in the widget by going to Users > Edit User and in the Staff Status setting selecting "Hide in roster". 
+
+- **Largo Taxonomy List** - List all of the terms in a given taxonomy with links to their archive pages. This is mostly commonly used to generate a list of series/projects with links to the project pages. To use this widget begin by entering in the Taxonomy field the slug of the taxonomy you want to use. For example, the slug for Categories is "category"; the slug for Tags is "post_tag"; the slug for P:ost Prominence is "prominence"; and the slug for Series is "series". You must enter one of these slugs for the widget to function correctly. 
+
+By default the widget will pull in *all* posts in the taxonomy, and this could be a very large number of posts. Use the Count field to limit the number of posts displayed. You can also limit the display to specific terms in the taxonomy. To do this you must find the term IDs by visiting the list of terms in the taxonomy (under Posts in the dashboard), then hover over or click on the term and find the tag_ID number in the URL for that term. For example, in this URL for the term "Bacon": 
+
+/wp-admin/edit-tags.php?action=edit&taxonomy=post_tag&tag_ID=482&post_type=post
+
+the term ID is 482.
+
+After setting the taxonomy slug, count, and optionally limiting by term ID, you choose to display thumbnails and a headline of the most recent post in the taxonomy, or display the taxonomy list as as dropdown menu. The Title of the widget defaults to Categories, but you can override this with a title of your choice.
+
 - **Largo About Site** - Displays the site description provided in the Appearance > Theme Options > Basic Settings menu.
-- **Largo Donate Widget** - Shows a donate message and button. The default message and link used in this widget can be configured in the Appearance > Theme Options > Basic Settings menu but can be overridden on a per-widget basis if you want to show different messages on different pages/sections of your site.
-- **Largo Facebook Widget** - Shows a Facebook "like" box/feed.
-- **Largo Follow** - Uses the social media links provided for your site in the Appearance > Theme Options > Basic Settings menu to show buttons to follow you on select social networks
+- **Largo Donate Widget** - Shows a donate message and button with a link to a donation page. You can change the message, button text, and/or link on a per-widget basis if you need to for different pages/sections of your site.
+- **Largo Facebook Widget** - Shows a Facebook "like" box/feed. This will only work for Facebook Pages, which are by default public, not personal Facebook account. If you get an error message saying "Error: Not a valid Facebook Page url," the url is not a public Facebook Page.
+- **Largo Follow** - Uses the social media links provided for your site in the Appearance > Theme Options > Basic Settings menu to show buttons to follow you on select social networks. 
 - **Largo Prev/Next Links** - Most commonly used in the Article Bottom widget area, this will show links to the next/prev post ordered by published date.
-- **Largo Recent Posts** - A powerful widget to show recent posts in various formats with the option to limit by category, tag, custom taxonomy term and/or author.
+
+- **Largo Recent Posts** - A powerful widget to show recent posts in various formats with the option to limit by category, tag, custom taxonomy term and/or author. This widget has many options that enable display of a filtered set of articles or excerpts based on criteria of your choosing. You can limit by author and/or category, and then further limit by tag. You can limit by custom taxonomy (Post Prominence, Series, or Post Types (the latter two need to be enabled in Appearance > Theme Options > Advanced), and you can combine these filters as needed. 
+
+Limiting by tags, taxonomies, and terms requires using the "slug" for each. For example, the slug for a tag of "social media" would be "social-media". Likewise with the Custom Taxonomies (Post Prominence, Series, and Post Types), the slugs are "prominence", "series", and "post-type". If you want to limit by custom taxonomy, enter the taxonomy's slug in the Taxonomy field, and the slug for the term in the Term field. For example if you want to display Post Prominence content assigned to "Featured in Series", you'll enter "prominence" as the Taxonomy and "series-featured" as the Term. You can find the slugs for any taxonomy by checking its settings page which lists the names and slugs for each taxonomy.
+
+After setting the limits on the content you want displayed, you can adjust how it's displayed.  You can set how thumbnails, excerpts, bbylines, and top terms are displayed, and add a More link to a URL. One additional setting may be very helpful: Depending on how you limit by taxonomy etc., you may want to select the option to Avoid Duplicate Posts.
+
+
 - **Largo Tag List** - Typically used in the Article Bottom widget area, this will display a list of tags associated with a given post.
 - **Largo Twitter Widget** - Allow for the display of a Twitter profile, list or search widget. Note that to use this widget you'll need to create a widget (and grab the widget ID) from https://twitter.com/settings/widgets.
 - **Largo Disclaimer Site** - When the "Enable Disclaimer Widget" option is enabled from the Appearance > Theme Options menu, this widget will show the article disclaimer you have provided. Optionally, you can override the disclaimer on a per-article basis by modifying it from the post edit screen.
