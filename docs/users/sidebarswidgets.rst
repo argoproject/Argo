@@ -43,7 +43,7 @@ Less Common Widget Areas
 
 - **Homepage Alert** - For sites that cover breaking news, this is an optional widget area where you can place a text widget to add a "breaking" banner to the top of the homepage. The styling for this widget area is very basic, so if you plan to use it you might want to create either some custom CSS for a text widget and/or create and register your own "breaking news" widget for this area.
 - **Header Ad Zone** -  If you have enabled the optional header leaderboard ad zone from the **Appearance > Theme Options > Advanced** tab, drop an ad widget to appear in this area.
-- **Homepage Left Rail** - If you are using a three column homepage layout (set in **Appearance > Theme Options >Layout**)this is the widget area for the contents of the left-side column.
+- **Homepage Left Rail** - If you are using a three column homepage layout (set in **Appearance > Theme Options >Layout**) this is the widget area for the contents of the left-side column.
 
 Custom Widget Areas
 -------------------
@@ -55,13 +55,13 @@ Custom Widgets
 
 Largo adds a number of custom widgets in addition to the `standard widgets <http://codex.wordpress.org/Widgets_SubPanel>`_ that come included with WordPress.
 
-All of our widgets have:
+All Largo custom widgets have:
 
-- The choice of three backgrounds (default, reverse and none) to give you a variety of styling options and classes to use for custom CSS.
-- The ability to be hidden on desktops, tablets and phones using the responsive utility classes `from Twitter Bootstrap <http://getbootstrap.com/2.3.2/scaffolding.html#responsive>`_. We recommend hiding less necessary widgets for users on smaller viewports such as mobile devices in order to create a cleaner, simpler experience that allows them to focus on your content without distraction.
+- The choice of three backgrounds (default, reverse and none) to provide styling options and classes for custom CSS.
+- The ability to hide the widget on desktops, tablets, and phones using the responsive utility classes `from Twitter Bootstrap <http://getbootstrap.com/2.3.2/scaffolding.html#responsive>`_. We recommend hiding less necessary widgets for users on smaller viewports such as mobile devices to create a cleaner experience that allows them to focus on your content.
 - The ability to set a link for the widget title.
 
-The widgets added by Largo include:
+Here is a complete list of the Largo custom widgets as of version 0.5.4:
 
 INN Member Stories
 ------------------
