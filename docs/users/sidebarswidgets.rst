@@ -68,9 +68,11 @@ The widgets added by Largo include:
 
 - **Largo Taxonomy List** - List all of the terms in a given taxonomy with links to their archive pages. This is mostly commonly used to generate a list of series/projects with links to the project pages. To use this widget begin by entering in the Taxonomy field the slug of the taxonomy you want to use. For example, the slug for Categories is "category"; the slug for Tags is "post_tag"; the slug for P:ost Prominence is "prominence"; and the slug for Series is "series". You must enter one of these slugs for the widget to function correctly. 
 
-By default the widget will pull in *all* posts in the taxonomy, and this could be a very large number of posts. Use the Count field to limit the number of posts displayed. You can also limit the display to specific terms in the taxonomy. To do this you must find the term IDs by visiting the list of terms in the taxonomy (under Posts in the dashboard), then hover over or click on the term and find the tag_ID number in the URL for that term. For example, in this URL for the term "Bacon": 
+By default the widget will pull in *all* posts in the taxonomy, and this could be a very large number of posts. Use the Count field to limit the number of posts displayed. You can also limit the display to specific terms in the taxonomy. To do this you must find the term IDs by visiting the list of terms in the taxonomy (under Posts in the dashboard), then hover over or click on the term and find the tag_ID number in the URL for that term. 
 
-/wp-admin/edit-tags.php?action=edit&taxonomy=post_tag&tag_ID=482&post_type=post
+For example, in this URL for the term "Bacon": 
+
+:: /wp-admin/edit-tags.php?action=edit&taxonomy=post_tag&tag_ID=482&post_type=post
 
 the term ID is 482.
 
