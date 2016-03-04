@@ -11,7 +11,7 @@ To add a content block to a widget area, simply drag and drop a widget from the 
 
 Note that some widgets are small and can easily fit in narrow columns. Other widgets can contain lots of content that doesn’t fit well in a small space. It’s important to see how a widget affects the page layout and adjust as needed.
 
-*For more about widgets and how WordPress handles them, see `the WordPress Codex article on widgets <http://codex.wordpress.org/WordPress_Widgets>`_*.
+For more about widgets and how WordPress handles them, see `the WordPress Codex article on widgets <http://codex.wordpress.org/WordPress_Widgets>`_.
 
 Widget Areas
 ============
