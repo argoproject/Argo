@@ -153,7 +153,7 @@ Each term within a taxonomy also has a name and a slug. For example, the slug fo
 
 If you want to limit by custom taxonomy, enter the taxonomy's slug in the Taxonomy field, and then the term's slug in the Term field. For example if you want to display Post Prominence content assigned to "Featured in Series", you'll enter "prominence" as the Taxonomy and "series-featured" as the Term. 
 
-After setting the limits on the content you want displayed, you can adjust how it's displayed.  You can set how thumbnails, excerpts, bbylines, and top terms are displayed, and add a More link to a URL. One additional setting may be very helpful: Depending on how you limit by taxonomy etc., you may want to select the option to Avoid Duplicate Posts.
+After setting the limits on the content you want displayed, you can adjust how it's displayed.  You can set how thumbnails, excerpts, bylines, and top terms are displayed, and add a More link to a URL. One additional setting may be very helpful: Depending on how you limit by taxonomy etc., you may want to select the option to Avoid Duplicate Posts.
 
 Largo Related Posts
 -------------------
