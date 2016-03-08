@@ -27,7 +27,7 @@ $values = get_post_custom( $post->ID );
 
 	 	<h5 class="byline"><?php largo_byline(); ?></h5>
 
-		<?php largo_excerpt( $post, 5, true, __('Continue&nbsp;Reading', 'largo'), true, false ); ?>
+		<?php largo_excerpt( $post, 2, true, __('Continue&nbsp;Reading', 'largo'), true, false ); ?>
 
 		<?php if ( !is_home() && largo_has_categories_or_tags() && $tags === 'btm' ) { ?>
 			<h5 class="tag-list"><strong><?php _e('More about:', 'largo'); ?></strong> <?php largo_categories_and_tags( 8 ); ?></h5>
