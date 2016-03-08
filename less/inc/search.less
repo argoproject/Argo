@@ -1,9 +1,30 @@
+/**
+ * Styles for search forms and search results
+ *
+ * Styles for the global nav search are in less/inc/header.less
+ */
+
 // Search Results
 .search-results {
+  .input-append {
+    width: 100%;
+    position: relative;
+  }
+  .form-search {
+    input {
+      width: 90%;
+      box-sizing: border-box;
+    }
+    button {
+      width: 10%;
+      box-sizing: border-box;
+    }
+  }
   .search-term {
     background-color: @grayLighter;
     padding: 1px 5px;
   }
+
   .stories {
     article {
       padding-bottom: 12px;
