@@ -3,9 +3,11 @@ $apologies = __('Apologies, but no results were found. Perhaps searching will he
 
 if ( is_404() ) {
 	$apologies = sprintf(
-		__("Apologies, but <code>%s</code> was not found. Perhaps wearching will help.", 'largo'),
-		wp_kses($_SERVER['REQUEST_URI'], array()) // The url
+		__("Apologies, but <code>%s</code> was not found. Perhaps searching will help.", 'largo'),
+		wp_kses($_SERVER['REQUEST_URI'], array()) // The url, sanitized
 	);
+} else if ( is_search() ) {
+	$apologies = __("Apologies, but no results were found. Perhaps searching for something else will help.", 'largo');
 }
 
 ?>
