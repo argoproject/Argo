@@ -19,6 +19,7 @@ From `INN's computer setup guide <https://github.com/INN/docs/blob/master/staffi
 - VirtualBox
 - Vagrant
 - npm and grunt-cli
+- xgettext (only needed for rebuilding translation files and releasing)
 
 If you're on OSX, you will also want to install Homebrew, to assist in the installation of the above.
 
