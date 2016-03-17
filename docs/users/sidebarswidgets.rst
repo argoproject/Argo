@@ -22,7 +22,6 @@ Sidebar Widget Areas
 --------------------
 
 - **Main Sidebar** - By default this is the sidebar used for all non-single pages (homepage, category pages, date archive pages, etc.)
-
 - **Single Sidebar** - Used for single posts and pages, if you select a two-column template for single-post pages. As of Largo version 0.4, the recommended default layout for single posts and pages is a single column layout that does **not** include a sidebar unless you explicitly set one from the **Layout Options > Custom Sidebar** dropdown menu when editing an individual post. Note that if you do not populate this widget area, Largo will fall back to using the Main Sidebar. 
 - **Topic Sidebar** - An optional widget area enabled from the **Appearance > Theme Options > Layout** menu. When enabled, this widget area will be used in the place of the main sidebar on all category, tag, and custom taxonomy pages.
 
@@ -58,7 +57,7 @@ Largo adds a number of custom widgets in addition to the `standard widgets <http
 All Largo custom widgets have:
 
 - The choice of three backgrounds (default, reverse and none) to provide styling options and classes for custom CSS.
-- The ability to hide the widget on desktops, tablets, and phones using the responsive utility classes `from Twitter Bootstrap <http://getbootstrap.com/2.3.2/scaffolding.html#responsive>`_. We recommend hiding less necessary widgets for users on smaller viewports such as mobile devices to create a cleaner experience that allows them to focus on your content.
+- The ability to hide the widget on desktops, tablets, and phones using the responsive utility classes `from Twitter Bootstrap <http://getbootstrap.com/2.3.2/scaffolding.html#responsive>`_. We recommend hiding less-necessary widgets for users on smaller viewports such as mobile devices to create a cleaner experience that allows them to focus on your content.
 - The ability to set a link for the widget title.
 
 Here is a complete list of the Largo custom widgets as of version 0.5.4:
@@ -71,7 +70,7 @@ Shows a list of curated stories from other members of INN. By default this widge
 Largo About Site
 ----------------
 
-Displays the site description provided in the **Appearance > Theme Options > Basic Settings** menu.
+Displays the site description provided in the **Appearance > Theme Options > Basic Settings** menu. This description can include some HTML elements (such as links, bold text, etc.).
 
 Largo Author Bio
 ----------------
@@ -86,7 +85,7 @@ When the "Enable Disclaimer Widget" option is enabled from the **Appearance > Th
 Largo Donate Widget
 -------------------
 
-Shows a donate message and button with a link to a donation page. You can change the message, button text, and/or link on a per-widget basis if you need to for different pages/sections of your site.
+Shows a donate message and button with a link to a donation page. You can change the message, button text, and/or link on a per-widget basis if you need to for different pages/sections of your site. By default, the link used in this widget is the one set under the **Appearance > Theme Options > Basic Settings** menu (also used for the donate button in the site header).
 
 Largo Explore Related
 ---------------------
@@ -97,13 +96,6 @@ Largo Facebook Widget
 ---------------------
 
 Shows a Facebook "like" box/feed. This will only work for Facebook Pages, which are by default public, not personal Facebook accounts. If you get an error message saying "Error: Not a valid Facebook Page url," it typically means the url is not a public Facebook Page.
-
-Largo Featured Posts
---------------------
-
-Show posts assigned a Post Prominence, with titles, thumbnails and excerpts. By default Largo has five Post Prominence terms: *Featured in Category, Featured in Series, Footer Featured Widget, Homepage Featured, and Sidebar Featured Widget*. (You can add new Post Prominence terms in **Posts > Post Prominence**.) Use these to display posts you want to feature on different pages. For example you can place this widget in the Main Sidebar, and set it to display posts assigned to Homepage Featured. Posts assigned the Prominence Term of Homepage Featured will then display in this widget. You could then place another Largo Featured Posts widget in the Topic Sidebar (after enabling it from the **Appearance > Theme Options > Layout > Sidebar Options**), and set it to display posts assigned the Prominence Term of Featured in Category.
-
-In short, you can use the Featured Posts widget to feature different posts in various types of pages. Other options for this widget include changing the title (defaults to "In Case You Missed It"), changing the number of posts to show and the excerpt length, and Thumbnail location.
 
 Largo Follow
 ------------
@@ -125,7 +117,7 @@ This widget is useful for single-post pages to show the title and description of
 Largo Prev/Next Links
 ---------------------
 
-Most commonly used in the Article Bottom widget area, this will show links to the next and previous posts ordered by published date.
+Most commonly used in the Article Bottom widget area, this will show links to the next and previous posts ordered by published date. Optionally, you can choose to limit the posts shown to the next/previous stories in the same category as the current post.
 
 Largo Recent Comments
 ---------------------
@@ -153,7 +145,7 @@ Each term within a taxonomy also has a name and a slug. For example, the slug fo
 
 If you want to limit by custom taxonomy, enter the taxonomy's slug in the Taxonomy field, and then the term's slug in the Term field. For example if you want to display Post Prominence content assigned to "Featured in Series", you'll enter "prominence" as the Taxonomy and "series-featured" as the Term. 
 
-After setting the limits on the content you want displayed, you can adjust how it's displayed.  You can set how thumbnails, excerpts, bylines, and top terms are displayed, and add a More link to a URL. One additional setting may be very helpful: Depending on how you limit by taxonomy etc., you may want to select the option to Avoid Duplicate Posts.
+After setting the limits on the content you want displayed, you can adjust how it's displayed.  You can set how thumbnails, excerpts, bylines, and top terms are displayed, and add a More link to a URL. One additional setting may be very helpful: Depending on how you limit by taxonomy etc., you may want to select the option to Avoid Duplicate Posts which will cause this widget to skip any posts that are already shown elsewhere on the page.
 
 Largo Related Posts
 -------------------
@@ -205,11 +197,16 @@ If you have the **Link Roundups** plugin installed, this widget will display the
 For more on how this works see the `Link Roundups widget documentation <https://github.com/INN/link-roundups/blob/master/README.md>`_.
 
 
-Widgets Deprecated in 0.4
+Widgets Deprecated in 0.4x
 =========================
 
 - **Largo Footer Featured Posts** - Works similarly to the Featured Widget above but limited to the "footer featured" term in the prominence taxonomy.
 - **Largo Sidebar Featured Posts** - Works similarly to the Featured Widget above but limited to the "footer featured" term in the prominence taxonomy.
+
+Widgets Deprecated in 0.5x
+=========================
+
+- **Largo Featured Posts** - Now just use the Largo Recent Posts widget and limit to the desired term in the Prominence taxonomy.
 
 Sidebar Options
 ===============
