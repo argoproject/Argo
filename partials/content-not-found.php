@@ -21,7 +21,7 @@ if ( is_404() ) {
 	</header><!-- .entry-header -->
 
 	<div class="entry-content">
-		<p><?php echo $apologies; ?></p>
+		<?php echo wpautop( $apologies ); ?></p>
 		<?php get_search_form(); ?>
 	</div><!-- .entry-content -->
 </article><!-- #post-0 -->
