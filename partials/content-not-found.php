@@ -3,14 +3,7 @@ $apologies = __( 'Apologies, but no results were found. Perhaps searching will h
 
 if ( is_404() ) {
 	if ( of_get_option( '404_message' ) ) {
-		$apologies = wp_kses( of_get_option( '404_message' ), array(
-			'a' => array(),
-			'b' => array(),
-			'br' => array(),
-			'i' => array(),
-			'em' => array(),
-			'strong' => array(),
-		));
+		$apologies = of_get_option( '404_message' );
 	} else {
 		$apologies = sprintf(
 			__( 'Apologies, but <code>%s</code> was not found. Perhaps searching will help.', 'largo' ),
@@ -18,7 +11,7 @@ if ( is_404() ) {
 		);
 	}
 } else if ( is_search() ) {
-	$apologies = __( 'Apologies, but no results were found. Perhaps searching for something else will help.', 'largo');
+	$apologies = __( 'Apologies, but no results were found. Perhaps searching for something else will help.', 'largo' );
 }
 
 ?>
