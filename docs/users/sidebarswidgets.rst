@@ -177,7 +177,7 @@ List all of the terms in a given taxonomy with links to their archive pages. Thi
 	**Taxonomy**: This dropdown allows you to configure the taxonomy from which terms will be drawn. Example taxonomies are Category, Tag, Post Prominence, and Series. This option defaults to Series.
 
 	**Sort order**:
-		- Alphabetically: Terms will be sorted in alphabetical order by their name.
+		- Alphabetically: Terms will be sorted in alphabetical order by their name. Terms beginning with punctuation will come after terms beginning with letters. Terms beginning with numbers will come before terms beginning with letters.
 		- Most Recent: Terms created more recently will appear first. Term sort order is determined by the term's ID, and newer terms always have higher ID values.
 
 	**Count**: By default the widget will pull in 5 posts from the taxonomy. Use the Count field to increase or decrease the number of posts displayed. The minimum number of terms displayed is 1. In theory you can display all terms in a taxonomy by setting the count to the number of posts in the taxonomy, but in practice you should not set the number higher than 10. Using a large count number in conjunction with the thumbnail or headline options will negatively affect your site's performance, and may cause your server to run out of memory.
