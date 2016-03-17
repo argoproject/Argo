@@ -23,6 +23,8 @@ class largo_taxonomy_list_widget extends WP_Widget {
 	 * @param array $args Sidebar-related args
 	 * @param array $instance Instance-specific widget arguments
 	 * @link https://developer.wordpress.org/reference/functions/get_terms/
+	 * @uses largo_taxonomy_list_widget::render_series_list
+	 * @uses largo_taxonomy_list_widget::render_term_list
 	 */
 	function widget( $args, $instance ) {
 		extract( $args );
@@ -99,10 +101,10 @@ class largo_taxonomy_list_widget extends WP_Widget {
 					$this->render_series_list($tax_items, $instance);
 					break;
 				case 'category':
-					$this->render_cat_list($tax_items, $instance);
+					$this->render_term_list($tax_items, $instance);
 					break;
 				case 'post_tag':
-					$this->render_tag_list($tax_items, $instance);
+					$this->render_term_list($tax_items, $instance);
 					break;
 				default:
 					$this->render_term_list($tax_items, $instance);
@@ -185,68 +187,6 @@ class largo_taxonomy_list_widget extends WP_Widget {
 				$headline = largo_first_headline_in_post_array($posts);
 			}
 
-			$this->render_li($item, $thumbnail, $headline);
-		}
-	}
-
-	/**
-	 * Find the first thumbnailed post in the category and create an <li>
-	 *
-	 * @private
-	 * @uses largo_taxonomy_list_widget::render_li
-	 * @uses largo_featured_thumbnail_in_post_array
-	 * @uses largo_first_headline_in_post_array
-	 * @since 0.5.3
-	 */
-	private function render_cat_list($tax_items, $instance) {
-		foreach ($tax_items as $item) {
-			$headline = '';
-			$thumbnail = '';
-			$posts = array();
-
-			// Only get posts if we're going to use them.
-			if ($instance['thumbnails'] == '1' || $instance['use_headline'] == '1') {
-				$posts = get_posts(array(
-					'category_name' => $item->name,
-				));
-			}
-			if ($instance['thumbnails'] == '1') {
-				$thumbnail = largo_featured_thumbnail_in_post_array($posts);
-			}
-			if ($instance['use_headline'] == '1') {
-				$headline = largo_first_headline_in_post_array($posts);
-			}
-			$this->render_li($item, $thumbnail, $headline);
-		}
-	}
-
-	/**
-	 * For a tag, find the first thumbnailed post and create an <li>
-	 *
-	 * @private
-	 * @uses largo_taxonomy_list_widget::render_li
-	 * @uses largo_featured_thumbnail_in_post_array
-	 * @uses largo_first_headline_in_post_array
-	 * @since 0.5.3
-	 */
-	private function render_tag_list($tax_items, $instance) {
-		foreach ($tax_items as $item) {
-			$headline = '';
-			$thumbnail = '';
-			$posts = array();
-
-			// Only get posts if we're going to use them.
-			if ($instance['thumbnails'] == '1' || $instance['use_headline'] == '1') {
-				$posts = get_posts(array(
-					'tag' => $item->slug,
-				));
-			}
-			if ($instance['thumbnails'] == '1') {
-				$thumbnail = largo_featured_thumbnail_in_post_array($posts);
-			}
-			if ($instance['use_headline'] == '1') {
-				$headline = largo_first_headline_in_post_array($posts);
-			}
 			$this->render_li($item, $thumbnail, $headline);
 		}
 	}
