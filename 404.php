@@ -9,18 +9,6 @@ get_header(); ?>
 
 <div id="content" class="span8" role="main">
 	<?php get_template_part( 'partials/content', 'not-found' ); ?>
-	<p><?php
-		echo wp_kses( of_get_option( '404_message' ), array(
-			'a' => array(),
-			'b' => array(),
-			'br' => array(),
-			'i' => array(),
-			'em' => array(),
-			'strong' => array(),
-		));
-	?></p>
-	
-	<h3><?php __( 'Or check out some of our most recent stories', 'largo' ); ?>
 	<?php
 		/*
 		 * Display the Recent Posts widget
@@ -31,7 +19,8 @@ get_header(); ?>
 		 */
 		if ( class_exists( 'largo_recent_posts_widget' ) ) {
 			the_widget( 'largo_recent_posts_widget', array (
-				'title' => ''	
+				'title' => __( 'Or check out some of our recent stories', 'largo' ),
+				'show_byline' => 1
 			));
 		}
 	?>
