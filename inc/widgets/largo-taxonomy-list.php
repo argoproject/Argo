@@ -49,8 +49,8 @@ class largo_taxonomy_list_widget extends WP_Widget {
 			'taxonomy' => 'series',
 			'number' => 5,
 			'exclude' => null,
-			'orderby' => 'name',
-			'order' => 'ASC'
+			'orderby' => 'id',
+			'order' => 'DESC'
 		);
 		$term_args = wp_parse_args( $term_args, $defaults );
 
@@ -287,8 +287,8 @@ class largo_taxonomy_list_widget extends WP_Widget {
 		$instance = $old_instance;
 		$instance['title'] = sanitize_text_field($new_instance['title']);
 		$instance['taxonomy'] = isset($new_instance['taxonomy']) ? strtolower(strip_tags($new_instance['taxonomy'])) : 'series' ;
-		$instance['orderby'] = isset($new_instance['orderby']) ? strtolower(strip_tags($new_instance['orderby'])) : 'name' ;
-		$instance['order'] = isset($new_instance['order']) ? strtolower(strip_tags($new_instance['order'])) : 'ASC' ;
+		$instance['orderby'] = isset($new_instance['orderby']) ? strtolower(strip_tags($new_instance['orderby'])) : 'id' ;
+		$instance['order'] = isset($new_instance['order']) ? strtolower(strip_tags($new_instance['order'])) : 'DESC' ;
 		$instance['order'] = sanitize_text_field($new_instance['order']);
 		$instance['count'] = sanitize_text_field($new_instance['count']);
 
@@ -338,7 +338,7 @@ class largo_taxonomy_list_widget extends WP_Widget {
 		}
 
 		// Create <option>s  of sort orderbys for the <select>
-		$sort_orderbys = array('name', 'slug', 'term_id', 'id', 'description', 'count'); // list from https://developer.wordpress.org/reference/functions/get_terms/
+		$sort_orderbys = array('id', 'name', 'slug', 'term_id', 'description', 'count'); // list from https://developer.wordpress.org/reference/functions/get_terms/
 		$sort_orderby_options = '';
 		foreach ( $sort_orderbys as $sort_orderby ) {
 			$sort_orderby_options .= sprintf(
