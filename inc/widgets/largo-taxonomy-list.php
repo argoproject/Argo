@@ -42,9 +42,18 @@ class largo_taxonomy_list_widget extends WP_Widget {
 			'taxonomy' => $instance['taxonomy'],
 			'number' => $instance['count'],
 			'exclude' => $instance['exclude'],
-			'orderby' => $instance['orderby'],
-			'order' => $instance['order'],
 		);
+		switch ($instance['sort']) {
+			case 'name_asc':
+				$term_args['orderby'] = 'name';
+				$term_args['order'] = 'ASC';
+				break;
+			default:
+				$term_args['orderby'] = 'id';
+				$term_args['order'] = 'DESC';
+				break;
+		}
+
 		$defaults = array(
 			'taxonomy' => 'series',
 			'number' => 5,
@@ -287,9 +296,7 @@ class largo_taxonomy_list_widget extends WP_Widget {
 		$instance = $old_instance;
 		$instance['title'] = sanitize_text_field($new_instance['title']);
 		$instance['taxonomy'] = isset($new_instance['taxonomy']) ? strtolower(strip_tags($new_instance['taxonomy'])) : 'series' ;
-		$instance['orderby'] = isset($new_instance['orderby']) ? strtolower(strip_tags($new_instance['orderby'])) : 'id' ;
-		$instance['order'] = isset($new_instance['order']) ? strtolower(strip_tags($new_instance['order'])) : 'DESC' ;
-		$instance['order'] = sanitize_text_field($new_instance['order']);
+		$instance['sort'] = isset($new_instance['sort']) ? strtolower(strip_tags($new_instance['sort'])) : 'id_desc' ;
 		$instance['count'] = sanitize_text_field($new_instance['count']);
 
 		// Default is 5 as of 0.5.5, not infinite: see discussion on http://jira.inn.org/browse/HELPDESK-589
@@ -315,8 +322,7 @@ class largo_taxonomy_list_widget extends WP_Widget {
 		$instance = wp_parse_args( (array) $instance, array( 'title' => '', 'taxonomy' => '' ) );
 		$title = esc_attr( $instance['title'] );
 		$count = isset($instance['count']) ? esc_attr( $instance['count'] ) : 5;
-		$orderby = esc_attr( $instance['orderby'] );
-		$order = esc_attr( $instance['order'] );
+		$sort = esc_attr( $instance['sort'] );
 		$instance['taxonomy'] = isset( $instance['taxonomy'] ) ? $instance['taxonomy'] : 'series';
 		$dropdown = isset( $instance['dropdown'] ) ? (bool) $instance['dropdown'] : false;
 		$thumbnails = isset( $instance['thumbnails'] ) ? (bool) $instance['thumbnails'] : false;
@@ -337,29 +343,17 @@ class largo_taxonomy_list_widget extends WP_Widget {
 			}
 		}
 
-		// Create <option>s  of sort orderbys for the <select>
-		$sort_orderbys = array('id', 'name', 'slug', 'term_id', 'description', 'count'); // list from https://developer.wordpress.org/reference/functions/get_terms/
-		$sort_orderby_options = '';
-		foreach ( $sort_orderbys as $sort_orderby ) {
-			$sort_orderby_options .= sprintf(
-				'<option value="%1$s" %2$s>%3$s</option>',
-				$sort_orderby,
-				selected( $instance['orderby'], $sort_orderby, false ),
-				__(ucwords($sort_orderby), 'largo')
-			);
-		}
-
 		// Create <option>s of sort orders for the <select>
 		$sort_orders = array(
-			'ASC' => 'Ascending',
-			'DESC' => 'Descending'
+			'name_asc' => 'Alphabetical order',
+			'id_desc' => 'Most-recently-created first'
 		); // list from https://developer.wordpress.org/reference/functions/get_terms/
 		$sort_order_options = '';
 		foreach ( $sort_orders as $order => $label ) {
 			$sort_order_options .= sprintf(
 				'<option value="%1$s" %2$s>%3$s</option>',
 				$order,
-				selected( $instance['order'], $order, false ),
+				selected( $instance['sort'], $order, false ),
 				__(ucwords($label), 'largo')
 			);
 		}
@@ -379,18 +373,10 @@ class largo_taxonomy_list_widget extends WP_Widget {
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id('orderby'); ?>"><?php _e('Order results by:', 'largo'); ?></label>
-			<select class="widefat" id="<?php echo $this->get_field_id('orderby'); ?>" name="<?php echo $this->get_field_name('orderby'); ?>" type="text" value="<?php echo $instance['orderby'] ?>">
-				<?php echo $sort_orderby_options; ?>
-			</select>
-		</p>
-
-		<p>
-			<label for="<?php echo $this->get_field_id('order'); ?>"><?php _e('Order results in which direction?', 'largo'); ?></label>
-			<select class="widefat" id="<?php echo $this->get_field_id('order'); ?>" name="<?php echo $this->get_field_name('order'); ?>" type="text" value="<?php echo $instance['order'] ?>">
+			<label for="<?php echo $this->get_field_id('sort'); ?>"><?php _e('How should terms be sorted?', 'largo'); ?></label>
+			<select class="widefat" id="<?php echo $this->get_field_id('sort'); ?>" name="<?php echo $this->get_field_name('sort'); ?>" type="text" value="<?php echo $instance['sort'] ?>">
 				<?php echo $sort_order_options; ?>
 			</select>
-			<small><?php _e('Using the alphabet as an example, ascending order will sort it as <code>a b c d ... x y z</code>. Descending order will sort the alphabet as <code>z y x q ... c b a</code>. Using numbers, an ascending sort will go <code>1 2 234 593 20450</code> and a descending sort will go <code>20450 593 234 2 1</code>.', 'largo'); ?></small>
 		</p>
 
 		<p>
@@ -400,7 +386,7 @@ class largo_taxonomy_list_widget extends WP_Widget {
 		</p>
 
 		<p>
-			<label for"<?php echo $this->get_field_id('count'); ?>"><?php _e('Count: (must be greater than 1)', 'largo'); ?></label>
+			<label for"<?php echo $this->get_field_id('count'); ?>"><?php _e('Count (must be greater than 1):', 'largo'); ?></label>
 			<input id="<?php echo $this->get_field_id('count'); ?>" name="<?php echo $this->get_field_name('count')?>" type="number" value="<?php echo $count; ?>" />
 			<br/>
 			<small><?php _e('The minimum number of terms shown is 1. While the maximum number is the number of terms in the taxonomy, in practice this number should be no larger than 10.', 'largo'); ?></small>
@@ -411,6 +397,7 @@ class largo_taxonomy_list_widget extends WP_Widget {
 
 		<p><input type="checkbox" class="checkbox ltlw-dropdown" id="<?php echo $this->get_field_id('dropdown'); ?>" name="<?php echo $this->get_field_name('dropdown'); ?>"<?php checked( $dropdown ); ?> />
 			<label for="<?php echo $this->get_field_id('dropdown'); ?>"><?php _e( 'Display terms as dropdown', 'largo' ); ?></label>
+			<br/>
 			<small><?php _e('If you choose to display terms as a dropdown, no thumbnails or headlines will be displayed.', 'largo'); ?></small>
 		</p>
 
