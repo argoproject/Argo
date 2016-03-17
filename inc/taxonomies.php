@@ -30,7 +30,7 @@ function largo_is_series_landing_enabled() {
  * @since 1.0
  */
 function largo_custom_taxonomies() {
-	if (!taxonomy_exists('prominence')) {
+	if ( !taxonomy_exists('prominence') ) {
 		register_taxonomy(
 			'prominence',
 			'post',
@@ -52,6 +52,37 @@ function largo_custom_taxonomies() {
 				),
 				'query_var'     => true,
 				'rewrite'       => true,
+			)
+		);
+	}
+
+	/*
+	 * Replaces Largo_Term_Icons::register_post_type and unregister_series_taxonomy()
+	 * @since 0.5.5
+	 * @link https://github.com/INN/Largo/issues/1173
+	 */
+	if ( !taxonomy_exists('post-type') ) {
+		$enabled = ( ! of_get_option('post_types_enabled') == 0 );
+		register_taxonomy(
+			'post-type',
+			array( 'post' ),
+			array(
+				'label' => __( 'Post Types', 'largo' ),
+				'labels' => array(
+					'name' => __( 'Post Types', 'largo' ),
+					'singular_name' => __( 'Post Type', 'largo' ),
+					'all_items' => __( 'All Post Types', 'largo' ),
+					'edit_item' => __( 'Edit Post Type', 'largo' ),
+					'update_item' => __( 'Update Post Type', 'largo' ),
+					'view_item' => __( 'View Post Type', 'largo' ),
+					'add_new_item' => __( 'Add New Post Type', 'largo' ),
+					'new_item_name' => __( 'New Post Type Name', 'largo' ),
+					'search_items' => __( 'Search Post Type'),
+				),
+				'public' => $enabled,
+				'show_admin_column' => $enabled,
+				'show_in_nav_menus' => $enabled,
+				'hierarchical' => true,
 			)
 		);
 	}
@@ -443,29 +474,3 @@ function largo_first_headline_in_post_array($array) {
 
 	return $headline;
 }
-
-/**
- * If the option in Advanced Options is unchecked, unregister the "Series" taxonomy
- *
- * @uses largo_is_series_enabled
- * @since 0.4
- */
-function unregister_series_taxonomy() {
-	if ( !largo_is_series_enabled() ) {
-		register_taxonomy( 'series', array(), array('show_in_nav_menus' => false) );
-	}
-}
-add_action( 'init', 'unregister_series_taxonomy', 999 );
-
-/**
- * If the option in Advanced Options is unchecked, unregister the "Post Types" taxonomy
- *
- * @uses of_get_option
- * @since 0.4
- */
-function unregister_post_types_taxonomy() {
-	if ( of_get_option('post_types_enabled') == 0 ) {
-		register_taxonomy( 'post-type', array(), array('show_in_nav_menus' => false) );
-	}
-}
-add_action( 'init', 'unregister_post_types_taxonomy', 999 );
