@@ -345,8 +345,8 @@ class largo_taxonomy_list_widget extends WP_Widget {
 
 		// Create <option>s of sort orders for the <select>
 		$sort_orders = array(
-			'name_asc' => 'Alphabetically by term name',
-			'id_desc' => 'Most-recently-created term first'
+			'name_asc' => 'Alphabetically',
+			'id_desc' => 'Most Recent'
 		); // list from https://developer.wordpress.org/reference/functions/get_terms/
 		$sort_order_options = '';
 		foreach ( $sort_orders as $order => $label ) {
