@@ -27,7 +27,7 @@ class largo_taxonomy_list_widget extends WP_Widget {
 	function widget( $args, $instance ) {
 		extract( $args );
 
-		$title = apply_filters('widget_title', empty( $instance['title'] ) ? __( 'Categories', 'largo' ) : $instance['title'], $instance, $this->id_base);
+		$title = apply_filters('widget_title', empty( $instance['title'] ) ? __( 'Series', 'largo' ) : $instance['title'], $instance, $this->id_base);
 		$is_dropdown = ! empty( $instance['dropdown'] ) ? '1' : '0';
 
 		/*
@@ -388,8 +388,6 @@ class largo_taxonomy_list_widget extends WP_Widget {
 		<p>
 			<label for"<?php echo $this->get_field_id('count'); ?>"><?php _e('Count (must be greater than 1):', 'largo'); ?></label>
 			<input id="<?php echo $this->get_field_id('count'); ?>" name="<?php echo $this->get_field_name('count')?>" type="number" value="<?php echo $count; ?>" />
-			<br/>
-			<small><?php _e('The minimum number of terms shown is 1. While the maximum number is the number of terms in the taxonomy, in practice this number should be no larger than 10.', 'largo'); ?></small>
 		</p>
 
 		<p>
