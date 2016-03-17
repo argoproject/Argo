@@ -283,7 +283,7 @@ function largo_top_tag_display() {
 	$terms = wp_get_object_terms($post->ID, array( 'series', 'category', 'post_tag', 'prominence', 'post-type' ) );
 
 	echo '<p><strong>' . __('Top Term', 'largo') . '</strong><br />';
-	echo __('Identify which of this posts\'s terms is primary.') . '</p>';
+	echo __('Identify which of this posts\'s terms is primary.', 'largo') . '</p>';
 
 	$disabled = (empty($terms))? 'disabled':'';
 	echo '<select style="min-width: 5em;" name="top_term" id="top_term" class="dropdown" ' . $disabled . '>';

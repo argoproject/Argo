@@ -201,7 +201,7 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 			$output .= sprintf(
 				$fb_share,
 				rawurlencode( get_permalink() ),
-				rawurlencode( ucfirst( of_get_option( 'fb_verb' ) ) )
+				__( ucfirst( of_get_option( 'fb_verb' ) ), 'largo' )
 			);
 		}
 
@@ -247,12 +247,12 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 				rawurlencode( html_entity_decode( get_the_title(), ENT_QUOTES, "UTF-8" ) ),
 				rawurlencode( get_permalink() ),
 				$via,
-				rawurlencode( __( 'Tweet', 'largo' ) )
+				__( 'Tweet', 'largo' )
 			);
 		}
 		
 		if ( $utilities['email'] === '1' ) {
-			$output .= '<span data-service="email" class="email custom-share-button share-button"><a><i class="icon-mail"></i> <span class="hidden-phone">Email</span></a></span>';
+			$output .= '<span data-service="email" class="email custom-share-button share-button"><a><i class="icon-mail"></i> <span class="hidden-phone">' . esc_attr( __( 'Email', 'largo' ) ) . '</span></a></span>';
 		}
 
 		
@@ -282,12 +282,12 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 			$top_term = get_term( (int) $top_term_id, $top_term_taxonomy );
 			$top_term_link = get_term_link( (int) $top_term_id, $top_term_taxonomy );
 			if ( ! is_wp_error( $top_term_link ) ) {
-				$more_social_links[] = '<li><a href="' . $top_term_link . '"><i class="icon-link"></i> <span>More on ' . $top_term->name . '</span></a></li>';
+				$more_social_links[] = '<li><a href="' . $top_term_link . '"><i class="icon-link"></i> <span>' . __( 'More on ', 'largo' ) . $top_term->name . '</span></a></li>';
 			}
 
 			$top_term_feed_link = get_term_feed_link( $top_term_id, $top_term_taxonomy );
 			if ( ! is_wp_error( $top_term_feed_link ) ) {
-				$more_social_links[] = '<li><a href="' . $top_term_feed_link . '"><i class="icon-rss"></i> <span>Subscribe to ' . $top_term->name . '</span></a></li>';
+				$more_social_links[] = '<li><a href="' . $top_term_feed_link . '"><i class="icon-rss"></i> <span>' . __( 'Subscribe to ', 'largo' ) . $top_term->name . '</span></a></li>';
 			}
 		}
 
@@ -298,7 +298,7 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 			$twitter_username = get_user_meta( $post->post_author, 'twitter', true );
 			if ( ! empty( $twitter_username ) ) {
 				$twitter_link = 'https://twitter.com/' . $twitter_username;
-				$more_social_links[] = '<li><a href="' . $twitter_link . '"><i class="icon-twitter"></i> <span>Follow this author</span></a></li>';
+				$more_social_links[] = '<li><a href="' . $twitter_link . '"><i class="icon-twitter"></i> <span>' . __( 'Follow this author', 'largo' ) . '</span></a></li>';
 			}
 		}
 
@@ -310,14 +310,15 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 		 * @since 0.5.5
 		 * @link https://github.com/INN/Largo/issues/219
 		 */
-		$more_social_links = apply_filters('largo_post_social_more_social_links', $more_social_links);
+		$more_social_links = apply_filters( 'largo_post_social_more_social_links', $more_social_links );
 
 		if ( count( $more_social_links ) ) {
 			$more_social_links_str = implode( $more_social_links, "\n" );
-
+			$more = __( 'More', 'largo' );
+			
 			$output .= <<<EOD
 <span class="more-social-links">
-	<a class="popover-toggle" href="#"><i class="icon-plus"></i><span class="hidden-phone">More</span></a>
+	<a class="popover-toggle" href="#"><i class="icon-plus"></i><span class="hidden-phone">${more}</span></a>
 	<span class="popover">
 	<ul>
 		${more_social_links_str}
