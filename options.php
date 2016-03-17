@@ -688,6 +688,12 @@ function optionsframework_options() {
 		'type' 	=> 'checkbox');
 
 	$options[] = array(
+		'desc' 	=> __('<strong>404 page text.</strong> This will be displayed on the 404 page, which is shown when people try to navigate to a page on your site that does not exist. Allowed HTML tags are <code>a</code>, <code>b</code>, <code>br</code>, <code>em</code>, <code>i</code> and <code>strong</code>.', 'largo'),
+		'id' 	=> '404_message',
+		'std' 	=> '',
+		'type' 	=> 'textarea');
+
+	$options[] = array(
 		'name' 	=> __('Byline Options', 'largo'),
 		'type'	=> 'info');
 
