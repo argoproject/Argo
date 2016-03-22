@@ -21,6 +21,11 @@ $entry_classes = 'entry-content';
 		<?php if ( !is_home() && largo_has_categories_or_tags() && $tags === 'btm' ) { ?>
 			<h5 class="tag-list"><strong><?php _e('More about:', 'largo'); ?></strong> <?php largo_categories_and_tags( 8 ); ?></h5>
 		<?php } ?>
+		<small class="date-link">
+			<span class="date"><?php largo_time(); ?></span>
+			<span class="sep">|</span>
+			<a href="<?php the_permalink(); ?>" title="<?php the_permalink(); ?>" rel=""><?php the_permalink(); ?></a>
+		</small>
 
 	</div><!-- .entry-content -->
 

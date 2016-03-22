@@ -39,6 +39,14 @@
       padding-bottom: 12px;
     }
   }
+  // No spacing after paragraph, see https://github.com/INN/Largo/pull/1177
+  .entry-content p {
+    margin-bottom: 0;
+  }
+  .date-link a,
+  .date-link {
+    color: @gray;
+  }
 }
 .search-results #content .form-search {
 }
