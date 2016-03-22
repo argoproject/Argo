@@ -15,14 +15,17 @@ $entry_classes = 'entry-content';
 		<h2 class="entry-title">
 			<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute( array( 'before' => __( 'Permalink to', 'largo' ) . ' ' ) )?>" rel="bookmark"><?php the_title(); ?></a>
 		</h2>
-		<small class="date"><?php largo_time(); ?></small>
 
 		<?php largo_excerpt( $post, 1, true, __('Continue&nbsp;Reading', 'largo'), true, false ); ?>
 
 		<?php if ( !is_home() && largo_has_categories_or_tags() && $tags === 'btm' ) { ?>
 			<h5 class="tag-list"><strong><?php _e('More about:', 'largo'); ?></strong> <?php largo_categories_and_tags( 8 ); ?></h5>
 		<?php } ?>
-		<a href="<?php the_permalink(); ?>" title="<?php the_permalink(); ?>" rel=""><?php the_permalink(); ?></a>
+		<small class="date-link">
+			<span class="date"><?php largo_time(); ?></span>
+			<span class="sep">|</span>
+			<a href="<?php the_permalink(); ?>" title="<?php the_permalink(); ?>" rel=""><?php the_permalink(); ?></a>
+		</small>
 
 	</div><!-- .entry-content -->
 
