@@ -67,7 +67,6 @@ class largo_recent_posts_widget extends WP_Widget {
 			foreach($wp_query->posts as $post) {
 				$duplicates[] = $post->ID;
 			}
-			var_log($duplicates);
 			$query_args['post__not_in'] = $duplicates;
 		}
 		if ( $instance['cat'] != '' ) $query_args['cat'] = $instance['cat'];
