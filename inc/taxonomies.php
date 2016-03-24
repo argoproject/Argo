@@ -30,6 +30,10 @@ function largo_is_series_landing_enabled() {
  * @since 1.0
  */
 function largo_custom_taxonomies() {
+
+	/*
+	 * Register the "Post Prominence" taxonomy, which is used to determine where posts display
+	 */
 	if ( !taxonomy_exists('prominence') ) {
 		register_taxonomy(
 			'prominence',
@@ -57,7 +61,9 @@ function largo_custom_taxonomies() {
 	}
 
 	/*
-	 * Replaces Largo_Term_Icons::register_post_type and unregister_series_taxonomy()
+	 * Register the "Post Types" taxonomy, used for icons. This is not enabled by default in Largo.
+	 *
+	 * Replaces Largo_Term_Icons::register_post_type and unregister_post_types_taxonomy()
 	 * @since 0.5.5
 	 * @link https://github.com/INN/Largo/issues/1173
 	 */
@@ -147,6 +153,7 @@ function largo_custom_taxonomies() {
 	do_action('largo_after_create_prominence_taxonomy', $largoProminenceTerms);
 
 	if ( ! taxonomy_exists( 'series' ) ) {
+		$series_enabled = largo_is_series_enabled();
 		register_taxonomy(
 			'series',
 			'post',
@@ -166,6 +173,9 @@ function largo_custom_taxonomies() {
 					'new_item_name' => __( 'New Series Name' ),
 					'menu_name' => __( 'Series' ),
 				),
+				'public' => $series_enabled,
+				'show_admin_column' => $series_enabled,
+				'show_in_nav_menus' => $series_enabled,
 				'query_var' => true,
 				'rewrite' => true,
 			)
