@@ -666,12 +666,6 @@ function optionsframework_options() {
 		'type' 	=> 'text');
 
 	$options[] = array(
-			'desc' 	=> __('<strong>Facebook Tracking Pixel ID.</strong> Unique numerical ID (one per Facebook Ads account) to enable tracking of site visitors and targeting of specific Facebook ads at your audience.', 'largo'),
-			'id' 	=> 'fb_tracking_pixel',
-			'std' 	=> '',
-			'type' 	=> 'text');
-
-	$options[] = array(
 		'desc' 	=> __('<strong>Bitly site verification.</strong> This is a string of numbers and letters used to verify your site with bitly analytics.', 'largo'),
 		'id' 	=> 'bitly_verification',
 		'std' 	=> '',
