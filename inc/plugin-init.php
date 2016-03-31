@@ -81,22 +81,22 @@ function largo_register_required_plugins() {
 		
 		// Our plugins from GitHub
 		array(
-			'name' 		=> 'Analytic Bridge'
-			'slug' 		=> 'analytic-bridge'
+			'name' 		=> 'Analytic Bridge',
+			'slug' 		=> 'analytic-bridge',
 			'source' 	=> 'https://github.com/INN/analytic-bridge/archive/master.zip',
-			'required'	=> false
+			'required'	=> false,
 		),
 		array(
-			'name' 		=> 'News Quiz'
-			'slug' 		=> 'news-quiz'
+			'name' 		=> 'News Quiz',
+			'slug' 		=> 'news-quiz',
 			'source' 	=> 'https://github.com/INN/news-quiz/archive/master.zip',
-			'required'	=> false
+			'required'	=> false,
 		),
 		array(
-			'name' 		=> 'Tweetable Text'
-			'slug' 		=> 'tweetable-text'
+			'name' 		=> 'Tweetable Text',
+			'slug' 		=> 'tweetable-text',
 			'source' 	=> 'https://github.com/INN/tweetable-text/archive/master.zip',
-			'required'	=> false
+			'required'	=> false,
 		),
 
 	);
