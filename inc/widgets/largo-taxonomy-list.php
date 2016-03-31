@@ -96,18 +96,10 @@ class largo_taxonomy_list_widget extends WP_Widget {
 
 			$tax_items = get_categories($term_args);
 
-			switch ( $instance['taxonomy'] ) {
-				case 'series':
-					$this->render_series_list( $tax_items, $instance );
-					break;
-				case 'category':
-					$this->render_term_list( $tax_items, $instance );
-					break;
-				case 'post_tag':
-					$this->render_term_list( $tax_items, $instance );
-					break;
-				default:
-					$this->render_term_list( $tax_items, $instance );
+			if ( $instance['taxonomy'] === 'series' ) {
+				$this->render_series_list( $tax_items, $instance );
+			} else {
+				$this->render_term_list( $tax_items, $instance );
 			}
 
 			echo '</ul>';
