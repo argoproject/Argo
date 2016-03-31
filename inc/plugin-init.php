@@ -1,19 +1,12 @@
 <?php
 /**
- * This file represents an example of the code that themes would use to register
- * the required plugins.
- *
- * It is expected that theme authors would copy and paste this code into their
- * functions.php file, and amend to suit.
- *
- * @package	   TGM-Plugin-Activation
- * @subpackage Example
- * @version	   2.3.6
- * @author	   Thomas Griffin <thomas@thomasgriffinmedia.com>
- * @author	   Gary Jones <gamajo@gamajo.com>
- * @copyright  Copyright (c) 2012, Thomas Griffin
- * @license	   http://opensource.org/licenses/gpl-2.0.php GPL v2 or later
- * @link       https://github.com/thomasgriffin/TGM-Plugin-Activation
+ * @package    TGM-Plugin-Activation
+ * @version    2.5.2 for parent theme Largo for publication on WordPress.org
+ * @author     Thomas Griffin, Gary Jones, Juliette Reinders Folmer
+ * @copyright  Copyright (c) 2011, Thomas Griffin
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPL v2 or later
+ * @link       https://github.com/TGMPA/TGM-Plugin-Activation
+ * @see 		http://tgmpluginactivation.com/configuration/ for detailed documentation.
  */
 
 /**
@@ -42,31 +35,38 @@ function largo_register_required_plugins() {
 	 */
 	$plugins = array(
 
-		// This is an example of how to include a plugin pre-packaged with a theme
-
+		// Our plugins from the WordPress Plugin Repository
 		array(
-			'name'     				=> 'Link Roundups', // The plugin name
-			'slug'     				=> 'link-roundups', // The plugin slug (typically the folder name)
-			'source'   				=> 'https://github.com/INN/link-roundups/archive/master.zip', // The plugin source
-			'required' 				=> false, // If false, the plugin is only 'recommended' instead of required
-			'version' 				=> '', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
-			'force_activation' 		=> false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
-			'force_deactivation' 	=> false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins
-			'external_url' 			=> 'https://github.com/INN/link-roundups', // If set, overrides default API URL and points to an external URL
+			'name' 		=> 'Link Roundups',
+			'slug' 		=> 'link-roundups',
+			'required' 	=> false,
+		),
+		
+		array(
+			'name' 		=> 'Super Cool Ad Inserter',
+			'slug' 		=> 'super-cool-ad-inserter',
+			'required' 	=> false,
+		),
+		
+		array(
+			'name' 		=> 'DoubleClick for WordPress',
+			'slug' 		=> 'doubleclick-for-wp',
+			'required' 	=> false,
+		),
+		
+		// Other commonly used plugins from the WordPress plugin repository
+		array(
+			'name' 		=> 'DocumentCloud',
+			'slug' 		=> 'documentcloud',
+			'required' 	=> false,
 		),
 
 		array(
-			'name'     				=> 'Documentcloud', // The plugin name
-			'slug'     				=> 'documentcloud', // The plugin slug (typically the folder name)
-			'source'   				=> 'https://github.com/documentcloud/wordpress-documentcloud/archive/master.zip', // The plugin source
-			'required' 				=> false, // If false, the plugin is only 'recommended' instead of required
-			'version' 				=> '', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
-			'force_activation' 		=> false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
-			'force_deactivation' 	=> false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins
-			'external_url' 			=> 'https://github.com/documentcloud/wordpress-documentcloud', // If set, overrides default API URL and points to an external URL
+			'name' 		=> 'Co-Authors Plus',
+			'slug' 		=> 'co-authors-plus',
+			'required' 	=> false,
 		),
-
-		// This is an example of how to include a plugin from the WordPress Plugin Repository
+		
 		array(
 			'name' 		=> 'Disqus Comment System',
 			'slug' 		=> 'disqus-comment-system',
@@ -78,23 +78,25 @@ function largo_register_required_plugins() {
 			'slug' 		=> 'bwp-google-xml-sitemaps',
 			'required' 	=> false,
 		),
-
+		
+		// Our plugins from GitHub
 		array(
-			'name' 		=> 'W3 Total Cache',
-			'slug' 		=> 'w3-total-cache',
-			'required' 	=> false,
+			'name' 		=> 'Analytic Bridge'
+			'slug' 		=> 'analytic-bridge'
+			'source' 	=> 'https://github.com/INN/analytic-bridge/archive/master.zip',
+			'required'	=> false
 		),
-
 		array(
-			'name' 		=> 'Edit Flow',
-			'slug' 		=> 'edit-flow',
-			'required' 	=> false,
+			'name' 		=> 'News Quiz'
+			'slug' 		=> 'news-quiz'
+			'source' 	=> 'https://github.com/INN/news-quiz/archive/master.zip',
+			'required'	=> false
 		),
-
 		array(
-			'name' 		=> 'Co-Authors Plus',
-			'slug' 		=> 'co-authors-plus',
-			'required' 	=> false,
+			'name' 		=> 'Tweetable Text'
+			'slug' 		=> 'tweetable-text'
+			'source' 	=> 'https://github.com/INN/tweetable-text/archive/master.zip',
+			'required'	=> false
 		),
 
 	);
@@ -102,42 +104,102 @@ function largo_register_required_plugins() {
 	// Change this to your theme text domain, used for internationalising strings
 	$theme_text_domain = 'largo';
 
-	/**
+	/*
 	 * Array of configuration settings. Amend each line as needed.
-	 * If you want the default strings to be available under your own theme domain,
-	 * leave the strings uncommented.
-	 * Some of the strings are added into a sprintf, so see the comments at the
-	 * end of each line for what each argument will be.
+	 *
+	 * TGMPA will start providing localized text strings soon. If you already have translations of our standard
+	 * strings available, please help us make TGMPA even better by giving us access to these translations or by
+	 * sending in a pull-request with .po file(s) with the translations.
+	 *
+	 * Only uncomment the strings in the config array if you want to customize the strings.
 	 */
 	$config = array(
-		'domain'       		=> $theme_text_domain,         	// Text domain - likely want to be the same as your theme.
-		'default_path' 		=> '',                         	// Default absolute path to pre-packaged plugins
-		'parent_slug' 		=> 'themes.php', 				// Default parent menu slug
-		'capability' 		=> 'edit_theme_options', 				// Default parent URL slug
-		'menu'         		=> 'install-required-plugins', 	// Menu slug
-		'has_notices'      	=> true,                       	// Show admin notices or not
-		'is_automatic'    	=> false,					   	// Automatically activate plugins after installation or not
-		'message' 			=> '',							// Message to output right before the plugins table
-		'strings'      		=> array(
-			'page_title'                       			=> __( 'Install Required Plugins', $theme_text_domain ),
-			'menu_title'                       			=> __( 'Install Plugins', $theme_text_domain ),
-			'installing'                       			=> __( 'Installing Plugin: %s', $theme_text_domain ), // %1$s = plugin name
-			'oops'                             			=> __( 'Something went wrong with the plugin API.', $theme_text_domain ),
-			'notice_can_install_required'     			=> _n_noop( 'This theme requires the following plugin: %1$s.', 'This theme requires the following plugins: %1$s.' ), // %1$s = plugin name(s)
-			'notice_can_install_recommended'			=> _n_noop( 'This theme recommends the following plugin: %1$s.', 'This theme recommends the following plugins: %1$s.' ), // %1$s = plugin name(s)
-			'notice_cannot_install'  					=> _n_noop( 'Sorry, but you do not have the correct permissions to install the %s plugin. Contact the administrator of this site for help on getting the plugin installed.', 'Sorry, but you do not have the correct permissions to install the %s plugins. Contact the administrator of this site for help on getting the plugins installed.' ), // %1$s = plugin name(s)
-			'notice_can_activate_required'    			=> _n_noop( 'The following required plugin is currently inactive: %1$s.', 'The following required plugins are currently inactive: %1$s.' ), // %1$s = plugin name(s)
-			'notice_can_activate_recommended'			=> _n_noop( 'The following recommended plugin is currently inactive: %1$s.', 'The following recommended plugins are currently inactive: %1$s.' ), // %1$s = plugin name(s)
-			'notice_cannot_activate' 					=> _n_noop( 'Sorry, but you do not have the correct permissions to activate the %s plugin. Contact the administrator of this site for help on getting the plugin activated.', 'Sorry, but you do not have the correct permissions to activate the %s plugins. Contact the administrator of this site for help on getting the plugins activated.' ), // %1$s = plugin name(s)
-			'notice_ask_to_update' 						=> _n_noop( 'The following plugin needs to be updated to its latest version to ensure maximum compatibility with this theme: %1$s.', 'The following plugins need to be updated to their latest version to ensure maximum compatibility with this theme: %1$s.' ), // %1$s = plugin name(s)
-			'notice_cannot_update' 						=> _n_noop( 'Sorry, but you do not have the correct permissions to update the %s plugin. Contact the administrator of this site for help on getting the plugin updated.', 'Sorry, but you do not have the correct permissions to update the %s plugins. Contact the administrator of this site for help on getting the plugins updated.' ), // %1$s = plugin name(s)
-			'install_link' 					  			=> _n_noop( 'Begin installing plugin', 'Begin installing plugins' ),
-			'activate_link' 				  			=> _n_noop( 'Activate installed plugin', 'Activate installed plugins' ),
-			'return'                           			=> __( 'Return to Required Plugins Installer', $theme_text_domain ),
-			'plugin_activated'                 			=> __( 'Plugin activated successfully.', $theme_text_domain ),
-			'complete' 									=> __( 'All plugins installed and activated successfully. %s', $theme_text_domain ), // %1$s = dashboard link
-			'nag_type'									=> 'updated' // Determines admin notice type - can only be 'updated' or 'error'
-		)
+		'id'           => 'largo',                 // Unique ID for hashing notices for multiple instances of TGMPA.
+		'default_path' => '',                      // Default absolute path to bundled plugins.
+		'menu'         => 'tgmpa-install-plugins', // Menu slug.
+		'has_notices'  => true,                    // Show admin notices or not.
+		'dismissable'  => true,                    // If false, a user cannot dismiss the nag message.
+		'dismiss_msg'  => '',                      // If 'dismissable' is false, this message will be output at top of nag.
+		'is_automatic' => false,                   // Automatically activate plugins after installation or not.
+		'message'      => '',                      // Message to output right before the plugins table.
+
+		/*
+		'strings'      => array(
+			'page_title'                      => __( 'Install Required Plugins', 'largo' ),
+			'menu_title'                      => __( 'Install Plugins', 'largo' ),
+			'installing'                      => __( 'Installing Plugin: %s', 'largo' ), // %s = plugin name.
+			'oops'                            => __( 'Something went wrong with the plugin API.', 'largo' ),
+			'notice_can_install_required'     => _n_noop(
+				'This theme requires the following plugin: %1$s.',
+				'This theme requires the following plugins: %1$s.',
+				'largo'
+			), // %1$s = plugin name(s).
+			'notice_can_install_recommended'  => _n_noop(
+				'This theme recommends the following plugin: %1$s.',
+				'This theme recommends the following plugins: %1$s.',
+				'largo'
+			), // %1$s = plugin name(s).
+			'notice_cannot_install'           => _n_noop(
+				'Sorry, but you do not have the correct permissions to install the %1$s plugin.',
+				'Sorry, but you do not have the correct permissions to install the %1$s plugins.',
+				'largo'
+			), // %1$s = plugin name(s).
+			'notice_ask_to_update'            => _n_noop(
+				'The following plugin needs to be updated to its latest version to ensure maximum compatibility with this theme: %1$s.',
+				'The following plugins need to be updated to their latest version to ensure maximum compatibility with this theme: %1$s.',
+				'largo'
+			), // %1$s = plugin name(s).
+			'notice_ask_to_update_maybe'      => _n_noop(
+				'There is an update available for: %1$s.',
+				'There are updates available for the following plugins: %1$s.',
+				'largo'
+			), // %1$s = plugin name(s).
+			'notice_cannot_update'            => _n_noop(
+				'Sorry, but you do not have the correct permissions to update the %1$s plugin.',
+				'Sorry, but you do not have the correct permissions to update the %1$s plugins.',
+				'largo'
+			), // %1$s = plugin name(s).
+			'notice_can_activate_required'    => _n_noop(
+				'The following required plugin is currently inactive: %1$s.',
+				'The following required plugins are currently inactive: %1$s.',
+				'largo'
+			), // %1$s = plugin name(s).
+			'notice_can_activate_recommended' => _n_noop(
+				'The following recommended plugin is currently inactive: %1$s.',
+				'The following recommended plugins are currently inactive: %1$s.',
+				'largo'
+			), // %1$s = plugin name(s).
+			'notice_cannot_activate'          => _n_noop(
+				'Sorry, but you do not have the correct permissions to activate the %1$s plugin.',
+				'Sorry, but you do not have the correct permissions to activate the %1$s plugins.',
+				'largo'
+			), // %1$s = plugin name(s).
+			'install_link'                    => _n_noop(
+				'Begin installing plugin',
+				'Begin installing plugins',
+				'largo'
+			),
+			'update_link' 					  => _n_noop(
+				'Begin updating plugin',
+				'Begin updating plugins',
+				'largo'
+			),
+			'activate_link'                   => _n_noop(
+				'Begin activating plugin',
+				'Begin activating plugins',
+				'largo'
+			),
+			'return'                          => __( 'Return to Required Plugins Installer', 'largo' ),
+			'plugin_activated'                => __( 'Plugin activated successfully.', 'largo' ),
+			'activated_successfully'          => __( 'The following plugin was activated successfully:', 'largo' ),
+			'plugin_already_active'           => __( 'No action taken. Plugin %1$s was already active.', 'largo' ),  // %1$s = plugin name(s).
+			'plugin_needs_higher_version'     => __( 'Plugin not activated. A higher version of %s is needed for this theme. Please update the plugin.', 'largo' ),  // %1$s = plugin name(s).
+			'complete'                        => __( 'All plugins installed and activated successfully. %1$s', 'largo' ), // %s = dashboard link.
+			'contact_admin'                   => __( 'Please contact the administrator of this site for help.', 'largo' ),
+
+			'nag_type'                        => 'updated', // Determines admin notice type - can only be 'updated', 'update-nag' or 'error'.
+		),
+		*/ 
 	);
 
 	tgmpa( $plugins, $config );
