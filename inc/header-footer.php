@@ -5,15 +5,16 @@
  *
  * Whether or not the sticky nav is displayed is determined by the javascript in js/navigation.js, since Largo 0.5.4.
  *
+ * @return Bool
  * @deprecated the constant SHOW_STICKY_NAV is deprecated
  * @link https://github.com/INN/Largo/issues/1135
- * @since 0.5.2
+ * @since 0.5.5
  */
 function largo_sticky_nav_active() {
-    if ( SHOW_STICKY_NAV ) {
-        return true;
-    }
-    return false;
+	if ( SHOW_STICKY_NAV ) {
+		return true;
+	}
+	return false;
 }
 
 /**
