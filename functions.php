@@ -299,7 +299,6 @@ class Largo {
 		/*
 		 * SHOW_STICKY_NAV is deprecated.
 		 * @link https://github.com/INN/Largo/issues/1135
-		 * @since 0.5.5
 		 */
 		if ( ! defined( 'SHOW_STICKY_NAV' ) ) {
 			define( 'SHOW_STICKY_NAV', FALSE );
