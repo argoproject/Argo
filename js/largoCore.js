@@ -98,7 +98,7 @@ jQuery(document).ready(function($) {
 
       // Handle the email service
       do_email: function( data ) {
-        var url = 'mailto:friend@example.com?' + $.param({
+        var url = 'mailto:?' + $.param({
           subject: data.title,
           body: data.description + "\n" + data.url
         });
