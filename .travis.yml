@@ -8,8 +8,11 @@ sudo: false
 language: php
 
 # PHP version used in first build configuration.
+# 5.3 matches the version of php installed in the INN/deploy-tools virtualbox
+# 5.5 matches http://phpinfo.wpengine.com/
 php:
     - "5.3"
+    - "5.5"
 
 # WordPress version used in first build configuration.
 env:
