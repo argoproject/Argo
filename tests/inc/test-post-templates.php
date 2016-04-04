@@ -7,19 +7,22 @@ class PostTemplatesTestFunctions extends WP_UnitTestCase {
 
 	}
 
+	private $ids = array();
+
+
 	function test_insert_image_no_thumb() {
 
-    	$filename = ( dirname(__FILE__) .'/../mock/img/cat.jpg' );
-    	$contents = file_get_contents($filename);
+		$filename = ( dirname(__FILE__) .'/../mock/img/cat.jpg' );
+		$contents = file_get_contents($filename);
 
-    	$upload = wp_upload_bits(basename($filename), null, $contents);
+		$upload = wp_upload_bits(basename($filename), null, $contents);
 
-    	print_r($upload['error']);
-    	$this->assertTrue( empty($upload['error']) );
+		print_r($upload['error']);
+		$this->assertTrue( empty($upload['error']) );
 
-    	$attachment_id = $this->_make_attachment($upload);
+		$attachment_id = $this->_make_attachment($upload);
 
-    	$attachment_url = wp_get_attachment_image_src($attachment_id,"large");
+		$attachment_url = wp_get_attachment_image_src($attachment_id,"large");
 		$attachment_url = $attachment_url[0];
 
 		$c1 = '<p><img src="'.$attachment_url.'" alt="1559758083_cef4ef63d2_o" width="771" height="475" class="alignnone size-large" /></p>
@@ -47,34 +50,34 @@ class PostTemplatesTestFunctions extends WP_UnitTestCase {
 		$this->assertEquals($c1final,$final1);
 		$this->assertEquals($c2final,$final2);
 
-    }
+	}
 
 
 	function _make_attachment( $upload, $parent_post_id = 0 ) {
 
-    	$type = '';
-    	if ( !empty($upload['type']) ) {
-    	    $type = $upload['type'];
-    	} else {
-    	    $mime = wp_check_filetype( $upload['file'] );
-    	    if ($mime)
-    	        $type = $mime['type'];
-    	}
-	
-    	$attachment = array(
-    	    'post_title' => basename( $upload['file'] ),
-    	    'post_content' => '',
-    	    'post_type' => 'attachment',
-    	    'post_parent' => $parent_post_id,
-    	    'post_mime_type' => $type,
-    	    'guid' => $upload[ 'url' ],
-    	);
-	
-    	// Save the data
-    	$id = wp_insert_attachment( $attachment, $upload[ 'file' ], $parent_post_id );
-    	wp_update_attachment_metadata( $id, wp_generate_attachment_metadata( $id, $upload['file'] ) );
-	
-    	return $this->ids[] = $id;
+		$type = '';
+		if ( !empty($upload['type']) ) {
+			$type = $upload['type'];
+		} else {
+			$mime = wp_check_filetype( $upload['file'] );
+			if ($mime)
+				$type = $mime['type'];
+		}
+
+		$attachment = array(
+			'post_title' => basename( $upload['file'] ),
+			'post_content' => '',
+			'post_type' => 'attachment',
+			'post_parent' => $parent_post_id,
+			'post_mime_type' => $type,
+			'guid' => $upload[ 'url' ],
+		);
+
+		// Save the data
+		$id = wp_insert_attachment( $attachment, $upload[ 'file' ], $parent_post_id );
+		wp_update_attachment_metadata( $id, wp_generate_attachment_metadata( $id, $upload['file'] ) );
+
+		return $this->ids[] = $id;
 
 	}
 
