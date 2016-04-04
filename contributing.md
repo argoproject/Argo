@@ -11,7 +11,7 @@ We welcome contributions and suggestions to help us improve this project. Please
 5.  [Submit a pull request to the parent repo](https://help.github.com/articles/creating-a-pull-request). Please read our [guide to submitting pull requests](https://github.com/inn/docs/blob/master/how-to-work-with-us/pull-requests.md) to see what we expect in a good pull request message.
 6.  Pull request should be assigned to:
     - [@rnagle](http://github.com/rnagle) (primary)
-    - [@aschweigert](http://github.com/aschweigert)(secondary)
+    - [@aschweigert](http://github.com/aschweigert) (secondary)
 
 We have [a helpful how-to](https://github.com/INN/docs/blob/master/how-to-work-with-us/via-github.md) that walks through this process in more detail if you're new to using Git.
 

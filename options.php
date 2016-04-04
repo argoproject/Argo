@@ -582,6 +582,12 @@ function optionsframework_options() {
 		'type' 	=> 'checkbox');
 
 	$options[] = array(
+		'desc' 	=> __('Enable Optional Header Widget Area.', 'largo'),
+		'id' 	=> 'header_widget_enabled',
+		'std' 	=> '0',
+		'type' 	=> 'checkbox');
+
+	$options[] = array(
 		'desc' 	=> __('Enable "Post Types" taxonomy.', 'largo'),
 		'id' 	=> 'post_types_enabled',
 		'std' 	=> '0',
@@ -692,6 +698,12 @@ function optionsframework_options() {
 		'id' 	=> 'noindex_archives',
 		'std' 	=> '0',
 		'type' 	=> 'checkbox');
+
+	$options[] = array(
+		'desc' 	=> __('<strong>404 page text.</strong> This will be displayed on the 404 page, which is shown when people try to navigate to a page on your site that does not exist.', 'largo'),
+		'id' 	=> '404_message',
+		'std' 	=> '',
+		'type' 	=> 'textarea');
 
 	$options[] = array(
 		'name' 	=> __('Byline Options', 'largo'),

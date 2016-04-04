@@ -90,6 +90,14 @@ function largo_register_sidebars() {
 		);
 	}
 
+	if ( of_get_option( 'header_widget_enabled' ) ) {
+		$sidebars[] = array(
+			'name' 	=> __( 'Header Widget', 'largo'),
+			'desc' 	=> __( 'An optional area to place one widget in the header next to the site logo.', 'largo' ),
+			'id' 	=> 'header-widget'
+		);
+	}
+
 	// user-defined custom widget areas
 	$custom_sidebars = preg_split( '/$\R?^/m', of_get_option( 'custom_sidebars' ) );
 	if ( is_array( $custom_sidebars ) ) {
@@ -345,3 +353,31 @@ function largo_sidebar_span_class() {
 	} else
 		return 'span4';
 }
+
+/**
+ * Output the "Header Widget" sidebar
+ *
+ * @action largo_header_after_largo_header
+ * @since 0.5.5
+ */
+function largo_header_widget_sidebar() {
+	if ( of_get_option('header_widget_enabled') ) {
+		dynamic_sidebar('header-widget');
+	}
+}
+add_action('largo_header_after_largo_header', 'largo_header_widget_sidebar');
+
+/**
+ * Output the "Article Bottom" sidebar
+ *
+ * @action largo_header_after_largo_header
+ * @since 0.5.5
+ */
+function largo_post_bottom_widget_area() {
+	if ( is_active_sidebar( 'article-bottom' ) ) {
+		echo '<div class="article-bottom nocontent">';
+		dynamic_sidebar( 'article-bottom' );
+		echo '</div>';
+	}
+}
+add_action('largo_post_bottom_widget_area', 'largo_post_bottom_widget_area');

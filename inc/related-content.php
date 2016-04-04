@@ -24,7 +24,10 @@ function largo_get_related_topics_for_category( $obj ) {
     }
 
     $out = "<ul>";
-
+	
+	$title_ul = apply_filters( 'largo_related_topics_title_ul', __( 'Related Topics:' , 'largo' ) );
+	$out .= '<li><strong>' . $title_ul . '</strong></li>';
+         
     // spit out the subcategories
     $cats = _subcategories_for_category( $cat_id );
 
@@ -386,6 +389,29 @@ function largo_top_term( $options = array() ) {
 }
 
 /**
+ * Add the post's top term to the post's post_class array
+ *
+ * @link https://github.com/INN/Largo/issues/1119
+ * @since 0.5.5
+ * @filter post_class
+ * @param array $classes An array of classes on the post
+ * @return array
+ */
+function largo_post_class_top_term($classes) {
+	global $post;
+	$top_term = get_post_meta( $post->ID, 'top_term', TRUE );
+	$term = get_term_by('id', $top_term, 'post_tag');
+
+	// Don't output the class .top-term-- if there isn't a top term saved
+	if ( !empty($term) ) {
+		$classes[] = 'top-term-' . $term->taxonomy . '-' . $term->slug;
+	}
+
+	return $classes;
+}
+add_filter('post_class', 'largo_post_class_top_term');
+
+/**
  *
  */
 function largo_filter_get_post_related_topics( $topics, $max ) {
@@ -592,7 +618,7 @@ class Largo_Related {
 		$taxonomies = get_the_terms( $this->post_id, array('category', 'post_tag') );
 
 		//loop thru taxonomies, much like series, and get posts
-		if ( count($taxonomies) ) {
+		if ( is_array($taxonomies) ) {
 			//sort by popularity
 			usort( $taxonomies, array(__CLASS__, 'popularity_sort' ) );
 
