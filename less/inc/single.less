@@ -58,42 +58,6 @@ body.normal.page {
 
   }
 
-  /* 1.2 - Hero */
-  
-  .hero {
-    text-align: center;
-    background-color: #efefef;
-    width: 100%;
-    margin: 0 0 24px;
-    &.is-gallery {
-      background-color: transparent;
-    }
-    p.wp-caption-text,
-    p.wp-media-credit {
-      float: none;
-      margin: 0 auto;
-      text-align: left;
-      font-size: @baseFontSize - 2;
-      margin:0 17.0213% 12px;
-      padding-top: 4px;
-    }
-    p.wp-media-credit {
-      text-align: right;
-      margin-top: 4px;
-      min-height: 0;
-    }
-    &.is-video {
-      margin-bottom: 24px;
-      .embed-container {
-        margin-bottom: 0;
-      }
-    }
-    &.is-empty {
-      min-height: 0;
-      height: 0;
-    }
-  }
-
   /* 1.3 - Sidebar (left of post) */
 
   .single #main #sidebar {
@@ -547,3 +511,45 @@ body.normal.page {
     margin-bottom: 0;
   }
 }
+
+/**
+ * Styles for the post-leading hero, used in both single-column .normal posts and two-column .classic posts
+ *
+ * @since 0.5.5
+ * @link https://github.com/INN/Largo/issues/934
+ */
+
+.hero {
+  text-align: center;
+  background-color: #efefef;
+  width: 100%;
+  margin: 0 0 24px;
+  &.is-gallery {
+    background-color: transparent;
+  }
+  p.wp-caption-text,
+  p.wp-media-credit {
+    float: none;
+    margin: 0 auto;
+    text-align: left;
+    font-size: @baseFontSize - 2;
+    margin:0 17.0213% 12px;
+    padding-top: 4px;
+  }
+  p.wp-media-credit {
+    text-align: right;
+    margin-top: 4px;
+    min-height: 0;
+  }
+  &.is-video {
+    margin-bottom: 24px;
+    .embed-container {
+      margin-bottom: 0;
+    }
+  }
+  &.is-empty {
+    min-height: 0;
+    height: 0;
+  }
+}
+
