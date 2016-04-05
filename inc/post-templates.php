@@ -134,6 +134,10 @@ function is_post_template( $template = '' ) {
 function largo_remove_hero($content) {
 
 	global $post;
+	// Abort if there is no global $post
+	if ( !isset($post)) {
+		return $content;
+	}
 
 	// 1: Only worry about this if:
 	// - it's a single template, and
@@ -162,7 +166,7 @@ function largo_remove_hero($content) {
 	if( !$do_run )
 		return $content;
 
-	if( !has_post_thumbnail() )
+	if( !has_post_thumbnail($post->ID) )
 		return $content;
 
 	$options = get_post_custom($post->ID);
