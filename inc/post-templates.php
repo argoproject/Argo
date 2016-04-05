@@ -109,12 +109,15 @@ function is_post_template( $template = '' ) {
 
 /**
  * Remove potentially duplicated hero image after upgrade to v0.4
- * 
+ *
  * The changes to the content in this function should eventually be made
- * perminant in the database. (@see https://github.com/INN/Largo/issues/354)
- * 
+ * permanent in the database. (@see https://github.com/INN/Largo/issues/354)
+ *
+ * If you would like to disable this function globally or on certain posts,
+ * use the filter `largo_remove_hero`.
+ *
  * @since 0.4
- * 
+ *
  * @param String $content the post content passed in by WordPress filter
  * @return String filtered post content.
  */
@@ -128,9 +131,25 @@ function largo_remove_hero($content) {
 	// - we haven't overridden the post display, and
 	// - we're not using a Largo layout
 
-	$do_not_run = apply_filters('largo_remove_hero', false);
+	/**
+	 * Filter to disable largo_remove_hero based on the global $post at the time the function is run
+	 *
+	 * When building your own filter, you must set the fourth parameter of add_filter to 2:
+	 *
+	 *     function filter_largo_remove_hero( $run, $post ) {
+	 *         # determine whether or not to run largo_remove_hero based on $post
+	 *         return $run;
+	 *     }
+	 *     add_filter('largo_remove_hero', 'filter_largo_remove_hero', 10, 2);
+	 *                                                                     ^
+	 *
+	 * @param Bool $run Whether `largo_remove_hero()` should be run
+	 * @param WP_Object $post The global $post at the time the function is run.
+	 * @since 0.5.5
+	 */
+	$do_run = apply_filters('largo_remove_hero', true, $post);
 
-	if( $do_not_run )
+	if( !$do_run )
 		return $content;
 
 	if( !has_post_thumbnail() )

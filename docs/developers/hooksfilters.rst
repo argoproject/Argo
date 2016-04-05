@@ -187,6 +187,22 @@ filter: **largo_post_social_more_social_links**
         }
         add_filter('largo_post_social_more_social_links', 'add_linkedin');
 
+.. php:function:: filter largo_remove_hero
+
+    Filter to disable largo_remove_hero based on the global $post at the time the function is run
+
+    :since: 0.5.5
+    :param Boolean $run: Whether the function should run against the current post
+    :param WP_Post $post: The global ``$post`` object at the time the function is run
+
+    When building your own filter, you must set the fourth parameter of add_filter to 2: ::
+
+        function filter_largo_remove_hero( $run, $post ) {
+            # determine whether or not to run largo_remove_hero based on $post
+            return $run;
+        }
+        add_filter('largo_remove_hero', 'filter_largo_remove_hero', 10, 2);
+                                                                     ^
 
 
 Template Hooks
