@@ -122,13 +122,18 @@ function largo_remove_hero($content) {
 
 	global $post;
 
-	// 1: Only worry about this if it's a single template, there's a feature image,
-	// we haven't overridden the post display and we're not using the classic layout.
+	// 1: Only worry about this if:
+	// - it's a single template, and
+	// - there's a feature image, and
+	// - we haven't overridden the post display, and
+	// - we're not using a Largo layout
 
-	if( !is_single() ) 
+	$do_not_run = apply_filters('largo_remove_hero', false);
+
+	if( $do_not_run )
 		return $content;
 
-	if( !has_post_thumbnail() ) 
+	if( !has_post_thumbnail() )
 		return $content;
 
 	$options = get_post_custom($post->ID);
@@ -136,8 +141,8 @@ function largo_remove_hero($content) {
 	if( isset($options['featured-image-display'][0]) )
 		return $content;
 
-	if( 
-		of_get_option( 'single_template' ) != 'normal' ||
+	if(
+		of_get_option( 'single_template' ) != 'normal' &&
 		of_get_option( 'single_template' ) != 'classic'
 	) {
 		return $content;
