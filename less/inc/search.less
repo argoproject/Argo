@@ -1,30 +1,54 @@
+/**
+ * Styles for search forms and search results
+ *
+ * Styles for the global nav search are in less/inc/header.less
+ */
+
 // Search Results
-.search-results {
+.archive.search-results {
+  .input-append {
+    width: 100%;
+    position: relative;
+  }
+  .form-search {
+    margin-bottom: 1em;
+    input {
+      width: 90%;
+      box-sizing: border-box;
+    }
+    button {
+      width: 10%;
+      box-sizing: border-box;
+    }
+  }
   .search-term {
     background-color: @grayLighter;
     padding: 1px 5px;
   }
+  h3 .rss-link {
+    margin-left: 1em;
+  }
+  h3 {
+    margin-bottom: 1em;
+    padding-bottom: 0.5em;
+    border-bottom: 1px solid @gray;
+  }
+
   .stories {
     article {
       padding-bottom: 12px;
     }
-    h2.entry-title {
-      font-size: 20px;
-      margin-bottom: 5px;
-    }
-    h5.byline {
-      font-size: 12px;
-      margin-bottom: 0;
-    }
-    .entry-content,
-    .entry-content p {
-      font-size: 14px;
-      margin-bottom: 5px;
-    }
+  }
+  // No spacing after paragraph, see https://github.com/INN/Largo/pull/1177
+  .entry-content p {
+    margin-bottom: 0;
+  }
+  .date-link a,
+  .date-link {
+    color: @gray;
   }
 }
 .search-results #content .form-search {
-  margin-bottom: 16px;
 }
 
 /* Google CSE */

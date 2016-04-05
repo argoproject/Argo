@@ -1,6 +1,6 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the largo-project package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: largo-project 0.5.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-10 14:57-0500\n"
+"POT-Creation-Date: 2016-03-17 13:43-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,10 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: 404.php:22
+msgid "Or check out some of our recent stories"
+msgstr ""
 
 #: archive.php:41
 msgid "Select a different month:"
@@ -268,8 +272,8 @@ msgstr ""
 msgid "Complete Coverage"
 msgstr ""
 
-#: image.php:32 inc/avatars/admin.php:32 inc/post-tags.php:640
-#: inc/post-tags.php:668
+#: image.php:32 inc/avatars/admin.php:32 inc/post-tags.php:642
+#: inc/post-tags.php:670
 msgid "Edit"
 msgstr ""
 
@@ -381,7 +385,7 @@ msgstr ""
 msgid "Twitter"
 msgstr ""
 
-#: inc/customizer/customizer.php:211 inc/post-tags.php:259 options.php:55
+#: inc/customizer/customizer.php:211 inc/post-tags.php:260 options.php:55
 msgid "Print"
 msgstr ""
 
@@ -755,59 +759,79 @@ msgstr ""
 msgid "Edit This Post"
 msgstr ""
 
-#: inc/post-tags.php:249 tests/inc/test-post-tags.php:82
+#: inc/post-tags.php:250 tests/inc/test-post-tags.php:82
 msgid "Tweet"
 msgstr ""
 
-#: inc/post-tags.php:259
+#: inc/post-tags.php:255 options.php:54 options.php:68
+msgid "Email"
+msgstr ""
+
+#: inc/post-tags.php:260
 msgid "Print this article"
 msgstr ""
 
-#: inc/post-tags.php:395
+#: inc/post-tags.php:285
+msgid "More on "
+msgstr ""
+
+#: inc/post-tags.php:290
+msgid "Subscribe to "
+msgstr ""
+
+#: inc/post-tags.php:301
+msgid "Follow this author"
+msgstr ""
+
+#: inc/post-tags.php:317 options.php:505 partials/nav-sticky.php:87
+msgid "More"
+msgstr ""
+
+#: inc/post-tags.php:397
 msgid "Next Page"
 msgstr ""
 
-#: inc/post-tags.php:396
+#: inc/post-tags.php:398
 msgid "Previous Page"
 msgstr ""
 
-#: inc/post-tags.php:580
+#: inc/post-tags.php:582
 #, php-format
 msgid ""
 "<div class=\"previous\"><a href=\"%1$s\"><img class=\"thumb\" src=\"%4$s\" /"
 "><h5>Previous %2$s</h5><span class=\"meta-nav\">%3$s</span></a></div>"
 msgstr ""
 
-#: inc/post-tags.php:587
+#: inc/post-tags.php:589
 #, php-format
 msgid ""
 "<div class=\"previous\"><a href=\"%1$s\"><h5>Previous %2$s</h5><span class="
 "\"meta-nav\">%3$s</span></a></div>"
 msgstr ""
 
-#: inc/post-tags.php:597
+#: inc/post-tags.php:599
 #, php-format
 msgid ""
 "<div class=\"next\"><a href=\"%1$s\"><img class=\"thumb\" src=\"%4$s\" /"
 "><h5>Next %2$s</h5><span class=\"meta-nav\">%3$s</span></a></div>"
 msgstr ""
 
-#: inc/post-tags.php:604
+#: inc/post-tags.php:606
 #, php-format
 msgid ""
 "<div class=\"next\"><a href=\"%1$s\"><h5>Next %2$s</h5><span class=\"meta-nav"
 "\">%3$s</span></a></div>"
 msgstr ""
 
-#: inc/post-tags.php:640
+#: inc/post-tags.php:642
 msgid "Pingback"
 msgstr ""
 
-#: inc/post-tags.php:672
+#: inc/post-tags.php:674
 msgid "Your comment is awaiting moderation."
 msgstr ""
 
-#: inc/post-tags.php:681
+#: inc/post-tags.php:683
 msgid "Reply"
 msgstr ""
 
@@ -1465,7 +1489,7 @@ msgstr ""
 
 #: inc/widgets/largo-donate.php:55 inc/widgets/largo-post-series-links.php:61
 #: inc/widgets/largo-recent-posts.php:170
-#: inc/widgets/largo-sidebar-featured.php:79 inc/widgets/largo-staff.php:91
+#: inc/widgets/largo-sidebar-featured.php:79 inc/widgets/largo-staff.php:94
 #: inc/widgets/largo-tag-list.php:52 inc/widgets/largo-taxonomy-list.php:284
 msgid "Title:"
 msgstr ""
@@ -2004,7 +2028,7 @@ msgstr ""
 msgid "Largo Sidebar Featured Posts"
 msgstr ""
 
-#: inc/widgets/largo-staff.php:96
+#: inc/widgets/largo-staff.php:99
 msgid "Include:"
 msgstr ""
 
@@ -2092,7 +2116,7 @@ msgid "Favorites"
 msgstr ""
 
 #: inc/widgets/largo-twitter.php:87 partials/nav-global.php:46
-#: partials/nav-sticky.php:63 partials/nav-sticky.php:68 searchform.php:8
+#: partials/nav-sticky.php:72 partials/nav-sticky.php:77 searchform.php:8
 msgid "Search"
 msgstr ""
 
@@ -2963,10 +2987,6 @@ msgstr ""
 msgid "List Below"
 msgstr ""
 
-#: options.php:54 options.php:68
-msgid "Email"
-msgstr ""
-
 #: options.php:78
 msgid "Like"
 msgstr ""
@@ -3387,10 +3407,6 @@ msgid ""
 "links that would otherwise cause the navigation to wrap onto multiple lines."
 msgstr ""
 
-#: options.php:505 partials/nav-sticky.php:77
-msgid "More"
-msgstr ""
-
 #: options.php:510
 msgid "Alternate site name for sticky navigation"
 msgstr ""
@@ -3545,16 +3561,23 @@ msgid ""
 msgstr ""
 
 #: options.php:703
+msgid ""
+"<strong>404 page text.</strong> This will be displayed on the 404 page, "
+"which is shown when people try to navigate to a page on your site that does "
+"not exist."
+msgstr ""
+
+#: options.php:709
 msgid "Byline Options"
 msgstr ""
 
-#: options.php:707
+#: options.php:713
 msgid "Enable display of job titles in bylines and author biographies?"
 msgstr ""
 
 #: partials/archive-category-primary-feature.php:14
 #: partials/archive-category-secondary-feature.php:12
-#: partials/content-roundup.php:28 partials/content-search.php:25
+#: partials/content-roundup.php:28 partials/content-search.php:16
 #: partials/content-series.php:19 partials/content.php:26
 #: partials/content.php:49
 msgid "Permalink to"
@@ -3578,12 +3601,24 @@ msgstr ""
 msgid "this author"
 msgstr ""
 
-#: partials/content-not-found.php:3
-msgid "Nothing Found"
+#: partials/content-not-found.php:2
+msgid "Apologies, but no results were found. Perhaps searching will help."
 msgstr ""
 
-#: partials/content-not-found.php:7
-msgid "Apologies, but no results were found. Perhaps searching will help."
+#: partials/content-not-found.php:9
+#, php-format
+msgid ""
+"Apologies, but <code>%s</code> was not found. Perhaps searching will help."
+msgstr ""
+
+#: partials/content-not-found.php:14
+msgid ""
+"Apologies, but no results were found. Perhaps searching for something else "
+"will help."
+msgstr ""
+
+#: partials/content-not-found.php:20
+msgid "Page Not Found"
 msgstr ""
 
 #: partials/content-page.php:13
@@ -3594,11 +3629,11 @@ msgstr ""
 msgid "Source: "
 msgstr ""
 
-#: partials/content-search.php:30 partials/content.php:54
+#: partials/content-search.php:19 partials/content.php:54
 msgid "Continue&nbsp;Reading"
 msgstr ""
 
-#: partials/content-search.php:33 partials/content.php:57
+#: partials/content-search.php:22 partials/content.php:57
 msgid "More about:"
 msgstr ""
 
@@ -3648,11 +3683,11 @@ msgstr ""
 msgid "GO"
 msgstr ""
 
-#: partials/nav-sticky.php:71 searchform.php:9
+#: partials/nav-sticky.php:80 searchform.php:9
 msgid "Go"
 msgstr ""
 
-#: partials/nav-sticky.php:155
+#: partials/nav-sticky.php:165
 msgid "About"
 msgstr ""
 

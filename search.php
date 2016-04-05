@@ -5,7 +5,7 @@
 get_header();
 ?>
 
-<div id="content" class="stories search-results span8" role="main">
+<div id="content" class="stories archive search-results span8" role="main">
 	<?php if (of_get_option('use_gcs') && of_get_option('gcs_id')) { ?>
 		<h1>
 			<?php
@@ -80,7 +80,7 @@ get_header();
 				get_template_part( 'partials/content', 'not-found' );
 			}
 		} ?>
-</div><!--#content-->
+</div><!-- #content -->
 
 <?php get_sidebar(); ?>
 <?php get_footer();
