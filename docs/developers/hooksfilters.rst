@@ -43,10 +43,10 @@ filter: **largo_archive_rounduplink_title**
 
     **Usage:** ::
 
-    function filter_rounduplink_title($title) {
+    function filter_rounduplink_title( $title ) {
         return "Custom title here";
     }
-    add_action('largo_archive_rounduplink_title', 'filter_rounduplink_title');
+    add_action( 'largo_archive_rounduplink_title', 'filter_rounduplink_title' );
 
 filter: **largo_registration_extra_fields**
 
@@ -58,10 +58,10 @@ filter: **largo_registration_extra_fields**
 
     Also passed in is a WP_Error object that stores all the generated errors for the page. Use this if you'd like to display an error message on the erroneous field. ::
 
-        function filter_function_name($values, $errors) {
+        function filter_function_name ($values, $errors ) {
             # ...
         }
-        add_filter('largo_registration_extra_fields', 'filter_function_name');
+        add_filter( 'largo_registration_extra_fields', 'filter_function_name' );
 
 action: **largo_validate_user_signup_extra_fields**
 
@@ -73,10 +73,10 @@ action: **largo_validate_user_signup_extra_fields**
 
     Also passed in is an array that contains only the extra fields that were present. This is an easy way to check only the extra data. ::
 
-        function action_function_name($result,$extras) {
+        function action_function_name( $result, $extras ) {
             # ...
         }
-        add_action('largo_validate_user_signup_extra_fields', 'action_function_name');
+        add_action( 'largo_validate_user_signup_extra_fields', 'action_function_name' );
 
 filter: **largo_lmp_args**
 
@@ -94,11 +94,11 @@ filter: **largo_lmp_template_partial**
 
     When building your own filter, you must set the fourth parameter of add_filter to 2: ::
 
-        function your_filter_name($partial, $post_type, $context) {
+        function your_filter_name( $partial, $post_type, $context ) {
             // things
             return $partials;
         }
-        add_filter( 'largo_lmp_template_partial', 'your_filter_name', 10, 2);
+        add_filter( 'largo_lmp_template_partial', 'your_filter_name', 10, 2 );
                                                                           ^
 
     Without setting '2', your filter will not be passed the $post_type or $context arguments.
@@ -114,11 +114,11 @@ filter: **largo_partial_by_post_type**
 
     When building your own filter, you must set the fourth parameter of add_filter to 3: ::
 
-         function your_filter_name($partial, $post_type, $context) {
+         function your_filter_name( $partial, $post_type, $context ) {
              // things
              return $partial;
          }
-         add_filter('largo_partial_by_post_type', 'your_filter_name', 10, 3);
+         add_filter( 'largo_partial_by_post_type', 'your_filter_name', 10, 3 );
                                                                           ^
 
     Without setting '3', your filter will not be passed the $post_type or $context arguments.
@@ -182,10 +182,10 @@ filter: **largo_post_social_more_social_links**
 
     Adding new social media networks is as simple as adding a new item to the array: ::
 
-        function add_linkedin($more) {
+        function add_linkedin( $more ) {
             $more[] = '<li><a href=""><i class="icon-linkedin"></i> <span>Your text here!</span></a></li>';
         }
-        add_filter('largo_post_social_more_social_links', 'add_linkedin');
+        add_filter( 'largo_post_social_more_social_links', 'add_linkedin' );
 
 .. php:function:: filter largo_remove_hero
 
@@ -201,7 +201,7 @@ filter: **largo_post_social_more_social_links**
             # determine whether or not to run largo_remove_hero based on $post
             return $run;
         }
-        add_filter('largo_remove_hero', 'filter_largo_remove_hero', 10, 2);
+        add_filter( 'largo_remove_hero', 'filter_largo_remove_hero', 10, 2 );
                                                                      ^
 
 
