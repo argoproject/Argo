@@ -205,6 +205,8 @@ if ( ! function_exists( 'largo_byline_normal_or_custom' ) ) {
 		$values = get_post_custom( $post_id );
 
 		$authors = largo_author_link( false, $post_id );
+
+		// add the author's job title
 		$author_id = get_post_meta( $post_id, 'post_author', true );
 		$show_job_titles = of_get_option('show_job_titles');
 		if ( !isset( $values['largo_byline_text'] ) && $show_job_titles && $job = get_the_author_meta( 'job_title' , $author_id ) ) {
