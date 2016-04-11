@@ -8,15 +8,18 @@ sudo: false
 language: php
 
 # PHP version used in first build configuration.
+# 5.3 matches the version of php installed in the INN/deploy-tools virtualbox
+# 5.5 matches http://phpinfo.wpengine.com/
 php:
     - "5.3"
+    - "5.5"
 
 # WordPress version used in first build configuration.
 env:
-    - WP_VERSION=3.9.1 WP_TESTS_DIR=/tmp/wordpress/tests/phpunit WP_CORE_DIR=/tmp/wordpress
-    - WP_VERSION=4.0.1 WP_TESTS_DIR=/tmp/wordpress/tests/phpunit WP_CORE_DIR=/tmp/wordpress
-    - WP_VERSION=4.1.5 WP_TESTS_DIR=/tmp/wordpress/tests/phpunit WP_CORE_DIR=/tmp/wordpress
-    - WP_VERSION=4.2.2 WP_TESTS_DIR=/tmp/wordpress/tests/phpunit WP_CORE_DIR=/tmp/wordpress
+    - WP_VERSION=4.1.10 WP_TESTS_DIR=/tmp/wordpress/tests/phpunit WP_CORE_DIR=/tmp/wordpress
+    - WP_VERSION=4.2.7 WP_TESTS_DIR=/tmp/wordpress/tests/phpunit WP_CORE_DIR=/tmp/wordpress
+    - WP_VERSION=4.3.3 WP_TESTS_DIR=/tmp/wordpress/tests/phpunit WP_CORE_DIR=/tmp/wordpress
+    - WP_VERSION=4.4.2 WP_TESTS_DIR=/tmp/wordpress/tests/phpunit WP_CORE_DIR=/tmp/wordpress
 
 # Only test the unittests branch for now
 branches:

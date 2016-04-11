@@ -40,6 +40,8 @@ class PostTemplatesTestFunctions extends WP_UnitTestCase {
 		$this->markTestIncomplete( 'This test has not yet been implemented.' );
 	}
 
+	private $ids = array();
+
 	function test_insert_image_no_thumb() {
 
 		$filename = ( dirname(__FILE__) .'/../mock/img/cat.jpg' );
@@ -73,15 +75,15 @@ class PostTemplatesTestFunctions extends WP_UnitTestCase {
 		$post_id = $this->factory->post->create();
 
 		add_post_meta( $post_id, '_thumbnail_id', $attachment_id );
-		$this->go_to( "/?p=$post_id" );
+
+		$this->go_to( '/?p=$post_id' );
 
 		$final1 = largo_remove_hero( $c1 );
 		$final2 = largo_remove_hero( $c2 );
-		$this->assertEquals( $c1final,$final1 );
-		$this->assertEquals( $c2final,$final2 );
+		$this->assertEquals( $c1final, $final1  );
+		$this->assertEquals( $c2final, $final2 );
 
 	}
-
 
 	function _make_attachment( $upload, $parent_post_id = 0 ) {
 
@@ -90,7 +92,7 @@ class PostTemplatesTestFunctions extends WP_UnitTestCase {
 			$type = $upload['type'];
 		} else {
 			$mime = wp_check_filetype( $upload['file'] );
-			if ($mime)
+			if ( $mime )
 				$type = $mime['type'];
 		}
 
@@ -112,8 +114,8 @@ class PostTemplatesTestFunctions extends WP_UnitTestCase {
 	}
 
 	function test_largo_get_partial_by_post_type() {
-		$ret = largo_get_partial_by_post_type('foo', 'bar', 'baz');
-		$this->assertEquals($ret, 'foo'); // dummy test so that this test will run. Mostly we're just asserting that the function doesn't cause errors.
+		$ret = largo_get_partial_by_post_type( 'foo', 'bar', 'baz' );
+		$this->assertEquals( $ret, 'foo' ); // dummy test so that this test will run. Mostly we're just asserting that the function doesn't cause errors.
 		$this->markTestIncomplete();
 	}
 
