@@ -26,9 +26,8 @@ In addition to these two taxonomies, Largo adds three more custom taxonomies:
 
 **Note:** The "Series" and "Post Types" taxonomies are disabled by default, but you can enable them from the Appearance > Theme Options > Advanced menu.
 
-You can add posts to any of these taxonomies from the post edit screen or using the WordPress quick edit functionality from any list of posts. You simply check the term in the taxonomy you want to add to a post or you can click on "Add New Category" to add a new term to a taxonomy (for example, if the post you are publishing is the first post in a new series you can add that series directly from the page where you are working on that post).
+You can add posts to any of these taxonomies from the post edit screen or using the WordPress quick edit functionality from any list of posts. You check the term in the taxonomy you want to add to a post or you can click on "Add New Category" to add a new term to a taxonomy (for example, if the post you are publishing is the first post in a new series you can add that series directly from the page where you are working on that post).
 
-Additionally you can add a description for each category, tag or series and also specify a custom sidebar to display on
 
 **Hint:** For consistency, we recommend capitalizing every word in tags, categories and custom taxonomies (so: "My Favorite Series" not "My favorite series" and "Campaign Finance" not "campaign finance") and you should also always use full names of public figures, places, etc. without titles (because titles can change over time, e.g. - "Grover Cleveland" not "President Grover Cleveland").
 
@@ -39,6 +38,10 @@ Note that in some cases you may need to click on the "Screen Options" tab at the
 You can add a Featured Image for each term created in any of the taxonomies. This will appear as a banner image at the top of the term's archive page. While this is optional, an appropriate image can add visual appeal and impact to a topic landing page. At this time only images can be added as Featured Media in taxonomies.
 
 You can add a Featured Image for a term in Posts > Categories (or Tags, Post Prominence, Series, and Post Types) by editing the term, and using the Set Featured Media button to upload an image or select an existing image in the Media Library. For best results use a landscape-shaped image with a width of 1170px, so it spans the top of landing page for the term.  Adding, editing, and removing Featured Media images for a taxonomy term works the same way as for Featured Media in posts and pages.
+
+**Term Descriptions**
+
+Largo provides the option to add a description to terms. The description will appear on term archive pages. Term descriptions can have HTML markup in them, but please be careful when composing HTML for these fields. HTML tags should have zero ``"`` characters or an even number of them - never an odd number. If the HTML tags in the term description are not valid, they can break your site's layout and formatting.
 
 .. _categories-tax:
 
