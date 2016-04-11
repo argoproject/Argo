@@ -167,16 +167,19 @@ function largo_remove_hero( $content ) {
 	 */
 	$do_run = apply_filters( 'largo_remove_hero', true, $post );
 
-	if( !$do_run )
+	if( !$do_run ) {
 		return $content;
+	}
 
-	if( !has_post_thumbnail( $post->ID ) )
+	if( !has_post_thumbnail( $post->ID ) ) {
 		return $content;
+	}
 
 	$options = get_post_custom( $post->ID );
 
-	if( isset( $options['featured-image-display'][0] ) )
+	if( isset( $options['featured-image-display'][0] ) ) {
 		return $content;
+	}
 
 	if(
 		of_get_option( 'single_template' ) != 'normal' &&
@@ -185,7 +188,7 @@ function largo_remove_hero( $content ) {
 		return $content;
 	}
 
-	$p = explode( '\n', $content );
+	$p = explode( "\n", $content );
 	
 	// 2: Find an image (regex)
 	//
@@ -198,8 +201,9 @@ function largo_remove_hero( $content ) {
 
 	// 3: if there's no image, there's nothing to worry about.
 
-	if( !$hasImg )
+	if( !$hasImg ) {
 		return $content;
+	}
 
 	$imgDom = $matches[0];
 	$src = $matches[1];
@@ -231,8 +235,9 @@ function largo_remove_hero( $content ) {
 		return $content;
 	
 	// 6: Else, shift the first paragraph off the content and return.
+	var_log($p);
 	array_shift( $p );
-	$content = implode( '\n', $p );
+	$content = implode( "\n", $p );
 	
 	return $content;
 
