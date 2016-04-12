@@ -6,7 +6,7 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'hnews item' ); ?> itemscope itemtype="http://schema.org/Article">
 
-	<?php do_action('largo_before_post_header'); ?>
+	<?php do_action( 'largo_before_post_header' ); ?>
 
 	<header>
 
@@ -23,18 +23,24 @@
 
 	</header><!-- / entry header -->
 
-	<?php do_action('largo_after_post_header'); ?>
+	<?php
+		do_action( 'largo_after_post_header' );
+
+		largo_hero( null,'' );
+
+		do_action( 'largo_after_hero' );
+	?>
 
 	<div class="entry-content clearfix" itemprop="articleBody">
 		<?php largo_entry_content( $post ); ?>
 	</div><!-- .entry-content -->
 
-	<?php do_action('largo_after_post_content'); ?>
+	<?php do_action( 'largo_after_post_content' ); ?>
 
 	<footer class="post-meta bottom-meta">
 
 	</footer><!-- /.post-meta -->
 
-	<?php do_action('largo_after_post_footer'); ?>
+	<?php do_action( 'largo_after_post_footer' ); ?>
 
 </article><!-- #post-<?php the_ID(); ?> -->
