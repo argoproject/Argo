@@ -184,6 +184,7 @@ filter: **largo_post_social_more_social_links**
 
         function add_linkedin( $more ) {
             $more[] = '<li><a href=""><i class="icon-linkedin"></i> <span>Your text here!</span></a></li>';
+            return $more;
         }
         add_filter( 'largo_post_social_more_social_links', 'add_linkedin' );
 
@@ -202,7 +203,22 @@ filter: **largo_post_social_more_social_links**
             return $run;
         }
         add_filter( 'largo_remove_hero', 'filter_largo_remove_hero', 10, 2 );
-                                                                     ^
+                                                                         ^
+.. php:function:: filter largo_top_term_metabox_taxonomies
+
+    Called in the ``largo_top_tag_display`` metabox to allow themes to filter the taxonomies from which are drawn the term options for the top term metabox display.
+    
+    :since 0.5.5:
+    :param Array $taxonomies: array( 'series', 'category', 'post_tag', 'prominence' )
+
+    Add new taxonomies like so: ::
+
+        function add_taxonomies( $taxonomies ) {
+            $taxonomies[] = 'columns';
+            $taxonomies[] = 'post-type';
+            return $taxonomies;
+        }
+        add_filter('largo_top_term_metabox_taxonomies', 'add_taxonomies');
 
 
 Template Hooks

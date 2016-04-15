@@ -280,7 +280,20 @@ function largo_top_tag_display() {
 	global $post;
 
 	$top_term = get_post_meta( $post->ID, 'top_term', TRUE );
-	$terms = wp_get_object_terms($post->ID, array( 'series', 'category', 'post_tag', 'prominence', 'post-type' ) );
+
+	/**
+	 * largo_top_term_metabox_taxonomies filter
+	 *
+	 * Allow child themes to modify the list of taxonomies from which terms are pulled to use as the top tag
+	 *
+	 * @since 0.5.5
+	 * @link https://github.com/INN/Largo/issues/1198
+	 * @filter largo_top_term_metabox_taxonomies
+	 * @param Array $taxonomies The list of default top term taxonomies: series, category, post_tag, prominence
+	 */
+	$taxonomies = apply_filters( 'largo_top_term_metabox_taxonomies', array( 'series', 'category', 'post_tag', 'prominence', 'post-type' ) );
+
+	$terms = wp_get_object_terms( $post->ID, $taxonomies );
 
 	echo '<p><strong>' . __('Top Term', 'largo') . '</strong><br />';
 	echo __('Identify which of this posts\'s terms is primary.', 'largo') . '</p>';
