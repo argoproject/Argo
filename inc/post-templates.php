@@ -235,7 +235,6 @@ function largo_remove_hero( $content ) {
 		return $content;
 	
 	// 6: Else, shift the first paragraph off the content and return.
-	var_log($p);
 	array_shift( $p );
 	$content = implode( "\n", $p );
 	
