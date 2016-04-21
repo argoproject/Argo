@@ -19,8 +19,6 @@ Documentation for all of the Argo plugins, most of which remains applicable for 
 
 - We have also modified the **Navis DocumentCloud** plugin to make it work a bit better within a responsive layout. We recommend using the version of the plugin that comes packaged with the Largo theme, but the instructions for `how to add a DocumentCloud document <http://argoproject.org/documentcloud.php>`_ to a post from the Project Argo site are still valid.
 
-- The **Argo Links** plugin is useful for collecting links from around the web and for creating link roundup posts. We have made some modifications to this plugin, most notably to add a sidebar widget to display your recently saved links, but for the most part it will work exactly as `documented on the Project Argo site <http://argoproject.org/argo-links.php>`_.
-
 The are two other plugins developed by NPR as part of Project Argo that we have not updated and we are not, at this point, 100% certain that they will work with the latest versions of WordPress and Largo so we do not necessarily recommend using them. That said, here's what they do in case you'd like to give them a try:
 
 - **Argo Audio Player** enables you to add embedded audio to your posts. Depending on your specific needs you might prefer using a plugin called `PowerPress <https://wordpress.org/plugins/powerpress/>`_ to support podcasting, or you might want to instead host your audio on SoundCloud and use their embedded player. If you want to give the Argo Audio Player a try, documentation `can be found here <http://argoproject.org/audio.php>`_.
@@ -70,6 +68,7 @@ Here is a complete list of the plugins currently installed and available.
 - `DoubleClick for WordPress <https://github.com/INN/DoubleClick-for-WordPress>`_ - DoubleClick ad integration, maintained by INN.
 - `Edit Flow <https://wordpress.org/plugins/edit-flow/>`_ - Adds better editorial workflow options to the WordPress admin
 - `Facebook Comments <https://wordpress.org/plugins/facebook-comments-plugin/>`_ - Replaces the default WordPress comment system with Facebook comments
+- `Link Roundups <https://github.com/INN/link-roundups>`_ - Curate links and display them in a sidebar widget or create link roundup posts
 - `Liveblog <https://wordpress.org/plugins/liveblog/>`_ - A simple way to add live blogs to your site.
 - `Navis DocumentCloud <https://wordpress.org/plugins/navis-documentcloud/>`_ - Embed DocumentCloud documents that won't be eaten by the visual editor
 - `News Quizzes <https://github.com/INN/news-quiz>`_ - A WordPress wrapper for Mother Jones' news quiz tool
@@ -91,7 +90,6 @@ Here is a complete list of the plugins currently installed and available.
 **Plugins from Project Argo:**
 
 - `Argo Audio Player <http://argoproject.org/audio.php>`_ - No longer updated/maintained, we recommend using an alternative service such as `SoundCloud <https://wordpress.org/plugins/soundcloud-shortcode/>`_ for embedding audio in posts
-- `Argo Links <http://argoproject.org/argo-links.php>`_ - Curate links and display them in a sidebar widget or create link roundup posts
 - `Navis Jiffy Posts <http://argoproject.org/jiffy-post.php>`_ - Makes it easy to quickly create a post from a URL
 - `Navis Slideshows <http://argoproject.org/slideshow.php>`_ - Slideshows that take advantage of the Slides jQuery plugin
 
