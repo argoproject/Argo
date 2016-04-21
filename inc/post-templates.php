@@ -288,11 +288,6 @@ function largo_url_to_attachmentid( $url ) {
  * @since 0.5.4
  */
 function largo_get_partial_by_post_type( $partial, $post_type, $context ) {
-	// Remove this conditional in #926.
-	if ( $post_type == 'argolinks' ) {
-		$partial = 'argolinks';
-	}
-
 	/**
 	 * Filter the output of largo_get_partial_by_post_type
 	 *
