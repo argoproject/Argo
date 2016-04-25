@@ -44,6 +44,7 @@ General Documentation
     users/themeoptions
     users/menus
     users/sidebarswidgets
+    users/posting
     users/landingpages
     users/taxonomies
     users/posttemplates
