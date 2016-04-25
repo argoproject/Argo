@@ -37,7 +37,8 @@ Note that uploads of media files are limited to 50 MB per file. In most cases it
 
 Once an image or other media element is added to a post, you can click on it to edit as needed.
 
-**Featured Media**
+Featured Media
+--------------
 
 Featured media can more deeply engage your audience by getting their attention the moment they view the story page. A strong image or video also increases sharing on social networks and extends the reach and impact of your work. And images and other media are important elements in telling a story.
 
@@ -58,40 +59,59 @@ With all featured media you can add a title, caption, and other descriptive info
 
 
 Taxonomies
-------------------
+----------
 
-Taxonomies are a way to label and organize the posts on your site. Taxonomies activated by default in Largo include Categories, Tags, and Post Prominence. Two optional taxonomies, Series and Post Types, can be enabled through the Appearance > Theme Options > Advanced menu. 
+Taxonomies are a way to label and organize the posts on your site. Taxonomies activated by default in Largo include the WordPress default Categories and Tags plus a custom taxonomy added by Largo called Post Prominence that is used to control the visual disply of posts. 
 
-Taxonomies do two important things:
+Two optional taxonomies, Series and Post Types, can be enabled through the Appearance > Theme Options > Advanced menu. 
 
-- They add good metadata for search engine optimization and social media.
+Taxonomies do a number of important things:
+
 - They allow sorting of content on landing pages and widgets based on topic or content type.
+- They help provide better content recommendations in a number of places, such as the Largo Related Posts widget.
+- They provide metadata to help search engines better understand the content of your site.
 
 The way Largo handles taxonomies is explained in detail on the Largo `Taxonomy documentation page <taxonomies.html>`_.
 
 **Categories, Tags, and Series**
 
-After creating the body of the post, you should assign some Categories and Tags to it. If you are using the Series or Post Type taxonomy, assign the post to the relevant series and/or post type.
+After creating the body of the post, you should assign some Categories and Tags to it. We recommend not overdoing it when you add categories. Typically your site should have 6-8 main categories and a post should only be added to 1 or maybe 2 of these categories. For tags, 8-10 tags is a good maximum to aim for. For recommedations regarding proper usage of tags, see the `Taxonomy documentation page <taxonomies.html>`_.
 
-**Related Posts**
+If you are using the Series or Post Type taxonomy, assign the post to the relevant series and/or post type.
+
+**Post Prominence**
+
+This is used to determine how and where posts are displayed on the site (for example, top stories on the homepage or featured content widgets in a sidebar or footer). For more on Post Prominence see the `Taxonomy documentation page <taxonomies.html#post-prominence>`_.
+
+Related Posts
+-------------
 
 If you are using the Largo Related Posts Widget, you can add selected related posts by entering one or more post IDs separated by commas. To find the ID of a post, open it as if you were editing the post. In the browser address bar you'll see a number in the URL similar to _http://yoursite.org/wp-admin/post.php?post=31400&action=edit_. In this case 31400 is the post ID. 
 
 _Note: If you are using the Largo Related Posts Widget and don't add related posts to any given post, the widget will display related posts based on series, category, or tag._
 
-**Top Term**
+Top Term
+--------
 
-From the Top Term pulldown menu (populated by categories and tags) select which term is primary for the post. This term appears directly above the headline on the post page, and links to the landing page for all posts assigned that top term.
+From the Top Term pulldown menu (populated by categories, tags and optionally series) select which term is primary for the post. This term appears directly above the headline on the post page, and links to the landing page for all posts assigned that top term.
 
-**Custom Byline Options**
+Custom Byline Options
+---------------------
 
 If you are posting for an author who doesn't have a WordPress user account for your website, you can enter their byline and optionally a link to a relevant webpage for that author. 
 
-We recommend creating a WordPress account for each author, which allows WordPress to create an author archive page with all posts for each author. If you find that you need to include co-authors, you should activate the `Coauthors Plus plugin <plugins.html>`_. 
+Note that this option should be used very rarely.
 
-Using the Custom Byline Option will override display of the user entering the post, and will not add the post to an author archive page.
+Wherever possible we recommend creating a WordPress account for each author. This allows WordPress to create an author archive page with all posts by this author.
 
-**Layout Options**
+If you find that you need to include co-authors (more than one author for a given post), you should activate the `Coauthors Plus plugin <plugins.html>`_. 
+
+This plugin also allows you to create guest authors without having to send them an email confirmation, useful if you need to add contributors that will not be logging into your site directly.
+
+If none of these options work, you can enter the byline text and (optionally) byline link in the Custom Byline Options box to override the display of the byline. Note that this will override display of the user entering the post, and will not add the post to an author archive page.
+
+Layout Options
+--------------
 
 The default post template since Largo 0.4 is the One Column (Standard) layout. In this box you can choose a different layout for the post. Read more here about the alternative `post layout options <themeoptions.html#layout-options>`_.
 
@@ -100,7 +120,3 @@ The default post template since Largo 0.4 is the One Column (Standard) layout. I
 The default (single column) post layout does not include a sidebar. If you select a sidebar from this dropdown menu it will be displayed as a column on the left of the post beginning below the hero image.
 
 For the two column post template, the sidebar is displayed to the right of the main post content.
-
-**Post Prominence**
-
-This is used to determine how and where posts are displayed on the site (for example, top stories on the homepage or featured content widgets in a sidebar or footer). For more on Post Prominence see the `Taxonomy documentation page <taxonomies.html#post-prominence>`_.
