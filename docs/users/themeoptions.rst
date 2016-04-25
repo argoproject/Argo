@@ -136,7 +136,7 @@ If the menu assigned to the sticky navigation has so many top-level links that i
 
 **Also of note** - If you have assigned a menu to the Global Navigation theme location, the sticky navigation will include that as a dropdown menu to the right of the sticky nav menu links.
 
-**Alternate site name for sticky navigation** - If your Site Title is too long to display the entire title in the sticky header, the title will be truncated and appended with ellipses, e.g. "Midwestern Institute for News..." You can add an abbreviation or shorter Alternative site name here to take the place of the full Site Title. Also note that if you upload a 100px-tall Sticky Header Logo in Appearance > Theme Options > Theme Images, the logo will display in the sticky header instead of the Site Title.
+**Alternate site name for sticky navigation** - If your Site Title is too long to display the entire title in the sticky header, the title will be truncated and appended with ellipses, e.g. "Midwestern Institute for News..." You can add an abbreviation or shorter Alternative site name here to take the place of the full Site Title. Also note that if you upload a 100px-tall Sticky Header Logo in **Appearance > Theme Options > Theme Images**, the logo will display in the sticky header instead of the Site Title.
 
 **Menu Options**
 
