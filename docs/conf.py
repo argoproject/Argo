@@ -102,9 +102,9 @@ html_theme = 'default'
 
 
 # -- START Change the local theme
-# @see http://docs.readthedocs.org/en/latest/theme.html
+# @see http://docs.readthedocs.io/en/latest/theme.html
 
-# on_rtd is whether we are on readthedocs.org
+# on_rtd is whether we are on readthedocs.io
 import os
 on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
 
@@ -115,7 +115,7 @@ if not on_rtd:  # only import and set the theme if we're building docs locally
 
 # -- END Change the local theme.
 
-# otherwise, readthedocs.org uses their theme by default, so no need to specify it
+# otherwise, readthedocs.io uses their theme by default, so no need to specify it
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the

@@ -14,7 +14,6 @@ get_header(); ?>
 		 * Display the Recent Posts widget
 		 *
 		 * @since 0.5.5
-		 * @link http://jira.inn.org/browse/WE-103
 		 * @link https://codex.wordpress.org/Function_Reference/the_widget
 		 */
 		if ( class_exists( 'largo_recent_posts_widget' ) ) {

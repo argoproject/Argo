@@ -28,13 +28,13 @@ The project extends work done by [NPR's Project Argo](http://argoproject.org/).
 
 **Documentation** and more information at: [largoproject.org](http://largoproject.org)
 
-**Support** is available [via our helpdesk system](http://jira.inn.org/servicedesk/customer/portal/4) or by emailing [support@largoproject.org](mailto:support@largoproject.org).
+**Support** is available [via our helpdesk system](http://support.largoproject.org/) or by emailing [support@largoproject.org](mailto:support@largoproject.org).
 
 **Current version:** v0.5.4
 
 ## Setup
 
-Follow the [setup instructions in the documentation](http://largo.readthedocs.org/users/download.html).
+Follow the [setup instructions in the documentation](http://largo.readthedocs.io/users/download.html).
 
 ## Contributing
 

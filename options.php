@@ -267,7 +267,7 @@ function optionsframework_options() {
 
 	$options[] = array(
 		'type' => 'info',
-		'desc' => __('Information about these options can be found in <a href="https://largo.readthedocs.org/users/prelaunchchecklist.html">the pre-launch checklist</a> and <a href="https://largo.readthedocs.org/users/themeoptions.html#theme-images">the theme images options</a>.', 'largo'),
+		'desc' => __('Information about these options can be found in <a href="https://largo.readthedocs.io/users/prelaunchchecklist.html">the pre-launch checklist</a> and <a href="https://largo.readthedocs.io/users/themeoptions.html#theme-images">the theme images options</a>.', 'largo'),
 	);
 
 	$options[] = array(

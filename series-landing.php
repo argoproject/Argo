@@ -175,7 +175,6 @@ if ( 'none' != $opt['footer_style'] ) : ?>
 			/*
 			 * custom footer html
 			 * If we don't reset the post meta here, then the footer HTML is from the wrong post. This doesn't mess with LMP, because it happens after LMP is enqueued in the main column.
-			 * @link http://jira.inn.org/browse/HELPDESK-590
 			 */
 			wp_reset_postdata();
 			if ( 'custom' == $opt['footer_style']) {
