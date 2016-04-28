@@ -34,7 +34,7 @@ The project extends work done by [NPR's Project Argo](http://argoproject.org/).
 
 ## Setup
 
-Follow the [setup instructions in the documentation](http://largo.readthedocs.org/users/download.html).
+Follow the [setup instructions in the documentation](http://largo.readthedocs.io/users/download.html).
 
 ## Contributing
 

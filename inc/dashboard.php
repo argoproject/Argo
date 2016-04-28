@@ -84,7 +84,7 @@ function largo_dashboard_quick_links() {
      		<p>If you\'re having trouble with your site, want to request a new feature or are just interested in learning more about Project Largo, here are a few helpful links:</p>
      		<ul>
      			<li><a href="http://largoproject.org/">Largo Project Website</a></li>
-     			<li><a href="http://largo.readthedocs.org/">Largo Documentation</a></li>
+     			<li><a href="http://largo.readthedocs.io/">Largo Documentation</a></li>
      			<li><a href="http://jira.inn.org/servicedesk/customer/portal/4">Help Desk</a></li>
      			<li><a href="http://confluence.inn.org/display/LKB/Largo+Knowledge+Base">Knowledge Base</a></li>
      			<li><a href="mailto:support@largoproject.org">Contact Us</a></li>
@@ -134,59 +134,63 @@ function largo_dash_admin_menu( $wp_admin_bar ) {
 	$wp_admin_bar->add_node($args);
 	
 	// Documentation
-	$args = array('id' => 'largo_docs', 'title' => 'Documentation', 'href' => 'http://largo.readthedocs.org/', 'parent' => 'largo_admin_mega'); 
+	$args = array('id' => 'largo_docs', 'title' => 'Documentation', 'href' => 'http://largo.readthedocs.io/', 'parent' => 'largo_admin_mega'); 
 	$wp_admin_bar->add_node($args);
 		
 		// Theme Options	
-		$args = array('id' => 'largo_docs_themeoptions', 'title' => 'Theme Options', 'href' => 'http://largo.readthedocs.org/users/themeoptions.html', 'parent' => 'largo_docs'); 
+		$args = array('id' => 'largo_docs_themeoptions', 'title' => 'Theme Options', 'href' => 'http://largo.readthedocs.io/users/themeoptions.html', 'parent' => 'largo_docs'); 
 		$wp_admin_bar->add_node($args);
 		
 		// Menus	
-		$args = array('id' => 'largo_docs_menus', 'title' => 'Menus', 'href' => 'http://largo.readthedocs.org/users/menus.html', 'parent' => 'largo_docs'); 
+		$args = array('id' => 'largo_docs_menus', 'title' => 'Menus', 'href' => 'http://largo.readthedocs.io/users/menus.html', 'parent' => 'largo_docs'); 
 		$wp_admin_bar->add_node($args);
 		
 		// Sidebars and Widgets	
-		$args = array('id' => 'largo_docs_sidebars', 'title' => 'Sidebars and Widgets', 'href' => 'http://largo.readthedocs.org/users/sidebarswidgets.html', 'parent' => 'largo_docs'); 
+		$args = array('id' => 'largo_docs_sidebars', 'title' => 'Sidebars and Widgets', 'href' => 'http://largo.readthedocs.io/users/sidebarswidgets.html', 'parent' => 'largo_docs'); 
 		$wp_admin_bar->add_node($args);
 		
 		// Series Landing Pages	
-		$args = array('id' => 'largo_docs_landings', 'title' => 'Series Landing Pages', 'href' => 'http://largo.readthedocs.org/users/landingpages.html', 'parent' => 'largo_docs'); 
+		$args = array('id' => 'largo_docs_landings', 'title' => 'Series Landing Pages', 'href' => 'http://largo.readthedocs.io/users/landingpages.html', 'parent' => 'largo_docs'); 
 		$wp_admin_bar->add_node($args);
 		
 		// Taxonomies	
-		$args = array('id' => 'largo_docs_tax', 'title' => 'Taxonomies', 'href' => 'http://largo.readthedocs.org/users/taxonomies.html', 'parent' => 'largo_docs'); 
+		$args = array('id' => 'largo_docs_tax', 'title' => 'Taxonomies', 'href' => 'http://largo.readthedocs.io/users/taxonomies.html', 'parent' => 'largo_docs'); 
 		$wp_admin_bar->add_node($args);
 		
 		// Post Templates		
-		$args = array('id' => 'largo_docs_templates', 'title' => 'Post Templates', 'href' => 'http://largo.readthedocs.org/users/posttemplates.html', 'parent' => 'largo_docs'); 
+		$args = array('id' => 'largo_docs_templates', 'title' => 'Post Templates', 'href' => 'http://largo.readthedocs.io/users/posttemplates.html', 'parent' => 'largo_docs'); 
 		$wp_admin_bar->add_node($args);
 		
 		// Plugins
-		$args = array('id' => 'largo_docs_plugins', 'title' => 'Plugins', 'href' => 'http://largo.readthedocs.org/users/plugins.html', 'parent' => 'largo_docs'); 
+		$args = array('id' => 'largo_docs_plugins', 'title' => 'Plugins', 'href' => 'http://largo.readthedocs.io/users/plugins.html', 'parent' => 'largo_docs'); 
 		$wp_admin_bar->add_node($args);
 		
 		// Contact Forms
-		$args = array('id' => 'largo_docs_contactform', 'title' => 'Contact Forms', 'href' => 'http://largo.readthedocs.org/users/contactforms.html', 'parent' => 'largo_docs'); 
+		$args = array('id' => 'largo_docs_contactform', 'title' => 'Contact Forms', 'href' => 'http://largo.readthedocs.io/users/contactforms.html', 'parent' => 'largo_docs'); 
 		$wp_admin_bar->add_node($args);
 		
 		// Advertising
-		$args = array('id' => 'largo_docs_ads', 'title' => 'Advertising', 'href' => 'http://largo.readthedocs.org/users/ads.html', 'parent' => 'largo_docs'); 
+		$args = array('id' => 'largo_docs_ads', 'title' => 'Advertising', 'href' => 'http://largo.readthedocs.io/users/ads.html', 'parent' => 'largo_docs'); 
 		$wp_admin_bar->add_node($args);
 		
 		// For Developers
-		$args = array('id' => 'largo_docs_devs', 'title' => 'For Developers', 'href' => 'http://largo.readthedocs.org/developers/fordevelopers.html', 'parent' => 'largo_docs'); 
+		$args = array('id' => 'largo_docs_devs', 'title' => 'For Developers', 'href' => 'http://largo.readthedocs.io/developers/fordevelopers.html', 'parent' => 'largo_docs'); 
 		$wp_admin_bar->add_node($args);
 		
 		// Image Sizes
-		$args = array('id' => 'largo_docs_imgs', 'title' => 'Image Sizes', 'href' => 'http://largo.readthedocs.org/developers/imagesizes.html', 'parent' => 'largo_docs'); 
+		$args = array('id' => 'largo_docs_imgs', 'title' => 'Image Sizes', 'href' => 'http://largo.readthedocs.io/developers/imagesizes.html', 'parent' => 'largo_docs'); 
 		$wp_admin_bar->add_node($args);
 		
 	// Knowledge Base
-	$args = array('id' => 'knowledge_base', 'title' => 'Knowledge Base', 'href' => 'http://confluence.inn.org/display/LKB/Largo+Knowledge+Base', 'parent' => 'largo_admin_mega'); 
+	$args = array('id' => 'knowledge_base', 'title' => 'Knowledge Base', 'href' => 'http://support.largoproject.org/support/solutions', 'parent' => 'largo_admin_mega'); 
 	$wp_admin_bar->add_node($args);
 	
 	// Member Help Desk
-	$args = array('id' => 'support', 'title' => 'Help Desk', 'href' => 'http://jira.inn.org/servicedesk/customer/portal/4', 'parent' => 'largo_admin_mega'); 
+	$args = array('id' => 'support', 'title' => 'Help Desk', 'href' => 'http://support.largoproject.org/support/home', 'parent' => 'largo_admin_mega'); 
+	$wp_admin_bar->add_node($args);
+	
+	// Member Forums
+	$args = array('id' => 'user_forums', 'title' => 'Community Forums', 'href' => 'http://support.largoproject.org/support/discussions', 'parent' => 'largo_admin_mega'); 
 	$wp_admin_bar->add_node($args);
 	
 	// Largo on GitHub

@@ -7,7 +7,7 @@
  * This menu is appended to the offcanvas nav menu (see partial/nav-sticky.php).
  *
  * @package Largo
- * @link http://largo.readthedocs.org/users/menus.html#available-menu-areas
+ * @link http://largo.readthedocs.io/users/menus.html#available-menu-areas
  */
 
 if ( ! is_single() && ! is_singular() || ! of_get_option( 'main_nav_hide_article', false ) ) {
