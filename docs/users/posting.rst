@@ -10,7 +10,7 @@ Formatting
 Text Formatting Options
 -----------------------
 
-Beyond using the toolbar in the Post Edit screen (in Visual mode), if you're comfortable editing HTML and use some custom Largo classes (in Text mode) to style your text. 
+Beyond using the toolbar in the Post Edit screen (in Visual mode), if you're comfortable editing HTML you can use some custom Largo classes (in Text mode) to style your text. 
 
 See the Largo User's Guide for `more on these custom styles  <https://github.com/INN/Largo-User-Guide/blob/master/docs/style-guide.md>`_.
 
