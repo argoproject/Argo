@@ -191,8 +191,8 @@ More Info on Theme Options in the Largo Guide for Users
 
 For more details on setting up Largo's Theme Options, including screen shots and recommendations, see the Largo Guide for Users pages on:
 
-- `Basic Settings </Largo-User-Guide/blob/master/docs/theme-options-basic-settings.md>`_
-- `Theme Images </Largo-User-Guide/blob/master/docs/theme-options-theme-images.md>`_
-- `Layout </Largo-User-Guide/blob/master/docs/theme-options-layout.md>`_
-- `Navigation </Largo-User-Guide/blob/master/docs/theme-options-navigation.md>`_
-- `Advanced </Largo-User-Guide/blob/master/docs/theme-options-advanced.md>`_
+- `Basic Settings <https://github.com/INN/Largo-User-Guide/blob/master/docs/theme-options-basic-settings.md>`_
+- `Theme Images <https://github.com/INN/Largo-User-Guide/blob/master/docs/theme-options-theme-images.md>`_
+- `Layout <https://github.com/INN/Largo-User-Guide/blob/master/docs/theme-options-layout.md>`_
+- `Navigation <https://github.com/INN/Largo-User-Guide/blob/master/docs/theme-options-navigation.md>`_
+- `Advanced <https://github.com/INN/Largo-User-Guide/blob/master/docs/theme-options-advanced.md>`_
