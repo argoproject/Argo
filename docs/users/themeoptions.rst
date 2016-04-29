@@ -42,12 +42,12 @@ This section allows you to upload images that are used primarily in the top head
 
 - Make sure you have created all six image sizes as outlined in our :doc:`prelaunchchecklist` and then click "Upload" by the image you want to add.
 
-	- 200x200px Square default thumbnail image
-	- 16x16px Favicon
-	- 768px-wide Small banner image
-	- 980px-wide Medium banner image
-	- 1170px-wide Large banner image
-	- 100px-tall site logo for use in the sticky header. Use a .png file with transparent background, and no clear space around the logo. If you prefer to simply use your Site Title in the sticky header, don't upload an image here.
+	- 200x200px Square default thumbnail image - used for Facebook posts when you do not set a featured image for your posts, and as a bookmark icon for Apple devices.
+	- 16x16px Favicon - the small icon that appears in browser tabs and in some feed readers and other applications
+	- 768px-wide Small banner image - Used for viewports below 768px wide (mostly phones and some tablets). Recommended height: 240px
+	- 980px-wide Medium banner image -  Upload Used for viewports between 768px and 980 px (mostly tablets). Recommended height: 180px
+	- 1170px-wide Large banner image - Used for viewports above 980 px (landscape tablets and desktops). Recommended height: 150px
+	- 100px-tall site logo for use in the sticky header. Use a .png file with transparent background, and no clear space around the logo. This image should be 100px tall and at least 100px wide. If you prefer to simply use your Site Title in the sticky header, don't upload an image here.
 
 - Drag and drop the image onto the uploader (or click "Select Files" and find the correct image on your computer). When the image has finished uploading, selected the full size image option, and then click the button at the bottom of the uploader that says "Use This Image".
 
