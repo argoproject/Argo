@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Project Largo - Base Theme v0.5.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-28 16:21-0400\n"
+"POT-Creation-Date: 2016-04-29 15:11-0400\n"
 "PO-Revision-Date: 2016-02-29 20:44:14+0000\n"
 "Last-Translator: Eric Flores <eric@dashway.com>\n"
 "Language-Team: Institute for Nonprofit News <largo@inn.org>\n"
@@ -22,7 +22,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Textdomain-Support: yes\n"
 
-#: 404.php:22
+#: 404.php:21
 msgid "Or check out some of our recent stories"
 msgstr ""
 
