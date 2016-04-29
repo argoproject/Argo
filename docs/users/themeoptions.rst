@@ -61,7 +61,7 @@ There is one additional option in this section, a checkbox that allows you to us
 
 .. _layout-options:
 
-Layout Options
+Layout
 --------------
 
 **Home Template** - This choice determines what the top of your website's main page looks like. The Largo theme currently offers five homepage templates:
@@ -142,7 +142,7 @@ If the menu assigned to the sticky navigation has so many top-level links that i
 
 .. _advanced-options:
 
-Advanced Options
+Advanced
 ----------------
 
 **Custom LESS** - Enabling this will let you change the theme's colors and fonts in **Appearance** > **CSS Variables**.
@@ -186,3 +186,13 @@ The following homepage layout templates are no longer included in Largo:
 
 - **Slider**: An animated carousel of featured stories with large images. This should be automatically updated to the "Blog" template after upgrading Largo.
 
+More Info on Theme Options in the Largo Guide for Users
+----------------------------------------------------
+
+For more details on setting up Largo's Theme Options, including screen shots and recommendations, see the Largo Guide for Users pages on:
+
+- `Basic Settings </Largo-User-Guide/blob/master/docs/theme-options-basic-settings.md>`_
+- `Theme Images </Largo-User-Guide/blob/master/docs/theme-options-theme-images.md>`_
+- `Layout </Largo-User-Guide/blob/master/docs/theme-options-layout.md>`_
+- `Navigation </Largo-User-Guide/blob/master/docs/theme-options-navigation.md>`_
+- `Advanced </Largo-User-Guide/blob/master/docs/theme-options-advanced.md>`_
