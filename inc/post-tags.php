@@ -467,11 +467,11 @@ if ( ! function_exists( 'largo_custom_wp_link_pages' ) ) {
  * @since 0.3
  */
 if ( ! function_exists( 'largo_excerpt' ) ) {
-	function largo_excerpt( $the_post=null, $sentence_count = 5, $use_more = false, $more_link = '', $echo = true, $strip_tags = true, $strip_shortcodes = true ) {
+	function largo_excerpt( $the_post=null, $sentence_count = 5, $use_more = null, $more_link = null, $echo = true, $strip_tags = true, $strip_shortcodes = true ) {
 		if (!empty($use_more))
-			_deprecated_argument(__FUNCTION__, '0.5.1', 'Parameter $use_more is deprecated.');
+			_deprecated_argument(__FUNCTION__, '0.5.1', 'Parameter $use_more is deprecated. Please use null as the argument.');
 		if (!empty($more_link))
-			_deprecated_argument(__FUNCTION__, '0.5.1', 'Parameter $more_link is deprecated.');
+			_deprecated_argument(__FUNCTION__, '0.5.1', 'Parameter $more_link is deprecated. Please use null as the argument.');
 
 		$the_post = get_post($the_post); // Normalize it into a post object
 
@@ -777,7 +777,7 @@ if ( ! function_exists( 'largo_hero_with_caption' ) ) {
  */
 if ( ! function_exists( 'largo_post_metadata' ) ) {
 	function largo_post_metadata( $post_id, $echo = TRUE ) {
-		$out = '<meta itemprop="description" content="' . strip_tags( largo_excerpt( get_post( $post_id ), 5, false, '', false ) ) . '" />' . "\n";
+		$out = '<meta itemprop="description" content="' . strip_tags( largo_excerpt( get_post( $post_id ), 5, null, null, false ) ) . '" />' . "\n";
 	 	$out .= '<meta itemprop="datePublished" content="' . get_the_date( 'c', $post_id ) . '" />' . "\n";
 	 	$out .= '<meta itemprop="dateModified" content="' . get_the_modified_date( 'c', $post_id ) . '" />' . "\n";
 

@@ -34,7 +34,7 @@ $tags = of_get_option ('tag_display');
 		<?php endif; ?>
 
  		<?php if ( isset($opt['show']['excerpt']) && $opt['show']['excerpt'] ) :
-			largo_excerpt( $post, 5, true, __('Continue&nbsp;Reading&nbsp;&rarr;', 'largo'), true, false );
+			largo_excerpt( $post, 5, null, null, true, false );
 		endif; ?>
 
 		<?php if ( isset($opt['show']['tags']) && $opt['show']['tags'] && largo_has_categories_or_tags() && $tags === 'btm' ) { ?>

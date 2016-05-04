@@ -19,7 +19,7 @@
 		</header>
 
 		<div class="entry-content">
-			<?php largo_excerpt($featured_post, 5, true, '', true, false); ?>
+			<?php largo_excerpt($featured_post, 5, null, null, true, false); ?>
 		</div>
 	</div>
 </article>
