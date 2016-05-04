@@ -32,9 +32,9 @@ function homepage_big_story_headline($moreLink=false) {
 		<h5 class="byline"><?php largo_byline(true, true, $bigStoryPost); ?></h5>
 		<section>
 			<?php if (empty($moreLink)) {
-					largo_excerpt($bigStoryPost, 2, false);
+					largo_excerpt($bigStoryPost, 2 );
 				} else {
-					largo_excerpt($bigStoryPost, 2, true, __('Continue&nbsp;Reading&nbsp;&rarr;', 'largo'), true, false);
+					largo_excerpt($bigStoryPost, 2, null, null, true, false);
 				} ?>
 		</section>
 	</article>
