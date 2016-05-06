@@ -246,8 +246,9 @@ function largo_admin_footer_text( $default_text ) {
 }
 add_filter( 'admin_footer_text', 'largo_admin_footer_text' );
 
-// remove the links menu item
+// remove the links menu item and the media options
 function largo_admin_menu() {
      remove_menu_page('link-manager.php');
+     remove_menu_page('options-media.php');
 }
 add_action( 'admin_menu', 'largo_admin_menu' );
