@@ -224,7 +224,7 @@ filter: **largo_post_social_more_social_links**
 Template Hooks
 --------------
 
-**at are these and why would I want to use them?**
+**What are these and why would I want to use them?**
 
 Sometimes you may want to fire certain functions or include additional blocks of markup on a page without having to modify or override an entire template file.
 
@@ -308,4 +308,6 @@ These actions are run on all homepage templates, including the Legacy Three Colu
  
  **category.php**
  
+ - **largo_category_after_description_in_header** - between the ``div.archive-description`` and before ``get_template_part('partials/archive', 'category-related');``.
  - **largo_before_category_river** - just before the river of stories at the bottom of the category archive page (for adding a header to this column, for example)
+ - **largo_after_category_river** - immediately after the river of stories at the bottom of the category archive page, after the Load More Posts button (for adding a footer to this column, for example.)

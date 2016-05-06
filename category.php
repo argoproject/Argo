@@ -26,6 +26,7 @@ $queried_object = get_queried_object();
 		?>
 		<h1 class="page-title"><?php echo $title; ?></h1>
 		<div class="archive-description"><?php echo $description; ?></div>
+		<?php do_action( 'largo_category_after_description_in_header' ); ?>
 		<?php get_template_part('partials/archive', 'category-related'); ?>
 	</header>
 
@@ -78,7 +79,9 @@ $queried_object = get_queried_object();
 			largo_content_nav( 'nav-below' );
 		} else {
 			get_template_part( 'partials/content', 'not-found' );
-		} ?>
+		}
+		do_action( 'largo_after_category_river' );
+	?>
 	</div>
 	<?php get_sidebar(); ?>
 </div>
