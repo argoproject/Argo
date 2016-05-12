@@ -88,15 +88,17 @@ Layout
 
 **Number of posts** - The number of posts displayed on the main area of the homepage, not counting posts in the top area of the homepage or in the sticky box. The default is 10.
 
-**Categories to include or exclude** - Enter a comma-separated list of category ID numbers here to include or exclude them in the main loop on the homepage (see http://codex.wordpress.org/Class_Reference/WP_Query for correct format). To exclude specific categories, use a minus sign before the category ID:
+**Categories to include or exclude** - Enter a comma-separated list of category ID numbers here to include or exclude them in the main loop on the homepage (see http://codex.wordpress.org/Class_Reference/WP_Query for correct format). 
 
-	``-250,-254,-587,-2345``
-
-You can also specify which categories to show by simply entering the IDs of your chosen categories. Only the specified categories will then display in the homepage main loop. Here's an example of including only four categories:
+To include only specific categories in the homepage main loop, enter the IDs of your chosen categories. Here's an example of including only four categories:
 
 	``231,239,242,387``
 
-To find the ID for any category, go to **Posts > Categories** to see your full category list. Find the category you want and click on it. This opens the category edit screen. Look in the URL for the category ID after `$tag_ID=`.
+To exclude specific categories in the homepage main loop, use a minus sign before the category ID:
+
+	``-250,-254,-587,-2345``
+
+To find the ID for any category, go to **Posts > Categories**, then find the category you want and click on it. In the edit screen for the category, look in the URL for the category ID after `$tag_ID=`.
 
 **Single Article Template** - Starting with version 0.3, Largo introduced a new single-post template that more prominently highlights article content, which is the default. For backward compatibility, the pre-0.3 version is also available, which by default includes a sidebar. The new template optionally includes a sidebar of your choice.
 
