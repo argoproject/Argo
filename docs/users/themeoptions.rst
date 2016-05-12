@@ -98,7 +98,7 @@ To exclude specific categories in the homepage main loop, use a minus sign befor
 
 	``-250,-254,-587,-2345``
 
-To find the ID for any category, go to **Posts > Categories**, then find the category you want and click on it. In the edit screen for the category, look in the URL for the category ID after `$tag_ID=`.
+To find the ID for any category, go to **Posts > Categories**, then find the category you want and click on it. In the edit screen for the category, look in the URL for the category ID after ``$tag_ID=``.
 
 **Single Article Template** - Starting with version 0.3, Largo introduced a new single-post template that more prominently highlights article content, which is the default. For backward compatibility, the pre-0.3 version is also available, which by default includes a sidebar. The new template optionally includes a sidebar of your choice.
 
