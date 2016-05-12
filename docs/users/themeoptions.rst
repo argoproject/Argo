@@ -100,7 +100,7 @@ To exclude specific categories in the homepage main loop, use a minus sign befor
 
 To find the ID for any category, go to **Posts > Categories**, then find the category you want and click on it. In the edit screen for the category, look in the URL for the category ID after ``$tag_ID=``.
 
-**Single Article Template** - Starting with version 0.3, Largo introduced a new single-post template that more prominently highlights article content, which is the default. For backward compatibility, the pre-0.3 version is also available, which by default includes a sidebar. The new template optionally includes a sidebar of your choice.
+**Single Article Template** - This sets the default template to be used by all posts. Starting with version 0.3, Largo introduced a new single-post template that more prominently highlights article content, which is the default. For backward compatibility, the pre-0.3 version is also available, which by default includes a sidebar. The new template optionally includes a sidebar of your choice. The default template set here can be overridden in any post by selecting another template in the post edit screen.
 
 **Category Options** - Starting with version 0.5.3, Largo allows you to disable the standard featured posts area on top of category archive pages. The five posts that are normally displayed on top of the page become part of the main column of posts.
 
