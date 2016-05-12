@@ -90,7 +90,13 @@ Layout
 
 **Categories to include or exclude** - Enter a comma-separated list of category ID numbers here to exclude them from the front-page listing. in the main loop on the homepage (comma-separated list of values, see http://codex.wordpress.org/Class_Reference/WP_Query for correct format). The general approach is:
 
-	``news,sports,12,13,press-releases,blog``
+	``-250,-254,-587,-2345``
+
+You can also specify which categories to show by simply entering the IDs of your chosen categories. Only the specified categories will then display in the homepage main loop. Here's an example or including only four categories:
+
+	``231,239,242,387``
+
+To find the ID for any category, go to **Posts > Categories** to see your full category list. Find the category you want and click on it. This opens the category edit screen. Look in the URL for the category ID after `$tag_ID=`.
 
 **Single Article Template** - Starting with version 0.3, Largo introduced a new single-post template that more prominently highlights article content, which is the default. For backward compatibility, the pre-0.3 version is also available, which by default includes a sidebar. The new template optionally includes a sidebar of your choice.
 
