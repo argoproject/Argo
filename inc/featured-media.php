@@ -350,6 +350,9 @@ function largo_enqueue_featured_media_js($hook) {
 
 	$featured_image_display = get_post_meta($post->ID, 'featured-image-display', true);
 
+	// The scripts following depend upon the WordPress media APIs
+	wp_enqueue_media();
+
 	$suffix = (LARGO_DEBUG)? '' : '.min';
 	wp_enqueue_script(
 		'largo_featured_media', get_template_directory_uri() . '/js/featured-media' . $suffix . '.js',
