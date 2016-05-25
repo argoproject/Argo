@@ -339,7 +339,7 @@ function largo_has_featured_media( $post = null ) {
  * @param array $hook The page that this function is being run on.
  */
 function largo_enqueue_featured_media_js($hook) {
-	if (!in_array($hook, array('edit.php', 'edit-tags.php', 'post-new.php', 'post.php')))
+	if (!in_array($hook, array('edit.php', 'edit-tags.php', 'post-new.php', 'post.php', 'term.php')))
 		return;
 
 	global $post, $wp_query;
@@ -349,6 +349,9 @@ function largo_enqueue_featured_media_js($hook) {
 	}
 
 	$featured_image_display = get_post_meta($post->ID, 'featured-image-display', true);
+
+	// The scripts following depend upon the WordPress media APIs
+	wp_enqueue_media();
 
 	$suffix = (LARGO_DEBUG)? '' : '.min';
 	wp_enqueue_script(
