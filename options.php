@@ -279,7 +279,7 @@ function optionsframework_options() {
 
 	$options[] = array(
 		'type' => 'info',
-		'desc' => __('Information about these options can be found in <a href="https://largo.readthedocs.org/users/prelaunchchecklist.html">the pre-launch checklist</a> and <a href="https://largo.readthedocs.org/users/themeoptions.html#theme-images">the theme images options</a>.', 'largo'),
+		'desc' => __('Information about these options can be found in <a href="https://largo.readthedocs.io/users/prelaunchchecklist.html">the pre-launch checklist</a> and <a href="https://largo.readthedocs.io/users/themeoptions.html#theme-images">the theme images options</a>.', 'largo'),
 	);
 
 	$options[] = array(
@@ -676,12 +676,6 @@ function optionsframework_options() {
 		'id' 	=> 'fb_tracking_pixel',
 		'std' 	=> '',
 		'type' 	=> 'text');
-
-	$options[] = array(
-			'desc' 	=> __('<strong>Facebook Tracking Pixel ID.</strong> Unique numerical ID (one per Facebook Ads account) to enable tracking of site visitors and targeting of specific Facebook ads at your audience.', 'largo'),
-			'id' 	=> 'fb_tracking_pixel',
-			'std' 	=> '',
-			'type' 	=> 'text');
 
 	$options[] = array(
 		'desc' 	=> __('<strong>Bitly site verification.</strong> This is a string of numbers and letters used to verify your site with bitly analytics.', 'largo'),

@@ -42,12 +42,12 @@ This section allows you to upload images that are used primarily in the top head
 
 - Make sure you have created all six image sizes as outlined in our :doc:`prelaunchchecklist` and then click "Upload" by the image you want to add.
 
-	- 200x200px Square default thumbnail image
-	- 16x16px Favicon
-	- 768px-wide Small banner image
-	- 980px-wide Medium banner image
-	- 1170px-wide Large banner image
-	- 100px-tall site logo for use in the sticky header. Use a .png file with transparent background, and no clear space around the logo.
+	- 200x200px Square default thumbnail image - used for Facebook posts when you do not set a featured image for your posts, and as a bookmark icon for Apple devices.
+	- 16x16px Favicon - the small icon that appears in browser tabs and in some feed readers and other applications
+	- 768px-wide Small banner image - Used for viewports below 768px wide (mostly phones and some tablets). Recommended height: 240px
+	- 980px-wide Medium banner image -  Upload Used for viewports between 768px and 980 px (mostly tablets). Recommended height: 180px
+	- 1170px-wide Large banner image - Used for viewports above 980 px (landscape tablets and desktops). Recommended height: 150px
+	- 100px-tall site logo for use in the sticky header. Use a .png file with transparent background, and no clear space around the logo. This image should be 100px tall and at least 100px wide. If you prefer to simply use your Site Title in the sticky header, don't upload an image here.
 
 - Drag and drop the image onto the uploader (or click "Select Files" and find the correct image on your computer). When the image has finished uploading, selected the full size image option, and then click the button at the bottom of the uploader that says "Use This Image".
 
@@ -55,13 +55,13 @@ This section allows you to upload images that are used primarily in the top head
 
 - Once you have uploaded all six images, be sure to click "Save Options" to save your changes.
 
-There is one additional option in this section, a checkbox that allows you to use text in the place of the banner images. It is unlikely that you will use this option, but if you do, selecting this checkbox will use the Site Title and Description from your **Settings** > **General** menu in the place of the the header images so make sure that you have set those options before you enable this feature.
+There is one additional option in this section, a checkbox that allows you to use text in the place of the banner images. It is unlikely that you will use this option, but if you do, selecting this checkbox will use the Site Title and Description from your **Settings** > **General** menu in the place of the the header images so make sure that you have set those options before you enable this feature. Note that you can use this option to display text instead of the banner and still display a 100px-tall site logo for the sticky header.
 
 .. _pre-launch checklist: :doc:`./prelaunchchecklist.rst`
 
 .. _layout-options:
 
-Layout Options
+Layout
 --------------
 
 **Home Template** - This choice determines what the top of your website's main page looks like. The Largo theme currently offers five homepage templates:
@@ -129,7 +129,9 @@ Note that if you hide the non-sticky main navigation on article pages, any conte
 
 If the menu assigned to the sticky navigation has so many top-level links that it would have to wrap onto multiple lines, a dropdown menu will be added containing the links that would wrap. Enter a label here for the dropdown menu, which defaults to "More."
 
-**Also of note:** If you have assigned a menu to the Global Navigation theme location, the sticky navigation will include that as a dropdown menu to the right of the sticky nav menu links.
+**Also of note** - If you have assigned a menu to the Global Navigation theme location, the sticky navigation will include that as a dropdown menu to the right of the sticky nav menu links.
+
+**Alternate site name for sticky navigation** - If your Site Title is too long to display the entire title in the sticky header, the title will be truncated and appended with ellipses, e.g. "Midwestern Institute for News..." You can add an abbreviation or shorter Alternative site name here to take the place of the full Site Title. Also note that if you upload a 100px-tall Sticky Header Logo in **Appearance > Theme Options > Theme Images**, the logo will display in the sticky header instead of the Site Title.
 
 **Menu Options**
 
@@ -140,7 +142,7 @@ If the menu assigned to the sticky navigation has so many top-level links that i
 
 .. _advanced-options:
 
-Advanced Options
+Advanced
 ----------------
 
 **Custom LESS** - Enabling this will let you change the theme's colors and fonts in **Appearance** > **CSS Variables**.
@@ -184,3 +186,13 @@ The following homepage layout templates are no longer included in Largo:
 
 - **Slider**: An animated carousel of featured stories with large images. This should be automatically updated to the "Blog" template after upgrading Largo.
 
+More Info on Theme Options in the Largo Guide for Users
+----------------------------------------------------
+
+For more details on setting up Largo's Theme Options, including screen shots and recommendations, see the Largo Guide for Users pages on:
+
+- `Basic Settings <https://github.com/INN/Largo-User-Guide/blob/master/docs/theme-options-basic-settings.md>`_
+- `Theme Images <https://github.com/INN/Largo-User-Guide/blob/master/docs/theme-options-theme-images.md>`_
+- `Layout <https://github.com/INN/Largo-User-Guide/blob/master/docs/theme-options-layout.md>`_
+- `Navigation <https://github.com/INN/Largo-User-Guide/blob/master/docs/theme-options-navigation.md>`_
+- `Advanced <https://github.com/INN/Largo-User-Guide/blob/master/docs/theme-options-advanced.md>`_

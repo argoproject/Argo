@@ -802,7 +802,6 @@ if ( ! function_exists( 'largo_post_metadata' ) ) {
  *
  * @since 0.5.4
  * @link https://github.com/INN/Largo/issues/961
- * @link http://jira.inn.org/browse/VO-10
  * @see largo_floating_social_button_width_json
  */
 if ( ! function_exists( 'largo_floating_social_buttons' ) ) {
