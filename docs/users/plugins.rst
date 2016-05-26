@@ -56,7 +56,7 @@ Here is a complete list of the plugins currently installed and available.
 **Utilities:**
 
 - `Categories to Tags Converter <https://wordpress.org/plugins/wpcat2tag-importer/>`_ - Convert existing categories to tags or tags to categories, selectively.
-- `CodeStyling Localization <https://wordpress.org/plugins/codestyling-localization/>`_ - a utility for generating translation files from within the WordPress dashboard.
+- `CodeStyling Localization <http://www.code-styling.de/english/development/wordpress-plugin-codestyling-localization-en>`_ - a utility for generating translation files from within the WordPress dashboard.
 - `Core Control <https://wordpress.org/plugins/core-control/>`_ - Core Control is a set of plugin modules which can be used to control certain aspects of the WordPress control.
 - `Empty Tags Remover <https://wordpress.org/plugins/empty-tags-remover/>`_ - Removes the empty tags, tags with no posts attached.
 - `Regenerate Thumbnails <https://wordpress.org/plugins/regenerate-thumbnails/>`_ - Allows you to regenerate all thumbnails after changing the thumbnail sizes.
