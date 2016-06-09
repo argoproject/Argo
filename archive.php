@@ -54,6 +54,9 @@ $queried_object = get_queried_object();
 				 */
 				$title = apply_filters( 'largo_archive_rounduplink_title', __( 'Saved Links' , 'largo' ) );
 				$rss_link = '/rounduplink/feed';
+			} elseif ( is_post_type_archive() )  {
+				$title = post_type_archive_title( '', false );
+				$rss_link = '/feed/?post_type=' . urlencode($wp_query->query_vars['post_type']);
 			}
 		?>
 
