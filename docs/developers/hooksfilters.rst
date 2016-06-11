@@ -37,16 +37,28 @@ filter: **largo_homepage_topstories_post_count**
 Other filters and actions
 -------------------------
 
-filter: **largo_archive_rounduplink_title**
+filter: **largo_archive_{$post_type}_title**
 
-    Called in `archive.php` to filter the page title for posts in the `rounduplink` post type.
+    Called in `archive.php` to filter the page title for posts in the ``$post_type`` `post type <https://codex.wordpress.org/Post_Types>`_.
 
     **Usage:** ::
 
     function filter_rounduplink_title($title) {
-        return "Custom title here";
+        return __("Custom title here", 'largo');
     }
     add_action('largo_archive_rounduplink_title', 'filter_rounduplink_title');
+
+filter: **largo_archive_{$post_type}_feed**
+
+    Called in `archive.php` to filter the feed url for posts in the ``$post_type`` `post type <https://codex.wordpress.org/Post_Types>`_.
+post type.
+
+    **Usage:** ::
+
+    function filter_column_feed($title) {
+        return "http://example.com/custom_feed_url/feed.xml";
+    }
+    add_action('largo_archive_column_feed', 'filter_column_feed');
 
 filter: **largo_registration_extra_fields**
 
