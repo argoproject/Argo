@@ -18,12 +18,12 @@ Here is a complete list of the plugins currently installed and available.
 
 **Plugins we've built and maintain**
 
-- `Analytic Bridge <https://github.com/INN/analytic-bridge>`_ - Integration with Google's Analytics (allows for the creation of popular posts widgets, etc.)
+- `Google Analytics Popular Posts <https://wordpress.org/plugins/ga-popular-posts/>`_ - Integration with Google's Analytics (allows for the creation of popular posts widgets, etc.)
 - `DoubleClick for WordPress <https://github.com/INN/DoubleClick-for-WordPress>`_ - Integration with Google's DoubleClick for Publisher ad serving platform.
 - `Link Roundups <https://wordpress.org/plugins/link-roundups/>`_ - Curate links from around the web, turn them into roundup posts (or display in a saved links widget) and then send them out as MailChimp campaigns.
-- `News Quizzes <https://github.com/INN/news-quiz>`_ - A WordPress wrapper for Mother Jones' news quiz tool
+- `News Quizzes https://wordpress.org/plugins/news-quiz-shortcode/>`_ - A WordPress wrapper for Mother Jones' news quiz tool
 - `Super Cool Ad Inserter <https://wordpress.org/plugins/super-cool-ad-inserter/>`_ - Easily insert ads, signup forms, donation messages, etc. within the body of a post/page
-- `Term Debt Consolidator <https://github.com/INN/term-debt-consolidator>`_ - Algorithimically suggests likely duplicate/similar tags and categories for consolidation
+- `Term Debt Consolidator <https://wordpress.org/plugins/term-debt-consolidator/>`_ - Algorithimically suggests likely duplicate/similar tags and categories for consolidation
 
 **Third-party plugins**
 
