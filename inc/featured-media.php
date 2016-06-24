@@ -344,8 +344,14 @@ function largo_enqueue_featured_media_js($hook) {
 
 	global $post, $wp_query;
 
-	if ( in_array($hook, array('edit-tags.php')) && isset($_GET['action']) ) {
-		$post = get_post( largo_get_term_meta_post( $_GET['taxonomy'], $_GET['tag_ID'] ) );
+	// Run this action on term edit pages
+	// edit-tags.php for wordpress before 4.5
+	// term.php for 4.5 and after
+	if ( in_array($hook, array('edit-tags.php', 'term.php')) && is_numeric($_GET['tag_ID']) ) {
+		// After WordPress 4.5, the taxonomy is no longer in the URL
+		// So to compensate, we get the taxonomy from the current screen
+		$screen = get_current_screen();
+		$post = get_post( largo_get_term_meta_post( $screen->taxonomy, $_GET['tag_ID'] ) );
 	}
 
 	$featured_image_display = get_post_meta($post->ID, 'featured-image-display', true);
