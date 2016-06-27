@@ -27,26 +27,38 @@ class largo_related_posts_widget extends WP_Widget {
 
 		if ( $title ) echo $before_title . $title . $after_title;
 
- 		$related = new Largo_Related( $instance['qty'] );
+		$related = new Largo_Related( $instance['qty'] );
 
- 		//get the related posts
- 		$rel_posts = new WP_Query( array(
- 			'post__in' => $related->ids(),
- 			'nopaging' => 1,
- 			'posts_per_page' => $instance['qty'],
- 			'ignore_sticky_posts' => 1
- 		) );
+		//get the related posts
+		$rel_posts = new WP_Query( array(
+			'post__in' => $related->ids(),
+			'nopaging' => 1,
+			'posts_per_page' => $instance['qty'],
+			'ignore_sticky_posts' => 1
+		) );
 
- 		if ( $rel_posts->have_posts() ) {
+		if ( $rel_posts->have_posts() ) {
 
-	 		echo '<ul class="related">';
+			echo '<ul class="related">';
 
-	 		while ( $rel_posts->have_posts() ) {
-		 		$rel_posts->the_post();
-		 		echo '<li>';
-				echo '<a href="' . get_permalink() . '"/>' . get_the_post_thumbnail( get_the_ID(), 'thumbnail', array('class'=>'alignleft') ) . '</a>';
+			while ( $rel_posts->have_posts() ) {
+				$rel_posts->the_post();
+				echo '<li>';
+
+				// Thumbnail before headline
+				if ( $instance['thumbnail_location'] == 'before' ) {
+					echo '<a href="' . get_permalink() . '"/>' . get_the_post_thumbnail( get_the_ID(), 'thumbnail', array('class'=>'alignleft') ) . '</a>';
+				}
 				?>
+
 				<h4><a href="<?php the_permalink(); ?>" title="Read: <?php esc_attr( the_title('','', FALSE) ); ?>"><?php the_title(); ?></a></h4>
+
+				<?php
+				// Thumbnail after headline
+				if ( $instance['thumbnail_location'] != 'before' ) {
+					echo '<a href="' . get_permalink() . '"/>' . get_the_post_thumbnail( get_the_ID(), 'thumbnail', array('class'=>'alignleft') ) . '</a>';
+				}
+				?>
 
 				<?php if ( $instance['show_byline'] ) { ?>
 					<h5 class="byline">
@@ -56,11 +68,11 @@ class largo_related_posts_widget extends WP_Widget {
 
 				<?php // post excerpt/summary
 				largo_excerpt(get_the_ID(), 2, false, '', true);
-		 		echo '</li>';
-	 		}
+				echo '</li>';
+			}
 
-	 		echo "</ul>";
- 		}
+			echo "</ul>";
+		}
 		echo $after_widget;
 		// Restore global $post
 		wp_reset_postdata();
