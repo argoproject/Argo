@@ -46,19 +46,10 @@ class largo_related_posts_widget extends WP_Widget {
 				echo '<li>';
 
 				// Thumbnail before headline
-				if ( $instance['thumbnail_location'] == 'before' ) {
-					echo '<a href="' . get_permalink() . '"/>' . get_the_post_thumbnail( get_the_ID(), 'thumbnail', array('class'=>'alignleft') ) . '</a>';
-				}
+					echo '<a href="' . get_permalink() . '"/>' . get_the_post_thumbnail( get_the_ID(), 'thumbnail', array('class'=>'') ) . '</a>';
 				?>
 
 				<h4><a href="<?php the_permalink(); ?>" title="Read: <?php esc_attr( the_title('','', FALSE) ); ?>"><?php the_title(); ?></a></h4>
-
-				<?php
-				// Thumbnail after headline
-				if ( $instance['thumbnail_location'] != 'before' ) {
-					echo '<a href="' . get_permalink() . '"/>' . get_the_post_thumbnail( get_the_ID(), 'thumbnail', array('class'=>'alignright') ) . '</a>';
-				}
-				?>
 
 				<?php if ( $instance['show_byline'] ) { ?>
 					<h5 class="byline">
@@ -84,7 +75,6 @@ class largo_related_posts_widget extends WP_Widget {
 		$instance['title'] = sanitize_text_field($new_instance['title']);
 		$instance['qty'] = (int) $new_instance['qty'];
 		$instance['show_byline'] = (int) $new_instance['show_byline'];
-		$instance['thumbnail_location'] = sanitize_key( $new_instance['thumbnail_location'] );
 		return $instance;
 	}
 
@@ -110,17 +100,6 @@ class largo_related_posts_widget extends WP_Widget {
 
 		<p><input id="<?php echo $this->get_field_id('show_byline'); ?>" name="<?php echo $this->get_field_name('show_byline'); ?>" type="checkbox" value="1" <?php checked( $instance['show_byline'], 1);?> />
 			<label for="<?php echo $this->get_field_id('show_byline'); ?>"><?php _e( 'Show byline on each post', 'largo' ); ?></label>
-		</p>
-
-		<p>
-			<label for="<?php echo $this->get_field_id('thumbnail_location'); ?>"><?php _e('Thumbnail position', 'largo'); ?>:</label>
-			<select name="<?php echo $this->get_field_name('thumbnail_location'); ?>" id="<?php echo $this->get_field_id('thumbnail_location'); ?>">
-			<?php
-			$choices = array( 'before' => __( 'Before Headline', 'largo' ), 'after' => __( 'After Headline', 'largo' ) );
-			foreach( $choices as $i => $display ) {
-				echo '<option value="', $i, '"', selected($instance['thumbnail_location'], $i, false), '>', $display, '</option>';
-			} ?>
-			</select>
 		</p>
 
 	<?php
