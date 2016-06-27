@@ -47,9 +47,13 @@ class largo_related_posts_widget extends WP_Widget {
 				echo '<a href="' . get_permalink() . '"/>' . get_the_post_thumbnail( get_the_ID(), 'thumbnail', array('class'=>'alignleft') ) . '</a>';
 				?>
 				<h4><a href="<?php the_permalink(); ?>" title="Read: <?php esc_attr( the_title('','', FALSE) ); ?>"><?php the_title(); ?></a></h4>
-				<h5 class="byline">
-					<span class="by-author"><?php largo_byline( true, false ); ?></span>
-				</h5>
+
+				<?php if ( $instance['show_byline'] ) { ?>
+					<h5 class="byline">
+						<span class="by-author"><?php largo_byline( true, false ); ?></span>
+					</h5>
+				<?php } ?>
+
 				<?php // post excerpt/summary
 				largo_excerpt(get_the_ID(), 2, false, '', true);
 		 		echo '</li>';
@@ -93,7 +97,7 @@ class largo_related_posts_widget extends WP_Widget {
 		</p>
 
 		<p><input id="<?php echo $this->get_field_id('show_byline'); ?>" name="<?php echo $this->get_field_name('show_byline'); ?>" type="checkbox" value="1" <?php checked( $instance['show_byline'], 1);?> />
-			<label for="<?php echo $this->get_field_id('show_byline'); ?>"><?php _e( 'Show date with each post', 'largo' ); ?></label>
+			<label for="<?php echo $this->get_field_id('show_byline'); ?>"><?php _e( 'Show byline on each post', 'largo' ); ?></label>
 		</p>
 
 		<p>
