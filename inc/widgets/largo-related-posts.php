@@ -56,7 +56,7 @@ class largo_related_posts_widget extends WP_Widget {
 				<?php
 				// Thumbnail after headline
 				if ( $instance['thumbnail_location'] != 'before' ) {
-					echo '<a href="' . get_permalink() . '"/>' . get_the_post_thumbnail( get_the_ID(), 'thumbnail', array('class'=>'alignleft') ) . '</a>';
+					echo '<a href="' . get_permalink() . '"/>' . get_the_post_thumbnail( get_the_ID(), 'thumbnail', array('class'=>'alignright') ) . '</a>';
 				}
 				?>
 
