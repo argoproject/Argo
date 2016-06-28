@@ -45,11 +45,10 @@ class largo_related_posts_widget extends WP_Widget {
 				$rel_posts->the_post();
 				echo '<li>';
 
-				// Thumbnail before headline
-					echo '<a href="' . get_permalink() . '"/>' . get_the_post_thumbnail( get_the_ID(), 'thumbnail', array('class'=>'') ) . '</a>';
+				echo '<a href="' . get_permalink() . '"/>' . get_the_post_thumbnail( get_the_ID(), 'thumbnail', array( 'class' => '' ) ) . '</a>';
 				?>
 
-				<h4><a href="<?php the_permalink(); ?>" title="Read: <?php esc_attr( the_title('','', FALSE) ); ?>"><?php the_title(); ?></a></h4>
+				<h4><a href="<?php the_permalink(); ?>" title="Read: <?php esc_attr( the_title( '','', FALSE ) ); ?>"><?php the_title(); ?></a></h4>
 
 				<?php if ( $instance['show_byline'] ) { ?>
 					<h5 class="byline">
