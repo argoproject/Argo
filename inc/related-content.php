@@ -555,7 +555,7 @@ class Largo_Related {
 	protected function get_term_posts() {
 
 		//we've gone back and forth through all the post's series, now let's try traditional taxonomies
-		$taxonomies = get_the_terms( $this->post_id, array('category', 'post_tag') );
+		$taxonomies = get_the_terms( $this->post_id, array( 'category', 'post_tag' ) );
 
 		//loop thru taxonomies, much like series, and get posts
 		if ( is_array($taxonomies) ) {
@@ -569,7 +569,7 @@ class Largo_Related {
 					'taxonomy' => $term->taxonomy,
 					'term' => $term->slug,
 					'orderby' => 'date',
-					'order' => 'ASC',
+					'order' => 'DESC',
 					'ignore_sticky_posts' => 1,
 					'date_query' => array(
 						'after' => $this->post->post_date,
@@ -580,7 +580,7 @@ class Largo_Related {
 				$term_query = new WP_Query( $args );
 
 				// If not enough posts were added from after this post, look before this post
-				if ( count($term_query->posts) < $this->number ) {
+				if ( count( $term_query->posts ) < $this->number ) {
 
 					// Store the returned posts from the after query
 					$this->add_from_query( $term_query );
@@ -621,7 +621,7 @@ class Largo_Related {
 		$posts_query = new WP_Query( $args );
 
 		if ( $posts_query->have_posts() ) {
-			$this->add_from_query($posts_query);
+			$this->add_from_query( $posts_query );
 		}
 	}
 
