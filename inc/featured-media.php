@@ -666,16 +666,3 @@ if ( ! function_exists( 'largo_hero_class' ) ) {
 			return $hero_class;
 	}
 }
-
-/**
- * Returns the featured image for a post; deprecated in 0.5.1
- * to be used as the hero image with caption and credit (if available)
- *
- * @since 0.4
- * @deprecated 0.5.1
- */
-if ( ! function_exists( 'largo_hero_with_caption' ) ) {
-	function largo_hero_with_caption( $post_id ) {
-		largo_featured_image_hero($post_id);
-	}
-}
