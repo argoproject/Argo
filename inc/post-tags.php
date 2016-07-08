@@ -89,8 +89,6 @@ if ( ! function_exists( 'largo_author_link' ) ) {
  * @param WP_Post|Integer $post The post object or ID to get the byline for. Defaults to current post.
  * @return String Byline as formatted html
  * @since 0.3
- * @uses largo_byline_coauthors
- * @uses largo_byline_normal_or_custom
  */
 if ( ! function_exists( 'largo_byline' ) ) {
 	function largo_byline( $echo = true, $exclude_date = false, $post = null ) {
@@ -105,23 +103,33 @@ if ( ! function_exists( 'largo_byline' ) ) {
 			$post_id = get_the_ID();
 		}
 
-		$values = get_post_custom( $post_id );
+		// Set us up the options
+		// This is an array of things to allow us to easily add options in the future
+		$options = array(
+			'post_id' => $post_id,
+			'values' => get_post_custom( $post_id ),
+			'exclude_date' => $exclude_date,
+		);
 
-		if ( function_exists( 'get_coauthors' ) && !isset( $values['largo_byline_text'] ) ) {
-			// If Co-Authors Plus is enabled and there is not a custom byline
-			$authors = largo_byline_coauthors( $post_id );
-		} else {
-			// If Co-Authors Plus is not enabled or if there is a custom byline
-			$authors = largo_byline_normal_or_custom( $post_id );
-		}
-
-		// Generate the HTML for the author portion of the byline
-		$output = '<span class="by-author"><span class="by">' . __( 'By', 'largo' ) . '</span> <span class="author vcard" itemprop="author">' . $authors . '</span></span>';
-
-		// Add the date if it is not excluded
-		if ( ! $exclude_date ) {
-			$output .= '<span class="sep"> | </span><time class="entry-date updated dtstamp pubdate" datetime="' . esc_attr( get_the_date( 'c', $post_id ) ) . '">' . largo_time(false, $post_id) . '</time>';
-		}
+		/**
+		 * The byline action
+		 *
+		 * @param array $options todo needs docs
+		 *
+		 * functions hooked on this should echo and return their output; all output from these functions is captured in PHP's output buffering using ob_start
+		 * functions hooked on this should not use output buffering. If you do use output buffering, make sure you close all buffers you open.
+		 *
+		 * Default order of operations:
+		 *       10 largo_byline_component_authors
+		 *       20 largo_byline_component_sep
+		 *       30 largo_byline_component_date
+		 *     1000 largo_byline_component_edit_link
+		 *
+		 * @todo: give this better docs
+		 */
+		ob_start();
+		do_action('largo_byline', $options);
+		$output = ob_get_clean();
 
 		/**
 		 * Filter the largo_byline output text to allow adding items at the beginning or the end of the text.
@@ -132,17 +140,83 @@ if ( ! function_exists( 'largo_byline' ) ) {
 		 */
 		$output = apply_filters( 'largo_byline', $output );
 
-		// Add the edit link if the current user can edit the post
-		if ( current_user_can( 'edit_post', $post_id ) ) {
-			$output .= '<span class="sep"> | </span><span class="edit-link"><a href="' . get_edit_post_link( $post_id ) . '">' . __( 'Edit This Post', 'largo' ) . '</a></span>';
-		}
-
 		if ( $echo ) {
 			echo $output;
 		} else {
 			return $output;
 		}
 	}
+}
+
+/**
+ * Largo byline component: output the author list
+ * @uses largo_byline_coauthors
+ * @uses largo_byline_normal_or_custom
+ *
+ * @since Largo 0.5.5
+ * @link https://github.com/INN/Largo/issues/1126
+ */
+function largo_byline_component_authors($options) {
+	extract($options);
+
+	// get the post's custom meta
+
+	if ( function_exists( 'get_coauthors' ) && !isset( $values['largo_byline_text'] ) ) {
+		// If Co-Authors Plus is enabled and there is not a custom byline
+		$authors = largo_byline_coauthors( $post_id );
+	} else {
+		// If Co-Authors Plus is not enabled or if there is a custom byline
+		$authors = largo_byline_normal_or_custom( $post_id );
+	}
+	// Generate the HTML for the author portion of the byline
+	$output = '<span class="by-author"><span class="by">' . __( 'By', 'largo' ) . '</span> <span class="author vcard" itemprop="author">' . $authors . '</span></span>';
+
+	echo $output;
+	return $output;
+}
+add_action('largo_byline', 'largo_byline_component_authors', 10); // we will assume that this is first
+
+add_action('largo_byline', 'largo_byline_component_sep', 20);
+
+/**
+ * #todo: doc this
+ */
+function largo_byline_component_publish_datetime($options) {
+	extract($options);
+
+	// Add the date if it is not excluded
+	if ( ! $exclude_date ) {
+		$output .= '<span class="sep"> | </span><time class="entry-date updated dtstamp pubdate" datetime="' . esc_attr( get_the_date( 'c', $post_id ) ) . '">' . largo_time(false, $post_id) . '</time>';
+	}
+
+	echo $output;
+	return $output;
+}
+add_action('largo_byline', 'largo_byline_component_sep', 30);
+
+/**
+ * @todo: doc this
+ */
+function largo_byline_component_edit_link($options) {
+	extract($options);
+
+	// Add the edit link if the current user can edit the post
+	if ( current_user_can( 'edit_post', $post_id ) ) {
+		$output .= '<span class="edit-link"><a href="' . get_edit_post_link( $post_id ) . '">' . __( 'Edit This Post', 'largo' ) . '</a></span>';
+	}
+
+	echo $ouptut;
+	return $output;
+}
+add_action('largo_byline', 'largo_byline_component_edit_link', 1000); // this should always be the last
+
+/**
+ * @todo: doc this
+ */
+function largo_byline_component_sep($options) {
+	$output = '<span class="sep"> | </span>';
+	echo $output;
+	return $output;
 }
 
 /**
@@ -158,7 +232,6 @@ if ( ! function_exists( 'largo_byline' ) ) {
 if ( ! function_exists( 'largo_byline_coauthors' ) ) {
 	function largo_byline_coauthors( $post_id ) {
 		if ( ! function_exists( 'get_coauthors' ) ) {
-			error_log( 'largo_byline_coauthors was called but Co Authors Plus does not appear to be installed. Using largo_byline_normal_or_custom instead' );
 			return largo_byline_normal_or_custom( $post_id );
 		}
 
@@ -216,6 +289,7 @@ if ( ! function_exists( 'largo_byline_normal_or_custom' ) ) {
 		return $authors;
 	}
 }
+
 /**
  * Outputs facebook, twitter and print utility links on article pages
  *
