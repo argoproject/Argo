@@ -276,19 +276,121 @@ if ( ! function_exists( 'largo_byline_coauthors' ) ) {
 if ( ! function_exists( 'largo_byline_normal_or_custom' ) ) {
 	function largo_byline_normal_or_custom( $post_id ) {
 		$values = get_post_custom( $post_id );
-
-		$authors = largo_author_link( false, $post_id );
-
-		// add the author's job title
 		$author_id = get_post_meta( $post_id, 'post_author', true );
-		$show_job_titles = of_get_option('show_job_titles');
-		if ( !isset( $values['largo_byline_text'] ) && $show_job_titles && $job = get_the_author_meta( 'job_title' , $author_id ) ) {
-			$authors  .= '<span class="job-title"><span class="comma">,</span> ' . $job . '</span>';
-		}
+
+		// an array of values to prevent future argument messes
+		$args = array(
+			'post_id' => $post_id,
+			'author_id' => $author_id,
+			'values' => $values,
+			'has_custom_byline' => isset( $values['largo_byline_text'] ) ? true : false , // so every function doesn't need to run this check themselves
+		);
+		
+		ob_start();
+		/**
+		 * @todo document this
+		 * it's like largo_byline but specific to this case where there's either a custom byline or there's a normal coauthor
+		 *
+		 * Normal order of things:
+		 *     10 largo_byline_normal_or_custom_component_avatar // only outputs if not custom byline
+		 *     20 largo_byline_normal_or_custom_component_author_link // always outputs
+		 *     30 largo_byline_normal_or_custom_component_author_job_title // only outputs if not custom byline
+		 *     40 largo_byline_normal_or_custom_component_author_twitter // only outputs if not custom byline
+		 */
+		do_action('largo_byline_normal_or_custom', $args);
+		$authors = ob_get_clean();
 
 		return $authors;
 	}
 }
+
+/**
+ * largo_byline_normal_or_custom action for avatars
+ *
+ * Should only output an avatar if custom bylines are not set
+ * @param array $args
+ * @action largo_byline_normal_or_custom
+ */
+function largo_byline_normal_or_custom_component_avatar($args) {
+	extract($args);
+	$output = '';
+
+	if ( ! $has_custom_byline ) {
+		$output = get_avatar(
+			$author_id,
+			32, // image size shall be 32px square
+			'', // default url for image shall be emptystring to prevent loading image if author has none
+			sprintf( __('Avatar for %1$s', 'largo'), largo_author($false) ), // alt for the image
+			array( // the other args, see https://codex.wordpress.org/Function_Reference/get_avatar
+				'force_default' => true, // never show Gravatar
+				'class' => '', // empty for now, we may want to add classes to this image
+				'force_display' => false, // this is default value; to toggle display of avatars check "Show Avatars" in Settings > Discussion
+			)
+		);
+	}
+	echo $output;
+	return $output;
+}
+add_action('largo_byline_normal_or_custom', 'largo_byline_normal_or_custom_component_avatar', 10);
+
+/**
+ * largo_byline_normal_or_custom action for author link
+ * @todo document this
+ * This always runs, because largo_author_link accounts for cases where there is a custom byline
+ * @param array $args
+ * @action largo_byline_normal_or_custom
+ */
+function largo_byline_normal_or_custom_component_author_link($args) {
+	extract($args);
+	$output = largo_author_link( false, $post_id );
+	echo $output;
+	return $output;
+}
+add_action('largo_byline_normal_or_custom', 'largo_byline_normal_or_custom_component_author_link', 20);
+
+/**
+ * largo_byline_normal_or_custom action for author job title
+ * @todo document this
+ * This only generates output if there is a standard author
+ * @param array $args
+ * @action largo_byline_normal_or_custom
+ */
+function largo_byline_normal_or_custom_component_author_job_title($args) {
+	extract($args);
+	$output = '';
+	if ( ! $has_custom_byline ) {
+		// run this query inside the $has_custom_byline check to save time
+		$show_job_titles = of_get_option('show_job_titles');
+		// only do this if we're showing job titles and there is one to be shown
+		if ( $show_job_titles && $job = get_the_author_meta( 'job_title' , $author_id ) ) {
+			$output .= '<span class="job-title"><span class="comma">,</span> ' . $job . '</span>';
+		}
+	}
+	echo $output;
+	return $output;
+}
+add_action('largo_byline_normal_or_custom', 'largo_byline_normal_or_custom_component_author_job_title', 30);
+
+/**
+ * largo_byline_normal_or_custom action for author twitter handle
+ * @todo document this
+ * This only generates output if there is a standard author
+ * @param array $args
+ * @action largo_byline_normal_or_custom
+ */
+function largo_byline_normal_or_custom_component_author_twitter($args) {
+	extract($args);
+	$output = '';
+	if ( ! $has_custom_byline ) {
+		$twitter = get_the_author_meta('twitter', $author_id);
+		if ( $twitter && is_single() ) {
+			$output .= ' <span class="twitter"><a href="https://twitter.com/' . largo_twitter_url_to_username( $twitter ) . '"><i class="icon-twitter"></i></a></span>';
+		}
+	}
+	echo $output;
+	return $output;
+}
+add_action('largo_byline_normal_or_custom', 'largo_byline_normal_or_custom_component_author_twitter', 40);
 
 /**
  * Make a nicer-looking excerpt regardless of how an author has been using excerpts in the past
