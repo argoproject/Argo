@@ -235,19 +235,34 @@ if ( ! function_exists( 'largo_byline_coauthors' ) ) {
 			return largo_byline_normal_or_custom( $post_id );
 		}
 
+		$show_job_titles = of_get_option('show_job_titles');
 		$coauthors = get_coauthors( $post_id );
+
 		foreach( $coauthors as $author ) {
-			$byline_text = $author->display_name;
-			$show_job_titles = of_get_option('show_job_titles');
-			if ( $org = $author->organization )
-				$byline_text .= ' (' . $org . ')';
+			// create args for largo_byline_coauthor_each hook
+			$args = array(
+				'author' => $author,
+				'author_id' => $author->ID,
+				'author_name' => $author->display_name, // used in largo_byline_avatar for both largo_byline_coauthor_each and largo_byline_normal_or_custom
+				'byline_text' => $author->display_name,
+				'show_job_titles' => $show_job_titles,
+			)
 
-			$byline_temp = '<a class="url fn n" href="' . get_author_posts_url( $author->ID, $author->user_nicename ) . '" title="' . esc_attr( sprintf( __( 'Read All Posts By %s', 'largo' ), $author->display_name ) ) . '" rel="author">' . esc_html( $byline_text ) . '</a>';
-			if ( $show_job_titles && $job = $author->job_title ) {
-				// Use parentheses in case of multiple guest authorss. Comma separators would be nonsensical: Firstname lastname, Job Title, Secondname Thirdname, and Fourthname Middle Fifthname
-				$byline_temp .= ' <span class="job-title"><span class="paren-open">(</span>' . $job . '<span class="paren-close">)</span></span>';
-			}
+			ob_start();
+			/**
+			 * @todo document this
+			 * it's like largo_byline but specific to a singular coauthor
+			 *
+			 * Normal order of things:
+			 *     10 largo_byline_avatar
+			 *     20 largo_byline_coauthor_each_component_author
+			 *     30 largo_byline_coauthor_each_component_job_title
+			 *     40 largo_byline_coauthor_each_component_twitter
+			 */
+			do_action('largo_byline_coauthor_each', $args);
+			$byline_temp = ob_get_clean();
 
+			// array of byline html strings
 			$out[] = $byline_temp;
 		}
 
@@ -267,7 +282,62 @@ if ( ! function_exists( 'largo_byline_coauthors' ) ) {
 }
 
 /**
- * Return largo_author_link for the post, and if applicable the post author's job title
+ * @todo: document this
+ * @hook largo_byline_coauthor_each
+ * @param array $args
+ */
+function largo_byline_coauthor_each_component_author($args) {
+	extract($args);
+	$byline_text = '';
+
+	// org name
+	if ( $org = $author->organization ) {
+		$byline_text = ' (' . $org . ')';
+	}
+
+	$output = '<a class="url fn n" href="' . get_author_posts_url( $author->ID, $author->user_nicename ) . '" title="' . esc_attr( sprintf( __( 'Read All Posts By %s', 'largo' ), $author->display_name ) ) . '" rel="author">' . esc_html( $byline_text ) . '</a>';
+	echo $output;
+	return $output;
+}
+
+/**
+ * @todo: document this
+ * @hook largo_byline_coauthor_each
+ * @param array $args
+ */
+function largo_byline_coauthor_each_component_job_title($args) {
+	extract($args);
+	$output = '';
+
+	if ( $show_job_titles && $job = $author->job_title ) {
+		// Use parentheses in case of multiple guest authorss. Comma separators would be nonsensical: Firstname lastname, Job Title, Secondname Thirdname, and Fourthname Middle Fifthname
+		$output = ' <span class="job-title"><span class="paren-open">(</span>' . $job . '<span class="paren-close">)</span></span>';
+	}
+
+	echo $output;
+	return $output;
+}
+
+/**
+ * @todo: document this
+ * @hook largo_byline_coauthor_each
+ * @param array $args
+ */
+function largo_byline_coauthor_each_component_twitter($args) {
+	extract($args);
+	$output = '';
+
+	if ( !empty($author->twitter) && is_single() ) {
+		$output = ' <span class="twitter"><a href="https://twitter.com/' . largo_twitter_url_to_username( $author->twitter ) . '"><i class="icon-twitter"></i></a></span>';
+	}
+
+	echo $output;
+	return $output;
+}
+
+
+/**
+ * Return the output of the largo_byline_normal_or_custom function
  *
  * @param Integer $post_id The id of the post
  * @return String HTML for the author, possibly including the author's link and job description
@@ -282,6 +352,7 @@ if ( ! function_exists( 'largo_byline_normal_or_custom' ) ) {
 		$args = array(
 			'post_id' => $post_id,
 			'author_id' => $author_id,
+			'author_name' => largo_author(false), // used in largo_byline_avatar for both largo_byline_coauthor_each and largo_byline_normal_or_custom
 			'values' => $values,
 			'has_custom_byline' => isset( $values['largo_byline_text'] ) ? true : false , // so every function doesn't need to run this check themselves
 		);
@@ -305,13 +376,14 @@ if ( ! function_exists( 'largo_byline_normal_or_custom' ) ) {
 }
 
 /**
- * largo_byline_normal_or_custom action for avatars
+ * largo_byline_normal_or_custom, largo_byline_coauthor_each action for avatars
  *
  * Should only output an avatar if custom bylines are not set
- * @param array $args
+ * @param array $args, containing indices 'has_custom_byline', 'author_id', 'author_name'
  * @action largo_byline_normal_or_custom
+ * @action largo_byline_coauthor_each
  */
-function largo_byline_normal_or_custom_component_avatar($args) {
+function largo_byline_avatar($args) {
 	extract($args);
 	$output = '';
 
@@ -320,7 +392,7 @@ function largo_byline_normal_or_custom_component_avatar($args) {
 			$author_id,
 			32, // image size shall be 32px square
 			'', // default url for image shall be emptystring to prevent loading image if author has none
-			sprintf( __('Avatar for %1$s', 'largo'), largo_author($false) ), // alt for the image
+			sprintf( __('Avatar for %1$s', 'largo'), $author_name ), // alt for the image
 			array( // the other args, see https://codex.wordpress.org/Function_Reference/get_avatar
 				'force_default' => true, // never show Gravatar
 				'class' => '', // empty for now, we may want to add classes to this image
