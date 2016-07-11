@@ -140,8 +140,13 @@ function largo_edit_permission_check() {
     global $current_user, $profileuser;
 
     $screen = get_current_screen();
-
-    wp_get_current_user();
+    
+    global $wp_version; 
+    if ( !substr( $wp_version, 0, 3 ) === "4.5" ) {
+    	get_currentuserinfo();
+    } else {
+    	wp_get_current_user();
+    }
 
     if( ! is_super_admin( $current_user->ID ) && in_array( $screen->base, array( 'user-edit', 'user-edit-network' ) ) ) { // editing a user profile
         if ( is_super_admin( $profileuser->ID ) ) { // trying to edit a superadmin while less than a superadmin
