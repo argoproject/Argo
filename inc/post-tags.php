@@ -128,6 +128,7 @@ if ( ! function_exists( 'largo_byline' ) ) {
 		 * @todo: give this better docs
 		 */
 		ob_start();
+
 		do_action('largo_byline', $options);
 		$output = ob_get_clean();
 
@@ -157,6 +158,10 @@ if ( ! function_exists( 'largo_byline' ) ) {
  * @link https://github.com/INN/Largo/issues/1126
  */
 function largo_byline_component_authors($options) {
+
+	if ( ! is_array($options) ) {
+		var_log($options);
+	}
 	extract($options);
 
 	// get the post's custom meta
@@ -172,11 +177,11 @@ function largo_byline_component_authors($options) {
 	$output = '<span class="by-author"><span class="by">' . __( 'By', 'largo' ) . '</span> <span class="author vcard" itemprop="author">' . $authors . '</span></span>';
 
 	echo $output;
-	return $output;
+	return $options;
 }
 add_action('largo_byline', 'largo_byline_component_authors', 10); // we will assume that this is first
 
-add_action('largo_byline', 'largo_byline_component_sep', 20);
+#add_action('largo_byline', 'largo_byline_component_sep', 20);
 
 /**
  * #todo: doc this
@@ -192,7 +197,7 @@ function largo_byline_component_publish_datetime($options) {
 	echo $output;
 	return $output;
 }
-add_action('largo_byline', 'largo_byline_component_sep', 30);
+#add_action('largo_byline', 'largo_byline_component_sep', 30);
 
 /**
  * @todo: doc this
@@ -208,7 +213,7 @@ function largo_byline_component_edit_link($options) {
 	echo $ouptut;
 	return $output;
 }
-add_action('largo_byline', 'largo_byline_component_edit_link', 1000); // this should always be the last
+#add_action('largo_byline', 'largo_byline_component_edit_link', 1000); // this should always be the last
 
 /**
  * @todo: doc this
