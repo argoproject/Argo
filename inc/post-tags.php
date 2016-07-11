@@ -242,11 +242,12 @@ if ( ! function_exists( 'largo_byline_coauthors' ) ) {
 		$out=array();
 		foreach( $coauthors as $author ) {
 			// create args for largo_byline_coauthor_each hook
+			$author_name = ( !empty($author->display_name) ) ? $author->display_name : $author->user_nicename ;
 			$args = array(
 				'author' => $author,
 				'author_id' => $author->ID,
-				'author_name' => $author->display_name, // used in largo_byline_avatar for both largo_byline_coauthor_each and largo_byline_normal_or_custom
-				'byline_text' => $author->display_name,
+				'author_name' => $author_name, // used in largo_byline_avatar for both largo_byline_coauthor_each and largo_byline_normal_or_custom
+				'byline_text' => $author_name,
 				'show_job_titles' => $show_job_titles,
 			);
 
@@ -267,7 +268,7 @@ if ( ! function_exists( 'largo_byline_coauthors' ) ) {
 			// array of byline html strings
 			$out[] = $byline_temp;
 		}
-		var_log($out);
+		#var_log($out);
 
 		// If there are multiple coauthors, join them with commas and 'and'
 		if ( count($out) > 1 ) {
@@ -283,10 +284,10 @@ if ( ! function_exists( 'largo_byline_coauthors' ) ) {
 		return $authors;
 	}
 }
-add_action('largo_byline_coauthor_each', 'largo_byline_avatar');
-add_action('largo_byline_coauthor_each', 'largo_byline_coauthor_each_component_author');
-add_action('largo_byline_coauthor_each', 'largo_byline_coauthor_each_component_job_title');
-add_action('largo_byline_coauthor_each', 'largo_byline_coauthor_each_component_twitter');
+add_action('largo_byline_coauthor_each', 'largo_byline_avatar', 10);
+add_action('largo_byline_coauthor_each', 'largo_byline_coauthor_each_component_author', 20);
+add_action('largo_byline_coauthor_each', 'largo_byline_coauthor_each_component_job_title', 30);
+add_action('largo_byline_coauthor_each', 'largo_byline_coauthor_each_component_twitter', 40);
 
 /**
  * @todo: document this
@@ -295,14 +296,15 @@ add_action('largo_byline_coauthor_each', 'largo_byline_coauthor_each_component_t
  */
 function largo_byline_coauthor_each_component_author($args) {
 	extract($args);
-	$byline_text = '';
 
 	// org name
 	if ( $org = $author->organization ) {
 		$byline_text = ' (' . $org . ')';
 	}
 
-	$output = '<a class="url fn n" href="' . get_author_posts_url( $author->ID, $author->user_nicename ) . '" title="' . esc_attr( sprintf( __( 'Read All Posts By %s', 'largo' ), $author->display_name ) ) . '" rel="author">' . esc_html( $byline_text ) . '</a>';
+	// find a name for the author
+
+	$output = '<a class="url fn n" href="' . get_author_posts_url( $author->ID, $author->user_nicename ) . '" title="' . esc_attr( sprintf( __( 'Read All Posts By %s', 'largo' ), $byline_text ) ) . '" rel="author">' . esc_html( $byline_text ) . '</a>';
 	echo $output;
 	return $args;
 }
@@ -320,6 +322,7 @@ function largo_byline_coauthor_each_component_job_title($args) {
 		// Use parentheses in case of multiple guest authorss. Comma separators would be nonsensical: Firstname lastname, Job Title, Secondname Thirdname, and Fourthname Middle Fifthname
 		$output = ' <span class="job-title"><span class="paren-open">(</span>' . $job . '<span class="paren-close">)</span></span>';
 	}
+	var_log($show_job_titles);
 
 	echo $output;
 	return $args;
@@ -381,11 +384,17 @@ if ( ! function_exists( 'largo_byline_normal_or_custom' ) ) {
 		return $authors;
 	}
 }
+add_action('largo_byline_normal_or_custom', 'largo_byline_normal_or_custom_component_avatar', 10);
+add_action('largo_byline_normal_or_custom', 'largo_byline_normal_or_custom_component_author_link', 20);
+add_action('largo_byline_normal_or_custom', 'largo_byline_normal_or_custom_component_author_job_title', 30);
+add_action('largo_byline_normal_or_custom', 'largo_byline_normal_or_custom_component_author_twitter', 40);
 
 /**
  * largo_byline_normal_or_custom, largo_byline_coauthor_each action for avatars
  *
  * Should only output an avatar if custom bylines are not set
+ *
+ * @todo: should this not only output on single posts?
  * @param array $args, containing indices 'has_custom_byline', 'author_id', 'author_name'
  * @action largo_byline_normal_or_custom
  * @action largo_byline_coauthor_each
@@ -394,10 +403,10 @@ function largo_byline_avatar($args) {
 	extract($args);
 	$output = '';
 
-	if ( ! $has_custom_byline ) {
+	if ( ! $has_custom_byline && is_single() ) {
 		$output = get_avatar(
 			$author_id,
-			32, // image size shall be 32px square
+			32, // image size shall be 32px square; this usually gets visually shrunk with CSS
 			'', // default url for image shall be emptystring to prevent loading image if author has none
 			sprintf( __('Avatar for %1$s', 'largo'), $author_name ), // alt for the image
 			array( // the other args, see https://codex.wordpress.org/Function_Reference/get_avatar
@@ -407,15 +416,18 @@ function largo_byline_avatar($args) {
 			)
 		);
 	}
+	$output .= ' '; // to reduce run-together bylines
 	echo $output;
 	return $args;
 }
-add_action('largo_byline_normal_or_custom', 'largo_byline_normal_or_custom_component_avatar', 10);
 
 /**
  * largo_byline_normal_or_custom action for author link
- * @todo document this
- * This always runs, because largo_author_link accounts for cases where there is a custom byline
+ *
+ * This generates the author link for a WordPress user or for a Largo custom byline
+ *
+ * This runs in both cases, because largo_author_link accounts for cases where there is a custom byline
+ *
  * @param array $args
  * @action largo_byline_normal_or_custom
  */
@@ -425,12 +437,11 @@ function largo_byline_normal_or_custom_component_author_link($args) {
 	echo $output;
 	return $args;
 }
-add_action('largo_byline_normal_or_custom', 'largo_byline_normal_or_custom_component_author_link', 20);
 
 /**
  * largo_byline_normal_or_custom action for author job title
  * @todo document this
- * This only generates output if there is a standard author
+ * This only generates output if there is a standard WordPress user author
  * @param array $args
  * @action largo_byline_normal_or_custom
  */
@@ -448,7 +459,6 @@ function largo_byline_normal_or_custom_component_author_job_title($args) {
 	echo $output;
 	return $args;
 }
-add_action('largo_byline_normal_or_custom', 'largo_byline_normal_or_custom_component_author_job_title', 30);
 
 /**
  * largo_byline_normal_or_custom action for author twitter handle
@@ -469,7 +479,6 @@ function largo_byline_normal_or_custom_component_author_twitter($args) {
 	echo $output;
 	return $args;
 }
-add_action('largo_byline_normal_or_custom', 'largo_byline_normal_or_custom_component_author_twitter', 40);
 
 /**
  * Make a nicer-looking excerpt regardless of how an author has been using excerpts in the past
