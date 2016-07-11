@@ -246,7 +246,7 @@ if ( ! function_exists( 'largo_byline_coauthors' ) ) {
 				'author_name' => $author->display_name, // used in largo_byline_avatar for both largo_byline_coauthor_each and largo_byline_normal_or_custom
 				'byline_text' => $author->display_name,
 				'show_job_titles' => $show_job_titles,
-			)
+			);
 
 			ob_start();
 			/**
