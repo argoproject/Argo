@@ -268,7 +268,6 @@ if ( ! function_exists( 'largo_byline_coauthors' ) ) {
 			// array of byline html strings
 			$out[] = $byline_temp;
 		}
-		#var_log($out);
 
 		// If there are multiple coauthors, join them with commas and 'and'
 		if ( count($out) > 1 ) {
@@ -322,7 +321,6 @@ function largo_byline_coauthor_each_component_job_title($args) {
 		// Use parentheses in case of multiple guest authorss. Comma separators would be nonsensical: Firstname lastname, Job Title, Secondname Thirdname, and Fourthname Middle Fifthname
 		$output = ' <span class="job-title"><span class="paren-open">(</span>' . $job . '<span class="paren-close">)</span></span>';
 	}
-	var_log($show_job_titles);
 
 	echo $output;
 	return $args;
