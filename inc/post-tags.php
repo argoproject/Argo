@@ -128,9 +128,8 @@ if ( ! function_exists( 'largo_byline' ) ) {
 		 * @todo: give this better docs
 		 */
 		ob_start();
-
 		do_action('largo_byline', $options);
-		$output = ob_get_clean();
+		$byline_output = ob_get_clean();
 
 		/**
 		 * Filter the largo_byline output text to allow adding items at the beginning or the end of the text.
@@ -139,15 +138,19 @@ if ( ! function_exists( 'largo_byline' ) ) {
 		 * @param string $partial The HTML of the output of largo_byline(), before the edit link is added.
 		 * @link https://github.com/INN/Largo/issues/1070
 		 */
-		$output = apply_filters( 'largo_byline', $output );
+		$byline_output = apply_filters( 'largo_byline', $byline_output );
 
 		if ( $echo ) {
-			echo $output;
+			echo $byline_output;
 		} else {
-			return $output;
+			return $byline_output;
 		}
 	}
 }
+add_action('largo_byline', 'largo_byline_component_authors', 10); // we will assume that this is first
+#add_action('largo_byline', 'largo_byline_component_sep', 20);
+#add_action('largo_byline', 'largo_byline_component_publish_datetime', 30);
+#add_action('largo_byline', 'largo_byline_component_edit_link', 1000); // this should always be the last
 
 /**
  * Largo byline component: output the author list
@@ -158,10 +161,6 @@ if ( ! function_exists( 'largo_byline' ) ) {
  * @link https://github.com/INN/Largo/issues/1126
  */
 function largo_byline_component_authors($options) {
-
-	if ( ! is_array($options) ) {
-		var_log($options);
-	}
 	extract($options);
 
 	// get the post's custom meta
@@ -179,9 +178,6 @@ function largo_byline_component_authors($options) {
 	echo $output;
 	return $options;
 }
-add_action('largo_byline', 'largo_byline_component_authors', 10); // we will assume that this is first
-
-#add_action('largo_byline', 'largo_byline_component_sep', 20);
 
 /**
  * #todo: doc this
@@ -190,14 +186,14 @@ function largo_byline_component_publish_datetime($options) {
 	extract($options);
 
 	// Add the date if it is not excluded
+	$output = '';
 	if ( ! $exclude_date ) {
-		$output .= '<span class="sep"> | </span><time class="entry-date updated dtstamp pubdate" datetime="' . esc_attr( get_the_date( 'c', $post_id ) ) . '">' . largo_time(false, $post_id) . '</time>';
+		$output = '<time class="entry-date updated dtstamp pubdate" datetime="' . esc_attr( get_the_date( 'c', $post_id ) ) . '">' . largo_time(false, $post_id) . '</time>';
 	}
 
 	echo $output;
-	return $output;
+	return $options;
 }
-#add_action('largo_byline', 'largo_byline_component_sep', 30);
 
 /**
  * @todo: doc this
@@ -206,14 +202,14 @@ function largo_byline_component_edit_link($options) {
 	extract($options);
 
 	// Add the edit link if the current user can edit the post
+	$output = '';
 	if ( current_user_can( 'edit_post', $post_id ) ) {
-		$output .= '<span class="edit-link"><a href="' . get_edit_post_link( $post_id ) . '">' . __( 'Edit This Post', 'largo' ) . '</a></span>';
+		$output = '<span class="edit-link"><a href="' . get_edit_post_link( $post_id ) . '">' . __( 'Edit This Post', 'largo' ) . '</a></span>';
 	}
 
 	echo $ouptut;
-	return $output;
+	return $options;
 }
-#add_action('largo_byline', 'largo_byline_component_edit_link', 1000); // this should always be the last
 
 /**
  * @todo: doc this
@@ -221,7 +217,7 @@ function largo_byline_component_edit_link($options) {
 function largo_byline_component_sep($options) {
 	$output = '<span class="sep"> | </span>';
 	echo $output;
-	return $output;
+	return $options;
 }
 
 /**
@@ -243,6 +239,7 @@ if ( ! function_exists( 'largo_byline_coauthors' ) ) {
 		$show_job_titles = of_get_option('show_job_titles');
 		$coauthors = get_coauthors( $post_id );
 
+		$out=array();
 		foreach( $coauthors as $author ) {
 			// create args for largo_byline_coauthor_each hook
 			$args = array(
@@ -253,7 +250,6 @@ if ( ! function_exists( 'largo_byline_coauthors' ) ) {
 				'show_job_titles' => $show_job_titles,
 			);
 
-			ob_start();
 			/**
 			 * @todo document this
 			 * it's like largo_byline but specific to a singular coauthor
@@ -264,12 +260,14 @@ if ( ! function_exists( 'largo_byline_coauthors' ) ) {
 			 *     30 largo_byline_coauthor_each_component_job_title
 			 *     40 largo_byline_coauthor_each_component_twitter
 			 */
+			ob_start();
 			do_action('largo_byline_coauthor_each', $args);
 			$byline_temp = ob_get_clean();
 
 			// array of byline html strings
 			$out[] = $byline_temp;
 		}
+		var_log($out);
 
 		// If there are multiple coauthors, join them with commas and 'and'
 		if ( count($out) > 1 ) {
@@ -285,6 +283,10 @@ if ( ! function_exists( 'largo_byline_coauthors' ) ) {
 		return $authors;
 	}
 }
+add_action('largo_byline_coauthor_each', 'largo_byline_avatar');
+add_action('largo_byline_coauthor_each', 'largo_byline_coauthor_each_component_author');
+add_action('largo_byline_coauthor_each', 'largo_byline_coauthor_each_component_job_title');
+add_action('largo_byline_coauthor_each', 'largo_byline_coauthor_each_component_twitter');
 
 /**
  * @todo: document this
@@ -302,7 +304,7 @@ function largo_byline_coauthor_each_component_author($args) {
 
 	$output = '<a class="url fn n" href="' . get_author_posts_url( $author->ID, $author->user_nicename ) . '" title="' . esc_attr( sprintf( __( 'Read All Posts By %s', 'largo' ), $author->display_name ) ) . '" rel="author">' . esc_html( $byline_text ) . '</a>';
 	echo $output;
-	return $output;
+	return $args;
 }
 
 /**
@@ -320,7 +322,7 @@ function largo_byline_coauthor_each_component_job_title($args) {
 	}
 
 	echo $output;
-	return $output;
+	return $args;
 }
 
 /**
@@ -337,7 +339,7 @@ function largo_byline_coauthor_each_component_twitter($args) {
 	}
 
 	echo $output;
-	return $output;
+	return $args;
 }
 
 
@@ -406,7 +408,7 @@ function largo_byline_avatar($args) {
 		);
 	}
 	echo $output;
-	return $output;
+	return $args;
 }
 add_action('largo_byline_normal_or_custom', 'largo_byline_normal_or_custom_component_avatar', 10);
 
@@ -421,7 +423,7 @@ function largo_byline_normal_or_custom_component_author_link($args) {
 	extract($args);
 	$output = largo_author_link( false, $post_id );
 	echo $output;
-	return $output;
+	return $args;
 }
 add_action('largo_byline_normal_or_custom', 'largo_byline_normal_or_custom_component_author_link', 20);
 
@@ -444,7 +446,7 @@ function largo_byline_normal_or_custom_component_author_job_title($args) {
 		}
 	}
 	echo $output;
-	return $output;
+	return $args;
 }
 add_action('largo_byline_normal_or_custom', 'largo_byline_normal_or_custom_component_author_job_title', 30);
 
@@ -465,7 +467,7 @@ function largo_byline_normal_or_custom_component_author_twitter($args) {
 		}
 	}
 	echo $output;
-	return $output;
+	return $args;
 }
 add_action('largo_byline_normal_or_custom', 'largo_byline_normal_or_custom_component_author_twitter', 40);
 
