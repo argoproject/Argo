@@ -148,9 +148,9 @@ if ( ! function_exists( 'largo_byline' ) ) {
 	}
 }
 add_action('largo_byline_action', 'largo_byline_component_authors', 10); // we will assume that this is first
-#add_action('largo_byline_action', 'largo_byline_component_sep', 20);
-#add_action('largo_byline_action', 'largo_byline_component_publish_datetime', 30);
-#add_action('largo_byline_action', 'largo_byline_component_edit_link', 1000); // this should always be the last
+add_action('largo_byline_action', 'largo_byline_component_sep', 20);
+add_action('largo_byline_action', 'largo_byline_component_publish_datetime', 30);
+add_action('largo_byline_action', 'largo_byline_component_edit_link', 1000); // this should always be the last
 
 /**
  * Largo byline component: output the author list
