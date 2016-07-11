@@ -142,7 +142,7 @@ function largo_edit_permission_check() {
     $screen = get_current_screen();
     
     global $wp_version; 
-    if ( !substr( $wp_version, 0, 3 ) === "4.5" ) {
+    if ( $wp_version < 4.5 ) {
     	get_currentuserinfo();
     } else {
     	wp_get_current_user();
