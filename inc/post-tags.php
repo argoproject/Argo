@@ -371,7 +371,7 @@ if ( ! function_exists( 'largo_byline_normal_or_custom' ) ) {
 		 * it's like largo_byline but specific to this case where there's either a custom byline or there's a normal coauthor
 		 *
 		 * Normal order of things:
-		 *     10 largo_byline_normal_or_custom_component_avatar // only outputs if not custom byline
+		 *     10 largo_byline_avatar // only outputs if not custom byline
 		 *     20 largo_byline_normal_or_custom_component_author_link // always outputs
 		 *     30 largo_byline_normal_or_custom_component_author_job_title // only outputs if not custom byline
 		 *     40 largo_byline_normal_or_custom_component_author_twitter // only outputs if not custom byline
@@ -382,7 +382,7 @@ if ( ! function_exists( 'largo_byline_normal_or_custom' ) ) {
 		return $authors;
 	}
 }
-add_action('largo_byline_normal_or_custom', 'largo_byline_normal_or_custom_component_avatar', 10);
+add_action('largo_byline_normal_or_custom', 'largo_byline_avatar', 10);
 add_action('largo_byline_normal_or_custom', 'largo_byline_normal_or_custom_component_author_link', 20);
 add_action('largo_byline_normal_or_custom', 'largo_byline_normal_or_custom_component_author_job_title', 30);
 add_action('largo_byline_normal_or_custom', 'largo_byline_normal_or_custom_component_author_twitter', 40);
