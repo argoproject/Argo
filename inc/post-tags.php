@@ -408,7 +408,6 @@ function largo_byline_avatar($args) {
 			'', // default url for image shall be emptystring to prevent loading image if author has none
 			sprintf( __('Avatar for %1$s', 'largo'), $author_name ), // alt for the image
 			array( // the other args, see https://codex.wordpress.org/Function_Reference/get_avatar
-				'force_default' => true, // never show Gravatar
 				'class' => '', // empty for now, we may want to add classes to this image
 				'force_display' => false, // this is default value; to toggle display of avatars check "Show Avatars" in Settings > Discussion
 			)
