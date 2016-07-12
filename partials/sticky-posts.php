@@ -54,7 +54,7 @@ if ( $query->have_posts() ) {
 
 						<div class="entry-content">
 						<?php
-							largo_excerpt( $post, 2, false );
+							largo_excerpt( $post, 2 );
 							$shown_ids[] = get_the_ID();
 
 						if ( $feature_posts ) { //if the sticky post is in a series, show up to 3 other posts in that series ?>

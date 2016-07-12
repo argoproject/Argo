@@ -42,12 +42,12 @@ This section allows you to upload images that are used primarily in the top head
 
 - Make sure you have created all six image sizes as outlined in our :doc:`prelaunchchecklist` and then click "Upload" by the image you want to add.
 
-	- 200x200px Square default thumbnail image
-	- 16x16px Favicon
-	- 768px-wide Small banner image
-	- 980px-wide Medium banner image
-	- 1170px-wide Large banner image
-	- 100px-tall site logo for use in the sticky header. Use a .png file with transparent background, and no clear space around the logo.
+	- 200x200px Square default thumbnail image - used for Facebook posts when you do not set a featured image for your posts, and as a bookmark icon for Apple devices.
+	- 16x16px Favicon - the small icon that appears in browser tabs and in some feed readers and other applications
+	- 768px-wide Small banner image - Used for viewports below 768px wide (mostly phones and some tablets). Recommended height: 240px
+	- 980px-wide Medium banner image -  Upload Used for viewports between 768px and 980 px (mostly tablets). Recommended height: 180px
+	- 1170px-wide Large banner image - Used for viewports above 980 px (landscape tablets and desktops). Recommended height: 150px
+	- 100px-tall site logo for use in the sticky header. Use a .png file with transparent background, and no clear space around the logo. This image should be 100px tall and at least 100px wide. If you prefer to simply use your Site Title in the sticky header, don't upload an image here.
 
 - Drag and drop the image onto the uploader (or click "Select Files" and find the correct image on your computer). When the image has finished uploading, selected the full size image option, and then click the button at the bottom of the uploader that says "Use This Image".
 
@@ -55,13 +55,13 @@ This section allows you to upload images that are used primarily in the top head
 
 - Once you have uploaded all six images, be sure to click "Save Options" to save your changes.
 
-There is one additional option in this section, a checkbox that allows you to use text in the place of the banner images. It is unlikely that you will use this option, but if you do, selecting this checkbox will use the Site Title and Description from your **Settings** > **General** menu in the place of the the header images so make sure that you have set those options before you enable this feature.
+There is one additional option in this section, a checkbox that allows you to use text in the place of the banner images. It is unlikely that you will use this option, but if you do, selecting this checkbox will use the Site Title and Description from your **Settings** > **General** menu in the place of the the header images so make sure that you have set those options before you enable this feature. Note that you can use this option to display text instead of the banner and still display a 100px-tall site logo for the sticky header.
 
 .. _pre-launch checklist: :doc:`./prelaunchchecklist.rst`
 
 .. _layout-options:
 
-Layout Options
+Layout
 --------------
 
 **Home Template** - This choice determines what the top of your website's main page looks like. The Largo theme currently offers five homepage templates:
@@ -88,11 +88,19 @@ Layout Options
 
 **Number of posts** - The number of posts displayed on the main area of the homepage, not counting posts in the top area of the homepage or in the sticky box. The default is 10.
 
-**Categories to include or exclude** - Enter a comma-separated list of category ID numbers here to exclude them from the front-page listing. in the main loop on the homepage (comma-separated list of values, see http://codex.wordpress.org/Class_Reference/WP_Query for correct format). The general approach is:
+**Categories to include or exclude** - Enter a comma-separated list of category ID numbers here to include or exclude them in the main loop on the homepage (see http://codex.wordpress.org/Class_Reference/WP_Query for correct format). 
 
-	``news,sports,12,13,press-releases,blog``
+To include only specific categories in the homepage main loop, enter the IDs of your chosen categories. Here's an example of including only four categories:
 
-**Single Article Template** - Starting with version 0.3, Largo introduced a new single-post template that more prominently highlights article content, which is the default. For backward compatibility, the pre-0.3 version is also available, which by default includes a sidebar. The new template optionally includes a sidebar of your choice.
+	``231,239,242,387``
+
+To exclude specific categories in the homepage main loop, use a minus sign before the category ID:
+
+	``-250,-254,-587,-2345``
+
+To find the ID for any category, go to **Posts > Categories**, then find the category you want and click on it. In the edit screen for the category, look in the URL for the category ID after ``$tag_ID=``.
+
+**Single Article Template** - This sets the default template to be used by all posts. Starting with version 0.3, Largo introduced a new single-post template that more prominently highlights article content, which is the default. For backward compatibility, the pre-0.3 version is also available, which by default includes a sidebar. The new template optionally includes a sidebar of your choice. The default template set here can be overridden in any post by selecting another template in the post edit screen.
 
 **Category Options** - Starting with version 0.5.3, Largo allows you to disable the standard featured posts area on top of category archive pages. The five posts that are normally displayed on top of the page become part of the main column of posts.
 
@@ -129,7 +137,9 @@ Note that if you hide the non-sticky main navigation on article pages, any conte
 
 If the menu assigned to the sticky navigation has so many top-level links that it would have to wrap onto multiple lines, a dropdown menu will be added containing the links that would wrap. Enter a label here for the dropdown menu, which defaults to "More."
 
-**Also of note:** If you have assigned a menu to the Global Navigation theme location, the sticky navigation will include that as a dropdown menu to the right of the sticky nav menu links.
+**Also of note** - If you have assigned a menu to the Global Navigation theme location, the sticky navigation will include that as a dropdown menu to the right of the sticky nav menu links.
+
+**Alternate site name for sticky navigation** - If your Site Title is too long to display the entire title in the sticky header, the title will be truncated and appended with ellipses, e.g. "Midwestern Institute for News..." You can add an abbreviation or shorter Alternative site name here to take the place of the full Site Title. Also note that if you upload a 100px-tall Sticky Header Logo in **Appearance > Theme Options > Theme Images**, the logo will display in the sticky header instead of the Site Title.
 
 **Menu Options**
 
@@ -140,19 +150,19 @@ If the menu assigned to the sticky navigation has so many top-level links that i
 
 .. _advanced-options:
 
-Advanced Options
+Advanced
 ----------------
 
 **Custom LESS** - Enabling this will let you change the theme's colors and fonts in **Appearance** > **CSS Variables**.
 
-**Enable Series** - Some sites may create a multi-part series or project that is only published for a set amount of time and then should fall into the archive or appear on a “projects” archive page. To support this and also to allow for the creation of custom landing pages, Largo adds an optional “series” taxonomy. When you create a new series, you can add a term to this taxonomy and then make sure all of the posts in that series have this label applied. This will enable the Largo theme to surface related posts in that series in at the bottom of a post (if you are using the “read next” widget) and, in some cases, also on the homepage (depending on the homepage layout you have selected). Largo also adds the ability to create custom sidebars and landing pages for series archive pages, replacing the default series archive template in WordPress. For more information, see :ref:`series-tax`.
+**Enable Series** - Some sites may create a multi-part series or project that is only published for a set amount of time and then should fall into the archive or appear on a “projects” archive page. To support this and also to allow for the creation of custom landing pages, Largo adds an optional “series” taxonomy. When you create a new series, you can add a term to this taxonomy and then make sure all of the posts in that series have this label applied. This will enable the Largo theme to surface related posts in that series at the bottom of a post (if you are using the “read next” widget) and, in some cases, also on the homepage (depending on the homepage layout you have selected). Largo also adds the ability to create custom sidebars and landing pages for series archive pages, replacing the default series archive template in WordPress. For more information, see :ref:`series-tax`.
 
 **Enable Custom Landing Pages** - Requires Series to be enabled. Series landing pages allow you to summarize a series of posts or tie a project together. For one example, see http://inewsnetwork.org/series/hit-and-run: the project page begins with a summary of the series, followed by posts within the series. 
 For more information on creating a series landing page, see :doc:`landingpages`.
 
 **Enable Optional Leaderboard Ad Zone** - This creates a widget area above your site's header that can be used to display ads. For more about this area, see :doc:`./ads`.
 
-**Enable Post Types** - :ref:`This taxonomy <post-types-tax>` allows you to organize posts by content type, such as “Article,” Photo Gallery,” “Data,” etc. When you create a new post type you can assign it an icon, which will be used in certain places in the theme. Each post type also has its own archive so that you can add links to your navigation to a page containing all of your “data” projects, for example. In the future, we plan to add custom templates specific to each content type to make them easier to manage and more optimal when displayed to users on your public-facing site.`
+**Enable Post Types** - :ref:`This taxonomy <post-types-tax>` allows you to organize posts by content type, such as “Article,” Photo Gallery,” “Data,” etc. When you create a new post type you can assign it an icon, which will be used in certain places in the theme. Each post type also has its own archive so that you can add links to your navigation to a page containing all of your “data” projects, for example. In the future, we plan to add custom templates specific to each content type to make them easier to manage and more optimal when displayed to users on your public-facing site.
 
 .. _landing-pages-sidebars-option:
 
@@ -184,3 +194,13 @@ The following homepage layout templates are no longer included in Largo:
 
 - **Slider**: An animated carousel of featured stories with large images. This should be automatically updated to the "Blog" template after upgrading Largo.
 
+More Info on Theme Options in the Largo Guide for Users
+----------------------------------------------------
+
+For more details on setting up Largo's Theme Options, including screen shots and recommendations, see the Largo Guide for Users pages on:
+
+- `Basic Settings <https://github.com/INN/Largo-User-Guide/blob/master/docs/theme-options-basic-settings.md>`_
+- `Theme Images <https://github.com/INN/Largo-User-Guide/blob/master/docs/theme-options-theme-images.md>`_
+- `Layout <https://github.com/INN/Largo-User-Guide/blob/master/docs/theme-options-layout.md>`_
+- `Navigation <https://github.com/INN/Largo-User-Guide/blob/master/docs/theme-options-navigation.md>`_
+- `Advanced <https://github.com/INN/Largo-User-Guide/blob/master/docs/theme-options-advanced.md>`_

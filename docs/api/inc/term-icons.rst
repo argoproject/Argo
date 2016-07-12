@@ -9,10 +9,6 @@ inc/term-icons.php
 
       :global: $largo
 
-   .. php:method:: Largo_Term_Icons::register_taxonomy()
-
-      Register the taxonomy post-type
-
    .. php:method:: Largo_Term_Icons::get_icons_config()
 
       Retrieves the Fontello config.json information about the glyphs

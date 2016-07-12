@@ -37,16 +37,28 @@ filter: **largo_homepage_topstories_post_count**
 Other filters and actions
 -------------------------
 
-filter: **largo_archive_rounduplink_title**
+filter: **largo_archive_{$post_type}_title**
 
-    Called in `archive.php` to filter the page title for posts in the `rounduplink` post type.
+    Called in `archive.php` to filter the page title for posts in the ``$post_type`` `post type <https://codex.wordpress.org/Post_Types>`_.
 
     **Usage:** ::
 
-    function filter_rounduplink_title($title) {
+    function filter_rounduplink_title( $title ) {
         return "Custom title here";
     }
-    add_action('largo_archive_rounduplink_title', 'filter_rounduplink_title');
+    add_action( 'largo_archive_rounduplink_title', 'filter_rounduplink_title' );
+
+filter: **largo_archive_{$post_type}_feed**
+
+    Called in `archive.php` to filter the feed url for posts in the ``$post_type`` `post type <https://codex.wordpress.org/Post_Types>`_.
+post type.
+
+    **Usage:** ::
+
+    function filter_column_feed($title) {
+        return "http://example.com/custom_feed_url/feed.xml";
+    }
+    add_action('largo_archive_column_feed', 'filter_column_feed');
 
 filter: **largo_registration_extra_fields**
 
@@ -58,10 +70,10 @@ filter: **largo_registration_extra_fields**
 
     Also passed in is a WP_Error object that stores all the generated errors for the page. Use this if you'd like to display an error message on the erroneous field. ::
 
-        function filter_function_name($values, $errors) {
+        function filter_function_name ($values, $errors ) {
             # ...
         }
-        add_filter('largo_registration_extra_fields', 'filter_function_name');
+        add_filter( 'largo_registration_extra_fields', 'filter_function_name' );
 
 action: **largo_validate_user_signup_extra_fields**
 
@@ -73,10 +85,10 @@ action: **largo_validate_user_signup_extra_fields**
 
     Also passed in is an array that contains only the extra fields that were present. This is an easy way to check only the extra data. ::
 
-        function action_function_name($result,$extras) {
+        function action_function_name( $result, $extras ) {
             # ...
         }
-        add_action('largo_validate_user_signup_extra_fields', 'action_function_name');
+        add_action( 'largo_validate_user_signup_extra_fields', 'action_function_name' );
 
 filter: **largo_lmp_args**
 
@@ -94,11 +106,11 @@ filter: **largo_lmp_template_partial**
 
     When building your own filter, you must set the fourth parameter of add_filter to 2: ::
 
-        function your_filter_name($partial, $post_type, $context) {
+        function your_filter_name( $partial, $post_type, $context ) {
             // things
             return $partials;
         }
-        add_filter( 'largo_lmp_template_partial', 'your_filter_name', 10, 2);
+        add_filter( 'largo_lmp_template_partial', 'your_filter_name', 10, 2 );
                                                                           ^
 
     Without setting '2', your filter will not be passed the $post_type or $context arguments.
@@ -114,11 +126,11 @@ filter: **largo_partial_by_post_type**
 
     When building your own filter, you must set the fourth parameter of add_filter to 3: ::
 
-         function your_filter_name($partial, $post_type, $context) {
+         function your_filter_name( $partial, $post_type, $context ) {
              // things
              return $partial;
          }
-         add_filter('largo_partial_by_post_type', 'your_filter_name', 10, 3);
+         add_filter( 'largo_partial_by_post_type', 'your_filter_name', 10, 3 );
                                                                           ^
 
     Without setting '3', your filter will not be passed the $post_type or $context arguments.
@@ -182,17 +194,49 @@ filter: **largo_post_social_more_social_links**
 
     Adding new social media networks is as simple as adding a new item to the array: ::
 
-        function add_linkedin($more) {
+        function add_linkedin( $more ) {
             $more[] = '<li><a href=""><i class="icon-linkedin"></i> <span>Your text here!</span></a></li>';
+            return $more;
         }
-        add_filter('largo_post_social_more_social_links', 'add_linkedin');
+        add_filter( 'largo_post_social_more_social_links', 'add_linkedin' );
 
+.. php:function:: filter largo_remove_hero
+
+    Filter to disable largo_remove_hero based on the global $post at the time the function is run
+
+    :since: 0.5.5
+    :param Boolean $run: Whether the function should run against the current post
+    :param WP_Post $post: The global ``$post`` object at the time the function is run
+
+    When building your own filter, you must set the fourth parameter of add_filter to 2: ::
+
+        function filter_largo_remove_hero( $run, $post ) {
+            # determine whether or not to run largo_remove_hero based on $post
+            return $run;
+        }
+        add_filter( 'largo_remove_hero', 'filter_largo_remove_hero', 10, 2 );
+                                                                         ^
+.. php:function:: filter largo_top_term_metabox_taxonomies
+
+    Called in the ``largo_top_tag_display`` metabox to allow themes to filter the taxonomies from which are drawn the term options for the top term metabox display.
+    
+    :since 0.5.5:
+    :param Array $taxonomies: array( 'series', 'category', 'post_tag', 'prominence' )
+
+    Add new taxonomies like so: ::
+
+        function add_taxonomies( $taxonomies ) {
+            $taxonomies[] = 'columns';
+            $taxonomies[] = 'post-type';
+            return $taxonomies;
+        }
+        add_filter('largo_top_term_metabox_taxonomies', 'add_taxonomies');
 
 
 Template Hooks
 --------------
 
-**at are these and why would I want to use them?**
+**What are these and why would I want to use them?**
 
 Sometimes you may want to fire certain functions or include additional blocks of markup on a page without having to modify or override an entire template file.
 
@@ -273,7 +317,19 @@ These actions are run on all homepage templates, including the Legacy Three Colu
  - **largo_after_page_header** - just after the closing post <header> element
  - **largo_before_page_content** - directly inside the .entry-content <div> tag
  - **largo_after_page_content** - directly before the .entry-content closing <div> tag
- 
- **category.php**
- 
+
+**category.php**
+
+ - **largo_category_after_description_in_header** - between the ``div.archive-description`` and before ``get_template_part('partials/archive', 'category-related');``.
  - **largo_before_category_river** - just before the river of stories at the bottom of the category archive page (for adding a header to this column, for example)
+ - **largo_after_category_river** - immediately after the river of stories at the bottom of the category archive page, after the Load More Posts button (for adding a footer to this column, for example.)
+
+**search.php**
+
+The Largo search page has two main modes: Google Custom Search Engine and the standard WordPress search emgine. Because the dispalyed layouts are so different, each has their own set of actions.
+
+- **largo_search_gcs_before_container**: If Google Custom Search is enabled, fires before the GCS container
+- **largo_search_gcs_after_container**: If Google Custom Search is enabled, fires after the GCS container
+- **largo_search_normal_before_form**: Fires before the ouput from ``get_search_form()``
+- **largo_search_normal_before_results**: Fires between ``get_search_from`` and "Your search for %s returned %s results", and runs even if there were no search results.
+- **largo_search_normal_after_results**: Fires after the search results or ``partials/content-not-found`` are displayed.

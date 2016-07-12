@@ -24,7 +24,7 @@ Some commands require you to have external applications installed. Instructions 
         Recompiles the `Largo API Docs </api/>`_ from structured comments in Largo's PHP code using `/docs/generate_api_docs.py <https://github.com/INN/Largo/blob/master/docs/generate_api_docs.py>`_ into reStructuredText files.
 
     ``shell:sphinx``
-        Converts all available reStructuredText files into HTML documentation, which is saved locally in ``docs/_build/html/``. If you want to preview these docs without pushing them to `largo.readthedocs.org <https://largo.readthedocs.org>`_, run ``python -m SimpleHTTPServer`` as described in `the documentation contribution instructions <setup-documentation.html#setting-up>`_.
+        Converts all available reStructuredText files into HTML documentation, which is saved locally in ``docs/_build/html/``. If you want to preview these docs without pushing them to `largo.readthedocs.io <https://largo.readthedocs.io>`_, run ``python -m SimpleHTTPServer`` as described in `the documentation contribution instructions <setup-documentation.html#setting-up>`_.
 
     ``shell:msmerge``
         Runs `msgmerge <https://www.gnu.org/software/gettext/manual/html_node/msgmerge-Invocation.html>`_ to merge translation files.

@@ -9,9 +9,11 @@ Project Repository: https://github.com/INN/Largo/
 
 Technical Issues (Bugs, Feature Requests, etc.): https://github.com/INN/Largo/issues
 
-Help Desk (Support Requests): http://jira.inn.org/servicedesk/customer/portal/4
+Help Desk (Support Requests): http://support.largoproject.org
 
-Knowledge Base: http://confluence.inn.org/display/LKB/Largo+Knowledge+Base
+Knowledge Base: http://support.largoproject.org/support/solutions
+
+User Forum: http://support.largoproject.org/support/discussions
 
 Twitter: http://twitter.com/largoproject
 
@@ -42,6 +44,7 @@ General Documentation
     users/themeoptions
     users/menus
     users/sidebarswidgets
+    users/posting
     users/landingpages
     users/taxonomies
     users/posttemplates

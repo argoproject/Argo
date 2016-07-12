@@ -299,12 +299,13 @@ class Largo {
 		if ( ! defined( 'SHOW_GLOBAL_NAV' ) ) {
 			define( 'SHOW_GLOBAL_NAV', TRUE );
 		}
+		/*
+		 * SHOW_STICKY_NAV is deprecated.
+		 * @link https://github.com/INN/Largo/issues/1135
+		 * @since 0.5.5
+		 */
 		if ( ! defined( 'SHOW_STICKY_NAV' ) ) {
-			if ( of_get_option( 'show_sticky_nav' ) ) {
-				define( 'SHOW_STICKY_NAV', TRUE );
-			} else {
-				define( 'SHOW_STICKY_NAV', FALSE );
-			}
+			define( 'SHOW_STICKY_NAV', FALSE );
 		}
 		if ( ! defined( 'SHOW_MAIN_NAV' ) ) {
 			define( 'SHOW_MAIN_NAV', TRUE );

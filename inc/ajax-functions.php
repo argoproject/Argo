@@ -192,9 +192,6 @@ if (!function_exists('largo_load_more_posts_choose_partial')) {
 			$partial = 'archive';
 		}
 
-		// argolinks post type
-		$partial = ( get_post_type() == 'argolinks' ) ? 'argolinks' : $partial;
-
 		/**
 		 * Filter to modify the Load More Posts template partial.
 		 *

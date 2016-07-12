@@ -46,16 +46,26 @@ $queried_object = get_queried_object();
 				} else {
 					$title = _e( 'Blog Archives', 'largo' );
 				}
-			} elseif ( is_post_type_archive( 'rounduplink' ) ) {
+			} elseif ( is_post_type_archive() )  {
+				$post_type = $wp_query->query_vars['post_type'];
 				/**
-				 * Make the title of the rounduplink archive filterable
-				 *
-				 * @link https://github.com/INN/Largo/issues/1123
+				 * Make the title of the post_type archive filterable
 				 * @param string $title The title of the archive page
 				 * @since 0.5.4
 				 */
-				$title = apply_filters( 'largo_archive_rounduplink_title', __( 'Saved Links' , 'largo' ) );
-				$rss_link = '/rounduplink/feed';
+				$title = apply_filters(
+					'largo_archive_' . $post_type . '_title',
+					__( post_type_archive_title( '', false ), 'largo' )
+				);
+				/**
+				 * Make the feed url of the post_type archive filterable
+				 * @param string $title The title of the archive page
+				 * @since 0.5.5
+				 */
+				$rss_link = apply_filters(
+					'largo_archive_' . $post_type . '_feed',
+					site_url('/feed/?post_type=' . urlencode($post_type))
+				);
 			}
 		?>
 

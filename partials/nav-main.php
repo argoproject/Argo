@@ -6,7 +6,7 @@
  * sticky navigation if enabled.
  *
  * @package Largo
- * @link http://largo.readthedocs.org/users/themeoptions.html#navigation
+ * @link http://largo.readthedocs.io/users/themeoptions.html#navigation
  */
 
 if ( ! is_single() && ! is_singular() || ! of_get_option( 'main_nav_hide_article', false ) ) {

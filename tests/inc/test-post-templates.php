@@ -6,6 +6,40 @@ class PostTemplatesTestFunctions extends WP_UnitTestCase {
 		parent::setUp();
 	}
 
+	function test_get_post_templates() {
+		$this->markTestIncomplete( 'This test has not yet been implemented.' );
+	}
+
+	function test_post_templates_dropdown() {
+		$this->markTestIncomplete( 'This test has not yet been implemented.' );
+	}
+
+	function test_get_post_template() {
+		$this->markTestIncomplete( 'This test has not yet been implemented.' );
+	}
+
+	function test_is_post_template() {
+		$this->markTestIncomplete( 'This test has not yet been implemented.' );
+	}
+
+	function test_largo_remove_hero() {
+		// returns unchanged when:
+		//     global $post is not set
+		//     the current $post does not have a featured media thumbnail
+		//     of_get_option('single_template') is not normal or classic
+		//     the first paragraph of the post contents doesn't have an image
+		//     the image in the first paragraph has a different src and attachment id than the post's featured media thumbnail
+		//     the image in the first paragraph has the same src, or has a different src but the same id, and the image's classes include 'size-small' or 'size-medium'
+		//
+		// Otherwise, the first paragraph is removed from the post contents
+
+		$this->markTestIncomplete( 'This test has not yet been implemented.' );
+	}
+
+	function test_largo_url_to_attachmentid() {
+		$this->markTestIncomplete( 'This test has not yet been implemented.' );
+	}
+
 	private $ids = array();
 
 	function test_insert_image_no_thumb() {
@@ -41,6 +75,7 @@ class PostTemplatesTestFunctions extends WP_UnitTestCase {
 		$post_id = $this->factory->post->create();
 
 		add_post_meta( $post_id, '_thumbnail_id', $attachment_id );
+
 		$this->go_to( '/?p=$post_id' );
 
 		$final1 = largo_remove_hero( $c1 );

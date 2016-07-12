@@ -51,7 +51,7 @@ class largo_related_posts_widget extends WP_Widget {
 					<span class="by-author"><?php largo_byline( true, false ); ?></span>
 				</h5>
 				<?php // post excerpt/summary
-				largo_excerpt(get_the_ID(), 2, false, '', true);
+				largo_excerpt(get_the_ID(), 2, null, null, true);
 		 		echo '</li>';
 	 		}
 

@@ -38,13 +38,6 @@ body.normal.page {
       padding-top: 26px;
     }
 
-    // subtitle
-    h2.subtitle {
-      font-size: @baseFontSize * 1.222;
-      font-weight: normal;
-      color: #999;
-    }
-
     // hide normal date display.
     .sep,
     .entry-date {
@@ -59,38 +52,10 @@ body.normal.page {
   }
 
   /* 1.2 - Hero */
-  
   .hero {
-    text-align: center;
-    background-color: #efefef;
-    width: 100%;
-    margin: 0 0 24px;
-    &.is-gallery {
-      background-color: transparent;
-    }
     p.wp-caption-text,
     p.wp-media-credit {
-      float: none;
-      margin: 0 auto;
-      text-align: left;
-      font-size: @baseFontSize - 2;
       margin:0 17.0213% 12px;
-      padding-top: 4px;
-    }
-    p.wp-media-credit {
-      text-align: right;
-      margin-top: 4px;
-      min-height: 0;
-    }
-    &.is-video {
-      margin-bottom: 24px;
-      .embed-container {
-        margin-bottom: 0;
-      }
-    }
-    &.is-empty {
-      min-height: 0;
-      height: 0;
     }
   }
 
@@ -185,6 +150,14 @@ body.normal.page {
 /*------------------------------------------------------------------------------
     2.0 - Entry Element Styles
 ------------------------------------------------------------------------------*/
+
+
+// subtitle
+h2.subtitle {
+  font-size: @baseFontSize * 1.222;
+  font-weight: normal;
+  color: @gray;
+}
 
 /* 2.1 - Byline */
 
@@ -553,5 +526,48 @@ body.normal.page {
   p {
     font-size: @baseFontSize * 0.815;
     margin-bottom: 0;
+  }
+}
+
+/**
+ * Styles for the post-leading hero, used in both single-column .normal posts and two-column .classic posts
+ *
+ * @since 0.5.5
+ * @link https://github.com/INN/Largo/issues/934
+ */
+
+.hero {
+  text-align: center;
+  background-color: #efefef;
+  width: 100%;
+  margin: 0 0 24px;
+  &.is-gallery {
+    background-color: transparent;
+  }
+  p.wp-caption-text,
+  p.wp-media-credit {
+    float: none;
+    font-size: @baseFontSize - 2;
+  }
+  p.wp-caption-text {
+    text-align: left;
+    margin: 0 12px;
+    padding-bottom: 12px;
+  }
+  p.wp-media-credit {
+    text-align: right;
+    margin: 4px 12px 4px;
+    min-height: 0;
+  }
+  &.is-embed,
+  &.is-video {
+    margin-bottom: 24px;
+    .embed-container {
+      margin-bottom: 0;
+    }
+  }
+  &.is-empty {
+    min-height: 0;
+    height: 0;
   }
 }

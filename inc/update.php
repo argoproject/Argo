@@ -369,11 +369,6 @@ function largo_force_settings_update() {
 	$options = array();
 	// paste in default settings from options.php after this line;
 	$options[] = array(
-		'desc'  => __('Show the <strong>sticky nav</strong>? Default is to show, but in some cases you may want to hide it.'),
-		'id'    => 'show_sticky_nav',
-		'std' 	=> '1',
-		'type' 	=> 'checkbox');
-	$options[] = array(
 		'desc' 	=> __('Starting with version 0.4, Largo introduced a new single-post template that more prominently highlights article content, which is the default. For backward compatibility, the pre-0.3 version is also available.', 'largo'),
 		'id' 	=> 'single_template',
 		'std' 	=> 'normal',

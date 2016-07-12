@@ -491,11 +491,11 @@ function largo_byline_normal_or_custom_component_author_twitter($args) {
  * @since 0.3
  */
 if ( ! function_exists( 'largo_excerpt' ) ) {
-	function largo_excerpt( $the_post=null, $sentence_count = 5, $use_more = false, $more_link = '', $echo = true, $strip_tags = true, $strip_shortcodes = true ) {
+	function largo_excerpt( $the_post=null, $sentence_count = 5, $use_more = null, $more_link = null, $echo = true, $strip_tags = true, $strip_shortcodes = true ) {
 		if (!empty($use_more))
-			_deprecated_argument(__FUNCTION__, '0.5.1', 'Parameter $use_more is deprecated.');
+			_deprecated_argument(__FUNCTION__, '0.5.1', 'Parameter $use_more is deprecated. Please use null as the argument.');
 		if (!empty($more_link))
-			_deprecated_argument(__FUNCTION__, '0.5.1', 'Parameter $more_link is deprecated.');
+			_deprecated_argument(__FUNCTION__, '0.5.1', 'Parameter $more_link is deprecated. Please use null as the argument.');
 
 		$the_post = get_post($the_post); // Normalize it into a post object
 

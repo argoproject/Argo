@@ -134,6 +134,7 @@ if ( isset( $wp_query->query_vars['term'] )
 	endwhile;
 	wp_reset_postdata();
 
+	// Enqueue the LMP data
 	$posts_term = of_get_option('posts_term_plural');
 	largo_render_template('partials/load-more-posts', array(
 		'nav_id' => 'nav-below',
@@ -171,7 +172,11 @@ endif;
 if ( 'none' != $opt['footer_style'] ) : ?>
 	<section id="series-footer">
 		<?php
-			//custom footer html
+			/*
+			 * custom footer html
+			 * If we don't reset the post meta here, then the footer HTML is from the wrong post. This doesn't mess with LMP, because it happens after LMP is enqueued in the main column.
+			 */
+			wp_reset_postdata();
 			if ( 'custom' == $opt['footer_style']) {
 				echo apply_filters( 'the_content', $opt['footerhtml'] );
 			} else if ( 'widget' == $opt['footer_style'] && is_active_sidebar( $post->post_name . "_footer" ) ) { ?>
