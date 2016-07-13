@@ -113,7 +113,7 @@ if ( ! function_exists( 'largo_byline' ) ) {
 
 		if ( isset( $options['values']['largo_byline_text'] ) && !empty( $options['values']['largo_byline_text'] ) ) {
 			// Temporary placeholder for largo custom byline option
-			$byline = '<span class="byline">CUSTOM BYLINE</span>';
+			$byline = new Largo_Custom_Byline( $options );
 		} else if ( function_exists( 'get_coauthors' ) ) {
 			// If Co-Authors Plus is enabled and there is not a custom byline
 			$byline = '<span class="byline">COAUTHORS BYLINE</span>';

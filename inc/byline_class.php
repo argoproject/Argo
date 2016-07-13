@@ -114,3 +114,23 @@ class Largo_Byline {
 		echo $ouptut;
 	}
 }
+
+// For Largo Custom Bylines
+class Largo_Custom_Byline extends Largo_Byline {
+
+	/**
+	 * differs from Largo_Byline in following ways:
+	 * - no avatar
+	 * - no job title
+	 * - no twitter
+	 */
+	function generate_byline() {
+		ob_start();
+		$this->author_link();
+		$this->published_date();
+		$this->edited_date();
+		$this->edit_link();
+
+		$this->output = ob_get_clean();
+	}
+}
