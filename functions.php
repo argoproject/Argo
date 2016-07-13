@@ -144,7 +144,6 @@ class Largo {
 	 */
 	private function require_files() {
 
-		// @todo: is there a reason this is not sorted?
 		$includes = array(
 			'/largo-apis.php',
 			'/inc/ajax-functions.php',
@@ -171,7 +170,6 @@ class Largo {
 			'/inc/related-content.php',
 			'/inc/featured-content.php',
 			'/inc/enqueue.php',
-			'/inc/post-social.php',
 			'/inc/post-templates.php',
 			'/inc/home-templates.php',
 			'/inc/update.php',
