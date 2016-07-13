@@ -40,17 +40,26 @@ class Largo_Byline {
 		return $this->output;
 	}
 
+	// This code is reformatted stuff from partials/author-bio-description.php
+	// But it's not grabbing the avatar that the same code grabs as a partial
+	// @todo fix this
 	function avatar() {
-		$output = get_avatar(
-			$author_id,
-			32, // image size shall be 32px square; this usually gets visually shrunk with CSS
-			'', // default url for image shall be emptystring to prevent loading image if author has none
-			sprintf( __('Avatar for %1$s', 'largo'), $author_name ), // alt for the image
-			array( // the other args, see https://codex.wordpress.org/Function_Reference/get_avatar
-				'class' => '', // empty for now, we may want to add classes to this image
-				'force_display' => false, // this is default value; to toggle display of avatars check "Show Avatars" in Settings > Discussion
-			)
-		);
+		$author_email = get_the_author_meta( 'email', $this->author_id );
+		if ( largo_has_avatar( $author_email ) ) {
+			$output = '<div class="photo">';
+			$output .= get_avatar(
+				$author_email,
+				32,
+				'',
+				get_the_author_meta( 'display_name', $this->author_id )
+			);
+			$output .= '</div>';
+		} elseif ( $this->author->type == 'guest-author' && get_the_post_thumbnail( $this->author->ID ) ) {
+			$photo = get_the_post_thumbnail( $this->author_id, array( 32,32 ) );
+			$photo = str_replace( 'attachment-32x32 wp-post-image', 'avatar avatar-32 photo', $photo );
+			$output = '<div class="photo">' . $photo . '</div>';
+		}
+
 		$output .= ' '; // to reduce run-together bylines
 		echo $output;
 	}
