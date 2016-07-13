@@ -111,25 +111,16 @@ if ( ! function_exists( 'largo_byline' ) ) {
 			'exclude_date' => $exclude_date,
 		);
 
-		/**
-		 * The byline action
-		 *
-		 * @param array $options todo needs docs
-		 *
-		 * functions hooked on this should echo and return their output; all output from these functions is captured in PHP's output buffering using ob_start
-		 * functions hooked on this should not use output buffering. If you do use output buffering, make sure you close all buffers you open.
-		 *
-		 * Default order of operations:
-		 *       10 largo_byline_component_authors
-		 *       20 largo_byline_component_sep
-		 *       30 largo_byline_component_date
-		 *     1000 largo_byline_component_edit_link
-		 *
-		 * @todo: give this better docs
-		 */
-		ob_start();
-		do_action('largo_byline_action', $options);
-		$byline_output = ob_get_clean();
+		if ( isset( $options['values']['largo_byline_text'] ) && !empty( $options['values']['largo_byline_text'] ) ) {
+			// Temporary placeholder for largo custom byline option
+			$byline = '<span class="byline">CUSTOM BYLINE</span>';
+		} else if ( function_exists( 'get_coauthors' ) ) {
+			// If Co-Authors Plus is enabled and there is not a custom byline
+			$byline = '<span class="byline">COAUTHORS BYLINE</span>';
+		} else {
+			// no custom byline, no coauthors: let's do the default
+			$byline = new Largo_Byline( $options );
+		}
 
 		/**
 		 * Filter the largo_byline output text to allow adding items at the beginning or the end of the text.
@@ -138,19 +129,14 @@ if ( ! function_exists( 'largo_byline' ) ) {
 		 * @param string $partial The HTML of the output of largo_byline(), before the edit link is added.
 		 * @link https://github.com/INN/Largo/issues/1070
 		 */
-		$byline_output = apply_filters( 'largo_byline', $byline_output );
+		$byline = apply_filters( 'largo_byline', $byline );
 
 		if ( $echo ) {
-			echo $byline_output;
-		} else {
-			return $byline_output;
+			echo $byline;
 		}
+		return $byline;
 	}
 }
-add_action('largo_byline_action', 'largo_byline_component_authors', 10); // we will assume that this is first
-add_action('largo_byline_action', 'largo_byline_component_sep', 20);
-add_action('largo_byline_action', 'largo_byline_component_publish_datetime', 30);
-add_action('largo_byline_action', 'largo_byline_component_edit_link', 1000); // this should always be the last
 
 /**
  * Largo byline component: output the author list
@@ -173,49 +159,7 @@ function largo_byline_component_authors($options) {
 		$authors = largo_byline_normal_or_custom( $post_id );
 	}
 	// Generate the HTML for the author portion of the byline
-	$output = '<span class="by-author"><span class="by">' . __( 'By', 'largo' ) . '</span> <span class="author vcard" itemprop="author">' . $authors . '</span></span>';
 
-	echo $output;
-	return $options;
-}
-
-/**
- * #todo: doc this
- */
-function largo_byline_component_publish_datetime($options) {
-	extract($options);
-
-	// Add the date if it is not excluded
-	$output = '';
-	if ( ! $exclude_date ) {
-		$output = '<time class="entry-date updated dtstamp pubdate" datetime="' . esc_attr( get_the_date( 'c', $post_id ) ) . '">' . largo_time(false, $post_id) . '</time>';
-	}
-
-	echo $output;
-	return $options;
-}
-
-/**
- * @todo: doc this
- */
-function largo_byline_component_edit_link($options) {
-	extract($options);
-
-	// Add the edit link if the current user can edit the post
-	$output = '';
-	if ( current_user_can( 'edit_post', $post_id ) ) {
-		$output = '<span class="edit-link"><a href="' . get_edit_post_link( $post_id ) . '">' . __( 'Edit This Post', 'largo' ) . '</a></span>';
-	}
-
-	echo $ouptut;
-	return $options;
-}
-
-/**
- * @todo: doc this
- */
-function largo_byline_component_sep($options) {
-	$output = '<span class="sep"> | </span>';
 	echo $output;
 	return $options;
 }
@@ -343,139 +287,6 @@ function largo_byline_coauthor_each_component_twitter($args) {
 	return $args;
 }
 
-
-/**
- * Return the output of the largo_byline_normal_or_custom function
- *
- * @param Integer $post_id The id of the post
- * @return String HTML for the author, possibly including the author's link and job description
- * @since 0.5.5
- */
-if ( ! function_exists( 'largo_byline_normal_or_custom' ) ) {
-	function largo_byline_normal_or_custom( $post_id ) {
-		$values = get_post_custom( $post_id );
-		$author_id = get_post_meta( $post_id, 'post_author', true );
-
-		// an array of values to prevent future argument messes
-		$args = array(
-			'post_id' => $post_id,
-			'author_id' => $author_id,
-			'author_name' => largo_author(false), // used in largo_byline_avatar for both largo_byline_coauthor_each and largo_byline_normal_or_custom
-			'values' => $values,
-			'has_custom_byline' => isset( $values['largo_byline_text'] ) ? true : false , // so every function doesn't need to run this check themselves
-		);
-		
-		ob_start();
-		/**
-		 * @todo document this
-		 * it's like largo_byline but specific to this case where there's either a custom byline or there's a normal coauthor
-		 *
-		 * Normal order of things:
-		 *     10 largo_byline_avatar // only outputs if not custom byline
-		 *     20 largo_byline_normal_or_custom_component_author_link // always outputs
-		 *     30 largo_byline_normal_or_custom_component_author_job_title // only outputs if not custom byline
-		 *     40 largo_byline_normal_or_custom_component_author_twitter // only outputs if not custom byline
-		 */
-		do_action('largo_byline_normal_or_custom', $args);
-		$authors = ob_get_clean();
-
-		return $authors;
-	}
-}
-add_action('largo_byline_normal_or_custom', 'largo_byline_avatar', 10);
-add_action('largo_byline_normal_or_custom', 'largo_byline_normal_or_custom_component_author_link', 20);
-add_action('largo_byline_normal_or_custom', 'largo_byline_normal_or_custom_component_author_job_title', 30);
-add_action('largo_byline_normal_or_custom', 'largo_byline_normal_or_custom_component_author_twitter', 40);
-
-/**
- * largo_byline_normal_or_custom, largo_byline_coauthor_each action for avatars
- *
- * Should only output an avatar if custom bylines are not set
- *
- * @todo: should this not only output on single posts?
- * @param array $args, containing indices 'has_custom_byline', 'author_id', 'author_name'
- * @action largo_byline_normal_or_custom
- * @action largo_byline_coauthor_each
- */
-function largo_byline_avatar($args) {
-	extract($args);
-	$output = '';
-
-	if ( ! $has_custom_byline && is_single() ) {
-		$output = get_avatar(
-			$author_id,
-			32, // image size shall be 32px square; this usually gets visually shrunk with CSS
-			'', // default url for image shall be emptystring to prevent loading image if author has none
-			sprintf( __('Avatar for %1$s', 'largo'), $author_name ), // alt for the image
-			array( // the other args, see https://codex.wordpress.org/Function_Reference/get_avatar
-				'class' => '', // empty for now, we may want to add classes to this image
-				'force_display' => false, // this is default value; to toggle display of avatars check "Show Avatars" in Settings > Discussion
-			)
-		);
-	}
-	$output .= ' '; // to reduce run-together bylines
-	echo $output;
-	return $args;
-}
-
-/**
- * largo_byline_normal_or_custom action for author link
- *
- * This generates the author link for a WordPress user or for a Largo custom byline
- *
- * This runs in both cases, because largo_author_link accounts for cases where there is a custom byline
- *
- * @param array $args
- * @action largo_byline_normal_or_custom
- */
-function largo_byline_normal_or_custom_component_author_link($args) {
-	extract($args);
-	$output = largo_author_link( false, $post_id );
-	echo $output;
-	return $args;
-}
-
-/**
- * largo_byline_normal_or_custom action for author job title
- * @todo document this
- * This only generates output if there is a standard WordPress user author
- * @param array $args
- * @action largo_byline_normal_or_custom
- */
-function largo_byline_normal_or_custom_component_author_job_title($args) {
-	extract($args);
-	$output = '';
-	if ( ! $has_custom_byline ) {
-		// run this query inside the $has_custom_byline check to save time
-		$show_job_titles = of_get_option('show_job_titles');
-		// only do this if we're showing job titles and there is one to be shown
-		if ( $show_job_titles && $job = get_the_author_meta( 'job_title' , $author_id ) ) {
-			$output .= '<span class="job-title"><span class="comma">,</span> ' . $job . '</span>';
-		}
-	}
-	echo $output;
-	return $args;
-}
-
-/**
- * largo_byline_normal_or_custom action for author twitter handle
- * @todo document this
- * This only generates output if there is a standard author
- * @param array $args
- * @action largo_byline_normal_or_custom
- */
-function largo_byline_normal_or_custom_component_author_twitter($args) {
-	extract($args);
-	$output = '';
-	if ( ! $has_custom_byline ) {
-		$twitter = get_the_author_meta('twitter', $author_id);
-		if ( $twitter && is_single() ) {
-			$output .= ' <span class="twitter"><a href="https://twitter.com/' . largo_twitter_url_to_username( $twitter ) . '"><i class="icon-twitter"></i></a></span>';
-		}
-	}
-	echo $output;
-	return $args;
-}
 
 /**
  * Outputs facebook, twitter and print utility links on article pages
