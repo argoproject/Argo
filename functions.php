@@ -178,7 +178,6 @@ class Largo {
 			'/inc/avatars.php',
 			'/inc/featured-media.php',
 			'/inc/deprecated.php',
-			'/inc/pagination.php',
 			'/inc/conditionals.php'
 		);
 
