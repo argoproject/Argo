@@ -83,7 +83,12 @@ class Largo_Byline {
 	function published_date() {
 		$output = '';
 		if ( ! $this->exclude_date ) {
-			$output = '<time class="entry-date updated dtstamp pubdate" datetime="' . esc_attr( get_the_date( 'c', $this->post_id ) ) . '">' . largo_time(false, $this->post_id) . '</time>';
+			printf(
+				' <time class="entry-date updated dtstamp pubdate" datetime="%1$s"><span class="published">%2$s </span>%3$s</time>',
+				esc_attr( get_the_date( 'c', $this->post_id ) ),
+				__( 'Published', 'largo' ),
+				largo_time( false, $this->post_id )
+			);
 		}
 		echo $output;
 	}
@@ -133,4 +138,7 @@ class Largo_Custom_Byline extends Largo_Byline {
 
 		$this->output = ob_get_clean();
 	}
+}
+
+class Largo_CoAuthors_Byline extends Largo_Byline {
 }
