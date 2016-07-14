@@ -46,18 +46,15 @@ class Largo_Byline {
 	function avatar() {
 		$author_email = get_the_author_meta( 'email', $this->author_id );
 		if ( largo_has_avatar( $author_email ) ) {
-			$output = '<div class="photo">';
 			$output .= get_avatar(
 				$author_email,
 				32,
 				'',
 				get_the_author_meta( 'display_name', $this->author_id )
 			);
-			$output .= '</div>';
 		} elseif ( $this->author->type == 'guest-author' && get_the_post_thumbnail( $this->author->ID ) ) {
 			$photo = get_the_post_thumbnail( $this->author_id, array( 32,32 ) );
 			$photo = str_replace( 'attachment-32x32 wp-post-image', 'avatar avatar-32 photo', $photo );
-			$output = '<div class="photo">' . $photo . '</div>';
 		}
 
 		$output .= ' '; // to reduce run-together bylines
@@ -196,17 +193,6 @@ class Largo_CoAuthors_Byline extends Largo_Byline {
 		$this->edit_link();
 
 		$this->output = ob_get_clean();
-	}
-
-	// The author ID for a guest author is the ID of the post that ontains it.
-	function avatar() {
-		$output = get_the_post_thumbnail(
-			$this->author_id,
-			array(32, 32), // size of thing
-			array('avatar')
-		);
-		$output .= ' '; // to reduce run-together bylines
-		echo $output;
 	}
 
 	function author_link() {
