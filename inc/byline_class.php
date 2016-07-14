@@ -141,7 +141,7 @@ class Largo_Byline {
 			&& is_single()
 		) {
 			echo sprintf(
-				' <span class="last-modified">%1$s %2$s %3$s %4$s</span',
+				' <span class="last-modified">%1$s %2$s %3$s %4$s</span> ',
 				__( 'Last modified', 'largo' ),
 				get_the_modified_date( 'F j, Y' ),
 				__( 'at', 'largo' ),
