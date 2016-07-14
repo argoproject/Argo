@@ -14,6 +14,14 @@ class Largo_Byline {
 		$this->generate_byline();
 	}
 
+	/**
+	 * Set us up the vars
+	 *
+	 * Post ID
+	 * Whether largo_byline() was told to exclude the date
+	 * The post's custom data
+	 * The author's custom data
+	 */
 	function populate_variables( $args ) {
 		$this->post_id = $args['post_id'];
 		$this->exclude_date = $args['exclude_date'];
@@ -21,14 +29,19 @@ class Largo_Byline {
 		$this->author_id = get_post_meta( $this->post_id, 'post_author', true );
 	}
 
+	/**
+	 * this creates the byline text and adds it to $this->output
+	 */
 	function generate_byline() {
 		ob_start();
-		//juicy bits here
+
+		// Author-specific portion of byline
 		$this->avatar();
 		$this->author_link();
 		$this->job_title();
 		$this->twitter();
 
+		// The generic parts
 		$this->published_date();
 		$this->edited_date();
 		$this->edit_link();
@@ -36,38 +49,50 @@ class Largo_Byline {
 		$this->output = ob_get_clean();
 	}
 
+	/**
+	 * This is what turns the whole class into a string
+	 */
 	public function __toString() {
 		return $this->output;
 	}
 
-	// This code is reformatted stuff from partials/author-bio-description.php
-	// But it's not grabbing the avatar that the same code grabs as a partial
-	// @todo fix this
+	/**
+	 * On single posts, output the avatar for the author object
+	 */
 	function avatar() {
 		$author_email = get_the_author_meta( 'email', $this->author_id );
-		if ( largo_has_avatar( $author_email ) ) {
-			$output .= get_avatar(
-				$author_email,
-				32,
-				'',
-				get_the_author_meta( 'display_name', $this->author_id )
-			);
-		} elseif ( $this->author->type == 'guest-author' && get_the_post_thumbnail( $this->author->ID ) ) {
-			$photo = get_the_post_thumbnail( $this->author_id, array( 32,32 ) );
-			$photo = str_replace( 'attachment-32x32 wp-post-image', 'avatar avatar-32 photo', $photo );
+
+		// only do avatars if it's a single post
+		if ( is_single() ) {
+			if ( largo_has_avatar( $author_email ) ) {
+				$output .= get_avatar(
+					$author_email,
+					32,
+					'',
+					get_the_author_meta( 'display_name', $this->author_id )
+				);
+			} elseif ( $this->author->type == 'guest-author' && get_the_post_thumbnail( $this->author->ID ) ) {
+				$output = get_the_post_thumbnail( $this->author_id, array( 32,32 ) );
+				$output = str_replace( 'attachment-32x32 wp-post-image', 'avatar avatar-32 photo', $output );
+			}
 		}
 
 		$output .= ' '; // to reduce run-together bylines
 		echo $output;
 	}
 
+	/**
+	 * a wrapper around largo_author_link
+	 */
 	function author_link() {
-		// a wrapper around the appropriate function
 		$authors = largo_author_link( false, $this->post_id );
 		$output = '<span class="by-author"><span class="by">' . __( 'By', 'largo' ) . '</span> <span class="author vcard" itemprop="author">' . $authors . '</span></span>';
 		echo $output;
 	}
 
+	/**
+	 * If job titles are enabled by Largo's theme option, display the one for this author
+	 */
 	function job_title() {
 		$show_job_titles = of_get_option('show_job_titles');
 		// only do this if we're showing job titles and there is one to be shown
@@ -78,6 +103,9 @@ class Largo_Byline {
 		echo $output;
 	}
 
+	/**
+	 * If this author has a twitter ID, output it as a link on an i.icon-twitter
+	 */
 	function twitter() {
 		$twitter = get_the_author_meta('twitter', $this->author_id);
 		if ( $twitter && is_single() ) {
@@ -86,7 +114,9 @@ class Largo_Byline {
 		echo $output;
 	}
 
-	// A wrapper around largo_time to determine when the post was published
+	/**
+	 * A wrapper around largo_time to determine when the post was published
+	 */
 	function published_date() {
 		$output = '';
 		if ( ! $this->exclude_date ) {
@@ -100,7 +130,11 @@ class Largo_Byline {
 		echo $output;
 	}
 
-	// @todo: should this be displayed under different conditions?
+	/**
+	 * Display the last-edited date for this post, only to admin users
+	 *
+	 * @todo: should this be displayed under different conditions?
+	 */
 	function edited_date() {
 		if (
 			current_user_can( 'edit_post', $this->post_id )
@@ -117,11 +151,15 @@ class Largo_Byline {
 		}
 	}
 
-	// @todo: why is this not working for my user on vagrant?
+	/**
+	 * Output the edit link for this post, only to admin users
+	 *
+	 * @todo: why is this not working for my user on vagrant?
+	 */
 	function edit_link() {
 		// Add the edit link if the current user can edit the post
 		$output = '';
-		if ( current_user_can( 'edit_post', $this->post_id ) ) {
+		if ( current_user_can( 'edit_post') ) {
 			$output = '<span class="edit-link"><a href="' . get_edit_post_link( $this->post_id ) . '">' . __( 'Edit This Post', 'largo' ) . '</a></span>';
 		}
 		echo $ouptut;
@@ -153,6 +191,12 @@ class Largo_Custom_Byline extends Largo_Byline {
  */
 class Largo_CoAuthors_Byline extends Largo_Byline {
 
+	/**
+	 * Differs from Largo_Byline in following ways:
+	 *
+	 * - gets list of coauthors, runs avatar, author_link, job_title, organization, twitter for each of those
+	 * - joins list of coauthors with commas and 'and' as appropriate
+	 */
 	function generate_byline() {
 		// get the coauthors for this post
 		$coauthors = get_coauthors( $this->post_id );
@@ -186,8 +230,11 @@ class Largo_CoAuthors_Byline extends Largo_Byline {
 		} else {
 			$authors = $out[0];
 		}
-		echo $authors;
 
+
+		// Now assemble the One True Byline
+		ob_start();
+		echo $authors;
 		$this->published_date();
 		$this->edited_date();
 		$this->edit_link();
@@ -195,6 +242,9 @@ class Largo_CoAuthors_Byline extends Largo_Byline {
 		$this->output = ob_get_clean();
 	}
 
+	/**
+	 * A coauthors-specific byline link method
+	 */
 	function author_link() {
 		$author_name = ( !empty($this->author->display_name) ) ? $this->author->display_name : $this->author->user_nicename ;
 
@@ -202,6 +252,9 @@ class Largo_CoAuthors_Byline extends Largo_Byline {
 		echo $output;
 	}
 
+	/**
+	 * Job title from the coauthors object
+	 */
 	function job_title() {
 		$show_job_titles = of_get_option('show_job_titles');
 		// only do this if we're showing job titles and there is one to be shown
@@ -212,6 +265,9 @@ class Largo_CoAuthors_Byline extends Largo_Byline {
 		echo $output;
 	}
 
+	/**
+	 * Output coauthor users's organization
+	 */
 	function organization() {
 		if ( $org = $this->author->organization ) {
 			$byline_text = ' (' . $org . ')';
@@ -219,6 +275,9 @@ class Largo_CoAuthors_Byline extends Largo_Byline {
 		}
 	}
 
+	/**
+	 * twitter link from the coauthors object
+	 */
 	function twitter() {
 		if ( isset($this->author->twitter) && is_single() ) {
 			$output .= ' <span class="twitter"><a href="https://twitter.com/' . largo_twitter_url_to_username( $this->author->twitter ) . '"><i class="icon-twitter"></i></a></span>';
