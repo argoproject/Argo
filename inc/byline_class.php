@@ -137,11 +137,10 @@ class Largo_Byline {
 	 */
 	function edited_date() {
 		if (
-			current_user_can( 'edit_post', $this->post_id )
-			&& ! $this->exclude_date
+			current_user_can( 'edit_published_posts' )
 			&& is_single()
 		) {
-			printf(
+			echo sprintf(
 				' <span class="last-modified">%1$s %2$s %3$s %4$s</span',
 				__( 'Last modified', 'largo' ),
 				get_the_modified_date( 'F j, Y' ),
@@ -158,11 +157,9 @@ class Largo_Byline {
 	 */
 	function edit_link() {
 		// Add the edit link if the current user can edit the post
-		$output = '';
-		if ( current_user_can( 'edit_post') ) {
-			$output = '<span class="edit-link"><a href="' . get_edit_post_link( $this->post_id ) . '">' . __( 'Edit This Post', 'largo' ) . '</a></span>';
+		if ( current_user_can( 'edit_published_posts' ) ) {
+			echo ' <span class="edit-link"><a href="' . get_edit_post_link( $this->post_id ) . '">' . __( 'Edit This Post', 'largo' ) . '</a></span>';
 		}
-		echo $ouptut;
 	}
 }
 
