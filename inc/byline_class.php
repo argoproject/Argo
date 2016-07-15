@@ -5,12 +5,32 @@
 
 /**
  * Generates a byline for a normal WordPress user
- * @todo document variables
  * @param Array $args an array with the following keys:
  *     - int post_id the ID of the post that we are creating a byline for
  *     - bool exclude_date Whether or not to display the date
  */
 class Largo_Byline {
+
+	/** @var int The ID of the post this byline is for */
+	private $post_id;
+
+	/** @var bool Whether or not the byline should include the date */
+	private $exclude_date;
+
+	/**
+	 * @var array The post's custom fields
+	 * @link https://codex.wordpress.org/Function_Reference/get_post_custom
+	 */
+	private $custom;
+
+	/** @var int The ID of the author for this post */
+	private $author_id;
+
+	/**
+	 * @var string The HTML ouput of this class
+	 * @see __toString
+	 */
+	public $output;
 
 	function __construct( $args ) {
 		$this->populate_variables( $args );
@@ -20,10 +40,14 @@ class Largo_Byline {
 	/**
 	 * Set us up the vars
 	 *
-	 * Post ID
-	 * Whether largo_byline() was told to exclude the date
-	 * The post's custom data
-	 * The author's custom data
+	 * @param array $args Associative array containing following keys:
+	 *     - 'post_id': an integer post ID
+	 *     - 'exclude_date': boolean whether or not to include the date in the byline
+	 *
+	 * @see $post_id      Sets this from $args
+	 * @see $exclude_date Sets this from $args
+	 * @see $custom       Fills this array with the output of get_post_custom
+	 * @see $author_id    Sets this from the post meta
 	 */
 	function populate_variables( $args ) {
 		$this->post_id = $args['post_id'];
@@ -34,6 +58,8 @@ class Largo_Byline {
 
 	/**
 	 * this creates the byline text and adds it to $this->output
+	 *
+	 * @see $output Creates this
 	 */
 	function generate_byline() {
 		ob_start();
@@ -54,6 +80,9 @@ class Largo_Byline {
 
 	/**
 	 * This is what turns the whole class into a string
+	 *
+	 * @see $output
+	 * @see generate_byline()
 	 */
 	public function __toString() {
 		return $this->output;
@@ -190,10 +219,17 @@ class Largo_Custom_Byline extends Largo_Byline {
 class Largo_CoAuthors_Byline extends Largo_Byline {
 
 	/**
+	 * Temporary variable used to contain the coauthor being rendered by the loop inside generate_byline();
+	 * @see $this->generate_byline();
+	 */
+	private $author;
+
+	/**
 	 * Differs from Largo_Byline in following ways:
 	 *
 	 * - gets list of coauthors, runs avatar, author_link, job_title, organization, twitter for each of those
 	 * - joins list of coauthors with commas and 'and' as appropriate
+	 *
 	 */
 	function generate_byline() {
 		// get the coauthors for this post
@@ -244,7 +280,7 @@ class Largo_CoAuthors_Byline extends Largo_Byline {
 	 * A coauthors-specific byline link method
 	 */
 	function author_link() {
-		$author_name = ( !empty($this->author->display_name) ) ? $this->author->display_name : $this->author->user_nicename ;
+		$author_name = ( ! empty($this->author->display_name) ) ? $this->author->display_name : $this->author->user_nicename ;
 
 		$output = '<a class="url fn n" href="' . get_author_posts_url( $this->author->ID, $this->author->user_nicename ) . '" title="' . esc_attr( sprintf( __( 'Read All Posts By %s', 'largo' ), $author_name ) ) . '" rel="author">' . esc_html( $author_name ) . '</a>';
 		echo $output;
