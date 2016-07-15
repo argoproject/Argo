@@ -6,6 +6,9 @@
 /**
  * Generates a byline for a normal WordPress user
  * @todo document variables
+ * @param Array $args an array with the following keys:
+ *     - int post_id the ID of the post that we are creating a byline for
+ *     - bool exclude_date Whether or not to display the date
  */
 class Largo_Byline {
 
@@ -152,8 +155,6 @@ class Largo_Byline {
 
 	/**
 	 * Output the edit link for this post, only to admin users
-	 *
-	 * @todo: why is this not working for my user on vagrant?
 	 */
 	function edit_link() {
 		// Add the edit link if the current user can edit the post
