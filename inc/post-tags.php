@@ -747,7 +747,7 @@ if ( ! function_exists( 'largo_hero_with_caption' ) ) {
  */
 if ( ! function_exists( 'largo_post_metadata' ) ) {
 	function largo_post_metadata( $post_id, $echo = TRUE ) {
-		$out = '<meta itemprop="description" content="' . strip_tags( largo_excerpt( get_post( $post_id ), 5, false, '', false ) ) . '" />' . "\n";
+		$out = '<meta itemprop="description" content="' . strip_tags( largo_excerpt( get_post( $post_id ), 5, null, null, false ) ) . '" />' . "\n";
 	 	$out .= '<meta itemprop="datePublished" content="' . get_the_date( 'c', $post_id ) . '" />' . "\n";
 	 	$out .= '<meta itemprop="dateModified" content="' . get_the_modified_date( 'c', $post_id ) . '" />' . "\n";
 
