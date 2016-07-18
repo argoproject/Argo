@@ -126,7 +126,7 @@ class Largo_Byline {
 	 * If job titles are enabled by Largo's theme option, display the one for this author
 	 */
 	function job_title() {
-		$show_job_titles = of_get_option('show_job_titles');
+		$show_job_titles = of_get_option( 'show_job_titles' );
 		// only do this if we're showing job titles and there is one to be shown
 		if ( $show_job_titles && $job = get_the_author_meta( 'job_title' , $this->author_id ) ) {
 			$output .= '<span class="job-title"><span class="comma">,</span> ' . $job . '</span>';
@@ -139,7 +139,7 @@ class Largo_Byline {
 	 * If this author has a twitter ID, output it as a link on an i.icon-twitter
 	 */
 	function twitter() {
-		$twitter = get_the_author_meta('twitter', $this->author_id);
+		$twitter = get_the_author_meta( 'twitter', $this->author_id );
 		if ( $twitter && is_single() ) {
 			$output .= ' <span class="twitter"><a href="https://twitter.com/' . largo_twitter_url_to_username( $twitter ) . '"><i class="icon-twitter"></i></a></span>';
 		}
@@ -255,10 +255,10 @@ class Largo_CoAuthors_Byline extends Largo_Byline {
 		}
 
 		// If there are multiple coauthors, join them with commas and 'and'
-		if ( count($out) > 1 ) {
-			end($out);
-			$key = key($out);
-			reset($out);
+		if ( count( $out ) > 1 ) {
+			end( $out );
+			$key = key( $out );
+			reset( $out );
 			$authors = implode( ', ', array_slice( $out, 0, -1 ) );
 			$authors .= ' <span class="and">' . __( 'and', 'largo' ) . '</span> ' . $out[$key];
 		} else {
@@ -290,7 +290,7 @@ class Largo_CoAuthors_Byline extends Largo_Byline {
 	 * Job title from the coauthors object
 	 */
 	function job_title() {
-		$show_job_titles = of_get_option('show_job_titles');
+		$show_job_titles = of_get_option( 'show_job_titles' );
 		// only do this if we're showing job titles and there is one to be shown
 		if ( true && $job = $this->author->job_title ) {
 			$output .= '<span class="job-title"><span class="comma">,</span> ' . $job . '</span>';
@@ -313,7 +313,7 @@ class Largo_CoAuthors_Byline extends Largo_Byline {
 	 * twitter link from the coauthors object
 	 */
 	function twitter() {
-		if ( isset($this->author->twitter) && is_single() ) {
+		if ( isset( $this->author->twitter ) && is_single() ) {
 			$output .= ' <span class="twitter"><a href="https://twitter.com/' . largo_twitter_url_to_username( $this->author->twitter ) . '"><i class="icon-twitter"></i></a></span>';
 		}
 		echo $output;
