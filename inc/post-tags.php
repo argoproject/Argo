@@ -725,7 +725,7 @@ if ( ! function_exists( 'largo_hero_class' ) ) {
 }
 
 /**
- * Depricated 0.5.1.
+ * Deprecated 0.5.1.
  * 
  * Returns the featured image for a post
  * to be used as the hero image with caption and credit (if available)
