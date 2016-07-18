@@ -222,7 +222,7 @@ class Largo_CoAuthors_Byline extends Largo_Byline {
 	 * Temporary variable used to contain the coauthor being rendered by the loop inside generate_byline();
 	 * @see $this->generate_byline();
 	 */
-	private $author;
+	protected $author;
 
 	/**
 	 * Differs from Largo_Byline in following ways:
