@@ -126,7 +126,7 @@ class Largo_Byline {
 	 * If job titles are enabled by Largo's theme option, display the one for this author
 	 */
 	function job_title() {
-		$show_job_titles = of_get_option( 'show_job_titles' );
+		$show_job_titles = of_get_option( 'show_job_titles', false );
 		// only do this if we're showing job titles and there is one to be shown
 		if ( $show_job_titles && $job = get_the_author_meta( 'job_title' , $this->author_id ) ) {
 			$output .= '<span class="job-title"><span class="comma">,</span> ' . $job . '</span>';
@@ -290,7 +290,7 @@ class Largo_CoAuthors_Byline extends Largo_Byline {
 	 * Job title from the coauthors object
 	 */
 	function job_title() {
-		$show_job_titles = of_get_option( 'show_job_titles' );
+		$show_job_titles = of_get_option( 'show_job_titles', false );
 		// only do this if we're showing job titles and there is one to be shown
 		if ( true && $job = $this->author->job_title ) {
 			$output .= '<span class="job-title"><span class="comma">,</span> ' . $job . '</span>';
