@@ -84,66 +84,42 @@ if ( ! function_exists( 'largo_author_link' ) ) {
 /**
  * Outputs custom byline and link (if set), otherwise outputs author link and post date
  *
- * @param $echo bool Echo the string or return it (default: echo)
- * @param $exclude_date bool Whether to exclude the date from byline (default: false)
- * @param $post object or int The post object or ID to get the byline for. Defaults to current post.
- * @return string Byline as formatted html
+ * @param Boolean $echo Echo the string or return it (default: echo)
+ * @param Boolean $exclude_date Whether to exclude the date from byline (default: false)
+ * @param WP_Post|Integer $post The post object or ID to get the byline for. Defaults to current post.
+ * @return String Byline as formatted html
  * @since 0.3
  */
 if ( ! function_exists( 'largo_byline' ) ) {
 	function largo_byline( $echo = true, $exclude_date = false, $post = null ) {
+
+		// Get the post ID
 		if (!empty($post)) {
 			if (is_object($post))
 				$post_id = $post->ID;
 			else if (is_numeric($post))
 				$post_id = $post;
-		} else
-			$post_id = get_the_ID();
-
-		$values = get_post_custom( $post_id );
-
-		// If Co-Authors Plus is enabled and there is not a custom byline
-		if ( function_exists( 'get_coauthors' ) && !isset( $values['largo_byline_text'] ) ) {
-			$coauthors = get_coauthors( $post_id );
-			foreach( $coauthors as $author ) {
-				$byline_text = $author->display_name;
-				$show_job_titles = of_get_option('show_job_titles');
-				if ( $org = $author->organization )
-					$byline_text .= ' (' . $org . ')';
-
-				$byline_temp = '<a class="url fn n" href="' . get_author_posts_url( $author->ID, $author->user_nicename ) . '" title="' . esc_attr( sprintf( __( 'Read All Posts By %s', 'largo' ), $author->display_name ) ) . '" rel="author">' . esc_html( $byline_text ) . '</a>';
-				if ( $show_job_titles && $job = $author->job_title ) {
-					// Use parentheses in case of multiple guest authorss. Comma separators would be nonsensical: Firstname lastname, Job Title, Secondname Thirdname, and Fourthname Middle Fifthname
-					$byline_temp .= ' <span class="job-title"><span class="paren-open">(</span>' . $job . '<span class="paren-close">)</span></span>';
-				}
-
-				$out[] = $byline_temp;
-
-			}
-
-			if ( count($out) > 1 ) {
-				end($out);
-				$key = key($out);
-				reset($out);
-				$authors = implode( ', ', array_slice( $out, 0, -1 ) );
-				$authors .= ' <span class="and">' . __( 'and', 'largo' ) . '</span> ' . $out[$key];
-			} else {
-				$authors = $out[0];
-			}
-
-		// If Co-Authors Plus is not enabled or if there is a custom byline
 		} else {
-			$authors = largo_author_link( false, $post_id );
-			$author_id = get_post_meta( $post_id, 'post_author', true );
-			$show_job_titles = of_get_option('show_job_titles');
-			if ( !isset( $values['largo_byline_text'] ) && $show_job_titles && $job = get_the_author_meta( 'job_title' , $author_id ) ) {
-				$authors  .= '<span class="job-title"><span class="comma">,</span> ' . $job . '</span>';
-			}
+			$post_id = get_the_ID();
 		}
 
-		$output = '<span class="by-author"><span class="by">' . __( 'By', 'largo' ) . '</span> <span class="author vcard" itemprop="author">' . $authors . '</span></span>';
-		if ( ! $exclude_date ) {
-			$output .= '<span class="sep"> | </span><time class="entry-date updated dtstamp pubdate" datetime="' . esc_attr( get_the_date( 'c', $post_id ) ) . '">' . largo_time(false, $post_id) . '</time>';
+		// Set us up the options
+		// This is an array of things to allow us to easily add options in the future
+		$options = array(
+			'post_id' => $post_id,
+			'values' => get_post_custom( $post_id ),
+			'exclude_date' => $exclude_date,
+		);
+
+		if ( isset( $options['values']['largo_byline_text'] ) && !empty( $options['values']['largo_byline_text'] ) ) {
+			// Temporary placeholder for largo custom byline option
+			$byline = new Largo_Custom_Byline( $options );
+		} else if ( function_exists( 'get_coauthors' ) ) {
+			// If Co-Authors Plus is enabled and there is not a custom byline
+			$byline = new Largo_CoAuthors_Byline( $options );
+		} else {
+			// no custom byline, no coauthors: let's do the default
+			$byline = new Largo_Byline( $options );
 		}
 
 		/**
@@ -153,18 +129,12 @@ if ( ! function_exists( 'largo_byline' ) ) {
 		 * @param string $partial The HTML of the output of largo_byline(), before the edit link is added.
 		 * @link https://github.com/INN/Largo/issues/1070
 		 */
-		$output = apply_filters( 'largo_byline', $output );
-
-
-		if ( current_user_can( 'edit_post', $post_id ) ) {
-			$output .= '<span class="sep"> | </span><span class="edit-link"><a href="' . get_edit_post_link( $post_id ) . '">' . __( 'Edit This Post', 'largo' ) . '</a></span>';
-		}
+		$byline = apply_filters( 'largo_byline', $byline );
 
 		if ( $echo ) {
-			echo $output;
-		} else {
-			return $output;
+			echo $byline;
 		}
+		return $byline;
 	}
 }
 

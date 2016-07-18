@@ -167,6 +167,7 @@ class Largo {
 			'/inc/open-graph.php',
 			'/inc/verify.php',
 			'/inc/post-tags.php',
+			'/inc/byline_class.php',
 			'/inc/header-footer.php',
 			'/inc/related-content.php',
 			'/inc/featured-content.php',
