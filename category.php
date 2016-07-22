@@ -73,7 +73,7 @@ $queried_object = get_queried_object();
 				the_post();
 				$post_type = get_post_type();
 				$partial = largo_get_partial_by_post_type('archive', $post_type, 'archive');
-				get_template_part( 'partials/content', 'archive' );
+				get_template_part( 'partials/content', $partial );
 			}
 			largo_content_nav( 'nav-below' );
 		} else {
