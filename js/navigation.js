@@ -79,6 +79,7 @@
   Navigation.prototype.bindStickyNavEvents = function() {
     var self = this;
 
+    // This is so that we may 
     $.each(Largo.sticky_nav_options, function(idx, opt) {
       if (opt)
         self.stickyNavEl.addClass(idx);
@@ -93,9 +94,9 @@
 
   Navigation.prototype.stickyNavResizeCallback = function() {
     if (
-        $(window).width() <= 768 ||
-        Largo.sticky_nav_options.sticky_nav_display_article
-      ) {
+      $(window).width() <= 768 ||
+      Largo.sticky_nav_options.sticky_nav_display_article
+    ) {
       this.stickyNavEl.addClass('show');
       this.stickyNavEl.parent().css('height', this.stickyNavEl.outerHeight());
     } else {
