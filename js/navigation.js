@@ -95,7 +95,8 @@
   Navigation.prototype.stickyNavResizeCallback = function() {
     if (
       $(window).width() <= 768 ||
-      Largo.sticky_nav_options.sticky_nav_display_article
+      Largo.sticky_nav_options.sticky_nav_display_article ||
+      ( Largo.sticky_nav_options.main_nav_hide_article && ($('body').hasClass('single') || $('body').hasClass('page')) )
     ) {
       this.stickyNavEl.addClass('show');
       this.stickyNavEl.parent().css('height', this.stickyNavEl.outerHeight());
