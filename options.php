@@ -480,7 +480,7 @@ function optionsframework_options() {
 	);
 
 	$options[] = array(
-		'desc' => __('Enable the sticky navigation for all screen sizes on article pages', 'largo'),
+		'desc' => __('Enable the sticky navigation for all screen sizes', 'largo'),
 		'id' => 'sticky_nav_display_article',
 		'std' => '1',
 		'type' => 'checkbox'
