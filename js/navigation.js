@@ -79,6 +79,8 @@
   Navigation.prototype.bindStickyNavEvents = function() {
     var self = this;
 
+    // This is so that we may apply styles to the navbar based on what options are set
+    // This is used with some styles in less/inc/navbar-sticky.less
     $.each(Largo.sticky_nav_options, function(idx, opt) {
       if (opt)
         self.stickyNavEl.addClass(idx);
@@ -93,9 +95,10 @@
 
   Navigation.prototype.stickyNavResizeCallback = function() {
     if (
-        $(window).width() <= 768 ||
-        (Largo.sticky_nav_options.main_nav_hide_article && ($('body').hasClass('single') || $('body').hasClass('page')))
-      ) {
+      $(window).width() <= 768 ||
+      Largo.sticky_nav_options.sticky_nav_display ||
+      ( Largo.sticky_nav_options.main_nav_hide_article && ($('body').hasClass('single') || $('body').hasClass('page')) )
+    ) {
       this.stickyNavEl.addClass('show');
       this.stickyNavEl.parent().css('height', this.stickyNavEl.outerHeight());
     } else {
