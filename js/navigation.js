@@ -79,7 +79,8 @@
   Navigation.prototype.bindStickyNavEvents = function() {
     var self = this;
 
-    // This is so that we may 
+    // This is so that we may apply styles to the navbar based on what options are set
+    // This is used with some styles in less/inc/navbar-sticky.less
     $.each(Largo.sticky_nav_options, function(idx, opt) {
       if (opt)
         self.stickyNavEl.addClass(idx);
