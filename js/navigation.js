@@ -93,13 +93,26 @@
     this.stickyNavSetOffset();
   };
 
+  // Hide the sticky nav if we're too close to the top of the page
+  Navigation.prototype.stickyNavScrollTopHide = function() {
+    if ($(window).scrollTop() <= this.mainEl.offset().top && this.mainNavEl.is(':visible')) {
+      this.stickyNavEl.removeClass('show');
+      clearTimeout(this.scrollTimeout);
+      return;
+    }
+  }
+
   Navigation.prototype.stickyNavResizeCallback = function() {
     if (
-      $(window).width() <= 768 ||
+      $(window).width() <= 768
+    ) {
+      this.stickyNavEl.addClass('show');
+      this.stickyNavEl.parent().css('height', this.stickyNavEl.outerHeight());
+    } else if (
       Largo.sticky_nav_options.sticky_nav_display ||
       ( Largo.sticky_nav_options.main_nav_hide_article && ($('body').hasClass('single') || $('body').hasClass('page')) )
     ) {
-      this.stickyNavEl.addClass('show');
+      this.stickyNavScrollTopHide();
       this.stickyNavEl.parent().css('height', this.stickyNavEl.outerHeight());
     } else {
       this.stickyNavEl.parent().css('height', '');
@@ -117,15 +130,13 @@
         direction = this.scrollDirection(),
         callback, wait;
 
-    if ($(window).scrollTop() <= this.mainEl.offset().top && this.mainNavEl.is(':visible')) {
-      this.stickyNavEl.removeClass('show');
-      clearTimeout(this.scrollTimeout);
-      return;
-    }
+    this.stickyNavScrollTopHide();
 
     this.stickyNavSetOffset();
 
-    if (this.previousScroll == direction) {
+    // Abort if the scroll direction is the same as it was, or if the page has not been scrolled.
+    if (this.previousScroll == direction || !this.previousScroll ) {
+      this.previousScroll = direction;
       return;
     }
 
