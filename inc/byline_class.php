@@ -71,8 +71,7 @@ class Largo_Byline {
 		$this->twitter();
 
 		// The generic parts
-		$this->published_date();
-		$this->edited_date();
+		$this->maybe_updated_date();
 		$this->edit_link();
 
 		$this->output = ob_get_clean();
@@ -147,19 +146,28 @@ class Largo_Byline {
 	}
 
 	/**
+	 * Determine which date to display
+	 */
+	function maybe_updated_date() {
+		if ( ! $this->exclude_date ) {
+			if ( is_single() && largo_post_was_updated( $this->post ) ) {
+				$this->edited_date();
+			} else {
+				$this->published_date();
+			}
+		}
+	}
+
+	/**
 	 * A wrapper around largo_time to determine when the post was published
 	 */
 	function published_date() {
-		$output = '';
-		if ( ! $this->exclude_date ) {
-			printf(
-				' <time class="entry-date updated dtstamp pubdate" datetime="%1$s"><span class="published">%2$s </span>%3$s</time>',
-				esc_attr( get_the_date( 'c', $this->post_id ) ),
-				__( 'Published', 'largo' ),
-				largo_time( false, $this->post_id )
-			);
-		}
-		echo $output;
+		echo sprintf(
+			' <time class="entry-date updated dtstamp pubdate" datetime="%1$s"><span class="published">%2$s </span>%3$s</time>',
+			esc_attr( get_the_date( 'c', $this->post_id ) ),
+			__( 'Published', 'largo' ),
+			largo_time( false, $this->post_id )
+		);
 	}
 
 	/**
@@ -168,18 +176,14 @@ class Largo_Byline {
 	 * @todo: should this be displayed under different conditions?
 	 */
 	function edited_date() {
-		if (
-			current_user_can( 'edit_published_posts' )
-			&& is_single()
-		) {
-			echo sprintf(
-				' <span class="last-modified">%1$s %2$s %3$s %4$s</span> ',
-				__( 'Last modified', 'largo' ),
-				get_the_modified_date( 'F j, Y' ),
-				__( 'at', 'largo' ),
-				get_the_modified_date( 'g:i a' )
-			);
-		}
+		echo sprintf(
+			' <time class="entry-date updated dtstamp" datetime="%1$s"><span class="last-modified">%2$s %3$s %4$s %5$s</span></time> ',
+			esc_attr( get_the_modified_date( 'c', $this->post_id ) ),
+			__( 'Updated', 'largo' ),
+			largo_modified_time( false, $this->post_id ),
+			__( 'at', 'largo' ),
+			get_the_modified_date( 'g:i a' )
+		);
 	}
 
 	/**
@@ -205,8 +209,7 @@ class Largo_Custom_Byline extends Largo_Byline {
 	function generate_byline() {
 		ob_start();
 		$this->author_link();
-		$this->published_date();
-		$this->edited_date();
+		$this->maybe_updated_date();
 		$this->edit_link();
 
 		$this->output = ob_get_clean();
@@ -269,8 +272,7 @@ class Largo_CoAuthors_Byline extends Largo_Byline {
 		// Now assemble the One True Byline
 		ob_start();
 		echo $authors;
-		$this->published_date();
-		$this->edited_date();
+		$this->maybe_updated_date();
 		$this->edit_link();
 
 		$this->output = ob_get_clean();

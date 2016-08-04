@@ -1,35 +1,65 @@
 <?php
 
 /**
- * For posts published less than 24 hours ago, show "time ago" instead of date, otherwise just use get_the_date
+ * For posts published less than 24 hours ago, show "time ago" instead of date, otherwise just use the published date
  *
  * @param $echo bool echo the string or return itv (default: echo)
  * @return string date and time as formatted html
  * @since 0.3
  */
 if ( ! function_exists( 'largo_time' ) ) {
-	function largo_time($echo=true, $post=null) {
-		if (!empty($post)) {
-			if (is_object($post))
-				$post_id = $post->ID;
-			else if (is_numeric($post))
-				$post_id = $post;
-		} else
-			$post_id = get_the_ID();
+	function largo_time( $echo=true, $post=null ) {
+		$post = get_post( $post );
 
-		$time_difference = current_time('timestamp') - get_the_time('U', $post_id);
-
-		if ( $time_difference < 86400 )
-			$output = sprintf( __('<span class="time-ago">%s ago</span>', 'largo' ),
-				human_time_diff( get_the_time('U', $post_id), current_time( 'timestamp' ) )
-			);
-		else
-			$output = get_the_date(null, $post_id);
+		$pubdate = get_the_time( 'U', $post );
+		$output = largo_time_diff( $pubdate );
 
 		if ( $echo )
 			echo $output;
 		return $output;
 	}
+}
+
+/**
+ * For posts modified less than 24 hours ago, show "time ago" instead of date, otherwise just use the modified date
+ *
+ * @param $echo bool echo the string or return itv (default: echo)
+ * @return string date and time as formatted html
+ * @since 0.5.5
+ */
+if ( ! function_exists( 'largo_modified_time' ) ) {
+	function largo_modified_time( $echo=true, $post=null ) {
+		$post = get_post( $post );
+
+		$updated = get_the_modified_time( 'U', $post );
+		$output = largo_time_diff( $updated );
+
+		if ( $echo )
+			echo $output;
+		return $output;
+	}
+}
+
+/**
+ * Given a time, if it was less than 24 hours ago return how many hours ago that was, otherwise return the 'F j, Y' formatted date
+ * @param int $modified the Unix timestamp for the modified date
+ * @return string HTML for the either "x hours ago" or the submitted date, formatted
+ * @since 0.5.5
+ * @see https://secure.php.net/manual/en/function.date.php
+ * @see https://github.com/INN/Largo/pull/1265
+ */
+function largo_time_diff( $time ) {
+	$time_difference = current_time( 'timestamp' ) - $time;
+
+	if ( $time_difference < 86400 ) {
+		$output = sprintf( __( '<span class="time-ago">%s ago</span>', 'largo' ),
+			human_time_diff( $time, current_time( 'timestamp' ) )
+		);
+	} else {
+		$output = date( 'F j, Y', $time );
+	}
+
+	return $output;
 }
 
 /**

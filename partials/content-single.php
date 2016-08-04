@@ -10,7 +10,6 @@
 
 	<header>
 
-		<h5 class="top-date"><?php largo_time(); ?></h5>
 		<h5 class="top-tag"><?php largo_top_term(); ?></h5>
 
 		<h1 class="entry-title" itemprop="headline"><?php the_title(); ?></h1>
