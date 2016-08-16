@@ -113,7 +113,7 @@
       ( Largo.sticky_nav_options.main_nav_hide_article && ($('body').hasClass('single') || $('body').hasClass('page')) )
     ) {
       this.stickyNavScrollTopHide();
-      this.stickyNavEl.parent().css('height', this.stickyNavEl.outerHeight());
+      this.stickyNavEl.parent().css('height', '');
     } else {
       this.stickyNavEl.parent().css('height', '');
     }
