@@ -112,7 +112,7 @@ $queried_object = get_queried_object();
 					$partial = largo_get_partial_by_post_type( 'archive', $post_type, 'archive' );
 					get_template_part( 'partials/content', $partial );
 					$counter++;
-					do_action( 'archive_loop_after_post_x', $counter );
+					do_action( 'archive_loop_after_post_x', $counter, $context = 'archive' );
 				endwhile;
 
 				largo_content_nav( 'nav-below' );
