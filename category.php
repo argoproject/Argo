@@ -68,11 +68,14 @@ $queried_object = get_queried_object();
 	<?php 
 		do_action( 'largo_before_category_river' );
 		if ( have_posts() ) {
+			$counter = 0;
 			while ( have_posts() ) {
 				the_post();
 				$post_type = get_post_type();
-				$partial = largo_get_partial_by_post_type('archive', $post_type, 'archive');
+				$partial = largo_get_partial_by_post_type( 'archive', $post_type, 'archive' );
 				get_template_part( 'partials/content', 'archive' );
+				$counter++;
+				do_action( 'category_archive_loop_after_post_x', $counter );
 			}
 			largo_content_nav( 'nav-below' );
 		} else {

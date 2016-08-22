@@ -105,11 +105,14 @@ $queried_object = get_queried_object();
 			<?php
 				// and finally wind the posts back so we can go through the loop as usual
 				rewind_posts();
-
+				
 				while ( have_posts() ) : the_post();
+					$counter = 0;
 					$post_type = get_post_type();
-					$partial = largo_get_partial_by_post_type('archive', $post_type, 'archive');
+					$partial = largo_get_partial_by_post_type( 'archive', $post_type, 'archive' );
 					get_template_part( 'partials/content', $partial );
+					$counter++;
+					do_action( 'archive_loop_after_post_x', $counter );
 				endwhile;
 
 				largo_content_nav( 'nav-below' );
