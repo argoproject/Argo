@@ -21,7 +21,7 @@ if ( of_get_option( 'cats_home' ) ) {
 $query = new WP_Query($args);
 
 if ( $query->have_posts() ) {
-	$counter = 0;
+	$counter = 1;
 	while ($query->have_posts()) : $query->the_post();
 		//if the post is in the array of post IDs already on this page, skip it. Just a double-check
 		if ( in_array( get_the_ID(), $shown_ids))
@@ -31,8 +31,8 @@ if ( $query->have_posts() ) {
 			do_action( 'largo_before_home_list_post', $post, $query );
 			get_template_part('partials/content', 'home');
 			do_action( 'largo_after_home_list_post', $post, $query );
-			$counter++;
 			do_action( 'largo_loop_after_post_x', $counter, $context = 'home' );
+			$counter++;
 		}
 	endwhile;
 	largo_content_nav( 'nav-below' );

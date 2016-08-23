@@ -107,12 +107,12 @@ $queried_object = get_queried_object();
 				rewind_posts();
 				
 				while ( have_posts() ) : the_post();
-					$counter = 0;
+					$counter = 1;
 					$post_type = get_post_type();
 					$partial = largo_get_partial_by_post_type( 'archive', $post_type, 'archive' );
 					get_template_part( 'partials/content', $partial );
-					$counter++;
 					do_action( 'largo_loop_after_post_x', $counter, $context = 'archive' );
+					$counter++;
 				endwhile;
 
 				largo_content_nav( 'nav-below' );
