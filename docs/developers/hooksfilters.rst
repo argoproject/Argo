@@ -242,7 +242,7 @@ Here is the current list of hooks available in Largo (available as of v.0.4):
  
 **for all lists of posts**
 
--  **largo_loop_after_post_x** - fires after ever post in a river of posts on the homepage or archive pages. This is helpful if you want to insert interstitial content in a river of posts (typically things like newsletter subscription widgets, donation messages, etc.). 
+-  **largo_loop_after_post_x** - fires after every post in a river of posts on the homepage or archive pages. This is helpful if you want to insert interstitial content in a river of posts (typically things like newsletter subscription widgets, donation messages, etc.). 
 
 This action takes a couple of arguments that may come in handy:
 
