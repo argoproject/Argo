@@ -32,7 +32,7 @@ if ( $query->have_posts() ) {
 			get_template_part('partials/content', 'home');
 			do_action( 'largo_after_home_list_post', $post, $query );
 			$counter++;
-			do_action( 'homepage_loop_after_post_x', $counter, $context = 'home' );
+			do_action( 'largo_loop_after_post_x', $counter, $context = 'home' );
 		}
 	endwhile;
 	largo_content_nav( 'nav-below' );
