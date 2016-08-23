@@ -254,7 +254,7 @@ This action takes a couple of arguments that may come in handy:
 an example of this in use might look like:
 
 	function mytheme_interstitial( $counter, $context ) {
-		if ( $counter === 2  && c$ontext === 'home' ) {
+		if ( $counter === 2  && $context === 'home' ) {
 			// do homepage stuff
 		} elseif ( $counter === 2 && $context === 'archive' ) {
 			// do something different in the same spot on archive pages
