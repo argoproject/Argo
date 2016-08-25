@@ -84,7 +84,9 @@ $queried_object = get_queried_object();
 			// It's not appropriate to display partials/content-not-found here.
 		} else {
 			get_template_part( 'partials/content', 'not-found' );
-		} ?>
+		}
+		do_action( 'largo_after_category_river' ); 
+	?>
 	</div>
 	<?php get_sidebar(); ?>
 </div>
