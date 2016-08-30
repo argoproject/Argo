@@ -89,7 +89,7 @@ if ( $is_series ) {
 			<?php }
 		?>
 
-		<?php largo_excerpt( $post, 5, true, __('Continue&nbsp;Reading', 'largo'), true, false ); ?>
+		<?php largo_excerpt( $post, 5, true, __( 'Continue&nbsp;Reading', 'largo' ), true, false ); ?>
 
 		<?php
 			if (
@@ -99,15 +99,6 @@ if ( $is_series ) {
 			) {
 				largo_excerpt( $post, 5, true, __('Continue&nbsp;Reading&nbsp;&rarr;', 'largo'), true, false );
 			}
-		?>
-
-		<?php
-			if (
-				( !is_home() && ! $is_series  && largo_has_categories_or_tags() && $tags === 'btm' )
-				|| ( isset($opt['show']['tags']) && $opt['show']['tags'] && largo_has_categories_or_tags() && $tags === 'btm' )
-			) { ?>
-				<h5 class="tag-list"><strong><?php _e('More about:', 'largo'); ?></strong> <?php largo_categories_and_tags( 8 ); ?></h5>
-			<?php }
 		?>
 
 		</div><!-- .entry-content -->
