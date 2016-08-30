@@ -54,9 +54,9 @@ if ( $featured ) {
 						largo_youtube_iframe_from_url( $youtube_url );
 						echo '</div>';
 					} elseif( has_post_thumbnail() ){
-						echo('<a href="' . get_permalink() . '" title="' . the_title_attribute( array( 'before' => __( 'Permalink to', 'largo' ) . ' ', 'echo' => false )) . '" rel="bookmark">');
+						echo( '<a href="' . get_permalink() . '" title="' . the_title_attribute( array( 'before' => __( 'Permalink to', 'largo' ) . ' ', 'echo' => false )) . '" rel="bookmark">' );
 						the_post_thumbnail( 'full' );
-						echo('</a>');
+						echo( '</a>' );
 					}
 				?>
 				</div>
@@ -89,7 +89,7 @@ if ( $featured ) {
 
 		<?php
 			if ( $show_excerpt ) {
-				largo_excerpt( $post, 5, true, __('Continue&nbsp;Reading&nbsp;&rarr;', 'largo'), true, false );
+				largo_excerpt( $post, 5, true, __( 'Continue&nbsp;Reading&nbsp;&rarr;', 'largo' ), true, false );
 			}
 		?>
 
