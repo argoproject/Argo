@@ -90,7 +90,7 @@ if ( ! function_exists( 'largo_post_social_links' ) ) {
 		if ( $utilities['email'] === '1' ) {
 			$output .= sprintf(
 				'<span data-service="email" class="email share-button"><a href="mailto:?subject=%2$s&body=%3$s%0D%0A%4$s" target="_blank"><i class="icon-mail-alt"></i> <span class="hidden-phone">%1$s</span></a></span>',
-				esc_attr( __( 'Email', 'npr' ) ),
+				esc_attr( __( 'Email', 'largo' ) ),
 				rawurlencode( html_entity_decode( get_the_title(), ENT_QUOTES, "UTF-8" ) ), // subject
 				rawurlencode( html_entity_decode( strip_tags( get_the_excerpt() ), ENT_QUOTES, "UTF-8" ) ), // description
 				rawurlencode( html_entity_decode( get_the_permalink() ) ) // url
