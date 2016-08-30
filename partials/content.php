@@ -8,6 +8,7 @@ $tags = of_get_option( 'tag_display' );
 $hero_class = largo_hero_class( $post->ID, FALSE );
 $values = get_post_custom( $post->ID );
 $featured = has_term( 'homepage-featured', 'prominence' );
+$entry_classes = 'entry-content';
 
 $show_top_tag = TRUE;
 $show_thumbnail = TRUE;
@@ -62,8 +63,6 @@ if ( $featured ) {
 				</div>
 			</header>
 		<?php } // end Homepage Featured thumbnail block
-
-		$entry_classes = 'entry-content';
 
 		echo '<div class="' . $entry_classes . '">';
 
