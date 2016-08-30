@@ -308,7 +308,7 @@ function largo_get_current_url() {
 /**
  * Return the first featured image thumbnail found in a given array of WP_Posts
  *
- * Useful if you wint to create a thumbnail for a given taxonomy
+ * Useful if you want to create a thumbnail for a given taxonomy
  *
  * @param array An array of WP_Post objects to iterate over
  * @return str|false The HTML for the image, or false if no images were found.
