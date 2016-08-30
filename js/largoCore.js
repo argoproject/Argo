@@ -96,19 +96,6 @@ jQuery(document).ready(function($) {
         });
       },
 
-      // Handle the email service
-      do_email: function( data ) {
-        var url = 'mailto:?' + $.param({
-          subject: data.title,
-          body: data.description + "\n" + data.url
-        });
-
-        this.popup({
-          url: url,
-          name: 'email_share'
-        });
-      },
-
       // Handle the Google+ service
       do_googleplus: function( data ) {
         var url = 'https://plus.google.com/share?' + $.param({
