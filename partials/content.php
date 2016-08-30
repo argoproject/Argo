@@ -9,30 +9,36 @@ $hero_class = largo_hero_class( $post->ID, FALSE );
 $values = get_post_custom( $post->ID );
 $featured = has_term( 'homepage-featured', 'prominence' );
 
+$show_top_tag = TRUE;
+$show_thumbnail = TRUE;
+$show_byline = TRUE;
+$show_excerpt = TRUE;
 
 global $opt;	// get display options for the loop
+
 // series-specific options
 if ( largo_post_in_series() ) {
 	$in_series = TRUE;
-	$tags = of_get_option( 'tag_display', 'top' );
-} else {
-	$in_series = FALSE;
-	$tags = array();
-}
-
-$show_top_tag = TRUE;
-$show_excerpt = TRUE;
-$show_thumbnail = TRUE;
-$show_byline = TRUE;
-
-if ( $is_series ) {
-	if ( isset( $opt['show']['tags'] ) && $opt['show']['tags'] && largo_has_categories_or_tags() ) {
-		$show_top_tag = TRUE;
-	} else {
+	if ( ! isset( $opt['show']['tags'] ) &&  ! $opt['show']['tags'] && ! largo_has_categories_or_tags() ) {
 		$show_top_tag = FALSE;
 	}
-}
+	if ( ! isset( $opt['show']['image'] ) &&!  $opt['show']['image'] ) {
+		$show_thumbnail = FALSE;
+	}
+	if ( ! isset( $opt['show']['byline'] ) && ! $opt['show']['byline'] ) {
+		$show_byline = FALSE;
+	}
+	if ( ! isset( $opt['show']['excerpt'] ) && ! $opt['show']['excerpt'] ) {
+		$show_excerpt = FALSE;
+	}
+} else {
+	$in_series = FALSE;
+}	
 
+if ( $featured ) {
+	$entry_classes .= ' span10 with-hero';
+	$show_thumbnail = FALSE;
+}
 
 ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?>>
@@ -59,7 +65,6 @@ if ( $is_series ) {
 
 		$entry_classes = 'entry-content';
 
-		if ( $featured ) $entry_classes .= ' span10 with-hero';
 		echo '<div class="' . $entry_classes . '">';
 
 		if ( $show_top_tag ) {
@@ -67,10 +72,7 @@ if ( $is_series ) {
 		}
 
 		// output the non-featured thumbnail if this is either not-featured and not in a series or is not-featured, in a series, and set to display the thumbnail
-		if (
-			( !$featured && !$in_series )
-			|| ( !$featured && isset($opt['show']['image']) && $opt['show']['image'] )
-		) {
+		if ( $show_thumbnail ) {
 			echo '<div class="has-thumbnail '.$hero_class.'"><a href="' . get_permalink() . '">' . get_the_post_thumbnail() . '</a></div>';
 		}
 	?>
@@ -80,23 +82,13 @@ if ( $is_series ) {
 		</h2>
 
 		<?php
-			// show the byline if it's not in a series, or show the byline if the byline things are set
-			if (
-				! $in_series
-				|| (isset($opt['show']['byline']) && $opt['show']['byline'] )
-			) { ?>
+			if ( $show_byline ) { ?>
 				<h5 class="byline"><?php largo_byline(); ?></h5>
 			<?php }
 		?>
 
-		<?php largo_excerpt( $post, 5, true, __( 'Continue&nbsp;Reading', 'largo' ), true, false ); ?>
-
 		<?php
-			if (
-				// only display the excerpt if this is not a series, or if the series options allow it to be
-				( ! $is_series )
-				|| ( isset($opt['show']['excerpt']) && $opt['show']['excerpt'] )
-			) {
+			if ( $show_excerpt ) {
 				largo_excerpt( $post, 5, true, __('Continue&nbsp;Reading&nbsp;&rarr;', 'largo'), true, false );
 			}
 		?>
