@@ -22,7 +22,7 @@ if ( largo_post_in_series() ) {
 	if ( ! isset( $opt['show']['tags'] ) &&  ! $opt['show']['tags'] && ! largo_has_categories_or_tags() ) {
 		$show_top_tag = FALSE;
 	}
-	if ( ! isset( $opt['show']['image'] ) &&!  $opt['show']['image'] ) {
+	if ( ! isset( $opt['show']['image'] ) && ! $opt['show']['image'] ) {
 		$show_thumbnail = FALSE;
 	}
 	if ( ! isset( $opt['show']['byline'] ) && ! $opt['show']['byline'] ) {
@@ -71,7 +71,6 @@ if ( $featured ) {
 			echo '<h5 class="top-tag">' . largo_top_term( $args = array( 'echo' => FALSE ) ) . '</h5>';
 		}
 
-		// output the non-featured thumbnail if this is either not-featured and not in a series or is not-featured, in a series, and set to display the thumbnail
 		if ( $show_thumbnail ) {
 			echo '<div class="has-thumbnail '.$hero_class.'"><a href="' . get_permalink() . '">' . get_the_post_thumbnail() . '</a></div>';
 		}
