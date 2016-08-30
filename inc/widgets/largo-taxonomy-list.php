@@ -172,7 +172,7 @@ class largo_taxonomy_list_widget extends WP_Widget {
 			}
 
 			if ( $thumbnail == '' ) {
-				$thumbnail = largo_featured_thumbnail_in_post_array( $posts );
+				$thumbnail = largo_first_thumbnail_in_post_array( $posts );
 			}
 
 			if ( $instance['use_headline'] == '1' ) {
@@ -212,7 +212,7 @@ class largo_taxonomy_list_widget extends WP_Widget {
 				$posts = get_posts($query_args);
 			}
 			if ( $instance['thumbnails'] == '1' ) {
-				$thumbnail = largo_featured_thumbnail_in_post_array( $posts );
+				$thumbnail = largo_first_thumbnail_in_post_array( $posts );
 			}
 			if ( $instance['use_headline'] == '1' ) {
 				$headline = largo_first_headline_in_post_array( $posts );
