@@ -165,7 +165,7 @@ function largo_get_featured_posts_in_category( $category_name, $number = 5 ) {
  * @since 0.4
  */
 function largo_category_archive_posts( $query ) {
-	//don't muck with admin, non-categories, etc
+	// don't muck with admin, non-categories, etc
 	if ( ! $query->is_category() || ! $query->is_main_query() || is_admin() ) return;
 
 	// If this has been disabled by an option, do nothing
