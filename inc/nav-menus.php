@@ -28,7 +28,7 @@ if ( ! function_exists( 'largo_add_dont_miss_label' ) ) {
 		// Get theme options label
 		$theme_option = esc_html( of_get_option( 'dont_miss_label') );
 		if ( !empty( $theme_option ) ) {
-			return '<li class="menu-label">' . esc_html( $theme_option ) . '</li>' . $items;
+			return '<li class="menu-label">' . $theme_option . '</li>' . $items;
 		} else {
 			return $items;
 		}	
