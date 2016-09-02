@@ -344,8 +344,14 @@ function largo_enqueue_featured_media_js($hook) {
 
 	global $post, $wp_query;
 
-	if ( in_array($hook, array('edit-tags.php')) && isset($_GET['action']) ) {
-		$post = get_post( largo_get_term_meta_post( $_GET['taxonomy'], $_GET['tag_ID'] ) );
+	// Run this action on term edit pages
+	// edit-tags.php for wordpress before 4.5
+	// term.php for 4.5 and after
+	if ( in_array($hook, array('edit-tags.php', 'term.php')) && is_numeric($_GET['tag_ID']) ) {
+		// After WordPress 4.5, the taxonomy is no longer in the URL
+		// So to compensate, we get the taxonomy from the current screen
+		$screen = get_current_screen();
+		$post = get_post( largo_get_term_meta_post( $screen->taxonomy, $_GET['tag_ID'] ) );
 	}
 
 	$featured_image_display = get_post_meta($post->ID, 'featured-image-display', true);
@@ -641,3 +647,31 @@ function largo_featured_media_post_classes($classes) {
 	return $classes;
 }
 add_filter('post_class', 'largo_featured_media_post_classes');
+
+/**
+ * Determines what type of hero image/video a single post should use
+ * and returns a class that gets added to its container div
+ *
+ * @since 0.4
+ */
+if ( ! function_exists( 'largo_hero_class' ) ) {
+	function largo_hero_class( $post_id, $echo = TRUE ) {
+		$hero_class = "is-empty";
+		$featured_media = (largo_has_featured_media($post_id))? largo_get_featured_media($post_id) : array();
+		$type = (isset($featured_media['type']))? $featured_media['type'] : false;
+
+		if (get_post_meta($post_id, 'youtube_url', true) || $type == 'video')
+			$hero_class = 'is-video';
+		else if ($type == 'gallery')
+			$hero_class = 'is-gallery';
+		else if ($type == 'embed-code')
+			$hero_class = 'is-embed';
+		else if (has_post_thumbnail($post_id) || $type == 'image')
+			$hero_class = 'is-image';
+
+		if ($echo)
+			echo $hero_class;
+		else
+			return $hero_class;
+	}
+}

@@ -24,10 +24,30 @@ if ( ! function_exists( 'largo_donate_button' ) ) {
  */
 if ( ! function_exists( 'largo_add_dont_miss_label' ) ) {
 	function largo_add_dont_miss_label( $items, $args ) {
-	    return '<li class="menu-label">' . esc_html( of_get_option( 'dont_miss_label') ) . '</li>' . $items;
+
+		// Get theme options label
+		$theme_option = esc_html( of_get_option( 'dont_miss_label') );
+		if ( ! empty( $theme_option ) ) {
+			return '<li class="menu-label">' . $theme_option . '</li>' . $items;
+		} else {
+			return $items;
+		}	
 	}
 }
-add_filter( 'wp_nav_menu_dont-miss_items', 'largo_add_dont_miss_label', 10, 2 );
+
+/**
+ * Catch the build process on the menu in the Don't Miss location and trigger the filter for it
+ *
+ * @since .5.5
+ */
+function largo_modify_nav_menu_args( $items, $args) {
+	if ( 'dont-miss' == $args->theme_location ) {
+		add_filter( 'wp_nav_menu_' . $args->menu->slug . '_items', 'largo_add_dont_miss_label', 10, 2 );
+	}
+
+	return $items;
+}
+add_filter( 'wp_nav_menu_objects', 'largo_modify_nav_menu_args', 10, 2 );
 
 if ( ! function_exists( 'largo_add_footer_menu_label' ) ) {
 	function largo_add_footer_menu_label( $items, $args ) {

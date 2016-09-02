@@ -79,6 +79,8 @@
   Navigation.prototype.bindStickyNavEvents = function() {
     var self = this;
 
+    // This is so that we may apply styles to the navbar based on what options are set
+    // This is used with some styles in less/inc/navbar-sticky.less
     $.each(Largo.sticky_nav_options, function(idx, opt) {
       if (opt)
         self.stickyNavEl.addClass(idx);
@@ -91,13 +93,27 @@
     this.stickyNavSetOffset();
   };
 
+  // Hide the sticky nav if we're too close to the top of the page
+  Navigation.prototype.stickyNavScrollTopHide = function() {
+    if ($(window).scrollTop() <= this.mainEl.offset().top && this.mainNavEl.is(':visible')) {
+      this.stickyNavEl.removeClass('show');
+      clearTimeout(this.scrollTimeout);
+      return;
+    }
+  }
+
   Navigation.prototype.stickyNavResizeCallback = function() {
     if (
-        $(window).width() <= 768 ||
-        (Largo.sticky_nav_options.main_nav_hide_article && ($('body').hasClass('single') || $('body').hasClass('page')))
-      ) {
+      $(window).width() <= 768 ||
+      ( Largo.sticky_nav_options.main_nav_hide_article && ($('body').hasClass('single') || $('body').hasClass('page')) )
+    ) {
       this.stickyNavEl.addClass('show');
       this.stickyNavEl.parent().css('height', this.stickyNavEl.outerHeight());
+    } else if (
+      Largo.sticky_nav_options.sticky_nav_display
+    ) {
+      this.stickyNavScrollTopHide();
+      this.stickyNavEl.parent().css('height', '');
     } else {
       this.stickyNavEl.parent().css('height', '');
     }
@@ -114,15 +130,13 @@
         direction = this.scrollDirection(),
         callback, wait;
 
-    if ($(window).scrollTop() <= this.mainEl.offset().top && this.mainNavEl.is(':visible')) {
-      this.stickyNavEl.removeClass('show');
-      clearTimeout(this.scrollTimeout);
-      return;
-    }
+    this.stickyNavScrollTopHide();
 
     this.stickyNavSetOffset();
 
-    if (this.previousScroll == direction) {
+    // Abort if the scroll direction is the same as it was, or if the page has not been scrolled.
+    if (this.previousScroll == direction || !this.previousScroll ) {
+      this.previousScroll = direction;
       return;
     }
 

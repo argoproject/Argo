@@ -47,7 +47,7 @@ if ( ! function_exists( 'largo_enqueue_js' ) ) {
 			'is_home' => is_home(),
 			'is_single' => is_single() || is_singular(),
 			'sticky_nav_options' => array(
-				'sticky_nav_display_article' => (bool) of_get_option( 'sticky_nav_display_article', 1 ),
+				'sticky_nav_display' => (bool) of_get_option( 'sticky_nav_display', 0 ),
 				'main_nav_hide_article' => (bool) of_get_option( 'main_nav_hide_article', 0 ),
 				'nav_overflow_label' => of_get_option( 'nav_overflow_label', 'More' )
 			)
