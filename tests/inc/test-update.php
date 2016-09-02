@@ -138,7 +138,7 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 		$this->assertEquals('largo-post-series-links-widget-2', $widgets['article-bottom'][1]);
 		$this->assertEquals('largo-tag-list-widget-2', $widgets['article-bottom'][2]);
 		$this->assertEquals('largo-author-widget-2', $widgets['article-bottom'][3]);
-		$this->assertEquals('largo-explore-related-widget-2', $widgets['article-bottom'][4]);
+		$this->assertEquals('largo-related-posts-widget-2', $widgets['article-bottom'][4]);
 		$this->assertEquals('largo-prev-next-post-links-widget-2', $widgets['article-bottom'][5]);
 
 		// Cleanup
