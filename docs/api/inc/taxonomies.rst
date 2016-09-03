@@ -122,19 +122,3 @@ inc/taxonomies.php
    :returns: str $he HTML for the link
 
    :since: 0.5.3
-
-.. php:function:: unregister_series_taxonomy()
-
-   If the option in Advanced Options is unchecked, unregister the "Series" taxonomy
-
-   :uses: largo_is_series_enabled
-
-   :since: 0.4
-
-.. php:function:: unregister_post_types_taxonomy()
-
-   If the option in Advanced Options is unchecked, unregister the "Post Types" taxonomy
-
-   :uses: of_get_option
-
-   :since: 0.4

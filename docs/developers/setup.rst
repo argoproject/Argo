@@ -58,7 +58,7 @@ Setting up Largo and WordPress
 
 7. First, install the Python dependencies.
 
-	We use a few Python libraries for this project, including `Fabric <http://www.fabfile.org>`_ which powers the INN deploy-tools to elegantly run `many common but complex tasks <https://github.com/INN/deploy-tools/blob/master/COMMANDS.md>`_. In the `OS X setup guide <https://github.com/inn/docs/staffing/onboarding/os-x-setup.md>`_, you should have installed Python virtualenv and virtualenvwrapper.
+	We use a few Python libraries for this project, including `Fabric <http://www.fabfile.org>`_ which powers the INN deploy-tools to elegantly run `many common but complex tasks <https://github.com/INN/deploy-tools/blob/master/COMMANDS.md>`_. In the `OS X setup guide <https://github.com/INN/docs/blob/master/staffing/onboarding/os-x-setup.md>`_, you should have installed Python virtualenv and virtualenvwrapper.
 
 	Make sure you tell virtualenvwrapper where the umbrella is. ::
 

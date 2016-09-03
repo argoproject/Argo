@@ -7,7 +7,7 @@ inc/post-templates.php
    You can optionally provide a template name and then the check will be
    specific to that template.
 
-   :since: 1.0
+   :since: 0.3
 
    :uses: $wp_query
    :param string $template: The specific template name if specific matching is required.
@@ -16,12 +16,26 @@ inc/post-templates.php
 
 .. php:function:: largo_remove_hero()
 
-   Remove potentially duplicated hero image after upgrade to v0.4
+   Remove potentially duplicated hero images in posts
+
+   If the first paragraph of the post's content contains an img tag with a src,
+   and if the src is the same as the src as the post featured media image, or if
+   the src are different but the attachment IDs are the same, then remove the first
+   paragraph from the post's content to hide the duplicate image.
+
+   This does catch img tags inside shortcodes.
+
+   This does not remove leading images that are different from the post featured media
 
    The changes to the content in this function should eventually be made
-   perminant in the database. (@see https://github.com/INN/Largo/issues/354)
+   permanent in the database. (@see https://github.com/INN/Largo/issues/354)
 
-   :since: 0.4
+   If you would like to disable this function globally or on certain posts,
+   use the filter `largo_remove_hero`.
+
+   :since: 0.4 $ in Largo's single-column template
+
+   :since: 0.5.5 $ in Largo's two-column template
    :param String $content: the post content passed in by WordPress filter
 
    :returns: String $iltered post content.

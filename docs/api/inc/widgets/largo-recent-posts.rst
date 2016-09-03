@@ -15,3 +15,9 @@ inc/widgets/largo-recent-posts.php
 
       :param array $args: widget arguments.
       :param array $instance: saved values from databse.
+
+      :global: $post
+
+      :global: $shown_ids $n array of post IDs already on the page, to avoid duplicating posts
+
+      :global: $wp_query $sed to get posts on the page not in $shown_ids, to avoid duplicating posts

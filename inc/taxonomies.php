@@ -7,8 +7,8 @@
  * @return bool Whether or not the Series taxonomy option is enabled in the Theme Options > Advanced
  */
 function largo_is_series_enabled() {
-	$series_enabled = of_get_option('series_enabled');
-	return !empty($series_enabled);
+	$series_enabled = of_get_option( 'series_enabled' );
+	return !empty( $series_enabled );
 }
 
 /**
@@ -18,8 +18,8 @@ function largo_is_series_enabled() {
  * @return bool Whether or not the Series Landing Page  option is enabled in the Theme Options > Advanced
  */
 function largo_is_series_landing_enabled() {
-	$series_landing_enabled = of_get_option('custom_landing_enabled');
-	return !empty($series_landing_enabled);
+	$series_landing_enabled = of_get_option( 'custom_landing_enabled' );
+	return !empty( $series_landing_enabled );
 }
 
 /**
@@ -27,14 +27,14 @@ function largo_is_series_landing_enabled() {
  * Insert the default terms
  *
  * @uses  largo_is_series_enabled
- * @since 1.0
+ * @since 0.3
  */
 function largo_custom_taxonomies() {
 
 	/*
 	 * Register the "Post Prominence" taxonomy, which is used to determine where posts display
 	 */
-	if ( !taxonomy_exists('prominence') ) {
+	if ( !taxonomy_exists( 'prominence' ) ) {
 		register_taxonomy(
 			'prominence',
 			'post',
@@ -62,47 +62,50 @@ function largo_custom_taxonomies() {
 
 	$termsDefinitions = array(
 		array(
-			'name' => __('Sidebar Featured Widget', 'largo'),
-			'description' => __('If you are using the Featured Posts widget in a sidebar, add this label to posts to determine which to display in the widget.', 'largo'),
+			'name' => __( 'Sidebar Featured Widget', 'largo' ),
+			'description' => __( 'If you are using the Featured Posts widget in a sidebar, add this label to posts to determine which to display in the widget.', 'largo' ),
 			'slug' => 'sidebar-featured'
 		),
 		array(
-			'name' => __('Footer Featured Widget', 'largo'),
-			'description' => __('If you are using the Featured Posts widget in the footer, add this label to posts to determine which to display in the widget.', 'largo'),
+			'name' => __( 'Footer Featured Widget', 'largo' ),
+			'description' => __( 'If you are using the Featured Posts widget in the footer, add this label to posts to determine which to display in the widget.', 'largo' ),
 			'slug' => 'footer-featured'
 		),
 		array(
-			'name' => __('Featured in Category', 'largo'),
-			'description' => __('This will allow you to designate a story to appear more prominently on category archive pages.', 'largo'),
+			'name' => __( 'Featured in Category', 'largo' ),
+			'description' => __( 'This will allow you to designate a story to appear more prominently on category archive pages.', 'largo' ),
 			'slug' => 'category-featured'
 		),
 		array(
-			'name' => __('Homepage Featured', 'largo'),
-			'description' => __('Add this label to posts to display them in the featured area on the homepage.', 'largo'),
+			'name' => __( 'Homepage Featured', 'largo' ),
+			'description' => __( 'Add this label to posts to display them in the featured area on the homepage.', 'largo' ),
 			'slug' => 'homepage-featured'
 		)
 	);
 
 	if (largo_is_series_enabled()) {
 		$termsDefinitions[] = array(
-			'name' => __('Featured in Series', 'largo'),
-			'description' => __('Select this option to allow this post to float to the top of any/all series landing pages sorting by Featured first.', 'largo'),
+			'name' => __( 'Featured in Series', 'largo' ),
+			'description' => __( 'Select this option to allow this post to float to the top of any/all series landing pages sorting by Featured first.', 'largo' ),
 			'slug' => 'series-featured'
 		);
 	}
 
-	$largoProminenceTerms = apply_filters('largo_prominence_terms', $termsDefinitions);
+	$largoProminenceTerms = apply_filters( 'largo_prominence_terms', $termsDefinitions );
 
 	$changed = false;
-	$terms = get_terms('prominence', array(
-		'hide_empty' => false,
-		'fields' => 'all'
-	));
-	$names = array_map(function($arg) { return $arg->name; }, $terms);
+	$terms = get_terms( 
+		'prominence', 
+		array(
+			'hide_empty' => false,
+			'fields' => 'all'
+		)
+	);
+	$names = array_map( function( $arg ) { return $arg->name; }, $terms );
 
 	$term_ids = array();
-	foreach ($largoProminenceTerms as $term ) {
-		if (!in_array($term['name'], $names)) {
+	foreach ( $largoProminenceTerms as $term ) {
+		if ( !in_array( $term['name'], $names ) ) {
 			wp_insert_term(
 				$term['name'], 'prominence',
 				array(
@@ -114,10 +117,11 @@ function largo_custom_taxonomies() {
 		}
 	}
 
-	if ($changed)
+	if ( $changed ) {
 		delete_option('prominence_children');
+	}
 
-	do_action('largo_after_create_prominence_taxonomy', $largoProminenceTerms);
+	do_action( 'largo_after_create_prominence_taxonomy', $largoProminenceTerms );
 
 	/*
 	 * Register the "Post Types" taxonomy, used for icons. This is not enabled by default in Largo.
@@ -127,7 +131,7 @@ function largo_custom_taxonomies() {
 	 * @link https://github.com/INN/Largo/issues/1173
 	 */
 	if ( !taxonomy_exists('post-type') ) {
-		$enabled = ( ! of_get_option('post_types_enabled') == 0 );
+		$enabled = ( ! of_get_option( 'post_types_enabled' ) == 0 );
 		register_taxonomy(
 			'post-type',
 			array( 'post' ),
@@ -196,12 +200,12 @@ add_action( 'init', 'largo_custom_taxonomies' );
  * @uses global $post
  * @uses largo_is_series_enabled
  * @return bool
- * @since 1.0
+ * @since 0.3
  */
 function largo_post_in_series( $post_id = NULL ) {
-	if ( !largo_is_series_enabled() ) return false;
+	if ( ! largo_is_series_enabled() ) return false;
 	global $post;
-	$the_id = ($post_id) ? $post_id : $post->ID ;
+	$the_id = ( $post_id ) ? $post_id : $post->ID ;
 	$features = get_the_terms( $the_id, 'series' );
 	return ( $features ) ? true : false;
 }
@@ -210,7 +214,7 @@ function largo_post_in_series( $post_id = NULL ) {
  * Outputs custom taxonomy terms attached to a post
  *
  * @return array of terms
- * @since 1.0
+ * @since 0.3
  */
 function largo_custom_taxonomy_terms( $post_id ) {
 	$taxonomies = apply_filters( 'largo_custom_taxonomies', array( 'series' ) );
@@ -229,7 +233,7 @@ function largo_custom_taxonomy_terms( $post_id ) {
  * Output format for the series custom taxonomy at the bottom of single posts
  *
  * @param $term array the term we want to output
- * @since 1.0
+ * @since 0.3
  */
 if ( ! function_exists( 'largo_term_to_label' ) ) {
 	function largo_term_to_label( $term ) {
@@ -248,6 +252,7 @@ if ( ! function_exists( 'largo_term_to_label' ) ) {
  * @uses largo_is_series_enabled
  * @param integer series term id
  * @param integer number of posts to fetch, defaults to all
+ * @since 0.4
  */
 function largo_get_series_posts( $series_id, $number = -1 ) {
 
@@ -320,10 +325,10 @@ function largo_get_series_posts( $series_id, $number = -1 ) {
 * @since 0.5
 * @return filtered $post_link, replacing a Landing Page link with its Series link as needed
 */
-function largo_series_landing_link($post_link, $post) {
+function largo_series_landing_link( $post_link, $post ) {
 	// Get configuration setting for Custom Landing Pages
-	$opt_custom_landing_enabled = of_get_option('custom_landing_enabled');
-	$custom_landing_enabled = !empty($opt_custom_landing_enabled);
+	$opt_custom_landing_enabled = of_get_option( 'custom_landing_enabled', 0 );
+	$custom_landing_enabled = !empty( $opt_custom_landing_enabled );
 
 	// Only process Landing Page post type when Series Landing Pages are enabled
 	if ( "cftl-tax-landing" == $post->post_type && $custom_landing_enabled ) {
@@ -331,16 +336,20 @@ function largo_series_landing_link($post_link, $post) {
 		$series_terms = wp_get_object_terms(
 			$post->ID,
 			'series',
-			array('orderby' => 'term_id', 'order' => 'DESC', 'fields' => 'slugs')
+			array(
+				'orderby' => 'term_id',
+				'order' => 'DESC',
+				'fields' => 'slugs'
+			)
 		);
 		// Only proceed if we successfully found at least 1 series term
-		if ( !is_wp_error($series_terms) && !empty($series_terms) ) {
+		if ( ! is_wp_error( $series_terms ) && ! empty( $series_terms ) ) {
 			// Get the link for the first series term
 			// (ordered by the highest ID in the case of multiple terms)
-			$term_link = get_term_link($series_terms[0], 'series');
+			$term_link = get_term_link( $series_terms[0], 'series' );
 			// Only proceed if we successfully found the term link
-			if ( !is_wp_error($term_link) && strlen(trim($term_link)) ) {
-				$post_link = esc_url($term_link);
+			if ( ! is_wp_error( $term_link ) && strlen( trim( $term_link ) ) ) {
+				$post_link = esc_url( $term_link );
 			}
 		}
 	}
@@ -349,7 +358,7 @@ function largo_series_landing_link($post_link, $post) {
 }
 // wp-taxonomy-landing library filters at priority 10.
 // We must filter AFTER that.
-add_filter('post_type_link', 'largo_series_landing_link', 22, 2);
+add_filter( 'post_type_link', 'largo_series_landing_link', 22, 2 );
 
 /**
  * Helper to get the Series Landing Page for a given series.
@@ -357,8 +366,8 @@ add_filter('post_type_link', 'largo_series_landing_link', 22, 2);
  * @param Object|id|string $series
  * @return array An array of all WP_Post objects answering the description of this series. May be 0, 1 or conceivably many.
  */
-function largo_get_series_landing_page_by_series($series) {
-	if ( !is_object($series) ) {
+function largo_get_series_landing_page_by_series( $series ) {
+	if ( ! is_object( $series ) ) {
 		if ( is_int( $series ) ) {
 			$series = get_term( $series, $taxonomy );
 		} else {
@@ -380,111 +389,4 @@ function largo_get_series_landing_page_by_series($series) {
 	$landing = new WP_Query( $args );
 
 	return $landing->posts;
-}
-
-/**
- * Helper for getting posts in a category archive, excluding featured posts.
- * 
- * @param WP_Query $query
- * @uses largo_get_featured_posts_in_category
- */
-function largo_category_archive_posts( $query ) {
-	//don't muck with admin, non-categories, etc
-	if ( !$query->is_category() || !$query->is_main_query() || is_admin() ) return;
-
-	// If this has been disabled by an option, do nothing
-	if ( of_get_option('hide_category_featured') == true ) return;
-
-	// get the featured posts
-	$featured_posts = largo_get_featured_posts_in_category($query->get('category_name'));
-
-	// get the IDs from the featured posts
-	$featured_post_ids = array();
-	foreach ( $featured_posts as $fpost )
-		$featured_post_ids[] = $fpost->ID;
-
-	$query->set('post__not_in', $featured_post_ids);
-}
-add_action('pre_get_posts', 'largo_category_archive_posts', 15);
-
-/**
- * Get posts marked as "Featured in category" for a given category name.
- *
- * @param string $category_name the category to retrieve featured posts for.
- * @param integer $number total number of posts to return, backfilling with regular posts as necessary.
- * @since 0.5
- */
-function largo_get_featured_posts_in_category($category_name, $number=5) {
-	$args = array(
-		'category_name' => $category_name,
-		'numberposts' => $number,
-		'post_status' => 'publish',
-	);
-
-	$tax_query = array(
-		'tax_query' => array(
-			array(
-				'taxonomy' => 'prominence',
-				'field' => 'slug',
-				'terms' => 'category-featured',
-			)
-		)
-	);
-
-	// Get the featured posts
-	$featured_posts = get_posts(array_merge($args, $tax_query));
-
-	// Backfill with regular posts if necessary
-	if (count( $featured_posts ) < (int) $number) {
-		$needed = (int) $number - count( $featured_posts );
-		$regular_posts = get_posts(array_merge($args, array(
-			'numberposts' => $needed,
-			'post__not_in' => array_map(function($x) { return $x->ID; }, $featured_posts)
-		)));
-		$featured_posts = array_merge($featured_posts, $regular_posts);
-	}
-
-	return $featured_posts;
-}
-
-/**
- * Return the first featured image thumbnail found in a given array of WP_Posts
- *
- * Useful if you wint to create a thumbnail for a given taxonomy
- *
- * @param array An array of WP_Post objects to iterate over
- * @return str|false The HTML for the image, or false if no images were found.
- * @since 0.5.3
- * @uses largo_has_featured_media
- */
-function largo_featured_thumbnail_in_post_array($array) {
-	$thumb = '';
-	foreach ($array as $post) {
-		$thumb = get_the_post_thumbnail($post->ID);
-		if ($thumb != '') return $thumb;
-	}
-
-	return $thumb;
-}
-
-/**
- * Return the first headline link for an array of WP_Posts
- *
- * Useful if you want to link to an example post in a series.
- *
- * @param array An array of WP_Post objects to iterate over
- * @return str The HTML for the link
- * @since 0.5.3
- */
-function largo_first_headline_in_post_array($array) {
-	$headline = '';
-	foreach ($array as $post) {
-		$headline = sprintf('<a href="%s">%s</a>',
-			get_permalink($post->ID),
-			get_the_title($post->ID)
-		);
-		if ($headline != '') return $headline;
-	}
-
-	return $headline;
 }

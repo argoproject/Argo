@@ -144,6 +144,7 @@ class Largo {
 	 */
 	private function require_files() {
 
+		// @todo: is there a reason this is not sorted?
 		$includes = array(
 			'/largo-apis.php',
 			'/inc/ajax-functions.php',
@@ -166,16 +167,19 @@ class Largo {
 			'/inc/open-graph.php',
 			'/inc/verify.php',
 			'/inc/post-tags.php',
+			'/inc/byline_class.php',
 			'/inc/header-footer.php',
 			'/inc/related-content.php',
 			'/inc/featured-content.php',
 			'/inc/enqueue.php',
+			'/inc/post-social.php',
 			'/inc/post-templates.php',
 			'/inc/home-templates.php',
 			'/inc/update.php',
 			'/inc/avatars.php',
 			'/inc/featured-media.php',
 			'/inc/deprecated.php',
+			'/inc/pagination.php',
 			'/inc/conditionals.php'
 		);
 
@@ -296,12 +300,13 @@ class Largo {
 		if ( ! defined( 'SHOW_GLOBAL_NAV' ) ) {
 			define( 'SHOW_GLOBAL_NAV', TRUE );
 		}
+		/*
+		 * SHOW_STICKY_NAV is deprecated.
+		 * @link https://github.com/INN/Largo/issues/1135
+		 * @since 0.5.5
+		 */
 		if ( ! defined( 'SHOW_STICKY_NAV' ) ) {
-			if ( of_get_option( 'show_sticky_nav' ) ) {
-				define( 'SHOW_STICKY_NAV', TRUE );
-			} else {
-				define( 'SHOW_STICKY_NAV', FALSE );
-			}
+			define( 'SHOW_STICKY_NAV', FALSE );
 		}
 		if ( ! defined( 'SHOW_MAIN_NAV' ) ) {
 			define( 'SHOW_MAIN_NAV', TRUE );
@@ -414,6 +419,9 @@ if ( ! function_exists( 'largo_setup' ) ) {
 
 		// Add support for localization (this is a work in progress)
 		load_theme_textdomain('largo', get_template_directory() . '/lang');
+		
+		//Add support for <title> tags
+		add_theme_support( 'title-tag' );
 
 	}
 }

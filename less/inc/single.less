@@ -20,14 +20,6 @@ body.normal.page {
     margin: 24px 17.0213%;
     position: relative;
 
-    // top date
-    h5.top-date {
-      font-size: @baseFontSize - 2;
-      font-weight: normal;
-      position: absolute;
-      right: 0;
-    }
-
     // top tag
     h5.top-tag {
       position: absolute;
@@ -39,8 +31,7 @@ body.normal.page {
     }
 
     // hide normal date display.
-    .sep,
-    .entry-date {
+    .sep {
       display: none;
     }
 
@@ -179,6 +170,14 @@ h2.subtitle {
   .time-ago,
   .edit-link a {
     color: @red;
+  }
+
+  .avatar-default {
+    display: none;
+  }
+  .avatar {
+    max-height: 1.3 * @baseFontSize * 0.915; // Line height for bylines
+    max-width: 1.3 * @baseFontSize * 0.915; // Line height for bylines
   }
 }
 
