@@ -619,7 +619,7 @@ var LFM = _.extend(LFM || {}, {
                     self.saving = false;
                     self.hideSpinner();
                     $('#set-featured-media-button').html(
-                        '<span class="dashicons dashicons-admin-generic"></span> Edit Featured Media');
+                        'Edit Featured Media');
                     LFM.has_featured_media = true;
                     LFM.instances.modal.close();
                 }
@@ -652,9 +652,6 @@ var LFM = _.extend(LFM || {}, {
             });
 
             LFM.Views.defaultToolbar.prototype.initialize.apply(this, arguments);
-
-            var override = wp.media.template('featured-image-override');
-            this.secondary.$el.prepend(override());
         },
 
         save: function() {

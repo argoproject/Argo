@@ -377,23 +377,6 @@ function largo_enqueue_featured_media_js($hook) {
 add_action('admin_enqueue_scripts', 'largo_enqueue_featured_media_js');
 
 /**
- * Adds the "Set Featured Media" button above the post editor
- */
-function largo_add_featured_media_button($context) {
-	global $post;
-	$has_featured_media = largo_has_featured_media($post->ID);
-	$language = (!empty($has_featured_media))? 'Edit' : 'Set';
-	ob_start();
-?>
-	<a href="#" id="set-featured-media-button" class="button set-featured-media add_media" data-editor="content" title="<?php echo $language; ?> Featured Media"><span class="dashicons dashicons-admin-generic"></span> <?php echo $language; ?> Featured Media</a> <span class="spinner" style="display: none;"></span>
-<?php
-	$context .= ob_get_contents();
-	ob_end_clean();
-	return $context;
-}
-add_action('media_buttons_context',  'largo_add_featured_media_button');
-
-/**
  * Prints the templates used by featured media modal.
  */
 function largo_featured_media_templates() { ?>
@@ -488,17 +471,11 @@ function largo_featured_media_templates() { ?>
 		</div>
 	</script>
 
-	<script type="text/template" id="tmpl-featured-image-override">
-		<form>
-			<input type="checkbox" name="featured-image-display" <# if (LFM.featured_image_display !== '') { #>checked="checked"<# } #>/> Override display of featured image for this post?
-		</form>
-	</script>
-
 	<script type="text/template" id="tmpl-featured-remove-featured">
 		<h1>Are you sure you want to remove featured media from this post?</h1>
 	</script>
 <?php }
-add_action('admin_print_footer_scripts', 'largo_featured_media_templates', 1);
+add_action( 'admin_print_footer_scripts', 'largo_featured_media_templates', 1 );
 
 /**
  * Remove the default featured image meta box from post pages
@@ -509,6 +486,83 @@ function largo_remove_featured_image_meta_box() {
 	remove_meta_box('postimagediv', 'post', 'advanced');
 }
 add_action('do_meta_boxes', 'largo_remove_featured_image_meta_box');
+
+/**
+ * Add new featured image meta box to post pages
+ */
+function largo_add_featured_image_meta_box() {
+    add_meta_box(
+        'largo_featured_image_metabox',
+        __( 'Featured Image', $plugin_name ),
+        'largo_featured_image_metabox_callback',
+        array( 'post' ),
+        'side',
+        'low'
+    );
+}
+add_action( 'add_meta_boxes', 'largo_add_featured_image_meta_box' );
+
+/**
+ * Get post meta in a callback
+ *
+ * @param WP_Post $post    The current post.
+ * @param array   $metabox With metabox id, title, callback, and args elements.
+ */
+function largo_featured_image_metabox_callback( $post, $metabox ) {
+	global $post;
+
+	$has_featured_media = largo_has_featured_media($post->ID);
+	$language = (!empty($has_featured_media))? 'Edit' : 'Set';
+
+	$checked = 'false' == get_post_meta( $post->ID, 'featured-image-display', true ) ? 'checked="checked"' : "";
+	echo wp_nonce_field( basename( __FILE__ ), 'featured_image_display_nonce' );
+
+	echo '<a href="#" id="set-featured-media-button" class="button set-featured-media add_media" data-editor="content" title="' . $language . ' Featured Media"></span> ' . $language . ' Featured Media</a> <span class="spinner" style="display: none;"></span>';
+
+	echo '<p><label class="selectit"><input type="checkbox" value="true" name="featured-image-display"' . $checked .'> Hide on Single Post display</label></p>';
+
+	$has_featured_media = largo_has_featured_media($post->ID);
+	$language = (!empty($has_featured_media))? 'Edit' : 'Set';
+}
+
+/**
+ * Save data from meta box
+ */
+function mytheme_save_data( $post_id, $post ) {
+
+	// Verify the nonce before proceeding
+	if ( !isset( $_POST['featured_image_display_nonce'] ) || !wp_verify_nonce( $_POST['featured_image_display_nonce'], basename( __FILE__ ) ) ) {
+		return $post_id;
+	}
+
+	// Get the post type object
+	$post_type = get_post_type_object( $post->post_type );
+
+	// Check if the current user has permission to edit the post
+	if ( !current_user_can( $post_type->cap->edit_post, $post_id ) ) {
+		return $post_id;
+	}
+
+	// Get the posted data and sanitize it for use as an HTML class
+	$new_meta_value = ( isset( $_POST['featured-image-display'] ) ? sanitize_html_class( $_POST['featured-image-display'] ) : '' );
+
+	// Get the meta key
+	$meta_key = 'featured-image-display';
+
+	// Get the meta value of the custom field key
+	$meta_value = get_post_meta( $post_id, $meta_key, true );
+
+	/*
+	 * If the checkbox was checked, update the meta_value, but save it as 'false' for compatibility with older Largo versions (<.5.5)
+	 * If the checkbox was unchecked, delete the meta_value
+	 */
+	 if ( $new_meta_value && 'true' == $new_meta_value && '' == $meta_value ) {
+		 add_post_meta( $post_id, $meta_key, 'false', true );
+	} elseif ( empty( $new_meta_value ) ) {
+		delete_post_meta( $post_id, $meta_key );
+	}
+}
+add_action('save_post', 'mytheme_save_data', 10, 2 );
 
 /**
  * AJAX functions
