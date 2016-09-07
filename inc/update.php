@@ -168,8 +168,8 @@ function largo_update_widgets() {
 
 	$checks['show_related_content'] = array(
 		'values' => array('1'),
-		'widget' => 'largo-explore-related',
-		'settings' => array('title' => __( 'More About', 'largo' ), 'topics' => 6, 'posts' => 3),
+		'widget' => 'largo-related-posts',
+		'settings' => array('title' => __( 'Read Next', 'largo' ), 'qty' => 1),
 	);
 
 	$checks['show_next_prev_nav_single'] = array(
