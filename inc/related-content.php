@@ -4,7 +4,7 @@
  * Show related tags and subcategories for each main category
  * Used on category.php to display a list of related terms
  *
- * @since 1.0
+ * @since 0.5.5
  * @return String HTML '' if there are no related topics or a UL if there are related topics
  */
 
