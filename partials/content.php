@@ -84,7 +84,7 @@ if ( $featured ) {
 
 		<?php
 			if ( $show_excerpt ) {
-				largo_excerpt( $post, 5, true, __( 'Continue&nbsp;Reading&nbsp;&rarr;', 'largo' ), true, false );
+				largo_excerpt( null, null, null, null, null, false );
 			}
 		?>
 
