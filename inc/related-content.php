@@ -206,20 +206,20 @@ function largo_get_recent_posts_for_term( $term, $max = 5, $min = 1 ) {
  * @since 1.0
  */
 function largo_has_categories_or_tags() {
-    if ( get_the_tags() ) {
-        return true;
-    }
+	if ( get_the_tags() ) {
+		return true;
+	}
 
-    $cats = get_the_category();
-    if ( $cats ) {
-        foreach ( $cats as $cat ) {
-            if ( $cat->name != 'Uncategorized' ) {
-                return true;
-            }
-        }
-    }
+	$cats = get_the_category();
+	if ( $cats ) {
+		foreach ( $cats as $cat ) {
+			if ( $cat->name != 'Uncategorized' ) {
+				return true;
+			}
+		}
+	}
 
-    return false;
+	return false;
 }
 
 /**
