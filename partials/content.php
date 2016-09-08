@@ -4,7 +4,6 @@
  *
  * @package Largo
  */
-$tags = of_get_option( 'tag_display' );
 $hero_class = largo_hero_class( $post->ID, FALSE );
 $values = get_post_custom( $post->ID );
 $featured = has_term( 'homepage-featured', 'prominence' );
@@ -20,7 +19,7 @@ global $opt;	// get display options for the loop
 // series-specific options
 if ( largo_post_in_series() ) {
 	$in_series = TRUE;
-	if ( ! isset( $opt['show']['tags'] ) &&  ! $opt['show']['tags'] && ! largo_has_categories_or_tags() ) {
+	if ( ! largo_has_categories_or_tags() ) {
 		$show_top_tag = FALSE;
 	}
 	if ( ! isset( $opt['show']['image'] ) && ! $opt['show']['image'] ) {

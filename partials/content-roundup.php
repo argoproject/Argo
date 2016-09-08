@@ -7,7 +7,6 @@
  * @link https://github.com/INN/link-roundups
  * @link https://wordpress.org/plugins/link-roundups/
  */
-$tags = of_get_option( 'tag_display' );
 $hero_class = largo_hero_class( $post->ID, FALSE );
 $values = get_post_custom( $post->ID );
 $featured = has_term( 'homepage-featured', 'prominence' );
@@ -19,8 +18,8 @@ $featured = has_term( 'homepage-featured', 'prominence' );
 		$entry_classes = 'entry-content';
 		echo '<div class="' . $entry_classes . '">';
 
-		if ( largo_has_categories_or_tags() && $tags === 'top' ) {
-		 	echo '<h5 class="top-tag">' . largo_top_term( $args = array( 'echo' => FALSE ) ) . '</h5>';
+		if ( largo_has_categories_or_tags() ) {
+			echo '<h5 class="top-tag">' . largo_top_term( $args = array( 'echo' => FALSE ) ) . '</h5>';
 		}
 	?>
 

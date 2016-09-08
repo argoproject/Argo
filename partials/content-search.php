@@ -4,7 +4,6 @@
  *
  * @package Largo
  */
-$tags = of_get_option( 'tag_display' );
 $values = get_post_custom( $post->ID );
 $entry_classes = 'entry-content';
 ?>
@@ -18,9 +17,6 @@ $entry_classes = 'entry-content';
 
 		<?php largo_excerpt( $post, 1, null, null, true, false ); ?>
 
-		<?php if ( !is_home() && largo_has_categories_or_tags() && $tags === 'btm' ) { ?>
-			<h5 class="tag-list"><strong><?php _e('More about:', 'largo'); ?></strong> <?php largo_categories_and_tags( 8 ); ?></h5>
-		<?php } ?>
 		<small class="date-link">
 			<span class="date"><?php largo_time(); ?></span>
 			<span class="sep">|</span>
