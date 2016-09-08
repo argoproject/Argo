@@ -34,6 +34,8 @@
 		do_action('largo_after_hero');
 	?>
 
+	<?php get_sidebar(); ?>
+
 	<section class="entry-content clearfix" itemprop="articleBody">
 		
 		<?php largo_entry_content( $post ); ?>
