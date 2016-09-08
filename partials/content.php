@@ -9,19 +9,19 @@ $values = get_post_custom( $post->ID );
 $featured = has_term( 'homepage-featured', 'prominence' );
 $entry_classes = 'entry-content';
 
-$show_top_tag = TRUE;
+$show_top_tag = largo_has_categories_or_tags();
+
+// $show_thumbnail does not control whether or not the thumbnail is displayed; it controls whether or not the thumbnail is displayed normally.
 $show_thumbnail = TRUE;
 $show_byline = TRUE;
 $show_excerpt = TRUE;
+$in_series = FALSE;
 
 global $opt;	// get display options for the loop
 
 // series-specific options
 if ( largo_post_in_series() ) {
 	$in_series = TRUE;
-	if ( ! largo_has_categories_or_tags() ) {
-		$show_top_tag = FALSE;
-	}
 	if ( ! isset( $opt['show']['image'] ) && ! $opt['show']['image'] ) {
 		$show_thumbnail = FALSE;
 	}
@@ -31,9 +31,7 @@ if ( largo_post_in_series() ) {
 	if ( ! isset( $opt['show']['excerpt'] ) && ! $opt['show']['excerpt'] ) {
 		$show_excerpt = FALSE;
 	}
-} else {
-	$in_series = FALSE;
-}	
+}
 
 if ( $featured ) {
 	$entry_classes .= ' span10 with-hero';
