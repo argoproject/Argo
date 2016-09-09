@@ -318,6 +318,11 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 	}
 
 	function test_largo_update_prominence_term_description_single() {
+		$term9 = get_term_by('slug', 'term-9', 'prominence', 'ARRAY_A');
+		if ( ! $term9 ) {
+			wp_insert_term( 'term-9', 'prominence', array( 'description' => 'Term Description 9' ) );
+		}
+
 		$update = array(
 			'name' => 'Term 9',
 			'description' => 'Term 9 From Outer Space',
