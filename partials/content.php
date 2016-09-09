@@ -4,18 +4,31 @@
  *
  * @package Largo
  */
-$hero_class = largo_hero_class( $post->ID, FALSE );
-$values = get_post_custom( $post->ID );
-$featured = has_term( 'homepage-featured', 'prominence' );
+$args = array (
+	// post-specific, should probably not be filtered but
+	'hero_class' => largo_hero_class( $post->ID, FALSE ),
+
+	// only used to determine the existence of a youtube_url
+	'values' => get_post_custom( $post->ID ),
+
+	// this should be filtered in the event of a term-specific archive
+	'featured' => has_term( 'homepage-featured', 'prominence' ),
+
+	// $show_thumbnail does not control whether or not the thumbnail is displayed;
+	// it controls whether or not the thumbnail is displayed normally.
+	'show_thumbnail' => TRUE,
+	'show_byline' => TRUE,
+	'show_excerpt' => TRUE,
+	'in_series' => FALSE,
+);
+
+apply_filters( 'largo_content_partial_arguments', $args, get_queried_object() );
+
+extract( $args );
+
 $entry_classes = 'entry-content';
 
 $show_top_tag = largo_has_categories_or_tags();
-
-// $show_thumbnail does not control whether or not the thumbnail is displayed; it controls whether or not the thumbnail is displayed normally.
-$show_thumbnail = TRUE;
-$show_byline = TRUE;
-$show_excerpt = TRUE;
-$in_series = FALSE;
 
 global $opt;	// get display options for the loop
 
@@ -64,7 +77,7 @@ if ( $featured ) {
 		echo '<div class="' . $entry_classes . '">';
 
 		if ( $show_top_tag ) {
-			echo '<h5 class="top-tag">' . largo_top_term( $args = array( 'echo' => FALSE ) ) . '</h5>';
+			echo '<h5 class="top-tag">' . largo_top_term( $arguments = array( 'echo' => FALSE ) ) . '</h5>';
 		}
 
 		if ( $show_thumbnail ) {

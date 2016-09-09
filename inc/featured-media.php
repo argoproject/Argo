@@ -675,3 +675,19 @@ if ( ! function_exists( 'largo_hero_class' ) ) {
 			return $hero_class;
 	}
 }
+
+/**
+ * Filter on partials/content.php to affect the presentation of partials/content.php
+ */
+function largo_content_partial_arguments_filter( $args, $queried_object ) {
+	$queried_object = (array) $queried_object;
+
+	if ( $queried_object['post_type'] === 'cftl-tax-landing' ) {
+		// The queried object for series pages is the series landing page's post
+	}
+	// @todo: What if it's a series without a landing page
+
+	// var_log($queried_object );
+	return $args;
+}
+add_action( 'largo_content_partial_arguments', 'largo_content_partial_arguments_filter', 10, 2 );
