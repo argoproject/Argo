@@ -23,6 +23,14 @@ function largo_add_mce_buttons() {
 }
 add_action( 'init', 'largo_add_mce_buttons' );
 
+// Modify TinyMCE editor to remove H1.
+function tiny_mce_remove_unused_formats($init) {
+	// Add block format elements you want to show in dropdown
+	$init['block_formats'] = 'Paragraph=p;Heading 2=h2;Heading 3=h3;Heading 4=h4;Heading 5=h5;Heading 6=h6;Pre=pre';
+	return $init;
+}
+add_filter('tiny_mce_before_init', 'tiny_mce_remove_unused_formats' );
+
 /**
  * Add the module shortcode (used for pullquotes and asides within posts)
  * This is no longer used but is included here for backwards compatibility
