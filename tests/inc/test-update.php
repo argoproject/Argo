@@ -373,45 +373,6 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 	function test_largo_enable_series_if_landing_page() {
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
-
-	function test_largo_replace_deprecated_widgets() {
-		// First, create some deprecated widgets
-		largo_instantiate_widget('largo-follow', array('title'=>'Baz'), 'homepage-alert');
-		largo_instantiate_widget('largo-recent-posts', array('title'=>'Baz'), 'homepage-alert');
-
-		$this->assertTrue(
-			largo_widget_in_region('largo-follow', 'homepage-alert'),
-			"Setup: The Largo Follow widget was not created in the Homepage Alert widget area.");
-
-		$this->assertTrue(
-			largo_widget_in_region('largo-recent-posts', 'homepage-alert'),
-			"Setup: The Largo Recent Posts was not created in the Homepage Alert widget area.");
-
-		// Run the actual updates
-		largo_replace_deprecated_widgets();
-
-		// You will want to check this later;
-		$this->assertTrue(
-			largo_widget_in_region('largo-recent-posts', 'sidebar-single'),
-			"The new Largo Featured widget was not found in the Sidebar Single widget area.");
-
-		$this->assertTrue(
-			largo_widget_in_region('largo-recent-posts', 'footer-1'),
-			"The new Largo Featured widget was not found in the Footer 1 widget area.");
-
-		$this->assertTrue(
-			largo_widget_in_region('largo-recent-posts', 'sidebar-main'),
-			"The old Largo Featured widget was not found in the Sidebar Main widget area.");
-
-		$this->assertTrue(
-			largo_widget_in_region('largo-follow', 'homepage-alert'),
-			"The Largo Follow widget was not found in the Homepage Alert widget area.");
-
-		$this->assertTrue(
-			largo_widget_in_region('largo-recent-posts', 'homepage-alert'),
-			"The old Largo Featured widget was not found in the Homepage Alert widget area.");
-
-	}
 }
 
 class LargoUpdateTestAjaxFunctions extends WP_Ajax_UnitTestCase {

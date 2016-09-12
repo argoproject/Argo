@@ -104,39 +104,6 @@ inc/update.php
 
    Make sure custom CSS is regenerated if we're using custom LESS variables
 
-.. php:function:: largo_check_deprecated_widgets()
-
-   Checks for use of deprecated widgets and posts an alert
-
-.. php:function:: largo_deprecated_footer_widget()
-
-   Admin notices of older widgets
-
-.. php:function:: largo_replace_deprecated_widgets()
-
-   Replace deprecated widgets with new widgets
-
-   To add widgets to this list of widgets to be upgraded:
-     - Add the deprecated widget class and its replacement to $upgrades
-
-   :uses: largo_get_widget_basename
-
-   :uses: largo_get_widget_number
-
-   :since: 0.5.3
-
-.. php:function:: largo_deprecated_callback_largo_featured()
-
-   Callback for updating the Largo Featured widget in largo_replace_deprecated_widgets()
-
-   :since: 0.5.3
-
-   :see: largo_replace_deprecated_widgets
-   :param array $deprecated: the deprecated widget's $instance variables
-   :param array $replacement: the replacement widget's $instance variables
-
-   :returns: array $result the replacement widget's $instance variables
-
 .. php:function:: largo_widget_in_region()
 
    Checks to see if a given widget is in a given region already
