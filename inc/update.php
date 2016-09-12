@@ -502,7 +502,8 @@ function largo_set_new_option_defaults() {
  * Make sure custom CSS is regenerated if we're using custom LESS variables
  */
 function largo_update_custom_less_variables() {
-	if (Largo::is_less_enabled()) {
+	$largo = Largo::get_instance();	
+	if ( $largo->is_less_enabled() ) {
 		$variables = Largo_Custom_Less_Variables::get_custom_values();
 		$escaped = array();
 
