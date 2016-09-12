@@ -682,12 +682,55 @@ if ( ! function_exists( 'largo_hero_class' ) ) {
 function largo_content_partial_arguments_filter( $args, $queried_object ) {
 	$queried_object = (array) $queried_object;
 
+	// get display options for the loop
+	global $opt;
+
 	if ( $queried_object['post_type'] === 'cftl-tax-landing' ) {
+		/**
+		 *  $opt looks like this:
+		 *  array (
+		 *   '_edit_lock' => '1473688772:1561628',
+		 *   '_edit_last' => '1561628',
+		 *   'wide_assets' => '',
+		 *   '_wp_page_template' => 'series-landing.php',
+		 *   'header_enabled' => '1',
+		 *   'show_series_byline' => '',
+		 *   'show_sharebar' => '1',
+		 *   'header_style' => 'standard',
+		 *   'cftl_layout' => 'two-column',
+		 *   'left_region' => 'sidebar-main',
+		 *   'right_region' => 'sidebar-main',
+		 *   'per_page' => '10',
+		 *   'post_order' => 'DESC',
+		 *   'show' => 
+		 *   array (
+		 *     'image' => false,
+		 *     'excerpt' => false,
+		 *     'byline' => false,
+		 *     'tags' => false,
+		 *   ),
+		 *   'footer_style' => '',
+		 *   'footerhtml' => '',
+		 * )
+		 */
 		// The queried object for series pages is the series landing page's post
+		$args['in_series'] = TRUE;
+		if ( ! isset( $opt['show']['image'] ) && ! $opt['show']['image'] ) {
+			$args['show_thumbnail'] = FALSE;
+		}
+		if ( ! isset( $opt['show']['byline'] ) && ! $opt['show']['byline'] ) {
+			$args['show_byline'] = FALSE;
+		}
+		if ( ! isset( $opt['show']['excerpt'] ) && ! $opt['show']['excerpt'] ) {
+			$args['show_excerpt'] = FALSE;
+		}
 	}
 	// @todo: What if it's a series without a landing page
 
-	// var_log($queried_object );
+	// series-specific options
+	if ( largo_post_in_series() ) {
+	}
+
 	return $args;
 }
 add_action( 'largo_content_partial_arguments', 'largo_content_partial_arguments_filter', 10, 2 );

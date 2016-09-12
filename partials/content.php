@@ -30,22 +30,6 @@ $entry_classes = 'entry-content';
 
 $show_top_tag = largo_has_categories_or_tags();
 
-global $opt;	// get display options for the loop
-
-// series-specific options
-if ( largo_post_in_series() ) {
-	$in_series = TRUE;
-	if ( ! isset( $opt['show']['image'] ) && ! $opt['show']['image'] ) {
-		$show_thumbnail = FALSE;
-	}
-	if ( ! isset( $opt['show']['byline'] ) && ! $opt['show']['byline'] ) {
-		$show_byline = FALSE;
-	}
-	if ( ! isset( $opt['show']['excerpt'] ) && ! $opt['show']['excerpt'] ) {
-		$show_excerpt = FALSE;
-	}
-}
-
 if ( $featured ) {
 	$entry_classes .= ' span10 with-hero';
 	$show_thumbnail = FALSE;
