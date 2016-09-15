@@ -888,21 +888,21 @@ add_action('admin_menu', 'largo_register_update_page');
  */
 function largo_update_page_view() { ?>
 	<style type="text/css">
-		.update-message {
+		.largo-update-message {
 			max-width: 700px;
 		}
-		.update-message,
-		.update-message p {
+		.largo-update-message,
+		.largo-update-message p {
 			font-size: 16px;
 		}
-		.update-message ul li {
+		.largo-update-message ul li {
 			list-style-type: disc;
 			list-style-position: inside;
 		}
-		.update-message .submit-container {
+		.largo-update-message .submit-container {
 			max-width: 178px;
 		}
-		.update-message .spinner {
+		.largo-update-message .spinner {
 			background: url(../wp-includes/images/spinner.gif) 0 0/20px 20px no-repeat;
 			-webkit-background-size: 20px 20px;
 			display: none;
@@ -914,8 +914,8 @@ function largo_update_page_view() { ?>
 			position: relative;
 			top: 4px;
 		}
-		.update-message .updated,
-		.update-message .error {
+		.largo-update-message .updated,
+		.largo-update-message .error {
 			padding-top: 16px;
 			padding-bottom: 16px;
 		}
@@ -923,7 +923,7 @@ function largo_update_page_view() { ?>
 	<div class="wrap">
 		<div id="icon-tools" class="icon32"></div>
 		<h2>Largo Database Update</h2>
-		<div class="update-message">
+		<div class="largo-update-message">
 			<p><?php _e('This version of Largo includes a variety of updates, enhancements and changes.'); ?></p>
 			<?php if (version_compare(of_get_option('largo_version'), '0.4') < 0) { ?>
 				<p><?php _e('These changes affect'); ?>:
