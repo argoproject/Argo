@@ -54,6 +54,7 @@
     font-weight: normal;
     font-style: normal;
     outline: none;
+    display:none;
 }
 
 .navis-slideshow .wp-caption-text {
@@ -250,7 +251,7 @@ body.normal.single-post .hero .navis-slideshow .wp-caption-text {
 .navis-slideshow.navis-full .slick-dots li button {
     background-color: #000;   
 }
-.navis-slideshow.navis-full .slick-dots.slick-active button {
+.navis-slideshow.navis-full .slick-dots li.slick-active button {
     background-color: #666;
 }
 
@@ -363,4 +364,44 @@ body.normal.single-post .hero .navis-slideshow.navis-full p.wp-caption-text {
     font-size:12px!important;
     font-style:italic;
     margin-bottom:2em;
+}
+
+@media screen and (max-width:767px) {
+    .navis-slideshow {
+        background-color: transparent;
+    }
+    .navis-slideshow .slick-dots {
+        padding: 0;
+    }
+    .navis-slideshow .slick-list {
+        top: 4px;
+    }
+    .navis-slideshow a.slick-previous {
+        left:0;
+        background-color:transparent;
+        display:none;
+    }
+    .navis-slideshow a.slick-next {
+        right:0;
+        background-color:transparent;
+        display:none;
+    }
+    .navis-slideshow a.slick-previous:before,
+    .navis-slideshow a.slick-next:before {
+        top:35%;
+        transform:none;
+    }
+    .navis-slideshow.navis-full a.slick-previous:before,
+    .navis-slideshow.navis-full a.slick-next:before {
+        top:50%;        
+        -webkit-transform: translate(0, -50%);
+           -moz-transform: translate(0, -50%);
+            -ms-transform: translate(0, -50%);
+             -o-transform: translate(0, -50%);
+                transform: translate(0, -50%);
+    }
+    body.normal.single-post .hero .navis-slideshow p.wp-caption-text {
+        background-color:transparent;
+        padding: 1em 1em 0 1em!important;
+    }
 }
