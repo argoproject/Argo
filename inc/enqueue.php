@@ -160,7 +160,7 @@ if ( ! function_exists( 'largo_footer_js' ) ) {
 
 		if ( largo_twitter_widget::is_rendered() ) { ?>
 			<!--Twitter-->
-			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+			<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 		<?php }
 
 		/*

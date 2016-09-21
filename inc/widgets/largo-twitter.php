@@ -14,9 +14,9 @@ class largo_twitter_widget extends WP_Widget {
 	function __construct() {
 		$widget_ops = array(
 			'classname' 	=> 'largo-twitter',
-			'description' 	=> __('Show a Twitter profile, list or search widget', 'largo')
+			'description' 	=> __( 'Show a Twitter profile, collection, list or likes widget', 'largo')
 		);
-		parent::__construct( 'largo-twitter-widget', __('Largo Twitter Widget', 'largo'), $widget_ops);
+		parent::__construct( 'largo-twitter-widget', __( 'Largo Twitter Widget', 'largo' ), $widget_ops );
 	}
 
 	function widget( $args, $instance ) {
@@ -28,11 +28,6 @@ class largo_twitter_widget extends WP_Widget {
 		// Note that these are not strictly necessary (widget will render as long as the data-widget-id attribute is correct
 		// The URL and text are just used as a fallback if the JS doesn't load
 		switch($instance['widget_type']) {
-			case 'search':
-				$widget_href = 'https://twitter.com/search?q=' . $instance['twitter_search'];
-				/* translators: Tweets about [search query] */
-				$widget_text = __( 'Tweets about ' . $instance['twitter_search'], 'largo' );
-				break;
 			case 'likes':
 				$widget_href = 'https://twitter.com/' . $instance['twitter_username'] . '/likes';
 				/* translators: @username's Likes on Twitter */
@@ -41,7 +36,7 @@ class largo_twitter_widget extends WP_Widget {
 			case 'list':
 				$widget_href = 'https://twitter.com/' . $instance['twitter_username'] . '/lists/' . $instance['twitter_list_slug'];
 				/* translators: Tweets from [list URL] */
-				$widget_text = __( 'Tweets from ' . $widget_href, 'largo' );
+				$widget_text = __( 'A Twitter List by ' . $instance['twitter_username'], 'largo' );
 				break;
 			case 'collection':
 				$widget_href = 'https://twitter.com/' . $instance['twitter_username'] . '/timelines/' . $instance['twitter_collection_id'];
@@ -53,9 +48,8 @@ class largo_twitter_widget extends WP_Widget {
 				$widget_text = __( 'Tweets by @' . $instance['twitter_username'], 'largo' );
 		}
 			
-		$widget_embed = sprintf( '<a class="twitter-timeline" href="%1$s" data-widget-id="%2$s">%3$s</a>',
+		$widget_embed = sprintf( '<a class="twitter-timeline" href="%1$s">%2$s</a>',
 			esc_url( $widget_href ),
-			$instance['widget_ID'],
 			esc_attr( $widget_text )
 		);
 		// N.B. - the JS is enqueued in largo_footer_js (inc/enqueue.php)
@@ -72,7 +66,6 @@ class largo_twitter_widget extends WP_Widget {
 		$instance = $old_instance;
 		$instance['twitter_username'] = sanitize_text_field( $new_instance['twitter_username'] );
 		$instance['twitter_list_slug'] = sanitize_text_field( $new_instance['twitter_list_slug'] );
-		$instance['twitter_search'] = sanitize_text_field( $new_instance['twitter_search'] );
 		$instance['widget_ID'] = sanitize_text_field( $new_instance['widget_ID'] );
 		$instance['widget_type'] = sanitize_text_field( $new_instance['widget_type'] );
 		return $instance;
@@ -93,7 +86,6 @@ class largo_twitter_widget extends WP_Widget {
 			    <option <?php selected( $instance['widget_type'], 'timeline'); ?> value="timeline"><?php _e( 'Timeline', 'largo' ); ?></option>
 			    <option <?php selected( $instance['widget_type'], 'likes'); ?> value="likes"><?php _e( 'Likes', 'largo' ); ?></option>
 			    <option <?php selected( $instance['widget_type'], 'list'); ?> value="list"><?php _e( 'List', 'largo' ); ?></option>
-			    <option <?php selected( $instance['widget_type'], 'search'); ?> value="search"><?php _e( 'Search', 'largo' ); ?></option>
 			    <option <?php selected( $instance['widget_type'], 'collection'); ?> value="collection"><?php _e( 'Collection', 'largo' ); ?></option>
 			</select>
 		</p>
@@ -111,11 +103,6 @@ class largo_twitter_widget extends WP_Widget {
 		<p>
 			<label for="<?php echo $this->get_field_id( 'twitter_list_slug' ); ?>"><?php _e( 'Twitter List Slug (for list widget):', 'largo' ); ?></label>
 			<input id="<?php echo $this->get_field_id( 'twitter_list_slug' ); ?>" name="<?php echo $this->get_field_name( 'twitter_list_slug' ); ?>" value="<?php echo esc_attr( $instance['twitter_list_slug'] ); ?>" style="width:90%;" />
-		</p>
-
-		<p>
-			<label for="<?php echo $this->get_field_id( 'twitter_search' ); ?>"><?php _e( 'Twitter Search Query (for search widget):', 'largo' ); ?></label>
-			<input id="<?php echo $this->get_field_id( 'twitter_search' ); ?>" name="<?php echo $this->get_field_name( 'twitter_search' ); ?>" value="<?php echo esc_attr( $instance['twitter_search'] ); ?>" style="width:90%;" />
 		</p>
 		
 		<p>
