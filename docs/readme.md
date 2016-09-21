@@ -1,6 +1,6 @@
 # Largo Docs
 
-Documentation in this directory is written in [reStructuredText](http://docutils.sourceforge.net/rst.html), compiled to html by [Sphinx](http://sphinx-doc.org/) and hosted in its final form at [largo.readthedocs.org](http://largo.readthedocs.org/).
+Documentation in this directory is written in [reStructuredText](http://docutils.sourceforge.net/rst.html), compiled to html by [Sphinx](http://sphinx-doc.org/) and hosted in its final form at [largo.readthedocs.io](http://largo.readthedocs.io/).
 
 [![Documentation Status](https://readthedocs.org/projects/largo/badge/?version=develop)](https://readthedocs.org/projects/largo/?badge=develop)
 

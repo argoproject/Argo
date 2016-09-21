@@ -168,8 +168,8 @@ function largo_update_widgets() {
 
 	$checks['show_related_content'] = array(
 		'values' => array('1'),
-		'widget' => 'largo-explore-related',
-		'settings' => array('title' => __( 'More About', 'largo' ), 'topics' => 6, 'posts' => 3),
+		'widget' => 'largo-related-posts',
+		'settings' => array('title' => __( 'Read Next', 'largo' ), 'qty' => 1),
 	);
 
 	$checks['show_next_prev_nav_single'] = array(
@@ -369,11 +369,6 @@ function largo_force_settings_update() {
 	$options = array();
 	// paste in default settings from options.php after this line;
 	$options[] = array(
-		'desc'  => __('Show the <strong>sticky nav</strong>? Default is to show, but in some cases you may want to hide it.'),
-		'id'    => 'show_sticky_nav',
-		'std' 	=> '1',
-		'type' 	=> 'checkbox');
-	$options[] = array(
 		'desc' 	=> __('Starting with version 0.4, Largo introduced a new single-post template that more prominently highlights article content, which is the default. For backward compatibility, the pre-0.3 version is also available.', 'largo'),
 		'id' 	=> 'single_template',
 		'std' 	=> 'normal',
@@ -507,7 +502,8 @@ function largo_set_new_option_defaults() {
  * Make sure custom CSS is regenerated if we're using custom LESS variables
  */
 function largo_update_custom_less_variables() {
-	if (Largo::is_less_enabled()) {
+	$largo = Largo::get_instance();	
+	if ( $largo->is_less_enabled() ) {
 		$variables = Largo_Custom_Less_Variables::get_custom_values();
 		$escaped = array();
 
@@ -892,21 +888,21 @@ add_action('admin_menu', 'largo_register_update_page');
  */
 function largo_update_page_view() { ?>
 	<style type="text/css">
-		.update-message {
+		.largo-update-message {
 			max-width: 700px;
 		}
-		.update-message,
-		.update-message p {
+		.largo-update-message,
+		.largo-update-message p {
 			font-size: 16px;
 		}
-		.update-message ul li {
+		.largo-update-message ul li {
 			list-style-type: disc;
 			list-style-position: inside;
 		}
-		.update-message .submit-container {
+		.largo-update-message .submit-container {
 			max-width: 178px;
 		}
-		.update-message .spinner {
+		.largo-update-message .spinner {
 			background: url(../wp-includes/images/spinner.gif) 0 0/20px 20px no-repeat;
 			-webkit-background-size: 20px 20px;
 			display: none;
@@ -918,8 +914,8 @@ function largo_update_page_view() { ?>
 			position: relative;
 			top: 4px;
 		}
-		.update-message .updated,
-		.update-message .error {
+		.largo-update-message .updated,
+		.largo-update-message .error {
 			padding-top: 16px;
 			padding-bottom: 16px;
 		}
@@ -927,7 +923,7 @@ function largo_update_page_view() { ?>
 	<div class="wrap">
 		<div id="icon-tools" class="icon32"></div>
 		<h2>Largo Database Update</h2>
-		<div class="update-message">
+		<div class="largo-update-message">
 			<p><?php _e('This version of Largo includes a variety of updates, enhancements and changes.'); ?></p>
 			<?php if (version_compare(of_get_option('largo_version'), '0.4') < 0) { ?>
 				<p><?php _e('These changes affect'); ?>:

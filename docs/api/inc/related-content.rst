@@ -46,6 +46,19 @@ inc/related-content.php
 
    :param array|string $options: Settings for post id, echo, link, use icon, wrapper and exclude
 
+.. php:function:: largo_post_class_top_term()
+
+   Add the post's top term to the post's post_class array
+
+   :link: https://github.com/INN/Largo/issues/1119
+
+   :since: 0.5.5
+
+   :filter: post_class
+   :param array $classes: An array of classes on the post
+
+   :returns: array
+
 .. php:class:: Largo_Related
 
       The Largo Related class.

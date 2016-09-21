@@ -7,7 +7,7 @@
  * WordPress Menu Manager.
  *
  * @package Largo
- * @link http://largo.readthedocs.org/users/menus.html#available-menu-areas
+ * @link http://largo.readthedocs.io/users/menus.html#available-menu-areas
  */
  ?>
 <nav id="secondary-nav" class="clearfix">

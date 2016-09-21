@@ -11,9 +11,9 @@ $tags = of_get_option ('tag_display');
 
 	<header>
 
- 		<?php if ( isset($opt['show']['tags']) && $opt['show']['tags'] && largo_has_categories_or_tags() && $tags === 'top' ) { ?>
-    		<h5 class="top-tag"><?php largo_top_term(); ?></h5>
-    	<?php } ?>
+ 		<?php if ( isset($opt['show']['tags']) && $opt['show']['tags'] && largo_has_categories_or_tags() && $tags === 'top' && largo_top_term() ) : ?>
+			<h5 class="top-tag"><?php largo_top_term() ?></h5>
+		<?php endif ?>
 
  		<h2 class="entry-title">
  			<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute( array( 'before' => __( 'Permalink to', 'largo' ) . ' ' ) )?>" rel="bookmark"><?php the_title(); ?></a>
@@ -34,7 +34,7 @@ $tags = of_get_option ('tag_display');
 		<?php endif; ?>
 
  		<?php if ( isset($opt['show']['excerpt']) && $opt['show']['excerpt'] ) :
-			largo_excerpt( $post, 5, true, __('Continue&nbsp;Reading&nbsp;&rarr;', 'largo'), true, false );
+			largo_excerpt( $post, 5, null, null, true, false );
 		endif; ?>
 
 		<?php if ( isset($opt['show']['tags']) && $opt['show']['tags'] && largo_has_categories_or_tags() && $tags === 'btm' ) { ?>

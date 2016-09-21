@@ -6,7 +6,7 @@
  * to the top of most pages that aren't the home page.
  *
  * @package Largo
- * @link http://largo.readthedocs.org/users/themeoptions.html#navigation
+ * @link http://largo.readthedocs.io/users/themeoptions.html#navigation
  */
 
 $site_name = ( of_get_option( 'nav_alt_site_name', false ) ) ? of_get_option( 'nav_alt_site_name' ) : get_bloginfo('name'); ?>
@@ -32,7 +32,7 @@ $site_name = ( of_get_option( 'nav_alt_site_name', false ) ) ? of_get_option( 'n
 					 * Display social icons. Enabled by default, toggle in Theme Options
 					 * under the Basic Settings tab under Menu Options.
 					 *
-					 * @link https://largo.readthedocs.org/users/themeoptions.html
+					 * @link https://largo.readthedocs.io/users/themeoptions.html
 					 */
 					if ( of_get_option( 'show_header_social') ) { ?>
 						<ul id="header-social" class="social-icons visible-desktop">
@@ -47,7 +47,7 @@ $site_name = ( of_get_option( 'nav_alt_site_name', false ) ) ? of_get_option( 'n
 							 *
 							 * Options under the Basic Settings tab under Donate Button.
 							 *
-							 * @link https://largo.readthedocs.org/users/themeoptions.html
+							 * @link https://largo.readthedocs.io/users/themeoptions.html
 							 */
 							if ( of_get_option( 'show_donate_button') ) {
 								if ($donate_link = of_get_option('donate_link')) { ?>
@@ -57,7 +57,16 @@ $site_name = ( of_get_option( 'nav_alt_site_name', false ) ) ? of_get_option( 'n
 									</a>
 								</li><?php
 								}
-							} ?>
+							}
+
+							/**
+							 * Don't display the search in the header if we're on the search page
+							 *
+							 * @link https://github.com/INN/Largo/pull/1167
+							 * @since 0.5.5
+							 */
+							if ( ! is_search() ) {
+							?>
 							<li id="sticky-nav-search">
 								<a href="#" class="toggle">
 									<i class="icon-search" title="<?php esc_attr_e('Search', 'largo'); ?>" role="button"></i>
@@ -72,6 +81,7 @@ $site_name = ( of_get_option( 'nav_alt_site_name', false ) ) ? of_get_option( 'n
 									</div>
 								</form>
 							</li>
+							<?php } ?>
 							<li>
 								<!-- "hamburger" button (3 bars) to trigger off-canvas navigation -->
 								<a class="btn btn-navbar toggle-nav-bar" title="<?php esc_attr_e('More', 'largo'); ?>">

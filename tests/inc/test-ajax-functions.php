@@ -63,7 +63,6 @@ class AjaxFunctionsTestFunctions extends WP_UnitTestCase {
 		$qv->query_vars['year'] = '';
 		$_POST['is_series_landing'] = false;
 		$qv->query_vars['series'] = '';
-		// @todo find way to test get_post_type() returning argolinks.
 		$ret = largo_load_more_posts_choose_partial($qv);
 		$this->assertEquals('home', $ret, 'empty query vars did not result in a determination that the partial type is home');
 
@@ -112,10 +111,7 @@ class AjaxFunctionsTestFunctions extends WP_UnitTestCase {
 		$this->assertEquals('archive', $ret, '');
 		$this->assertFalse(('home' == $ret), 'set query query vars did result in a determination that the partial type is home');
 
-		// @todo find way to test get_post_type() returning argolinks.
-		$this->assertFalse(('home' == $ret), 'set query query vars did result in a determination that the partial type is home');
-
-		// Test the filter.
+		// Don't test the filter; we're assuming that WordPress filtering works correctly.
 	}
 
 }

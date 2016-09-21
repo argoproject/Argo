@@ -27,36 +27,42 @@ class largo_related_posts_widget extends WP_Widget {
 
 		if ( $title ) echo $before_title . $title . $after_title;
 
- 		$related = new Largo_Related( $instance['qty'] );
+		$related = new Largo_Related( $instance['qty'] );
 
- 		//get the related posts
- 		$rel_posts = new WP_Query( array(
- 			'post__in' => $related->ids(),
- 			'nopaging' => 1,
- 			'posts_per_page' => $instance['qty'],
- 			'ignore_sticky_posts' => 1
- 		) );
+		//get the related posts
+		$rel_posts = new WP_Query( array(
+			'post__in' => $related->ids(),
+			'nopaging' => 1,
+			'posts_per_page' => $instance['qty'],
+			'ignore_sticky_posts' => 1
+		) );
 
- 		if ( $rel_posts->have_posts() ) {
+		if ( $rel_posts->have_posts() ) {
 
-	 		echo '<ul class="related">';
+			echo '<ul class="related">';
 
-	 		while ( $rel_posts->have_posts() ) {
-		 		$rel_posts->the_post();
-		 		echo '<li>';
-				echo '<a href="' . get_permalink() . '"/>' . get_the_post_thumbnail( get_the_ID(), 'thumbnail', array('class'=>'alignleft') ) . '</a>';
+			while ( $rel_posts->have_posts() ) {
+				$rel_posts->the_post();
+				echo '<li>';
+
+				echo '<a href="' . get_permalink() . '"/>' . get_the_post_thumbnail( get_the_ID(), 'thumbnail', array( 'class' => '' ) ) . '</a>';
 				?>
-				<h4><a href="<?php the_permalink(); ?>" title="Read: <?php esc_attr( the_title('','', FALSE) ); ?>"><?php the_title(); ?></a></h4>
-				<h5 class="byline">
-					<span class="by-author"><?php largo_byline( true, false ); ?></span>
-				</h5>
+
+				<h4><a href="<?php the_permalink(); ?>" title="Read: <?php esc_attr( the_title( '','', FALSE ) ); ?>"><?php the_title(); ?></a></h4>
+
+				<?php if ( $instance['show_byline'] ) { ?>
+					<h5 class="byline">
+						<span class="by-author"><?php largo_byline( true, false ); ?></span>
+					</h5>
+				<?php } ?>
+
 				<?php // post excerpt/summary
 				largo_excerpt(get_the_ID(), 2, false, '', true);
-		 		echo '</li>';
-	 		}
+				echo '</li>';
+			}
 
-	 		echo "</ul>";
- 		}
+			echo "</ul>";
+		}
 		echo $after_widget;
 		// Restore global $post
 		wp_reset_postdata();
@@ -68,7 +74,6 @@ class largo_related_posts_widget extends WP_Widget {
 		$instance['title'] = sanitize_text_field($new_instance['title']);
 		$instance['qty'] = (int) $new_instance['qty'];
 		$instance['show_byline'] = (int) $new_instance['show_byline'];
-		$instance['thumbnail_location'] = sanitize_key( $new_instance['thumbnail_location'] );
 		return $instance;
 	}
 
@@ -93,18 +98,7 @@ class largo_related_posts_widget extends WP_Widget {
 		</p>
 
 		<p><input id="<?php echo $this->get_field_id('show_byline'); ?>" name="<?php echo $this->get_field_name('show_byline'); ?>" type="checkbox" value="1" <?php checked( $instance['show_byline'], 1);?> />
-			<label for="<?php echo $this->get_field_id('show_byline'); ?>"><?php _e( 'Show date with each post', 'largo' ); ?></label>
-		</p>
-
-		<p>
-			<label for="<?php echo $this->get_field_id('thumbnail_location'); ?>"><?php _e('Thumbnail position', 'largo'); ?>:</label>
-			<select name="<?php echo $this->get_field_name('thumbnail_location'); ?>" id="<?php echo $this->get_field_id('thumbnail_location'); ?>">
-			<?php
-			$choices = array( 'before' => __( 'Before Headline', 'largo' ), 'after' => __( 'After Headline', 'largo' ) );
-			foreach( $choices as $i => $display ) {
-				echo '<option value="', $i, '"', selected($instance['thumbnail_location'], $i, false), '>', $display, '</option>';
-			} ?>
-			</select>
+			<label for="<?php echo $this->get_field_id('show_byline'); ?>"><?php _e( 'Show byline on each post', 'largo' ); ?></label>
 		</p>
 
 	<?php

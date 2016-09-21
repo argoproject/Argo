@@ -280,10 +280,23 @@ function largo_top_tag_display() {
 	global $post;
 
 	$top_term = get_post_meta( $post->ID, 'top_term', TRUE );
-	$terms = wp_get_object_terms($post->ID, array( 'series', 'category', 'post_tag', 'prominence', 'post-type' ) );
+
+	/**
+	 * largo_top_term_metabox_taxonomies filter
+	 *
+	 * Allow child themes to modify the list of taxonomies from which terms are pulled to use as the top tag
+	 *
+	 * @since 0.5.5
+	 * @link https://github.com/INN/Largo/issues/1198
+	 * @filter largo_top_term_metabox_taxonomies
+	 * @param Array $taxonomies The list of default top term taxonomies: series, category, post_tag, prominence
+	 */
+	$taxonomies = apply_filters( 'largo_top_term_metabox_taxonomies', array( 'series', 'category', 'post_tag', 'prominence', 'post-type' ) );
+
+	$terms = wp_get_object_terms( $post->ID, $taxonomies );
 
 	echo '<p><strong>' . __('Top Term', 'largo') . '</strong><br />';
-	echo __('Identify which of this posts\'s terms is primary.') . '</p>';
+	echo __('Identify which of this posts\'s terms is primary.', 'largo') . '</p>';
 
 	$disabled = (empty($terms))? 'disabled':'';
 	echo '<select style="min-width: 5em;" name="top_term" id="top_term" class="dropdown" ' . $disabled . '>';
@@ -317,20 +330,10 @@ add_action( 'admin_enqueue_scripts', 'largo_top_terms_js' );
  *
  */
 function largo_prominence_meta_box($post, $args) {
-	$largoProminenceTerms = $args['args'];
-
-	$terms = get_terms('prominence', array(
+	$termList = get_terms('prominence', array(
 		'hide_empty' => false,
 		'fields' => 'all'
 	));
-
-	$slugs = array_map(function($arg) { return $arg['slug']; }, $largoProminenceTerms);
-
-	$termList = array();
-	foreach ($terms as $k => $v) {
-		if (in_array($v->slug, $slugs))
-			$termList[] = $v;
-	}
 
 	$tax = get_taxonomy('prominence');
 	$args = array(

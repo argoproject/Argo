@@ -45,7 +45,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
   <item>
     <title><?php the_title_rss(); ?></title>
     <link><?php the_permalink(); ?></link>
-    <description><?php echo '<![CDATA[' . largo_excerpt( $post, 5, false, '', false ) . ']]>';  ?></description>
+    <description><?php echo '<![CDATA[' . largo_excerpt( $post, 5, null, '', false ) . ']]>';  ?></description>
     <pubDate><?php rss_date( strtotime( $post->post_date_gmt ) ); ?></pubDate>
     <guid><?php the_permalink(); ?></guid>
     <dc:creator><?php $curuser = get_user_by( 'id', $post->post_author ); echo $curuser->first_name . ' ' . $curuser->last_name; ?></dc:creator>

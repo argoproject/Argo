@@ -36,9 +36,9 @@ $featured = has_term( 'homepage-featured', 'prominence' );
 		if ( $featured ) $entry_classes .= ' span10 with-hero';
 		echo '<div class="' . $entry_classes . '">';
 
-		if ( largo_has_categories_or_tags() && $tags === 'top' ) {
-		 	echo '<h5 class="top-tag">' . largo_top_term( $args = array( 'echo' => FALSE ) ) . '</h5>';
-		}
+		if ( largo_has_categories_or_tags() && $tags === 'top' && largo_top_term() ) { ?>
+			<h5 class="top-tag"><?php largo_top_term( $args = array( 'echo' => FALSE ) ) ?></h5>
+		<?php }
 
 		if ( !$featured ) {
 			echo '<div class="has-thumbnail '.$hero_class.'"><a href="' . get_permalink() . '">' . get_the_post_thumbnail() . '</a></div>';
@@ -51,7 +51,7 @@ $featured = has_term( 'homepage-featured', 'prominence' );
 
 	 	<h5 class="byline"><?php largo_byline(); ?></h5>
 
-		<?php largo_excerpt( $post, 5, true, __('Continue&nbsp;Reading', 'largo'), true, false ); ?>
+		<?php largo_excerpt( $post, 5, null, null, true, false ); ?>
 
 		<?php if ( !is_home() && largo_has_categories_or_tags() && $tags === 'btm' ) { ?>
 			<h5 class="tag-list"><strong><?php _e('More about:', 'largo'); ?></strong> <?php largo_categories_and_tags( 8 ); ?></h5>

@@ -83,8 +83,8 @@ class HelpersTestFunctions extends WP_UnitTestCase {
 		/**
 		 * With a user that does not exist, we hope that the user will continue to not exist
 		 */
-		$result = largo_fb_user_is_followable("abcdefghijklmnopqrstuvwxyz12");
-		$this->assertFalse($result, "Either https://www.facebook.com/abcdefghijklmnopqrstuvwxyz12 is user that exists and allows follows, or the Facebook follow button iframe HTML structure has changed and largo_fb_url_to_username no longer operates predictably.");
+		$result = largo_fb_user_is_followable("fb8c57ff40dda4b6898ae049d8298584");
+		$this->assertFalse($result, "Either https://www.facebook.com/fb8c57ff40dda4b6898ae049d8298584 is user that exists and allows follows, or the Facebook follow button iframe HTML structure has changed and largo_fb_url_to_username no longer operates predictably.");
 		unset($result);
 
 		/**
