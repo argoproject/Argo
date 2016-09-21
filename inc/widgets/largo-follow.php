@@ -1,19 +1,10 @@
 <?php
-
 /*
  * Largo Follow Widget
  *
  * @package Largo
  */
 class largo_follow_widget extends WP_Widget {
-
-	/*
-	 * Used to tell largo_footer_js whether it needs
-	 * to load twitter scripts.
-	 *
-	 * @ignore
-	 */
-	private static $rendered = false;
 
 	function __construct() {
 		/* Widget settings. */
@@ -24,8 +15,6 @@ class largo_follow_widget extends WP_Widget {
 
 		/* Create the widget. */
 		parent::__construct( 'largo-follow-widget', __('Largo Follow', 'largo'), $widget_ops );
-
-		self::$rendered = true;
 	}
 
 	function widget( $args, $instance ) {
@@ -35,58 +24,45 @@ class largo_follow_widget extends WP_Widget {
 
 		echo $before_widget;
 
-		/* Display the widget title if one was input */
-		if ( $title )
-			echo $before_title . $title . $after_title;
-
-		$feed = get_feed_link();
-
-		if ( is_single() && isset($id) && $id == 'article-bottom' ) :
+		if ( is_single() && isset($id) && $id == 'article-bottom' ) {
 			// display the post social bar
 			largo_post_social_links();
-		else :
-			// display the usual buttons and whatnot
-			if ( of_get_option( 'rss_link' ) )
-				$feed = esc_url (of_get_option( 'rss_link' ) );
-
-			printf(__('<a class="rss subscribe btn social-btn" href="%1$s"><i class="icon-rss"></i>Subscribe via RSS</a>', 'largo'), $feed );
-
-			if ( of_get_option( 'twitter_link' ) ) : ?>
-				<a href="<?php echo esc_url( of_get_option( 'twitter_link' ) ); ?>" class="twitter subscribe btn social-btn"><i class="icon-twitter"></i><?php printf( __('Follow @%1$s', 'largo'), largo_twitter_url_to_username ( of_get_option( 'twitter_link' ) ) ); ?></a>
-			<?php endif;
-
-			if ( of_get_option( 'facebook_link' ) ) : ?>
-				<a href="<?php echo esc_url( of_get_option( 'facebook_link' ) ); ?>" class="facebook subscribe btn social-btn"><i class="icon-facebook"></i> <?php _e( 'Like on Facebook', 'largo' ); ?></a>
-			<?php endif;
-
-			if ( of_get_option( 'linkedin_link' ) ) : ?>
-				<a class="linkedin subscribe btn social-btn" href="<?php echo esc_url( of_get_option( 'linkedin_link' ) ); ?>"><i class="icon-linkedin"></i><?php _e( 'Find on LinkedIn', 'largo' ); ?></a>
-			<?php endif;
-
-			if ( of_get_option( 'gplus_link' ) ) : ?>
-				<a class="gplus subscribe btn social-btn" href="<?php echo esc_url( of_get_option( 'gplus_link' ) ); ?>"><i class="icon-gplus"></i><?php _e('Follow on G+', 'largo'); ?></a>
-
-			<?php endif;
-
-			if ( of_get_option( 'flickr_link' ) ) : ?>
-				<a class="flickr subscribe btn social-btn" href="<?php echo esc_url( of_get_option( 'flickr_link' ) ); ?>"><i class="icon-flickr"></i><?php _e('Follow on Flickr', 'largo'); ?></a>
-			<?php endif;
-
-			if ( of_get_option( 'youtube_link' ) ) : ?>
-				<a class="youtube subscribe btn social-btn" href="<?php echo esc_url( of_get_option( 'youtube_link' ) ); ?>"><i class="icon-youtube"></i><?php _e('Follow on YouTube', 'largo'); ?></a>
-		<?php endif;
-
-			//the below is for G+ and YouTube subscribe buttons
-			?>
-			<script type="text/javascript">
-			  (function() {
-			    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-			    po.src = 'https://apis.google.com/js/platform.js';
-			    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-			  })();
-			</script>
-		<?php
-		endif;
+		} else {
+			// Display the widget title if one was input
+			if ( $title ) echo $before_title . $title . $after_title;
+			
+			// Display the usual buttons and whatnot
+			$networks = array(
+				'facebook' => 'Like Us on Facebook',
+				'twitter' => 'Follow Us on Twitter',
+				'gplus' => 'Follow Us on Google+',
+				'youtube' => 'Follow Us on YouTube',
+				'instagram' => 'Follow Us on Instagram',
+				'linkedin' => 'Find Us on LinkedIn',
+				'tumblr' => 'Follow us on Tumblr',
+				'pinterest' => 'Follow us on Pinterest',
+				'github' => 'Find Us on GitHub',
+				'flickr' => 'Follow Us on Flickr',
+				'rss' => 'Subscribe via RSS'
+			);
+			$networks = apply_filters( 'largo_additional_networks', $networks );
+			
+			foreach ( $networks as $network => $btn_text ) {
+				if ( $network == 'rss' ) {
+					$link = of_get_option( 'rss_link' ) ? esc_url( of_get_option( 'rss_link' ) ) : get_feed_link();
+				} else {
+					$link = esc_url( of_get_option( $network . '_link' ) );
+				}
+				
+				if ( $link ) {
+					printf( __( '<a class="%1$s subscribe btn social-btn" href="%2$s"><i class="icon-%1$s"></i>%3$s</a>', 'largo'),
+						$network,
+						$link,
+						$btn_text
+					);
+				}
+			}
+		}
 
 		echo $after_widget;
 	}
@@ -110,9 +86,5 @@ class largo_follow_widget extends WP_Widget {
 		</p>
 
 	<?php
-	}
-
-	function is_rendered() {
-		return self::$rendered;
 	}
 }
