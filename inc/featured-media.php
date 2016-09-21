@@ -7,24 +7,24 @@ function largo_default_featured_media_types() {
 
 	$media_types = apply_filters('largo_default_featured_media_types', array(
 		'embed' => array(
-			'title' => 'Featured embed code',
+			'title' => __( 'Featured embed code', 'largo' ),
 			'id' => 'embed-code'
 		),
 		'video' => array(
-			'title' => 'Featured video',
+			'title' =>  __( 'Featured video' 'largo' ),
 			'id' => 'video'
 		),
 		'image' => array(
-			'title' => 'Featured image',
+			'title' => __( 'Featured image', 'largo' ),
 			'id' => 'image'
 		),
 		'gallery' => array(
-			'title' => 'Featured photo gallery',
+			'title' => __( 'Featured photo gallery', 'largo' ),
 			'id' => 'gallery'
 		)
 	));
 
-	return array_values($media_types);
+	return array_values( $media_types );
 
 }
 
@@ -52,39 +52,29 @@ function largo_hero( $post = null, $classes = '' ) {
  * @param int|WP_Post $post Optional. Post ID or WP_Post object. Default is global $post.
  * @param String $classes Optional. Class string to apply to outer div.hero
  */
-function largo_get_hero($post = null,$classes = '') {
-
-	$post = get_post($post);
-	$hero_class = largo_hero_class($post->ID, false);
-
+function largo_get_hero( $post = null, $classes = '' ) {
+	$post = get_post( $post );
+	$hero_class = largo_hero_class( $post->ID, false );
 	$ret = '';
-
-	$values = get_post_custom($post->ID);
+	$values = get_post_custom( $post->ID );
 
 	// If the box is checked to override the featured image display, obey it.
 	// EXCEPT if a youtube_url is added in the old way for the post. This is to respect
 	// behavior before v0.4,
-	if (isset($values['featured-image-display'][0]) && !isset($values['youtube_url']))
+	if ( isset( $values['featured-image-display'][0] ) && ! isset( $values['youtube_url'] ) ) {
 		return $ret;
+	}
+	if ( largo_has_featured_media( $post->ID ) && $hero_class !== 'is-empty' ) {
 
-	if (largo_has_featured_media($post->ID) && $hero_class !== 'is-empty') {
+		$featured_media = largo_get_featured_media( $post->ID );
 
-		$featured_media = largo_get_featured_media($post->ID);
-
-		if (in_array($featured_media['type'], array('embed-code', 'video'))) {
-
-			$ret = largo_get_featured_embed_hero($post->ID,$classes);
-
-		} else if ($featured_media['type'] == 'image') {
-
-			$ret = largo_get_featured_image_hero($post->ID,$classes);
-
-		} else if ($featured_media['type'] == 'gallery') {
-
-			$ret = largo_get_featured_gallery_hero($post->ID,$classes);
-
+		if ( in_array( $featured_media['type'], array( 'embed-code', 'video' ) ) ) {
+			$ret = largo_get_featured_embed_hero( $post->ID, $classes );
+		} else if ( $featured_media['type'] == 'image' ) {
+			$ret = largo_get_featured_image_hero( $post->ID, $classes );
+		} else if ( $featured_media['type'] == 'gallery' ) {
+			$ret = largo_get_featured_gallery_hero( $post->ID,$classes );
 		}
-
 	}
 
 	/**
@@ -95,11 +85,8 @@ function largo_get_hero($post = null,$classes = '') {
 	 * @param String $var    DOM for hero.
 	 * @param WP_Post $post  post object.
 	 */
-	$ret = apply_filters('largo_get_hero',$ret,$post,$classes);
-
-
+	$ret = apply_filters( 'largo_get_hero', $ret, $post, $classes );
 	return $ret;
-
 }
 
 /**
@@ -111,10 +98,8 @@ function largo_get_hero($post = null,$classes = '') {
  * @param int|WP_Post $post Optional. Post ID or WP_Post object. Default is global $post.
  * @param String $classes Optional. Class string to apply to outer div.hero
  */
-function largo_featured_image_hero($post = null, $classes = '') {
-
-	echo largo_get_featured_image_hero($post,$classes);
-
+function largo_featured_image_hero( $post = null, $classes = '' ) {
+	echo largo_get_featured_image_hero( $post, $classes );
 }
 
 /**
@@ -126,28 +111,28 @@ function largo_featured_image_hero($post = null, $classes = '') {
  * @param int|WP_Post $post Optional. Post ID or WP_Post object. Default is global $post.
  * @param String $classes Optional. Class string to apply to outer div.hero
  */
-function largo_get_featured_image_hero($post = null, $classes = '') {
+function largo_get_featured_image_hero( $post = null, $classes = '' ) {
 
-	$the_post = get_post($post);
-	$featured_media = largo_get_featured_media($the_post->ID);
+	$the_post = get_post( $post );
+	$featured_media = largo_get_featured_media( $the_post->ID );
 
-	if( $featured_media['type'] != 'image' ) {
+	if ( $featured_media['type'] != 'image' ) {
 		return;
 	}
 
-	$hero_class = largo_hero_class($the_post->ID, false);
-	$classes = "hero $hero_class $classes";
+	$hero_class = largo_hero_class( $the_post->ID, false );
+	$classes = 'hero $hero_class $classes';
 
 	$thumb_meta = null;
-	if ($thumb_id = get_post_thumbnail_id($the_post->ID)) {
-		$thumb_content = get_post($thumb_id);
-		$thumb_custom = get_post_custom($thumb_id);
+	if ( $thumb_id = get_post_thumbnail_id( $the_post->ID ) ) {
+		$thumb_content = get_post( $thumb_id );
+		$thumb_custom = get_post_custom( $thumb_id );
 
 		$thumb_meta = array(
-			'caption' => (!empty($thumb_content->post_excerpt))? $thumb_content->post_excerpt : null,
-			'credit' => (!empty($thumb_custom['_media_credit'][0]))? $thumb_custom['_media_credit'][0] : null,
-			'credit_url' => (!empty($thumb_custom['_media_credit_url'][0]))? $thumb_custom['_media_credit_url'][0] : null,
-			'organization' => (!empty($thumb_custom['_navis_media_credit_org'][0]))? $thumb_custom['_navis_media_credit_org'][0] : null
+			'caption' => ( ! empty( $thumb_content->post_excerpt ) ) ? $thumb_content->post_excerpt : null,
+			'credit' => ( ! empty( $thumb_custom['_media_credit'][0] ) ) ? $thumb_custom['_media_credit'][0] : null,
+			'credit_url' => ( ! empty( $thumb_custom['_media_credit_url'][0] ) ) ? $thumb_custom['_media_credit_url'][0] : null,
+			'organization' => ( ! empty( $thumb_custom['_navis_media_credit_org'][0] ) ) ? $thumb_custom['_navis_media_credit_org'][0] : null
 		);
 	}
 
@@ -158,7 +143,7 @@ function largo_get_featured_image_hero($post = null, $classes = '') {
 	);
 
 	ob_start();
-	largo_render_template('partials/hero', 'featured-image', $context);
+	largo_render_template( 'partials/hero', 'featured-image', $context );
 	$ret = ob_get_clean();
 
 	return $ret;
@@ -174,10 +159,8 @@ function largo_get_featured_image_hero($post = null, $classes = '') {
  * @param int|WP_Post $post Optional. Post ID or WP_Post object. Default is global $post.
  * @param String $classes Optional. Class string to apply to outer div.hero
  */
-function largo_featured_embed_hero($post = null, $classes = '') {
-
-	echo largo_get_featured_embed_hero($post,$classes);
-
+function largo_featured_embed_hero( $post = null, $classes = '' ) {
+	echo largo_get_featured_embed_hero( $post, $classes );
 }
 
 /**
@@ -188,17 +171,16 @@ function largo_featured_embed_hero($post = null, $classes = '') {
  * @param int|WP_Post $post Optional. Post ID or WP_Post object. Default is global $post.
  * @param String $classes Optional. Class string to apply to outer div.hero
  */
-function largo_get_featured_embed_hero($post = null, $classes = '') {
-
+function largo_get_featured_embed_hero( $post = null, $classes = '' ) {
 	$the_post = get_post($post);
-	$featured_media = largo_get_featured_media($the_post->ID);
+	$featured_media = largo_get_featured_media( $the_post->ID );
 
-	if( !in_array($featured_media['type'], array('embed-code', 'video')) ) {
+	if ( ! in_array($featured_media['type'], array( 'embed-code', 'video' ) ) ) {
 		return;
 	}
 
-	$hero_class = largo_hero_class($the_post->ID, false);
-	$classes = "hero $hero_class $classes";
+	$hero_class = largo_hero_class( $the_post->ID, false );
+	$classes = 'hero $hero_class $classes';
 
 	$context = array(
 		'classes' => $classes,
@@ -207,7 +189,7 @@ function largo_get_featured_embed_hero($post = null, $classes = '') {
 	);
 
 	ob_start();
-	largo_render_template('partials/hero', 'featured-embed', $context);
+	largo_render_template( 'partials/hero', 'featured-embed', $context );
 	$ret = ob_get_clean();
 
 	return $ret;
@@ -222,10 +204,8 @@ function largo_get_featured_embed_hero($post = null, $classes = '') {
  * @param int|WP_Post $post Optional. Post ID or WP_Post object. Default is global $post.
  * @param String $classes Optional. Class string to apply to outer div.hero
  */
-function largo_featured_gallery_hero($post = null, $classes = '') {
-
-	echo largo_get_featured_gallery_hero($post, $classes);
-
+function largo_featured_gallery_hero( $post = null, $classes = '' ) {
+	echo largo_get_featured_gallery_hero( $post, $classes );
 }
 
 /**
@@ -238,15 +218,15 @@ function largo_featured_gallery_hero($post = null, $classes = '') {
  */
 function largo_get_featured_gallery_hero( $post = null, $classes = '' ) {
 
-	$the_post = get_post($post);
-	$featured_media = largo_get_featured_media($the_post->ID);
+	$the_post = get_post( $post );
+	$featured_media = largo_get_featured_media( $the_post->ID );
 
-	if( $featured_media['type'] != 'gallery' ) {
+	if ( $featured_media['type'] != 'gallery' ) {
 		return;
 	}
 
-	$hero_class = largo_hero_class($the_post->ID, false);
-	$classes = "hero $hero_class $classes";
+	$hero_class = largo_hero_class( $the_post->ID, false );
+	$classes = 'hero $hero_class $classes';
 
 	$context = array(
 		'classes' => $classes,
@@ -255,7 +235,7 @@ function largo_get_featured_gallery_hero( $post = null, $classes = '' ) {
 	);
 
 	ob_start();
-	largo_render_template('partials/hero', 'featured-gallery', $context);
+	largo_render_template( 'partials/hero', 'featured-gallery', $context );
 	$ret = ob_get_clean();
 
 	return $ret;
@@ -279,35 +259,34 @@ function largo_get_featured_gallery_hero( $post = null, $classes = '' ) {
  */
 function largo_get_featured_media( $post = null ) {
 
-	$post = get_post($post);
+	$post = get_post( $post );
 
-	$ret = get_post_meta($post->ID, 'featured_media', true);
+	$ret = get_post_meta( $post->ID, 'featured_media', true );
 
 	// Check if the post has a thumbnail/featured image set.
 	// If yes, send that back as the featured media.
-	$post_thumbnail = get_post_thumbnail_id($post->ID);
-	if (empty($ret) && !empty($post_thumbnail)) {
+	$post_thumbnail = get_post_thumbnail_id( $post->ID );
+	if ( empty( $ret ) && ! empty( $post_thumbnail ) ) {
 		$ret = array(
 			'id' => $post->ID,
 			'attachment' => $post_thumbnail,
 			'type' => 'image'
 		);
-	} else if (!empty($ret) && in_array($ret['type'], array('embed', 'video')) && !empty($post_thumbnail)) {
-		$attachment = wp_prepare_attachment_for_js($post_thumbnail);
-		$ret = array_merge($ret, array('attachment_data' => $attachment));
+	} else if ( ! empty( $ret ) && in_array( $ret['type'], array( 'embed', 'video' ) ) && ! empty( $post_thumbnail ) ) {
+		$attachment = wp_prepare_attachment_for_js( $post_thumbnail );
+		$ret = array_merge( $ret, array( 'attachment_data' => $attachment ) );
 	}
 
 	// Backwards compatibility with posts that have a youtube_url set
-	$youtube_url = get_post_meta($post->ID, 'youtube_url', true);
-	if (empty($ret) && !empty($youtube_url)) {
+	$youtube_url = get_post_meta( $post->ID, 'youtube_url', true );
+	if ( empty( $ret ) && ! empty( $youtube_url ) ) {
 		$ret = array(
 			'id' => $post->ID,
 			'url' => $youtube_url,
-			'embed' => wp_oembed_get($youtube_url),
+			'embed' => wp_oembed_get( $youtube_url ),
 			'type' => 'video'
 		);
 	}
-
 	return $ret;
 }
 
@@ -318,13 +297,10 @@ function largo_get_featured_media( $post = null ) {
  * @return bool If a post ID has featured media or not.
  */
 function largo_has_featured_media( $post = null ) {
-
-	$post = get_post($post);
+	$post = get_post( $post );
 	$id = isset( $post->ID ) ? $post->ID : 0;
-
-	$featured_media = largo_get_featured_media($id);
-
-	return !empty($featured_media);
+	$featured_media = largo_get_featured_media( $id );
+	return ! empty( $featured_media );
 }
 
 /**
@@ -338,43 +314,45 @@ function largo_has_featured_media( $post = null ) {
  * @global LARGO_DEBUG
  * @param array $hook The page that this function is being run on.
  */
-function largo_enqueue_featured_media_js($hook) {
-	if (!in_array($hook, array('edit.php', 'edit-tags.php', 'post-new.php', 'post.php', 'term.php')))
+function largo_enqueue_featured_media_js( $hook ) {
+	if ( ! in_array( $hook, array( 'edit.php', 'edit-tags.php', 'post-new.php', 'post.php', 'term.php' ) ) ) {
 		return;
-
+	}
 	global $post, $wp_query;
 
 	// Run this action on term edit pages
 	// edit-tags.php for wordpress before 4.5
 	// term.php for 4.5 and after
-	if ( in_array($hook, array('edit-tags.php', 'term.php')) && is_numeric($_GET['tag_ID']) ) {
+	if ( in_array( $hook, array( 'edit-tags.php', 'term.php ') ) && is_numeric( $_GET['tag_ID'] ) ) {
 		// After WordPress 4.5, the taxonomy is no longer in the URL
 		// So to compensate, we get the taxonomy from the current screen
 		$screen = get_current_screen();
 		$post = get_post( largo_get_term_meta_post( $screen->taxonomy, $_GET['tag_ID'] ) );
 	}
 
-	$featured_image_display = get_post_meta($post->ID, 'featured-image-display', true);
+	$featured_image_display = get_post_meta( $post->ID, 'featured-image-display', true );
 
 	// The scripts following depend upon the WordPress media APIs
 	wp_enqueue_media();
 
-	$suffix = (LARGO_DEBUG)? '' : '.min';
+	$suffix = ( LARGO_DEBUG ) ? '' : '.min';
 	wp_enqueue_script(
 		'largo_featured_media', get_template_directory_uri() . '/js/featured-media' . $suffix . '.js',
-		array('media-models', 'media-views'), false, 1);
+		array( 'media-models', 'media-views' ), false, 1
+	);
 
 	wp_enqueue_style(
 		'largo_featured_media',
-		get_template_directory_uri(). '/css/featured-media' . $suffix . '.css');
+		get_template_directory_uri(). '/css/featured-media' . $suffix . '.css'
+	);
 
-	wp_localize_script('largo_featured_media', 'LFM', array(
+	wp_localize_script( 'largo_featured_media', 'LFM', array(
 		'options' => largo_default_featured_media_types(),
-		'featured_image_display' => !empty($featured_image_display),
-		'has_featured_media' => (bool) largo_has_featured_media($post->ID)
+		'featured_image_display' => ! empty( $featured_image_display ),
+		'has_featured_media' => (bool) largo_has_featured_media( $post->ID )
 	));
 }
-add_action('admin_enqueue_scripts', 'largo_enqueue_featured_media_js');
+add_action( 'admin_enqueue_scripts', 'largo_enqueue_featured_media_js' );
 
 /**
  * Prints the templates used by featured media modal.
@@ -481,11 +459,11 @@ add_action( 'admin_print_footer_scripts', 'largo_featured_media_templates', 1 );
  * Remove the default featured image meta box from post pages
  */
 function largo_remove_featured_image_meta_box() {
-	remove_meta_box('postimagediv', 'post', 'normal');
-	remove_meta_box('postimagediv', 'post', 'side');
-	remove_meta_box('postimagediv', 'post', 'advanced');
+	remove_meta_box( 'postimagediv', 'post', 'normal' );
+	remove_meta_box( 'postimagediv', 'post', 'side' );
+	remove_meta_box( 'postimagediv', 'post', 'advanced' );
 }
-add_action('do_meta_boxes', 'largo_remove_featured_image_meta_box');
+add_action( 'do_meta_boxes', 'largo_remove_featured_image_meta_box' );
 
 /**
  * Add new featured image meta box to post pages
@@ -493,7 +471,7 @@ add_action('do_meta_boxes', 'largo_remove_featured_image_meta_box');
 function largo_add_featured_image_meta_box() {
     add_meta_box(
         'largo_featured_image_metabox',
-        __( 'Featured Image', $plugin_name ),
+        __( 'Featured Image', 'largo' ),
         'largo_featured_image_metabox_callback',
         array( 'post' ),
         'side',
@@ -511,8 +489,8 @@ add_action( 'add_meta_boxes', 'largo_add_featured_image_meta_box' );
 function largo_featured_image_metabox_callback( $post, $metabox ) {
 	global $post;
 
-	$has_featured_media = largo_has_featured_media($post->ID);
-	$language = (!empty($has_featured_media))? 'Edit' : 'Set';
+	$has_featured_media = largo_has_featured_media( $post->ID );
+	$language = ( ! empty( $has_featured_media ) ) ? 'Edit' : 'Set';
 
 	$checked = 'false' == get_post_meta( $post->ID, 'featured-image-display', true ) ? 'checked="checked"' : "";
 	echo wp_nonce_field( basename( __FILE__ ), 'featured_image_display_nonce' );
@@ -521,14 +499,14 @@ function largo_featured_image_metabox_callback( $post, $metabox ) {
 
 	echo '<p><label class="selectit"><input type="checkbox" value="true" name="featured-image-display"' . $checked .'> Hide on Single Post display</label></p>';
 
-	$has_featured_media = largo_has_featured_media($post->ID);
-	$language = (!empty($has_featured_media))? 'Edit' : 'Set';
+	$has_featured_media = largo_has_featured_media( $post->ID );
+	$language = ( ! empty( $has_featured_media ) ) ? 'Edit' : 'Set';
 }
 
 /**
  * Save data from meta box
  */
-function mytheme_save_data( $post_id, $post ) {
+function largo_save_featured_media_data( $post_id, $post ) {
 
 	// Verify the nonce before proceeding
 	if ( !isset( $_POST['featured_image_display_nonce'] ) || !wp_verify_nonce( $_POST['featured_image_display_nonce'], basename( __FILE__ ) ) ) {
@@ -562,7 +540,7 @@ function mytheme_save_data( $post_id, $post ) {
 		delete_post_meta( $post_id, $meta_key );
 	}
 }
-add_action('save_post', 'mytheme_save_data', 10, 2 );
+add_action( 'save_post', 'largo_save_featured_media_data', 10, 2 );
 
 /**
  * AJAX functions
@@ -573,101 +551,103 @@ add_action('save_post', 'mytheme_save_data', 10, 2 );
  * with an `id` key corresponding to post ID to look up.
  */
 function largo_featured_media_read() {
-	if (!empty($_POST['data'])) {
-		$data = json_decode(stripslashes($_POST['data']), true);
-		$ret = largo_get_featured_media($data['id']);
+	if ( !empty( $_POST['data'] ) ) {
+		$data = json_decode( stripslashes( $_POST['data'] ), true );
+		$ret = largo_get_featured_media( $data['id'] );
 
 		// Otherwise, check for `featured_media` post meta
-		if (!empty($ret)) {
-			print json_encode($ret);
+		if ( !empty( $ret ) ) {
+			print json_encode( $ret );
 			wp_die();
 		}
 
 		// No featured thumbnail and not `featured_media`, so just return
 		// an array with the post ID
-		print json_encode(array('id' => $data['id']));
+		print json_encode( array( 'id' => $data['id'] ) );
 		wp_die();
 	}
 }
-add_action('wp_ajax_largo_featured_media_read', 'largo_featured_media_read');
+add_action( 'wp_ajax_largo_featured_media_read', 'largo_featured_media_read' );
 
 /**
  * Save `featured_media` post meta. Expects array $_POST['data'] with at least
  * an `id` key corresponding to the post ID that needs meta saved.
  */
 function largo_featured_media_save() {
-	if (!empty($_POST['data'])) {
-		$data = json_decode(stripslashes($_POST['data']), true);
+	if ( !empty( $_POST['data'] ) ) {
+		$data = json_decode( stripslashes( $_POST['data'] ), true );
 
 		// If an attachment ID is present, update the post thumbnail/featured image
-		if (!empty($data['attachment']))
-			set_post_thumbnail($data['id'], $data['attachment']);
-		else
-			delete_post_thumbnail($data['id']);
-
+		if ( !empty( $data['attachment'] ) ) {
+			set_post_thumbnail( $data['id'], $data['attachment'] );
+		} else {
+			delete_post_thumbnail( $data['id'] );
+		}
 		// Get rid of the old youtube_url while we're saving
-		$youtube_url = get_post_meta($data['id'], 'youtube_url', true);
-		if (!empty($youtube_url))
+		$youtube_url = get_post_meta( $data['id'], 'youtube_url', true );
+		if ( !empty( $youtube_url ) ) {
 			delete_post_meta($data['id'], 'youtube_url');
-
+		}
 		// Set the featured image for embed or oembed types
-		if (isset($data['thumbnail_url']) && isset($data['thumbnail_type']) && $data['thumbnail_type'] == 'oembed')
-			$thumbnail_id = largo_media_sideload_image($data['thumbnail_url'], null);
-		else if (isset($data['attachment']))
+		if ( isset( $data['thumbnail_url'] ) && isset( $data['thumbnail_type'] ) && $data['thumbnail_type'] == 'oembed' ) {
+			$thumbnail_id = largo_media_sideload_image( $data['thumbnail_url'], null );
+		} else if ( isset( $data['attachment'] ) ) {
 			$thumbnail_id = $data['attachment'];
+		}
 
 		// If featured media is a gallery, use the first image as the representative thumbnail
-		if ($data['type'] == 'gallery')
+		if ( $data['type'] == 'gallery' )
 			$thumbnail_id = $data['gallery'][0];
+		}
 
-		if (isset($thumbnail_id)) {
-			update_post_meta($data['id'], '_thumbnail_id', $thumbnail_id);
-			$data['attachment_data'] = wp_prepare_attachment_for_js($thumbnail_id);
+		if ( isset( $thumbnail_id ) ) {
+			update_post_meta( $data['id'], '_thumbnail_id', $thumbnail_id );
+			$data['attachment_data'] = wp_prepare_attachment_for_js( $thumbnail_id );
 		}
 
 		// Don't save the post ID in post meta
 		$save = $data;
-		unset($save['id']);
+		unset( $save['id'] );
 
 		// Save what's sent over the wire as `featured_media` post meta
-		$ret = update_post_meta($data['id'], 'featured_media', $save);
+		$ret = update_post_meta( $data['id'], 'featured_media', $save );
 
-		print json_encode($data);
+		print json_encode( $data );
 		wp_die();
 	}
 }
-add_action('wp_ajax_largo_featured_media_save', 'largo_featured_media_save');
+add_action( 'wp_ajax_largo_featured_media_save', 'largo_featured_media_save' );
 
 /**
  * Saves the option that determines whether a featured image should be displayed
  * at the top of the post page or not.
  */
 function largo_save_featured_image_display() {
-	if (!empty($_POST['data'])) {
-		$data = json_decode(stripslashes($_POST['data']), true);
+	if ( !empty( $_POST['data'] ) ) {
+		$data = json_decode( stripslashes( $_POST['data'] ), true );
 
 		$post_ID = (int) $data['id'];
-		$post_type = get_post_type($post_ID);
-		$post_status = get_post_status($post_ID);
+		$post_type = get_post_type( $post_ID );
+		$post_status = get_post_status( $post_ID );
 
-		if ($post_type && isset($data['featured-image-display']) && $data['featured-image-display'] == 'on') {
-			update_post_meta($post_ID, 'featured-image-display', 'false');
+		if ( $post_type && isset( $data['featured-image-display'] ) && $data['featured-image-display'] == 'on') {
+			update_post_meta( $post_ID, 'featured-image-display', 'false' );
 		} else {
-			delete_post_meta($post_ID, 'featured-image-display');
+			delete_post_meta( $post_ID, 'featured-image-display' );
 		}
-		print json_encode($data);
+		print json_encode( $data );
 		wp_die();
 	}
 }
-add_action('wp_ajax_largo_save_featured_image_display', 'largo_save_featured_image_display');
+add_action( 'wp_ajax_largo_save_featured_image_display', 'largo_save_featured_image_display' );
 
 /**
  * When a URL is typed/pasted into the url field of the featured video view,
  * this function tries to fetch the oembed information for that video.
  */
 function largo_fetch_video_oembed() {
-	if (!empty($_POST['data'])) {
-		$data = json_decode(stripslashes($_POST['data']), true);
+	if ( !empty( $_POST['data'] ) ) {
+		$data = json_decode( stripslashes( $_POST['data'] ), true );
 
 		require_once( ABSPATH . WPINC . '/class-oembed.php' );
 		$oembed = _wp_oembed_get_object();
@@ -675,24 +655,24 @@ function largo_fetch_video_oembed() {
 		$provider = $oembed->get_provider($url);
 		$data = $oembed->fetch($provider, $url);
 		$embed = $oembed->data2html($data, $url);
-		$ret = array_merge(array('embed' => $embed), (array) $data);
-		print json_encode($ret);
+		$ret = array_merge( array( 'embed' => $embed ), (array) $data );
+		print json_encode( $ret );
 		wp_die();
 	}
 }
-add_action('wp_ajax_largo_fetch_video_oembed', 'largo_fetch_video_oembed');
+add_action( 'wp_ajax_largo_fetch_video_oembed', 'largo_fetch_video_oembed' );
 
 /**
  * Add post classes to indicate whether a post has featured media and what type it is
  *
  * @since 0.5.2
  */
-function largo_featured_media_post_classes($classes) {
+function largo_featured_media_post_classes( $classes ) {
 	global $post;
 
-	$featured = largo_get_featured_media($post->ID);
-	if (!empty($featured)) {
-		$classes = array_merge($classes, array(
+	$featured = largo_get_featured_media( $post->ID );
+	if ( !empty( $featured ) ) {
+		$classes = array_merge( $classes, array(
 			'featured-media',
 			'featured-media-' . $featured['type']
 		));
@@ -700,7 +680,7 @@ function largo_featured_media_post_classes($classes) {
 
 	return $classes;
 }
-add_filter('post_class', 'largo_featured_media_post_classes');
+add_filter( 'post_class', 'largo_featured_media_post_classes' );
 
 /**
  * Determines what type of hero image/video a single post should use
@@ -710,22 +690,24 @@ add_filter('post_class', 'largo_featured_media_post_classes');
  */
 if ( ! function_exists( 'largo_hero_class' ) ) {
 	function largo_hero_class( $post_id, $echo = TRUE ) {
-		$hero_class = "is-empty";
-		$featured_media = (largo_has_featured_media($post_id))? largo_get_featured_media($post_id) : array();
-		$type = (isset($featured_media['type']))? $featured_media['type'] : false;
+		$hero_class = 'is-empty';
+		$featured_media = ( largo_has_featured_media( $post_id ) ) ? largo_get_featured_media( $post_id ) : array();
+		$type = ( isset( $featured_media['type'] ) ) ? $featured_media['type'] : false;
 
-		if (get_post_meta($post_id, 'youtube_url', true) || $type == 'video')
+		if ( get_post_meta( $post_id, 'youtube_url', true ) || $type == 'video' ) {
 			$hero_class = 'is-video';
-		else if ($type == 'gallery')
+		} else if ( $type == 'gallery' ) {
 			$hero_class = 'is-gallery';
-		else if ($type == 'embed-code')
+		} else if ( $type == 'embed-code' ) {
 			$hero_class = 'is-embed';
-		else if (has_post_thumbnail($post_id) || $type == 'image')
+		} else if ( has_post_thumbnail( $post_id ) || $type == 'image') {
 			$hero_class = 'is-image';
+		}
 
-		if ($echo)
+		if ( $echo ) {
 			echo $hero_class;
-		else
+		} else {
 			return $hero_class;
+		}
 	}
 }
