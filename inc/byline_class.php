@@ -91,12 +91,14 @@ class Largo_Byline {
 	 * On single posts, output the avatar for the author object
 	 */
 	function avatar() {
-		$author_email = get_the_author_meta( 'email', $this->author_id );
-
+		
 		// only do avatars if it's a single post
-		if ( is_single() ) {
+		if ( ! is_single() ) {
+			$output = '';
+		} else {
+			$author_email = get_the_author_meta( 'email', $this->author_id );
 			if ( largo_has_avatar( $author_email ) ) {
-				$output .= get_avatar(
+				$output = get_avatar(
 					$author_email,
 					32,
 					'',
@@ -106,9 +108,8 @@ class Largo_Byline {
 				$output = get_the_post_thumbnail( $this->author_id, array( 32,32 ) );
 				$output = str_replace( 'attachment-32x32 wp-post-image', 'avatar avatar-32 photo', $output );
 			}
-		}
-
-		$output .= ' '; // to reduce run-together bylines
+			$output .= ' '; // to reduce run-together bylines	
+		}	
 		echo $output;
 	}
 
@@ -126,11 +127,11 @@ class Largo_Byline {
 	 */
 	function job_title() {
 		$show_job_titles = of_get_option( 'show_job_titles', false );
+		$output = '';
 		// only do this if we're showing job titles and there is one to be shown
 		if ( $show_job_titles && $job = get_the_author_meta( 'job_title' , $this->author_id ) ) {
 			$output .= '<span class="job-title"><span class="comma">,</span> ' . $job . '</span>';
 		}
-		$output .= '';
 		echo $output;
 	}
 
@@ -139,6 +140,7 @@ class Largo_Byline {
 	 */
 	function twitter() {
 		$twitter = get_the_author_meta( 'twitter', $this->author_id );
+		$output = '';
 		if ( $twitter && is_single() ) {
 			$output .= ' <span class="twitter"><a href="https://twitter.com/' . largo_twitter_url_to_username( $twitter ) . '"><i class="icon-twitter"></i></a></span>';
 		}
