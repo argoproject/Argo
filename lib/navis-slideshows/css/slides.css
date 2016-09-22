@@ -134,6 +134,15 @@ body.normal.single-post .hero .navis-slideshow .wp-caption-text {
     height:0;
 }
 
+body.single-format-standard .navis-slideshow a.slick-previous {
+	left: 0px;
+	background: none;
+}
+body.single-format-standard .navis-slideshow a.slick-next {
+	right: 0px;
+	background: none;
+}
+
 .navis-slideshow a.slick-previous {
     position: absolute;
     top: 0px;
