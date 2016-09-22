@@ -99,21 +99,6 @@ class FeaturedMediaTestFunctions extends WP_UnitTestCase {
 		$this->assertTrue(!empty($wp_scripts->registered['largo_featured_media']));
 	}
 
-	function test_largo_add_featured_media_button() {
-		global $post;
-		$post = get_post($this->post);
-		setup_postdata($post);
-
-		$ret = largo_add_featured_media_button('TEST');
-
-		// `largo_add_featured_media_button` should concatenate featured media button markup
-		// and the $context string passed to it
-		$this->assertTrue((bool) preg_match('/^TEST/', $ret));
-
-		// Make sure the button ID attribute is present and matches our expectation
-		$this->assertTrue((bool) preg_match('/id\="set\-featured\-media\-button"/', $ret));
-	}
-
 	function test_largo_featured_media_templates() {
 		// Since this function prints A LOT of stuff, let's just make sure it exists
 		$this->assertTrue(function_exists('largo_featured_media_templates'));
