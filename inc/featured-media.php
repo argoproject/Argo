@@ -450,7 +450,7 @@ function largo_featured_media_templates() { ?>
 	</script>
 
 	<script type="text/template" id="tmpl-featured-remove-featured">
-		<h1>Are you sure you want to remove featured media from this post?</h1>
+		<h1><?php echo __( 'Are you sure you want to remove featured media from this post?', 'largo' ); ?></h1>
 	</script>
 <?php }
 add_action( 'admin_print_footer_scripts', 'largo_featured_media_templates', 1 );
@@ -495,9 +495,9 @@ function largo_featured_image_metabox_callback( $post, $metabox ) {
 	$checked = 'false' == get_post_meta( $post->ID, 'featured-image-display', true ) ? 'checked="checked"' : "";
 	echo wp_nonce_field( basename( __FILE__ ), 'featured_image_display_nonce' );
 
-	echo '<a href="#" id="set-featured-media-button" class="button set-featured-media add_media" data-editor="content" title="' . $language . ' Featured Media"></span> ' . $language . ' Featured Media</a> <span class="spinner" style="display: none;"></span>';
+	echo '<a href="#" id="set-featured-media-button" class="button set-featured-media add_media" data-editor="content" title="' . __( $language . ' Featured Media', 'largo' ) . '"></span> ' . __( $language . ' Featured Media', 'largo' ) . '</a> <span class="spinner" style="display: none;"></span>';
 
-	echo '<p><label class="selectit"><input type="checkbox" value="true" name="featured-image-display"' . $checked .'> Hide on Single Post display</label></p>';
+	echo '<p><label class="selectit"><input type="checkbox" value="true" name="featured-image-display"' . $checked .'> ' . __( 'Hide on Single Post display', 'largo' ) . '</label></p>';
 
 	$has_featured_media = largo_has_featured_media( $post->ID );
 	$language = ( ! empty( $has_featured_media ) ) ? 'Edit' : 'Set';
