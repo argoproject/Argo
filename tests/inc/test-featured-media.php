@@ -55,11 +55,11 @@ class FeaturedMediaTestFunctions extends WP_UnitTestCase {
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
-	function test_largo_featured_image_hero() {
+	function test_largo_get_featured_hero() {
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
-	function test_largo_get_featured_image_hero() {
+	function test_largo_featured_image_hero() {
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
@@ -67,15 +67,7 @@ class FeaturedMediaTestFunctions extends WP_UnitTestCase {
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
-	function test_largo_get_featured_embed_hero() {
-		$this->markTestIncomplete('This test has not been implemented yet.');
-	}
-
 	function test_largo_featured_gallery_hero() {
-		$this->markTestIncomplete('This test has not been implemented yet.');
-	}
-
-	function test_largo_get_featured_gallery_hero() {
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
