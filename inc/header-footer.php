@@ -96,8 +96,7 @@ if ( ! function_exists( 'inn_logo' ) ) {
 if ( ! function_exists( 'largo_social_links' ) ) {
 	function largo_social_links() {
 
-		$fields = array(
-			
+		$networks = array(
 			'facebook' 	=> __( 'Link to Facebook Profile', 'largo' ),
 			'twitter' 	=> __( 'Link to Twitter Page', 'largo' ),
 			'gplus' 	=> __( 'Link to Google Plus Page', 'largo' ),
@@ -110,8 +109,9 @@ if ( ! function_exists( 'largo_social_links' ) ) {
 			'flickr' 	=> __( 'Link to Flickr Page', 'largo' ),
 			'rss' 		=> __( 'Link to RSS Feed', 'largo' )
 		);
+		$networks = apply_filters( 'largo_additional_networks', $networks );
 
-		foreach ( $fields as $field => $title ) {
+		foreach ( $networks as $field => $title ) {
 			$field_link =  $field . '_link';
 
 			if ( of_get_option( $field_link ) ) {

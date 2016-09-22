@@ -136,7 +136,6 @@ inc/update.php
    :param array $replacement: the replacement widget's $instance variables
 
    :returns: array $result the replacement widget's $instance variables
-
 .. php:function:: largo_widget_in_region()
 
    Checks to see if a given widget is in a given region already

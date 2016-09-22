@@ -14,7 +14,7 @@ class largo_facebook_widget extends WP_Widget {
 	function __construct() {
 		$widget_ops = array(
 			'classname' 	=> 'largo-facebook',
-			'description' 	=> __('Show a Facebook Like Box for your page', 'largo')
+			'description' 	=> __('Show a Facebook Page Box for your page', 'largo')
 		);
 		parent::__construct( 'largo-facebook-widget', __('Largo Facebook Widget', 'largo'), $widget_ops);
 	}
@@ -24,12 +24,16 @@ class largo_facebook_widget extends WP_Widget {
 
 		echo $before_widget;
 
-			$height = isset( $instance['widget-height'] ) ? $instance['widget-height'] : 350;
-			$output = '<div class="fb-like-box" data-href="' . esc_url( $instance['fb_page_url'] ) . '" data-height="' . (int) $height . '"';
-			$output .= ! empty( $instance['show_faces'] ) ? ' data-show-faces="true"' : ' data-show-faces="false"';
-			$output .= ! empty( $instance['show_stream'] ) ? ' data-stream="true"' : ' data-stream="false"';
-			$output .= ! empty( $instance['show_header'] ) ? ' data-header="true"' : ' data-header="false"';
-			$output .= '></div>';
+			$page_url = esc_url( $instance['fb_page_url'] );
+			$height = isset( $instance['widget_height'] ) ? $instance['widget_height'] : 350;
+			
+			$output = '<div class="fb-page" data-adapt-container-width="true" data-href="' . $page_url . '"';
+			$output .= ' data-height="' . (int) $height . '"';
+			$output .= ! empty( $instance['show_faces'] ) ? ' data-show-facepile="true"' : ' data-show-facepile="false"';
+			if ( !empty( $instance['show_stream'] ) ) {
+				$output .= ' data-tabs="timeline"';
+			}
+			$output .= '><div class="fb-xfbml-parse-ignore"><blockquote cite="' . $page_url . '"><a href="' . $page_url . '">' . get_bloginfo( 'name' ) .'</a></blockquote></div></div>';
 
 		echo $output;
 
@@ -44,7 +48,6 @@ class largo_facebook_widget extends WP_Widget {
 		$instance['widget_height'] = (int) $new_instance['widget_height'];
 		$instance['show_faces'] = ! empty( $new_instance['show_faces'] ) ? 1 : 0;
 		$instance['show_stream'] = ! empty( $new_instance['show_stream'] ) ? 1 : 0;
-		$instance['show_header'] = ! empty( $new_instance['show_header'] ) ? 1 : 0;
 		return $instance;
 	}
 
@@ -54,30 +57,26 @@ class largo_facebook_widget extends WP_Widget {
 			'widget_height' 	=> 350,
 			'show_faces' 		=> 1,
 			'show_stream' 		=> 0,
-			'show_header' 		=> 0
 		);
 		$instance = wp_parse_args( (array) $instance, $defaults );
 		$show_faces = ! empty( $instance['show_faces'] ) ? 'checked="checked"' : '';
 		$show_stream = ! empty( $instance['show_stream'] ) ? 'checked="checked"' : '';
-		$show_header = ! empty( $instance['show_header'] ) ? 'checked="checked"' : '';
 		?>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'fb_page_url' ); ?>"><?php _e('Facebook Page URL:', 'largo'); ?></label>
+			<label for="<?php echo $this->get_field_id( 'fb_page_url' ); ?>"><?php _e( 'Facebook Page URL:', 'largo' ); ?></label>
 			<input id="<?php echo $this->get_field_id( 'fb_page_url' ); ?>" name="<?php echo $this->get_field_name( 'fb_page_url' ); ?>" value="<?php echo esc_attr( $instance['fb_page_url'] ); ?>" style="width:90%;" />
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'widget_height' ); ?>"><?php _e('Widget Height:', 'largo'); ?></label>
+			<label for="<?php echo $this->get_field_id( 'widget_height' ); ?>"><?php _e( 'Widget Height:', 'largo' ); ?></label>
 			<input id="<?php echo $this->get_field_id( 'widget_height' ); ?>" name="<?php echo $this->get_field_name( 'widget_height' ); ?>" value="<?php echo (int) $instance['widget_height']; ?>" style="width:90%;" />
 		</p>
 
 		<p style="margin:15px 0 10px 5px">
-			<input class="checkbox" type="checkbox" <?php echo $show_faces; ?> id="<?php echo $this->get_field_id('show_faces'); ?>" name="<?php echo $this->get_field_name('show_faces'); ?>" /> <label for="<?php echo $this->get_field_id('show_faces'); ?>"><?php _e('Show Faces?', 'largo'); ?></label>
+			<input class="checkbox" type="checkbox" <?php echo $show_faces; ?> id="<?php echo $this->get_field_id( 'show_faces' ); ?>" name="<?php echo $this->get_field_name( 'show_faces' ); ?>" /> <label for="<?php echo $this->get_field_id( 'show_faces' ); ?>"><?php _e( 'Show Faces?', 'largo'); ?></label>
 			<br />
-			<input class="checkbox" type="checkbox" <?php echo $show_stream; ?> id="<?php echo $this->get_field_id('show_stream'); ?>" name="<?php echo $this->get_field_name('show_stream'); ?>" /> <label for="<?php echo $this->get_field_id('show_stream'); ?>"><?php _e('Show Stream?', 'largo'); ?></label>
-			<br />
-			<input class="checkbox" type="checkbox" <?php echo $show_header; ?> id="<?php echo $this->get_field_id('show_header'); ?>" name="<?php echo $this->get_field_name('show_header'); ?>" /> <label for="<?php echo $this->get_field_id('show_header'); ?>"><?php _e('Show Header?', 'largo'); ?></label>
+			<input class="checkbox" type="checkbox" <?php echo $show_stream; ?> id="<?php echo $this->get_field_id( 'show_stream' ); ?>" name="<?php echo $this->get_field_name( 'show_stream' ); ?>" /> <label for="<?php echo $this->get_field_id( 'show_stream' ); ?>"><?php _e( 'Show Stream?', 'largo' ); ?></label>
 		</p>
 
 	<?php
