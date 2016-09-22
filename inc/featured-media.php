@@ -274,10 +274,27 @@ function largo_enqueue_featured_media_js( $hook ) {
 
 	$suffix = ( LARGO_DEBUG ) ? '' : '.min';
 	wp_enqueue_script(
-		'largo_featured_media', get_template_directory_uri() . '/js/featured-media' . $suffix . '.js',
-		array( 'media-models', 'media-views' ), false, 1
+		'largo_featured_media',
+		get_template_directory_uri() . '/js/featured-media' . $suffix . '.js',
+		array( 'media-models', 'media-views' ),
+		false,
+		1
 	);
-
+	wp_localize_script(
+		'largo_featured_media',
+		'largo_featured_media_vars',
+		array(
+			'embed_title' => __( 'Featured embed code', 'largo' ),
+			'video_title' => __( 'Featured video', 'largo' ),
+			'image_title' => __( 'Featured image', 'largo' ),
+			'gallery_title' => __( 'Featured gallery', 'largo' ),
+			'error_invalid_url' => __( 'Error: please enter a valid URL.', 'largo' ),
+			'error_occurred' => __( 'An error ocurred', 'largo' ),
+			'set_featured' => __( 'Set as featured', 'largo' ),
+			'confirm_remove_featured' => __( 'Yes, remove featured media', 'largo' ),
+			'remove_featured_title' => __( 'Remove featured', 'largo' )
+		)
+	);
 	wp_enqueue_style(
 		'largo_featured_media',
 		get_template_directory_uri(). '/css/featured-media' . $suffix . '.css'

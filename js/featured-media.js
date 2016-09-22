@@ -82,7 +82,7 @@ var LFM = _.extend(LFM || {}, {
                 embed = [
                     // Embed code
                     new wp.media.controller.Embed({
-                        title: 'Featured embed code',
+                        title: largo_featured_media_vars.embed_title,
                         id: 'embed-code',
                         content: 'embed',
                         priority: 0
@@ -91,7 +91,7 @@ var LFM = _.extend(LFM || {}, {
                 video = [
                     // Video embed
                     new wp.media.controller.Embed({
-                        title: 'Featured video',
+                        title: largo_featured_media_vars.video_title,
                         id: 'video',
                         content: 'video',
                         priority: 10
@@ -100,7 +100,7 @@ var LFM = _.extend(LFM || {}, {
                 image = [
                     // Featured image
                     new wp.media.controller.FeaturedImage({
-                        title: 'Featured image',
+                        title: largo_featured_media_vars.image_title,
                         priority: 20,
                         id: 'image',
                     }),
@@ -111,7 +111,7 @@ var LFM = _.extend(LFM || {}, {
                     // Featured gallery
                     new wp.media.controller.Library({
                         id: 'gallery',
-                        title: 'Featured gallery',
+                        title: largo_featured_media_vars.gallery_title,
                         priority: 30,
                         toolbar: 'main-gallery',
                         filterable: 'uploaded',
@@ -505,7 +505,7 @@ var LFM = _.extend(LFM || {}, {
                             if (url_pattern.test(address))
                                 self.fetchMeta(address);
                             else {
-                                error.html('Error: please enter a valid URL.');
+                                error.html(largo_featured_media_vars.error_invalid_url);
                             }
                         }, 100);
                     });
@@ -521,7 +521,7 @@ var LFM = _.extend(LFM || {}, {
                     error.html('');
 
                     if (!data.embed)
-                        error.html('Please enter a valid video URL.');
+                        error.html(largo_featured_media_vars.error_invalid_url);
                     else
                         self.$el.find('textarea').html(data.embed);
 
@@ -537,7 +537,7 @@ var LFM = _.extend(LFM || {}, {
                     self.hideSpinner();
                 },
                 failure = function() {
-                    console.log('An error ocurred');
+                    console.log(largo_featured_media_vars.error_occurred);
                 };
 
             this.showSpinner();
@@ -645,7 +645,7 @@ var LFM = _.extend(LFM || {}, {
                         style: 'primary',
                         priority: 10,
                         requires: { selection: true },
-                        text: 'Set as featured',
+                        text: largo_featured_media_vars.set_featured,
                         click: this.save.bind(this)
                     }
                 }
@@ -684,7 +684,7 @@ var LFM = _.extend(LFM || {}, {
                         style: 'primary',
                         priority: 10,
                         requires: false,
-                        text: 'Yes, remove featured media',
+                        text: largo_featured_media_vars.confirm_remove_featured,
                         click: this.clearFeatured.bind(this)
                     }
                 }
@@ -768,7 +768,7 @@ var LFM = _.extend(LFM || {}, {
     LFM.Controller.removeFeaturedMedia = wp.media.controller.State.extend({
         defaults: {
             id: 'remove',
-            title: 'Remove featured',
+            title: largo_featured_media_vars.remove_featured_title,
             content: 'remove',
             menu: 'default',
             toolbar: 'remove-featured',
