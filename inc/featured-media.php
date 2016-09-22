@@ -67,8 +67,7 @@ function largo_get_hero( $post = null, $classes = '' ) {
 	}
 	if ( largo_has_featured_media( $post->ID ) && $hero_class !== 'is-empty' ) {
 
-		$featured_media = largo_get_featured_media( $post->ID );
-		$ret = largo_get_featured_hero( $post->ID,$classes );
+		$ret = largo_get_featured_hero( $post->ID, $classes );
 	}
 
 	/**
