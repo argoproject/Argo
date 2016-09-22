@@ -429,7 +429,7 @@ function largo_add_featured_image_meta_box() {
         'largo_featured_image_metabox_callback',
         array( 'post' ),
         'side',
-        'low'
+        'core'
     );
 }
 add_action( 'add_meta_boxes', 'largo_add_featured_image_meta_box' );
