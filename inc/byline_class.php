@@ -273,7 +273,7 @@ class Largo_CoAuthors_Byline extends Largo_Byline {
 
 		// Now assemble the One True Byline
 		ob_start();
-		echo $authors;
+		echo '<span class="by-author"><span class="by">' . __( 'By', 'largo' ) . '</span> <span class="author vcard" itemprop="author">' . $authors . '</span></span>';
 		$this->maybe_updated_date();
 		$this->edit_link();
 
