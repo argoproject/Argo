@@ -28,7 +28,7 @@ filter: **largo_homepage_series_stories_list_maximum**
 
 filter: **largo_homepage_topstories_post_count**
 
-    *args: $showposts*
+    *args: $posts_per_page*
 
     Filter the number of posts that are displayed in the right-hand side of the Top Stories homepage template.
 
