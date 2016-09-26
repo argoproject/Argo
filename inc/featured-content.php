@@ -10,7 +10,7 @@
  */
 function largo_get_featured_posts( $args = array() ) {
     $defaults = array(
-        'showposts' => 3,
+        'posts_per_page' => 3,
         'offset' 	=> 0,
         'orderby' 	=> 'date',
         'order' 	=> 'DESC',

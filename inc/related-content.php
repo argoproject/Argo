@@ -158,7 +158,7 @@ function largo_get_recent_posts_for_term( $term, $max = 5, $min = 1 ) {
     global $post;
 
     $query_args = array(
-        'showposts' 			=> $max,
+        'posts_per_page' 			=> $max,
         'orderby' 				=> 'date',
         'order' 				=> 'DESC',
         'ignore_sticky_posts' 	=> 1,
@@ -185,7 +185,7 @@ function largo_get_recent_posts_for_term( $term, $max = 5, $min = 1 ) {
 			$post_ids = preg_split( '#\s*,\s*#', get_post_meta( $post->ID, 'largo_custom_related_posts', true ) );
 			$query_args[ 'post__in' ] = $post_ids;
 			$query_args[ 'orderby' ] = 'post__in';
-			$query_args['showposts'] = count($post_ids);
+			$query_args['posts_per_page'] = count($post_ids);
 		}
 
     $query_args = apply_filters( 'largo_get_recent_posts_for_term_query_args', $query_args, $term, $max, $min, $post );
@@ -440,7 +440,7 @@ function largo_filter_get_recent_posts_for_term_query_args( $query_args, $term, 
     if ( $term->term_id == -90 ) {
         $posts = preg_split( '#\s*,\s*#', get_post_meta( $post->ID, 'largo_custom_related_posts', true ) );
         $query_args = array(
-            'showposts'             => $max,
+            'posts_per_page'        => $max,
             'orderby'               => 'post__in',
             'order'                 => 'ASC',
             'ignore_sticky_posts'   => 1,

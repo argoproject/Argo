@@ -14,7 +14,7 @@
  */
 $numposts = 20;
 $posts = query_posts( array(
-  'showposts' => $numposts
+  'posts_per_page' => $numposts
 ) );
 $lastpost = $numposts - 1;
 

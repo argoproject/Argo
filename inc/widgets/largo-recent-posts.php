@@ -55,8 +55,8 @@ class largo_recent_posts_widget extends WP_Widget {
 		$excerpt = isset( $instance['excerpt_display'] ) ? $instance['excerpt_display'] : 'num_sentences';
 
 		$query_args = array (
-			'post__not_in' 	=> get_option( 'sticky_posts' ),
-			'showposts' 	=> $instance['num_posts'],
+			'post__not_in' 	 => get_option( 'sticky_posts' ),
+			'posts_per_page' => $instance['num_posts'],
 			'post_status'	=> 'publish'
 		);
 
