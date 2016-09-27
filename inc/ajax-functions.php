@@ -197,7 +197,7 @@ if (!function_exists('largo_load_more_posts_choose_partial')) {
 		 *
 		 * When building your own filter, you must set the fourth parameter of add_filter to 2:
 		 *
-		 *     function your_filter_name($partial, $post_type, $context) {
+		 *     function your_filter_name($partial, $post_type) {
 		 *         // things
 		 *         return $partials;
 		 *     }
