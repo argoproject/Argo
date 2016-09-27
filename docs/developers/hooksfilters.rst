@@ -124,7 +124,7 @@ filter: **largo_lmp_template_partial**
 
     When building your own filter, you must set the fourth parameter of add_filter to 2: ::
 
-        function your_filter_name( $partial, $post_type, $context ) {
+        function your_filter_name( $partial, $post_type ) {
             // things
             return $partials;
         }
