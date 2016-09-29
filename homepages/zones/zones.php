@@ -27,9 +27,7 @@ function homepage_big_story_headline($moreLink=false) {
 	ob_start();
 ?>
 	<article>
-		<?php if ( largo_top_term( array( 'post'=> $bigStoryPost->ID ) ) ) : ?>
-			<h5 class="top-tag"><?php largo_top_term( array( 'post'=> $bigStoryPost->ID ) ); ?></h5>
-		<?php endif; ?>
+		<?php largo_maybe_top_term( array( 'post'=> $bigStoryPost->ID ) ); ?>
 		<h2><a href="<?php echo get_permalink($bigStoryPost->ID); ?>"><?php echo $bigStoryPost->post_title; ?></a></h2>
 		<h5 class="byline"><?php largo_byline(true, true, $bigStoryPost); ?></h5>
 		<section>
