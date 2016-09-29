@@ -10,9 +10,12 @@
 
 	<header>
 
-		<?php if ( largo_top_term() ) : ?> 
-			<h5 class="top-tag"><?php largo_top_term() ?></h5>
-		<?php endif; ?>
+		<?php
+			$top_term = largo_top_term( array( 'echo' => False ) );
+			if ( $top_term ) {
+		?>
+			<h5 class="top-tag"><?php echo $top_term; ?></h5>
+		<?php } ?>
 
 		<h1 class="entry-title" itemprop="headline"><?php the_title(); ?></h1>
 		<?php if ( $subtitle = get_post_meta( $post->ID, 'subtitle', true ) ) : ?>
