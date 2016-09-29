@@ -342,3 +342,20 @@ if ( ! function_exists( 'largo_comment' ) ) {
 		endswitch;
 	}
 }
+
+/**
+ * If largo_top_term() would output a term, wrap that in an h5.top-term and output it to the page.
+ *
+ * Takes the same argument array as largo_top_term(), and passes that argument array to
+ * largo_top_term() with 'echo' => False. largo_maybe_top_term() handles the echo decision.
+ *
+ * @since 0.5.5
+ * @param Array $args the same argument array that would be passed to largo_top_term()
+ */
+function largo_maybe_top_term( $args = array() ) {
+	$args = array_merge( $args, array( 'echo' => False ) );
+	$top_term = largo_top_term( $args );
+	if ( $top_term ) { ?>
+		<h5 class="top-tag"><?php echo $top_term; ?></h5>
+	<?php }
+}
