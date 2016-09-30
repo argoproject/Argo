@@ -5,7 +5,7 @@
 
 
 /*------------------------------------------------------------------------------
-    1.0 - Normal layout overrides (override two column display)
+  1.0 - Normal layout overrides (override two column display)
 ------------------------------------------------------------------------------*/
 
 body.normal.single-post,
@@ -50,21 +50,11 @@ body.normal.page {
     }
   }
 
-  /* 1.3 - Sidebar (left of post) */
+  /* 1.3 - Sidebar (right of post) */
 
-  .single #main #sidebar {
+  &.single #main #sidebar {
       /* all to undo bootstrap */
-      float: none;
-      width: auto;
-      min-height: 0;
-      margin-left: 0;
-    .widget {
-      /* float widgets */
-      float: left; 
-      clear: left;
-      padding-right: 20px; // add padding for gutter between body text & sidebar
-      width: 17.021276594% - @fluidGridGutterWidth;
-    }
+      float: right;
     .widget:first-child {
       padding-top: 0; // first widget flush with top of article
     }
@@ -139,7 +129,7 @@ body.normal.page {
 }
 
 /*------------------------------------------------------------------------------
-    2.0 - Entry Element Styles
+  2.0 - Entry Element Styles
 ------------------------------------------------------------------------------*/
 
 
@@ -318,13 +308,70 @@ h2.subtitle {
   }
 }
 
+#floating-social-buttons,
+.largo-follow {
+  .rss {
+    .socialButton (@rss);
+  }
+  .twitter {
+    .socialButton (@twitter);
+  }
+  .facebook {
+    .socialButton (@facebook);
+  }
+  .linkedin {
+    .socialButton (@linkedin);
+  }
+  .gplus {
+    .socialButton (@gplus);
+  }
+  .flickr {
+    .socialButton (@flickr);
+  }
+  .youtube {
+    .socialButton (@youtube);
+  }
+  .instagram {
+    .socialButton (@instagram);
+  }
+  .pinterest {
+    .socialButton (@pinterest);
+  }
+  .tumblr {
+    .socialButton (@tumblr);
+  }
+  .github {
+    .socialButton (@github);
+  }
+  .print {
+    background-color: #85898F;
+    &:hover {
+      background-color: darken(#85898F, 5%);
+    }
+  }
+  .email {
+    background-color: #62656F;
+    &:hover {
+      background-color: darken(#62656F, 5%);
+    }
+  }
+  .social-btn {
+    line-height: 1.5em;
+    margin: 0.5em 0; // left-align buttons
+    padding: 0.66em;
+    color: @white;
+    &:hover {
+	  color: @white;
+    }
+  }
+}
+
 #floating-social-buttons {
   transition: opacity 0.2s;
   border: 1px solid @grayLighter;
   .hidden-phone {
     display: none;
   }
-
   .post-social {
     & > span {
       padding-left: -100%;
@@ -332,9 +379,9 @@ h2.subtitle {
       margin: 0;
       padding: 0;
       font-size: 20px;
-
-      &:hover { cursor: pointer; }
-
+      &:hover { 
+	    cursor: pointer;
+	  }
       & > a {
         color: @grayLighter;
         display: block;
@@ -348,68 +395,12 @@ h2.subtitle {
       color: @white;
     }
   }
-  .rss {
-    background-color: @white;
-    color: @grayLighter;
-    &:hover {
-      background-color: darken(@rss, 5%);
-    }
-  }
-  .twitter {
-    background-color: @white;
-    color: @grayLighter;
-    &:hover {
-      background-color: darken(@twitter, 5%);
-    }
-  }
-  .facebook {
-    background-color: @white;
-    color: @grayLighter;
-    &:hover {
-      background-color: darken(@facebook, 5%);
-    }
-  }
-  .linkedin {
-    background-color: @white;
-    color: @grayLighter;
-    &:hover {
-      background-color: darken(@linkedin, 5%);
-    }
-  }
-  .gplus {
-    background-color: @white;
-    color: @grayLighter;
-    &:hover {
-      background-color: darken(@gplus, 5%);
-    }
-  }
-  .flickr {
-    background-color: @white;
-    color: @grayLighter;
-    &:hover {
-      background-color: darken(@flickr, 5%);
-    }
-  }
-  .youtube {
-    background-color: @white;
-    color: @grayLighter;
-    &:hover {
-      background-color: darken(@youtube, 5%);
-    }
-  }
-  .print {
-    background-color: @white;
-    color: @grayLighter;
-    &:hover {
-      background-color: darken(#85898F, 5%);
-    }
-  }
+  .twitter,
+  .facebook,
+  .print,
   .email {
-    background-color: @white;
     color: @grayLighter;
-    &:hover {
-      background-color: darken(#62656F, 5%);
-    }
+    background-color: @white;
   }
   .more-social-links {
     background-color: @white;
@@ -419,11 +410,9 @@ h2.subtitle {
       background-color: @orange;
       color: @white;
     }
-
     .popover {
       top: 68px;
       font-size: 14px;
-
       i {
         margin-right: 0.25em;
       }
@@ -437,9 +426,6 @@ h2.subtitle {
     }
   }
   .social-btn {
-    line-height: 1.5em;
-    max-width: 250px;
-    margin: 0.5em 0;
     padding: 0.5em;
   }
   .post-social {
@@ -453,7 +439,7 @@ h2.subtitle {
   }
 }
 
-/* 2.3 - Default WP Post Pagination 
+/* 2.3 - Default WP Post Pagination
  * ---------------------------------
  * NOTE: Largo has a widget to handle post pagination, these style default WP output
  *
@@ -534,6 +520,9 @@ h2.subtitle {
   margin: 0 0 24px;
   &.is-gallery {
     background-color: transparent;
+    &.span12 {
+      margin-left: 0;
+    }
   }
   p.wp-caption-text,
   p.wp-media-credit {

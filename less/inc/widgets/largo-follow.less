@@ -1,6 +1,8 @@
 /**
  * Styles for the Largo Follow widget
  *
+ * Note: styles for social buttons are in single.less
+ *
  * @since 0.5.3
  */
 .subscribe {
@@ -23,97 +25,6 @@
   }
 }
 
-// These colors also used in .post-social in single.less
-.largo-follow {
-  .rss {
-    background-color: @rss;
-    color:@white;
-    &:hover {
-      background-color: darken(@rss, 5%);
-    }
-  }
-  .twitter {
-    background-color:@twitter;
-    color:@white;
-    &:hover {
-      background-color: darken(@twitter, 5%);
-    }
-  }
-  .facebook {
-    background-color:@facebook;
-    color:@white;
-    &:hover {
-      background-color: darken(@facebook, 5%);
-    }
-  }
-  .linkedin {
-    background-color:@linkedin;
-    color:#fff;
-    &:hover {
-      background-color: darken(@linkedin, 5%);
-    }
-  }
-  .gplus {
-    background-color:@gplus;
-    color:@white;
-    &:hover {
-      background-color: darken(@gplus, 5%);
-    }
-  }
-  .flickr {
-    background-color:@flickr;
-    color:#fff;
-    &:hover {
-      background-color: darken(@flickr, 5%);
-    }
-  }
-  .youtube {
-    background-color:@youtube;
-    color:@white;
-    &:hover {
-      background-color: darken(@youtube, 5%);
-    }
-  }
-  .print {
-    background-color: #85898F;
-    color:#fff;
-    &:hover {
-      background-color: darken(#85898F, 5%);
-    }
-  }
-  .email {
-    background-color: #62656F;
-    color:#fff;
-    &:hover {
-      background-color: darken(#62656F, 5%);
-    }
-  }
-  .social-btn {
-    line-height: 1.5em;
-    margin: 0.5em 0; // left-align buttons
-    padding: 0.66em;
-  }
-}
-
 .article-bottom .largo-follow {
   padding: 0;
 }
-.twitter-follow-button {
-  display: block;
-  margin: 0 0 (@baseline - 6);
-}
-.widget .fb-like {
-  margin: 0 0 (@baseline / 4);
-}
-.fb-like, .fb-like span, .fb-like.fb_iframe_widget span iframe,
-.fb-like-box, .fb-like-box span, .fb-like-box span iframe[style] {
-  width: 100% !important;
-}
-.fb-like-box {
-  background: white !important;
-  background-color: white !important;
-}
-.flickr-follow {
-  margin-bottom: (@baseline / 2);
-}
-

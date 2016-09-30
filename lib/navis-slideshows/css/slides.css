@@ -1,15 +1,18 @@
 .navis-slideshow {
-    background-color: #efefef;
-    font-family: Arial;
+    background-color: #fff;
+    font-family: sans-serif;
     font-size: 11px;
     color: #666;
     position: relative;
-    border: 1px solid #ddd;
+    border: none;
     width: 100%;
-    margin-top: 20px;
+    margin-top: 0;
     margin-bottom: 20px;
-    display: none;
-    padding: 36px 0 5px 0;
+    padding: 4px 0 0 0;
+}
+
+.navis-slideshow .slick-list {
+    top:24px;
 }
 
 .ie6 .navis-slideshow {
@@ -24,31 +27,55 @@
 }
 
 .navis-slideshow h6 {
-    margin: 6px;
+    margin: 0 0 -10px;
     font-weight: normal;
     font-size: 11px;
     font-style: italic;
     color: #666;
+    z-index:2;
 }
 
 .navis-slideshow h6.credit {
-    text-align: right;
-    float: right;
+    position:absolute;
+    left: 17%;
+    padding: .5em 0;
+    text-align:right;
+    display:none;
 }
 
 .navis-slideshow h6.permalink {
-    float: left;
+    position:absolute;
+    left: 2%;
     text-align: left;
+    padding-left: 16px;
 }
 
 .slide-permalink {
     font-weight: normal;
     font-style: normal;
     outline: none;
+    display:none;
 }
 
 .navis-slideshow .wp-caption-text {
     clear: both;
+    width:100%;
+    color: #000;
+    background-color: #fff;
+    width: 100%;
+    padding:1em 0!important;
+    margin:0;
+    //margin: 0 2%!important;
+    // padding: .75em 1em 1.5em!important;
+    // border: 4px solid #000;
+    // border-bottom:none;
+    position: relative;
+    font-size:12px!important;
+    font-style:italic;
+}
+
+body.normal.single-post .hero .navis-slideshow .wp-caption-text {
+    padding:1em 17.0213%!important;
 }
 
 .slide-permalink:hover {
@@ -57,77 +84,332 @@
 }
 
 .navis-slideshow .slick-dots {
-    margin: 0 !important;
-    width: 95%;
-    padding: 0;
+    display: -ms-flexbox!important;
+    display: -webkit-flex!important;
+    display: flex!important;
+    margin: 0!important;
+    width: 100%;
     position: absolute;
-    top: 10px;
-    left: 10px
+    top: 4px;
+    left: 0;
 }
 
 .navis-slideshow .slick-dots li {
-    float: left;
-    margin: 0 1px !important;
+    float: none;
+    width:100%;
+    margin: 0!important;
     list-style: none;
     background: none !important;
     padding: 0 !important;
+    border-right:1px solid #ffffff;
+}
+.navis-slideshow .slick-dots li:last-of-type {
+    border-right:none;
 }
 
 .navis-slideshow .slick-dots li button {
     border: none;
     display: block;
-    width: 12px;
-    height: 12px;
-    background-color: transparent;
-    background-image: url(../img/pagination.png);
-    background-position: 0 0;
+    width: 100%;
+    height: 4px;
+    background-color: #ccc;
+    background-image: none;
     float: left;
     overflow: hidden;
     text-indent: -99999px;
 }
 
 .navis-slideshow .slick-dots li.slick-active button {
-    background-position: 0 -12px
+    background-color: #666;
 }
 
 .navis-slideshow a.slick-navigation {
-    background: url(../img/slide-nav.png) no-repeat top left;
+    background-color: transparent;
+    background-image:none;
     text-indent: -10000px;
     display: block;
     text-decoration: none;
     outline: none;
+    width:0;
+    height:0;
+}
+
+body.single-format-standard .navis-slideshow a.slick-previous {
+	left: 0px;
+	background: none;
+}
+body.single-format-standard .navis-slideshow a.slick-next {
+	right: 0px;
+	background: none;
 }
 
 .navis-slideshow a.slick-previous {
     position: absolute;
-    top: 5px;
-    right: 32px;
-    background-position: 0 -213px;
-    width: 21px;
-    height: 21px;
+    top: 0px;
+    left: -40px;
+    height:100%;
+    width:40px;
+    border:none;
     z-index: 10;
     outline: none;
+    background-color: #fff;
+    border-right:4px solid transparent;
 }
 
 .navis-slideshow a.slick-previous:hover {
-    background-position: 0 -142px;
-    width: 21px;
-    height: 21px;
+    cursor:pointer;
+    height:100%;
+    width:40px;
+    ///border-right:4px solid #ccc;
+}
+.navis-slideshow a.slick-previous:before {
+    content: ' ';
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    -webkit-transform: translate(0, -50%);
+       -moz-transform: translate(0, -50%);
+        -ms-transform: translate(0, -50%);
+         -o-transform: translate(0, -50%);
+            transform: translate(0, -50%);
+    border-style: solid;
+    border-width: 20px 10px 20px 0;
+    border-color: transparent #ccc transparent transparent;
+    z-index: 10;
+    outline: none;
+}
+.navis-slideshow a.slick-previous:hover:before {
+    border-color: transparent #666 transparent transparent;
 }
 
 .navis-slideshow a.slick-next {
     position: absolute;
-    top: 5px;
-    right: 7px;
-    background-position: 0 -71px;
-    width: 21px;
-    height: 21px;
+    top:0;
+    right: -40px;
+    height:100%;
+    width:40px;
+    border:none;
+    z-index: 10;
+    outline: none;
+    background-color: #fff;
+    border-left:4px solid transparent;
+}
+.navis-slideshow a.slick-next:hover {
+    cursor:pointer;
+    height:100%;
+    width:40px;
+    ///border-left:4px solid #ccc;
+}
+.navis-slideshow a.slick-next:before {
+    content: ' ';
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    -webkit-transform: translate(0, -50%);
+       -moz-transform: translate(0, -50%);
+        -ms-transform: translate(0, -50%);
+         -o-transform: translate(0, -50%);
+            transform: translate(0, -50%);
+    border-style: solid;
+    border-width: 20px 0 20px 10px;
+    border-color: transparent transparent transparent #ccc;
     z-index: 10;
     outline: none;
 }
+.navis-slideshow a.slick-next:hover:before {
+    border-color: transparent transparent transparent #666;
+}
 
-.navis-slideshow a.slick-next:hover {
-    background-position: 0 0;
-    width: 21px;
-    height: 21px
+
+.navis-slideshow .slick-slide img {
+    margin:0 auto;
+    max-height: 80vh;
+    position: relative;
+    //margin-bottom: -1.5em;
+}
+
+.navis-slideshow.slick-initialized .slick-slide {
+    position:relative;
+    //background-color: #000;
+    min-height: 50vh;
+}
+
+/**** FULL SIZE ***/
+.navis-slideshow.navis-full {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 4px 0 0;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999999;
+    overflow:visible;
+    background-color: #000;
+}
+.navis-slideshow.navis-full .slick-list {
+    top:0;
+}
+.navis-slideshow.navis-full .slick-dots {
+    width: 100%;
+    padding:0 0;
+    top: 0;
+}
+.navis-slideshow.navis-full .slick-dots li button {
+    background-color: #000;   
+}
+.navis-slideshow.navis-full .slick-dots li.slick-active button {
+    background-color: #666;
+}
+
+.navis-slideshow.navis-full a.slick-previous {
+    left:0;
+    background-color:transparent;
+}
+.navis-slideshow.navis-full a.slick-previous:hover {
+    background-color:transparent;
+    border-right:4px solid transparent;
+}
+.navis-slideshow.navis-full a.slick-previous:before {
+    border-color: transparent #fff transparent transparent;
+}
+.navis-slideshow.navis-full a.slick-next {
+    right:0;
+    background-color:transparent;
+}
+.navis-slideshow.navis-full a.slick-next:hover {
+    background-color:transparent;
+    border-left:4px solid transparent;
+}
+.navis-slideshow.navis-full a.slick-next:before {
+    border-color: transparent transparent transparent #fff;
+}
+
+.navis-slideshow.navis-full span.navis-before {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    color: white;
+    z-index: 99999;
+    font-size: 2.5em;
+}
+
+.navis-slideshow.navis-full span.navis-before:hover {
+    color:#666;
+    cursor:pointer;
+}
+
+.navis-slideshow.slick-initialized.navis-full .slick-slide {
+    min-height: 100vh;
+}
+
+.navis-slideshow.navis-full .slick-slide img {
+    max-height: 100vh;
+    top: 45%;
+    position: absolute;
+    left: 50%;    
+    -webkit-transform: translate(-50%, -50%);
+       -moz-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+         -o-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+}
+
+.navis-slideshow.navis-full h6 {
+    padding: 10px 16px;
+}
+
+.navis-slideshow.navis-full .wp-caption-text,
+body.normal.single-post .hero .navis-slideshow.navis-full p.wp-caption-text {
+    background-color: rgba(0,0,0,.7);
+    color: #ccc;
+    padding: 1em 17.023%!important;
+    bottom: 0;
+    position: absolute;
+    border: none;
+    text-align: center;
+}
+
+.largo-img-grid {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-wrap:wrap;
+    -webkit-flex-wrap:wrap;
+    flex-wrap:wrap;
+    justify-content:space-between;
+}
+.largo-img-grid.two-up>div{
+    width:49%;
+}
+.largo-img-grid.three-up>div{
+    width:32.5%;
+}
+.largo-img-grid.four-up>div{
+    width:24%;
+}
+.largo-img-grid>div>div {
+    min-height:300px;
+    background-size: cover;
+    background-position: center center;
+}
+.largo-img-grid img {
+    display:none;
+}
+.largo-img-grid {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-wrap:wrap;
+    -webkit-flex-wrap:wrap;
+    flex-wrap:wrap;
+    -ms-justify-content: space-between;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+}
+.largo-img-grid p.wp-caption-text {
+    font-size:12px!important;
+    font-style:italic;
+    margin-bottom:2em;
+}
+
+@media screen and (max-width:767px) {
+    .navis-slideshow {
+        background-color: transparent;
+    }
+    .navis-slideshow .slick-dots {
+        padding: 0;
+    }
+    .navis-slideshow .slick-list {
+        top: 4px;
+    }
+    .navis-slideshow a.slick-previous {
+        left:0;
+        background-color:transparent;
+        display:none;
+    }
+    .navis-slideshow a.slick-next {
+        right:0;
+        background-color:transparent;
+        display:none;
+    }
+    .navis-slideshow a.slick-previous:before,
+    .navis-slideshow a.slick-next:before {
+        top:35%;
+        transform:none;
+    }
+    .navis-slideshow.navis-full a.slick-previous:before,
+    .navis-slideshow.navis-full a.slick-next:before {
+        top:50%;        
+        -webkit-transform: translate(0, -50%);
+           -moz-transform: translate(0, -50%);
+            -ms-transform: translate(0, -50%);
+             -o-transform: translate(0, -50%);
+                transform: translate(0, -50%);
+    }
+    body.normal.single-post .hero .navis-slideshow p.wp-caption-text {
+        background-color:transparent;
+        padding: 1em 1em 0 1em!important;
+    }
 }

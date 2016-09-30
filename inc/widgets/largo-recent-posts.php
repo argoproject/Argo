@@ -55,18 +55,13 @@ class largo_recent_posts_widget extends WP_Widget {
 		$excerpt = isset( $instance['excerpt_display'] ) ? $instance['excerpt_display'] : 'num_sentences';
 
 		$query_args = array (
-			'post__not_in' 	=> get_option( 'sticky_posts' ),
-			'showposts' 	=> $instance['num_posts'],
+			'post__not_in' 	 => get_option( 'sticky_posts' ),
+			'posts_per_page' => $instance['num_posts'],
 			'post_status'	=> 'publish'
 		);
 
 		if ( isset( $instance['avoid_duplicates'] ) && $instance['avoid_duplicates'] === 1 ) {
-			// Create a temporary array and fill it with posts from $shown_ids and from the page's original query
-			$duplicates = (array) $shown_ids;
-			foreach( $wp_query->posts as $post ) {
-				$duplicates[] = $post->ID;
-			}
-			$query_args['post__not_in'] = $duplicates;
+			$query_args['post__not_in'] = $shown_ids;
 		}
 		if ( $instance['cat'] != '' ) $query_args['cat'] = $instance['cat'];
 		if ( $instance['tag'] != '') $query_args['tag'] = $instance['tag'];

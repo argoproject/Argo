@@ -21,7 +21,7 @@ $topstory_classes = (largo_get_active_homepage_layout() == 'LegacyThreeColumn') 
 					'terms' 	=> 'top-story'
 				)
 			),
-			'showposts' => 1
+			'posts_per_page' => 1
 		) );
 		if ( $topstory->have_posts() ) :
 			while ( $topstory->have_posts() ) : $topstory->the_post(); $shown_ids[] = get_the_ID();
@@ -47,8 +47,8 @@ $topstory_classes = (largo_get_active_homepage_layout() == 'LegacyThreeColumn') 
 	<?php if ( largo_get_active_homepage_layout() !== 'LegacyThreeColumn' ) { ?>
 		<div class="sub-stories span4">
 			<?php
-			$showposts = 6;
-			$showposts = apply_filters( 'largo_homepage_topstories_post_count', $showposts );
+			$posts_per_page = 6;
+			$posts_per_page = apply_filters( 'largo_homepage_topstories_post_count', $posts_per_page );
 			$substories = largo_get_featured_posts( array(
 				'tax_query' => array(
 					array(
@@ -57,7 +57,7 @@ $topstory_classes = (largo_get_active_homepage_layout() == 'LegacyThreeColumn') 
 						'terms' 	=> 'homepage-featured'
 					)
 				),
-				'showposts'		=> $showposts,
+				'posts_per_page'		=> $posts_per_page,
 				'post__not_in' 	=> $shown_ids
 			) );
 			if ( $substories->have_posts() ) :
@@ -65,9 +65,9 @@ $topstory_classes = (largo_get_active_homepage_layout() == 'LegacyThreeColumn') 
 				while ( $substories->have_posts() ) : $substories->the_post(); $shown_ids[] = get_the_ID();
 					if ( $count <= 3 ) : ?>
 						<div <?php post_class( 'story' ); ?> >
-							<?php if ( largo_has_categories_or_tags() && $tags === 'top' ) : ?>
-								<h5 class="top-tag"><?php largo_top_term(); ?></h5>
-							<?php endif; ?>
+							<?php if ( largo_has_categories_or_tags() && $tags === 'top' () ) {
+								largo_maybe_top_term();
+							} ?>
 							<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 							<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
 							<?php largo_excerpt( $post, 3 ); ?>

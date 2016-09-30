@@ -60,8 +60,8 @@ if ( $featured ) {
 
 		echo '<div class="' . $entry_classes . '">';
 
-		if ( $show_top_tag ) {
-			echo '<h5 class="top-tag">' . largo_top_term( $arguments = array( 'echo' => FALSE ) ) . '</h5>';
+		if ( largo_has_categories_or_tags() && $tags === 'top' ) {
+			largo_maybe_top_term();
 		}
 
 		if ( $show_thumbnail ) {
