@@ -20,9 +20,7 @@ $featured = has_term( 'homepage-featured', 'prominence' );
 	?>
 		<div class="<?php echo $entry_classes; ?>">
 
-		<?php if ( largo_has_categories_or_tags() && $tags === 'top' && largo_top_term() ) : ?> 
-			<h5 class="top-tag"><?php largo_top_term( $args = array( 'echo' => FALSE ) ); ?></h5>
-		<?php endif; ?>
+		<?php largo_maybe_top_term(); ?>
 
 		<h2 class="entry-title">
 			<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute( array( 'before' => __( 'Permalink to', 'largo' ) . ' ' ) )?>" rel="bookmark"><?php the_title(); ?></a>
