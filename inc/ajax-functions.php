@@ -184,6 +184,9 @@ if (!function_exists('largo_load_more_posts_choose_partial')) {
 		// Series landing pages
 		if ( isset($_POST['is_series_landing']) && $_POST['is_series_landing'] == 'true') {
 			$partial = 'series';
+
+			// necessary to pass the landing page display options along
+			// $_POST['opt'] comes from the LMP AJAX request, which was put on the page by largo_load_more_posts_data
 			$opt = $_POST['opt'];
 		}
 

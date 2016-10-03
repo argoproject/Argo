@@ -675,8 +675,10 @@ function largo_content_partial_arguments_filter( $args, $queried_object ) {
 	// get display options for the loop
 	global $opt;
 
-	// If there is a series landing page
-	if ( $queried_object['post_type'] === 'cftl-tax-landing' ) {
+	// If there is a series landing page, one of the two cases will be true:
+	// - the queried object will have the post_type of cftl-tax-landing
+	// - largo_load_more_posts_choose_partial will have set up the global $opt from $_POST['opt'], from largo_load_more_posts_data
+	if ( $queried_object['post_type'] === 'cftl-tax-landing' || !empty( $opt ) ) {
 		/**
 		 *  $opt looks like this:
 		 *  array (
@@ -705,13 +707,16 @@ function largo_content_partial_arguments_filter( $args, $queried_object ) {
 		 */
 		// The queried object for series pages is the series landing page's post
 		$args['in_series'] = TRUE;
-		if ( isset( $opt['show']['image'] ) && $opt['show']['image'] == false ) {
+
+		// If $opt is loaded from $_POST['opt'] because we're doing an LMP query, PHP's boolean False was encoded as json's string 'false'
+		// These conditionals account for either possibility
+		if ( isset( $opt['show']['image'] ) && ( $opt['show']['image'] == false || strtolower( $opt['show']['image'] ) === 'false' ) ) {
 			$args['show_thumbnail'] = FALSE;
 		}
-		if ( isset( $opt['show']['byline'] ) && $opt['show']['byline'] == false ) {
+		if ( isset( $opt['show']['byline'] ) && ( $opt['show']['byline'] == false || strtolower( $opt['show']['byline'] ) === 'false' ) ) {
 			$args['show_byline'] = FALSE;
 		}
-		if ( isset( $opt['show']['excerpt'] ) && $opt['show']['excerpt'] == false ) {
+		if ( isset( $opt['show']['excerpt'] ) && ( $opt['show']['excerpt'] == false || strtolower( $opt['show']['excerpt'] ) === 'false' ) ) {
 			$args['show_excerpt'] = FALSE;
 		}
 	}
@@ -726,3 +731,12 @@ function largo_content_partial_arguments_filter( $args, $queried_object ) {
 	return $args;
 }
 add_action( 'largo_content_partial_arguments', 'largo_content_partial_arguments_filter', 10, 2 );
+
+/**
+ * Add global $opt to the global when running a LMP query on a series landing page with series landing stuff
+ */
+function test_largo_lmp_args( $args ){
+	global $opt;
+	return $args;
+}
+add_filter( 'largo_lmp_template_partial', 'test_largo_lmp_args' );
