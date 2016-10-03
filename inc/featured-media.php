@@ -668,6 +668,14 @@ if ( ! function_exists( 'largo_hero_class' ) ) {
 
 /**
  * Filter on partials/content.php to affect the presentation of partials/content.php
+ *
+ * Are you trying to modify this for a child theme? You may want to create a new partial for that use instead.
+ *
+ * @global $opt
+ * @uses largo_post_in_series
+ * @filter largo_content_partial_arguments
+ * @param array $args The arguments for how partials/content.php displays
+ * @param array|StdClass $queried_object the WordPress query that started the page load
  */
 function largo_content_partial_arguments_filter( $args, $queried_object ) {
 	$queried_object = (array) $queried_object;
