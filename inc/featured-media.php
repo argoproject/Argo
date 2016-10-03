@@ -110,6 +110,12 @@ function largo_get_featured_hero( $post = null, $classes = '' ) {
 	$hero_class = largo_hero_class( $the_post->ID, false );
 	$classes = 'hero $hero_class $classes';
 
+	$context = array(
+		'classes' => $classes,
+		'featured_media' => $featured_media,
+		'the_post' => $the_post
+	);
+
 	if ( 'image' == $featured_media['type'] ) {
 		$thumb_meta = null;
 		if ( $thumb_id = get_post_thumbnail_id( $the_post->ID ) ) {
@@ -122,25 +128,25 @@ function largo_get_featured_hero( $post = null, $classes = '' ) {
 				'credit_url' => ( ! empty( $thumb_custom['_media_credit_url'][0] ) ) ? $thumb_custom['_media_credit_url'][0] : null,
 				'organization' => ( ! empty( $thumb_custom['_navis_media_credit_org'][0] ) ) ? $thumb_custom['_navis_media_credit_org'][0] : null
 			);
+
+			$context['thumb_meta'] = $thumb_meta;
 		}
 
 	}
 
-	$context = array(
-		'classes' => $classes,
-		'thumb_meta' => $thumb_meta,
-		'the_post' => $the_post
-	);
+	if ( 'gallery' == $featured_media['type'] ) {
+		$context['gallery_ids'] = implode(',', $featured_media['gallery']);
+	}
 
 	switch( $featured_media['type'] ) {
+		// video and embed code use the same partial;
+		// empty statement list for a case passes control to next case: https://secure.php.net/manual/en/control-structures.switch.php
 		case 'video':
-			$template_slug = 'video';
+		case 'embed-code':
+			$template_slug = 'embed';
 			break;
 		case 'image':
 			$template_slug = 'image';
-			break;
-		case 'embed-code':
-			$template_slug = 'embed';
 			break;
 		case 'gallery':
 			$template_slug = 'gallery';
