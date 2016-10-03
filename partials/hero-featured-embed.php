@@ -1,6 +1,6 @@
 <div class="<?php echo $classes; ?>">
 	<div class="embed-container">
-		<? echo $featured_media['embed']; ?>
+		<?php echo $featured_media['embed']; ?>
 	</div>
 	<div class="embed-details wp-caption">
 	<?php if (!empty($featured_media['credit'])) { ?>

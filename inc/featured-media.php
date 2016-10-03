@@ -128,6 +128,7 @@ function largo_get_featured_hero( $post = null, $classes = '' ) {
 
 	$context = array(
 		'classes' => $classes,
+		'featured_media' => $featured_media,
 		'thumb_meta' => $thumb_meta,
 		'the_post' => $the_post
 	);
