@@ -731,12 +731,3 @@ function largo_content_partial_arguments_filter( $args, $queried_object ) {
 	return $args;
 }
 add_action( 'largo_content_partial_arguments', 'largo_content_partial_arguments_filter', 10, 2 );
-
-/**
- * Add global $opt to the global when running a LMP query on a series landing page with series landing stuff
- */
-function test_largo_lmp_args( $args ){
-	global $opt;
-	return $args;
-}
-add_filter( 'largo_lmp_template_partial', 'test_largo_lmp_args' );
