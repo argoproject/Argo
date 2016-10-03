@@ -186,14 +186,6 @@ Be sure and use the "Results only" layout listed in the `Google Custom Search da
 
 **INN Options** - If `INN_MEMBER` is defined as `true` in your site's `wp-config.php` or in your child theme, then you will have the option to add the year that your organization joined INN. This will be displayed in the footer next to the INN logo.
 
-
-Deprecated Options
-------------------
-
-The following homepage layout templates are no longer included in Largo:
-
-- **Slider**: An animated carousel of featured stories with large images. This should be automatically updated to the "Blog" template after upgrading Largo.
-
 More Info on Theme Options in the Largo Guide for Users
 ----------------------------------------------------
 
