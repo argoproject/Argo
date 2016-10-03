@@ -675,6 +675,7 @@ function largo_content_partial_arguments_filter( $args, $queried_object ) {
 	// get display options for the loop
 	global $opt;
 
+	// If there is a series landing page
 	if ( $queried_object['post_type'] === 'cftl-tax-landing' ) {
 		/**
 		 *  $opt looks like this:
@@ -715,10 +716,12 @@ function largo_content_partial_arguments_filter( $args, $queried_object ) {
 			$args['show_excerpt'] = FALSE;
 		}
 	}
-	// @todo: What if it's a series without a landing page
+	// If the main query is for a series term
+	// need to check the queried object vars to see if there's a series term in the terms
 
-	// series-specific options
+	// If the displayed post is in a series at all, not just the series landing page
 	if ( largo_post_in_series() ) {
+		var_log( 'post in series' );
 	}
 
 	return $args;

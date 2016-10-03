@@ -3,6 +3,11 @@
 /**
  * Check if the Series taxonomy is enabled
  *
+ * Is the series equivalent of the WordPress function is_category();
+ * We didn't call the function is_series() because it needs the largo_ prefix.
+ *
+ * @uses global $post
+ * @uses largo_is_series_enabled
  * @since 0.4
  * @return bool Whether or not the Series taxonomy option is enabled in the Theme Options > Advanced
  */
@@ -184,7 +189,7 @@ add_action( 'init', 'largo_custom_taxonomies' );
 
 
 /**
- * Determines whether a post is in a series
+ * Determines whether a post is in a series.
  * Expects to be called from within The Loop.
  * Is the series equivalent of the WordPress function is_category();
  * We didn't call the function is_series() because it needs the largo_ prefix.
