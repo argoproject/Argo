@@ -22,7 +22,6 @@ get_header();
 $shown_ids = array();
 $home_template = largo_get_active_homepage_layout();
 $layout_class = of_get_option('home_template');
-$tags = of_get_option ('tag_display');
 
 global $largo;
 if ($home_template == 'LegacyThreeColumn')
