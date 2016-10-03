@@ -686,7 +686,7 @@ function largo_content_partial_arguments_filter( $args, $queried_object ) {
 	// If there is a series landing page, one of the two cases will be true:
 	// - the queried object will have the post_type of cftl-tax-landing
 	// - largo_load_more_posts_choose_partial will have set up the global $opt from $_POST['opt'], from largo_load_more_posts_data
-	if ( $queried_object['post_type'] === 'cftl-tax-landing' || !empty( $opt ) ) {
+	if ( ( isset( $queried_object['post_type'] ) && $queried_object['post_type'] === 'cftl-tax-landing' ) || !empty( $opt ) ) {
 		/**
 		 *  $opt looks like this:
 		 *  array (
