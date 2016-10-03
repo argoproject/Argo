@@ -478,9 +478,6 @@ function cftl_tax_landing_main($post) {
 		<label for="show-byline">
 			<input type="checkbox" id="show-byline" name="show[byline]" value="1" <?php checked ($fields['show']['byline'], 1 ) ?> /> Byline
 		</label>
-		<label for="show-tags">
-			<input type="checkbox" id="show-tags" name="show[tags]" value="1" <?php checked ($fields['show']['tags'], 1 ) ?> /> Categories/Tags
-		</label>
 	</div>
 </div>
 <?php
