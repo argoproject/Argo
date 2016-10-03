@@ -5,7 +5,8 @@
  * @package Largo
  */
 $args = array (
-	// post-specific, should probably not be filtered but
+	// post-specific, should probably not be filtered but may be useful
+	'post_id' => $post->ID,
 	'hero_class' => largo_hero_class( $post->ID, FALSE ),
 
 	// only used to determine the existence of a youtube_url
@@ -22,7 +23,7 @@ $args = array (
 	'in_series' => FALSE,
 );
 
-apply_filters( 'largo_content_partial_arguments', $args, get_queried_object() );
+$args = apply_filters( 'largo_content_partial_arguments', $args, get_queried_object() );
 
 extract( $args );
 
@@ -81,7 +82,7 @@ if ( $featured ) {
 
 		<?php
 			if ( $show_excerpt ) {
-				largo_excerpt( null, null, null, null, null, false );
+				largo_excerpt();
 			}
 		?>
 
