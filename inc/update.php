@@ -862,9 +862,12 @@ function largo_update_admin_notice() {
 	}
 	if ( largo_need_updates() && ! ( isset( $_GET['page'] ) && $_GET['page'] == 'update-largo' ) ) {
 ?>
-	<div class="update-nag" style="display: block;">
-		<p>Largo has been updated! Please <a href="<?php echo admin_url( 'index.php?page=update-largo' ); ?>">visit the update page</a> to apply a required database update.</p>
-	</div>
+	<div class="update-nag" style="display: block;"><p>
+	<?php printf(
+		__( 'Largo has been updated! Please <a href="%s">visit the update page</a> to apply a required database update.', 'largo' ),
+		admin_url( 'index.php?page=update-largo' )
+	?>
+	</p></div>
 <?php
 	}
 }
@@ -1150,6 +1153,11 @@ add_action( 'admin_menu', 'largo_block_theme_options_for_update', 10 );
  * @since 0.5.3
  */
 function largo_block_theme_options() { ?>
-	<h3>Please <a href="<?php echo admin_url( 'index.php?page=update-largo' ); ?>">visit the update page</a> to apply required Largo updates before editing Theme Options.</h3>
+	<h3>
+	<?php printf(
+		__( 'Please <a href="%s">visit the update page</a> to apply required Largo updates before editing Theme Options.', 'largo' ),
+		admin_url( 'index.php?page=update-largo' )
+	); ?>
+	</h3>
 <?php
 }
