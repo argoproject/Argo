@@ -706,13 +706,13 @@ function largo_content_partial_arguments_filter( $args, $queried_object ) {
 		 */
 		// The queried object for series pages is the series landing page's post
 		$args['in_series'] = TRUE;
-		if ( ! isset( $opt['show']['image'] ) && ! $opt['show']['image'] ) {
+		if ( isset( $opt['show']['image'] ) && $opt['show']['image'] == false ) {
 			$args['show_thumbnail'] = FALSE;
 		}
-		if ( ! isset( $opt['show']['byline'] ) && ! $opt['show']['byline'] ) {
+		if ( isset( $opt['show']['byline'] ) && $opt['show']['byline'] == false ) {
 			$args['show_byline'] = FALSE;
 		}
-		if ( ! isset( $opt['show']['excerpt'] ) && ! $opt['show']['excerpt'] ) {
+		if ( isset( $opt['show']['excerpt'] ) && $opt['show']['excerpt'] == false ) {
 			$args['show_excerpt'] = FALSE;
 		}
 	}
@@ -720,8 +720,8 @@ function largo_content_partial_arguments_filter( $args, $queried_object ) {
 	// need to check the queried object vars to see if there's a series term in the terms
 
 	// If the displayed post is in a series at all, not just the series landing page
-	if ( largo_post_in_series() ) {
-		var_log( 'post in series' );
+	if ( largo_post_in_series( $args['post_id'] ) ) {
+		$args['featured'] = has_term( 'series-featured', 'prominence' );
 	}
 
 	return $args;
