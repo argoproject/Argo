@@ -866,6 +866,7 @@ function largo_update_admin_notice() {
 	<?php printf(
 		__( 'Largo has been updated! Please <a href="%s">visit the update page</a> to apply a required database update.', 'largo' ),
 		admin_url( 'index.php?page=update-largo' )
+	);
 	?>
 	</p></div>
 <?php
