@@ -697,8 +697,7 @@ function largo_content_partial_arguments_filter( $args, $queried_object ) {
 		 *   array (
 		 *     'image' => false,
 		 *     'excerpt' => false,
-		 *     'byline' => false,
-		 *     'tags' => false,
+		 *     'byline' => false
 		 *   ),
 		 *   'footer_style' => '',
 		 *   'footerhtml' => '',
