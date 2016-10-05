@@ -25,9 +25,9 @@ class largo_image_widget extends WP_Widget {
 	function __construct() {
 		$widget_ops = array( 'classname' => 'widget_sp_image', 'description' => __( 'Showcase a single image with a Title, URL, and a Description', 'largo' ) );
 		$control_ops = array( 'id_base' => 'widget_sp_image' );
-		
+
 		parent::__construct( 'widget_sp_image', __('Largo Image Widget', 'largo'), $widget_ops, $control_ops);
-		
+
 		add_action( 'sidebar_admin_setup', array( $this, 'admin_setup' ) );
 		add_action( 'admin_head-widgets.php', array( $this, 'admin_head' ) );
 	}
@@ -179,7 +179,7 @@ class largo_image_widget extends WP_Widget {
 			<p><label for="<?php echo $this->get_field_id('size'); ?>"><?php _e('Size', 'largo'); ?>:</label>
 				<select name="<?php echo $this->get_field_name('size'); ?>" id="<?php echo $this->get_field_id('size'); ?>" onChange="imageWidget.toggleSizes( '<?php echo $this->id; ?>', '<?php echo $id_prefix; ?>' );">
 					<?php
-					// Note: this is dumb. We shouldn't need to have to do this. There should really be a centralized function in core code for this.
+					// @TODO Note: this is dumb. We shouldn't need to have to do this. There should really be a centralized function in core code for this.
 					$possible_sizes = apply_filters( 'image_size_names_choose', array(
 						'full'      => __('Full Size', 'largo'),
 						'thumbnail' => __('Thumbnail', 'largo'),

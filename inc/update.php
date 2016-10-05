@@ -511,7 +511,7 @@ function largo_set_new_option_defaults() {
  * Make sure custom CSS is regenerated if we're using custom LESS variables
  */
 function largo_update_custom_less_variables() {
-	$largo = Largo::get_instance();	
+	$largo = Largo::get_instance();
 	if ( $largo->is_less_enabled() ) {
 		$variables = Largo_Custom_Less_Variables::get_custom_values();
 		$escaped = array();
@@ -680,7 +680,7 @@ function largo_replace_deprecated_widgets() {
 							$upgrade_instance_args = array_replace( $upgrade['defaults'], $all_instances_of_widget[$number] );
 
 							/**
-							 * Call a callback specified in the widget upgrade options in largo_replace_deprecated_widgets() 
+							 * Call a callback specified in the widget upgrade options in largo_replace_deprecated_widgets()
 							 *
 							 * @param array The deprecated widget's $instance variables
 							 * @param array The replacement widget's default $instance variables
@@ -799,7 +799,7 @@ function largo_instantiate_widget( $kind, $instance_settings, $region ) {
 	} else {
 
 		//figure out what ID we're creating. Don't just use count() as things might get deleted or something...
-		//there's probably a smarter way to do this...
+		//@TODO there's probably a smarter way to do this...
 		while ( array_key_exists( $instance_id, $widget_instances) ) {
 			$instance_id++;
 		}
