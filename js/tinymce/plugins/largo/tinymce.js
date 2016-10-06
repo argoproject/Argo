@@ -1,4 +1,4 @@
-function init() {	//this doesn't seem to actually be getting called, despite what's in window.php?
+function init() {	// @TODO ? this doesn't seem to actually be getting called, despite what's in window.php?
 	tinyMCEPopup.resizeToInnerSize();
 }
 
