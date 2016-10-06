@@ -48,9 +48,9 @@ if( !function_exists( 'post_templates_dropdown' ) ) {
 		$post_templates = get_post_templates();
 
 		foreach ( $post_templates as $template_name => $template_file ) { //loop through templates, make them options
-			if ( $template_file == get_post_meta( $post->ID, '_wp_post_template', true ) ) { 
-				$selected = ' selected="selected"'; 
-			} else { 
+			if ( $template_file == get_post_meta( $post->ID, '_wp_post_template', true ) ) {
+				$selected = ' selected="selected"';
+			} else {
 				$selected = '';
 			}
 			$opt = '<option value="' . $template_file . '"' . $selected . '>' . $template_name . '</option>';
@@ -123,7 +123,7 @@ function is_post_template( $template = '' ) {
  *
  * This does not remove leading images that are different from the post featured media
  *
- * The changes to the content in this function should eventually be made
+ * @TODO The changes to the content in this function should eventually be made
  * permanent in the database. (@see https://github.com/INN/Largo/issues/354)
  *
  * If you would like to disable this function globally or on certain posts,
@@ -189,7 +189,7 @@ function largo_remove_hero( $content ) {
 	}
 
 	$p = explode( "\n", $content );
-	
+
 	// 2: Find an image (regex)
 	//
 	// Creates the array:
@@ -227,17 +227,17 @@ function largo_remove_hero( $content ) {
 		$pImgId = $imgId[1];
 	}
 
-	if( !($pImgId == $featureImgId) ) 
+	if( !($pImgId == $featureImgId) )
 		return $content;
-	
+
 	// 5: Check if it's a full width image, or if the image is not large enough to be a hero.
-	if( strpos( $classes,'size-small' ) || strpos( $classes,'size-medium' ) ) 
+	if( strpos( $classes,'size-small' ) || strpos( $classes,'size-medium' ) )
 		return $content;
-	
+
 	// 6: Else, shift the first paragraph off the content and return.
 	array_shift( $p );
 	$content = implode( "\n", $p );
-	
+
 	return $content;
 
 }
@@ -247,26 +247,26 @@ add_filter( 'the_content', 'largo_remove_hero', 1 );
 /**
  * Retrieves the attachment ID from the file URL
  * (or that of any thumbnail image)
- * 
+ *
  * @since 0.4
  * @see https://pippinsplugins.com/retrieve-attachment-id-from-image-url/
- * 
+ *
  * @return Int ID of post attachment (or false if not found)
- */ 
+ */
 function largo_url_to_attachmentid( $url ) {
 
 	global $wpdb;
-	$attachment = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE guid='%s';", $url ) ); 
-    
-    if( !empty( $attachment ) ) 
+	$attachment = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE guid='%s';", $url ) );
+
+    if( !empty( $attachment ) )
     	return $attachment[0];
 
     // Check if there's a size in the url and remove it.
 
     $url = preg_replace( '/-\d+x\d+(?=\.(jpg|jpeg|png|gif)$)/i', '', $url );
-	$attachment = $wpdb->get_col($wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE guid='%s';", $url ) ); 
+	$attachment = $wpdb->get_col($wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE guid='%s';", $url ) );
 
-    if( !empty( $attachment ) ) 
+    if( !empty( $attachment ) )
     	return $attachment[0];
     else
     	return false;
