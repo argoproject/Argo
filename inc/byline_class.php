@@ -12,7 +12,7 @@
 class Largo_Byline {
 
 	/** @var int The ID of the post this byline is for */
-	private $post_id;
+	protected $post_id;
 
 	/** @var bool Whether or not the byline should include the date */
 	private $exclude_date;
