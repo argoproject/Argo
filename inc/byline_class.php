@@ -173,7 +173,7 @@ class Largo_Byline {
 	}
 
 	/**
-	 * Display the last-edited date for this post, only to admin users
+	 * Display the last-edited date for this post
 	 *
 	 * @todo: should this be displayed under different conditions?
 	 */
