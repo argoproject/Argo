@@ -179,12 +179,10 @@ class Largo_Byline {
 	 */
 	function edited_date() {
 		echo sprintf(
-			' <time class="entry-date updated dtstamp" datetime="%1$s"><span class="last-modified">%2$s %3$s %4$s %5$s</span></time> ',
+			' <time class="entry-date updated dtstamp" datetime="%1$s"><span class="last-modified">%2$s %3$s</span></time> ',
 			esc_attr( get_the_modified_date( 'c', $this->post_id ) ),
 			__( 'Updated', 'largo' ),
-			largo_modified_time( false, $this->post_id ),
-			__( 'at', 'largo' ),
-			get_the_modified_date( 'g:i a' )
+			largo_modified_time( false, $this->post_id )
 		);
 	}
 
