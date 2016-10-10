@@ -223,7 +223,7 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 		$landing = $this->factory->post->create(array(
 			'post_type' => 'cftl-tax-landing',
 			'tax_input' => array(
-				'series' => $this->series_id,
+				'series' => $this->series->slug,
 			),
 		));
 		update_post_meta($landing, 'has_order', 'ASC');
@@ -263,7 +263,7 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 		$landing = $this->factory->post->create(array(
 			'post_type' => 'cftl-tax-landing',
 			'tax_input' => array(
-				'series' => $this->series_id,
+				'series' => $this->series->slug,
 			),
 		));
 		update_post_meta($landing, 'has_order', 'DESC');
@@ -311,7 +311,7 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 		$landing = $this->factory->post->create(array(
 			'post_type' => 'cftl-tax-landing',
 			'tax_input' => array(
-				'series' => $this->series_id,
+				'series' => $this->series->slug,
 			),
 		));
 		update_post_meta($landing, 'has_order', 'custom');
@@ -342,7 +342,7 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 		$landing = $this->factory->post->create(array(
 			'post_type' => 'cftl-tax-landing',
 			'tax_input' => array(
-				'series' => $this->series_id,
+				'series' => $this->series->slug,
 			),
 		));
 		update_post_meta($landing, 'has_order', 'featured, DESC');
@@ -362,8 +362,8 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 		));
 		// create a post that is featured in this taxonomy. It shall be the first.
 		$feat = $this->factory->post->create(array(
+			'series' => $this->series->slug,
 			'tax_input' => array(
-				'series' => $this->series_id,
 				'prominence' => 'taxonomy-featured'
 			)
 		));
@@ -381,7 +381,7 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 		$landing = $this->factory->post->create(array(
 			'post_type' => 'cftl-tax-landing',
 			'tax_input' => array(
-				'series' => $this->series_id,
+				'series' => $this->series->slug,
 			),
 		));
 		update_post_meta($landing, 'has_order', 'featured, ASC');
@@ -409,8 +409,8 @@ class LargoRelatedTestFunctions extends WP_UnitTestCase {
 			)
 		);
 		$feat = $this->factory->post->create(array(
+			'series' => $this->series->slug,
 			'tax_input' => array(
-				'series' => $this->series_id,
 				'prominence' => 'taxonomy-featured'
 			)
 		));
