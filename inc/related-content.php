@@ -539,14 +539,19 @@ class Largo_Related {
 				$args = array(
 					'post_type' => 'post',
 					'posts_per_page' => $this->number,
-					'taxonomy' => 'series',
-					'term' => $term->slug,
 					'orderby' => 'date',
 					'order' => 'ASC',
 					'ignore_sticky_posts' => 1,
 					'date_query' => array(
 						'after' => $this->post->post_date,
 					),
+					'tax_query' => array(
+						array(
+							'taxonomy' => 'series',
+							'term' => $term->slug,
+							'field' => 'slug'
+						)
+					)
 				);
 
 				// see if there's a post that has the sort order info for this series
@@ -616,7 +621,7 @@ class Largo_Related {
 
 		//we've gone back and forth through all the post's series, now let's try traditional taxonomies	
 		$taxonomies = array();
-		foreach ( array( 'categories', 'tags' ) as $_taxonomy ) {
+		foreach ( array( 'category', 'post_tag' ) as $_taxonomy ) {
 			$_terms = get_object_term_cache( $this->post_id, $_taxonomy );
 
 			if ( false === $_terms ) {
@@ -638,14 +643,19 @@ class Largo_Related {
 				$args = array(
 					'post_type' => 'post',
 					'posts_per_page' => $this->number,
-					'taxonomy' => $term->taxonomy,
-					'term' => $term->slug,
 					'orderby' => 'date',
 					'order' => 'DESC',
 					'ignore_sticky_posts' => 1,
 					'date_query' => array(
 						'after' => $this->post->post_date,
 					),
+					'tax_query' => array(
+						array(
+							'taxonomy' => $term->taxonomy,
+							'terms' => $term->slug,
+							'field' => 'slug',
+						)
+					)
 				);
 
 				// run the query
@@ -673,7 +683,7 @@ class Largo_Related {
 						break;
 					}
 				}
-			}
+			} // foreach
 		}
 	}
 
