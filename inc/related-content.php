@@ -539,19 +539,14 @@ class Largo_Related {
 				$args = array(
 					'post_type' => 'post',
 					'posts_per_page' => $this->number,
+					'taxonomy' => 'series',
+					'term' => $term->slug,
 					'orderby' => 'date',
 					'order' => 'ASC',
 					'ignore_sticky_posts' => 1,
 					'date_query' => array(
 						'after' => $this->post->post_date,
 					),
-					'tax_query' => array(
-						array(
-							'taxonomy' => 'series',
-							'term' => $term->slug,
-							'field' => 'slug'
-						)
-					)
 				);
 
 				// see if there's a post that has the sort order info for this series
