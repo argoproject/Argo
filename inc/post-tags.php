@@ -392,4 +392,4 @@ function largo_after_hero_largo_edited_date() {
 		echo '</div>';
 	}
 }
-add_action( 'largo_after_hero', 'largo_after_hero_largo_edited_date', 1 );
+add_action( 'largo_after_hero', 'largo_after_hero_largo_edited_date', 5 );
