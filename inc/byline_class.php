@@ -71,7 +71,7 @@ class Largo_Byline {
 		$this->twitter();
 
 		// The generic parts
-		$this->maybe_updated_date();
+		$this->maybe_published_date();
 		$this->edit_link();
 
 		$this->output = ob_get_clean();
@@ -148,13 +148,10 @@ class Largo_Byline {
 	}
 
 	/**
-	 * Determine which date to display
+	 * Determine whether to display the date
 	 */
-	function maybe_updated_date() {
+	function maybe_published_date() {
 		if ( ! $this->exclude_date ) {
-			if ( is_single() && largo_post_was_updated( $this->post ) ) {
-				$this->edited_date();
-			} else {
 				$this->published_date();
 			}
 		}
@@ -169,20 +166,6 @@ class Largo_Byline {
 			esc_attr( get_the_date( 'c', $this->post_id ) ),
 			__( 'Published', 'largo' ),
 			largo_time( false, $this->post_id )
-		);
-	}
-
-	/**
-	 * Display the last-edited date for this post
-	 *
-	 * @todo: should this be displayed under different conditions?
-	 */
-	function edited_date() {
-		echo sprintf(
-			' <time class="entry-date updated dtstamp" datetime="%1$s"><span class="last-modified">%2$s %3$s</span></time> ',
-			esc_attr( get_the_modified_date( 'c', $this->post_id ) ),
-			__( 'Updated', 'largo' ),
-			largo_modified_time( false, $this->post_id )
 		);
 	}
 
@@ -209,7 +192,7 @@ class Largo_Custom_Byline extends Largo_Byline {
 	function generate_byline() {
 		ob_start();
 		$this->author_link();
-		$this->maybe_updated_date();
+		$this->maybe_published_date();
 		$this->edit_link();
 
 		$this->output = ob_get_clean();
@@ -272,7 +255,7 @@ class Largo_CoAuthors_Byline extends Largo_Byline {
 		// Now assemble the One True Byline
 		ob_start();
 		echo '<span class="by-author"><span class="by">' . __( 'By', 'largo' ) . '</span> <span class="author vcard" itemprop="author">' . $authors . '</span></span>';
-		$this->maybe_updated_date();
+		$this->maybe_published_date();
 		$this->edit_link();
 
 		$this->output = ob_get_clean();
