@@ -281,4 +281,20 @@ EOT;
 		// every time when there is output, make sure there's <h5 class="top-tag"> and </h5> in the output
 	}
 
+	function test_largo_edited_date() {
+		largo_edited_date();
+		$this->markTestIncomplete('Test largo_edited_date not implemented');
+		// This should cover:
+		// on not-updated post, display stuff
+		// on updated post, display stuff
+	}
+
+	function test_largo_after_hero_largo_edited_date() {
+		largo_after_hero_largo_edited_date();
+		$this->markTestIncomplete('Test largo_after_hero_largo_edited_date not implemented');
+		// This should cover:
+		// on not-updated post, no output
+		// on updated post, output contains largo_edited_date(); for the post, and contains '<div class="entry-content clearfix">' and '</div>'
+	}
+
 }
