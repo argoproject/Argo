@@ -662,7 +662,7 @@ class lessc {
 
       if ($mixins === null) {
         // fwrite(STDERR,"failed to find block: ".implode(" > ", $path)."\n");
-        break; // throw error here??
+        break; // @TODO ? throw error here??
       }
 
       foreach ($mixins as $mixin) {
@@ -3501,4 +3501,3 @@ class lessc_formatter_lessjs extends lessc_formatter_classic {
   public $assignSeparator = ": ";
   public $selectorSeparator = ",";
 }
-
