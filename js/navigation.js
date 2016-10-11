@@ -263,7 +263,7 @@
         if (overflow.length == 0) {
           var overflowmenu ='<li id="menu-overflow" class="menu-item-has-children dropdown">' +
             '<a href="#" class="dropdown-toggle">' + Largo.sticky_nav_options.nav_overflow_label + '<b class="caret"></b></a>' +
-            '<ul id="menu-more-1" class="dropdown-menu"></ul></li>';
+            '<ul id="sticky-nav-overflow" class="dropdown-menu"></ul></li>';
           overflow = $(overflowmenu);
           overflow.find('a').click(function() { return false; });
           shelf.find('ul.nav > li.menu-item').last().after(overflow);
@@ -271,7 +271,7 @@
 
         var li = shelf.find('ul.nav > li.menu-item').last();
 
-        overflow.find('ul#menu-more-1').prepend(li);
+        overflow.find('ul#sticky-nav-overflow').prepend(li);
         li.addClass('overflowed');
         li.data('shelfwidth', shelfWidth);
       } else if (overflow.length) {
