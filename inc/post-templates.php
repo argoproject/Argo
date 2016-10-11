@@ -71,11 +71,11 @@ if( ! function_exists( 'get_post_template' ) ) {
 		if ( is_object( $post ) ) {
 			$custom_field = get_post_meta( $post->ID, '_wp_post_template', true );
 		}
-		if ( !empty( $custom_field ) ) {
-			if ( file_exists( get_stylesheet_directory() . '/{$custom_field}' ) ) {
-				$template = get_stylesheet_directory() . '/{$custom_field}';
-			} else if ( file_exists( get_template_directory() . '/{$custom_field}') ) {
-				$template = get_template_directory() . '/{$custom_field}';
+		if ( ! empty( $custom_field ) ) {
+			if ( file_exists( get_stylesheet_directory() . "/{$custom_field}" ) ) {
+				$template = get_stylesheet_directory() . "/{$custom_field}";
+			} else if ( file_exists( get_template_directory() . "/{$custom_field}" ) ) {
+				$template = get_template_directory() . "/{$custom_field}";
 			}
 		}
 		return $template;
