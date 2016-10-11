@@ -152,8 +152,7 @@ class Largo_Byline {
 	 */
 	function maybe_published_date() {
 		if ( ! $this->exclude_date ) {
-				$this->published_date();
-			}
+			$this->published_date();
 		}
 	}
 
