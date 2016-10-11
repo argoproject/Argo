@@ -361,3 +361,35 @@ function largo_maybe_top_term( $args = array() ) {
 		<h5 class="top-tag"><?php echo $top_term; ?></h5>
 	<?php }
 }
+
+/**
+ * Display the last-edited date for this post
+ * @since 0.5.5
+ * @link https://github.com/INN/Largo/issues/1341
+ */
+function largo_edited_date( $post = null ) {
+	$post = get_post( $post );
+
+	echo sprintf(
+		' <time class="entry-date updated dtstamp" datetime="%1$s"><span class="last-modified">%2$s %3$s</span></time> ',
+		esc_attr( get_the_modified_date( 'c', $post ) ),
+		__( 'Updated', 'largo' ),
+		largo_modified_time( false, $post )
+	);
+}
+
+/**
+ * Output largo_edited_date() on the single post template
+ * @since 0.5.5
+ * @action largo_after_hero
+ * @uses largo_edited_date
+ * @link https://github.com/INN/Largo/issues/1341
+ */
+function largo_after_hero_largo_edited_date() {
+	if ( largo_post_was_updated() ) {
+		echo '<div class="entry-content clearfix">';
+		largo_edited_date();
+		echo '</div>';
+	}
+}
+add_action( 'largo_after_hero', 'largo_after_hero_largo_edited_date' );
