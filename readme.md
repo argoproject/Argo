@@ -10,6 +10,8 @@ A responsive WordPress framework designed for news publishers and developed by t
 
 We are making regular updates that may or may not always play nice with previous versions.
 
+For released versions of Largo, please see the [list of tagged releases](https://github.com/INN/Largo/releases).
+
 The `master` branch is the latest stable version and what INN is using for our sites in production (with a few minor tweaks specific to our hosting environment). Please do not submit pull requests to this branch unless they are minor hotfixes that can be directly merged.
 
 The `develop` branch contains work in progress slated for our next point release. Feel free to try it out, report issues, etc. but we DO NOT recommend using it in production. This is also typically the branch to submit pull requests to if you want to contribute to the project.
@@ -31,6 +33,10 @@ The project extends work done by [NPR's Project Argo](http://argoproject.org/).
 **Support** is available [via our helpdesk system](http://support.largoproject.org/) or by emailing [support@largoproject.org](mailto:support@largoproject.org).
 
 **Current version:** v0.5.4
+
+**Minimum supported PHP version:** 5.3
+
+**Minimum supported WordPress version:** 4.1, though we usually recommend using the current version of WordPress
 
 ## Setup
 
