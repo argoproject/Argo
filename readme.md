@@ -34,6 +34,10 @@ The project extends work done by [NPR's Project Argo](http://argoproject.org/).
 
 **Current version:** v0.5.4
 
+**Minimum supported PHP version:** 5.3
+
+**Minimum supported WordPress version:** 4.1, though you should always use the current version of WordPress
+
 ## Setup
 
 Follow the [setup instructions in the documentation](http://largo.readthedocs.io/users/download.html).
