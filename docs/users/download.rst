@@ -6,6 +6,8 @@ Download and Install WordPress
 
 The Largo parent theme and plugins have been tested with the latest version of WordPress. Some hosting providers offer one-click installation of WordPress and that should get you the latest version. If that does not work for you, download the latest version from the `WordPress downloads <https://wordpress.org/download/>`_  page and follow their `instructions <http://codex.wordpress.org/Installing_WordPress>`_ to get it setup.
 
+Largo requires a minimum PHP version of 5.3, and has been tested thoroughly on PHP 5.5.
+
 Download and Install Largo
 --------------------------
 
