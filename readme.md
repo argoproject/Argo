@@ -36,7 +36,7 @@ The project extends work done by [NPR's Project Argo](http://argoproject.org/).
 
 **Minimum supported PHP version:** 5.3
 
-**Minimum supported WordPress version:** 4.1, though you should always use the current version of WordPress
+**Minimum supported WordPress version:** 4.1, though we usually recommend using the current version of WordPress
 
 ## Setup
 
