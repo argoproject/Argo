@@ -57,7 +57,7 @@ if ( $featured ) {
 
 		echo '<div class="' . $entry_classes . '">';
 
-		if ( largo_has_categories_or_tags() && $tags === 'top' ) {
+		if ( largo_has_categories_or_tags() ) {
 			largo_maybe_top_term();
 		}
 
