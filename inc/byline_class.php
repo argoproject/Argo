@@ -274,6 +274,7 @@ class Largo_CoAuthors_Byline extends Largo_Byline {
 	 */
 	function job_title() {
 		$show_job_titles = of_get_option( 'show_job_titles', false );
+		$output = '';
 		// only do this if we're showing job titles and there is one to be shown
 		if ( true && $job = $this->author->job_title ) {
 			$output .= '<span class="job-title"><span class="comma">,</span> ' . $job . '</span>';
@@ -296,6 +297,7 @@ class Largo_CoAuthors_Byline extends Largo_Byline {
 	 * twitter link from the coauthors object
 	 */
 	function twitter() {
+		$output = '';
 		if ( isset( $this->author->twitter ) && is_single() ) {
 			$output .= ' <span class="twitter"><a href="https://twitter.com/' . largo_twitter_url_to_username( $this->author->twitter ) . '"><i class="icon-twitter"></i></a></span>';
 		}
