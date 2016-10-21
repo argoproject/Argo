@@ -116,8 +116,8 @@ class largo_recent_posts_widget extends WP_Widget {
 			printf( __( '<p class="error"><strong>You don\'t have any recent %s.</strong></p>', 'largo' ), strtolower( $posts_term ) );
 		} // end more featured posts
 
-		// close the ul if we're just showing a list of headlines
-		if ( $excerpt == 'none' ) echo '</ul>';
+		// close the ul
+		echo '</ul>';
 
 		if( $instance['linkurl'] !='' ) {
 			echo '<p class="morelink"><a href="' . esc_url( $instance['linkurl'] ) . '">' . esc_html( $instance['linktext'] ) . '</a></p>';
