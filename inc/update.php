@@ -533,18 +533,18 @@ function largo_update_custom_less_variables() {
 function largo_check_deprecated_widgets() {
 
 	$deprecated = array(
-		'largo-footer-featured' => 'largo_deprecated_footer_widget',
-		'largo-sidebar-featured' => 'largo_deprecated_sidebar_widget'
 	);
 
-	$widgets = get_option( 'sidebars_widgets ');
-	foreach ( $widgets as $region => $widgets ) {
-		if ( $region != 'wp_inactive_widgets' && $region != 'array_version' && is_array( $widgets ) ) {
-			foreach ( $widgets as $widget_instance ) {
-				foreach ( $deprecated as $widget_name => $callback ) {
-					if ( strpos( $widget_instance, $widget_name ) === 0) {
-						add_action( 'admin_notices', $callback );
-						unset( $deprecated[$widget_name] ); //no need to flag the same widget multiple times
+	if ( !empty( $deprecated) ) {
+		$widgets = get_option( 'sidebars_widgets ');
+		foreach ( $widgets as $region => $widgets ) {
+			if ( $region != 'wp_inactive_widgets' && $region != 'array_version' && is_array( $widgets ) ) {
+				foreach ( $widgets as $widget_instance ) {
+					foreach ( $deprecated as $widget_name => $callback ) {
+						if ( strpos( $widget_instance, $widget_name ) === 0) {
+							add_action( 'admin_notices', $callback );
+							unset( $deprecated[$widget_name] ); //no need to flag the same widget multiple times
+						}
 					}
 				}
 			}
@@ -552,22 +552,6 @@ function largo_check_deprecated_widgets() {
 	}
 }
 
-/**
- * Admin notices of older widgets
- */
-function largo_deprecated_footer_widget() { ?>
-	<div class="update-nag"><p>
-	<?php printf( __( 'You are using the <strong>Largo Footer Featured Posts</strong> widget, which is deprecated and will be removed from future versions of Largo. Please <a href="%s">change your widget settings</a> to use its replacement, <strong>Largo Featured Posts</strong>.', 'largo' ), admin_url( 'widgets.php' ) ); ?>
-	</p></div>
-	<?php
-}
-
-function largo_deprecated_sidebar_widget() { ?>
-	<div class="update-nag"><p>
-	<?php printf( __( 'You are using the <strong>Largo Sidebar Featured Posts</strong> widget, which is deprecated and will be removed from future versions of Largo. Please <a href="%s">change your widget settings</a> to use its replacement, <strong>Largo Featured Posts</strong>.', 'largo' ), admin_url( 'widgets.php' ) ); ?>
-	</p></div>
-	<?php
-}
 
 /**
  * Replace deprecated widgets with new widgets
