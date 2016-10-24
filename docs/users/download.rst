@@ -6,10 +6,12 @@ Download and Install WordPress
 
 The Largo parent theme and plugins have been tested with the latest version of WordPress. Some hosting providers offer one-click installation of WordPress and that should get you the latest version. If that does not work for you, download the latest version from the `WordPress downloads <https://wordpress.org/download/>`_  page and follow their `instructions <http://codex.wordpress.org/Installing_WordPress>`_ to get it setup.
 
+Largo requires a minimum PHP version of 5.3, and has been tested thoroughly on PHP 5.5. Contact your hosting provider if you are unsure which version of PHP your site uses.
+
 Download and Install Largo
 --------------------------
 
-The latest stable version of the Largo parent theme is available for download from `the project repository on github <https://github.com/INN/Largo>`_ on github. The master branch (`download link <https://github.com/INN/Largo/archive/master.zip>`_) is always the latest stable release although you may sometimes want to also keep an eye on `the develop branch <https://github.com/inn/largo/tree/develop>`_ which contains our work on the next release of Largo. Note that we do not recommend using the develop branch on a production site.
+The latest stable version of the Largo parent theme is available for download from `the project repository on github <https://github.com/INN/Largo/releases>`_ on github. The master branch (`download link <https://github.com/INN/Largo/archive/master.zip>`_) is always the latest stable release although you may sometimes want to also keep an eye on `the develop branch <https://github.com/inn/largo/tree/develop>`_ which contains our work on the next release of Largo. Note that we do not recommend using the develop branch on a production site.
 
 Once you have downloaded the Largo theme you'll need to unzip it, and will typically want to rename the resulting folder to just "largo" (github will include the name of the branch in the name of the folder, i.e. - largo-master, but to avoid potential problems with the following instructions using "largo" as the name of the folder will make your life a little easier.
 
