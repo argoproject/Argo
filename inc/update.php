@@ -38,8 +38,11 @@ function largo_perform_update() {
 			largo_enable_series_if_landing_page();
 		}
 
-		// Repeatable, should be run when updating to 0.4+
-		largo_remove_topstory_prominence_term();
+		// Run when updating from pre-0.5
+		if ( version_compare( $previous_options['largo_version'], '0.5' ) < 0 ) {
+			// Repeatable, should be run when updating to 0.4+
+			largo_remove_topstory_prominence_term();
+		}
 
 		// Always run
 		largo_update_custom_less_variables();
