@@ -152,7 +152,6 @@ function largo_home_single_top() {
 function largo_home_featured_stories($max = 3) {
 	$big_story = largo_home_single_top();
 	$homepage_feature_term = get_term_by( 'name', __('Homepage Featured', 'largo'), 'prominence' );
-	$uncategorized_term = get_term_by( 'name', __('Uncategorized'), 'category' );
 
 	// Get the homepage featured posts
 	$featured_stories = get_posts(array(
@@ -175,6 +174,7 @@ function largo_home_featured_stories($max = 3) {
  * 2. Gets the term that the 3 series stories belong to.
  *
  * @return array An array with `series_stories` and `series_stories_term` keys.
+ * @todo is this duplicating the functionality of the Largo_Related class?
  */
 function largo_home_series_stories_data() {
 	$big_story = largo_home_single_top();
