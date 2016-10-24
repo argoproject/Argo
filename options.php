@@ -589,9 +589,12 @@ function optionsframework_options() {
 		'class' => 'hidden');
 
 
-	$screen = get_current_screen();
-	if ( is_object( $screen ) && $screen->base == 'widgets' ) {
-		return $widget_options;
+	// this is wrapped in a function_exists because optionsframework_options is called during after_switch_theme, which is not yet an admin screen, so the function is not defined
+	if ( function_exists( 'get_current_screen' ) ) {
+		$screen = get_current_screen();
+		if ( is_object( $screen ) && $screen->base == 'widgets' ) {
+			return $widget_options;
+		}
 	}
 
 

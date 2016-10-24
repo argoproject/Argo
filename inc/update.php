@@ -16,16 +16,36 @@
  */
 function largo_activation_maybe_setup() {
 	var_log( "Should setup be done?" );
-	if ( of_get_option( 'largo_version' ) ) {
-		var_log( "No.");
+	if ( of_get_option( 'largo_version', false ) ) {
 		return false;
 	}
-		var_log( "Yes.");
+
+	// We must make sure some things are enqueued first in order to run these functions
+	$requires = array(
+		// included for the definition of the defaults in optionsframework_options()
+		'/options.php',
+	);
+	// after_switch_theme appears to run before after_setup_theme, which is what calls Largo::get_instance calls Largo::load calls Largo::require_files
+	foreach ( $requires as $required ) {
+		require_once( get_template_directory() . $required );
+	}
+
+	// We assume here that since this action runs on after_switch_theme,
+	// and since switching themes requires admin privileges,
+	// that this user has the permissions to run optionsframework_init
+	// @see optionsframework_rolescheck() in lib/options-framework/options-framework.php
+	if ( current_user_can( 'edit_theme_options' ) ) {
+		optionsframework_init();
+	}
 
 	// this must run before any other function that makes use of of_set_option()
 	largo_set_new_option_defaults();
-	of_set_option( 'largo_version', largo_version() );
 
+	var_log( "if this returns false it is because there is no get_option( 'optionsframework' )" );
+	var_log( of_set_option( 'largo_version', largo_version() ) );
+
+	var_log( get_option( 'optionsframework' ) );
+	var_log( largo_version() );
 	return true;
 }
 add_action( 'after_switch_theme', 'largo_activation_maybe_setup' );
@@ -101,6 +121,8 @@ function largo_need_updates() {
 	// try to figure out which versions of the options are stored. Implemented in 0.3
 	if ( of_get_option( 'largo_version' ) ) {
 		$compare = version_compare( largo_version(), of_get_option( 'largo_version' ) );
+		var_log( largo_version() );
+		var_log( of_get_option( 'largo_version' ) );
 		if ( $compare == 1 ) {
 			return true;
 		} else {
