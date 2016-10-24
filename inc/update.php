@@ -40,6 +40,14 @@ function largo_activation_maybe_setup() {
 	// this must run before any other function that makes use of of_set_option()
 	largo_set_new_option_defaults();
 
+	of_set_option( 'largo_version', largo_version() );
+
+	// Prevent the update nag from displaying on the first page load
+	remove_action( 'admin_notices', 'largo_update_admin_notice', 10 );
+
+	// Prevent the theme options menu from getting hijacked with the update nag
+	remove_action( 'admin_menu', 'largo_block_theme_options_for_update', 10 );
+
 	return true;
 }
 add_action( 'after_switch_theme', 'largo_activation_maybe_setup' );
@@ -115,6 +123,7 @@ function largo_need_updates() {
 	// try to figure out which versions of the options are stored. Implemented in 0.3
 	if ( of_get_option( 'largo_version' ) ) {
 		$compare = version_compare( largo_version(), of_get_option( 'largo_version' ) );
+
 		if ( $compare == 1 ) {
 			return true;
 		} else {
