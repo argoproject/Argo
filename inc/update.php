@@ -8,6 +8,29 @@
  * ------------------------------------------------------ */
 
 /**
+ * For initial activations of Largo, where no largo was previously installed
+ *
+ * @since 0.5.5
+ * @return Bool false if the initial setup functions were not run, true if they were.
+ * @link https://github.com/INN/Largo/issues/690
+ */
+function largo_activation_maybe_setup() {
+	var_log( "Should setup be done?" );
+	if ( of_get_option( 'largo_version' ) ) {
+		var_log( "No.");
+		return false;
+	}
+		var_log( "Yes.");
+
+	// this must run before any other function that makes use of of_set_option()
+	largo_set_new_option_defaults();
+	of_set_option( 'largo_version', largo_version() );
+
+	return true;
+}
+add_action( 'after_switch_theme', 'largo_activation_maybe_setup' );
+
+/**
  * Performs various update functions and set a new verion number.
  *
  * This acts as a main() for applying database updates when the update ajax is
