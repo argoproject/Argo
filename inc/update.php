@@ -532,6 +532,17 @@ function largo_update_custom_less_variables() {
  */
 function largo_check_deprecated_widgets() {
 
+	/*
+	 * The format of this array is:
+	 * array(
+	 *     'widget-css-class' => 'admin_notice_function',
+	 *     'largo-footer-featured' => 'largo_deprecated_footer_widget',
+	 * )
+	 *
+	 * In the above example, the presence of 'widget-css-class' will cause 'admin_notice_function' to be hooked on 'admin_notices'.
+	 * The function 'admin_notice_function' should output a div.update-nag.
+	 * An example of such a function is largo_deprecated_footer_widget, which can be found in inc/update.php in Largo v0.5.4
+	 */
 	$deprecated = array(
 	);
 
