@@ -14,13 +14,6 @@ jQuery(document).ready(function($) {
     $('.header_img').parent().remove();
   }
 
-  //the homepage carousel, make sure we don't load this unless .carousel is defined
-  if($().carousel) {
-    $('.carousel').carousel({
-      interval: 6000
-    });
-  }
-
   //GA event tracking for image-widget items
   $('a.image-click-track').on('click', function() {
     if (typeof _gaq == 'object') _gaq.push(['_trackEvent', 'Click', 'Image Widget', this.getAttribute('title')]);
