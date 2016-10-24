@@ -234,48 +234,15 @@ class UpdateTestFunctions extends WP_UnitTestCase {
 		update_option('sidebars_widgets', $widgets_backup);
 	}
 
-	function test_largo_check_deprecated_widgets() {
-		// Backup sidebar widgets
-		$widgets_backup = get_option('sidebars_widgets');
-
-		// Create the deprecated widgets
-		update_option('sidebars_widgets', array(
-			'article-bottom' => array (
-				0 => 'largo-footer-featured-2',
-				1 => 'largo-sidebar-featured-2',
-			), // largo_instantiate_widget uses article-bottom for all its widgets
-		));
-
-		largo_check_deprecated_widgets();
-
-		// Test that the requisite deprecated widgets actions have been added to the admin_notices hook
-		$return = has_action('admin_notices', 'largo_deprecated_footer_widget');
-		$this->assertTrue(isset($return));
-		unset($return);
-
-		$return = has_action('admin_notices', 'largo_deprecated_sidebar_widget');
-		$this->assertTrue(isset($return));
-		unset($return);
-
-		// Cleanup
-		of_reset_options();
-		delete_option('sidebars_widgets');
-		update_option('sidebars_widgets', $widgets_backup);
-	}
-
-	function test_largo_deprecated_footer_widget() {
-		// prints a nag
-		// uses __
-		$this->expectOutputRegex('/[.*]+/'); // This is excessively greedy, it expects any output at all
-		largo_deprecated_footer_widget();
-	}
-
-	function test_largo_deprecated_sidebar_widget() {
-		// prints a nag
-		// uses __
-		$this->expectOutputRegex('/[.*]+/'); // This is excessively greedy, it expects any output at all
-		largo_deprecated_sidebar_widget();
-	}
+	# This is what a test function for a callback for a deprecated widget should look like
+	# Please do not remove this, as we may write deprecated widget test functions in the future.
+	#
+	#function test_largo_deprecated_sidebar_widget() {
+	#	// prints a nag
+	#	// uses __()
+	#	$this->expectOutputRegex('/[.*]+/'); // This is excessively greedy, it expects any output at all
+	#	largo_deprecated_sidebar_widget();
+	#}
 
 	function test_largo_transition_nav_menus() {
 		// Test the function's ability to create the Main Navigation nav menu
