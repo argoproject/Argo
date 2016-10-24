@@ -15,7 +15,6 @@
  * @link https://github.com/INN/Largo/issues/690
  */
 function largo_activation_maybe_setup() {
-	var_log( "Should setup be done?" );
 	if ( of_get_option( 'largo_version', false ) ) {
 		return false;
 	}
@@ -41,11 +40,6 @@ function largo_activation_maybe_setup() {
 	// this must run before any other function that makes use of of_set_option()
 	largo_set_new_option_defaults();
 
-	var_log( "if this returns false it is because there is no get_option( 'optionsframework' )" );
-	var_log( of_set_option( 'largo_version', largo_version() ) );
-
-	var_log( get_option( 'optionsframework' ) );
-	var_log( largo_version() );
 	return true;
 }
 add_action( 'after_switch_theme', 'largo_activation_maybe_setup' );
@@ -121,8 +115,6 @@ function largo_need_updates() {
 	// try to figure out which versions of the options are stored. Implemented in 0.3
 	if ( of_get_option( 'largo_version' ) ) {
 		$compare = version_compare( largo_version(), of_get_option( 'largo_version' ) );
-		var_log( largo_version() );
-		var_log( of_get_option( 'largo_version' ) );
 		if ( $compare == 1 ) {
 			return true;
 		} else {
