@@ -134,6 +134,7 @@ class largo_recent_posts_widget extends WP_Widget {
 		$instance['excerpt_display'] = sanitize_key( $new_instance['excerpt_display'] );
 		$instance['num_sentences'] = intval( $new_instance['num_sentences'] );
 		$instance['show_byline'] = ! empty($new_instance['show_byline']);
+		$instance['hide_byline_date'] = ! empty($new_instance['hide_byline_date']);
 		$instance['show_top_term'] = ! empty($new_instance['show_top_term']);
 		$instance['show_icon'] = ! empty($new_instance['show_icon']);
 		$instance['cat'] = intval( $new_instance['cat'] );
@@ -156,6 +157,7 @@ class largo_recent_posts_widget extends WP_Widget {
 			'excerpt_display' => 'num_sentences',
 			'num_sentences' => 2,
 			'show_byline' => '',
+			'hide_byline_date' => '',
 			'show_top_term' => '',
 			'show_icon' => '',
 			'cat' => 0,
@@ -169,6 +171,7 @@ class largo_recent_posts_widget extends WP_Widget {
 		$instance = wp_parse_args( (array) $instance, $defaults );
 		$duplicates = $instance['avoid_duplicates'] ? 'checked="checked"' : '';
 		$showbyline = $instance['show_byline'] ? 'checked="checked"' : '';
+		$hidebylinedate = $instance['hide_byline_date'] ? 'checked="checked"' : '';
 		$show_top_term = $instance['show_top_term'] ? 'checked="checked"' : '';
 		$show_icon = $instance['show_icon'] ? 'checked="checked"' : '';
 		?>
@@ -222,6 +225,10 @@ class largo_recent_posts_widget extends WP_Widget {
 
 		<p>
 			<input class="checkbox" type="checkbox" <?php echo $showbyline; ?> id="<?php echo $this->get_field_id( 'show_byline' ); ?>" name="<?php echo $this->get_field_name( 'show_byline' ); ?>" /> <label for="<?php echo $this->get_field_id( 'show_byline' ); ?>"><?php _e( 'Show byline on posts?', 'largo' ); ?></label>
+		</p>
+
+		<p>
+			<input class="checkbox" type="checkbox" <?php echo $hidebylinedate; ?> id="<?php echo $this->get_field_id( 'hide_byline_date' ); ?>" name="<?php echo $this->get_field_name( 'hide_byline_date' ); ?>" /> <label for="<?php echo $this->get_field_id( 'hide_byline_date' ); ?>"><?php _e( 'Hide the publish date in the byline?', 'largo' ); ?></label>
 		</p>
 
 		<p>
