@@ -396,6 +396,8 @@ if ( ! function_exists( 'of_get_option' ) ) {
 		$config = get_option( 'optionsframework' );
 
 		if ( ! isset( $config['id'] ) ) {
+			var_log( "It looks like you are calling of_get_option on a site that has not initialized the options framework. Running `get_option( 'optionsframework' )` returns the following value, which does not have an index 'id' or is not an array:");
+			var_log( $config );
 			return $default;
 		}
 
