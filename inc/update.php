@@ -8,6 +8,51 @@
  * ------------------------------------------------------ */
 
 /**
+ * For initial activations of Largo, where no largo was previously installed
+ *
+ * @since 0.5.5
+ * @return Bool false if the initial setup functions were not run, true if they were.
+ * @link https://github.com/INN/Largo/issues/690
+ */
+function largo_activation_maybe_setup() {
+	if ( of_get_option( 'largo_version', false ) ) {
+		return false;
+	}
+
+	// We must make sure some things are enqueued first in order to run these functions
+	$requires = array(
+		// included for the definition of the defaults in optionsframework_options()
+		'/options.php',
+	);
+	// after_switch_theme appears to run before after_setup_theme, which is what calls Largo::get_instance calls Largo::load calls Largo::require_files
+	foreach ( $requires as $required ) {
+		require_once( get_template_directory() . $required );
+	}
+
+	// We assume here that since this action runs on after_switch_theme,
+	// and since switching themes requires admin privileges,
+	// that this user has the permissions to run optionsframework_init
+	// @see optionsframework_rolescheck() in lib/options-framework/options-framework.php
+	if ( current_user_can( 'edit_theme_options' ) ) {
+		optionsframework_init();
+	}
+
+	// this must run before any other function that makes use of of_set_option()
+	largo_set_new_option_defaults();
+
+	of_set_option( 'largo_version', largo_version() );
+
+	// Prevent the update nag from displaying on the first page load
+	remove_action( 'admin_notices', 'largo_update_admin_notice', 10 );
+
+	// Prevent the theme options menu from getting hijacked with the update nag
+	remove_action( 'admin_menu', 'largo_block_theme_options_for_update', 10 );
+
+	return true;
+}
+add_action( 'after_switch_theme', 'largo_activation_maybe_setup' );
+
+/**
  * Performs various update functions and set a new verion number.
  *
  * This acts as a main() for applying database updates when the update ajax is
@@ -80,6 +125,7 @@ function largo_need_updates() {
 	// try to figure out which versions of the options are stored. Implemented in 0.3
 	if ( of_get_option( 'largo_version' ) ) {
 		$compare = version_compare( largo_version(), of_get_option( 'largo_version' ) );
+
 		if ( $compare == 1 ) {
 			return true;
 		} else {
