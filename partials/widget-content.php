@@ -5,6 +5,7 @@ if ( isset( $instance['show_top_term'] ) && $instance['show_top_term'] == 1 && l
 	largo_maybe_top_term();
 }
 
+
 // the thumbnail image (if we're using one)
 if ($thumb == 'small') {
 	$img_location = $instance['image_align'] != '' ? $instance['image_align'] : 'left';
@@ -35,7 +36,7 @@ if ($thumb == 'small') {
 
 <?php // byline on posts
 if ( isset( $instance['show_byline'] ) && $instance['show_byline'] == true) { ?>
-	<span class="byline"><?php echo largo_byline(false); ?></span>
+	<span class="byline"><?php echo largo_byline( false, $instance['hide_byline_date'] ); ?></span>
 <?php }
 
 // the excerpt
