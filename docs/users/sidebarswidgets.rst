@@ -216,7 +216,7 @@ Widgets Deprecated in 0.5x
 =========================
 
 - **Largo Featured Posts** - Now just use the Largo Recent Posts widget and limit to the desired term in the Prominence taxonomy.
-- **Largo Explore Related** - Replaced by the Largo Related posts widget.
+- **Largo Explore Related** - The Largo Related Posts widget now provides much more flexibility, and better styling especially for mobile devices.
 
 Sidebar Options
 ===============
