@@ -9,7 +9,7 @@ Project Repository: https://github.com/INN/Largo/
 
 Technical Issues (Bugs, Feature Requests, etc.): https://github.com/INN/Largo/issues
 
-Largo User Guides for Administrators, Authors, and editors: https://largo.inn.org/guides/
+Largo User Guides for Administrators, Authors, and Editors: https://largo.inn.org/guides/
 
 Help Desk (Support Requests): http://support.largoproject.org
 
