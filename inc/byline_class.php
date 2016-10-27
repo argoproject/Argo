@@ -162,7 +162,7 @@ class Largo_Byline {
 	 */
 	function published_date() {
 		echo sprintf(
-			'<span class="sep"> | </span><time class="entry-date updated dtstamp pubdate" datetime="%1$s">%2$s</time>',
+			'<span class="sep"> |</span> <time class="entry-date updated dtstamp pubdate" datetime="%1$s">%2$s</time>',
 			esc_attr( get_the_date( 'c', $this->post_id ) ),
 			largo_time( false, $this->post_id )
 		);
