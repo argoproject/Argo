@@ -38,14 +38,24 @@ From the `WordPress Codex <http://codex.wordpress.org/Child_Themes>`_:
 
 Why should you use a child theme?
 `````````````````````````````````
-In order to make it easier to upgrade to future versions of the Largo parent theme, you will want to add any customizations that are unique to your site by creating a child theme. WordPress has a tutorial you can follow that explains how to create and configure a child theme.
+In order to make it easier to upgrade to future versions of the Largo parent theme, you will want to add any customizations that are unique to your site by creating a child theme. WordPress has a `tutorial you can follow <http://codex.wordpress.org/Child_Themes>`_ that explains how to create and configure a child theme.
 
-**More**: `Creating Child Themes <../users/download.html#creating-child-themes>`_
+**More:** `Using Child Themes <../developers/childthemes.html>`_.
 
 .. toctree::
     :maxdepth: 2
 
     childthemes
+
+Custom Post Templates
+---------------------
+
+Largo allows you to select between three default templates to use for posts and pages on your site. This default is set from the **Appearance > Theme Options > Layout** tab under the “Single Article Template” heading.
+
+- One Column (Standard Layout) is a new default article template in Largo version 0.4 that focuses on readability, reduces distractions and allows for beautiful presentation of visual elements within a story with a large “hero” section at the top of the article for featured media (photo, video, slideshow or embedded media).
+- Two Columns (Classic Layout) is the previous article template from Largo version 0.3 and before which features a content area on the left and a sidebar on the right.
+- Full-width (no sidebar) is an option when posts need a wider content area for things like maps and interactive data applications. The full-width template is not ideal for text, as the line length is non-optimal for a good reading experience.
+
 
 Technical Notes
 ---------------
