@@ -9,6 +9,8 @@ Project Repository: https://github.com/INN/Largo/
 
 Technical Issues (Bugs, Feature Requests, etc.): https://github.com/INN/Largo/issues
 
+Largo User Guides for Administrators, Authors, and Editors: https://largo.inn.org/guides/
+
 Help Desk (Support Requests): http://support.largoproject.org
 
 Knowledge Base: http://support.largoproject.org/support/solutions
@@ -18,39 +20,6 @@ User Forum: http://support.largoproject.org/support/discussions
 Twitter: http://twitter.com/largoproject
 
 Mailing List: http://eepurl.com/yu0bT
-
-
-.. _setup-docs:
-
-Installation And Setup
-----------------------
-
-.. toctree::
-    :maxdepth: 2
-
-    users/prelaunchchecklist
-    users/download
-
-
-.. _general-docs:
-
-General Documentation
----------------------
-
-.. toctree::
-    :maxdepth: 2
-
-    users/generalsettings
-    users/themeoptions
-    users/menus
-    users/sidebarswidgets
-    users/posting
-    users/landingpages
-    users/taxonomies
-    users/posttemplates
-    users/plugins
-    users/contactforms
-    users/ads
 
 .. _dev-docs:
 
