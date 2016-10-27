@@ -10,7 +10,7 @@ Many of Largo's core functions are pluggable so you can write your own version o
 
 You can read up on how that works in the `WordPress codex section about child themes <http://codex.wordpress.org/Child_Themes>`_.
 
-See: `Function Refernce <../api/index.hmtl>`_.
+See: `Function Reference <../api/index.html>`_.
 
 Theme Options and the Options Framework
 ---------------------------------------
@@ -51,7 +51,7 @@ To rebuild the translation files, run the following commands: ::
 Images
 ------
 
-See the `Pre-Launch Checklist <users/prelaunchchecklist.html>`_ to see the list of image types and sizes you'll need to get your site up and running.
+See the `Largo User Guide for Administrators Theme Images page <https://largo.inn.org/guides/administrators/theme-options/theme-images/>`_ to see the list of image types and sizes you'll need to get your site up and running.
 
 **More on image sizes:**
 
