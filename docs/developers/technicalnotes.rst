@@ -55,9 +55,9 @@ See the `Largo User Guide for Administrators Theme Images page <https://largo.in
 
 **More on image sizes:**
 
-- `Largo Image Sizes and Constants <imagesizes.html>`_.
-- `Image Sizes  <imagesizes.html#image-sizes>`_.
-- `Constants <imagesizes.html#constants>`_.
+- `Largo Image Sizes and Constants <imagesizes.html>`_
+- `Image Sizes  <imagesizes.html#image-sizes>`_
+- `Constants <imagesizes.html#constants>`_
 
 .. toctree::
     :maxdepth: 2
