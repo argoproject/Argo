@@ -237,6 +237,10 @@
       return;
     }
 
+    if ( ! this.windowwidth() <= 768 ) {
+      $('html').removeClass('nav-open');
+    }
+
     var shelf = nav.find('.nav-shelf'),
         button = nav.find('.toggle-nav-bar'),
         right = nav.find('.nav-right'),
