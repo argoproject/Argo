@@ -89,6 +89,7 @@ class Largo_Byline {
 
 	/**
 	 * On single posts, output the avatar for the author object
+	 * This supports both Largo_Byline and Largo_CoAuthors_Byline
 	 */
 	function avatar() {
 		
@@ -105,11 +106,11 @@ class Largo_Byline {
 					get_the_author_meta( 'display_name', $this->author_id )
 				);
 			} elseif ( $this->author->type == 'guest-author' && get_the_post_thumbnail( $this->author->ID ) ) {
-				$output = get_the_post_thumbnail( $this->author_id, array( 32,32 ) );
+				$output = get_the_post_thumbnail( $this->author->ID, array( 32,32 ) );
 				$output = str_replace( 'attachment-32x32 wp-post-image', 'avatar avatar-32 photo', $output );
 			}
-			$output .= ' '; // to reduce run-together bylines	
-		}	
+			$output .= ' '; // to reduce run-together bylines
+		}
 		echo $output;
 	}
 
@@ -161,7 +162,7 @@ class Largo_Byline {
 	 */
 	function published_date() {
 		echo sprintf(
-			'<span class="sep"> | </span><time class="entry-date updated dtstamp pubdate" datetime="%1$s">%2$s</time>',
+			'<span class="sep"> |</span> <time class="entry-date updated dtstamp pubdate" datetime="%1$s">%2$s</time>',
 			esc_attr( get_the_date( 'c', $this->post_id ) ),
 			largo_time( false, $this->post_id )
 		);
@@ -207,6 +208,12 @@ class Largo_CoAuthors_Byline extends Largo_Byline {
 	 * @see $this->generate_byline();
 	 */
 	protected $author;
+
+	/**
+	 * Temporary variable used for the author ID;
+	 * @see $this->generate_byline();
+	 */
+	private $author_id;
 
 	/**
 	 * Differs from Largo_Byline in following ways:
@@ -298,7 +305,7 @@ class Largo_CoAuthors_Byline extends Largo_Byline {
 	 */
 	function twitter() {
 		$output = '';
-		if ( isset( $this->author->twitter ) && is_single() ) {
+		if ( ! empty( $this->author->twitter ) && is_single() ) {
 			$output .= ' <span class="twitter"><a href="https://twitter.com/' . largo_twitter_url_to_username( $this->author->twitter ) . '"><i class="icon-twitter"></i></a></span>';
 		}
 		echo $output;
