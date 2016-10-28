@@ -8,6 +8,14 @@
     return this.init();
   };
 
+  /*
+   * This is a shim to cover for the case where a browser may or may not have scrollbars
+   * @link https://github.com/jquery/jquery/issues/1729
+   */
+  Navigation.prototype.windowwidth = function() {
+    return Math.max(window.outerWidth, $(window).width());
+  }
+
   Navigation.prototype.init = function() {
     // Dropdowns on touch screens
     this.enableMobileDropdowns();
@@ -18,7 +26,7 @@
     this.mainEl = $('#main');
     this.mainNavEl = $('#main-nav');
 
-    if ($(window).width() > 768) {
+    if ( this.windowwidth() > 768) {
       this.stickyNavTransition();
     }
 
@@ -88,7 +96,7 @@
 
   Navigation.prototype.stickyNavResizeCallback = function() {
     if (
-      $(window).width() <= 768 ||
+      this.windowwidth() <= 768 ||
       ( Largo.sticky_nav_options.main_nav_hide_article && ($('body').hasClass('single') || $('body').hasClass('page')) )
     ) {
       this.stickyNavEl.addClass('show');
@@ -224,7 +232,7 @@
   Navigation.prototype.navOverflow = function() {
     var nav = $('#sticky-nav');
 
-    if (!nav.is(':visible') || $(window).width() <= 768) {
+    if (!nav.is(':visible') || this.windowwidth() <= 768) {
       this.revertOverflow();
       return;
     }
@@ -235,7 +243,7 @@
         shelfWidth = shelf.outerWidth(),
         rightWidth = right.outerWidth(),
         caretWidth = nav.find('.caret').first().outerWidth(),
-        windowWidth = $(window).width(),
+        windowWidth = this.windowwidth(),
         isMobile = button.is(':visible');
 
     if (!isMobile) {
