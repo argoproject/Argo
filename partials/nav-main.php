@@ -14,20 +14,33 @@ if ( ! is_single() && ! is_singular() || ! of_get_option( 'main_nav_hide_article
 <nav id="main-nav" class="navbar clearfix">
 	<div class="navbar-inner">
 		<div class="container">
-			<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
-			<a class="btn btn-navbar toggle-nav-bar"  title="<?php esc_attr_e('More', 'largo'); ?>">
-				<!-- BEGIN Mobile off-canvas menu button -->
-				<div class="bars">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</div>
-				<!-- END Mobile off-canvas menu button -->
-			</a>
-
+			
+			<?php 
+				/*
+				 * Before Main Nav Shelf
+				 *
+				 * Use add_action( 'largo_before_main_nav_shelf', 'function_to_add');
+				 *
+				 * @link https://codex.wordpress.org/Function_Reference/add_action
+				 * @since 0.5.5
+     			 */
+				do_action( 'largo_before_main_nav_shelf' ); 
+			?>
+			
 			<div class="nav-shelf">
 				<ul class="nav">
-					<?php
+				
+				<?php
+					/*
+					 * Before Main Nav List Items
+					 *
+					 * Use add_action( 'largo_before_main_nav_list_items', 'function_to_add');
+					 *
+					 * @link https://codex.wordpress.org/Function_Reference/add_action
+					 * @since 0.5.5
+     			 	 */
+					do_action( 'largo_before_main_nav_list_items' );
+					
 					/*
 					 * Generate the Main Navigation shown mainly on homepages
 					 *
@@ -44,36 +57,33 @@ if ( ! is_single() && ! is_singular() || ! of_get_option( 'main_nav_hide_article
 						'walker' => new Bootstrap_Walker_Nav_Menu()
 					);
 					largo_nav_menu( $args );
+					
+					/*
+					 * After Main Nav List Items
+					 *
+					 * Use add_action( 'largo_after_main_nav_list_items', 'function_to_add');
+					 *
+					 * @link https://codex.wordpress.org/Function_Reference/add_action
+					 * @since 0.5.5
+     			 	 */
+					do_action( 'largo_after_main_nav_list_items' );
 				?>
 				</ul>
 
-				<!-- BEGIN Mobile-Only Menu -->
-				<ul class="nav visible-phone">
-				<?php if ( has_nav_menu( 'global-nav' ) ) { ?>
-					<li class="menu-item-has-childen dropdown">
-						<a href="javascript:void(0);" class="dropdown-toggle">
-						<?php
-							/* try to get the menu name from global-nav */
-							$menus = get_nav_menu_locations();
-							$menu_title = wp_get_nav_menu_object( $menus['global-nav'] )->name;
-							echo ( $menu_title ) ? $menu_title : __( 'About', 'largo' );
-						?>
-							<b class="caret"></b>
-						</a>
-						<?php
-							$args = array(
-								'theme_location' => 'global-nav',
-								'depth' => 1,
-								'container' => false,
-								'menu_class' => 'dropdown-menu'
-							);
-							largo_nav_menu( $args );
-						?>
-					</li>
-				<?php } ?>
-				</ul>
-				<!-- END Mobile-Only Menu -->
 			</div>
+			
+			<?php 
+				/*
+				 * Before Main Nav Shelf
+				 *
+				 * Use add_action( 'largo_after_main_nav_shelf', 'function_to_add');
+				 *
+				 * @link https://codex.wordpress.org/Function_Reference/add_action
+				 * @since 0.5.5
+     			 */
+				do_action( 'largo_after_main_nav_shelf' );
+			?>
+			
 		</div>
 	</div>
 </nav>

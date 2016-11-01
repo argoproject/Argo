@@ -5,13 +5,22 @@
 get_header();
 ?>
 
-<div id="content" class="stories search-results span8" role="main">
+<div id="content" class="stories archive search-results span8" role="main">
 	<?php if (of_get_option('use_gcs') && of_get_option('gcs_id')) { ?>
 		<h1>
 			<?php
 				printf( __('Search results for <span class="search-term">%s</span>', 'largo'), get_search_query() );
 			?>
 		</h1>
+
+		<?
+			/**
+			 * Fires before the Google Custom Search container
+			 *
+			 * @since Largo 0.5.5
+			 */
+			do_action('largo_search_gcs_before_container');
+		?>
 
 		<div class="gcs_container">
 			<script>
@@ -57,10 +66,37 @@ get_header();
 			</script>
 			<?php } ?>
 		</div>
+
+		<?
+			/**
+			 * Fires after the Google Custom Search container
+			 *
+			 * @since Largo 0.5.5
+			 */
+			do_action('largo_search_gcs_after_container');
+		?>
+
 	<?php } else { ?>
 
 		<?php if ( have_posts() ) {
-			get_search_form(); ?>
+
+			/**
+			 * Fires before the non-GCS search form
+			 *
+			 * @since Largo 0.5.5
+			 */
+			do_action('largo_search_normal_before_form');
+
+			get_search_form();
+
+			/**
+			 * Fires after the non-GCS search form, before the search results counter
+			 *
+			 * @since Largo 0.5.5
+			 */
+			do_action('largo_search_normal_before_results');
+
+			?>
 
 			<h3 class="recent-posts clearfix">
 				<?php
@@ -79,8 +115,15 @@ get_header();
 			} else {
 				get_template_part( 'partials/content', 'not-found' );
 			}
+
+			/**
+			 * Fires after the non-GCS search results or lack-of-results
+			 *
+			 * @since Largo 0.5.5
+			 */
+			do_action('largo_search_normal_after_results');
 		} ?>
-</div><!--#content-->
+</div><!-- #content -->
 
 <?php get_sidebar(); ?>
 <?php get_footer();

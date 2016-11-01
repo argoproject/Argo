@@ -1,11 +1,64 @@
 /**
  * Styles for the Largo Author Bio widget
  *
- * @see /less/inc/author.less
  * @since 0.5.3
  */
 
 .widget .author-box ul {
   padding: 0;
   margin: 0;
+}
+// AUTHOR BOX
+.author-box {
+  clear: both;
+  margin: 0;
+  img.avatar {
+    float: left;
+    margin: 5px 15px 10px 0;
+    padding: 4px;
+    border: 1px solid @grayLighter;
+  }
+  p {
+    font-size: @baseFontSize;
+    margin-bottom: @baseline/3;
+  }
+  ul {
+    list-style:none;
+    margin: 0;
+    float: left;
+    li {
+      display: inline-block;
+      float: left;
+      margin-right: 5px;
+      min-width: 30px;
+      a {
+	    display: block;
+	    padding: 4px;
+	    color: @white;
+	    background-color: @grayDark;
+	    .border-radius(4px);
+	    &:hover {
+		  background-color: lighten(@grayDark,10%);
+		}    
+      }
+      i {
+        padding: 4px;
+        &::before {
+          font-size: 14px;
+        }
+      }
+      &.author-posts-link {
+        font-size: @baseFontSize - 3;
+        font-weight: bold;
+        font-family: @sansFontFamily;
+        a {
+	      padding: 6px 10px;
+          color: @white;
+          &:hover {
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
 }

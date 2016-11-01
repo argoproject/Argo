@@ -42,12 +42,6 @@ function optionsframework_options() {
 		}
 	}
 
-	$tag_display_options = array(
-		'top' 	=> __('Single Tag Above', 'largo'),
-		'btm' 	=> __('List Below', 'largo'),
-		'none' 	=> __('None', 'largo')
-	);
-
 	$article_utility_buttons = array(
 		'facebook' 	=> __('Facebook', 'largo'),
 		'twitter' 	=> __('Twitter', 'largo'),
@@ -196,10 +190,16 @@ function optionsframework_options() {
 		'id' 	=> 'youtube_link',
 		'std' 	=> '',
 		'type' 	=> 'text');
-
+	
 	$options[] = array(
-		'desc' 	=> __('<strong>Link to Flickr Photostream</strong> (http://www.flickr.com/photos/username/)', 'largo'),
-		'id' 	=> 'flickr_link',
+		'desc' 	=> __('<strong>Link to Instagram Page</strong> (http://instagram.com/username)', 'largo'),
+		'id' 	=> 'instagram_link',
+		'std' 	=> '',
+		'type' 	=> 'text');
+	
+	$options[] = array(
+		'desc' 	=> __('<strong>Link to LinkedIn Group or Profile</strong> (http://www.linkedin.com/in/username/)', 'largo'),
+		'id' 	=> 'linkedin_link',
 		'std' 	=> '',
 		'type' 	=> 'text');
 
@@ -210,17 +210,23 @@ function optionsframework_options() {
 		'type' 	=> 'text');
 
 	$options[] = array(
-		'desc' 	=> __('<strong>Link to LinkedIn Group or Profile</strong> (http://www.linkedin.com/in/username/)', 'largo'),
-		'id' 	=> 'linkedin_link',
+		'desc' 	=> __('<strong>Link to Pinterest Page</strong> (http://pinterest.com/username)', 'largo'),
+		'id' 	=> 'pinterest_link',
 		'std' 	=> '',
 		'type' 	=> 'text');
-
+		
 	$options[] = array(
 		'desc' 	=> __('<strong>Link to Github Page</strong> (http://github.com/username)', 'largo'),
 		'id' 	=> 'github_link',
 		'std' 	=> '',
 		'type' 	=> 'text');
-
+	
+	$options[] = array(
+		'desc' 	=> __('<strong>Link to Flickr Photostream</strong> (http://www.flickr.com/photos/username/)', 'largo'),
+		'id' 	=> 'flickr_link',
+		'std' 	=> '',
+		'type' 	=> 'text');
+		
 	$options[] = array(
 		'desc' 	=> __('By default, a row of social media icons is shown in the site footer. <strong>Check this box if you want to show them in the header as well</strong>. Note that they will only display on desktops and larger tablets.', 'largo'),
 		'id' 	=> 'show_header_social',
@@ -369,14 +375,6 @@ function optionsframework_options() {
 		'type' 	=> 'info');
 
 	$options[] = array(
-		'desc' 		=> __('<strong>How would you like to display categories and tags for posts on the homepage?</strong> Largo can display a single category or tag above the headline for each story, a list of tags below the story\'s excerpt or nothing at all.', 'largo'),
-		'id' 		=> 'tag_display',
-		'std' 		=> 'top',
-		'type' 		=> 'select',
-		'class'		=> 'mini',
-		'options' 	=> $tag_display_options);
-
-	$options[] = array(
 		'desc' 	=> __('<strong>Number of posts</strong> to display in the main loop on the homepage', 'largo'),
 		'id' 	=> 'num_posts_home',
 		'std' 	=> 10,
@@ -462,41 +460,41 @@ function optionsframework_options() {
 	);
 
 	$options[] = array(
-		'name' => __('Sticky navigation', 'largo'),
-		'desc' => __('By default, the sticky navigation bar is visible on all pages for mobile screen sizes. The sticky navigation bar will disappear when a user scrolls down and reappear on an up scroll. When the main navigation is visible, the sticky navigation will disappear.'),
+		'name' => __( 'Sticky navigation', 'largo' ),
+		'desc' => __( 'By default, a floating/sticky navigation bar is visible on all pages for mobile screen sizes. The sticky navigation bar will disappear when a user scrolls down and reappear when a user begins to scroll up. When the main navigation is visible, the sticky navigation will disappear. This feature can be deactivated but we typically recommend sticking with the default behavior.'),
 		'type' => 'info'
 	);
 
 	$options[] = array(
-		'desc' => __('Enable the sticky navigation for all screen sizes on article pages', 'largo'),
-		'id' => 'sticky_nav_display_article',
+		'desc' => __( 'Enable sticky navigation?', 'largo' ),
+		'id' => 'sticky_nav_display',
 		'std' => '1',
 		'type' => 'checkbox'
 	);
 
 	$options[] = array(
-		'desc' => __('Hide the main navigation on article pages and display only the sticky navigation on article pages', 'largo'),
+		'desc' => __( 'Hide the main navigation on article pages and display only the sticky navigation on article pages', 'largo' ),
 		'id' => 'main_nav_hide_article',
 		'std' => '0',
 		'type' => 'checkbox'
 	);
 
 	$options[] = array(
-		'desc' => __('<strong>NOTE:</strong> If the main navigation is hidden on article pages, <strong>readers will only see a small logo in the left-hand corner when entering the site and you will not be able to run a banner ad above the navigation.</strong>', 'largo'),
+		'desc' => __( '<strong>NOTE:</strong> If the main navigation is hidden on article pages, <strong>readers will only see a small logo in the left-hand corner when entering the site and you will not be able to run a banner ad above the navigation.</strong>', 'largo' ),
 		'type' => 'info'
 	);
 
 	$options[] = array(
-		'name' => __('Sticky navigation overflow'),
-		'desc' => __('Enter the label used for the navigation menu that houses any navigation links that would otherwise cause the navigation to wrap onto multiple lines.', 'largo'),
+		'name' => __( 'Sticky navigation overflow' ),
+		'desc' => __( 'Enter the label used for the navigation menu that houses any navigation links that would otherwise cause the navigation to wrap onto multiple lines.', 'largo' ),
 		'id' => 'nav_overflow_label',
-		'std' => __('More', 'largo'),
+		'std' => __( 'More', 'largo' ),
 		'type' => 'text'
 	);
 
 	$options[] = array(
-		'name' => __('Alternate site name for sticky navigation'),
-		'desc' => __('If your site name is especially long, use this field to set an abbreviation or shorter version for use in the sticky nav on small screens.', 'largo'),
+		'name' => __( 'Alternate site name for sticky navigation' ),
+		'desc' => __( 'If your site name is especially long, use this field to set an abbreviation or shorter version for use in the sticky nav on small screens.', 'largo' ),
 		'id' => 'nav_alt_site_name',
 		'std' => '',
 		'type' => 'text'
@@ -591,9 +589,12 @@ function optionsframework_options() {
 		'class' => 'hidden');
 
 
-	$screen = get_current_screen();
-	if ( is_object( $screen ) && $screen->base == 'widgets' ) {
-		return $widget_options;
+	// this is wrapped in a function_exists because optionsframework_options is called during after_switch_theme, which is not yet an admin screen, so the function is not defined
+	if ( function_exists( 'get_current_screen' ) ) {
+		$screen = get_current_screen();
+		if ( is_object( $screen ) && $screen->base == 'widgets' ) {
+			return $widget_options;
+		}
 	}
 
 

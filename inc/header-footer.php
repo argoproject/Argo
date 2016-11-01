@@ -96,19 +96,22 @@ if ( ! function_exists( 'inn_logo' ) ) {
 if ( ! function_exists( 'largo_social_links' ) ) {
 	function largo_social_links() {
 
-		$fields = array(
-			'rss' 		=> __( 'Link to RSS Feed', 'largo' ),
+		$networks = array(
 			'facebook' 	=> __( 'Link to Facebook Profile', 'largo' ),
 			'twitter' 	=> __( 'Link to Twitter Page', 'largo' ),
-			'youtube' 	=> __( 'Link to YouTube Page', 'largo' ),
-			'flickr' 	=> __( 'Link to Flickr Page', 'largo' ),
-			'tumblr' 	=> __( 'Link to Tumblr', 'largo' ),
 			'gplus' 	=> __( 'Link to Google Plus Page', 'largo' ),
+			'youtube' 	=> __( 'Link to YouTube Page', 'largo' ),
+			'instagram' => __( 'Link to Instagram Page', 'largo' ),
+			'tumblr' 	=> __( 'Link to Tumblr', 'largo' ),
 			'linkedin' 	=> __( 'Link to LinkedIn Page', 'largo' ),
-			'github' 	=> __( 'Link to Github Page', 'largo' )
+			'pinterest' => __( 'Link to Pinterest Page', 'largo' ),
+			'github' 	=> __( 'Link to Github Page', 'largo' ),
+			'flickr' 	=> __( 'Link to Flickr Page', 'largo' ),
+			'rss' 		=> __( 'Link to RSS Feed', 'largo' )
 		);
+		$networks = apply_filters( 'largo_additional_networks', $networks );
 
-		foreach ( $fields as $field => $title ) {
+		foreach ( $networks as $field => $title ) {
 			$field_link =  $field . '_link';
 
 			if ( of_get_option( $field_link ) ) {
@@ -186,6 +189,30 @@ if ( ! function_exists ( 'largo_seo' ) ) {
 	}
 }
 add_action( 'wp_head', 'largo_seo' );
+
+/**
+ * Schema.org article metadata we include in the header of each single post
+ *
+ * @since 0.4
+ */
+if ( ! function_exists( 'largo_post_metadata' ) ) {
+	function largo_post_metadata( $post_id, $echo = TRUE ) {
+		$out = '<meta itemprop="description" content="' . strip_tags( largo_excerpt( get_post( $post_id ), 5, false, '', false ) ) . '" />' . "\n";
+		$out .= '<meta itemprop="datePublished" content="' . get_the_date( 'c', $post_id ) . '" />' . "\n";
+		$out .= '<meta itemprop="dateModified" content="' . get_the_modified_date( 'c', $post_id ) . '" />' . "\n";
+
+		if ( has_post_thumbnail( $post_id ) ) {
+			$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'thumbnail' );
+			$out .= '<meta itemprop="image" content="' . $image[0] . '" />';
+		}
+
+		if ( $echo ) {
+			echo $out;
+		} else {
+			return $out;
+		}
+	}
+}
 
 /**
  * Remove extraneous <head> elements

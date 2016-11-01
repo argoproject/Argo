@@ -8,6 +8,14 @@
     return this.init();
   };
 
+  /*
+   * This is a shim to cover for the case where a browser may or may not have scrollbars
+   * @link https://github.com/jquery/jquery/issues/1729
+   */
+  Navigation.prototype.windowwidth = function() {
+    return Math.max(window.outerWidth, $(window).width());
+  }
+
   Navigation.prototype.init = function() {
     // Dropdowns on touch screens
     this.enableMobileDropdowns();
@@ -18,7 +26,7 @@
     this.mainEl = $('#main');
     this.mainNavEl = $('#main-nav');
 
-    if ($(window).width() > 768) {
+    if ( this.windowwidth() > 768) {
       this.stickyNavTransition();
     }
 
@@ -42,22 +50,6 @@
       // Open the drop down
       openMenu = false;
 
-      // Handle the tap for the drop down
-      $('ul.nav').on(mobileEvent + '.largo', 'li', function(event) {
-        var li = $(event.currentTarget);
-
-        if (!li.is('.open')) {
-          // The link when the menu is closed
-          closeOpenMenu();
-          li.addClass('open');
-          openMenu = li;
-        } else if ($(event.target).is('b.caret')) {
-          // The caret when the menu is open
-          li.removeClass('open');
-          openMenu = false;
-        }
-      });
-
       // Call this to close the open menu
       var closeOpenMenu = function() {
         if (openMenu) {
@@ -79,6 +71,8 @@
   Navigation.prototype.bindStickyNavEvents = function() {
     var self = this;
 
+    // This is so that we may apply styles to the navbar based on what options are set
+    // This is used with some styles in less/inc/navbar-sticky.less
     $.each(Largo.sticky_nav_options, function(idx, opt) {
       if (opt)
         self.stickyNavEl.addClass(idx);
@@ -91,13 +85,27 @@
     this.stickyNavSetOffset();
   };
 
+  // Hide the sticky nav if we're too close to the top of the page
+  Navigation.prototype.stickyNavScrollTopHide = function() {
+    if ($(window).scrollTop() <= this.mainEl.offset().top && this.mainNavEl.is(':visible')) {
+      this.stickyNavEl.removeClass('show');
+      clearTimeout(this.scrollTimeout);
+      return;
+    }
+  }
+
   Navigation.prototype.stickyNavResizeCallback = function() {
     if (
-        $(window).width() <= 768 ||
-        (Largo.sticky_nav_options.main_nav_hide_article && ($('body').hasClass('single') || $('body').hasClass('page')))
-      ) {
+      this.windowwidth() <= 768 ||
+      ( Largo.sticky_nav_options.main_nav_hide_article && ($('body').hasClass('single') || $('body').hasClass('page')) )
+    ) {
       this.stickyNavEl.addClass('show');
       this.stickyNavEl.parent().css('height', this.stickyNavEl.outerHeight());
+    } else if (
+      Largo.sticky_nav_options.sticky_nav_display
+    ) {
+      this.stickyNavScrollTopHide();
+      this.stickyNavEl.parent().css('height', '');
     } else {
       this.stickyNavEl.parent().css('height', '');
     }
@@ -114,15 +122,13 @@
         direction = this.scrollDirection(),
         callback, wait;
 
-    if ($(window).scrollTop() <= this.mainEl.offset().top && this.mainNavEl.is(':visible')) {
-      this.stickyNavEl.removeClass('show');
-      clearTimeout(this.scrollTimeout);
-      return;
-    }
+    this.stickyNavScrollTopHide();
 
     this.stickyNavSetOffset();
 
-    if (this.previousScroll == direction) {
+    // Abort if the scroll direction is the same as it was, or if the page has not been scrolled.
+    if (this.previousScroll == direction || !this.previousScroll ) {
+      this.previousScroll = direction;
       return;
     }
 
@@ -226,9 +232,13 @@
   Navigation.prototype.navOverflow = function() {
     var nav = $('#sticky-nav');
 
-    if (!nav.is(':visible') || $(window).width() <= 768) {
+    if (!nav.is(':visible') || this.windowwidth() <= 768) {
       this.revertOverflow();
       return;
+    }
+
+    if ( ! this.windowwidth() <= 768 ) {
+      $('html').removeClass('nav-open');
     }
 
     var shelf = nav.find('.nav-shelf'),
@@ -237,7 +247,7 @@
         shelfWidth = shelf.outerWidth(),
         rightWidth = right.outerWidth(),
         caretWidth = nav.find('.caret').first().outerWidth(),
-        windowWidth = $(window).width(),
+        windowWidth = this.windowwidth(),
         isMobile = button.is(':visible');
 
     if (!isMobile) {
@@ -265,7 +275,7 @@
         if (overflow.length == 0) {
           var overflowmenu ='<li id="menu-overflow" class="menu-item-has-children dropdown">' +
             '<a href="#" class="dropdown-toggle">' + Largo.sticky_nav_options.nav_overflow_label + '<b class="caret"></b></a>' +
-            '<ul id="menu-more-1" class="dropdown-menu"></ul></li>';
+            '<ul id="sticky-nav-overflow" class="dropdown-menu"></ul></li>';
           overflow = $(overflowmenu);
           overflow.find('a').click(function() { return false; });
           shelf.find('ul.nav > li.menu-item').last().after(overflow);
@@ -273,7 +283,7 @@
 
         var li = shelf.find('ul.nav > li.menu-item').last();
 
-        overflow.find('ul#menu-more-1').prepend(li);
+        overflow.find('ul#sticky-nav-overflow').prepend(li);
         li.addClass('overflowed');
         li.data('shelfwidth', shelfWidth);
       } else if (overflow.length) {

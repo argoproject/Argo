@@ -164,7 +164,7 @@ function largo_get_recent_posts_for_term( $term, $max = 5, $min = 1 ) {
     global $post;
 
     $query_args = array(
-        'showposts' 			=> $max,
+        'posts_per_page' 			=> $max,
         'orderby' 				=> 'date',
         'order' 				=> 'DESC',
         'ignore_sticky_posts' 	=> 1,
@@ -191,7 +191,7 @@ function largo_get_recent_posts_for_term( $term, $max = 5, $min = 1 ) {
 			$post_ids = preg_split( '#\s*,\s*#', get_post_meta( $post->ID, 'largo_custom_related_posts', true ) );
 			$query_args[ 'post__in' ] = $post_ids;
 			$query_args[ 'orderby' ] = 'post__in';
-			$query_args['showposts'] = count($post_ids);
+			$query_args['posts_per_page'] = count($post_ids);
 		}
 
     $query_args = apply_filters( 'largo_get_recent_posts_for_term_query_args', $query_args, $term, $max, $min, $post );
@@ -212,20 +212,20 @@ function largo_get_recent_posts_for_term( $term, $max = 5, $min = 1 ) {
  * @since 1.0
  */
 function largo_has_categories_or_tags() {
-    if ( get_the_tags() ) {
-        return true;
-    }
+	if ( get_the_tags() ) {
+		return true;
+	}
 
-    $cats = get_the_category();
-    if ( $cats ) {
-        foreach ( $cats as $cat ) {
-            if ( $cat->name != 'Uncategorized' ) {
-                return true;
-            }
-        }
-    }
+	$cats = get_the_category();
+	if ( $cats ) {
+		foreach ( $cats as $cat ) {
+			if ( $cat->name != 'Uncategorized' ) {
+				return true;
+			}
+		}
+	}
 
-    return false;
+	return false;
 }
 
 /**
@@ -325,17 +325,39 @@ function largo_top_term( $options = array() ) {
 
 	$args = wp_parse_args( $options, $defaults );
 
+	/*
+	 * Try to get a term ID
+	 * Or continue using 'none' if that is the case
+	 */
 	$term_id = get_post_meta( $args['post'], 'top_term', TRUE );
-	//get the taxonomy slug
-	$taxonomy = $wpdb->get_var( $wpdb->prepare( "SELECT taxonomy FROM $wpdb->term_taxonomy WHERE term_id = %d LIMIT 1", $term_id) );
 
-	if ( empty( $term_id ) || empty($taxonomy) ) {	// if no top_term specified, fall back to the first category
-		$term_id = get_the_category( $args['post'] );
-		if ( !is_array( $term_id ) || !count($term_id) ) return;	//no categories OR top term? Do nothing
-		$term_id = $term_id[0]->term_id;
+	// Try to get the taxonomy for the term ID, but if it's 'none' for the "None" option, don't bother doing this.
+	if ( !empty($term_id) && $term_id !== 'none' ) {
+		//get the taxonomy slug
+		$taxonomy = $wpdb->get_var( $wpdb->prepare( "SELECT taxonomy FROM $wpdb->term_taxonomy WHERE term_id = %d LIMIT 1", $term_id) );
 	}
 
-	if ( $term_id ) {
+	// if no top_term specified, or if the top term is not in a taxonomy and the top term is not 'none',
+	if ( empty( $term_id ) || ( empty($taxonomy) && $term_id !== 'none' ) ) {
+		// Get the categories the post is in and try to use the first one as a term id
+		$term_id = get_the_category( $args['post'] );
+		if ( is_array( $term_id ) &&  count($term_id) ) {
+			$term_id = $term_id[0]->term_id;
+		}
+
+		// The post isn't in a category? Try post-types if that's enabled.
+		if ( empty($term_id) && taxonomy_exists('post-type') ) {
+			$term_id = get_the_terms( $args['post'], 'post-type' );
+			if ( is_array( $term_id ) &&  count($term_id) ) {
+				$term_id = $term_id[0]->term_id;
+			}
+		}
+	}
+
+	/*
+	 * Using the term ID, get the term and then generate some text
+	 */
+	if ( $term_id && $term_id !== 'none' && !empty($taxonomy) ) {
 		$icon = ( $args['use_icon'] ) ?  '<i class="icon-white icon-tag"></i>' : '' ;	//this will probably change to a callback largo_term_icon() someday
 		$link = ( $args['link'] ) ? array('<a href="%2$s" title="Read %3$s in the %4$s category">','</a>') : array('', '') ;
 		// get the term object
@@ -349,13 +371,51 @@ function largo_top_term( $options = array() ) {
 			$term->name,
 			$icon
 		);
-	} else {
+	}
+
+	/*
+	 * No output?
+	 * generate a link to the post's category or tags
+	 */
+	if ( empty($output) ) {
 		$output = largo_categories_and_tags( 1, false, $args['link'], $args['use_icon'], '', $args['wrapper'], $args['exclude']);
 		$output = ( is_array($output) ) ? $output[0] : '';
 	}
+
+	/*
+	 * for https://github.com/INN/Largo/issues/1082, support not outputting anything
+	 * @since 0.5.5
+	 */
+	if ( $term_id == 'none' ) {
+		$output = '';
+	}
+
 	if ( $args['echo'] ) echo $output;
 	return $output;
 }
+
+/**
+ * Add the post's top term to the post's post_class array
+ *
+ * @link https://github.com/INN/Largo/issues/1119
+ * @since 0.5.5
+ * @filter post_class
+ * @param array $classes An array of classes on the post
+ * @return array
+ */
+function largo_post_class_top_term($classes) {
+	global $post;
+	$top_term = get_post_meta( $post->ID, 'top_term', TRUE );
+	$term = get_term_by('id', $top_term, 'post_tag');
+
+	// Don't output the class .top-term-- if there isn't a top term saved
+	if ( !empty($term) ) {
+		$classes[] = 'top-term-' . $term->taxonomy . '-' . $term->slug;
+	}
+
+	return $classes;
+}
+add_filter('post_class', 'largo_post_class_top_term');
 
 /**
  *
@@ -386,7 +446,7 @@ function largo_filter_get_recent_posts_for_term_query_args( $query_args, $term, 
     if ( $term->term_id == -90 ) {
         $posts = preg_split( '#\s*,\s*#', get_post_meta( $post->ID, 'largo_custom_related_posts', true ) );
         $query_args = array(
-            'showposts'             => $max,
+            'posts_per_page'        => $max,
             'orderby'               => 'post__in',
             'order'                 => 'ASC',
             'ignore_sticky_posts'   => 1,
@@ -560,8 +620,20 @@ class Largo_Related {
 	 */
 	protected function get_term_posts() {
 
-		//we've gone back and forth through all the post's series, now let's try traditional taxonomies
-		$taxonomies = get_the_terms( $this->post_id, array( 'category', 'post_tag' ) );
+		//we've gone back and forth through all the post's series, now let's try traditional taxonomies	
+		$taxonomies = array();
+		foreach ( array( 'category', 'post_tag' ) as $_taxonomy ) {
+			$_terms = get_object_term_cache( $this->post_id, $_taxonomy );
+
+			if ( false === $_terms ) {
+				$_terms = wp_get_object_terms( $this->post_id, $_taxonomy );
+				wp_cache_add( $this->post_id, $taxonomies, $_taxonomy . '_relationships' );
+			}
+			
+			if ( is_array( $_terms ) ) {
+				$taxonomies = array_merge( $taxonomies, $_terms );
+			}
+		}
 
 		//loop thru taxonomies, much like series, and get posts
 		if ( is_array($taxonomies) ) {
@@ -572,14 +644,19 @@ class Largo_Related {
 				$args = array(
 					'post_type' => 'post',
 					'posts_per_page' => $this->number,
-					'taxonomy' => $term->taxonomy,
-					'term' => $term->slug,
 					'orderby' => 'date',
 					'order' => 'DESC',
 					'ignore_sticky_posts' => 1,
 					'date_query' => array(
 						'after' => $this->post->post_date,
 					),
+					'tax_query' => array(
+						array(
+							'taxonomy' => $term->taxonomy,
+							'terms' => $term->slug,
+							'field' => 'slug',
+						)
+					)
 				);
 
 				// run the query
@@ -607,7 +684,7 @@ class Largo_Related {
 						break;
 					}
 				}
-			}
+			} // foreach
 		}
 	}
 

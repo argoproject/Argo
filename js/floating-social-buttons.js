@@ -112,7 +112,7 @@
    *
    * Returns an array with the 0th index the offset from top and the 1st index the offset from bottom.
    *
-   * Things to consider:
+   * @TODO ? Things to consider:
    *   if there's a hero unit, we need to use the bottom of that
    *   if there isn't a hero image, then we can use the bottom of `#content > article > header`
    *   afaik, we don't add hero units after the page loads, so this should be good for now

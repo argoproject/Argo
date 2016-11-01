@@ -1,10 +1,10 @@
 <?php
 
 // The top term
-$top_term_args = array('echo' => false);
-if ( isset($instance['show_top_term']) && $instance['show_top_term'] == 1 && largo_has_categories_or_tags() ) { ?>
-	<h5 class="top-tag"><?php echo largo_top_term($top_term_args); ?></h5>
-<?php }
+if ( isset( $instance['show_top_term'] ) && $instance['show_top_term'] == 1 && largo_has_categories_or_tags() ) {
+	largo_maybe_top_term();
+}
+
 
 // the thumbnail image (if we're using one)
 if ($thumb == 'small') {
@@ -36,7 +36,7 @@ if ($thumb == 'small') {
 
 <?php // byline on posts
 if ( isset( $instance['show_byline'] ) && $instance['show_byline'] == true) { ?>
-	<span class="byline"><?php echo largo_byline(false); ?></span>
+	<span class="byline"><?php echo largo_byline( false, $instance['hide_byline_date'] ); ?></span>
 <?php }
 
 // the excerpt

@@ -55,18 +55,13 @@ class largo_recent_posts_widget extends WP_Widget {
 		$excerpt = isset( $instance['excerpt_display'] ) ? $instance['excerpt_display'] : 'num_sentences';
 
 		$query_args = array (
-			'post__not_in' 	=> get_option( 'sticky_posts' ),
-			'showposts' 	=> $instance['num_posts'],
+			'post__not_in' 	 => get_option( 'sticky_posts' ),
+			'posts_per_page' => $instance['num_posts'],
 			'post_status'	=> 'publish'
 		);
 
 		if ( isset( $instance['avoid_duplicates'] ) && $instance['avoid_duplicates'] === 1 ) {
-			// Create a temporary array and fill it with posts from $shown_ids and from the page's original query
-			$duplicates = (array) $shown_ids;
-			foreach( $wp_query->posts as $post ) {
-				$duplicates[] = $post->ID;
-			}
-			$query_args['post__not_in'] = $duplicates;
+			$query_args['post__not_in'] = $shown_ids;
 		}
 		if ( $instance['cat'] != '' ) $query_args['cat'] = $instance['cat'];
 		if ( $instance['tag'] != '') $query_args['tag'] = $instance['tag'];
@@ -116,8 +111,8 @@ class largo_recent_posts_widget extends WP_Widget {
 			printf( __( '<p class="error"><strong>You don\'t have any recent %s.</strong></p>', 'largo' ), strtolower( $posts_term ) );
 		} // end more featured posts
 
-		// close the ul if we're just showing a list of headlines
-		if ( $excerpt == 'none' ) echo '</ul>';
+		// close the ul
+		echo '</ul>';
 
 		if( $instance['linkurl'] !='' ) {
 			echo '<p class="morelink"><a href="' . esc_url( $instance['linkurl'] ) . '">' . esc_html( $instance['linktext'] ) . '</a></p>';
@@ -139,6 +134,7 @@ class largo_recent_posts_widget extends WP_Widget {
 		$instance['excerpt_display'] = sanitize_key( $new_instance['excerpt_display'] );
 		$instance['num_sentences'] = intval( $new_instance['num_sentences'] );
 		$instance['show_byline'] = ! empty($new_instance['show_byline']);
+		$instance['hide_byline_date'] = ! empty($new_instance['hide_byline_date']);
 		$instance['show_top_term'] = ! empty($new_instance['show_top_term']);
 		$instance['show_icon'] = ! empty($new_instance['show_icon']);
 		$instance['cat'] = intval( $new_instance['cat'] );
@@ -161,6 +157,7 @@ class largo_recent_posts_widget extends WP_Widget {
 			'excerpt_display' => 'num_sentences',
 			'num_sentences' => 2,
 			'show_byline' => '',
+			'hide_byline_date' => '',
 			'show_top_term' => '',
 			'show_icon' => '',
 			'cat' => 0,
@@ -174,6 +171,7 @@ class largo_recent_posts_widget extends WP_Widget {
 		$instance = wp_parse_args( (array) $instance, $defaults );
 		$duplicates = $instance['avoid_duplicates'] ? 'checked="checked"' : '';
 		$showbyline = $instance['show_byline'] ? 'checked="checked"' : '';
+		$hidebylinedate = $instance['hide_byline_date'] ? 'checked="checked"' : '';
 		$show_top_term = $instance['show_top_term'] ? 'checked="checked"' : '';
 		$show_icon = $instance['show_icon'] ? 'checked="checked"' : '';
 		?>
@@ -227,6 +225,10 @@ class largo_recent_posts_widget extends WP_Widget {
 
 		<p>
 			<input class="checkbox" type="checkbox" <?php echo $showbyline; ?> id="<?php echo $this->get_field_id( 'show_byline' ); ?>" name="<?php echo $this->get_field_name( 'show_byline' ); ?>" /> <label for="<?php echo $this->get_field_id( 'show_byline' ); ?>"><?php _e( 'Show byline on posts?', 'largo' ); ?></label>
+		</p>
+
+		<p>
+			<input class="checkbox" type="checkbox" <?php echo $hidebylinedate; ?> id="<?php echo $this->get_field_id( 'hide_byline_date' ); ?>" name="<?php echo $this->get_field_name( 'hide_byline_date' ); ?>" /> <label for="<?php echo $this->get_field_id( 'hide_byline_date' ); ?>"><?php _e( 'Hide the publish date in the byline?', 'largo' ); ?></label>
 		</p>
 
 		<p>

@@ -26,6 +26,7 @@ $queried_object = get_queried_object();
 		?>
 		<h1 class="page-title"><?php echo $title; ?></h1>
 		<div class="archive-description"><?php echo $description; ?></div>
+		<?php do_action( 'largo_category_after_description_in_header' ); ?>
 		<?php get_template_part( 'partials/archive', 'category-related' ); ?>
 	</header>
 
@@ -73,7 +74,7 @@ $queried_object = get_queried_object();
 				the_post();
 				$post_type = get_post_type();
 				$partial = largo_get_partial_by_post_type( 'archive', $post_type, 'archive' );
-				get_template_part( 'partials/content', 'archive' );
+				get_template_part( 'partials/content', $partial );
 				do_action( 'largo_loop_after_post_x', $counter, $context = 'archive' );
 				$counter++;
 			}
@@ -85,7 +86,7 @@ $queried_object = get_queried_object();
 		} else {
 			get_template_part( 'partials/content', 'not-found' );
 		}
-		do_action( 'largo_after_category_river' ); 
+		do_action( 'largo_after_category_river' );
 	?>
 	</div>
 	<?php get_sidebar(); ?>

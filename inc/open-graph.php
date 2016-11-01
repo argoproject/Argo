@@ -41,8 +41,8 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
 					<meta property="og:title" content="<?php the_title(); ?>" />
 					<meta property="og:type" content="article" />
 					<meta property="og:url" content="<?php the_permalink(); ?>"/>
-					<meta property="og:description" content="<?php echo strip_tags( get_the_excerpt() ); ?>" />
-					<meta name="description" content="<?php echo strip_tags( get_the_excerpt() ); ?>" />
+					<meta property="og:description" content="<?php echo strip_tags( esc_html( get_the_excerpt() ) ); ?>" />
+					<meta name="description" content="<?php echo strip_tags( esc_html( get_the_excerpt() ) ); ?>" />
 			<?php
 				} // have_posts
 
@@ -50,7 +50,7 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
 
 			} elseif ( is_home() ) { ?>
 
-				<meta property="og:title" content="<?php bloginfo( 'name' ); echo ' - '; bloginfo('description'); ?>" />
+				<meta property="og:title" content="<?php bloginfo( 'name' ); echo ' - '; bloginfo( 'description' ); ?>" />
 				<meta property="og:type" content="website" />
 				<meta property="og:url" content="<?php echo home_url(); ?>"/>
 				<meta property="og:description" content="<?php bloginfo( 'description' ); ?>" />
@@ -76,8 +76,8 @@ if ( ! function_exists( 'largo_opengraph' ) ) {
 					$description = get_bloginfo( 'description' );
 				}
 				if ( $description ) {
-					echo '<meta property="og:description" content="' . strip_tags( $description ) . '" />';
-					echo '<meta name="description" content="' . strip_tags( $description ) . '" />';
+					echo '<meta property="og:description" content="' . strip_tags( esc_html( $description ) ) . '" />';
+					echo '<meta name="description" content="' . strip_tags( esc_html( $description ) ) . '" />';
 				}
 			} // else
 

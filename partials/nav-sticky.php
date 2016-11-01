@@ -57,7 +57,16 @@ $site_name = ( of_get_option( 'nav_alt_site_name', false ) ) ? of_get_option( 'n
 									</a>
 								</li><?php
 								}
-							} ?>
+							}
+
+							/**
+							 * Don't display the search in the header if we're on the search page
+							 *
+							 * @link https://github.com/INN/Largo/pull/1167
+							 * @since 0.5.5
+							 */
+							if ( ! is_search() ) {
+							?>
 							<li id="sticky-nav-search">
 								<a href="#" class="toggle">
 									<i class="icon-search" title="<?php esc_attr_e('Search', 'largo'); ?>" role="button"></i>
@@ -72,6 +81,7 @@ $site_name = ( of_get_option( 'nav_alt_site_name', false ) ) ? of_get_option( 'n
 									</div>
 								</form>
 							</li>
+							<?php } ?>
 							<li>
 								<!-- "hamburger" button (3 bars) to trigger off-canvas navigation -->
 								<a class="btn btn-navbar toggle-nav-bar" title="<?php esc_attr_e('More', 'largo'); ?>">

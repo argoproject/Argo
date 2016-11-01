@@ -31,17 +31,16 @@ inc/featured-media.php
 
    :since: 0.5.1
 
-   :see: largo_get_featured_image_hero()
+   :see: largo_get_featured_hero()
    :param int|WP_Post $post: Optional. Post ID or WP_Post object. Default is global $post.
    :param String $classes: Optional. Class string to apply to outer div.hero
 
-.. php:function:: largo_get_featured_image_hero()
+.. php:function:: largo_get_featured_hero()
 
-   Returns DOM for a featured image hero.
+   Returns DOM for a featured hero.
 
    :since: 0.5.1
 
-   :see: largo_get_featured_image_hero()
    :param int|WP_Post $post: Optional. Post ID or WP_Post object. Default is global $post.
    :param String $classes: Optional. Class string to apply to outer div.hero
 
@@ -51,15 +50,7 @@ inc/featured-media.php
 
    :since: 0.5.1
 
-   :see: largo_get_featured_embed_hero()
-   :param int|WP_Post $post: Optional. Post ID or WP_Post object. Default is global $post.
-   :param String $classes: Optional. Class string to apply to outer div.hero
-
-.. php:function:: largo_get_featured_embed_hero()
-
-   Returns DOM for an embed code hero.
-
-   :since: 0.5.1
+   :see: largo_get_featured_hero()
    :param int|WP_Post $post: Optional. Post ID or WP_Post object. Default is global $post.
    :param String $classes: Optional. Class string to apply to outer div.hero
 
@@ -69,15 +60,7 @@ inc/featured-media.php
 
    :since: 0.5.1
 
-   :see: largo_get_featured_gallery_hero()
-   :param int|WP_Post $post: Optional. Post ID or WP_Post object. Default is global $post.
-   :param String $classes: Optional. Class string to apply to outer div.hero
-
-.. php:function:: largo_get_featured_gallery_hero()
-
-   Returns DOM for a featured gallery hero.
-
-   :since: 0.5.1
+   :see: largo_get_featured_hero()
    :param int|WP_Post $post: Optional. Post ID or WP_Post object. Default is global $post.
    :param String $classes: Optional. Class string to apply to outer div.hero
 

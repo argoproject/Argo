@@ -77,10 +77,10 @@ class Navis_Slideshows {
 			'itemtag' => 'dl',
 			'icontag' => 'dt',
 			'captiontag' => 'dd',
-			'columns'  => 3,
+			'columns'  => 1,
 			'size' => 'thumbnail',
 			'link' => 'file',
-			'ids' => '',
+			'ids' => ''
 		), $attr );
 
 		$id = intval( $attr['id'] );
@@ -92,6 +92,7 @@ class Navis_Slideshows {
 		}
 		$size = sanitize_key( $attr['size'] );
 		$ids = array_map( 'intval', explode(',', $attr['ids'] ) );
+		$columns = $attr['columns'];
 
 		// XXX: this could be factored out to a common function for getting
 		// a post's images
@@ -127,6 +128,31 @@ class Navis_Slideshows {
 			}
 		}
 
+		$column_label = 'one-up';
+		if ( !empty( $columns ) ) {
+			if ($columns == '1') {
+				$columns = 'one';
+			} else if ($columns == '2') {
+				$columns = 'two';
+			} else if ($columns == '3') {
+				$columns = 'three';
+			} else if ($columns == '4') {
+				$columns = 'four';
+			} else if ($columns == '5') {
+				$columns = 'five';
+			} else if ($columns == '6') {
+				$columns = 'six';
+			} else if ($columns == '7') {
+				$columns = 'seven';
+			} else if ($columns == '8') {
+				$columns = 'eight';
+			} else if ($columns == '9') {
+				$columns = 'nine';
+			} 
+
+			$column_label = $columns . '-up';
+		} 
+
 		if ( empty( $attachments ) )
 			return '';
 
@@ -143,7 +169,7 @@ class Navis_Slideshows {
 			$post->ID . $post->post_title . $post->post_content . $this->slideshows);
 
 		$output .= '
-			<div id="slides-' . esc_attr( $post_html_id ) . '" class="navis-slideshow">';
+			<div id="slides-' . esc_attr( $post_html_id ) . '" class="navis-slideshow ' . $column_label .'">';
 
 		/*-- Add images --*/
 		$count = 0;

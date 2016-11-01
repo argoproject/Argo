@@ -274,4 +274,27 @@ EOT;
 		largo_floating_social_button_js();
 	}
 
+	function test_largo_maybe_top_term() {
+		$this->markTestIncomplete('Test largo_maybe_top_term not implemented because test_largo_top_term not implemented');
+		// This should cover:
+		// every case when largo_top_term would and would not return a link, this checks that the liink is returned
+		// every time when there is output, make sure there's <h5 class="top-tag"> and </h5> in the output
+	}
+
+	function test_largo_edited_date() {
+		largo_edited_date();
+		$this->markTestIncomplete('Test largo_edited_date not implemented');
+		// This should cover:
+		// on not-updated post, display stuff
+		// on updated post, display stuff
+	}
+
+	function test_largo_after_hero_largo_edited_date() {
+		largo_after_hero_largo_edited_date();
+		$this->markTestIncomplete('Test largo_after_hero_largo_edited_date not implemented');
+		// This should cover:
+		// on not-updated post, no output
+		// on updated post, output contains largo_edited_date(); for the post, and contains '<div class="entry-content clearfix">' and '</div>'
+	}
+
 }

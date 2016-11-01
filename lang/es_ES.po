@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Project Largo - Base Theme v0.5.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-29 15:11-0400\n"
+"POT-Creation-Date: 2016-05-25 17:42-0400\n"
 "PO-Revision-Date: 2016-02-29 20:44:14+0000\n"
 "Last-Translator: Eric Flores <eric@dashway.com>\n"
 "Language-Team: Institute for Nonprofit News <largo@inn.org>\n"
@@ -105,7 +105,7 @@ msgid "Main Navigation"
 msgstr "Navegación Global"
 
 # @ largo
-#: functions.php:213 options.php:514
+#: functions.php:213 options.php:526
 msgid "Don't Miss"
 msgstr "No se pierda"
 
@@ -131,7 +131,7 @@ msgstr ""
 
 # @ largo
 #: homepages/homepage.php:97 homepages/homepage.php:154
-#: homepages/layouts/TopStories.php:24 inc/taxonomies.php:76 inc/update.php:297
+#: homepages/layouts/TopStories.php:24 inc/taxonomies.php:80 inc/update.php:297
 msgid "Homepage Featured"
 msgstr "Destacado de página de inicio"
 
@@ -323,11 +323,6 @@ msgid "View"
 msgstr "Mostrar archivo"
 
 # @ largo
-#: homepages/zones/zones.php:37 partials/content-series.php:37
-msgid "Continue&nbsp;Reading&nbsp;&rarr;"
-msgstr "Continuar&nbsp;leyendo&nbsp;&rarr;"
-
-# @ largo
 #: homepages/zones/zones.php:98
 #, fuzzy
 msgid "More in"
@@ -495,7 +490,7 @@ msgid "Facebook Button Text"
 msgstr "Botón de texto de Facebook"
 
 # @ largo
-#: inc/customizer/customizer.php:236 options.php:439
+#: inc/customizer/customizer.php:236 options.php:451
 msgid "Footer Layout"
 msgstr "Emplanaje del pie de página"
 
@@ -549,11 +544,6 @@ msgstr ""
 "Ver mas historias recientes de miembros del Investigative News Network."
 
 # @ largo
-#: inc/header-footer.php:100
-msgid "Link to RSS Feed"
-msgstr "Enlace a la fuente RSS"
-
-# @ largo
 #: inc/header-footer.php:101
 msgid "Link to Facebook Profile"
 msgstr "Encuéntranos en Facebook"
@@ -565,23 +555,24 @@ msgstr "Síguenos en Twitter"
 
 # @ largo
 #: inc/header-footer.php:103
+msgid "Link to Google Plus Page"
+msgstr "Enlace a Página de Google Plus"
+
+# @ largo
+#: inc/header-footer.php:104
 msgid "Link to YouTube Page"
 msgstr "Enlace a página de Youtube"
 
 # @ largo
-#: inc/header-footer.php:104
-msgid "Link to Flickr Page"
-msgstr "Enlace a página de Flickr"
-
-# @ largo
 #: inc/header-footer.php:105
-msgid "Link to Tumblr"
-msgstr "Enlace a Tumblr"
+#, fuzzy
+msgid "Link to Instagram Page"
+msgstr "Síguenos en Twitter"
 
 # @ largo
 #: inc/header-footer.php:106
-msgid "Link to Google Plus Page"
-msgstr "Enlace a Página de Google Plus"
+msgid "Link to Tumblr"
+msgstr "Enlace a Tumblr"
 
 # @ largo
 #: inc/header-footer.php:107
@@ -591,8 +582,24 @@ msgstr "Enlace a página de LinkdIn"
 # @ largo
 #: inc/header-footer.php:108
 #, fuzzy
+msgid "Link to Pinterest Page"
+msgstr "Síguenos en Twitter"
+
+# @ largo
+#: inc/header-footer.php:109
+#, fuzzy
 msgid "Link to Github Page"
 msgstr "Síguenos en Twitter"
+
+# @ largo
+#: inc/header-footer.php:110
+msgid "Link to Flickr Page"
+msgstr "Enlace a página de Flickr"
+
+# @ largo
+#: inc/header-footer.php:111
+msgid "Link to RSS Feed"
+msgstr "Enlace a la fuente RSS"
 
 # @ default
 #: inc/helpers.php:82 inc/helpers.php:164 inc/update.php:981
@@ -636,150 +643,6 @@ msgid ""
 msgstr ""
 
 # @ largo
-# @ tgmpa
-#: inc/plugin-init.php:122 lib/class-tgm-plugin-activation.php:333
-msgid "Install Required Plugins"
-msgstr "Instalar todos los plugins necesarios"
-
-# @ largo
-# @ tgmpa
-#: inc/plugin-init.php:123 lib/class-tgm-plugin-activation.php:334
-msgid "Install Plugins"
-msgstr "Instalar plugins"
-
-# @ largo
-# @ tgmpa
-#: inc/plugin-init.php:124 lib/class-tgm-plugin-activation.php:335
-#, php-format
-msgid "Installing Plugin: %s"
-msgstr "Instalando Plugins"
-
-# @ largo
-# @ tgmpa
-#: inc/plugin-init.php:125 lib/class-tgm-plugin-activation.php:336
-msgid "Something went wrong with the plugin API."
-msgstr "Hay algún problema con el plugin API"
-
-# @ largo
-#: inc/plugin-init.php:126 lib/class-tgm-plugin-activation.php:338
-#, php-format
-msgid "This theme requires the following plugin: %1$s."
-msgid_plural "This theme requires the following plugins: %1$s."
-msgstr[0] ""
-msgstr[1] ""
-
-# @ largo
-#: inc/plugin-init.php:127 lib/class-tgm-plugin-activation.php:343
-#, php-format
-msgid "This theme recommends the following plugin: %1$s."
-msgid_plural "This theme recommends the following plugins: %1$s."
-msgstr[0] ""
-msgstr[1] ""
-
-# @ largo
-#: inc/plugin-init.php:128
-#, php-format
-msgid ""
-"Sorry, but you do not have the correct permissions to install the %s plugin. "
-"Contact the administrator of this site for help on getting the plugin "
-"installed."
-msgid_plural ""
-"Sorry, but you do not have the correct permissions to install the %s "
-"plugins. Contact the administrator of this site for help on getting the "
-"plugins installed."
-msgstr[0] ""
-msgstr[1] ""
-
-# @ largo
-#: inc/plugin-init.php:129 lib/class-tgm-plugin-activation.php:368
-#, php-format
-msgid "The following required plugin is currently inactive: %1$s."
-msgid_plural "The following required plugins are currently inactive: %1$s."
-msgstr[0] ""
-msgstr[1] ""
-
-# @ largo
-#: inc/plugin-init.php:130 lib/class-tgm-plugin-activation.php:373
-#, php-format
-msgid "The following recommended plugin is currently inactive: %1$s."
-msgid_plural "The following recommended plugins are currently inactive: %1$s."
-msgstr[0] ""
-msgstr[1] ""
-
-# @ largo
-#: inc/plugin-init.php:131
-#, php-format
-msgid ""
-"Sorry, but you do not have the correct permissions to activate the %s "
-"plugin. Contact the administrator of this site for help on getting the "
-"plugin activated."
-msgid_plural ""
-"Sorry, but you do not have the correct permissions to activate the %s "
-"plugins. Contact the administrator of this site for help on getting the "
-"plugins activated."
-msgstr[0] ""
-msgstr[1] ""
-
-# @ largo
-#: inc/plugin-init.php:132 lib/class-tgm-plugin-activation.php:353
-#, php-format
-msgid ""
-"The following plugin needs to be updated to its latest version to ensure "
-"maximum compatibility with this theme: %1$s."
-msgid_plural ""
-"The following plugins need to be updated to their latest version to ensure "
-"maximum compatibility with this theme: %1$s."
-msgstr[0] ""
-msgstr[1] ""
-
-# @ largo
-#: inc/plugin-init.php:133
-#, php-format
-msgid ""
-"Sorry, but you do not have the correct permissions to update the %s plugin. "
-"Contact the administrator of this site for help on getting the plugin "
-"updated."
-msgid_plural ""
-"Sorry, but you do not have the correct permissions to update the %s plugins. "
-"Contact the administrator of this site for help on getting the plugins "
-"updated."
-msgstr[0] ""
-msgstr[1] ""
-
-# @ largo
-#: inc/plugin-init.php:134 lib/class-tgm-plugin-activation.php:383
-msgid "Begin installing plugin"
-msgid_plural "Begin installing plugins"
-msgstr[0] ""
-msgstr[1] ""
-
-# @ largo
-#: inc/plugin-init.php:135
-msgid "Activate installed plugin"
-msgid_plural "Activate installed plugins"
-msgstr[0] ""
-msgstr[1] ""
-
-# @ largo
-# @ tgmpa
-#: inc/plugin-init.php:136 lib/class-tgm-plugin-activation.php:397
-msgid "Return to Required Plugins Installer"
-msgstr ""
-
-# @ largo
-# @ tgmpa
-#: inc/plugin-init.php:137 lib/class-tgm-plugin-activation.php:399
-#: lib/class-tgm-plugin-activation.php:3029
-msgid "Plugin activated successfully."
-msgstr ""
-
-# @ largo
-#: inc/plugin-init.php:138
-#, php-format
-msgid "All plugins installed and activated successfully. %s"
-msgstr ""
-
-# @ largo
 #: inc/post-metaboxes.php:14 inc/update.php:166
 msgid "Author"
 msgstr "Autor"
@@ -800,13 +663,13 @@ msgid "Layout Options"
 msgstr "Opciones de emplanaje"
 
 # @ largo
-#: inc/post-metaboxes.php:100 inc/post-metaboxes.php:264 options.php:603
+#: inc/post-metaboxes.php:100 inc/post-metaboxes.php:264 options.php:615
 msgid "Disclaimer"
 msgstr "Aclaración"
 
 # @ largo
 # @ default
-#: inc/post-metaboxes.php:119 inc/taxonomies.php:51
+#: inc/post-metaboxes.php:119 inc/taxonomies.php:55
 msgid "Post Prominence"
 msgstr "Prominencia de la entrada"
 
@@ -888,12 +751,12 @@ msgid ""
 msgstr ""
 
 # @ largo
-#: inc/post-metaboxes.php:281
+#: inc/post-metaboxes.php:298
 msgid "Top Term"
 msgstr ""
 
 # @ default
-#: inc/post-metaboxes.php:282
+#: inc/post-metaboxes.php:299
 msgid "Identify which of this posts's terms is primary."
 msgstr ""
 
@@ -962,8 +825,7 @@ msgid "Follow this author"
 msgstr ""
 
 # @ largo
-#: inc/post-tags.php:317 options.php:493 partials/nav-main.php:18
-#: partials/nav-sticky.php:77
+#: inc/post-tags.php:317 options.php:505 partials/nav-sticky.php:87
 msgid "More"
 msgstr "Más"
 
@@ -1058,7 +920,7 @@ msgstr ""
 "tenga la etiqueta: %4$s\">%5$s%4$s</a></%1$s>"
 
 # @ largo
-#: inc/related-content.php:365
+#: inc/related-content.php:425
 msgid "Top Posts"
 msgstr ""
 
@@ -1166,7 +1028,7 @@ msgid "Full-width area immediately above footer"
 msgstr ""
 
 # @ largo
-#: inc/sidebars.php:79 options.php:356
+#: inc/sidebars.php:79 options.php:368
 msgid "Homepage Bottom"
 msgstr ""
 
@@ -1202,248 +1064,249 @@ msgid "Default (no sidebar)"
 msgstr ""
 
 # @ default
-#: inc/taxonomies.php:40
+#: inc/taxonomies.php:44
 msgctxt "taxonomy general name"
 msgid "Post Prominence"
 msgstr ""
 
 # @ default
-#: inc/taxonomies.php:41
+#: inc/taxonomies.php:45
 msgctxt "taxonomy singular name"
 msgid "Post Prominence"
 msgstr ""
 
 # @ default
-#: inc/taxonomies.php:42
+#: inc/taxonomies.php:46
 msgid "Search Post Prominences"
 msgstr ""
 
 # @ default
-#: inc/taxonomies.php:43
+#: inc/taxonomies.php:47
 msgid "All Post Prominences"
 msgstr ""
 
 # @ default
-#: inc/taxonomies.php:44
+#: inc/taxonomies.php:48
 msgid "Parent Post Prominence"
 msgstr ""
 
 # @ default
-#: inc/taxonomies.php:45
+#: inc/taxonomies.php:49
 msgid "Parent Post Prominence:"
 msgstr ""
 
 # @ default
-#: inc/taxonomies.php:46
+#: inc/taxonomies.php:50
 msgid "Edit Post Prominence"
 msgstr ""
 
 # @ default
-#: inc/taxonomies.php:47
+#: inc/taxonomies.php:51
 msgid "View Post Prominence"
 msgstr ""
 
 # @ default
-#: inc/taxonomies.php:48
+#: inc/taxonomies.php:52
 msgid "Update Post Prominence"
 msgstr ""
 
 # @ default
-#: inc/taxonomies.php:49
+#: inc/taxonomies.php:53
 msgid "Add New Post Prominence"
 msgstr ""
 
 # @ default
-#: inc/taxonomies.php:50
+#: inc/taxonomies.php:54
 msgid "New Post Prominence Name"
 msgstr ""
 
 # @ largo
-#: inc/taxonomies.php:61 inc/update.php:279
+#: inc/taxonomies.php:65 inc/update.php:279
 msgid "Sidebar Featured Widget"
 msgstr ""
 
 # @ largo
-#: inc/taxonomies.php:62 inc/update.php:280
+#: inc/taxonomies.php:66 inc/update.php:280
 msgid ""
 "If you are using the Featured Posts widget in a sidebar, add this label to "
 "posts to determine which to display in the widget."
 msgstr ""
 
 # @ largo
-#: inc/taxonomies.php:66 inc/update.php:285
+#: inc/taxonomies.php:70 inc/update.php:285
 msgid "Footer Featured Widget"
 msgstr ""
 
 # @ largo
-#: inc/taxonomies.php:67 inc/update.php:286
+#: inc/taxonomies.php:71 inc/update.php:286
 msgid ""
 "If you are using the Featured Posts widget in the footer, add this label to "
 "posts to determine which to display in the widget."
 msgstr ""
 
 # @ largo
-#: inc/taxonomies.php:71 inc/update.php:291
+#: inc/taxonomies.php:75 inc/update.php:291
 msgid "Featured in Category"
 msgstr ""
 
 # @ largo
-#: inc/taxonomies.php:72 inc/update.php:292
+#: inc/taxonomies.php:76 inc/update.php:292
 msgid ""
 "This will allow you to designate a story to appear more prominently on "
 "category archive pages."
 msgstr ""
 
 # @ largo
-#: inc/taxonomies.php:77 inc/update.php:298
+#: inc/taxonomies.php:81 inc/update.php:298
 msgid ""
 "Add this label to posts to display them in the featured area on the homepage."
 msgstr ""
 
 # @ largo
-#: inc/taxonomies.php:84 inc/update.php:309
+#: inc/taxonomies.php:88 inc/update.php:309
 msgid "Featured in Series"
 msgstr "Destacado en series"
 
 # @ largo
-#: inc/taxonomies.php:85 inc/update.php:311 inc/update.php:312
+#: inc/taxonomies.php:89 inc/update.php:311 inc/update.php:312
 msgid ""
 "Select this option to allow this post to float to the top of any/all series "
 "landing pages sorting by Featured first."
 msgstr ""
 
+# @ largo
+#: inc/taxonomies.php:135 inc/taxonomies.php:137
+msgid "Post Types"
+msgstr ""
+
+# @ largo
+#: inc/taxonomies.php:138
+#, fuzzy
+msgid "Post Type"
+msgstr "Tipo"
+
+# @ largo
+#: inc/taxonomies.php:139
+msgid "All Post Types"
+msgstr ""
+
+# @ largo
+#: inc/taxonomies.php:140
+msgid "Edit Post Type"
+msgstr ""
+
+# @ largo
+#: inc/taxonomies.php:141
+msgid "Update Post Type"
+msgstr ""
+
+# @ largo
+#: inc/taxonomies.php:142
+msgid "View Post Type"
+msgstr ""
+
+# @ largo
+#: inc/taxonomies.php:143
+msgid "Add New Post Type"
+msgstr ""
+
+# @ largo
+#: inc/taxonomies.php:144
+msgid "New Post Type Name"
+msgstr ""
+
 # @ default
-#: inc/taxonomies.php:125
+#: inc/taxonomies.php:145
+#, fuzzy
+msgid "Search Post Type"
+msgstr "Busque este Lugar"
+
+# @ default
+#: inc/taxonomies.php:167
 #, fuzzy
 msgctxt "taxonomy general name"
 msgid "Series"
 msgstr "Series"
 
 # @ default
-#: inc/taxonomies.php:126
+#: inc/taxonomies.php:168
 #, fuzzy
 msgctxt "taxonomy singular name"
 msgid "Series"
 msgstr "Series"
 
 # @ default
-#: inc/taxonomies.php:127
+#: inc/taxonomies.php:169
 #, fuzzy
 msgid "Search Series"
 msgstr "Busque este Lugar"
 
 # @ default
-#: inc/taxonomies.php:128
+#: inc/taxonomies.php:170
 #, fuzzy
 msgid "All Series"
 msgstr "Series"
 
 # @ default
-#: inc/taxonomies.php:129
+#: inc/taxonomies.php:171
 #, fuzzy
 msgid "Parent Series"
 msgstr "Series"
 
 # @ default
-#: inc/taxonomies.php:130
+#: inc/taxonomies.php:172
 #, fuzzy
 msgid "Parent Series:"
 msgstr "Más en esta Serie"
 
 # @ default
-#: inc/taxonomies.php:131
+#: inc/taxonomies.php:173
 #, fuzzy
 msgid "Edit Series"
 msgstr "Series"
 
 # @ default
-#: inc/taxonomies.php:132
+#: inc/taxonomies.php:174
 #, fuzzy
 msgid "View Series"
 msgstr "Series"
 
 # @ default
-#: inc/taxonomies.php:133
+#: inc/taxonomies.php:175
 #, fuzzy
 msgid "Update Series"
 msgstr "Series"
 
 # @ default
-#: inc/taxonomies.php:134
+#: inc/taxonomies.php:176
 #, fuzzy
 msgid "Add New Series"
 msgstr "Series"
 
 # @ default
-#: inc/taxonomies.php:135
+#: inc/taxonomies.php:177
 msgid "New Series Name"
 msgstr ""
 
 # @ default
 # @ largo
-#: inc/taxonomies.php:136 inc/widgets/largo-series-posts.php:102
+#: inc/taxonomies.php:178 inc/widgets/largo-series-posts.php:102
+#: inc/widgets/largo-taxonomy-list.php:32
 msgid "Series"
 msgstr "Series"
 
 # @ largo
-#: inc/term-icons.php:34 inc/term-icons.php:36
-msgid "Post Types"
-msgstr ""
-
-# @ largo
-#: inc/term-icons.php:37
-#, fuzzy
-msgid "Post Type"
-msgstr "Tipo"
-
-# @ largo
-#: inc/term-icons.php:38
-msgid "All Post Types"
-msgstr ""
-
-# @ largo
-#: inc/term-icons.php:39
-msgid "Edit Post Type"
-msgstr ""
-
-# @ largo
-#: inc/term-icons.php:40
-msgid "Update Post Type"
-msgstr ""
-
-# @ largo
-#: inc/term-icons.php:41
-msgid "View Post Type"
-msgstr ""
-
-# @ largo
-#: inc/term-icons.php:42
-msgid "Add New Post Type"
-msgstr ""
-
-# @ largo
-#: inc/term-icons.php:43
-msgid "New Post Type Name"
-msgstr ""
-
-# @ default
-#: inc/term-icons.php:44
-#, fuzzy
-msgid "Search Post Type"
-msgstr "Busque este Lugar"
-
-# @ largo
-#: inc/term-icons.php:104 inc/term-icons.php:127
+#: inc/term-icons.php:79 inc/term-icons.php:102
 msgid "Term Icon"
 msgstr ""
 
 # @ largo
-#: inc/term-icons.php:107 inc/term-icons.php:129
+#: inc/term-icons.php:82 inc/term-icons.php:104
 msgid "No Icon"
 msgstr ""
 
 # @ largo
-#: inc/term-icons.php:114 inc/term-icons.php:135
+#: inc/term-icons.php:89 inc/term-icons.php:110
 msgid "The icon the theme may use with the term."
 msgstr ""
 
@@ -1516,7 +1379,7 @@ msgid ""
 msgstr ""
 
 # @ largo
-#: inc/update.php:372 options.php:396
+#: inc/update.php:372 options.php:408
 msgid ""
 "Starting with version 0.4, Largo introduced a new single-post template that "
 "more prominently highlights article content, which is the default. For "
@@ -1859,7 +1722,7 @@ msgstr ""
 #: inc/widgets/largo-donate.php:55 inc/widgets/largo-post-series-links.php:61
 #: inc/widgets/largo-recent-posts.php:182
 #: inc/widgets/largo-sidebar-featured.php:79 inc/widgets/largo-staff.php:94
-#: inc/widgets/largo-tag-list.php:52 inc/widgets/largo-taxonomy-list.php:284
+#: inc/widgets/largo-tag-list.php:52 inc/widgets/largo-taxonomy-list.php:296
 msgid "Title:"
 msgstr "Título:"
 
@@ -2436,7 +2299,7 @@ msgstr ""
 
 # @ largo
 #: inc/widgets/largo-recent-posts.php:264
-#: inc/widgets/largo-taxonomy-list.php:299
+#: inc/widgets/largo-taxonomy-list.php:301
 msgid "Taxonomy:"
 msgstr ""
 
@@ -2583,56 +2446,67 @@ msgstr "Archivado como:"
 msgid "Max # of tags to show:"
 msgstr "Numero de entradas a mostrar"
 
-# @ largo
-#: inc/widgets/largo-taxonomy-list.php:10
-msgid "List all of the terms in a custom taxonomy with links"
+#: inc/widgets/largo-taxonomy-list.php:15
+msgid ""
+"List all (or some) of the terms in a given taxonomy. Optionally with links "
+"to recent stories in each term."
 msgstr ""
 
 # @ largo
-#: inc/widgets/largo-taxonomy-list.php:12
+#: inc/widgets/largo-taxonomy-list.php:17
 msgid "Largo Taxonomy List"
 msgstr "List de Taxonomía Largo"
 
 # @ largo
-#: inc/widgets/largo-taxonomy-list.php:18
-msgid "Categories"
-msgstr "Categorías"
-
-# @ largo
-#: inc/widgets/largo-taxonomy-list.php:42
+#: inc/widgets/largo-taxonomy-list.php:76
 #, php-format
 msgid "Select %s"
 msgstr "Seleccione %s"
 
-# @ largo
-#: inc/widgets/largo-taxonomy-list.php:288
-msgid "Only display the terms in this comma-separated list of term IDs:"
+#: inc/widgets/largo-taxonomy-list.php:280
+msgid "Alphabetically (A to Z)"
 msgstr ""
 
 # @ largo
-#: inc/widgets/largo-taxonomy-list.php:290
-msgid ""
-"Find term IDs by examining the URL of the taxonomy when you click the \"edit"
-"\" button in the list"
-msgstr ""
+#: inc/widgets/largo-taxonomy-list.php:281
+#, fuzzy
+msgid "Most Recent First"
+msgstr "Entradas recientes de Largo"
 
-# @ largo
-#: inc/widgets/largo-taxonomy-list.php:294
-msgid "Count: (leave blank to receive all items)"
-msgstr ""
-
-# @ largo
-#: inc/widgets/largo-taxonomy-list.php:304
-msgid "Display as dropdown"
-msgstr ""
-
-# @ largo
 #: inc/widgets/largo-taxonomy-list.php:308
-msgid "Display thumbnails?"
+msgid "How should the terms be ordered?"
+msgstr ""
+
+#: inc/widgets/largo-taxonomy-list.php:315
+msgid "Number of terms to display (must be greater than 1):"
+msgstr ""
+
+#: inc/widgets/largo-taxonomy-list.php:320
+msgid "Terms to exclude:"
+msgstr ""
+
+#: inc/widgets/largo-taxonomy-list.php:322
+msgid "Comma-separated list of term IDs"
+msgstr ""
+
+#: inc/widgets/largo-taxonomy-list.php:327
+msgid "Display terms as dropdown"
+msgstr ""
+
+#: inc/widgets/largo-taxonomy-list.php:329
+msgid ""
+"If you choose to display terms as a dropdown, no thumbnails or headlines "
+"will be displayed."
 msgstr ""
 
 # @ largo
-#: inc/widgets/largo-taxonomy-list.php:312
+#: inc/widgets/largo-taxonomy-list.php:334
+#, fuzzy
+msgid "Display thumbnail images?"
+msgstr "Imagen de muestra"
+
+# @ largo
+#: inc/widgets/largo-taxonomy-list.php:339
 msgid "Display headline of most-recent post in taxonomy?"
 msgstr ""
 
@@ -2668,7 +2542,7 @@ msgstr ""
 
 # @ largo
 #: inc/widgets/largo-twitter.php:87 partials/nav-global.php:46
-#: partials/nav-sticky.php:63 partials/nav-sticky.php:68 searchform.php:8
+#: partials/nav-sticky.php:72 partials/nav-sticky.php:77 searchform.php:8
 msgid "Search"
 msgstr "Búsqueda"
 
@@ -2933,6 +2807,47 @@ msgid "You don't have permission to do this."
 msgstr "No tienes autorización para hacer esto."
 
 # @ largo
+# @ tgmpa
+#: lib/class-tgm-plugin-activation.php:333
+msgid "Install Required Plugins"
+msgstr "Instalar todos los plugins necesarios"
+
+# @ largo
+# @ tgmpa
+#: lib/class-tgm-plugin-activation.php:334
+msgid "Install Plugins"
+msgstr "Instalar plugins"
+
+# @ largo
+# @ tgmpa
+#: lib/class-tgm-plugin-activation.php:335
+#, php-format
+msgid "Installing Plugin: %s"
+msgstr "Instalando Plugins"
+
+# @ largo
+# @ tgmpa
+#: lib/class-tgm-plugin-activation.php:336
+msgid "Something went wrong with the plugin API."
+msgstr "Hay algún problema con el plugin API"
+
+# @ largo
+#: lib/class-tgm-plugin-activation.php:338
+#, php-format
+msgid "This theme requires the following plugin: %1$s."
+msgid_plural "This theme requires the following plugins: %1$s."
+msgstr[0] ""
+msgstr[1] ""
+
+# @ largo
+#: lib/class-tgm-plugin-activation.php:343
+#, php-format
+msgid "This theme recommends the following plugin: %1$s."
+msgid_plural "This theme recommends the following plugins: %1$s."
+msgstr[0] ""
+msgstr[1] ""
+
+# @ largo
 #: lib/class-tgm-plugin-activation.php:348
 #, php-format
 msgid ""
@@ -2941,6 +2856,18 @@ msgid ""
 msgid_plural ""
 "Sorry, but you do not have the correct permissions to install the %1$s "
 "plugins."
+msgstr[0] ""
+msgstr[1] ""
+
+# @ largo
+#: lib/class-tgm-plugin-activation.php:353
+#, php-format
+msgid ""
+"The following plugin needs to be updated to its latest version to ensure "
+"maximum compatibility with this theme: %1$s."
+msgid_plural ""
+"The following plugins need to be updated to their latest version to ensure "
+"maximum compatibility with this theme: %1$s."
 msgstr[0] ""
 msgstr[1] ""
 
@@ -2964,6 +2891,22 @@ msgstr[0] ""
 msgstr[1] ""
 
 # @ largo
+#: lib/class-tgm-plugin-activation.php:368
+#, php-format
+msgid "The following required plugin is currently inactive: %1$s."
+msgid_plural "The following required plugins are currently inactive: %1$s."
+msgstr[0] ""
+msgstr[1] ""
+
+# @ largo
+#: lib/class-tgm-plugin-activation.php:373
+#, php-format
+msgid "The following recommended plugin is currently inactive: %1$s."
+msgid_plural "The following recommended plugins are currently inactive: %1$s."
+msgstr[0] ""
+msgstr[1] ""
+
+# @ largo
 #: lib/class-tgm-plugin-activation.php:378
 #, php-format
 msgid ""
@@ -2972,6 +2915,13 @@ msgid ""
 msgid_plural ""
 "Sorry, but you do not have the correct permissions to activate the %1$s "
 "plugins."
+msgstr[0] ""
+msgstr[1] ""
+
+# @ largo
+#: lib/class-tgm-plugin-activation.php:383
+msgid "Begin installing plugin"
+msgid_plural "Begin installing plugins"
 msgstr[0] ""
 msgstr[1] ""
 
@@ -2989,14 +2939,27 @@ msgid_plural "Begin activating plugins"
 msgstr[0] ""
 msgstr[1] ""
 
+# @ largo
+# @ tgmpa
+#: lib/class-tgm-plugin-activation.php:397
+msgid "Return to Required Plugins Installer"
+msgstr ""
+
 # @ tgmpa
 #: lib/class-tgm-plugin-activation.php:398
 msgid "Return to the dashboard"
 msgstr ""
 
+# @ largo
+# @ tgmpa
+#: lib/class-tgm-plugin-activation.php:399
+#: lib/class-tgm-plugin-activation.php:3021
+msgid "Plugin activated successfully."
+msgstr ""
+
 # @ tgmpa
 #: lib/class-tgm-plugin-activation.php:400
-#: lib/class-tgm-plugin-activation.php:2832
+#: lib/class-tgm-plugin-activation.php:2824
 msgid "The following plugin was activated successfully:"
 msgid_plural "The following plugins were activated successfully:"
 msgstr[0] ""
@@ -3044,119 +3007,114 @@ msgid "Update Required"
 msgstr "Series"
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:635
-msgid "Set the parent_slug config variable instead."
-msgstr ""
-
-# @ tgmpa
-#: lib/class-tgm-plugin-activation.php:828
-#: lib/class-tgm-plugin-activation.php:3438
+#: lib/class-tgm-plugin-activation.php:820
+#: lib/class-tgm-plugin-activation.php:3430
 msgid "Return to the Dashboard"
 msgstr ""
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:935
+#: lib/class-tgm-plugin-activation.php:927
 msgid ""
 "The remote plugin package does not contain a folder with the desired slug "
 "and renaming did not work."
 msgstr ""
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:935
-#: lib/class-tgm-plugin-activation.php:938
+#: lib/class-tgm-plugin-activation.php:927
+#: lib/class-tgm-plugin-activation.php:930
 msgid ""
 "Please contact the plugin provider and ask them to package their plugin "
 "according to the WordPress guidelines."
 msgstr ""
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:938
+#: lib/class-tgm-plugin-activation.php:930
 msgid ""
 "The remote plugin package consists of more than one file, but the files are "
 "not packaged in a folder."
 msgstr ""
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:1116
-#: lib/class-tgm-plugin-activation.php:2828
+#: lib/class-tgm-plugin-activation.php:1108
+#: lib/class-tgm-plugin-activation.php:2820
 msgctxt "plugin A *and* plugin B"
 msgid "and"
 msgstr ""
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:1881
+#: lib/class-tgm-plugin-activation.php:1873
 #, php-format
 msgctxt "%s = version number"
 msgid "TGMPA v%s"
 msgstr ""
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:2167
+#: lib/class-tgm-plugin-activation.php:2159
 msgid "Required"
 msgstr "Requerido"
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:2170
+#: lib/class-tgm-plugin-activation.php:2162
 msgid "Recommended"
 msgstr "Recomendado"
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:2186
+#: lib/class-tgm-plugin-activation.php:2178
 msgid "WordPress Repository"
 msgstr ""
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:2189
+#: lib/class-tgm-plugin-activation.php:2181
 #, fuzzy
 msgid "External Source"
 msgstr "Enlace Externo"
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:2192
+#: lib/class-tgm-plugin-activation.php:2184
 msgid "Pre-Packaged"
 msgstr ""
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:2209
+#: lib/class-tgm-plugin-activation.php:2201
 msgid "Not Installed"
 msgstr ""
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:2213
+#: lib/class-tgm-plugin-activation.php:2205
 msgid "Installed But Not Activated"
 msgstr ""
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:2215
+#: lib/class-tgm-plugin-activation.php:2207
 msgid "Active"
 msgstr ""
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:2221
+#: lib/class-tgm-plugin-activation.php:2213
 msgid "Required Update not Available"
 msgstr ""
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:2224
+#: lib/class-tgm-plugin-activation.php:2216
 #, fuzzy
 msgid "Requires Update"
 msgstr "Requerido"
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:2227
+#: lib/class-tgm-plugin-activation.php:2219
 #, fuzzy
 msgid "Update recommended"
 msgstr "Recomendado"
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:2235
+#: lib/class-tgm-plugin-activation.php:2227
 #, php-format
 msgctxt "%1$s = install status, %2$s = update status"
 msgid "%1$s, %2$s"
 msgstr ""
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:2280
+#: lib/class-tgm-plugin-activation.php:2272
 #, fuzzy, php-format
 msgctxt "plugins"
 msgid "All <span class=\"count\">(%s)</span>"
@@ -3165,7 +3123,7 @@ msgstr[0] "<span class=\"time-ago\">hace %s</span>"
 msgstr[1] "<span class=\"time-ago\">hace %s</span>"
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:2283
+#: lib/class-tgm-plugin-activation.php:2275
 #, fuzzy, php-format
 msgid "To Install <span class=\"count\">(%s)</span>"
 msgid_plural "To Install <span class=\"count\">(%s)</span>"
@@ -3173,7 +3131,7 @@ msgstr[0] "<span class=\"time-ago\">hace %s</span>"
 msgstr[1] "<span class=\"time-ago\">hace %s</span>"
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:2286
+#: lib/class-tgm-plugin-activation.php:2278
 #, php-format
 msgid "Update Available <span class=\"count\">(%s)</span>"
 msgid_plural "Update Available <span class=\"count\">(%s)</span>"
@@ -3181,7 +3139,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:2289
+#: lib/class-tgm-plugin-activation.php:2281
 #, fuzzy, php-format
 msgid "To Activate <span class=\"count\">(%s)</span>"
 msgid_plural "To Activate <span class=\"count\">(%s)</span>"
@@ -3189,28 +3147,28 @@ msgstr[0] "<span class=\"time-ago\">hace %s</span>"
 msgstr[1] "<span class=\"time-ago\">hace %s</span>"
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:2371
+#: lib/class-tgm-plugin-activation.php:2363
 msgctxt "as in: \"version nr unknown\""
 msgid "unknown"
 msgstr ""
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:2379
+#: lib/class-tgm-plugin-activation.php:2371
 msgid "Installed version:"
 msgstr ""
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:2387
+#: lib/class-tgm-plugin-activation.php:2379
 msgid "Minimum required version:"
 msgstr ""
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:2399
+#: lib/class-tgm-plugin-activation.php:2391
 msgid "Available version:"
 msgstr ""
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:2422
+#: lib/class-tgm-plugin-activation.php:2414
 #, php-format
 msgid ""
 "No plugins to install, update or activate. <a href=\"%1$s\">Return to the "
@@ -3218,181 +3176,181 @@ msgid ""
 msgstr ""
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:2436
+#: lib/class-tgm-plugin-activation.php:2428
 msgid "Plugin"
 msgstr ""
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:2437
+#: lib/class-tgm-plugin-activation.php:2429
 msgid "Source"
 msgstr ""
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:2438
+#: lib/class-tgm-plugin-activation.php:2430
 msgid "Type"
 msgstr "Tipo"
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:2442
+#: lib/class-tgm-plugin-activation.php:2434
 msgid "Version"
 msgstr ""
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:2443
+#: lib/class-tgm-plugin-activation.php:2435
 msgid "Status"
 msgstr "Estatus"
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:2491
+#: lib/class-tgm-plugin-activation.php:2483
 #, php-format
 msgctxt "%2$s = plugin name in screen reader markup"
 msgid "Install %2$s"
 msgstr ""
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:2495
+#: lib/class-tgm-plugin-activation.php:2487
 #, fuzzy, php-format
 msgctxt "%2$s = plugin name in screen reader markup"
 msgid "Update %2$s"
 msgstr "Series"
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:2500
+#: lib/class-tgm-plugin-activation.php:2492
 #, php-format
 msgctxt "%2$s = plugin name in screen reader markup"
 msgid "Activate %2$s"
 msgstr ""
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:2570
+#: lib/class-tgm-plugin-activation.php:2562
 msgid "Upgrade message from the plugin author:"
 msgstr ""
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:2603
+#: lib/class-tgm-plugin-activation.php:2595
 msgid "Install"
 msgstr ""
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:2609
+#: lib/class-tgm-plugin-activation.php:2601
 #, fuzzy
 msgid "Update"
 msgstr "Series"
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:2612
+#: lib/class-tgm-plugin-activation.php:2604
 msgid "Activate"
 msgstr ""
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:2643
+#: lib/class-tgm-plugin-activation.php:2635
 msgid "No plugins were selected to be installed. No action taken."
 msgstr ""
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:2645
+#: lib/class-tgm-plugin-activation.php:2637
 msgid "No plugins were selected to be updated. No action taken."
 msgstr ""
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:2681
+#: lib/class-tgm-plugin-activation.php:2673
 msgid "No plugins are available to be installed at this time."
 msgstr ""
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:2683
+#: lib/class-tgm-plugin-activation.php:2675
 msgid "No plugins are available to be updated at this time."
 msgstr ""
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:2788
+#: lib/class-tgm-plugin-activation.php:2780
 msgid "No plugins were selected to be activated. No action taken."
 msgstr ""
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:2814
+#: lib/class-tgm-plugin-activation.php:2806
 msgid "No plugins are available to be activated at this time."
 msgstr ""
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:3028
+#: lib/class-tgm-plugin-activation.php:3020
 msgid "Plugin activation failed."
 msgstr ""
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:3362
+#: lib/class-tgm-plugin-activation.php:3354
 #, php-format
 msgid "Updating Plugin %1$s (%2$d/%3$d)"
 msgstr ""
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:3364
+#: lib/class-tgm-plugin-activation.php:3356
 #, php-format
 msgid "An error occurred while installing %1$s: <strong>%2$s</strong>."
 msgstr ""
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:3365
+#: lib/class-tgm-plugin-activation.php:3357
 #, php-format
 msgid "The installation of %1$s failed."
 msgstr ""
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:3369
+#: lib/class-tgm-plugin-activation.php:3361
 msgid ""
 "The installation and activation process is starting. This process may take a "
 "while on some hosts, so please be patient."
 msgstr ""
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:3370
+#: lib/class-tgm-plugin-activation.php:3362
 #, php-format
 msgid "%1$s installed and activated successfully."
 msgstr ""
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:3370
-#: lib/class-tgm-plugin-activation.php:3376
+#: lib/class-tgm-plugin-activation.php:3362
+#: lib/class-tgm-plugin-activation.php:3368
 msgid "Show Details"
 msgstr "Mostrar detalles"
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:3370
-#: lib/class-tgm-plugin-activation.php:3376
+#: lib/class-tgm-plugin-activation.php:3362
+#: lib/class-tgm-plugin-activation.php:3368
 msgid "Hide Details"
 msgstr "Esconder detalles"
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:3371
+#: lib/class-tgm-plugin-activation.php:3363
 msgid "All installations and activations have been completed."
 msgstr ""
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:3372
+#: lib/class-tgm-plugin-activation.php:3364
 #, php-format
 msgid "Installing and Activating Plugin %1$s (%2$d/%3$d)"
 msgstr ""
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:3375
+#: lib/class-tgm-plugin-activation.php:3367
 msgid ""
 "The installation process is starting. This process may take a while on some "
 "hosts, so please be patient."
 msgstr ""
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:3376
+#: lib/class-tgm-plugin-activation.php:3368
 #, php-format
 msgid "%1$s installed successfully."
 msgstr ""
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:3377
+#: lib/class-tgm-plugin-activation.php:3369
 msgid "All installations have been completed."
 msgstr ""
 
 # @ tgmpa
-#: lib/class-tgm-plugin-activation.php:3378
+#: lib/class-tgm-plugin-activation.php:3370
 #, php-format
 msgid "Installing Plugin %1$s (%2$d/%3$d)"
 msgstr ""
@@ -3894,30 +3852,44 @@ msgstr ""
 
 # @ largo
 #: options.php:201
-msgid ""
-"<strong>Link to Flickr Photostream</strong> (http://www.flickr.com/photos/"
-"username/)"
+#, fuzzy
+msgid "<strong>Link to Instagram Page</strong> (http://instagram.com/username)"
 msgstr ""
+"<strong>Enlace a Twitter Profile</strong> (https://twitter.com/username)"
 
 # @ largo
 #: options.php:207
-msgid "<strong>Link to Tumblr</strong> (http://yoursite.tumblr.com)"
-msgstr ""
-
-# @ largo
-#: options.php:213
 msgid ""
 "<strong>Link to LinkedIn Group or Profile</strong> (http://www.linkedin.com/"
 "in/username/)"
 msgstr ""
 
 # @ largo
+#: options.php:213
+msgid "<strong>Link to Tumblr</strong> (http://yoursite.tumblr.com)"
+msgstr ""
+
+# @ largo
 #: options.php:219
+#, fuzzy
+msgid "<strong>Link to Pinterest Page</strong> (http://pinterest.com/username)"
+msgstr ""
+"<strong>Enlace a Twitter Profile</strong> (https://twitter.com/username)"
+
+# @ largo
+#: options.php:225
 msgid "<strong>Link to Github Page</strong> (http://github.com/username)"
 msgstr ""
 
 # @ largo
-#: options.php:225
+#: options.php:231
+msgid ""
+"<strong>Link to Flickr Photostream</strong> (http://www.flickr.com/photos/"
+"username/)"
+msgstr ""
+
+# @ largo
+#: options.php:237
 msgid ""
 "By default, a row of social media icons is shown in the site footer. "
 "<strong>Check this box if you want to show them in the header as well</"
@@ -3925,12 +3897,12 @@ msgid ""
 msgstr ""
 
 # @ largo
-#: options.php:230
+#: options.php:242
 msgid "Single Post Options"
 msgstr "Opciones de entrada única"
 
 # @ largo
-#: options.php:234
+#: options.php:246
 msgid ""
 "<p><strong>Would you like to display share icons at the top of single posts?"
 "</strong></p> <p>By default social icons appear at the top of single posts "
@@ -3938,21 +3910,21 @@ msgid ""
 msgstr ""
 
 # @ largo
-#: options.php:240
+#: options.php:252
 msgid ""
 "Select the <strong>share icons</strong> to display at the top of single "
 "posts."
 msgstr ""
 
 # @ largo
-#: options.php:247
+#: options.php:259
 msgid ""
 "<strong>Would you like to display share icons in a floating bar beside posts "
 "using the single-column post template?</strong>"
 msgstr ""
 
 # @ largo
-#: options.php:253
+#: options.php:265
 #, fuzzy
 msgid "<strong>Verb to use</strong> for Facebook buttons?"
 msgstr ""
@@ -3960,11 +3932,11 @@ msgstr ""
 "unicas."
 
 # @ largo
-#: options.php:264
+#: options.php:276
 msgid "Theme Images"
 msgstr "Imagenes de la plantilla"
 
-#: options.php:270
+#: options.php:282
 msgid ""
 "Information about these options can be found in <a href=\"https://largo."
 "readthedocs.io/users/prelaunchchecklist.html\">the pre-launch checklist</a> "
@@ -3973,12 +3945,12 @@ msgid ""
 msgstr ""
 
 # @ largo
-#: options.php:274
+#: options.php:286
 msgid "Upload a Square Thumbnail Image (200x200px minimum)"
 msgstr ""
 
 # @ largo
-#: options.php:275
+#: options.php:287
 msgid ""
 "This is a default image used for Facebook posts when you do not set a "
 "featured image for your posts. We also use it as a bookmark icon for Apple "
@@ -3986,12 +3958,12 @@ msgid ""
 msgstr ""
 
 # @ largo
-#: options.php:280
+#: options.php:292
 msgid "Upload a Favicon"
 msgstr ""
 
 # @ largo
-#: options.php:281
+#: options.php:293
 msgid ""
 "This is the small icon that appears in browser tabs and in some feed readers "
 "and other applications. Favicons must be an .ico file and are typically "
@@ -3999,60 +3971,60 @@ msgid ""
 msgstr ""
 
 # @ largo
-#: options.php:286
+#: options.php:298
 msgid "Header Image"
 msgstr ""
 
 # @ largo
-#: options.php:290
+#: options.php:302
 msgid ""
 "<strong>Use only text</strong> in the place of a banner image (uses site "
 "title and description)."
 msgstr ""
 
 # @ largo
-#: options.php:296
+#: options.php:308
 msgid "Small Banner Image (768px wide)"
 msgstr ""
 
 # @ largo
-#: options.php:297
+#: options.php:309
 msgid ""
 "Used for viewports below 768px wide (mostly phones and some tablets). "
 "Recommended height: 240px."
 msgstr ""
 
 # @ largo
-#: options.php:302
+#: options.php:314
 msgid "Medium Banner Image (980px wide)"
 msgstr ""
 
 # @ largo
-#: options.php:303
+#: options.php:315
 msgid ""
 "Used for viewports between 768px and 980 px (mostly tablets). Recommended "
 "height: 180px."
 msgstr ""
 
 # @ largo
-#: options.php:308
+#: options.php:320
 msgid "Large Banner Image (1170px wide)"
 msgstr ""
 
 # @ largo
-#: options.php:309
+#: options.php:321
 msgid ""
 "Used for viewports above 980 px (landscape tablets and desktops). "
 "Recommended height: 150px."
 msgstr ""
 
 # @ largo
-#: options.php:314
+#: options.php:326
 msgid "Sticky Header Logo"
 msgstr ""
 
 # @ largo
-#: options.php:315
+#: options.php:327
 msgid ""
 "Used in the sticky navigation. This image should be 100px tall and at least "
 "100px wide. If no logo is provided, the site name will be displayed. To "
@@ -4061,36 +4033,36 @@ msgid ""
 msgstr ""
 
 # @ largo
-#: options.php:323
+#: options.php:335
 msgid "Layout"
 msgstr ""
 
 # @ largo
-#: options.php:336
+#: options.php:348
 msgid "Home Template"
 msgstr ""
 
 # @ largo
-#: options.php:337
+#: options.php:349
 msgid ""
 "<strong>Select the layout to use for the top of the homepage.</strong> These "
 "are Home Templates, defined much like post/page templates."
 msgstr ""
 
 # @ largo
-#: options.php:346
+#: options.php:358
 msgid "Sticky Posts"
 msgstr "Entradas Permanentes"
 
 # @ largo
-#: options.php:350
+#: options.php:362
 msgid ""
 "Show sticky posts box on homepage? If checked, you will need to set at least "
 "one post as sticky for this box to appear."
 msgstr ""
 
 # @ largo
-#: options.php:357
+#: options.php:369
 msgid ""
 "<strong>Select the layout to use for the bottom of the homepage.</strong> "
 "Largo supports three options: a single column list of recent posts with "
@@ -4098,12 +4070,12 @@ msgid ""
 msgstr ""
 
 # @ largo
-#: options.php:368
+#: options.php:380
 msgid "Other Homepage Display Options"
 msgstr "Otras Opciones de Emplanaje de Página de Inicio"
 
 # @ largo
-#: options.php:372
+#: options.php:384
 msgid ""
 "<strong>How would you like to display categories and tags for posts on the "
 "homepage?</strong> Largo can display a single category or tag above the "
@@ -4112,13 +4084,13 @@ msgid ""
 msgstr ""
 
 # @ largo
-#: options.php:380
+#: options.php:392
 msgid ""
 "<strong>Number of posts</strong> to display in the main loop on the homepage"
 msgstr ""
 
 # @ largo
-#: options.php:386
+#: options.php:398
 msgid ""
 "<strong>Categories to include or exclude</strong> in the main loop on the "
 "homepage (comma-separated list of values, see: http://bit.ly/XmDGgd for "
@@ -4126,28 +4098,28 @@ msgid ""
 msgstr ""
 
 # @ largo
-#: options.php:392
+#: options.php:404
 msgid "Single Article Template"
 msgstr "Plantilla de Artículo Sencillo"
 
 # @ largo
-#: options.php:407
+#: options.php:419
 #, fuzzy
 msgid "Category Options"
 msgstr "Categorías"
 
 # @ default
-#: options.php:411
+#: options.php:423
 msgid "Hide the featured posts area on category pages?"
 msgstr ""
 
 # @ largo
-#: options.php:417
+#: options.php:429
 msgid "Sidebar Options"
 msgstr "Opciones de Sidebar"
 
 # @ largo
-#: options.php:421
+#: options.php:433
 msgid ""
 "By default Largo has two sidebars. One is used for single pages and posts "
 "and the other is used for everything else (including the homepage). Check "
@@ -4156,21 +4128,21 @@ msgid ""
 msgstr ""
 
 # @ largo
-#: options.php:427
+#: options.php:439
 msgid ""
 "Include an additional widget region (\"sidebar\") just above the site footer "
 "region"
 msgstr ""
 
 # @ largo
-#: options.php:433
+#: options.php:445
 msgid ""
 "Enter names of <strong>additional sidebar regions</strong> (one per line) "
 "you'd like post authors to be able to choose to display on their posts."
 msgstr ""
 
 # @ largo
-#: options.php:440
+#: options.php:452
 msgid ""
 "<strong>Select the layout to use for the footer.</strong> The default is a 3 "
 "column footer with a wide center column. Alternatively you can choose to "
@@ -4179,19 +4151,19 @@ msgid ""
 msgstr ""
 
 # @ largo
-#: options.php:460
+#: options.php:472
 #, fuzzy
 msgid "Navigation"
 msgstr "Navegación Global"
 
 # @ largo
-#: options.php:465
+#: options.php:477
 #, fuzzy
 msgid "Sticky navigation"
 msgstr "Descripción del sitio"
 
 # @ default
-#: options.php:466
+#: options.php:478
 msgid ""
 "By default, the sticky navigation bar is visible on all pages for mobile "
 "screen sizes. The sticky navigation bar will disappear when a user scrolls "
@@ -4200,19 +4172,19 @@ msgid ""
 msgstr ""
 
 # @ largo
-#: options.php:471
+#: options.php:483
 msgid "Enable the sticky navigation for all screen sizes on article pages"
 msgstr ""
 
 # @ largo
-#: options.php:478
+#: options.php:490
 msgid ""
 "Hide the main navigation on article pages and display only the sticky "
 "navigation on article pages"
 msgstr ""
 
 # @ largo
-#: options.php:485
+#: options.php:497
 msgid ""
 "<strong>NOTE:</strong> If the main navigation is hidden on article pages, "
 "<strong>readers will only see a small logo in the left-hand corner when "
@@ -4221,44 +4193,44 @@ msgid ""
 msgstr ""
 
 # @ default
-#: options.php:490
+#: options.php:502
 #, fuzzy
 msgid "Sticky navigation overflow"
 msgstr "Descripción del sitio"
 
 # @ largo
-#: options.php:491
+#: options.php:503
 msgid ""
 "Enter the label used for the navigation menu that houses any navigation "
 "links that would otherwise cause the navigation to wrap onto multiple lines."
 msgstr ""
 
 # @ default
-#: options.php:498
+#: options.php:510
 msgid "Alternate site name for sticky navigation"
 msgstr ""
 
 # @ largo
-#: options.php:499
+#: options.php:511
 msgid ""
 "If your site name is especially long, use this field to set an abbreviation "
 "or shorter version for use in the sticky nav on small screens."
 msgstr ""
 
 # @ largo
-#: options.php:506
+#: options.php:518
 msgid "Menu Options"
 msgstr "Opciones del menú"
 
 # @ largo
-#: options.php:507
+#: options.php:519
 msgid ""
 "<strong>Show</strong> the \"Don't Miss\" menu under the main site "
 "navigation. Add links to this menu under <strong>Appearance > Menus</strong>."
 msgstr ""
 
 # @ largo
-#: options.php:512
+#: options.php:524
 msgid ""
 "Enter the <strong>label that appears in front of the menu links in the "
 "\"Don't Miss\" menu</strong>. You can delete this default and no label will "
@@ -4266,88 +4238,88 @@ msgid ""
 msgstr ""
 
 # @ largo
-#: options.php:518
+#: options.php:530
 msgid ""
 "Enter the <strong>label that appears before the menu links in the Footer Nav "
 "Menu</strong>. You can delete this default and no label will appear."
 msgstr ""
 
 # @ largo
-#: options.php:528
+#: options.php:540
 msgid "Advanced"
 msgstr "Avanzado"
 
 # @ largo
-#: options.php:532
+#: options.php:544
 msgid "Enable Custom LESS to CSS For Theme Customization."
 msgstr ""
 
 # @ largo
-#: options.php:538
+#: options.php:550
 msgid "Enable \"Series\" taxonomy."
 msgstr "Activar taxonomía de \"Series\\\"\\ "
 
 # @ largo
-#: options.php:544
+#: options.php:556
 msgid ""
 "Enable Custom Landing Pages for Series/Project Pages. Requires \"Series\" "
 "taxonomy to be enabled."
 msgstr ""
 
 # @ largo
-#: options.php:551
+#: options.php:563
 msgid "Default region in lefthand column of Landing Pages"
 msgstr ""
 
 # @ largo
-#: options.php:559
+#: options.php:571
 msgid "Default region in righthand column of Landing Pages"
 msgstr ""
 
 # @ largo
-#: options.php:567
+#: options.php:579
 msgid "Enable Optional Leaderboard Ad Zone."
 msgstr ""
 
 # @ largo
-#: options.php:573
+#: options.php:585
 #, fuzzy
 msgid "Enable Optional Header Widget Area."
 msgstr "Widget de donación de Largo"
 
 # @ largo
-#: options.php:579
+#: options.php:591
 msgid "Enable \"Post Types\" taxonomy."
 msgstr ""
 
 # @ largo
-#: options.php:604
+#: options.php:616
 #, fuzzy
 msgid "Enable Disclaimer Widget."
 msgstr "Widget de donación de Largo"
 
 # @ largo
-#: options.php:610
+#: options.php:622
 msgid "Enter a default disclaimer"
 msgstr ""
 
 # @ largo
-#: options.php:619
+#: options.php:631
 msgid "Search options"
 msgstr "Opciones de búsqueda"
 
 # @ largo
-#: options.php:620
+#: options.php:632
 msgid "Replace WordPress search with Google Custom Search"
 msgstr "Sustituir la Búsqueda de Wordpress por la Búsqueda de Google"
 
 # @ largo
-#: options.php:626
+#: options.php:638
 msgid "Search engine ID (something like 012174647732932797336:f2lixuynrs0) "
 msgstr ""
 
 # @ largo
-#: options.php:632
+#: options.php:644
 msgid ""
 "Google Custom Search typically returns better results than the search engine "
 "built into WordPress. You can get your ID and configure it at <a href="
@@ -4356,13 +4328,13 @@ msgid ""
 msgstr ""
 
 # @ largo
-#: options.php:638
+#: options.php:650
 #, fuzzy
 msgid "Site verification"
 msgstr "Descripción del sitio"
 
 # @ largo
-#: options.php:639
+#: options.php:651
 msgid ""
 "<strong>Twitter Account ID.</strong> This is used for verifying your site "
 "for Twitter Analytics. This is NOT your username, it will be a 9 digit "
@@ -4370,14 +4342,14 @@ msgid ""
 msgstr ""
 
 # @ largo
-#: options.php:645
+#: options.php:657
 msgid ""
 "<strong>Google site verification meta tag.</strong> Used to verify a site in "
 "Google Webmaster Tools. This will be a long string of numbers and letters."
 msgstr ""
 
 # @ largo
-#: options.php:651
+#: options.php:663
 msgid ""
 "<strong>Facebook admins meta tag.</strong> This is a comma-separated list of "
 "numerical FB user IDs you want to allow to access Facebook insights for your "
@@ -4385,7 +4357,7 @@ msgid ""
 msgstr ""
 
 # @ largo
-#: options.php:657
+#: options.php:669
 msgid ""
 "<strong>Facebook app ID meta tag.</strong> This is a numerical app ID that "
 "will allow Facebook to capture insights for any social plugins active on "
@@ -4393,7 +4365,7 @@ msgid ""
 msgstr ""
 
 # @ largo
-#: options.php:663
+#: options.php:675
 msgid ""
 "<strong>Facebook Tracking Pixel ID.</strong> Unique numerical ID (one per "
 "Facebook Ads account) to enable tracking of site visitors and targeting of "
@@ -4401,25 +4373,25 @@ msgid ""
 msgstr ""
 
 # @ largo
-#: options.php:669
+#: options.php:681
 msgid ""
 "<strong>Bitly site verification.</strong> This is a string of numbers and "
 "letters used to verify your site with bitly analytics."
 msgstr ""
 
 # @ largo
-#: options.php:675
+#: options.php:687
 msgid "SEO Options"
 msgstr ""
 
 # @ largo
-#: options.php:679
+#: options.php:691
 msgid ""
 "Use noindex for all archive pages (default is to use noindex for just date "
 "archives)."
 msgstr ""
 
-#: options.php:685
+#: options.php:697
 msgid ""
 "<strong>404 page text.</strong> This will be displayed on the 404 page, "
 "which is shown when people try to navigate to a page on your site that does "
@@ -4427,20 +4399,20 @@ msgid ""
 msgstr ""
 
 # @ largo
-#: options.php:691
+#: options.php:703
 #, fuzzy
 msgid "Byline Options"
 msgstr "Opciones de entrada única"
 
 # @ largo
-#: options.php:695
+#: options.php:707
 msgid "Enable display of job titles in bylines and author biographies?"
 msgstr ""
 
 # @ largo
 #: partials/archive-category-primary-feature.php:14
 #: partials/archive-category-secondary-feature.php:12
-#: partials/content-roundup.php:28 partials/content-search.php:25
+#: partials/content-roundup.php:28 partials/content-search.php:16
 #: partials/content-series.php:19 partials/content.php:26
 #: partials/content.php:49
 msgid "Permalink to"
@@ -4515,13 +4487,7 @@ msgid "Source: "
 msgstr ""
 
 # @ largo
-#: partials/content-search.php:30 partials/content.php:54
-#, fuzzy
-msgid "Continue&nbsp;Reading"
-msgstr "Continuar&nbsp;leyendo&nbsp;&rarr;"
-
-# @ largo
-#: partials/content-search.php:33 partials/content.php:57
+#: partials/content-search.php:22 partials/content.php:57
 #, fuzzy
 msgid "More about:"
 msgstr "Más Sobre"
@@ -4588,15 +4554,15 @@ msgid "GO"
 msgstr "IR"
 
 # @ largo
-#: partials/nav-main.php:59 partials/nav-sticky.php:155
+#: partials/nav-sticky.php:80 searchform.php:8
+msgid "Go"
+msgstr "Ir"
+
+# @ largo
+#: partials/nav-sticky.php:165
 #, fuzzy
 msgid "About"
 msgstr "Más Sobre"
-
-# @ largo
-#: partials/nav-sticky.php:71 searchform.php:9
-msgid "Go"
-msgstr "Ir"
 
 # @ largo
 #: partials/sidebar-fallback.php:9
@@ -4642,3 +4608,16 @@ msgid "%s result"
 msgid_plural "%s results"
 msgstr[0] ""
 msgstr[1] ""
+
+# @ largo
+#~ msgid "Continue&nbsp;Reading&nbsp;&rarr;"
+#~ msgstr "Continuar&nbsp;leyendo&nbsp;&rarr;"
+
+# @ largo
+#~ msgid "Categories"
+#~ msgstr "Categorías"
+
+# @ largo
+#, fuzzy
+#~ msgid "Continue&nbsp;Reading"
+#~ msgstr "Continuar&nbsp;leyendo&nbsp;&rarr;"

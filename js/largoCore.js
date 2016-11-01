@@ -14,13 +14,6 @@ jQuery(document).ready(function($) {
     $('.header_img').parent().remove();
   }
 
-  //the homepage carousel, make sure we don't load this unless .carousel is defined
-  if($().carousel) {
-    $('.carousel').carousel({
-      interval: 6000
-    });
-  }
-
   //GA event tracking for image-widget items
   $('a.image-click-track').on('click', function() {
     if (typeof _gaq == 'object') _gaq.push(['_trackEvent', 'Click', 'Image Widget', this.getAttribute('title')]);
@@ -93,19 +86,6 @@ jQuery(document).ready(function($) {
         this.popup({
           url: url,
           name: 'facebook_share'
-        });
-      },
-
-      // Handle the email service
-      do_email: function( data ) {
-        var url = 'mailto:friend@example.com?' + $.param({
-          subject: data.title,
-          body: data.description + "\n" + data.url
-        });
-
-        this.popup({
-          url: url,
-          name: 'email_share'
         });
       },
 

@@ -55,11 +55,11 @@ class FeaturedMediaTestFunctions extends WP_UnitTestCase {
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
-	function test_largo_featured_image_hero() {
+	function test_largo_get_featured_hero() {
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
-	function test_largo_get_featured_image_hero() {
+	function test_largo_featured_image_hero() {
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
@@ -67,15 +67,7 @@ class FeaturedMediaTestFunctions extends WP_UnitTestCase {
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
-	function test_largo_get_featured_embed_hero() {
-		$this->markTestIncomplete('This test has not been implemented yet.');
-	}
-
 	function test_largo_featured_gallery_hero() {
-		$this->markTestIncomplete('This test has not been implemented yet.');
-	}
-
-	function test_largo_get_featured_gallery_hero() {
 		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
@@ -105,21 +97,6 @@ class FeaturedMediaTestFunctions extends WP_UnitTestCase {
 		largo_enqueue_featured_media_js($hook);
 
 		$this->assertTrue(!empty($wp_scripts->registered['largo_featured_media']));
-	}
-
-	function test_largo_add_featured_media_button() {
-		global $post;
-		$post = get_post($this->post);
-		setup_postdata($post);
-
-		$ret = largo_add_featured_media_button('TEST');
-
-		// `largo_add_featured_media_button` should concatenate featured media button markup
-		// and the $context string passed to it
-		$this->assertTrue((bool) preg_match('/^TEST/', $ret));
-
-		// Make sure the button ID attribute is present and matches our expectation
-		$this->assertTrue((bool) preg_match('/id\="set\-featured\-media\-button"/', $ret));
 	}
 
 	function test_largo_featured_media_templates() {

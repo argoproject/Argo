@@ -36,12 +36,12 @@ Some commands require you to have external applications installed. Instructions 
 ``pot``
     Scans the Largo code for the WordPress localization functions and generates ``.po`` files for working with localization software.
 
-    Running this command requires your computer to have ``xgettext`` installed. Installation instructions vary based on operating system; your best bet is Google.
+    Running this command requires your computer to have ``xgettext`` installed. Installation instructions vary based on operating system; your best bet is Google. ``xgettext`` is usually installed in the same package as ``gettext``.
 
 ``po2mo``
     Converts the ``.po`` files to ``.mo`` files. For more information about ``.po`` and ``.mo`` files, see the `Wikipedia articles on gettext <https://en.wikipedia.org/wiki/Gettext>`_.
 
-    Running this command requires your computer to have ``xgettext`` installed. Installation instructions vary based on operating system; your best bet is Google.
+    Running this command requires your computer to have ``xgettext`` installed. Installation instructions vary based on operating system; your best bet is Google. ``xgettext`` is usually installed in the same package as ``gettext``.
 
 ``apidocs``
     Runs ``shell:apidocs``, rebuilding only the API docs.

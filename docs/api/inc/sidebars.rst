@@ -42,3 +42,19 @@ inc/sidebars.php
 .. php:function:: largo_is_sidebar_required()
 
    Determines if is_single or is_singular context requires a sidebar
+
+.. php:function:: largo_header_widget_sidebar()
+
+   Output the "Header Widget" sidebar
+
+   :action: largo_header_after_largo_header
+
+   :since: 0.5.5
+
+.. php:function:: largo_post_bottom_widget_area()
+
+   Output the "Article Bottom" sidebar
+
+   :action: largo_header_after_largo_header
+
+   :since: 0.5.5

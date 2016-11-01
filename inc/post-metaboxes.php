@@ -268,18 +268,35 @@ function largo_custom_disclaimer_meta_box_display() {
 largo_register_meta_input( 'disclaimer', 'wp_filter_post_kses' );
 
 /**
- * Metabox option to choose the top tag for the post
+ * Metabox option to choose the top tag for the posto
+ *
+ * Includes the option for "None", which is not the default option, but is an option.
  *
  * @global $post
+ * @since 0.5.5
+ * @link https://github.com/INN/Largo/issues/1082
  */
 function largo_top_tag_display() {
 	global $post;
 
 	$top_term = get_post_meta( $post->ID, 'top_term', TRUE );
-	$terms = wp_get_object_terms($post->ID, array( 'series', 'category', 'post_tag', 'prominence' ) );
+
+	/**
+	 * largo_top_term_metabox_taxonomies filter
+	 *
+	 * Allow child themes to modify the list of taxonomies from which terms are pulled to use as the top tag
+	 *
+	 * @since 0.5.5
+	 * @link https://github.com/INN/Largo/issues/1198
+	 * @filter largo_top_term_metabox_taxonomies
+	 * @param Array $taxonomies The list of default top term taxonomies: series, category, post_tag, prominence
+	 */
+	$taxonomies = apply_filters( 'largo_top_term_metabox_taxonomies', array( 'series', 'category', 'post_tag', 'prominence', 'post-type' ) );
+
+	$terms = wp_get_object_terms( $post->ID, $taxonomies );
 
 	echo '<p><strong>' . __('Top Term', 'largo') . '</strong><br />';
-	echo __('Identify which of this posts\'s terms is primary.') . '</p>';
+	echo __('Identify which of this posts\'s terms is primary.', 'largo') . '</p>';
 
 	$disabled = (empty($terms))? 'disabled':'';
 	echo '<select style="min-width: 5em;" name="top_term" id="top_term" class="dropdown" ' . $disabled . '>';
@@ -287,10 +304,11 @@ function largo_top_tag_display() {
 	foreach ($terms as $term)
 		echo '<option value="' . (int) $term->term_id . '"' . selected( $term->term_id, $top_term, FALSE ) . ">" . $term->name . '</option>';
 
+	echo '<option value="none"' . selected( 'none' , $top_term, FALSE ) . ">None</option>";
 	echo '</select>';
 }
 largo_add_meta_content('largo_top_tag_display', 'largo_additional_options');
-largo_register_meta_input( 'top_term', 'intval' );
+largo_register_meta_input( 'top_term', 'sanitize_key' );
 
 /**
  * Load JS for our top-terms select

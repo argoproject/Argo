@@ -27,14 +27,14 @@ function homepage_big_story_headline($moreLink=false) {
 	ob_start();
 ?>
 	<article>
-		<h5 class="top-tag"><?php largo_top_term(array('post'=> $bigStoryPost->ID)); ?></h5>
+		<?php largo_maybe_top_term( array( 'post'=> $bigStoryPost->ID ) ); ?>
 		<h2><a href="<?php echo get_permalink($bigStoryPost->ID); ?>"><?php echo $bigStoryPost->post_title; ?></a></h2>
 		<h5 class="byline"><?php largo_byline(true, true, $bigStoryPost); ?></h5>
 		<section>
 			<?php if (empty($moreLink)) {
-					largo_excerpt($bigStoryPost, 2, false);
+					largo_excerpt($bigStoryPost, 2 );
 				} else {
-					largo_excerpt($bigStoryPost, 2, true, __('Continue&nbsp;Reading&nbsp;&rarr;', 'largo'), true, false);
+					largo_excerpt($bigStoryPost, 2, null, null, true, false);
 				} ?>
 		</section>
 	</article>

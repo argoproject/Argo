@@ -1,38 +1,40 @@
 <?php
 /**
  * Adds ability to select a custom post template for single posts
- * Derived from Single Post Template 1.3 plugin by Nathan Rice ( http://www.nathanrice.net/plugins
+ * Derived from Single Post Template 1.3 plugin by Nathan Rice (http://www.nathanrice.net/plugins)
  *
- * @since 1.0
+ * @since 0.3
  */
 
 //	This function scans the template files of the active theme,
 //	and returns an array of [Template Name => {file}.php]
-if( !function_exists( 'get_post_templates' ) ) {
+if( ! function_exists( 'get_post_templates' ) ) {
 	function get_post_templates() {
 		$theme = wp_get_theme();
 		$templates = $theme->get_files( 'php', 1, true );
 		$post_templates = array();
 
-		$base = array(trailingslashit(get_template_directory()), trailingslashit(get_stylesheet_directory()));
+		$base = array( trailingslashit( get_template_directory() ), trailingslashit( get_stylesheet_directory() ) );
 
-		foreach ((array)$templates as $template) {
-			$template = WP_CONTENT_DIR . str_replace(WP_CONTENT_DIR, '', $template);
-			$basename = str_replace($base, '', $template);
+		foreach ( (array)$templates as $template ) {
+			$template = WP_CONTENT_DIR . str_replace( WP_CONTENT_DIR, '', $template );
+			$basename = str_replace( $base, '', $template );
 
 			// don't allow template files in subdirectories
 			// if (false !== strpos($basename, '/'))
 			//	continue;
 
-			$template_data = implode('', file( $template ));
+			$template_data = implode( '', file( $template ) );
 
 			$name = '';
-			if (preg_match( '|Single Post Template:(.*)$|mi', $template_data, $name))
-				$name = _cleanup_header_comment($name[1]);
+			if ( preg_match( '|Single Post Template:(.*)$|mi', $template_data, $name ) ) {
+				$name = _cleanup_header_comment( $name[1] );
+			}
 
-			if (!empty($name)) {
-				if(basename($template) != basename(__FILE__))
+			if ( !empty( $name ) ) {
+				if( basename( $template ) != basename(__FILE__) ) {
 					$post_templates[trim($name)] = $basename;
+				}
 			}
 		}
 
@@ -42,13 +44,17 @@ if( !function_exists( 'get_post_templates' ) ) {
 }
 
 //	build the dropdown items
-if( !function_exists( 'post_templates_dropdown' ) ) {
+if( ! function_exists( 'post_templates_dropdown' ) ) {
 	function post_templates_dropdown() {
 		global $post;
 		$post_templates = get_post_templates();
 
 		foreach ( $post_templates as $template_name => $template_file ) { //loop through templates, make them options
-			if ( $template_file == get_post_meta( $post->ID, '_wp_post_template', true )) { $selected = ' selected="selected"'; } else { $selected = ''; }
+			if ( $template_file == get_post_meta( $post->ID, '_wp_post_template', true ) ) {
+				$selected = ' selected="selected"';
+			} else {
+				$selected = '';
+			}
 			$opt = '<option value="' . $template_file . '"' . $selected . '>' . $template_name . '</option>';
 			echo $opt;
 		}
@@ -59,14 +65,16 @@ if( !function_exists( 'post_templates_dropdown' ) ) {
  * Filter the single template value, and replace it with
  * the template chosen by the user, if they chose one.
  */
-if( !function_exists( 'get_post_template' ) ) {
+if( ! function_exists( 'get_post_template' ) ) {
 	function get_post_template( $template ) {
 		global $post;
-		$custom_field = get_post_meta( $post->ID, '_wp_post_template', true );
-		if ( !empty( $custom_field ) ) {
-			if ( file_exists( get_stylesheet_directory() . "/{$custom_field}") ) {
+		if ( is_object( $post ) ) {
+			$custom_field = get_post_meta( $post->ID, '_wp_post_template', true );
+		}
+		if ( ! empty( $custom_field ) ) {
+			if ( file_exists( get_stylesheet_directory() . "/{$custom_field}" ) ) {
 				$template = get_stylesheet_directory() . "/{$custom_field}";
-			} else if ( file_exists( get_template_directory() . "/{$custom_field}") ) {
+			} else if ( file_exists( get_template_directory() . "/{$custom_field}" ) ) {
 				$template = get_template_directory() . "/{$custom_field}";
 			}
 		}
@@ -80,7 +88,7 @@ if( !function_exists( 'get_post_template' ) ) {
  * You can optionally provide a template name and then the check will be
  * specific to that template.
  *
- * @since 1.0
+ * @since 0.3
  * @uses $wp_query
  *
  * @param string $template The specific template name if specific matching is required.
@@ -92,53 +100,95 @@ function is_post_template( $template = '' ) {
 
 	$post_template = get_post_meta( get_queried_object_id(), '_wp_post_template', true );
 
-	if ( empty( $template ) )
+	if ( empty( $template ) ) {
 		return (bool) $post_template;
-
-	if ( $template == $post_template )
+	}
+	if ( $template == $post_template ) {
 		return true;
-
-	if ( 'default' == $template && ! $post_template )
+	}
+	if ( 'default' == $template && ! $post_template ) {
 		return true;
-
+	}
 	return false;
 }
 
 
 /**
- * Remove potentially duplicated hero image after upgrade to v0.4
- * 
- * The changes to the content in this function should eventually be made
- * perminant in the database. (@see https://github.com/INN/Largo/issues/354)
- * 
- * @since 0.4
- * 
+ * Remove potentially duplicated hero images in posts
+ *
+ * If the first paragraph of the post's content contains an img tag with a src,
+ * and if the src is the same as the src as the post featured media image, or if
+ * the src are different but the attachment IDs are the same, then remove the first
+ * paragraph from the post's content to hide the duplicate image.
+ *
+ * This does catch img tags inside shortcodes.
+ *
+ * This does not remove leading images that are different from the post featured media
+ *
+ * @TODO The changes to the content in this function should eventually be made
+ * permanent in the database. (@see https://github.com/INN/Largo/issues/354)
+ *
+ * If you would like to disable this function globally or on certain posts,
+ * use the filter `largo_remove_hero`.
+ *
+ * @since 0.4 - in Largo's single-column template
+ * @since 0.5.5 - in Largo's two-column template
+ *
  * @param String $content the post content passed in by WordPress filter
  * @return String filtered post content.
  */
-function largo_remove_hero($content) {
+function largo_remove_hero( $content ) {
 
 	global $post;
-
-	// 1: Only worry about this if it's a single template, there's a feature image,
-	// we haven't overridden the post display and we're not using the classic layout.
-
-	if( !is_single() ) 
+	// Abort if there is no global $post
+	if ( ! isset( $post ) ) {
 		return $content;
+	}
 
-	if( !has_post_thumbnail() ) 
+	// 1: Only worry about this if:
+	// - it's a single template, and
+	// - there's a feature image, and
+	// - we haven't overridden the post display, and
+	// - we're not using a Largo layout
+
+	/**
+	 * Filter to disable largo_remove_hero based on the global $post at the time the function is run
+	 *
+	 * When building your own filter, you must set the fourth parameter of add_filter to 2:
+	 *
+	 *     function filter_largo_remove_hero( $run, $post ) {
+	 *         # determine whether or not to run largo_remove_hero based on $post
+	 *         return $run;
+	 *     }
+	 *     add_filter( 'largo_remove_hero', 'filter_largo_remove_hero', 10, 2 );
+	 *                                                                     ^
+	 *
+	 * @param Bool $run Whether `largo_remove_hero()` should be run
+	 * @param WP_Object $post The global $post at the time the function is run.
+	 * @since 0.5.5
+	 */
+	$do_run = apply_filters( 'largo_remove_hero', true, $post );
+
+	if ( ! $do_run ) {
 		return $content;
+	}
 
-	$options = get_post_custom($post->ID);
-
-	if( isset($options['featured-image-display'][0]) )
+	if ( ! has_post_thumbnail( $post->ID ) ) {
 		return $content;
+	}
 
-	if( of_get_option( 'single_template' ) == 'classic' )
+	$options = get_post_custom( $post->ID );
+
+	if ( isset( $options['featured-image-display'][0] ) ) {
 		return $content;
+	}
 
-	$p = explode("\n",$content);
-	
+	if ( of_get_option( 'single_template' ) != 'normal' && of_get_option( 'single_template' ) != 'classic' ) {
+		return $content;
+	}
+
+	$p = explode( "\n", $content );
+
 	// 2: Find an image (regex)
 	//
 	// Creates the array:
@@ -146,12 +196,13 @@ function largo_remove_hero($content) {
 	//		$matches[1] = value of src.
 
 	$pattern = '/<img\s+[^>]*src="([^"]*)"[^>]*>/';
-	$hasImg = preg_match($pattern,$p[0],$matches);
+	$hasImg = preg_match( $pattern, $p[0], $matches );
 
 	// 3: if there's no image, there's nothing to worry about.
 
-	if( !$hasImg )
+	if( ! $hasImg ) {
 		return $content;
+	}
 
 	$imgDom = $matches[0];
 	$src = $matches[1];
@@ -160,67 +211,66 @@ function largo_remove_hero($content) {
 	// If they're the same, remove the top image.
 
 	$featureImgId = get_post_thumbnail_id();
-	$pImgId = largo_url_to_attachmentid($matches[1]);
+	$pImgId = largo_url_to_attachmentid( $matches[1] );
 
 	// Try a second way to get the attachment id
 
 	$pattern = '/class="([^"]+)"/';
-	preg_match($pattern,$imgDom,$classes);
+	preg_match( $pattern, $imgDom, $classes );
 
 	$classes = $classes[1];
 
-	if( !$pImgId ) {
+	if ( ! $pImgId ) {
 		$pattern = '/wp-image-(\d+)/';
-		preg_match($pattern,$classes,$imgId);
+		preg_match( $pattern, $classes, $imgId);
 		$pImgId = $imgId[1];
 	}
 
-	if( !($pImgId == $featureImgId) ) 
+	if ( ! ( $pImgId == $featureImgId ) ) {
 		return $content;
-	
+	}
+
 	// 5: Check if it's a full width image, or if the image is not large enough to be a hero.
-
-	if( strpos($classes,'size-small') || strpos($classes,'size-medium') ) 
+	if ( strpos( $classes,'size-small' ) || strpos( $classes,'size-medium' ) )
 		return $content;
-	
-	// 6: Else, shift the first paragraph off the content and return.
 
-	array_shift($p);
-	$content = implode("\n",$p);
-	
+	// 6: Else, shift the first paragraph off the content and return.
+	array_shift( $p );
+	$content = implode( "\n", $p );
+
 	return $content;
 
 }
-add_filter('the_content','largo_remove_hero',1);
+add_filter( 'the_content', 'largo_remove_hero', 1 );
 
 
 /**
  * Retrieves the attachment ID from the file URL
  * (or that of any thumbnail image)
- * 
+ *
  * @since 0.4
  * @see https://pippinsplugins.com/retrieve-attachment-id-from-image-url/
- * 
+ *
  * @return Int ID of post attachment (or false if not found)
- */ 
-function largo_url_to_attachmentid($url) {
+ */
+function largo_url_to_attachmentid( $url ) {
 
 	global $wpdb;
-	$attachment = $wpdb->get_col($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE guid='%s';", $url )); 
-    
-    if( !empty( $attachment ) ) 
-    	return $attachment[0];
+	$attachment = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE guid='%s';", $url ) );
 
-    // Check if there's a size in the url and remove it.
+	if ( ! empty( $attachment ) ) {
+    		return $attachment[0];
+	}
+	
+	// Check if there's a size in the url and remove it.
+	$url = preg_replace( '/-\d+x\d+(?=\.(jpg|jpeg|png|gif)$)/i', '', $url );
+	$attachment = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE guid='%s';", $url ) );
 
-    $url = preg_replace( '/-\d+x\d+(?=\.(jpg|jpeg|png|gif)$)/i', '', $url );
-	$attachment = $wpdb->get_col($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE guid='%s';", $url )); 
-
-    if( !empty( $attachment ) ) 
-    	return $attachment[0];
-    else
-    	return false;
-
+	if ( ! empty( $attachment ) ) {
+		return $attachment[0];
+	} else {
+		return false;
+	}
 }
 
 /**
@@ -237,12 +287,7 @@ function largo_url_to_attachmentid($url) {
  * @filter largo_partial_by_post_type
  * @since 0.5.4
  */
-function largo_get_partial_by_post_type($partial, $post_type, $context) {
-	// Remove this conditional in #926.
-	if ($post_type == 'argolinks') {
-		$partial = 'argolinks';
-	}
-
+function largo_get_partial_by_post_type( $partial, $post_type, $context ) {
 	/**
 	 * Filter the output of largo_get_partial_by_post_type
 	 *
@@ -262,7 +307,7 @@ function largo_get_partial_by_post_type($partial, $post_type, $context) {
 	 * @param string $post_type The current post's post_type
 	 * @param string $context The context in which this filter is being called, defaulting to search.
 	 */
-	$partial = apply_filters('largo_partial_by_post_type', $partial, $post_type, $context);
+	$partial = apply_filters( 'largo_partial_by_post_type', $partial, $post_type, $context );
 
 	return $partial;
 }

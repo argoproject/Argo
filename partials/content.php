@@ -4,58 +4,83 @@
  *
  * @package Largo
  */
-$tags = of_get_option( 'tag_display' );
-$hero_class = largo_hero_class( $post->ID, FALSE );
-$values = get_post_custom( $post->ID );
-$featured = has_term( 'homepage-featured', 'prominence' );
+$args = array (
+	// post-specific, should probably not be filtered but may be useful
+	'post_id' => $post->ID,
+	'hero_class' => largo_hero_class( $post->ID, FALSE ),
+
+	// only used to determine the existence of a youtube_url
+	'values' => get_post_custom( $post->ID ),
+
+	// this should be filtered in the event of a term-specific archive
+	'featured' => has_term( 'homepage-featured', 'prominence' ),
+
+	// $show_thumbnail does not control whether or not the thumbnail is displayed;
+	// it controls whether or not the thumbnail is displayed normally.
+	'show_thumbnail' => TRUE,
+	'show_byline' => TRUE,
+	'show_excerpt' => TRUE,
+	'in_series' => FALSE,
+);
+
+$args = apply_filters( 'largo_content_partial_arguments', $args, get_queried_object() );
+
+extract( $args );
+
+$entry_classes = 'entry-content';
+
+$show_top_tag = largo_has_categories_or_tags();
+
+if ( $featured ) {
+	$entry_classes .= ' span10 with-hero';
+	$show_thumbnail = FALSE;
+}
+
 ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?>>
 
 	<?php
-		// Special treatment for posts that are in the Homepage Featured prominence taxonomy term and have thumbnails or videos.
-		if ( $featured && ( has_post_thumbnail() || $values['youtube_url'] ) ) {
-	?>
-		<header>
-			<div class="hero span12 <?php echo $hero_class; ?>">
-			<?php
-				if ( $youtube_url = $values['youtube_url'][0] ) {
-					echo '<div class="embed-container">';
-					largo_youtube_iframe_from_url( $youtube_url );
-					echo '</div>';
-				} elseif( has_post_thumbnail() ){
-					echo('<a href="' . get_permalink() . '" title="' . the_title_attribute( array( 'before' => __( 'Permalink to', 'largo' ) . ' ', 'echo' => false )) . '" rel="bookmark">');
-					the_post_thumbnail( 'full' );
-					echo('</a>');
-				}
-			?>
-			</div>
-		</header>
-	<?php
-		} // end Homepage Featured thumbnail block
-		$entry_classes = 'entry-content';
-		if ( $featured ) $entry_classes .= ' span10 with-hero';
+		// Special treatment for posts that are in the Homepage Featured prominence taxonomy term and have thumbnails
+		if ( $featured && ( has_post_thumbnail() || $values['youtube_url'] ) ) { ?>
+			<header>
+				<div class="hero span12 <?php echo $hero_class; ?>">
+				<?php
+					if( has_post_thumbnail() ){
+						echo( '<a href="' . get_permalink() . '" title="' . the_title_attribute( array( 'before' => __( 'Permalink to', 'largo' ) . ' ', 'echo' => false )) . '" rel="bookmark">' );
+						the_post_thumbnail( 'full' );
+						echo( '</a>' );
+					}
+				?>
+				</div>
+			</header>
+		<?php } // end Homepage Featured thumbnail block
+
 		echo '<div class="' . $entry_classes . '">';
 
-		if ( largo_has_categories_or_tags() && $tags === 'top' ) {
-		 	echo '<h5 class="top-tag">' . largo_top_term( $args = array( 'echo' => FALSE ) ) . '</h5>';
+		if ( largo_has_categories_or_tags() ) {
+			largo_maybe_top_term();
 		}
 
-		if ( !$featured ) {
+		if ( $show_thumbnail ) {
 			echo '<div class="has-thumbnail '.$hero_class.'"><a href="' . get_permalink() . '">' . get_the_post_thumbnail() . '</a></div>';
 		}
 	?>
 
-	 	<h2 class="entry-title">
-	 		<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute( array( 'before' => __( 'Permalink to', 'largo' ) . ' ' ) )?>" rel="bookmark"><?php the_title(); ?></a>
-	 	</h2>
+		<h2 class="entry-title">
+			<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute( array( 'before' => __( 'Permalink to', 'largo' ) . ' ' ) )?>" rel="bookmark"><?php the_title(); ?></a>
+		</h2>
 
-	 	<h5 class="byline"><?php largo_byline(); ?></h5>
+		<?php
+			if ( $show_byline ) { ?>
+				<h5 class="byline"><?php largo_byline(); ?></h5>
+			<?php }
+		?>
 
-		<?php largo_excerpt( $post, 5, true, __('Continue&nbsp;Reading', 'largo'), true, false ); ?>
-
-		<?php if ( !is_home() && largo_has_categories_or_tags() && $tags === 'btm' ) { ?>
-			<h5 class="tag-list"><strong><?php _e('More about:', 'largo'); ?></strong> <?php largo_categories_and_tags( 8 ); ?></h5>
-		<?php } ?>
+		<?php
+			if ( $show_excerpt ) {
+				largo_excerpt();
+			}
+		?>
 
 		</div><!-- .entry-content -->
 
