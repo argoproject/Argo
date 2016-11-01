@@ -1,6 +1,16 @@
 inc/update.php
 ==============
 
+.. php:function:: largo_activation_maybe_setup()
+
+   For initial activations of Largo, where no largo was previously installed
+
+   :since: 0.5.5
+
+   :returns: Bool $alse if the initial setup functions were not run, true if they were.
+
+   :link: https://github.com/INN/Largo/issues/690
+
 .. php:function:: largo_perform_update()
 
    Performs various update functions and set a new verion number.
@@ -104,14 +114,6 @@ inc/update.php
 
    Make sure custom CSS is regenerated if we're using custom LESS variables
 
-.. php:function:: largo_check_deprecated_widgets()
-
-   Checks for use of deprecated widgets and posts an alert
-
-.. php:function:: largo_deprecated_footer_widget()
-
-   Admin notices of older widgets
-
 .. php:function:: largo_replace_deprecated_widgets()
 
    Replace deprecated widgets with new widgets
@@ -136,6 +138,7 @@ inc/update.php
    :param array $replacement: the replacement widget's $instance variables
 
    :returns: array $result the replacement widget's $instance variables
+
 .. php:function:: largo_widget_in_region()
 
    Checks to see if a given widget is in a given region already

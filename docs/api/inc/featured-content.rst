@@ -10,7 +10,7 @@ inc/featured-content.php
 
    :returns: array $f featured post objects
 
-   :since: 1.0
+   :since: 0.3
 
 .. php:function:: largo_get_the_main_feature()
 
@@ -21,7 +21,7 @@ inc/featured-content.php
 
    :returns: term $bject|false
 
-   :since: 1.0
+   :since: 0.3
 
 .. php:function:: largo_scrub_sticky_posts()
 
@@ -44,3 +44,22 @@ inc/featured-content.php
 .. php:function:: largo_have_homepage_featured_posts()
 
    Determine if we have any 'featured' posts on homepage
+
+.. php:function:: largo_get_featured_posts_in_category()
+
+   Get posts marked as "Featured in category" for a given category name.
+
+   :param string $category_name: the category to retrieve featured posts for.
+   :param integer $number: total number of posts to return, backfilling with regular posts as necessary.
+
+   :since: 0.5
+
+.. php:function:: largo_category_archive_posts()
+
+   Helper for getting posts in a category archive, excluding featured posts.
+
+   :param WP_Query $query:
+
+   :uses: largo_get_featured_posts_in_category
+
+   :since: 0.4

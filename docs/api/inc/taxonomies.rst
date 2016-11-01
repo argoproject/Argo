@@ -5,6 +5,13 @@ inc/taxonomies.php
 
    Check if the Series taxonomy is enabled
 
+   Is the series equivalent of the WordPress function is_category();
+   We didn't call the function is_series() because it needs the largo_ prefix.
+
+   :uses: global $post
+
+   :uses: largo_is_series_enabled
+
    :since: 0.4
 
    :returns: bool $hether or not the Series taxonomy option is enabled in the Theme Options > Advanced
@@ -24,12 +31,14 @@ inc/taxonomies.php
 
    :uses: largo_is_series_enabled
 
-   :since: 1.0
+   :since: 0.3
 
 .. php:function:: largo_post_in_series()
 
-   Determines whether a post is in a series
+   Determines whether a post is in a series.
    Expects to be called from within The Loop.
+   Is the series equivalent of the WordPress function is_category();
+   We didn't call the function is_series() because it needs the largo_ prefix.
 
    :uses: global $post
 
@@ -37,7 +46,7 @@ inc/taxonomies.php
 
    :returns: bool
 
-   :since: 1.0
+   :since: 0.3
 
 .. php:function:: largo_custom_taxonomy_terms()
 
@@ -45,7 +54,7 @@ inc/taxonomies.php
 
    :returns: array $f terms
 
-   :since: 1.0
+   :since: 0.3
 
 .. php:function:: largo_get_series_posts()
 
@@ -54,6 +63,8 @@ inc/taxonomies.php
    :uses: largo_is_series_enabled
    :param integer $eries: term id
    :param integer $umber: of posts to fetch, defaults to all
+
+   :since: 0.4
 
 .. php:function:: largo_series_landing_link()
 
@@ -79,46 +90,3 @@ inc/taxonomies.php
    :param Object|id|string $series:
 
    :returns: array $n array of all WP_Post objects answering the description of this series. May be 0, 1 or conceivably many.
-
-.. php:function:: largo_category_archive_posts()
-
-   Helper for getting posts in a category archive, excluding featured posts.
-
-   :param WP_Query $query:
-
-   :uses: largo_get_featured_posts_in_category
-
-.. php:function:: largo_get_featured_posts_in_category()
-
-   Get posts marked as "Featured in category" for a given category name.
-
-   :param string $category_name: the category to retrieve featured posts for.
-   :param integer $number: total number of posts to return, backfilling with regular posts as necessary.
-
-   :since: 0.5
-
-.. php:function:: largo_featured_thumbnail_in_post_array()
-
-   Return the first featured image thumbnail found in a given array of WP_Posts
-
-   Useful if you wint to create a thumbnail for a given taxonomy
-
-   :param array $n: array of WP_Post objects to iterate over
-
-   :returns: str|false $he HTML for the image, or false if no images were found.
-
-   :since: 0.5.3
-
-   :uses: largo_has_featured_media
-
-.. php:function:: largo_first_headline_in_post_array()
-
-   Return the first headline link for an array of WP_Posts
-
-   Useful if you want to link to an example post in a series.
-
-   :param array $n: array of WP_Post objects to iterate over
-
-   :returns: str $he HTML for the link
-
-   :since: 0.5.3

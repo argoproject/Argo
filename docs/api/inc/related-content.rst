@@ -6,7 +6,9 @@ inc/related-content.php
    Show related tags and subcategories for each main category
    Used on category.php to display a list of related terms
 
-   :since: 1.0
+   :since: 0.5.5
+
+   :returns: String $TML '' if there are no related topics or a UL if there are related topics
 
 .. php:function:: largo_get_post_related_topics()
 

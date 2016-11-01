@@ -27,11 +27,12 @@ inc/post-templates.php
 
    This does not remove leading images that are different from the post featured media
 
-   The changes to the content in this function should eventually be made
    permanent in the database. (@see https://github.com/INN/Largo/issues/354)
 
    If you would like to disable this function globally or on certain posts,
    use the filter `largo_remove_hero`.
+
+   :TODO: The $hanges to the content in this function should eventually be made
 
    :since: 0.4 $ in Largo's single-column template
 

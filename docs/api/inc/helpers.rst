@@ -156,3 +156,29 @@ inc/helpers.php
    Get the current URL, including the protocol and host
 
    :since: 0.5
+
+.. php:function:: largo_first_thumbnail_in_post_array()
+
+   Return the first featured image thumbnail found in a given array of WP_Posts
+
+   Useful if you want to create a thumbnail for a given taxonomy
+
+   :param array $n: array of WP_Post objects to iterate over
+
+   :returns: str|false $he HTML for the image, or false if no images were found.
+
+   :since: 0.5.3
+
+   :uses: largo_has_featured_media
+
+.. php:function:: largo_first_headline_in_post_array()
+
+   Return the first headline link for an array of WP_Posts
+
+   Useful if you want to link to an example post in a series.
+
+   :param array $n: array of WP_Post objects to iterate over
+
+   :returns: str $he HTML for the link
+
+   :since: 0.5.3

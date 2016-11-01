@@ -43,6 +43,8 @@ homepages/homepage.php
 
    :returns: array $n array with `series_stories` and `series_stories_term` keys.
 
+   :todo: is $his duplicating the functionality of the Largo_Related class?
+
 .. php:function:: largo_home_series_stories_term()
 
    Gets the homepage's Big Story series data and returns only the series stories' term.
