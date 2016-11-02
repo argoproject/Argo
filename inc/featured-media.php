@@ -431,7 +431,7 @@ add_action( 'do_meta_boxes', 'largo_remove_featured_image_meta_box' );
 function largo_add_featured_image_meta_box() {
     add_meta_box(
         'largo_featured_image_metabox',
-        __( 'Featured Image', 'largo' ),
+        __( 'Featured Media', 'largo' ),
         'largo_featured_image_metabox_callback',
         array( 'post' ),
         'side',
