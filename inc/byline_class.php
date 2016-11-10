@@ -23,8 +23,12 @@ class Largo_Byline {
 	 */
 	private $custom;
 
-	/** @var int The ID of the author for this post */
-	private $author_id;
+	/**
+	 * Temporary variable used for the author ID;
+	 * This must be public, because Largo_CoAuthors_Byline's methods incorporate methods from Largo_Byline, and parent classes cannot see private or protected members of extending classes.
+	 * @var int The ID of the author for this post
+	 */
+	public $author_id;
 
 	/**
 	 * @var string The HTML ouput of this class
@@ -211,9 +215,10 @@ class Largo_CoAuthors_Byline extends Largo_Byline {
 
 	/**
 	 * Temporary variable used for the author ID;
+	 * This must be public, because Largo_CoAuthors_Byline's methods incorporate methods from Largo_Byline, and parent classes cannot see private or protected members of extending classes.
 	 * @see $this->generate_byline();
 	 */
-	private $author_id;
+	public $author_id;
 
 	/**
 	 * Differs from Largo_Byline in following ways:
