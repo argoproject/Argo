@@ -26,8 +26,21 @@ article.story {
   border-bottom: 1px dotted @grayLight;
   margin-bottom: @baseline;
 }
-.stories article[class*="span"] {
-  margin-left: 0;
+.stories article {
+  &.span1,
+  &.span2,
+  &.span3,
+  &.span4,
+  &.span5,
+  &.span6,
+  &.span7,
+  &.span8,
+  &.span9,
+  &.span10,
+  &.span11,
+  &.span12 {
+    margin-left: 0;
+  }
 }
 .stories h2.entry-title {
   font-size: @baseFontSize * 2;
