@@ -108,7 +108,7 @@ function largo_get_featured_hero( $post = null, $classes = '' ) {
 	$featured_media = largo_get_featured_media( $the_post->ID );
 
 	$hero_class = largo_hero_class( $the_post->ID, false );
-	$classes = 'hero $hero_class $classes';
+	$classes = "hero $hero_class $classes";
 
 	$context = array(
 		'classes' => $classes,
