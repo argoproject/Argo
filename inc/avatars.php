@@ -38,14 +38,15 @@ function largo_has_gravatar( $email ) {
  * @return bool true if an avatar is available for this user
  * @since 0.4
  */
-function largo_has_avatar($email) {
-	$user = get_user_by('email', $email);
-	$result = largo_get_user_avatar_id($user->ID);
-	if (!empty($result))
+function largo_has_avatar( $email ) {
+	$user = get_user_by( 'email', $email );
+	$result = largo_get_user_avatar_id( $user->ID );
+	if ( ! empty ( $result ) ) {
 		return true;
-	else {
-		if (largo_has_gravatar($email))
+	} else {
+		if ( largo_has_gravatar( $email ) ) {
 			return true;
+		}	
 	}
 	return false;
 }
