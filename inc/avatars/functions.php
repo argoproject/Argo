@@ -28,12 +28,17 @@ add_action( 'get_avatar', 'largo_get_avatar_filter', 1, 5 );
  * @param int $string The size of the avatar
  */
 function largo_get_avatar_src( $id_or_email, $size ) {
-	// get the user ID;
-	if ( ! is_numeric( $id_or_email ) ) {
+
+	// get the user ID
+	if ( is_numeric( $id_or_email ) ) {
+		$id = (int) $id_or_email;
+	} elseif ( is_object( $id_or_email ) ) {
+		if ( ! empty( $id_or_email->user_id ) ) {
+			$id = (int) $id_or_email->user_id;
+		}
+	} else {
 		$user = get_user_by( 'email', $id_or_email );
 		$id = $user->ID;
-	} else {
-		$id = (int) $id_or_email;
 	}
 
 	$avatar_id = largo_get_user_avatar_id( $id );
