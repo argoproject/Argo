@@ -550,6 +550,7 @@ class Largo_Related {
 					'orderby' => 'date',
 					'order' => 'ASC',
 					'ignore_sticky_posts' => 1,
+					'post__not_in' => array( $this->post_id ),
 					'date_query' => array(
 						'after' => $this->post->post_date,
 					),
@@ -647,6 +648,7 @@ class Largo_Related {
 					'orderby' => 'date',
 					'order' => 'DESC',
 					'ignore_sticky_posts' => 1,
+					'post__not_in' => array( $this->post_id ),
 					'date_query' => array(
 						'after' => $this->post->post_date,
 					),
