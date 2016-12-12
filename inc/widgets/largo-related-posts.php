@@ -33,6 +33,7 @@ class largo_related_posts_widget extends WP_Widget {
 		$rel_posts = new WP_Query( array(
 			'post__in' => $related->ids(),
 			'nopaging' => 1,
+			'post__not_in' => array( $post->ID ),
 			'posts_per_page' => $instance['qty'],
 			'ignore_sticky_posts' => 1
 		) );
