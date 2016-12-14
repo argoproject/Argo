@@ -160,7 +160,7 @@ function largo_get_post_related_topics( $max = 5 ) {
  * @return array|false of post objects.
  * @since 1.0
  */
-function largo_get_recent_posts_for_term( $term, $max = 5, $min = 1 ) {
+function largo_get_recent_posts_for_term( $term, $max = 5, $min = 1, $post__not_in = array() ) {
     global $post;
 
     $query_args = array(
@@ -168,11 +168,13 @@ function largo_get_recent_posts_for_term( $term, $max = 5, $min = 1 ) {
         'orderby' 				=> 'date',
         'order' 				=> 'DESC',
         'ignore_sticky_posts' 	=> 1,
+        'post__not_in' => $post__not_in,
     );
 
     // Exclude the current post if we're inside The Loop
-    if ( $post ) {
-        $query_args[ 'post__not_in' ] = array( $post->ID );
+    // On the homepage, this excludes the most-recently-published post
+    if ( $post->ID ) {
+        $query_args[ 'post__not_in' ] = array_merge( array($post->ID), $query_args[ 'post__not_in' ] );
     }
 
     if ( $term->taxonomy == 'post_tag' ) {

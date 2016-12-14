@@ -51,7 +51,8 @@ function homepage_big_story_headline($moreLink=false) {
 function homepage_series_stories_list() {
 	global $shown_ids;
 
-	$feature = largo_get_the_main_feature(largo_home_single_top());
+	$featured = largo_home_single_top();
+	$feature = largo_get_the_main_feature($featured);
 
 	$min = 2;
 	$max = 3;
@@ -89,7 +90,7 @@ function homepage_series_stories_list() {
 	 */
 	$max = apply_filters('largo_homepage_series_stories_list_maximum',$max);
 
-	$series_posts = largo_get_recent_posts_for_term($feature, $max, $min);
+	$series_posts = largo_get_recent_posts_for_term($feature, $max, $min, array( $featured->ID ) );
 
 	ob_start();
 	if (!empty($feature)) {
