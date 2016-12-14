@@ -157,6 +157,7 @@ function largo_get_post_related_topics( $max = 5 ) {
  * @param object    $term   A term object.
  * @param int       $max    Maximum number of posts to return.
  * @param int       $min    Minimum number of posts. If not met, returns false.
+ * @param Array     $post__not_in Array of integer post IDs to be excluded from the query
  * @return array|false of post objects.
  * @since 1.0
  */
