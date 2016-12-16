@@ -32,7 +32,7 @@ The project extends work done by [NPR's Project Argo](http://argoproject.org/).
 
 **Support** is available [via our helpdesk system](http://support.largoproject.org/) or by emailing [support@largoproject.org](mailto:support@largoproject.org).
 
-**Current version:** v0.5.5.1
+**Current version:** v0.5.5.2
 
 **Minimum supported PHP version:** 5.3
 
