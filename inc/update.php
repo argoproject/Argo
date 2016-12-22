@@ -33,7 +33,7 @@ function largo_activation_maybe_setup() {
 	// and since switching themes requires admin privileges,
 	// that this user has the permissions to run optionsframework_init
 	// @see optionsframework_rolescheck() in lib/options-framework/options-framework.php
-	if ( current_user_can( 'edit_theme_options' ) ) {
+	if ( current_user_can( 'update_themes' ) ) {
 		optionsframework_init();
 	}
 
@@ -863,7 +863,7 @@ function largo_get_widget_number( $slug ) {
  * @since 0.3
  */
 function largo_update_admin_notice() {
-	if ( ! current_user_can( 'edit_theme_options' ) ) {
+	if ( ! current_user_can( 'update_themes' ) ) {
 		return;
 	}
 	if ( largo_need_updates() && ! ( isset( $_GET['page'] ) && $_GET['page'] == 'update-largo' ) ) {
@@ -889,7 +889,7 @@ function largo_register_update_page() {
 	$parent_slug = null;
 	$page_title = 'Update Largo';
 	$menu_title = 'Update Largo';
-	$capability = 'edit_theme_options';
+	$capability = 'update_themes';
 	$menu_slug = 'update-largo';
 	$function = 'largo_update_page_view';
 
@@ -1001,7 +1001,7 @@ add_action( 'admin_enqueue_scripts', 'largo_update_page_enqueue_js' );
  * @global $_GET
  */
 function largo_ajax_update_database() {
-	if ( ! current_user_can('edit_theme_options' ) ) {
+	if ( ! current_user_can('update_themes' ) ) {
 		print json_encode( array(
 			'status' => __( 'An error occurred.', 'largo' ),
 			'success' => false
@@ -1145,7 +1145,7 @@ function largo_block_theme_options_for_update() {
 		add_theme_page(
 			__( 'Theme Options', 'options_framework_theme' ),
 			__( 'Theme Options', 'options_framework_theme' ),
-			'edit_theme_options',
+			'update_themes',
 			'largo-block-theme-options',
 			'largo_block_theme_options'
 		);
