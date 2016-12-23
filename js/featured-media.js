@@ -782,7 +782,7 @@ var LFM = _.extend(LFM || {}, {
     });
 
     $(document).ready(function() {
-        $('#set-featured-media-button').click(function() {
+        $('.set-featured-media').click(function() {
             if (LFM.fetching)
                 return;
 
