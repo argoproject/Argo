@@ -103,7 +103,7 @@ class Largo_Byline {
 		} else {
 			$author_email = get_the_author_meta( 'email', $this->author_id );
 			if ( $this->author->type == 'guest-author' && get_the_post_thumbnail( $this->author->ID ) ) {
-				$output = get_the_post_thumbnail( $this->author->ID, array( 32,32 ) );
+				$output = get_the_post_thumbnail( $this->author->ID, array( 60,60 ) );
 				$output = str_replace( 'attachment-32x32', 'avatar avatar-32 photo', $output );
 				$output = str_replace( 'wp-post-image', '', $output );
 			} else if ( largo_has_avatar( $author_email ) ) {
