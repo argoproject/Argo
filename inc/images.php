@@ -36,14 +36,10 @@ if ( ! function_exists( 'largo_home_icon' ) ) {
 		$default = '<i class="icon-home ' . esc_attr( $class ) . '"></i>';
 
 		if ( ! empty( $logo ) ) {
-			$attachment_id = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM {$wpdb->posts} WHERE guid = %s", $logo ) );
-			if ( !empty( $attachment_id ) )
-				echo wp_get_attachment_image( $attachment_id, $size );
-			else {
-				if ( preg_match( '/^http(s)?\:\/\//', $logo ) )
-					echo '<img src="' . $logo . '" class="attachment-home-logo" alt="logo">';
-				else
-					echo $default;
+			if ( preg_match( '/^http(s)?\:\/\//', $logo ) ) {
+				echo '<img src="' . $logo . '" class="attachment-home-logo" alt="logo">';
+			} else {
+				echo $default;
 			}
 		} else {
 			echo $default;
