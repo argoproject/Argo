@@ -266,7 +266,7 @@ function largo_enqueue_featured_media_js( $hook ) {
 	// Run this action on term edit pages
 	// edit-tags.php for wordpress before 4.5
 	// term.php for 4.5 and after
-	if ( in_array( $hook, array( 'edit-tags.php', 'term.php ') ) && is_numeric( $_GET['tag_ID'] ) ) {
+	if ( in_array( $hook, array( 'edit-tags.php', 'term.php' ) ) && is_numeric( $_GET['tag_ID'] ) ) {
 		// After WordPress 4.5, the taxonomy is no longer in the URL
 		// So to compensate, we get the taxonomy from the current screen
 		$screen = get_current_screen();
