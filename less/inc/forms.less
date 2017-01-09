@@ -229,26 +229,68 @@ input[type="checkbox"]:focus {
 .input-xxlarge    { width: 530px; }
 
 // Grid style input sizes
-input[class*="span"],
-select[class*="span"],
-textarea[class*="span"],
-.uneditable-input[class*="span"],
+input,
+select,
+textarea,
+.uneditable-input,
 // Redeclare since the fluid row class is more specific
-.row-fluid input[class*="span"],
-.row-fluid select[class*="span"],
-.row-fluid textarea[class*="span"],
-.row-fluid .uneditable-input[class*="span"] {
-  float: none;
-  margin-left: 0;
+.row-fluid input,
+.row-fluid select,
+.row-fluid textarea,
+.row-fluid .uneditable-input {
+  &.span1,
+  &.span2,
+  &.span3,
+  &.span4,
+  &.span5,
+  &.span6,
+  &.span7,
+  &.span8,
+  &.span9,
+  &.span10,
+  &.span11,
+  &.span12 {
+    float: none;
+    margin-left: 0;
+  }
 }
 // Ensure input-prepend/append never wraps
-.input-append input[class*="span"],
-.input-append .uneditable-input[class*="span"],
-.input-prepend input[class*="span"],
-.input-prepend .uneditable-input[class*="span"],
-.row-fluid .input-prepend [class*="span"],
-.row-fluid .input-append [class*="span"] {
-  display: inline-block;
+.input-append input,
+.input-append .uneditable-input,
+.input-prepend input,
+.input-prepend .uneditable-input {
+  &.span1,
+  &.span2,
+  &.span3,
+  &.span4,
+  &.span5,
+  &.span6,
+  &.span7,
+  &.span8,
+  &.span9,
+  &.span10,
+  &.span11,
+  &.span12 {
+    display: inline-block;
+  }
+}
+
+.row-fluid .input-prepend,
+.row-fluid .input-append {
+  .span1,
+  .span2,
+  .span3,
+  .span4,
+  .span5,
+  .span6,
+  .span7,
+  .span8,
+  .span9,
+  .span10,
+  .span11,
+  .span12 {
+    display: inline-block;
+  }
 }
 
 
