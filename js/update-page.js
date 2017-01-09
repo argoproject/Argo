@@ -2,7 +2,7 @@
     var $ = jQuery;
 
     $('input#update').click(function() {
-        var parent = $('.update-message'),
+        var parent = $('.largo-update-message'),
             spinner = parent.find('.spinner');
 
         parent.find('.message').remove();

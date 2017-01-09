@@ -30,11 +30,6 @@ body.normal.page {
       padding-top: 26px;
     }
 
-    // hide normal date display.
-    .sep {
-      display: none;
-    }
-
     // edit link
     .edit-link {
       padding-left: 5px;
@@ -152,6 +147,13 @@ h2.subtitle {
   margin-bottom: @baseline / 2;
   font-weight: normal;
   font-size: @baseFontSize * 0.915;
+
+  // ensure that everything is vertically aligned
+  vertical-align: middle;
+  & > * {
+    display: inline;
+  }
+
   a {
     color: @textColor;
   }
@@ -171,9 +173,12 @@ h2.subtitle {
   .avatar-default {
     display: none;
   }
+  img,
   .avatar {
-    max-height: 1.3 * @baseFontSize * 0.915; // Line height for bylines
-    max-width: 1.3 * @baseFontSize * 0.915; // Line height for bylines
+    max-height: 30px; // image height introduced in https://github.com/INN/Largo/pull/1387 is 60px
+    max-width: 30px; // image width introduced in https://github.com/INN/Largo/pull/1387 is 60px
+    border-radius: 50%;
+    border: 1px solid @gray;
   }
 }
 
