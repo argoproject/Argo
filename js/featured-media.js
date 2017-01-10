@@ -40,7 +40,7 @@ var LFM = _.extend(LFM || {}, {
             // Make sure we tell the backend what post ID we're dealing with.
             data = _.extend(data, { id: LFM.Utils.getPostId() });
            
-	    var action;
+            var action;
             if (method == 'read')
                 action = 'largo_featured_media_read';
             else if (method == 'update' || method ==  'create')
@@ -124,8 +124,8 @@ var LFM = _.extend(LFM || {}, {
 
                     // Gallery states.
                     new wp.media.controller.GalleryEdit({
-			library: options.selection,
-			editing: options.editing,
+                        library: options.selection,
+                        editing: options.editing,
                         menu: 'gallery'
                     }),
 
@@ -249,7 +249,7 @@ var LFM = _.extend(LFM || {}, {
 
         editSelectionContent: function() {
             var state = this.state(),
-	    selection = state.get('selection'),
+            selection = state.get('selection'),
             view;
 
             view = new wp.media.view.AttachmentsBrowser({
@@ -837,7 +837,7 @@ var LFM = _.extend(LFM || {}, {
 			}
 
 			query.on('sync', function() {
-			    var resortedModel = getSorted( query.models, query.args.post__in );
+                            var resortedModel = getSorted( query.models, query.args.post__in );
                             args.selection = new wp.media.model.Selection(resortedModel, { multiple: true });
                             modal = new LFM.Views.featuredMediaFrame(args);
                             modal.open();
