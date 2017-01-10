@@ -39,7 +39,7 @@ var LFM = _.extend(LFM || {}, {
 
             // Make sure we tell the backend what post ID we're dealing with.
             data = _.extend(data, { id: LFM.Utils.getPostId() });
-
+           
             var action;
             if (method == 'read')
                 action = 'largo_featured_media_read';
@@ -131,7 +131,6 @@ var LFM = _.extend(LFM || {}, {
 
                     new wp.media.controller.GalleryAdd()
                 ];
-
             if (_.indexOf(options.states, 'embed-code') >= 0)
                 this.states.add(embed);
 
@@ -782,7 +781,7 @@ var LFM = _.extend(LFM || {}, {
     });
 
     $(document).ready(function() {
-        $('#set-featured-media-button').click(function() {
+        $('.set-featured-media').click(function() {
             if (LFM.fetching)
                 return;
 
@@ -823,8 +822,23 @@ var LFM = _.extend(LFM || {}, {
                             }
                         });
 
-                        query.on('sync', function() {
-                            args.selection = new wp.media.model.Selection(query.models, { multiple: true });
+			// Take the saved sort order and resort the model to match
+			function getSorted(itemsArray, sortingArr ) {
+			  var result = [];
+			  for(var i=0; i<itemsArray.length; i++) {
+				var item = '';
+				itemsArray.forEach(function( item, count ) {
+					if ( sortingArr[i] === item.id ) {
+					  result[i] = item;
+					}
+				});
+			  }
+			  return result;
+			}
+
+			query.on('sync', function() {
+                            var resortedModel = getSorted( query.models, query.args.post__in );
+                            args.selection = new wp.media.model.Selection(resortedModel, { multiple: true });
                             modal = new LFM.Views.featuredMediaFrame(args);
                             modal.open();
                             LFM.instances.modal = modal;
