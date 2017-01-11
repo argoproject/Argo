@@ -34,7 +34,7 @@ function homepage_big_story_headline( $moreLink=false ) {
 			<?php if ( empty( $moreLink ) ) {
 					largo_excerpt( $bigStoryPost, 2 );
 				} else {
-					largo_excerpt(.$bigStoryPost, 2, null, null, true, false );
+					largo_excerpt( $bigStoryPost, 2, null, null, true, false );
 				} ?>
 		</section>
 	</article>
