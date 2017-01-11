@@ -11,7 +11,7 @@
 function largo_get_related_topics_for_category( $obj ) {
 	$MAX_RELATED_TOPICS = 5;
 
-	if (!isset($obj->post_type)) {
+	if ( !isset( $obj->post_type ) ) {
 		$obj->post_type = 0;
 	}
 
@@ -74,7 +74,7 @@ function _tags_associated_with_category( $cat_id, $max = 5 ) {
         $ptags = get_the_tags( $post->ID );
         if ( $ptags ) {
             foreach ( $ptags as $tag ) {
-                if (isset($tags[$tag->term_id])) {
+                if ( isset( $tags[$tag->term_id] ) ) {
                 	$tags[ $tag->term_id ]++;
                 } else {
                 	$tags[ $tag->term_id ] = 0;
@@ -194,7 +194,7 @@ function largo_get_recent_posts_for_term( $term, $max = 5, $min = 1, $post__not_
 			$post_ids = preg_split( '#\s*,\s*#', get_post_meta( $post->ID, 'largo_custom_related_posts', true ) );
 			$query_args[ 'post__in' ] = $post_ids;
 			$query_args[ 'orderby' ] = 'post__in';
-			$query_args['posts_per_page'] = count($post_ids);
+			$query_args['posts_per_page'] = count( $post_ids );
 		}
 
     $query_args = apply_filters( 'largo_get_recent_posts_for_term_query_args', $query_args, $term, $max, $min, $post );
@@ -247,61 +247,61 @@ function largo_has_categories_or_tags() {
  */
 if ( ! function_exists( 'largo_categories_and_tags' ) ) {
 	function largo_categories_and_tags( $max = 5, $echo = true, $link = true, $use_icon = false, $separator = ', ', $item_wrapper = 'span', $exclude = array(), $rss = false ) {
-	    $cats = get_the_category();
-	    $tags = get_the_tags();
-	    $icon = '';
-	    $output = array();
+		$cats = get_the_category();
+		$tags = get_the_tags();
+		$icon = '';
+		$output = array();
 
-	    // if $use_icon is true, include the markup for the tag icon
-	    if ( $use_icon === true )
-	    	$icon = '<i class="icon-white icon-tag"></i>';
-        elseif ( $use_icon )
-            $icon = '<i class="icon-white icon-'.esc_attr($use_icon).'"></i>';
+		// if $use_icon is true, include the markup for the tag icon
+		if ( $use_icon === true )
+			$icon = '<i class="icon-white icon-tag"></i>';
+		elseif ( $use_icon )
+			$icon = '<i class="icon-white icon-' . esc_attr( $use_icon ) . '"></i>';
 
-	    if ( $cats ) {
-	        foreach ( $cats as $cat ) {
+		if ( $cats ) {
+			foreach ( $cats as $cat ) {
 
-	            // skip uncategorized and any others in the array of terms to exclude
-	            if ( $cat->name == 'Uncategorized' || in_array( $cat->term_id, $exclude ) )
-	                continue;
+				// skip uncategorized and any others in the array of terms to exclude
+				if ( $cat->name == 'Uncategorized' || in_array( $cat->term_id, $exclude ) )
+					continue;
 
-	            if ( $link ) {
-		            $output[] = sprintf(
-		                __('<%1$s class="post-category-link"><a href="%2$s" title="Read %3$s in the %4$s category">%5$s%4$s</a></%1$s>', 'largo'),
-			                $item_wrapper,
-			                ( $rss ? get_category_feed_link( $cat->term_id ) : get_category_link( $cat->term_id ) ),
-			                of_get_option( 'posts_term_plural' ),
-			                $cat->name,
-			                $icon
-		            );
-		       } else {
-			       $output[] = $cat->name;
-		       }
-	        }
-	    }
+				if ( $link ) {
+					$output[] = sprintf(
+						__( '<%1$s class="post-category-link"><a href="%2$s" title="Read %3$s in the %4$s category">%5$s%4$s</a></%1$s>', 'largo' ),
+						$item_wrapper,
+						( $rss ? get_category_feed_link( $cat->term_id ) : get_category_link( $cat->term_id ) ),
+						of_get_option( 'posts_term_plural' ),
+						$cat->name,
+						$icon
+					);
+				} else {
+					$output[] = $cat->name;
+				}
+			}
+		}
 
-	    if ( $tags ) {
-	        foreach ( $tags as $tag ) {
+		if ( $tags ) {
+			foreach ( $tags as $tag ) {
 
-	        	if ( in_array( $tag->term_id, $exclude ) )
-	                continue;
+				if ( in_array( $tag->term_id, $exclude ) )
+					continue;
 
-	        	if ( $link ) {
-		            $output[] = sprintf(
-		                __('<%1$s class="post-tag-link"><a href="%2$s" title="Read %3$s tagged with: %4$s">%5$s%4$s</a></%1$s>', 'largo'),
-		                	$item_wrapper,
-		                	( $rss ?  get_tag_feed_link( $tag->term_id ) : get_tag_link( $tag->term_id ) ),
-		                	of_get_option( 'posts_term_plural' ),
-		                	$tag->name,
-		                	$icon
-		            );
-		         } else {
-		         	 $output[] = $tag->name;
-		       }
-	        }
-	    }
+				if ( $link ) {
+					$output[] = sprintf(
+						__( '<%1$s class="post-tag-link"><a href="%2$s" title="Read %3$s tagged with: %4$s">%5$s%4$s</a></%1$s>', 'largo' ),
+						$item_wrapper,
+						( $rss ?  get_tag_feed_link( $tag->term_id ) : get_tag_link( $tag->term_id ) ),
+						of_get_option( 'posts_term_plural' ),
+						$tag->name,
+						$icon
+					);
+				} else {
+					$output[] = $tag->name;
+				}
+			}
+		}
 
-	    if ( $echo )
+		if ( $echo )
 			echo implode( $separator, array_slice( $output, 0, $max ) );
 
 		return $output;
@@ -335,23 +335,23 @@ function largo_top_term( $options = array() ) {
 	$term_id = get_post_meta( $args['post'], 'top_term', TRUE );
 
 	// Try to get the taxonomy for the term ID, but if it's 'none' for the "None" option, don't bother doing this.
-	if ( !empty($term_id) && $term_id !== 'none' ) {
+	if ( !empty( $term_id ) && $term_id !== 'none' ) {
 		//get the taxonomy slug
 		$taxonomy = $wpdb->get_var( $wpdb->prepare( "SELECT taxonomy FROM $wpdb->term_taxonomy WHERE term_id = %d LIMIT 1", $term_id) );
 	}
 
 	// if no top_term specified, or if the top term is not in a taxonomy and the top term is not 'none',
-	if ( empty( $term_id ) || ( empty($taxonomy) && $term_id !== 'none' ) ) {
+	if ( empty( $term_id ) || ( empty( $taxonomy ) && $term_id !== 'none' ) ) {
 		// Get the categories the post is in and try to use the first one as a term id
 		$term_id = get_the_category( $args['post'] );
-		if ( is_array( $term_id ) &&  count($term_id) ) {
+		if ( is_array( $term_id ) &&  count( $term_id ) ) {
 			$term_id = $term_id[0]->term_id;
 		}
 
 		// The post isn't in a category? Try post-types if that's enabled.
-		if ( empty($term_id) && taxonomy_exists('post-type') ) {
+		if ( empty( $term_id ) && taxonomy_exists( 'post-type' ) ) {
 			$term_id = get_the_terms( $args['post'], 'post-type' );
-			if ( is_array( $term_id ) &&  count($term_id) ) {
+			if ( is_array( $term_id ) &&  count( $term_id ) ) {
 				$term_id = $term_id[0]->term_id;
 			}
 		}
@@ -360,12 +360,12 @@ function largo_top_term( $options = array() ) {
 	/*
 	 * Using the term ID, get the term and then generate some text
 	 */
-	if ( $term_id && $term_id !== 'none' && !empty($taxonomy) ) {
+	if ( $term_id && $term_id !== 'none' && !empty( $taxonomy ) ) {
 		$icon = ( $args['use_icon'] ) ?  '<i class="icon-white icon-tag"></i>' : '' ;	//this will probably change to a callback largo_term_icon() someday
-		$link = ( $args['link'] ) ? array('<a href="%2$s" title="Read %3$s in the %4$s category">','</a>') : array('', '') ;
+		$link = ( $args['link'] ) ? array( '<a href="%2$s" title="Read %3$s in the %4$s category">','</a>' ) : array( '', '' ) ;
 		// get the term object
 		$term = get_term( $term_id, $taxonomy );
-		if (is_wp_error($term)) return;
+		if ( is_wp_error( $term ) ) return;
 		$output = sprintf(
 			'<%1$s class="post-category-link">'.$link[0].'%5$s%4$s'.$link[1].'</%1$s>',
 			$args['wrapper'],
@@ -380,9 +380,9 @@ function largo_top_term( $options = array() ) {
 	 * No output?
 	 * generate a link to the post's category or tags
 	 */
-	if ( empty($output) ) {
+	if ( empty( $output ) ) {
 		$output = largo_categories_and_tags( 1, false, $args['link'], $args['use_icon'], '', $args['wrapper'], $args['exclude']);
-		$output = ( is_array($output) ) ? $output[0] : '';
+		$output = ( is_array( $output ) ) ? $output[0] : '';
 	}
 
 	/*
@@ -406,19 +406,19 @@ function largo_top_term( $options = array() ) {
  * @param array $classes An array of classes on the post
  * @return array
  */
-function largo_post_class_top_term($classes) {
+function largo_post_class_top_term( $classes ) {
 	global $post;
 	$top_term = get_post_meta( $post->ID, 'top_term', TRUE );
-	$term = get_term_by('id', $top_term, 'post_tag');
+	$term = get_term_by( 'id', $top_term, 'post_tag' );
 
 	// Don't output the class .top-term-- if there isn't a top term saved
-	if ( !empty($term) ) {
+	if ( !empty( $term ) ) {
 		$classes[] = 'top-term-' . $term->taxonomy . '-' . $term->slug;
 	}
 
 	return $classes;
 }
-add_filter('post_class', 'largo_post_class_top_term');
+add_filter( 'post_class', 'largo_post_class_top_term' );
 
 /**
  *
@@ -495,7 +495,7 @@ class Largo_Related {
 			$this->post_id = get_the_ID();
 		}
 
-		$this->post = get_post($this->post_id);
+		$this->post = get_post( $this->post_id );
 	}
 
 	/**
@@ -539,7 +539,7 @@ class Largo_Related {
 		//try to get posts by series, if this post is in a series
 		$series = get_the_terms( $this->post_id, 'series' );
 
-		if ( is_array($series) ) {
+		if ( is_array( $series ) ) {
 
 			//loop thru all the series this post belongs to
 			foreach ( $series as $term ) {
@@ -571,7 +571,7 @@ class Largo_Related {
 				if ( $cftl_query->have_posts() ) {
 					$cftl_query->next_post();
 					$has_order = get_post_meta( $cftl_query->post->ID, 'post_order', TRUE );
-					if ( !empty($has_order) ) {
+					if ( !empty( $has_order ) ) {
 						switch ( $has_order ) {
 							case 'ASC':
 								$args['order'] = 'ASC';
@@ -592,7 +592,7 @@ class Largo_Related {
 				$series_query = new WP_Query( $args );
 
 				// If not enough posts were added from after this post, look before this post
-				if ( count($series_query->posts) < $this->number ) {
+				if ( count( $series_query->posts ) < $this->number ) {
 
 					// Store the returned posts from the after query
 					$this->add_from_query( $series_query );
@@ -640,9 +640,9 @@ class Largo_Related {
 		}
 
 		//loop thru taxonomies, much like series, and get posts
-		if ( is_array($taxonomies) ) {
+		if ( is_array( $taxonomies ) ) {
 			//sort by popularity
-			usort( $taxonomies, array(__CLASS__, 'popularity_sort' ) );
+			usort( $taxonomies, array( __CLASS__, 'popularity_sort' ) );
 
 			foreach ( $taxonomies as $term ) {
 				$args = array(
@@ -725,7 +725,7 @@ class Largo_Related {
 		//see if this post has manually set related posts
 		$post_ids = get_post_meta( $this->post_id, 'largo_custom_related_posts', true );
 		if ( ! empty( $post_ids ) ) {
-			$this->post_ids = explode( ",", str_replace(' ', '', $post_ids) );
+			$this->post_ids = explode( ",", str_replace( ' ', '', $post_ids ) );
 			if ( $this->have_enough_posts() ) {
 				return $this->cleanup_ids();
 			}
@@ -759,7 +759,7 @@ class Largo_Related {
 			$q->the_post();
 			// add this post if it's new
 			if ( ! in_array( $q->post->ID, $this->post_ids ) ) {	// only add it if it wasn't already there
-				$this->post_ids[] = (int) trim($q->post->ID);
+				$this->post_ids[] = (int) trim( $q->post->ID );
 				// stop if we have enough
 				if ( $this->have_enough_posts() ) return;
 			}
