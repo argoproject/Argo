@@ -175,7 +175,7 @@ function largo_get_recent_posts_for_term( $term, $max = 5, $min = 1, $post__not_
     // Exclude the current post if we're inside The Loop
     // On the homepage, this excludes the most-recently-published post
     if ( $post->ID ) {
-        $query_args[ 'post__not_in' ] = array_merge( array($post->ID), $query_args[ 'post__not_in' ] );
+        $query_args[ 'post__not_in' ] = array_merge( array( $post->ID ), $query_args[ 'post__not_in' ] );
     }
 
     if ( $term->taxonomy == 'post_tag' ) {

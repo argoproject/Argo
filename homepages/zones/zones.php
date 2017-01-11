@@ -52,7 +52,7 @@ function homepage_series_stories_list() {
 	global $shown_ids;
 
 	$featured = largo_home_single_top();
-	$feature = largo_get_the_main_feature($featured);
+	$feature = largo_get_the_main_feature( $featured );
 
 	$min = 2;
 	$max = 3;
