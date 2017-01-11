@@ -64,9 +64,9 @@ function homepage_series_stories_list() {
 	 * This is used in the query for the series list of posts in the same series
 	 * as the main feature. If fewer than this number of posts exist, the list
 	 * is hidden and the headline dominates the full box.
-	 * 
+	 *
 	 * Default value is 2.
-	 */
+	 *
 	 * @since 0.5.1
 	 *
 	 * @param int  $var minimum number of posts that can show.
@@ -81,7 +81,7 @@ function homepage_series_stories_list() {
 	 * This is used in the query for the series list of posts in the same series
 	 * as the main feature. This is the maximum number of posts that will display
 	 * in the list.
-	 * 
+	 *
 	 * Default value is 3.
 	 *
 	 * @since 0.5.1
@@ -124,7 +124,7 @@ function homepage_feature_stories_list() {
 	 * This is used in the query for the series list of posts in the same series
 	 * as the main feature. This is the maximum number of posts that will display
 	 * in the list.
-	 * 
+	 *
 	 * Default value is 3.
 	 *
 	 * @since 0.5.1
