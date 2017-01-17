@@ -28,7 +28,8 @@ class Navis_Slideshows {
 	public $slideshows = 0;
 
 	function __construct() {
-		add_action( 'init', array( &$this, 'add_slideshow_header' ) );
+
+		/* All CSS & JS enqueues have been moved to largo/inc/enqueue.php */
 
 		add_filter(
 			'post_gallery', array( &$this, 'handle_slideshow' ), 10, 2
@@ -40,14 +41,6 @@ class Navis_Slideshows {
 		add_action('save_post', array( &$this, 'tag_post_as_slideshow' ), 10, 2);
 		remove_shortcode('gallery');
 		add_shortcode('gallery', array(&$this, 'handle_slideshow'), 10, 2);
-	}
-
-	function add_slideshow_header() {
-		$slides_css = get_template_directory_uri() . '/lib/navis-slideshows/css/slides.css';
-		wp_enqueue_style('navis-slides', $slides_css, array(), '1.0');
-
-		$slick_css = get_template_directory_uri() . '/lib/navis-slideshows/vendor/slick/slick.css';
-		wp_enqueue_style('navis-slick', $slick_css, array(), '1.0');
 	}
 
 	/**
@@ -62,14 +55,6 @@ class Navis_Slideshows {
 
 		$this->slideshows += 1;
 
-		// jQuery slides plugin, available at http://slidesjs.com/
-		$slides_src = get_template_directory_uri() . '/lib/navis-slideshows/vendor/slick/slick.min.js';
-		wp_enqueue_script('jquery-slick', $slides_src, array('jquery'), '3.0', true);
-
-		// our custom js
-		$show_src = get_template_directory_uri() . '/lib/navis-slideshows/js/navis-slideshows.js';
-		wp_enqueue_script('navis-slideshows', $show_src, array('jquery-slick'), '0.1', true);
-
 		$attr = shortcode_atts( array(
 			'order' => 'ASC',
 			'orderby' => 'menu_order ID',
@@ -77,7 +62,7 @@ class Navis_Slideshows {
 			'itemtag' => 'dl',
 			'icontag' => 'dt',
 			'captiontag' => 'dd',
-			'columns'  => 1,
+			'columns'  => 0,
 			'size' => 'thumbnail',
 			'link' => 'file',
 			'ids' => ''
@@ -128,9 +113,11 @@ class Navis_Slideshows {
 			}
 		}
 
-		$column_label = 'one-up';
+		$column_label = 'none-up';
 		if ( !empty( $columns ) ) {
-			if ($columns == '1') {
+			if ($columns == '0') {
+				$columns = 'none';
+			} else if ($columns == '1') {
 				$columns = 'one';
 			} else if ($columns == '2') {
 				$columns = 'two';
@@ -148,10 +135,10 @@ class Navis_Slideshows {
 				$columns = 'eight';
 			} else if ($columns == '9') {
 				$columns = 'nine';
-			} 
+			}
 
 			$column_label = $columns . '-up';
-		} 
+		}
 
 		if ( empty( $attachments ) )
 			return '';
@@ -192,12 +179,13 @@ class Navis_Slideshows {
 			$output .= '<img data-lazy="' . esc_url( $img_url ) . '" />';
 
 			if (!empty($credit))
-				$output .= '<h6 class="credit">' . wp_kses_post( $credit ) . '</h6>';
+				$output .= '<p class="wp-media-credit">' . wp_kses_post( $credit ) . '</p>';
 
-			$slide_link = get_permalink($post) . '#' . $post_html_id . '/' . $count;
-			$output .= '<h6 class="permalink"><a href="' . $slide_link . '" class="slide-permalink"><i class="icon-link"></i> ' . esc_attr( __( 'permalink', 'largo' ) ) . '</a></h6>';
 			if (!empty($caption))
 				$output .= '<p class="wp-caption-text">' . wp_kses_post( $caption ) . '</p>';
+
+			$slide_link = get_permalink($post) . '#' . $post_html_id . '/' . $count;
+			$output .= '<p class="permalink"><a href="' . $slide_link . '" class="slide-permalink"><i class="icon-link"></i> ' . esc_attr( __( 'permalink', 'largo' ) ) . '</a></p>';
 
 			$output .= '</div>';
 		}
