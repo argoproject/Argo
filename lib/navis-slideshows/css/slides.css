@@ -8,6 +8,7 @@
     margin-top: 0;
     margin-bottom: 20px;
     padding: 4px 0 0 0;
+    text-align: left;
 }
 
 .navis-slideshow .slick-list {
@@ -23,6 +24,7 @@
     font-weight: normal;
     font-style: normal;
     font-size: 12px;
+    margin-bottom:0;
 }
 
 .navis-slideshow .wp-caption-text {
@@ -39,6 +41,7 @@
 
 body.normal.single-post .hero .navis-slideshow .wp-caption-text {
     padding:1em 17.0213%!important;
+    margin:0;
 }
 
 .slide-permalink:hover {
@@ -359,6 +362,9 @@ body.normal.single-post .navis-slideshow.navis-full p.wp-media-credit {
 }
 
 @media screen and (max-width:767px) {
+    .hero .navis-slideshow {
+        margin-bottom: 0;
+    }
     .navis-slideshow {
         background-color: transparent;
     }
@@ -394,7 +400,7 @@ body.normal.single-post .navis-slideshow.navis-full p.wp-media-credit {
     }
     body.normal.single-post .hero .navis-slideshow p.wp-caption-text {
         background-color:transparent;
-        padding: 1em 1em 0 1em!important;
+        padding:0!important;
     }
     .navis-slideshow.slick-initialized .slick-slide {
         min-height: 25vh;

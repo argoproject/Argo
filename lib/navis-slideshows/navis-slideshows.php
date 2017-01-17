@@ -62,7 +62,7 @@ class Navis_Slideshows {
 			'itemtag' => 'dl',
 			'icontag' => 'dt',
 			'captiontag' => 'dd',
-			'columns'  => 1,
+			'columns'  => 0,
 			'size' => 'thumbnail',
 			'link' => 'file',
 			'ids' => ''
