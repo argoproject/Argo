@@ -59,7 +59,7 @@ if ( ! defined( 'INN_MEMBER' ) )
  */
 if ( ! defined( 'LARGO_DEBUG' ) )
 	define( 'LARGO_DEBUG', FALSE );
-	
+
 /**
  * Image size constants, almost 100% that you won't need to change these
  */
@@ -419,7 +419,7 @@ if ( ! function_exists( 'largo_setup' ) ) {
 
 		// Add support for localization (this is a work in progress)
 		load_theme_textdomain('largo', get_template_directory() . '/lang');
-		
+
 		//Add support for <title> tags
 		add_theme_support( 'title-tag' );
 
@@ -453,24 +453,22 @@ if ( ! function_exists( 'of_set_option' ) ) {
 }
 
 /**
-/* Gallery Default Settings
-/* Adds a '0' option for gallery columns
-*/
+ * Gallery Default Settings
+ * Adds a '0' option for gallery columns
+ */
 add_action( 'wp_enqueue_media', 'gallery_zero_columns' );
-function gallery_zero_columns(){
+function gallery_zero_columns() {
 	$columns_src = get_template_directory_uri() . '/lib/navis-slideshows/js/navis-columns.js';
-	wp_enqueue_script('navis-columns', $columns_src, array('jquery'), '1.0', true);
+	wp_enqueue_script( 'navis-columns', $columns_src, array( 'jquery' ), '1.0', true );
 }
 /**
-/* Gallery Default Settings
-/* @param Array $settings
-/* @return Array $settings
+ * Gallery Default Settings
+ * @param Array $settings
+ * @return Array $settings
 */
 function theme_gallery_defaults( $settings ) {
 	// Sets default column setting to 0
-    $settings['galleryDefaults']['columns'] = 0;
-    return $settings;
+	$settings['galleryDefaults']['columns'] = 0;
+	return $settings;
 }
 add_filter( 'media_view_settings', 'theme_gallery_defaults' );
-
-

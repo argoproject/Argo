@@ -138,7 +138,7 @@ class Navis_Slideshows {
 			}
 
 			$column_label = $columns . '-up';
-		} 
+		}
 
 		if ( empty( $attachments ) )
 			return '';
