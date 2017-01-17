@@ -179,12 +179,13 @@ class Navis_Slideshows {
 			$output .= '<img data-lazy="' . esc_url( $img_url ) . '" />';
 
 			if (!empty($credit))
-				$output .= '<h6 class="credit">' . wp_kses_post( $credit ) . '</h6>';
+				$output .= '<p class="wp-media-credit">' . wp_kses_post( $credit ) . '</p>';
 
-			$slide_link = get_permalink($post) . '#' . $post_html_id . '/' . $count;
-			$output .= '<h6 class="permalink"><a href="' . $slide_link . '" class="slide-permalink"><i class="icon-link"></i> ' . esc_attr( __( 'permalink', 'largo' ) ) . '</a></h6>';
 			if (!empty($caption))
 				$output .= '<p class="wp-caption-text">' . wp_kses_post( $caption ) . '</p>';
+
+			$slide_link = get_permalink($post) . '#' . $post_html_id . '/' . $count;
+			$output .= '<p class="permalink"><a href="' . $slide_link . '" class="slide-permalink"><i class="icon-link"></i> ' . esc_attr( __( 'permalink', 'largo' ) ) . '</a></p>';
 
 			$output .= '</div>';
 		}
