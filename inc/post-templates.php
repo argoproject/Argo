@@ -216,36 +216,6 @@ function largo_remove_hero( $content ) {
 }
 add_filter( 'the_content', 'largo_remove_hero', 1 );
 
-
-/**
- * Retrieves the attachment ID from the file URL
- * (or that of any thumbnail image)
- *
- * @since 0.4
- * @see https://pippinsplugins.com/retrieve-attachment-id-from-image-url/
- *
- * @return Int ID of post attachment (or false if not found)
- */
-function largo_url_to_attachmentid( $url ) {
-
-	global $wpdb;
-	$attachment = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE guid='%s';", $url ) );
-
-	if ( ! empty( $attachment ) ) {
-		return $attachment[0];
-	}
-
-	// Check if there's a size in the url and remove it.
-	$url = preg_replace( '/-\d+x\d+(?=\.(jpg|jpeg|png|gif)$)/i', '', $url );
-	$attachment = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE guid='%s';", $url ) );
-
-	if ( ! empty( $attachment ) ) {
-		return $attachment[0];
-	} else {
-		return false;
-	}
-}
-
 /**
  * Given a post type and an optional context, return the partial that should be loaded for that sort of post.
  *

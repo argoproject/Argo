@@ -36,10 +36,6 @@ class PostTemplatesTestFunctions extends WP_UnitTestCase {
 		$this->markTestIncomplete( 'This test has not yet been implemented.' );
 	}
 
-	function test_largo_url_to_attachmentid() {
-		$this->markTestIncomplete( 'This test has not yet been implemented.' );
-	}
-
 	private $ids = array();
 
 	function test_insert_image_no_thumb() {
