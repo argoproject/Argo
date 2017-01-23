@@ -8,7 +8,7 @@
 
 //	This function scans the template files of the active theme,
 //	and returns an array of [Template Name => {file}.php]
-if( ! function_exists( 'get_post_templates' ) ) {
+if ( ! function_exists( 'get_post_templates' ) ) {
 	function get_post_templates() {
 		$theme = wp_get_theme();
 		$templates = $theme->get_files( 'php', 1, true );
@@ -16,7 +16,7 @@ if( ! function_exists( 'get_post_templates' ) ) {
 
 		$base = array( trailingslashit( get_template_directory() ), trailingslashit( get_stylesheet_directory() ) );
 
-		foreach ( (array)$templates as $template ) {
+		foreach ( (array) $templates as $template ) {
 			$template = WP_CONTENT_DIR . str_replace( WP_CONTENT_DIR, '', $template );
 			$basename = str_replace( $base, '', $template );
 
@@ -31,7 +31,7 @@ if( ! function_exists( 'get_post_templates' ) ) {
 				$name = _cleanup_header_comment( $name[1] );
 			}
 
-			if ( !empty( $name ) ) {
+			if ( ! empty( $name ) ) {
 				if( basename( $template ) != basename(__FILE__) ) {
 					$post_templates[trim($name)] = $basename;
 				}
@@ -65,7 +65,7 @@ if( ! function_exists( 'post_templates_dropdown' ) ) {
  * Filter the single template value, and replace it with
  * the template chosen by the user, if they chose one.
  */
-if( ! function_exists( 'get_post_template' ) ) {
+if ( ! function_exists( 'get_post_template' ) ) {
 	function get_post_template( $template ) {
 		global $post;
 		if ( is_object( $post ) ) {
@@ -95,8 +95,9 @@ if( ! function_exists( 'get_post_template' ) ) {
  * @return bool True on success, false on failure.
  */
 function is_post_template( $template = '' ) {
-	if ( ! is_single() )
+	if ( ! is_single() ) {
 		return false;
+	}
 
 	$post_template = get_post_meta( get_queried_object_id(), '_wp_post_template', true );
 
@@ -193,50 +194,22 @@ function largo_remove_hero( $content ) {
 	//
 	// Creates the array:
 	// 		$matches[0] = <img src="..." class="..." id="..." />
-	//		$matches[1] = value of src.
-
-	$pattern = '/<img\s+[^>]*src="([^"]*)"[^>]*>/';
-	$hasImg = preg_match( $pattern, $p[0], $matches );
+	//		$matches[1] = image id from class="wp-image-[id]"
+	//		$matches[2] = value of src.
+	$pattern = '/<img\s+[^>]*class="[^"]*?wp-image-(\d+)[^"]*?"\s+[^>]*src="([^"]*)"[^>]*>/';
+	$has_img = preg_match( $pattern, $p[0], $matches );
 
 	// 3: if there's no image, there's nothing to worry about.
-
-	if( ! $hasImg ) {
+	if ( ! $has_img ) {
 		return $content;
 	}
 
-	$imgDom = $matches[0];
-	$src = $matches[1];
+	$featured_img_id = get_post_thumbnail_id();
+	$post_img_id = $matches[1];
 
-	// 4: Compare the src url to the feature image url.
-	// If they're the same, remove the top image.
-
-	$featureImgId = get_post_thumbnail_id();
-	$pImgId = largo_url_to_attachmentid( $matches[1] );
-
-	// Try a second way to get the attachment id
-
-	$pattern = '/class="([^"]+)"/';
-	preg_match( $pattern, $imgDom, $classes );
-
-	$classes = $classes[1];
-
-	if ( ! $pImgId ) {
-		$pattern = '/wp-image-(\d+)/';
-		preg_match( $pattern, $classes, $imgId);
-		$pImgId = $imgId[1];
+	if ( $featured_img_id === $post_img_id ) {
+		return str_replace( $matches[0], '', $content );
 	}
-
-	if ( ! ( $pImgId == $featureImgId ) ) {
-		return $content;
-	}
-
-	// 5: Check if it's a full width image, or if the image is not large enough to be a hero.
-	if ( strpos( $classes,'size-small' ) || strpos( $classes,'size-medium' ) )
-		return $content;
-
-	// 6: Else, shift the first paragraph off the content and return.
-	array_shift( $p );
-	$content = implode( "\n", $p );
 
 	return $content;
 
@@ -259,9 +232,9 @@ function largo_url_to_attachmentid( $url ) {
 	$attachment = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE guid='%s';", $url ) );
 
 	if ( ! empty( $attachment ) ) {
-    		return $attachment[0];
+		return $attachment[0];
 	}
-	
+
 	// Check if there's a size in the url and remove it.
 	$url = preg_replace( '/-\d+x\d+(?=\.(jpg|jpeg|png|gif)$)/i', '', $url );
 	$attachment = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE guid='%s';", $url ) );
