@@ -53,18 +53,18 @@ class PostTemplatesTestFunctions extends WP_UnitTestCase {
 		$attachment_url = wp_get_attachment_image_src( $attachment_id, 'large' );
 		$attachment_url = $attachment_url[0];
 
-		$c1 = '<p><img src="' . $attachment_url . '" alt="1559758083_cef4ef63d2_o" width="771" height="475" class="alignnone size-large" /></p>
+		$c1 = '<p><img src="' . $attachment_url . '" alt="1559758083_cef4ef63d2_o" width="771" height="475" class="alignnone size-large wp-image-' . $attachment_id . '" /></p>
 <h2>Headings</h2>
 <p>Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Sed posuere consectetur est at lobortis. Nulla vitae elit libero, a pharetra augue. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec sed odio dui.</p>';
 
 		$c1final = '<h2>Headings</h2>
 <p>Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Sed posuere consectetur est at lobortis. Nulla vitae elit libero, a pharetra augue. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec sed odio dui.</p>';
 
-		$c2 = '<p><img src="' . $attachment_url . '" alt="1559758083_cef4ef63d2_o" width="771" height="475" class="alignnone size-medium" /></p>
+		$c2 = '<p><img src="' . $attachment_url . '" alt="1559758083_cef4ef63d2_o" width="771" height="475" class="alignnone size-medium wp-image-' . $attachment_id . '" /></p>
 <h2>Headings</h2>
 <p>Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Sed posuere consectetur est at lobortis. Nulla vitae elit libero, a pharetra augue. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec sed odio dui.</p>';
 
-		$c2final = '<p><img src="' . $attachment_url . '" alt="1559758083_cef4ef63d2_o" width="771" height="475" class="alignnone size-medium" /></p>
+		$c2final = '<p><img src="' . $attachment_url . '" alt="1559758083_cef4ef63d2_o" width="771" height="475" class="alignnone size-medium wp-image-' . $attachment_id . '" /></p>
 <h2>Headings</h2>
 <p>Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Sed posuere consectetur est at lobortis. Nulla vitae elit libero, a pharetra augue. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec sed odio dui.</p>';
 
@@ -76,7 +76,7 @@ class PostTemplatesTestFunctions extends WP_UnitTestCase {
 
 		$final1 = largo_remove_hero( $c1 );
 		$final2 = largo_remove_hero( $c2 );
-		$this->assertEquals( $c1final, $final1  );
+		$this->assertEquals( $c1final, $final1 );
 		$this->assertEquals( $c2final, $final2 );
 
 	}
