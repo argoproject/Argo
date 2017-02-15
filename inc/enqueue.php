@@ -95,7 +95,7 @@ if ( ! function_exists( 'largo_gallery_enqueue' ) ) {
 		wp_enqueue_style( 'navis-slides', $slides_css, array(), '1.0' );
 
 		$show_src = get_template_directory_uri() . '/lib/navis-slideshows/js/navis-slideshows.js';
-		wp_enqueue_script( 'navis-slideshows', $show_src, array( 'jquery-slick' ), '0.1', true );
+		wp_enqueue_script( 'navis-slideshows', $show_src, array( 'jquery-slick' ), '0.11', true );
 	}
 	add_action( 'wp_enqueue_scripts', 'largo_gallery_enqueue' );
 }
