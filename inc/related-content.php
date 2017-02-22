@@ -762,7 +762,7 @@ class Largo_Related {
 				! in_array( $q->post->ID, $this->post_ids ) 	// only add it if it wasn't already there
 				&& $q->post->ID != $this->post_id // do not add the id of the current post, because we do not want to ever return that
 			) {
-				$this->post_ids[] = (int) trim($q->post->ID);
+				$this->post_ids[] = (int) trim( $q->post->ID );
 				// stop if we have enough
 				if ( $this->have_enough_posts() ) return;
 			}
