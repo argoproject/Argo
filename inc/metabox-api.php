@@ -94,21 +94,21 @@ function largo_register_meta_input( $input_names, $presave_fn = NULL ) {
  */
 function _largo_metaboxes_generate() {
  	global $largo;
-   if ( ! empty( $largo['meta']['boxes'] ) ) {
- 		foreach( $largo['meta']['boxes'] as $box_id => $settings ) {
- 			foreach( $settings['screens'] as $screen ) {
- 				add_meta_box(
- 					$box_id,
- 					$settings['title'],
- 					'_largo_metaboxes_content',
- 					$screen,
- 					$settings['context'],
- 					$settings['priority'],
- 					$settings['callbacks']
- 				);
- 			}
- 		}
- 	}
+	if ( ! empty( $largo['meta']['boxes'] ) ) {
+		foreach( $largo['meta']['boxes'] as $box_id => $settings ) {
+			foreach( $settings['screens'] as $screen ) {
+				add_meta_box(
+					$box_id,
+					$settings['title'],
+					'_largo_metaboxes_content',
+					$screen,
+					$settings['context'],
+					$settings['priority'],
+					$settings['callbacks']
+				);
+			}
+		}
+	}
 }
 add_action( 'add_meta_boxes', '_largo_metaboxes_generate', 12 ); // give everything time to do its thing before we run
 
