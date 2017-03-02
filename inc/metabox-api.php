@@ -10,7 +10,7 @@
  * Otherwise we get function redeclarations.
  * Since we're using include_once() this is unlikely, but possible and worth checking.
  */
-if ( isset($largo) && array_key_exists('meta', $largo) ) return;
+if ( isset( $largo ) && array_key_exists( 'meta', $largo ) ) return;
 
 $largo['meta'] = array(
 	'boxes' => array(),		// the metaboxes to generate, including callbacks for the content
@@ -32,9 +32,9 @@ $largo['meta'] = array(
 function largo_add_meta_box( $id, $title, $callbacks = array(), $post_types = 'post', $context = 'advanced', $priority = 'default' ) {
 	global $largo;
 
-	if ( is_string($post_types) ) $post_types = array($post_types);
-	if ( is_string($callbacks) ) $callbacks = array($callbacks);
-	if ( is_null($callbacks) ) $callbacks = array();
+	if ( is_string( $post_types ) ) $post_types = array( $post_types );
+	if ( is_string( $callbacks ) ) $callbacks = array($callbacks);
+	if ( is_null( $callbacks ) ) $callbacks = array();
 
 	$largo['meta']['boxes'][$id] = array(
 		'title' => __( $title, 'largo'),
@@ -59,7 +59,7 @@ function largo_add_meta_content( $callback, $box_id ) {
 	global $largo;
 
 	// Create this metabox if one hasn't been defined... assumes just 'post'
-	if ( !array_key_exists( $box_id, $largo['meta']['boxes'] ) ){
+	if ( ! array_key_exists( $box_id, $largo['meta']['boxes'] ) ){
 		largo_add_meta_box( $box_id, 'Meta Information' );
 	}
 
@@ -93,21 +93,22 @@ function largo_register_meta_input( $input_names, $presave_fn = NULL ) {
  * Private function to actually generate the metaboxes
  */
 function _largo_metaboxes_generate() {
-	global $largo;
-
-	foreach( $largo['meta']['boxes'] as $box_id => $settings ) {
-		foreach( $settings['screens'] as $screen ) {
-			add_meta_box(
-				$box_id,
-				$settings['title'],
-				'_largo_metaboxes_content',
-				$screen,
-				$settings['context'],
-				$settings['priority'],
-				$settings['callbacks']
-			);
-		}
-	}
+ 	global $largo;
+   if ( ! empty( $largo['meta']['boxes'] ) ) {
+ 		foreach( $largo['meta']['boxes'] as $box_id => $settings ) {
+ 			foreach( $settings['screens'] as $screen ) {
+ 				add_meta_box(
+ 					$box_id,
+ 					$settings['title'],
+ 					'_largo_metaboxes_content',
+ 					$screen,
+ 					$settings['context'],
+ 					$settings['priority'],
+ 					$settings['callbacks']
+ 				);
+ 			}
+ 		}
+ 	}
 }
 add_action( 'add_meta_boxes', '_largo_metaboxes_generate', 12 ); // give everything time to do its thing before we run
 
