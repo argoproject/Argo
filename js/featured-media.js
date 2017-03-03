@@ -39,7 +39,7 @@ var LFM = _.extend(LFM || {}, {
 
             // Make sure we tell the backend what post ID we're dealing with.
             data = _.extend(data, { id: LFM.Utils.getPostId() });
-           
+
             var action;
             if (method == 'read')
                 action = 'largo_featured_media_read';
@@ -79,69 +79,70 @@ var LFM = _.extend(LFM || {}, {
 
         createStates: function() {
             var options = this.options,
-                embed = [
-                    // Embed code
-                    new wp.media.controller.Embed({
-                        title: largo_featured_media_vars.embed_title,
-                        id: 'embed-code',
-                        content: 'embed',
-                        priority: 0
-                    }),
-                ],
-                video = [
-                    // Video embed
-                    new wp.media.controller.Embed({
-                        title: largo_featured_media_vars.video_title,
-                        id: 'video',
-                        content: 'video',
-                        priority: 10
-                    }),
-                ],
-                image = [
-                    // Featured image
-                    new wp.media.controller.FeaturedImage({
-                        title: largo_featured_media_vars.image_title,
-                        priority: 20,
-                        id: 'image',
-                    }),
+              image = [
+                  // Featured image
+                  new wp.media.controller.FeaturedImage({
+                      title: largo_featured_media_vars.image_title,
+                      id: 'image',
+                      priority: 10
+                  }),
 
-                    new wp.media.controller.EditImage({ model: options.editImage })
-                ],
-                gallery = [
-                    // Featured gallery
-                    new wp.media.controller.Library({
-                        id: 'gallery',
-                        title: largo_featured_media_vars.gallery_title,
-                        priority: 30,
-                        toolbar: 'main-gallery',
-                        filterable: 'uploaded',
-                        multiple: 'add',
-                        editable: false,
-                        library: wp.media.query(_.defaults({
-                            type: 'image'
-                        }, options.library))
-                    }),
+                  new wp.media.controller.EditImage({ model: options.editImage })
+              ],
+              gallery = [
+                  // Featured gallery
+                  new wp.media.controller.Library({
+                      title: largo_featured_media_vars.gallery_title,
+                      id: 'gallery',
+                      priority: 20,
+                      toolbar: 'main-gallery',
+                      filterable: 'uploaded',
+                      multiple: 'add',
+                      editable: false,
+                      library: wp.media.query(_.defaults({
+                          type: 'image'
+                      }, options.library))
+                  }),
 
-                    // Gallery states.
-                    new wp.media.controller.GalleryEdit({
-                        library: options.selection,
-                        editing: options.editing,
-                        menu: 'gallery'
-                    }),
+                  // Gallery states.
+                  new wp.media.controller.GalleryEdit({
+                      library: options.selection,
+                      editing: options.editing,
+                      menu: 'gallery'
+                  }),
 
-                    new wp.media.controller.GalleryAdd()
-                ];
-            if (_.indexOf(options.states, 'embed-code') >= 0)
-                this.states.add(embed);
-
-            if (_.indexOf(options.states, 'video') >= 0)
-                this.states.add(video);
+                  new wp.media.controller.GalleryAdd()
+              ],
+              video = [
+                  // Video embed
+                  new wp.media.controller.Embed({
+                      title: largo_featured_media_vars.video_title,
+                      id: 'video',
+                      priority: 30,
+                      content: 'video'
+                  }),
+              ],
+              embed = [
+                  // Embed code
+                  new wp.media.controller.Embed({
+                      title: largo_featured_media_vars.embed_title,
+                      id: 'embed-code',
+                      priority: 40,
+                      content: 'embed'
+                  }),
+              ];
 
             if (_.indexOf(options.states, 'image') >= 0 )
                 this.states.add(image);
 
             if (_.indexOf(options.states, 'gallery') >= 0)
                 this.states.add(gallery);
+
+            if (_.indexOf(options.states, 'video') >= 0)
+                this.states.add(video);
+
+            if (_.indexOf(options.states, 'embed-code') >= 0)
+                this.states.add(embed);
 
             if (LFM.has_featured_media) {
                 this.states.add([
