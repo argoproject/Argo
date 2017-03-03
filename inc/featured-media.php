@@ -204,6 +204,11 @@ function largo_get_featured_media( $post = null ) {
 
 	$post = get_post( $post );
 
+	// make sure we actually have a valid post object before we try to get post meta
+	if ( ! is_object( $post ) ) {
+		return;
+	}
+
 	$ret = get_post_meta( $post->ID, 'featured_media', true );
 
 	// Check if the post has a thumbnail/featured image set.
@@ -266,11 +271,16 @@ function largo_enqueue_featured_media_js( $hook ) {
 	// Run this action on term edit pages
 	// edit-tags.php for wordpress before 4.5
 	// term.php for 4.5 and after
-	if ( in_array( $hook, array( 'edit-tags.php', 'term.php' ) ) && is_numeric( $_GET['tag_ID'] ) ) {
+	if ( in_array( $hook, array( 'edit-tags.php', 'term.php' ) ) && isset( $_GET['tag_ID'] ) && is_numeric( $_GET['tag_ID'] ) ) {
 		// After WordPress 4.5, the taxonomy is no longer in the URL
 		// So to compensate, we get the taxonomy from the current screen
 		$screen = get_current_screen();
 		$post = get_post( largo_get_term_meta_post( $screen->taxonomy, $_GET['tag_ID'] ) );
+	}
+
+	// make sure we actually have a valid post object before we try to get post meta
+	if ( ! is_object( $post ) ) {
+		return;
 	}
 
 	$featured_image_display = get_post_meta( $post->ID, 'featured-image-display', true );
@@ -454,7 +464,7 @@ function largo_featured_image_metabox_callback( $post, $metabox ) {
 
 	$checked = 'false' == get_post_meta( $post->ID, 'featured-image-display', true ) ? 'checked="checked"' : "";
 	echo wp_nonce_field( basename( __FILE__ ), 'featured_image_display_nonce' );
-	
+
 	echo '<a href="#" class="set-featured-media">' . get_the_post_thumbnail() . '</a>';
 	echo '<a href="#" id="set-featured-media-button" class="button set-featured-media add_media" data-editor="content" title="' . __( $language . ' Featured Media', 'largo' ) . '"></span> ' . __( $language . ' Featured Media', 'largo' ) . '</a> <span class="spinner" style="display: none;"></span>';
 
@@ -707,7 +717,7 @@ function largo_content_partial_arguments_filter( $args, $queried_object ) {
 		 *   'right_region' => 'sidebar-main',
 		 *   'per_page' => '10',
 		 *   'post_order' => 'DESC',
-		 *   'show' => 
+		 *   'show' =>
 		 *   array (
 		 *     'image' => false,
 		 *     'excerpt' => false,
