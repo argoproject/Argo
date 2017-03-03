@@ -1,56 +1,52 @@
 <?php
 /**
  * Returns a Facebook username or ID from the URL
- * 
+ *
  * @param   string  $url a Facebook url
  * @return  string  the Facebook username or id extracted from the input string
  * @since   0.4
  */
 function largo_fb_url_to_username( $url )  {
-	$urlParts = explode("/", $url);
-	if ( end($urlParts) == '' ) {
+	$urlParts = explode( '/', $url );
+	if ( end( $urlParts ) == '' ) {
 		// URL has a trailing slash
-		$urlParts = array_slice($urlParts, 0 , -1);
+		$urlParts = array_slice( $urlParts, 0 , -1 );
 	}
-	$username = end($urlParts);
-	if ( preg_match( "/profile.php/", $username ) ) {
+	$username = end( $urlParts );
+	if ( preg_match( '/profile.php/', $username ) ) {
 		// a profile id
-		preg_match( "/id=([0-9]+)/", $username, $matches );
+		preg_match( '/id=([0-9]+)/', $username, $matches );
 		$username = $matches[1];
 	} else {
 		// hopefully there's a username
-		preg_match( "/[^\?&#]+/", $username, $matches);
-		if (isset($matches[0])){
+		preg_match( '/[^\?&#]+/', $username, $matches);
+		if ( isset( $matches[0] ) ){
 			$username = $matches[0];
 		}
 	}
-	
 	return $username;
 }
 
 /**
- * Checks to see if a given Facebook username or ID has following enabled by 
+ * Checks to see if a given Facebook username or ID has following enabled by
  * checking the iframe of that user's "Follow" button for <table>.
  * Usernames that can be followed have <tables>.
  * Users that can't be followed don't.
  * Users that don't exist don't.
- * 
+ *
  * @param   string  $username a valid Facebook username or page name. They're generally indistinguishable, except pages get to use '-'
  * @uses    wp_remote_get
  * @return  bool    The user specified by the username or ID can be followed
  */
 function largo_fb_user_is_followable( $username ) {
 	// syntax for this iframe taken from https://developers.facebook.com/docs/plugins/follow-button/
-	$get = wp_remote_get( "https://www.facebook.com/plugins/follow.php?href=https%3A%2F%2Fwww.facebook.com%2F" . $username . "&amp;width&amp;height=80&amp;colorscheme=light&amp;layout=button&amp;show_faces=true");
-	if (! is_wp_error( $get ) ) {
+	$get = wp_remote_get( 'https://www.facebook.com/plugins/follow.php?href=https%3A%2F%2Fwww.facebook.com%2F' . $username . '&amp;width&amp;height=80&amp;colorscheme=light&amp;layout=button&amp;show_faces=true' );
+	if ( ! is_wp_error( $get ) ) {
 		$response = $get['body'];
-		if ( strpos($response, 'table') !== false ) {
-			// can follow
-			return true;
-		} else {
-			// cannot follow
-			return false;
+		if ( strpos( $response, 'table' ) !== false ) {
+			return true; // can follow
 		}
+		return false; // cannot follow
 	}
 }
 
@@ -58,9 +54,9 @@ function largo_fb_user_is_followable( $username ) {
  * Cleans a Facebook url to the bare username or id when the user is edited
  *
  * Edits $_POST directly because there's no other way to save the corrected username
- * from this callback. The action hooks this is used for run before edit_user in 
- * wp-admin/user-edit.php, which overwrites the user's contact methods. edit_user 
- * reads from $_POST. 
+ * from this callback. The action hooks this is used for run before edit_user in
+ * wp-admin/user-edit.php, which overwrites the user's contact methods. edit_user
+ * reads from $_POST.
  *
  * @param  object  $user_id the WP_User object being edited
  * @param  array   $_POST
@@ -69,17 +65,16 @@ function largo_fb_user_is_followable( $username ) {
  * @link   http://codex.wordpress.org/Plugin_API/Action_Reference/edit_user_profile_update
  * @link   http://codex.wordpress.org/Plugin_API/Action_Reference/personal_options_update
  */
-function clean_user_fb_username($user_id) {
-
-	if ( current_user_can('edit_user', $user_id) ) {
+function clean_user_fb_username( $user_id ) {
+	if ( current_user_can( 'edit_user', $user_id ) ) {
 		$fb = largo_fb_url_to_username( $_POST['fb'] );
 		if ( preg_match( '/[^a-zA-Z0-9\.\-]/', $fb ) ) {
 			// it's not a valid Facebook username, because it uses an invalid character
-			$fb = "";
+			$fb = '';
 		}
-		update_user_meta($user_id, 'fb', $fb);
-		if ( get_user_meta($user_id, 'fb', true) != $fb ) {
-			wp_die(__('An error occurred.'));
+		update_user_meta( $user_id, 'fb', $fb );
+		if ( get_user_meta( $user_id, 'fb', true ) != $fb ) {
+			wp_die( __( 'An error occurred.', 'largo' ) );
 		}
 		$_POST['fb'] = $fb;
 	}
@@ -97,19 +92,18 @@ function clean_user_fb_username($user_id) {
  * @since   0.4
  */
 function validate_fb_username( $errors, $update, $user ) {
-
-	if ( isset( $_POST["fb"] ) ) {
-		$fb_suspect = trim( $_POST["fb"] );
+	if ( isset( $_POST['fb'] ) ) {
+		$fb_suspect = trim( $_POST['fb'] );
 		if( ! empty( $fb_suspect ) ) {
 			$fb_user = largo_fb_url_to_username( $fb_suspect );
 			if ( preg_match( '/[^a-zA-Z0-9\.\-]/', $fb_user ) ) {
 				// it's not a valid Facebook username, because it uses an invalid character
-				$errors->add('fb_username', '<b>' . $fb_suspect . '</b> ' . __('is an invalid Facebook username.') . '</p>' . '<p>' . __('Facebook usernames only use the uppercase and lowercase alphabet letters (a-z A-Z), the Arabic numbers (0-9), periods (.) and dashes (-)') );
-			}
-			if ( ! largo_fb_user_is_followable( $fb_user ) ) {
-				$errors->add('fb_username',' <b>' . $fb_suspect . '</b> ' . __('does not allow followers on Facebook.') . '</p>' . '<p>' . __('<a href="https://www.facebook.com/help/201148673283205#How-can-I-let-people-follow-me?">Follow these instructions</a> to allow others to follow you.') );
-			}
-		}
+				$errors->add( 'fb_username', '<b>' . $fb_suspect . '</b> ' . __( 'is an invalid Facebook username.', 'largo' ) . '</p>' . '<p>' . __('Facebook usernames only use the uppercase and lowercase alphabet letters (a-z A-Z), the Arabic numbers (0-9), periods (.) and dashes (-)', 'largo' ) );
+ 			}
+ 			if ( ! largo_fb_user_is_followable( $fb_user ) ) {
+ 				$errors->add( 'fb_username',' <b>' . $fb_suspect . '</b> ' . __( 'does not allow followers on Facebook.', 'largo' ) . '</p>' . '<p>' . __('<a href="https://www.facebook.com/help/201148673283205#How-can-I-let-people-follow-me?">Follow these instructions</a> to allow others to follow you.', 'largo' ) );
+ 			}
+ 		}
 	}
 }
 
@@ -121,28 +115,28 @@ function validate_fb_username( $errors, $update, $user ) {
  * @since 	0.3
  */
 function largo_twitter_url_to_username( $url ) {
-	$urlParts = explode("/", $url);
-	if ( end($urlParts) == '' ) {
+	$urlParts = explode( '/', $url );
+	if ( end( $urlParts ) == '' ) {
 		// URL has a trailing slash
-		$urlParts = array_slice($urlParts, 0 , -1);
+		$urlParts = array_slice( $urlParts, 0 , -1 );
 	}
-	$username = preg_replace( "/@/", '', end($urlParts) );
+	$username = preg_replace( '/@/', '', end( $urlParts ) );
 	// strip the ?&# URL parameters if they're present
 	// this will let through all other characters
-	preg_match( "/[^\?&#]+/", $username, $matches);
-	if (isset($matches[0])){
+	preg_match( '/[^\?&#]+/', $username, $matches );
+	if ( isset( $matches[0] ) ){
 		$username = $matches[0];
 	}
-	return $username;
+ 	return $username;
 }
 
 /**
  * Cleans a Twitter url or an @username to the bare username when the user is edited
  *
  * Edits $_POST directly because there's no other way to save the corrected username
- * from this callback. The action hooks this is used for run before edit_user in 
- * wp-admin/user-edit.php, which overwrites the user's contact methods. edit_user 
- * reads from $_POST. 
+ * from this callback. The action hooks this is used for run before edit_user in
+ * wp-admin/user-edit.php, which overwrites the user's contact methods. edit_user
+ * reads from $_POST.
  *
  * @param  object  $user_id the WP_User object being edited
  * @param  array   $_POST
@@ -151,24 +145,23 @@ function largo_twitter_url_to_username( $url ) {
  * @link   http://codex.wordpress.org/Plugin_API/Action_Reference/edit_user_profile_update
  * @link   http://codex.wordpress.org/Plugin_API/Action_Reference/personal_options_update
  */
-function clean_user_twitter_username($user_id) {
-
-	if ( current_user_can('edit_user', $user_id) ) {
+function clean_user_twitter_username( $user_id ) {
+	if ( current_user_can( 'edit_user', $user_id ) ) {
 		$twitter = largo_twitter_url_to_username( $_POST['twitter'] );
 		if ( preg_match( '/[^a-zA-Z0-9_]/', $twitter ) ) {
 			// it's not a valid twitter username, because it uses an invalid character
-			$twitter = "";
+ 			$twitter = '';
 		}
-		update_user_meta($user_id, 'twitter_link', $twitter);
-		if ( get_user_meta($user_id, 'twitter_link', true) != $twitter ) {
-			wp_die(__('An error occurred.'));
+		update_user_meta( $user_id, 'twitter_link', $twitter );
+		if ( get_user_meta( $user_id, 'twitter_link', true ) != $twitter ) {
+			wp_die( __( 'An error occurred.', 'largo' ) );
 		}
 		$_POST['twitter'] = $twitter;
 	}
 }
 
 /**
- * Checks that the Twitter URL is composed of valid characters [a-zA-Z0-9_] and 
+ * Checks that the Twitter URL is composed of valid characters [a-zA-Z0-9_] and
  * causes an error if there is not.
  *
  * @param   $errors the error object
@@ -179,13 +172,12 @@ function clean_user_twitter_username($user_id) {
  * @since   0.4
  */
 function validate_twitter_username( $errors, $update, $user ) {
-
-	if ( isset( $_POST["twitter"] ) ) {
-		$tw_suspect = trim( $_POST["twitter"] );
+	if ( isset( $_POST['twitter'] ) ) {
+		$tw_suspect = trim( $_POST['twitter'] );
 		if( ! empty( $tw_suspect ) ) {
 			if ( preg_match( '/[^a-zA-Z0-9_]/', largo_twitter_url_to_username( $tw_suspect ) ) ) {
 				// it's not a valid twitter username, because it uses an invalid character
-				$errors->add('twitter_username', '<b>' . $tw_suspect . '</b>' . __('is an invalid Twitter username.') . '</p>' . '<p>' . __('Twitter usernames only use the uppercase and lowercase alphabet letters (a-z A-Z), the Arabic numbers (0-9), and underscores (_).') );
+				$errors->add( 'twitter_username', '<b>' . $tw_suspect . '</b>' . __( 'is an invalid Twitter username.', 'largo' ) . '</p>' . '<p>' . __( 'Twitter usernames only use the uppercase and lowercase alphabet letters (a-z A-Z), the Arabic numbers (0-9), and underscores (_).', 'largo' ) );
 			}
 		}
 	}
@@ -217,9 +209,8 @@ function largo_youtube_iframe_from_url( $url, $echo = TRUE ) {
 	$output = '<iframe  src="//www.youtube.com/embed/' . largo_youtube_url_to_ID( $url ) . '" frameborder="0" allowfullscreen></iframe>';
 	if ( $echo ) {
 		echo $output;
-	} else {
-		return $output;
 	}
+	return $output;
 }
 
 /**
@@ -234,8 +225,8 @@ function largo_youtube_iframe_from_url( $url, $echo = TRUE ) {
  */
 function largo_youtube_image_from_url( $url, $size = large, $echo = TRUE ) {
 	$id = largo_youtube_url_to_ID( $url );
-
 	$output = 'http://img.youtube.com/vi/' . $id;
+
 	switch( $size ) {
 		case 'thumb':
 			$output .= '/default.jpg'; // 120 x 90
@@ -243,7 +234,7 @@ function largo_youtube_image_from_url( $url, $size = large, $echo = TRUE ) {
 		case 'small':
 			$output .= '/hqdefault.jpg'; // 480 x 360
 			break;
-		case 'medium':
+ 		case 'medium':
 			$output .= '/sddefault.jpg'; // 640 x 480
 			break;
 		case 'large':
@@ -252,10 +243,9 @@ function largo_youtube_image_from_url( $url, $size = large, $echo = TRUE ) {
 	}
 
 	if ( $echo ) {
-		echo $output;
-	} else {
-		return $output;
-	}
+ 		echo $output;
+ 	}
+ 	return $output;
 }
 
 /**
@@ -278,18 +268,16 @@ function largo_make_slug( $string, $maxLength = 63 ) {
  * @param array $context an array with the variables that should be made available in the template being loaded.
  * @since 0.4
  */
-function largo_render_template($slug, $name=null, $context=array()) {
-	global $wp_query;
-
-	if (is_array($name) && empty($context))
-		$context = $name;
-
-	if (!empty($context)) {
-		$context = apply_filters('largo_render_template_context', $context, $slug, $name);
-		$wp_query->query_vars = array_merge($wp_query->query_vars, $context);
-	}
-
-	get_template_part($slug, $name);
+function largo_render_template( $slug, $name = null, $context = array() ) {
+  global $wp_query;
+	if ( is_array( $name ) && empty( $context ) ) {
+    $context = $name;
+  }
+  if ( ! empty( $context ) ) {
+    $context = apply_filters( 'largo_render_template_context', $context, $slug, $name );
+    $wp_query->query_vars = array_merge( $wp_query->query_vars, $context );
+  }
+  get_template_part( $slug, $name );
 }
 
 /**
@@ -297,13 +285,10 @@ function largo_render_template($slug, $name=null, $context=array()) {
  *
  * @since 0.5
  */
-function largo_get_current_url() {
-	$is_ssl = is_ssl();
-	if (!empty($is_ssl))
-		return "https://" . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
-	else
-		return "http://" .$_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
-}
+ function largo_get_current_url() {
+ 	$url = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+ 	return ( ! empty( is_ssl() ) ) ? 'https://' . $url : 'http://' . $url;
+ }
 
 /**
  * Return the first featured image thumbnail found in a given array of WP_Posts
