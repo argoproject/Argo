@@ -1,14 +1,14 @@
 # Largo
 
+```diff
+- Note: Largo is undergoing a full rebuild in the 1.0 branch
+```
+
 A responsive WordPress framework designed for news publishers and developed by the Institute for Nonprofit News.
 
 <img src="https://travis-ci.org/INN/Largo.svg?branch=develop" /> <img src="https://readthedocs.org/projects/largo/badge/?version=master" />
 
 ---
-
-**IMPORTANT!** THIS PROJECT IS UNDER ACTIVE DEVELOPMENT
-
-We are making regular updates that may or may not always play nice with previous versions.
 
 For released versions of Largo, please see the [list of tagged releases](https://github.com/INN/Largo/releases).
 
