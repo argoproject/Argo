@@ -283,13 +283,13 @@ function largo_render_template( $slug, $name = null, $context = array() ) {
 /**
  * Get the current URL, including the protocol and host
  *
- * @since 0.5.5.4
+ * @since 0.5
  */
 function largo_get_current_url() {
 	$is_ssl = is_ssl();
 	$url = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
 
-	if (!empty($is_ssl)) {
+	if ( ! empty( $is_ssl ) ) {
 		return "https://" . $url;
 	} else {
 		return "http://" . $url;
