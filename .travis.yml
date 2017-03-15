@@ -13,16 +13,13 @@ language: php
 php:
     - "5.3"
     - "5.5"
+    - "7.0"
 
 # WordPress version used in first build configuration.
 env:
     - WP_VERSION=master
     - WP_VERSION=4.6
     - WP_VERSION=4.5
-    - WP_VERSION=4.4
-    - WP_VERSION=4.3
-    - WP_VERSION=4.2
-    - WP_VERSION=4.1
 
 # Only test the unittests branch for now
 branches:
