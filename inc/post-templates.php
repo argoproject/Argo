@@ -196,7 +196,7 @@ function largo_remove_hero( $content ) {
 	// 		$matches[0] = <img src="..." class="..." id="..." />
 	//		$matches[1] = image id from class="wp-image-[id]"
 	//		$matches[2] = value of src.
-	$pattern = '/<img\s+[^>]*class="[^"]*?wp-image-(\d+)[^"]*?"\s+[^>]*>/';
+	$pattern = '/[<p>]?<img\s+[^>]*class="[^"]*?wp-image-(\d+)[^"]*?"\s+[^>]*>[<\/p>]?/';
 	$has_img = preg_match( $pattern, $p[0], $matches );
 
 	// 3: if there's no image, there's nothing to worry about.
